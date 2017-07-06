@@ -1,0 +1,655 @@
+package l1j.server.server;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import l1j.server.Config;
+import l1j.server.L1DatabaseFactory;
+import l1j.server.GameSystem.AttendanceController;
+import l1j.server.GameSystem.TimeEventController;
+import l1j.server.GameSystem.Boss.BossTimeController;
+import l1j.server.GameSystem.Boss.NewBossSpawnTable;
+import l1j.server.GameSystem.Robot.Robot;
+import l1j.server.GameSystem.Robot.Robot_ConnectAndRestart;
+import l1j.server.GameSystem.Robot.Robot_Crown;
+import l1j.server.GameSystem.Robot.Robot_Hunt;
+import l1j.server.GameSystem.Robot.Robot_Location;
+import l1j.server.IndunSystem.MiniGame.BattleZone;
+import l1j.server.RobotSystem.RobotAIThread;
+import l1j.server.server.Controller.AdenaHuntController;
+import l1j.server.server.Controller.ArnoldBackEvent;
+import l1j.server.server.Controller.AuctionTimeController;
+import l1j.server.server.Controller.BraveavatarController;
+import l1j.server.server.Controller.BugRaceController;
+import l1j.server.server.Controller.ClanBuffController;
+import l1j.server.server.Controller.CrockController;
+import l1j.server.server.Controller.DevilController;
+import l1j.server.server.Controller.DungeonQuitController;
+import l1j.server.server.Controller.EventItemController;
+import l1j.server.server.Controller.FishingTimeController;
+import l1j.server.server.Controller.GhostController;
+import l1j.server.server.Controller.HouseTaxTimeController;
+import l1j.server.server.Controller.HpMpRegenController;
+import l1j.server.server.Controller.InvSwapController;
+import l1j.server.server.Controller.IsleController;
+import l1j.server.server.Controller.LoginController;
+import l1j.server.server.Controller.NpcChatTimeController;
+import l1j.server.server.Controller.OneTimeController;
+import l1j.server.server.Controller.PcInventoryDeleteController;
+import l1j.server.server.Controller.PremiumTimeController;
+import l1j.server.server.Controller.RankingTimeController;
+import l1j.server.server.Controller.ShipTimeController;
+import l1j.server.server.Controller.TamController;
+import l1j.server.server.Controller.UbTimeController;
+import l1j.server.server.Controller.WarTimeController;
+import l1j.server.server.clientpackets.C_NPCAction2;
+import l1j.server.server.datatables.AccessoryEnchantList;
+import l1j.server.server.datatables.AccountAttendanceTable;
+import l1j.server.server.datatables.ArmorEnchantList;
+import l1j.server.server.datatables.AttendanceTable;
+import l1j.server.server.datatables.CastleTable;
+import l1j.server.server.datatables.CharacterBalance;
+import l1j.server.server.datatables.CharacterHitRate;
+import l1j.server.server.datatables.CharacterReduc;
+import l1j.server.server.datatables.CharacterTable;
+import l1j.server.server.datatables.ChatLogTable;
+import l1j.server.server.datatables.ClanTable;
+import l1j.server.server.datatables.DoorSpawnTable;
+import l1j.server.server.datatables.DropItemTable;
+import l1j.server.server.datatables.DropTable;
+import l1j.server.server.datatables.FurnitureSpawnTable;
+import l1j.server.server.datatables.GetBackRestartTable;
+import l1j.server.server.datatables.IpTable;
+import l1j.server.server.datatables.ItemTable;
+import l1j.server.server.datatables.KeyTable;
+import l1j.server.server.datatables.LightSpawnTable;
+import l1j.server.server.datatables.MapsTable;
+import l1j.server.server.datatables.MobGroupTable;
+import l1j.server.server.datatables.MonsterBookTable;
+import l1j.server.server.datatables.NPCTalkDataTable;
+import l1j.server.server.datatables.NpcActionTable;
+import l1j.server.server.datatables.NpcCashShopSpawnTable;
+import l1j.server.server.datatables.NpcChatTable;
+import l1j.server.server.datatables.NpcShopTable;
+import l1j.server.server.datatables.NpcSpawnTable;
+import l1j.server.server.datatables.NpcTable;
+import l1j.server.server.datatables.PetTable;
+import l1j.server.server.datatables.PetTypeTable;
+import l1j.server.server.datatables.PolyTable;
+import l1j.server.server.datatables.RaceTable;
+import l1j.server.server.datatables.RankTable;
+import l1j.server.server.datatables.ResolventTable;
+import l1j.server.server.datatables.RestoreItemTable;
+import l1j.server.server.datatables.ShopTable;
+import l1j.server.server.datatables.SkillsTable;
+import l1j.server.server.datatables.SpawnTable;
+import l1j.server.server.datatables.SprTable;
+import l1j.server.server.datatables.UBSpawnTable;
+import l1j.server.server.datatables.UBTable;
+import l1j.server.server.datatables.WeaponAddDamage;
+import l1j.server.server.datatables.WeaponEnchantList;
+import l1j.server.server.datatables.WeaponSkillTable;
+import l1j.server.server.datatables.WeekQuestTable;
+import l1j.server.server.model.Dungeon;
+import l1j.server.server.model.ElementalStoneGenerator;
+import l1j.server.server.model.Getback;
+import l1j.server.server.model.L1CastleLocation;
+import l1j.server.server.model.L1Clan;
+import l1j.server.server.model.L1ClanRanking;
+import l1j.server.server.model.L1Cube;
+import l1j.server.server.model.L1DeleteItemOnGround;
+import l1j.server.server.model.L1HauntedHouse;
+import l1j.server.server.model.L1Sys;
+import l1j.server.server.model.L1World;
+import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.gametime.L1GameTimeClock;
+import l1j.server.server.model.gametime.RealTimeClock;
+import l1j.server.server.model.item.L1TreasureBox;
+import l1j.server.server.model.item.function.L1HealingPotion;
+import l1j.server.server.model.map.L1WorldMap;
+import l1j.server.server.model.trap.L1WorldTraps;
+import l1j.server.server.monitor.LoggerInstance;
+import l1j.server.server.utils.SQLUtil;
+import l1j.server.server.utils.SystemUtil;
+import manager.LinAllManagerInfoThread;
+
+public class GameServer {
+    private int chatlvl;
+    private static GameServer _instance;
+    private LoginController _loginController;
+    private static Logger _log = Logger.getLogger(GameServer.class.getName());
+
+    private GameServer() {
+    }
+
+    public static GameServer getInstance() {
+	if (_instance == null) {
+	    synchronized (GameServer.class) {
+		if (_instance == null)
+		    _instance = new GameServer();
+	    }
+	}
+	return _instance;
+    }
+
+    public void initialize() throws Exception {
+	double rateXp = Config.RATE_XP;
+	double rateLawful = Config.RATE_LAWFUL;
+	double rateKarma = Config.RATE_KARMA;
+	double rateDropItems = Config.RATE_DROP_ITEMS;
+	double rateDropAdena = Config.RATE_DROP_ADENA;
+	double EnchantChanceWeapon = Config.ENCHANT_CHANCE_WEAPON;
+	double EnchantChanceArmor = Config.ENCHANT_CHANCE_ARMOR;
+	double EnchantChanceAccessory = Config.ENCHANT_CHANCE_ACCESSORY;
+	chatlvl = Config.GLOBAL_CHAT_LEVEL;
+
+	System.out.println("──────────────Server Setting────────────────");
+
+	System.out.println(" ▶ 경험치:  " + (rateXp) + " 배");
+	System.out.println(" ▶ 라우풀:  " + (rateLawful) + " 배");
+	System.out.println(" ▶ 우호도:  " + (rateKarma) + " 배");
+	System.out.println(" ▶ 아이템:  " + (rateDropItems) + " 배 ");
+	System.out.println(" ▶ 아데나:  " + (rateDropAdena) + " 배");
+	System.out.println(" ▶ 채팅LV:  " + (chatlvl) + " 레벨");
+	System.out.println(" ▶ 무기확률: [" + (EnchantChanceWeapon) + "] 배");
+	System.out.println(" ▶ 방어구확률: [" + (EnchantChanceArmor) + "] 배");
+	System.out.println(" ▶ 악세사리확률: [" + (EnchantChanceAccessory) + "] 배");
+
+	int maxOnlineUsers = Config.MAX_ONLINE_USERS;
+	System.out.println(" ▶ 최대인원: [" + (maxOnlineUsers) + "] 명");
+	if (Config.ALT_NONPVP) { // Non-PvP 설정
+	    System.out.println(" ▶ PK:  [가능]");
+	} else {
+	    System.out.println(" ▶ PK:  [불가능]");
+	}
+	GeneralThreadPool.getInstance();
+
+	// 나누기
+	IdFactory.getInstance();
+	L1WorldMap.getInstance();
+	CharacterBalance.getInstance();
+	CharacterHitRate.getInstance();
+	CharacterReduc.getInstance();
+	_loginController = LoginController.getInstance();
+	_loginController.setMaxAllowedOnlinePlayers(maxOnlineUsers);
+
+	CharacterTable.getInstance().loadAllCharName();
+
+	// 온라인 상태 리셋트
+	CharacterTable.clearOnlineStatus();
+
+	// 게임 시간 시계
+	L1GameTimeClock.init();
+	// 현재 시간 시계
+	RealTimeClock.init();
+	// 공지
+	L1Sys.getInstance();
+	L1Sys l1Sys = L1Sys.getInstance();
+	GeneralThreadPool.getInstance().execute(l1Sys);
+
+	C_NPCAction2.getInstance();
+
+	KeyTable.initBossKey();
+
+	AccessoryEnchantList.getInstance(); // 악세사리 인챈 정보 리스트
+	ArmorEnchantList.getInstance(); // 방어구 인챈 정보 리스트
+	WeaponEnchantList.getInstance(); // 무기 인챈 정보 리스트
+
+	// 패키지상점
+	NpcCashShopSpawnTable.getInstance();
+	NpcCashShopSpawnTable.getInstance().Start();
+
+	// UB타임 콘트롤러
+	UbTimeController ubTimeContoroller = UbTimeController.getInstance();
+	GeneralThreadPool.getInstance().scheduleAtFixedRate(ubTimeContoroller, 0, UbTimeController.SLEEP_TIME);
+
+	AttendanceController.init(); // 출석
+	AttendanceTable.getInstance();
+	AccountAttendanceTable.getInstance();
+
+	// 전쟁 타임 콘트롤러
+	WarTimeController warTimeController = WarTimeController.getInstance();
+	GeneralThreadPool.getInstance().execute(warTimeController);
+
+	// 정령의 돌 타임 컨트롤러
+	if (Config.ELEMENTAL_STONE_AMOUNT > 0) {
+	    ElementalStoneGenerator elementalStoneGenerator = ElementalStoneGenerator.getInstance();
+	    GeneralThreadPool.getInstance().scheduleAtFixedRate(elementalStoneGenerator, 0,
+		    ElementalStoneGenerator.SLEEP_TIME);
+	}
+
+	// 타임이벤트 컨트롤러(매일)
+	TimeEventController.getInstance();
+	DevilController.getInstance().start(); // 악마왕영토
+	/** 로그파일저장 **/
+	LoggerInstance.getInstance();
+
+	/** 로봇시스템 **/
+	RobotAIThread.init();// 추가
+	/** 로봇시스템 **/
+
+	// npc shop
+	NpcShopTable.getInstance();
+	GeneralThreadPool.getInstance().execute(NpcShopSystem.getInstance());
+	// npc shop
+
+	// 배틀존
+	if (Config.배틀존작동유무) {
+	    BattleZone battleZone = BattleZone.getInstance();
+	    GeneralThreadPool.getInstance().execute(battleZone);
+	}
+
+	/** 악마왕 사냥터 **/
+	if (Config.악마왕작동유무) {
+	    DevilController.getInstance().start();
+	}
+
+	/** 아덴사냥터 **/
+	if (Config.아덴사냥터작동유무) {
+	    AdenaHuntController.getInstance().start();
+	}
+
+	/** 잊혀진섬 **/
+	GeneralThreadPool.getInstance().execute(IsleController.getInstance());
+
+	OneTimeController.start();
+	// 프리미엄 타임 콘트롤러
+	PremiumTimeController premiumTimeController = PremiumTimeController.getInstance();
+	GeneralThreadPool.getInstance().scheduleAtFixedRate(premiumTimeController, 0, PremiumTimeController.SLEEP_TIME); // #
+
+	// 탐 타임 콘트롤러
+	TamController tamController = TamController.getInstance();
+	GeneralThreadPool.getInstance().scheduleAtFixedRate(tamController, 0, TamController.SLEEP_TIME); // #
+
+	// 던전 타이머
+	DungeonTimer dungeontimer = DungeonTimer.getInstance();
+	GeneralThreadPool.getInstance().scheduleAtFixedRate(dungeontimer, 0, DungeonTimer.SleepTime);
+
+	// 이벤트 아이템 컨트롤러
+	if (Config.양말작동유무) {
+	    EventItemController eventItemController = EventItemController.getInstance();
+	    GeneralThreadPool.getInstance().scheduleAtFixedRate(eventItemController, 0, EventItemController.SleepTime);
+	}
+
+	// 브레이브아바타
+	BraveavatarController braveavatarController = BraveavatarController.getInstance();
+	GeneralThreadPool.getInstance().execute(braveavatarController);
+
+	// 아지트 경매 타임 콘트롤러
+	AuctionTimeController auctionTimeController = AuctionTimeController.getInstance();
+	GeneralThreadPool.getInstance().scheduleAtFixedRate(auctionTimeController, 0, AuctionTimeController.SLEEP_TIME); // #
+
+	// 아지트 세금 타임 콘트롤러
+	HouseTaxTimeController houseTaxTimeController = HouseTaxTimeController.getInstance();
+	GeneralThreadPool.getInstance().scheduleAtFixedRate(houseTaxTimeController, 0,
+		HouseTaxTimeController.SLEEP_TIME); // #
+
+	// 낚시 타임 콘트롤러
+	FishingTimeController fishingTimeController = FishingTimeController.getInstance();
+	GeneralThreadPool.getInstance().scheduleAtFixedRate(fishingTimeController, 0, FishingTimeController.SLEEP_TIME); // #
+
+	NpcChatTimeController npcChatTimeController = NpcChatTimeController.getInstance();
+	GeneralThreadPool.getInstance().scheduleAtFixedRate(npcChatTimeController, 0, NpcChatTimeController.SLEEP_TIME); // #
+
+	PcInventoryDeleteController pcInventoryDeleteController = PcInventoryDeleteController.getInstance();
+	GeneralThreadPool.getInstance().scheduleAtFixedRate(pcInventoryDeleteController, 0,
+		PcInventoryDeleteController.SLEEP_TIME); // #
+
+	if (Config.버경작동유무) {
+	    BugRaceController bugRaceController = BugRaceController.getInstance();
+	    GeneralThreadPool.getInstance().execute(bugRaceController);
+	}
+
+	L1HauntedHouse hauntedHouse = L1HauntedHouse.getInstance();
+	GeneralThreadPool.getInstance().execute(hauntedHouse);
+
+	// L1Racing race = L1Racing.getInstance();
+	// GeneralThreadPool.getInstance().execute(race);
+
+	NpcTable.getInstance();
+	L1DeleteItemOnGround deleteitem = new L1DeleteItemOnGround();
+	deleteitem.initialize();
+
+	if (!NpcTable.getInstance().isInitialized()) {
+	    throw new Exception("Could not initialize the npc table");
+	}
+	WeekQuestTable.getInstance(); // 주퀘
+
+	SpawnTable.getInstance();
+	MobGroupTable.getInstance();
+	SkillsTable.getInstance();
+	PolyTable.getInstance();
+	ItemTable.getInstance();
+	ItemTable.getInstance().initRace();
+	DropTable.getInstance();
+	DropItemTable.getInstance();
+	ShopTable.getInstance();
+	NPCTalkDataTable.getInstance();
+	L1World.getInstance();
+	L1WorldTraps.getInstance();
+	Dungeon.getInstance();
+	NpcSpawnTable.getInstance();
+	IpTable.getInstance();
+	MapsTable.getInstance();
+	UBSpawnTable.getInstance();
+	PetTable.getInstance();
+	ClanTable.getInstance();
+	CastleTable.getInstance();
+	L1CastleLocation.setCastleTaxRate(); // CastleTable 초기화 다음 아니면 안 된다
+	GetBackRestartTable.getInstance();
+	DoorSpawnTable.getInstance();
+	ChatLogTable.getInstance();
+	WeaponSkillTable.getInstance();
+	NpcActionTable.load();
+
+	GMCommandsConfig.load();
+	Getback.loadGetBack();
+	PetTypeTable.load();
+
+	// 디버깅
+	L1TreasureBox.load();
+	L1HealingPotion.load();
+
+	SprTable.getInstance();
+	RaceTable.getInstance();
+	ResolventTable.getInstance();
+	FurnitureSpawnTable.getInstance();
+	NpcChatTable.getInstance();
+	LightSpawnTable.getInstance();
+	L1Cube.getInstance();
+	Announcements.getInstance();
+	WeaponAddDamage.getInstance();
+	// 보스스폰
+	NewBossSpawnTable.getInstance();
+	BossTimeController.getInstance();
+
+	RestoreItemTable.getInstance().LoadRestoreItemTable();
+
+	// 돌아온아놀드이벤트
+	ArnoldBackEvent.getInstance();
+	InvSwapController.getInstance();
+
+	// 혈맹포인트버프활성화
+	ClanBuffController.getInstance();
+
+	GeneralThreadPool.getInstance().execute(ShipTimeController.getInstance());
+
+	GeneralThreadPool.getInstance().execute(CrockController.getInstance());
+
+	GeneralThreadPool.getInstance().execute(GhostController.getInstance());
+
+	DungeonQuitController dungeonquitcontroller = DungeonQuitController.getInstance();
+	GeneralThreadPool.getInstance().scheduleAtFixedRate(dungeonquitcontroller, 0, DungeonQuitController.SLEEP_TIME);
+
+	if (Config.ALT_HALLOWEENIVENT != true) {
+	    Halloween();
+	}
+	if (Config.ALT_RABBITEVENT != true) { // 신묘년 이벤트
+	    RabbitEvent();
+	}
+	if (Config.Use_Show_Announcecycle == true) { // 자동 공지사항
+	    Announcecycle.getInstance();
+	}
+	L1ClanRanking.getInstance().start();
+	MonsterBookTable.getInstace();
+	RankTable.getInstance();
+	RankingTimeController.getInstance(); // 랭킹 시스템 추가 - 실시간 갱신
+	HpMpRegenController regen = new HpMpRegenController(1000);
+	regen.start();
+	Robot_ConnectAndRestart.getInstance().start_spawn();
+	Robot_Hunt.getInstance().start_spawn();
+	Robot_Location.setRLOC();
+	TimerTask task = new TimerTask() {
+
+	    @Override
+	    public void run() {
+		GMCommands.clanBot = true;
+		Robot_Crown.getInstance().loadbot();
+		Robot.인형 = !Robot.인형;
+	    }
+	};
+	Timer timer = new Timer();
+	timer.schedule(task, 2000);
+	// 가비지 컬렉터 실행 (Null) 객체의 해제
+	System.gc();
+	System.out.println("┌────────────────────────────────┐");
+	System.out.println("│\t\tサーバーが正常に稼動しました。 - ON\t\t  │");
+	System.out.println("│\t\t\t서버 포트 : " + Config.GAME_SERVER_PORT + "\t\t\t  │");
+	System.out.println("│\t\t\t  메모리 : " + SystemUtil.getUsedMemoryMB() + "M\t\t\t\t  │");
+	System.out.println("│\t\t\t  플랫폼 : Netty Base\t\t\t  │");
+	System.out.println("└────────────────────────────────┘\n");
+	Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
+
+	UBTable.getInstance().getUb(1).start();
+    }
+
+    /**
+     * 온라인중의 플레이어 모두에 대해서 kick, 캐릭터 정보의 보존을 한다.
+     */
+    public void disconnectAllCharacters() {
+	for (L1Clan clan : L1World.getInstance().getAllClans()) {
+	    int clanid = clan.getClanId();
+	    int[] time = clan.getBuffTime();
+	    ClanTable.getInstance().updateBless(clanid, clan.getBless());
+	    ClanTable.getInstance().updateBlessCount(clanid, clan.getBlessCount());
+	    ClanTable.getInstance().updateBuffTime(time[0], time[1], time[2], time[3], clanid);
+	}
+	Collection<L1PcInstance> pcList = L1World.getInstance().getAllPlayers();
+	for (L1PcInstance pc : pcList) {
+	    if (pc == null || pc.noPlayerck2)
+		continue;
+	    try {
+		if (pc.getNetConnection() != null) {
+		    pc.getNetConnection().setActiveChar(null);
+		    pc.getNetConnection().kick();
+		}
+		pc.logout();
+	    } catch (Exception e) {
+
+	    }
+	}
+    }
+
+    public int saveAllCharInfo() {
+	// exception 발생하면 -1 리턴, 아니면 저장한 인원 수 리턴
+	int cnt = 0;
+	try {
+	    for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
+		cnt++;
+		pc.save();
+		pc.saveInventory();
+	    }
+	} catch (Exception e) {
+	    return -1;
+	}
+
+	return cnt;
+    }
+
+    /**
+     * 온라인중의 플레이어에 대해서 kick , 캐릭터 정보의 보존을 한다.
+     */
+    public static void disconnectChar(L1PcInstance pc) {
+	if (pc.getNetConnection() != null) {
+	    pc.getNetConnection().kick();
+	}
+	pc.logout();
+    }
+
+    public static void disconnectChar(String name) {
+	L1PcInstance pc = L1World.getInstance().getPlayer(name);
+
+	if (pc != null) {
+	    disconnectChar(pc);
+	}
+    }
+
+    private class ServerShutdownThread extends Thread {
+	private final int _secondsCount;
+
+	public ServerShutdownThread(int secondsCount) {
+	    _secondsCount = secondsCount;
+	}
+
+	@Override
+	public void run() {
+	    L1World world = L1World.getInstance();
+	    try {
+		int secondsCount = _secondsCount;
+		world.broadcastServerMessage("잠시 후, 서버를 종료 합니다.");
+		world.broadcastServerMessage("안전한 장소에서 로그아웃 해 주세요");
+		while (0 < secondsCount) {
+		    if (secondsCount <= 30) {
+			System.out.println("게임이 " + secondsCount + "초 후에 종료 됩니다. 게임을 중단해 주세요.");
+			world.broadcastServerMessage("게임이 " + secondsCount + "초 후에 종료 됩니다. 게임을 중단해 주세요.");
+		    } else {
+			if (secondsCount % 60 == 0) {
+			    System.out.println("게임이 " + secondsCount / 60 + "분 후에 종료 됩니다.");
+			    world.broadcastServerMessage("게임이 " + secondsCount / 60 + "분 후에 종료 됩니다.");
+			}
+		    }
+		    Thread.sleep(1000);
+		    secondsCount--;
+		}
+		shutdown();
+	    } catch (InterruptedException e) {
+		world.broadcastServerMessage("서버 종료가 중단되었습니다. 서버는 정상 가동중입니다.");
+		return;
+	    }
+	}
+    }
+
+    private ServerShutdownThread _shutdownThread = null;
+
+    public synchronized void shutdownWithCountdown(int secondsCount) {
+	if (_shutdownThread != null) {
+	    RobotAIThread.close();
+	    // 이미 슛다운 요구를 하고 있다
+	    // TODO 에러 통지가 필요할지도 모른다
+	    return;
+	}
+	_shutdownThread = new ServerShutdownThread(secondsCount);
+	_shutdownThread.start();
+	Collection<L1PcInstance> pcList = L1World.getInstance().getAllPlayers();
+	for (L1PcInstance pc : pcList) {
+	    if (pc == null || pc.noPlayerck2)
+		continue;
+	    pc.서버다운중 = true;
+	}
+    }
+
+    public void shutdown() {
+	disconnectAllCharacters();
+	// manager.savelog(); //서버 다운시 서버로그 저장여부 2014년7월12일 log디비 폴더 이용 시점에 주석처리
+	LinAllManagerInfoThread.getInstance().ServerInfoUPDATE();
+	InvSwapController.getInstance().initDB();
+	RestoreItemTable.getInstance().SaveReStoreItem();
+	System.exit(0);
+    }
+
+    public synchronized void abortShutdown() {
+	if (_shutdownThread == null) {
+	    // 슛다운 요구를 하지 않았다
+	    // TODO 에러 통지가 필요할지도 모른다
+	    return;
+	}
+
+	_shutdownThread.interrupt();
+	_shutdownThread = null;
+    }
+
+    public void Halloween() {
+	Connection con = null;
+	PreparedStatement pstm = null;
+	PreparedStatement pstm1 = null;
+	PreparedStatement pstm2 = null;
+	PreparedStatement pstm3 = null;
+	PreparedStatement pstm4 = null;
+	try {
+	    con = L1DatabaseFactory.getInstance().getConnection();
+	    pstm = con.prepareStatement(
+		    "DELETE FROM character_items WHERE item_id IN (20380, 21060, 256, 200172) AND enchantlvl < 0");
+	    pstm1 = con.prepareStatement(
+		    "DELETE FROM character_elf_warehouse WHERE item_id IN (20380, 21060, 256, 200172) AND enchantlvl < 0");
+	    pstm2 = con.prepareStatement(
+		    "DELETE FROM clan_warehouse WHERE item_id IN (20380, 21060, 256, 200172) AND enchantlvl < 0");
+	    pstm3 = con.prepareStatement(
+		    "DELETE FROM character_warehouse WHERE item_id IN (20380, 21060, 256, 200172) AND enchantlvl < 0");
+	    pstm4 = con.prepareStatement(
+		    "DELETE FROM character_package_warehouse WHERE item_id IN (20380, 21060, 256, 200172) AND enchantlvl < 0");
+
+	    pstm4.execute();
+	    pstm3.execute();
+	    pstm2.execute();
+	    pstm1.execute();
+	    pstm.execute();
+	} catch (SQLException e) {
+	    _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+	} finally {
+	    SQLUtil.close(pstm4);
+	    SQLUtil.close(pstm3);
+	    SQLUtil.close(pstm2);
+	    SQLUtil.close(pstm1);
+	    SQLUtil.close(pstm);
+	    SQLUtil.close(con);
+	}
+    }
+
+    public void RabbitEvent() { // 신묘년 이벤트
+	Connection con = null;
+	PreparedStatement pstm = null;
+	PreparedStatement pstm1 = null;
+	PreparedStatement pstm2 = null;
+	PreparedStatement pstm3 = null;
+	PreparedStatement pstm4 = null;
+	PreparedStatement pstm5 = null;
+	PreparedStatement pstm6 = null;
+	PreparedStatement pstm7 = null;
+	try {
+	    con = L1DatabaseFactory.getInstance().getConnection();
+	    pstm = con.prepareStatement(
+		    "DELETE FROM character_items WHERE item_id IN (1115, 1116, 1117, 1118) AND enchantlvl < 0");
+	    pstm1 = con.prepareStatement(
+		    "DELETE FROM character_elf_warehouse WHERE item_id IN (1115, 1116, 1117, 1118) AND enchantlvl < 0");
+	    pstm2 = con.prepareStatement(
+		    "DELETE FROM clan_warehouse WHERE item_id IN (1115, 1116, 1117, 1118) AND enchantlvl < 0");
+	    pstm3 = con.prepareStatement(
+		    "DELETE FROM character_warehouse WHERE item_id IN (1115, 1116, 1117, 1118) AND enchantlvl < 0");
+	    pstm4 = con.prepareStatement(
+		    "DELETE FROM character_items WHERE item_id IN (22250, 22251, 22252) AND enchantlvl < 0");
+	    pstm5 = con.prepareStatement(
+		    "DELETE FROM character_elf_warehouse WHERE item_id IN (22250, 22251, 22252) AND enchantlvl < 0");
+	    pstm6 = con.prepareStatement(
+		    "DELETE FROM clan_warehouse WHERE item_id IN (22250, 22251, 22252) AND enchantlvl < 0");
+	    pstm7 = con.prepareStatement(
+		    "DELETE FROM character_warehouse WHERE item_id IN (22250, 22251, 22252) AND enchantlvl < 0");
+	    pstm7.execute();
+	    pstm6.execute();
+	    pstm5.execute();
+	    pstm4.execute();
+	    pstm3.execute();
+	    pstm2.execute();
+	    pstm1.execute();
+	    pstm.execute();
+	} catch (SQLException e) {
+	    _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+	} finally {
+	    SQLUtil.close(pstm);
+	    SQLUtil.close(pstm1);
+	    SQLUtil.close(pstm2);
+	    SQLUtil.close(pstm3);
+	    SQLUtil.close(pstm4);
+	    SQLUtil.close(pstm5);
+	    SQLUtil.close(pstm6);
+	    SQLUtil.close(pstm7);
+	    SQLUtil.close(con);
+	}
+    }
+
+}

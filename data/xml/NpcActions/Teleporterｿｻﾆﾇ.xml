@@ -1,0 +1,1676 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<NpcActionList>
+    <!-- 붉은 기사단 기지  -->
+    <Action Name="teleport wood_depo" NpcId="50005,50020,50024,50036,50039,50044,50046,50051,50054,50066"> 
+        <Teleport X="32596" Y="33175" Map="4" Heading="5" Price="750"/>
+    </Action>
+	<!-- ### 숨겨진 계곡 ### -->
+	<!-- 숨겨진 계곡 결투장안내원 IN -->
+	<Action Name="teleport hidden-velley-arena-in" NpcId="50008">
+		<Teleport X="32709" Y="32776" Map="69" Heading="5" Price="0"/>
+	</Action>
+	<!-- 숨겨진계곡 결투장안내원 OUT -->
+	<Action Name="teleport hidden-velley-arena-out" NpcId="4901000">
+		<Teleport X="32724" Y="32775" Map="69" Heading="5" Price="0"/>
+	</Action>
+	<!-- 숨겨진 계곡⇒숨계 던전 -->
+	<Action Name="teleport dungeon-in" NpcId="50006">
+		<Teleport X="32872" Y="32871" Map="86" Heading="7" Price="0"/>
+	</Action>
+	<!-- 숨겨진 계곡 던전 -> 숨겨진 계곡 밖 -->
+	<Action Name="teleport dungeon-out" NpcId="50002">
+		<Teleport X="32677" Y="32814" Map="69" Heading="5" Price="0"/>
+	</Action>
+	<!-- 숨겨진 계곡⇒은기사마을 -->
+	<Action Name="teleport hidden-velley-for-newbie" NpcId="50004,50003">
+		<Teleport X="33087" Y="33388" Map="4" Heading="6" Price="0"/>
+	</Action>
+	<!-- 숨겨진 계곡⇒침묵의 동굴 -->
+	<Action Name="teleport dark island-in" NpcId="50005">
+		<Teleport X="32918" Y="32799" Map="304" Heading="5" Price="0"/>
+	</Action>
+	<!-- 숨겨진 계곡 -> 실베리아 // 환술사 아샤 -->
+	<Action Name="teleport illusionist island-in" NpcId="4201000">
+		<Teleport X="32790" Y="32871" Map="1000" Heading="5" Price="0"/>
+	</Action>
+	<!-- ### 노래하는 섬 ### -->
+	<!-- 노래하는 섬 지하 감옥⇒노래하는 섬북부 -->
+	<Action Name="teleport dungeon-out" NpcId="50012">
+		<Teleport X="32782" Y="32851" Map="68" Heading="5" Price="0"/>
+	</Action>
+	<!-- 노래하는 섬⇒노래하는 섬지하 감옥 -->
+	<Action Name="teleport dungeon-in" NpcId="50011">
+		<Teleport X="32676" Y="32865" Map="85" Heading="6" Price="0"/>
+	</Action>
+	<!-- 노래하는 섬⇒결투장 IN-->
+	<Action Name="teleport singing-island-arena-in" NpcId="50013">
+		<Teleport X="32834" Y="32781" Map="68" Heading="5" Price="0"/>
+	</Action>
+	<!-- 노래하는 섬⇒결투장 OUT -->
+	<Action Name="teleport singing-island-arena-out" NpcId="4902000">
+		<Teleport X="32831" Y="32772" Map="68" Heading="5" Price="0"/>
+	</Action>		
+	<!-- 노래하는 섬⇒ 말섬 -->
+	<Action Name="teleport talking-island-for-newbie" NpcId="50009,50010">
+		<Teleport X="32593" Y="32922" Map="0" Heading="5" Price="0"/>
+	</Action>
+	<!-- 노래하는 섬 -> 베히모스 // 용기사 피에나 --> 
+	<Action Name="teleport dragonknight island-in" NpcId="4202000"> 
+		<Teleport X="32807" Y="32865" Map="1001" Heading="5" Price="0"/> 
+	</Action>
+	<!--  은기사 마을⇒숨겨진 계곡 -->
+	<Action Name="teleport hidden-valley" NpcId="50055">
+		<Teleport X="32675" Y="32861" Map="69" Heading="5" Price="0"/>
+	</Action>
+	<!--  요정 숲⇒숨겨진 계곡 -->
+	<Action Name="teleport valley-in" NpcId="50065">
+		<Teleport X="32695" Y="32852" Map="69" Heading="5" Price="0"/>
+	</Action>
+	<!--  침묵의 동굴⇒숨겨진 계곡 -->
+	<Action Name="teleport valley-go" NpcId="50069">
+		<Teleport X="32683" Y="32849" Map="69" Heading="5" Price="0"/>
+	</Action>
+	<!--  말하는 섬⇒노래하는 섬 -->
+	<Action Name="teleport singing-island" NpcId="50016">
+		<Teleport X="32803" Y="32762" Map="68" Heading="5" Price="0"/>
+	</Action>
+	<!-- 노래하는 섬⇒에르프의 숲 -->
+	<Action Name="teleport elvenforest-in" NpcId="50001">
+		<Teleport X="33059" Y="32343" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 노래하는 섬⇒이야기할 수 있는 섬, 실버 나이트 타운, 에르프의 숲, 침묵의 동굴 -->
+	<Action Name="teleport ti-in" NpcId="50082">
+		<Teleport X="32593" Y="32922" Map="0" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport skt-in" NpcId="50082">
+		<Teleport X="33083" Y="33387" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport efores-in" NpcId="50082">
+		<Teleport X="33054" Y="32323" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport scave-in" NpcId="50082">
+		<Teleport X="32922" Y="32802" Map="304" Heading="5" Price="0"/>
+	</Action>
+	<!-- 실버 나이트 타운, 이야기할 수 있는 섬, 에르프의 숲, 침묵의 동굴⇒노래하는 섬 -->
+	<Action Name="teleport si-in" NpcId="71035">
+		<Teleport X="32834" Y="32858" Map="8011" Heading="5" Price="0"/>
+	</Action>
+	<!-- 드로몬드⇒노래하는 섬 -->
+	<Action Name="1" NpcId="70997">
+		<Teleport X="32831" Y="32838" Map="8011" Heading="2" Price="0"/>
+	</Action>
+	<!-- 알렉스 노래하는 섬⇒훈련장 -->
+	<Action Name="0" NpcId="70999">
+		<Teleport X="32741" Y="32721" Map="8014" Heading="4" Price="0"/>
+	</Action>
+	<!-- 알렉스 훈련장⇒노래하는 섬 -->
+	<Action Name="1" NpcId="71000">
+		<Teleport X="32832" Y="32846" Map="8011" Heading="4" Price="0"/>
+	</Action>
+	<!-- 치코리 노래하는 섬⇒노래하는 섬북부 -->
+	<Action Name="0" NpcId="71009">
+		<Teleport X="32800" Y="32734" Map="8015" Heading="6" Price="0"/>
+	</Action>
+	<!-- 치코리 우타시마 북부⇒노래하는 섬 -->
+	<Action Name="teleport town-in" NpcId="71010">
+		<Teleport X="32805" Y="32850" Map="8011" Heading="6" Price="0"/>
+	</Action>
+	<!-- 방어 아나운서 노래하는 섬⇒노래하는 섬북부 -->
+	<Action Name="0" NpcId="71011">
+		<Teleport X="32758" Y="32774" Map="8015" Heading="2" Price="0"/>
+	</Action>
+	<!-- 방어 아나운서 노래하는 섬북부⇒노래하는 섬 -->
+	<Action Name="teleport town-in" NpcId="71012">
+		<Teleport X="32870" Y="32823" Map="8011" Heading="7" Price="0"/>
+	</Action>
+	<!-- 마을의 자경단(오른쪽)⇒노래하는 섬북부 -->
+	<Action Name="teleport town-out" NpcId="71014">
+		<Teleport X="32727" Y="32764" Map="8015" Heading="2" Price="0"/>
+	</Action>
+	<!-- 마을의 자경단(상)⇒노래하는섬서부 -->
+	<Action Name="teleport town-out" NpcId="71015">
+		<Teleport X="32796" Y="32866" Map="8012" Heading="7" Price="0"/>
+	</Action>
+	<!-- 마을의 자경단(오른쪽)⇒노래하는 섬 -->
+	<Action Name="teleport town-in" NpcId="71017">
+		<Teleport X="32868" Y="32829" Map="8011" Heading="6" Price="0"/>
+	</Action>
+	<!-- 마을의 자경단(상)⇒노래하는섬 -->
+	<Action Name="teleport town-in" NpcId="71016">
+		<Teleport X="32834" Y="32791" Map="8011" Heading="4" Price="0"/>
+	</Action>
+
+
+
+
+
+	<!-- 다니엘 : 디아드요새 -->
+	<Action Name="teleport diad-woods" NpcId="50079">
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="550"/>
+	</Action>
+	<Action Name="teleport diad-gludin" NpcId="50079">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="550"/>
+	</Action>
+	<Action Name="teleport diad-silver" NpcId="50079">
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="600"/>
+	</Action>
+	<Action Name="teleport diad-kent" NpcId="50079">
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="550"/>
+	</Action>
+	<Action Name="teleport diad-willow" NpcId="50079">
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="700"/>
+	</Action>
+	<Action Name="teleport diad-heine" NpcId="50079">
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="600"/>
+	</Action>
+	<Action Name="teleport diad-giran" NpcId="50079">
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="600"/>
+	</Action>
+	<Action Name="teleport diad-werldern" NpcId="50079">
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="750"/>
+	</Action>
+	<Action Name="teleport diad-oren" NpcId="50079">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="750"/>
+	</Action>
+	<Action Name="teleport diad-aden" NpcId="50079">
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="550"/>
+	</Action>
+	<Action Name="teleport diad-lowful" NpcId="50079">
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="550"/>
+	</Action>
+	<Action Name="teleport diad-chaos" NpcId="50079">
+		<Teleport X="32885" Y="32658" Map="4" Heading="5" Price="700"/>
+	</Action>
+	<Action Name="teleport diad-island" NpcId="50079">
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="650"/>
+	</Action>
+	<!-- 다니엘 : 디아드요새 사냥터 -->
+	<Action Name="teleport telediad1" NpcId="50079">
+		<Teleport X="32723" Y="32851" Map="320" Heading="5" Price="700"/>
+	</Action>
+	<Action Name="teleport diad-oumdun" NpcId="50079">
+		<Teleport X="32785" Y="32938" Map="310" Heading="5" Price="800"/>
+	</Action>
+	<Action Name="teleport diad-mincave" NpcId="50079">
+		<Teleport X="32729" Y="33000" Map="330" Heading="5" Price="800"/>
+	</Action>
+	<Action Name="teleport diad-las" NpcId="50079">
+		<Teleport X="32693" Y="32796" Map="450" Heading="5" Price="1000"/>
+	</Action>
+
+
+
+
+
+	<!-- 말하는섬 케이스 -->
+	<Action Name="teleport firefieldtown" NpcId="50017">
+		<Teleport X="32564" Y="32294" Map="4" Heading="5" Price="50"/>
+	</Action>
+
+
+
+
+
+	<!-- 기란 윌마 -->
+	<Action Name="teleport giran-kent" NpcId="50036">
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="126"/>
+	</Action>
+	<Action Name="teleport giran-heine" NpcId="50036">
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="126"/>
+	</Action>
+	<Action Name="teleport giran-werldern" NpcId="50036">
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="52"/>
+	</Action>
+	<Action Name="teleport giran-silver" NpcId="50036">
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="189"/>
+	</Action>
+	<Action Name="teleport giran-gludin" NpcId="50036">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="52"/>
+	</Action>
+	<Action Name="teleport giran-oren" NpcId="50036">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="52"/>
+	</Action>
+	<Action Name="teleport giran-aden" NpcId="50036">
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="189"/>
+	</Action>
+	<Action Name="teleport giran-woods" NpcId="50036">
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="126"/>
+	</Action>
+	<Action Name="teleport giran-willow" NpcId="50036">
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="126"/>
+	</Action>
+	<Action Name="teleport giran-lowful" NpcId="50036">
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="315"/>
+	</Action>
+	<Action Name="teleport giran-chaos" NpcId="50036">
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="315"/>
+	</Action>
+	<Action Name="teleport giran-grape" NpcId="50036">
+		<Teleport X="32864" Y="32811" Map="4" Heading="5" Price="420"/>
+	</Action>
+	<Action Name="teleport giran-island" NpcId="50036">
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="735"/>
+	</Action>
+	<Action Name="teleport giran-scave" NpcId="50036">
+		<Teleport X="32874" Y="32904" Map="304" Heading="5" Price="1155"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="50036">
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="875"/>
+	</Action>
+
+
+
+
+	<!-- 글루디오 아스터 -->				   
+	<Action Name="teleport gludin-kent" NpcId="50024">
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="132"/>
+	</Action>
+	<Action Name="teleport gludin-woods" NpcId="50024">
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="55"/>
+	</Action>
+	<Action Name="teleport gludin-willow" NpcId="50024">
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="198"/>
+	</Action>
+	<Action Name="teleport gludin-giran" NpcId="50024">
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="55"/>
+	</Action>
+	<Action Name="teleport gludin-silver" NpcId="50024">
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="132"/>
+	</Action>
+	<Action Name="teleport gludin-heine" NpcId="50024">
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="264"/>
+	</Action>
+	<Action Name="teleport gludin-werldern" NpcId="50024">
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="55"/>
+	</Action>
+	<Action Name="teleport gludin-behemoth" NpcId="50024">
+		<Teleport X="32807" Y="32865" Map="1001" Heading="5" Price="7777"/>
+	</Action>
+	<Action Name="teleport gludin-silveria" NpcId="50024">
+		<Teleport X="32790" Y="32871" Map="1000" Heading="5" Price="7777"/>
+	</Action>
+	<Action Name="teleport gludin-oren" NpcId="50024">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="198"/>
+	</Action>
+	<Action Name="teleport gludin-aden" NpcId="50024">
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="264"/>
+	</Action>
+	<Action Name="teleport gludin-lowful" NpcId="50024">
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="220"/>
+	</Action>
+	<Action Name="teleport gludin-chaos" NpcId="50024">
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="220"/>
+	</Action>
+	<Action Name="teleport gludin-grape" NpcId="50024">
+		<Teleport X="32864" Y="32811" Map="4" Heading="5" Price="420"/>
+	</Action>
+	<Action Name="teleport gludin-island" NpcId="50024">
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="550"/>
+	</Action>
+	<Action Name="teleport gludin-scave" NpcId="50024">
+		<Teleport X="32874" Y="32904" Map="304" Heading="5" Price="1155"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="50024">
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="7480"/>
+	</Action>
+
+
+
+
+	<!-- 하이네 리올 -->
+	<Action Name="teleport heine-giran" NpcId="50066">
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="180"/>
+	</Action>
+	<Action Name="teleport heine-silver" NpcId="50066">
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport heine-aden" NpcId="50066">
+		<Teleport X="33965" Y="33253" Map="4" Heading="5" Price="120"/>
+	</Action>
+	<Action Name="teleport heine-kent" NpcId="50066">
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="120"/>
+	</Action>
+	<Action Name="teleport heine-woods" NpcId="50066">
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport heine-werldern" NpcId="50066">
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport heine-oren" NpcId="50066">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="240"/>
+	</Action>
+	<Action Name="teleport heine-gludin" NpcId="50066">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="120"/>
+	</Action>
+	<Action Name="teleport heine-willow" NpcId="50066">
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="180"/>
+	</Action>
+	<Action Name="teleport heine-grape" NpcId="50066">
+		<Teleport X="32864" Y="32811" Map="4" Heading="5" Price="420"/>
+	</Action>
+	<Action Name="teleport heine-lowful" NpcId="50066">
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="400"/>
+	</Action>
+	<Action Name="teleport heine-chaos" NpcId="50066">
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="400"/>
+	</Action>
+	<Action Name="teleport heine-island" NpcId="50066">
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="800"/>
+	</Action>
+	<Action Name="teleport heine-scave" NpcId="50066">
+		<Teleport X="32874" Y="32904" Map="304" Heading="5" Price="1155"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="50066">
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="7100"/>
+	</Action>
+	<!-- 말하는섬 루카스 글말 -->
+	<Action Name="teleport island-gludin" NpcId="50015">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="1500"/>
+	</Action>
+
+
+
+
+	<!-- 켄트 스탠리 -->
+	<Action Name="teleport kent-gludin" NpcId="50020">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport kent-giran" NpcId="50020">
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport kent-silver" NpcId="50020">
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="120"/>
+	</Action>
+	<Action Name="teleport kent-woods" NpcId="50020">
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="120"/>
+	</Action>
+	<Action Name="teleport kent-willow" NpcId="50020">
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport kent-heine" NpcId="50020">
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="180"/>
+	</Action>
+	<Action Name="teleport kent-werldern" NpcId="50020">
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="120"/>
+	</Action>
+	<Action Name="teleport kent-oren" NpcId="50020">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="120"/>
+	</Action>
+	<Action Name="teleport kent-aden" NpcId="50020">
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="180"/>
+	</Action>
+	<Action Name="teleport kent-lowful" NpcId="50020">
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="200"/>
+	</Action>
+	<Action Name="teleport kent-chaos" NpcId="50020">
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="200"/>
+	</Action>
+	<Action Name="teleport kent-grape" NpcId="50020">
+		<Teleport X="32864" Y="32811" Map="4" Heading="5" Price="420"/>
+	</Action>
+	<Action Name="teleport kent-island" NpcId="50020">
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="600"/>
+	</Action>	
+	<Action Name="teleport kent-scave" NpcId="50020">
+		<Teleport X="32874" Y="32904" Map="304" Heading="5" Price="1155"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="50020">
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="7100"/>
+	</Action>
+
+
+
+
+
+	<!-- 오움던전 공간이동사 디아루즈--> 
+	<Action Name="teleport oum-gludin" NpcId="50072">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="2200"/>
+	</Action>
+	<Action Name="teleport oum-kent" NpcId="50072">
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="1800"/>
+	</Action>
+	<Action Name="teleport oum-giran" NpcId="50072">
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="1000"/>
+	</Action>
+	<Action Name="teleport oum-aden" NpcId="50072">
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="1600"/>
+	</Action>
+	<Action Name="teleport oum-heine" NpcId="50072">
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="2200"/>
+	</Action>
+	<Action Name="teleport oum-oren" NpcId="50072">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="1200"/>
+	</Action>
+	<Action Name="teleport oum-scave" NpcId="50072">
+		<Teleport X="32918" Y="32799" Map="304" Heading="5" Price="1300"/>
+	</Action>
+	<Action Name="teleport oum-lowful" NpcId="50072">
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="2000"/>
+	</Action>
+	<Action Name="teleport oum-chaos" NpcId="50072">
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="2000"/>
+	</Action>
+
+
+
+
+
+	<!-- 침묵의동굴 디아노스 -->	
+	<Action Name="teleport scave-gludin" NpcId="50068">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="1500"/>
+	</Action>
+	<Action Name="teleport scave-kent" NpcId="50068">
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="800"/>
+	</Action>
+	<Action Name="teleport scave-giran" NpcId="50068">
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="600"/>
+	</Action>
+	<Action Name="teleport scave-aden" NpcId="50068">
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="1800"/>
+	</Action>
+	<Action Name="teleport scave-heine" NpcId="50068">
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="1800"/>
+	</Action>
+	<Action Name="teleport scave-oren" NpcId="50068">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="1000"/>
+	</Action>	
+	<Action Name="teleport scave-silver" NpcId="50068">
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="300"/>
+	</Action>									 
+
+
+
+
+
+	<!--웰던 레슬리 -->						  
+	<Action Name="teleport dwarf-giran" NpcId="50039"> 
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="185"/> 
+	</Action>
+	<Action Name="teleport dwarf-oren" NpcId="50039"> 
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="185"/> 
+	</Action>
+	<Action Name="teleport dwarf-kent" NpcId="50039"> 
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="123"/> 
+	</Action>
+	<Action Name="teleport dwarf-heine" NpcId="50039"> 
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="247"/> 
+	</Action>
+	<Action Name="teleport dwarf-gludin" NpcId="50039"> 
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="51"/> 
+	</Action>
+	<Action Name="teleport dwarf-silver" NpcId="50039"> 
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="123"/> 
+	</Action>
+	<Action Name="teleport dwarf-aden" NpcId="50039"> 
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="247"/> 
+	</Action>
+	<Action Name="teleport dwarf-woods" NpcId="50039"> 
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="51"/> 
+	</Action>
+	<Action Name="teleport dwarf-willow" NpcId="50039"> 
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="185"/> 
+	</Action>
+	<Action Name="teleport dwarf-grape" NpcId="50039">
+		<Teleport X="32864" Y="32811" Map="4" Heading="5" Price="420"/>
+	</Action>
+	<Action Name="teleport dwarf-lowful" NpcId="50039"> 
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="412"/> 
+	</Action>
+	<Action Name="teleport dwarf-chaos" NpcId="50039"> 
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="412"/> 
+	</Action>
+	<Action Name="teleport dwarf-island" NpcId="50039"> 
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="824"/> 
+	</Action>
+	<Action Name="teleport dwarf-scave" NpcId="50039">
+		<Teleport X="32874" Y="32904" Map="304" Heading="5" Price="1155"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="50039"> 
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="7931"/> 
+	</Action>
+
+
+
+
+
+	<!-- 윈다우드 트레이 -->							
+	<Action Name="teleport woods-gludin" NpcId="50054"> 
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="50"/> 
+	</Action>
+	<Action Name="teleport woods-silver" NpcId="50054"> 
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="50"/> 
+	</Action>
+	<Action Name="teleport woods-kent" NpcId="50054"> 
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="120"/> 
+	</Action>
+	<Action Name="teleport woods-willow" NpcId="50054"> 
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="120"/> 
+	</Action>
+	<Action Name="teleport woods-heine" NpcId="50054"> 
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="180"/> 
+	</Action>
+	<Action Name="teleport woods-giran" NpcId="50054"> 
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="180"/> 
+	</Action>
+	<Action Name="teleport woods-aden" NpcId="50054"> 
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="180"/> 
+	</Action>
+	<Action Name="teleport woods-werldern" NpcId="50054"> 
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="240"/> 
+	</Action>
+	<Action Name="teleport woods-oren" NpcId="50054"> 
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="240"/> 
+	</Action>
+	<Action Name="teleport woods-lowful" NpcId="50054"> 
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="300"/> 
+	</Action>
+	<Action Name="teleport woods-chaos" NpcId="50054"> 
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="200"/> 
+	</Action>
+	<Action Name="teleport woods-grape" NpcId="50054">
+		<Teleport X="32864" Y="32811" Map="4" Heading="5" Price="200"/>
+	</Action>
+	<Action Name="teleport woods-island" NpcId="50054"> 
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="420"/> 
+	</Action>
+	<Action Name="teleport woods-scave" NpcId="50054">
+		<Teleport X="32874" Y="32904" Map="304" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="50054"> 
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="6500"/> 
+	</Action>
+
+
+
+
+
+	<!-- 시리우스,엘레리스 -->			  
+	<Action Name="teleport aden-heine" NpcId="50044,50046"> 
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="259"/> 
+	</Action>		 
+	<Action Name="teleport aden-giran" NpcId="50044,50046"> 
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="129"/> 
+	</Action>		 
+	<Action Name="teleport aden-silver" NpcId="50044,50046"> 
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="194"/> 
+	</Action>		 
+	<Action Name="teleport aden-kent" NpcId="50044,50046"> 
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="129"/> 
+	</Action>		 
+	<Action Name="teleport aden-woods" NpcId="50044,50046"> 
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="54"/> 
+	</Action>		 
+	<Action Name="teleport aden-werldern" NpcId="50044,50046"> 
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="324"/> 
+	</Action>		 
+	<Action Name="teleport aden-gludin" NpcId="50044,50046"> 
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="194"/> 
+	</Action>		 
+	<Action Name="teleport aden-oren" NpcId="50044,50046"> 
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="259"/> 
+	</Action>		 
+	<Action Name="teleport aden-willow" NpcId="50044,50046"> 
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="420"/> 
+	</Action>		 
+	<Action Name="teleport aden-grape" NpcId="50044,50046">
+		<Teleport X="32864" Y="32811" Map="4" Heading="5" Price="450"/>
+	</Action>
+	<Action Name="teleport aden-lowful" NpcId="50044,50046"> 
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="540"/> 
+	</Action>		 
+	<Action Name="teleport aden-chaos" NpcId="50044,50046"> 
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="540"/> 
+	</Action>		 
+	<Action Name="teleport aden-island" NpcId="50044,50046"> 
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="972"/> 
+	</Action>		 
+	<Action Name="teleport aden-scave" NpcId="50044,50046">
+		<Teleport X="32874" Y="32904" Map="304" Heading="5" Price="1155"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="50044,50046"> 
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="7992"/> 
+	</Action>	
+
+
+
+
+	 
+	<!-- 오렌 키리우스 -->
+	<Action Name="teleport oren-werldern" NpcId="50051"> 
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="240"/> 
+	</Action>		  
+	<Action Name="teleport oren-giran" NpcId="50051"> 
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="240"/> 
+	</Action>		  
+	<Action Name="teleport oren-heine" NpcId="50051"> 
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="180"/> 
+	</Action>		  
+	<Action Name="teleport oren-kent" NpcId="50051"> 
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="300"/> 
+	</Action>		  
+	<Action Name="teleport oren-gludin" NpcId="50051"> 
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="120"/> 
+	</Action>		  
+	<Action Name="teleport oren-silver" NpcId="50051"> 
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="180"/> 
+	</Action>		  
+	<Action Name="teleport oren-aden" NpcId="50051"> 
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="300"/> 
+	</Action>		  
+	<Action Name="teleport oren-woods" NpcId="50051"> 
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="50"/> 
+	</Action>		  
+	<Action Name="teleport oren-willow" NpcId="50051"> 
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="240"/> 
+	</Action>		  
+	<Action Name="teleport oren-grape" NpcId="50051">
+		<Teleport X="32864" Y="32811" Map="4" Heading="5" Price="420"/>
+	</Action>
+	<Action Name="teleport oren-lowful" NpcId="50051"> 
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="500"/> 
+	</Action>		  
+	<Action Name="teleport oren-chaos" NpcId="50051"> 
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="500"/> 
+	</Action>		  
+	<Action Name="teleport oren-island" NpcId="50051"> 
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="900"/> 
+	</Action>		  
+	<Action Name="teleport oren-scave" NpcId="50051">
+		<Teleport X="32874" Y="32904" Map="304" Heading="5" Price="1155"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="50051"> 
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="8000"/> 
+	</Action>	
+
+
+
+
+	  
+	<!-- 베헤모스 데카비아 -->	  
+	<Action Name="teleport behemoth-werldern" NpcId="3000005">
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport behemoth-giran" NpcId="3000005">
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport behemoth-oren" NpcId="3000005">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport behemoth-silveria" NpcId="3000005">
+		<Teleport X="32790" Y="32871" Map="1000" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport behemoth-kent" NpcId="3000005">
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="120"/>
+	</Action>
+	<Action Name="teleport behemoth-heine" NpcId="3000005">
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="120"/>
+	</Action>
+	<Action Name="teleport behemoth-gludin" NpcId="3000005">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="180"/>
+	</Action>
+	<Action Name="teleport behemoth-silver" NpcId="3000005">
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="180"/>
+	</Action>
+	<Action Name="teleport behemoth-aden" NpcId="3000005">
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="180"/>
+	</Action>
+	<Action Name="teleport behemoth-woods" NpcId="3000005">
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="240"/>
+	</Action>
+	<Action Name="teleport behemoth-willown" NpcId="3000005">
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="240"/>
+	</Action>
+	<Action Name="teleport behemoth-lowful" NpcId="3000005">
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="400"/>
+	</Action>
+	<Action Name="teleport behemoth-chaos" NpcId="3000005">
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="400"/>
+	</Action>
+	<Action Name="teleport behemoth-island" NpcId="3000005">
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="800"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="3000005">
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="7700"/>
+	</Action>
+	<Action Name="teleport behemoth-dragon" NpcId="3000005">
+		<Teleport X="33432" Y="32546" Map="4" Heading="5" Price="100"/>
+	</Action>
+	<Action Name="teleport behemoth-girdun" NpcId="3000005">
+		<Teleport X="33315" Y="33062" Map="4" Heading="5" Price="220"/>
+	</Action>
+	<Action Name="teleport behemoth-mirr" NpcId="3000005">
+		<Teleport X="33725" Y="33348" Map="4" Heading="5" Price="220"/>
+	</Action>
+	<Action Name="teleport behemoth-gypsy" NpcId="3000005">
+		<Teleport X="33979" Y="32927" Map="4" Heading="5" Price="220"/>
+	</Action>
+	<Action Name="teleport behemoth-train" NpcId="3000005">
+		<Teleport X="32951" Y="33505" Map="4" Heading="5" Price="330"/>
+	</Action>
+	<Action Name="teleport behemoth-gludun" NpcId="3000005">
+		<Teleport X="32724" Y="32928" Map="4" Heading="5" Price="330"/>
+	</Action>
+	<Action Name="teleport behemoth-oasis" NpcId="3000005">
+		<Teleport X="32860" Y="33253" Map="4" Heading="5" Price="330"/>
+	</Action>
+	<Action Name="teleport behemoth-eva" NpcId="3000005">
+		<Teleport X="33629" Y="33509" Map="4" Heading="5" Price="330"/>
+	</Action>
+	<Action Name="teleport behemoth-under" NpcId="3000005">
+		<Teleport X="32562" Y="33458" Map="4" Heading="5" Price="440"/>
+	</Action>
+	<Action Name="teleport behemoth-reed" NpcId="3000005">
+		<Teleport X="32726" Y="32396" Map="4" Heading="5" Price="440"/>
+	</Action>
+	<!-- 실베리아 샤리엘 -->
+	<Action Name="teleport silveria-oren" NpcId="3100005">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport silveria-werldern" NpcId="3100005">
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport silveria-behemoth" NpcId="3100005">
+		<Teleport X="32807" Y="32865" Map="1001" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport silveria-giran" NpcId="3100005">
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="120"/>
+	</Action>
+	<Action Name="teleport silveria-heine" NpcId="3100005">
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="180"/>
+	</Action>
+	<Action Name="teleport silveria-kent" NpcId="3100005">
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="180"/>
+	</Action>
+	<Action Name="teleport silveria-gludin" NpcId="3100005">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="240"/>
+	</Action>
+	<Action Name="teleport silveria-silver" NpcId="3100005">
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="50"/>
+	</Action>
+	<Action Name="teleport silveria-aden" NpcId="3100005">
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="240"/>
+	</Action>
+	<Action Name="teleport silveria-woods" NpcId="3100005">
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="300"/>
+	</Action>
+	<Action Name="teleport silveria-willow" NpcId="3100005">
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="300"/>
+	</Action>
+	<Action Name="teleport silveria-lowful" NpcId="3100005">
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport silveria-chaos" NpcId="3100005">
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport silveria-island" NpcId="3100005">
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="900"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="3100005">
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="8000"/>
+	</Action>
+	<Action Name="teleport silveria-gypsy" NpcId="3100005">
+		<Teleport X="33979" Y="32927" Map="4" Heading="5" Price="220"/>
+	</Action>
+	<Action Name="teleport silveria-girdun" NpcId="3100005">
+		<Teleport X="33315" Y="33062" Map="4" Heading="5" Price="330"/>
+	</Action>
+	<Action Name="teleport silveria-mirr" NpcId="3100005">
+		<Teleport X="33725" Y="33348" Map="4" Heading="5" Price="330"/>
+	</Action>
+	<Action Name="teleport silveria-dragon" NpcId="3100005">
+		<Teleport X="33432" Y="32546" Map="4" Heading="5" Price="330"/>
+	</Action>
+	<Action Name="teleport silveria-train" NpcId="3100005">
+		<Teleport X="32951" Y="33505" Map="4" Heading="5" Price="440"/>
+	</Action>
+	<Action Name="teleport silveria-eva" NpcId="3100005">
+		<Teleport X="33629" Y="33509" Map="4" Heading="5" Price="440"/>
+	</Action>
+	<Action Name="teleport silveria-reed" NpcId="3100005">
+		<Teleport X="32726" Y="32396" Map="4" Heading="5" Price="550"/>
+	</Action>
+	<Action Name="teleport silveria-gludun" NpcId="3100005">
+		<Teleport X="32724" Y="32928" Map="4" Heading="5" Price="550"/>
+	</Action>
+	<Action Name="teleport silveria-oasis" NpcId="3100005">
+		<Teleport X="32860" Y="33253" Map="4" Heading="5" Price="550"/>
+	</Action>
+	<Action Name="teleport silveria-under" NpcId="3100005">
+		<Teleport X="32562" Y="33458" Map="4" Heading="5" Price="550"/>
+	</Action>
+	<!-- 레벨별 사냥터 -->
+	<Action Name="teleport guide1_1_1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32787" Y="32858" Map="4" Heading="5" Price="450"/>
+	</Action>
+	<Action Name="teleport guide1_1_2" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33153" Y="33271" Map="4" Heading="5" Price="450"/>
+	</Action>
+	<Action Name="teleport guide1_1_3" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32643" Y="32592" Map="4" Heading="5" Price="450"/>
+	</Action>
+	<Action Name="teleport guide1_1_4" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32664" Y="32893" Map="4" Heading="5" Price="450"/>
+	</Action>
+	<Action Name="teleport guide1_2_1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32669" Y="33005" Map="4" Heading="5" Price="465"/>
+	</Action>
+	<Action Name="teleport guide1_2_2" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32672" Y="33158" Map="4" Heading="5" Price="465"/>
+	</Action>
+	<Action Name="teleport guide1_2_3" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33082" Y="33142" Map="4" Heading="5" Price="465"/>
+	</Action>
+	<Action Name="teleport guide1_2_4" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="34166" Y="32813" Map="4" Heading="5" Price="465"/>
+	</Action>
+	<Action Name="teleport guide1_2_5" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32633" Y="32837" Map="0" Heading="5" Price="1065"/>
+	</Action>
+	<Action Name="teleport guide1_2_6" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32522" Y="32869" Map="0" Heading="5" Price="1065"/>
+	</Action>
+	<Action Name="teleport guide1_3_1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32963	" Y="33014" Map="4" Heading="5" Price="480"/>
+	</Action>
+	<Action Name="teleport guide1_3_2" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32651" Y="33462" Map="4" Heading="5" Price="480"/>
+	</Action>
+	<Action Name="teleport guide1_3_3" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33252" Y="33013" Map="4" Heading="5" Price="480"/>
+	</Action>
+	<Action Name="teleport guide1_3_4" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33403" Y="33415" Map="4" Heading="5" Price="480"/>
+	</Action>
+	<Action Name="teleport guide1_3_5" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32676" Y="32799" Map="304" Heading="5" Price="630"/>
+	</Action>
+	<Action Name="teleport guide1_3_6" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32414" Y="33044" Map="0" Heading="5" Price="1080"/>
+	</Action>
+	<Action Name="teleport guide2_1_1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32736" Y="32672" Map="4" Heading="5" Price="600"/>
+	</Action>
+	<Action Name="teleport guide2_1_2" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33570" Y="32577" Map="4" Heading="5" Price="600"/>
+	</Action>
+	<Action Name="teleport guide2_1_4" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32811" Y="32728" Map="7" Heading="5" Price="750"/>
+	</Action>
+	<Action Name="teleport guide2_2_1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32738" Y="32372" Map="4" Heading="5" Price="615"/>
+	</Action>
+	<Action Name="teleport guide2_2_2" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33911" Y="32980" Map="4" Heading="5" Price="615"/>
+	</Action>
+	<Action Name="teleport telegiran1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32761" Y="32825" Map="307" Heading="5" Price="765"/>
+	</Action>
+	<Action Name="teleport guide2_3_1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33438" Y="33027" Map="4" Heading="5" Price="630"/>
+	</Action>
+	<Action Name="teleport guide2_3_2" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="34216" Y="32461" Map="4" Heading="5" Price="780"/>
+	</Action>
+	<!--<Action Name="teleport guide2_3_3" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005">
+		<Teleport X="32810" Y="32730" Map="53" Heading="5" Price="630"/>
+	</Action>-->
+	<!--<Action Name="teleport guide2_3_4" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32797" Y="32752" Map="9" Heading="5" Price="1080"/>
+	</Action>-->
+	<Action Name="teleport telegiran1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32748" Y="32827" Map="308" Heading="5" Price="930"/>
+	</Action>
+	<Action Name="teleport guide3_1_1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="34224" Y="32259" Map="4" Heading="5" Price="750"/>
+	</Action>
+	<Action Name="teleport guide3_1_2" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="34051" Y="32451" Map="4" Heading="5" Price="750"/>
+	</Action>
+	<Action Name="teleport guide3_1_3" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="34252" Y="32360" Map="4" Heading="5" Price="750"/>
+	</Action>
+<!--	<Action Name="teleport guide3_1_5" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005">
+		<Teleport X="32808" Y="32797" Map="54" Heading="5" Price="1050"/>
+	</Action> -->
+	<Action Name="teleport guide3_2_1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32821" Y="33274" Map="4" Heading="5" Price="765"/>
+	</Action>
+	<Action Name="teleport guide3_2_2" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33660" Y="32961" Map="4" Heading="5" Price="765"/>
+	</Action>
+	<Action Name="teleport guide3_2_3" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="34173" Y="32278" Map="4" Heading="5" Price="765"/>
+	</Action>
+	<Action Name="teleport guide3_2_4" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33738" Y="32396" Map="4" Heading="5" Price="765"/>
+	</Action>
+	<Action Name="teleport telegiran1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32758" Y="32840" Map="309" Heading="5" Price="1215"/>
+	</Action>
+	<Action Name="teleport guide3_2_7" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32710" Y="32788" Map="59" Heading="5" Price="915"/>
+	</Action>
+	<Action Name="teleport guide3_3_1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33769" Y="33314" Map="4" Heading="5" Price="780"/>
+	</Action>
+	<Action Name="teleport guide3_3_2" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33334" Y="32444" Map="4" Heading="5" Price="780"/>
+	</Action>
+	<Action Name="teleport guide3_3_3" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="34280" Y="33214" Map="4" Heading="5" Price="780"/>
+	</Action>
+	<Action Name="teleport guide3_3_4" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33815" Y="32638" Map="4" Heading="5" Price="780"/>
+	</Action>
+	<Action Name="teleport guide3_3_5" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33662" Y="32334" Map="4" Heading="5" Price="780"/>
+	</Action>
+<!--	<Action Name="teleport guide3_3_6" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005">
+		<Teleport X="32732" Y="32730" Map="55" Heading="5" Price="1230"/>
+	</Action> -->
+	<Action Name="teleport guide3_3_7" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32743" Y="32861" Map="60" Heading="5" Price="1080"/>
+	</Action>
+	<Action Name="teleport guide4_1" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33764" Y="33314" Map="4" Heading="5" Price="780"/>
+	</Action>
+	<Action Name="teleport guide4_2" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33334" Y="32440" Map="4" Heading="5" Price="780"/>
+	</Action>
+	<Action Name="teleport guide4_3" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33823" Y="32642" Map="4" Heading="5" Price="780"/>
+	</Action>
+	<Action Name="teleport guide4_4" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="34278" Y="33214" Map="4" Heading="5" Price="780"/>
+	</Action>
+	<Action Name="teleport guide4_5" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="33662" Y="32340" Map="4" Heading="5" Price="780"/>
+	</Action>
+<!--	<Action Name="teleport guide4_6" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005">
+		<Teleport X="32740" Y="32725" Map="55" Heading="5" Price="1230"/>
+	</Action> -->
+	<Action Name="teleport guide4_7" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32746" Y="32861" Map="60" Heading="5" Price="1080"/>
+	</Action>	
+	<Action Name="teleport guide4_8" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32727" Y="32808" Map="61" Heading="5" Price="780"/>
+	</Action>	
+	<Action Name="teleport guide4_9" NpcId="50079,50036,50024,50066,50020,50072,50068,50056,50039,50054,50044,50046,50051,3000005,3100005,5069">
+		<Teleport X="32805" Y="32870" Map="63" Heading="5" Price="780"/>
+	</Action>	
+	<!-- Heine성⇒Heine, 수중 유적의 입구, Heine의 선착장 -->
+	<Action Name="teleport heinec-village" NpcId="50067">
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport heinec-evadun" NpcId="50067">
+		<Teleport X="32694" Y="32828" Map="61" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport heinec-forgotten" NpcId="50067">
+		<Teleport X="33427" Y="33481" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 드워후성⇒완숙, 상아의 탑5계, 수정의 동굴 입구 -->
+	<Action Name="teleport dwarfc-village" NpcId="50040">
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport dwarfc-ivorytower" NpcId="50040">
+		<Teleport X="32773" Y="32806" Map="79" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport dwarfc-crystal" NpcId="50040">
+		<Teleport X="34174" Y="32184" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 기란성⇒기란, 기란단젼3층, 드래곤 발레, 리틀 버그 베어 레이스장 -->
+	<Action Name="teleport giranc-village" NpcId="50035">
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="0"/>
+	</Action>
+<!--	<Action Name="teleport giranc-girandun" NpcId="50035">
+		<Teleport X="32731" Y="32728" Map="55" Heading="5" Price="0"/>
+	</Action> -->
+	<Action Name="teleport giranc-dragonvalley" NpcId="50035">
+		<Teleport X="33432" Y="32546" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport giranc-littlebb" NpcId="50035">
+		<Teleport X="33517" Y="32851" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 오크 요새⇒화전민마을, 에르프의 숲지하 감옥3층, 드래곤 발레 -->
+	<Action Name="teleport orc-village" NpcId="50063">
+		<Teleport X="32715" Y="32448" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport orc-elvendun" NpcId="50063">
+		<Teleport X="32760" Y="32761" Map="21" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport orc-dragonvalley" NpcId="50063">
+		<Teleport X="33432" Y="32546" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 윈다웃드성⇒우드 베크, 실버 나이트 타운 지하 감옥3층, 오아시스, 실버 나이트 타운 -->
+	<Action Name="teleport woodsc-village" NpcId="50052">
+		<Teleport X="32640" Y="33203" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport woodsc-oasis" NpcId="50052">
+		<Teleport X="32863" Y="33252" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport woodsc-sknight" NpcId="50052">
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 켄트성⇒켄트 지하 감옥 -->
+	<Action Name="teleport kentcd" NpcId="50023">
+		<Teleport X="32721" Y="33087" Map="240" Heading="5" Price="10000"/>
+	</Action>
+	<!-- 켄트성⇒켄트, 메인 랜드 지하 감옥4층, 기란단젼2층 -->
+	<Action Name="teleport kentc-village" NpcId="50021">
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 에덴성⇒에덴, 오만의 탑1계, 짚시마을 -->
+	<Action Name="teleport adenc-village" NpcId="50047">
+		<Teleport X="33965" Y="33253" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport adenc-omantower" NpcId="50047">
+		<Teleport X="32795" Y="32798" Map="101" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport adenc-gypsy" NpcId="50047">
+		<Teleport X="33979" Y="32926" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 디아드 요새⇒오옴 지하 감옥의 마을, 오옴 지하 감옥, 오만의 탑1계 -->
+	<Action Name="teleport diadc-village" NpcId="50075">
+		<Teleport X="32800" Y="32801" Map="310" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport diadc-oumdun" NpcId="50075">
+		<Teleport X="32864" Y="32939" Map="310" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport diadc-omantower" NpcId="50075">
+		<Teleport X="32795" Y="32798" Map="101" Heading="5" Price="0"/>
+	</Action>
+	<!-- 기란⇒기란 시장 X="32705" Y="32811" Map="350-->
+	<Action Name="teleport giran-giran-trade-zone" NpcId="50034">
+		<Teleport X="32800" Y="32927" Map="800" Heading="5" Price="0"/>
+	</Action>
+	<!-- 그르딘⇒그르딘 시장 32769 32798 340 -->
+	<Action Name="teleport gludio-gludin-trade-zone" NpcId="50027">
+		<Teleport X="32800" Y="32927" Map="800" Heading="5" Price="0"/>
+	</Action>
+	<!-- 실버 나이트 타운⇒실버 나이트 타운 시장 32738 32790 370-->
+	<Action Name="teleport silver-silver-trade-zone" NpcId="50060">
+		<Teleport X="32800" Y="32927" Map="800" Heading="5" Price="0"/>
+	</Action>
+	<!-- 오렌⇒오렌 시장 32733 32808 360-->
+	<Action Name="teleport oren-oren-trade-zone" NpcId="50050">
+		<Teleport X="32800" Y="32927" Map="800" Heading="5" Price="0"/>
+	</Action>
+	<!-- 그르딘 시장⇒기란 시장, 오렌 시장, 실버 나이트 타운 시장 -->
+	<Action Name="teleport gludintz-girantz" NpcId="50026">
+		<Teleport X="32702" Y="32842" Map="350" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport gludintz-orentz" NpcId="50026">
+		<Teleport X="32733" Y="32792" Map="360" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport gludintz-silvertz" NpcId="50026">
+		<Teleport X="32733" Y="32792" Map="370" Heading="5" Price="0"/>
+	</Action>
+	<!-- 실버 나이트 타운 시장⇒그르딘 시장, 기란 시장, 오렌 시장 -->
+	<Action Name="teleport silvertz-gludintz" NpcId="50059">
+		<Teleport X="32772" Y="32858" Map="340" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport silvertz-girantz" NpcId="50059">
+		<Teleport X="32702" Y="32842" Map="350" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport silvertz-orentz" NpcId="50059">
+		<Teleport X="32733" Y="32792" Map="360" Heading="5" Price="0"/>
+	</Action>
+	<!-- 오렌 시장⇒그르딘 시장, 기란 시장, 실버 나이트 타운 시장 -->
+	<Action Name="teleport orentz-gludintz" NpcId="50049">
+		<Teleport X="32772" Y="32858" Map="340" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport orentz-girantz" NpcId="50049">
+		<Teleport X="32702" Y="32842" Map="350" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport orentz-silvertz" NpcId="50049">
+		<Teleport X="32733" Y="32792" Map="370" Heading="5" Price="0"/>
+	</Action>
+	<!-- 기란 시장⇒그르딘 시장, 오렌 시장, 실버 나이트 타운 시장 -->
+	<Action Name="teleport girantz-gludintz" NpcId="50033">
+		<Teleport X="32772" Y="32858" Map="340" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport girantz-orentz" NpcId="50033">
+		<Teleport X="32733" Y="32792" Map="360" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport girantz-silvertz" NpcId="50033">
+		<Teleport X="32733" Y="32792" Map="370" Heading="5" Price="0"/>
+	</Action>
+	<!-- 실버 나이트 타운 시장⇒실버 나이트 타운 -->
+	<Action Name="teleport silver-trade-zone-silver" NpcId="50058">
+		<Teleport X="33083" Y="33387" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 그르딘 시장⇒그르딘 -->
+	<Action Name="teleport gludin-trade-zone-gludio" NpcId="50025">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 기란 시장⇒기란 -->
+	<Action Name="teleport giran-trade-zone-giran" NpcId="50032">
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 오렌 시장⇒오렌 -->
+	<Action Name="teleport oren-trade-zone-oren" NpcId="50048">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 메인 이외의 텔레 포터를 기술 -->
+	<!-- 에도 렌⇒몽환의 섬 -->
+	<Action Name="teleport phantasm-island" NpcId="50045">
+		<Teleport X="32635" Y="32817" Map="303" Heading="5" Price="1000"/>
+	</Action>
+	<!-- 화전마을⇒숨겨진 선착장 -->
+	<Action Name="teleport orctown-hiddendock" NpcId="50064">
+		<Teleport X="32738" Y="32857" Map="445" Heading="5" Price="100"/>
+	</Action>
+	<!-- 잊을 수 있었던 섬⇒Heine의 선착장 -->
+	<Action Name="teleport escape-forgotten-island" NpcId="50070">
+		<Teleport X="33431" Y="33471" Map="4" Heading="5" Price="7"/>
+	</Action>
+	<!-- 잊을 수 있었던 섬⇒Heine의 선착장 -->
+	<Action Name="teleport escape-forgotten-island" NpcId="50071">
+		<Teleport X="33427" Y="33481" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 디아드 요새⇒레지스탕스의 마을 -->
+	<Action Name="teleport diad-cavern" NpcId="50074">
+		<Teleport X="32570" Y="32665" Map="400" Heading="5" Price="0"/>
+	</Action>
+	<!-- 정령의 무덤 -> 지저호수 -->
+	<Action Name="teleport elegrave-abysslake" NpcId="50076">
+		<Teleport X="32800" Y="33051" Map="420" Heading="5" Price="0"/>
+	</Action>
+	<!-- 정령의 무덤 -> 해적섬 -->
+	<Action Name="teleport elegrave-drakeIsland" NpcId="50076">
+		<Teleport X="32669" Y="32982" Map="440" Heading="5" Price="0"/>
+	</Action>
+	<!-- 정령의 무덤 -> 동쪽 -->
+	<Action Name="teleport elegrave-obe2" NpcId="50076">
+	        <Teleport X="32909" Y="32916" Map="430" Heading="5" Price="0"/>
+	</Action>
+	<!-- 정령의 무덤 -> 남동쪽 -->
+	<Action Name="teleport elegrave-obe3" NpcId="50076">
+	        <Teleport X="32828" Y="32964" Map="430" Heading="5" Price="0"/>
+	</Action>
+	<!-- 정령의 무덤 -> 남쪽 -->
+	<Action Name="teleport elegrave-obe4" NpcId="50076">
+	       <Teleport X="32781" Y="32928" Map="430" Heading="5" Price="0"/>
+	</Action>
+	<!-- 정령의 무덤 -> 서쪽 -->
+	<Action Name="teleport elegrave-obe5" NpcId="50076">
+	       <Teleport X="32810" Y="32813" Map="430" Heading="5" Price="0"/>
+ 	</Action>
+	<!-- 지저호수⇒해적섬4층 -->
+	<Action Name="teleport abysslake-elegrave" NpcId="50077">
+		<Teleport X="32744" Y="32809" Map="444" Heading="5" Price="0"/>
+	</Action>
+	<!-- 해적섬지하 감옥4층⇒지저 호수 -->
+	<Action Name="teleport piratedungeon-elementaltomb" NpcId="50078">
+		<Teleport X="32800" Y="33051" Map="420" Heading="5" Price="0"/>
+	</Action>
+	<!-- 화전민마을⇒그르디오 -->
+	<Action Name="teleport orcfortress-gludio" NpcId="50079">
+		<Teleport X="32654" Y="32544" Map="4" Heading="5" Price="15"/>
+	</Action>
+	<!-- 그르디오⇒화전민마을 -->
+	<Action Name="teleport gludio-orcfortress" NpcId="50080">
+		<Teleport X="32657" Y="32520" Map="4" Heading="5" Price="15"/>
+	</Action>
+	<!-- 탐사원의 조수⇒배의 묘지:지상층 -->
+	<Action Name="B" NpcId="50081">
+		<Teleport X="32844" Y="32694" Map="550" Heading="5" Price="0"/>
+	</Action>
+	<!-- 야히의 하인⇒마족의 신전 -->
+	<Action Name="4" NpcId="80047">
+		<Teleport X="32929" Y="32995" Map="410" Heading="5" Price="0"/>
+	</Action>
+	<!-- 차원의 문(사막)⇒욕망의 동굴, 버릴 수 있었던 사람들의 땅 -->
+	<Action Name="a" NpcId="80058" LevelMin="45">
+		<Teleport X="32757" Y="32794" Map="600" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="b" NpcId="80058" LevelMin="45" LevelMax="51">
+		<Teleport X="32834" Y="32790" Map="778" Heading="5" Price="0"/>
+	</Action>
+	<!-- 바르로그의 밀정⇒마족의 신전 -->
+	<Action Name="4" NpcId="80065">
+		<Teleport X="32747" Y="32813" Map="410" Heading="5" Price="0"/>
+	</Action>
+	<!-- 오크의 요새⇒오염된 축복의 땅 -->
+	<Action Name="teleport orcfcd" NpcId="71039">
+		<Teleport X="32982" Y="32808" Map="244" Heading="5" Price="10000"/>
+	</Action>
+	<!-- 오염된 축복의 땅⇒오크의 요새 -->
+	<Action Name="1" NpcId="71045">
+		<Teleport X="32750" Y="32435" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 드워후성⇒드워후성케이브 -->
+	<Action Name="teleport umine" NpcId="71078">
+		<Teleport X="32680" Y="32795" Map="255" Heading="5" Price="10000"/>
+	</Action>
+	<!-- Heine성⇒Heine성케이브 -->
+	<Action Name="teleport heine-Cdungeon" NpcId="71080">
+		<Teleport X="32746" Y="32860" Map="252" Heading="6" Price="10000"/>
+	</Action>
+	<!-- 퀘스트 지하 감옥을 기술 -->
+	<!-- 에르프의 숲⇒다크마르단젼(진짜, 가짜) -->
+	<Action Name="teleport darkmar-dungen" NpcId="70853">
+		<Teleport X="32727" Y="32799" Map="213" Heading="5" Price="0"/>
+	</Action>
+	<Action Name="teleport dark-elf-dungen" NpcId="70853">
+		<Teleport X="32727" Y="32799" Map="209" Heading="5" Price="0"/>
+	</Action>
+	<!-- 드래곤 발레 지하 감옥3층⇒세피아 지하 감옥 -->
+	<Action Name="teleport sepia-dungen" NpcId="50031">
+		<Teleport X="32740" Y="32860" Map="302" Heading="5" Price="0"/>
+	</Action>	
+		<!-- 도리아 북쪽 계곡 -->
+	<Action Name="teleport talking n forest" NpcId="9271">
+		<Teleport X="32762" Y="32750" Map="2005" Heading="5" Price="0"/>
+	</Action>
+	<!-- 도리아 남쪽 계곡 -->
+	<Action Name="teleport talking s forest" NpcId="9271">
+		<Teleport X="32596" Y="32947" Map="2005" Heading="5" Price="0"/>
+	</Action>
+	<!-- 도리아 서쪽 계곡 -->
+	<Action Name="teleport talking e forest" NpcId="9271">
+		<Teleport X="32680" Y="32743" Map="2005" Heading="5" Price="0"/>
+	</Action>
+	<!-- 도리아 동쪽 계곡 -->
+	<Action Name="teleport talking w forest" NpcId="9271">
+		<Teleport X="32726" Y="32985" Map="2005" Heading="5" Price="0"/>
+	</Action>
+	<!-- 도리아 남쪽 협곡 -->
+	<Action Name="teleport talking s canyon" NpcId="9271">
+		<Teleport X="32535" Y="32969" Map="2005" Heading="5" Price="0"/>
+	</Action>
+	<!-- 도리아 은기사 -->
+	<Action Name="teleport talking silverknight-in" NpcId="9271">
+		<Teleport X="33084" Y="33389" Map="4" Heading="5" Price="0"/>
+	</Action>
+	<!-- 도리아 수련장 -->
+	<Action Name="teleport talking training" NpcId="9271">
+		<Teleport X="32721" Y="32813" Map="2005" Heading="5" Price="0"/>
+	</Action>
+	<!-- 카미라의 방⇒흐랑코의 미궁 -->
+	<Action Name="b" NpcId="71036">
+		<Teleport X="32679" Y="32742" Map="482" Heading="5" Price="0"/>
+	</Action>
+	<!-- 카미라의 방⇒디에고가 닫힌 뇌 -->
+	<Action Name="d" NpcId="71036">
+		<Teleport X="32736" Y="32800" Map="483" Heading="5" Price="0"/>
+	</Action>
+	<!-- 카미라의 방⇒호세의 지하소굴 -->
+	<Action Name="f" NpcId="71036">
+		<Teleport X="32746" Y="32807" Map="484" Heading="5" Price="0"/>
+	</Action>
+	<!-- 흐랑코⇒카미라의 방 -->
+	<Action Name="b" NpcId="71089">
+		<Teleport X="32735" Y="32845" Map="481" Heading="5" Price="0"/>
+	</Action>
+	<!-- 맘몬⇒기란내성던전 -->
+	<Action Name="teleport grtel" NpcId="6000014">
+		<Teleport X="32805" Y="32792" Map="248" Heading="3" Price="1000"/>
+	</Action>
+	<!-- 플로라⇒아덴내성던전 -->
+	<Action Name="teleport adencd" NpcId="6000016">
+		<Teleport X="32659" Y="32800" Map="257" Heading="0" Price="1000"/>
+	</Action>
+
+	<!-- 폴 -> 낚시터 Out -->
+	<Action Name="a" NpcId="80083">
+		<Teleport X="32609" Y="32771" Map="4" Heading="4" Price="0"/>
+	</Action>
+		<Action Name="b" NpcId="80083">
+		<Teleport X="32767" Y="32824" Map="5490" Heading="4" Price="0"/>
+	</Action>
+		<Action Name="c" NpcId="80083">
+		<Teleport X="32789" Y="32870" Map="5490" Heading="4" Price="0"/>
+	</Action>
+		<Action Name="d" NpcId="80083">
+		<Teleport X="32732" Y="32809" Map="5490" Heading="4" Price="0"/>
+	</Action>
+		<Action Name="e" NpcId="80083">
+		<Teleport X="32732" Y="32869" Map="5490" Heading="4" Price="0"/>
+	</Action>
+		<Action Name="f" NpcId="80083">
+		<Teleport X="32794" Y="32792" Map="5490" Heading="4" Price="0"/>
+	</Action>
+	<!-- 숨겨진 용들의 땅 -->
+	<!-- 조화의 대지(땅) -->
+	<Action Name="1" NpcId="900015">
+		<Teleport X="32947" Y="32603" Map="1002" Heading="0" Price="0"/>
+	</Action>
+	<!-- 조화의 대지(불) -->
+	<Action Name="2" NpcId="900015">
+		<Teleport X="32796" Y="32593" Map="1002" Heading="0" Price="0"/>
+	</Action>
+	<!-- 조화의 대지(물) -->
+	<Action Name="3" NpcId="900015">
+		<Teleport X="32820" Y="32810" Map="1002" Heading="0" Price="0"/>
+	</Action>
+	<!-- 조화의 대지(바람) -->
+	<Action Name="4" NpcId="900015">
+		<Teleport X="33003" Y="32733" Map="1002" Heading="0" Price="0"/>
+	</Action>
+	<!-- 용들의 무덤(북) -->
+	<Action Name="5" NpcId="900015">
+		<Teleport X="32712" Y="32661" Map="1002" Heading="0" Price="0"/>
+	</Action>
+	<!-- 용들의 무덤(남) -->
+	<Action Name="6" NpcId="900015">
+		<Teleport X="32722" Y="32755" Map="1002" Heading="0" Price="0"/>
+	</Action>
+	<!-- 창공의 계곡 -->
+	<Action Name="7" NpcId="900015">
+		<Teleport X="32985" Y="32631" Map="1002" Heading="4" Price="0"/>
+	</Action>
+
+        <!-- 상아탑 피터 1층 -->
+	<Action Name="1" NpcId="900056">
+		<Teleport X="32770" Y="32826" Map="75" Heading="5" Price="7000"/>
+	</Action>
+        <!-- 상아탑 피터 2층 -->
+	<Action Name="2" NpcId="900056">
+		<Teleport X="32772" Y="32823" Map="76" Heading="5" Price="7000"/>
+	</Action>
+        <!-- 상아탑 피터 3층 -->
+	<Action Name="3" NpcId="900056">
+		<Teleport X="32762" Y="32839" Map="77" Heading="5" Price="7000"/>
+	</Action>
+		<!-- 상아탑 피터 4층 -->
+ 	<Action Name="4" NpcId="900056">
+		<Teleport X="32901" Y="32765" Map="280" Heading="5" Price="10000"/>
+ 	</Action>
+		<!-- 상아탑 피터 7층 -->
+ 	<Action Name="7" NpcId="900056">
+  		<Teleport X="32736" Y="32796" Map="283" Heading="5" Price="10000"/>
+	</Action>
+		<!-- 마법사 아도니스  -->
+	<Action Name="1" NpcId="900057"> 
+		<Teleport X="32901" Y="32765" Map="280" Price="1080" />
+	</Action>
+
+
+ 	<!-- 1층 어둠의 결계 -> 2층 흑마법 수련장 -->
+ 	<Action Name="teleport lascube1_1" NpcId="900084">
+  	        <Teleport X="32798" Y="32862" Map="460" Heading="5" Price="0"/>
+ 	</Action>
+ 	<!-- 1층 어둠의 결계 -> 2층 정령 소환실 -->
+ 	<Action Name="teleport lascube1_2" NpcId="900084">
+  	        <Teleport X="32727" Y="32819" Map="464" Heading="5" Price="0"/>
+ 	</Action>
+ 	<!-- 2층 암흑의 결계 -> 3층 용병 훈련장 -->
+ 	<Action Name="teleport lascube2_1" NpcId="900085">
+  	        <Teleport X="32727" Y="32795" Map="472" Heading="5" Price="0"/>
+ 	</Action>
+ 	<!-- 2층 암흑의 결계 -> 3층 악령 제단 -->
+ 	<Action Name="teleport lascube3_1" NpcId="900086">
+  	        <Teleport X="32727" Y="32820" Map="470" Heading="5" Price="0"/>
+ 	</Action>
+ 	<!-- 3층 암흑의 결계 -> 4층 그랑카인 신전 -->
+ 	<Action Name="teleport lascube4_1" NpcId="900087">
+  	        <Teleport X="32741" Y="32875" Map="530" Heading="5" Price="0"/>
+ 	</Action>
+ 	<!-- 오만 6층 -> 오만 1층 -->
+ 	<Action Name="B" NpcId="900089">
+  	        <Teleport X="32795" Y="32799" Map="101" Heading="5" Price="300"/>
+ 	</Action>
+ 	<!-- 오만 6층 -> 오만 10층 -->
+ 	<Action Name="A" NpcId="900089">
+   	        <Teleport X="32754" Y="32747" Map="110" Heading="5" Price="2400"/>
+ 	</Action>
+ 	<!-- 오만 16층 -> 오만 11층 -->
+ 	<Action Name="B" NpcId="900090">
+  	        <Teleport X="32632" Y="32934" Map="111" Heading="5" Price="300"/>
+ 	</Action>
+ 	<!-- 오만 26층 -> 오만 21층 -->
+ 	<Action Name="B" NpcId="900091">
+  	        <Teleport X="32631" Y="32935" Map="121" Heading="5" Price="300"/>
+ 	</Action>
+ 	<!-- 오만 36층 -> 오만 31층 -->
+ 	<Action Name="B" NpcId="900092">
+  	        <Teleport X="32631" Y="32935" Map="131" Heading="5" Price="300"/>
+ 	</Action>
+ 	<!-- 오만 46층 -> 오만 41층 -->
+ 	<Action Name="B" NpcId="900093">
+  	        <Teleport X="32631" Y="32935" Map="141" Heading="5" Price="300"/>
+ 	</Action>
+ 	<!-- 오만 56층 -> 오만 51층 -->
+ 	<Action Name="B" NpcId="900094">
+  	        <Teleport X="32669" Y="32814" Map="151" Heading="5" Price="300"/>
+ 	</Action>
+ 	<!-- 오만 66층 -> 오만 61층 -->
+ 	<Action Name="B" NpcId="900095">
+  	        <Teleport X="32669" Y="32814" Map="161" Heading="5" Price="300"/>
+ 	</Action>
+ 	<!-- 오만 76층 -> 오만 71층 -->
+ 	<Action Name="B" NpcId="900096">
+  	        <Teleport X="32669" Y="32814" Map="171" Heading="5" Price="300"/>
+ 	</Action>
+ 	<!-- 오만 86층 -> 오만 81층 -->
+ 	<Action Name="B" NpcId="900097">
+  	        <Teleport X="32669" Y="32814" Map="181" Heading="5" Price="300"/>
+ 	</Action>
+ 	<!-- 오만 96층 -> 오만 91층 -->
+ 	<Action Name="B" NpcId="900098">
+  	        <Teleport X="32669" Y="32814" Map="191" Heading="5" Price="300"/>
+ 	</Action>
+ 	<!-- 마에노브 -> 오만 6층 -->
+ 	<Action Name="J" NpcId="900105">
+  	        <Teleport X="33766" Y="32863" Map="106" Heading="5" Price="2400"/>
+ 	</Action>
+
+
+
+
+	<!-- 은기사 마을 텔레포트 메트 -->		 
+	<Action Name="teleport silver-kent" NpcId="50056"> 
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="55"/> 
+	</Action>
+	<Action Name="teleport silver-woods" NpcId="50056"> 
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="55"/> 
+	</Action> 
+	<Action Name="teleport silver-heine" NpcId="50056"> 
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="55"/> 
+	</Action> 
+	<Action Name="teleport silver-gludin" NpcId="50056"> 
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="132"/> 
+	</Action> 
+	<Action Name="teleport silver-giran" NpcId="50056"> 
+		<Teleport X="33438" Y="32796" Map="4" Heading="5" Price="132"/> 
+	</Action> 
+	<Action Name="teleport silver-aden" NpcId="50056"> 
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="132"/> 
+	</Action> 
+	<Action Name="teleport silver-scave" NpcId="50056">
+		<Teleport X="32874" Y="32904" Map="304" Heading="5" Price="198"/>
+	</Action>
+	<Action Name="teleport silver-willow" NpcId="50056"> 
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="198"/> 
+	</Action> 
+	<Action Name="teleport silver-werldern" NpcId="50056"> 
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="270"/> 
+	</Action> 
+	<Action Name="teleport silver-behemoth" NpcId="50056"> 
+		<Teleport X="32807" Y="32865" Map="1001" Heading="5" Price="7777"/> 
+	</Action> 
+	<Action Name="teleport silver-silveria" NpcId="50056"> 
+		<Teleport X="32790" Y="32871" Map="1000" Heading="5" Price="7777"/> 
+	</Action> 
+	<Action Name="teleport silver-oren" NpcId="50056"> 
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="246"/> 
+	</Action> 
+	<Action Name="teleport silver-grape" NpcId="50056">
+		<Teleport X="32864" Y="32811" Map="4" Heading="5" Price="420"/>
+	</Action>	
+	<Action Name="teleport silver-island" NpcId="50056"> 
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="770"/> 
+	</Action> 
+	<Action Name="teleport telediad1" NpcId="50056"> 
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="7480"/> 
+	</Action> 
+
+	<!-- 은기사 마을 텔레포트 메트 -->
+	<Action Name="teleport guide0_1_1" NpcId="50056">
+		<Teleport X="33188" Y="33445" Map="4" Heading="5" Price="30"/>
+	</Action>
+	<Action Name="teleport guide0_1_2" NpcId="50056">
+		<Teleport X="33152" Y="33178" Map="4" Heading="5" Price="30"/>
+	</Action>
+	<Action Name="teleport guide0_1_3" NpcId="50056">
+		<Teleport X="33062" Y="33221" Map="4" Heading="5" Price="30"/>
+	</Action>
+	<Action Name="teleport guide0_1_8" NpcId="50056">
+		<Teleport X="33029" Y="33137" Map="4" Heading="5" Price="30"/>
+	</Action>
+	<Action Name="teleport guide0_1_4" NpcId="50056">
+		<Teleport X="32802" Y="32804" Map="25" Heading="5" Price="70"/>
+	</Action>
+	<Action Name="teleport guide0_1_5" NpcId="50056">
+		<Teleport X="32812" Y="32808" Map="26" Heading="5" Price="80"/>
+	</Action>
+	<Action Name="teleport guide0_1_6" NpcId="50056">
+		<Teleport X="32811" Y="32810" Map="27" Heading="5" Price="90"/>
+	</Action>
+	<Action Name="teleport guide0_1_7" NpcId="50056">
+		<Teleport X="32796" Y="32797" Map="28" Heading="5" Price="100"/>
+	</Action>
+	<Action Name="teleport valley_in" NpcId="50056">
+		<Teleport X="32681" Y="32853" Map="2005" Heading="5" Price=""/>
+	</Action>
+	<Action Name="teleport hp_a1" NpcId="50056">
+		<Teleport X="32989" Y="32715" Map="2010" Heading="5" Price=""/>
+	</Action>
+	<Action Name="teleport hp_e1" NpcId="50056">
+		<Teleport X="32901" Y="32630" Map="2010" Heading="5" Price=""/>
+	</Action>
+	<Action Name="teleport hp_f1" NpcId="50056">
+		<Teleport X="32794" Y="32593" Map="2010" Heading="5" Price=""/>
+	</Action>
+	<Action Name="teleport hp_w1" NpcId="50056">
+		<Teleport X="32807" Y="32789" Map="2010" Heading="5" Price=""/>
+	</Action>
+	<!-- 은기사마을 // 메트 -->	
+
+
+
+	<!-- 52이상 텔레포트 -->
+	<Action Name="teleport guide7_1_1" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 윈다우드 성 근처 해안 -->
+		<Teleport X="32697" Y="33501" Map="4" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_2" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 윈다우드 사막 오아시스 -->
+		<Teleport X="32865" Y="33251" Map="4" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_3" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 윈다우드 사막 협곡 -->
+		<Teleport X="32694" Y="33247" Map="4" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_4" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 윈다우드 흰 개미 서식지 -->
+		<Teleport X="32864" Y="33108" Map="4" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_5" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 오렌 설벽 -->
+		<Teleport X="34192" Y="32246" Map="4" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_6" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 오렌 엘모어전쟁터 -->
+		<Teleport X="34048" Y="32482" Map="4" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_7" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 오렌마을 난쟁이 부락 -->
+		<Teleport X="33900" Y="32284" Map="4" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_8" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 말하는 섬 북쪽 -->
+		<Teleport X="32678" Y="32857" Map="0" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_9" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 말하는 섬 습지 -->
+		<Teleport X="32520" Y="33019" Map="0" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_10" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 말하는 섬 정예 오크 부락 -->
+		<Teleport X="32527" Y="32826" Map="0" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_11" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 말하는 섬 던전 입구 -->
+		<Teleport X="32480" Y="32858" Map="0" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide7_1_12" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 선박의 무덤 수면  -->
+        <Teleport X="32844" Y="32694" Map="550" Heading="1" Price="500"/>
+    	</Action>
+	<Action Name="teleport guide6_1_1" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 그림자 신전 [ 버땅 ] -->
+		<Teleport X="32538" Y="32958" Map="777" Heading="5" Price="500"/>
+	</Action>
+	<Action Name="teleport guide6_1_2" NpcId="50020,50024,50036,50039,50044,50046,50051,50054,50066,5069"> <!-- 욕망의 동굴 [ 버땅 ] -->
+		<Teleport X="32834" Y="32790" Map="778" Heading="5" Price="500"/>
+	</Action>
+	<!-- 시장 린지 -->
+	<Action Name="teleport market-kent" NpcId="5069">
+		<Teleport X="33050" Y="32782" Map="4" Heading="5" Price="82"/>
+	</Action>
+	<Action Name="teleport market-heine" NpcId="5069">
+		<Teleport X="33612" Y="33257" Map="4" Heading="5" Price="82"/>
+	</Action>
+	<Action Name="teleport market-werldern" NpcId="5069">
+		<Teleport X="33709" Y="32500" Map="4" Heading="5" Price="82"/>
+	</Action>
+	<Action Name="teleport market-silver" NpcId="5069">
+		<Teleport X="33080" Y="33386" Map="4" Heading="5" Price="198"/>
+	</Action>
+	<Action Name="teleport market-gludin" NpcId="5069">
+		<Teleport X="32608" Y="32734" Map="4" Heading="5" Price="198"/>
+	</Action>
+	<Action Name="teleport market-oren" NpcId="5069">
+		<Teleport X="34062" Y="32278" Map="4" Heading="5" Price="198"/>
+	</Action>
+	<Action Name="teleport market-aden" NpcId="5069">
+		<Teleport X="33966" Y="33253" Map="4" Heading="5" Price="198"/>
+	</Action>
+	<Action Name="teleport market-woods" NpcId="5069">
+		<Teleport X="32619" Y="33184" Map="4" Heading="5" Price="297"/>
+	</Action>
+	<Action Name="teleport market-willow" NpcId="5069">
+		<Teleport X="32740" Y="32447" Map="4" Heading="5" Price="297"/>
+	</Action>
+	<Action Name="teleport market-lowful" NpcId="5069">
+		<Teleport X="33118" Y="32933" Map="4" Heading="5" Price="495"/>
+	</Action>
+	<Action Name="teleport market-chaos" NpcId="5069">
+		<Teleport X="32885" Y="32652" Map="4" Heading="5" Price="495"/>
+	</Action>
+	<Action Name="teleport market-grape" NpcId="5069">
+		<Teleport X="32864" Y="32811" Map="4" Heading="5" Price="495"/>
+	</Action>
+	<Action Name="teleport market-island" NpcId="5069">
+		<Teleport X="32583" Y="32924" Map="0" Heading="5" Price="1155"/>
+	</Action>
+	<Action Name="teleport telediad1" NpcId="5069">
+		<Teleport X="32807" Y="32916" Map="320" Heading="5" Price="12210"/>
+	</Action>
+	<!-- 엘루나 요정의 숲 텔레포터 -->
+	<Action Name="teleport elf-gludin" NpcId="5091"> <!-- 글루딘 -->
+		<Teleport X="32608" Y="32737" Map="4" Heading="5" Price="57"/>
+	</Action>
+	<Action Name="teleport elf-giran" NpcId="5091"> <!-- 기란 -->
+		<Teleport X="33437" Y="32799" Map="4" Heading="5" Price="57"/>
+	</Action>
+	<Action Name="teleport elf-silver" NpcId="5091"> <!-- 은기사 -->
+		<Teleport X="33085" Y="33389" Map="4" Heading="5" Price="57"/>
+	</Action>
+	<Action Name="teleport elf-woods" NpcId="5091"> <!-- 우드벡 -->
+		<Teleport X="32617" Y="33179" Map="4" Heading="5" Price="138"/>
+	</Action>
+	<Action Name="teleport elf-willow" NpcId="5091"> <!-- 화전민 -->
+		<Teleport X="32742" Y="32451" Map="4" Heading="5" Price="138"/>
+	</Action>
+	<Action Name="teleport elf-heine" NpcId="5091"> <!-- 하이네 -->
+		<Teleport X="33599" Y="33235" Map="4" Heading="5" Price="138"/>
+	</Action>
+	<Action Name="teleport elf-werldern" NpcId="5091"> <!-- 웰던 -->
+		<Teleport X="33698" Y="32509" Map="4" Heading="5" Price="138"/>
+	</Action>
+	<Action Name="teleport elf-oren" NpcId="5091"> <!-- 오렌 -->
+		<Teleport X="34056" Y="32274" Map="4" Heading="5" Price="207"/>
+	</Action>
+	<Action Name="teleport elf-aden" NpcId="5091"> <!-- 아덴 -->
+		<Teleport X="33923" Y="33347" Map="4" Heading="5" Price="207"/>
+	</Action>
+	<Action Name="teleport elf-lowful" NpcId="5091"> <!-- 라우풀 -->
+		<Teleport X="33136" Y="32237" Map="4" Heading="5" Price="230"/>
+	</Action>
+	<Action Name="teleport elf-chaos" NpcId="5091"> <!-- 카오틱 -->
+		<Teleport X="32891" Y="32656" Map="4" Heading="5" Price="230"/>
+	</Action>
+	<Action Name="teleport elf-island" NpcId="5091"> <!-- 말하는 섬 -->
+		<Teleport X="32587" Y="32925" Map="0" Heading="5" Price="690"/>
+	</Action>
+</NpcActionList>

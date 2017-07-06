@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<codes>
+	<client>
+	    <opernation name="C_OPCODE_BOARDBACK" code="1"/> <!-- 게시판next -->
+	    <opernation name="C_OPCODE_DELBUDDY" code="4"/>
+	    <opernation name="C_OPCODE_ARROWATTACK" code="11"/>
+	    <opernation name="C_OPCODE_DOOR" code="13"/>
+	    <opernation name="C_OPCODE_ATTR" code="17"/>
+	    <opernation name="C_OPCODE_TITLE" code="18"/>
+	    <opernation name="C_OPCODE_SHOP" code="19"/>
+	    <opernation name="C_OPCODE_PARTY" code="20"/>
+	    <opernation name="C_OPCODE_TELEPORT" code="21"/>
+	    <opernation name="C_OPCODE_RETURNTOLOGIN" code="22"/>
+	    <opernation name="C_OPCODE_BOARDREAD" code="23"/>
+	    <opernation name="C_OPCODE_CHATWHISPER" code="24"/>
+	    <opernation name="C_OPCODE_RESULT" code="26"/>
+	    <opernation name="C_OPCODE_LOGINPACKET" code="27"/>
+	    <opernation name="C_OPCODE_ADDBUDDY" code="31"/>
+	    <opernation name="C_OPCODE_EMBLEM" code="32"/>
+	    <opernation name="C_OPCODE_ENTERPORTAL" code="33"/>
+	    <opernation name="C_OPCODE_BASERESET" code="34"/>
+	    <opernation name="C_OPCODE_MAIL" code="35"/>
+	    <opernation name="C_OPCODE_BOOKMARKDELETE" code="38"/>
+	    <opernation name="C_OPCODE_QUITGAME" code="41"/>
+	    <opernation name="C_OPCODE_AMOUNT" code="42"/>
+	    <opernation name="C_OPCODE_DROPITEM" code="43"/>
+	    <opernation name="C_OPCODE_PROPOSE" code="44"/>
+	    <opernation name="C_OPCODE_NPCTALK" code="45"/>
+	    <opernation name="C_OPCODE_JOINCLAN" code="46"/>
+	    <opernation name="C_OPCODE_TRADE" code="47"/>
+	    <opernation name="C_OPCODE_PETMENU" code="48"/>
+	    <opernation name="C_OPCODE_RESTART" code="49"/>
+	    <opernation name="C_OPCODE_RANK" code="51"/>
+	    <opernation name="C_OPCODE_SKILLBUY" code="55"/>
+	    <opernation name="C_OPCODE_EXCLUDE" code="56"/>
+	    <opernation name="C_OPCODE_TRADEADDITEM" code="58"/>
+	    <opernation name="C_OPCODE_SELECTLIST" code="59"/>
+	    <opernation name="C_OPCODE_CHARACTERCONFIG" code="60"/>
+	    <opernation name="C_OPCODE_SELECTTARGET" code="61"/>
+	    <opernation name="C_OPCODE_ATTACK" code="62"/>
+	    <opernation name="C_OPCODE_BOARDDELETE" code="63"/>
+	    <opernation name="C_OPCODE_CALL" code="64"/>
+	    <opernation name="C_OPCODE_USEITEM" code="65"/>
+	    <opernation name="C_OPCODE_LEAVEPARTY" code="69"/>
+	    <opernation name="C_OPCODE_DELETEINVENTORYITEM" code="70"/>
+	    <opernation name="C_OPCODE_BANPARTY" code="71"/>
+	    <opernation name="C_OPCODE_USESKILL" code="72"/>
+	    <opernation name="C_OPCODE_NPCACTION" code="73"/>
+	    <opernation name="C_OPCODE_SKILLBUYOK" code="75"/>
+	    <opernation name="C_OPCODE_EXTCOMMAND" code="76"/>
+	    <opernation name="C_OPCODE_CHANGEWARTIME" code="77"/>
+	    <opernation name="C_OPCODE_CHANGEHEADING" code="78"/>
+	    <opernation name="C_OPCODE_GIVEITEM" code="82"/>
+	    <opernation name="C_OPCODE_CHAT" code="83"/>
+	    <opernation name="C_OPCODE_CHECKPK" code="85"/>
+	    <opernation name="C_OPCODE_PRIVATESHOPLIST" code="86"/>
+	    <opernation name="C_OPCODE_NEWCHAR" code="87"/>
+	    <opernation name="C_OPCODE_TAXRATE" code="90"/>
+	    <opernation name="C_OPCODE_BOARD" code="91"/>
+	    <opernation name="C_OPCODE_LOGINTOSERVEROK" code="92"/>
+	    <opernation name="C_OPCODE_WHO" code="93"/>
+	    <opernation name="C_OPCODE_CREATECLAN" code="96"/>
+	    <opernation name="C_OPCODE_PLEDGE" code="97"/>
+	    <opernation name="C_OPCODE_TRADEADDOK" code="99"/>
+	    <opernation name="C_OPCODE_BOOKMARK" code="100"/>
+	    <opernation name="C_OPCODE_KEEPALIVE" code="104"/>
+	    <opernation name="C_OPCODE_CLIENTVERSION" code="106"/>
+	    <opernation name="C_OPCODE_DELETECHAR" code="107"/>
+	    <opernation name="C_OPCODE_LEAVECLANE" code="111"/>
+	    <opernation name="C_OPCODE_CHANGECHAR" code="112"/>
+	    <opernation name="C_OPCODE_BANCLAN" code="114"/>
+	    <opernation name="C_OPCODE_FIGHT" code="115"/>
+	    <opernation name="C_OPCODE_CHATGLOBAL" code="116"/>
+	    <opernation name="C_OPCODE_BOARDWRITE" code="117"/>
+	    <opernation name="C_OPCODE_TRADEADDCANCEL" code="119"/>
+	    <opernation name="C_OPCODE_COMMONCLICK" code="122"/>
+	    <opernation name="C_OPCODE_LOGINTOSERVER" code="123"/>
+	    <opernation name="C_OPCODE_DEPOSIT" code="124"/>
+	    <opernation name="C_OPCODE_PICKUPITEM" code="125"/>
+	    <opernation name="C_OPCODE_FIX_WEAPON_LIST" code="126"/>
+	    <opernation name="C_OPCODE_MOVECHAR" code="127"/>
+	    <opernation name="C_OPCODE_BUDDYLIST" code="128"/>
+	    <opernation name="C_OPCODE_CREATEPARTY" code="130"/>
+	    <opernation name="C_OPCODE_CHATPARTY" code="131"/>
+	    <opernation name="C_OPCODE_FISHCLICK" code="11127"/>
+	    <opernation name="C_OPCODE_WAR" code="1138"/>
+	    <opernation name="C_OPCODE_CHANGECHAR" code="1162"/>
+	    <opernation name="C_OPCODE_DELEXCLUDE" code="1165"/>
+	    <opernation name="C_OPCODE_USEPETITEM" code="1180"/>
+	    <opernation name="C_OPCODE_DRAWAL" code="1191"/>
+	    <opernation name="C_OPCODE_BANCHATPARTY" code="1131"/>
+	    <opernation name="C_OPCODE_EXIT_GHOST" code="1657"/>
+	    <opernation name="C_OPCODE_HIRESOLDIER" code="891"/>
+	</client>
+
+	<server>
+	    <opernation name="S_OPCODE_HPUPDATE" code="1"/> <!-- 피 업데이트 -->
+	    <opernation name="S_OPCODE_UNKNOWN1" code="3"/> <!-- 접속시 -->
+	    <opernation name="S_OPCODE_TAXRATE" code="4"/> <!-- 세율 조정 -->
+	    <opernation name="S_OPCODE_SPMR" code="5"/>  <!-- Sp와Mr 효과 처리 갱신 -->
+	    <opernation name="S_OPCODE_HIRESOLDIER" code="6"/> <!-- -->
+	    <opernation name="S_OPCODE_EFFECTLOCATION" code="7"/> <!-- 좌표값이 필요한 이팩트 효과 처리-->
+	    <opernation name="S_OPCODE_INVIS" code="10"/>  <!-- 투명 효과 처리--> 
+	    <opernation name="S_OPCODE_ADDITEM" code="12"/> <!-- 아이템 추가 (인벤) -->
+	    <opernation name="S_OPCODE_SELECTTARGET" code="13"/>  <!-- 선택 목표 효과 처리 -->
+	    <opernation name="S_OPCODE_LAWFUL" code="14"/> <!-- 라우풀 갱신처리 -->
+	    <opernation name="S_OPCODE_WHISPERCHAT" code="17"/>  <!-- 귓속말 효과 처리 -->
+	    <opernation name="S_OPCODE_USEMAP" code="18"/> <!-- 지도 맵 보기 (아이템) -->
+	    <opernation name="S_OPCODE_NORMALCHAT" code="19"/> <!-- 일반 채팅 -->
+	    <opernation name="S_OPCODE_BLESSOFEVA" code="20"/> <!-- 에바효과 처리 -->
+	    <opernation name="S_OPCODE_GLOBALCHAT" code="21"/> <!-- 전체채팅 -->
+	    <opernation name="S_OPCODE_SYSMSG" code="21"/> <!-- 서버메세지(전쳇과 같은옵) -->
+	    <opernation name="S_OPCODE_TRADE" code="22"/> <!-- /교환 후 거래창 -->
+	    <opernation name="S_OPCODE_CHARVISUALUPDATE" code="23"/> <!-- 캐릭터 모드 변환 -->
+	    <opernation name="S_OPCODE_EXP" code="24"/> <!-- 경험치 업데이트 갱신 처리 -->
+	    <opernation name="S_OPCODE_GAMETIME" code="25"/>  <!-- 게임 시간 -->
+	    <opernation name="S_OPCODE_SHOWRETRIEVELIST" code="26"/>  <!-- 창고 리스트-->
+	    <opernation name="S_OPCODE_CASTLEMASTER" code="27"/> <!-- 성 소유 목록 셋팅 -->
+	    <opernation name="S_OPCODE_RESURRECTION" code="28"/>  <!-- 부활 효과 처리 -->
+	    <opernation name="S_OPCODE_NEWCHARPACK" code="31"/> <!-- 캐릭터 새로 만들기 -->
+	    <opernation name="S_OPCODE_YES_NO" code="32"/> <!-- Yes_No 메세지 창 -->
+	    <opernation name="S_OPCODE_SOUND" code="34"/> <!-- 사운드 이팩트 (물약종류) -->
+	    <opernation name="S_OPCODE_MOVEOBJECT" code="35"/> <!-- 오브젝트 이동 -->
+	    <opernation name="S_OPCODE_SKILLSOUNDGFX" code="36"/> <!-- 사운드 이팩트 -->
+	    <opernation name="S_OPCODE_ITEMSTATUS" code="39"/>  <!-- 아이템 상세 정보 업데이트 -->
+	    <opernation name="S_OPCODE_ITEMAMOUNT" key="39"/>  <!-- 아이템 정보 업데이트 -->
+	    <opernation name="S_OPCODE_TELEPORT" code="40"/> <!-- -->
+	    <opernation name="S_OPCODE_MPUPDATE" code="42"/> <!-- 엠피 업데이트 -->
+	    <opernation name="S_OPCODE_TRUETARGET" code="43"/> <!-- 트루 타켓 -->
+	    <opernation name="S_OPCODE_CHARTITLE" code="44"/>  <!-- 캐릭터 호칭 처리 -->
+	    <opernation name="S_OPCODE_IDENTIFYDESC" code="46"/> <!-- 아이템 확인 주문서 -->
+	    <opernation name="S_OPCODE_NPCSHOUT" code="48"/> <!-- 몬스터,엔피씨 외치기 -->
+	    <opernation name="S_OPCODE_PINKNAME" code="49"/> <!-- 보라돌이 효과 처리-->
+	    <opernation name="S_OPCODE_COMMONNEWS" code="50"/> <!-- 공지 사항 -->
+	    <opernation name="S_OPCODE_WEATHER" code="51"/>  <!-- 날씨 조정하기 -->
+	    <opernation name="S_OPCODE_LETTER" code="52"/> <!-- -->
+	    <opernation name="S_OPCODE_LETTERLIST" code="52"/> <!-- 편지 리스트 --> 
+	    <opernation name="S_OPCODE_RETURNEDSTAT" code="53"/> <!-- 스텟초기화 -->
+	    <opernation name="S_OPCODE_DRAWAL" code="54"/> <!-- 공금 인출 -->
+	    <opernation name="S_OPCODE_DEPOSIT" code="54"/>  <!-- 공금 입금하기 -->
+	    <opernation name="S_OPCODE_TRADEADDITEM" code="55"/>  <!-- /교환 후 거래창에 아이템 추가 처리-->
+	    <opernation name="S_OPCODE_ITEMCOLOR" code="56"/> <!-- 아이템 블레스 (축,저주,노멀,봉인) -->
+	    <opernation name="S_OPCODE_CHARLOCK" code="57"/> <!-- 독이나 커스 걸린후 굳는 효과 처리 -->
+	    <opernation name="S_OPCODE_DEXUP" code="58"/> <!-- 덱스 업 -->
+	    <opernation name="S_OPCODE_DELETEINVENTORYITEM" code="60"/> <!-- 인벤내 아이템 삭제 -->
+ 	    <opernation name="S_OPCODE_SKILLHASTE" code="61"/> <!-- 헤이스트 -->
+	    <opernation name="S_OPCODE_DOACTIONGFX" code="63"/> <!-- 액션처리 -->
+	    <opernation name="S_OPCODE_DETELECHAROK" code="64"/> <!-- 캐릭터 지우기 -->
+	    <opernation name="S_OPCODE_INVLIST" code="65"/> <!-- 인벤에 있는 아이템 리스트 -->
+	    <opernation name="S_OPCODE_BOARD" code="66"/>  <!-- 게시판 리스트 -->
+	    <opernation name="S_OPCODE_SELECTLIST" code="67"/> <!-- 펫과 무기수리시(물품선택) -->
+	    <opernation name="S_OPCODE_DELSKILL" code="69"/> <!-- 스킬 지우기 -->
+	    <opernation name="S_OPCODE_PARALYSIS" code="70"/> <!-- 페럴라이즈 효과 처리 -->
+	    <opernation name="S_OPCODE_ATTACKPACKET" code="71"/>  <!-- 공격 효과 처리-->
+	    <opernation name="S_OPCODE_SHOWHTML" code="74"/> <!-- Npc 와 대화처리 -->
+	    <opernation name="S_OPCODE_CHANGEHEADING" code="75"/> <!-- 캐릭터 방향변경 (0~8) -->
+	    <opernation name="S_OPCODE_DISCONNECT" code="76"/> <!-- 캐릭터 강제 종료 처리 -->
+     	    <opernation name="S_OPCODE_SERVERVERSION" code="77"/> <!-- 서버 버전 정보-->
+	    <opernation name="S_OPCODE_POISON" code="78"/> <!-- 캐릭터 모습 변경 (독,커스) -->
+	    <opernation name="S_OPCODE_ABILITY" code="79"/>  <!-- 이동반지,소환반지 사용 -->
+	    <opernation name="S_OPCODE_SKILLBRAVE" code="80"/>  <!-- 용기,홀리, 효과 처리-->
+    	    <opernation name="S_OPCODE_PACKETBOX" code="81"/> <!-- 통합 패킷 --> 
+	    <opernation name="S_OPCODE_UNKNOWN2" code="81"/> <!-- 통합 패킷 -->
+	    <opernation name="S_OPCODE_ACTIVESPELLS" code="81"/> <!-- SKILLICONGFX와 동일한 옵코드 구조 -->
+	    <opernation name="S_OPCODE_SKILLICONGFX" code="81"/>  <!-- 스킬 아이콘 효과 처리--> 
+	    <opernation name="S_OPCODE_MAPID" code="82"/>  <!-- 맵 아이디 -->
+	    <opernation name="S_OPCODE_BOOKMARKS" code="83"/> <!-- /기억 리스트 -->
+	    <opernation name="S_OPCODE_HOUSEMAP" code="84"/>  <!-- 아지트 위치 리스트 처리 -->
+	    <opernation name="S_OPCODE_SERVERMSG" code="85"/> <!-- 서버메세지 -->
+	    <opernation name="S_OPCODE_ATTRIBUTE" code="86"/> <!-- 이동 불가 요청 -->
+	    <opernation name="S_OPCODE_INPUTAMOUNT" code="87"/> <!-- -->
+	    <opernation name="S_OPCODE_SKILLICONSHIELD" code="88"/>  <!-- 스킬 쉴드 효과 처리 -->
+    	    <opernation name="S_OPCODE_NEWCHARWRONG" code="89"/> <!-- 캐릭터 만든 후 다시 선택창으로 -->
+	    <opernation name="S_OPCODE_CHARPACK" code="90"/>  <!-- 캐릭터 오브젝트 그리기 -->
+	    <opernation name="S_OPCODE_DROPITEM" code="90"/>  <!-- 아이템 오브젝트 그리기 -->
+	    <opernation name="S_OPCODE_EMBLEM" code="91"/>  <!-- 혈맹 문장 효과 처리 --> 
+	    <opernation name="S_OPCODE_TRADESTATUS" code="94"/>  <!-- 거래 (취소,완료) -->
+	    <opernation name="S_OPCODE_OWNCHARSTATUS2" code="95"/>  <!-- 스탯창 갱신처리 -->
+	    <opernation name="S_OPCODE_CHARAMOUNT" code="96"/> <!-- 계정에 포함된 캐릭터 갯수정보 -->
+	    <opernation name="S_OPCODE_OWNCHARATTRDEF" code="97"/> <!-- Ac 설정 효과 처리 --> 
+	    <opernation name="S_OPCODE_CHARLIST" code="98"/> <!-- 캐릭터 리스트 창에 있는 캐릭터정보 * 6 -->
+	    <opernation name="S_OPCODE_HOUSELIST" code="99"/> <!-- 아지트 리스트 띄우기 -->
+	    <opernation name="S_OPCODE_RANGESKILLS" code="100"/> <!-- 마법 공격 -->
+	    <opernation name="S_OPCODE_REMOVE_OBJECT" code="102"/> <!-- 오브젝트 지우기 -->
+	    <opernation name="S_OPCODE_POLY" code="103"/> <!-- 변신처리 -->
+	    <opernation name="S_OPCODE_SHOWSHOPSELLLIST" code="104"/> <!-- 상점 물품 판매부분 -->
+	    <opernation name="S_OPCODE_HPMETER" code="105"/>  <!-- 미니 HP바 처리 -->
+	    <opernation name="S_OPCODE_BLUEMESSAGE" code="107"/> <!-- 블루 메세지 (클라이언트 중앙) -->
+	    <opernation name="S_OPCODE_OWNCHARSTATUS" code="108"/> <!-- 스탯 정보 -->
+	    <opernation name="S_OPCODE_ADDSKILL" code="111"/> <!-- 스킬 추가 -->
+           	    <opernation name="S_OPCODE_WAR" code="112"/> <!-- 전쟁,혈전 -->
+	    <opernation name="S_OPCODE_SHOWSHOPBUYLIST" code="114"/>  <!-- 상점 물품 구입 처리-->
+	    <opernation name="S_OPCODE_LIQUOR" code="116"/> <!-- 술 아이템 효과 처리 -->
+	    <opernation name="S_OPCODE_CURSEBLIND" code="117"/> <!-- 커스 블리인드 처리 -->
+	    <opernation name="S_OPCODE_STRUP" code="118"/> <!-- 힘업 -->
+	    <opernation name="S_OPCODE_BOARDREAD" code="121"/>  <!-- 게시판 내용 출력 -->
+	    <opernation name="S_OPCODE_PRIVATESHOPLIST" code="122"/> <!-- 개인상점 물품 목록 보기 --> 
+	    <opernation name="S_OPCODE_LIGHT" code="123"/> <!-- 밝기 조절 -->
+	    <opernation name="S_OPCODE_SKILLBUY" code="124"/> <!-- 스킬 구입 리스트 창 -->
+	    <opernation name="S_OPCODE_LOGINRESULT" code="125"/>  <!-- 로그인 답변 처리 -->
+	    <opernation name="S_OPCODE_PINGTIME" code="126"/> <!-- 핑 Time 체크 -->
+	    <opernation name="S_OPCODE_RESTART" code="126"/> <!-- -->
+	    <opernation name="S_OPCODE_ITEMNAME" code="127"/> <!-- 아이템 착용 -->
+	    <opernation name="S_OPCODE_SERVERSTAT" code="51"/> <!-- -->
+	    <opernation name="S_OPCODE_TELEPORTLOCK" code="2"/> <!-- -->
+     	    <opernation name="S_OPCODE_SERVERSTAT" code="51"/> <!-- -->
+	    <opernation name="S_OPCODE_ATTACKTARGET" code="89"/>  <!-- 공격 목표 선정 처리 -->
+	    <opernation name="S_OPCODE_WARTIME" code="99"/> <!-- 공성 시간 변경 -->    
+	    <opernation name="S_OPCODE_UNDERWATER" code="71"/> <!-- -->
+	    <opernation name="S_OPCODE_LOGINOK" code="78"/> <!-- -->
+	    <opernation name="S_OPCODE_CHARDELETEOK" code="999"/> <!-- -->
+	    <opernation name="S_OPCODE_COMMONNEWS2" code="999"/> <!-- -->
+	    <opernation name="S_OPCODE_NEWMASTER" code="999"/> <!-- -->
+	    <opernation name="S_OPCODE_PUTSOLDIER" code="999"/> <!-- -->
+	    <opernation name="S_OPCODE_SELETESERVER" code="999"/> <!-- -->
+	    <opernation name="S_OPCODE_CHANGENAME" code="9"/> <!-- -->
+	</server>
+</codes>

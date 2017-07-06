@@ -1,0 +1,152 @@
+﻿<!-- <?xml version="1.0" encoding="UTF-8"?> -->
+<BossCycleList>
+
+ 	<!-- 오만보스 1시0분 기준, 4시간 주기,  30분까지 탐시간 유지 -->	
+	<BossCycle Name="oman">
+		<Cycle Base="1h0m" Period="4h" End="50m"/>
+	</BossCycle>
+
+
+
+ 	<!-- 카스파 0시0분 기준, 1시간 주기,  30분 유지 -->	
+	<BossCycle Name="SM3">
+		<Cycle Base="0h0m" Period="1h"  End="50m"/>
+	</BossCycle>
+
+	<!-- 네크 0시0분 기준, 1시간 주기,  30분 유지 -->	
+	<BossCycle Name="SM4">
+		<Cycle Base="0h30m" Period="1h"  End="50m"/>
+	</BossCycle>
+
+
+
+ 	<!-- 필드 0시0분 기준, 1시간 주기,  30분 유지 -->	
+	<BossCycle Name="DK1">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+
+
+ 	<!-- 용 0시0분 기준, 12시간 주기, 30분까지 탐시간 유지 -->	
+	<BossCycle Name="Dragon">
+		<Cycle Base="0h0m" Period="12h"  End="50m"/>
+	</BossCycle>
+
+
+ 	<!-- 성던보스 2시0분 기준, 4시간 주기,  30분까지 탐시간 유지 -->	
+
+	<BossCycle Name="sungdun">
+		<Cycle Base="2h0m" Period="4h" End="50m"/>
+	</BossCycle>
+
+
+
+ 	<!-- 기타던전보스 3시0분 기준, 4시간 주기,  30분까지 탐시간 유지 -->	
+
+	<BossCycle Name="dun">
+		<Cycle Base="3h0m" Period="4h" End="50m"/>
+	</BossCycle>
+
+
+
+ 	<!-- 데스 3시0분 기준, 4시간 주기,  30분까지 탐시간 유지 -->	
+	<BossCycle Name="death">
+		<Cycle Base="0h0m" Period="4h" End="50m"/>
+	</BossCycle>
+
+
+
+ 	<!-- 유니콘 0시0분 기준, 1시간 주기,  30분 유지 -->	
+	<BossCycle Name="SM">
+		<Cycle Base="0h0m" Period="1h"  End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM1">
+		<Cycle Base="0h0m" Period="1h"  End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM2">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+
+
+
+ 	<!-- 몽환섬 대정령 0시0분 기준, 1시간 주기,  30분 유지 -->	
+	<BossCycle Name="SM5">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM6">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM7">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM8">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM9">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM10">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM11">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM12">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM13">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM14">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM15">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+	<BossCycle Name="SM16">
+		<Cycle Base="0h0m" Period="1h" End="50m"/>
+	</BossCycle>
+
+
+		<BossCycle Name="OK0">
+		<Cycle Period="30m"/>
+	</BossCycle>
+		<BossCycle Name="OK1">
+		<Cycle Period="1h"/>
+	</BossCycle>
+		<BossCycle Name="OK2">
+		<Cycle Period="2h"/>
+	</BossCycle>
+		<BossCycle Name="OK3">
+		<Cycle Period="3h"/>
+	</BossCycle>
+		<BossCycle Name="OK4">
+		<Cycle Period="4h"/>
+	</BossCycle>
+		<BossCycle Name="OK5">
+		<Cycle Period="5h"/>
+	</BossCycle>
+		<BossCycle Name="OK6">
+		<Cycle Period="6h"/>
+	</BossCycle>
+		<BossCycle Name="OK7">
+		<Cycle Period="7h"/>
+	</BossCycle>
+		<BossCycle Name="OK8">
+		<Cycle Period="8h"/>
+	</BossCycle>
+		<BossCycle Name="OK9">
+		<Cycle Period="9h"/>
+	</BossCycle>
+		<BossCycle Name="OK10">
+		<Cycle Period="10h"/>
+	</BossCycle>
+		<BossCycle Name="OK11">
+		<Cycle Period="11h"/>
+	</BossCycle>
+		<BossCycle Name="OK12">
+		<Cycle Period="12h"/>
+	</BossCycle>
+
+
+
+</BossCycleList>

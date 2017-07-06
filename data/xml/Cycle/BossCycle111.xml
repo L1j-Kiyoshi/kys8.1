@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<BossCycleList>
+	<!-- Base(은)는 기준일을 지정하는 경우에 사용. 생략시는Date=서버 기동일,Time=0:00 -->
+	<!-- Cycle(은)는 주기를 지정한다. (각각 일, 때, 분의 편성으로 지정 가능)  -->
+	<!-- Period마셔 필수. 생략시는Start=0,End=Period과 동치 -->
+	<!-- 샘플
+	<BossCycle Name="Sample1">
+	<Base Date="2008/5/18" Time="0:00" />
+		<Cycle Period="1d2h31m" Start="3h30m" End="1d5m" />
+	</BossCycle>
+	-->
+	<BossCycle Name="DeathKnight">
+		<!-- 데스나이트, 0시 0분 기준으로 7시간 주기, 3시간 30분 지나면 탐 끝 -->
+		<Cycle Base="1d0h30m" Period="7h" End="3h30m"/>
+	</BossCycle>
+	<BossCycle Name="DK">
+		<Cycle Period="4h"/>
+	</BossCycle>
+	<BossCycle Name="Demon">
+		<!-- 데몬, 0시 0분 기준으로 4시간 주기 2시간 지나면 탐 끝 -->
+		<Cycle Base="0h0m" Period="4h"/>
+	</BossCycle>
+	<BossCycle Name="Oren">
+		<Cycle Period="4h"/>
+	</BossCycle>
+	<BossCycle Name="Aden">
+		<Cycle Period="4h"/>
+	</BossCycle>
+	<BossCycle Name="Caspa">
+		<Cycle Period="30m"/>
+	</BossCycle>
+	<BossCycle Name="Caspa1">
+		<Cycle Period="1h"/>
+	</BossCycle>
+	<BossCycle Name="1Drake">
+		<Cycle Base="0h0m" Period="2h"/> 
+	</BossCycle>
+	<BossCycle Name="2Drake">
+		<Cycle Base="2h0m" Period="3h"/> 
+	</BossCycle>
+	<BossCycle Name="Night">
+		<!-- 커츠, 0시0분 기준 4시간주기, 2시간 탐완료-->
+		<Cycle Base="0h0m" Period="4h"/>
+	</BossCycle>
+	<BossCycle Name="Dragon">
+		<Cycle Period="8h"/>
+	</BossCycle>
+	<BossCycle Name="etc1">
+		<Cycle Period="30m"/>
+	</BossCycle>
+	<BossCycle Name="Unknown">
+		<Cycle Period="30m"/>
+	</BossCycle>
+	<BossCycle Name="Christmas">
+		<Cycle Period="1h"/>
+	</BossCycle>
+	<BossCycle Name="GiantAnt">
+		<Cycle Period="4h"/>
+	</BossCycle>
+	<BossCycle Name="DK2">
+		<Cycle Period="1h"/>
+	</BossCycle>
+</BossCycleList>
+	
