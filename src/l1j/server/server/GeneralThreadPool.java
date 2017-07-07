@@ -8,6 +8,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import l1j.server.Config;
 import l1j.server.server.model.monitor.L1PcMonitor;
 
@@ -16,12 +17,12 @@ public class GeneralThreadPool {
 
 	private static final int SCHEDULED_CORE_POOL_SIZE = 50;
 
-	private Executor _executor; // 범용 ExecutorService
-	private ScheduledExecutorService _scheduler; // 범용 ScheduledExecutorService
-	private ScheduledExecutorService _pcScheduler; // 플레이어의 모니터용 ScheduledExecutorService
-	// 일단 L1J 디폴트 상태로, map:4에 있는 아무것도 하고 있지 않는 PC가 1초간에 점유 하는 실행 시간은 약
-	// 6ms(AutoUpdate: 약 6ms, ExpMonitor:극소)
-	private final int _pcSchedulerPoolSize = 1 + Config.MAX_ONLINE_USERS / 15; // 적당(20 User에 1개정도의 할당)
+	private Executor _executor; // 汎用 ExecutorService
+	private ScheduledExecutorService _scheduler; // 汎用 ScheduledExecutorService
+	private ScheduledExecutorService _pcScheduler; // プレイヤーのモニター用 ScheduledExecutorService
+	// 一度L1Jデフォルト状態で、map：4の何もしていないPCが1秒間に占有する実行時間は約
+	// 6ms(AutoUpdate: 約6ms、ExpMonitor：極小）
+	private final int _pcSchedulerPoolSize = 1 + Config.MAX_ONLINE_USERS / 15; // 適性（20 User 1程度の割り当て）
 
 	public static GeneralThreadPool getInstance() {
 		if (_instance == null) {
@@ -91,7 +92,7 @@ public class GeneralThreadPool {
 		return _pcScheduler.scheduleAtFixedRate(r, initialDelay, period, TimeUnit.MILLISECONDS);
 	}
 
-	// ThreadPoolManager 로부터 배차
+	// ThreadPoolManager から配車
 	private class PriorityThreadFactory implements ThreadFactory {
 		private final int _prio;
 		private final String _name;

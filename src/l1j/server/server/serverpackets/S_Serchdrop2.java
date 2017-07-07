@@ -53,11 +53,11 @@ public class S_Serchdrop2 extends ServerBasePacket {
 			}
 
 			writeC(Opcodes.S_BOARD_READ);
-			writeD(0);// 넘버
-			writeS("메티스");// 글쓴이?
-			writeS("드랍리스트");
+			writeD(0);// ナンバー
+			writeS("メティス");// 投稿者？
+			writeS("ドロップリスト");
 			writeS("");
-			writeS("\r검색할 몹 : " + NpcTable.getInstance().getTemplate(npcid).get_name() + "\n\n\r****** 드랍하는아이템 ******"
+			writeS("\r検索するモンスター : " + NpcTable.getInstance().getTemplate(npcid).get_name() + "\n\n\r****** ドロップするアイテム ******"
 					+ "\n\n\r" + itemname[0] + " | " + itemname[1] + " | " + itemname[2] + " | " + itemname[3] + " | "
 					+ itemname[4] + " | " + itemname[5] + " | " + itemname[6] + " | " + itemname[7] + " | "
 					+ itemname[8] + " | " + itemname[9] + " | " + itemname[10] + " | " + itemname[11] + " | "

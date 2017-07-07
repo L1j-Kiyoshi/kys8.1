@@ -18,7 +18,7 @@
  */
 package l1j.server.server.utils;
 
-// 전부 static로 해도 괜찮을지도 모른다
+// すべてstaticにしてもいいかもしれない
 public class ByteArrayUtil {
 	private final byte[] _byteArray;
 

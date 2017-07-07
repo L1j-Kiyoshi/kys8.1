@@ -36,7 +36,7 @@ public class IdFactory {
 	}
 
 	private void loadState() {
-		// DB로부터 MAXID를 요구한다
+		// DBからMAXIDを要求する
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -54,7 +54,7 @@ public class IdFactory {
 				id = FIRST_ID;
 			}
 			_curId = id;
-//			System.out.println("■ 오브젝트ID NUMBER.......................... " + _curId);
+//			System.out.println("■ オブジェクトID NUMBER.......................... " + _curId);
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		} finally {

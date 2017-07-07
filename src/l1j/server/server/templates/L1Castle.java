@@ -71,6 +71,6 @@ public class L1Castle {
 	
 	private int _security;
 	public int getCastleSecurity() { return _security; }
-	public void setCastleSecurity(int i) { _security = i; }//임시
+	public void setCastleSecurity(int i) { _security = i; }//一時的
 
 }

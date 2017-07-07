@@ -299,7 +299,7 @@ public class L1BoardPost {
 		return null;
 	}
 	
-	public void 자유게시판() {
+	public void board_Free() {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -315,7 +315,7 @@ public class L1BoardPost {
 		}
 	}
 
-	public void 서버정보() {
+	public void serverInfo() {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -330,7 +330,7 @@ public class L1BoardPost {
 			SQLUtil.close(con);
 		}
 	}
-	public void 운영자1() {
+	public void operator1() {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -345,7 +345,7 @@ public class L1BoardPost {
 			SQLUtil.close(con);
 		}
 	}
-	public void 운영자2() {
+	public void operator2() {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -360,7 +360,7 @@ public class L1BoardPost {
 			SQLUtil.close(con);
 		}
 	}
-	public void 운영자3() {
+	public void operator3() {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -375,7 +375,7 @@ public class L1BoardPost {
 			SQLUtil.close(con);
 		}
 	}
-	public void 건의사항() {
+	public void proposal() {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {

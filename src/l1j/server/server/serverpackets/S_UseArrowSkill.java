@@ -20,6 +20,7 @@
 package l1j.server.server.serverpackets;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 import l1j.server.server.Opcodes;
 import l1j.server.server.model.L1Character;
 
@@ -37,8 +38,8 @@ public class S_UseArrowSkill extends ServerBasePacket {
 			int y, boolean isHit) {
 
 		int aid = 1;
-		// 오크 궁수에만 변경
-		if (cha.getTempCharGfx() == 3860 || cha.getTempCharGfx() == 13346) {//다크엘프 공격모션 오류없이
+		// オークアーチャーのみ変更
+		if (cha.getTempCharGfx() == 3860 || cha.getTempCharGfx() == 13346) {//ダークエルフの攻撃モーションエラーなし
 			aid = 21;
 		}
 		writeC(Opcodes.S_ATTACK);
@@ -52,7 +53,7 @@ public class S_UseArrowSkill extends ServerBasePacket {
 		// writeD(246);
 		writeD(_sequentialNumber.incrementAndGet());
 		writeH(spellgfx);
-		writeC(127); // 스킬 사용시의 광원의 넓이?
+		writeC(127); //スキル使用時の光源の広さ？
 		writeH(cha.getX());
 		writeH(cha.getY());
 		writeH(x);

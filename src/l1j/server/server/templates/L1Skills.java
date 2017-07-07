@@ -57,7 +57,7 @@ public class L1Skills {
 	private int _itmeConsumeCount;
 	private int _reuseDelay;
 	private int _buffDuration;
-	private int _targetTo; // 대상 0:자신 1:PC 2:NPC 4:혈맹 8:파티 16:펫 32:장소
+	private int _targetTo; // 対象0：自分1：PC 2：NPC 4：血盟8：パーティー16：ペット32：場所
 
 
 	public int getSkillId() {

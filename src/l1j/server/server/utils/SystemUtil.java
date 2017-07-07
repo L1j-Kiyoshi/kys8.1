@@ -20,10 +20,10 @@ package l1j.server.server.utils;
 
 public class SystemUtil {
 	/**
-	 * 시스템이 이용중의 heap 사이즈를 메가바이트 단위로 돌려준다.<br>
-	 * 이 값에 스택의 사이즈는 포함되지 않는다.
+	 * システムが利用中のheapサイズをメガバイト単位で返す。<br>
+	 * この値にスタックのサイズは含まれない。
 	 * 
-	 * @return 이용중의 heap 사이즈
+	 * @return ご利用中のheapサイズ
 	 */
 	public static long getUsedMemoryMB() {
 		return (Runtime.getRuntime().totalMemory() - Runtime.getRuntime()

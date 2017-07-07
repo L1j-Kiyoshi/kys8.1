@@ -58,79 +58,79 @@ public class S_Ranking extends ServerBasePacket {
 		String title = null;
 		writeC(Opcodes.S_BOARD_READ);
 		writeD(number);
-		writeS("랭킹 관리자");
+		writeS("ランキング管理者");
 		switch (number) {
 		case 1:
-			//title = "전체 랭킹";
-			title = "전사 랭킹";
+			//title = "全体ランキング";
+			title = "戦士ランキング";
 			break;
 		case 2:
-			title = "군주 랭킹";
+			title = "君主ランキング";
 			break;
 		case 3:
-			title = "기사 랭킹";
+			title = "記事ランキング";
 			break;
 		case 4:
-			title = "요정 랭킹";
+			title = "妖精ランキング";
 			break;
 		case 5:
-			title = "법사 랭킹";
+			title = "玄ランキング";
 			break;
 		case 6:
-			title = "다엘 랭킹";
+			title = "すべてへランキング";
 			break;
 		case 7:
-			title = "용기사 랭킹";
+			title = "用記事ランキング";
 			break;
 		case 8:
-			title = "환술사 랭킹";
+			title = "イリュージョニストランキング";
 			break;
 		}
 		writeS(title);
 		writeS(date);
 		switch (pc.getType()) {
 		case 0:
-			type = "군주";
+			type = "君主";
 			break;
 		case 1:
-			type = "기사";
+			type = "記事";
 			break;
 		case 2:
-			type = "요정";
+			type = "妖精";
 			break;
 		case 3:
-			type = "마법사";
+			type = "ウィザード";
 			break;
 		case 4:
-			type = "다크엘프";
+			type = "ダークエルフ";
 			break;
 		case 5:
-			type = "용기사";
+			type = "竜騎士";
 			break;
 		case 6:
-			type = "환술사";
+			type = "イリュージョニスト";
 			break;
 		case 7:
-			type = "전사";
+			type = "戦士";
 			break;
 		}
 		int p = Rank(pc, number);
 		if (number == 9) {
-			writeS("\n\r\n\r\n\r" + pc.getName() + "님의 전체랭킹 : " + p + "위"
-					+ "\n\r\n\r\n\r" + type + " 클래스 랭킹 : " + j + "위"
+			writeS("\n\r\n\r\n\r" + pc.getName() + "さんの全ランキング：" + p + "位"
+					+ "\n\r\n\r\n\r" + type + "クラスランキング：" + j + "位"
 					+ "\n\r\n\r\n\r" + "        ");
 
 		} else {
-			writeS("\n\r" + "     1위 " + name[0] + "\n\r" +
-					"     2위 " + name[1] + "\n\r" +
-					"     3위 " + name[2] + "\n\r" +
-					"     4위 " + name[3] + "\n\r" +
-					"     5위 " + name[4] + "\n\r" +
-					"     6위 " + name[5] + "\n\r" +
-					"     7위 " + name[6] + "\n\r" +
-					"     8위 " + name[7] + "\n\r" +
-					"     9위 " + name[8] + "\n\r" +
-					"    10위 " + name[9] + "\n\r" +
+			writeS("\n\r" + "     1位 " + name[0] + "\n\r" +
+					"     2位 " + name[1] + "\n\r" +
+					"     3位 " + name[2] + "\n\r" +
+					"     4位 " + name[3] + "\n\r" +
+					"     5位 " + name[4] + "\n\r" +
+					"     6位 " + name[5] + "\n\r" +
+					"     7位 " + name[6] + "\n\r" +
+					"     8位 " + name[7] + "\n\r" +
+					"     9位 " + name[8] + "\n\r" +
+					"    10位 " + name[9] + "\n\r" +
 			"             ");
 		}
 	}
@@ -213,7 +213,7 @@ public class S_Ranking extends ServerBasePacket {
 					i++;
 				}
 
-				// 레코드가 없거나 5보다 작을때
+				// レコードがない場合、または5よりも小さいとき
 				while (i < 10) {
 					name[i] = " ";
 					i++;

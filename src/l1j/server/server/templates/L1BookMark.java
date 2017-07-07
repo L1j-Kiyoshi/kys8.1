@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import l1j.server.L1DatabaseFactory;
@@ -154,7 +153,7 @@ public class L1BookMark {
             }
 
         } catch (SQLException e) {
-           // _log.log(Level.WARNING, "bookmarks 예외 발생.", e);
+           // _log.log(Level.WARNING, "bookmarks 例外が発生。", e);
         } finally {
             SQLUtil.close(rs, pstm, con);
        }
@@ -178,7 +177,7 @@ public class L1BookMark {
 			pstm.setInt(8, 0);
 			pstm.executeUpdate();
 		} catch (SQLException e) {
-			//_log.log(Level.SEVERE, "북마크의 추가로 에러가 발생했습니다.", e);
+			//_log.log(Level.SEVERE, "ブックマークの追加でエラーが発生しました。", e);
 		} finally {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
@@ -225,7 +224,7 @@ public class L1BookMark {
                 bookmarkDB(pc);
            }
         } catch (SQLException e) {
-            //_log.log(Level.SEVERE, "북마크의 삭제로 에러가 발생했습니다.", e);
+            //_log.log(Level.SEVERE, "ブックマークの削除でエラーが発生しました。", e);
         } finally {
             SQLUtil.close(pstm);
             SQLUtil.close(con);
@@ -285,14 +284,14 @@ public class L1BookMark {
                 pc._bookmarks.add(bookmark);
                 pc.sendPackets(new S_Bookmarks(s, bookmark.getMapId(), bookmark.getLocX(), bookmark.getLocY(), bookmark.getNumId()));
             } catch (SQLException e) {
-                //_log.log(Level.SEVERE, "북마크의 추가로 에러가 발생했습니다.", e);
+                //_log.log(Level.SEVERE, "ブックマークの追加でエラーが発生しました。", e);
             } finally {
                 SQLUtil.close(pstm);
                 SQLUtil.close(con);
             }
 
         } else {
-            pc.sendPackets(new S_ServerMessage(1655));// 같은 기억명으로 저장할 수 없습니다.
+            pc.sendPackets(new S_ServerMessage(1655));// 同じ記憶人で保存することができません。
        }
     }
 
@@ -319,7 +318,7 @@ public class L1BookMark {
                 }
             }
         } catch (SQLException e) {
-           // _log.log(Level.WARNING, "WriteBookmark 예외 발생.", e);
+           // _log.log(Level.WARNING, "WriteBookmark 例外が発生。", e);
         } finally {
             SQLUtil.close(rs, pstm, con);
        }
@@ -343,7 +342,7 @@ public class L1BookMark {
             pstm = con.prepareStatement("SELECT * FROM beginner_addteleport WHERE item_obj_id='" + obj_id + "' ORDER BY num_id ASC");
             rs = pstm.executeQuery();
             if (pc.getMark_count() == size) {
-                pc.sendPackets(new S_SystemMessage("기억창에 자리가 한개도 없습니다.[확장필요]"));
+                pc.sendPackets(new S_SystemMessage("記憶ウィンドウに桁が一つもありません。[拡張が必要]"));
                 return;
             }
             while (rs.next()) {
@@ -395,14 +394,14 @@ public class L1BookMark {
                 pc.addBookMark(bookmark);
                 pc.sendPackets(new S_Bookmarks(bookmark.getName(), bookmark.getMapId(), bookmark.getLocX(), bookmark.getLocY(), bookmark.getNumId()));
             }
-            pc.sendPackets(new S_SystemMessage("[ " + count2  + " ]개의 기억이 등록"));
+            pc.sendPackets(new S_SystemMessage("[ " + count2  + " ]つの記憶が登録"));
             if (count != 0) {
-                pc.sendPackets(new S_SystemMessage("[ " + count + " ]개의 기억은 저장되지 않았습니다.[확장필요]"));
+                pc.sendPackets(new S_SystemMessage("[ " + count + " ]つの記憶は保存されません。[拡張が必要]"));
             }
             pc.sendPackets(new S_BookMarkLoad(pc));
             pc.getInventory().removeItem(useItem, 1);
         } catch (SQLException e) {
-           // _log.log(Level.WARNING, "WriteBookmark 예외 발생.", e);
+           // _log.log(Level.WARNING, "WriteBookmark 例外が発生。", e);
         } finally {
             bookmark = null;
           SQLUtil.close(rs, pstm, con);
@@ -418,7 +417,7 @@ public class L1BookMark {
             pstm.setInt(1, obj_id);
             pstm.execute();
         } catch (SQLException e) {
-           // _log.log(Level.SEVERE, "북마크의 삭제로 에러가 발생했습니다.", e);
+           // _log.log(Level.SEVERE, "ブックマークの削除でエラーが発生しました。", e);
         } finally {
             SQLUtil.close(pstm);
             SQLUtil.close(con);
@@ -452,7 +451,7 @@ public class L1BookMark {
                 pstm.execute();
             }
         } catch (SQLException e) {
-           // _log.log(Level.WARNING, "WriteBookmark 예외 발생.", e);
+           // _log.log(Level.WARNING, "WriteBookmark 例外が発生。", e);
         } finally {
             SQLUtil.close(rs, pstm, con);
         }

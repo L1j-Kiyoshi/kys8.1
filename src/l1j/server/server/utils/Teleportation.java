@@ -1,6 +1,6 @@
 package l1j.server.server.utils;
 
-import static l1j.server.server.model.skill.L1SkillId.STATUS_DRAGON_PEARL;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -42,7 +42,8 @@ public class Teleportation {
 	}
 
 	public void doTeleportation(L1PcInstance pc) {
-		if (pc == null)return;
+		if (pc == null)
+			return;
 		doTeleportation(pc, false);
 	}
 
@@ -51,7 +52,6 @@ public class Teleportation {
 		if (pc == null || pc.isDead()) {
 			return;
 		}
-		
 
 		int oldmap = pc.getMapId();
 		int x = pc.getTeleportX();
@@ -67,7 +67,7 @@ public class Teleportation {
 			mapId = pc.getMapId();
 		}
 
-		//pc.setTeleport(true);
+		// pc.setTeleport(true);
 
 		pc.getMap().setPassable(pc.getLocation(), true);
 
@@ -78,28 +78,28 @@ public class Teleportation {
 
 		pc.getMap().setPassable(pc.getLocation(), false);
 
-		if (pc.getZoneType() == 0) {			
-			if(pc.getSafetyZone() == true) {
+		if (pc.getZoneType() == 0) {
+			if (pc.getSafetyZone() == true) {
 				pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.SAFETYZONE, false));
-				pc.setSafetyZone(false);	
+				pc.setSafetyZone(false);
 			}
-		} else {			
+		} else {
 			if (pc.getSafetyZone() == false) {
 				pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.SAFETYZONE, true));
-				pc.setSafetyZone(true);	
+				pc.setSafetyZone(true);
 			}
 		}
-		
+
 		if (pc.isReserveGhost()) {
 			pc.endGhost();
 		}
-		/** 패키지상점 **/
+		/** パッケージ店 **/
 		if (pc.getMapId() != 631 && pc.getMapId() != 514 && pc.getMapId() != 515 && pc.getMapId() != 516) {
 			for (L1PcInstance pc2 : L1World.getInstance().getVisiblePlayer(pc)) {
 				pc.broadcastPacket(new S_OtherCharPacks(pc, pc2));
 			}
 		}
-		/** 패키지상점 **/
+		/** パッケージ店 **/
 		pc.broadcastRemoveAllKnownObjects();
 		pc.removeAllKnownObjects();
 		pc.sendPackets(new S_OwnCharPack(pc));
@@ -130,7 +130,7 @@ public class Teleportation {
 		}
 
 		if (pc.getMapId() == 781 || pc.getMapId() == 782) {
-			// 애완동물을 월드 MAP상으로부터 지운다
+			// ペットをワールドMAP上から消す
 			Object[] petList = pc.getPetList().values().toArray();
 			L1PetInstance pet = null;
 			L1SummonInstance summon = null;
@@ -204,7 +204,7 @@ public class Teleportation {
 
 			}
 		} else {
-			// 애완동물을 월드 MAP상으로부터 지운다
+			// ペットをワールドMAP上から消す
 			Object[] petList = pc.getPetList().values().toArray();
 			L1PetInstance pet = null;
 			L1SummonInstance summon = null;
@@ -223,7 +223,7 @@ public class Teleportation {
 				}
 			}
 
-			// 마법인형을 월드 맵상으로부터 지운다
+			// マジックドールをワールドマップ上から消す
 			for (L1DollInstance doll : pc.getDollList()) {
 				doll.deleteDoll();
 			}
@@ -240,97 +240,117 @@ public class Teleportation {
 			updatePc.updateObject();
 		}
 		pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
-		
+
 		pc.setTeleport(false);
-		
-		/** 인스턴스 던전 아이템삭제 **/
-		if (pc.getMap().getBaseMapId() != 1936 && pc.getMap().getBaseMapId() != 2600 && pc.getMap().getBaseMapId() != 2699) {
+
+		/** インスタンスダンジョンのアイテムの削除 **/
+		if (pc.getMap().getBaseMapId() != 1936 && pc.getMap().getBaseMapId() != 2600
+				&& pc.getMap().getBaseMapId() != 2699) {
 			removeItem(pc);
 		}
-		/** 인스턴스 던전 아이템삭제 **/
-		
+		/** インスタンスダンジョンのアイテムの削除 **/
+
 		if (pc.hasSkillEffect(L1SkillId.WIND_SHACKLE)) {
 			pc.sendPackets(new S_SkillIconWindShackle(pc.getId(), pc.getSkillEffectTimeSec(L1SkillId.WIND_SHACKLE)));
 		} else if (pc.hasSkillEffect(L1SkillId.DANCING_BLADES)) {
 			pc.sendPackets(new S_SkillBrave(pc.getId(), 1, pc.getSkillEffectTimeSec(L1SkillId.DANCING_BLADES)));
 			pc.sendPackets(new S_SkillIconAura(154, pc.getSkillEffectTimeSec(L1SkillId.DANCING_BLADES)));
 		}
-		if(pc.getInventory().checkEquipped(900022)){
-			if(pc.getMapId() >= 1700 && pc.getMapId() <= 1707){
-				
-			}else{
+		if (pc.getInventory().checkEquipped(900022)) {
+			if (pc.getMapId() >= 1700 && pc.getMapId() <= 1707) {
+
+			} else {
 				L1ItemInstance item = pc.getInventory().findEquippedItemId(900022);
 				pc.getInventory().setEquipped(item, false);
 			}
 		}
 		checkMapTime(pc, oldmap, mapId);
 	}
-	
+
 	private static void checkMapTime(L1PcInstance pc, int oldmap, int mapId) {
-		if (oldmap != pc.getMapId()) {   
-			int setTimer1 = 120 - pc.getGirandungeonTime();// 기란 감옥
-			int setTimer2 = 60 - pc.getnewdodungeonTime();// 상아탑:발록 진영
-			int setTimer3 = 60 - pc.getOrendungeonTime();// 상아탑:야히 진영
-			int setTimer4 = 30 - pc.getSoulTime();// 고대정령무덤
-			int setTimer5 = 30 - pc.geticedungeonTime();// 얼음 던전 PC
-			int setTimer6 = 30 - pc.getSomeTime(); // 몽환의 섬
-			//int setTimer7 = 120 - pc.getRadungeonTime(); // 라스타바드 던전
-			int setTimer8 = 120 - pc.getDrageonTime();// 용의 계곡 던전
-			int setTimer9 = 120 - pc.getislandTime();// 말하는섬던전
+		if (oldmap != pc.getMapId()) {
+			int setTimer1 = 120 - pc.getGirandungeonTime();// ギラン監獄
+			int setTimer2 = 60 - pc.getnewdodungeonTime();// 象牙の塔：バルログ陣営
+			int setTimer3 = 60 - pc.getOrendungeonTime();// 象牙の塔：ヤヒ陣営
+			int setTimer4 = 30 - pc.getSoulTime();// 古代精霊の墓
+			int setTimer5 = 30 - pc.geticedungeonTime();// 氷のダンジョンPC
+			int setTimer6 = 30 - pc.getSomeTime(); // 夢幻の島
+			// int setTimer7 = 120 - pc.getRadungeonTime(); // ラスタバドダンジョン
+			int setTimer8 = 120 - pc.getDrageonTime();// ドラゴンバレーのダンジョン
+			int setTimer9 = 120 - pc.getislandTime();// 話せる島ダンジョン
 
 			if (pc.noPlayerCK || pc.noPlayerck2 || pc.getRobotAi() != null) {
 				return;
 			}
 			switch (mapId) {
 
-							/** 각 던전 타이머 지정 곱하기 60기준으로맞추기 ( 60분 기준 1시간으로 정의한다 ) **/
-			// 기란 & 글루딘던전
-			case 53:case 54:case 55:case 56:
-			case 15403:case 15404:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer1 * 60));// 60분 기준 1시간으로 정의한다.
+			/** 各ダンジョンタイマー指定乗算60基準に合わせる（60分あたり1時間で定義する） **/
+			// ギラン・グルーディンダンジョン
+			case 53:
+			case 54:
+			case 55:
+			case 56:
+			case 15403:
+			case 15404:
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer1 * 60));// 60分あたり1時間で定義する。
 				break;
-			// 야히진영
-			case 285:case 286:case 287:case 288:case 289:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer3 * 60));// 60분 기준 1시간으로 정의한다.
+			// ヤヒ陣営
+			case 285:
+			case 286:
+			case 287:
+			case 288:
+			case 289:
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer3 * 60));// 60分あたり1時間で定義する。
 				break;
-			// 라스타바드
-			/*case 451:case 452:case 453:case 454:case 455:case 456:case 460:
-			case 461:case 462:case 463:case 464:case 465:case 466:case 470:
-			case 471:case 472:case 473:case 474:case 475:case 476:case 477:
-			case 478:case 479:case 490:case 491:case 492:case 493:case 494:
-			case 495:case 496:case 530:case 531:case 532:case 533:case 534:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer7 * 60));// 60분 기준 1시간으로 정의한다.
-				break;*/
-				// 용의 던전
-		/*	case 30:case 31:case 32:case 33:case 35:case 36:case 814:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer8 * 60));// 60분 기준 1시간으로 정의한다.
-				break; */
-				//몽환의섬
+			// ラスタバド
+			/*
+			 * case 451:case 452:case 453:case 454:case 455:case 456:case 460:
+			 * case 461:case 462:case 463:case 464:case 465:case 466:case 470:
+			 * case 471:case 472:case 473:case 474:case 475:case 476:case 477:
+			 * case 478:case 479:case 490:case 491:case 492:case 493:case 494:
+			 * case 495:case 496:case 530:case 531:case 532:case 533:case 534:
+			 * pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer7 *
+			 * 60));// 60分あたり1時間で定義する。 break;
+			 */
+			// 用のダンジョン
+			/*
+			 * case 30:case 31:case 32:case 33:case 35:case 36:case 814:
+			 * pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer8 *
+			 * 60));// 60分あたり1時間で定義する。 break;
+			 */
+			// 夢幻の島
 			case 303:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer6 * 60));// 60분 기준 1시간으로 정의한다.
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer6 * 60));// 60分あたり1時間で定義する。
 				break;
-				//정령무덤,고대의무덤
-			case 430:case 400:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer4 * 60));// 60분 기준 1시간으로 정의한다.
+			// 精霊の墓、古代の墓
+			case 430:
+			case 400:
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer4 * 60));// 60分あたり1時間で定義する。
 				break;
-				//얼던PC
-			case 5555:case 5556:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer5 * 60));// 60분 기준 1시간으로 정의한다.
+			// オルドンPC
+			case 5555:
+			case 5556:
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer5 * 60));// 60分あたり1時間で定義する。
 				break;
-				//발록진영
-			case 280:case 281:case 282:case 283:case 284:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer2 * 60));// 60분 기준 1시간으로 정의한다.
+			// バルログ陣営
+			case 280:
+			case 281:
+			case 282:
+			case 283:
+			case 284:
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer2 * 60));// 60分あたり1時間で定義する。
 				break;
-				// 말하는 섬 던전
-			case 1: case 2:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer9 * 60));// 60분 기준 1시간으로 정의한다.
+			// 話せる島ダンジョン
+			case 1:
+			case 2:
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer9 * 60));// 60分あたり1時間で定義する。
 				break;
 			default:
 				break;
 			}
 		}
 	}
-	
+
 	private static void removeItem(L1PcInstance pc) {
 		for (L1ItemInstance item : pc.getInventory().getItems()) {
 			if (item.getItemId() == 203003 || item.getItemId() == 810006 || item.getItemId() == 810007)

@@ -1,5 +1,5 @@
 /**
- * 타이머 관련 맵 객체
+ * タイマー関連マップオブジェクト
  * 2008. 12. 04
 */
 
@@ -12,19 +12,19 @@ public class L1TimeMap{
 	private int DoorId;
 
 	/** 
-	 * 기본 생성자
-	 * @param	(int)	id		맵 아이디
-	 * @param	(int)	time	설정된 시간(s)
+	 * 既定のコンストラクタ
+	 * @param	(int)	id		マップ名
+	 * @param	(int)	time	設定された時間（s）
 	*/
 	public L1TimeMap(int id, int time){
 		this.id = id;
 		this.time = time;
 	}
 	/** 
-	 * 기본 생성자
-	 * @param	(int)	id		맵 아이디
-	 * @param	(int)	time	설정된 시간(s)
-	 * @param	(int)	DoorId	설정된 문 아이디
+	 *既定のコンストラクタ
+	 * @param	(int)	id		マップ名
+	 * @param	(int)	time	設定された時間（s）
+	 * @param	(int)	DoorId	設定されたドアのID
 	*/
 	public L1TimeMap(int id, int time, int DoorId){
 		this.id = id;
@@ -32,29 +32,29 @@ public class L1TimeMap{
 		this.DoorId = DoorId;
 	}
 	/** 
-	 * 맵 아이디 리턴
-	 * @return	(int)	맵 아이디
+	 * マップ名リターン
+	 * @return	(int)	マップ名
 	*/
 	public int getId(){
 		return id;
 	}
 	/** 
-	 * 설정 시간 리턴
-	 * @return	(int)	설정시간
+	 * 設定時間リターン
+	 * @return	(int)	設定時間
 	*/
 	public int getTime(){
 		return time;
 	}
 	/** 
-	 * 설정된 문 아이디 리턴
-	 * @return	(int)	문 아이디
+	 * 設定されたドアのIDリターン
+	 * @return	(int)	ドア名
 	*/
 	public int getDoor(){
 		return DoorId;
 	}
 	/** 
-	 * 남은시간 계산
-	 * @return	(boolean)	시간이 종료되었으면 true, 남아있다면 false
+	 * 残り時間を計算
+	 * @return	(boolean)	時間が終了したらtrue、残っている場合false
 	*/
 	public boolean count(){
 		return time-- <= 0;

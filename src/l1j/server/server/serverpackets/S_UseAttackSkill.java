@@ -69,22 +69,22 @@ public class S_UseAttackSkill extends ServerBasePacket {
 	private void buildPacket(L1Character cha, int targetobj, int spellgfx,
 			int x, int y, int actionId, int isHit, boolean withCastMotion) {
 		if (cha instanceof L1PcInstance) {
-			// 그림자계 변신중에 공격 마법을 사용하면(자) 클라이언트가 떨어지기 (위해)때문에 잠정 대응
+			// 影系変身中に攻撃魔法を使用すると、クライアントが落ちるため、暫定対応
 			if (cha.hasSkillEffect(L1SkillId.SHAPE_CHANGE)
 					&& actionId == ActionCodes.ACTION_SkillAttack) {
 				int tempchargfx = cha.getTempCharGfx();
 				if (tempchargfx == 5727 || tempchargfx == 5730) {
 					actionId = ActionCodes.ACTION_SkillBuff;
 				} else if (tempchargfx == 5733 || tempchargfx == 5736) {
-					// 보조 마법 모션으로 하면(자) 공격 마법의 그래픽과
-					// 대상에의 대미지 모션이 발생하지 않게 되기 (위해)때문에
-					// 공격 모션으로 대용
+					// 補助魔法モーションにすると、攻撃魔法のグラフィックと
+					// 対象へのダメージモーショ​​ンが発生しなくなるため
+					// 攻撃モーションで代用
 					actionId = ActionCodes.ACTION_Attack;
 				}
 			}
 		}
-		// 화령의 주인이 디폴트라면 공격 마법의 그래픽이 발생하지 않기 때문에 강제 치환
-		// 어딘가 별개로 관리하는 것이 좋아?
+		// ファイアー主人がデフォルトであれば、攻撃魔法のグラフィックが発生しないため、強制的に置換
+		// どこか別で管理することが好き？
 		if (cha.getTempCharGfx() == 4013) {
 			actionId = ActionCodes.ACTION_Attack;
 		}
@@ -98,9 +98,9 @@ public class S_UseAttackSkill extends ServerBasePacket {
 		writeC(isHit);
 		writeC(0);
 		writeC(newheading);
-		writeD(_sequentialNumber.incrementAndGet()); // 번호가 겹치지 않게 보낸다
+		writeD(_sequentialNumber.incrementAndGet()); // 番号が重ならないように送る
 		writeH(spellgfx);
-		writeC(6); // 타켓지종:6, 범위&타켓지종:8, 범위:0
+		writeC(6); // ターゲットジジョン：6、範囲及びターゲットジジョン：8、範囲：0
 		writeH(cha.getX());
 		writeH(cha.getY());
 		writeH(x);

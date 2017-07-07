@@ -34,13 +34,13 @@ public class S_SPMR extends ServerBasePacket {
 
 	private void buildPacket(L1PcInstance pc) {
 		writeC(Opcodes.S_MAGIC_STATUS);
-		// 위즈 댐 일부의 SP는 S_SkillBrave 송신시에 갱신되기 (위해)때문에 공제해 둔다
+		// ウィズダム一部のSPはS_SkillBrave送信時に更新されるため控除しておく
 		if (pc.hasSkillEffect(L1SkillId.STATUS_WISDOM_POTION)) {
-			writeC(pc.getAbility().getSp() - pc.getAbility().getTrueSp() - 2); // 장비 증가한 SP
+			writeC(pc.getAbility().getSp() - pc.getAbility().getTrueSp() - 2); //機器増加SP
 		} else {
-			writeC(pc.getAbility().getSp() - pc.getAbility().getTrueSp()); // 장비 증가한 SP
+			writeC(pc.getAbility().getSp() - pc.getAbility().getTrueSp()); // 機器増加SP
 		}
-		writeH(pc.getResistance().getMr() - pc.getResistance().getBaseMr()); // 장비나 마법으로 증가한 MR
+		writeH(pc.getResistance().getMr() - pc.getResistance().getBaseMr()); // 装備や魔法で増加したMR
 	}
 
 	@Override

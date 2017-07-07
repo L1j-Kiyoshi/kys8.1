@@ -17,13 +17,13 @@ import l1j.server.server.templates.L1ShopItem;
 public class S_PremiumShopSellList extends ServerBasePacket {
 
 	/**
-	 * 가게의 물건 리스트를 표시한다. 캐릭터가 BUY 버튼을 눌렀을 때에 보낸다.
+	 * 店の物件一覧を表示する。キャラクターがBUYボタンを押したときに送る。
 	 */
 	public S_PremiumShopSellList(boolean bb,int types){
 		writeC(Opcodes.S_BUY_LIST);
 		writeD(0);
 		int npcId;
-		switch(types){ //0 집행급 
+		switch(types){ //0 執行級 
 			case 0:
 				npcId = 90000;
 				break;
@@ -45,7 +45,7 @@ public class S_PremiumShopSellList extends ServerBasePacket {
 			return;
 		}
 
-		// L1ItemInstance의 getStatusBytes를 이용하기 위해(때문에)
+		// L1ItemInstanceのgetStatusBytesを利用するため
 		L1ItemInstance dummy = new L1ItemInstance();
 		L1ShopItem shopItem = null;
 		L1Item item = null;
@@ -106,7 +106,7 @@ public class S_PremiumShopSellList extends ServerBasePacket {
 		try {
 			shopItems = shop.getSellingItems();
 		} catch (Exception e) {
-			System.out.println("S_PremiumShopSellList 오류 엔피시번호 : " + npcId);
+			System.out.println("S_PremiumShopSellListエラーエンピシ番号：" + npcId);
 		}
 		if (shopItems != null) {
 			writeH(shopItems.size());
@@ -115,7 +115,7 @@ public class S_PremiumShopSellList extends ServerBasePacket {
 			return;
 		}
 
-		// L1ItemInstance의 getStatusBytes를 이용하기 위해(때문에)
+		//L1ItemInstanceのgetStatusBytesを利用するため
 		L1ItemInstance dummy = new L1ItemInstance();
 		L1ShopItem shopItem = null;
 		L1Item item = null;
@@ -128,7 +128,7 @@ public class S_PremiumShopSellList extends ServerBasePacket {
 			try {
 				writeH(shopItem.getItem().getGfxId());
 			} catch (Exception e) {
-				System.out.println("엔피시 상점 오류 엔피시 번호 :" + npcId);
+				System.out.println("エンピシ店エラーエンピシ番号：" + npcId);
 			}
 			writeD(price);
 			if (shopItem.getPackCount() > 1) {
@@ -157,28 +157,28 @@ public class S_PremiumShopSellList extends ServerBasePacket {
 				}
 			}
 		}
-		//탐상인 
+		//探傷ある 
 		if ((npcId ==7200002)){
 			writeC(253);
 			writeC(255);
-	    //베리 
+	    //ベリー 
 		}else if ((npcId ==7000077)){ 
 			writeC(73);
 			writeC(58);
-		// 알수없음 0/0	
-		}else if ((npcId == 900107)) { // 만월의 정기인데??..
-			//writeC(0x2c08); //desc번호 인데..안되네..ㅋ
+		// 不明 0/0	
+		}else if ((npcId == 900107)) { // 満月の定期のに？。
+			//writeC(0x2c08); //desc番号だが..ならないね。（笑）
 			writeC(255);
 			writeC(255);
 			writeC(0);
 			writeC(0);
-		// 금빛깃털
+		// 金色の羽
 		} else if ((npcId == 6000002)){
 			writeH(0x3ccf);
 		} else if ((npcId >= 7210061 &&  npcId <= 7210070)){
 			writeH(0x3DE4);
 		//15844
-		} else {//그외 깃털로 표시 
+		} else {//その他羽で表示
 			writeC(111);
 			writeC(10);
 		}

@@ -38,7 +38,7 @@ public class S_SurvivalCry extends ServerBasePacket {
 	public static final int POINT = 2;
 	public static final int OTP_SHOW = 4;
 	public static final int OTP_CHECK_MSG = 5;
-	public static final int 접속모름 = 15;
+	public static final int ConnectModeName = 15;
 
 	public S_SurvivalCry(int value) {
 		buildPacket(value);
@@ -50,7 +50,7 @@ public class S_SurvivalCry extends ServerBasePacket {
 
 	private void buildPacket(int value, boolean ck) {
 		writeC(Opcodes.S_EXTENDED);
-		writeC(접속모름);
+		writeC(ConnectModeName);
 		writeD(0x00);
 		writeC(0x00);
 
@@ -66,13 +66,13 @@ public class S_SurvivalCry extends ServerBasePacket {
 		writeC(Opcodes.S_EXTENDED);
 		writeD(0x0F);
 		writeH(0x00);
-		writeD(value); // 남은시간
+		writeD(value); // 残り時間
 		writeH(0x00);
 	}
 
 	public S_SurvivalCry(int value, L1PcInstance pc) {
 		try {
-			if (value == 0) { // 목록
+			if (value == 0) { // リスト
 				writeC(Opcodes.S_EXTENDED);
 				writeC(0x02);
 				writeH(0x00);
@@ -97,15 +97,15 @@ public class S_SurvivalCry extends ServerBasePacket {
 							|| item.getItemId() == 5000034
 							|| item.getItemId() == 430003
 							|| item.getItemId() == 430505)
-						name = name + " [7일]";
+						name = name + "[7日]";
 					else if (item.getItemId() >= 60173
 							&& item.getItemId() <= 60176)
 						name = name + " [18000]";
 					else if (item.getItemId() >= 21113
 							&& item.getItemId() <= 21120)
-						name = name + " [3시간]";
-					writeH(name.getBytes("UTF-16LE").length + 2); // 이름 글자 사이즈
-					writeSU16(name); // 이름
+						name = name + "[3時間]";
+					writeH(name.getBytes("UTF-16LE").length + 2); // 名前の文字サイズ
+					writeSU16(name); // 名前
 					String html = item.getHtml();
 					int ii = 2;
 					if (!html.equalsIgnoreCase("")) {
@@ -120,13 +120,13 @@ public class S_SurvivalCry extends ServerBasePacket {
 					}
 					writeH(ii); // html size
 					writeSS(html); // html
-					writeD(item.getPrice()); // 가격
-					writeH(item.getType()); // 2-장비 3-버프 4-편의 5-기타
-					writeH(item.getStatus()); // 0 노말 1 new 2 hot 3 sale
+					writeD(item.getPrice()); // 価格
+					writeH(item.getType()); // 2機器3バフ4-利便5-その他
+					writeH(item.getStatus()); // 0 ノーマル 1 new 2 hot 3 sale
 					writeD(0x000C0DBF);
 					writeD(0x000063);
 				}
-			} else if (value == 1) { // 결제 저장된 이메일
+			} else if (value == 1) { // 決済格納された電子メール
 				writeC(Opcodes.S_EXTENDED);
 				/*
 				 * String s = "0c 00 26 00 64 00 6c 00 64 00 75 00 64 00 67 "+
@@ -139,31 +139,31 @@ public class S_SurvivalCry extends ServerBasePacket {
 				while (st.hasMoreTokens()) {
 					writeC(Integer.parseInt(st.nextToken(), 16));
 				}
-			} else if (value == 2) { // 현재 포인트 관련?
+			} else if (value == 2) { // 現在のポイント関連？
 				writeC(Opcodes.S_EXTENDED);
 				writeH(0x03);
 				writeH(0x01);
 				writeH(0x04);
-				writeD(pc.getNcoin());// 베리
+				writeD(pc.getNcoin());// ベリー
 				// writeD(pc.getNetConnection().getAccount().berry);//price
-				// 41159 - 깃털
+				// 41159 - 羽
 				// writeD(0x00);
 				writeH(0x00);
-			} else if (value == 3) { // 결제 저장된 이메일
+			} else if (value == 3) { // 決済格納された電子メール
 				writeC(Opcodes.S_EXTENDED);
 				String s = "02 00 00 f4 ff ff ff 00 00 00 00 00 00 99 17";
 				StringTokenizer st = new StringTokenizer(s);
 				while (st.hasMoreTokens()) {
 					writeC(Integer.parseInt(st.nextToken(), 16));
 				}
-			} else if (value == 4) {// OTP 창
+			} else if (value == 4) {// OTPウィンドウ
 				writeC(Opcodes.S_EXTENDED);
 				writeD(0x33);
 				writeH(0x00);
 			} else if (value == 5) {// OTP CHECK MSG
 				writeC(Opcodes.S_EXTENDED);
 				writeH(0x05);
-				// OTP 틀림
+				// OTP間違い
 				// writeH(0x0ED0B);
 				// writeD(0x29FFFFFF);
 				writeH(0x00);

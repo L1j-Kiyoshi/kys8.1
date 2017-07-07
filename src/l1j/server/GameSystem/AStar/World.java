@@ -20,24 +20,24 @@ public final class World {
 	static private Map<Integer, l1j.server.GameSystem.AStar.bean.Map> list;
 
 	static public void init() {
-		TimeLine.start("월드맵 불러오기....안해");
+		TimeLine.start("ワールドマップの読み込み....妻");
 
 		list = new HashMap<Integer, l1j.server.GameSystem.AStar.bean.Map>();
 
 		try {
 			File f = new File("Sabu/maps/Cache");
-			// 폴더가 존재할경우
+			// フォルダが存在する場合
 			if (f.isDirectory()) {
-				// 캐쉬파일로부터 맵 로딩
+				// キャッシュファイルからマップの読み込み
 				read(false);
-				// 폴더가 존재하지 않을경우
+				// フォルダが存在しない場合
 			} else {
-				System.out.println("캐쉬 폴더가 존재하지 않습니다.");
-				// 폴더생성
+				System.out.println("キャッシュフォルダが存在しません。");
+				// フォルダの作成
 				f.mkdir();
-				// txt파일로부터 맵 로딩
+				// txtファイルからマップの読み込み
 				read(true);
-				// 캐쉬파일 작성
+				// キャッシュファイルの作成
 				writeCache();
 			}
 		} catch (Exception e) {
@@ -51,7 +51,7 @@ public final class World {
 	static private void writeCache() throws Exception {
 		try {
 
-			System.out.println("캐쉬 파일을 생성하고 있습니다.");
+			System.out.println("キャッシュファイルを作成しています。");
 			BufferedOutputStream bw = null;
 			for (l1j.server.GameSystem.AStar.bean.Map m : list.values()) {
 				bw = new BufferedOutputStream(new FileOutputStream(
@@ -59,18 +59,18 @@ public final class World {
 				bw.write(m.data);
 				bw.close();
 			}
-			System.out.println(" (완료)");
+			System.out.println(" (完了)");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	static private void read(boolean type) throws Exception {
-		// text로부터 읽는거 알림용
+		// textから読むて通知用
 		try {
 
 			if (type)
-				System.out.println("Text 파일에서 월드맵 정보를 추출하고 있습니다.");
+				System.out.println("Textファイルからワールドマップ情報を抽出しています。");
 
 			String maps;
 			StringTokenizer st1;
@@ -188,7 +188,7 @@ public final class World {
 		 * l1j.server.GameSystem.Astar.bean.Map m = new
 		 * l1j.server.GameSystem.Astar.bean.Map(); //m = list.get(targetId);
 		 * //m.mapid = newId;
-		 * 
+		 *
 		 * l1j.server.GameSystem.Astar.bean.Map ori_map = list.get(targetId);
 		 * m.data = new byte[ori_map.data_size]; for (int i = 0; i <
 		 * ori_map.data_size; i++) { m.data[i] = ori_map.data[i]; } m.mapid =
@@ -196,7 +196,7 @@ public final class World {
 		 * ori_map.locY1; m.locY2 = ori_map.locY2; m.size = ori_map.size;
 		 * m.data_size = ori_map.data_size; m.dataDynamic = new
 		 * byte[m.data_size]; m.isdoor = new boolean[m.data_size][8];
-		 * 
+		 *
 		 * list.put(newId , m);
 		 */
 	}
@@ -208,7 +208,7 @@ public final class World {
 		 * l1j.server.GameSystem.Astar.bean.Map re_map = list.get(resetId);
 		 * if(ori_map == null || re_map == null) return; if(ori_map.data_size !=
 		 * re_map.data_size) return;
-		 * 
+		 *
 		 * for (int i = 0; i < re_map.data_size; i++) { re_map.data[i] =
 		 * ori_map.data[i]; } for (int i = 0; i < re_map.data_size; i++) {
 		 * re_map.dataDynamic[i] = ori_map.dataDynamic[i]; } for (int i = 0; i <
@@ -244,7 +244,7 @@ public final class World {
 	private static final byte BITFLAG_IS_DOOR_IMPASSABLE_X = (byte) 0x80;
 	private static final byte BITFLAG_IS_DOOR_IMPASSABLE_Y = (byte) 0x40;
 
-	static public void 문이동(int x, int y, int map, boolean h, boolean flag) {
+	static public void moveDoor(int x, int y, int map, boolean h, boolean flag) {
 		L1V1Map m = (L1V1Map) L1WorldMap.getInstance().getMap((short) map);
 		if (m != null) {
 			if (!m.isInMap(x, y)) {
@@ -275,7 +275,7 @@ public final class World {
 	private static final byte HEADING_TABLE_X[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
 	private static final byte HEADING_TABLE_Y[] = { -1, -1, 0, 1, 1, 1, 0, -1 };
 
-	static public boolean 문이동(int x, int y, int map, int h) {
+	static public boolean moveDoor(int x, int y, int map, int h) {
 		if (h < 0 || h > 7) {
 			return false;
 		}
@@ -483,13 +483,13 @@ public final class World {
 		 * y);break; case 7: gab2 =
 		 * L1WorldMap.getInstance().getMap((short)map).getOriginalTile(x-1,
 		 * y-1);break; default: return false; }
-		 * 
-		 * if(World.문이동(x, y, map, dir)){ return false; }
-		 * 
-		 * 
+		 *
+		 * if(World.moveDoor(x, y, map, dir)){ return false; }
+		 *
+		 *
 		 * if (gab == 12 || gab2== 12){ return true; }else if (gab == 47 ||
 		 * gab2== 47){ return true; }
-		 * 
+		 *
 		 * switch(dir){ case 0: return (get_map(x, y, map)&8)>0; case 1: return
 		 * ((get_map(x, y, map)&8)>0 && (get_map(x, y-1, map)&4)>0) ||
 		 * ((get_map(x, y, map)&4)>0 && (get_map(x+1, y, map)&8)>0); case 2:

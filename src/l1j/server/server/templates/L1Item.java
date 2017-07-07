@@ -9,7 +9,7 @@ public abstract class L1Item implements Serializable {
 	public L1Item() {
 	}
 
-	// ■■■■■■ L1EtcItem, L1Weapon, L1Armor 에 공통되는 항목 ■■■■■■
+	// ■■■■■■ L1EtcItem, L1Weapon, L1Armor に共通する項目 ■■■■■■
 
 	private int _type2; //  0=L1EtcItem, 1=L1Weapon, 2=L1Armor
 
@@ -68,7 +68,7 @@ public abstract class L1Item implements Serializable {
 	private int _type;
 
 	/**
-	 * 아이템의 종류를 돌려준다.<br>
+	 * アイテムの種類を返す。<br>
 	 * 
 	 * @return
 	 * <p>
@@ -86,7 +86,7 @@ public abstract class L1Item implements Serializable {
 
 	 * [armor]<br>
 	 * 1:helm, 2:armor, 3:T, 4:cloak, 5:glove, 6:boots, 7:shield, 8:amulet,
-	 * 9:ring, 10:belt, 11:ring2, 12:earring , 13:garder 14,rune1, 15각반 16문장 17휘장 18견갑ㅂ	 */
+	 * 9:ring, 10:belt, 11:ring2, 12:earring , 13:garder 14,rune1, 15ゲートル16文章17記章18肩甲ㅂ	 */
 	public int getType() {
 		return _type;
 	}
@@ -98,7 +98,7 @@ public abstract class L1Item implements Serializable {
 	private int _type1;
 
 	/**
-	 * 아이템의 종류를 돌려준다.<br>
+	 * アイテムの種類を返す。<br>
 	 * 
 	 * @return
 	 * <p>
@@ -119,11 +119,11 @@ public abstract class L1Item implements Serializable {
 	private int _material;
 
 	/**
-	 * 아이템의 소재를 돌려준다
+	 * アイテムの素材を返す
 	 *
-	 * @return 0:none 1:액체 2:web 3:식물성 4:동물성 5:지 6:포 7:피 8:목 9:골 10:룡의 린 11:철
-	 *         12:강철 13:동 14:은 15:금 16:플라티나 17:미스릴 18:브락크미스릴 19:유리 20:보석
-	 *         21:광물 22:오리하르콘
+	 * @return 0：none 1：液体2：web 3：植物性4：動物5：地6：フォー7：血8：木9：ゴール10：竜のリン11：鉄
+	 *         12：鋼鉄13：同14：15：金の16：プラチナ17：ミスリル18：ブラックミスリル19：ガラス20：宝石
+	 *         21：鉱物22：オリハルコン
 	 */
 	public int getMaterial() {
 		return _material;
@@ -209,7 +209,7 @@ public abstract class L1Item implements Serializable {
 	private int _itemDescId;
 
 	/**
-	 * 감정시에 표시되는 ItemDesc.tbl의 메세지 ID를 돌려준다.
+	 * 感情時に表示されるItemDesc.tblのメッセージIDを返す。
 	 */
 	public int getItemDescId() {
 		return _itemDescId;
@@ -280,7 +280,7 @@ public abstract class L1Item implements Serializable {
 	}
 
 	/**
-	 * 아이템의 개수가 변화했을 때에 곧바로 DB에 기입해야할 것인가를 돌려준다.
+	 * アイテムの数が変化したとき、すぐにDBに書き込むべきかを返す。
 	 */
 	public boolean isToBeSavedAtOnce() {
 		return _save_at_once;
@@ -290,7 +290,7 @@ public abstract class L1Item implements Serializable {
 		_save_at_once = flag;
 	}
 
-	// ■■■■■■ L1EtcItem, L1Weapon 에 공통되는 항목 ■■■■■■
+	// ■■■■■■ L1EtcItem, L1Weapon に共通する項目 ■■■■■■
 
 
 	private int _dmgSmall = 0; 
@@ -313,9 +313,9 @@ public abstract class L1Item implements Serializable {
 		_dmgLarge = dmgLarge;
 	}
 
-	// ■■■■■■ L1EtcItem, L1Armor 에 공통되는 항목 ■■■■■■
+	// ■■■■■■ L1EtcItem, L1Armor に共通する項目 ■■■■■■
 
-	// ■■■■■■ L1Weapon, L1Armor 에 공통되는 항목 ■■■■■■
+	// ■■■■■■ L1Weapon, L1Armor に共通する項目 ■■■■■■
 
 	private int _safeEnchant = 0;
 
@@ -575,7 +575,7 @@ public abstract class L1Item implements Serializable {
 	private int _useType;
 
 	/**
-	 * 사용했을 때의 리액션을 결정하는 타입을 돌려준다.
+	 * 使用した時のリアクションを決定するタイプを返す。
 	 */
 	public int getUseType() {
 		return _useType;
@@ -588,7 +588,7 @@ public abstract class L1Item implements Serializable {
 	private int _foodVolume;
 
 	/**
-	 * 고기등의 아이템으로 설정되어 있는 만복도를 돌려준다.
+	 * 肉などのアイテムに設定されている満腹度を返す。
 	 */
 	public int getFoodVolume() {
 		return _foodVolume;
@@ -599,7 +599,7 @@ public abstract class L1Item implements Serializable {
 	}
 
 	/**
-	 * 램프등의 아이템으로 설정되어 있는 밝음을 돌려준다.
+	 * ランプなどのアイテムに設定されている明るさを返す。
 	 */
 	public int getLightRange() {
 		if (_itemId == 40001) {
@@ -631,64 +631,64 @@ public abstract class L1Item implements Serializable {
 		}
 	}
 	
-	/*** 마법 촉매의 종류를 돌려 준다. */
+	/***魔法の触媒の種類を返す。 */
 	public int getMagicCatalystType () {
 		int type = 0;
 		switch (getItemId ()) {
-		case 40318 : // 마력의 돌
+		case 40318 : // 魔力の石
 		case 30079:
-			type = 166; // 재료에 의한 아이콘 패키지
+			type = 166; // 材料によるアイコンパッケージ
 			break;
-		case 40319 : // 정령 옥
-		case 30078: // 상아탑의 정령옥
+		case 40319 : // 精霊の玉
+		case 30078: // 象牙の塔の精霊の玉
 			type = 569;
 			break;
-		case 40321 : // 흑요석
-		case 30080: // 상아탑의 흑요석
+		case 40321 : // 黒曜石
+		case 30080: // 象牙の塔の黒曜石
 			type = 837;
 			break;
-		case 30077: // 상아탑의 유그드라 열매
-		case 210036: // 유그드라 열매
+		case 30077: // 象牙の塔のユグドラの実
+		case 210036: // ユグドラの実
 			type = 3674;
 			break;
-		case 30081: // 상아탑의 각인의 뼈조각
-		case 210035: // 각인의 뼈조각
+		case 30081: // 象牙の塔の刻印のボーンピース
+		case 210035: // 刻印のボーンピース
 			type = 3605;
 			break;
-		case 30082: // 상아탑의 속성석
-		case 210038: // 속성석
+		case 30082: // 象牙の塔の属性石
+		case 210038: // 属性石
 			type = 3606;
 			break;
-		case 30076: // 상아탑의 엘븐와퍼
-		case 40068: //엘븐와퍼
+		case 30076: // 象牙の塔のエルヴンワッフル
+		case 40068: //エルヴンワッフル
 		case 140068:
 			type = 86;
 			break;	
-		case 41295: //영양미끼
+		case 41295: //栄養餌
 			type = 14467;
 			break;
-		case 41293: //고탄력낚시대
+		case 41293: //高弾力釣り竿
 			type = 14462;
 			break;
-		case 41294: // 릴 장착 고탄력 낚싯대
+		case 41294: // リール装着高弾力釣り竿
 			type = 14463;
 			break;
-		case 41305:// 릴장착 은빛 낚싯대
+		case 41305:// リール装着銀色釣り竿
 			type = 14464;
 			break;
-		case 41296: //베리아나
+		case 41296: //ベリーアナ
 			type = 14468;
 			break;
-		case 41297: //블루 베리아나
+		case 41297: //ブルーベリーアナ
 			type = 14469;
 			break;
-		case 41298: //앵무 베리아나
+		case 41298: //インコベリーアナ
 			type = 14470;
 			break;
-		case 41246: //결정체
+		case 41246: //結晶
 			type = 2257;
 			break;
-		case 41159: //깃털
+		case 41159: //羽
 			type = 2671;
 			break;
 		}
@@ -697,7 +697,7 @@ public abstract class L1Item implements Serializable {
 
 
 
-	// ■■■■■■ L1EtcItem 로 오버라이드(override) 하는 항목 ■■■■■■
+	// ■■■■■■ L1EtcItem でオーバーライド（override）する項目 ■■■■■■
 	public boolean isStackable() {
 		return false;
 	}
@@ -730,7 +730,7 @@ public abstract class L1Item implements Serializable {
 		return 0;
 	}
 
-	// ■■■■■■ L1Weapon 로 오버라이드(override) 하는 항목 ■■■■■■
+	// ■■■■■■ L1Weapon でオーバーライド（override）する項目 ■■■■■■
 		
 	public int getHitModifier() {
 		return 0;
@@ -761,7 +761,7 @@ public abstract class L1Item implements Serializable {
 		return false;
 	}
 
-	// ■■■■■■ L1Armor 로 오버라이드(override) 하는 항목 ■■■■■■
+	// ■■■■■■ L1Armor でオーバーライド（override）する項目 ■■■■■■
 	public int get_ac() {
 		return 0;
 	}
@@ -845,7 +845,7 @@ public abstract class L1Item implements Serializable {
 		return 0;
 	}
 		
-	private int _grade; // ● 장신구 단계
+	private int _grade; // ● アクセサリーのステップ
 
 	public int getGrade() {
 		return _grade;
@@ -855,7 +855,7 @@ public abstract class L1Item implements Serializable {
 		_grade = grade;
 	}
 
-	private int _price; // ● 가격
+	private int _price; // ● 価格
 	
 	public int get_price() {
 		return _price;

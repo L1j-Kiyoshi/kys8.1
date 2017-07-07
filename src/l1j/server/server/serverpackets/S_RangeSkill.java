@@ -20,6 +20,7 @@
 package l1j.server.server.serverpackets;
 
 import java.util.concurrent.atomic.AtomicInteger;
+
 import l1j.server.server.Opcodes;
 import l1j.server.server.model.L1Character;
 
@@ -57,14 +58,14 @@ public class S_RangeSkill extends ServerBasePacket {
 			cha.setHeading(newHeading);
 			writeC(cha.getHeading());
 		}
-		writeD(_sequentialNumber.incrementAndGet()); // 번호가 겹치지 않게 보낸다.
+		writeD(_sequentialNumber.incrementAndGet()); // 番号が重ならないように送る。
 		writeH(spellgfx);
-		writeC(type); // 0:범위 6:원거리 8:범위&원거리
+		writeC(type); // 0：範囲6：遠距離8：範囲及び遠距離
 		writeH(0);
 		writeH(target.length);
 		for (int i = 0; i < target.length; i++) {
 			writeD(target[i].getId());
-			writeC(0x20); // 0:대미지 모션 있음 0이외:없음
+			writeC(0x20); // 0：ダメージモーショ​​ンある0以外：なし
 		}
 	}
 

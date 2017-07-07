@@ -18,7 +18,7 @@ public class S_SkillBuy extends ServerBasePacket {
 		int RC = 0;
 		// int TC = 0;
 		switch (player.getType()) {
-		case 0: // 군주
+		case 0: // 君主
 			/*
 			 * if (player.get_level() >= 10 && player.get_level() <= 19) { RC =
 			 * 8; } else if (player.get_level() >= 20) { RC = 16; }
@@ -27,7 +27,7 @@ public class S_SkillBuy extends ServerBasePacket {
 			RC = 16;
 			break;
 
-		case 1: // 기사
+		case 1: // ナイト
 			/*
 			 * if (player.get_level() >= 50) { RC = 8; }
 			 */
@@ -35,7 +35,7 @@ public class S_SkillBuy extends ServerBasePacket {
 			RC = 8;
 			break;
 
-		case 2: // 엘프
+		case 2: // エルフ
 			/*
 			 * if (player.get_level() >= 8 && player.get_level() <= 15) { RC =
 			 * 8; } else if (player.get_level() >= 16 && player.get_level() <=
@@ -63,7 +63,7 @@ public class S_SkillBuy extends ServerBasePacket {
 
 			RC = 16;
 			break;
-		case 7: // 전사
+		case 7: // ウォリアー
 			/*
 			 * if (player.get_level() >= 50) { RC = 8; }
 			 */

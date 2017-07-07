@@ -1,6 +1,5 @@
 package l1j.server.GameSystem.Boss;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BossAlive {
@@ -11,7 +10,7 @@ public class BossAlive {
 			ins = new BossAlive();
 		return ins;
 	}
-	//MapID , 1생존 2죽음
+	//MapID , 1生存2死
 	HashMap<Integer,Integer> isAlive = new HashMap<Integer,Integer>();
 	
 	public boolean isBossAlive(int mapid){
@@ -29,7 +28,7 @@ public class BossAlive {
 	public void BossDeath(int mapid){
 		isAlive.remove(mapid);
 	}
-	//나중에 이거 HashMap으로 만들기
+	//後でこれHashMapにする
 	public boolean is에르자베 = false;
 	public long ezTime = -1;
 

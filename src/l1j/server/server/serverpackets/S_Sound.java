@@ -31,7 +31,7 @@ public class S_Sound extends ServerBasePacket {
 	private byte[] _byte = null;
 
 	/**
-	 * 효과음을 울린다(sound 폴더의 wav 파일).
+	 * 効果音を鳴らす（soundフォルダのwavファイル）。
 	 * @param sound
 	 */
 	public S_Sound(int sound) {

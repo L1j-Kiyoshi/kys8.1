@@ -40,7 +40,7 @@ public class S_SkillSound extends ServerBasePacket {
 	}
 
 	private void buildPacket(int objid, int gfxid, int aid) {
-		// aid는 사용되지 않았다
+		//aidは使用されなかった
 		writeC(Opcodes.S_EFFECT);
 		writeD(objid);
 		writeH(gfxid);
@@ -49,7 +49,7 @@ public class S_SkillSound extends ServerBasePacket {
 	}
 
 	private void buildPacket(int objid, int gfxid, int aid, int x, int y) {
-		// aid는 사용되지 않았다
+		// aidは使用されなかった
 		writeC(Opcodes.S_EFFECT);
 		writeD(objid);
 		writeH(gfxid);

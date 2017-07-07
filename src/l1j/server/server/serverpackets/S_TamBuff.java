@@ -25,7 +25,7 @@ public class S_TamBuff extends ServerBasePacket {
 		writeC(0x38);
 		writeC(1);
 		writeC(0x40);
-		write7B(type + 4180);// string-2(줄수)
+		write7B(type + 4180);// string-2(与える)
 		writeC(0x48);
 		writeH(0x20d5);
 		writeC(0x50);

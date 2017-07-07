@@ -9,7 +9,7 @@ public class CalcStat {
 	private CalcStat() {
 	}
 
-	/** Str 수치 **/
+	/** Str 数値 **/
 	public static int calcDmgup(int str) {
 		switch (str) {
 		case 10:
@@ -225,7 +225,7 @@ public class CalcStat {
 			return 0;
 	}
 
-	/** Dex 수치 **/
+	/** Dex 数値 **/
 	public static int calcBowDmgup(int dex) {
 		switch (dex) {
 		case 9:
@@ -456,26 +456,26 @@ public class CalcStat {
 			return -2;
 	}
 
-	public static int 원거리회피(int dex) {
+	public static int calcLongRangeAvoid(int dex) {
 		try {
 			if (dex < 0)
 				return 3;
 			if (dex > 45)
 				return 22;
-			return 원거리_회피력[dex];
+			return LongRange_Avoid[dex];
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 3;
 		}
 	}
 
-	private static final int[] 원거리_회피력 = { 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 5,// 1~10
+	private static final int[] LongRange_Avoid = { 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 5,// 1~10
 			5, 6, 6, 7, 7, 8, 8, 9, 9, 10,// 11~20
 			10, 11, 11, 12, 12, 13, 13, 14, 14, 15,// 21~30
 			15, 16, 16, 17, 17, 18, 18, 19, 19, 20,// 31~40
 			20, 21, 21, 22, 22 };// 41~45
 
-	/** Int 수치 **/
+	/** Int 数値 **/
 	public static int calcMagicDmg(int Int) {
 		switch (Int) {
 		case 15:
@@ -2000,13 +2000,13 @@ public class CalcStat {
 		return 1000 + (total * 100);
 	}
 	
-	public static int 마법보너스(int inte) {
+	public static int getMagicBonus(int inte) {
 		try {
 
 			if (inte < 12)
 				return 2;
 			int temp = 2 + ((inte - 8) / 4);
-			return temp/* 근거리_대미지[str] */;
+			return temp/* 近距離_ダメージ[str] */;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 2;

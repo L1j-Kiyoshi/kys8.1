@@ -108,7 +108,7 @@ public class S_CharStat extends ServerBasePacket {
 			int bowhitup = CalcStat.calcBowHitup(d);
 			int bowcritical = CalcStat.calcBowCritical(d);
 			int dexac = CalcStat.calcAc(d);
-			int dexer = CalcStat.원거리회피(d);
+			int dexer = CalcStat.calcLongRangeAvoid(d);
 			int dexsize = size7B(bowdmg) + size7B(bowhitup) + size7B(bowcritical) + size7B(dexac) + size7B(dexer) + 5;
 			writeC(0x2a);
 			writeC(dexsize);
@@ -236,7 +236,7 @@ public class S_CharStat extends ServerBasePacket {
 			int calcBowHit = CalcStat.calcBowHitup(ChaDex);
 			int calcBowCri = CalcStat.calcBowCritical(ChaDex);
 			int calcDexAc = CalcStat.calcAc(ChaDex);
-			int calcDexEr = CalcStat.원거리회피(ChaDex);
+			int calcDexEr = CalcStat.calcLongRangeAvoid(ChaDex);
 			int StatDexsize = size7B(calcBowDmg) + size7B(calcBowHit) + size7B(calcBowCri) + size7B(calcDexAc) + size7B(calcDexEr) + 5;
 			writeC(0x2a);
 			writeC(StatDexsize);

@@ -53,7 +53,7 @@ public class L1SpawnUtil {
 			L1World.getInstance().addVisibleObject(npc);
 
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // チャット開始
 			if (0 < timeMillisToDelete) {
 				L1NpcDeleteTimer timer = new L1NpcDeleteTimer(npc, timeMillisToDelete);
 				timer.begin();
@@ -63,9 +63,9 @@ public class L1SpawnUtil {
 		}
 	}
 
-	/** 엔피씨를 스폰한다
+	/** エンピシをスポーンする
 	 * @param x @param y @param map @param npcId @param randomRange
-	 * @param timeMillisToDelete @param movemap (이동시킬 맵을 설정한다 - 안타레이드) */
+	 * @param timeMillisToDelete @param movemap (移動させるマップを設定する - ヒットレイド) */
 	public static void spawn2(int x, int y, short map, int npcId, int randomRange, int timeMillisToDelete, int movemap) {
 		try {
 			L1NpcInstance npc = NpcTable.getInstance().newNpcInstance(npcId);
@@ -113,7 +113,7 @@ public class L1SpawnUtil {
 			L1World.getInstance().addVisibleObject(npc); 
 
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // チャット開始
 			if (0 < timeMillisToDelete) {
 				L1NpcDeleteTimer timer = new L1NpcDeleteTimer(npc, timeMillisToDelete);				
 				timer.begin();
@@ -207,7 +207,7 @@ public class L1SpawnUtil {
 			L1World.getInstance().addVisibleObject(npc);
 
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // チャット開始
 			if (0 < timeMillisToDelete) {
 				L1NpcDeleteTimer timer = new L1NpcDeleteTimer(npc,
 						timeMillisToDelete);
@@ -251,7 +251,7 @@ public class L1SpawnUtil {
 			L1World.getInstance().addVisibleObject(npc);
 
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // チャット開始
 
 			if (npc.getMapId() == 9101) {
 				if (npcId == 91240) {
@@ -302,13 +302,13 @@ public class L1SpawnUtil {
 			L1World.getInstance().storeObject(npc);
 			L1World.getInstance().addVisibleObject(npc);
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // チャット開始
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		}
 	}
 	
-	//타임밀리
+	//タイムミリ
 	public static void spawn6(int x, int y, short map, int npcId, int randomRange, int timeMillisToDelete, int movemap) {
 		try {
 			L1NpcInstance npc = NpcTable.getInstance().newNpcInstance(npcId);
@@ -343,7 +343,7 @@ public class L1SpawnUtil {
 			L1World.getInstance().addVisibleObject(npc);
 
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // チャット開始
 			if (0 < timeMillisToDelete) {
 				L1NpcDeleteTimer timer = new L1NpcDeleteTimer(npc, timeMillisToDelete);
 				timer.begin();
@@ -395,7 +395,7 @@ public class L1SpawnUtil {
 				L1World.getInstance().addVisibleObject(npc);
 
 				npc.getLight().turnOnOffLight();
-				npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+				npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // チャット開始
 				if (0 < timeMillisToDelete) {
 					L1NpcDeleteTimer timer = new L1NpcDeleteTimer(npc, timeMillisToDelete);
 					timer.begin();
@@ -442,7 +442,7 @@ public class L1SpawnUtil {
 			L1World.getInstance().addVisibleObject(npc);
 			
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); //チャット開始
 			
 			if (0 < timeMillisToDelete) {
 				L1NpcDeleteTimer timer = new L1NpcDeleteTimer(npc, timeMillisToDelete);

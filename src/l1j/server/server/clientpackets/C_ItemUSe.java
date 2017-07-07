@@ -11164,8 +11164,8 @@ public class C_ItemUSe extends ClientBasePacket {
 			} else {
 				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[PC방 이용 시간] 30일 동안 PC방 혜택이 적용 됩니다."));
 			}
-			pc.getAccount().setBuff_PC방(deleteTime);
-			pc.getAccount().update피씨방();
+			pc.getAccount().setBuff_PCRoom(deleteTime);
+			pc.getAccount().updateInternetCafe();
 			pc.getInventory().removeItem(useItem, 1);
 		} catch (Exception e) {
 			e.printStackTrace();

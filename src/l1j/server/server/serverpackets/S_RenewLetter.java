@@ -14,8 +14,8 @@ public class S_RenewLetter extends ServerBasePacket{
 	}
 	private void buildPacket(L1PcInstance pc, int type, int id) {
 		writeC(Opcodes. S_MAIL_INFO);
-	    writeC(type); // 0:메일함 1:혈맹메일함 2:보관함
-	    writeD(id);  // 게시물 넘버
+	    writeC(type); // 0:メールボックス1：血盟メールボックス2：アーカイブ
+	    writeD(id);  // 投稿ナンバー
 	    writeC(1); 
 	}
 	@Override

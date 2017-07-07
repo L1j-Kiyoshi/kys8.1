@@ -47,14 +47,14 @@ public class DeadLockDetector implements Runnable {
 			long[] threadIds = bean.findDeadlockedThreads();
 			if (threadIds != null) {
 				if (pc != null && pc.getNetConnection() != null)
-					pc.sendPackets(new S_SystemMessage("데드락 감지! - 서버 Cmd 참고"));
+					pc.sendPackets(new S_SystemMessage("デッドロックを検出！ - サーバーCmd参考"));
 				else
-					System.out.println("데드락 감지!");
+					System.out.println("デッドロックを検出！");
 				sb = new StringBuilder();
 				// noDeadLocks = false;
 
 				ThreadInfo[] infos = bean.getThreadInfo(threadIds);
-				sb.append("\n스레드 락 정보: \n");
+				sb.append("\nスレッドロック情報: \n");
 				for (ThreadInfo threadInfo : infos) {
 					printThreadInfo(threadInfo);
 					LockInfo[] lockInfos = threadInfo.getLockedSynchronizers();
@@ -64,16 +64,16 @@ public class DeadLockDetector implements Runnable {
 					printMonitorInfo(threadInfo, monitorInfos);
 				}
 
-				sb.append("\n스레드 덤프: \n");
+				sb.append("\nスレッドダンプ: \n");
 				for (ThreadInfo ti : bean.dumpAllThreads(true, true)) {
 					printThreadInfo(ti);
 				}
 				System.out.println(sb.toString());
 			} else {
 				if (pc != null && pc.getNetConnection() != null)
-					pc.sendPackets(new S_SystemMessage("데드락 없음"));
+					pc.sendPackets(new S_SystemMessage("デッドロックなし"));
 				else
-					System.out.println("데드락 없음.");
+					System.out.println("デッドロック無し。");
 			}
 			// Thread.sleep(checkInterval);
 		} catch (Exception ex) {
@@ -100,36 +100,33 @@ public class DeadLockDetector implements Runnable {
 	}
 
 	private void printThread(ThreadInfo ti) {
-		sb.append("\n스레드 출력\n");
-		sb.append("\"" + ti.getThreadName() + "\"" + " Id=" + ti.getThreadId()
-				+ " in " + ti.getThreadState() + "\n");
+		sb.append("\nスレッド出力\n");
+		sb.append("\"" + ti.getThreadName() + "\"" + " Id=" + ti.getThreadId() + " in " + ti.getThreadState() + "\n");
 		if (ti.getLockName() != null) {
 			sb.append(" on lock=" + ti.getLockName() + "\n");
 		}
 		if (ti.isSuspended()) {
-			sb.append(" (일시 중지)" + "\n");
+			sb.append(" (一時停止)" + "\n");
 		}
 		if (ti.isInNative()) {
-			sb.append(" (활성화)" + "\n");
+			sb.append(" (有効)" + "\n");
 		}
 		if (ti.getLockOwnerName() != null) {
-			sb.append(INDENT + " owned by " + ti.getLockOwnerName() + " Id="
-					+ ti.getLockOwnerId() + "\n");
+			sb.append(INDENT + " owned by " + ti.getLockOwnerName() + " Id=" + ti.getLockOwnerId() + "\n");
 		}
 	}
 
-	private void printMonitorInfo(ThreadInfo threadInfo,
-			MonitorInfo[] monitorInfos) {
-		sb.append(INDENT + "잠긴 모니터: " + monitorInfos.length + "개\n");
+	private void printMonitorInfo(ThreadInfo threadInfo, MonitorInfo[] monitorInfos) {
+		sb.append(INDENT + "ロックされたモニター: " + monitorInfos.length + "本\n");
 		for (MonitorInfo monitorInfo : monitorInfos) {
 			sb.append(INDENT + "  - " + monitorInfo + " locked at " + "\n");
-			sb.append(INDENT + "      " + monitorInfo.getLockedStackDepth()
-					+ " " + monitorInfo.getLockedStackFrame() + "\n");
+			sb.append(INDENT + "      " + monitorInfo.getLockedStackDepth() + " " + monitorInfo.getLockedStackFrame()
+					+ "\n");
 		}
 	}
 
 	private void printLockInfo(LockInfo[] lockInfos) {
-		sb.append(INDENT + "잠긴 싱크: " + lockInfos.length + "개\n");
+		sb.append(INDENT + "ロックされたシンク：" + lockInfos.length + "本\n");
 		for (LockInfo lockInfo : lockInfos) {
 			sb.append(INDENT + "  - " + lockInfo + "\n");
 		}

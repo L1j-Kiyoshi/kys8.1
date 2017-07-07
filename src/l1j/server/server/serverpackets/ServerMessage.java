@@ -3,23 +3,23 @@ package l1j.server.server.serverpackets;
 public class ServerMessage {
 	public final static int DUPLICATED_IP_CONNECTION = 357;
 
-	public final static int CANNOT_DROP_OR_TRADE = 210; // \f1%0은 버리거나 또는 타인에게
+	public final static int CANNOT_DROP_OR_TRADE = 210; // \f1%0はしまったり、または他人に
 
-	// 양도 할 수 없습니다.
+	// 譲渡することはできません。
 
-	public final static int HAVING_NEST_OF_CLAN = 665; // \f1성이나 아지트를 소유한 상태에서는
+	public final static int HAVING_NEST_OF_CLAN = 665; // \f1性やアジトを所有した状態では、
 
-	// 혈맹을 해산할 수 없습니다.
+	// 血盟を解散することができません。
 
-	public final static int CANNOT_BREAK_CLAN = 302; // \f1해산할 수 없습니다.
+	public final static int CANNOT_BREAK_CLAN = 302; // \f1解散することができません。
 
-	public final static int CANNOT_BREAK_CLAN_HAVING_FRIENDS = 1235; // 동맹이
+	public final static int CANNOT_BREAK_CLAN_HAVING_FRIENDS = 1235; // 同盟が
 
-	// 있는 경우
-	// 혈맹을
-	// 해산할 수
-	// 없습니다.
-	public final static int CANNOT_WAR_FROM_ALLIANCECLAN = 1205; // 동맹혈맹과는 전쟁을 할 수 없습니다.
+	// ある場合
+	// 血盟を
+	// 解散することができ
+	// ありません。
+	public final static int CANNOT_WAR_FROM_ALLIANCECLAN = 1205; // 同盟血盟とは、戦争をすることはできません。
 
-	public final static int LEAVE_CLAN = 178;// \f1%0%s %1 혈맹을 탈퇴했습니다.
+	public final static int LEAVE_CLAN = 178;// \f1%0%s %1 血盟を脱退しました。
 }

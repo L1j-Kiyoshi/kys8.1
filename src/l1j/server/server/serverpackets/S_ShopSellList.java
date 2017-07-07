@@ -39,10 +39,10 @@ public class S_ShopSellList extends ServerBasePacket {
 		try {
 			shopItems = shop.getSellingItems();
 		} catch (Exception e) {
-			System.out.println("S_ShopSellList 오류 엔피시번호 : " + npcId);
+			System.out.println("S_ShopSellListエラーエンピシ番号：" + npcId);
 		}
 		if (shopItems != null) {
-			// 시간 제한이 있는 아이템일경우 열람을 원하는 사용자에 인벤에서 동일한 아이템 찾아보기.
+			// 時間制限のあるアイテムの場合、閲覧を希望するユーザーにインベントリから同じアイテムをブラウズ。
 			Date date = new Date(0);
 			for(L1ShopItem si : shopItems) {
 				if(!si.isTimeLimit())
@@ -79,7 +79,7 @@ public class S_ShopSellList extends ServerBasePacket {
 			try {
 				writeH(shopItem.getItem().getGfxId());
 			} catch (Exception e) {
-				System.out.println("엔피시 상점 오류 엔피시 번호 :" + npcId);
+				System.out.println("エンピシ店エラーエンピシ番号：" + npcId);
 			}
 			if ((npcId == 70035) || (npcId == 70041) || (npcId == 70042))
 				writeD(price1);
@@ -95,9 +95,9 @@ public class S_ShopSellList extends ServerBasePacket {
 			
 			}else {
 				if(item.getItemId() >= 140074 && item.getItemId() <= 140100)
-					writeS("축복 "+item.getName());
+					writeS("祝福 "+item.getName());
 				else if(item.getItemId() >= 240074 && item.getItemId() <= 240087)
-					writeS("저주 "+item.getName());
+					writeS("呪い "+item.getName());
 				else
 					writeS(item.getName());
 			}
@@ -119,7 +119,7 @@ public class S_ShopSellList extends ServerBasePacket {
 				}
 			}
 		}
-		writeH(7);//표기 타입부분
+		writeH(7);//表記タイプ部分
 	}
 
 	public byte[] getContent() throws IOException {

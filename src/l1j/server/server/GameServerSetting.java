@@ -13,7 +13,7 @@ public class GameServerSetting
 		return _instance;
 	}
 
-	/** Server Manager 1 관련 부분 **/
+	/** Server Manager 1 関連部分 **/
 	public static boolean 일반 = false;
 	public static boolean 귓속말 = false;
 	public static boolean 글로벌 = false;
@@ -26,7 +26,7 @@ public class GameServerSetting
 	
 	public static boolean ServerDown = false;
 
-	// -- 레벨제한
+	// -- レベル制限
 		private int maxLevel = Config.LIMITLEVEL;
 		public int get_maxLevel() {
 			return maxLevel;

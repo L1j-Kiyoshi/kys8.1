@@ -27,10 +27,10 @@ public class S_SystemMessage extends ServerBasePacket {
 	private byte[] _byte = null;
 
 	/**
-	 * 클라이언트에 데이터의 존재하지 않는 오리지날의 메세지를 표시한다.
-	 * 메세지에 nameid($xxx)가 포함되어 있는 경우는 overload 된 이제(벌써) 한편을 사용한다.
+	 * クライアントにデータの存在しないオリジナルのメッセージを表示する。
+	 *メッセージにnameid（$ xxx）が含まれている場合は、overloadされたもう一方を使用する。
 	 * 
-	 * @param msg - 표시하는 캐릭터 라인
+	 * @param msg - 表示する文字列
 	 */
 	public S_SystemMessage(String msg) {
 		writeC(Opcodes.S_MESSAGE);
@@ -44,17 +44,17 @@ public class S_SystemMessage extends ServerBasePacket {
 		writeS(msg);
 	}
 	/**
-	 * 클라이언트에 데이터의 존재하지 않는 오리지날의 메세지를 표시한다.
+	 *クライアントにデータの存在しないオリジナルのメッセージを表示する。
 	 * 
-	 * @param msg - 표시하는 캐릭터 라인
-	 * @param nameid - 캐릭터 라인에 nameid($xxx)가 포함되어 있는 경우 true로 한다.
+	 * @param msg - 表示する文字列
+	 * @param nameid - 文字列にnameid（$ xxx）が含まれている場合、trueにする。
 	 */
 	public S_SystemMessage(String msg, boolean nameid) {
 		writeC(Opcodes.S_SAY_CODE);
 		writeC(2);
 		writeD(0);
 		writeS(msg);
-		// NPC 채팅 패킷이면 nameid가 해석되기 (위해)때문에 이것을 이용한다
+		// NPC チャットパケットであればnameidが解釈されるため、これを利用する
 	}
 
 	@Override

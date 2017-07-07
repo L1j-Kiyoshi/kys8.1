@@ -21,31 +21,31 @@ import l1j.server.server.utils.SQLUtil;
 import manager.LinAllManagerInfoThread;
 
 public class Account {
-	/** 계정명 */
+	/** アカウント名 */
 	private String _name;
-	/** 접속자 IP주소 */
+	/** 接続者のIPアドレス*/
 	private String _ip;
-	/** 패스워드(암호화 됨) */
+	/** パスワード（暗号化されます） */
 	private String _password;
-	/** 최근 접속일 */
+	/** 最近せる方法は？ */
 	private Timestamp _lastActive;
-	/** 엑세스 등급(GM인가?) */
+	/** アクセス評価（GMか？） */
 	private int _accessLevel;
-	/** 접속자 호스트명 */
+	/** 接続者ホスト名 */
 	private String _host;
-	/** 밴 유무(True == 금지) */
+	/** ヴァン有無（True ==禁止） */
 	private boolean _banned;
-	/** 계정 유효 유무(True == 유효) */
+	/** アカウントの有効の有無（True ==有効） */
 	private boolean _isValid = false;
-	/** 캐릭터 슬롯(태고의옥쇄) */
+	/** キャラクタースロット（太古の玉砕） */
 	private int _charslot;
-	/** 창고 비밀번호 */
+	/**倉庫パスワード*/
 	private int _GamePassword;
 	
 	public int Ncoin_point;
 	public int Shop_open_count;
 
-	/** 드래곤 레이드 버프 시간 **/
+	/** ドラゴンレイドバフ時間 **/
 	public Timestamp _dragon_raid_buff;
 	
 	public Timestamp getDragonRaid() {
@@ -67,28 +67,28 @@ public class Account {
 	public Timestamp _Buff_DEX;
 	public Timestamp _Buff_INT;
 	
-	/** Buff_PC방 */
-	public Timestamp _Buff_PC방;
+	/** Buff_PC部屋 */
+	public Timestamp _Buff_PCRoom;
 	public int tam_point;
 	public Timestamp _lastQuit;
 	
 	private int _tam = 0;
 	private int _tamStep = 0;
 	
-	/** 메세지 로그용 */
+	/** メッセージログの */
 	private static Logger _log = Logger.getLogger(Account.class.getName());
 
 	public Account() {}
 
 	/**
-	 * 패스워드를 암호화한다.
+	 * パスワードを暗号化する。
 	 *
-	 * @param rawPassword 패스워드
+	 * @param rawPassword パスワード
 	 * @return String
 	 * @throws NoSuchAlgorithmException
-	 *             암호화 알고리즘을 사용할 수 없을 때
+	 *             暗号化アルゴリズムを使用することができないとき
 	 * @throws UnsupportedEncodingException
-	 *             인코딩이 지원되지 않을 때
+	 *             エンコーディングがサポートされていない場合
 	 */
 	@SuppressWarnings("unused")
 	private static String encodePassword(final String rawPassword)
@@ -98,7 +98,7 @@ public class Account {
 		return Base64.encodeBytes(buf);
 	}
 
-	//영구추방 아이피 체크
+	//永久追放アイピーチェック
 	public static String checkIP(String name) {
 		String n = null;
 		Connection con = null;
@@ -124,22 +124,22 @@ public class Account {
 	}
 	
 	/**
-	 * 신규 계정 생성
+	 * 新規アカウントの作成
 	 *
-	 * @param name 계정명
-	 * @param rawPassword 패스워드
-	 * @param ip 접속자 IP주소
-	 * @param host 접속자 호스트명
+	 * @param name アカウント名
+	 * @param rawPassword パスワード
+	 * @param ip 接続者のIPアドレス
+	 * @param host 接続者ホスト名
 	 * @return Account
 	 */
 	public static Account create(final String name, final String rawPassword, final String ip, final String host) {
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
-		/** 0 오전 , 1 오후 * */
-		String 오전오후 = "오후";
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
+		/** 0 午前、1午後 * */
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "오전";
+			ampm = "午前";
 		}
 		Connection con = null;
 		PreparedStatement pstm = null;		
@@ -174,7 +174,7 @@ public class Account {
 			
 			pstm2.execute();
 			pstm.execute();
-			System.out.println(""+ 오전오후 + " " + cal.get(시간) + "시" + cal.get(분) + "분" + "   ■ 신규 계정: ["+name+"] 생성완료■");
+			System.out.println(""+ ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分" + "   ■ 新規アカウント: ["+name+"] 生成完了■");
 			 LinAllManagerInfoThread.AccountCount += 1;
 			return account;
 		} catch (SQLException e) {
@@ -188,9 +188,9 @@ public class Account {
 	}
 
 	/**
-	 * DB에서 계정 정보 불러오기 
+	 * DBアカウント情報の読み込み
 	 *
-	 * @param name 계정명
+	 * @param name アカウント名
 	 * @return Account
 	 */
 	public static Account load(final String name) {
@@ -229,7 +229,7 @@ public class Account {
 			account._Buff_DEX = (rs.getTimestamp("Buff_Dex_Time"));
 			account._Buff_INT = (rs.getTimestamp("Buff_Int_Time"));
 			account._Buff_HOLD = (rs.getTimestamp("Buff_Hold_Time"));
-			account._Buff_PC방 = (rs.getTimestamp("BUFF_PCROOM_Time"));
+			account._Buff_PCRoom = (rs.getTimestamp("BUFF_PCROOM_Time"));
 			
 			account.Ncoin_point = (rs.getInt("Ncoin_Point"));
 			account.Shop_open_count = (rs.getInt("Shop_open_count"));
@@ -252,9 +252,9 @@ public class Account {
 	}
 
 	/**
-	 * DB에 최근 접속일 업데이트
+	 * DBに最近せる方法は？アップデート
 	 *
-	 * @param account 계정명
+	 * @param account アカウント名
 	 */
 	public static void updateLastActive(final Account account, String ip) {
 		Connection con = null;
@@ -280,9 +280,9 @@ public class Account {
 	}
 	
 	/**
-	 * 해당 계정의 캐릭터수를 셈
+	 * そのアカウントのキャラクター数を計算
 	 *
-	 * @return result 캐릭터수
+	 * @return result キャラクター数
 	 */
 	public int countCharacters() {
 		int result = 0;
@@ -307,7 +307,7 @@ public class Account {
 		}
 		return result;
 	}
-	/**드래곤 레이드 버프*/
+	/**ドラゴンレイドバフ*/
 	public void updateDragonRaidBuff() {
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -397,16 +397,16 @@ public class Account {
 	}
 
 	/**
-	 * 입력된 비밀번호와 DB에 저장된 패스워드를 비교
+	 * 入力されたパスワードとDBに格納されたパスワードを比較
 	 *
-	 * @param rawPassword 패스워드
+	 * @param rawPassword パスワード
 	 * @return boolean
 	 */
 	public boolean validatePassword(String accountName, final String rawPassword) {
 		try {
 			_isValid = (_password.equals(/*encodePassword(*/rawPassword)/*)*/ || checkPassword(accountName, _password, rawPassword));
 			if (_isValid) {
-				_password = null; // 인증이 성공했을 경우, 패스워드를 파기한다.
+				_password = null; // 認証が成功した場合、パスワードを破棄します。
 			}
 			return _isValid;
 		} catch (Exception e) {
@@ -428,7 +428,7 @@ public class Account {
 			account._phone = account.getphone();
 			_log.fine("update phone for " + account.getName());
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, "accounts updatePhone 에러발생", e);
+			_log.log(Level.SEVERE, "accounts updatePhone エラーが発生", e);
 		} finally {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
@@ -436,7 +436,7 @@ public class Account {
 	}
 
 	/**
-	 * 유효한 계정인가 
+	 * 有効なアカウントか
 	 *
 	 * @return boolean
 	 */
@@ -445,7 +445,7 @@ public class Account {
 	}
 
 	/**
-	 * GM 계정인가
+	 * GM アカウントか
 	 *
 	 * @return boolean
 	 */
@@ -534,12 +534,12 @@ public class Account {
 	}
 	
 	
-	public Timestamp getBuff_PC방() {
-		return _Buff_PC방;
+	public Timestamp getBuff_PCRoom() {
+		return _Buff_PCRoom;
 	}
 
-	public void setBuff_PC방(Timestamp ts) {
-		_Buff_PC방 = ts;
+	public void setBuff_PCRoom(Timestamp ts) {
+		_Buff_PCRoom = ts;
 	}
 	
 //	public void set_Password(String password){
@@ -559,7 +559,7 @@ public class Account {
 	}
 	 
 	/**
-	  * 최종 로그인일을 취득한다.
+	  * 最終ログイン日を取得する。
 	  */
 	
 	public int getAccessLevel() {
@@ -578,7 +578,7 @@ public class Account {
 		return _charslot;
 	}	
 	/**
-	 * 연락처를 취득한다.
+	 * 連絡先を取得する。
 	 * 
 	 * @return String
 	 */
@@ -593,7 +593,7 @@ public class Account {
 	}
 
 	/**
-	 * 캐릭터 슬롯수 설정 
+	 * キャラクタースロット数の設定
 	 *
 	 * @return boolean
 	 */
@@ -635,8 +635,8 @@ public class Account {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
 			
-			// 동일 IP로 생성된 계정이 3개 미만인 경우
-			if (num < Config.AUTH_IP)//계정생성외부화
+			// 同じIPで生成されたアカウントが3つ未満の場合
+			if (num < Config.AUTH_IP)//アカウントの作成外部化
 				return false;
 			else
 				return true;
@@ -649,7 +649,7 @@ public class Account {
 		}return false;
 	}
 
-	//웹 연동을 위한 메소드 추가 - By Sini
+	//ウェブ連動のためのメソッドを追加
 	public static boolean checkPassword(String accountName, String _pwd ,String rawPassword) { 
 		String _inputPwd = null;
 		Connection con = null;
@@ -667,7 +667,7 @@ public class Account {
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
-			if ( _pwd.equals(_inputPwd)) { // 동일하다면
+			if ( _pwd.equals(_inputPwd)) { // 同じであれば
 				return true;
 			}else
 				return false;
@@ -700,7 +700,7 @@ public class Account {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
 
-			// Ban IP가 1개 이상인경우
+			// Ban IPが1つ以上ある場合
 			if(num >= 1){
 				return true;
 			} else {
@@ -723,7 +723,7 @@ public class Account {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
-			con = L1DatabaseFactory.getInstance().getConnection();//n버프 ㅗㅇ포내성
+			con = L1DatabaseFactory.getInstance().getConnection();//nバフ フォー耐性
 			String sqlstr = "UPDATE accounts SET Buff_HPMP_Time=?,Buff_DMG_Time=?,Buff_Reduc_Time=?,Buff_Magic_Time=?,Buff_Stun_Time=?,Buff_Str_Time=?, Buff_Dex_Time=?, Buff_Int_Time=?,Buff_Hold_Time=? WHERE login = ?";
 			pstm = con.prepareStatement(sqlstr);
 			pstm.setTimestamp(1, _Buff_HPMP);
@@ -746,16 +746,16 @@ public class Account {
 	}
 	
 	/**
-	 * update피씨방
+	 * updateインターネットカフェ
 	 */
-	public void update피씨방() {
+	public void updateInternetCafe() {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
 			String sqlstr = "UPDATE accounts SET BUFF_PCROOM_Time=? WHERE login = ?";
 			pstm = con.prepareStatement(sqlstr);
-			pstm.setTimestamp(1, _Buff_PC방);
+			pstm.setTimestamp(1, _Buff_PCRoom);
 			pstm.setString(2, _name);
 			pstm.executeUpdate();
 		} catch (Exception e) {
@@ -766,7 +766,7 @@ public class Account {
 		}
 	}
 	/**
-	 * 창고 비번
+	 * 倉庫非番
 	 *
 	 * @return boolean
 	 */
@@ -827,7 +827,7 @@ public class Account {
 		int char_objid = 0;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM `characters` WHERE account_name = ?"); // 케릭터 테이블에서군주만골라와서
+			pstm = con.prepareStatement("SELECT * FROM `characters` WHERE account_name = ?"); // キャラクターテーブルで君主だけを選んで来て
 			pstm.setString(1, account.getName());
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -835,7 +835,7 @@ public class Account {
 				char_objid = rs.getInt("objid");
 				if (tamtime != null) {
 					if (sysTime <= tamtime.getTime()) {
-						// 현재까지도 적용되어지고있는 경우.
+						// 現在まで適用されてている場合。
 						int 추가횟수 = 탐추가횟수;
 						tam_point += 추가횟수 * tamcount;
 						updateTam();
@@ -844,7 +844,7 @@ public class Account {
 						int day = Nexttam(char_objid);
 						if (day != 0) {
 							Timestamp deleteTime = null;
-							deleteTime = new Timestamp(sysTime + (86400000 * (long) day) + 10000);// 7일
+							deleteTime = new Timestamp(sysTime + (86400000 * (long) day) + 10000);// 7日
 							con2 = L1DatabaseFactory.getInstance().getConnection();
 							pstm2 = con2.prepareStatement("UPDATE `characters` SET TamEndTime=? WHERE account_name = ? AND objid = ?"); // 케릭터테이블에서 군주만골라와서
 							pstm2.setTimestamp(1, deleteTime);
@@ -856,18 +856,18 @@ public class Account {
 						}
 						// }
 						if (종료날짜 <= tamtime.getTime()) {
-							// 현재는 아니지만 종료이후 적용되어지는 경우.
+							// 現在はありませんが終了後、適用されている場合。
 							int 추가횟수 = (int) ((tamtime.getTime() - 종료날짜) / (60000 * 12));
 							tam_point += 추가횟수 * tamcount;
 							updateTam();
 						} else {
-							// System.out.println("종료날짜 이전에 탐시간도 종료됨.");
+							// System.out.println("終了日以前に乗車時間も終了される。");
 						}
 
 						/**/
 					}
 				} else {
-					// System.out.println("탐타임 없음");
+					// System.out.println("乗車時間なし");
 				}
 			}
 		} catch (Exception e) {
@@ -908,10 +908,10 @@ public class Account {
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
 			pstm = con
-					.prepareStatement("SELECT day FROM `tam` WHERE objid = ? order by id asc limit 1"); // 케릭터
-																										// 테이블에서
-																										// 군주만
-																										// 골라와서
+					.prepareStatement("SELECT day FROM `tam` WHERE objid = ? order by id asc limit 1"); // キャラクター
+																										// テーブルで
+																										// 君主のみ
+																										// 選ん来
 			pstm.setInt(1, objectId);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -969,13 +969,13 @@ public class Account {
 	}
 	
 	/**
-	  * 최종 로그인일을 DB에 반영한다.
+	  *最終ログイン日DBに反映する。
 	  *
 	  * @param account
-	  *            어카운트
+	  *            アカウント
 	  */
 	
-	// 탐 계정 정보에 저장하기 탐상점에서 갯수 로딩
+	// 乗車アカウント情報に保存する乗車店で本数ロード
 	public int getTamPoint() {
 		return tam_point;
 	}

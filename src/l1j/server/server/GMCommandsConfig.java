@@ -137,7 +137,7 @@ public class GMCommandsConfig {
 				}
 			}
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, "GMCommands.xml의 read에 실패", e);
+			_log.log(Level.SEVERE, "GMCommands.xmlのreadに失敗", e);
 		}
 	}
 }

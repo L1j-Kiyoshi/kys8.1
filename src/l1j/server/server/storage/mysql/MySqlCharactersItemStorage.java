@@ -62,7 +62,7 @@ public class MySqlCharactersItemStorage extends CharactersItemStorage {
 				item.setAttrEnchantLevel(rs.getInt("attr_enchantlvl"));
 				item.setSpecialEnchant(rs.getInt("special_enchant"));
 				item.setEndTime(rs.getTimestamp("end_time"));
-				/** 패키지상점 **/
+				/** パッケージ店 **/
 				item.setPackage(rs.getInt("package") != 0 ? true : false);
 				item.getLastStatus().updateAll();
 			    if (item.getItem().getItemId() == 80500) {
@@ -103,13 +103,13 @@ public class MySqlCharactersItemStorage extends CharactersItemStorage {
 			pstm.setInt(13, item.getAttrEnchantLevel());
 			pstm.setInt(14, item.getSpecialEnchant());
 			pstm.setTimestamp(15, item.getEndTime());
-			/** 패키지상점 **/
+			/** パッケージ店 **/
 			pstm.setInt(16, item.isPackage() == false ? 0 : 1);
 			
 			pstm.execute();
 
 		} catch (SQLException e) {
-			 System.out.println("디비 아이템 저장 오류 아이템명 : " + item.getName() + " 소유자 : " + item.getItemOwner().getName());
+			 System.out.println("ディビアイテム保存エラーアイテム名：" + item.getName() + "所有者：" + item.getItemOwner().getName());
 			throw e;
 		} finally {
 			SQLUtil.close(pstm);
@@ -203,7 +203,7 @@ public class MySqlCharactersItemStorage extends CharactersItemStorage {
 	@Override
 	public void updateItemCount(L1ItemInstance item) throws Exception {
 		//executeUpdate(item.getId(), "UPDATE character_items SET count = ? WHERE id = ?", item.getCount());
-		/** 패키지상점 **/
+		/** パッケージ店 **/
 		executeUpdate(item.getId(), "UPDATE character_items SET count = ?, package = ? WHERE id = ?", item.getCount(), item.isPackage() == false ? 0 : 1);
 		item.getLastStatus().updateCount();
 	}
@@ -316,7 +316,7 @@ public class MySqlCharactersItemStorage extends CharactersItemStorage {
 		}
 	}
 	
-	/** 패키지상점 **/
+	/** パッケージ店 **/
 	private void executeUpdate(int objId, String sql, int updateNum, int updatePackage) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstm = null;

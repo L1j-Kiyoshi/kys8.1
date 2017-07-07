@@ -69,7 +69,7 @@ public class Announcements {
 				}
 			}
 
-			_log.config("공지사항" + i + "로드");
+			_log.config("お知らせ" + i + "ロード");
 		} catch (FileNotFoundException e) {
 		} catch (IOException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

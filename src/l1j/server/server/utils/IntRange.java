@@ -4,11 +4,11 @@ import java.util.Random;
 
 /**
  * <p>
- * 최저치 low와 최대치 high에 의해 둘러싸인, 수치의 범위를 지정하는 클래스.
+ * 最低値lowと最大値highに囲まれ、数値の範囲を指定するクラスです。
  * </p>
  * <p>
- * <b>이 클래스는 동기화 되지 않는다.</b> 복수의 thread가 동시에 이 클래스의 인스턴스에 액세스 해,
- * 1개이상의 thread가 범위를 변경하는 경우, 외부적인 동기화가 필요하다.
+ * <b>このクラスは、同期されない。</ b>複数のthreadが同時に、このクラスのインスタンスにアクセスし、
+ * 1つ以上のthreadが範囲を変更する場合は、外部的な同期が必要である。
  * </p>
  */
 public class IntRange {
@@ -30,11 +30,11 @@ public class IntRange {
 		return rnd.nextInt(number);
 	}
 	/**
-	 * 수치 i가, 범위내에 있을까를 돌려준다.
+	 *数値iが、範囲内にあるかを返す。
 	 * 
 	 * @param i
-	 *            수치
-	 * @return 범위내이면 true
+	 *            数値
+	 * @return 範囲内であれば true
 	 */
 	public boolean includes(int i) {
 		return (_low <= i) && (i <= _high);
@@ -45,11 +45,11 @@ public class IntRange {
 	}
 
 	/**
-	 * 수치 i를, 이 범위내에 말다.
+	 *値iを、この範囲内に丸める。
 	 * 
 	 * @param i
-	 *            수치
-	 * @return 말 수 있었던 값
+	 *            数値
+	 * @return 丸められた値
 	 */
 	public int ensure(int i) {
 		int r = i;
@@ -66,9 +66,9 @@ public class IntRange {
 	}
 
 	/**
-	 * 이 범위내로부터 랜덤인 값을 생성한다.
+	 * この範囲内からランダムな値を生成する。
 	 * 
-	 * @return 범위내의 랜덤인 값
+	 * @return 範囲内のランダムな値
 	 */
 	public int randomValue() {
 		return _rnd.nextInt(getWidth() + 1) + _low;

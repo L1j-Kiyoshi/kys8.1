@@ -30,14 +30,14 @@ public class S_TradeAddItem extends ServerBasePacket {
 
 	public S_TradeAddItem(L1ItemInstance item, int count, int type) {
 		writeC(Opcodes.S_ADD_XCHG);
-		writeC(type); // 0:트레이드 윈도우 상단 1:트레이드 윈도우 하단
+		writeC(type); // 0:トレードウィンドウの上部に1：トレードウインドウの下部に
 		writeH(item.getItem().getGfxId());
 		writeS(item.getNumberedViewName(count));
 
-		// 0:축복 1:통상 2:저주 3:미감정
-		if (!item.isIdentified()) { // 미감정
+		// 0:祝福1：通常2：呪い3：未鑑定
+		if (!item.isIdentified()) { // 米感情
 			writeC(3);
-		} else { // 교환이 끝난 상태
+		} else { // 交換済み
 			byte[] status = null;
 			int bless = item.getBless();
 			writeC(bless);
@@ -52,14 +52,14 @@ public class S_TradeAddItem extends ServerBasePacket {
 
 	public S_TradeAddItem(L1ItemInstance item, String name, int count, int type) {
 		writeC(Opcodes.S_ADD_XCHG);
-		writeC(type); // 0:트레이드 윈도우 상단 1:트레이드 윈도우 하단
+		writeC(type); // 0:トレードウィンドウの上部に1：トレードウインドウの下部に
 		writeH(item.getItem().getGfxId());
 		writeS(name);
 
-		// 0:축복 1:통상 2:저주 3:미감정
-		if (!item.isIdentified()) { // 미확인
+		// 0:祝福1：通常2：呪い3：未鑑定
+		if (!item.isIdentified()) { // 未確認
 			writeC(3);
-		} else { // 교환이 끝난 상태
+		} else { // 交換済み
 			byte[] status = null;
 			int bless = item.getBless();
 			writeC(bless);

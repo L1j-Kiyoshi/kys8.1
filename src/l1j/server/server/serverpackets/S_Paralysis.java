@@ -28,58 +28,58 @@ public class S_Paralysis extends ServerBasePacket {
 
 	public S_Paralysis(int type, boolean flag) {
 		writeC(Opcodes.S_PARALYSE);
-		if (type == TYPE_PARALYSIS) // 체가 완전하게 마비되었습니다.
+		if (type == TYPE_PARALYSIS) // 体は完全に麻痺しています。
 		{
 			if (flag == true) {
 				writeC(2);
 			} else {
 				writeC(3);
 			}
-		} else if (type == TYPE_PARALYSIS2) // 체가 완전하게 마비되었습니다.
+		} else if (type == TYPE_PARALYSIS2) //体は完全に麻痺しています。
 		{
 			if (flag == true) {
 				writeC(4);
 			} else {
 				writeC(5);
 			}
-		} else if (type == TYPE_TELEPORT_UNLOCK){ // 텔레포트 대기 상태의 해제
+		} else if (type == TYPE_TELEPORT_UNLOCK){ // テレポート待ち状態の解除
 			writeC(7);
-		} else if (type == TYPE_SLEEP) // 강력한 수마가 덮쳐 와, 자 버렸습니다.
+		} else if (type == TYPE_SLEEP) //強力な睡魔が襲ってと、寝てしまいました。
 		{
 			if (flag == true) {
 				writeC(10);
 			} else {
 				writeC(11);
 			}
-		} else if (type == TYPE_FREEZE)  // 체가 얼었습니다.
+		} else if (type == TYPE_FREEZE)  // 体凍結た。
 		{
 			if (flag == true) {
 				writeC(12);
 			} else {
 				writeC(13);
 			}
-		} else if (type == TYPE_STUN) // 스탠 상태입니다.
+		} else if (type == TYPE_STUN) // スタン状態です。
 		{
 			if (flag == true) {
 				writeC(22);
 			} else {
 				writeC(23);
 			}
-		} else if (type == TYPE_BIND) // 다리가 속박된 것처럼 움직일 수 없습니다.
+		} else if (type == TYPE_BIND) // 足が束縛されたかのように動くことができません。
 		{
 			if (flag == true) {
 				writeC(24);
 			} else {
 				writeC(25);
 			}
-		} else if (type == TYPE_RIP) // 파워그립
+		} else if (type == TYPE_RIP) // パワーグリップ
 		{
 			if (flag == true) {
 				writeC(26);
 			} else {
 				writeC(27);
 			}
-		} else if (type == TYPE_PERADO) // 데스페라도
+		} else if (type == TYPE_PERADO) // デスペラード
 		{
 			if (flag == true) {
 				writeC(30);

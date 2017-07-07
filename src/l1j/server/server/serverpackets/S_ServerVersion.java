@@ -11,7 +11,7 @@ public class S_ServerVersion extends ServerBasePacket {
 	// time = time - (time % 300);
 
 	/** 20170124 **/ // by feel.
-	// writeC(Opcodes.S_EXTENDED_PROTOBUF); // 20170106 부터변경댐 by feel적용
+	// writeC(Opcodes.S_EXTENDED_PROTOBUF); // 20170106 から変更ダムby feel適用
 	// // S_VERSION_CHECK
 
 	// String s = "35 03 08 00 10 05 " + "18 89 BD 8F AC 06 " + "20 89 BD 8F

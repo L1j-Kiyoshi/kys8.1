@@ -37,7 +37,7 @@ public class S_PrivateShopforNpc extends ServerBasePacket{
 				shop = NpcCashShopTable.getInstance().get(npcId);
 			}
 			if (shop == null) {
-				System.out.println("엔피시 상점 오류 : 번호" + npc.getNpcId() + " x :" + npc.getX() + " y :" + npc.getY() + " map :" + npc.getMapId());
+				System.out.println("エンピシ店のエラー：番号" + npc.getNpcId() + " x :" + npc.getX() + " y :" + npc.getY() + " map :" + npc.getMapId());
 				return;
 			}
 			List<L1ShopItem> shopItems = shop.getSellingItems();

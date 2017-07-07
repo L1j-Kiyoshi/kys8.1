@@ -151,26 +151,26 @@ public class GameServer {
 
 	System.out.println("──────────────Server Setting────────────────");
 
-	System.out.println(" ▶ 경험치:  " + (rateXp) + " 배");
-	System.out.println(" ▶ 라우풀:  " + (rateLawful) + " 배");
-	System.out.println(" ▶ 우호도:  " + (rateKarma) + " 배");
-	System.out.println(" ▶ 아이템:  " + (rateDropItems) + " 배 ");
-	System.out.println(" ▶ 아데나:  " + (rateDropAdena) + " 배");
-	System.out.println(" ▶ 채팅LV:  " + (chatlvl) + " 레벨");
-	System.out.println(" ▶ 무기확률: [" + (EnchantChanceWeapon) + "] 배");
-	System.out.println(" ▶ 방어구확률: [" + (EnchantChanceArmor) + "] 배");
-	System.out.println(" ▶ 악세사리확률: [" + (EnchantChanceAccessory) + "] 배");
+	System.out.println(" ▶ 経験値:  " + (rateXp) + "倍");
+	System.out.println(" ▶ ラウフル:  " + (rateLawful) + " 배");
+	System.out.println(" ▶ 友好度:  " + (rateKarma) + "倍");
+	System.out.println(" ▶ アイテム:  " + (rateDropItems) + " 倍 ");
+	System.out.println(" ▶ アデナ:  " + (rateDropAdena) + "倍");
+	System.out.println(" ▶ チャットLV:  " + (chatlvl) + " レベル");
+	System.out.println(" ▶ 武器確率: [" + (EnchantChanceWeapon) + "] 倍");
+	System.out.println(" ▶ 防具確率: [" + (EnchantChanceArmor) + "]倍");
+	System.out.println(" ▶ アクセサリー確率: [" + (EnchantChanceAccessory) + "]倍");
 
 	int maxOnlineUsers = Config.MAX_ONLINE_USERS;
-	System.out.println(" ▶ 최대인원: [" + (maxOnlineUsers) + "] 명");
-	if (Config.ALT_NONPVP) { // Non-PvP 설정
-	    System.out.println(" ▶ PK:  [가능]");
+	System.out.println(" ▶ 最大人数: [" + (maxOnlineUsers) + "]人");
+	if (Config.ALT_NONPVP) { // Non-PvP 設定
+	    System.out.println(" ▶ PK:  [可能]");
 	} else {
-	    System.out.println(" ▶ PK:  [불가능]");
+	    System.out.println(" ▶ PK:  [不可能]");
 	}
 	GeneralThreadPool.getInstance();
 
-	// 나누기
+	// 分割
 	IdFactory.getInstance();
 	L1WorldMap.getInstance();
 	CharacterBalance.getInstance();
@@ -181,14 +181,14 @@ public class GameServer {
 
 	CharacterTable.getInstance().loadAllCharName();
 
-	// 온라인 상태 리셋트
+	// オンライン状態リセット
 	CharacterTable.clearOnlineStatus();
 
-	// 게임 시간 시계
+	// ゲーム時間時計
 	L1GameTimeClock.init();
-	// 현재 시간 시계
+	// 現在時刻の時計
 	RealTimeClock.init();
-	// 공지
+	// お知らせ
 	L1Sys.getInstance();
 	L1Sys l1Sys = L1Sys.getInstance();
 	GeneralThreadPool.getInstance().execute(l1Sys);
@@ -197,100 +197,100 @@ public class GameServer {
 
 	KeyTable.initBossKey();
 
-	AccessoryEnchantList.getInstance(); // 악세사리 인챈 정보 리스트
-	ArmorEnchantList.getInstance(); // 방어구 인챈 정보 리스트
-	WeaponEnchantList.getInstance(); // 무기 인챈 정보 리스트
+	AccessoryEnchantList.getInstance(); // アクセサリーエンチャント情報リスト
+	ArmorEnchantList.getInstance(); // 防具エンチャント情報リスト
+	WeaponEnchantList.getInstance(); // 武器エンチャント情報リスト
 
-	// 패키지상점
+	// パッケージ店
 	NpcCashShopSpawnTable.getInstance();
 	NpcCashShopSpawnTable.getInstance().Start();
 
-	// UB타임 콘트롤러
+	// UBタイムコントローラ
 	UbTimeController ubTimeContoroller = UbTimeController.getInstance();
 	GeneralThreadPool.getInstance().scheduleAtFixedRate(ubTimeContoroller, 0, UbTimeController.SLEEP_TIME);
 
-	AttendanceController.init(); // 출석
+	AttendanceController.init(); // 出席
 	AttendanceTable.getInstance();
 	AccountAttendanceTable.getInstance();
 
-	// 전쟁 타임 콘트롤러
+	// 戦争タイムコントローラ
 	WarTimeController warTimeController = WarTimeController.getInstance();
 	GeneralThreadPool.getInstance().execute(warTimeController);
 
-	// 정령의 돌 타임 컨트롤러
+	// 精霊の石タイムコントローラ
 	if (Config.ELEMENTAL_STONE_AMOUNT > 0) {
 	    ElementalStoneGenerator elementalStoneGenerator = ElementalStoneGenerator.getInstance();
 	    GeneralThreadPool.getInstance().scheduleAtFixedRate(elementalStoneGenerator, 0,
 		    ElementalStoneGenerator.SLEEP_TIME);
 	}
 
-	// 타임이벤트 컨트롤러(매일)
+	// タイムイベントコントローラ（毎日）
 	TimeEventController.getInstance();
-	DevilController.getInstance().start(); // 악마왕영토
-	/** 로그파일저장 **/
+	DevilController.getInstance().start(); //悪魔王の領土
+	/** ログファイルの保存 **/
 	LoggerInstance.getInstance();
 
-	/** 로봇시스템 **/
-	RobotAIThread.init();// 추가
-	/** 로봇시스템 **/
+	/** ロボットシステム **/
+	RobotAIThread.init();// 追加
+	/** ロボットシステム **/
 
 	// npc shop
 	NpcShopTable.getInstance();
 	GeneralThreadPool.getInstance().execute(NpcShopSystem.getInstance());
 	// npc shop
 
-	// 배틀존
+	// バトルゾーン
 	if (Config.배틀존작동유무) {
 	    BattleZone battleZone = BattleZone.getInstance();
 	    GeneralThreadPool.getInstance().execute(battleZone);
 	}
 
-	/** 악마왕 사냥터 **/
+	/** 悪魔王狩り場 **/
 	if (Config.악마왕작동유무) {
 	    DevilController.getInstance().start();
 	}
 
-	/** 아덴사냥터 **/
+	/** アデン狩り場 **/
 	if (Config.아덴사냥터작동유무) {
 	    AdenaHuntController.getInstance().start();
 	}
 
-	/** 잊혀진섬 **/
+	/** 忘れられた島 **/
 	GeneralThreadPool.getInstance().execute(IsleController.getInstance());
 
 	OneTimeController.start();
-	// 프리미엄 타임 콘트롤러
+	// プレミアムタイムコントローラ
 	PremiumTimeController premiumTimeController = PremiumTimeController.getInstance();
 	GeneralThreadPool.getInstance().scheduleAtFixedRate(premiumTimeController, 0, PremiumTimeController.SLEEP_TIME); // #
 
-	// 탐 타임 콘트롤러
+	// 乗車時間コントローラ
 	TamController tamController = TamController.getInstance();
 	GeneralThreadPool.getInstance().scheduleAtFixedRate(tamController, 0, TamController.SLEEP_TIME); // #
 
-	// 던전 타이머
+	// ダンジョンタイマー
 	DungeonTimer dungeontimer = DungeonTimer.getInstance();
 	GeneralThreadPool.getInstance().scheduleAtFixedRate(dungeontimer, 0, DungeonTimer.SleepTime);
 
-	// 이벤트 아이템 컨트롤러
+	// イベントアイテムコントローラ
 	if (Config.양말작동유무) {
 	    EventItemController eventItemController = EventItemController.getInstance();
 	    GeneralThreadPool.getInstance().scheduleAtFixedRate(eventItemController, 0, EventItemController.SleepTime);
 	}
 
-	// 브레이브아바타
+	// ブレイブアバター
 	BraveavatarController braveavatarController = BraveavatarController.getInstance();
 	GeneralThreadPool.getInstance().execute(braveavatarController);
 
-	// 아지트 경매 타임 콘트롤러
+	// アジト競売タイムコントローラ
 	AuctionTimeController auctionTimeController = AuctionTimeController.getInstance();
 	GeneralThreadPool.getInstance().scheduleAtFixedRate(auctionTimeController, 0, AuctionTimeController.SLEEP_TIME); // #
 
-	// 아지트 세금 타임 콘트롤러
+	// アジトの税金タイムコントローラ
 	HouseTaxTimeController houseTaxTimeController = HouseTaxTimeController.getInstance();
 	GeneralThreadPool.getInstance().scheduleAtFixedRate(houseTaxTimeController, 0,
 		HouseTaxTimeController.SLEEP_TIME); // #
 
-	// 낚시 타임 콘트롤러
+	// 釣りタイムコントローラ
 	FishingTimeController fishingTimeController = FishingTimeController.getInstance();
 	GeneralThreadPool.getInstance().scheduleAtFixedRate(fishingTimeController, 0, FishingTimeController.SLEEP_TIME); // #
 
@@ -319,7 +319,7 @@ public class GameServer {
 	if (!NpcTable.getInstance().isInitialized()) {
 	    throw new Exception("Could not initialize the npc table");
 	}
-	WeekQuestTable.getInstance(); // 주퀘
+	WeekQuestTable.getInstance(); // ジュクウェ
 
 	SpawnTable.getInstance();
 	MobGroupTable.getInstance();
@@ -341,7 +341,7 @@ public class GameServer {
 	PetTable.getInstance();
 	ClanTable.getInstance();
 	CastleTable.getInstance();
-	L1CastleLocation.setCastleTaxRate(); // CastleTable 초기화 다음 아니면 안 된다
+	L1CastleLocation.setCastleTaxRate(); // CastleTable 初期化は、次なければならない
 	GetBackRestartTable.getInstance();
 	DoorSpawnTable.getInstance();
 	ChatLogTable.getInstance();
@@ -352,7 +352,7 @@ public class GameServer {
 	Getback.loadGetBack();
 	PetTypeTable.load();
 
-	// 디버깅
+	// デバッグ
 	L1TreasureBox.load();
 	L1HealingPotion.load();
 
@@ -365,17 +365,17 @@ public class GameServer {
 	L1Cube.getInstance();
 	Announcements.getInstance();
 	WeaponAddDamage.getInstance();
-	// 보스스폰
+	// ボス出現
 	NewBossSpawnTable.getInstance();
 	BossTimeController.getInstance();
 
 	RestoreItemTable.getInstance().LoadRestoreItemTable();
 
-	// 돌아온아놀드이벤트
+	// 帰ってきたアーノルドイベント
 	ArnoldBackEvent.getInstance();
 	InvSwapController.getInstance();
 
-	// 혈맹포인트버프활성화
+	// 血盟ポイントバフ活性化
 	ClanBuffController.getInstance();
 
 	GeneralThreadPool.getInstance().execute(ShipTimeController.getInstance());
@@ -390,16 +390,16 @@ public class GameServer {
 	if (Config.ALT_HALLOWEENIVENT != true) {
 	    Halloween();
 	}
-	if (Config.ALT_RABBITEVENT != true) { // 신묘년 이벤트
+	if (Config.ALT_RABBITEVENT != true) { // 辛卯年のイベント
 	    RabbitEvent();
 	}
-	if (Config.Use_Show_Announcecycle == true) { // 자동 공지사항
+	if (Config.Use_Show_Announcecycle == true) { // 自動お知らせ
 	    Announcecycle.getInstance();
 	}
 	L1ClanRanking.getInstance().start();
 	MonsterBookTable.getInstace();
 	RankTable.getInstance();
-	RankingTimeController.getInstance(); // 랭킹 시스템 추가 - 실시간 갱신
+	RankingTimeController.getInstance(); // ランキングシステムを追加 - リアルタイム更新
 	HpMpRegenController regen = new HpMpRegenController(1000);
 	regen.start();
 	Robot_ConnectAndRestart.getInstance().start_spawn();
@@ -416,13 +416,13 @@ public class GameServer {
 	};
 	Timer timer = new Timer();
 	timer.schedule(task, 2000);
-	// 가비지 컬렉터 실행 (Null) 객체의 해제
+	// ガベージコレクタの実行（Null）オブジェクトの解除
 	System.gc();
 	System.out.println("┌────────────────────────────────┐");
 	System.out.println("│\t\tサーバーが正常に稼動しました。 - ON\t\t  │");
-	System.out.println("│\t\t\t서버 포트 : " + Config.GAME_SERVER_PORT + "\t\t\t  │");
-	System.out.println("│\t\t\t  메모리 : " + SystemUtil.getUsedMemoryMB() + "M\t\t\t\t  │");
-	System.out.println("│\t\t\t  플랫폼 : Netty Base\t\t\t  │");
+	System.out.println("│\t\t\tサーバーのポート : " + Config.GAME_SERVER_PORT + "\t\t\t  │");
+	System.out.println("│\t\t\t  メモリ : " + SystemUtil.getUsedMemoryMB() + "M\t\t\t\t  │");
+	System.out.println("│\t\t\t  プラットフォーム : Netty Base\t\t\t  │");
 	System.out.println("└────────────────────────────────┘\n");
 	Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
 
@@ -430,7 +430,7 @@ public class GameServer {
     }
 
     /**
-     * 온라인중의 플레이어 모두에 대해서 kick, 캐릭터 정보의 보존을 한다.
+     * オンライン中のプレイヤーの両方に対してkick、文字情報の保存をする。
      */
     public void disconnectAllCharacters() {
 	for (L1Clan clan : L1World.getInstance().getAllClans()) {
@@ -457,7 +457,7 @@ public class GameServer {
     }
 
     public int saveAllCharInfo() {
-	// exception 발생하면 -1 리턴, 아니면 저장한 인원 수 리턴
+	// exception 発生した場合-1リターン、または保存した人数リターン
 	int cnt = 0;
 	try {
 	    for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
@@ -473,7 +473,7 @@ public class GameServer {
     }
 
     /**
-     * 온라인중의 플레이어에 대해서 kick , 캐릭터 정보의 보존을 한다.
+     * オンライン中のプレイヤーに対してkick、文字情報の保存をする。
      */
     public static void disconnectChar(L1PcInstance pc) {
 	if (pc.getNetConnection() != null) {
@@ -502,16 +502,16 @@ public class GameServer {
 	    L1World world = L1World.getInstance();
 	    try {
 		int secondsCount = _secondsCount;
-		world.broadcastServerMessage("잠시 후, 서버를 종료 합니다.");
+		world.broadcastServerMessage("しばらくして、サーバーをシャットダウンします。");
 		world.broadcastServerMessage("안전한 장소에서 로그아웃 해 주세요");
 		while (0 < secondsCount) {
 		    if (secondsCount <= 30) {
-			System.out.println("게임이 " + secondsCount + "초 후에 종료 됩니다. 게임을 중단해 주세요.");
-			world.broadcastServerMessage("게임이 " + secondsCount + "초 후에 종료 됩니다. 게임을 중단해 주세요.");
+			System.out.println("ゲームが" + secondsCount + "秒後に終了します。ゲームを中断してください。");
+			world.broadcastServerMessage("ゲームが" + secondsCount + "秒後に終了します。ゲームを中断してください。");
 		    } else {
 			if (secondsCount % 60 == 0) {
-			    System.out.println("게임이 " + secondsCount / 60 + "분 후에 종료 됩니다.");
-			    world.broadcastServerMessage("게임이 " + secondsCount / 60 + "분 후에 종료 됩니다.");
+			    System.out.println("ゲームが" + secondsCount / 60 + "分後に終了します。");
+			    world.broadcastServerMessage("ゲームが" + secondsCount / 60 + "分後に終了します。");
 			}
 		    }
 		    Thread.sleep(1000);
@@ -519,7 +519,7 @@ public class GameServer {
 		}
 		shutdown();
 	    } catch (InterruptedException e) {
-		world.broadcastServerMessage("서버 종료가 중단되었습니다. 서버는 정상 가동중입니다.");
+		world.broadcastServerMessage("サーバーのシャットダウンが停止しました。サーバーは正常稼動中です。");
 		return;
 	    }
 	}
@@ -530,8 +530,8 @@ public class GameServer {
     public synchronized void shutdownWithCountdown(int secondsCount) {
 	if (_shutdownThread != null) {
 	    RobotAIThread.close();
-	    // 이미 슛다운 요구를 하고 있다
-	    // TODO 에러 통지가 필요할지도 모른다
+	    // すでにシャットダウン要求をしている
+	    // TODO エラー通知が必要かもしれない
 	    return;
 	}
 	_shutdownThread = new ServerShutdownThread(secondsCount);
@@ -546,7 +546,7 @@ public class GameServer {
 
     public void shutdown() {
 	disconnectAllCharacters();
-	// manager.savelog(); //서버 다운시 서버로그 저장여부 2014년7월12일 log디비 폴더 이용 시점에 주석처리
+	// manager.savelog(); //サーバーダウン時にサーバーログを保存するかどうか、2014年7月12日logディビフォルダ利用時にコメントアウト
 	LinAllManagerInfoThread.getInstance().ServerInfoUPDATE();
 	InvSwapController.getInstance().initDB();
 	RestoreItemTable.getInstance().SaveReStoreItem();
@@ -555,8 +555,8 @@ public class GameServer {
 
     public synchronized void abortShutdown() {
 	if (_shutdownThread == null) {
-	    // 슛다운 요구를 하지 않았다
-	    // TODO 에러 통지가 필요할지도 모른다
+	    // シャットダウン要求をしなかった
+	    // TODOエラー通知が必要かもしれない
 	    return;
 	}
 
@@ -601,7 +601,7 @@ public class GameServer {
 	}
     }
 
-    public void RabbitEvent() { // 신묘년 이벤트
+    public void RabbitEvent() { // 辛卯年のイベント
 	Connection con = null;
 	PreparedStatement pstm = null;
 	PreparedStatement pstm1 = null;

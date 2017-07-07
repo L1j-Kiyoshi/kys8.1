@@ -113,7 +113,7 @@ public class PacketHandler {
 	// System.out.println("c opcode : " + i);
 	// System.out.println("addDmg= " + addDmg);
 	// System.out.println("[C opocde] = " + i + "[Length] = " +
-	// abyte0.length);//본섭옵코추출
+	// abyte0.length);//本サーバーオプコ抽出
 	// System.out.println(DataToPacket(abyte0, abyte0.length));
 	switch (i) {
 	case C_PLEDGE_WATCH:
@@ -258,9 +258,9 @@ public class PacketHandler {
 	case C_FAR_ATTACK:
 	    new C_Attack(abyte0, _client);
 	    break;
-	// 캐릭터의 쇼트 컷이나 목록 상태가 플레이중에 변동했을 경우에
-	// 쇼트 컷이나 목록 상태를 부가해 클라이언트로부터 송신되어 온다
-	// 보내져 오는 타이밍은 클라이언트 종료시
+	// キャラクターのショートカットやリストの状態がプレイ中に変動した場合に
+	// ショートカットやリストの状態を付加して、クライアントから送信されてくる
+	// 送られてくるタイミングは、クライアント終了時
 	case C_BAN_MEMBER:
 	    new C_BanClan(abyte0, _client);
 	    break;
@@ -393,7 +393,7 @@ public class PacketHandler {
 	    break;
 	case C_WAREHOUSE_CONTROL:
 	    new C_WhPw(abyte0, _client);
-	    break; // 창고 비번
+	    break; // 倉庫非番
 	case C_EXCHANGEABLE_SPELL:
 	    new C_Horun(abyte0, _client);
 	    break;
@@ -420,14 +420,14 @@ public class PacketHandler {
 	default:
 
 	    // String s = Integer.toHexString(abyte0[0] & 0xff);
-	    // _log.warning("용도 불명 작동코드:데이터 내용");
-	    // _log.warning((new StringBuilder()).append("작동코드
+	    // _log.warning("用途不明の動作コード：データの内容");
+	    // _log.warning((new StringBuilder()).append("動作コード
 	    // ").append(s).toString());
 	    // _log.warning(new ByteArrayUtil(abyte0).dumpToString());
 	    break;
 	}
 	// _log.warning((new
-	// StringBuilder()).append("작동코드").append(i).toString());
+	// StringBuilder()).append("動作コード").append(i).toString());
     }
 
     public String DataToPacket(byte[] data, int len) {

@@ -269,7 +269,7 @@ public class GameClient {
 		}
 	    }
 	}
-	// 마법인형을 월드 맵상으로부터 지운다
+	// マジックドールをワールドマップ上から消す
 	try {
 	    if (pc.getDollList() != null && pc.getDollListSize() > 0) {
 		for (L1DollInstance doll : pc.getDollList()) {
@@ -278,7 +278,7 @@ public class GameClient {
 		}
 	    }
 	} catch (Exception e) {
-	    System.out.println("캐릭터 : " + pc.getName() + " Error Code = 1009");
+	    System.out.println("キャラクター : " + pc.getName() + " Error Code = 1009");
 	}
 	Object[] followerList = pc.getFollowerList().values().toArray();
 	for (Object followerObject : followerList) {
@@ -333,7 +333,7 @@ public class GameClient {
 	    data = le.getUByte8().fromArray(incoming, temp);
 	    PacketHandler(data);
 	} catch (Exception e) {
-	    _log.log(Level.WARNING, "LineageClient.encryptD 예외 발생.", e);
+	    _log.log(Level.WARNING, "LineageClient.encryptD 例外が発生。", e);
 	}
 	return null;
     }
@@ -344,7 +344,7 @@ public class GameClient {
 	    data1 = le.encrypt_S(data1);
 	    return le.getUByte8().fromArray(data1);
 	} catch (Exception e) {
-	    _log.log(Level.WARNING, "LineageClient.encryptE 예외 발생.", e);
+	    _log.log(Level.WARNING, "LineageClient.encryptE 例外が発生。", e);
 	}
 	return null;
     }
@@ -465,7 +465,7 @@ public class GameClient {
 		    || opcode == Opcodes.S_NUM_CHARACTER || opcode == Opcodes.C_LOGIN || opcode == Opcodes.C_READ_NEWS
 		    || opcode == Opcodes.C_ONOFF || opcode == Opcodes.S_CHARACTER_INFO
 		    || opcode == Opcodes.C_VERSION)) {
-		// System.out.println("이옵들이 아니면 패킷을 막는다!");
+		// System.out.println("イオプがなければ、パケットを防ぐ！");
 		return;
 	    }
 	}

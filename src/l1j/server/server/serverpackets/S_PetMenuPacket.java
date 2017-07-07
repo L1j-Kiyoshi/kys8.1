@@ -34,7 +34,7 @@ public class S_PetMenuPacket extends ServerBasePacket {
 	private void buildpacket(L1NpcInstance npc, int exppercet) {
 		writeC(Opcodes.S_HYPERTEXT);
 
-		if (npc instanceof L1PetInstance) { // 펫
+		if (npc instanceof L1PetInstance) { // ペット
 			L1PetInstance pet = (L1PetInstance) npc;
 			writeD(pet.getId());
 			writeS("anicom");
@@ -42,72 +42,72 @@ public class S_PetMenuPacket extends ServerBasePacket {
 			writeH(10);
 			switch (pet.getCurrentPetStatus()) {
 			case 1:
-				writeS("$469"); // 공격 태세
+				writeS("$469"); // 攻撃態勢
 				break;
 			case 2:
-				writeS("$470"); // 방어 태세
+				writeS("$470"); // 防御態勢
 				break;
 			case 3:
-				writeS("$471"); // 휴게
+				writeS("$471"); // 休憩
 				break;
 			case 5:
-				writeS("$472");  // 경계
+				writeS("$472");  // 境界
 				break;
 			case 8:
-				writeS("$613");	//수집
+				writeS("$613");	//収集
 				break;
 			default:
-				writeS("$471"); // 휴게
+				writeS("$471"); // 休憩
 				break;
 			}
-			writeS(Integer.toString(pet.getCurrentHp())); // 현재의 HP
-			writeS(Integer.toString(pet.getMaxHp())); // 최대 HP
-			writeS(Integer.toString(pet.getCurrentMp())); // 현재의 MP
-			writeS(Integer.toString(pet.getMaxMp())); // 최대 MP
-			writeS(Integer.toString(pet.getLevel())); // 레벨
+			writeS(Integer.toString(pet.getCurrentHp())); // 現在のHP
+			writeS(Integer.toString(pet.getMaxHp())); // 最大HP
+			writeS(Integer.toString(pet.getCurrentMp())); // 現在のMP
+			writeS(Integer.toString(pet.getMaxMp())); // 最大MP
+			writeS(Integer.toString(pet.getLevel())); // レベル
 
-			// 이름의 캐릭터수가 8을 넘으면(자) 떨어진다
-			// 왠지"센트 버나드","치우침 이브 래빗"은 OK
+			// 名前の文字数が8を超えると落ちる
+			// なぜか「セントバーナード "、"ブレイブラビット "はOK
 			// String pet_name = pet.get_name();
-			// if (pet_name.equalsIgnoreCase("하이드베르만")) {
-			// pet_name = "하이드베르마";
+			// if (pet_name.equalsIgnoreCase("ハイドフェル")) {
+			// pet_name = "ハイドフェルマー";
 			// }
-			// else if (pet_name.equalsIgnoreCase("하이 센트 버나드")) {
-			// pet_name = "하이 센트 바";
+			// else if (pet_name.equalsIgnoreCase("ハイセントバーナード")) {
+			// pet_name = "ハイセントバー";
 			// }
 			// writeS(pet_name);
-			writeS(""); // 펫의 이름을 표시시키면(자) 불안정하게 되므로, 비표시로 한다
-			writeS("$612"); // 배 가득
-			writeS(Integer.toString(exppercet)); // 경험치
-			writeS(Integer.toString(pet.getLawful())); // 아라이먼트
-		} else if (npc instanceof L1SummonInstance) { // 사몬몬스타
+			writeS(""); // ペットの名前を表示させると不安定になるので、非表示にする
+			writeS("$612"); // お腹いっぱい
+			writeS(Integer.toString(exppercet)); // 経験値
+			writeS(Integer.toString(pet.getLawful())); // アライメント
+		} else if (npc instanceof L1SummonInstance) { // サーモンモンスター
 			L1SummonInstance summon = (L1SummonInstance) npc;
 			writeD(summon.getId());
 			writeS("moncom");
 			writeC(0x00);
-			writeH(6); // 건네주는 인수 캐릭터의 수의 모양
+			writeH(6); // 渡す引数文字の数の形
 			switch (summon.get_currentPetStatus()) {
 			case 1:
-				writeS("$469"); // 공격 태세
+				writeS("$469"); // 攻撃態勢
 				break;
 			case 2:
-				writeS("$470"); // 방어 태세
+				writeS("$470"); // 防御態勢
 				break;
 			case 3:
-				writeS("$471"); // 휴게
+				writeS("$471"); // 休憩
 				break;
 			case 5:
-				writeS("$472"); // 경계
+				writeS("$472"); // 境界
 				break;
 			default:
-				writeS("$471"); // 휴게
+				writeS("$471"); // 休憩
 				break;
 			}
-			writeS(Integer.toString(summon.getCurrentHp())); // 현재의 HP
-			writeS(Integer.toString(summon.getMaxHp())); // 최대 HP
-			writeS(Integer.toString(summon.getCurrentMp())); // 현재의 MP
-			writeS(Integer.toString(summon.getMaxMp())); // 최대 MP
-			writeS(Integer.toString(summon.getLevel())); // 레벨
+			writeS(Integer.toString(summon.getCurrentHp())); // 現在のHP
+			writeS(Integer.toString(summon.getMaxHp())); // 最大HP
+			writeS(Integer.toString(summon.getCurrentMp())); // 現在のMP
+			writeS(Integer.toString(summon.getMaxMp())); // 最大MP
+			writeS(Integer.toString(summon.getLevel())); // レベル
 			// writeS(summon.getNpcTemplate().get_nameid());
 			// writeS(Integer.toString(0));
 			// writeS(Integer.toString(790));

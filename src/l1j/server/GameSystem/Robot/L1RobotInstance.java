@@ -1101,7 +1101,7 @@ public class L1RobotInstance extends L1PcInstance {
 				int tmpx = aStar.getXY(dir, true) + getX();
 				int tmpy = aStar.getXY(dir, false) + getY();
 				boolean obj = World.isMapdynamic(tmpx, tmpy, getMapId());
-				boolean door = World.문이동(getX(), getY(), getMapId(), dir);
+				boolean door = World.moveDoor(getX(), getY(), getMapId(), dir);
 				if (tail && !obj && !door) {
 					setDirectionMove(dir);
 				}
@@ -1173,7 +1173,7 @@ public class L1RobotInstance extends L1PcInstance {
 				&& getMapId() == _target.getMapId())
 			tail = true;
 
-		boolean door = World.문이동(getX(), getY(), getMapId(),
+		boolean door = World.moveDoor(getX(), getY(), getMapId(),
 				calcheading(this, target.getX(), target.getY()));
 
 		int range = 1;
@@ -1311,7 +1311,7 @@ public class L1RobotInstance extends L1PcInstance {
 				&& getMapId() == _target2.getMapId())
 			tail = true;
 
-		boolean door = World.문이동(getX(), getY(), getMapId(),
+		boolean door = World.moveDoor(getX(), getY(), getMapId(),
 				calcheading(this, target2.getX(), target2.getY()));
 
 		int range = 1;
@@ -1524,7 +1524,7 @@ public class L1RobotInstance extends L1PcInstance {
 		} else {
 			boolean tail2 = World.isThroughObject(getX(), getY(), getMapId(),
 					dir);
-			boolean door = World.문이동(getX(), getY(), getMapId(),
+			boolean door = World.moveDoor(getX(), getY(), getMapId(),
 					calcheading(this, x, y));
 			if (door || !tail2) {
 				cnt++;
@@ -1751,9 +1751,9 @@ public class L1RobotInstance extends L1PcInstance {
 				int calcy = (int) getLocation().getY() - loc.getY();
 				if ((Math.abs(calcx) <= 15 && Math.abs(calcy) <= 15)
 						&& loc != null) {
-					tail = aStar.근접서치타일(this, x, y, m, false);
+					tail = aStar.searchNearTile(this, x, y, m, false);
 				} else {
-					tail = aStar.근접서치타일(this, x, y, m, true);
+					tail = aStar.searchNearTile(this, x, y, m, true);
 				}
 			} catch (Exception e) {
 				return -1;
@@ -2041,7 +2041,7 @@ public class L1RobotInstance extends L1PcInstance {
 			} else {
 				boolean tail2 = World.isThroughObject(getX(), getY(),
 						getMapId(), dir);
-				boolean door = World.문이동(getX(), getY(), getMapId(),
+				boolean door = World.moveDoor(getX(), getY(), getMapId(),
 						calcheading(this, loc.getX(), loc.getY()));
 				if (door || !tail2) {
 					cnt++;

@@ -36,17 +36,17 @@ public class C_BoardDelete extends ClientBasePacket {
 			return;
 		}
 		if (board.getNpcId() == 4200015) {
-			topic.서버정보();
+			topic.serverInfo();
 		} else if (board.getNpcId() == 4200020) {
-			topic.운영자1();
+			topic.operator1();
 		} else if (board.getNpcId() == 4200021) {
-			topic.운영자2();
+			topic.operator2();
 		} else if (board.getNpcId() == 4200022) {
-			topic.운영자3();
+			topic.operator3();
 		} else if (board.getNpcId() == 500002) {
-			topic.건의사항();
+			topic.proposal();
 		} else {
-			topic.자유게시판();
+			topic.board_Free();
 		}
 	}
 

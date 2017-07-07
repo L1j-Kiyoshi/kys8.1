@@ -20,6 +20,7 @@
 package l1j.server.server.serverpackets;
 
 import java.util.List;
+
 import l1j.server.server.Opcodes;
 import l1j.server.server.datatables.ShopTable;
 import l1j.server.server.model.L1Object;
@@ -28,7 +29,6 @@ import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.shop.L1AssessedItem;
 import l1j.server.server.model.shop.L1Shop;
-import l1j.server.server.serverpackets.S_NoSell;
 
 // Referenced classes of package l1j.server.server.serverpackets:
 // ServerBasePacket, S_SystemMessage
@@ -63,7 +63,7 @@ public class S_ShopBuyList extends ServerBasePacket {
 			writeD(item.getTargetId());
 			writeD(item.getAssessedPrice());
 		}
-		writeH(0x07);//상점판매 리스트
+		writeH(0x07);//店販売リスト
 	}
 
 	@Override

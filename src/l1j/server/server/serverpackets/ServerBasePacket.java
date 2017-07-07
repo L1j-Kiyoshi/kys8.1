@@ -70,7 +70,7 @@ public abstract class ServerBasePacket {
 
 	protected void writeC(int value) {
 		_bao.write(value & 0xff);
-		// 옵코드 wirteC 첫번째 호출만 셋팅...
+		// オプションコードwirteC最初の呼び出しのみ設定...
 		if (isKey) {
 			setKey(value);
 			isKey = false;
@@ -165,7 +165,7 @@ public abstract class ServerBasePacket {
 		return length;
 	}
 	
-	/* 한국 옵코드 추가 패킷 */
+	/* 韓国オプションコードの追加のパケット */
 	protected void write4bit(int value)
 	  {
 	    if (value <= 127) {
@@ -301,12 +301,12 @@ public abstract class ServerBasePacket {
 				byte[] test = text.getBytes("MS949");
 				for (int i = 0; i < test.length;) {
 					if ((test[i] & 0xff) >= 0x7F) {
-						/** 한글 **/
+						/** ハングルの **/
 						_bao.write(test[i + 1]);
 						_bao.write(test[i]);
 						i += 2;
 					} else {
-						/** 영문&숫자 **/
+						/** 英語＆数字 **/
 						_bao.write(test[i]);
 						_bao.write(0);
 						i += 1;
@@ -360,15 +360,13 @@ public abstract class ServerBasePacket {
 	public abstract byte[] getContent() throws IOException;
 
 	/**
-	 * 서버 패킷의 종류를 나타내는 캐릭터 라인을 돌려준다. ("[S] S_WhoAmount" 등 )
+	 * サーバーのパケットの種類を表す文字列を返す。 （「[S] S_WhoAmount "など）
 	 */
 	public String getType() {
 		return "";
 	}
 
 	public String toString() {
-		// getType() 의 리턴이 "" 이라면 빈값 아니면 패킷이름 + 코드값 출력
-		// [옵코드] 패킷명
 		String sTemp = getType().equals("") ? "" : "[" + getKey() + "] " + getType();
 		return sTemp;
 	}

@@ -19,7 +19,7 @@
 package l1j.server.server.types;
 
 /**
- * 좌표 좌상의 점(left, top), 및 우하의 점(right, bottom)에 의해 둘러싸이는 좌표의 area를 지정하는 클래스.
+ *座標左上の点（left、top）、および右下の点（right、bottom）によって囲まれる座標のareaを指定するクラスです。
  */
 public class Rectangle {
 	private int _left;
@@ -75,24 +75,24 @@ public class Rectangle {
 	}
 
 	/**
-	 * 지정된 점(x, y)이, 이 Rectangle의 범위내에 있는지를 판정한다.
+	 * 指定された点（x、y）が、このRectangleの範囲内にあることを判定する。
 	 * 
 	 * @param x
-	 *            판정하는 점의 X좌표
+	 *            判定点のX座標
 	 * @param y
-	 *            판정하는 점의 Y좌표
-	 * @return 점(x, y)이 이 Rectangle의 범위내에 있는 경우, true.
+	 *            判定点のY座標
+	 * @return 点（x、y）がこのRectangleの範囲内にある場合、true。
 	 */
 	public boolean contains(int x, int y) {
 		return (_left <= x && x <= _right) && (_top <= y && y <= _bottom);
 	}
 
 	/**
-	 * 지정된 Point가, 이 Rectangle의 범위내에 있는지를 판정한다.
+	 * 指定されたPointが、このRectangleの範囲内にあることを判定する。
 	 * 
 	 * @param pt
-	 *            판정하는 Point
-	 * @return pt가 이 Rectangle의 범위내에 있는 경우, true.
+	 *            判定するPoint
+	 * @return ptがこのRectangleの範囲内にある場合、true。
 	 */
 	public boolean contains(Point pt) {
 		return contains(pt.getX(), pt.getY());

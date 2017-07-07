@@ -100,7 +100,7 @@ public class Ability {
 
 	public int getMagicBonus() {
 		int i = getTotalInt();
-		return CalcStat.마법보너스(i);
+		return CalcStat.getMagicBonus(i);
 		/*
 		 * if (i <= 5) return -2; else if (i <= 8) return -1; else if (i <= 11)
 		 * return 0; else if (i <= 14) return 1; else if (i <= 17) return 2;

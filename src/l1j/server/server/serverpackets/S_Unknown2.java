@@ -6,13 +6,13 @@ public class S_Unknown2 extends ServerBasePacket {
 	public S_Unknown2(int type) {
 		writeC(Opcodes.S_EVENT);
 		switch(type){
-		case 0: // 로그인시 처리, 어마운트 전 
+		case 0: // ログイン時の処理、語マウント前
 			writeC(0x3d);					
-            writeD(0);// 남은시간  
-            writeC(0);// 예약  
+            writeD(0);// 残り時間
+            writeC(0);// 予約  
             writeC(0x29); // unknown  
 			break;					
-		case 1:	// 리스
+		case 1:	// リース
 			writeC(0x2A);
 			writeD(0);
 			writeH(0);

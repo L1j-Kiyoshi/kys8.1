@@ -4085,7 +4085,7 @@ public class L1PcInstance extends L1Character {
     public int get_Er() {
         int er = 0;
 
-        int BaseEr = CalcStat.원거리회피(getAbility().getTotalDex());
+        int BaseEr = CalcStat.calcLongRangeAvoid(getAbility().getTotalDex());
 
         er += BaseEr;
         return er;

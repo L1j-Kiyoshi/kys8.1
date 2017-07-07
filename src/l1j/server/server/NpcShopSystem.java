@@ -37,7 +37,7 @@ public class NpcShopSystem implements Runnable {
 	@Override
 	public void run() {
 
-		// 1시간마다 shop 리로드
+		// 1時間ごとにshopリロード
 		String currentTime = "";
 		while (true) {
 			try {
@@ -47,7 +47,7 @@ public class NpcShopSystem implements Runnable {
 				currentTime = sdf.format(c.getTime());
 				if (!isReload) {
 					if (isOwnHour(currentTime)) {
-						// 리로드
+						// リロード
 						if (isPower()) {
 							NpcShopTable.reloding();
 							isReload = true;
@@ -65,7 +65,7 @@ public class NpcShopSystem implements Runnable {
 	}
 
 	private boolean isOwnHour(String time) {
-		// System.out.println("시간 : " + time);
+		// System.out.println("時間 : " + time);
 		if (time == null || time.equals(""))
 			return false;
 		return time.equals("0000") || time.equals("0100") || time.equals("0200") || time.equals("0300")

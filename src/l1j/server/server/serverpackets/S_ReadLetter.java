@@ -37,15 +37,15 @@ public class S_ReadLetter extends ServerBasePacket{
 			
 			
 			writeC(Opcodes. S_MAIL_INFO);
-		     writeC(type); // 16:메일함 17:혈맹메일
+		     writeC(type); // 16:メールボックス17：血盟メール
 
 		     if (rs.next())
 		     {
-		    	 writeD(rs.getInt(1));   // 게시글 넘버
-		    	 writeSS(rs.getString(8)); // 내용
-		    	 writeC(id); // 일
-		    	 writeS(rs.getString(3)); // 보낸사람
-		    	 writeSS(rs.getString(7)); // 제목
+		    	 writeD(rs.getInt(1));   // スレッドナンバー
+		    	 writeSS(rs.getString(8)); // 内容
+		    	 writeC(id); // 仕事
+		    	 writeS(rs.getString(3)); // 送信者
+		    	 writeSS(rs.getString(7)); // タイトル
 		     } 
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

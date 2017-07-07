@@ -72,10 +72,10 @@ public class S_Pledge extends ServerBasePacket {
                 writeByte(text);
                 writeD(clanMember.getClanMemberId());
                 writeC(clanMember.getType());
-                //writeD((int) (System.currentTimeMillis() / 1000L)); //가입일자를 만들자
+                //writeD((int) (System.currentTimeMillis() / 1000L)); //登録年月日を作ろう
             	if (clanMember == null
     					|| clanMember.getClanJoinDate() == null) {
-    				writeD(0x00);// 가입일
+    				writeD(0x00);// 日
     			} else {
     				writeD((int) (clanMember.getClanJoinDate().getTime() / 1000));
     			}
@@ -97,10 +97,10 @@ public class S_Pledge extends ServerBasePacket {
                 writeByte(text);
                 writeD(robot.getClanMemberId());
                 writeC(robot.getType());
-                //writeD((int) (System.currentTimeMillis() / 1000L)); //가입일자를 만들자
+                //writeD((int) (System.currentTimeMillis() / 1000L)); //登録年月日を作ろう
             	if (robot == null
     					|| robot.getClanJoinDate() == null) {
-    				writeD(0x00);// 가입일
+    				writeD(0x00);// 日
     			} else {
     				writeD((int) (robot.getClanJoinDate().getTime() / 1000));
     			}
@@ -115,9 +115,9 @@ public class S_Pledge extends ServerBasePacket {
     
 
     /**
-     * 메모
-     * @param name 혈맹원 이름
-     * @param notes 메모 내용
+     * メモ
+     * @param name 血盟員の名前
+     * @param notes メモの内容
      */
     public S_Pledge(String name, String notes) {
         writeC(Opcodes.S_EVENT);
@@ -144,33 +144,33 @@ public class S_Pledge extends ServerBasePacket {
 	public S_Pledge(L1Clan clan, int bless) {		
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
 		writeH(0x8a);
-		writeC(0x08);// 현제 축복기운
+		writeC(0x08);// 現在祝福元気
 		write7B((int) clan.getBlessCount() / 10000);
-		writeC(0x10);// 최대 축복기운
+		writeC(0x10);// 最大の祝福元気
 		write7B(40000);
-		writeC(0x18);// 1회 버프값
+		writeC(0x18);// 1回バフ値
 		write7B(30000);
-		writeC(0x20);// 1회 교환값[재버프사용시]
+		writeC(0x20);// 1回の交換値[再バフ使用時]
 		write7B(1000);
 		for (int i = 0; i < 4; i++) {
 			int time = clan.getBuffTime()[i];
 			if (time == 0)
 				time = 172800;
-			writeC(0x2a);// 총길이
+			writeC(0x2a);// 着丈
 			write7B(27 + bitlengh(time));
 			writeC(0x0a);
 			writeC(bitlengh(time) + 6);		
-			writeC(0x08);// 버프아디
+			writeC(0x08);// バフアディ
 			write7B(2724 + i);
-			writeC(0x10);// 초
+			writeC(0x10);// 超
 			write7B(time);
-			writeC(0x18);// 1:사용가능 2:사용중 3:대기
+			writeC(0x18);// 1：使用可能2：使用中3：待機
 			writeC(clan.getBuffTime()[i] == 0 ? 1 : bless == i + 1 ? 2 : 3);
-			writeC(0x12);// 이름
+			writeC(0x12);// 名前
 			writeS2("$" + Integer.toString(22503 + i));
-			writeC(0x1a);// 설명
+			writeC(0x1a);// 説明
 			writeS2("$" + Integer.toString(22508 + i));
-			writeC(0x20);// 인벤이미지
+			writeC(0x20);// インベントリ画像
 			write7B(7233 + (i * 2));
 		}
 		writeH(0);

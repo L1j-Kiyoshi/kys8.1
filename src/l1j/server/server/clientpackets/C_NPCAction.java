@@ -311,7 +311,7 @@ public class C_NPCAction extends ClientBasePacket {
 					return;
 				}
 				S_RetrievePledgeList rpl = new S_RetrievePledgeList(objid, pc);
-				if (rpl.사용중) {
+				if (rpl.InUse) {
 					return;
 				}
 				if (rpl.NonValue)

@@ -21,9 +21,9 @@ public class S_RaceBoard extends ServerBasePacket {
 	writeH(15);
 
 	for( int i = 0; i < 5; ++i ) {
-		writeS(BugRaceController.getInstance()._littleBugBear[i].getName()); //버그베어 이름
-		writeS(BugRaceController.getInstance()._bugCondition[i]); //상태
-		writeS(Double.toString(BugRaceController.getInstance()._winRate[i]) + "%"); //승률
+		writeS(BugRaceController.getInstance()._littleBugBear[i].getName()); //バグベア名前
+		writeS(BugRaceController.getInstance()._bugCondition[i]); //状態
+		writeS(Double.toString(BugRaceController.getInstance()._winRate[i]) + "%"); //勝率
 	}
 }
 

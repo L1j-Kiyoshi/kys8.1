@@ -31,10 +31,10 @@ public class L1Armor extends L1Item {
 	private int _damageReduction = 0;
 	private int _ignorereductionbyarmor = 0;
 	private int _weightReduction = 0;
-	private int _HitRate = 0; // ● 근접무기 명중률
-	private int _DmgRate = 0; // ● 근접무기 추타율
-	private int _bowHitRate = 0; // ● 활의 명중율
-	private int _BowDmgRate = 0; // ● 활의 추타율
+	private int _HitRate = 0; // ● 近接武器命中率
+	private int _DmgRate = 0; // ● 近接武器追加打率
+	private int _bowHitRate = 0; // ● 弓の命中率
+	private int _BowDmgRate = 0; // ● 弓の追加打率
 	private int _defense_water = 0;
 	private int _defense_wind = 0;
 	private int _defense_fire = 0;

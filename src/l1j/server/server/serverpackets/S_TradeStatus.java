@@ -27,7 +27,7 @@ import l1j.server.server.Opcodes;
 public class S_TradeStatus extends ServerBasePacket {
 	public S_TradeStatus(int type) {
 		writeC(Opcodes.S_XCHG_RESULT);
-		writeC(type); // 0:거래 완료 1:거래 캔슬
+		writeC(type); // 0:取引完了1：取引キャンセル
 	}
 
 	@Override

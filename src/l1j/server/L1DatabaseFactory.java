@@ -51,7 +51,7 @@ public class L1DatabaseFactory {
 	 * DBへのアクセスに必要な情報を設定
 	 * 
 	 * @param driver
-	 *            DB접속 드라이버
+	 *            DB接続ドライバ
 	 * @param url
 	 *            DBサーバーのURL
 	 * @param user

@@ -9,11 +9,11 @@ public class S_Weight extends ServerBasePacket {
         writeC(Opcodes.S_EXTENDED_PROTOBUF);
         writeC(0xe5);
         writeC(0x01);      
-        writeC(0x08);// 퍼센트
+        writeC(0x08);// パーセント
         writeC(pc.getInventory().getWeight100());
-        writeC(0x10);// 소지무게
+        writeC(0x10);// 所持重量
         write7B(pc.getInventory().getWeight());
-        writeC(0x18);// 최대무게
+        writeC(0x18);// 最大重量
         write7B(pc.getMaxWeight());
         writeH(0);
     }

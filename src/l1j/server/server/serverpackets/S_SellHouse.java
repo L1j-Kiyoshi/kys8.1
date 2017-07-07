@@ -15,9 +15,9 @@ public class S_SellHouse extends ServerBasePacket {
 		writeC(Opcodes.S_HYPERTEXT_INPUT);
 		writeD(objectId);
 		writeD(0); // ?
-		writeD(100000); // 스핀 컨트롤의 초기 가격
-		writeD(100000); // 가격의 하한
-		writeD(2000000000); // 가격의 상한
+		writeD(100000); //スピンコントロールの初期価格
+		writeD(100000); // 価格の下限
+		writeD(2000000000); // 価格の上限
 		writeH(0); // ?
 		writeS("agsell");
 		writeS("agsell " + houseNumber);

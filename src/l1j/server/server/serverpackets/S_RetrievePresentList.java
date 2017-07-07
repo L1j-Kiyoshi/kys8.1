@@ -36,7 +36,7 @@ public class S_RetrievePresentList extends ServerBasePacket {
 				writeC(Opcodes.S_RETRIEVE_LIST);
 				writeD(objid);
 				writeH(size);
-				writeC(20); // 개인 창고
+				writeC(20); // 個人倉庫
 				L1ItemInstance item = null;
 				for (Object itemObject : warehouse.getItems()) {
 					item = (L1ItemInstance) itemObject;
@@ -48,7 +48,7 @@ public class S_RetrievePresentList extends ServerBasePacket {
 					writeC(item.isIdentified() ? 1 : 0);
 					writeS(item.getViewName());
 					if (!item.isIdentified()) {
-						// 미감정의 경우 스테이터스를 보낼 필요는 없다
+						// 米感情の場合ステータスを送信する必要はない
 						writeC(0);
 					} else {
 						byte[] status = item.getStatusBytes();
@@ -64,7 +64,7 @@ public class S_RetrievePresentList extends ServerBasePacket {
 			writeH(0x00);
 			writeH(0x08);
 		} else {
-			pc.sendPackets(new S_ServerMessage(263)); // \f1한사람의 캐릭터가 가지고 걸을 수 있는 아이템은 최대 180개까지입니다.
+			pc.sendPackets(new S_ServerMessage(263)); // \f1一人のキャラクターが持って歩くことができるアイテムは最大180個までです。
 		}
 	}
 
@@ -72,7 +72,7 @@ public class S_RetrievePresentList extends ServerBasePacket {
 		writeC(Opcodes.S_RETRIEVE_LIST);
 		writeD(0);
 		writeH(pc.getInventory().getSize());
-		writeC(20); // 개인 창고
+		writeC(20); // 個人倉庫
 		L1ItemInstance item = null;
 		for (Object itemObject : pc.getInventory().getItems()) {
 			item = (L1ItemInstance) itemObject;

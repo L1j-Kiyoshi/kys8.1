@@ -43,7 +43,7 @@ public class S_RetrievePackageList extends ServerBasePacket {
 				writeD(objid);
 				writeH(size);
 				writeC(3);
-				//writeC(12); // 6 : 무반응 7 : 팅 8 : 요정창고 맡기기 9: 요정찾기 15:패키지상점
+				//writeC(12); // 6 : 無反応7：ティング8：妖精倉庫任せる9：妖精検索15：パッケージ店
 				L1ItemInstance item = null;
 				for (Object itemObject : w.getItems()) {
 					item = (L1ItemInstance) itemObject;
@@ -65,7 +65,7 @@ public class S_RetrievePackageList extends ServerBasePacket {
 			} else
 				NonValue = true;
 		} else {
-			pc.sendPackets(new S_ServerMessage(263)); // \f1한사람의 캐릭터가 가지고 걸을 수있는 아이템은 최대 180개까지입니다.
+			pc.sendPackets(new S_ServerMessage(263)); // \f1一人のキャラクターが持って歩くことができるアイテムは最大180個までです。
 		}
 	}
 

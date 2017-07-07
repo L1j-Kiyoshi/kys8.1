@@ -49,7 +49,7 @@ public class S_PetPack extends ServerBasePacket {
 		writeC(pet.getStatus()); // Modes in List.spr
 		writeC(pet.getHeading());
 		writeC(pet.getLight().getChaLightSize()); // (Bright) - 0~15
-		writeC(pet.getMoveSpeed()); // 스피드 - 0:normal, 1:fast,
+		writeC(pet.getMoveSpeed()); // スピード - 0:normal, 1:fast,
 		// 2:slow
 		writeD(pet.getExp());
 		writeH(pet.getTempLawful());
@@ -66,7 +66,7 @@ public class S_PetPack extends ServerBasePacket {
 		writeS(null); // ??
 		writeS(pet.getMaster() != null ? pet.getMaster().getName() : "");
 		writeC(0); // ??
-		// HP의 퍼센트
+		// HPのパーセント
 		if (pet.getMaster() != null && pet.getMaster().getId() == pc.getId()) {
 			writeC(100 * pet.getCurrentHp() / pet.getMaxHp());
 		} else {

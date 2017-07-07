@@ -43,8 +43,8 @@ public class FaceToFace {
 		List<L1PcInstance> players = L1World.getInstance().getVisiblePlayer(pc,
 				1);
 
-		if (players.size() == 0) { // 1 셀 이내에 PC가 없는 경우
-			pc.sendPackets(new S_ServerMessage(93)); // \f1 거기에는 아무도 없습니다.
+		if (players.size() == 0) { // 1セル内にPCがない場合
+			pc.sendPackets(new S_ServerMessage(93)); // \f1 そこには誰もいません。
 			return null;
 		}
 		for (L1PcInstance target : players) {
@@ -55,7 +55,7 @@ public class FaceToFace {
 				if (targetHeading == 4) {
 					return target;
 				} else {
-					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0이 당신을 보고 있지 않습니다.
+					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0あなたを見ていません。
 					return null;
 				}
 			} else if (pcHeading == 1 && pcX == (targetX - 1)
@@ -63,14 +63,14 @@ public class FaceToFace {
 				if (targetHeading == 5) {
 					return target;
 				} else {
-					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0이 당신을 보고 있지 않습니다.
+					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0あなたを見ていません。
 					return null;
 				}
 			} else if (pcHeading == 2 && pcX == (targetX - 1) && pcY == targetY) {
 				if (targetHeading == 6) {
 					return target;
 				} else {
-					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0이 당신을 보고 있지 않습니다.
+					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0あなたを見ていません。
 					return null;
 				}
 			} else if (pcHeading == 3 && pcX == (targetX - 1)
@@ -78,14 +78,14 @@ public class FaceToFace {
 				if (targetHeading == 7) {
 					return target;
 				} else {
-					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0이 당신을 보고 있지 않습니다.
+					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0あなたを見ていません。
 					return null;
 				}
 			} else if (pcHeading == 4 && pcX == targetX && pcY == (targetY - 1)) {
 				if (targetHeading == 0) {
 					return target;
 				} else {
-					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0이 당신을 보고 있지 않습니다.
+					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0あなたを見ていません。
 					return null;
 				}
 			} else if (pcHeading == 5 && pcX == (targetX + 1)
@@ -93,14 +93,14 @@ public class FaceToFace {
 				if (targetHeading == 1) {
 					return target;
 				} else {
-					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0이 당신을 보고 있지 않습니다.
+					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0あなたを見ていません。
 					return null;
 				}
 			} else if (pcHeading == 6 && pcX == (targetX + 1) && pcY == targetY) {
 				if (targetHeading == 2) {
 					return target;
 				} else {
-					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0이 당신을 보고 있지 않습니다.
+					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0あなたを見ていません。
 					return null;
 				}
 			} else if (pcHeading == 7 && pcX == (targetX + 1)
@@ -108,12 +108,12 @@ public class FaceToFace {
 				if (targetHeading == 3) {
 					return target;
 				} else {
-					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0이 당신을 보고 있지 않습니다.
+					pc.sendPackets(new S_ServerMessage(91, target.getName())); // \f1%0あなたを見ていません。
 					return null;
 				}
 			}
 		}
-		pc.sendPackets(new S_ServerMessage(93)); // \f1 거기에는 아무도 없습니다.
+		pc.sendPackets(new S_ServerMessage(93)); // \f1 そこには誰もいません。
 		return null;
 	}
 	
@@ -124,8 +124,8 @@ public class FaceToFace {
 		int pcHeading = pc.getHeading();
 		List<L1Object> list = L1World.getInstance().getVisibleObjects(pc, 1);
 
-		if (list.size() == 0) { // 1 셀 이내에 PC가 없는 경우
-			pc.sendPackets(new S_ServerMessage(93)); // \f1 거기에는 아무도 없습니다.
+		if (list.size() == 0) { // 1セル内にPCがない場合
+			pc.sendPackets(new S_ServerMessage(93)); // \f1 そこには誰もいません。
 			return null;
 		}
 		L1Character target = null;

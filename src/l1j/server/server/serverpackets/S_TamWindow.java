@@ -15,7 +15,7 @@ public class S_TamWindow extends ServerBasePacket {
 	private byte[] _byte = null;
 	private static final String S_TAMWINDOW = "S_TAMWINDOW";
 	
-	public static final int ACCOUNT_TAM = 0xCD;//계정 탐 정보창
+	public static final int ACCOUNT_TAM = 0xCD;//アカウント乗車情報ウィンドウ
 	
 	public static final int Buff = 0x6e;
 	
@@ -63,7 +63,7 @@ public class S_TamWindow extends ServerBasePacket {
 		writeH(0x0068);
 		writeH(0x0070);
 
-		writeH(0);// 시간값46 e7
+		writeH(0);// 時間値46 e7
 	}
 	public S_TamWindow(String account) {
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
@@ -117,31 +117,31 @@ public class S_TamWindow extends ServerBasePacket {
 				writeC(0x0a);//
 				// System.out.println(objidcount);
 				writeC(_Name.getBytes().length + 14 + objidcount/* addlen */
-						+ tamcount);// 패킷전체길이
+						+ tamcount);// パケット全体の長さ
 				writeC(0x08);//
-				writeC(0x00);// 변화 (서버 다를 변경)
+				writeC(0x00);// 変化（サーバー異なる変更）
 				writeC(0x10);//
-				byteWrite(_objid);// 탐 있을때 올라감.
-				//write4bit(_objid);//테스트
+				byteWrite(_objid);// 乗車いる時上がる。
+				//write4bit(_objid);//テスト
 				
 				writeC(0x18);
 				if (time == 0) {
-					writeC(0);// 탐
+					writeC(0);// 乗車
 				} else {
-					byteWrite(time / 1000);// 탐 있을때 올라감.
+					byteWrite(time / 1000);// 乗車いる時上がる。
 					//write4bit(time/1000);
 				}
 				writeC(0x20);
 				writeC(tamwaitcount(_objid));
 				writeC(0x2a);//
-				writeC(_Name.getBytes().length);// 이름 길이
-				writeByte(_Name.getBytes());// 이름 뒤에 0 없는이름.
+				writeC(_Name.getBytes().length);// 名前の長さ
+				writeByte(_Name.getBytes());// 名前の後に0ない名前。
 				writeC(0x30);//
-				writeC(_level);// 레벨
+				writeC(_level);// レベル
 				writeC(0x38);//
-				writeC(_class);// 클래스번호
+				writeC(_class);// クラス番号
 				writeC(0x40);//
-				writeC(_sex);// _sex);//남자여자?
+				writeC(_sex);// _sex);//男女性？
 			}
 			writeC(0x10);
 			writeC(0x03);
@@ -219,10 +219,10 @@ public class S_TamWindow extends ServerBasePacket {
 		ResultSet rs = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM tam WHERE objid = ?"); // 케릭터
-																				// 테이블에서
-																				// 군주만
-																				// 골라와서
+			pstm = con.prepareStatement("SELECT * FROM tam WHERE objid = ?"); // キャラクター
+																				// テーブルで
+																				// 君主のみ
+																				// 選ん来
 			pstm.setInt(1, obj);
 			rs = pstm.executeQuery();
 			while (rs.next()) {

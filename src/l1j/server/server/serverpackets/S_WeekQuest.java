@@ -52,18 +52,18 @@ public class S_WeekQuest extends ServerBasePacket {
 
 			for(int i = 0 ; i < 3 ; i++){
 				writeC(0x12);
-				writeC(0x2e); // 한 clear의 길이
+				writeC(0x2e); // したclearの長さ
 				writeC(0x08);
 				writeC(i);
 				writeC(0x18);
 				if(pc.isLineClear(i)){
 					if(pc.getReward(i)){
-						writeC(0x05); //보상을 받았음
+						writeC(0x05); //補償を受けた
 					}else{
-						writeC(0x03); //안받고 완료 상태
+						writeC(0x03); //受けなく完了状態
 					}
 				}else{
-					writeC(0x01); //진행중
+					writeC(0x01); //進行中
 				}
 				for(int j = 0 ; j < 3;j++){
 					writeC(0x22);
@@ -82,10 +82,10 @@ public class S_WeekQuest extends ServerBasePacket {
 					writeC(0x18);
 				
 					switch(i){
-						case 0: //ㅊ1번줄
+						case 0: //1ボンジュル
 							switch(j){
 								case 0:
-									//여기에다가 pc.getWeekType()에 따른 몬스터를 추가
+									//これに加えがpc.getWeekType（）によるモンスターを追加
 									switch(pc.getWeekType()){
 										case 1:
 											writeC(0x96);
@@ -242,7 +242,7 @@ public class S_WeekQuest extends ServerBasePacket {
 							
 					}
 					writeC(0x20);
-					writeC(0xce); //원래는 여기에 몬스터도감의 있는 번호가 들어가야함
+					writeC(0xce); //もともとはここにモンスター図鑑のある番号が入ること
 					writeC(0x01);
 				
 					writeC(0x28);

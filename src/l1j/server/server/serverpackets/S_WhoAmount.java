@@ -29,7 +29,7 @@ public class S_WhoAmount extends ServerBasePacket {
 		writeC(0x01);
 		writeS(amount);		
 		//by.lins
-		writeD(0);	// 더미로 넣어야 안팅김
+		writeD(0);	// 山に入れないチンギム
 		//by.lins
 	}
 

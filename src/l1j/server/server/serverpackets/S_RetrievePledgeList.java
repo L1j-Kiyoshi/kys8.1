@@ -31,7 +31,7 @@ import l1j.server.server.model.Warehouse.WarehouseManager;
 
 public class S_RetrievePledgeList extends ServerBasePacket {
 	public boolean NonValue = false;
-	public boolean 사용중 = false;
+	public boolean InUse = false;
 	public S_RetrievePledgeList(int objid, L1PcInstance pc) {
 		L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 		if (clan == null) {
@@ -50,17 +50,17 @@ public class S_RetrievePledgeList extends ServerBasePacket {
 
 				
 				if (usingPc.getClan() == clan) {
-					// \f1 혈맹원이 창고를 사용중입니다.당분간 지나고 나서 이용해 주세요.
-					pc.sendPackets(new S_ChatPacket(pc,"" + usingPc.getName() + "께서 현재 혈맹창고를 사용중입니다."));
-					사용중 = true;
+					// \f1 血盟員が倉庫を使用中です。しばらく経ってから利用してください。
+					pc.sendPackets(new S_ChatPacket(pc,"" + usingPc.getName() + "が現在の血盟倉庫を使用中です。"));
+					InUse = true;
 					return;
 				}
 			}
 			if (!clanWarehouse.setWarehouseUsingChar(pc.getId(), id)) {
-				// 그사이에 누가 끼어들어온 경우
-				// \f1 혈맹원이 창고를 사용중입니다.당분간 지나고 나서 이용해 주세요.
-				pc.sendPackets(new S_ChatPacket(pc,"" + clanWarehouse.getName() + "께서 현재 혈맹창고를 사용중입니다."));
-				사용중 = true;
+				// その間に誰挟まっ入った場合
+				// \f1 血盟員が倉庫を使用中です。しばらく経ってから利用してください。
+				pc.sendPackets(new S_ChatPacket(pc,"" + clanWarehouse.getName() + "が現在の血盟倉庫を使用中です。"));
+				InUse = true;
 				return;
 			}
 		}
@@ -71,7 +71,7 @@ public class S_RetrievePledgeList extends ServerBasePacket {
 				writeC(Opcodes.S_RETRIEVE_LIST);
 				writeD(objid);
 				writeH(size);
-				writeC(5); // 혈맹 창고
+				writeC(5); // 血盟倉庫
 				L1ItemInstance item = null;
 				for (Object itemObject : clanWarehouse.getItems()) {
 					item = (L1ItemInstance) itemObject;
@@ -94,8 +94,8 @@ public class S_RetrievePledgeList extends ServerBasePacket {
 			}
 		} else {
 			clanWarehouse.setWarehouseUsingChar(0, 0);
-			pc.sendPackets(new S_ServerMessage(263)); // \f1한사람의 캐릭터가 가지고 걸을 수
-														// 있는 아이템은 최대 180개까지입니다.
+			pc.sendPackets(new S_ServerMessage(263)); // \f1一人のキャラクターが持って歩くことができ
+														// アイテムは、最大180個までです。
 		}
 	}
 

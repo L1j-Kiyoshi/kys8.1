@@ -48,7 +48,7 @@ public class CalcExp {
 		L1Object l1object = L1World.getInstance().findObject(targetid);
 		L1NpcInstance npc = (L1NpcInstance) l1object;
 
-		// 헤이트의 합계를 취득
+		// ヘイトの合計を取得
 		L1Character acquisitor;
 		int hate = 0;
 		int acquire_exp = 0;
@@ -72,12 +72,12 @@ public class CalcExp {
 				if (acquisitor instanceof L1PcInstance) {
 					totalHateLawful += hate;
 				}
-			} else { // null였거나 죽어 있으면(자) 배제
+			} else { // nullだったり死んでいると排除
 				acquisitorList.remove(i);
 				hateList.remove(i);
 			}
 		}
-		if (totalHateExp == 0) { // 취득자가 없는 경우
+		if (totalHateExp == 0) { // 取得者がいない場合
 			return;
 		}
 
@@ -91,9 +91,9 @@ public class CalcExp {
 			}
 			int lawful = npc.getLawful();
 
-			if (l1pcinstance.isInParty()) { // 파티중
-				// 파티의 헤이트의 합계를 산출
-				// 파티 멤버 이외에는 그대로 배분
+			if (l1pcinstance.isInParty()) { // パーティー中
+				// パーティーのヘイトの合計を算出
+				// パーティメンバー以外のまま配分
 				partyHateExp = 0;
 				partyHateLawful = 0;
 				for (i = hateList.size() - 1; i >= 0; i--) {
@@ -147,9 +147,9 @@ public class CalcExp {
 					party_lawful = (lawful * partyHateLawful / totalHateLawful);
 				}
 
-				// EXP, 로우훌 배분
+				// EXP, ローフル配分
 
-				// 프리보나스
+				// フリーヴォナス
 				double pri_bonus = 0;
 				L1PcInstance leader = l1pcinstance.getParty().getLeader();
 				if (leader.isCrown()
@@ -158,7 +158,7 @@ public class CalcExp {
 					pri_bonus = 0.059;
 				}
 
-				// PT경험치의 계산
+				// PT経験値の計算
 				L1PcInstance[] ptMembers = l1pcinstance.getParty().getMembers();
 				double pt_bonus = 0;
 				for (L1PcInstance each : l1pcinstance.getParty().getMembers()) {
@@ -172,7 +172,7 @@ public class CalcExp {
 
 				party_exp = (int) (party_exp * (1 + pt_bonus + pri_bonus));
 
-				// 자캐릭터와 그 애완동물·사몬의 헤이트의 합계를 산출
+				// 自キャラとそのペット・サーモンのヘイトの合計を算出
 				if (party_level > 0) {
 					dist = ((l1pcinstance.getLevel() * l1pcinstance.getLevel()) / party_level);
 				}
@@ -202,8 +202,8 @@ public class CalcExp {
 						}
 					}
 				}
-				// 자캐릭터와 그 애완동물·사몬에 분배
-				if (ownHateExp != 0) { // 공격에 참가하고 있었다
+				// 自キャラとそのペット・サーモンに分配
+				if (ownHateExp != 0) { // 攻撃に参加していた
 					for (i = hateList.size() - 1; i >= 0; i--) {
 						acquisitor = (L1Character) acquisitorList.get(i);
 						hate = (Integer) hateList.get(i);
@@ -214,7 +214,7 @@ public class CalcExp {
 									acquire_exp = (member_exp * hate / ownHateExp);
 								}
 								
-								if(pc.getMapId() == 111 || pc.getMapId() == 1700){ //정상
+								if(pc.getMapId() == 111 || pc.getMapId() == 1700){ //通常の
 									int newExp = (exp * partyHateExp / totalHateExp);
 									AddExp(pc, newExp, member_lawful);
 								}else{
@@ -234,9 +234,9 @@ public class CalcExp {
 						} else if (acquisitor instanceof L1SummonInstance) {
 						}
 					}
-				} else { // 공격에 참가하고 있지 않았다
-					// 자캐릭터에만 분배
-					if(l1pcinstance.getMapId() == 111 || l1pcinstance.getMapId() == 1700){ //정상
+				} else { //攻撃に参加していなかった
+					// 自キャラのみ分配
+					if(l1pcinstance.getMapId() == 111 || l1pcinstance.getMapId() == 1700){ //通常の
 						int newExp = (exp * partyHateExp / totalHateExp);
 						AddExp(l1pcinstance, newExp, member_lawful);
 					}else{
@@ -244,7 +244,7 @@ public class CalcExp {
 					}
 				}
 
-				// 파티 멤버와 그 애완동물·사몬의 헤이트의 합계를 산출
+				// パーティーメンバーとそのペット・サーモンのヘイトの合計を算出
 				for (int cnt = 0; cnt < ptMembers.length; cnt++) {
 					if (l1pcinstance.knownsObject(ptMembers[cnt])) {
 						if (party_level > 0) {
@@ -279,8 +279,8 @@ public class CalcExp {
 								}
 							}
 						}
-						// 파티 멤버와 그 애완동물·사몬에 분배
-						if (ownHateExp != 0) { // 공격에 참가하고 있었다
+						// パーティーメンバーとそのペット・サーモンに分配
+						if (ownHateExp != 0) { // 攻撃に参加していた
 							for (i = hateList.size() - 1; i >= 0; i--) {
 								acquisitor = (L1Character) acquisitorList
 										.get(i);
@@ -291,7 +291,7 @@ public class CalcExp {
 										if (ownHateExp > 0) {
 											acquire_exp = (member_exp * hate / ownHateExp);
 										}
-										if(pc.getMapId() == 111 || pc.getMapId() == 1700){ //정상
+										if(pc.getMapId() == 111 || pc.getMapId() == 1700){ //通常の
 											int newExp = (exp * partyHateExp / totalHateExp);
 											AddExp(pc, newExp, member_lawful);
 										}else{
@@ -311,9 +311,9 @@ public class CalcExp {
 								} else if (acquisitor instanceof L1SummonInstance) {
 								}
 							}
-						} else { // 공격에 참가하고 있지 않았다
-							// 파티 멤버에만 분배
-							if(ptMembers[cnt].getMapId() == 111 || ptMembers[cnt].getMapId() == 1700){ //정상
+						} else { // 攻撃に参加していなかった
+							// パーティメンバーのみ分配
+							if(ptMembers[cnt].getMapId() == 111 || ptMembers[cnt].getMapId() == 1700){ //通常の
 								int newExp = (exp * partyHateExp / totalHateExp);
 								AddExp(ptMembers[cnt], newExp, member_lawful);
 							}else{
@@ -322,8 +322,8 @@ public class CalcExp {
 						}
 					}
 				}
-			} else { // 파티를 짜지 않았다
-				// EXP, 로우훌의 분배
+			} else { // パーティーを組まなかった
+				// EXP, ローフルの分配
 				for (i = hateList.size() - 1; i >= 0; i--) {
 					acquisitor = (L1Character) acquisitorList.get(i);
 					hate = (Integer) hateList.get(i);
@@ -354,13 +354,13 @@ public class CalcExp {
 		int add_lawful = (int) (lawful * Config.RATE_LAWFUL) * -1;
 		pc.addLawful(add_lawful);
 
-		/** 로봇시스템 **/
+		/** ロボットシステム **/
 		if(pc.getRobotAi() != null ){			
 			return;
 		}
 		
-		if (pc.getLevel()>=Config.LIMITLEVEL && pc.getExp()>=ExpTable.getExpByLevel(Config.LIMITLEVEL+1)){//경험치
-			pc.sendPackets(new S_ChatPacket(pc,"레벨제한으로 더이상 경험치 획득이 불가능합니다"));
+		if (pc.getLevel()>=Config.LIMITLEVEL && pc.getExp()>=ExpTable.getExpByLevel(Config.LIMITLEVEL+1)){//経験値
+			pc.sendPackets(new S_ChatPacket(pc,"レベル制限にもう経験値獲得が不可能です"));
 				return;
 			}
 		
@@ -371,8 +371,8 @@ public class CalcExp {
 		double levelupBonus = 0;
 		double abyssBonus = 0;
 		double clanBonus = 0;
-		double comboBonus = 0; //콤보시스템
-		double addexp1 = 0; //성장의문장
+		double comboBonus = 0; //コンボシステム
+		double addexp1 = 0; //成長の文章
 		
 		if (pc.getPeerage() == 1){ abyssBonus += 0.05;
 		} else if (pc.getPeerage() == 2){ abyssBonus += 0.1;
@@ -394,25 +394,25 @@ public class CalcExp {
 		} else if (pc.getPeerage() == 18){ abyssBonus += 0.9; }
 		
 		if(pc.getClanname() != null && pc.getClanid() > 0){
-			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_ONE && pc.getClan().getClanExp() < Config.CLAN_EXP_TWO){ // 혈맹1레벨
+			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_ONE && pc.getClan().getClanExp() < Config.CLAN_EXP_TWO){ // 血盟レベル1
 				clanBonus += 0.1;
 			}
-			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_TWO && pc.getClan().getClanExp() < Config.CLAN_EXP_THREE){ // 혈맹2레벨
+			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_TWO && pc.getClan().getClanExp() < Config.CLAN_EXP_THREE){ // 血盟2レベル
 				clanBonus += 0.15;
 			}
-			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_THREE && pc.getClan().getClanExp() < Config.CLAN_EXP_FOUR){ // 혈맹3레벨
+			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_THREE && pc.getClan().getClanExp() < Config.CLAN_EXP_FOUR){ // 血盟レベル3
 				clanBonus += 0.2;
 			}
-			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_FOUR && pc.getClan().getClanExp() < Config.CLAN_EXP_FIVE){ // 혈맹4레벨
+			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_FOUR && pc.getClan().getClanExp() < Config.CLAN_EXP_FIVE){ // 血盟レベル4
 				clanBonus += 0.25;
 			}
-			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_FIVE && pc.getClan().getClanExp() < Config.CLAN_EXP_SIX){ // 혈맹5레벨
+			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_FIVE && pc.getClan().getClanExp() < Config.CLAN_EXP_SIX){ // 血盟レベル5
 				clanBonus += 0.3;
 			}
-			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_SIX && pc.getClan().getClanExp() < Config.CLAN_EXP_SEVEN){ // 혈맹6레벨
+			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_SIX && pc.getClan().getClanExp() < Config.CLAN_EXP_SEVEN){ // 血盟レベル6
 				clanBonus += 0.4;
 			}
-			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_SEVEN){ // 혈맹7레벨
+			if(pc.getClan().getClanExp() >= Config.CLAN_EXP_SEVEN){ // 血盟レベル7
 				clanBonus += 0.5;
 			}
 		}
@@ -470,12 +470,12 @@ public class CalcExp {
 			beginnerBonus += 0.5;
 		}
 		
-		//직장인
+		//会社員
 		if (pc.getInventory().checkEquipped(10000)) {
 			beginnerBonus += 1.5;
 		}
 		
-		// 성장의문장
+		// 成長の文章
 		int 성장의문장 = pc.getInventory().getEnchantCount(900020);
 		if (pc.getInventory().checkEquipped(900020)) {
 			beginnerBonus += (0.1 * 성장의문장);
@@ -582,22 +582,22 @@ public class CalcExp {
 		
 		double clanOnlineBonus = 0;
 		
-		/** 혈맹버프 추가경험치 20% **/
+		/** 血盟バフ追加経験値 20% **/
 		if (pc.getClanid() != 0) {
 			if (pc.getClan().getOnlineClanMember().length >= Config.CLAN_COUNT) {
 				clanOnlineBonus += 0.10;
-				//System.out.println("혈맹 : " + clanOnlineBonus);
+				//System.out.println("血盟 : " + clanOnlineBonus);
 			}
 		}
 		
-		/** 성혈추가경험치지급 **/
+		/** 腥血追加経験値支給 **/
 		double BloodBonus = 0;	
 		if (clan != null && clan.getCastleId() != 0) {
 			BloodBonus += Config.성혈경험치;
-			//System.out.println("성혈 : " + BloodBonus);
+			//System.out.println("腥血 : " + BloodBonus);
 		}
 				
-		/** 수련던전 해당레벨 부터 경험치안받도록 사용금지 리뉴얼됨 **/
+		/** 修練ケイブそのレベルから経験治安受ける使用禁止リニューアルされまし **/
 		if ((pc.getLevel() >= 1 && pc.getLevel() <= 2) && (pc.getMapId() >= 25 && pc.getMapId() <= 28)) {
 			return;
 		}
@@ -606,16 +606,16 @@ public class CalcExp {
 				+ foodBonus + clanBonus + expposion + comboBonus + einhasadBonus + emeraldBonus + clanOnlineBonus + BloodBonus 
 				+ dollBonus + addexp1));
 	
-		// 폭렙방지
+		// ポクレプ防止
 		if (pc.getLevel() >= 1) {
 			if ((add_exp + pc.getExp()) > ExpTable.getExpByLevel((pc.getLevel() + 1))) {
 				add_exp = (ExpTable.getExpByLevel((pc.getLevel() + 1)) - pc.getExp());
 			}
 		}
 		
-		// 레벨제한
+		// レベル制限
 		if (pc.getLevel() >= GameServerSetting.getInstance().get_maxLevel()) {
-			// 다음레벨에 필요한 경험치
+			// 次のレベルに必要な経験値
 			int maxexp = ExpTable.getExpByLevel(GameServerSetting.getInstance().get_maxLevel() + 1);
 			if (pc.getExp() + add_exp >= maxexp) {
 				return;
@@ -623,7 +623,7 @@ public class CalcExp {
 		}
 	
 		pc.addExp(add_exp);
-		//System.out.println("기본 : " + add_exp);
+		//System.out.println("基本 : " + add_exp);
 		pc.addMonsterKill(1);
 	}
 
@@ -655,11 +655,11 @@ public class CalcExp {
 		pet.setExpPercent(expPercentage);
 		pc.sendPackets(new S_PetPack(pet, pc));
 
-		if (gap != 0) { // 레벨업하면(자) DB에 기입한다
-			pc.sendPackets(new S_SkillSound(pet.getId(), 6353));// /이건 자기한데 보이게
-			Broadcaster.broadcastPacket(pc, new S_SkillSound(pet.getId(), 6353));// 이거는 다른 사람도 보게...
+		if (gap != 0) { // レベルアップすると、DBに書き込む
+			pc.sendPackets(new S_SkillSound(pet.getId(), 6353));// /これ自己のに見える
+			Broadcaster.broadcastPacket(pc, new S_SkillSound(pet.getId(), 6353));// これは、他の人も見る...
 			L1Pet petTemplate = PetTable.getInstance().getTemplate(petItemObjId);
-			if (petTemplate == null) { // PetTable에 없다
+			if (petTemplate == null) { // PetTableにない
 				_log.warning("L1Pet == null");
 				return;
 			}
@@ -667,8 +667,8 @@ public class CalcExp {
 			petTemplate.set_level(pet.getLevel());
 			petTemplate.set_hp(pet.getMaxHp());
 			petTemplate.set_mp(pet.getMaxMp());
-			PetTable.getInstance().storePet(petTemplate); // DB에 기입해
-			pc.sendPackets(new S_ServerMessage(320, pet.getName())); // \f1%0의 레벨이 올랐습니다.
+			PetTable.getInstance().storePet(petTemplate); // DBに書き込まれ
+			pc.sendPackets(new S_ServerMessage(320, pet.getName())); // \f1%0のレベルが上がりました。
 		}
 	}
 }

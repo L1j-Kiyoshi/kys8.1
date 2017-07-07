@@ -85,9 +85,9 @@ public class PremiumTimeController implements Runnable {
 			
 			long sysTime = System.currentTimeMillis();
 			if (pc.PC방_버프) {
-				if (pc.getAccount().getBuff_PC방() != null) {
-					if (sysTime <= pc.getAccount().getBuff_PC방().getTime()) {
-						long 피씨타임 = pc.getAccount().getBuff_PC방().getTime() - sysTime;
+				if (pc.getAccount().getBuff_PCRoom() != null) {
+					if (sysTime <= pc.getAccount().getBuff_PCRoom().getTime()) {
+						long 피씨타임 = pc.getAccount().getBuff_PCRoom().getTime() - sysTime;
 						TimeZone seoul = TimeZone.getTimeZone(Config.TIME_ZONE);
 						Calendar calendar = Calendar.getInstance(seoul);
 						calendar.setTimeInMillis(피씨타임);

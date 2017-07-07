@@ -15,7 +15,7 @@ import l1j.server.server.model.Instance.L1TrapInstance;
 
 public class AStar {
 
-	// 열린 노드, 닫힌 노드 리스트
+	// 開かれたノード、閉じたノードリスト
 	Node OpenNode, ClosedNode;
 	private L1NpcInstance _npc = null;
 
@@ -23,7 +23,7 @@ public class AStar {
 		_npc = npc;
 	}
 
-	// 최대 루핑 회수
+	// 最大屋根回収
 	static final int LIMIT_LOOP = 200;
 	// private List<Node> pool;
 	// private List<Node> sabu;
@@ -51,7 +51,7 @@ public class AStar {
 
 	// *************************************************************************
 	// Name : AStar()
-	// Desc : 생성자
+	// Desc : コンストラクタ
 	// *************************************************************************
 	public AStar() {
 		// sabu = new ArrayList<Node>();
@@ -87,7 +87,7 @@ public class AStar {
 
 	// *************************************************************************
 	// Name : ResetPath()
-	// Desc : 이전에 생성된 경로를 제거
+	// Desc : 以前に作成されたパスを削除
 	// *************************************************************************
 	public void cleanTail() {
 		Node tmp;
@@ -122,25 +122,14 @@ public class AStar {
 			setPool(ClosedNode);
 			ClosedNode = tmp;
 		}
-
-		/*
-		 * if(cnt > 5000){
-		 * System.out.println("인서트 이름 "+_npc.getName()+" x:"+_npc
-		 * .getX()+" y:"+_npc.getY()+" m:"+_npc.getMapId());
-		 * System.out.println(_npc.isDead()); L1PcInstance[] gm =
-		 * Config.toArray접속채팅모니터(); gm[0].dx= _npc.getX(); gm[0].dy=
-		 * _npc.getY(); gm[0].dm= _npc.getMapId();
-		 * gm[0].dh=gm[0].getMoveState().getHeading(); gm[0].setTelType(7);
-		 * gm[0].sendPackets(new S_SabuTell(gm[0])); }
-		 */
 	}
 
 	// *************************************************************************
 	// Name : FindPath()
-	// Desc : 시작위치와 목표위치를 입력 받아 경로노드 리스트를 반환
+	// Desc : 開始位置と目標位置の入力を受け、パスノードのリストを返す
 	// *************************************************************************
-	// 몬스터좌표 sx, xy
-	// 이동할좌표 tx, ty
+	// モンスターの座標sx、xy
+	// 移動座標tx、ty
 	public Node searchTail(L1Object o, int tx, int ty, int m, boolean obj) {
 		int calcx = o.getX() - tx;
 		int calcy = o.getY() - ty;
@@ -155,7 +144,7 @@ public class AStar {
 			 * if(o instanceof L1NpcInstance){ L1NpcInstance npp =
 			 * (L1NpcInstance)o; if(npp.getNpcId() >=100750 && npp.getNpcId() <=
 			 * 100757){
-			 * 
+			 *
 			 * }else{ return null; } }
 			 */
 
@@ -165,7 +154,7 @@ public class AStar {
 		int sx = o.getX();
 		int sy = o.getY();
 
-		// 처음 시작노드 생성
+		// 最初に起動ノードを作成
 		src = getPool();
 		src.g = 0;
 		src.h = (tx - sx) * (tx - sx) + (ty - sy) * (ty - sy);
@@ -173,24 +162,24 @@ public class AStar {
 		src.x = sx;
 		src.y = sy;
 
-		// 시작노드를 열린노드 리스트에 추가
+		// 開始ノードを開いて、ノードリストに追加
 		OpenNode = src;
 
-		// 길찾기 메인 루프
-		// 최대 반복 회수가 넘으면 길찾기 중지
+		// ルートメインループ
+		// 最大反復回数が越えると道順を停止
 		while (count < LIMIT_LOOP) {
 			if (_npc != null) {
 				if (_npc.isDead()) {
 					return null;
 				}
 			}
-			// 열린노드가 없다면 모든 노드를 검색했으므로 길찾기 중지
+			// 開かれたノードがない場合は、すべてのノードを検索したので、ルートを停止
 			if (OpenNode == null) {
-				// System.out.println("열린곳이없어");
+				// System.out.println("開かれたところがない");
 				return null;
 			}
 
-			// 열린노드의 첫번째 노드를 가져오고 열린노드에서 제거
+			// 開かれたノードの最初のノードを取得し、開かれたノードから削除
 			best = OpenNode;
 			if(best!=null)
 			System.out.println("Best.x : "+best.x+" Y : "+best.y);
@@ -198,21 +187,21 @@ public class AStar {
 			if(OpenNode!=null)
 			System.out.println("O.x : "+OpenNode.x+" Y : "+OpenNode.y);
 
-			// 가져온 노드를 닫힌노드에 추가
+			// インポートされたノードを閉じたノードに追加
 			best.next = ClosedNode;
 			if(ClosedNode!=null)
 			System.out.println("bn.x : "+ClosedNode.x+" Y : "+ClosedNode.y);
 			ClosedNode = best;
 			if(ClosedNode!=null)
 			System.out.println("bn.x : "+ClosedNode.x+" Y : "+ClosedNode.y);
-			// 현재 가져온 노드가 목표노드라면 길찾기 성공
+			// 現在取得したノードが目標ノードであれば、道を見つける成功
 			if (best.x == tx && best.y == ty) {
 				return best;
 			}
 
-			// 현재 노드와 인접한 노드들로 확장하여 열린노드로 추가
+			// 現在のノードと隣接ノードに拡張して開かれたノードに追加
 			if (MakeChild(o, best, tx, ty, obj) == 0 && count == 0) {
-				// System.out.println("막혀있어..");
+				// System.out.println("詰まっていて。");
 				return null;
 			}
 
@@ -224,10 +213,10 @@ public class AStar {
 
 	// *************************************************************************
 	// Name : MakeChild()
-	// Desc : 입력받은 노드의 인접한 노드들로 확장
+	// Desc : 入力されたノードの隣接ノードに拡張
 	// *************************************************************************
-	// 리니지 환경에 맞게 재수정 by sabu
-	private char 메이크차일드(L1Object o, Node node, int tx, int ty, boolean obj) {
+	// リネージュ環境に合わせて再修正
+	private char make_Child(L1Object o, Node node, int tx, int ty, boolean obj) {
 		int x, y;
 		char flag = 0;
 
@@ -239,18 +228,18 @@ public class AStar {
 		 * if(npp.getNpcId() >=100750 && npp.getNpcId() <= 100757){ ckckck =
 		 * true; } }
 		 */
-		// 인접한 노드로 이동가능한지 검사
+		// 隣接ノードに移動可能かどうかのチェック
 		for (int i = 0; i < 8; ++i) {
 			if (ckckck || World.isThroughObject(x, y, o.getMapId(), i)) {
 				int nx = x + getXY(i, true);
 				int ny = y + getXY(i, false);
 				boolean ck = true;
-				// 골인지점의 좌표는 검색할필요 없음.
+				// ゴール地点の座標は、リトリーブ必要なし。
 				if (tx != nx || ty != ny) {
 					if (obj) {
 						if (o instanceof L1DollInstance) {
 							ck = true;
-						} else if (World.문이동(x, y, o.getMapId(), i) == true) {
+						} else if (World.moveDoor(x, y, o.getMapId(), i) == true) {
 							ck = false;
 							/*
 							 * if(o instanceof L1NpcInstance){ L1NpcInstance np
@@ -301,11 +290,11 @@ public class AStar {
 
 	// *************************************************************************
 	// Name : FindPath()
-	// Desc : 근접한 위치 찾기.. 씨발 될려나
+	// Desc : 近接した位置検索。ファックドゥェルリョナ
 	// *************************************************************************
-	// 몬스터좌표 sx, xy
-	// 이동할좌표 tx, ty
-	public Node 근접서치타일(L1Object o, int tx, int ty, int m, boolean obj) {
+	// モンスターの座標 sx, xy
+	// 移動座標 tx, ty
+	public Node searchNearTile(L1Object o, int tx, int ty, int m, boolean obj) {
 		int calcx = o.getX() - tx;
 		int calcy = o.getY() - ty;
 		if (o instanceof L1RobotInstance) {
@@ -330,7 +319,7 @@ public class AStar {
 		int sx = o.getX();
 		int sy = o.getY();
 
-		// 처음 시작노드 생성
+		// 最初に起動ノードを作成
 		src = getPool();
 		src.g = 0;
 		src.h = (tx - sx) * (tx - sx) + (ty - sy) * (ty - sy);
@@ -338,39 +327,39 @@ public class AStar {
 		src.x = sx;
 		src.y = sy;
 
-		// 시작노드를 열린노드 리스트에 추가
+		// 開始ノードを開いて、ノードリストに追加
 		OpenNode = src;
 
-		// 길찾기 메인 루프
-		// 최대 반복 회수가 넘으면 길찾기 중지
+		// ルートメインループ
+		// 最大反復回数が越えると道順を停止
 		while (count < LIMIT_LOOP) {
 			if (_npc != null) {
 				if (_npc.isDead()) {
 					return null;
 				}
 			}
-			// 열린노드가 없다면 모든 노드를 검색했으므로 길찾기 중지
+			// 開かれたノードがない場合は、すべてのノードを検索したので、ルートを停止
 			if (OpenNode == null) {
-				// System.out.println("열린곳이없어");
+				// System.out.println("開かれたところがない");
 				return null;
 			}
 
-			// 열린노드의 첫번째 노드를 가져오고 열린노드에서 제거
+			// 開かれたノードの最初のノードを取得し、開かれたノードから削除
 			best = OpenNode;
 			OpenNode = best.next;
 
-			// 가져온 노드를 닫힌노드에 추가
+			// インポートされたノードを閉じたノードに追加
 			best.next = ClosedNode;
 			ClosedNode = best;
 
-			// 현재 가져온 노드가 목표노드라면 길찾기 성공
+			//現在取得したノードが目標ノードであれば、道を見つける成功
 			if (best.x == tx && best.y == ty) {
 				return best;
 			}
 
-			// 현재 노드와 인접한 노드들로 확장하여 열린노드로 추가
-			if (메이크차일드(o, best, tx, ty, obj) == 0 && count == 0) {
-				// System.out.println("막혀있어..");
+			// 現在のノードと隣接ノードに拡張して開かれたノードに追加
+			if (make_Child(o, best, tx, ty, obj) == 0 && count == 0) {
+				// System.out.println("詰まっていて。");
 				return null;
 			}
 
@@ -402,9 +391,9 @@ public class AStar {
 
 	// *************************************************************************
 	// Name : MakeChild()
-	// Desc : 입력받은 노드의 인접한 노드들로 확장
+	// Desc : 入力されたノードの隣接ノードに拡張
 	// *************************************************************************
-	// 리니지 환경에 맞게 재수정 by sabu
+	// リネージュ環境に合わせて再修正
 
 	private char MakeChild(L1Object o, Node node, int tx, int ty, boolean obj) {
 		int x, y;
@@ -419,19 +408,19 @@ public class AStar {
 		 * true; //Broadcaster.broadcastPacket(npp, new S_NpcChatPacket(npp,
 		 * "33333333333", 0)); } }
 		 */
-		// 인접한 노드로 이동가능한지 검사
+		// 隣接ノードに移動可能かどうかのチェック
 
 		for (int i = 0; i < 8; ++i) {
 			if (ckckck || World.isThroughObject(x, y, o.getMapId(), i)) {
 				int nx = x + getXY(i, true);
 				int ny = y + getXY(i, false);
 				boolean ck = true;
-				// 골인지점의 좌표는 검색할필요 없음.
+				// ゴール地点の座標は、リトリーブ必要なし。
 				if (tx != nx || ty != ny) {
 					if (obj) {
 						if (o instanceof L1DollInstance) {
 							ck = true;
-						} else if (World.문이동(x, y, o.getMapId(), i) == true) {
+						} else if (World.moveDoor(x, y, o.getMapId(), i) == true) {
 							ck = false;
 							/*
 							 * if(o instanceof L1NpcInstance){ L1NpcInstance npp
@@ -480,14 +469,14 @@ public class AStar {
 
 	// *************************************************************************
 	// Name : MakeChildSub()
-	// Desc : 노드를 생성. 열린노드나 닫힌노드에 이미 있는 노드라면
-	// 이전값과 비교하여 f가 더 작으면 정보 수정
-	// 닫힌노드에 있다면 그에 연결된 모든 노드들의 정보도 같이 수정
+	// Desc : ノードを生成します。開かれたノードまたは閉じたノードに既にあるノードであれば、
+	// 以前の値と比較して、fがより小さければ情報の修正
+	// 閉じたノードにある場合は、それに接続されたすべてのノードの情報も一緒に修正
 	// *************************************************************************
 	void MakeChildSub(Node node, int x, int y, int m, int tx, int ty) {
 		Node old = null, child = null;
 		int g = node.g + 1;
-		// 현재노드가 열린 노드에 있고 f가 더 작으면 정보 수정
+		// 現在のノードが開かれたノードにあり、fがより小さければ情報の修正
 		if ((old = IsOpen(x, y, m)) != null) {
 			if (g < old.g) {
 				old.prev = node;
@@ -495,17 +484,17 @@ public class AStar {
 				old.f = old.h + old.g;
 			}
 
-			// 현재노드가 닫힌 노드에 있고 f가 더 작으면 정보 수정
+			// 現在のノードが閉じたノードにあり、fがより小さければ情報の修正
 		} else if ((old = IsClosed(x, y, m)) != null) {
 			if (g < old.g) {
 				old.prev = node;
 				old.g = g;
 				old.f = old.h + old.g;
 			}
-			// 새로운 노드라면 노드정보 생성하고 열린노드에 추가
+			// 新しいノードであれば、ノード情報生成し、開かれたノードに追加
 		} else {
 			try {
-				// 새로운 노드 생성
+				// 新しいノードを作成
 				child = getPool();
 
 				child.prev = node;
@@ -515,7 +504,7 @@ public class AStar {
 				child.x = x;
 				child.y = y;
 
-				// 새로운 노드를 열린노드에 추가
+				// 新しいノードを開いたノードに追加
 				InsertNode(child);
 			} catch (Exception e) {
 			}
@@ -524,7 +513,7 @@ public class AStar {
 
 	// *************************************************************************
 	// Name : IsOpen()
-	// Desc : 입력된 노드가 열린노드인지 검사
+	// Desc : 入力されたノードが開かれたノードである検査
 	// *************************************************************************
 	private Node IsOpen(int x, int y, int mapid) {
 		Node tmp = OpenNode;
@@ -544,24 +533,12 @@ public class AStar {
 			}
 			tmp = tmp.next;
 		}
-
-		/*
-		 * if(cnt > 5000){
-		 * System.out.println(cnt+" 오픈 x :"+x+" y :"+y+" m :"+mapid);
-		 * System.out.
-		 * println(" 이름"+_npc.getName()+" x:"+_npc.getX()+" y:"+_npc.getY
-		 * ()+" m:"+_npc.getMapId()); System.out.println(_npc.isDead());
-		 * L1PcInstance[] gm = Config.toArray접속채팅모니터(); gm[0].dx= _npc.getX();
-		 * gm[0].dy= _npc.getY(); gm[0].dm= _npc.getMapId();
-		 * gm[0].dh=gm[0].getMoveState().getHeading(); gm[0].setTelType(7);
-		 * gm[0].sendPackets(new S_SabuTell(gm[0])); }
-		 */
 		return null;
 	}
 
 	// *************************************************************************
 	// Name : IsClosed()
-	// Desc : 입력된 노드가 닫힌노드인지 검사
+	// Desc : 入力されたノードが閉じたノードかどうか確認
 	// *************************************************************************
 	private Node IsClosed(int x, int y, int mapid) {
 		Node tmp = ClosedNode;
@@ -581,24 +558,13 @@ public class AStar {
 			}
 			tmp = tmp.next;
 		}
-		/*
-		 * if(cnt > 5000){
-		 * System.out.println(cnt+" 클로즈 x :"+x+" y :"+y+" m :"+mapid);
-		 * System.out
-		 * .println(" 이름"+_npc.getName()+" x:"+_npc.getX()+" y:"+_npc.getY
-		 * ()+" m:"+_npc.getMapId()); System.out.println(_npc.isDead());
-		 * L1PcInstance[] gm = Config.toArray접속채팅모니터(); gm[0].dx= _npc.getX();
-		 * gm[0].dy= _npc.getY(); gm[0].dm= _npc.getMapId();
-		 * gm[0].dh=gm[0].getMoveState().getHeading(); gm[0].setTelType(7);
-		 * gm[0].sendPackets(new S_SabuTell(gm[0])); }
-		 */
 		return null;
 	}
 
 	// *************************************************************************
 	// Name : InsertNode()
-	// Desc : 입력된 노드를 열린노드에 f값에 따라 정렬하여 추가
-	// f값이 높은것이 제일 위에 오도록 -> 최적의 노드
+	// Desc : 入力されたノードを開いて、ノードのf値に基づいてソートして追加
+	// f値が高いことが一番上に来るように ->最適のノード
 	// *************************************************************************
 	private void InsertNode(Node src) {
 		Node old = null, tmp = null;
@@ -628,35 +594,25 @@ public class AStar {
 			src.next = tmp;
 			OpenNode = src;
 		}
-		/*
-		 * if(cnt > 100000){
-		 * System.out.println("인서트 이름 "+_npc.getName()+" x:"+_npc
-		 * .getX()+" y:"+_npc.getY()+" m:"+_npc.getMapId());
-		 * System.out.println(_npc.isDead()); L1PcInstance[] gm =
-		 * Config.toArray접속채팅모니터(); gm[0].dx= _npc.getX(); gm[0].dy=
-		 * _npc.getY(); gm[0].dm= _npc.getMapId();
-		 * gm[0].dh=gm[0].getMoveState().getHeading(); gm[0].setTelType(7);
-		 * gm[0].sendPackets(new S_SabuTell(gm[0])); }
-		 */
 	}
 
 	/**
-	 * 풀링에 추가해도되는지 확인해주는 함수. : 너무 많이 등록되면 문제가 되기대문에 적정선으로 카바.. :
+	 * プールに追加してもいることを確認してくれる関数です。 ：あまりにも多くの登録されると、問題になるメインの適当な線でカバー。：
 	 * java.lang.OutOfMemoryError: Java heap space
-	 * 
+	 *
 	 * @param c
 	 * @return
 	 */
 	private boolean isPoolAppend(List<?> pool, Object c) {
-		// 전체 갯수로 체크.
+		// 総数でチェック。
 		return pool.size() < 200;
 	}
 
 	/**
-	 * 방향과 타입에따라 적절하게 좌표값세팅 리턴
-	 * 
+	 * 方向とタイプに応じて適切に座標値の設定リターン
+	 *
 	 * @param h
-	 *            : 방향
+	 *            : 方向
 	 * @param type
 	 *            : true ? x : y
 	 * @return

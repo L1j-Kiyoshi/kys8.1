@@ -33,7 +33,7 @@ public class MySqlCharacterStorage implements CharacterStorage {
 
 			rs = pstm.executeQuery();
 			
-			if (!rs.next()) {// SELECT가 결과를 돌려주지 않았다.
+			if (!rs.next()) {// SELECTが結果を返さなかった。
 				return null;
 			}
 			
@@ -121,8 +121,8 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			pc.setSealScrollCount(rs.getInt("sealScrollCount"));
 			pc.setLastLoginTime(rs.getTimestamp("lastLoginTime"));
 			pc.setEinhasad(rs.getInt("einhasad"));
-			pc.setAinState(rs.getInt("AinState")); //생존 쿨타임 상태
-			pc.setSurvivalGauge(rs.getInt("SurvivalGauge")); //생존게이지			
+			pc.setAinState(rs.getInt("AinState")); //生存クールタイム状態
+			pc.setSurvivalGauge(rs.getInt("SurvivalGauge")); //生存ゲージ	
 			pc.setKills(rs.getInt("PC_Kill"));
 			pc.setDeaths(rs.getInt("PC_Death"));
 			pc.setGirandungeonTime(rs.getInt("GiranTime"));
@@ -131,30 +131,30 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			pc.setRadungeonTime(rs.getInt("RadungeonTime"));
 			pc.setSomeTime(rs.getInt("SomeTime"));
 			pc.setSoulTime(rs.getInt("SoulTime"));
-			pc.setnewdodungeonTime(rs.getInt("newdoTime"));//발록
-			pc.seticedungeonTime(rs.getInt("iceTime"));//얼던
-			pc.setislandTime(rs.getInt("islanddungeonTime"));//말던
+			pc.setnewdodungeonTime(rs.getInt("newdoTime"));//バルログ
+			pc.seticedungeonTime(rs.getInt("iceTime"));//オルドン
+			pc.setislandTime(rs.getInt("islanddungeonTime"));//巻い
 			pc.setMark_count(rs.getInt("Mark_Count"));
-			pc.setAge(rs.getInt("Age")); //나이설정
-			/** 캐릭별 추가데미지, 추가리덕션, 확률  **/
+			pc.setAge(rs.getInt("Age")); //年齢設定
+			/** キャラクター別追加ダメージ、追加リダクション、確率  **/
 			pc.setAddDamage(rs.getInt("AddDamage"));
 			pc.setAddDamageRate(rs.getInt("AddDamageRate"));
 			pc.setAddReduction(rs.getInt("AddReduction"));
 			pc.setAddReductionRate(rs.getInt("AddReductionRate"));
-			/** 캐릭별 추가데미지, 추가리덕션, 확률  **/
+			/** キャラクター別追加ダメージ、追加リダクション、確率  **/
 			pc.setPeerage(rs.getInt("IsPeerage"));
 			pc.setAbysspoint(rs.getInt("Abysspoint"));
 			pc.setTamTime(rs.getTimestamp("TamEndTime"));
-			pc.set_SpecialSize(rs.getInt("SpecialSize"));//특수창고
+			pc.set_SpecialSize(rs.getInt("SpecialSize"));//特殊倉庫
 			pc.setHuntPrice(rs.getInt("HuntPrice"));
 			pc.setHuntCount(rs.getInt("HuntCount"));
 			pc.setReasonToHunt(rs.getString("HuntText"));
-			/** 로봇시스템 **/
+			/** ロボットシステム **/
 			if (rs.getString("account_name").equals("인공지능")) {
 				pc.setRobotAi(new L1RobotAI(pc));
 			}
 			pc.setClanJoinDate(rs.getTimestamp("Clan_Join_Date"));
-			/** 로봇시스템 **/
+			/** ロボットシステム **/
 			pc.refresh();
 			pc.setMoveSpeed(0);
 			pc.setBraveSpeed(0);
@@ -253,8 +253,8 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			pstm.setTimestamp(++i, pc.getLastPk());
 			pstm.setTimestamp(++i, pc.getDeleteTime());
 			pstm.setInt(++i, pc.getReturnStat());
-			pstm.setInt(++i, pc.getAinState()); //생존 쿨타임
-			pstm.setInt(++i, pc.getSurvivalGauge()); //생존게이지			
+			pstm.setInt(++i, pc.getAinState()); //生存クールタイム
+			pstm.setInt(++i, pc.getSurvivalGauge()); //生存ゲージ		
 			pstm.setInt(++i, pc.getBirthDay());
 			pstm.setInt(++i, pc.getGirandungeonTime());
 			pstm.setInt(++i, pc.getOrendungeonTime());
@@ -262,17 +262,17 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			pstm.setInt(++i, pc.getRadungeonTime());
 			pstm.setInt(++i, pc.getSomeTime());
 			pstm.setInt(++i, pc.getSoulTime());
-			pstm.setInt(++i, pc.getnewdodungeonTime());//발록진영
-			pstm.setInt(++i, pc.geticedungeonTime());//얼던PC
-			pstm.setInt(++i, pc.getislandTime());//말던
+			pstm.setInt(++i, pc.getnewdodungeonTime());//バルログ陣営
+			pstm.setInt(++i, pc.geticedungeonTime());//オルドンPC
+			pstm.setInt(++i, pc.getislandTime());//巻い
 			pstm.setInt(++i, pc.getMark_count());
-			pstm.setInt(++i, pc.getAge()); //나이설정
-			/** 캐릭별 추가데미지, 추가리덕션, 확률 **/
+			pstm.setInt(++i, pc.getAge()); //年齢設定
+			/** キャラクター別追加ダメージ、追加リダクション、確率 **/
 			pstm.setInt(++i, pc.getAddDamage());
 			pstm.setInt(++i, pc.getAddDamageRate());
 			pstm.setInt(++i, pc.getAddReduction());
 			pstm.setInt(++i, pc.getAddReductionRate());
-			/** 캐릭별 추가데미지, 추가리덕션, 확률 **/
+			/** キャラクター別追加ダメージ、追加リダクション、確率 **/
 			pstm.setInt(++i, pc.getPeerage());
 			pstm.setInt(++i, pc.getAbysspoint());
 			pstm.setTimestamp(++i, pc.getTamTime());
@@ -308,8 +308,8 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			rs = pstm.executeQuery();
 			if (!rs.next()) {
 				/*
-				 * SELECT가 값을 돌려주지 않았다
-				 * 존재하지 않는지, 혹은 다른 어카운트가 소유하고 있는 캐릭터명이 지정되었다고 하는 것이 된다.
+				 * SELECTが値を返さなかった
+				 * 存在しないか、あるいは他のアカウントが所有しているキャラクター名が指定されたということになる。
 				 */
 				_log.warning("invalid delete char request: account="
 						+ accountName + " char=" + charName);
@@ -448,8 +448,8 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			pstm.setInt(++i, pc.getSealScrollTime());
 			pstm.setInt(++i, pc.getSealScrollCount());
 			pstm.setInt(++i, pc.getEinhasad());
-			pstm.setInt(++i, pc.getAinState()); //생존 쿨타임
-			pstm.setInt(++i, pc.getSurvivalGauge()); //생존게이지
+			pstm.setInt(++i, pc.getAinState()); //生存クールタイム
+			pstm.setInt(++i, pc.getSurvivalGauge()); //生存ゲージ
 			pstm.setInt(++i, pc.getKills());
 			pstm.setInt(++i, pc.getDeaths());
 			pstm.setInt(++i, pc.getGirandungeonTime());
@@ -458,17 +458,17 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			pstm.setInt(++i, pc.getRadungeonTime());
 			pstm.setInt(++i, pc.getSomeTime());
 			pstm.setInt(++i, pc.getSoulTime());
-			pstm.setInt(++i, pc.getnewdodungeonTime());//발록진영
-			pstm.setInt(++i, pc.geticedungeonTime());//얼던PC
-			pstm.setInt(++i, pc.getislandTime());//말섬
+			pstm.setInt(++i, pc.getnewdodungeonTime());//バルログ陣営
+			pstm.setInt(++i, pc.geticedungeonTime());//オルドンPC
+			pstm.setInt(++i, pc.getislandTime());//マルソム
 			pstm.setInt(++i, pc.getMark_count());
-			pstm.setInt(++i, pc.getAge()); //나이설정
-			/** 캐릭별 추가데미지, 추가리덕션, 확률 **/
+			pstm.setInt(++i, pc.getAge()); //年齢設定
+			/** キャラクター別追加ダメージ、追加リダクション、確率 **/
 			pstm.setInt(++i, pc.getAddDamage());
 			pstm.setInt(++i, pc.getAddDamageRate());
 			pstm.setInt(++i, pc.getAddReduction());
 			pstm.setInt(++i, pc.getAddReductionRate());
-			/** 캐릭별 추가데미지, 추가리덕션, 확률 **/
+			/** キャラクター別追加ダメージ、追加リダクション、確率 **/
 			pstm.setInt(++i, pc.getPeerage());
 			pstm.setInt(++i, pc.getAbysspoint());
 			pstm.setTimestamp(++i, pc.getTamTime());

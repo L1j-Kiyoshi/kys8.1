@@ -36,7 +36,7 @@ public class S_RetrieveList extends ServerBasePacket {
 				writeC(Opcodes.S_RETRIEVE_LIST);
 				writeD(objid);
 				writeH(size);
-				writeC(3); // 개인 창고
+				writeC(3); // 個人倉庫
 				L1ItemInstance item = null;
 				for (Object itemObject : warehouse.getItems()) {
 					item = (L1ItemInstance) itemObject;
@@ -58,7 +58,7 @@ public class S_RetrieveList extends ServerBasePacket {
 				this.NonValue = true;
 			}
 		} else {
-			pc.sendPackets(new S_ServerMessage(263)); // \f1한사람의 캐릭터가 가지고 걸을 수 있는 아이템은 최대 180개까지입니다.
+			pc.sendPackets(new S_ServerMessage(263)); // \f1一人のキャラクターが持って歩くことができるアイテムは最大180個までです。
 		}
 	}
 

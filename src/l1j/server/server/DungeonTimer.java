@@ -13,7 +13,7 @@ public class DungeonTimer implements Runnable {
 
 	private static DungeonTimer instance;
 
-	public static final int SleepTime = 1 * 60 * 1000; //1분 마다 체크
+	public static final int SleepTime = 1 * 60 * 1000; //1分ごとにチェック
 	
 	public static DungeonTimer getInstance(){
 		if (instance == null){
@@ -31,15 +31,15 @@ public class DungeonTimer implements Runnable {
 				} else {
 					try {
 						if (use.getMapId() >= 53 && use.getMapId() <= 56
-								|| use.getMapId() >= 15403 && use.getMapId() <= 15404) { // 기란
+								|| use.getMapId() >= 15403 && use.getMapId() <= 15404) { // ギラン
 							GiranTimeCheck(use);
 						}
-						if (use.getMapId() >= 78 && use.getMapId() <= 82){ //오렌
+						if (use.getMapId() >= 78 && use.getMapId() <= 82){ //オレン
 							OrenTimeCheck(use);
 						}
 						if (use.getMapId() >= 30 && use.getMapId() <= 33
 						 || use.getMapId() >= 35 && use.getMapId() <= 37
-						 || use.getMapId() == 814){ //용던
+						 || use.getMapId() == 814){ //ヨンドン
 							DrageonTimeCheck(use);
 						}
 						/*if (use.getMapId() >= 451 && use.getMapId() <= 456
@@ -50,24 +50,24 @@ public class DungeonTimer implements Runnable {
 								|| use.getMapId() == 479){
 							RadungeonTimeCheck(use);
 						}*/
-						if (use.getMapId() == 303) { // 몽섬
+						if (use.getMapId() == 303) { // モンソム
 							SomeTimeCheck(use);
 						}
-						if (use.getMapId() == 430 || use.getMapId() == 400) { // 정령의무덤 , 고대의무덤 
+						if (use.getMapId() == 430 || use.getMapId() == 400) { // 精霊の墓、古代の墓
 							SoulTimeCheck(use);
 						}
 						if (use.getMapId() == 280 || use.getMapId() == 281 || use.getMapId() == 282
-								 || use.getMapId() == 283 || use.getMapId() == 284) { //발록진영
+								 || use.getMapId() == 283 || use.getMapId() == 284) { //バルログ陣営
 							newdodungeonTimeCheck(use);
 						}
 						if (use.getMapId() == 285 || use.getMapId() == 286 || use.getMapId() == 287 || use.getMapId() == 288
-								 || use.getMapId() == 289) { //야히진영
+								 || use.getMapId() == 289) { //ヤヒ陣営
 							OrenTimeCheck(use);
 						}
-						if (use.getMapId() == 5555 || use.getMapId() == 5556) { //얼던PC
+						if (use.getMapId() == 5555 || use.getMapId() == 5556) { //オルドンPC
 							icedungeonTimeCheck(use);
 						}
-						if (use.getMapId() == 1 || use.getMapId() == 2) { //말던
+						if (use.getMapId() == 1 || use.getMapId() == 2) { //巻い
 							islanddungeonTimeCheck(use);
 						}
 						초기화();
@@ -78,35 +78,35 @@ public class DungeonTimer implements Runnable {
 				}
 			}
 		} catch (Exception a){
-			System.out.println("DungeonTimer 에러~~~");
+			System.out.println("DungeonTimer エラー");
 		}
 	}
 	
 	private void 초기화(){
 		try {
 			Calendar cal = Calendar.getInstance();
-			int 시간 = Calendar.HOUR;
-			int 분 = Calendar.MINUTE;
-			/** 0 오전 , 1 오후 * */
-			String 오전오후 = "오후";
+			int hour = Calendar.HOUR;
+			int minute = Calendar.MINUTE;
+			/** 0 午前 , 1 午後 * */
+			String ampm = "午後";
 			if (cal.get(Calendar.AM_PM) == 0) {
-				오전오후 = "오전";
+				ampm = "午前";
 			}
 			if (DungeonQuitController.getInstance().isgameStart == false) {
-				if ((오전오후.equals("오전") && cal.get(시간) == 8 && cal.get(분) == 59)) {//매일 오전 8시59분초기화
+				if ((ampm.equals("午前") && cal.get(hour) == 8 && cal.get(minute) == 59)) {//毎日午前8時59分の初期化
 					DungeonQuitController.getInstance().isgameStart = true;
-					System.out.println("■던전초기화■: " + 오전오후 + " " + cal.get(시간) + "시" + cal.get(분) + "분 초기화되었습니다.");
+					System.out.println("■ダンジョン初期化■: " + ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分初期化しました。");
 				}
 			}
 		} catch (Exception e) {
-			System.out.println("시간초기화에러" + e);
+			System.out.println("時間の初期化エラー" + e);
 		}
 	}
 
 	private void GiranTimeCheck(L1PcInstance pc) {
 		if (pc.getGirandungeonTime() == 119){
 			new L1Teleport().teleport(pc, 33419, 32810, (short) 4, 0, true);
-			pc.sendPackets(new S_SystemMessage("기감 던전 시간이 만료되었습니다."));
+			pc.sendPackets(new S_SystemMessage("技監ダンジョン時間が経過しました。"));
 		}
 		pc.setGirandungeonTime(pc.getGirandungeonTime() + 1);
 	}
@@ -114,7 +114,7 @@ public class DungeonTimer implements Runnable {
 	private void OrenTimeCheck(L1PcInstance pc){
 		if (pc.getOrendungeonTime() == 59){
 			new L1Teleport().teleport(pc, 33419, 32810, (short) 4, 0, true);
-			pc.sendPackets(new S_SystemMessage("던전 시간이 만료되었습니다."));
+			pc.sendPackets(new S_SystemMessage("ダンジョン時間が経過しました。"));
 		}
 		pc.setOrendungeonTime(pc.getOrendungeonTime() + 1);
 		
@@ -123,7 +123,7 @@ public class DungeonTimer implements Runnable {
 	private void DrageonTimeCheck(L1PcInstance pc){
 		if (pc.getDrageonTime() == 119){
 			new L1Teleport().teleport(pc, 33419, 32810, (short) 4, 0, true);
-			pc.sendPackets(new S_SystemMessage("\\aA경고: \\aG[용의]\\aA 던전 시간이 만료되었습니다."));
+			pc.sendPackets(new S_SystemMessage("\\aA警告: \\aG[用の]\\aA ダンジョン時間が経過しました。"));
 		}
 		pc.setDrageonTime(pc.getDrageonTime() + 1);
 	}
@@ -131,14 +131,14 @@ public class DungeonTimer implements Runnable {
 	private void SomeTimeCheck(L1PcInstance pc){
 		if (pc.getSomeTime() == 29){
 			new L1Teleport().teleport(pc, 33419, 32810, (short) 4, 0, true);
-			pc.sendPackets(new S_SystemMessage("\\aA경고: \\aG[몽환의 섬]\\aA 던전 시간이 만료되었습니다."));
+			pc.sendPackets(new S_SystemMessage("\\aA警告: \\aG[夢幻の島]\\aA ダンジョン時間が経過しました。"));
 		}
 		pc.setSomeTime(pc.getSomeTime() + 1);
 	}
 	private void SoulTimeCheck(L1PcInstance pc){
 		if (pc.getSoulTime() == 29){
 			new L1Teleport().teleport(pc, 33419, 32810, (short) 4, 0, true);
-			pc.sendPackets(new S_ChatPacket(pc, "무덤 체류 시간이 만료 되었습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "墓滞留時間が経過しました。"));
 		}
 		pc.setSoulTime(pc.getSoulTime() + 1);
 	}
@@ -146,28 +146,28 @@ public class DungeonTimer implements Runnable {
 	private void RadungeonTimeCheck(L1PcInstance pc){
 		if (pc.getRadungeonTime() == 119){
 			new L1Teleport().teleport(pc, 33419, 32810, (short) 4, 0, true);
-			pc.sendPackets(new S_ChatPacket(pc, "라스타바드 던전 시간이 만료 되었습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "ラスタバドケイブ時間が経過しました。"));
 		}
 		pc.setRadungeonTime(pc.getRadungeonTime() + 1);
 	}
 	private void newdodungeonTimeCheck(L1PcInstance pc){
 		if (pc.getnewdodungeonTime() == 59){
 			new L1Teleport().teleport(pc, 33419, 32810, (short) 4, 0, true);
-			pc.sendPackets(new S_SystemMessage("\\aA경고: \\aG[발록진영]\\aA 던전 시간이 만료되었습니다."));
+			pc.sendPackets(new S_SystemMessage("\\aA警告: \\aG[バルログ陣営]\\aA ダンジョン時間が経過しました。"));
 		}
 		pc.setnewdodungeonTime(pc.getnewdodungeonTime() + 1);
 	}
 	private void icedungeonTimeCheck(L1PcInstance pc){
 		if (pc.geticedungeonTime() == 29){
 			new L1Teleport().teleport(pc, 33419, 32810, (short) 4, 0, true);
-			pc.sendPackets(new S_SystemMessage("\\aA경고: \\aG[얼음PC]\\aA 던전 시간이 만료되었습니다."));
+			pc.sendPackets(new S_SystemMessage("\\aA警告: \\aG[氷PC]\\aA ダンジョン時間が経過しました。"));
 		}
 		pc.seticedungeonTime(pc.geticedungeonTime() + 1);
 	}
 	private void islanddungeonTimeCheck(L1PcInstance pc){
 		if (pc.getislandTime() == 119){
 			new L1Teleport().teleport(pc, 32585, 32929, (short) 0, 0, true);
-			pc.sendPackets(new S_SystemMessage("\\aA경고: \\aG[말하는섬]\\aA 던전 시간이 만료되었습니다."));
+			pc.sendPackets(new S_SystemMessage("\\aA警告: \\aG[話せる島]\\aA ダンジョン時間が経過しました。"));
 		}
 		pc.setislandTime(pc.getislandTime() + 1);
 	}

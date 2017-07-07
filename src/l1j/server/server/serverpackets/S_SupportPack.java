@@ -48,7 +48,7 @@ public class S_SupportPack extends ServerBasePacket {
 		writeC(pet.getMoveSpeed()); // ⅩΥ【Ι - 0:normal,1:fast,2:slow
 		writeD(0);
 		writeH(0);
-		writeS("");//이름 없음..계속 띄어짐
+		writeS("");//名前なし。継続とまりジム
 		writeS(pet.getTitle());
 		int status = 0;
 		if (pet.getPoison() != null) {
