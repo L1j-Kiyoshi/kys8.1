@@ -38,18 +38,18 @@ import l1j.server.server.utils.FileUtil;
 
 
 /**
- * 텍스트 맵을 캐싱 해 read 시간을 단축한다.
+ * テキストマップをキャッシュしてread時間を短縮する。
  */
 public class CachedMapReader extends MapReader {
 
-	/** 텍스트 맵 홀더.  */
+	/** テキストマップホルダー。  */
 	private static final String MAP_DIR = "./maps/";
 
-	/** 캐싱 하는 맵 홀더.  */
+	/** キャッシュするマップホルダー。  */
 	private static final String CACHE_DIR = "./data/mapcache/";
 
 	/**
-	 * 전맵 ID의 리스트를 돌려준다.
+	 * ジョンメプIDのリストを返す。
 	 *
 	 * @return ArraryList
 	 */
@@ -79,10 +79,10 @@ public class CachedMapReader extends MapReader {
 	}
 
 	/**
-	 * 지정의 맵 번호의 텍스트 맵을 캐쉬 맵으로 변경한다.
+	 * 指定のマップ番号のテキストマップをキャッシュマップに変更する。
 	 *
 	 * @param mapId
-	 *            맵 번호
+	 *            マップ番号
 	 * @return L1V1Map
 	 * @throws IOException
 	 */
@@ -115,10 +115,10 @@ public class CachedMapReader extends MapReader {
 	}
 
 	/**
-	 * 지정의 맵 번호의 캐쉬 맵을 읽어들인다.
+	 * 指定のマップ番号のキャッシュマップを読み込む。
 	 *
 	 * @param mapId
-	 *            맵 번호
+	 *            マップ番号
 	 * @return L1Map
 	 * @throws IOException
 	 */
@@ -168,7 +168,7 @@ public class CachedMapReader extends MapReader {
 	}
 
 	/**
-	 * 모든 텍스트 맵을 읽어들인다.
+	 * すべてのテキストマップを読み込む。
 	 *
 	 * @return Map
 	 * @throws IOException

@@ -1,38 +1,6 @@
 package l1j.server;
 
-import static l1j.server.server.model.skill.L1SkillId.ADDITIONAL_FIRE;
-import static l1j.server.server.model.skill.L1SkillId.AQUA_PROTECTER;
-import static l1j.server.server.model.skill.L1SkillId.BERSERKERS;
-import static l1j.server.server.model.skill.L1SkillId.BLESS_WEAPON;
-import static l1j.server.server.model.skill.L1SkillId.BOUNCE_ATTACK;
-import static l1j.server.server.model.skill.L1SkillId.BRAVE_AURA;
-import static l1j.server.server.model.skill.L1SkillId.BURNING_SPIRIT;
-import static l1j.server.server.model.skill.L1SkillId.BURNING_WEAPON;
-import static l1j.server.server.model.skill.L1SkillId.CLEAR_MIND;
-import static l1j.server.server.model.skill.L1SkillId.COMA_B;
-import static l1j.server.server.model.skill.L1SkillId.DECREASE_WEIGHT;
-import static l1j.server.server.model.skill.L1SkillId.DOUBLE_BRAKE;
-import static l1j.server.server.model.skill.L1SkillId.DRAGON_SKIN;
-import static l1j.server.server.model.skill.L1SkillId.DRESS_EVASION;
-import static l1j.server.server.model.skill.L1SkillId.ELEMENTAL_FIRE;
-import static l1j.server.server.model.skill.L1SkillId.ELEMENTAL_PROTECTION;
-import static l1j.server.server.model.skill.L1SkillId.EXOTIC_VITALIZE;
-import static l1j.server.server.model.skill.L1SkillId.FEATHER_BUFF_A;
-import static l1j.server.server.model.skill.L1SkillId.GLOWING_AURA;
-import static l1j.server.server.model.skill.L1SkillId.God_buff;
-import static l1j.server.server.model.skill.L1SkillId.IMMUNE_TO_HARM;
-import static l1j.server.server.model.skill.L1SkillId.INSIGHT;
-import static l1j.server.server.model.skill.L1SkillId.IRON_SKIN;
-import static l1j.server.server.model.skill.L1SkillId.LIFE_MAAN;
-import static l1j.server.server.model.skill.L1SkillId.NATURES_TOUCH;
-import static l1j.server.server.model.skill.L1SkillId.PHYSICAL_ENCHANT_DEX;
-import static l1j.server.server.model.skill.L1SkillId.PHYSICAL_ENCHANT_STR;
-import static l1j.server.server.model.skill.L1SkillId.REDUCTION_ARMOR;
-import static l1j.server.server.model.skill.L1SkillId.RESIST_MAGIC;
-import static l1j.server.server.model.skill.L1SkillId.SOLID_CARRIAGE;
-import static l1j.server.server.model.skill.L1SkillId.SOUL_OF_FLAME;
-import static l1j.server.server.model.skill.L1SkillId.UNCANNY_DODGE;
-import static l1j.server.server.model.skill.L1SkillId.WATER_LIFE;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import l1j.server.server.datatables.ItemTable;
 import l1j.server.server.model.L1World;
@@ -46,7 +14,7 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 
 enum SpecialEvent { BugRace, AllBuf, InfinityFight, DoNotChatEveryone, DoChatEveryone};
 
-// 게임 내, 전체 이벤트에 대한 처리를 담당
+// ゲーム内、全体のイベントの処理を担当
 public class SpecialEventHandler {
 
 	private static volatile SpecialEventHandler uniqueInstance = null;
@@ -71,13 +39,13 @@ public class SpecialEventHandler {
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 			if( pc.getNetConnection() != null ) {
 				pc.getInventory().storeItem(30105, 3);
-				L1ItemInstance item = ItemTable.getInstance().createItem(30105); //크리스마스 선물상자
-				pc.sendPackets(new S_ChatPacket(pc,"■ 전체선물 ■: \\aA[" + item.getLogName() + "]이 도착했습니다."));
-	
+				L1ItemInstance item = ItemTable.getInstance().createItem(30105); //クリスマスのギフトボックス
+				pc.sendPackets(new S_ChatPacket(pc,"■ 全体プレゼント ■: \\aA[" + item.getLogName() + "]が到着しました。"));
+
 			}
 		}
 	}
-	public void 통합버프() {
+	public void buff_ALL() {
 		int[] allBuffSkill = {PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, FEATHER_BUFF_A, LIFE_MAAN, God_buff, COMA_B };
 		L1SkillUse l1skilluse = null;
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
@@ -92,10 +60,10 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc,"\\aA알림: 게임마스터께서 '전체 버프'를 제공하였습니다."));
+			pc.sendPackets(new S_ChatPacket(pc,"\\aA通知：ゲームマスターが「全体バフ」を提供していました。"));
 		}
 	}
-	public void 통합버프(L1PcInstance pc) {
+	public void buff_ALL(L1PcInstance pc) {
 		int[] allBuffSkill = {PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, FEATHER_BUFF_A, LIFE_MAAN, God_buff, COMA_B };
 		L1SkillUse l1skilluse = null;
 			if (pc == null || pc.isPrivateShop() || pc.getMapId() == 5166 || pc.isAutoClanjoin()) {
@@ -109,9 +77,9 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-	
+
 	}
-	public void 화면풀업(L1PcInstance gm) { //화면 안의 유져에게 풀버프
+	public void buff_ScreenFull(L1PcInstance gm) { //画面の中のユーザーズにフルバフ
 		int[] allBuffSkill = {PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, NATURES_TOUCH, ADDITIONAL_FIRE, INSIGHT, DRAGON_SKIN };
 			L1SkillUse l1skilluse = null;
 			for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
@@ -122,10 +90,10 @@ public class SpecialEventHandler {
 			for (int i = 0; i < allBuffSkill.length ; i++) {
 			l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
-			pc.sendPackets(new S_ChatPacket(pc,"\\aA알림: 게임마스터 주위에 '버프'가 제공하었습니다."));
+			pc.sendPackets(new S_ChatPacket(pc,"\\aA通知：ゲームマスターの周りに「バフ」が提供ハオトた。"));
 			}
 			}
-	public void 화면축복(L1PcInstance gm) {
+	public void buff_ScreenMetis(L1PcInstance gm) {
 		int[] allBuffSkill = { FEATHER_BUFF_A };
 		L1SkillUse l1skilluse = null;
 		for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
@@ -149,10 +117,10 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc, "\\aA알림: 게임마스터 주위에 '메티스의 축복'을 제공하였습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "\\aA通知：ゲームマスターの周りに「メティスの祝福」を提供していました。"));
 		}
 	}
-	public void 화면생마(L1PcInstance gm) {
+	public void buff_EvilEye(L1PcInstance gm) {
 		int[] allBuffSkill = { 7678 };
 		L1SkillUse l1skilluse = null;
 		for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
@@ -185,10 +153,10 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc,"\\aA알림: 게임마스터 주위에 '생명의 마안'을 제공하였습니다."));
+			pc.sendPackets(new S_ChatPacket(pc,"\\aA通知：ゲームマスターの周りに「生命の魔眼」を提供していました。"));
 		}
 	}
-	public void 화면흑사(L1PcInstance gm) {
+	public void buff_God(L1PcInstance gm) {
 		int[] allBuffSkill = { God_buff };
 		L1SkillUse l1skilluse = null;
 		for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
@@ -203,20 +171,20 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc,"\\aA알림: 게임마스터 주위에 '흑사의 버프'을 제공하였습니다."));
+			pc.sendPackets(new S_ChatPacket(pc,"\\aA通知：ゲームマスターの周りに「フクサのバフ」を提供していました。"));
 		}
 	}
-	public void 화면코마(L1PcInstance gm) {
+	public void buff_ScreenCOMA(L1PcInstance gm) {
 		int[] allBuffSkill = { COMA_B };
 		L1SkillUse l1skilluse = null;
 		for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
 		if(pc.isPrivateShop() || pc.isAutoClanjoin()){
 		continue;
 		}
-			if (pc.hasSkillEffect(L1SkillId.COMA_A)) { // 코마 3조각
+			if (pc.hasSkillEffect(L1SkillId.COMA_A)) { // コマ3個
 				pc.removeSkillEffect(L1SkillId.COMA_A);
 			}
-			if (pc.hasSkillEffect(L1SkillId.COMA_B)) { // 코마 5조각
+			if (pc.hasSkillEffect(L1SkillId.COMA_B)) { // コマ5個
 				pc.removeSkillEffect(L1SkillId.COMA_B);
 			}
 
@@ -225,10 +193,10 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc,"\\aA알림: 게임마스터 주위에 '코마 버프'을 제공하였습니다."));
+			pc.sendPackets(new S_ChatPacket(pc,"\\aA通知：ゲームマスターの周りに「コマバフ」を提供していました。"));
 		}
 	}
-	public void 전체풀업() {
+	public void buff_ALLFull() {
 		int[] allBuffSkill = { DECREASE_WEIGHT, PHYSICAL_ENCHANT_DEX,
 				PHYSICAL_ENCHANT_STR, BLESS_WEAPON, BERSERKERS,
 				IMMUNE_TO_HARM, REDUCTION_ARMOR, BOUNCE_ATTACK,
@@ -251,10 +219,10 @@ public class SpecialEventHandler {
 			}
 			pc.setBuffnoch(0);
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc, "\\aA알림: 게임마스터께서 '버프'를 제공하였습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "\\aA通知：ゲームマスターが「バフ」を提供していました。"));
 		}
 	}
-	public void 전체축복() {
+	public void buff_ALLMetis() {
 		int[] allBuffSkill = { FEATHER_BUFF_A };
 		L1SkillUse l1skilluse = null;
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
@@ -281,10 +249,10 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc, "\\aA알림: 게임마스터께서'메티스의 축복'을 제공하였습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "\\aA通知：ゲームマスターが「メティスの祝福」を提供していました。"));
 		}
 	}
-	public void 전체생마() {
+	public void buff_ALLEvilEye() {
 		int[] allBuffSkill = { 7678 };
 		L1SkillUse l1skilluse = null;
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
@@ -320,10 +288,10 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc, "\\aA알림: 게임마스터께서 '생명의 마안'을 제공하였습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "\\aA通知：ゲームマスターが「生命の魔眼」を提供していました。"));
 		}
 	}
-	public void 전체흑사() {
+	public void buff_ALLGod() {
 		int[] allBuffSkill = { God_buff };
 		L1SkillUse l1skilluse = null;
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
@@ -341,10 +309,10 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc, "\\aA알림: 게임마스터께서 '흑사의 버프'를 제공하였습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "\\aA通知：ゲームマスターが「フクサのバフ」を提供していました。"));
 		}
 	}
-	public void 전체코마() {
+	public void buff_ALLCOMA() {
 		int[] allBuffSkill = { COMA_B };
 		L1SkillUse l1skilluse = null;
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
@@ -354,10 +322,10 @@ public class SpecialEventHandler {
 			if (pc.noPlayerCK && !pc.noPlayerRobot) {
 				continue;
 			}
-			if (pc.hasSkillEffect(L1SkillId.COMA_A)) { // 코마 3조각
+			if (pc.hasSkillEffect(L1SkillId.COMA_A)) { // コマ3個
 				pc.removeSkillEffect(L1SkillId.COMA_A);
 			}
-			if (pc.hasSkillEffect(L1SkillId.COMA_B)) { // 코마 5조각
+			if (pc.hasSkillEffect(L1SkillId.COMA_B)) { // コマ5個
 				pc.removeSkillEffect(L1SkillId.COMA_B);
 			}
 
@@ -366,19 +334,19 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc, "\\aA알림: 게임마스터께서 '코마 버프'를 제공하였습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "\\aA通知：ゲームマスターが「コマバフ」を提供していました。"));
 		}
 	}
 
 	public void doNotChatEveryone() {
 		L1World.getInstance().set_worldChatElabled(false);
-		L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("\\aG경고: \\aA월드채팅 비활성화 시작"));
+		L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("\\aG警告： \\aAワールドチャットを無効に開始"));
 	}
 
 	public void doChatEveryone() {
 		L1World.getInstance().set_worldChatElabled(true);
-		L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("\\aG경고: \\aA월드채팅 활성화 시작"));
+		L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("\\aG警告： \\aAワールドチャットを有効に開始"));
 	}
 
-	
+
 }

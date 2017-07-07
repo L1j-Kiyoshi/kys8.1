@@ -5,30 +5,30 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import l1j.server.server.utils.LeakCheckedConnection;
-
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+import l1j.server.server.utils.LeakCheckedConnection;
+
 /**
- * DB에의 액세스하기 위한 각종 인터페이스를 제공
+ * DBへのアクセスするための各種インタフェースを提供
  */
 public class L1DatabaseFactory {
 	private static L1DatabaseFactory _instance = null;
 
-	/** DB접속 정보를 집계한 것?  */
+	/** DB接続情報をまとめたもの。  */
 	private ComboPooledDataSource _source;
 
-	/** 메세지 로그용.  */
+	/** メッセージログの。  */
 	private static Logger _log = Logger.getLogger(L1DatabaseFactory.class.getName());
 
-	/* DB 액세스에 필요한 정보들 */
-	/** DB접속 드라이버.  */
+	/* DB アクセスに必要な情報の */
+	/** DB接続ドライバー。  */
 	private static String _driver;
-	/** DB서버의 URL.  */
+	/** DBサーバーの URL.  */
 	private static String _url;     
-	/** DB서버에 접속하는 유저명.  */
+	/** DBサーバーに接続するユーザ名。  */
 	private static String _user;    
-	/** DB서버에 접속하는 패스워드.  */
+	/** DBサーバーに接続するパスワード。  */
 	private static String _password;
 
 	/**
@@ -48,16 +48,16 @@ public class L1DatabaseFactory {
 	}
 	
 	/**
-	 * DB에의 액세스에 필요한 정보 설정
+	 * DBへのアクセスに必要な情報を設定
 	 * 
 	 * @param driver
 	 *            DB접속 드라이버
 	 * @param url
-	 *            DB서버 URL
+	 *            DBサーバーのURL
 	 * @param user
-	 *            DB서버에 접속하는 유저명
+	 *            DBサーバーに接続するユーザ名
 	 * @param password
-	 *            DB서버에 접속하는 패스워드
+	 *            DBサーバーに接続するパスワード
 	 */
 	public static void setDatabaseSettings(final String driver,
 			final String url, final String user, final String password) {
@@ -69,7 +69,7 @@ public class L1DatabaseFactory {
 
 	private L1DatabaseFactory() throws SQLException {
 		try {
-			// DatabaseFactory을 L2J로부터 일부를 제외해 배차
+			// DatabaseFactoryをL2Jから一部を除き配車
 			_source = new ComboPooledDataSource();
 			_source.setDriverClass(_driver);
 			_source.setJdbcUrl(_url);
@@ -112,9 +112,9 @@ public class L1DatabaseFactory {
 	}
 
 	/**
-	 * DB접속을 해, connection 오브젝트를 돌려준다.
+	 * DB接続をし、connectionオブジェクトを返す。
 	 * 
-	 * @return Connection connection 오브젝트
+	 * @return Connection connection オブジェクト
 	 * @throws SQLException
 	 */
 	public Connection getConnection() {

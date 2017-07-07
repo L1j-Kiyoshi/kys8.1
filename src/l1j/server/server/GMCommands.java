@@ -334,14 +334,14 @@ public class GMCommands {
 		case "상점추방":				ShopKick(gm, param);break;
 		case "감옥":					hold(gm, param);break;
 		case "정리":					Clear(gm);break;
-		case "통합버프":				SpecialEventHandler.getInstance().통합버프();break;
+		case "통합버프":				SpecialEventHandler.getInstance().buff_ALL();break;
 		case "전체버프":				전체버프(gm, param);break;
 		case "화면버프":				화면버프(gm);break;
-		case "화면1":					SpecialEventHandler.getInstance().화면풀업(gm);break;
-		case "화면2":					SpecialEventHandler.getInstance().화면축복(gm);break;
-		case "화면3":					SpecialEventHandler.getInstance().화면생마(gm);break;
-		case "화면4":					SpecialEventHandler.getInstance().화면흑사(gm);break;
-		case "화면5":					SpecialEventHandler.getInstance().화면코마(gm);break;
+		case "화면1":					SpecialEventHandler.getInstance().buff_ScreenFull(gm);break;
+		case "화면2":					SpecialEventHandler.getInstance().buff_ScreenMetis(gm);break;
+		case "화면3":					SpecialEventHandler.getInstance().buff_EvilEye(gm);break;
+		case "화면4":					SpecialEventHandler.getInstance().buff_God(gm);break;
+		case "화면5":					SpecialEventHandler.getInstance().buff_ScreenCOMA(gm);break;
 		case "화면풀업":				allBuff1(gm);break;
 		case "화면축복":				allBuff2(gm);break;
 		case "화면생마":				allBuff3(gm);break;
@@ -1565,15 +1565,15 @@ public class GMCommands {
 			StringTokenizer st = new StringTokenizer(param);
 			String status = st.nextToken();
 			if (status.equalsIgnoreCase("1")) { // doAllBuf
-				SpecialEventHandler.getInstance().전체풀업();
+				SpecialEventHandler.getInstance().buff_ALLFull();
 			} else if (status.equalsIgnoreCase("2")) {
-				SpecialEventHandler.getInstance().전체축복();
+				SpecialEventHandler.getInstance().buff_ALLMetis();
 			} else if (status.equalsIgnoreCase("3")) {
-				SpecialEventHandler.getInstance().전체생마();
+				SpecialEventHandler.getInstance().buff_ALLEvilEye();
 			} else if (status.equalsIgnoreCase("4")) {
-				SpecialEventHandler.getInstance().전체흑사();
+				SpecialEventHandler.getInstance().buff_ALLGod();
 			} else if (status.equalsIgnoreCase("5")) {
-				SpecialEventHandler.getInstance().전체코마();
+				SpecialEventHandler.getInstance().buff_ALLCOMA();
 			}
 		} catch (Exception e) {
 			gm.sendPackets(new S_ChatPacket(gm,"----------------------------------------------------"));

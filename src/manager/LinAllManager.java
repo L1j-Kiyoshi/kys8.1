@@ -13,35 +13,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
 
-import l1j.server.Config;
-import l1j.server.L1DatabaseFactory;
-import l1j.server.Server;
-import l1j.server.server.Account;
-import l1j.server.server.GameServer;
-import l1j.server.server.datatables.CastleTable;
-import l1j.server.server.datatables.ClanTable;
-import l1j.server.server.datatables.DropTable;
-import l1j.server.server.datatables.ExpTable;
-import l1j.server.server.datatables.IpTable;
-import l1j.server.server.datatables.ItemTable;
-import l1j.server.server.datatables.MobSkillTable;
-import l1j.server.server.datatables.NpcTable;
-import l1j.server.server.datatables.PolyTable;
-import l1j.server.server.datatables.ShopTable;
-import l1j.server.server.datatables.SkillsTable;
-import l1j.server.server.datatables.WeaponAddDamage;
-import l1j.server.server.datatables.WeaponSkillTable;
-import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1ItemInstance;
-import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.model.Warehouse.PrivateWarehouse;
-import l1j.server.server.model.Warehouse.WarehouseManager;
-import l1j.server.server.model.item.L1TreasureBox;
-import l1j.server.server.storage.CharactersItemStorage;
-import l1j.server.server.templates.L1Item;
-import l1j.server.server.utils.SQLUtil;
-import manager.composite.LetterComposite;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -75,6 +46,35 @@ import org.eclipse.swt.widgets.TrayItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeColumn;
 import org.eclipse.swt.widgets.TreeItem;
+
+import l1j.server.Config;
+import l1j.server.L1DatabaseFactory;
+import l1j.server.Server;
+import l1j.server.server.Account;
+import l1j.server.server.GameServer;
+import l1j.server.server.datatables.CastleTable;
+import l1j.server.server.datatables.ClanTable;
+import l1j.server.server.datatables.DropTable;
+import l1j.server.server.datatables.ExpTable;
+import l1j.server.server.datatables.IpTable;
+import l1j.server.server.datatables.ItemTable;
+import l1j.server.server.datatables.MobSkillTable;
+import l1j.server.server.datatables.NpcTable;
+import l1j.server.server.datatables.PolyTable;
+import l1j.server.server.datatables.ShopTable;
+import l1j.server.server.datatables.SkillsTable;
+import l1j.server.server.datatables.WeaponAddDamage;
+import l1j.server.server.datatables.WeaponSkillTable;
+import l1j.server.server.model.L1World;
+import l1j.server.server.model.Instance.L1ItemInstance;
+import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.Warehouse.PrivateWarehouse;
+import l1j.server.server.model.Warehouse.WarehouseManager;
+import l1j.server.server.model.item.L1TreasureBox;
+import l1j.server.server.storage.CharactersItemStorage;
+import l1j.server.server.templates.L1Item;
+import l1j.server.server.utils.SQLUtil;
+import manager.composite.LetterComposite;
 
 
 public class LinAllManager {
@@ -295,7 +295,7 @@ public class LinAllManager {
 		lblNewLabel_44.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_44.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_44.setBounds(432, 573, 185, 26);
-		lblNewLabel_44.setText("서버가동시간 : ");
+		lblNewLabel_44.setText("サーバーの稼働時間：");
 		
 
 		shlInbumserverManager.open();
@@ -308,7 +308,7 @@ public class LinAllManager {
 			}
 		}
 
-		/**서버 정보 쓰레드*/
+		/**サーバー情報スレッド*/
 		LinAllManagerInfoThread.getInstance();
 
 		try{
@@ -319,7 +319,7 @@ public class LinAllManager {
 			}
 		}catch(Exception e){e.printStackTrace();}
 		//savelog();
-		/**재귀호출*/
+		/**再帰呼び出し*/
 		open();
 	}
 
@@ -344,7 +344,7 @@ public class LinAllManager {
 				dialog.setMessage(message); 
 				int flag = dialog.open();
 				if (flag == SWT.OK) { 
-					e.doit = false; // true로 하면 종료됨
+					e.doit = false; // trueとすると終了
 				} else {
 					e.doit = false; 
 				}
@@ -552,13 +552,13 @@ public class LinAllManager {
 			public void widgetSelected(SelectionEvent e) {
 				if(table_2.getSelectionCount() <= 0){
 					MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.OK|SWT.ICON_INFORMATION);
-					messageBox.setMessage("선택된 아이템이 없습니다.");
+					messageBox.setMessage("選択されたアイテムがありません。");
 					messageBox.open();
 					return;
 				}
 
 				MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.YES | SWT.NO |SWT.ICON_QUESTION);
-				messageBox.setMessage("해당 아이템을 정말 삭제하시겠습니까 ?");
+				messageBox.setMessage("該当アイテムを本当に削除しますか？");
 				int type = messageBox.open();
 				if(type == SWT.YES){
 					itemdelete(table_2.getSelection());
@@ -604,13 +604,13 @@ public class LinAllManager {
 			public void widgetSelected(SelectionEvent e) {
 				if(table_3.getSelectionCount() <= 0){
 					MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.OK|SWT.ICON_INFORMATION);
-					messageBox.setMessage("선택된 아이템이 없습니다.");
+					messageBox.setMessage("選択されたアイテムがありません。");
 					messageBox.open();
 					return;
 				}
 
 				MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.YES | SWT.NO |SWT.ICON_QUESTION);
-				messageBox.setMessage("해당 아이템을 정말 삭제하시겠습니까 ?");
+				messageBox.setMessage("該当アイテムを本当に削除しますか？");
 				int type = messageBox.open();
 				if(type == SWT.YES){
 					wherehouseitemdelete(table_3.getSelection());
@@ -635,12 +635,12 @@ public class LinAllManager {
 				if(e.detail == 0){
 					if(tree.getSelection()[0] == null)return;
 					String[] s = charlist.get(tree.getSelection()[0].getText());
-					/**트리*/
+					/**ツリー*/
 					if(s == null)return;
-					lblNewLabel_47.setText(s[1]);//혈맹
-					lblNewLabel_46.setText(s[2]);//레벨
-					label_25.setText(s[3]);//시간
-					label_28.setText(s[4]);//전일
+					lblNewLabel_47.setText(s[1]);//血盟
+					lblNewLabel_46.setText(s[2]);//レベル
+					label_25.setText(s[3]);//時間
+					label_28.setText(s[4]);//前日
 
 				}
 			}
@@ -1334,7 +1334,7 @@ public class LinAllManager {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.OK|SWT.ICON_INFORMATION);
-				messageBox.setMessage("아직준비중 !!");
+				messageBox.setMessage("まだ準備中！");
 				messageBox.open();
 			}
 		});
@@ -1350,7 +1350,7 @@ public class LinAllManager {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.OK|SWT.ICON_INFORMATION);
-				messageBox.setMessage("아직준비중 !!");
+				messageBox.setMessage("まだ準備中！");
 				messageBox.open();
 			}
 		});
@@ -1374,7 +1374,7 @@ public class LinAllManager {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.YES | SWT.NO |SWT.ICON_QUESTION);
-				messageBox.setMessage("모든 로그를 저장하시겠습니까?");
+				messageBox.setMessage("すべてのログを保存しますか？");
 				int type = messageBox.open();
 				if(type == SWT.YES){
 				//	savelog();
@@ -1405,7 +1405,7 @@ public class LinAllManager {
 			public void widgetSelected(SelectionEvent e) {
 				GameServer.getInstance().saveAllCharInfo();
 				MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.OK|SWT.ICON_INFORMATION);
-				messageBox.setMessage("모든 캐릭터의 정보 저장 완료 !!");
+				messageBox.setMessage("すべての文字の情報の保存完了！");
 				messageBox.open();
 			}
 		});
@@ -1420,7 +1420,7 @@ public class LinAllManager {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.YES | SWT.NO |SWT.ICON_QUESTION);
-				messageBox.setMessage("서버를 종료하시겠습니까?");
+				messageBox.setMessage("サーバーを終了しますか？");
 				int type = messageBox.open();
 				if(type == SWT.YES){
 //					savelog();
@@ -1436,7 +1436,7 @@ public class LinAllManager {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.YES | SWT.NO |SWT.ICON_QUESTION);
-				messageBox.setMessage("서버를 종료하시겠습니까?");
+				messageBox.setMessage("サーバーを終了しますか？");
 				int type = messageBox.open();
 				if(type == SWT.YES){
 					GameServer.getInstance().saveAllCharInfo();
@@ -1467,7 +1467,7 @@ public class LinAllManager {
 			public void widgetSelected(SelectionEvent e) {
 //				savelog();
 				MessageBox messageBox = new MessageBox(shlInbumserverManager, SWT.OK | SWT.ICON_INFORMATION);
-				messageBox.setMessage("채팅화면을 청소후 저장완료.");
+				messageBox.setMessage("チャット画面をきれいにして保存完了。");
 				messageBox.open();
 			}
 		});
@@ -1577,13 +1577,13 @@ public class LinAllManager {
 			public void widgetSelected(SelectionEvent e) {
 				final Tray tray = display.getSystemTray();
 				if(tray != null){
-					// 현재 윈도우 감추기.
+					// 現在のウィンドウを隠す。
 					shlInbumserverManager.setVisible(false);
-					// 트레이 활성화.
+					// トレイ活性化。
 					final TrayItem item = new TrayItem(tray, SWT.NONE);
 					item.setToolTipText( String.format("\uB9B0 \uC62C"));
 					item.setImage( SWTResourceManager.getImage("data\\img\\apple.png") );
-					// 이벤트 등록.
+					// イベントの登録。
 					item.addSelectionListener(new SelectionAdapter() {
 						@Override
 						public void widgetSelected(SelectionEvent e) {
@@ -1669,7 +1669,7 @@ public class LinAllManager {
 	}
 
 	/**
-	 * 현제 시간
+	 * 現在の時間
 	 * @return
 	 */
 	private String getLogTime() {
@@ -1694,7 +1694,7 @@ public class LinAllManager {
 
 
 	/**
-	 * 인벤토리 아이템 삭제 함수
+	 * インベントリアイテムの削除関数
 	 * @param tableitem
 	 */
 	public void itemdelete(final TableItem[] tableitem) {
@@ -1702,12 +1702,12 @@ public class LinAllManager {
 			L1PcInstance target = L1World.getInstance().getPlayer(Pcname);
 			if(target != null){
 				for(TableItem table : tableitem){
-					/**인벤토리에서 삭제*/
+					/**インベントリから削除*/
 					target.getInventory().removeItem(Integer.parseInt(table.getText(1)));
-					/**아이템 리스트에서 삭제*/
+					/**アイテムリストから削除*/
 					items.remove(table.getText(1));
 				}
-				/**데이터 저장*/
+				/**データの保存*/
 				target.saveInventory();
 			}else {
 				for(TableItem table : tableitem){
@@ -1720,7 +1720,7 @@ public class LinAllManager {
 		}catch(Exception e){e.printStackTrace();}
 	}
 	/**
-	 * 창고 아이템 삭제
+	 * 倉庫アイテムの削除
 	 * @param tableitem
 	 */
 	public void wherehouseitemdelete(final TableItem[] tableitem) {
@@ -1764,7 +1764,7 @@ public class LinAllManager {
 
 
 	/**
-	 * 캐릭터 인벤토리
+	 * キャラクターインベントリ
 	 */
 	ConcurrentHashMap<Integer,L1ItemInstance> items = new ConcurrentHashMap<Integer,L1ItemInstance>();
 	public void InvantoryList() {
@@ -1802,7 +1802,7 @@ public class LinAllManager {
 					item.setAttrEnchantLevel(rs.getInt("attr_enchantlvl"));
 					item.setSpecialEnchant(rs.getInt("special_enchant"));
 					item.setEndTime(rs.getTimestamp("end_time"));
-					/** 패키지상점 **/
+					/** パッケージ店 **/
 					item.setPackage(rs.getInt("package") != 0 ? true : false);
 					items.put(item.getId(), item);
 				}
@@ -1818,7 +1818,7 @@ public class LinAllManager {
 		}catch(Exception e){e.printStackTrace();}
 	}
 	/**
-	 * 창고 아이템 리스트
+	 * 倉庫アイテムリスト
 	 */
 	ConcurrentHashMap<Integer,L1ItemInstance> warehouseitems = new ConcurrentHashMap<Integer,L1ItemInstance>();
 	public void warehouseList() {
@@ -1863,7 +1863,7 @@ public class LinAllManager {
 
 
 	/**
-	 * 캐릭 접속 로그
+	 * キャラクター接続ログ
 	 * @param name
 	 * @param ip
 	 */
@@ -1877,9 +1877,7 @@ public class LinAllManager {
 							ch = true;
 					}
 					if (!ch) {
-						txtInbumserverByleaf.append(getLogTime() +" 접속 [" + name + "] "+ (list.getItems().length + 1) +"명\n");
-						//txtInbumserverByleaf.append("[접속] (" + name + ")\n");
-						//txtInbumserverByleaf.append("IP :" + ip + " Time : " + getLogTime() + " [" + (list.getItems().length + 1) + "명]\n\n");
+						txtInbumserverByleaf.append(getLogTime() +" 接続 [" + name + "] "+ (list.getItems().length + 1) +"人\n");
 						list.add(name);
 						if (LinAllManagerInfoThread.MaxUser < list.getItems().length) {
 							LinAllManagerInfoThread.MaxUser = list.getItems().length;
@@ -1893,7 +1891,7 @@ public class LinAllManager {
 	}
 
 	/**
-	 * 캐릭 접속 종료
+	 * キャラクター接続終了
 	 * @param name
 	 * @param ip
 	 */
@@ -1907,9 +1905,7 @@ public class LinAllManager {
 							ch = true;
 					}
 					if (ch) {
-						txtInbumserverByleaf.append(getLogTime() +" 종료 [" + name + "] "+ (list.getItems().length - 1) +"명\n");
-						//txtInbumserverByleaf.append("[종료] (" + name + ")\n");
-						//txtInbumserverByleaf.append("IP :" + ip + " Time : " + getLogTime() + " [" + (list.getItems().length - 1) + "명]\n\n");
+						txtInbumserverByleaf.append(getLogTime() +" 終了 [" + name + "] "+ (list.getItems().length - 1) +"人\n");
 						list.remove(name);
 					}
 				} catch (Exception e) {
@@ -1919,7 +1915,7 @@ public class LinAllManager {
 		});
 	}
 	/**
-	 * 전체채팅 로그 
+	 * 全体チャットログ 
 	 * @param name
 	 * @param msg
 	 */
@@ -1935,7 +1931,7 @@ public class LinAllManager {
 	}
 
 	/**
-	 * 일반 채팅 로그 
+	 * 一般的なチャットログ
 	 * @param name
 	 * @param msg
 	 */
@@ -1952,7 +1948,7 @@ public class LinAllManager {
 
 
 	/**
-	 * 귓말 채팅 로그
+	 * ウィスパーチャットログ
 	 * @param Aname
 	 * @param Dname
 	 * @param msg
@@ -1970,7 +1966,7 @@ public class LinAllManager {
 
 	}
 	/**
-	 * 클랜 채팅 로그
+	 * クランチャットログ
 	 * @param Clanname
 	 * @param name
 	 * @param msg
@@ -1988,7 +1984,7 @@ public class LinAllManager {
 
 	}
 	/**
-	 * 파티채팅 로그
+	 * パーティーチャットログ
 	 * @param partylist
 	 * @param name
 	 * @param msg
@@ -2005,7 +2001,7 @@ public class LinAllManager {
 		});
 	}
 	/**
-	 * 상점 구입 로그
+	 * 店の購入ログ
 	 * @param Itemname
 	 * @param count
 	 * @param price
@@ -2020,13 +2016,13 @@ public class LinAllManager {
 			public void run() {
 				try{
 					txtTime_1.append("["+npcname+"]"+name+" Time : "+getLogTime()+"\n");
-					txtTime_1.append("[아이템 : "+Itemname+"] [갯수 :"+count+"] [가격 : "+price+"]\n\n");
+					txtTime_1.append("[アイテム : "+Itemname+"] [本数 :"+count+"] [価格 : "+price+"]\n\n");
 				}catch(Exception e){e.printStackTrace();}
 			}
 		});
 	}
 	/**
-	 * 거래 로그
+	 * 取引ログ
 	 * @param Itemname
 	 * @param count
 	 * @param Aname
@@ -2048,8 +2044,8 @@ public class LinAllManager {
 
 
 	/**
-	 * 창고 로그
-	 * 창고  창고에 넣기 : type = 0,창고에서 빼기 : type = 1
+	 * 倉庫のログ
+	 * 倉庫貯蔵 : type = 0,倉庫でマイナス : type = 1
 	 * 
 	 * @param Itemname
 	 * @param count
@@ -2062,11 +2058,11 @@ public class LinAllManager {
 			public void run() {
 				try{
 					if(type == 0){
-						text.append("["+name+"]->[창고] Time : "+getLogTime()+"\n");
-						text.append("[아이템 : "+Itemname+"]\n\n");
+						text.append("["+name+"]->[倉庫] Time : "+getLogTime()+"\n");
+						text.append("[アイテム : "+Itemname+"]\n\n");
 					}else if(type == 1){
-						text.append("[창고]->["+name+"] Time : "+getLogTime()+"\n");
-						text.append("[아이템 : "+Itemname+"]\n\n");
+						text.append("[倉庫]->["+name+"] Time : "+getLogTime()+"\n");
+						text.append("[アイテム : "+Itemname+"]\n\n");
 					}
 				}catch(Exception e){e.printStackTrace();}
 			}
@@ -2075,8 +2071,8 @@ public class LinAllManager {
 	}
 
 	/**
-	 * 요정넣기, type = 0,요정 빼기 : type = 1
-	 * 혈맹넣기, type = 2,혈맹 빼기 : type = 3
+	 *妖精付け、type = 0、妖精マイナス：type = 1
+	 * 血盟付け、type = 2、血盟マイナス：type = 3
 	 * @param Itemname
 	 * @param count
 	 * @param name
@@ -2088,17 +2084,17 @@ public class LinAllManager {
 			public void run() {
 				try{
 					if(type == 0){
-						text_4.append("["+name+"]->[요정창고] Time : "+getLogTime()+"\n");
-						text_4.append("[아이템 : "+Itemname+"]\n\n");
+						text_4.append("["+name+"]->[妖精倉庫] Time : "+getLogTime()+"\n");
+						text_4.append("[アイテム : "+Itemname+"]\n\n");
 					}else if(type == 1){
-						text_4.append("[요정창고]->["+name+"] Time : "+getLogTime()+"\n");
-						text_4.append("[아이템 : "+Itemname+"]\n\n");
+						text_4.append("[妖精倉庫]->["+name+"] Time : "+getLogTime()+"\n");
+						text_4.append("[アイテム : "+Itemname+"]\n\n");
 					}else if(type == 2){
-						text_4.append("["+name+"]->[혈맹창고] Time : "+getLogTime()+"\n");
-						text_4.append("[아이템 : "+Itemname+"]\n\n");
+						text_4.append("["+name+"]->[血盟倉庫] Time : "+getLogTime()+"\n");
+						text_4.append("[アイテム : "+Itemname+"]\n\n");
 					}else if(type == 3){
-						text_4.append("[혈맹창고]->["+name+"] Time : "+getLogTime()+"\n");
-						text_4.append("[아이템 : "+Itemname+"]\n\n");
+						text_4.append("[血盟倉庫]->["+name+"] Time : "+getLogTime()+"\n");
+						text_4.append("[アイテム : "+Itemname+"]\n\n");
 					}
 				}catch(Exception e){e.printStackTrace();}
 			}
@@ -2108,8 +2104,8 @@ public class LinAllManager {
 
 
 	/**
-	 * 인첸트 로그
-	 * 성공 : type = 0,실패 : type = 1
+	 * エンチャントログ
+	 * 成功：type = 0、失敗：type = 1
 	 * @param Itemname
 	 * @param name
 	 * @param type
@@ -2119,12 +2115,12 @@ public class LinAllManager {
 		display.syncExec(new Runnable() {
 			public void run() {
 				try{
-					if(type == 0){//성공
-						txtTime_3.append("["+name+"]=> 인첸트 성공! Time : "+getLogTime()+"\n");
-						txtTime_3.append("[아이템 : +"+oldEnchant+" "+Itemname+"] - > [아이템 : +"+newEnchant+" "+Itemname+"] \n");
-					}else{//실패
-						txtTime_3.append("["+name+"]=> 인첸트 실패! Time : "+getLogTime()+"\n");
-						txtTime_3.append("[아이템 : +"+oldEnchant+" "+Itemname+"]\n");
+					if(type == 0){//成功
+						txtTime_3.append("["+name+"]=> エンチャント成功！ Time : "+getLogTime()+"\n");
+						txtTime_3.append("[アイテム : +"+oldEnchant+" "+Itemname+"] - > [アイテム : +"+newEnchant+" "+Itemname+"] \n");
+					}else{//失敗
+						txtTime_3.append("["+name+"]=> エンチャントに失敗！ Time : "+getLogTime()+"\n");
+						txtTime_3.append("[アイテム : +"+oldEnchant+" "+Itemname+"]\n");
 					}
 				}catch(Exception e){e.printStackTrace();}
 			}
@@ -2132,8 +2128,8 @@ public class LinAllManager {
 
 	}
 	/**
-	 * 드랍 엔 픽업
-	 * 픽업 : type=0,드랍 : type=1
+	 * ドロップ円ピックアップ
+	 *ピックアップ：type = 0、ドロップ：type = 1
 	 * @param Itemname
 	 * @param name
 	 * @param count
@@ -2144,54 +2140,16 @@ public class LinAllManager {
 		display.syncExec(new Runnable() {
 			public void run() {
 				try{
-					if(type == 0){//픽업
-						text_10.append("픽업 : ["+name+"][아이템 : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
-					}else{//드랍
-						text_10.append("드랍 : ["+name+"][아이템 : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
+					if(type == 0){//ピックアップ
+						text_10.append("ピックアップ：["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
+					}else{//ドロップ
+						text_10.append("ドロップ : ["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
 					}
 				}catch(Exception e){e.printStackTrace();}
 			}
 		});
 
 	}
-
-//	public static void savelog() {
-//		try {
-//			savelog(txtInbumserverByleaf, "시스템");
-//			savelog(chatText, "전체채팅");
-//			savelog(txtTime, "귓속말");
-//			savelog(text_5, "혈맹채팅");
-//			savelog(text_6, "파티채팅");
-//			savelog(txtTime_1, "상점");
-//			savelog(txtTime_2, "교환");
-//			savelog(text, "창고");
-//			savelog(text_4, "특수창고");
-//			savelog(txtTime_3, "인챈트");
-//			savelog(text_10, "드랍&픽업");
-//			savelog(text_7, "패널티");
-//			savelog(text_8, "일반채팅");
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-//
-//	public static void savelog(Text textPane, String name) {
-//		try {
-//			File f = null;
-//			String sTemp = "";
-//			sTemp = getDate();
-//			StringTokenizer s = new StringTokenizer(sTemp, " ");
-//			String data = s.nextToken();
-//			f = new File("ManagerLog/" + data);
-//			if (!f.exists()) {
-//				f.mkdir();
-//			}
-//			flush(textPane, name, data);
-//			textPane.setText("");
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//	}
 
 
 	public static void flush(Text text, String FileName, String date) {
@@ -2206,7 +2164,7 @@ public class LinAllManager {
 
 
 	/**
-	 * 패널티 떨굼 : 0 , 증발 : 1
+	 * ペナルティドロップ：0、蒸発：1
 	 * @param Itemname
 	 * @param name
 	 * @param count
@@ -2217,10 +2175,10 @@ public class LinAllManager {
 		display.syncExec(new Runnable() {
 			public void run() {
 				try{
-					if(type == 0){//떨굼
-						text_7.append("떨굼 : ["+name+"][아이템 : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
-					}else{//증발
-						text_7.append("증발 : ["+name+"][아이템 : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
+					if(type == 0){//ドロップ
+						text_7.append("ドロップ : ["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
+					}else{//蒸発
+						text_7.append("蒸発 : ["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
 					}
 				}catch(Exception e){e.printStackTrace();}
 			}
@@ -2233,7 +2191,7 @@ public class LinAllManager {
 		display.syncExec(new Runnable() {
 			public void run() {
 				try {
-					text_11.append("명령 : [" + name + "] [" + cmd + "] [" + arg + "] Time : " + getLogTime() + "\n");
+					text_11.append("コマンド : [" + name + "] [" + cmd + "] [" + arg + "] Time : " + getLogTime() + "\n");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -2247,7 +2205,7 @@ public class LinAllManager {
 		display.syncExec(new Runnable() {
 			public void run() {
 				try {
-					text_9.append("보스스폰 : [" + name + "]  Time : " + getLogTime() + "\n");
+					text_9.append("ボス出現 : [" + name + "]  Time : " + getLogTime() + "\n");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -2259,7 +2217,7 @@ public class LinAllManager {
 		display.syncExec(new Runnable() {
 			public void run() {
 				try {
-					text_12.append("던전오픈 : [" + name + "]  Time : " + getLogTime() + "\n");
+					text_12.append("ダンジョンオープン : [" + name + "]  Time : " + getLogTime() + "\n");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -2269,7 +2227,7 @@ public class LinAllManager {
 
 
 	String Clanname="";String Pcname="";
-	String exp="";String stasts="";//로긴상태
+	String exp="";String stasts="";//ログイン状態
 	String hp="";String mp="";
 	String str="";String dex="";
 	String con="";String wis="";
@@ -2312,7 +2270,7 @@ public class LinAllManager {
 			String cname = rs.getString("Clanname");
 
 			if(cname==null||cname.equals("")){
-				Clanname = "[가입한 혈맹 없음]";
+				Clanname = "[登録した血盟なし]";
 			}else{
 				Clanname = "["+cname+"]";
 			}
@@ -2342,12 +2300,12 @@ public class LinAllManager {
 				String str2 = sdf.format( new Date( rs.getTimestamp("lastLogoutTime").getTime()));
 				logindate = str2;
 
-				SimpleDateFormat sdf2 = new SimpleDateFormat( "HH시 mm분 ss초" , Locale.KOREA );
+				SimpleDateFormat sdf2 = new SimpleDateFormat( "HH時mm分ss秒" , Locale.KOREA );
 				String str3 = sdf2.format( new Date( rs.getTimestamp("lastLogoutTime").getTime()));
 				logintime = str3;
 			}else{
 				logindate = "0000-00-00";
-				logintime = "00시 00분 00초";
+				logintime = "00時00分00秒";
 			}
 			MaxHp = rs.getShort("MaxHp");
 			CurrentHp = rs.getShort("CurHp");
@@ -2374,7 +2332,7 @@ public class LinAllManager {
 			L1PcInstance target = L1World.getInstance().getPlayer(name);
 			if(target == null)return false;
 			if(target.getClan() == null){
-				Clanname = "[가입한 혈맹 없음]";
+				Clanname = "[登録した血盟なし]";
 
 			}else{
 				Clanname = "["+target.getClan().getClanName()+"]";
@@ -2405,12 +2363,12 @@ public class LinAllManager {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
 				String str1 = sdf.format(new Date(target.getLastLoginTime().getTime()));
 				logindate = str1;
-				SimpleDateFormat sdf2 = new SimpleDateFormat("HH시 mm분 ss초", Locale.KOREA);
+				SimpleDateFormat sdf2 = new SimpleDateFormat("HH時mm分ss秒", Locale.KOREA);
 				String str2 = sdf2.format(new Date(target.getLastLoginTime().getTime()));
 				logintime = str2;
 			} else {
 				logindate = "0000-00-00";
-				logintime = "00시 00분 00초";
+				logintime = "00時00分00秒";
 			}
 
 
@@ -2478,13 +2436,13 @@ public class LinAllManager {
 				String name = rs.getString("char_name");
 				String clanname = "["+rs.getString("Clanname")+"]";
 				if(clanname.equals("[]")||clanname.equals("[null]")){
-					clanname = "[가입한 혈맹 없음]";
+					clanname = "[登録した血盟なし]";
 				}
 
 				int lv = rs.getInt("level");
 				String exp = lv+"Lv     "+nf.format(ExpTable.getExpPercentagedouble(lv,rs.getInt("Exp")))+"%";		
 				String login = "0000-00-00  00:00:00";
-				String loginbefore = "0일전";
+				String loginbefore = "0日前";
 				if(rs.getTimestamp("lastLogoutTime") != null){
 					SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd  HH:mm:ss" , Locale.KOREA );
 
@@ -2492,7 +2450,7 @@ public class LinAllManager {
 					login = str2;
 					SimpleDateFormat sdf2 = new SimpleDateFormat( "yyyyMMdd" , Locale.KOREA );
 					String str3 = sdf2.format( new Date( rs.getTimestamp("lastLogoutTime").getTime()));
-					loginbefore = getDiffDayCount(str3,nowDate())+"일전";
+					loginbefore = getDiffDayCount(str3,nowDate())+"前";
 				}
 				charlist.put(name, new String[]{name,clanname,exp,login,loginbefore});
 			}
@@ -2507,7 +2465,7 @@ public class LinAllManager {
 
 
 	/**
-	 * 계정 정보 취득
+	 * アカウント情報の取得
 	 * @param name
 	 */
 	public void accountInfo() {
@@ -2516,11 +2474,11 @@ public class LinAllManager {
 			public void run() {
 				try {
 					Account account = Account.load(accountname);
-					lblNewLabel_49.setText(account.getName());// 아이디
-					label_27.setText(account.get_Password());// 비번
-					lblNewLabel_42.setText("IP : " + account.getHost());// 아이피
+					lblNewLabel_49.setText(account.getName());// ユーザ名
+					label_27.setText(account.get_Password());// 非番
+					lblNewLabel_42.setText("IP : " + account.getHost());// アイピー
 					if (account.isBanned())
-						btnCheckButton.setSelection(true);// 벤 체크박스
+						btnCheckButton.setSelection(true);// ベンのチェックボックス
 					else
 						btnCheckButton.setSelection(false);
 					trtmNewTreeitem.removeAll();
@@ -2538,24 +2496,24 @@ public class LinAllManager {
 	}
 
 	/**
-	 * 캐릭터 정보
+	 * キャラクター情報
 	 * @param name
 	 */
 	public void charInfo(final String name) {
 
 		if(ServercharInfo(name)){
-			/**인벤*/
+			/**インベントリ*/
 			InvantoryList();
-			/**창고*/
+			/**倉庫*/
 			warehouseList();
 		}else if(DBcharInfo(name)){
-			/**인벤*/
+			/**インベントリ*/
 			InvantoryList();
-			/**창고*/
+			/**倉庫*/
 			warehouseList();
 		}else{
 			MessageBox messageBox = new MessageBox(shlInbumserverManager,SWT.OK|SWT.ICON_INFORMATION);
-			messageBox.setMessage("그러한 캐릭명은 존재하지않습니다!");
+			messageBox.setMessage("そのようなキャラクター名が存在しません！");
 			messageBox.open();
 			return;
 		}
@@ -2563,29 +2521,29 @@ public class LinAllManager {
 		display.syncExec(new Runnable() {
 			public void run() {
 				try{
-					lblNewLabel_28.setText(Clanname);//혈맹이름[ ]포함
-					lblNewLabel_25.setText(Pcname);//캐릭명
-					lblNewLabel_26.setText(exp);//레벨 경험치퍼센트
-					lblNewLabel_27.setText(stasts);//로긴 상태 Login : 포함
+					lblNewLabel_28.setText(Clanname);//血盟名[]を含む
+					lblNewLabel_25.setText(Pcname);//キャラクター名
+					lblNewLabel_26.setText(exp);//レベル経験値パーセント
+					lblNewLabel_27.setText(stasts);//ログイン状態Login：含ま
 					lblNewLabel_30.setText(hp);//hp 111/111
 					label_10.setText(mp);//mp 111/111
-					lblNewLabel_31.setText(str);//힘 베이스 포함
-					label_13.setText(dex);//덱스 
-					label_11.setText(con);//콘
-					label_14.setText(wis);//위즈
-					label_12.setText(Int);//인트
-					label_15.setText(cha);//카리
+					lblNewLabel_31.setText(str);//力ベースを含む
+					label_13.setText(dex);//デックス 
+					label_11.setText(con);//コーン
+					label_14.setText(wis);//ウィズ
+					label_12.setText(Int);//ポイント
+					label_15.setText(cha);//カリー
 					label_17.setText(sp);//sp
-					label_16.setText(mr);//mr %포함
+					label_16.setText(mr);//mr ％を含む
 					label_18.setText(er);//ER
 					label_19.setText(dg);//DG
-					lblNewLabel_40.setText(Ltime);//라스타바드 타임
-					label_21.setText(toptime);//상아탑 타임
-					label_22.setText(gitime);//기란 타임
+					lblNewLabel_40.setText(Ltime);//ラスタバドタイム
+					label_21.setText(toptime);//象牙の塔タイム
+					label_22.setText(gitime);//ギランタイム
 					lblNewLabel_39.setText(pk);//PK
-					label_20.setText(deth);//데스
-					lblNewLabel_35.setText(logindate);//로그아웃 날짜
-					lblNewLabel_37.setText(logintime);//로그아웃 시간
+					label_20.setText(deth);//デス
+					lblNewLabel_35.setText(logindate);//ログアウトの日付
+					lblNewLabel_37.setText(logintime);//ログアウト時間
 
 					progressBar_1.setMaximum(MaxHp);
 					progressBar_1.setMinimum(0);
@@ -2596,7 +2554,7 @@ public class LinAllManager {
 					progressBar_2.setSelection(CurrentMp);
 
 
-					/**인벤토리*/
+					/**インベントリ*/
 					table_2.removeAll();
 					for(L1ItemInstance item : items.values()){
 						if(item.getItem().getItemId() == 40308){
@@ -2627,9 +2585,9 @@ public class LinAllManager {
 							tableItem.setForeground(SWTResourceManager.getColor(255, 0, 0));
 						tableItem.setText(new String[] {item.getLogName(), ""+item.getId()});
 					}
-					/**인벤토리*/
+					/**インベントリ*/
 
-					/**창고*/
+					/**倉庫*/
 					table_3.removeAll();		    		
 					for(L1ItemInstance item : warehouseitems.values()){
 						if(item.getItem().getItemId() == 40308){
@@ -2660,7 +2618,7 @@ public class LinAllManager {
 							tableItem.setForeground(SWTResourceManager.getColor(255, 0, 0));
 						tableItem.setText(new String[] {item.getLogName(), ""+item.getId()});
 					}
-					/**창고*/
+					/**倉庫*/
 
 
 				}catch(Exception e){e.printStackTrace();}
@@ -2677,21 +2635,21 @@ public class LinAllManager {
 		display.syncExec(new Runnable() {
 			public void run() {
 				try{
-					lblNewLabel_5.setText(""+(int)Config.RATE_XP);//경험치 배율
-					lblNewLabel_7.setText(""+(int)Config.RATE_DROP_ADENA);//아데나 배율
-					lblNewLabel_9.setText(""+(int)Config.RATE_DROP_ITEMS);//아이템 배율
-					lblNewLabel_20.setText(AdenMake);//아덴 총생산량
-					label.setText(AdenConsume);//아덴 총 회수량
-					lblNewLabel_21.setText(AdenTax+"%");//세금 배율
-					lblNewLabel_22.setText(Bugdividend);//버경 최대배당
-					label_1.setText(AccountCount);//계정생성
-					lblNewLabel_23.setText(CharCount);//캐릭 생성
-					label_2.setText(PvPCount);//pvp 횟수
-					label_4.setText(PenaltyCount);//패널티 횟수
-					label_3.setText(ClanMaker);//혈맹 창설
-					label_5.setText(Maxuser);//최대 유저수
-					lblNewLabel_2.setText(ThreadCount);//쓰레드 갯수
-					lblm.setText(Memory);//메모리 용량
+					lblNewLabel_5.setText(""+(int)Config.RATE_XP);//経験値倍率
+					lblNewLabel_7.setText(""+(int)Config.RATE_DROP_ADENA);//アデナ倍率
+					lblNewLabel_9.setText(""+(int)Config.RATE_DROP_ITEMS);//アイテム倍率
+					lblNewLabel_20.setText(AdenMake);//アデンの総生産量
+					label.setText(AdenConsume);//アデン総回収量
+					lblNewLabel_21.setText(AdenTax+"%");//税金倍率
+					lblNewLabel_22.setText(Bugdividend);//ボギョン最大配当
+					label_1.setText(AccountCount);//アカウントの作成
+					lblNewLabel_23.setText(CharCount);//キャラクター作成
+					label_2.setText(PvPCount);//pvp 回数
+					label_4.setText(PenaltyCount);//ペナルティ回数
+					label_3.setText(ClanMaker);//血盟創設
+					label_5.setText(Maxuser);//最大ユーザー数
+					lblNewLabel_2.setText(ThreadCount);//スレッドの数
+					lblm.setText(Memory);//メモリ容量
 					progressBar.setSelection(0);
 
 				}catch(Exception e){e.printStackTrace();}

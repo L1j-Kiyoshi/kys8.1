@@ -26,7 +26,7 @@ import l1j.server.server.model.map.L1Map;
 
 public abstract class MapReader {
 	/**
-	 * 모든 텍스트 맵을 읽어들인다(추상 클래스)
+	 *すべてのテキストマップを読み込む（抽象クラ​​ス）
 	 *
 	 * @return Map
 	 * @throws IOException
@@ -34,17 +34,17 @@ public abstract class MapReader {
 	public abstract Map<Integer, L1Map> read() throws IOException;
 
 	/**
-	 * 지정의 맵 번호의 텍스트 맵을 읽어들인다.
+	 * 指定のマップ番号のテキストマップを読み込む。
 	 *
 	 * @param id
-	 *            맵 ID
+	 *            マップ ID
 	 * @return L1Map
 	 * @throws IOException
 	 */
 	public abstract L1Map read(int id) throws IOException;
 
 	/**
-	 * 읽어들이는 맵 파일을 판단한다(텍스트 맵 or 캐쉬 맵 or V2텍스트 맵).
+	 *読み込むマップファイルを判断する（テキストマップorキャッシュマップor V2テキストマップ）。
 	 *
 	 * @return MapReader
 	 */

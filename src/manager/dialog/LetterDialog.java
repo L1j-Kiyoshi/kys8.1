@@ -2,14 +2,6 @@ package manager.dialog;
 
 import java.sql.Timestamp;
 
-import l1j.server.server.datatables.LetterTable;
-import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_LetterList;
-import l1j.server.server.serverpackets.S_ServerMessage;
-import l1j.server.server.serverpackets.S_SkillSound;
-import manager.LinAllManager;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.custom.StyledText;
@@ -26,6 +18,14 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+
+import l1j.server.server.datatables.LetterTable;
+import l1j.server.server.model.L1World;
+import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.serverpackets.S_LetterList;
+import l1j.server.server.serverpackets.S_ServerMessage;
+import l1j.server.server.serverpackets.S_SkillSound;
+import manager.LinAllManager;
 
 public class LetterDialog extends Dialog {
 
@@ -75,7 +75,7 @@ public class LetterDialog extends Dialog {
 		shell = new Shell(getParent(), getStyle());
 		shell.setSize(450, 473);
 		shell.setText("\uD3B8\uC9C0\uBCF4\uAE30");
-		//화면중앙으로
+		//画面の中央に
 		display = Display.getDefault();
 		shell.setBounds((display.getBounds().width / 2) - (shell.getBounds().width / 2),
 				(display.getBounds().height / 2) - (shell.getBounds().height / 2),
@@ -123,9 +123,9 @@ public class LetterDialog extends Dialog {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				MessageBox messageBox = new MessageBox(shell, SWT.ICON_QUESTION |SWT.YES | SWT.NO);
-			    messageBox.setMessage("정말 삭제 하시겠습니까?");
+			    messageBox.setMessage("本当に削除しますか？");
 			    if(messageBox.open() == SWT.YES) {
-					// 삭제하기.
+					// 削除する。
 			    	LinAllManager.getInstance().getLetterComposite().delete(item);
 					//
 					close();
@@ -186,7 +186,7 @@ public class LetterDialog extends Dialog {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				MessageBox messageBox = new MessageBox(shell, SWT.ICON_QUESTION |SWT.YES | SWT.NO);
-			    messageBox.setMessage("편지를 발송 하시겠습니까?");
+			    messageBox.setMessage("手紙を発送しますか？");
 			    if(messageBox.open() == SWT.YES) {
 			    	//
 			    	L1PcInstance receiver = L1World.getInstance().getPlayer(text_4.getText());
@@ -204,9 +204,9 @@ public class LetterDialog extends Dialog {
 	}
 	
 	private void close() {
-		// 클린.
+		// クリーン。
 		LinAllManager.getInstance().getLetterComposite().clear();
-		// 리로드.
+		// リロード。
 		LinAllManager.getInstance().getLetterComposite().reload();
 		//
 		shell.dispose();
@@ -243,7 +243,7 @@ public class LetterDialog extends Dialog {
 		if (receiver != null && receiver.getOnlineStatus() != 0) {
 			LetterList(receiver, type, MAILBOX_SIZE);
 			receiver.sendPackets(new S_SkillSound(receiver.getId(), 1091));
-			receiver.sendPackets(new S_ServerMessage(428)); // 편지가 도착했습니다.
+			receiver.sendPackets(new S_ServerMessage(428)); //メールが届きました。
 		}
 	}
 	

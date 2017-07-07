@@ -521,7 +521,7 @@ public class C_ItemUSe extends ClientBasePacket {
 			L1Cooking.useCookingItem(pc, l1iteminstance);
 			break;
 		case 3000161://메티스의 축복 주문서
-			SpecialEventHandler.getInstance().통합버프(pc);
+			SpecialEventHandler.getInstance().buff_ALL(pc);
 			pc.getInventory().removeItem(l1iteminstance.getId(), 1);
 			break;
 		default:

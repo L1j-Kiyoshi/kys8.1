@@ -16,35 +16,35 @@ import l1j.server.server.model.map.L1Map;
 import l1j.server.server.model.map.L1V1Map;
 
 /**
- * 텍스트 맵(maps/\d*.txt)을 읽어들인다.
+ * テキストマップ（maps / \\ d * .txt）を読み込む。
  */
 public class TextMapReader extends MapReader {
 
-	/** 메세지 로그용. */
+	/** メッセージログの。 */
 	private static Logger _log = Logger
 			.getLogger(TextMapReader.class.getName());
-	/** 맵 홀더. */
+	/** マップホルダー。 */
 	private static final String MAP_DIR = "./maps/";
-	/** MAP_INFO용 맵 번호 위치. */
+	/** MAP_INFO用マップ番号の位置。 */
 	public static final int MAPINFO_MAP_NO = 0;
-	/** MAP_INFO용 개시 X좌표의 위치. */
+	/** MAP_INFO用開始X座標の位置。 */
 	public static final int MAPINFO_START_X = 1;
-	/** MAP_INFO용 최종 X좌표의 위치. */
+	/** MAP_INFO用最終X座標の位置。 */
 	public static final int MAPINFO_END_X = 2;
-	/** MAP_INFO용 개시 Y좌표의 위치. */
+	/** MAP_INFO用開始Y座標の位置。 */
 	public static final int MAPINFO_START_Y = 3;
-	/** MAP_INFO용 개시 Y좌표의 위치. */
+	/** MAP_INFO用開始Y座標の位置。 */
 	public static final int MAPINFO_END_Y = 4;
 
 	/**
-	 * 지정의 맵 번호의 텍스트 맵을 읽어들인다.
-	 * 
+	 * 指定のマップ番号のテキストマップを読み込む。
+	 *
 	 * @param mapId
-	 *            맵 번호
+	 *            マップ番号
 	 * @param xSize
-	 *            X좌표의 사이즈
+	 *            X座標のサイズ
 	 * @param ySize
-	 *            Y좌표의 사이즈
+	 *            Y座標のサイズ
 	 * @return byte[][]
 	 * @throws IOException
 	 */
@@ -60,7 +60,7 @@ public class TextMapReader extends MapReader {
 		StringTokenizer tok = null;
 		while ((line = in.readLine()) != null) {
 			if (line.trim().length() == 0 || line.startsWith("#")) {
-				continue; // 빈줄, 코멘트는 스킵
+				continue; // 空行、コメントはスキップ
 			}
 
 			x = 0;
@@ -78,10 +78,10 @@ public class TextMapReader extends MapReader {
 	}
 
 	/**
-	 * 지정의 맵 번호의 텍스트 맵을 읽음
-	 * 
+	 * 指定のマップ番号のテキストマップを読む
+	 *
 	 * @param id
-	 *            맵 번호
+	 *            マップ番号
 	 * @return L1Map
 	 * @throws IOException
 	 */
@@ -115,8 +115,8 @@ public class TextMapReader extends MapReader {
 	}
 
 	/**
-	 * 모든 텍스트 맵을 읽음
-	 * 
+	 * すべてのテキストマップを読む
+	 *
 	 * @return Map
 	 * @throws IOException
 	 */
@@ -155,8 +155,8 @@ public class TextMapReader extends MapReader {
 	}
 
 	/**
-	 * mapInfo：맵 No, 맵 사이즈를 보관 유지하고 있다. 1 레코드가{mapNo, StartX, EndX, StartY,
-	 * EndY}로 구성되어 있다.
+	 * mapInfo：マップNo、マップサイズを保持している。 1レコードが{mapNo、StartX、EndX、StartY、
+	 * EndY}で構成されている。
 	 */
 	/** 15.12.23 **/
     public static final int[][] MAP_INFO = {
@@ -962,11 +962,11 @@ public class TextMapReader extends MapReader {
     		{	5007	,	32704	,	32831	,	32704	,	32831	},
     		{	5008	,	32704	,	32831	,	32704	,	32831	},
     		{	5009	,	32704	,	32831	,	32704	,	32831	},
-    		{	15401	,	32704	,	32895	,	32768	,	32959	}, //지배의 결계 
+    		{	15401	,	32704	,	32895	,	32768	,	32959	}, //支配の結界
 			{	15402	,	32640	,	33023	,	32768	,	32959	},
 			{   15403 ,    32704 ,    32895 ,  32768 ,    32959 },
 			{   15404 ,    32640,    32831,    32768 ,  32959 },
-			{	1161,	32704,	32831,	32832,32959}, //발라카스레어
+			{	1161,	32704,	32831,	32832,32959}, //ヴァラカスレア
 			{ 1708, 32576, 33023, 32640, 33087 },
 			{ 1709, 32704, 32959, 32832, 33087 },
 			{ 1710, 32704, 32831, 32704, 32831 },

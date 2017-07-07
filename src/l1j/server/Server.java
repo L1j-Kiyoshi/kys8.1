@@ -12,25 +12,24 @@ import java.util.concurrent.Executors;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import l1j.server.server.GameServer;
-import l1j.server.server.Controller.LoginController;
-import l1j.server.server.utils.PerformanceTimer;
-
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 
+import l1j.server.server.GameServer;
+import l1j.server.server.Controller.LoginController;
+import l1j.server.server.utils.PerformanceTimer;
 import server.CodecFactory;
 import server.ProtocolHandler;
 
 /**
- * l1j-jp의 서버를 기동한다.
+ * l1j-jpのサーバーを起動する。
  */
 public class Server {
-	/** 메세지 로그용. */
+	/**メッセージログの。 */
 	private static Logger _log = Logger.getLogger(Server.class.getName());
 
-	/** 로그 설정 파일의 폴더. */
+	/** ログ設定ファイルのフォルダ。 */
 	private static final String LOG_PROP = "./config/log.properties";
 
 	static private ServerBootstrap sb;
@@ -40,29 +39,29 @@ public class Server {
 
 	private void startLoginServer() {
 		try {
-			// 정보로딩?
+			// 情報の読み込み？
 			// GameServer.getInstance().initialize();
-			// 게임서버 풀 생성?
+			// ゲームサーバープールの作成？
 			LoginController.getInstance().setMaxAllowedOnlinePlayers(Config.MAX_ONLINE_USERS);
 			sb = new ServerBootstrap(new NioServerSocketChannelFactory(Executors.newCachedThreadPool(),Executors.newCachedThreadPool()));
 			cf = new CodecFactory(new ProtocolHandler());
 			sb.setPipelineFactory(cf);
 
-			// 서버 성능을 높이기위해 클라가 접속을 끊더라도 세션을 유지하는 알고리즘임..필요없으므로 false
+			// サーバーのパフォーマンスを高めるためにクライアントが接続を切断しても、セッションを維持するためのアルゴリズムである。必要ないので、false
 			sb.setOption("child.keepAlive", false);
-			// Naggle 비활성.
+			// Naggle アクティブ。
 			sb.setOption("child.tcpNoDelay", true);
-			// 받을 패킷의 최대양.
+			// 受信パケットの最大量。
 			sb.setOption("child.receiveBufferSize", 2048);
 			sb.setOption("connectTimeoutMillis", 300);
-			// 서버 활성화.
+			// サーバーが有効。
 			channel = sb.bind(new InetSocketAddress(Config.GAME_SERVER_PORT));
 			//pla = "Netty";
 			//System.out.println("Platform: " + pla + "  Port : "+ Config.GAME_SERVER_PORT + "   Server operation.");
 		} catch (Exception e) { /* e.printStackTrace(); */
 		}
 		;
-		// FIXME StrackTrace하면 error
+		// FIXME StrackTraceと error
 	}
 
 	public void shutdown() {
@@ -74,10 +73,10 @@ public class Server {
 	
 	public static Calendar StartTime;
 	/**
-	 * 서버 메인.
+	 * サーバーメイン。
 	 *
 	 * @param args
-	 *            커멘드 라인 인수
+	 *            コマンドライン引数
 	 * @throws SQLException
 	 * @throws Exception
 	 */
@@ -88,13 +87,13 @@ public class Server {
 
 			PerformanceTimer timer = new PerformanceTimer();
 			System.out.println("──────────────────────────────────");
-			System.out.print("■ [데이터 베이스 초기화] 1 데이터 베이스 초기화");
+			System.out.print("■ [データベースの初期化] 1 データベースの初期化");
 			// clearDB();
-			System.out.println(" 완료 [" + timer.get() + " ms]");
+			System.out.println(" 完了 [" + timer.get() + " ms]");
 			timer.reset();
-			System.out.print("■ [데이터 베이스 초기화] 2 데이터 베이스 초기화");
+			System.out.print("■ [データベースの初期化] 2データベースの初期化");
 			// clearDB();
-			System.out.println(" 완료 [" + timer.get() + " ms]");
+			System.out.println(" 完了 [" + timer.get() + " ms]");
 			System.out.println("──────────────────────────────────");
 			timer = null;
 			startGameServer();
@@ -113,7 +112,7 @@ public class Server {
 		} catch (Exception e) { /* e.printStackTrace(); */
 		}
 		;
-		// FIXME StrackTrace하면 error
+		// FIXME StrackTraceと error
 	}
 
 	private void initLogManager() {
@@ -138,7 +137,7 @@ public class Server {
 		}
 	}
 
-	private void initDBFactory() {// L1DatabaseFactory 초기설정
+	private void initDBFactory() {// L1DatabaseFactory 初期設定
 		L1DatabaseFactory.setDatabaseSettings(Config.DB_DRIVER, Config.DB_URL,
 				Config.DB_LOGIN, Config.DB_PASSWORD);
 		try {
@@ -146,7 +145,7 @@ public class Server {
 		} catch (Exception e) { /* e.printStackTrace(); */
 		}
 		;
-		// FIXME StrackTrace하면 error
+		// FIXME StrackTraceと error
 	}
 
 }
