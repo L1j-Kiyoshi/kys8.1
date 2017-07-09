@@ -14,7 +14,7 @@ public class S_OwnCharPack extends ServerBasePacket {
 	private static final int STATUS_FASTMOVABLE = 64;
 	private static final int STATUS_GHOST = 128;
 	//private static final int BLOOD_LUST = 16;//100
-	private static final int DANCING_BLADES = 16;//댄싱
+	private static final int DANCING_BLADES = 16;//ダンシング
 
 	private byte[] _byte = null;
 
@@ -25,7 +25,7 @@ public class S_OwnCharPack extends ServerBasePacket {
 	private void buildPacket(L1PcInstance pc) {
 		int status = STATUS_PC;
 
-		// 굴독같은 초록의 독
+		// グルドク同じ緑の毒
 		// if (pc.isPoison()) {
 		// status |= STATUS_POISON;
 		// }
@@ -46,7 +46,7 @@ public class S_OwnCharPack extends ServerBasePacket {
 		if (pc.isDancingBlades()) {
 			status |= DANCING_BLADES;
 		}
-		if (pc.isFastMovable() || pc.isFruit()) {//유그드라 추가 변경1/19
+		if (pc.isFastMovable() || pc.isFruit()) {//ユグドラ追加変更1/19
 			status |= STATUS_FASTMOVABLE;
 		}
 		if (pc.isGhost()) {
@@ -95,7 +95,7 @@ public class S_OwnCharPack extends ServerBasePacket {
 		writeD(pc.getExp());
 		writeH(pc.getLawful());
 		if (pc.getHuntCount() >= 1) { // 
-			writeS(pc.getName() + "\\fe(수배중)");
+			writeS(pc.getName() + "\\fe(手配中)");
 		} else {
 			writeS(pc.getName());
 		}
@@ -103,9 +103,9 @@ public class S_OwnCharPack extends ServerBasePacket {
 		writeC(status);
 		writeD(pc.getClanid() > 0 ? pc.getClan().getEmblemId() : 0); 
 		writeS(pc.getClanname());
-		writeS(null); // 펫호팅?
+		writeS(null); // ペットホチン?
 		writeC(pc.getClanRank() > 0 ? pc.getClanRank() << 4 : 0xb0); 
-		if (pc.isInParty()) // 파티중
+		if (pc.isInParty()) // パーティー中
 		{
 			writeC(100 * pc.getCurrentHp() / pc.getMaxHp());
 		} else {
@@ -124,7 +124,7 @@ public class S_OwnCharPack extends ServerBasePacket {
 		writeC(0);
 
 		writeC(pc.getAttackLevelCount());
-		if (pc.isInParty()) {	// 파티중
+		if (pc.isInParty()) {	// パーティー中
 			int mpRatio = 100;
 			if (0 < pc.getMaxMp()) {
 				mpRatio = 100 * pc.getCurrentMp() / pc.getMaxMp();

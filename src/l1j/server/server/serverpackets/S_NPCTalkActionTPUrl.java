@@ -35,8 +35,8 @@ public class S_NPCTalkActionTPUrl extends ServerBasePacket {
 		writeC(Opcodes.S_HYPERTEXT);
 		writeD(objid);
 		writeS(htmlid);
-		writeH(0x01); // 불명
-		writeH(prices.length); // 인수의 수
+		writeH(0x01); // 不明
+		writeH(prices.length); // 引数の数
 
 		for (Object price : prices) {
 			writeS(String.valueOf(((Integer) price).intValue()));

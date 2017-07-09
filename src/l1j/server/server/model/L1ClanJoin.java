@@ -53,36 +53,36 @@ public class L1ClanJoin {
 		L1Clan clan = L1World.getInstance().getClan(clanName);
 		if (clan != null) {
 			int maxMember = 0;
-			///////////혈맹리뉴얼//////////////
+			///////////血盟リニューアル//////////////
 			int charisma = 0;
 			if(pc.getId() != clan.getLeaderId())
 				charisma = pc.getAbility().getTotalCha();
 			else
 				charisma = getOfflineClanLeaderCha(clan.getLeaderId());
-			///////////혈맹리뉴얼//////////////
+			///////////血盟リニューアル//////////////
 			boolean lv45quest = false;
 			if (pc.getQuest().isEnd(L1Quest.QUEST_LEVEL45)) {
 				lv45quest = true;
 			}
-			if (pc.getLevel() >= 50) { // Lv50 이상
-				if (lv45quest == true) { // Lv45 퀘스트 클리어가 끝난 상태
+			if (pc.getLevel() >= 50) { // Lv50以上
+				if (lv45quest == true) { // Lv45クエストクリア済み
 					maxMember = charisma * 9;
 				} else {
 					maxMember = charisma * 3;
 				}
-			} else { // Lv50 미만
-				if (lv45quest == true) { // Lv45 퀘스트 클리어가 끝난 상태
+			} else { // Lv50未満
+				if (lv45quest == true) { //Lv45クエストクリア済み
 					maxMember = charisma * 6;
 				} else {
 					maxMember = charisma * 2;
 				}
 			}
-			if (Config.MAX_CLAN_MEMBER > 0) { // Clan 인원수의 상한의 설정
-				// 있어
+			if (Config.MAX_CLAN_MEMBER > 0) { // Clan人数の上限の設定
+				// おり
 				maxMember = Config.MAX_CLAN_MEMBER;
 			}
 
-			if (joinPc.getClanid() == 0) { // 크란미가입
+			if (joinPc.getClanid() == 0) { // クラン未加入
 				if (maxMember <= clan.getClanMemberList().size()) {
 					joinPc.sendPackets(new S_ServerMessage(188, pc.getName())); 
 					return false;
@@ -100,7 +100,7 @@ public class L1ClanJoin {
 				Broadcaster.broadcastPacket(joinPc, new S_CharTitle(joinPc.getId(), ""));
 				joinPc.setClanJoinDate(new Timestamp(System.currentTimeMillis()));
 				try{
-					joinPc.save(); // DB에 캐릭터 정보를 기입한다
+					joinPc.save(); // DBに文字情報を記入する
 				} catch(Exception e) {}
 				clan.addClanMember(joinPc.getName(), joinPc.getClanRank(), joinPc.getLevel(), "", joinPc.getId(), joinPc.getType(), joinPc.getOnlineStatus(), joinPc);
 				joinPc.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.수련, joinPc.getName()));
@@ -115,14 +115,14 @@ public class L1ClanJoin {
 					player.broadcastPacket(new S_ReturnedStat(player.getId(), joinPc.getClan().getEmblemId()));
 				}
 				//L1Teleport.teleport(joinPc, joinPc.getX(), joinPc.getY(), joinPc.getMapId(),joinPc.getHeading(), false);
-				// 혈맹에
-				// 가입했습니다.
-			} else { // 크란 가입이 끝난 상태(크란 연합)
+				//血盟に
+				//登録しました。
+			} else { // クラン加入済み（クラン連合）
 				if (Config.CLAN_ALLIANCE) {
 					changeClan(pc, joinPc, maxMember);
 				} else {
 					joinPc.sendPackets(new S_ServerMessage(89)); 
-					// \f1당신은벌써혈맹에가입하고있습니다.
+					// \f1あなたはすでに血盟に加入しています。
 				}
 			}
 		} else {
@@ -144,22 +144,22 @@ public class L1ClanJoin {
 		int oldClanNum = oldClan.getClanMemberList().size();
 		if (clan != null && oldClan != null && joinPc.isCrown()
 				&& joinPc.getId() == oldClan.getLeaderId()) {
-			if (maxMember < clanNum + oldClanNum) { // 빈 곳이 없다
+			if (maxMember < clanNum + oldClanNum) { // 空きがない
 				joinPc.sendPackets(new S_ServerMessage(188, pc.getName())); 
-				// %0는당신을혈맹원으로서받아들일수가없습니다.
+				// %0はあなたの血盟員として受け入れることができません.
 				return;
 			}
 			L1PcInstance clanMember[] = clan.getOnlineClanMember();
 			for (int cnt = 0; cnt < clanMember.length; cnt++) {
 				clanMember[cnt].sendPackets(new S_ServerMessage(94, joinPc.getName())); 
-				// \f1%0이혈맹의일원으로서받아들여졌습니다.
+				// \f1%0耳穴猛の一員として受け入れられました。
 			}
 
 
 			for (int i = 0; i < oldClan.getClanMemberList().size(); i++) {
 				L1PcInstance oldClanMember = L1World.getInstance().getPlayer(
 						oldClan.getClanMemberList().get(i).name);
-				if (oldClanMember != null) { // 온라인중의 구크란 멤버
+				if (oldClanMember != null) { // オンライン中の旧クランメンバー
 					oldClanMember.setClanid(clanId);
 					oldClanMember.setClanname(clanName);
 					if (oldClanMember.getId() == joinPc.getId()) {
@@ -167,7 +167,7 @@ public class L1ClanJoin {
 					} else
 						oldClanMember.setClanRank(L1Clan.수련);
 					try {
-						// DB에 캐릭터 정보를 기입한다
+						// DBに文字情報を記入する
 						oldClanMember.save();
 					} catch (Exception e) {
 						_log.log(Level.SEVERE, "C_Attr[changeClan]Error", e);
@@ -188,9 +188,9 @@ public class L1ClanJoin {
 					
 							 // \f1%0
 					
-					// 혈맹에
-					// 가입했습니다.
-				} else { // 오프 라인중의 구크란 멤버
+					//血盟に
+					//登録しました。
+				} else { // オフライン中の旧クランメンバー
 					try {
 						L1PcInstance offClanMember = CharacterTable.getInstance().restoreCharacter(
 								oldClan.getClanMemberList().get(i).name);
@@ -205,15 +205,15 @@ public class L1ClanJoin {
 					}
 				}
 			}
-			// 이전혈맹 삭제
+			// 前血盟削除
 			String emblem_file = String.valueOf(oldClanId);
 			File file = new File("emblem/" + emblem_file);
 			file.delete();
 			ClanTable.getInstance().deleteClan(oldClanName);
 		}
 	}
-	// 오프라인중의 군주 카리스마
-	///////////혈맹리뉴얼//////////////
+	// オフライン中の君主カリスマ
+	///////////血盟リニューアル//////////////
 	public int getOfflineClanLeaderCha(int member) {
 		java.sql.Connection con = null;
 		java.sql.PreparedStatement pstm = null;

@@ -21,8 +21,8 @@ package l1j.server.server.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import l1j.server.server.model.Instance.L1NpcInstance;
@@ -37,9 +37,9 @@ public class L1HateList {
 
 	public L1HateList() {
 		/*
-		 * ConcurrentHashMap를 이용하는 것보다, 모든 메소드를 동기 하는 (분)편이 메모리 사용량, 속도 모두 우수했다.
-		 * 단, 향후 이 클래스의 이용 방법이 바뀌었을 경우, 예를 들면 많은 thread로부터 동시에 읽기가 걸리게 되었을 경우는,
-		 * ConcurrentHashMap를 이용하는 것이 좋을지도 모른다.
+		 * ConcurrentHashMapを利用するより、すべてのメソッドを同期する方がメモリ使用量、速度ともに優れていた。
+		 * ただし、今後このクラスの利用方法が変わった場合には、例えば、多くのthreadから同時に読みかかるされた場合は、
+		 * ConcurrentHashMapを利用する方が良いかもしれない。
 		 */
 		_hateMap = new ConcurrentHashMap<L1Character, Integer>();
 	}

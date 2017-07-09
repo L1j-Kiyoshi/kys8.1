@@ -41,7 +41,6 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.Instance.L1PetInstance;
 import l1j.server.server.model.Instance.L1SummonInstance;
 import l1j.server.server.model.Instance.L1SupportInstance;
-import l1j.server.server.model.L1World.visibleLocObjects;
 import l1j.server.server.model.map.L1Map;
 import l1j.server.server.model.map.L1WorldMap;
 import l1j.server.server.serverpackets.S_SystemMessage;
@@ -79,21 +78,21 @@ public class L1World {
 	
 	@SuppressWarnings("unchecked")
 	private L1World() {
-		_allPlayers = new ConcurrentHashMap<String, L1PcInstance>(); // 모든 플레이어
-		_allPets = new ConcurrentHashMap<Integer, L1PetInstance>(); // 모든 애완동물
-		_allSummons = new ConcurrentHashMap<Integer, L1SummonInstance>(); // 모든 사몬몬스타
-		_allSupports = new ConcurrentHashMap<Integer, L1SupportInstance>(); // 모든 서포트
-		_allObjects = new ConcurrentHashMap<Integer, L1Object>(); // 모든 오브젝트(L1ItemInstance 들어가, L1Inventory는 없음)
-		_visibleObjects = new ConcurrentHashMap[MAX_MAP_ID + 1]; // MAP 마다의 오브젝트(L1Inventory 들어가, L1ItemInstance는 없음)
-		_allWars = new CopyOnWriteArrayList<L1War>(); // 모든 전쟁
-		_allClansById = new ConcurrentHashMap<Integer, L1Clan>(); // 모든 크란(Online/Offline 어느쪽이나)
-		_allClans = new ConcurrentHashMap<String, L1Clan>(); // 모든 크란(Online/Offline 어느쪽이나)
-		_allNpc = new ConcurrentHashMap<Integer, L1NpcInstance>(); // 모든 npc
-		_allShopNpc = new ConcurrentHashMap<Integer, L1NpcShopInstance>(); // 모든 무인NPC상점
+		_allPlayers = new ConcurrentHashMap<String, L1PcInstance>(); // すべてのプレイヤー
+		_allPets = new ConcurrentHashMap<Integer, L1PetInstance>(); // すべてのペット
+		_allSummons = new ConcurrentHashMap<Integer, L1SummonInstance>(); // すべてのサーモンモンスター
+		_allSupports = new ConcurrentHashMap<Integer, L1SupportInstance>(); //すべてのサポート
+		_allObjects = new ConcurrentHashMap<Integer, L1Object>();
+		_visibleObjects = new ConcurrentHashMap[MAX_MAP_ID + 1];
+		_allWars = new CopyOnWriteArrayList<L1War>(); // すべての戦争
+		_allClansById = new ConcurrentHashMap<Integer, L1Clan>();
+		_allClans = new ConcurrentHashMap<String, L1Clan>();
+		_allNpc = new ConcurrentHashMap<Integer, L1NpcInstance>(); // すべてのnpc
+		_allShopNpc = new ConcurrentHashMap<Integer, L1NpcShopInstance>(); // すべての無人NPC商店
 		_allitem = new ConcurrentHashMap<Integer, L1ItemInstance>();
-		_allGuard = new ConcurrentHashMap<Integer, L1GuardInstance>(); // 모든 경비병
+		_allGuard = new ConcurrentHashMap<Integer, L1GuardInstance>(); // すべての警備兵
 		_allCastleGuard = new ConcurrentHashMap<Integer, L1CastleGuardInstance>(); 
-		_allRobot = new ConcurrentHashMap<Integer, L1RobotInstance>(); // 모든
+		_allRobot = new ConcurrentHashMap<Integer, L1RobotInstance>(); // すべて
 		for (int i = 0; i <= MAX_MAP_ID; i++) {
 			_visibleObjects[i] = new ConcurrentHashMap<Integer, L1Object>();
 		}
@@ -142,8 +141,8 @@ public class L1World {
 			_width = width;
 			_height = height;
 
-			// 좌표마다 생성하면 좋지만 메모리가 4기가나 먹음.
-			// 그래서 visibleLocSize 단위로 끊어서 저장
+			// 座標ごとに生成すればよいが、メモリが4基、または食べる。
+			// だからvisibleLocSize単位で分割することによって保存
 			int w = width / visibleLocSize;
 			int h = height / visibleLocSize;
 
@@ -293,8 +292,8 @@ public class L1World {
 	}
 
 	/**
-	 * 모든 상태를 클리어 한다.<br>
-	 * 디버그, 테스트등이 특수한 목적 이외로 호출해서는 안 된다.
+	 * すべての状態をクリアする。<br>
+	 * デバッグ、テストなどの特殊な目的以外で呼び出してはいけない。
 	 */
 	public void clear() {
 		_instance = new L1World();
@@ -374,7 +373,7 @@ public class L1World {
 		return null;
 	}
 
-	// _allObjects의 뷰
+	// _allObjectsのビュー
 	private Collection<L1Object> _allValues;
 
 	public Collection<L1Object> getObject() {
@@ -384,7 +383,7 @@ public class L1World {
 	}
 
 	public L1GroundInventory getInventory(int x, int y, short map) {
-		int inventoryKey = ((x - 30000) * 10000 + (y - 30000)) * -1; // xy의 마이너스치를 인벤트리 키로서 사용
+		int inventoryKey = ((x - 30000) * 10000 + (y - 30000)) * -1; // xyのマイナス値をインベントリツリーキーとして使用
 
 		Object object = _visibleObjects[map].get(inventoryKey);
 		if (object == null) {
@@ -483,7 +482,7 @@ public class L1World {
 			}
 		}
 	}
-	public void moveVisibleObject(L1Object object, int newMap) // set_Map로 새로운 Map로 하기 전에 부르는 것
+	public void moveVisibleObject(L1Object object, int newMap) // set_Mapで新しいMapにする前に呼ばれること
 	{
 		if(object == null) return;
 		if (object.getMapId() != newMap) {
@@ -501,7 +500,7 @@ public class L1World {
 		ConcurrentHashMap<Integer, Integer> lineMap = new ConcurrentHashMap<Integer, Integer>();
 
 		/*
-		 * http://www2.starcat.ne.jp/~fussy/algo/algo1-1.htm보다
+		 * http://www2.starcat.ne.jp/~fussy/algo/algo1-1.htmより
 		 */
 		int E;
 		int x;
@@ -519,7 +518,7 @@ public class L1World {
 
 		x = x0;
 		y = y0;
-		/* 기울기가 1 이하의 경우 */
+		/* 傾きが1以下の場合 */
 		if (dx >= dy) {
 			E = -dx;
 			for (i = 0; i <= dx; i++) {
@@ -532,7 +531,7 @@ public class L1World {
 					E -= 2 * dx;
 				}
 			}
-			/* 기울기가 1보다 큰 경우 */
+			/* 傾きが1よりも大きい場合 */
 		} else {
 			E = -dy;
 			for (i = 0; i <= dy; i++) {
@@ -596,16 +595,16 @@ public class L1World {
 				}
 				int distance = location.getTileLineDistance(element
 						.getLocation());
-				// 직선 거리가 높이, 폭어느 쪽보다 큰 경우, 계산할 것도 없이 범위외
+				// 直線距離が高さ、幅のどちらよりも大きい場合には、計算もなく範囲外
 				if (distance > height && distance > width) {
 					continue;
 				}
 
-				// object의 위치를 원점과하기 위한 좌표 보정
+				// objectの位置を原点とするための座標補正
 				int x1 = element.getX() - x;
 				int y1 = element.getY() - y;
 
-				// Z축회전시키고 각도를 0번으로 한다.
+				// Z軸回転させて角度を0度とする。
 				int rotX = (int) Math.round(x1 * cosSita + y1 * sinSita);
 				int rotY = (int) Math.round(-x1 * sinSita + y1 * cosSita);
 
@@ -614,7 +613,7 @@ public class L1World {
 				int ymin = -width;
 				int ymax = width;
 
-				// 깊이가 사정과 맞물리지 않기 때문에 직선 거리로 판정하도록(듯이) 변경.
+				// 深さが事情とかみ合わないので、直線距離で判定するように変更します。
 				// if (rotX > xmin && rotX <= xmax && rotY >= ymin && rotY <=
 				// ymax) {
 				if (rotX > xmin && distance <= xmax && rotY >= ymin
@@ -665,7 +664,7 @@ public class L1World {
 
 	public ArrayList<L1Object> getVisiblePoint(L1Location loc, int radius) {
 		ArrayList<L1Object> result = new ArrayList<L1Object>();
-		int mapId = loc.getMapId(); // 루프내에서 부르면(자) 무겁기 때문에
+		int mapId = loc.getMapId(); // ループ内で歌えば（者）重いので、
 
 		if (mapId <= MAX_MAP_ID) {
 			for (L1Object element : _visibleObjects[mapId].values()) {
@@ -750,7 +749,7 @@ public class L1World {
 //		return result;
 //	}
 	
-	//수정
+	//修正
 	public ArrayList<L1PcInstance> getVisiblePlayer(L1Object object, int radius) {
 		int map = object.getMapId();
 		Point pt = object.getLocation();
@@ -807,7 +806,7 @@ public class L1World {
 
 
 	/**
-	 * object를 인식할 수 있는 범위에 있는 플레이어를 취득한다
+	 * objectを認識することができる範囲にあるプレーヤーを取得する
 	 * 
 	 * @param object
 	 * @return
@@ -842,11 +841,11 @@ public class L1World {
 	}
 
 	/**
-	 * 월드내에 있는 지정된 이름의 플레이어를 취득한다.
+	 * ワールド内にある指定された名前のプレイヤーを取得する。
 	 * 
 	 * @param name -
-	 *            플레이어명(소문자·대문자는 무시된다)
-	 * @return 지정된 이름의 L1PcInstance. 해당 플레이어가 존재하지 않는 경우는 null를 돌려준다.
+	 *            プレイヤー名（小文字・大文字は無視される）
+	 * @return 指定された名前のL1PcInstance。そのプレイヤーが存在しない場合はnullを返す。
 	 */
 	public L1PcInstance getPlayer(String name) {
 		if (null == name) return null;
@@ -854,11 +853,11 @@ public class L1World {
 	}
 	
 	/**
-	 * 월드내에 있는 지정된 이름의 무인NPC상점을 취득한다.
+	 * ワールド内にある指定された名前の無人NPC商店を取得する。
 	 * 
 	 * @param name -
-	 *            무인NPC상점명(소문자·대문자는 무시된다)
-	 * @return 지정된 이름의 L1ShopNpcInstance. 해당 마네킹 존재하지 않는 경우는 null를 돌려준다.
+	 *            無人NPC店名（小文字・大文字は無視される）
+	 * @return 指定された名前のL1ShopNpcInstance。このマネキンが存在しない場合はnullを返す。
 	 */
 	public L1NpcShopInstance getShopNpc(String name) {
 		Collection<L1NpcShopInstance> npc = null;
@@ -872,7 +871,7 @@ public class L1World {
 		return null;
 	}
 	
-	// _allShopNpc의 뷰
+	// _allShopNpcのビュー
 	private Collection<L1NpcShopInstance> _allShopNpcValues;
 
 	public Collection<L1NpcShopInstance> getAllShopNpc() {
@@ -881,7 +880,7 @@ public class L1World {
 	}
 
 
-	// _allPets의 뷰
+	// _allPetsのビュー
 	private Collection<L1PetInstance> _allPetValues;
 
 	public Collection<L1PetInstance> getAllPets() {
@@ -889,7 +888,7 @@ public class L1World {
 		return (vs != null) ? vs : (_allPetValues = Collections.unmodifiableCollection(_allPets.values()));
 	}
 
-	// _allSummons의 뷰
+	// _allSummonsのビュー
 	private Collection<L1SummonInstance> _allSummonValues;
 
 	public Collection<L1SummonInstance> getAllSummons() {
@@ -914,12 +913,12 @@ public class L1World {
 		}
 	}
 	
-	// 추가
+	// 追加
 	public L1War[] get_wars() {
 		return _allWars.toArray(new L1War[_allWars.size()]);
 	}
 
-	// _allWars의 뷰
+	// _allWarsのビュー
 	private List<L1War> _allWarList;
 
 	public List<L1War> getWarList() {
@@ -953,7 +952,7 @@ public class L1World {
 		return _allClansById.get(clanId);
 	}
 
-	// _allClans의 뷰
+	// _allClansのビュー
 	private Collection<L1Clan> _allClanValues;
 
 	public Collection<L1Clan> getAllClans() {
@@ -991,10 +990,10 @@ public class L1World {
 	}
 
 	/**
-	 * 월드상에 존재하는 모든 플레이어에 패킷을 송신한다.
+	 * ワールド上に存在するすべてのプレイヤーにパケットを送信する。
 	 * 
 	 * @param packet
-	 *            송신하는 패킷을 나타내는 ServerBasePacket 오브젝트.
+	 *           送信するパケットを示すServerBasePacketオブジェクト。
 	 */
 	public void broadcastPacketToAll(ServerBasePacket packet) {
 		_log.finest("players to notify : " + getAllPlayers().size());
@@ -1025,10 +1024,10 @@ public class L1World {
 		}
 	}
 	/**
-	 * 월드상에 존재하는 모든 플레이어에 서버 메세지를 송신한다.
+	 * ワールド上に存在するすべてのプレイヤーにサーバーメッセージを送信する。
 	 * 
 	 * @param message
-	 *            송신하는 메세지
+	 *            送信するメッセージ
 	 */
 	public void broadcastServerMessage(String message) {
 		broadcastPacketToAll(new S_SystemMessage(message));

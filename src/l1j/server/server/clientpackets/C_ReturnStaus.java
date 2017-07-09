@@ -164,7 +164,7 @@ public class C_ReturnStaus extends ClientBasePacket {
 					init_mp = 5;
 				break;
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				init_hp = 16;
 				switch (pc.getAbility().getBaseWis()) {
 				case 9:

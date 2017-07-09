@@ -323,7 +323,7 @@ public class L1Robot4 implements L1CommandExecutor {
 								robot.getAbility().addAddedInt(robot.getLevel() - 50);
 							} else if (robot.isDragonknight()) {
 								robot.getAbility().addAddedStr(robot.getLevel() - 50);
-							} else if (robot.is전사()){
+							} else if (robot.isWarrior()){
 								robot.getAbility().addAddedStr(robot.getLevel() - 50);
 							}
 						}
@@ -342,7 +342,7 @@ public class L1Robot4 implements L1CommandExecutor {
 								robot.setCurrentWeapon(40);
 							} else if (robot.isDragonknight()) {
 								robot.setCurrentWeapon(50);
-							} else if (robot.is전사()){
+							} else if (robot.isWarrior()){
 								robot.setCurrentWeapon(88);
 							}
 						} else {
@@ -451,7 +451,7 @@ public class L1Robot4 implements L1CommandExecutor {
 									robot.getInventory().storeItem(item);
 									robot.getInventory().setEquipped(item, true);
 								}
-							} else if (robot.is전사()){
+							} else if (robot.isWarrior()){
 									boolean isWeapon = false;
 
 									for (L1ItemInstance item : robot.getInventory().getItems()) {

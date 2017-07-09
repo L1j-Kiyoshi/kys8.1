@@ -7,7 +7,7 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.skill.L1SkillId;
 
 /**
- * 가속기의 사용을 체크하는 클래스.
+ * アクセラレータの使用をチェックするクラス。
  */
 public class AcceleratorChecker {
 	class AccelInfo {
@@ -80,7 +80,7 @@ public class AcceleratorChecker {
 		MOVE, ATTACK, SPELL_DIR, SPELL_NODIR
 	}
 
-	// 체크의 결과
+	// チェックの結果
 	public static final int R_OK = 0;
 
 	public static final int R_DETECTED = 1;
@@ -96,12 +96,12 @@ public class AcceleratorChecker {
 	}
 
 	/**
-	 * 액션의 간격이 부정하지 않을까 체크해, 적당 처리를 실시한다.
+	 * アクションの間隔が否定しないかチェックして、適当処理を実施する。
 	 * 
 	 * @param type
-	 *            - 체크하는 액션의 타입
-	 * @return 문제가 없었던 경우는 0, 부정할 경우는 1, 부정 동작이 일정 회수에 이르렀기 때문에 플레이어를 절단 했을 경우는
-	 *         2를 돌려준다.
+	 *             - チェックするアクションのタイプ
+	 * @return 問題がなかった場合は0、負の場合は、1、不正動作が一定回数に達したためプレイヤーを切断した場合は、
+	 *         2を返す。
 	 */
 
 	public boolean isAccelerated(ACT_TYPE type) {
@@ -182,13 +182,13 @@ public class AcceleratorChecker {
 	}
 
 	/**
-	 * PC 상태로부터 지정된 종류의 액션의 올바른 인터벌(ms)을 계산해, 돌려준다.
+	 * PCの状態から指定された種類のアクションの適切なインターバル（ms）を計算し、返す。
 	 * 
 	 * @param type
-	 *            - 액션의 종류
+	 *             - アクションの種類
 	 * @param _pc
-	 *            - 조사하는 PC
-	 * @return 올바른 인터벌(ms)
+	 *             - 調査しているPC
+	 * @return 正しいインターバル（ms）
 	 */
 	public int getRightInterval(ACT_TYPE type) {
 		int interval;
@@ -250,11 +250,11 @@ public class AcceleratorChecker {
 			if (gfxid == 13140) {
 				interval *= Move_Level_Rate_80;
 			}
-			if (gfxid == 11333 || // "lv1 dwarf" ; 난쟁이
-					gfxid == 11343 || // "lv15 ungoliant" ; 웅골리언트
-					gfxid == 11355 || // "lv30 cockatrice" ; 코카트리스
-					gfxid == 11364 || // "lv45 baphomet" ; 바포메트
-					gfxid == 11379// "lv52 beleth" ; 베레스
+			if (gfxid == 11333 || // "lv1 dwarf" ; 小人
+					gfxid == 11343 || // "lv15 ungoliant" ; ドレッドスパイダー
+					gfxid == 11355 || // "lv30 cockatrice" ; コカトリス
+					gfxid == 11364 || // "lv45 baphomet" ; バフォメット
+					gfxid == 11379// "lv52 beleth" ; ベレス
 			) {
 				if (_pc.getLevel() >= 80) {
 					interval *= Move_Level_Rate_80;
@@ -291,7 +291,7 @@ public class AcceleratorChecker {
 			return 0;
 		}
 
-		// 윈드세클 걸린상태라면
+		// ウィンドセクルかかった状態であれば、
 		if (type.equals(ACT_TYPE.ATTACK) && this._pc.hasSkillEffect(167)) { 
 			interval *= 2;
 		}
@@ -304,7 +304,7 @@ public class AcceleratorChecker {
 		if (type.equals(ACT_TYPE.MOVE) && _pc.isBlackwizard() && _pc.isUgdraFruit()) {
 			interval *= HASTE_RATE;
 		}
-		if (_pc.isBlood_lust()) { // 블러드러스트
+		if (_pc.isBlood_lust()) { // ブラッドラスト
 			interval *= HASTE_RATE;
 		}
 

@@ -27,9 +27,9 @@ public class S_HowManyMake extends ServerBasePacket {
 		writeC(Opcodes.S_HYPERTEXT_INPUT);
 		writeD(objId);
 		writeD(0); // ?
-		writeD(0); // 스핀 컨트롤의 초기 가격
-		writeD(0); // 가격의 하한
-		writeD(max); // 가격의 상한
+		writeD(0); // スピンコントロールの初期価格
+		writeD(0); //価格の下限
+		writeD(max); // 価格の上限
 		writeH(0); // ?
 		writeS("request");
 		writeS(htmlId);

@@ -17,8 +17,6 @@
 
 package l1j.server.server.serverpackets;
 
-import java.util.StringTokenizer;
-
 import l1j.server.server.Opcodes;
 import l1j.server.server.model.Instance.L1ItemInstance;
 
@@ -30,7 +28,7 @@ public class S_AddItem extends ServerBasePacket {
 	private static final String S_ADD_ITEM = "[S] S_AddItem";
 
 	/**
-	 * 목록에 아이템을 1개 추가한다.
+	 * リストにアイテムを1つ追加する。
 	 */
 	public S_AddItem(L1ItemInstance item) {
 		writeC(Opcodes.S_ADD_INVENTORY);
@@ -56,18 +54,18 @@ public class S_AddItem extends ServerBasePacket {
 		writeC(item.getBless());
 		writeD(item.getCount());
 		int bit  = 0;  
-	    if (!item.getItem().isTradable()) bit += 2;//교환 불가능
-	    if (item.getItem().isCantDelete()) bit  += 4;//삭제 불가능
-	    if (item.getItem().get_safeenchant() < 0) bit += 8;//인챈불가능
-	  //  if(item.getItem().getWareHouse()>0&&!item.getItem().isTradable()) bit += 16; // 창고보관가능
+	    if (!item.getItem().isTradable()) bit += 2;//交換不可能
+	    if (item.getItem().isCantDelete()) bit  += 4;//削除不可能
+	    if (item.getItem().get_safeenchant() < 0) bit += 8;//エンチャント不可能
+	  //  if(item.getItem().getWareHouse()>0&&!item.getItem().isTradable()) bit += 16; // 倉庫保管可能
 	    if (item.getBless() >= 128) bit  = 46; 
-	    if (item.isIdentified())bit += 1;//확인
+	    if (item.isIdentified())bit += 1;//確認
 	     writeC(bit);
 		writeS(item.getViewName());
 		
 		
 		if (!item.isIdentified()) {
-			// 미감정의 경우 스테이터스를 보낼 필요는 없다
+			// 米感情の場合ステータスを送信する必要はない
 			writeC(0);
 		} else {
 			byte[] status = item.getStatusBytes();

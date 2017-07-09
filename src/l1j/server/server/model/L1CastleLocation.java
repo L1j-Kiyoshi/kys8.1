@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Random;
 
 import l1j.server.server.datatables.CastleTable;
-import l1j.server.server.model.L1Character;
 import l1j.server.server.model.gametime.L1GameTime;
 import l1j.server.server.model.gametime.L1GameTimeAdapter;
 import l1j.server.server.model.gametime.L1GameTimeClock;
@@ -33,8 +32,8 @@ public class L1CastleLocation {
 
 	public static final int DIAD_CASTLE_ID = 8;
 
-	// →↑하지만 X축,→↓이 Y축
-	// 켄트성
+	// →↑が、X軸、→↓このY軸
+	// ケント城
 	private static final int KENT_TOWER_X = 33168; // 33170//33139
 
 	private static final int KENT_TOWER_Y = 32779; // 32774//32768
@@ -53,7 +52,7 @@ public class L1CastleLocation {
 
 	private static final short KENT_INNER_CASTLE_MAP = 15;
 
-	// 오크성
+	// オーク性
 	private static final int OT_TOWER_X = 32798;
 
 	private static final int OT_TOWER_Y = 32285;
@@ -70,7 +69,7 @@ public class L1CastleLocation {
 
 	private static final short OT_MAP = 4;
 
-	// 윈다우드
+	// ウィンダウッド
 	private static final int WW_TOWER_X = 32623;
 
 	private static final int WW_TOWER_Y = 33379;
@@ -89,7 +88,7 @@ public class L1CastleLocation {
 
 	private static final short WW_INNER_CASTLE_MAP = 29;
 
-	// 기란
+	// ギラン
 	private static final int GIRAN_TOWER_X = 33631;
 
 	private static final int GIRAN_TOWER_Y = 32678;
@@ -108,7 +107,7 @@ public class L1CastleLocation {
 
 	private static final short GIRAN_INNER_CASTLE_MAP = 52;
 
-	// 하이네
+	// ハイネ
 	private static final int HEINE_TOWER_X = 33524;
 
 	private static final int HEINE_TOWER_Y = 33396;
@@ -127,7 +126,7 @@ public class L1CastleLocation {
 
 	private static final short HEINE_INNER_CASTLE_MAP = 64;
 
-	// 드워프
+	// ドワーフ
 	private static final int DOWA_TOWER_X = 32828;
 
 	private static final int DOWA_TOWER_Y = 32818;
@@ -144,7 +143,7 @@ public class L1CastleLocation {
 
 	private static final short DOWA_MAP = 66;
 
-	// 아덴
+	// アデン
 	private static final int ADEN_TOWER_X = 34090;
 
 	private static final int ADEN_TOWER_Y = 33260;
@@ -179,7 +178,7 @@ public class L1CastleLocation {
 
 	private static final int ADEN_SUB_TOWER4_Y = 33230;
 
-	// 디아드 요새
+	// ディアド要塞
 	private static final int DIAD_TOWER_X = 33033;
 
 	private static final int DIAD_TOWER_Y = 32895;
@@ -257,7 +256,7 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * 가디안 타워, 크라운의 좌표로부터 castle_id를 돌려준다
+	 * ガーディアンタワー、クラウンの座標からcastle_idを返す
 	 */
 	public static int getCastleId(int locx, int locy, short mapid) {
 		return getCastleId(new L1Location(locx, locy, mapid));
@@ -278,7 +277,7 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * 지정한 성의 전쟁 에리어(기내)에 있을까 돌려준다
+	 * 指定された城の戦争エリア（機内）にあるか返す
 	 */
 	public static int getCastleIdByArea(L1Character cha) {
 		return getCastleIdByArea(cha.getLocation());
@@ -289,7 +288,7 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * 몇개의 전쟁 에리어(기내) 화도나 체크
+	 * いくつかの戦争エリア（機内）かどうかチェック
 	 */
 	public static boolean checkInWarArea(int castleId, L1Character cha) {
 		return checkInWarArea(castleId, cha.getLocation());
@@ -300,14 +299,14 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * 몇개의 전쟁 에리어(기내) 화도나 체크
+	 * いくつかの戦争エリア（機内）かどうかチェック
 	 */
 	public static boolean checkInAllWarArea(int locx, int locy, short mapid) {
 		return checkInAllWarArea(new L1Location(locx, locy, mapid));
 	}
 
 	/**
-	 * castleId로부터 가디안 타워의 좌표를 돌려준다
+	 * castleIdからガーディアンタワーの座標を返す
 	 */
 	public static int[] getTowerLoc(int castleId) {
 		int[] result = new int[3];
@@ -321,7 +320,7 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * castleId로부터 전쟁 에리어(기내)의 좌표를 돌려준다
+	 * castleIdから戦争エリア（機内）の座標を返す
 	 */
 	public static int[] getWarArea(int castleId) {
 		int[] loc = new int[5];
@@ -388,7 +387,7 @@ public class L1CastleLocation {
 		return loc;
 	}
 
-	public static int[] getCastleLoc(int castle_id) { // / castle_id로부터 키우치의 좌표를 돌려준다
+	public static int[] getCastleLoc(int castle_id) { // / castle_idから育て値座標を返す
 		int[] loc = new int[3];
 		switch (castle_id) {
 		case KENT_CASTLE_ID:
@@ -438,7 +437,7 @@ public class L1CastleLocation {
 	}
 
 	/*
-	 * castle_id로부터 귀환처의 좌표를 랜덤에 돌려준다
+	 * castle_idから帰還先の座標をランダムに返す
 	 */
 	public static int[] getGetBackLoc(int castle_id) {
 		int[] loc;
@@ -465,7 +464,7 @@ public class L1CastleLocation {
 			loc = L1TownLocation.getGetBackLoc(L1TownLocation.TOWNID_ADEN);
 			break;
 		case DIAD_CASTLE_ID:
-			// 디아드 요새의 귀환처는 미조사
+			// ディアド要塞の帰還先は未調査
 			Random random = new Random(System.nanoTime());
 			int rnd = random.nextInt(3);
 			loc = new int[3];
@@ -491,20 +490,20 @@ public class L1CastleLocation {
 	}
 
 	/**
-	 * npcid로부터 castle_id를 돌려준다
+	 * npcidからcastle_idを返す
 	 * 
 	 * @param npcid
 	 * @return
 	 */
 	public static int getCastleIdByNpcid(int npcid) {
-		// 에덴성：에덴 왕국 전역
-		// 켄트성：켄트, 그르딘
-		// 윈다웃드성：우드 베크, 오아시스, 실버 나이트 타운
-		// 기란성：기란, 이야기할 수 있는 섬
-		// Heine성：Heine
-		// 드워후성：완숙, 상아의 탑, 상아의 탑의 마을
-		// 오크사이：화전마을
-		// 디아드 요새：전쟁세의 일부
+		//エデン性：エデン王国全域
+		//ケント城：ケント、グルディーン
+		//ウィンダウトドゥソン：ウッドベック、オアシス、シルバーナイトタウン
+		//ギラン城：ギラン、話すことができている島
+		// Heine性：Heine
+		//ドゥウォ症候性：完熟、象牙の塔、象牙の塔の村
+		//オーク間：焼畑村
+		//ディアド要塞：戦争歳の一部
 
 		int castle_id = 0;
 
@@ -513,38 +512,38 @@ public class L1CastleLocation {
 		switch (town_id) {
 		case L1TownLocation.TOWNID_KENT:
 		case L1TownLocation.TOWNID_GLUDIO:
-			castle_id = KENT_CASTLE_ID; // 켄트성
+			castle_id = KENT_CASTLE_ID; // ケント城
 			break;
 
 		case L1TownLocation.TOWNID_ORCISH_FOREST:
-			castle_id = OT_CASTLE_ID; // 오크의 숲
+			castle_id = OT_CASTLE_ID; // オークの森
 			break;
 
 		case L1TownLocation.TOWNID_SILVER_KNIGHT_TOWN:
 		case L1TownLocation.TOWNID_WINDAWOOD:
-			castle_id = WW_CASTLE_ID; // 윈다웃드성
+			castle_id = WW_CASTLE_ID; //ウィンダウトドゥソン
 			break;
 
 		case L1TownLocation.TOWNID_TALKING_ISLAND:
 		case L1TownLocation.TOWNID_GIRAN:
-			castle_id = GIRAN_CASTLE_ID; // 기란성
+			castle_id = GIRAN_CASTLE_ID; // ギラン城
 			break;
 
 		case L1TownLocation.TOWNID_HEINE:
-			castle_id = HEINE_CASTLE_ID; // Heine성
+			castle_id = HEINE_CASTLE_ID; // Heine性
 			break;
 
 		case L1TownLocation.TOWNID_WERLDAN:
 		case L1TownLocation.TOWNID_OREN:
-			castle_id = DOWA_CASTLE_ID; // 드워후성
+			castle_id = DOWA_CASTLE_ID; // ドゥウォ症候性
 			break;
 
 		case L1TownLocation.TOWNID_ADEN:
-			castle_id = ADEN_CASTLE_ID; // 에덴성
+			castle_id = ADEN_CASTLE_ID; // エデン性
 			break;
 
 		case L1TownLocation.TOWNID_OUM_DUNGEON:
-			castle_id = DIAD_CASTLE_ID; // 디아드 요새
+			castle_id = DIAD_CASTLE_ID; // ディアド要塞
 			break;
 
 		default:
@@ -553,7 +552,7 @@ public class L1CastleLocation {
 		return castle_id;
 	}
 
-	// 이 메소드는 에덴 시간에 1일마다 갱신되는 세율을 반환한다. (리얼 타임의 세율은 아니다)
+	// このメソッドは、エデン時間に1日ごとに更新されている税率を返します。 （リアルタイムの税率ではない）
 	public static int getCastleTaxRateByNpcId(int npcId) {
 		int castleId = getCastleIdByNpcid(npcId);
 		if (castleId != 0) {
@@ -562,12 +561,12 @@ public class L1CastleLocation {
 		return 0;
 	}
 
-	// 각 성의 세율을 보관해 두는 HashMap(숍용)
+	// 各省税率を保管しておくHashMap（ショプヨン）
 	private static HashMap<Integer, Integer> _castleTaxRate = new HashMap<Integer, Integer>();
 
 	private static L1CastleTaxRateListener _listener;
 
-	// GameServer#initialize, L1CastleTaxRateListener#onDayChanged인 만큼 불려 갈 예정.
+	// GameServer#initialize, L1CastleTaxRateListener#onDayChangedだけ呼び出される予定。
 	public static void setCastleTaxRate() {
 		for (L1Castle castle : CastleTable.getInstance().getCastleTableList()) {
 			_castleTaxRate.put(castle.getId(), castle.getTaxRate());

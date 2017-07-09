@@ -699,11 +699,11 @@ public class L1MonsterInstance extends L1NpcInstance {
 					switch(몬스터){
 					case 5135:
 						L1World.getInstance().broadcastPacketToAll(new S_MatizAlarm(2,3600,3600,false));
-						BossAlive.getInstance().is샌드웜 = false;
+						BossAlive.getInstance().isSandWarm = false;
 						break;
 					case 5136:
 						L1World.getInstance().broadcastPacketToAll(new S_MatizAlarm(1,3600,3600,false));
-						BossAlive.getInstance().is에르자베 = false;
+						BossAlive.getInstance().isErusabe = false;
 						break;
 					}
 					}
@@ -1275,7 +1275,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 			PearlBuff.sendPackets(new S_SkillSound(PearlBuff.getId(), 7834));
 			PearlBuff.setSkillEffect(L1SkillId.PAP_MAGICALPEARLBUFF, 60 * 1000);
 			PearlBuff.broadcastPacket(new S_SkillSound(PearlBuff.getId(), 7834));
-			if(PearlBuff.isKnight() || PearlBuff.isCrown() || PearlBuff.isDarkelf()	|| PearlBuff.isDragonknight() || PearlBuff.is전사()){
+			if(PearlBuff.isKnight() || PearlBuff.isCrown() || PearlBuff.isDarkelf()	|| PearlBuff.isDragonknight() || PearlBuff.isWarrior()){
 				Sahel.broadcastPacket(new S_NpcChatPacket(Sahel, "$8471", 0)); // 근거리 물리력에
 			}else if(PearlBuff.isElf()){
 				Sahel.broadcastPacket(new S_NpcChatPacket(Sahel, "$8472", 0)); // 원거리 물리력에

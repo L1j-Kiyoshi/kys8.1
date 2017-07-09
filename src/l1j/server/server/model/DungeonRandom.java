@@ -93,7 +93,7 @@ public class DungeonRandom {
 				newDungeonRandom = new NewDungeonRandom(newX, newY,
 						newMapId, heading);
 				if (_dungeonMap.containsKey(key)) {
-					_log.log(Level.WARNING, "같은 키의 dungeon 데이터가 있습니다. key=" + key);
+					_log.log(Level.WARNING, "同じキーのdungeonデータがあります。 key =" + key);
 				}
 				_dungeonMap.put(key, newDungeonRandom);
 			}
@@ -134,7 +134,7 @@ public class DungeonRandom {
 			int newY = newDungeonRandom._newY[rnd];
 			int heading = newDungeonRandom._heading;
 
-			// 3초간은 무적(앱솔루트 배리어 상태)으로 한다.
+			// 3秒間は無敵（アブソルートバリア状態）とする。
 	
 			pc.setSkillEffect(L1SkillId.ABSOLUTE_BARRIER, 3000);
 		//	pc.stopHpRegeneration();

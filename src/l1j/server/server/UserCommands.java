@@ -700,7 +700,7 @@ public class UserCommands {
 					pc.sendPackets(new S_OwnCharStatus2(pc));
 					pc.sendPackets(new S_OwnCharStatus(pc));
 				}
-			} else if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.is전사()) {
+			} else if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.isWarrior()) {
 				if (pc.getHuntPrice() == Config.수배1단) {
 					pc.addDmgup(1);
 					pc.addBowDmgup(1);

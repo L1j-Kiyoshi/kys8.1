@@ -59,7 +59,7 @@ public class S_BlueMessage extends ServerBasePacket {
 			writeS(msg2);
 			writeS(msg3);
 		}
-		writeD(0);	// 더미로 넣어야 안팅김
+		writeD(0);	// 山に入れないチンギム
 	}
 
 	@Override

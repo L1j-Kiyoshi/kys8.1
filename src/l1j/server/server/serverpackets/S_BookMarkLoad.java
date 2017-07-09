@@ -74,7 +74,7 @@ public class S_BookMarkLoad extends ServerBasePacket {
                 writeH(pc._bookmarks.get(i).getLocY());
             }
         } catch (Exception e) {
-            _log.log(Level.WARNING, "S_BookMarkLoad 예외 발생.", e);
+            _log.log(Level.WARNING, "S_BookMarkLoad例外発生。", e);
         } finally {
         }
     }

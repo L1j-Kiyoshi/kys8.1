@@ -324,7 +324,7 @@ public class C_LoginToServer extends ClientBasePacket {
 		pc.sendPackets(new S_Unknown1(pc));
 		
 
-		if (Config.CHARACTER_CONFIG_IN_SERVER_SIDE && pc.is전사()) {
+		if (Config.CHARACTER_CONFIG_IN_SERVER_SIDE && pc.isWarrior()) {
 			pc.sendPackets(new S_CharacterConfig(pc.getId()));
 		}
 		
@@ -454,9 +454,9 @@ public class C_LoginToServer extends ClientBasePacket {
 			}
 			if (weapon.getItem().getType1() == 20) {
 				if (weapon.getItem().getType() == 4)
-					pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, 3, true));
+					pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
 				else
-					pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, 3, true));
+					pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
 			} else {
 				//
 				int type = 7;
@@ -475,10 +475,10 @@ public class C_LoginToServer extends ClientBasePacket {
 					bow_or_tohand = true;
 				}
 				//
-				pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, type, bow_or_tohand));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, type, bow_or_tohand));
 			}
 		} else {
-			pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, 1, 0, false));
+			pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, 1, 0, false));
 		}
 
 		pc.sendClanMarks();// 성혈군주 왕관표시
@@ -541,8 +541,8 @@ public class C_LoginToServer extends ClientBasePacket {
 			}
 		}
 
-		pc.sendPackets(new S_PacketBox(S_PacketBox.인벤저장));
-		if (Config.CHARACTER_CONFIG_IN_SERVER_SIDE && !pc.is전사()) {
+		pc.sendPackets(new S_PacketBox(S_PacketBox.INVENTORY_SAVE));
+		if (Config.CHARACTER_CONFIG_IN_SERVER_SIDE && !pc.isWarrior()) {
 			pc.sendPackets(new S_CharacterConfig(pc.getId()));
 		}
 		
@@ -624,7 +624,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			long tamtime = pc.TamTime();
 
 			int aftertamtime = (int) tamtime;
-			pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.버프창, tamtime, tamcount, true));
+			pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.BUFF_WINDOW, tamtime, tamcount, true));
 			if (aftertamtime < 0) {
 				aftertamtime = 0;
 			}
@@ -987,7 +987,7 @@ public class C_LoginToServer extends ClientBasePacket {
 					pc.sendPackets(new S_SystemMessage("[PC방 이용 시간] " + sc + "초 남았습니다."));
 				}
 				pc.PC방_버프 = true;
-				pc.sendPackets(new S_PacketBox(S_PacketBox.PC방버프, 1));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.PC_ROOM_BUFF, 1));
 			}
 		} else {
 			pc.PC방_버프 = false;
@@ -1065,11 +1065,11 @@ public class C_LoginToServer extends ClientBasePacket {
 		huntoption(pc); // 수배효과
 		
 		
-		if(BossAlive.getInstance().is에르자베){
+		if(BossAlive.getInstance().isErusabe){
 			int time = (int)(BossAlive.getInstance().ezTime - RealTimeClock.getInstance().getRealTime().getSeconds());
 			pc.sendPackets(new S_MatizAlarm(1,time,3600,true));	
 		}
-		if(BossAlive.getInstance().is샌드웜){
+		if(BossAlive.getInstance().isSandWarm){
 			int time = (int)(BossAlive.getInstance().sdTime - RealTimeClock.getInstance().getRealTime().getSeconds());
 			pc.sendPackets(new S_MatizAlarm(2,time,3600,true));	
 		}
@@ -1202,7 +1202,7 @@ public class C_LoginToServer extends ClientBasePacket {
 					pc.sendPackets(new S_OwnCharStatus2(pc));
 					pc.sendPackets(new S_OwnCharStatus(pc));
 				}
-			} else if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.is전사()) {
+			} else if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.isWarrior()) {
 				if (pc.getHuntPrice() == Config.수배1단) {
 					pc.addDmgup(1);
 					pc.addBowDmgup(1);
@@ -1285,7 +1285,7 @@ public class C_LoginToServer extends ClientBasePacket {
 					}
 				}
 				// 전사스킬 로드
-				if (l1skills != null && pc.is전사() && l1skills.getSkillLevel() == 30) {
+				if (l1skills != null && pc.isWarrior() && l1skills.getSkillLevel() == 30) {
 					pc.sendPackets(new S_ACTION_UI(145, l1skills.getId()));
 				}
 				if (l1skills != null && pc.isDarkelf() && l1skills.getSkillLevel() == 30) {

@@ -54,7 +54,7 @@ public class L1Party {
 		}
 
 		_membersList.remove(pc);
-		// 리더가 탈퇴할경우 리스트에서 삭제
+		// リーダーが脱退する場合、リストから削除
 		if (pc.isCrown()) {
 			if (isLeader(pc)) {
 				BraveavatarController.getInstance().removeMember(pc);
@@ -65,7 +65,7 @@ public class L1Party {
 			deleteMiniHp(pc);
 		}
 
-		// 파티에서 제외되었을때, 브레이브 아바타 효과를 제거한다.
+		// パーティーから除外された時、ブレイブアバター効果を除去する。
 		if (pc.getPbavatar()) {
 			BraveavatarController.getInstance().brave_end(pc);
 		}
@@ -110,7 +110,7 @@ public class L1Party {
 		return _result;
 	}
 
-	public void refresh(L1PcInstance pc) {// 파티추가
+	public void refresh(L1PcInstance pc) {// パーティー追加
 		for (L1PcInstance member : getMembers()) {
 			if (pc.getId() == member.getId()) {
 				continue;
@@ -125,7 +125,7 @@ public class L1Party {
 		}
 	}
 
-	public void memberDie(L1PcInstance pc) {// 파티원 죽엇을때
+	public void memberDie(L1PcInstance pc) {// パーティーメンバージュクオトとき
 		for (L1PcInstance member : getMembers()) {
 			if (pc.getId() == member.getId()) {
 				continue;
@@ -142,10 +142,10 @@ public class L1Party {
 			}
 			//
 			if (pc.getId() == member.getId()) {
-				// 자기자신한테는 68 (newMember)
+				// 自分にとっては68（newMember）
 				pc.sendPackets(new S_Party(0x68, pc));
 			} else {
-				// 주변 파티원들에게는 69 (oldMember)
+				// 周辺のパーティーメンバーたちには69（oldMember）
 				member.sendPackets(new S_Party(0x69, pc));
 			}
 			// refreshParty
@@ -193,7 +193,7 @@ public class L1Party {
 		// _leader.sendPackets(new S_Test3());
 	}
 
-	public void passLeader(L1PcInstance pc) { // 리더위임
+	public void passLeader(L1PcInstance pc) { // リーダー委任
 		for (L1PcInstance member : getMembers()) {
 			member.getParty().setLeader(pc);
 			member.sendPackets(new S_Party(0x6A, pc));
@@ -212,7 +212,7 @@ public class L1Party {
 		}
 	}
 
-	public void kickMember(L1PcInstance pc) { // 리더추방
+	public void kickMember(L1PcInstance pc) { // リーダー追放
 		if (getNumOfMembers() == 2) {
 			breakup();
 		} else {
@@ -222,7 +222,7 @@ public class L1Party {
 			}
 			sendKickMessage(pc);
 		}
-		pc.sendPackets(new S_ServerMessage(419)); // 파티로부터 추방되었습니다.
+		pc.sendPackets(new S_ServerMessage(419)); // パーティーから追放されました。
 	}
 
 	public L1PcInstance[] getMembers() {
@@ -241,7 +241,7 @@ public class L1Party {
 		sendTo.sendPackets(new S_ServerMessage(420, left.getName()));
 	}
 
-	public List<L1PcInstance> getList() {// 하딘 파티 멤버 리스트
+	public List<L1PcInstance> getList() {// ハーディンパーティーメンバーリスト
 		return _membersList;
 	}
 

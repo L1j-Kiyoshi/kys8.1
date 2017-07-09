@@ -147,12 +147,12 @@ public class L1Magic {
 		return HitupByArmor;
 	}
 
-	/* ■■■■■■■■■■■■■■ 성공 판정 ■■■■■■■■■■■■■ */
-	// ●●●● 확률계 마법의 성공 판정 ●●●●
-	// 계산방법
-	// 공격측 포인트：LV + ((MagicBonus * 3) * 마법 고유 계수)
-	// 방어측 포인트：((LV / 2) + (MR * 3)) / 2
-	// 공격 성공율：공격측 포인트 - 방어측 포인트
+	/* ■■■■■■■■■■■■■■ 成功判定 ■■■■■■■■■■■■■ */
+	// ●●●●確率系魔法の成功判定 ●●●●
+	// 計算方法
+	// 攻撃側のポイント：LV +（（MagicBonus * 3）*魔法固有係数）
+	// 防御側のポイント：（（LV / 2）+（MR * 3））/ 2
+	// 攻撃成功率：攻撃側のポイント - 防御側のポイント
 	public boolean calcProbabilityMagic(int skillId) {
 		int probability = 0;
 		boolean isSuccess = false;
@@ -224,16 +224,16 @@ public class L1Magic {
 					return true;
 				}
 				if (_pc.getClanid() > 0 && (_pc.getClanid() == _targetPc.getClanid()) && (_pc.get_DuelLine() == _targetPc.get_DuelLine())) {
-					_targetPc.sendPackets(new S_SystemMessage("혈맹원 " + _pc.getName() + " 님이 캔슬레이션 마법을 시전했습니다."));
+					_targetPc.sendPackets(new S_SystemMessage("血盟員" + _pc.getName() + "様がキャンセレーション魔法を詠唱しました。"));
 					return true;
 				}
 				if (_pc.isInParty()) {
 					if (_pc.getParty().isMember(_targetPc)) {
-						_targetPc.sendPackets(new S_SystemMessage("파티원 " + _pc.getName() + " 님이 캔슬레이션 마법을 시전했습니다."));
+						_targetPc.sendPackets(new S_SystemMessage("파티원 " + _pc.getName() + "様がキャンセレーション魔法を詠唱しました。"));
 						return true;
 					}
 				}
-				// 대상이 인비지 상태일땐 켄슬 무효
+				// 対象がインビジ状態イルテンキャンセ無効
 				if (_targetPc.isInvisble()) {
 					return false;
 				}
@@ -247,7 +247,7 @@ public class L1Magic {
 			}
 		}
 
-		// 50렙 이상 npc 에게 아래 마법 안걸림.
+		// 50レップ以上npcに下魔法ない距離。
 		if (_calcType == PC_NPC && _targetNpc.getLevel() >= 50 && _targetNpc.getNpcTemplate().isCantResurrect()) {
 			if (skillId == WEAPON_BREAK || skillId == SLOW || skillId == CURSE_PARALYZE || skillId == MANA_DRAIN
 					|| skillId == WEAKNESS || skillId == DISEASE || skillId == DECAY_POTION || skillId == GREATER_SLOW
@@ -261,32 +261,32 @@ public class L1Magic {
 			}
 		} 
 
-		/*** 신규레벨보호 ***/
+		/*** 新規レベルの保護 ***/
 		if (_calcType == PC_PC) {
 			if (_targetPc.getLevel() < Config.AUTO_REMOVELEVEL || _pc.getLevel() < Config.AUTO_REMOVELEVEL) {
 				if (skillId != EXTRA_HEAL && skillId != HEAL && skillId != GREATER_HEAL && skillId != HEAL_ALL && skillId != FULL_HEAL
-						&& skillId != NATURES_BLESSING) { // 버프계
-					_pc.sendPackets(new S_SystemMessage("\\aG[!] 신규보호로 상대방의 마법을 보호받고 있습니다"));
-					_targetPc.sendPackets(new S_SystemMessage("\\aG[!] 신규보호로 상대방의 마법을 보호받고 있습니다"));
+						&& skillId != NATURES_BLESSING) { // バフ系
+					_pc.sendPackets(new S_SystemMessage("\\aG[!] 新規保護で相手の魔法を保護されています"));
+					_targetPc.sendPackets(new S_SystemMessage("\\aG[!] 新規保護で相手の魔法を保護されています"));
 					return false;
 				}
 			}
 		}
-		/*** 신규레벨보호 ***/
+		/*** 新規レベルの保護 ***/
 
-		/** 신규혈맹 공격안되게 **/
+		/** 新規血盟攻撃途方もなく **/
 		if (_calcType == PC_PC) {
 			  boolean isAliveBoss = BossAlive.getInstance().isBossAlive(_targetPc.getMapId());
 			if ((_pc.getClanid() == Config.신규혈맹클랜 || _targetPc.getClanid() == Config.신규혈맹클랜 )&& !isAliveBoss ) {
 				if (skillId != EXTRA_HEAL && skillId != HEAL && skillId != GREATER_HEAL && skillId != HEAL_ALL && skillId != FULL_HEAL
-						&& skillId != NATURES_BLESSING) { // 버프계
-					_pc.sendPackets(new S_SystemMessage("\\aG[!] 신규혈맹보호로 상대방의 마법을 보호받고 있습니다"));
-					_targetPc.sendPackets(new S_SystemMessage("\\aG[!] 신규혈맹보호로 상대방의 마법을 보호받고 있습니다"));
+						&& skillId != NATURES_BLESSING) { // バフ系
+					_pc.sendPackets(new S_SystemMessage("\\aG[!] 新規血盟保護で相手の魔法を保護されています"));
+					_targetPc.sendPackets(new S_SystemMessage("\\aG[!] 新規血盟保護で相手の魔法を保護されています"));
 					return false;
 				}
 			}
 		}
-		/** 신규혈맹 공격안되게 **/
+		/**新規血盟攻撃途方もなく**/
 
 		if (_calcType == PC_NPC && (_targetNpc.getNpcId() == 5042)) {
 			if (skillId == TAMING_MONSTER)
@@ -299,9 +299,9 @@ public class L1Magic {
 		// return false;
 		// }
 
-		// 아스바인드중은 WB, 왈가닥 세레이션 이외 무효
+		//アスバインド中はWB、キャンセレーション以外無効
 		if (_calcType == PC_PC || _calcType == NPC_PC) {
-			if (_calcType == PC_PC) { // 스턴중에 스턴실패
+			if (_calcType == PC_PC) { // スターン中スターンに失敗
 //				if (_targetPc.hasSkillEffect(SHOCK_STUN) || _targetPc.hasSkillEffect(BONE_BREAK)) {
 //					if (skillId == SHOCK_STUN || skillId == BONE_BREAK) {
 //						return false;
@@ -309,7 +309,7 @@ public class L1Magic {
 //				}
 			}
 			if (_targetPc.hasSkillEffect(EARTH_BIND)) {
-				if (skillId != WEAPON_BREAK && skillId != CANCELLATION // 확률계
+				if (skillId != WEAPON_BREAK && skillId != CANCELLATION // 確率系
 						&& skillId != EXTRA_HEAL && skillId != HEAL && skillId != GREATER_HEAL && skillId != HEAL_ALL && skillId != FULL_HEAL
 						&& skillId != NATURES_BLESSING && skillId == MANA_DRAIN || skillId == CURSE_PARALYZE || skillId == THUNDER_GRAB
 						|| skillId == ERASE_MAGIC || skillId == SHOCK_STUN || skillId == EARTH_BIND || skillId == BONE_BREAK) { // 버프계
@@ -335,7 +335,7 @@ public class L1Magic {
 			}
 		}
 
-		// 100% 확률을 가지는 스킬
+		// 100％の確率を持つスキル
 		if (skillId == MIND_BREAK || skillId == IllUSION_AVATAR) {
 			return true;
 		}
@@ -388,7 +388,7 @@ public class L1Magic {
 			break;
 		}
 
-		if (probability + getMagicHitupByArmor() >= rnd) { // 마법실패시에도 미쓰 뜨게
+		if (probability + getMagicHitupByArmor() >= rnd) { // 魔法に失敗時にもミス開か
 			isSuccess = true;
 		} else {
 			if (_calcType == NPC_PC || _calcType == PC_PC) {
@@ -397,7 +397,7 @@ public class L1Magic {
 				isSuccess = false;
 			} else if (_calcType == PC_NPC) {
 				_pc.sendPackets(new S_SkillSound(_targetNpc.getId(), 13418));
-				Broadcaster.broadcastPacket(_pc, new S_SkillSound(_targetNpc.getId(), 13418));// 이거는 다른 사람도 보게...
+				Broadcaster.broadcastPacket(_pc, new S_SkillSound(_targetNpc.getId(), 13418));// これは、他の人も見る...
 				isSuccess = false;
 			}
 		}
@@ -418,12 +418,12 @@ public class L1Magic {
 		if (_targetPc == null && _targetNpc == null)
 			return isSuccess;
 
-		String msg2 = "확률:" + probability + "%";
+		String msg2 = "確率:" + probability + "%";
 		String msg3 = "";
 		if (isSuccess == true) {
-			msg3 = "성공";
+			msg3 = "成功";
 		} else {
-			msg3 = "실패";
+			msg3 = "失敗";
 		}
 
 		if (_pc != null && _pc.isGm()) {
@@ -486,8 +486,8 @@ public class L1Magic {
 
 		case ERASE_MAGIC:
 		case ELEMENTAL_FALL_DOWN: {
-			/** 이레이즈매직 엘리멘탈폴다운 **/
-			/** 동레벨일경우 40% 레벨 아래당 2% 성공확률 상향 레벨 높을때 2% 성공확률 감소 **/
+			/** イレースマジックエレメンタルフォールダウン **/
+			/** 同レベルの場合、40％レベルの下あたり2％の成功確率アップレベル高いとき2％成功確率の減少 **/
 			if (attackLevel >= defenseLevel)
 				probability = (attackLevel - defenseLevel) * 2 + Config.이레이즈매직;
 			else if (attackLevel < defenseLevel) {
@@ -500,8 +500,8 @@ public class L1Magic {
 			break;
 		case EARTH_BIND:
 		case STRIKER_GALE: {
-			/** 어스바인드 스트라이커게일 **/
-			/** 동레벨일경우 35% 레벨아래당 2% 성공확률 증가, 레벨높을때 3% 성공확률 감소 **/
+			/** アースバインドストライカーゲイル **/
+			/** 同レベルの場合、35％レベルの下あたり2％の確率の増加、レベル高いとき3％成功確率の減少 **/
 			if (attackLevel >= defenseLevel)
 				probability = (attackLevel - defenseLevel) * 2 + Config.어스바인드;
 			else if (attackLevel < defenseLevel) {
@@ -514,8 +514,8 @@ public class L1Magic {
 			break;
 		case POLLUTE_WATER:
 		case WIND_SHACKLE: {
-			/** 윈드세클 폴루토워터 **/
-			/** 동레벨일경우 30% 레벨아래당 2% 성공확률 증가, 레벨높을때 3% 성공확률 감소 **/
+			/** ウィンドセクルポールルートウォーター **/
+			/** 同レベルの場合、30％レベルの下あたり2％の確率の増加、レベル高いとき3％成功確率の減少 **/
 			if (attackLevel >= defenseLevel)
 				probability = (attackLevel - defenseLevel) * 2 + Config.윈드세클;
 			else if (attackLevel < defenseLevel) {
@@ -529,8 +529,8 @@ public class L1Magic {
 		case DEATH_HEAL:
 			probability = Config.데스힐;
 			break;
-		case SHAPE_CHANGE: // 셰이프 본섭 마방140에게 60% - 마방당 -1%
-		case CANCELLATION:// 켄슬 본섭 마방100에게 46% - 마방당 -1%
+		case SHAPE_CHANGE: // シェイプ本サーバー魔140に60％ - 魔あたり-1％
+		case CANCELLATION:// キャンセ本サーバー魔100に46％ - 魔あたり-1％
 			if (attackInt > 25)
 				attackInt = 25;
 			probability = (int) (attackInt * 4 + l1skills.getProbabilityValue() - defenseMr);
@@ -543,25 +543,25 @@ public class L1Magic {
 			if (probability > 80) {
 				probability = 80;
 			}
-//			 _pc.sendPackets(new S_SystemMessage("[확률] -> " + defenseMr + " " + probability + "%"));
-//			 System.out.println("[마법확률] -> " + defenseMr + " " + probability + "%");
+//			 _pc.sendPackets(new S_SystemMessage("[確率] -> " + defenseMr + " " + probability + "%"));
+//			 System.out.println("[魔法確率] -> " + defenseMr + " " + probability + "%");
 			L1ItemInstance findItem = _targetPc.getInventory().findItemId(11284);
 			if(findItem != null){
 				probability = 0;
 			}
 			break;
-		case SLOW: // 슬로우 본섭 마방100에게 58% - 마방당 -1%
-		case DISEASE: // 디지즈 본섭 마방100에게 68% - 마방당 -1%
-		case WEAKNESS: // 위크니스 본섭 마방100에게 56% - 마방당 -1%
-		case CURSE_PARALYZE:// 패럴라이즈 마방100에게 15%
-		case WEAPON_BREAK:// 웨폰브레이크 마방100에게 30%
-		case DECAY_POTION: // 디케이포션 마방100에게 23%
-		case ICE_LANCE: // 아이스랜스 마방100에게 30%
-		case CURSE_BLIND: // 야매로 15로 설정함
-		case CURSE_POISON: // 야매로 50로 설정함
-		case SILENCE: // 야매로 35로 설정함
-		case DARKNESS: // 야매로 30로 설정함
-		case FOG_OF_SLEEPING:// 야매로 25로 설정함
+		case SLOW: // スロー本サーバー魔100に58％ - 魔あたり-1％
+		case DISEASE: // ディジーズ本サーバー魔100に68％ - 魔あたり-1％
+		case WEAKNESS: // ウィークネス本サーバー魔100に56％ - 魔あたり-1％
+		case CURSE_PARALYZE:// パラライズ魔100に15％
+		case WEAPON_BREAK:// ウェポンブレイク魔100に30％
+		case DECAY_POTION: // ディケイポーション魔100に23％
+		case ICE_LANCE: // アイスランス魔100に30％
+		case CURSE_BLIND: // ヤメに15に設定する
+		case CURSE_POISON: // ヤメに50に設定する
+		case SILENCE: // ヤメに35に設定する
+		case DARKNESS: // ヤメに30に設定する
+		case FOG_OF_SLEEPING:// ヤメに25に設定する
 			if (attackInt > 25)
 				attackInt = 25;
 			probability = (int) (attackInt * 4 + l1skills.getProbabilityValue() - defenseMr);
@@ -574,8 +574,8 @@ public class L1Magic {
 			if (probability > 80) {
 				probability = 80;
 			}
-//			 _pc.sendPackets(new S_SystemMessage("[확률] -> " + defenseMr + " " + probability + "%"));
-//			 System.out.println("[마법확률] -> " + defenseMr + " " + probability + "%");
+//			 _pc.sendPackets(new S_SystemMessage("[確率] -> " + defenseMr + " " + probability + "%"));
+//			 System.out.println("[魔法確率] -> " + defenseMr + " " + probability + "%");
 			break;
 		case THUNDER_GRAB:
 			probability = 50;
@@ -583,13 +583,13 @@ public class L1Magic {
 				probability += 2 * _pc.getBaseMagicHitUp();
 			}
 			break;
-		case COUNTER_BARRIER: // 테스트
+		case COUNTER_BARRIER: // テスト
 			probability = Config.카운터배리어; // 19
 			break;
 		case GUARD_BREAK:
 			probability = 45;
 			break;
-		/** 전사스킬 파워그립, 데스페라도 확율 본섭화 **/
+		/** 戦士スキルパワーグリップ、デスペラード確率本サーバー化 **/
 		case DESPERADO:
 			probability = (int) Config.데스페라도 + ((attackLevel - defenseLevel) * 5);
 		    if(probability < 15){
@@ -607,7 +607,7 @@ public class L1Magic {
 			}
 			break;
 		case TOMAHAWK: {
-			/** 전사스킬 토마호크 : 동레벨일경우 63% 레벨아래당 5% 성공확률 증가, 레벨높을때 3% 성공확률 감소 **/
+			/** 戦士スキルトマホーク：同レベルの場合63％のレベルの下あたり5％の確率の増加、レベル高いとき3％成功確率の減少 **/
 			if (attackLevel >= defenseLevel)
 				probability = (attackLevel - defenseLevel) * 5 + 63;
 			else if (attackLevel < defenseLevel) {
@@ -618,20 +618,20 @@ public class L1Magic {
 			}
 		}
 			break;
-		case FEAR: // 피어 본섭 22% ~ 42% 베이스 스텟에 의한
+		case FEAR: // ピア本サーバー22％〜42％ベースステータスによる
 			probability = 35;
 			if (_calcType == PC_PC || _calcType == PC_NPC) {
 				probability += 2 * _pc.getMagicBonus();
 			}
 			break;
-		case HORROR_OF_DEATH: // 인트빨 본섭화
+		case HORROR_OF_DEATH: // ポイント洗える本サーバー化
 			probability = (int) ((attackInt - 11) * 6);
 			break;
 		case MORTAL_BODY:
 			probability = 25;
 			break;
 		case CONFUSION:
-		case PHANTASM: // 컨퓨젼, 판타즘 본섭 30%
+		case PHANTASM: // コンフュージョン、ファンタズム本サーバー30％
 			probability = 38;
 			break;
 		case RETURN_TO_NATURE:
@@ -661,8 +661,8 @@ public class L1Magic {
 				probability = 50;
 			}
 			break;
-		case SHOCK_STUN:// 쇼크스턴
-			/** 데몬인형, 나이트발드인형 스턴레벨 상승에 따른 본브레이크 스턴확률 증가 **/
+		case SHOCK_STUN:// ショックスタン
+			/** デーモン人形、ナイトバルド人形スターンレベルの上昇に伴う、本ブレーキスタン確率増加 **/
 			if (_calcType == PC_PC) {
 				if (_calcType == PC_PC) {
 					if (_pc instanceof L1PcInstance) {
@@ -681,7 +681,7 @@ public class L1Magic {
 					}
 				}
 			}
-			/** 데몬인형, 나이트발드인형 스턴레벨 상승에 따른 본브레이크 스턴확률 증가 **/
+			/** デーモン人形、ナイトバルド人形スターンレベルの上昇に伴う、本ブレーキスタン確率増加 **/
 			probability = (int) Config.SHOCK_STUN + ((attackLevel - defenseLevel) * 2);
 			if (_calcType == PC_PC || _calcType == PC_NPC) {
 				probability += _pc.getBaseMagicHitUp();
@@ -706,22 +706,22 @@ public class L1Magic {
 				probability = 0;
 			break;
 		case FINAL_BURN:
-			probability = (int) ((attackLevel) - (defenseMr / 5)); // 파이널 번
+			probability = (int) ((attackLevel) - (defenseMr / 5)); // ファイナル回
 			break;
 		case TURN_UNDEAD:
 			if (attackInt > 25)
 				attackInt = 25;
 			if (attackLevel > 52)
-				attackLevel = 60; // 프리섭화를 위해 52로 변경(기본은 49임)
+				attackLevel = 60; // プリソプ化のために52に変更（基本は49である）
 			probability = (int) ((attackInt * 3 + (attackLevel * 2.5) + _pc.getBaseMagicHitUp()) - (defenseMr + (defenseLevel / 2)) - 80);
 			if (_calcType == PC_PC || _calcType == PC_NPC) {
 				if (!_pc.isWizard()) {
 					probability -= 30;
 				}
 			}
-			break; // 추가 턴언데드 본섭화
-		case ARMOR_BRAKE: // 아머 브레이크
-			/** 바란카 스턴레벨 상승에 따른 아머브레이크 확률 증가 **/
+			break; //追加ターンアンデッド本サーバー化
+		case ARMOR_BRAKE: // アーマーブレイク
+			/** バランカスターンレベルの上昇に伴うアーマーブレイク確率増加 **/
 			if (_calcType == PC_PC) {
 				if (_pc instanceof L1PcInstance) {
 					if (_calcType == PC_PC) {
@@ -734,7 +734,7 @@ public class L1Magic {
 					}
 				}
 			}
-			/** 바란카 스턴레벨 상승에 따른 아머브레이크 확률 증가 **/
+			/**バランカスターンレベルの上昇に伴うアーマーブレイク確率増加 **/
 			probability = (int) (Config.아머브레이크 + ((attackLevel - defenseLevel) * 3));
 			probability += _pc.getImpactUp();
 			if (probability < 10) {
@@ -849,7 +849,7 @@ public class L1Magic {
 
 			if (skillId == ENERGY_BOLT || skillId == CALL_LIGHTNING || skillId == DISINTEGRATE) {
 				for (L1ItemInstance armor : _targetPc.getEquipSlot().getArmors()) {
-					// 붉은 기사의 방패
+					// レッド記事の盾
 					if (armor.getItemId() == 20230) {
 						int probability = 1;
 
@@ -878,8 +878,8 @@ public class L1Magic {
 					damage = _targetPc.getCurrentHp();
 				}
 			}
-			// 전사스킬 : 타이탄 매직
-			// HP가 40% 미만일때 마법공격을 확률적으로 반사.
+			// 戦士スキル：タイタンマジック
+			// HPが40％未満の場合、魔法攻撃を確率的に反射。
 			if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 240)) {
 				int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
 				int chance = _random.nextInt(100) + 1;
@@ -893,7 +893,7 @@ public class L1Magic {
 						_targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12559));
 						_targetPc.getInventory().consumeItem(41246, 10);
 					} else {
-						_targetPc.sendPackets(new S_SystemMessage("타이탄 매직: 촉매제가 부족합니다."));
+						_targetPc.sendPackets(new S_SystemMessage("タイタンマジック：触媒が不足します。"));
 					}
 				}
 				return (int) damage;
@@ -905,7 +905,7 @@ public class L1Magic {
 			}
 		}
 
-		/** 로봇시스템 **/
+		/** ロボットシステム **/
 		if (_calcType == PC_PC) {
 			if (_targetPc.getRobotAi() != null && (_targetPc.noPlayerCK || _targetPc.noPlayerck2 || _targetPc.isGm())) {
 				if (_targetPc != null && _targetPc.getClanid() != 0 && !_targetPc.getMap().isSafetyZone(_targetPc.getLocation())) {
@@ -921,7 +921,7 @@ public class L1Magic {
 				}
 			}
 		}
-		/** 로봇시스템 **/
+		/** ロボットシステム **/
 
 		return damage;
 	}
@@ -941,10 +941,10 @@ public class L1Magic {
 		if (_targetPc.hasSkillEffect(EARTH_BIND)) {
 			dmg = 0;
 		}
-		if (_targetPc.hasSkillEffect(MOB_BASILL)) { // 바실얼리기대미지0
+		if (_targetPc.hasSkillEffect(MOB_BASILL)) { // バジルアーリー期待未知0
 			dmg = 0;
 		}
-		if (_targetPc.hasSkillEffect(MOB_COCA)) { // 코카얼리기대미지0
+		if (_targetPc.hasSkillEffect(MOB_COCA)) { // コカアーリー期待未知0
 			dmg = 0;
 		}
 		if (dmg < 0) {
@@ -966,10 +966,10 @@ public class L1Magic {
 		if (_targetNpc.hasSkillEffect(EARTH_BIND)) {
 			dmg = 0;
 		}
-		if (_targetNpc.hasSkillEffect(MOB_BASILL)) { // 바실얼리기대미지0
+		if (_targetNpc.hasSkillEffect(MOB_BASILL)) { // バジルアーリー期待未知0
 			dmg = 0;
 		}
-		if (_targetNpc.hasSkillEffect(MOB_COCA)) { // 코카얼리기대미지0
+		if (_targetNpc.hasSkillEffect(MOB_COCA)) { // コカアーリー期待未知0
 			dmg = 0;
 		}
 		if (dmg < 0) {
@@ -996,7 +996,7 @@ public class L1Magic {
 		dmg -= _targetPc.getDamageReductionByArmor();
 
 
-		for (L1DollInstance doll : _targetPc.getDollList()) {// 마법인형에 의한 추가 방어
+		for (L1DollInstance doll : _targetPc.getDollList()) {// マジックドールによる追加の防御
 			dmg -= doll.getDamageReductionByDoll();
 			// dmg -= dmg * doll.getDamageReductionRatioByDoll();
 		}
@@ -1044,19 +1044,19 @@ public class L1Magic {
 				}
 			}
 		}	
-		/** 마법사 일경우 대미지외부화 적용 */
+		/** ウィザードの場合、ダメージ外部化さ */
 		if (_calcType == PC_PC) {
 			if (_pc.getType() == 3) {
 				dmg *= Config.마법사마법대미지;
 			}
 		}
-		/** 마법사 일경우 대미지외부화 적용 */
+		/** ウィザードの場合、ダメージ外部化さ */
 		if (_calcType == PC_NPC) {
 			if (_pc.getType() == 3) {
 				dmg *= Config.마법사몬스터대미지;
 			}
 		}
-		/** 마법사 일경우 추가대미지 적용 */
+		/** ウィザードの場合、追加ダメージ適用 */
 		if (_targetPc.hasSkillEffect(IllUSION_AVATAR)) {
 			dmg += dmg / 3;
 		}
@@ -1071,7 +1071,7 @@ public class L1Magic {
 		}
 		if (_targetPc.hasSkillEffect(COUNTER_MIRROR)) {
 			if (_calcType == PC_PC) {
-				if (_targetPc.getAbility().getTotalWis() >= _random.nextInt(70)) {// 원본 100
+				if (_targetPc.getAbility().getTotalWis() >= _random.nextInt(70)) {// ソース100
 					_pc.sendPackets(new S_DoActionGFX(_pc.getId(), ActionCodes.ACTION_Damage));
 					_pc.broadcastPacket(new S_DoActionGFX(_pc.getId(), ActionCodes.ACTION_Damage));
 					_targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 4395));
@@ -1123,20 +1123,20 @@ public class L1Magic {
 			System.out.println("Character Add Reduction Error");
 		}
 
-		/*** 신규레벨보호 ***/
+		/*** 新規レベルの保護 ***/
 		if (_calcType == PC_PC) {
 			int castle_id = L1CastleLocation.getCastleIdByArea(_pc);
 			if (castle_id == 0) {
 				if (_targetPc.getLevel() < Config.AUTO_REMOVELEVEL || _pc.getLevel() < Config.AUTO_REMOVELEVEL) {
 					dmg /= 2;
-					_pc.sendPackets(new S_SystemMessage("신규 레벨은 대미지의 50%만 가해집니다."));
-					_targetPc.sendPackets(new S_SystemMessage("신규 레벨은 대미지를 50%만 받습니다."));
+					_pc.sendPackets(new S_SystemMessage("新規レベルはダメージの50％だけがかかります。"));
+					_targetPc.sendPackets(new S_SystemMessage("新規レベルはダメージを50％だけます。"));
 				}
 			}
 		}
-		/*** 신규레벨보호 ***/
+		/*** 新規レベルの保護 ***/
 
-		/** 신규혈맹 공격안되게 **/
+		/** 新規血盟攻撃途方もなく **/
 		if (_calcType == PC_PC) {
 			 boolean isAliveBoss = BossAlive.getInstance().isBossAlive(_targetPc.getMapId());
 			int castle_id = L1CastleLocation.getCastleIdByArea(_pc);
@@ -1144,19 +1144,19 @@ public class L1Magic {
 				if (_pc.getClanid() == Config.신규혈맹클랜 || _targetPc.getClanid() == Config.신규혈맹클랜) {
 					if (Config.신규혈맹보호처리) {
 						dmg = 0;
-						_pc.sendPackets(new S_SystemMessage("신규보호 혈맹은 상호간에 공격이 되지 않습니다"));
-						_targetPc.sendPackets(new S_SystemMessage("신규보호 혈맹은 상호간에 공격이 되지 않습니다"));
+						_pc.sendPackets(new S_SystemMessage("新規保護血盟は相互に攻撃されていません"));
+						_targetPc.sendPackets(new S_SystemMessage("新規保護血盟は相互に攻撃されていません"));
 					} else {
 						dmg /= 2;
-						_pc.sendPackets(new S_SystemMessage("신규보호혈맹은 대미지를 50%만 가해집니다."));
-						_targetPc.sendPackets(new S_SystemMessage("신규보호혈맹은 대미지를 50%만 받습니다."));
+						_pc.sendPackets(new S_SystemMessage("新規保護血盟はダメージを50％だけかかります。"));
+						_targetPc.sendPackets(new S_SystemMessage("新規保護血盟はダメージを50％だけます。"));
 					}
 				}
 			}
 		}
-		/** 신규혈맹 공격안되게 **/
+		/**新規血盟攻撃途方もなく **/
 
-		/** 배틀존 **/
+		/** バトルゾーン **/
 		if (_calcType == PC_PC) {
 			if (_pc.getMapId() == 5153) {
 				if (_pc.get_DuelLine() == _targetPc.get_DuelLine() || _pc.get_DuelLine() == 0) {
@@ -1172,7 +1172,7 @@ public class L1Magic {
 		return dmg;
 	}
 
-	/** 플레이어·NPC 로부터 NPC 에의 대미지 산출 **/
+	/** プレイヤー・NPCからNPCへのダメージ算出 **/
 	private int calcNpcMagicDamage(int skillId) {
 		int dmg = 0;
 		if (skillId == FINAL_BURN) {
@@ -1252,7 +1252,7 @@ public class L1Magic {
 			if ((_targetNpc.getNpcTemplate().get_gfxid() == 7864 || _targetNpc.getNpcTemplate().get_gfxid() == 7869
 					|| _targetNpc.getNpcTemplate().get_gfxid() == 7870)) {
 				dmg *= 1.5;
-			} // 파푸리온 혈흔1.5뎀
+			} // パプリオン血痕1.5モデム
 		}
 
 		return dmg;
@@ -1264,7 +1264,7 @@ public class L1Magic {
 		int diceCount = l1skills.getDamageDiceCount();
 		int value = l1skills.getDamageValue();
 		int magicDamage = 0;
-		double PowerMr = 0; // 마방
+		double PowerMr = 0; // 魔
 
 		Random random = new Random();
 
@@ -1276,14 +1276,14 @@ public class L1Magic {
 
 		magicDamage += value * (1 + getSpellPower() / 10);
 
-		/** 치명타 발생 부분 */
+		/** クリティカル発生部分 */
 		double criticalCoefficient = 1.4;
 		int rnd = random.nextInt(100) + 1;
 
 		if (_calcType == PC_PC || _calcType == PC_NPC) {
 			int propCritical = CalcStat.calcMagicCritical(_pc.ability.getTotalInt())+_pc.getMagicCritical();
 			switch (skillId) {
-			// 6레벨 이하 광역마법 제외한 공격마법
+			// 6レベル以下広域魔法を除く攻撃魔法
 			case ENERGY_BOLT:
 			case ICE_DAGGER:
 			case WIND_CUTTER:
@@ -1298,7 +1298,7 @@ public class L1Magic {
 				propCritical = +10;
 				break;
 			}
-			// 마안 일정확률로 마법치명타+1
+			// 魔眼一定確率で魔法クリティカル+1
 			if (_pc.hasSkillEffect(LIND_MAAN) || _pc.hasSkillEffect(SHAPE_MAAN) || _pc.hasSkillEffect(LIFE_MAAN)) {
 				propCritical += 1;
 			}
@@ -1310,8 +1310,8 @@ public class L1Magic {
 				magicDamage *= criticalCoefficient;
 			}
 		}
-		// 디스마법은 라우풀에 따라 데미지 상향처리.
-		// : 카오틱수치가 높을수록 데미지 하향
+		// ディス魔法はロウフルに応じてダメージボトムアップ処理。
+		// : カオティック数値が高いほどダメージ下向き
 		if (skillId == DISINTEGRATE) {
 			int lawful = getLawful();
 			if (lawful <= 0)
@@ -1320,25 +1320,25 @@ public class L1Magic {
 		}
 		//
 		if (getTargetMr() < 101) {
-			PowerMr = getTargetMr() / (double) 200; // 마방100되면 10당 (기본대미지*마법상수)의 5% 대미지
-			// 줄어들게 설정 총50%
+			PowerMr = getTargetMr() / (double) 200; // 魔100と、10当たり（基本ダメージ*魔法の定数）の5％ダメージ
+			// 減る設定合計50％
 		} else {
-			PowerMr = 0.5 + (getTargetMr() - 100) / (double) 400; // 마방100초과분에 대해 10당
-			// (기본대미지*마법상수)의 1% 줄어들게 설정 100당 10%
-		} // 마방 400되면 마법대미지 0
+			PowerMr = 0.5 + (getTargetMr() - 100) / (double) 400; // 魔100超過分について10あたり
+			// （基本ダメージ*魔法の定数）の1％減る設定100当たり10％
+		} // 魔400と、魔法ダメージ0
 		if (skillId == FINAL_BURN) {
 			PowerMr = 0;
 		}
-		magicDamage -= magicDamage * PowerMr; // 먼저 마방에 의한 대미지 감소부터 처리
+		magicDamage -= magicDamage * PowerMr; //まず、魔によるダメージ減少から処理
 		double attrDeffence = calcAttrResistance(l1skills.getAttr());
 
-		// 속성방어 100당 45% 줄어듬.
-		// 10당4.5%초과분에대해서
-		// 10당 0.9% 줄어들게 설정
-		magicDamage -= magicDamage * attrDeffence; // 마방에 의한 대미지 감소후 속성방어에 의한
-		// 대미지 감소 처리
+		// 属性防御100当たり45％減。
+		// 10当たり4.5％超過分について
+		// 10当たり0.9％減少し設定
+		magicDamage -= magicDamage * attrDeffence; // 魔によるダメージ減少後の属性防御による
+		// ダメージ減少処理
 		if (_calcType == PC_PC || _calcType == PC_NPC) {
-			magicDamage += _pc.getBaseMagicDmg(); // 베이스 스탯 마법 대미지 보너스 추가
+			magicDamage += _pc.getBaseMagicDmg(); // ベースステータス魔法ダメージボーナスを追加
 		}
 		if (_calcType == PC_PC || _calcType == PC_NPC) {
 			int weaponAddDmg = 0;
@@ -1346,7 +1346,7 @@ public class L1Magic {
 			if (weapon != null) {
 				weaponAddDmg = weapon.getItem().getMagicDmgModifier();
 			}
-			magicDamage += weaponAddDmg; // 무기에 의한 마법 대미지 추가
+			magicDamage += weaponAddDmg; // 武器による魔法ダメージ追加
 		}
 		return magicDamage;
 	}
@@ -1380,7 +1380,7 @@ public class L1Magic {
 	}
 
 	/**
-	 * MR에 의한 마법 대미지 감소를 처리 한다 수정일자 : 2013.02.22 수정자 : 메르키스
+	 * MRによる魔法ダメージ減少を処理する修正日：2013.02.22修飾子：メールキス
 	 * 
 	 * @param dmg
 	 * @return dmg
@@ -1527,7 +1527,7 @@ public class L1Magic {
 			resistFloor = (int) (0.45 * Math.abs(resist));
 		} else {
 			resistFloor = (int) (45 + 0.09 * Math.abs(resist));
-			// 속성100초과분에 대해0.45의 1/5정도 감소되게 변경
+			// 属性100超過分について0.45の1/5程度減少されるように変更
 		}
 		double attrDeffence = resistFloor / 100;
 		return attrDeffence;
@@ -1629,11 +1629,11 @@ public class L1Magic {
 			damage = 0;
 			drainMana = 0;
 		}
-		if (_targetPc.hasSkillEffect(MOB_BASILL)) { // 바실얼리기대미지0
+		if (_targetPc.hasSkillEffect(MOB_BASILL)) { // バジルアーリー期待未知0
 			damage = 0;
 			drainMana = 0;
 		}
-		if (_targetPc.hasSkillEffect(MOB_COCA)) { // 코카얼리기대미지0
+		if (_targetPc.hasSkillEffect(MOB_COCA)) { // コカアーリー期待未知0
 			damage = 0;
 			drainMana = 0;
 		}
@@ -1662,11 +1662,11 @@ public class L1Magic {
 			damage = 0;
 			drainMana = 0;
 		}
-		if (_targetNpc.hasSkillEffect(MOB_BASILL)) { // 바실얼리기대미지0
+		if (_targetNpc.hasSkillEffect(MOB_BASILL)) { //バジルアーリー期待未知0
 			damage = 0;
 			drainMana = 0;
 		}
-		if (_targetNpc.hasSkillEffect(MOB_COCA)) { // 코카얼리기대미지0
+		if (_targetNpc.hasSkillEffect(MOB_COCA)) { // コカアーリー期待未知0
 			damage = 0;
 			drainMana = 0;
 		}
@@ -1696,7 +1696,7 @@ public class L1Magic {
 		}
 	}
 
-	// ●●●● 전사 타이탄 대미지를 산출 ●●●●
+	// ●●●● 戦士タイタンダメージを算出 ●●●●
 	private int 타이탄대미지() {
 		double damage = 0;
 		L1ItemInstance weapon = null;

@@ -85,7 +85,7 @@ public class S_DropItem extends ServerBasePacket {
 					sb.append(" ");
 					break;
 				}
-				// 인첸 +0 일때도 표기되게 하실분은 밑에 if (item.getEnchantLevel() >= 0) {로 교체
+				// エンチャン+0のときも表記されるようにする方は、下if（item.getEnchantLevel（）> = 0）{に置き換え
 				if (item.getEnchantLevel() > 0) {
 					sb.append("+" + item.getEnchantLevel() + " ");
 				} else if (item.getEnchantLevel() < 0) {

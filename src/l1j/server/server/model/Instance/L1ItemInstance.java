@@ -862,7 +862,7 @@ public class L1ItemInstance extends L1Object {
 			bit |= getItem().isUseDarkelf() ? 16 : 0;
 			bit |= getItem().isUseDragonKnight() ? 32 : 0;
 			bit |= getItem().isUseBlackwizard() ? 64 : 0;
-			bit |= getItem().isUse전사() ? 128 : 0;
+			bit |= getItem().isUseWarrior() ? 128 : 0;
 			os.writeC(7);
 			os.writeC(bit);
 			
@@ -1530,7 +1530,7 @@ public class L1ItemInstance extends L1Object {
 			bit |= getItem().isUseDarkelf() ? 16 : 0;
 			bit |= getItem().isUseDragonKnight() ? 32 : 0;
 			bit |= getItem().isUseBlackwizard() ? 64 : 0;
-			bit |= getItem().isUse전사() ? 128 : 0;
+			bit |= getItem().isUseWarrior() ? 128 : 0;
 			os.writeC(7);
 			os.writeC(bit);
 			
@@ -2045,7 +2045,7 @@ public class L1ItemInstance extends L1Object {
 			}
 
 			/** 반지 5이상 추가 대미지 **/
-			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().get장신구처리() == 9 || getItem().get장신구처리() == 11) {
+			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 9 || getItem().getAccessoryProcess() == 11) {
 				if (getEnchantLevel() > 4) {
 					os.writeC(39);
 					os.writeS("근거리 대미지 +" + (getEnchantLevel() - 4));
@@ -2055,7 +2055,7 @@ public class L1ItemInstance extends L1Object {
 			}
 
 			/** 반지 7이상 옵션 스펠파워 리뉴얼 **/
-			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().get장신구처리() == 9 || getItem().get장신구처리() == 11) {
+			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 9 || getItem().getAccessoryProcess() == 11) {
 				if (getEnchantLevel() >= 7) {
 					os.writeC(17);
 					os.writeC(getEnchantLevel() - 6);
@@ -2063,7 +2063,7 @@ public class L1ItemInstance extends L1Object {
 			}
 
 			/** 스냅퍼의 반지 PvP추가대미지 표시 (현질러와 일반유저의 격차때문에 실제로 대미지는 들어있지않음) **/
-		if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().get장신구처리() == 9 || getItem().get장신구처리() == 11 && getEnchantLevel() > 6) {
+		if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 9 || getItem().getAccessoryProcess() == 11 && getEnchantLevel() > 6) {
 			if (getEnchantLevel() == 7) {
 				os.writeC(59);
 				os.writeC(getEnchantLevel() - 6);
@@ -2350,7 +2350,7 @@ public class L1ItemInstance extends L1Object {
 					break;
 				}
 				/** 반지 귀걸이 목걸이 인챈트 HP증가 표시 **/
-			} else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().get장신구처리() != 10 && getEnchantLevel() > 0) {
+			} else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() != 10 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
 					os.writeC(14);
@@ -2594,7 +2594,7 @@ public class L1ItemInstance extends L1Object {
 				os.writeS(RoomtisHealingPotion12());
 			}
 			/** 목걸이 5이상 물약 회복량 **/
-			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().get장신구처리() == 8 || getItem().get장신구처리() == 12) {
+			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12) {
 				if (getEnchantLevel() > 4) {
 					os.writeC(39);
 					os.writeS("물약 회복량 " + ((getEnchantLevel() - 4) * 2) + "% +0");
@@ -2790,7 +2790,7 @@ public class L1ItemInstance extends L1Object {
 				}
 				
 				/** 반지 6부터 마방표시 **/
-			} else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().get장신구처리() == 9 || getItem().get장신구처리() == 11) {	
+			} else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 9 || getItem().getAccessoryProcess() == 11) {	
 				switch (getEnchantLevel()) {
 				case 6:
 					os.writeC(15);
@@ -3128,7 +3128,7 @@ public class L1ItemInstance extends L1Object {
 				}
 			}
 			/** 귀걸이,목걸이 +6부터 AC부분처리**/
-			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().get장신구처리() == 8 || getItem().get장신구처리() == 12 && getEnchantLevel() > 5) {
+			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12 && getEnchantLevel() > 5) {
 				switch (getEnchantLevel()) {
 				case 6:
 					os.writeC(39);
@@ -4038,7 +4038,7 @@ public class L1ItemInstance extends L1Object {
 				os.writeH(getItem().get_regist_stun() + 9);
 				
 				/** 귀걸이,목걸이 +7부터 스턴내성 **/
-			} else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().get장신구처리() == 8 || getItem().get장신구처리() == 12 && getEnchantLevel() > 6) {
+			} else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12 && getEnchantLevel() > 6) {
 				switch (getEnchantLevel()) {
 				case 7:
 					os.writeC(33);

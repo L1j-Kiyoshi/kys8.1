@@ -93,9 +93,9 @@ public class S_AddSkill extends ServerBasePacket {
 		writeC(bw1);
 		writeC(bw2);
 		writeC(bw3);
-		writeC(war);	// 1-하울 2-기간틱 8-파워그립 16-토마호크 32-데스페라도
+		writeC(war);	// 1-ハウル2ギガンティック8パワーグリップ16トマホーク32デスペラード
 		writeC(de3);
-		writeH(0);	//요정스킬 패킷 C에서 H로 바뀜 속성마법사라지는부분수정
+		writeH(0);	//妖精スキルパケットCからHに変わる属性魔法消える部分修正
 		writeC(elf7 == 1 ? 4 : elf7 == 2 ? 1 : elf7 == 4 ? 2 : elf7 == 8 ? 3 : elf7 == 0 ? 0 : 0);
 	}
 	

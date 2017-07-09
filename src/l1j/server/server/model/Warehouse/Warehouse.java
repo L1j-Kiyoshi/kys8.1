@@ -3,6 +3,7 @@ package l1j.server.server.model.Warehouse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 import l1j.server.server.datatables.ItemTable;
 import l1j.server.server.model.L1Inventory;
 import l1j.server.server.model.L1Object;
@@ -64,7 +65,7 @@ public abstract class Warehouse extends L1Object {
 		
 		L1ItemInstance carryItem;
 		
-		//엔진관련 버그 방지 추가
+		//エンジン関連のバグを防ぐ追加
 		if (item.getCount() <= count || count < 0) {
 			deleteItem(item);
 			carryItem = item;
@@ -83,7 +84,7 @@ public abstract class Warehouse extends L1Object {
 			carryItem.setBless(item.getItem().getBless());
 			carryItem.setAttrEnchantLevel(item.getAttrEnchantLevel());
 			carryItem.setSpecialEnchant(item.getSpecialEnchant());
-			/** 패키지상점 **/
+			/** パッケージ店 **/
 			carryItem.setPackage(item.isPackage());
 		}
 		return inventory.storeTradeItem(carryItem);

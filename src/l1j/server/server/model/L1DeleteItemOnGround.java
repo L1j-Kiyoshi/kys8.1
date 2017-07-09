@@ -55,7 +55,7 @@ public class L1DeleteItemOnGround {
 			switch(_executeStatus) {
 				case EXECUTE_STATUS_NONE:
 				{
-				//	L1World.getInstance().broadcastPacketToAll(new S_ServerMessage(166, "월드 맵상의 아이템","10초 후에 삭제됩니다"));
+				//	L1World.getInstance().broadcastPacketToAll(new S_ServerMessage(166, "ワールドマップ上のアイテム","10秒後に削除されます"));
 
 					_executeStatus = EXECUTE_STATUS_READY;
 					GeneralThreadPool.getInstance().schedule(this, 10000);
@@ -65,7 +65,7 @@ public class L1DeleteItemOnGround {
 				case EXECUTE_STATUS_READY:
 				{
 					deleteItem();
-			//		L1World.getInstance().broadcastPacketToAll(new S_ServerMessage(166, "월드 맵상의 아이템", "삭제되었습니다"));
+			//		L1World.getInstance().broadcastPacketToAll(new S_ServerMessage(166, "ワールドマップ上のアイテム", "削除されました"));
 					
 					_executeStatus = EXECUTE_STATUS_NONE;
 					GeneralThreadPool.getInstance().schedule(this, INTERVAL);
@@ -81,7 +81,7 @@ public class L1DeleteItemOnGround {
 		}
 
 		_deleteTimer = new DeleteTimer();
-		GeneralThreadPool.getInstance().schedule(_deleteTimer, INTERVAL); // 타이머 개시
+		GeneralThreadPool.getInstance().schedule(_deleteTimer, INTERVAL); // タイマー開始
 	}
 
 	private void deleteItem() {
@@ -97,26 +97,26 @@ public class L1DeleteItemOnGround {
 			item = (L1ItemInstance) obj;
 			if (item.getItemOwner() == null
 					|| !(item.getItemOwner() instanceof L1RobotInstance)) {
-				if (item.getX() == 0 && item.getY() == 0) { // 지면상의 아이템은 아니고,
-															// 누군가의 소유물
+				if (item.getX() == 0 && item.getY() == 0) { // 地面上のアイテムではなく、
+															// 誰かの所有物
 				continue;
 				}
 			}
-			if (item.getItem(). getItemId() == 40515) { // 정령의 돌
+			if (item.getItem(). getItemId() == 40515) { // 精霊の石
 				continue;
 			}
-			if (L1HouseLocation.isInHouse(item.getX(), item.getY(), item. getMapId())) { // 아지트내
+			if (L1HouseLocation.isInHouse(item.getX(), item.getY(), item. getMapId())) { // アジト内
 				continue;
 			}
 
 			players = L1World.getInstance()
 					.getVisiblePlayer(item, Config.ALT_ITEM_DELETION_RANGE);
-			if (players.isEmpty()) { // 지정 범위내에 플레이어가 없으면 삭제
+			if (players.isEmpty()) { // 指定範囲内のプレイヤーが存在しない場合、削除
 				groundInventory = L1World. getInstance(). getInventory(item.getX(), item.getY(), item.getMapId());
 				groundInventory.removeItem(item);
 				numOfDeleted++;
 			}
 		}
-		_log.fine("월드 맵상의 아이템을 자동 삭제. 삭제수: " + numOfDeleted);
+		_log.fine("ワールドマップ上のアイテムを自動的に削除します。削除することができ：" + numOfDeleted);
 	}
 }

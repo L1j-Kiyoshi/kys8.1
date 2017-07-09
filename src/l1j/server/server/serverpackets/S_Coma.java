@@ -3,13 +3,13 @@ package l1j.server.server.serverpackets;
 
 import l1j.server.server.Opcodes;
 
-// 맨처음엔
-// S_SkillSound(7382): A타입
-// S_SkillSound(7383): B타입 보내주면 됨.
-// coin 인벤이미지: 3565
+// 最初は
+// S_SkillSound(7382):Aタイプ
+// S_SkillSound(7383): Bタイプ送信する場合される。
+// coin インベントリ画像：3565
 public class S_Coma extends ServerBasePacket {
 
-// j가 40일때 A, 41일때 B
+// jが40時、A、41時B
 	public S_Coma(int j,int time) {
 		writeC(Opcodes.S_EVENT);
 		writeC(0x14);

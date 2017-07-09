@@ -64,8 +64,8 @@ public class S_NPCTalkReturn extends ServerBasePacket {
 		writeD(objid);
 		writeS(htmlid);
 		if (data != null && 1 <= data.length) {
-			writeH(0x01); // 들어오는 npc htmlid 부분의 필요 바이트 
-			writeH(data.length); // 인수의 수
+			writeH(0x01); // 着信npc htmlid部分の必要バイト
+			writeH(data.length); // 引数の数
 			for (String datum : data) {
 				writeS(datum);
 			}

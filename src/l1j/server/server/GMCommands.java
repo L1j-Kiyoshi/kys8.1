@@ -521,7 +521,7 @@ public class GMCommands {
 					gm.sendPackets(new S_MatizTest(Integer.parseInt(value),value2));
 					break;
 				case 6:
-					gm.sendPackets(new S_PacketBox(S_PacketBox.드래곤레이드버프, 86400 * 2));
+					gm.sendPackets(new S_PacketBox(S_PacketBox.DRAGON_RAID_BUFF, 86400 * 2));
 					break;
 				case 7:
 					gm.sendPackets(new S_ACTION_UI2(value, (long)86400000));

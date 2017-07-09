@@ -35,7 +35,7 @@ public class L1Inventory extends L1Object {
 	public static final int WAREHOUSE_TYPE_PERSONAL = 0;
 	public static final int WAREHOUSE_TYPE_CLAN = 1;
 
-	// 아이템패킷추가
+	// アイテムパケット追加
 	public int[] slot_ring = new int[4];
 	public int[] slot_rune = new int[3];
     public int[] slot_earring = new int[2];
@@ -54,15 +54,15 @@ public class L1Inventory extends L1Object {
 	}
 
 	public int getTypeAndItemIdEquipped(int type2, int type, int ItemId) { 
-		// itemId도추가검색
+		// itemIdドチュが検索
 		int equipeCount = 0;
 		L1ItemInstance item = null;
 		for (Object itemObject : _items) {
 			item = (L1ItemInstance) itemObject;
-			if (item.getItem().getType2() == type2 // 0 etc아템 1 무기 2아머
-					&& item.getItem().getType() == type // type2 의 세부항목들
-					&& item.getItem().getItemId() == ItemId// 아이템의 아이디
-					&& item.isEquipped()) { // 착용
+			if (item.getItem().getType2() == type2 // 0 etcアテム1武器2アーマー
+					&& item.getItem().getType() == type // type2の詳細項目
+					&& item.getItem().getItemId() == ItemId// アイテムのIDを
+					&& item.isEquipped()) { // 着用
 				equipeCount++;
 			}
 		}
@@ -70,14 +70,14 @@ public class L1Inventory extends L1Object {
 	}
 
 	public int getTypeAndGradeEquipped(int type2, int type, int Grade) { 
-		// Grade도추가검색
+		// Gradeドチュが検索
 		int equipeCount = 0;
 		L1ItemInstance item = null;
 		for (Object itemObject : _items) {
 			item = (L1ItemInstance) itemObject;
-			if (item.getItem().getType2() == type2 // 0 etc아템 1 무기 2아머
-					&& item.getItem().getType() == type // type2 의 세부항목들
-					&& item.getItem().getGrade() == Grade && item.isEquipped()) { // 착용
+			if (item.getItem().getType2() == type2 // 0 etcアテム1武器2アーマー
+					&& item.getItem().getType() == type // type2の詳細項目
+					&& item.getItem().getGrade() == Grade && item.isEquipped()) { // 着用
 				equipeCount++;
 			}
 		}
@@ -119,14 +119,14 @@ public class L1Inventory extends L1Object {
 				break;
 			case 9: // ring1
 			case 11: // ring2
-				// 기존에 착용중인게 잇는지 검색.
+				// 既存の着用しているのがイトヌンジ検索します。
 				for (int i = 0; i < slot_ring.length; ++i) {
 					if (slot_ring[i] == item.getId())
 						select_idx = i;
 				}
-				// 착용해야할경우 기존에 착용중인게 없을때만 메모리 갱신.
+				// 着用すべき場合は、既存の着用中に存在しない場合にのみ、メモリ更新。
 				if (item.isEquipped() && select_idx == -1) {
-					// 착용중이라면 빈 슬롯에 넣기.
+					// 着用中であれば、空のスロットに入れる。
 					for (int i = 0; i < slot_ring.length; ++i) {
 						if (slot_ring[i] == 0) {
 							slot_ring[i] = item.getId();
@@ -135,9 +135,9 @@ public class L1Inventory extends L1Object {
 						}
 					}
 				}
-				// 착용해제해야할 경우 기존에 착용중인게 잇을땜나 메모리 갱신.
+				// 着用解除すべき場合は、既存の着用中にイトウルテムナメモリ更新。
 				if (!item.isEquipped() && select_idx != -1) {
-					// 해제중이라면 이전에 적용되잇던 위치에 값을 제거.
+					// 解除中であれば、以前に適用さイトドン位置に値を削除します。
 					slot_ring[select_idx] = 0;
 					idx = S_EquipmentWindow.EQUIPMENT_INDEX_RING1 + select_idx;
 				}
@@ -168,17 +168,17 @@ public class L1Inventory extends L1Object {
 				break;
 			case 13: // garder
 				idx = S_EquipmentWindow.EQUIPMENT_INDEX_SHIELD;
-				// 가더가 들어가야할 슬롯 번호 확인해야함.
+				// ガーダーが入らなければならスロット番号を確認し必要があること。
 				break;
 			case 14: // rune
-				// 기존에 착용중인게 잇는지 검색.
+				//既存の着用しているのがイトヌンジ検索します。
 				for (int i = 0; i < slot_rune.length; ++i) {
 					if (slot_rune[i] == item.getId())
 						select_idx = i;
 				}
-				// 착용해야할경우 기존에 착용중인게 없을때만 메모리 갱신.
+				// 着用すべき場合は、既存の着用中に存在しない場合にのみ、メモリ更新。
 				if (item.isEquipped() && select_idx == -1) {
-					// 착용중이라면 빈 슬롯에 넣기.
+					// 着用中であれば、空のスロットに入れる。
 					for (int i = 0; i < slot_rune.length; ++i) {
 						if (slot_rune[i] == 0) {
 							slot_rune[i] = item.getId();
@@ -187,30 +187,30 @@ public class L1Inventory extends L1Object {
 						}
 					}
 				}
-				// 착용해제해야할 경우 기존에 착용중인게 잇을땜나 메모리 갱신.
+				// 着用解除すべき場合は、既存の着用中にイトウルテムナメモリ更新。
 				if (!item.isEquipped() && select_idx != -1) {
-					// 해제중이라면 이전에 적용되잇던 위치에 값을 제거.
+					// 解除中であれば、以前に適用さイトドン位置に値を削除します。
 					slot_rune[select_idx] = 0;
 					idx = S_EquipmentWindow.EQUIPMENT_INDEX_RUNE1 + select_idx;
 				}
 				break;
 
-			case 15: // 각반
+			case 15: // ゲートル
 				idx = S_EquipmentWindow.EQUIPMENT_INDEX_PAIR;
 				break;
-			case 16: // 문장
+			case 16: // 文章
 				idx = S_EquipmentWindow.EQUIPMENT_INDEX_sentence;
 				break;
-			case 17: // 휘장
+			case 17: // 記章
 				idx = S_EquipmentWindow.EQUIPMENT_INDEX_badge; 
 				break;
-			case 18: // 견갑
+			case 18: // 肩甲
 				idx = S_EquipmentWindow.EQUIPMENT_INDEX_shoulder; 
 				break;
 			}
 		} else {
 			switch (item.getItem().getType1()) {
-			case 11:	// 도끼
+			case 11:	// 斧
 				if(item.isEquipped()) {
 					if(worldjoin && pc.getEquipSlot().getWeaponCount()==2)
 						idx = pc.getEquipSlot().worldjoin_weapon_idx++ %2 == 0 ? S_EquipmentWindow.EQUIPMENT_INDEX_WEAPON : S_EquipmentWindow.EQUIPMENT_INDEX_SHIELD;
@@ -229,7 +229,7 @@ public class L1Inventory extends L1Object {
 			pc.sendPackets(new S_EquipmentWindow(pc, item.getId(), idx, item.isEquipped()));
 	}
 
-	// 아이템패킷추가
+	// アイテムパケット追加
 
 	public int getSize() {
 		return _items.size();
@@ -408,12 +408,12 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 
 		item.setChargeCount(chargeCount);
 
-		//시간제 아이템
+		//時間制アイテム
 		switch (itemId) {
 		
-		//호랑이/진돗개
-		case 3000048: //꼬마 요정의 마음
-			SetDeleteTime(item, 1439); // 24시간 -1분
+		//虎/珍島犬
+		case 3000048: //エルフの心
+			SetDeleteTime(item, 1439); // 24時間-1分
 			break;
 		case L1ItemId.KILLTON_CONTRACT:
 			SetDeleteTime(item, 60);
@@ -425,21 +425,21 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 			SetDeleteTime(item, 60);
 			break;
 		case 100036:
-		case 500210: //테베,쿠쿨 제단 열쇠
-		case L1ItemId.DRAGON_KEY: // 드래곤키
+		case 500210: //テーベ、ククル祭壇の鍵
+		case L1ItemId.DRAGON_KEY: //ドラゴンキー
 		case 490012:
 		case 490013:
 		case 490014:
 		case 40312:
-			SetDeleteTime(item, 180); // 3시간
+			SetDeleteTime(item, 180); // 3時間
 			break;
-		case 30022: // 마법인형: 블레그
-		case 30023: // 마법인형: 레데그
-		case 30024: // 마법인형: 엘레그
-		case 30025: // 마법인형: 그레그
-			SetDeleteTime(item, 300); // 5시간
+		case 30022: //マジックドール：ブレイクその
+		case 30023: // マジックドール：レデグー
+		case 30024: // マジックドール：エルレグ
+		case 30025: // マジックドール：グレッグ
+			SetDeleteTime(item, 300); // 5時間
 			break;
-	/*	case 7: // 수련자의 무기
+	/*	case 7: //修練者の武器
 		case 35:
 		case 48:
 		case 73:
@@ -451,9 +451,9 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 		case 175:
 		case 224:
 		case 203012:
-			SetDeleteTime(item, 10080); // 7일
+			SetDeleteTime(item, 10080); // 7日
 			break;*/
-		case 22328: // 베테르랑 방어구
+		case 22328: //ベビーテルラン防具
 		case 22329:
 		case 22330:
 		case 22331:
@@ -461,7 +461,7 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 		case 22333:
 		case 22334:
 		case 22335:
-		case 1126: // 베테르랑 무기
+		case 1126: // ベビーテルラン武器
 		case 1127:
 		case 1128:
 		case 1129:
@@ -469,9 +469,9 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 		case 1131:
 		case 1132:
 		case 1133:
-			SetDeleteTime(item, 4320); // 3일
+			SetDeleteTime(item, 4320); //3日
 			break;
-		case 20282: // 수련자의 방어구
+		case 20282: // 修練者の防具
 		case 22073:
 		case 22300:
 		case 22301:
@@ -488,7 +488,7 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 		case 22337:
 		case 22338:
 		case 22339:
-		case 7: // 수련자의 무기
+		case 7: // 修練者の武器
 		case 35:
 		case 48:
 		case 73:
@@ -500,7 +500,7 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 		case 175:
 		case 224:
 		case 203012:
-		//	SetDeleteTime(item, 4320); // 3일
+		//	SetDeleteTime(item, 4320); // 3日
 			break;
 		default:
 			break;
@@ -730,7 +730,7 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 			return null;
 		}
 		L1ItemInstance carryItem;
-		// 엔진관련 버그 방지 추가
+		// エンジン関連のバグを防ぐ追加
 		if (item.getCount() <= count || count < 0) {
 			deleteItem(item);
 			carryItem = item;
@@ -765,7 +765,7 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 			return null;
 		}
 		L1ItemInstance carryItem;
-		// 엔진관련 버그 방지 추가
+		// エンジン関連のバグを防ぐ追加
 		if (item.getCount() <= count || count < 0) {
 			deleteItem(item);
 			carryItem = item;
@@ -916,7 +916,7 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 	public boolean checkItem(int id) {
 		return checkItem(id, 1);
 	}
-/*속성인첸트템 코딩*/
+/*属性エンチャントシステムコーディング*/
 	public boolean checkAttrEnchantItem(int id,int enchant,int attr, int count) {
 		int num = 0;
 		for (L1ItemInstance item : _items) {
@@ -967,7 +967,7 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 		return false;
 	}
 
-	// ////////////////인첸된 체크 아이템 재코딩
+	// ////////////////エンチャンされたチェック項目の再コーディング
 public boolean checkEnchantItem(int id, int enchant, int count) {
 		int num = 0;
 		for (L1ItemInstance item : _items) {
@@ -1081,7 +1081,7 @@ public boolean checkEnchantItem(int id, int enchant, int count) {
 	}
 	
 	
-	// 새로운 아이템의 격납 : 쪼꼬 재코딩
+	//新しいアイテムの格納：チョコ再コーディング
 	public L1ItemInstance storeItem(int id, int count, String name) {
 		L1Item sTemp = ItemTable.getInstance().getTemplate(id);
 		L1Item temp = ItemTable.getInstance().clone(sTemp, name);
@@ -1094,14 +1094,14 @@ public boolean checkEnchantItem(int id, int enchant, int count) {
 			item.setBless(temp.getBless());
 			item.setAttrEnchantLevel(0);
 			if (!temp.isStackable() || findItemId(id) == null) {
-				// 새롭게 생성할 필요가있는 경우만 ID의발행과 L1World에의등록을 실시한다
+				// 新たに作成する必要がある場合のみIDの発行とL1Worldへの登録を行う
 				item.setId(IdFactory.getInstance().nextId());
 				L1World.getInstance().storeObject(item);
 			}
 			return storeItem(item);
 		}
 
-		// 스택 할 수 없는 아이템의 경우
+		// スタックすることができないアイテムの場合
 		L1ItemInstance result = null;
 		L1ItemInstance item = null;
 		for (int i = 0; i < count; i++) {
@@ -1113,7 +1113,7 @@ public boolean checkEnchantItem(int id, int enchant, int count) {
 			storeItem(item);
 			result = item;
 		}
-		// 마지막에 만든 아이템을 돌려준다. 배열을 되돌리도록(듯이) 메소드 정의를 변경하는 편이 좋을지도 모른다.
+		// 最後に作成されたアイテムを返す。配列を戻すよう（に）メソッドの定義を変更したほうがいいかもしれない。
 		return result;
 	}
 

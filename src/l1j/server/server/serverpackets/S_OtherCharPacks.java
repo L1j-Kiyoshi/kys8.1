@@ -37,7 +37,7 @@ public class S_OtherCharPacks extends ServerBasePacket {
 	private static final int STATUS_FASTMOVABLE = 64;
 	private static final int STATUS_GHOST = 128;
 	//private static final int BLOOD_LUST = 16;//100
-	private static final int DANCING_BLADES = 16;//댄싱
+	private static final int DANCING_BLADES = 16;//ダンシング
 
 	private byte[] _byte = null;
 
@@ -77,7 +77,7 @@ public class S_OtherCharPacks extends ServerBasePacket {
 		if (pc.isDancingBlades()) {
 			status |= DANCING_BLADES;
 		}
-		if (pc.isFastMovable() || pc.isFruit()) {//유그드라 추가 변경1/19
+		if (pc.isFastMovable() || pc.isFruit()) {//ユグドラ追加変更1/19
 			status |= STATUS_FASTMOVABLE;
 		}
 		if (pc.isParalyzed()) {
@@ -88,7 +88,7 @@ public class S_OtherCharPacks extends ServerBasePacket {
 		// int addbyte1 = 1;
 
 		writeC(Opcodes.S_PUT_OBJECT);
-		if (pc.isGm() && pc.isGmInvis()) {// 인비지 추가
+		if (pc.isGm() && pc.isGmInvis()) {// インビジ追加
 			writeH(0);
 			writeH(0);
 			writeD(0);
@@ -136,22 +136,22 @@ public class S_OtherCharPacks extends ServerBasePacket {
 		// writeC(0x00);
 		writeH(pc.getLawful());
 		if (pc.getHuntCount() >= 1) { // 
-			writeS(pc.getName() + "\\fe(수배중)");
+			writeS(pc.getName() + "\\fe(手配中)");
 		} else {
 			writeS(pc.getName());
 		}
 		writeS(pc.getTitle());
 		writeC(status);
 		writeD(pc.getClanid() > 0 ? pc.getClan().getEmblemId() > 0 ? pc.getClan().getEmblemId() : 0:0); 
-		writeS(pc.getClanname()); // 크란명
-		writeS(null); // 펫호팅?
+		writeS(pc.getClanname()); // クラン名
+		writeS(null); // ペットホチン?
 		writeC(0); // ?
 		/*
-		 * if(pc.is_isInParty()) // 파티중 { writeC(100 * pc.get_currentHp() /
+		 * if(pc.is_isInParty()) // パーティー中 { writeC(100 * pc.get_currentHp() /
 		 * pc.get_maxHp()); } else { writeC(0xFF); }
 		 */
 
-//		if (pc.isInParty()) {	// 파티중
+//		if (pc.isInParty()) {	// パーティー中
 //			writeC(100 * pc.getCurrentHp() / pc.getMaxHp());
 //		} else {
 			writeC(0xFF);
@@ -168,7 +168,7 @@ public class S_OtherCharPacks extends ServerBasePacket {
 
 		writeC(0);
 		writeC(pc.getAttackLevelCount());//pc.getAttackLevelCount()
-//		 if (pc.isInParty()) {	// 파티중
+//		 if (pc.isInParty()) {	// パーティー中
 //			int mpRatio = 100;
 //			if (0 < pc.getMaxMp()) {
 //				mpRatio = 100 * pc.getCurrentMp() / pc.getMaxMp();

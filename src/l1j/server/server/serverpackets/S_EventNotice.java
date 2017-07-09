@@ -12,8 +12,8 @@ private static final String S_EventNotice = "[S] S_EventNotice";
 
 public S_EventNotice(){
 	  
-	  String event = "               이벤트 종료됨";
-//	  String date = "3일전";
+	  String event = "               イベント終了";
+//	  String date = "3日前";
 	  
 	  int length = event.getBytes().length + 19;
 //	  int length2 = date.getBytes().length + 19;
@@ -55,7 +55,7 @@ public S_EventNotice(){
 
 
 
-//원본
+//ソース
 /*package l1j.server.server.serverpackets;
 
 import l1j.server.server.Opcodes;
@@ -71,7 +71,7 @@ public class S_EventNotice extends ServerBasePacket {
 		writeC(code);
 		switch (code) {
 		case EVENT_NOTICE:
-			String event = "[구현중입니다]";
+			String event = "[実装中です]";
 			writeC(0x00);
 			writeH(0x0108);
 			writeC(0x10);
@@ -80,7 +80,7 @@ public class S_EventNotice extends ServerBasePacket {
 			int length = event.getBytes().length + 19;
 			writeC(length);
 			writeC(0x10);
-			writeD(0x069099fe); // ? 이벤트 번호로 추정
+			writeD(0x069099fe); // ? イベント番号と推定
 			writeC(0x22);
 			writeS2(event);
 			writeC(0x28);

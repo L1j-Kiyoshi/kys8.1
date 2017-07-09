@@ -68,7 +68,7 @@ public class Getback {
 		ResultSet rs = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			// 동맵으로 에리어 지정과 무지정이 혼재하고 있으면(자), 에리어 지정을 먼저 읽어들이기 위해 area_x1 DESC
+			// ドンメプにエリア指定と無知情混在していると、エリア指定を先に読み込むためにarea_x1 DESC
 			String sSQL = "SELECT * FROM getback ORDER BY area_mapid,area_x1 DESC ";
 			pstm = con.prepareStatement(sSQL);
 			rs = pstm.executeQuery();
@@ -110,11 +110,11 @@ public class Getback {
 	}
 
 	/**
-	 * pc의 현재지로부터 귀환 포인트를 취득한다.
+	 * pcの現在までから帰還ポイントを取得する。
 	 * 
 	 * @param pc
-	 * @param bScroll_Escape(미사용)
-	 * @return locx, locy, mapid의 순서에 격납되고 있는 배열
+	 * @param bScroll_Escape(未使用)
+	 * @return locx, locy, mapidの順に格納されている配列
 	 */
 	public static int[] GetBack_Location(L1PcInstance pc, boolean bScroll_Escape) {
 
@@ -126,7 +126,7 @@ public class Getback {
 		int pcLocY = pc.getY();
 		int pcMapId = pc.getMapId();
 		ArrayList<Getback> getbackList = _getback.get(pcMapId);
-		if (pc.isInParty()) {// 파티추가
+		if (pc.isInParty()) {// パーティー追加
 			if (pc.isDead()) {
 				pc.getParty().refresh(pc);
 			}
@@ -151,7 +151,7 @@ public class Getback {
 			} else {
 				loc = ReadGetbackInfo(getback, nPosition);
 
-				// town_id가 지정되고 있는 경우는 거기에 귀환시킨다
+				// town_idが指定されている場合は、そこに帰還させる
 				if (pc.isElf() && getback._getbackTownIdForElf > 0) {
 					loc = L1TownLocation.getGetBackLoc(getback._getbackTownIdForElf);
 				} else if (pc.isDarkelf() && getback._getbackTownIdForDarkelf > 0) {
@@ -160,7 +160,7 @@ public class Getback {
 					loc = L1TownLocation.getGetBackLoc(getback._getbackTownId);
 				}
 			}
-			// getback 테이블에 데이터가 없는 경우, SKT에 귀환
+			// getbackテーブルにデータがない場合は、SKTの帰還
 		} else {
 			loc[0] = 33442;
 			loc[1] = 32798;
@@ -181,7 +181,7 @@ public class Getback {
 		try {
 			loc = GetBack_Location(pc, true);
 
-			if (pc.getClanid() != 0) { // 크란 소속
+			if (pc.getClanid() != 0) { // クランに所属
 				int castle_id = 0;
 				int house_id = 0;
 				L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
@@ -189,16 +189,16 @@ public class Getback {
 					castle_id = clan.getCastleId();
 					house_id = clan.getHouseId();
 				}
-				if (castle_id != 0) { // 성주 크란원
+				if (castle_id != 0) { // 城主クラン員
 					loc = L1CastleLocation.getCastleLoc(castle_id);
-				} else if (house_id != 0) { // 아지트 소유 크란원
+				} else if (house_id != 0) { // アジトを所有クラン員
 					loc = L1HouseLocation.getHouseLoc(house_id);
 				}
 			}
 
 			return loc;
 		} catch (Exception e) {
-			/** 2011.07.31 고정수 복사 버그 방지 */
+			/** 2011.07.31固定することができ、コピーのバグを防ぐ */
 			loc[0] = 33437;
 			loc[1] = 32812;
 			loc[2] = 4;

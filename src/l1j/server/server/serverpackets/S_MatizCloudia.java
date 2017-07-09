@@ -20,8 +20,6 @@
 package l1j.server.server.serverpackets;
 
 import l1j.server.server.Opcodes;
-import l1j.server.server.model.Instance.L1DoorInstance;
-import l1j.server.server.model.Instance.L1PcInstance;
 
 // Referenced classes of package l1j.server.server.serverpackets:
 // ServerBasePacket
@@ -35,7 +33,7 @@ public class S_MatizCloudia extends ServerBasePacket {
 
 		//df 07 02 0a 13 08 80 02 10 9e 96 95 c2 05 22 06 08 01 10 lv  18 05 28 01 00 00
 		//df 07 02 0a 1b 08 b4 02 10 bc ba 9f c2 05 22 06 08 01 10 00 18 01 22 06 08 02 10 00 18 01 28 01 00 00 
-		//df 07 02 0a 1b 08 b4 02 10 bc ba 9f c2 05 22 06 08 01 10 속 18 01 22 06 08 02 10 변 18 01 28 01 00 00
+		//df 07 02 0a 1b 08 b4 02 10 bc ba 9f c2 05 22 06 08 01 10の中18 01 22 06 08 02 10変更18 01 28 01 00 00
 		//6f 07 02 0a 1b 08 81 02 10 9e db c3 c3 05 22 06 08 01 10 01 18 01 22 06 08 02 10 01 18 01 28 01 00 00
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
 		writeC(0x07);
@@ -83,7 +81,7 @@ public class S_MatizCloudia extends ServerBasePacket {
 				writeC(0x28);
 				writeC(0x01);
 				break;
-			case 1:// value : 1속 2변 3완
+			case 1:// value : 1速2辺3ワン
 				if(value==1 || value==3){
 					writeC(0x01);
 				}else{
@@ -119,10 +117,10 @@ public class S_MatizCloudia extends ServerBasePacket {
 		switch(type){
 			case 1:
 			case 3:
-				//자동공격"
+				//自動攻撃 "
 				writeC(0x09);
 				break;
-			case 2://제법이군
+			case 2://製法だな
 			case 4:
 				writeC(0x0d);
 				break;

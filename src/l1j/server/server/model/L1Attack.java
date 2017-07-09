@@ -1,75 +1,6 @@
 package l1j.server.server.model;
 
-import static l1j.server.server.model.skill.L1SkillId.ABSOLUTE_BARRIER;
-import static l1j.server.server.model.skill.L1SkillId.ARMOR_BRAKE;
-import static l1j.server.server.model.skill.L1SkillId.BERSERKERS;
-import static l1j.server.server.model.skill.L1SkillId.BRAVE_AURA;
-import static l1j.server.server.model.skill.L1SkillId.BURNING_SLASH;
-import static l1j.server.server.model.skill.L1SkillId.BURNING_SPIRIT;
-import static l1j.server.server.model.skill.L1SkillId.BURNING_WEAPON;
-import static l1j.server.server.model.skill.L1SkillId.CLAN_BUFF3;
-import static l1j.server.server.model.skill.L1SkillId.CLAN_BUFF4;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_0_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_10_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_11_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_12_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_13_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_14_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_15_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_16_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_17_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_18_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_19_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_1_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_20_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_21_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_22_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_23_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_2_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_3_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_4_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_5_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_6_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_7_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_8_S;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_1_9_S;
-import static l1j.server.server.model.skill.L1SkillId.COOK_DEX;
-import static l1j.server.server.model.skill.L1SkillId.COOK_GROW;
-import static l1j.server.server.model.skill.L1SkillId.COOK_INT;
-import static l1j.server.server.model.skill.L1SkillId.COOK_STR;
-import static l1j.server.server.model.skill.L1SkillId.ARMORGUARD;
-import static l1j.server.server.model.skill.L1SkillId.RANK_BUFF_2;
-import static l1j.server.server.model.skill.L1SkillId.RANK_BUFF_3;
-import static l1j.server.server.model.skill.L1SkillId.RANK_BUFF_4;
-import static l1j.server.server.model.skill.L1SkillId.RANK_BUFF_5;
-import static l1j.server.server.model.skill.L1SkillId.DOUBLE_BRAKE;
-import static l1j.server.server.model.skill.L1SkillId.DRAGON_SKIN;
-import static l1j.server.server.model.skill.L1SkillId.EARTH_BIND;
-import static l1j.server.server.model.skill.L1SkillId.EARTH_GUARDIAN;
-import static l1j.server.server.model.skill.L1SkillId.ELEMENTAL_FIRE;
-import static l1j.server.server.model.skill.L1SkillId.ENCHANT_VENOM;
-import static l1j.server.server.model.skill.L1SkillId.FEAR;
-import static l1j.server.server.model.skill.L1SkillId.FEATHER_BUFF_A;
-import static l1j.server.server.model.skill.L1SkillId.FEATHER_BUFF_B;
-import static l1j.server.server.model.skill.L1SkillId.FIRE_WEAPON;
-import static l1j.server.server.model.skill.L1SkillId.ICE_LANCE;
-import static l1j.server.server.model.skill.L1SkillId.IMMUNE_TO_HARM;
-import static l1j.server.server.model.skill.L1SkillId.IllUSION_AVATAR;
-import static l1j.server.server.model.skill.L1SkillId.MIRROR_IMAGE;
-import static l1j.server.server.model.skill.L1SkillId.MOB_BASILL;
-import static l1j.server.server.model.skill.L1SkillId.MOB_COCA;
-import static l1j.server.server.model.skill.L1SkillId.PAP_FIVEPEARLBUFF;
-import static l1j.server.server.model.skill.L1SkillId.PAP_MAGICALPEARLBUFF;
-import static l1j.server.server.model.skill.L1SkillId.PATIENCE;
-import static l1j.server.server.model.skill.L1SkillId.PHANTASM;
-import static l1j.server.server.model.skill.L1SkillId.REDUCTION_ARMOR;
-import static l1j.server.server.model.skill.L1SkillId.SOUL_OF_FLAME;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_CURSE_BARLOG;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_CURSE_YAHEE;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_HOLY_MITHRIL_POWDER;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_HOLY_WATER;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_HOLY_WATER_OF_EVA;
-import static l1j.server.server.model.skill.L1SkillId.UNCANNY_DODGE;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.Random;
 
@@ -153,22 +84,22 @@ public class L1Attack {
 
     private int _drainMana = 0;
 
-    /** 조우의 돌골렘 **/
+    /** ゾウのストーンゴーレム **/
 
     private int _drainHp = 0;
 
-    /** 조우의 돌골렘 **/
+    /** ゾウのストーンゴーレム **/
 
     private int _attckGrfxId = 0;
 
     private int _attckActId = 0;
 
-    // 공격자가 플레이어의 경우의 무기 정보
+    // 攻撃者がプレイヤーの場合の武器情報
     private L1ItemInstance weapon = null;
 
     private L1ItemInstance armor = null;
     // 전사 쌍수
-    private L1ItemInstance Sweapon = null;// 세컨웨폰
+    private L1ItemInstance Sweapon = null;// セカンドウェポン
     private int _SweaponId = 0;
     private int _SweaponType = 0;
     private int _SweaponType1 = 0;
@@ -210,7 +141,7 @@ public class L1Attack {
     
     private int _ignorereductionbyarmor = 0;
 
-    private int _weaponAttrLevel = 0; // 속성 레벨
+    private int _weaponAttrLevel = 0; //属性レベル
 
     private int _attackType = 0;
 
@@ -218,7 +149,7 @@ public class L1Attack {
 
     private L1ItemInstance _sting = null;
 
-    private int _leverage = 10; // 1/10배로 표현한다.
+    private int _leverage = 10; // 1/10倍表現する。
 
     public void setLeverage(int i) {
         _leverage = i;
@@ -287,7 +218,7 @@ public class L1Attack {
         strHit[57] = 17;
         strHit[58] = 17;
         int Hit = 18;
-        for (int str = 59; str <= 127; str++) { // 59~127은 3마다＋1
+        for (int str = 59; str <= 127; str++) { // 59~127は3ごとに+1
             if (str % 3 == 1) {
                 Hit++;
             }
@@ -298,9 +229,9 @@ public class L1Attack {
     private static final int[] dexHit = new int[128];
 
     static {
-        // DEX 데미지 보정
+        // DEXダメージ補正
         for (int dex = 0; dex <= 6; dex++) {
-            // 0~11는 0
+            // 0~11は0
             dexHit[dex] = -2;
         }
         dexHit[7] = -1;
@@ -367,7 +298,7 @@ public class L1Attack {
         dexHit[68] = 30;
 
         int hit = 31;
-        for (int dex = 69; dex <= 127; dex++) { // 48~127은 3마다＋1 //#
+        for (int dex = 69; dex <= 127; dex++) { // 48~127は3ごとに+1
             if (dex % 3 == 1) {
                 hit++;
             }
@@ -450,7 +381,7 @@ public class L1Attack {
     private static final int[] dexDmg = new int[128];
 
     static {
-		// DEX 데미지 보정			
+		// DEXダメージ補正
 		dexDmg[ 7 ] = 2 ;
 		dexDmg[ 8 ] = 2 ;
 		dexDmg[ 9 ] = 3 ;
@@ -522,7 +453,7 @@ public class L1Attack {
     private static final int[] intDmg = new int[128];
 
     static {
-        // int 대미지 보정
+        // intダメージ補正
         for (int int1 = 0; int1 <= 14; int1++) {
             intDmg[int1] = 0;
         }
@@ -547,7 +478,7 @@ public class L1Attack {
         intDmg[33] = 13;
         intDmg[34] = 13;
         int dmg = 25;
-        for (int int1 = 35; int1 <= 127; int1++) { // 35~127은 1마다＋1
+        for (int int1 = 35; int1 <= 127; int1++) { // 35~127は1に+1
             dmg += 1;
             intDmg[int1] = dmg;
         }
@@ -579,7 +510,7 @@ public class L1Attack {
                 _targetNpc = (L1NpcInstance) target;
                 _calcType = PC_NPC;
             }
-            // 무기 정보의 취득
+            // 武器情報の取得
             weapon = _pc.getWeaponSwap();
             Sweapon = _pc.getSecondWeapon();
             if (Sweapon != null) {
@@ -591,14 +522,14 @@ public class L1Attack {
                 _SweaponSmall = Sweapon.getItem().getDmgSmall();
                 _SweaponLarge = Sweapon.getItem().getDmgLarge();
                 _SweaponBless = Sweapon.getItem().getBless();
-                _SweaponEnchant = Sweapon.getEnchantLevel() - Sweapon.get_durability(); // 손상분 마이너스
+                _SweaponEnchant = Sweapon.getEnchantLevel() - Sweapon.get_durability(); //損傷分マイナス
                 _SweaponMaterial = Sweapon.getItem().getMaterial();
                 _SweaponAttrEnchantLevel = Sweapon.getAttrEnchantLevel();
             }
             if (weapon != null) {
                 _weaponId = weapon.getItem().getItemId();
                 _weaponType = weapon.getItem().getType1();
-                _weaponType2 = weapon.getItem().getType();// 변경
+                _weaponType2 = weapon.getItem().getType();// 変更
                 _weaponAddHit = weapon.getItem().getHitModifier() + weapon.getHitByMagic();
                 _weaponAddDmg = weapon.getItem().getDmgModifier() + weapon.getDmgByMagic();
                 _weaponSmall = weapon.getItem().getDmgSmall();
@@ -608,19 +539,19 @@ public class L1Attack {
                     _weaponEnchant = 0;
                 }
                 if (_weaponType != 20 && _weaponType != 62) {
-                    _weaponEnchant = weapon.getEnchantLevel() - weapon.get_durability(); // 손상분 마이너스
+                    _weaponEnchant = weapon.getEnchantLevel() - weapon.get_durability(); //損傷分マイナス
                 } else {
                     _weaponEnchant = weapon.getEnchantLevel();
                 }
                 _weaponMaterial = weapon.getItem().getMaterial();
-                if (_weaponType == 20) { // 아로의 취득
+                if (_weaponType == 20) { // アローの取得
                     _arrow = _pc.getInventory().getArrow();
                     if (_arrow != null) {
                         _weaponBless = _arrow.getItem().getBless();
                         _weaponMaterial = _arrow.getItem().getMaterial();
                     }
                 }
-                if (_weaponType == 62) { // 스팅의 취득
+                if (_weaponType == 62) { // スティングの取得
                     _sting = _pc.getInventory().getSting();
                     if (_sting != null) {
                         _weaponBless = _sting.getItem().getBless();
@@ -630,10 +561,10 @@ public class L1Attack {
                 _weaponDoubleDmgChance = weapon.getItem().getDoubleDmgChance();
                 _weaponAttrLevel = weapon.getAttrEnchantLevel();
             }
-            // 스테이터스에 의한 추가 대미지 보정
-            if (_weaponType == 20) { // 활의 경우는 DEX치 참조
+            // ステータスによる追加ダメージ補正
+            if (_weaponType == 20) { // 弓の場合はDEX値を参照
                 _statusDamage = dexDmg[_pc.getAbility().getTotalDex()];
-            } else if (_weaponType2 == 17) {// 키링크는 인트영향
+            } else if (_weaponType2 == 17) {// キーリンクはポイントの影響
                 _statusDamage = intDmg[_pc.getAbility().getTotalInt()];
             } else {
                 _statusDamage = strDmg[_pc.getAbility().getTotalStr()];
@@ -654,13 +585,13 @@ public class L1Attack {
         _targetY = target.getY();
     }
 
-    /* ■■■■■■■■■■■■■■■■ 명중 판정 ■■■■■■■■■■■■■■■■ */
+    /* ■■■■■■■■■■■■■■■■ 衝突判定 ■■■■■■■■■■■■■■■■ */
 
     public boolean calcHit() {
         if (_calcType == PC_PC || _calcType == PC_NPC) {
             if (_pc == null || _target == null)
                 return _isHit;
-            // 키링크 일경우 상대방 앱솔일경우 무시
+            // キーリンクの場合、相手アブソの場合は無視
             if (_weaponType2 == 17) {
                 if (_target.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) {
                     _isHit = false;
@@ -676,23 +607,23 @@ public class L1Attack {
 				}
 			}
             if (!(_pc instanceof L1RobotInstance) && _weaponType == 20 && _weaponId != 190 && _weaponId != 10000 && _weaponId != 202011 && _arrow == null) {
-                _isHit = false; // 화살이 없는 경우는 미스
+                _isHit = false; // 矢がない場合は、ミス
             } else if (_weaponType == 62 && _sting == null) {
-                _isHit = false; // 스팅이 없는 경우는 미스
+                _isHit = false; // スティングがない場合は、ミス
             } else if (!_pc.glanceCheck(_targetX, _targetY)) {
-                _isHit = false; // 공격자가 플레이어의 경우는 장애물 판정
+                _isHit = false; // 攻撃者がプレイヤーの場合は、障害物判定
             } else if (_weaponId == 247 || _weaponId == 248 || _weaponId == 249) {
-                _isHit = false; // 시련의 검B~C 공격 무효
+                _isHit = false; // 試練の剣B〜Cの攻撃無効
             } else if (_pc.getMapId() == 631 || _pc.getMapId() == 514) {
             	_isHit = false;
             } else if (_calcType == PC_PC) {
                 _isHit = calcPcPcHit();
                 if (_isHit == false) {
-                    _pc.sendPackets(new S_SkillSound(_target.getId(), 13418));// 이펙트
-                    _targetPc.sendPackets(new S_SkillSound(_target.getId(), 13418));// 이펙트
+                    _pc.sendPackets(new S_SkillSound(_target.getId(), 13418));// エフェクト
+                    _targetPc.sendPackets(new S_SkillSound(_target.getId(), 13418));// エフェクト
                 }
             } else if (_calcType == PC_NPC) {
-                /** 바포방 뚫어 방지 **/
+                /** バーポバン開け防止 **/
                 if (_pc.바포방 != true && _pc.getX() == 32758 && _pc.getY() == 32878 && _pc.getMapId() == 2) {
                     return _isHit = false;
                 } else if (_pc.바포방 != true && _pc.getX() == 32794 && _pc.getY() == 32790 && _pc.getMapId() == 2) {
@@ -700,15 +631,15 @@ public class L1Attack {
                 } else {
                     _isHit = calcPcNpcHit();
                 }
-                /** 바포방 뚫어 방지 **/
+                /** バーポバン開け防止 **/
                 if (_isHit == false) {
-                    _pc.sendPackets(new S_SkillSound(_targetNpc.getId(), 13418));// 미스 이펙트
+                    _pc.sendPackets(new S_SkillSound(_targetNpc.getId(), 13418));// ミスエフェクト
                 }
             }
         } else if (_calcType == NPC_PC) {
             _isHit = calcNpcPcHit();
             if (_isHit == false) {
-                _targetPc.sendPackets(new S_SkillSound(_target.getId(), 13418));// 이펙트
+                _targetPc.sendPackets(new S_SkillSound(_target.getId(), 13418));// エフェクト
             }
         } else if (_calcType == NPC_NPC) {
             _isHit = calcNpcNpcHit();
@@ -722,10 +653,10 @@ public class L1Attack {
         return _isHit;
     }
 
-    // ●●●● 플레이어로부터 플레이어에의 명중 판정 ●●●●
+    // ●●●● プレイヤーからプレイヤーへの衝突判定 ●●●●
     /*
-     * PC에의 명중율 =(PC의 Lv＋클래스 보정＋STR 보정＋DEX 보정＋무기 보정＋DAI의 매수/2＋마법 보정)×0.68－10 이것으로 산출된 수치는 자신이 최대 명중(95%)을 주는 일을 할 수 있는 상대측 PC의 AC 거기로부터 상대측 PC의 AC가
-     * 1좋아질 때마다 자명중율로부터 1당겨 간다 최소 명중율5% 최대 명중율95%
+     * PCへの命中率=（PCのLv +クラス補正+ STR補正+ DEX補正+武器補正+ DAIの枚数/ 2 +魔法の補正）×0.68-10これで算出された数値は、自分が最大命中（95％）を与えることができる相手側PCのACそこから相手側PCのACが
+     * 1良くたび者命中率から1引いていく少なくとも命中率5％、最大命中率95％
      */
     private boolean calcPcPcHit() {
 
@@ -744,7 +675,7 @@ public class L1Attack {
         if (_targetPc.hasSkillEffect(ABSOLUTE_BARRIER) || _targetPc.hasSkillEffect(ICE_LANCE))
             return false;
 
-        /** 배틀존 **/
+        /** バトルゾーン **/
         if (_calcType == PC_PC) {
             if (_pc.getMapId() == 5153) {
                 if (_pc.get_DuelLine() == _targetPc.get_DuelLine()) {
@@ -755,16 +686,16 @@ public class L1Attack {
 
         _hitRate = _pc.getLevel();
 
-        /** 스탯 + 무기에 따른 공성 **/
+        /** ステータス+武器による攻城 **/
         _hitRate += PchitAdd();
 
-        /** 전사일경우 50부터 렙당 명중+2 상승 **/
-        if (_pc.is전사()) {
+        /**転写の場合、50からレプダン衝突+2上昇 **/
+        if (_pc.isWarrior()) {
             _hitRate += Math.max(0, _pc.getLevel() - 50) * 2;
         }
         int attackerDice = _random.nextInt(20) + 1 + _hitRate - 10;
 
-        /** 타겟PC의 회피 스킬 연산 **/
+        /** ターゲットPCの回避スキル凧산 **/
         attackerDice += toPcSkillHit();
 
         int defenderValue = (int) (_targetPc.getAC().getAc() * 1.5) * -1;
@@ -774,10 +705,10 @@ public class L1Attack {
 
         defenderValue += levelDmg;
 
-        /** DefenderDice 연산 **/
+        /** DefenderDice演算 **/
         int defenderDice = toPcDD(defenderValue);
 
-        // 캐릭터 공성데이터 추가
+        // キャラクター攻城データの追加
         try {
             if (_pc.isCrown()) {
                 _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(0);
@@ -793,7 +724,7 @@ public class L1Attack {
                 _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(5);
             } else if (_pc.isDragonknight()) {
                 _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(6);
-            } else if (_pc.is전사()) {
+            } else if (_pc.isWarrior()) {
             	 _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(7);
                 
             }
@@ -801,27 +732,27 @@ public class L1Attack {
             System.out.println("Character Add Damege Error");
         }
 
-        /** 히트 최종 연산 **/
+        /** ヒット最終演算 **/
         if (hitRateCal(attackerDice, defenderDice, _hitRate - 9, _hitRate + 10))
             return false;
 
         if (_pc.getLocation().getLineDistance(_targetPc.getLocation()) >= 3 && _weaponType != 20 && _weaponType != 62) { // 타겟과의 거리가 3이상이면서 활이나 스팅이
-                                                                                                                         // 아니면 공격미스 ㅎ;
+                                                                                                                         // それとも攻撃ミス笑;
             _hitRate = 0;
         }
         int rnd = _random.nextInt(100) + 1;
-        if (_weaponType == 20 && _hitRate > rnd) { // 활의 경우 , 히트 했을 경우에서도 ER에서의 회피를 재차 실시한다.
+        if (_weaponType == 20 && _hitRate > rnd) { // 弓の場合、ヒットした場合でもERからの回避を再度実施する。
             return calcErEvasion();
         }
 
         int _jX = _pc.getX() - _targetPc.getX();
         int _jY = _pc.getY() - _targetPc.getY();
 
-        if (_weaponType == 24) { // 창
+        if (_weaponType == 24) { // ウィンドウ
             if ((_jX > 3 || _jX < -3) && (_jY > 3 || _jY < -3)) {
                 _hitRate = 0;
             }
-        } else if (_weaponType == 20 || _weaponType == 62) {// 활
+        } else if (_weaponType == 20 || _weaponType == 62) {// 弓
             if ((_jX > 15 || _jX < -15) && (_jY > 15 || _jY < -15)) {
                 _hitRate = 0;
             }
@@ -831,25 +762,25 @@ public class L1Attack {
             }
         }
 
-        // System.out.println("Final 값 : _hitRate:"+_hitRate+" rnd:"+rnd+" 결과:"+(_hitRate >= rnd));
+        // System.out.println("Final 値 : _hitRate:"+_hitRate+" rnd:"+rnd+" 結果:"+(_hitRate >= rnd));
         // return _hitRate >= rnd;
-        // 미스이팩 넣기
+        // ミスイパック付け
         if (_hitRate >= rnd) {
             return true;
         } else {
-            _pc.sendPackets(new S_SkillSound(_targetPc.getId(), 13418));// 이펙트
-            _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 13418));// 이펙트
+            _pc.sendPackets(new S_SkillSound(_targetPc.getId(), 13418));// エフェクト
+            _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 13418));// エフェクト
             return false;
         }
     }
 
-    // ●●●● 플레이어로부터 NPC 에의 명중 판정 ●●●●
+    // ●●●●プレイヤーからNPCへの命中判定 ●●●●
     private boolean calcPcNpcHit() {
-        /** SPR체크 **/
+        /** SPRチェック **/
         if (_pc.AttackSpeedCheck2 >= 1) {
             if (_pc.AttackSpeedCheck2 == 1) {
                 _pc.AttackSpeed2 = System.currentTimeMillis();
-                _pc.sendPackets(new S_SystemMessage("\\fY[체크시작]"));
+                _pc.sendPackets(new S_SystemMessage("\\fY[チェック開始]"));
             }
             _pc.AttackSpeedCheck2++;
             if (_pc.AttackSpeedCheck2 >= 12) {
@@ -858,11 +789,11 @@ public class L1Attack {
                 String s = String.format("%.0f", k);
                 _pc.AttackSpeed2 = 0;
                 _pc.sendPackets(new S_ChatPacket(_pc, "-----------------------------------------"));
-                _pc.sendPackets(new S_ChatPacket(_pc, "해당변신은 " + s + "이 공속으로 적절한값입니다."));
+                _pc.sendPackets(new S_ChatPacket(_pc, "この変身は" + s + "この攻撃速度に適切な値です。"));
                 _pc.sendPackets(new S_ChatPacket(_pc, "-----------------------------------------"));
             }
         }
-        /** SPR체크 **/
+        /** SPRチェック **/
 
 
         try {
@@ -880,17 +811,17 @@ public class L1Attack {
         		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(5);
         	} else if(_pc.isDragonknight()){
         		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(6);
-        	} else if(_pc.is전사()){
+        	} else if(_pc.isWarrior()){
         		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(7);
         	}
         } catch (Exception e){
         	System.out.println("Character Add Damege Error");
         }
   
-        // NPC에의 명중율 =(PC의 Lv＋클래스 보정＋STR 보정＋DEX 보정＋무기 보정＋DAI의 매수/2＋마법 보정)×5－{NPC의 AC×(-5)}
+        // NPCへの命中率=（PCのLv +クラス補正+ STR補正+ DEX補正+武器補正+ DAIの枚数/ 2 +魔法の補正）×5 {NPCのAC×（-5）}
         _hitRate = _pc.getLevel();
 
-        /** 스탯 + 무기에 따른 공성 **/
+        /** ステータス+武器による攻城 **/
         _hitRate += PchitAdd();
 
         if (_targetNpc.getAc() < 0) {
@@ -911,11 +842,11 @@ public class L1Attack {
         int _jX = _pc.getX() - _targetNpc.getX();
         int _jY = _pc.getY() - _targetNpc.getY();
 
-        if (_weaponType == 24) { // 창일때
+        if (_weaponType == 24) { // ウィンドウのとき
             if ((_jX > 3 || _jX < -3) && (_jY > 3 || _jY < -3)) {
                 _hitRate = 0;
             }
-        } else if (_weaponType == 20 || _weaponType == 62) {// 활일때
+        } else if (_weaponType == 20 || _weaponType == 62) {// 弓のとき
             if ((_jX > 15 || _jX < -15) && (_jY > 15 || _jY < -15)) {
                 _hitRate = 0;
             }
@@ -925,7 +856,7 @@ public class L1Attack {
             }
         }
         
-        int npcId = _targetNpc.getNpcTemplate().get_npcId(); // 씨엠디오류나옴
+        int npcId = _targetNpc.getNpcTemplate().get_npcId(); // シェムリディエラー出
         if (npcId >= 45912 && npcId <= 45915 && !_pc.hasSkillEffect(STATUS_HOLY_WATER)) {
             _hitRate = 0;
         }
@@ -962,17 +893,17 @@ public class L1Attack {
         if (npcId >= 46092 && npcId <= 46106 && _pc.getTempCharGfx() == 6034) {
             _hitRate = 0;
         }
-        if (_targetNpc.getNpcTemplate().get_gfxid() == 7684 && !_pc.hasSkillEffect(PAP_FIVEPEARLBUFF)) { // 오색진주
+        if (_targetNpc.getNpcTemplate().get_gfxid() == 7684 && !_pc.hasSkillEffect(PAP_FIVEPEARLBUFF)) { // 五色真珠
             _hitRate = 0;
         }
-        if (_targetNpc.getNpcTemplate().get_gfxid() == 7805 && !_pc.hasSkillEffect(PAP_MAGICALPEARLBUFF)) { // 신비진주
+        if (_targetNpc.getNpcTemplate().get_gfxid() == 7805 && !_pc.hasSkillEffect(PAP_MAGICALPEARLBUFF)) { // 神秘的な真珠
             _hitRate = 0;
         }
 
         return _hitRate >= _random.nextInt(100) + 1;
     }
 
-    // ●●●● NPC 로부터 플레이어에의 명중 판정 ●●●●
+    // ●●●● NPCからプレイヤーへの衝突判定 ●●●●
     private boolean calcNpcPcHit() {
 
         if (_targetPc.hasSkillEffect(ABSOLUTE_BARRIER)) {
@@ -989,21 +920,21 @@ public class L1Attack {
 
         int attackerDice = _random.nextInt(20) + 1 + _hitRate - 1;
 
-        /** 타겟PC의 회피 스킬 연산 **/
+        /** ターゲットPCの回避スキル演算 **/
         attackerDice += toPcSkillHit();
 
         int defenderValue = (_targetPc.getAC().getAc()) * -1;
 
-        /** DefenderDice 연산 **/
+        /** DefenderDice演算 **/
         int defenderDice = toPcDD(defenderValue);
 
-        /** 히트 최종 연산 **/
+        /** ヒット最終演算 **/
         if (hitRateCal(attackerDice, defenderDice, _hitRate, _hitRate + 19))
             return false;
 
         int rnd = _random.nextInt(100) + 1;
 
-        // NPC의 공격 레인지가 10이상의 경우로, 2이상 떨어져 있는 경우활공격으로 간주한다
+        // NPCの攻撃レンジが10以上の場合で、2以上離れている場合、弓攻撃とみなす
         if (_npc.getNpcTemplate().get_ranged() >= 10 && _hitRate > rnd
                 && _npc.getLocation().getTileLineDistance(new Point(_targetX, _targetY)) >= 2) {
             return calcErEvasion();
@@ -1012,37 +943,37 @@ public class L1Attack {
         return _hitRate >= rnd;
     }
 
-    // ●●●● NPC 로부터 NPC 에의 명중 판정 ●●●●
+    // ●●●● NPCからNPCへの命中判定 ●●●●
     private boolean calcNpcNpcHit() {
         int target_ac = 10 - _targetNpc.getAC().getAc();
         int attacker_lvl = _npc.getNpcTemplate().get_level();
 
         if (target_ac != 0) {
-            _hitRate = (100 / target_ac * attacker_lvl); // 피공격자 AC = 공격자 Lv  // 의 때 명중율 100%
+            _hitRate = (100 / target_ac * attacker_lvl); // 被攻撃AC =攻撃Lv //のとき命中率100％
         } else {
             _hitRate = 100 / 1 * attacker_lvl;
         }
 
-        if (_npc instanceof L1PetInstance) { // 펫은 LV1마다 추가 명중+2
+        if (_npc instanceof L1PetInstance) { // ペットはLV1に追加命中+2
             _hitRate += _npc.getLevel() * 2;
             _hitRate += ((L1PetInstance) _npc).getHitByWeapon();
         }
 
         if (_hitRate < attacker_lvl) {
-            _hitRate = attacker_lvl; // 최저 명중율=Lｖ％
+            _hitRate = attacker_lvl; // 最低命中率= Lv％
         }
         if (_hitRate > 95) {
-            _hitRate = 95; // 최고 명중율은 95%
+            _hitRate = 95; // 最高命中率は95％
         }
         if (_hitRate < 5) {
-            _hitRate = 5; // 공격자 Lv가 5 미만때는 명중율 5%
+            _hitRate = 5; // 攻撃者Lvが5未満の時命中率5％
         }
 
         int rnd = _random.nextInt(100) + 1;
         return _hitRate >= rnd;
     }
 
-    // ●●●● ER에 의한 회피 판정 ●●●●
+    // ●●●● ERによる回避判定 ●●●●
     private boolean calcErEvasion() {
         int er = _targetPc.get_PlusEr();
 
@@ -1050,14 +981,14 @@ public class L1Attack {
         return er < rnd;
     }
 
-    /* ■■■■■■■■■■■■■■■ 대미지 산출 ■■■■■■■■■■■■■■■ */
+    /* ■■■■■■■■■■■■■■■ダメージ算出 ■■■■■■■■■■■■■■■ */
 
     public int calcDamage() {
         try {
             switch (_calcType) {
             case PC_PC:
                 _damage = calcPcPcDamage();
-                // 타이탄 락 : HP가 40% 미만일때 근접공격을 확률적으로 반사.
+                // タイタンロック：HPが40％未満の場合、近接攻撃を確率的に反射。
                 if (_weaponType != 20 && _weaponType != 62 && _weaponType2 != 17 && _weaponType2 != 19) { // 활이 아니라면 락 발동.
                     if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 238)) {
                         int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
@@ -1066,9 +997,9 @@ public class L1Attack {
                         if (_target.get락구간상승() != 0) {
                             락구간 += _target.get락구간상승();
                         }
-                        // System.out.println("락구간 얼마상승하는가" + 락구간);
+                        // System.out.println("ロック区間いくら上がるか」+ロック区間);
                         if (!_targetPc.isstop() && percent <= (40 + 락구간 + _targetPc.getRisingUp()) && chance <= 23) {
-                            // System.out.println("락이 발동하는가??");
+                            // System.out.println("ロック発動するか?");
                             if (_targetPc.getInventory().checkItem(41246, 10)) {
                                 _pc.receiveCounterBarrierDamage(_targetPc, 타이탄대미지());
                                 _damage = 0;
@@ -1076,11 +1007,11 @@ public class L1Attack {
                               //  _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12555));
                                 _targetPc.getInventory().consumeItem(41246, 10);
                             } else {
-                                _targetPc.sendPackets(new S_SystemMessage("타이탄 락: 촉매제가 부족합니다."));
+                                _targetPc.sendPackets(new S_SystemMessage("タイタンロック：触媒が不足します。"));
                             }
                         }
                     }
-                } else { // 그렇지 않다면 블릿 발동
+                } else { // そうでない場合のウェーブレット発動
                     if (_weaponType2 != 17 && _weaponType2 != 19) {
                         if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 239)) {
                             int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
@@ -1089,7 +1020,6 @@ public class L1Attack {
                             if (_target.get락구간상승() != 0) {
                                 락구간 += _target.get락구간상승();
                             }
-                            // System.out.println("락구간 얼마상승하는가" + 락구간);
                             if (!_targetPc.isstop() && percent <= (40 + 락구간 + _targetPc.getRisingUp()) && chance <= 23) {
                                 if (_targetPc.getInventory().checkItem(41246, 10)) {
                                     _pc.receiveCounterBarrierDamage(_targetPc, 타이탄대미지());
@@ -1098,11 +1028,11 @@ public class L1Attack {
                                   //  _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12557));
                                     _targetPc.getInventory().consumeItem(41246, 10);
                                 } else {
-                                    _targetPc.sendPackets(new S_SystemMessage("타이탄 블릿: 촉매제가 부족합니다."));
+                                    _targetPc.sendPackets(new S_SystemMessage("タイタンウェーブレット：触媒が不足します。"));
                                 }
                             }
                         }
-                    } else { // 그렇지 않다면 매직 발동
+                    } else { // そうでない場合マジック発動
                         if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 240)) {
                             int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
                             int chance = _random.nextInt(100) + 1;
@@ -1110,7 +1040,6 @@ public class L1Attack {
                             if (_target.get락구간상승() != 0) {
                                 락구간 += _target.get락구간상승();
                             }
-                            // System.out.println("락구간 얼마상승하는가" + 락구간);
                             if (!_targetPc.isstop() && percent <= (40 + 락구간 + _targetPc.getRisingUp()) && chance <= 23) {
                                 if (this._targetPc.getInventory().checkItem(41246, 10)) {
                                     if (this._calcType == 1)
@@ -1122,7 +1051,7 @@ public class L1Attack {
                                    // this._targetPc.broadcastPacket(new S_SkillSound(this._targetPc.getId(), 12559));
                                     this._targetPc.getInventory().consumeItem(41246, 10);
                                 } else {
-                                    this._targetPc.sendPackets(new S_SystemMessage("타이탄 매직: 촉매제가 부족합니다."));
+                                    this._targetPc.sendPackets(new S_SystemMessage("タイタンマジック：触媒が不足します。"));
                                 }
                             }
                         }
@@ -1134,7 +1063,7 @@ public class L1Attack {
                 break;
             case NPC_PC:
                 _damage = calcNpcPcDamage();
-                // 타이탄 락 : HP가 40% 미만일때 근접 공격을 확률적으로 반사.
+                // タイタンロック：HPが40％未満の場合、近接攻撃を確率的に反射。
                 int bowactid = _npc.getNpcTemplate().getBowActId();
                 if (bowactid != 66) {
                     if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 238)) {
@@ -1144,7 +1073,6 @@ public class L1Attack {
                         if (_target.get락구간상승() != 0) {
                             락구간 += _target.get락구간상승();
                         }
-                        // System.out.println("락구간 얼마상승하는가" + 락구간);
                         if (!_targetPc.isstop() && percent <= (40 + 락구간 + _targetPc.getRisingUp()) && chance <= 23) {
                             if (_targetPc.getInventory().checkItem(41246, 10)) {
                                 _npc.receiveCounterBarrierDamage(_targetPc, 타이탄대미지());
@@ -1153,12 +1081,12 @@ public class L1Attack {
                                // _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12555));
                                 _targetPc.getInventory().consumeItem(41246, 10);
                             } else {
-                                _targetPc.sendPackets(new S_SystemMessage("타이탄 락: 촉매제가 부족합니다."));
+                                _targetPc.sendPackets(new S_SystemMessage("タイタンロック：触媒が不足します。"));
                             }
                         }
                     }
                 } else {
-                    // 타이탄 블릿 : HP가 40% 미만일때 원거리 공격을 확률적으로 반사.
+                    // タイタンウェーブレット：HPが40％未満の場合、遠距離攻撃を確率的に反射。
                     if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 239)) {
                         int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
                         int chance = _random.nextInt(100) + 1;
@@ -1166,7 +1094,6 @@ public class L1Attack {
                         if (_target.get락구간상승() != 0) {
                             락구간 += _target.get락구간상승();
                         }
-                        // System.out.println("락구간 얼마상승하는가" + 락구간);
                         if (!_targetPc.isstop() && percent <= (40 + 락구간 + _targetPc.getRisingUp()) && chance <= 23) {
                             if (_targetPc.getInventory().checkItem(41246, 10)) {
                                 _npc.receiveCounterBarrierDamage(_targetPc, 타이탄대미지());
@@ -1175,7 +1102,7 @@ public class L1Attack {
                                // _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12557));
                                 _targetPc.getInventory().consumeItem(41246, 10);
                             } else {
-                                _targetPc.sendPackets(new S_SystemMessage("타이탄 블릿: 촉매제가 부족합니다."));
+                                _targetPc.sendPackets(new S_SystemMessage("タイタンウェーブレット：触媒が不足します。"));
                             }
                         }
                     }
@@ -1192,11 +1119,11 @@ public class L1Attack {
         return _damage;
     }
 
-    // ●●●● 플레이어로부터 플레이어에의 대미지 산출 ●●●●
+    // ●●●● プレイヤーからプレイヤーへのダメージ算出 ●●●●
     public int calcPcPcDamage() {
 		if (_pc instanceof L1RobotInstance) {
 			if (!_targetPc.isRobot()) {
-				if (_pc.getCurrentWeapon() == 20) { // 활
+				if (_pc.getCurrentWeapon() == 20) { // 弓
 					return _random.nextInt(70) + 40;
 				} else {
 					return _random.nextInt(80) + 30;
@@ -1212,14 +1139,14 @@ public class L1Attack {
 
         if ((_pc.getZoneType() == 1 && _targetPc.getZoneType() == 0) || (_pc.getZoneType() == 1 && _targetPc.getZoneType() == -1)) {
             _isHit = false;
-            // 세이프티존에서 노멀/컴뱃존 공격 불가
+            // セーフティゾーンでノーマル/コンバットゾーン攻撃不可
         }
 
-        /** 포효의이도류 인첸당 발동확률증가 **/
+        /** 轟音の二刀流エンチャンあたり発動確率増加 **/
         if (_weaponId == 203018) {
             _weaponDoubleDmgChance += _pc.getWeapon().getEnchantLevel();
         }
-        if (_weaponType == 58) { // 크로우
+        if (_weaponType == 58) { // クロウ
         	int crowchance = _random.nextInt(100) + 1;
         	if(crowchance <= _weaponDoubleDmgChance){
         		weaponDamage = weaponMaxDamage + _weaponAddDmg;
@@ -1229,7 +1156,7 @@ public class L1Attack {
         	}else{
         		weaponDamage = _random.nextInt(weaponMaxDamage) + _weaponAddDmg + 1;
         	}
-        }else if (_weaponType == 0) { // 맨손
+        }else if (_weaponType == 0) { // 素手
             weaponDamage = 0;
         } else {
             weaponDamage = _random.nextInt(weaponMaxDamage) + _weaponAddDmg + 1;
@@ -1241,17 +1168,17 @@ public class L1Attack {
                 weaponDamage = weaponMaxDamage + _weaponAddDmg;
             }
         }
-		/** 축복주문서무기 추타관련 **/
+		/** 祝福書武器ツタ関連 **/
 		/*if (_weaponType != 0) {
 			if (weapon.getBless() == 0 || weapon.getBless() == 128) {
 				weaponDamage += 3;
 			}
 		}*/
         if(_weaponType != 0 ){
-            if (_weaponType != 20 && _weaponType != 62) { // 근거리
+            if (_weaponType != 20 && _weaponType != 62) { // 近距離
                 int Dmgcritical = CalcStat.calcDmgCritical(_pc.getAbility().getTotalStr())+_pc.getDmgCritical();
                 int chance = _random.nextInt(100) + 1;
-                //휘장 치명타
+                //記章クリティカル
                 if (_pc.getInventory().checkEquipped(900032)){
                 	L1ItemInstance item = _pc.getInventory().findEquippedItemId(900032);
                 	if(item.getEnchantLevel() == 6){
@@ -1261,7 +1188,7 @@ public class L1Attack {
                 	}else if(item.getEnchantLevel() >= 8){
                 		Dmgcritical += 5;
                 	}
-                }/*if (_pc.getInventory().checkEquipped(22208)){ // 발라완력
+                }/*if (_pc.getInventory().checkEquipped(22208)){ // 塗って腕力
                 	L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
                 	if(item.getEnchantLevel() == 7){
                 		Dmgcritical += 1;
@@ -1270,7 +1197,7 @@ public class L1Attack {
                 	}else if(item.getEnchantLevel() >= 9){
                 		Dmgcritical += 3;
                 	}
-                }if (_pc.getInventory().checkEquipped(22209)){ //발라인내
+                }if (_pc.getInventory().checkEquipped(22209)){ //塗って忍耐
                 	L1ItemInstance item = _pc.getInventory().findEquippedItemId(22209);
                 	if(item.getEnchantLevel() == 7){
                 		Dmgcritical += 1;
@@ -1280,7 +1207,7 @@ public class L1Attack {
                 		Dmgcritical += 3;
                 	}
                 }*/
-                /** 발라카스의 일격 **/
+                /** ヴァラカスの一撃 **/
          		if (_pc.getInventory().checkEquipped(22208) || _pc.getInventory().checkEquipped(22209)
          				|| _pc.getInventory().checkEquipped(22210) || _pc.getInventory().checkEquipped(22211)) {
          			int chancess = _random.nextInt(100);
@@ -1299,7 +1226,7 @@ public class L1Attack {
             } else {
                 int Bowcritical = CalcStat.calcBowCritical(_pc.getAbility().getTotalDex())+_pc.getBowDmgCritical();
                 int chance = _random.nextInt(100) + 1;
-              //휘장 치명타
+              //記章クリティカル
                 if (_pc.getInventory().checkEquipped(900033)){
                 	L1ItemInstance item = _pc.getInventory().findEquippedItemId(900033);
                 	if(item.getEnchantLevel() == 6){
@@ -1319,7 +1246,7 @@ public class L1Attack {
                 		Bowcritical += 3;
                 	}
                 }*/
-                /** 발라카스의 일격 **/
+                /** ヴァラカスの一撃 **/
         		if (_pc.getInventory().checkEquipped(22208) || _pc.getInventory().checkEquipped(22209)
         				|| _pc.getInventory().checkEquipped(22210) || _pc.getInventory().checkEquipped(22211)) {
         			int chancess = _random.nextInt(100);
@@ -1339,7 +1266,7 @@ public class L1Attack {
             }
         int weaponTotalDamage = weaponDamage + _weaponEnchant;
         boolean secondw = false;
-        if (_pc.is전사() && _pc.hasSkillEffect(L1SkillId.SLAYER) && _pc.getSecondWeapon() != null) {
+        if (_pc.isWarrior() && _pc.hasSkillEffect(L1SkillId.SLAYER) && _pc.getSecondWeapon() != null) {
             int ran = _random.nextInt(100);
             if (ran < 50) {
                 secondw = true;
@@ -1365,7 +1292,7 @@ public class L1Attack {
                     
                 }
             } else {
-                _pc.sendPackets(new S_SystemMessage("현재 투명상태에서는 해당스킬 발동 무효."));
+                _pc.sendPackets(new S_SystemMessage("現在、透明状態では、このスキル発動無効。"));
             }
             _pc.removeSkillEffect(L1SkillId.ASSASSIN);
         }
@@ -1385,7 +1312,7 @@ public class L1Attack {
         }
 
 
-        if (_pc.hasSkillEffect(DOUBLE_BRAKE) && (_weaponType == 54 || _weaponType == 58)) { // 더블브레이크 확률 50렙부터 5렙당 1%씩 상승
+        if (_pc.hasSkillEffect(DOUBLE_BRAKE) && (_weaponType == 54 || _weaponType == 58)) { //ダブルブレーキ確率50レップから5レプダン1％ずつ上昇
             int RealSteelLevel = _pc.getLevel();
             if (RealSteelLevel < 45) {
                 RealSteelLevel = 45;
@@ -1417,23 +1344,23 @@ public class L1Attack {
             }
         }
         
-        if (_weaponType == 20) { // 활
+        if (_weaponType == 20) { // 弓
             if (_arrow != null) {
                 int add_dmg = _arrow.getItem().getDmgSmall();
                 if (add_dmg == 0) {
                     add_dmg = 1;
                 }
                 dmg = dmg + _random.nextInt(add_dmg) + 1;
-            } else if (_weaponId == 190) { // 사이하의 활
+            } else if (_weaponId == 190) { // サイハの弓
                 dmg = dmg + _random.nextInt(15);
 
-            } else if (_pc.getTempCharGfx() == 7959) { // 천상의 활
+            } else if (_pc.getTempCharGfx() == 7959) { // 天上の弓
                 dmg = dmg + _random.nextInt(13);
             }
-        } else if (_pc.getTempCharGfx() == 202011) { // 가이아의격노
+        } else if (_pc.getTempCharGfx() == 202011) { // ガイアの激怒
             dmg = dmg + _random.nextInt(15);
 
-        } else if (_weaponType == 62) { // 암 토토 렛
+        } else if (_weaponType == 62) { // がんトートレッド
             int add_dmg = _sting.getItem().getDmgSmall();
             if (add_dmg == 0) {
                 add_dmg = 1;
@@ -1445,7 +1372,7 @@ public class L1Attack {
 
 		//double dmgRate = 1;
         
-        /** 본섭 10검이상 추타 +1 표기 효과 **/
+        /** 本サーバー10剣以上ツタ+1表記効果 **/
         if (_weaponType != 0 && _weaponType != 20) {
 			if(_weaponId != 66){
             switch (weapon.getEnchantLevel()) {
@@ -1473,7 +1400,7 @@ public class L1Attack {
 			}
         }
         
-        /** 인첸트에 따른 추타관련 **/
+        /** エンチャントによるツタ関連**/
         if (_weaponType != 0 && _weaponType != 20) {
             switch (weapon.getEnchantLevel()) {
             case 7:
@@ -1507,12 +1434,12 @@ public class L1Attack {
                 break;
             }
         }
-        /** 드슬 인첸별 추타2씩 **/
+        /** ドゥスルエンチャン星ツタ2ずつ **/
         if(_weaponId == 66){
         	dmg += weapon.getEnchantLevel();
         }
         
-        /** 붉은 기사의 대검 리뉴얼 **/
+        /** 赤の記事の大剣リニューアル **/
         if (_pc.getInventory().checkEquipped(202002) || _pc.getInventory().checkEquipped(203002) || _pc.getInventory().checkEquipped(1136)
                 || _pc.getInventory().checkEquipped(1137)) {
             if (_pc.getLawful() < -32760) {
@@ -1553,57 +1480,57 @@ public class L1Attack {
         case 1014:
             L1WeaponSkill.getDiseaseWeapon(_pc, _targetPc, _weaponId);
             break;
-        case 2: // 악운의단검
-        case 200002: // 축악운의단검
+        case 2: // 悪運の短剣
+        case 200002: // 軸悪運の短剣
             dmg = L1WeaponSkill.악운의단검(_pc, _targetPc, weapon);
             break;
-        case 12: // 바람칼날단검
-        case 203020: // 생명의단검
-        case 601: // 파멸의대검
+        case 12: // 風の刃短剣
+        case 203020: // 生命の短剣
+        case 601: // 破滅のグレートソード
             파멸의대검(dmg);
             break;
-        case 204: // 진홍의크로스보우
-        case 100204: // 축진홍의크로스보우
-        case 86: // 붉은그림자의이도류
+        case 204: // 真紅のクロスボウ
+        case 100204: // 軸真紅のクロスボウ
+        case 86: // 赤い影のデュアルブレード
             L1WeaponSkill.붉은그림자의이도류(_pc, _targetPc);
             break;
-        case 1115: // 신묘장검
-        case 1117: // 신묘크로
+        case 1115: // 神妙ソード
+        case 1117: // 神妙クロ
             dmg += getEbHP(_pc, _target, 8981, _weaponEnchant);
             break;
-        case 1116: // 신묘지팡이
-        case 1118: // 신묘장궁
-        case 202011: // 가이야의격노
+        case 1116: // 神妙杖
+        case 1118: // 神妙ロングボウ
+        case 202011: // がよの激怒
             dmg += getEbMP1(_pc, _target, 8981, _weaponEnchant);
             break;
-        case 1109: // 마족크로우
-        case 1113: // 마족검
-        case 1114: // 마족양손검
-        case 203011: // 마족도끼
+        case 1109: // 魔族クロウ
+        case 1113: // 魔族の剣
+        case 1114: // 魔族両手剣
+        case 203011: // 魔族斧
             dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
             break;
-        case 1110: // 마족지팡이
-        case 1112: // 마족키링크
-        case 1111: // 마족활
+        case 1110: // 魔族の杖
+        case 1112: // 魔族のキーリンク
+        case 1111: // 魔族の弓
             dmg += getEbMP(_pc, _target, 8152, _weaponEnchant);
             break;
-        case 1108: // 마족체인
+        case 1108: // 魔族チェーン
             dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
             L1WeaponSkill.체인소드(_pc);
             break;
-        case 1119: // 극한의 체인소드
+        case 1119: // 極限のチェーンソード
             dmg += 극한의체인소드(_pc, _target, 3685, _weaponEnchant);
             L1WeaponSkill.체인소드(_pc);
             break;
-        case 1123: // 블러드서커
+        case 1123: // ブラッドサッカー
         case 202013:
             L1WeaponSkill.체인소드(_pc);
             블러드서커(dmg, _weaponEnchant);
             break;
-        case 500:// 소멸자의체인소드
-        case 501:// 파멸자의체인소드
-        case 1104:// 엘모어체인소드
-        case 1132:// 베테르랑체인소드
+        case 500:// デストラクタのチェーンソード
+        case 501:// 破滅者のチェーンソード
+        case 1104:// エルモアチェーンソード
+        case 1132:// ベビーテルランチェーンソード
             L1WeaponSkill.체인소드(_pc);
             break;
         case 203017:
@@ -1611,16 +1538,16 @@ public class L1Attack {
             if (weapon.getEnchantLevel() >= 10)
             dmg += L1WeaponSkill.섬멸자(_pc, _target, 4077, _weaponEnchant);
             break;
-        case 203006://태풍의도끼
+        case 203006://台風の斧
         	if (weapon.getEnchantLevel() >= 10)
         	 dmg += L1WeaponSkill.태풍도끼(_pc, _target, 7977, _weaponEnchant);
         	break;
             
-        case 1136://악몽의장궁
+        case 1136://悪夢のロングボウ
        	 if (weapon.getEnchantLevel() >= 10)
                 dmg += L1WeaponSkill.악장(_pc, _target, 14339, _weaponEnchant);
        	break;
-        case 203025://진싸
+        case 203025://ジンサ
         case 203026:
        	 if (weapon.getEnchantLevel() >= 10)
                 dmg += L1WeaponSkill.진싸(_pc, _target, 8032, _weaponEnchant);
@@ -1628,56 +1555,56 @@ public class L1Attack {
         case 312:
             dmg = L1WeaponSkill.체인소드블레이즈쇼크(_pc, _targetNpc, _weaponEnchant);
             break;
-        case 202001: // 환영의 체인소드
+        case 202001: // 歓迎のチェーンソード
             dmg += L1WeaponSkill.환영의체인소드(_pc, _target, _weaponEnchant);
             L1WeaponSkill.체인소드(_pc);
             break;
-        case 1124: // 파괴의 이도류
-        case 1125: // 파괴의 크로우
-        case 11125:// 축복 파괴의이도류
+        case 1124: // 破壊の二刀流
+        case 1125: // 破壊のクロウ
+        case 11125:// 祝福破壊の二刀流
             dmg += L1WeaponSkill.파괴의이도류크로우(_pc, _target, 9359, _weaponEnchant);
             break;
-        case 600: // 뇌신검
+        case 600: // 脳身体検査
             dmg += L1WeaponSkill.뇌신검(_pc, _target, 3940, _weaponEnchant);
             break;
-        case 604: // 혹한의 창
+        case 604: // 酷寒のウィンドウ
             dmg += L1WeaponSkill.혹한의창(_pc, _target, 3704, _weaponEnchant);
             break;
-        case 605: // 광풍의 도끼
-        case 203015: // 질풍의 도끼
+        case 605: //狂風の斧
+        case 203015: // 疾風の斧
             dmg += L1WeaponSkill.광풍의도끼(_pc, _target, 5524, _weaponEnchant);
             break;
-        case 191: // 살천의 활
+        case 191: // サルチョンの弓
             dmg += L1WeaponSkill.살천의활(_pc, _target, 9361, _weaponEnchant);
             break;
-        case 1135: // 공명의 키링크
+        case 1135: // 共鳴のキーリンク
             dmg += L1WeaponSkill.공명의키링크(_pc, _target, 5201, _weaponEnchant);
             break;
-        case 202012: // 히페리온의 절망
+        case 202012: // ヒペリオンの絶望
             dmg += L1WeaponSkill.히페리온의절망(_pc, _target, 12248, _weaponEnchant);
             break;
-        case 1120: // 냉한의 키링크
+        case 1120: // 冷え性のキーリンク
             dmg += L1WeaponSkill.냉한의키링크(_pc, _target, 6553, _weaponEnchant);
             break;
-        case 283: // 발라카스의 키링크
+        case 283: // ヴァラカスのキーリンク
             dmg += L1WeaponSkill.Redskill(_pc, _target, 10405, _weaponEnchant);
             break;
-        case 294: // 군주의 검
+        case 294: // 君主の剣
             dmg += L1WeaponSkill.군주의검(_pc, _target, 4842, _weaponEnchant);
             break;
-        case 58: // 데스나이트의 불검
+        case 58: // デスナイトのフレイムブレード
             dmg += L1WeaponSkill.데스나이트의불검(_pc, _target, _weaponEnchant, 7300);
             break;
-        case 54: // 커츠의 검
+        case 54: // カーツの剣
             dmg += L1WeaponSkill.커츠의검(_pc, _target, _weaponEnchant, 10405);
             break;
-        case 124: // 바포메트의지팡이
+        case 124: // バフォメットスタッフ
             dmg += L1WeaponSkill.바포메트의지팡이(_pc, _target, _weaponEnchant, 129);
             break;
-        case 202003: // 제로스의 지팡이
+        case 202003: // ゼロスの杖
             dmg += L1WeaponSkill.제로스의지팡이(_pc, _target, _weaponEnchant, 11760);
             break;
-        case 134: // 수정 결정체 지팡이
+        case 134: // 修正結晶棒
             dmg += L1WeaponSkill.수정결정체지팡이(_pc, _target, _weaponEnchant, 10405);
             dmg+=getEbMP(_pc, _target, 8152, _weaponEnchant);
             break;
@@ -1686,7 +1613,7 @@ public class L1Attack {
             break;
         }
 
-        if (_weaponType == 0) { // 맨손
+        if (_weaponType == 0) { // 素手
             dmg = (_random.nextInt(5) + 4) / 4;
         }
 
@@ -1696,7 +1623,7 @@ public class L1Attack {
             System.out.println("무기추가대미지에러");
         }
         
-        //스킬, 요리 등에 대한 데미지리덕션
+        //スキル、料理などのダメージリダクション
         int damagereduction = 0;
         if (_targetPc.hasSkillEffect(COOK_STR) || _targetPc.hasSkillEffect(COOK_DEX) || _targetPc.hasSkillEffect(COOK_INT)) { // 리뉴얼 요리
         	damagereduction += 2;
@@ -1747,19 +1674,19 @@ public class L1Attack {
         
         	damagereduction += 2;
         }
-        if (_targetPc.hasSkillEffect(RANK_BUFF_5)){ //정상의가호
+        if (_targetPc.hasSkillEffect(RANK_BUFF_5)){ //通常のが号
         	damagereduction += 8;
         }
         if (_targetPc.hasSkillEffect(CLAN_BUFF4)) {
         	damagereduction += 1;
         }
-     /*   for (L1DollInstance doll : _targetPc.getDollList()) {// 마법인형에 의한 대미지 감소.돌골렘인형
+     /*   for (L1DollInstance doll : _targetPc.getDollList()) {// マジックドールによるダメージ減少。ドルゴールレム人形
 			dmg -= doll.getDamageReductionByDoll();
 		}
-        dmg -= _targetPc.getDamageReductionByArmor(); // 방어구에 의한 대미지 감소
+        dmg -= _targetPc.getDamageReductionByArmor(); // 防具によるダメージ減少
 */        
-       /* _ignorereductionbyarmor = armor.getItem().getIgnoreReductionByArmor(); //리덕션무시
-        _ignorereductionbyweapon = weapon.getItem().getIgnoreReductionByWeapon(); //리덕션무시
+       /* _ignorereductionbyarmor = armor.getItem().getIgnoreReductionByArmor(); //リダクション無視
+        _ignorereductionbyweapon = weapon.getItem().getIgnoreReductionByWeapon(); //リダクション無視
         int ignorereduction = _ignorereductionbyarmor + _ignorereductionbyweapon;
         int damagereductiontotal = _targetPc.getDamageReductionByArmor() + damagereduction;
         
@@ -1777,7 +1704,7 @@ public class L1Attack {
         }*/
         dmg -= damagereduction;
         
-        //스킬, 요리 등에 대한 데미지리덕션
+        //スキル、料理などのダメージリダクション
         
         
         if (_pc.hasSkillEffect(L1SkillId.RANK_BUFF_3) || _pc.hasSkillEffect(L1SkillId.RANK_BUFF_4)) {
@@ -1785,7 +1712,7 @@ public class L1Attack {
         }
        
        
-        // 클랜버프 pvp        
+        // クランバフpvp 
         if (_pc.hasSkillEffect(L1SkillId.RANK_BUFF_3)){
             dmg += 2;
         }
@@ -1817,10 +1744,10 @@ public class L1Attack {
         if (_targetPc.hasSkillEffect(IMMUNE_TO_HARM)) {
         	dmg -= (dmg * 0.3);//4
         }
-        dmg += 룸티스검귀추가데미지(); // 검은빛 귀걸이 추가 데미지 처리
+        dmg += 룸티스검귀추가데미지(); // 黒い光ピアス追加ダメージ処理
 
 
-		for (L1DollInstance doll : _pc.getDollList()) {// 매직 돌 인형에 의한 추가 대미지
+		for (L1DollInstance doll : _pc.getDollList()) {// マジックドールドールによる追加ダメージ
 			if (doll == null)
 				continue;
 			if (_weaponType != 20 && _weaponType != 62) {
@@ -1830,24 +1757,24 @@ public class L1Attack {
 			doll.getPixieGreg(_pc, _targetPc);
 		}
 
-        // 전사 스킬 PC - PC
-        // 크래쉬 : 공격자에 레벨에 50% 정도를 데미지에 반영한다.
+        // 戦士スキルPC  -  PC
+        // クラッシュ：攻撃者のレベルに50％程度をダメージに反映する。
         if (SkillsTable.getInstance().spellCheck(_pc.getId(), 236)) {
             int chance = _random.nextInt(100) + 1;
             if (13 >= chance) { // 크래쉬 : 레벨 나누기 2의 데미지
                 //
                 int alpha_dmg = _pc.getLevel() / 2;
-                if (SkillsTable.getInstance().spellCheck(_pc.getId(), 234)) {// 퓨리 : 크래쉬에서 나온 데미지에 2배
+                if (SkillsTable.getInstance().spellCheck(_pc.getId(), 234)) {//ピュリ：クラッシュから出てきたダメージに2倍
                     chance = _random.nextInt(100) + 1;
-                    if (2 >= chance) { // 퓨리 확률
+                    if (2 >= chance) { // ピュリ確率
                         dmg += dmg + _pc.getLevel();
-                        // 성공시 이팩 2개 나가는거
+                        // 成功時イペク2つ出て行くだろ
                         _pc.sendPackets(new S_SkillSound(_targetPc.getId(), 12489));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12489));
                     }
                 }
                 dmg += alpha_dmg;
-                // 크래쉬는 크래쉬 이팩트 그대로 처리.
+                // クラッシュはクラッシュエフェクトのまま処理します。
                 _pc.sendPackets(new S_SkillSound(_targetPc.getId(), 12487));
                 _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12487));
             }
@@ -1858,11 +1785,11 @@ public class L1Attack {
                 dmg += 5;
 		}
         int dolldamagereduction = 0;
-        for (L1DollInstance doll : _targetPc.getDollList()) {// 마법인형에 의한 대미지 감소.돌골렘인형
+        for (L1DollInstance doll : _targetPc.getDollList()) {// マジックドールによるダメージ減少。ドルゴールレム人形
         	dolldamagereduction = doll.getDamageReductionByDoll();
 		}
         dmg -= dolldamagereduction;
-        int itemamagereduction= _targetPc.getDamageReductionByArmor(); // 방어구에 의한 대미지 감소
+        int itemamagereduction= _targetPc.getDamageReductionByArmor(); // 防具によるダメージ減少
         
         dmg -= itemamagereduction;
         int totaldamagereduction = 0;
@@ -1934,10 +1861,10 @@ public class L1Attack {
         /** 대상 속성인첸트에따른 대미지연산 **/
         dmg += 피시속성인첸트효과();
 
-        /** 대상 Buff에 따른 대미지 연산 **/
+        /** 対象Buffによるダメージ演算 **/
         //dmg += toPcBuffDmg(dmg);
 
-        /** 캐릭별 추가데미지, 추가리덕션, 확률 **/
+        /** キャラクター別追加ダメージ、追加リダクション、確率 **/
         if (_calcType == PC_PC) {
             if (_pc.getAddDamageRate() >= CommonUtil.random(100)) {
                 dmg += _pc.getAddDamage();
@@ -1946,39 +1873,39 @@ public class L1Attack {
                 dmg -= _targetPc.getAddReduction();
             }
         }
-        /** 캐릭별 추가데미지, 추가리덕션, 확률 **/
+        /** キャラクター別追加ダメージ、追加リダクション、確率 **/
 
-        /** 70레벨부터 추가타격 + 1 **/
+        /** 70レベルから追加打撃+ 1 **/
        // dmg += Math.max(0, _pc.getLevel() - 70) * 1;
 
-        /** 아머브레이크 */
-        if (_targetPc.hasSkillEffect(ARMOR_BRAKE)) { // 아머브레이크
+        /** アーマーブレイク */
+        if (_targetPc.hasSkillEffect(ARMOR_BRAKE)) { // アーマーブレイク
             if (_weaponType != 20 && _weaponType != 62) {
                 dmg *= 1.25;
             }
         }
-        /** 아머브레이크 */
+        /** アーマーブレイク */
 
-        /** 트루타켓 **/
+        /** トゥルーターゲット **/
         if (_targetPc.get트루타켓() > 0) {
             dmg *= 1 + (_targetPc.get트루타켓() / 100);
         }
-        /** 트루타켓 **/
+        /** トゥルーターゲット **/
 
-        /*** 신규레벨보호 ***/
+        /*** 新規レベルの保護 ***/
         /*if (_calcType == PC_PC) {
             int castle_id = L1CastleLocation.getCastleIdByArea(_pc);
             if (castle_id == 0) {
                 if (_targetPc.getLevel() < Config.AUTO_REMOVELEVEL || _pc.getLevel() < Config.AUTO_REMOVELEVEL) {
                     dmg /= 2;
-                    _pc.sendPackets(new S_SystemMessage("신규 레벨은 대미지의 50%만 가해집니다."));
-                    _targetPc.sendPackets(new S_SystemMessage("신규 레벨은 대미지를 50%만 받습니다."));
+                    _pc.sendPackets(new S_SystemMessage("新規レベルはダメージの50％だけがかかります。"));
+                    _targetPc.sendPackets(new S_SystemMessage("新規レベルはダメージを50％だけます。"));
                 }
             }
         }*/
-        /*** 신규레벨보호 ***/
+        /*** 新規レベルの保護 ***/
 
-        /** 신규혈맹 공격안되게 **/
+        /** 新規血盟攻撃途方もなく **/
        if (_calcType == PC_PC) {
             int castle_id = L1CastleLocation.getCastleIdByArea(_pc);
             boolean isAliveBoss = BossAlive.getInstance().isBossAlive(_targetPc.getMapId());
@@ -1986,17 +1913,17 @@ public class L1Attack {
                 if (_pc.getClanid() == Config.신규혈맹클랜 || _targetPc.getClanid() == Config.신규혈맹클랜) {
                     if (Config.신규혈맹보호처리) {
                         _isHit = false;
-                        _pc.sendPackets(new S_SystemMessage("신규보호 혈맹은 상호간에 공격이 되지 않습니다."));
-                        _targetPc.sendPackets(new S_SystemMessage("신규보호 혈맹은 상호간에 공격이 되지 않습니다."));
+                        _pc.sendPackets(new S_SystemMessage("新規保護血盟は相互に攻撃されていません。"));
+                        _targetPc.sendPackets(new S_SystemMessage("新規保護血盟は相互に攻撃されていません。"));
                     } else {
                         dmg /= 2;
-                        _pc.sendPackets(new S_SystemMessage("신규보호혈맹은 대미지의 50%만 가해집니다."));
-                        _targetPc.sendPackets(new S_SystemMessage("신규보호혈맹은 대미지를 50%만 받습니다."));
+                        _pc.sendPackets(new S_SystemMessage("新規保護血盟はダメージの50％だけがかかります。"));
+                        _targetPc.sendPackets(new S_SystemMessage("新規保護血盟はダメージを50％だけます。"));
                     }
                 }
             }
         }
-        /** 신규혈맹 공격안되게 **/
+        /** 新規血盟攻撃途方もなく **/
 
         if (_pc.hasSkillEffect(BURNING_SLASH)) {
             if (_weaponType != 20) {
@@ -2007,8 +1934,8 @@ public class L1Attack {
             }
         }
     /**/
-        // 반역자의방패 대미지감소처리
-        if (_targetPc.getInventory().checkEquipped(22263)) {// 반역자의방패
+        //反逆者の盾ダメージ減少処理
+        if (_targetPc.getInventory().checkEquipped(22263)) {//反逆者の盾
             int chance = _random.nextInt(100);
             L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22263);
             int enchant = item.getEnchantLevel();
@@ -2018,7 +1945,7 @@ public class L1Attack {
                 _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 6320));
             }
         }
-        if (_targetPc.getInventory().checkEquipped(222355)) {// 신성한요정족방패
+        if (_targetPc.getInventory().checkEquipped(222355)) {// 神聖なエルヴンシールド
             int chance = _random.nextInt(100) + 1;
             L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(222355);
             if (chance <= item.getEnchantLevel()) {
@@ -2027,26 +1954,26 @@ public class L1Attack {
                 _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 14543));
             }
         }
-        // 린드비오르의 가호
+        // リンドビオルの加護
         int chance6 = _random.nextInt(100) + 1;
         if (dmg > 25) {
             if (_target != _targetNpc) {
-                if (_targetPc.getInventory().checkEquipped(22204)) {// 린드완력
+                if (_targetPc.getInventory().checkEquipped(22204)) {// リンド腕力
                     if (chance6 <= 5) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 10);
                         _targetPc.setCurrentMp(getMp);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2188));
                     }
-                } else if (_targetPc.getInventory().checkEquipped(22205)) {// 린드예지력
+                } else if (_targetPc.getInventory().checkEquipped(22205)) {// リンド先見の明
                     if (chance6 <= 5) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 15);
                         _targetPc.setCurrentMp(getMp);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2188));
                     }
-                } else if (_targetPc.getInventory().checkEquipped(22206)// 린드인내력
-                        || _targetPc.getInventory().checkEquipped(22207)) {// 린드마력
+                } else if (_targetPc.getInventory().checkEquipped(22206)// リンド耐久
+                        || _targetPc.getInventory().checkEquipped(22207)) {// リンド馬力
                     if (chance6 <= 5) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 20);
                         _targetPc.setCurrentMp(getMp);
@@ -2057,16 +1984,16 @@ public class L1Attack {
             }
         }
 
-        // 파푸리온의 가호
+        // パプリオンの加護
         int chance5 = _random.nextInt(100) + 1;
             if (_target != null) {
                 int dmg2 = 0;
                 int plus = 0;
-                if (_targetPc.getInventory().checkEquipped(22200) || // 파푸 완력
-                        _targetPc.getInventory().checkEquipped(22201) || // 파푸 예지력
-                        _targetPc.getInventory().checkEquipped(22202) || // 파푸 인내력
-                        _targetPc.getInventory().checkEquipped(22203)) { // 파푸 마력
-                    if (chance5 <= 6) { // 원래 5임
+                if (_targetPc.getInventory().checkEquipped(22200) || // パプ腕力
+                        _targetPc.getInventory().checkEquipped(22201) || // パプ先見の明
+                        _targetPc.getInventory().checkEquipped(22202) || // パプ耐久
+                        _targetPc.getInventory().checkEquipped(22203)) { // パプ馬力
+                    if (chance5 <= 6) { // 元5である
                         L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22200);
                         L1ItemInstance item1 = _targetPc.getInventory().findEquippedItemId(22201);
                         L1ItemInstance item2 = _targetPc.getInventory().findEquippedItemId(22202);
@@ -2084,12 +2011,12 @@ public class L1Attack {
                             plus = 3;
                         }
                         if (_targetPc.hasSkillEffect(L1SkillId.POLLUTE_WATER)) {
-                            dmg2 += (40 + _random.nextInt(15) + (plus * 10)) / 2; // 플루트워터경우절반 //원래 랜덤수치 30임
+                            dmg2 += (40 + _random.nextInt(15) + (plus * 10)) / 2; // フルートウォーター場合の半分//元のランダム数値30である
                         }
                         if (_targetPc.hasSkillEffect(L1SkillId.WATER_LIFE)) {
-                            dmg2 += (40 + _random.nextInt(15) + (plus * 10)) * 2; // 워터라이프경우두배 //원래 랜덤수치 30임
+                            dmg2 += (40 + _random.nextInt(15) + (plus * 10)) * 2; // ウォーターライフ場合倍増//元のランダム数値30である
                         }
-                        dmg2 += 40 + _random.nextInt(15) + (plus * 10); // 회복률 = 기본50회복+랜덤(1~30) //원래 랜덤수치 30임
+                        dmg2 += 40 + _random.nextInt(15) + (plus * 10); // 回復率=基本50回復+ランダム（1〜30）//元のランダム数値30である
                         _targetPc.setCurrentHp(_targetPc.getCurrentHp() + dmg2);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2187));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2187));
@@ -2097,13 +2024,13 @@ public class L1Attack {
                 }
             }
           
-		// 신성한 요정족판금갑옷
+		// 神聖なエルヴンプレートメイル
 		int chance66 = _random.nextInt(100) + 1;
 		if (_target != null) {
 			int dmg2 = 0;
 			int plus = 0;
 			if (_targetPc.getInventory().checkEquipped(222351)) {
-				if (chance66 <= 5) { // 원래 5임
+				if (chance66 <= 5) { // 元5である
 					if (_targetPc.hasSkillEffect(L1SkillId.POLLUTE_WATER)) {
 						dmg2 += (25 + _random.nextInt(15) + (plus * 10)) / 2; //
 					}
@@ -2132,7 +2059,7 @@ public class L1Attack {
                 dmg -= CharacterReduc.getInstance().getCharacterReduc(5);
             } else if (_targetPc.isDragonknight()) {
                 dmg -= CharacterReduc.getInstance().getCharacterReduc(6);
-            } else if (_targetPc.is전사()) {
+            } else if (_targetPc.isWarrior()) {
                 dmg -= CharacterReduc.getInstance().getCharacterReduc(7);
             }
         } catch (Exception e) {
@@ -2154,14 +2081,14 @@ public class L1Attack {
                 dmg += CharacterBalance.getInstance().getCharacterBalance(5);
             } else if (_pc.isDragonknight()) {
                 dmg += CharacterBalance.getInstance().getCharacterBalance(6);
-            } else if (_pc.is전사()) {
+            } else if (_pc.isWarrior()) {
             	dmg += CharacterBalance.getInstance().getCharacterBalance(7);
             }
         } catch (Exception e) {
             System.out.println("Character Add Damege Error");
         }
 
-        /** 버닝스피릿츠, 엘리멘탈파이어, 브레이브멘탈 1.5배 스킬이펙트 및 추타 부분 **/
+        /** バーニングスピリッツ、エレメンタルファイヤー、ブレイブメンタル1.5倍スキルエフェクトとツタの部分 **/
         int chance41 = _random.nextInt(100) + 1;
         if (_weaponType != 20 && _weaponType != 62 && _weaponType2 != 17) {
             if (_pc.hasSkillEffect(BURNING_SPIRIT) || _pc.hasSkillEffect(ELEMENTAL_FIRE) || _pc.hasSkillEffect(BRAVE_AURA)) {
@@ -2177,7 +2104,7 @@ public class L1Attack {
             }
         }
 
-        // 캐릭터 간 대미지 외부화 처리
+        // キャラクター間ダメージ外部化処理
         /*if (_calcType == PC_PC) {
             if (_pc.isCrown()) {
                 dmg += Config.PRINCE_ADD_DAMAGEPC;
@@ -2193,35 +2120,16 @@ public class L1Attack {
                 dmg += Config.DRAGONKNIGHT_ADD_DAMAGEPC;
             } else if (_pc.isBlackwizard()) {
                 dmg += Config.BLACKWIZARD_ADD_DAMAGEPC;
-            } else if (_pc.is전사()) {
-                dmg += Config.전사_ADD_DAMAGEPC;
+            } else if (_pc.is戦士()) {
+                dmg += Config.戦士_ADD_DAMAGEPC;
             }
         }
 */
-        /** AC에 의한 데미지 감소 수정본 **/
-      /*  if (_calcType == PC_PC) {
-            if (_targetPc.isKnight()) { // 기사/
-                dmg -= dmg * (calcPcDefense() * Config.기사);
-            } else if (_targetPc.isDragonknight()) {// 용기사
-                dmg -= dmg * (calcPcDefense() * Config.용기사);
-            } else if (_targetPc.isElf()) { // 요정
-                dmg -= dmg * (calcPcDefense() * Config.요정);
-            } else if (_targetPc.isCrown()) { // 군주/
-                dmg -= dmg * (calcPcDefense() * Config.군주);
-            } else if (_targetPc.isWizard()) { // 법사/
-                dmg -= dmg * (calcPcDefense() * Config.법사);
-            } else if (_targetPc.isDarkelf()) { // 다엘/
-                dmg -= dmg * (calcPcDefense() * Config.다엘);
-            } else if (_targetPc.isBlackwizard()) { // 환술사/
-                dmg -= dmg * (calcPcDefense() * Config.환술사);
-            } else if (_targetPc.is전사()) { // 전사/
-                dmg -= dmg * (calcPcDefense() * Config.전사);
-            }
-        }*/
+        /** ACによるダメージ減少修正 **/
         if (dmg <= 0) {
             _isHit = false;
         }
-/**어비스포인트에따른 리덕	 */
+/**アビスポイントによるリドク	 */
 		
 		if (_targetPc.getPeerage() == 1){ dmg -=0.5;
 		} else if (_targetPc.getPeerage() == 2){ dmg -= 1;
@@ -2245,7 +2153,7 @@ public class L1Attack {
         return (int) dmg;
     }
 
-    // ●●●● 플레이어로부터 NPC 에의 대미지 산출 ●●●●
+    // ●●●● プレイヤーからNPCへのダメージ算出 ●●●●
     private int calcPcNpcDamage() {
         if (_targetNpc == null || _pc == null) {
             _isHit = false;
@@ -2260,15 +2168,15 @@ public class L1Attack {
 					|| ((L1RobotInstance) _pc).사냥봇_위치.equalsIgnoreCase("상아탑5층")) {
 				if (_pc.getCurrentWeapon() == 46 // 단검
 						|| _pc.getCurrentWeapon() == 20
-						|| _pc.getCurrentWeapon() == 24) {// 활
+						|| _pc.getCurrentWeapon() == 24) {// 弓
 					return _random.nextInt(50) + 100;
 				} else {
 					return _random.nextInt(50) + 50;
 				}
 			} else {
-				if (_pc.getCurrentWeapon() == 46 // 단검
+				if (_pc.getCurrentWeapon() == 46 // 短剣
 						|| _pc.getCurrentWeapon() == 20
-						|| _pc.getCurrentWeapon() == 24) {// 활
+						|| _pc.getCurrentWeapon() == 24) {// 弓
 					return _random.nextInt(30) + 70;
 				} else {
 					return _random.nextInt(40) + 40;
@@ -2288,7 +2196,7 @@ public class L1Attack {
 
         int weaponDamage = 0;
 
-        if (_weaponType == 58) { // 크로우
+        if (_weaponType == 58) { // クロウ
         	int crowchance = _random.nextInt(100) + 1;
         	if(crowchance <= _weaponDoubleDmgChance){
         		weaponDamage = weaponMaxDamage + _weaponAddDmg;
@@ -2300,7 +2208,7 @@ public class L1Attack {
         	}
         }
 
-        else if (_weaponType == 0) { // 맨손, 활, 암 토토 렛_weaponType == 0 ||
+        else if (_weaponType == 0) { // 素手、弓、癌トートレッド_weaponType == 0 ||
             weaponDamage = 0;
         } else {
             // weaponDamage = _random.nextInt(weaponMaxDamage) + 1;
@@ -2314,10 +2222,10 @@ public class L1Attack {
             }
         }
         if(_weaponType != 0 ){
-            if (_weaponType != 20 && _weaponType != 62) { // 근거리
+            if (_weaponType != 20 && _weaponType != 62) { // 近距離
                 int Dmgcritical = CalcStat.calcDmgCritical(_pc.getAbility().getTotalStr())+_pc.getDmgCritical();
                 int chance = _random.nextInt(100) + 1;
-                //휘장 치명타
+                //記章クリティカル
                 if (_pc.getInventory().checkEquipped(900032)){
                 	L1ItemInstance item = _pc.getInventory().findEquippedItemId(900032);
                 	if(item.getEnchantLevel() == 6){
@@ -2327,7 +2235,7 @@ public class L1Attack {
                 	}else if(item.getEnchantLevel() >= 8){
                 		Dmgcritical += 5;
                 	}
-                }if (_pc.getInventory().checkEquipped(22208)){ // 발라완력
+                }if (_pc.getInventory().checkEquipped(22208)){ // 塗って腕力
                 	L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
                 	if(item.getEnchantLevel() == 7){
                 		Dmgcritical += 1;
@@ -2336,7 +2244,7 @@ public class L1Attack {
                 	}else if(item.getEnchantLevel() >= 9){
                 		Dmgcritical += 3;
                 	}
-                }if (_pc.getInventory().checkEquipped(22209)){ //발라인내
+                }if (_pc.getInventory().checkEquipped(22209)){ //塗って忍耐
                 	L1ItemInstance item = _pc.getInventory().findEquippedItemId(22209);
                 	if(item.getEnchantLevel() == 7){
                 		Dmgcritical += 1;
@@ -2353,7 +2261,7 @@ public class L1Attack {
             } else {
                 int Bowcritical = CalcStat.calcBowCritical(_pc.getAbility().getTotalDex())+_pc.getBowDmgCritical();
                 int chance = _random.nextInt(100) + 1;
-              //휘장 치명타
+              //記章クリティカル
                 if (_pc.getInventory().checkEquipped(900033)){
                 	L1ItemInstance item = _pc.getInventory().findEquippedItemId(900033);
                 	if(item.getEnchantLevel() == 6){
@@ -2381,7 +2289,7 @@ public class L1Attack {
             }
         int weaponTotalDamage = weaponDamage + _weaponEnchant;
 
-        if (_pc.is전사() && _pc.hasSkillEffect(L1SkillId.SLAYER) && _pc.getSecondWeapon() != null) {
+        if (_pc.isWarrior() && _pc.hasSkillEffect(L1SkillId.SLAYER) && _pc.getSecondWeapon() != null) {
             int ran = _random.nextInt(100);
             if (ran < 50) {
                 secondw = true;
@@ -2395,8 +2303,8 @@ public class L1Attack {
             }
         }
 
-        weaponTotalDamage += calcMaterialBlessDmg(); // 은축복 대미지 보너스
-        /** 포효의이도류 인첸당 발동확률증가 **/
+        weaponTotalDamage += calcMaterialBlessDmg(); // 祝福ダメージボーナス
+        /** 轟音の二刀流エンチャンあたり発動確率増加 **/
         if (_weaponId == 203018) {
             _weaponDoubleDmgChance += _pc.getWeapon().getEnchantLevel();
         }
@@ -2433,14 +2341,14 @@ public class L1Attack {
         } else {
             dmg = weaponTotalDamage + _statusDamage + _pc.getBowDmgup() + _pc.getBowDmgRate();
         }
-        if (_pc.hasSkillEffect(BURNING_SPIRIT) && _pc.isDarkelf()) { // 버닝스피릿츠
+        if (_pc.hasSkillEffect(BURNING_SPIRIT) && _pc.isDarkelf()) { // バーニングスピリッツ
             if ((_random.nextInt(100) + 1) <= 33) {
                 dmg *= 3 / 2;
             }
         }
-        dmg += 몬스터속성인첸트효과(); // 속성 대미지
+        dmg += 몬스터속성인첸트효과(); // 属性ダメージ
 
-        if (_weaponType == 20) { // 활
+        if (_weaponType == 20) { // 弓
             if (_arrow != null) {
                 int add_dmg = 0;
                 if (_targetNpc.getNpcTemplate().get_size().equalsIgnoreCase("large")) {
@@ -2454,11 +2362,11 @@ public class L1Attack {
                 if (_targetNpc.getNpcTemplate().is_hard() && weapon.getItem().get_penetration() != 1) {
 					add_dmg /= 2;
 				}
-            } else if (_weaponId == 190 || _weaponId == 10000 || _weaponId == 202011) { // 사이하의 활
+            } else if (_weaponId == 190 || _weaponId == 10000 || _weaponId == 202011) { // サイハの弓
                 dmg = dmg + _random.nextInt(15) + 4;
             }
 
-        } else if (_weaponType == 62) { // 암 토토 렛
+        } else if (_weaponType == 62) { // がんトートレッド
             int add_dmg = 0;
             if (_targetNpc.getNpcTemplate().get_size().equalsIgnoreCase("large")) {
                 add_dmg = _sting.getItem().getDmgLarge();
@@ -2471,7 +2379,7 @@ public class L1Attack {
             dmg = dmg + _random.nextInt(add_dmg) + 1 + 속성화살(_arrow, _targetNpc);
         }
         
-        /** 본섭 10검이상 추타 +1 표기 효과 **/
+        /** 本サーバー10剣以上ツタ+1表記効果 **/
         if (_weaponType != 0 && _weaponType != 20) {
             switch (weapon.getEnchantLevel()) {
             case 10:
@@ -2501,7 +2409,7 @@ public class L1Attack {
         if(_weaponId == 66){
         	dmg += weapon.getEnchantLevel();
         }
-        /** 인첸트에 따른 추타관련 **/
+        /** エンチャントによるツタ関連 **/
         /*if (_weaponType != 0 && _weaponType != 20) {
             switch (weapon.getEnchantLevel()) {
             case 7:
@@ -2552,41 +2460,41 @@ public class L1Attack {
         case 1014:
             L1WeaponSkill.getDiseaseWeapon(_pc, _targetNpc, _weaponId);
             break;
-        case 12: // 바람칼날단검
-        case 203020: // 생명의단검
-        case 601: // 파멸의대검
+        case 12: // 風の刃短剣
+        case 203020: // 生命の短剣
+        case 601: // 破滅のグレートソード
             파멸의대검(dmg);
             break;
-        case 204: // 진홍의크로스보우
-        case 100204: // 축진홍의크로스보우
-        case 86: // 붉은그림자의이도류
+        case 204: // 真紅のクロスボウ
+        case 100204: // 軸真紅のクロスボウ
+        case 86: // 赤い影のデュアルブレード
             L1WeaponSkill.붉은그림자의이도류(_pc, _targetNpc);
             break;
-        case 1115: // 신묘장검
-        case 1117: // 신묘크로
+        case 1115: // 神妙ソード
+        case 1117: // 神妙クロ
             dmg += getEbHP(_pc, _target, 8981, _weaponEnchant);
             break;
-        case 1116: // 신묘지팡이
-        case 1118: // 신묘장궁
-        case 202011: // 가이야의격노
+        case 1116: // 神妙杖
+        case 1118: // 神妙ロングボウ
+        case 202011: // がよの激怒
             dmg += getEbMP1(_pc, _target, 8981, _weaponEnchant);
             break;
-        case 1109: // 마족크로우
-        case 1113: // 마족검
-        case 1114: // 마족양손검
-        case 203011: // 마족양손검
+        case 1109: // 魔族クロウ
+        case 1113: // 魔族の剣
+        case 1114: // 魔族両手剣
+        case 203011: // 魔族両手剣
             dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
             break;
-        case 1110: // 마족지팡이
-        case 1112: // 마족키링크
-        case 1111: // 마족활
+        case 1110: // 魔族の杖
+        case 1112: // 魔族のキーリンク
+        case 1111: // 魔族の弓
             dmg += getEbMP(_pc, _target, 8152, _weaponEnchant);
             break;
-        case 1108: // 마족체인
+        case 1108: // 魔族チェーン
             dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
             L1WeaponSkill.체인소드(_pc);
             break;
-        case 1119: // 극한의 체인소드
+        case 1119: // 極限のチェーンソード
             dmg += 극한의체인소드(_pc, _target, 3685, _weaponEnchant);
             L1WeaponSkill.체인소드(_pc);
             break;
@@ -2595,10 +2503,10 @@ public class L1Attack {
             L1WeaponSkill.체인소드(_pc);
             블러드서커(dmg, _weaponEnchant);
             break;
-        case 500:// 소멸자의체인소드
-        case 501:// 파멸자의체인소드
-        case 1104:// 엘모어체인소드
-        case 1132:// 베테르랑체인소드
+        case 500:// デストラクタのチェーンソード
+        case 501:// 破滅者のチェーンソード
+        case 1104:// エルモアチェーンソード
+        case 1132:// ベビーテルランチェーンソード
             L1WeaponSkill.체인소드(_pc);
             break;
         case 312:
@@ -2609,73 +2517,73 @@ public class L1Attack {
             if (weapon.getEnchantLevel() >= 10)
             dmg += L1WeaponSkill.섬멸자(_pc, _target, 4077, _weaponEnchant);
             break;
-        case 203006://태풍의도끼
+        case 203006://台風の斧
         	if (weapon.getEnchantLevel() >= 10)
         	 dmg += L1WeaponSkill.태풍도끼(_pc, _target, 7977, _weaponEnchant);
         	break;
-        case 1136://악몽의장궁
+        case 1136://悪夢のロングボウ
         	 if (weapon.getEnchantLevel() >= 10)
                  dmg += L1WeaponSkill.악장(_pc, _target, 14339, _weaponEnchant);
         	break;
-        case 203025://진싸
+        case 203025://ジンサ
         case 203026:
        	 if (weapon.getEnchantLevel() >= 10)
                 dmg += L1WeaponSkill.진싸(_pc, _target, 8032, _weaponEnchant);
        	break;
-        case 202001: // 환영의 체인소드
+        case 202001: // 歓迎のチェーンソード
             dmg += L1WeaponSkill.환영의체인소드(_pc, _target, _weaponEnchant);
             L1WeaponSkill.체인소드(_pc);
             break;
-        case 1124: // 파괴의 이도류
-        case 1125: // 파괴의 크로우
-        case 11125:// 축복 파괴의이도류
+        case 1124: // 破壊の二刀流
+        case 1125: // 破壊のクロウ
+        case 11125:// 祝福破壊の二刀流
             dmg += L1WeaponSkill.파괴의이도류크로우(_pc, _target, 9359, _weaponEnchant);
             break;
-        case 600: // 뇌신검
+        case 600: // 脳身体検査
             dmg += L1WeaponSkill.뇌신검(_pc, _target, 3940, _weaponEnchant);
             break;
-        case 604: // 혹한의 창
+        case 604: // 酷寒のウィンドウ
             dmg += L1WeaponSkill.혹한의창(_pc, _target, 3704, _weaponEnchant);
             break;
-        case 605: // 광풍의 도끼
-        case 203015: // 질풍의 도끼
+        case 605: // 狂風の斧
+        case 203015: // 疾風の斧
             dmg += L1WeaponSkill.광풍의도끼(_pc, _target, 5524, _weaponEnchant);
             break;
-        case 191: // 살천의 활
+        case 191: // サルチョンの弓
             dmg += L1WeaponSkill.살천의활(_pc, _target, 9361, _weaponEnchant);
             break;
-        case 1135: // 공명의 키링크
+        case 1135: // 共鳴のキーリンク
             dmg += L1WeaponSkill.공명의키링크(_pc, _target, 5201, _weaponEnchant);
             break;
-        case 1120: // 냉한의 키링크
+        case 1120: // 冷え性のキーリンク
             dmg += L1WeaponSkill.냉한의키링크(_pc, _target, 6553, _weaponEnchant);
             break;
-        case 202012: // 히페리온의 절망
+        case 202012: // ヒペリオンの絶望
             dmg += L1WeaponSkill.히페리온의절망(_pc, _target, 12248, _weaponEnchant);
             break;
-        case 283: // 발라카스의 키링크
+        case 283: // ヴァラカスのキーリンク
             dmg += L1WeaponSkill.Redskill(_pc, _target, 10405, _weaponEnchant);
             break;
-        case 294: // 군주의 검
+        case 294: // 君主の剣
             dmg += L1WeaponSkill.군주의검(_pc, _target, 4842, _weaponEnchant);
             break;
-        case 58: // 데스나이트의 불검
+        case 58: // デスナイトのフレイムブレード
             dmg += L1WeaponSkill.데스나이트의불검(_pc, _target, _weaponEnchant, 7300);
             break;
-        case 54: // 커츠의 검
+        case 54: // カーツの剣
             dmg += L1WeaponSkill.커츠의검(_pc, _target, _weaponEnchant, 10405);
             break;
-        case 124: // 바포메트의지팡이
+        case 124: // バフォメットスタッフ
             dmg += L1WeaponSkill.바포메트의지팡이(_pc, _target, _weaponEnchant, 129);
             break;
-        case 202003: // 제로스의 지팡이
+        case 202003: // ゼロスの杖
             dmg += L1WeaponSkill.제로스의지팡이(_pc, _target, _weaponEnchant, 11760);
             break;
-        case 134: // 수정 결정체 지팡이
+        case 134: // 修正結晶棒
             dmg += L1WeaponSkill.수정결정체지팡이(_pc, _target, _weaponEnchant, 10405);
             dmg+=getEbMP(_pc, _target, 8152, _weaponEnchant);
             break;
-        case 603: // 천사의 지팡이
+        case 603: // 天使の杖
             L1WeaponSkill.천사의지팡이(_pc, _target, _weaponEnchant);
             break;
         default:
@@ -2683,7 +2591,7 @@ public class L1Attack {
             break;
         }
 
-        if (_weaponType == 0) { // 맨손
+        if (_weaponType == 0) { // 素手
             dmg = (_random.nextInt(5) + 4) / 4;
         }
 
@@ -2693,7 +2601,7 @@ public class L1Attack {
             System.out.println("Weapon Add Damege Error");
         }
 
-        dmg += 룸티스검귀추가데미지();  // 검은빛 귀걸이 추가 데미지 처리
+        dmg += 룸티스검귀추가데미지();  // 黒い光ピアス追加ダメージ処理
 
         if (_pc.hasSkillEffect(BURNING_SLASH)) {
             if (_weaponType != 20 && _weaponType != 62) {
@@ -2703,7 +2611,7 @@ public class L1Attack {
                 _pc.removeSkillEffect(BURNING_SLASH);
             }
         }
-        for (L1DollInstance doll : _pc.getDollList()) {// 매직 돌 인형에 의한 추가 대미지
+        for (L1DollInstance doll : _pc.getDollList()) {// マジックドールドールによる追加ダメージ
         	if (doll == null)
         		continue;
         	if (_weaponType != 20 && _weaponType != 62) {
@@ -2713,29 +2621,29 @@ public class L1Attack {
         	doll.getPixieGreg(_pc, _targetNpc);
         }
 
-        // 전사 스킬 PC - NPC
-        // 크래쉬 : 공격자에 레벨에 50% 정도를 데미지에 반영한다.
+        // 戦士スキルPC  -  NPC
+        // クラッシュ：攻撃者のレベルに50％程度をダメージに反映する。
         if (SkillsTable.getInstance().spellCheck(_pc.getId(), 236)) {
             int chance = _random.nextInt(100) + 1;
-            if (13 >= chance) { // 크래쉬 확률
+            if (13 >= chance) { // クラッシュの確率
                 //
                 int alpha_dmg = _pc.getLevel() / 2;
-                // 퓨리 : 크래쉬에서 나온 뎀지에 2배.
+                // ピュリ：クラッシュから出てきたデムジに2倍。
                 if (SkillsTable.getInstance().spellCheck(_pc.getId(), 234)) {
                     chance = _random.nextInt(100) + 1;
-                    if (1 >= chance) { // 퓨리 확률
+                    if (1 >= chance) { // ピュリ確率
                         dmg += dmg + _pc.getLevel();
-                        // 성공시 이팩 2개 나가는거
+                        // 成功時イペク2つ出て行くだろ
                         _targetNpc.broadcastPacket(new S_SkillSound(_targetNpc.getId(), 12489));
                     }
                 }
                 dmg += alpha_dmg;
-                // 크래쉬는 크래쉬 이팩트 그대로 처리.
+                // クラッシュはクラッシュエフェクトのまま処理します。
                 _targetNpc.broadcastPacket(new S_SkillSound(_targetNpc.getId(), 12487));
             }
         }
 
-        /** 버닝스피릿츠, 엘리멘탈파이어, 브레이브멘탈 1.5배 스킬이펙트 및 추타 부분 **/
+        /** バーニングスピリッツ、エレメンタルファイヤー、ブレイブメンタル1.5倍スキルエフェクトとツタの部分 **/
         int chance41 = _random.nextInt(100) + 1;
         if (_weaponType != 20 && _weaponType != 62 && _weaponType2 != 17) {
             if (_pc.hasSkillEffect(BURNING_SPIRIT) || _pc.hasSkillEffect(ELEMENTAL_FIRE) || _pc.hasSkillEffect(BRAVE_AURA)) {
@@ -2766,7 +2674,7 @@ public class L1Attack {
                 dmg += CharacterBalance.getInstance().getCharacterBalance(5);
             } else if (_pc.isDragonknight()) {
                 dmg += CharacterBalance.getInstance().getCharacterBalance(6);
-            } else if (_pc.is전사()) {
+            } else if (_pc.isWarrior()) {
             	dmg += CharacterBalance.getInstance().getCharacterBalance(7);
             }
         } catch (Exception e) {
@@ -2807,7 +2715,7 @@ public class L1Attack {
         return (int) dmg;
     }
 
-    // ●●●● NPC 로부터 플레이어에의 대미지 산출 ●●●●
+    // ●●●●NPCからプレイヤーへのダメージ算出 ●●●●
     private int calcNpcPcDamage() {
         if (_npc == null || _targetPc == null)
             return 0;
@@ -2818,31 +2726,31 @@ public class L1Attack {
 		if (_targetPc instanceof L1RobotInstance) {
 			dmg = 20;
 
-		} // 로봇뎀감
-		if (lvl < 10) // 몹렙이 10미만
+		} // ロボットデムガム
+		if (lvl < 10) // モプレプが10未満
 			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
-		else if (lvl >= 10 && lvl < 20) // 몹렙이 10 ~ 49
+		else if (lvl >= 10 && lvl < 20) // モプレプが10〜49
 			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
-		else if (lvl >= 20 && lvl < 30) // 몹렙이 50 ~ 69
+		else if (lvl >= 20 && lvl < 30) // モプレプが50〜69
 			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
-		else if (lvl >= 30 && lvl < 40) // 몹렙이 50 ~ 69
+		else if (lvl >= 30 && lvl < 40) // モプレプが50〜69
 			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
-		else if (lvl >= 40 && lvl < 50) // 몹렙이 50 ~ 69
+		else if (lvl >= 40 && lvl < 50) // モプレプが50〜69
 			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 3;
-		else if (lvl >= 50 && lvl < 60) // 몹렙이 70 ~ 79
+		else if (lvl >= 50 && lvl < 60) // モプレプが70〜79
 			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 5;
-		else if (lvl >= 60 && lvl < 70) // 몹렙이 80 ~ 86
+		else if (lvl >= 60 && lvl < 70) // モプレプが80〜86
 			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 10;
-		else if (lvl >= 70 && lvl < 80) // 몹렙이 50 ~ 69
+		else if (lvl >= 70 && lvl < 80) //モプレプが50〜69
 			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 15;
-		else if (lvl >= 80 && lvl < 87) // 몹렙이 50 ~ 69
+		else if (lvl >= 80 && lvl < 87) // モプレプが50〜69
 			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 20;
-		else if (lvl >= 87) // 몹렙이 87 이상
+		else if (lvl >= 87) // モプレプが87以上
 			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 100;
 	
 
         if (_npc instanceof L1PetInstance) {
-            dmg += (lvl / 16); // 펫은 LV16마다 추가 타격
+            dmg += (lvl / 16); // ペットはLV16に追加打撃
             dmg += ((L1PetInstance) _npc).getDamageByWeapon();
         }
         dmg += _npc.getDmgup();
@@ -2851,31 +2759,31 @@ public class L1Attack {
             // dmg *= 1.1;
             dmg *= 1.2;
         }
-        if (_npc.getMapId() == 1700 /*|| _npc.getMapId()== ???*/) {// 잊섬이라면
-        	dmg *= 1.4; //데미지 두배 
+        if (_npc.getMapId() == 1700 /*|| _npc.getMapId()== ???*/) {// イッソムなら
+        	dmg *= 1.4; //ダメージ倍増
         }
-       /* *//** 특정 맵 몬스터 쌔게 **//*
+       /* *//** 特定のマップのモンスターセゲ **//*
         if (_npc.getMapId() == 30) {
-        	dmg = (dmg * getLeverage()) / 0; //숫자를 올릴수록 쌔진다
+        	dmg = (dmg * getLeverage()) / 0; //数字を上げるほど。するとれる
         	}*/
-        /** 전체 몬스터 쌔게 **/
-        // dmg = dmg * getLeverage() / 13;//<몬스터 물리데미지 올리면 약해진다.
-        dmg = dmg * getLeverage() / Config.npcdmg; // npc물리데미지 외부화
+        /** 全モンスターセゲ **/
+        // dmg = dmg * getLeverage() / 13;//<モンスターの物理ダメージ上げれば弱まる。
+        dmg = dmg * getLeverage() / Config.npcdmg; // npc物理ダメージ外部化
         dmg -= calcPcDefense();
 
-        if (_npc.isWeaponBreaked()) { // NPC가 웨폰브레이크중.
+        if (_npc.isWeaponBreaked()) { // NPCがウェポンブレイク中。
             dmg *= 0.5;
         }
 
-        for (L1DollInstance doll : _targetPc.getDollList()) {// 마법인형에 의한 대미지 감소. 돌골렘
+        for (L1DollInstance doll : _targetPc.getDollList()) {// マジックドールによるダメージ減少。ストーンゴーレム
         	dmg -= doll.getDamageReductionByDoll();
         }
 
-        dmg -= _targetPc.getDamageReductionByArmor(); // 방어구에 의한 대미지 감소
+        dmg -= _targetPc.getDamageReductionByArmor(); // 防具によるダメージ減少
 
-        /** 대상 Buff에 따른 대미지 연산 **/
+        /** 対象Buffによるダメージ演算 **/
         //dmg += toPcBuffDmg(dmg);
-      //스킬, 요리 등에 대한 데미지리덕션
+      //スキル、料理などのダメージリダクション
         int damagereduction = 0;
         if (_targetPc.hasSkillEffect(COOK_STR) || _targetPc.hasSkillEffect(COOK_DEX) || _targetPc.hasSkillEffect(COOK_INT)) { // 리뉴얼 요리
         	damagereduction += 2;
@@ -2883,7 +2791,7 @@ public class L1Attack {
         if(_targetPc.hasSkillEffect(COOK_GROW)){
         	damagereduction += 2;
         }
-        // 전사스킬 : 아머가드 - 캐릭의 AC/10의 데미지감소 효과를 얻는다.
+        // 戦士スキル：アーマーガード - キャラクターのAC / 10のダメージ減少効果を得る。
         if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 237)) {
         	if(_targetPc.getAC().getAc() < -10){
         		damagereduction += _targetPc.getAC().getAc() / -10;
@@ -2928,21 +2836,21 @@ public class L1Attack {
         if (_targetPc.hasSkillEffect(IMMUNE_TO_HARM)) {
         	dmg -= (dmg * 0.3);//4
         }
-        //스킬, 요리 등에 대한 데미지리덕션
+        //スキル、料理などのダメージリダクション
         
 
-        // 반역자의방패 확률적 대미지감소처리
-        if (_targetPc.getInventory().checkEquipped(22263)) {// 반역자의방패
+        // 反逆者の盾確率的ダメージ減少処理
+        if (_targetPc.getInventory().checkEquipped(22263)) {// 反逆者の盾
             int chance = _random.nextInt(100);
             L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22263);
             int enchant = item.getEnchantLevel();
             if (chance <= 1 + (enchant * 2)) {
-                dmg -= 50; // 원래 50임
+                dmg -= 50; // 元50である
                 _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 6320));
                 _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 6320));
             }
         }
-        if (_targetPc.getInventory().checkEquipped(222355)) {// 신성한요정족방패
+        if (_targetPc.getInventory().checkEquipped(222355)) {// 神聖なエルヴンシールド
             int chance = _random.nextInt(100) + 1;
             L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(222355);
             if (chance <= item.getEnchantLevel()) {
@@ -2951,26 +2859,26 @@ public class L1Attack {
                 _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 14543));
             }
         }
-        // 린드비오르의 가호
+        // リンドビオルの加護
         int chance6 = _random.nextInt(100) + 1;
         if (dmg > 25) {
             if (_target != _targetNpc) {
-                if (_targetPc.getInventory().checkEquipped(22204)) {// 린드완력
+                if (_targetPc.getInventory().checkEquipped(22204)) {// リンド腕力
                     if (chance6 <= 5) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 10);
                         _targetPc.setCurrentMp(getMp);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2188));
                     }
-                } else if (_targetPc.getInventory().checkEquipped(22205)) {// 린드예지력
+                } else if (_targetPc.getInventory().checkEquipped(22205)) {// リンド先見の明
                     if (chance6 <= 5) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 15);
                         _targetPc.setCurrentMp(getMp);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2188));
                     }
-                } else if (_targetPc.getInventory().checkEquipped(22206)// 린드인내력
-                        || _targetPc.getInventory().checkEquipped(22207)) {// 린드마력
+                } else if (_targetPc.getInventory().checkEquipped(22206)// リンド耐久
+                        || _targetPc.getInventory().checkEquipped(22207)) {// リンド馬力
                     if (chance6 <= 5) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 20);
                         _targetPc.setCurrentMp(getMp);
@@ -2980,17 +2888,17 @@ public class L1Attack {
                 }
             }
         }
-        // 파푸리온의 가호
+        // パプリオンの加護
         int chance5 = _random.nextInt(100) + 1;
         if (dmg > 25) {
             if (_target != null) {
                 int dmg2 = 0;
                 int plus = 0;
-                if (_targetPc.getInventory().checkEquipped(22200) || // 파푸 완력
-                        _targetPc.getInventory().checkEquipped(22201) || // 파푸 예지력
-                        _targetPc.getInventory().checkEquipped(22202) || // 파푸 인내력
+                if (_targetPc.getInventory().checkEquipped(22200) || // パプ腕力
+                        _targetPc.getInventory().checkEquipped(22201) || // パプ先見の明
+                        _targetPc.getInventory().checkEquipped(22202) || // パプ耐久
                         _targetPc.getInventory().checkEquipped(22203)) { // 파푸 마력
-                    if (chance5 <= 5) { // 원래 5임
+                    if (chance5 <= 5) { // 元5である
                         L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22200);
                         L1ItemInstance item1 = _targetPc.getInventory().findEquippedItemId(22201);
                         L1ItemInstance item2 = _targetPc.getInventory().findEquippedItemId(22202);
@@ -3008,12 +2916,12 @@ public class L1Attack {
                             plus = 3;
                         }
                         if (_targetPc.hasSkillEffect(L1SkillId.POLLUTE_WATER)) {
-                            dmg2 += (40 + _random.nextInt(15) + (plus * 10)) / 2; // 플루트워터경우절반 //원래 랜덤수치 30임
+                            dmg2 += (40 + _random.nextInt(15) + (plus * 10)) / 2; // フルートウォーター場合の半分//元のランダム数値30である
                         }
                         if (_targetPc.hasSkillEffect(L1SkillId.WATER_LIFE)) {
-                            dmg2 += (40 + _random.nextInt(15) + (plus * 10)) * 2; // 워터라이프경우두배 //원래 랜덤수치 30임
+                            dmg2 += (40 + _random.nextInt(15) + (plus * 10)) * 2; // ウォーターライフ場合倍増//元のランダム数値30である
                         }
-                        dmg2 += 40 + _random.nextInt(15) + (plus * 10); // 회복률 = 기본50회복+랜덤(1~30) //원래 랜덤수치 30임
+                        dmg2 += 40 + _random.nextInt(15) + (plus * 10); // 回復率=基本50回復+ランダム（1〜30）//元のランダム数値30である
                         _targetPc.setCurrentHp(_targetPc.getCurrentHp() + dmg2);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2187));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2187));
@@ -3021,13 +2929,13 @@ public class L1Attack {
                 }
             }
         }
-		// 신성한 요정족판금갑옷
+		// 神聖なエルヴンプレートメイル
 		int chance66 = _random.nextInt(100) + 1;
 		if (_target != null) {
 			int dmg2 = 0;
 			int plus = 0;
 			if (_targetPc.getInventory().checkEquipped(222351)) {
-				if (chance66 <= 6) { // 원래 5임
+				if (chance66 <= 6) { // 元5である
 					if (_targetPc.hasSkillEffect(L1SkillId.POLLUTE_WATER)) {
 						dmg2 += (25 + _random.nextInt(15) + (plus * 10)) / 2; //
 					}
@@ -3057,14 +2965,14 @@ public class L1Attack {
                 dmg -= CharacterReduc.getInstance().getCharacterReduc(5);
             } else if (_targetPc.isDragonknight()) {
                 dmg -= CharacterReduc.getInstance().getCharacterReduc(6);
-            } else if (_targetPc.is전사()) {
+            } else if (_targetPc.isWarrior()) {
             	dmg -= CharacterReduc.getInstance().getCharacterReduc(7);
             }
         } catch (Exception e) {
             System.out.println("Character Add Reduction Error");
         }
 
-        // 애완동물, 사몬으로부터 플레이어에 공격
+        // ペット、サーモンからプレイヤーに攻撃
         boolean isNowWar = false;
         int castleId = L1CastleLocation.getCastleIdByArea(_targetPc);
         if (castleId > 0) {
@@ -3097,7 +3005,7 @@ public class L1Attack {
         return (int) dmg;
     }
 
-    // ●●●● NPC 로부터 NPC 에의 대미지 산출 ●●●●
+    // ●●●● NPCからNPCへのダメージ算出 ●●●●
     private int calcNpcNpcDamage() {
         if (_targetNpc == null || _npc == null)
             return 0;
@@ -3107,7 +3015,7 @@ public class L1Attack {
 
         if (_npc instanceof L1PetInstance) {
             dmg = _random.nextInt(_npc.getNpcTemplate().get_level()) + _npc.getAbility().getTotalStr() / 2 + 1;
-            dmg += (lvl / 16); // 펫은 LV16마다 추가 타격
+            dmg += (lvl / 16); // ペットはLV16に追加打撃
             dmg += ((L1PetInstance) _npc).getDamageByWeapon();
         } else if (_npc instanceof L1SummonInstance) {
             dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 5;
@@ -3123,7 +3031,7 @@ public class L1Attack {
 
         dmg -= calcNpcDamageReduction();
 
-        if (_npc.isWeaponBreaked()) { // NPC가 웨폰브레이크중.
+        if (_npc.isWeaponBreaked()) { // NPCがウェポンブレイク中。
             dmg /= 2;
         }
 
@@ -3143,7 +3051,7 @@ public class L1Attack {
         return (int) dmg;
     }
 
-    // ●●●● 플레이어의 대미지 강화 마법 ●●●●
+    // ●●●● プレイヤーのダメージ強化魔法 ●●●●
     private double calcBuffDamage(double dmg) {
         if (_pc.hasSkillEffect(BURNING_SPIRIT) || (_pc.hasSkillEffect(ELEMENTAL_FIRE) && _weaponType != 20 && _weaponType != 62)) {
             if ((_random.nextInt(100) + 1) <= 33) {
@@ -3165,7 +3073,7 @@ public class L1Attack {
         return dmg;
     }
 
-    /** 무기 속성 인챈에 따른 효과 부여(PC-PC) **/
+    /** 武器属性エンチャントによる効果付与（PC-PC） **/
     private double 피시속성인첸트효과() {
         int Attr = _weaponAttrLevel;
         double AttrDmg = 0;
@@ -3213,31 +3121,31 @@ public class L1Attack {
         return AttrDmg;
     }
 
-    /** 무기 속성 인챈에 따른 효과 부여(PC-NPC) **/
+    /**武器属性エンチャントによる効果付与（PC-NPC) **/
     private int 몬스터속성인첸트효과() {
         int AttrDmg = 0;
         int Attr = _weaponAttrLevel;
         int NpcWeakAttr = _targetNpc.getNpcTemplate().get_weakAttr();
         switch (NpcWeakAttr) {
-        case 1: // 땅 취약 몬스터
+        case 1: // 土地脆弱モンスター
             if (Attr >= 15 && Attr <= 20) {
                 // AttrDmg += 1 + (Attr - 15) * 2;
                 AttrDmg += 1 + (Attr - 15);
             }
             break;
-        case 2: // 물 취약 몬스터
+        case 2: // 水脆弱モンスター
             if (Attr >= 6 && Attr <= 10) {
                 // AttrDmg += 1 + (Attr - 6) * 2;
                 AttrDmg += 1 + (Attr - 6);
             }
             break;
-        case 4: // 불 취약 몬스터
+        case 4: // 火脆弱モンスター
             if (Attr >= 1 && Attr <= 5) {
                 // AttrDmg += (Attr - 1) * 2 + 1;
                 AttrDmg += 1 + (Attr - 1);
             }
             break;
-        case 8: // 바람 취약 몬스터
+        case 8: //風脆弱モンスター
             if (Attr >= 11 && Attr <= 15) {
                 // AttrDmg += 1 + (Attr - 11) * 2;
                 AttrDmg += 1 + (Attr - 11);
@@ -3250,27 +3158,27 @@ public class L1Attack {
         return AttrDmg;
     }
 
-    // ●●●● 플레이어의 AC에 의한 대미지 경감 ●●●●
+    // ●●●● プレイヤーのACによるダメージ軽減 ●●●●
     private int calcPcDefense() {
         int ac = Math.max(0, 10 - _targetPc.getAC().getAc());
         int acDefMax = _targetPc.getClassFeature().getAcDefenseMax(ac);
         return _random.nextInt(acDefMax + 1);
     }
 
-    // ●●●● NPC의 대미지 축소에 의한 경감 ●●●●
+    // ●●●● NPCのダメージ縮小による軽減 ●●●●
     private int calcNpcDamageReduction() {
         return _targetNpc.getNpcTemplate().get_damagereduction();
     }
 
-    // ●●●● 무기의 재질과 축복에 의한 추가 대미지 산출 ●●●●
+    // ●●●● 武器の材質と祝福による追加ダメージ算出 ●●●●
     private int calcMaterialBlessDmg() {
         int damage = 0;
         int undead = _targetNpc.getNpcTemplate().get_undead();
-        if ((_weaponMaterial == 14 || _weaponMaterial == 17 || _weaponMaterial == 22) && (undead == 1 || undead == 3)) { // 은·미스릴·오리하르콘, 한편, 안 데드계·안
-                                                                                                                         // 데드계 보스
+        if ((_weaponMaterial == 14 || _weaponMaterial == 17 || _weaponMaterial == 22) && (undead == 1 || undead == 3)) { // は・ミスリル・オリハルコン、かつ、アンデッド系・アン
+                                                                                                                         // デッド系ボス
             damage += _random.nextInt(20) + 1;
         }
-        if (_weaponBless == 0 && (undead == 1 || undead == 2 || undead == 3)) { // 축복 무기, 한편, 안 데드계·악마계·안 데드계 보스
+        if (_weaponBless == 0 && (undead == 1 || undead == 2 || undead == 3)) { // 祝福武器、かつ、アンデッド系・悪魔系・アンデッド系ボス
             damage += _random.nextInt(4) + 1;
         }
         if (weapon != null && _weaponType != 20 && _weaponType != 62 && weapon.getHolyDmgByMagic() != 0 && (undead == 1 || undead == 3)) {
@@ -3279,7 +3187,7 @@ public class L1Attack {
         return damage;
     }
 
-    // ●●●● NPC의 안 데드의 야간 공격력의 변화 ●●●●
+    // ●●●● NPCの内部デッドの夜の攻撃力の変化 ●●●●
     private boolean isUndeadDamage() {
         boolean flag = false;
         int undead = _npc.getNpcTemplate().get_undead();
@@ -3290,43 +3198,43 @@ public class L1Attack {
         return flag;
     }
 
-    // ●●●● NPC의 독공격을 부가 ●●●●
+    // ●●●● NPCの毒攻撃を付加 ●●●●
     private void addNpcPoisonAttack(L1Character attacker, L1Character target) {
-        if (_npc.getNpcTemplate().get_poisonatk() != 0) { // 독공격 있어
-            if (15 >= _random.nextInt(100) + 1) { // 15%의 확률로 독공격
-                if (_npc.getNpcTemplate().get_poisonatk() == 1) { // 통상독
-                    // 3초 주기에 대미지 5
+        if (_npc.getNpcTemplate().get_poisonatk() != 0) { // 毒攻撃おり
+            if (15 >= _random.nextInt(100) + 1) { // 15％の確率で毒攻撃
+                if (_npc.getNpcTemplate().get_poisonatk() == 1) { // 通常毒
+                    // 3秒周期でダメー​​ジ5
                     L1DamagePoison.doInfection(attacker, target, 3000, 5, false);
-                } else if (_npc.getNpcTemplate().get_poisonatk() == 2) { // 침묵독
+                } else if (_npc.getNpcTemplate().get_poisonatk() == 2) { // 沈黙毒
                     L1SilencePoison.doInfection(target);
-                } else if (_npc.getNpcTemplate().get_poisonatk() == 4) { // 마비독
-                    // 20초 후에 16초간 마비
+                } else if (_npc.getNpcTemplate().get_poisonatk() == 4) { // 麻痺毒
+                    // 20秒後に16秒間麻痺
                     L1ParalysisPoison.doInfection(target, 20000, 16000);
                 }
             }
-        } else if (_npc.getNpcTemplate().get_paralysisatk() != 0) { // / 마비 공격 있어
+        } else if (_npc.getNpcTemplate().get_paralysisatk() != 0) { // / 麻痺攻撃おり
         }
     }
 
-    // ■■■■ 마나스탓후와 강철의 마나스탓후의 MP흡수량 산출 ■■■■
+    // ■■■■ マナススタッフと鋼のマナスせい後MP吸収量算出 ■■■■
     public void calcStaffOfMana() {
-        // 마나,강철마나,악마지팡이
+        // マナ、鋼鉄マナ、悪魔の杖
         if (_weaponId == 126 || _weaponId == 127 || _weaponId == 413103) {
-            int som_lvl = _weaponEnchant + 3; // 최대 MP흡수량을 설정
+            int som_lvl = _weaponEnchant + 3; // 最大MP吸収量を設定
             if (som_lvl < 0) {
                 som_lvl = 0;
             }
-            // MP흡수량을 랜덤 취득
+            // MP吸収量をランダム取得
             _drainMana = _random.nextInt(som_lvl) + 1;
-            // 최대 MP흡수량을 9에 제한
+            // 最大MP吸収量を9に制限
             if (_drainMana > Config.MANA_DRAIN_LIMIT_PER_SOM_ATTACK) {
                 _drainMana = Config.MANA_DRAIN_LIMIT_PER_SOM_ATTACK;
             }
         }
     }
 
-    public void 마력의단검() { // 마나 흡수를 위한 추가
-        int MR = getTargetMr(); // 마방에 따라 성공률 적용
+    public void 마력의단검() { //マナ吸収のための追加
+        int MR = getTargetMr(); // 魔に基づいて成功率を適用
         if (MR >= 100)
             return;
         if (MR < _random.nextInt(100))
@@ -3359,15 +3267,15 @@ public class L1Attack {
         }
     }
 
-    /** 조우의 돌골렘 - 마력의 단검 **/
+    /** ゾウのストーンゴーレム - 馬力の短剣 **/
     public void calcDrainOfMana() {
         if (_weaponId == 602) {
             마력의단검();
         }
     }
 
-    /** 조우의 돌골렘 - 파멸의 대검 * */
-    public void 파멸의대검(double dmg) { // 21차파멸의대검파워북참조
+    /** ゾウのストーンゴーレム - 破滅のグレートソード * */
+    public void 파멸의대검(double dmg) { // 21回破滅のグレートソードパワーブック参照
         int r = _random.nextInt(100);
         if (r <= 80) {
             if (dmg <= 30) {
@@ -3390,7 +3298,7 @@ public class L1Attack {
         }
     }
 
-    public void 블러드서커(double dmg, int enchant) { // 21차파워북참조
+    public void 블러드서커(double dmg, int enchant) { // 21回パワーブック参照
         int r = _random.nextInt(100);
         int e = enchant - 6;
         if (r <= 75) {
@@ -3433,7 +3341,7 @@ public class L1Attack {
         // return L1WeaponSkill.calcDamageReduction(target, dmg, L1Skills.ATTR_WATER);
     }
 
-    // 가이아격노
+    // ガイア激怒
     public int getEbMP1(L1PcInstance pc, L1Character target, int effect, int enchant) {
         int dmg = 0;
         int en = enchant;
@@ -3447,8 +3355,8 @@ public class L1Attack {
         return dmg;
     }
 
-    /** ●●●● 이블 리버스 ●●●● **/
-    // 검 체인소드 크로우 도끼
+    /** ●●●●悪リバース ●●●● **/
+    // 剣チェーンソードクロウ斧
     public int getEbHP(L1PcInstance pc, L1Character target, int effect, int enchant) {
         int dmg = 0;
         int en = enchant;
@@ -3468,8 +3376,8 @@ public class L1Attack {
         Broadcaster.broadcastPacket(pc, new S_SkillSound(target.getId(), 13418));
     }
 
-    /** ●●●● 이블 트릭 ●●●● **/
-    // 지팡이 활 키링크
+    /** ●●●● 悪のトリック ●●●● **/
+    // 杖弓キーリンク
     public int getEbMP(L1PcInstance pc, L1Character target, int effect, int enchant) {
         int dmg = 0;
         int en = enchant;
@@ -3483,18 +3391,18 @@ public class L1Attack {
         return dmg;
     }
 
-    // ■■■■ PC의 독공격을 부가 ■■■■
+    // ■■■■ PCの毒攻撃を付加 ■■■■
     public void addPcPoisonAttack(L1Character attacker, L1Character target) {
         int chance = _random.nextInt(100) + 1;
-        if ((_weaponId == 13 || _weaponId == 44 // FOD, 고대의 다크 에르프 소도
-                || (_weaponId != 0 && _pc.hasSkillEffect(ENCHANT_VENOM))) // 엔챤트
-                // 베놈중
+        if ((_weaponId == 13 || _weaponId == 44 // FOD、古代のダークエルフソード
+                || (_weaponId != 0 && _pc.hasSkillEffect(ENCHANT_VENOM))) // エンチャント
+                // ベノムの
                 && chance <= 10) {
             L1DamagePoison.doInfection(attacker, target, 3000, 30, false);
         }
     }
 
-    /* ■■■■■■■■■■■■■■ 공격 모션 송신 ■■■■■■■■■■■■■■ */
+    /* ■■■■■■■■■■■■■■ 攻撃モーション送信 ■■■■■■■■■■■■■■ */
 
     public void action() {
         try {
@@ -3514,9 +3422,9 @@ public class L1Attack {
         }
     }
 
-    // ●●●● 플레이어의 공격 모션 송신 ●●●●
+    // ●●●● プレイヤーの攻撃モーション送信 ●●●●
     private void actionPc() {
-        _pc.setHeading(_pc.targetDirection(_targetX, _targetY)); // 방향세트
+        _pc.setHeading(_pc.targetDirection(_targetX, _targetY)); // 方向セット
         if(_target instanceof L1NpcInstance){
         	if(((L1NpcInstance)_target).getNpcId() >=400067 && ((L1NpcInstance)_target).getNpcId() <=400080){
         		_isHit = false;
@@ -3529,19 +3437,19 @@ public class L1Attack {
                  if (_pc.getTempCharGfx() == 7967) {
                     _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 7972, _targetX, _targetY, _isHit));
                     Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 7972, _targetX, _targetY, _isHit));
-                } else if (_pc.getTempCharGfx() == 11402 || _pc.getTempCharGfx() == 8900) { // 75렙 변신
+                } else if (_pc.getTempCharGfx() == 11402 || _pc.getTempCharGfx() == 8900) { // 75レプ変身
                     _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 8904, _targetX, _targetY, _isHit));
                     Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 8904, _targetX, _targetY, _isHit));
                     Broadcaster.broadcastPacketExceptTargetSight(_target, new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
-                } else if (_pc.getTempCharGfx() == 11406 || _pc.getTempCharGfx() == 8913) {// 80렙 변신
+                } else if (_pc.getTempCharGfx() == 11406 || _pc.getTempCharGfx() == 8913) {// 80レプ変身
                     _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 8916, _targetX, _targetY, _isHit));
                     Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 8916, _targetX, _targetY, _isHit));
                     Broadcaster.broadcastPacketExceptTargetSight(_target, new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
-                } else if (_pc.getTempCharGfx() == 13631) {// 82렙 변신
+                } else if (_pc.getTempCharGfx() == 13631) {// 82レプ変身
                     _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 13656, _targetX, _targetY, _isHit));
                     Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 13656, _targetX, _targetY, _isHit));
                     Broadcaster.broadcastPacketExceptTargetSight(_target, new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
-                } else if (_pc.getTempCharGfx() == 13635) {// 85렙 변신
+                } else if (_pc.getTempCharGfx() == 13635) {// 85レップ変身
                     _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 13658, _targetX, _targetY, _isHit));
                     Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 13658, _targetX, _targetY, _isHit));
                     Broadcaster.broadcastPacketExceptTargetSight(_target, new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
@@ -3558,7 +3466,7 @@ public class L1Attack {
                 if (_isHit) {
                     Broadcaster.broadcastPacketExceptTargetSight(_target, new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
                 }
-            } else if (_weaponId == 202011) {// 가이아의격노
+            } else if (_weaponId == 202011) {// ガイアの激怒
                 _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 13658, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 13658, _targetX, _targetY, _isHit));
                 if (_isHit) {
@@ -3576,19 +3484,19 @@ public class L1Attack {
              if (_pc.getTempCharGfx() == 7967) {
                 _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 7972, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 7972, _targetX, _targetY, _isHit));
-            } else if (_pc.getTempCharGfx() == 11402 || _pc.getTempCharGfx() == 8900) {// 75렙 변신
+            } else if (_pc.getTempCharGfx() == 11402 || _pc.getTempCharGfx() == 8900) {// 75レプ変身
                 _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 8904, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 8904, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacketExceptTargetSight(_target, new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
-            } else if (_pc.getTempCharGfx() == 11406 || _pc.getTempCharGfx() == 8913) {// 80렙 변신
+            } else if (_pc.getTempCharGfx() == 11406 || _pc.getTempCharGfx() == 8913) {// 80レプ変身
                 _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 8916, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 8916, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacketExceptTargetSight(_target, new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
-            } else if (_pc.getTempCharGfx() == 13631) {// 82렙 변신
+            } else if (_pc.getTempCharGfx() == 13631) {// 82レプ変身
                 _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 13656, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 13656, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacketExceptTargetSight(_target, new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
-            } else if (_pc.getTempCharGfx() == 13635) {// 85렙 변신
+            } else if (_pc.getTempCharGfx() == 13635) {// 85レプ変身
                 _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 13658, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 13658, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacketExceptTargetSight(_target, new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
@@ -3617,7 +3525,7 @@ public class L1Attack {
     }
 
     private void criticalPc() {
-        _pc.setHeading(_pc.targetDirection(_targetX, _targetY)); // 방향세트
+        _pc.setHeading(_pc.targetDirection(_targetX, _targetY)); // 方向セット
         if (_weaponType == 20) {
             _pc.sendPackets(new S_AttackCritical(_pc, _targetId, _targetX, _targetY, _weaponType, _isHit));
             Broadcaster.broadcastPacket(_pc, new S_AttackCritical(_pc, _targetId, _targetX, _targetY, _weaponType, _isHit));// 새로만드셔서 ㅎ
@@ -3626,7 +3534,7 @@ public class L1Attack {
             _pc.sendPackets(new S_AttackCritical(_pc, _targetId, _targetX, _targetY, _weaponType, _isHit));
             Broadcaster.broadcastPacket(_pc, new S_AttackCritical(_pc, _targetId, _targetX, _targetY, _weaponType, _isHit));
         } else {
-            if (_pc.is전사()) {
+            if (_pc.isWarrior()) {
                 _pc.sendPackets(new S_AttackCritical(_pc, _targetId, 99));
                 Broadcaster.broadcastPacket(_pc, new S_AttackCritical(_pc, _targetId, 99));
             } else {
@@ -3643,15 +3551,15 @@ public class L1Attack {
         }
     }
 
-    // ●●●● NPC의 공격 모션 송신 ●●●●
+    // ●●●● NPCの攻撃モーション送信 ●●●●
     private void actionNpc() {
         int _npcObjectId = _npc.getId();
         int bowActId = 0;
         int actId = 0;
 
-        _npc.setHeading(_npc.targetDirection(_targetX, _targetY)); // 방향세트
+        _npc.setHeading(_npc.targetDirection(_targetX, _targetY)); // 方向セット
 
-        // 타겟과의 거리가 2이상 있으면 원거리 공격
+        // ターゲットとの距離が2以上の場合、遠距離攻撃
         boolean isLongRange = (_npc.getLocation().getTileLineDistance(new Point(_targetX, _targetY)) > 1);
         bowActId = _npc.getNpcTemplate().getBowActId();
 
@@ -3682,15 +3590,15 @@ public class L1Attack {
         }
     }
 
-    // 나는 일 도구(화살, 스팅)가 미스였다고 나무의 궤도를 계산
-    public void calcOrbit(int cx, int cy, int head) // 기점 X 기점 Y 지금 향하고 있는 방향
+    // 飛び道具（矢、スティング）がミスだった木の軌道を計算
+    public void calcOrbit(int cx, int cy, int head) // 基点X基点Y今向いている方向
     {
-        float dis_x = Math.abs(cx - _targetX); // X방향의 타겟까지의 거리
-        float dis_y = Math.abs(cy - _targetY); // Y방향의 타겟까지의 거리
-        float dis = Math.max(dis_x, dis_y); // 타겟까지의 거리
+        float dis_x = Math.abs(cx - _targetX); //X方向のターゲットまでの距離
+        float dis_y = Math.abs(cy - _targetY); // Y方向のターゲットまでの距離
+        float dis = Math.max(dis_x, dis_y); // ターゲットまでの距離
         float avg_x = 0;
         float avg_y = 0;
-        if (dis == 0) { // 목표와 같은 위치라면 향하고 있는 방향에 진곧
+        if (dis == 0) { // 目標と同じ位置であれば、向いている方向に真っ直ぐ
             switch (head) {
             case 1:
                 avg_x = 1;
@@ -3732,8 +3640,8 @@ public class L1Attack {
             avg_y = dis_y / dis;
         }
 
-        int add_x = (int) Math.floor((avg_x * 15) + 0.59f); // 상하 좌우가 조금 우선인 둥근
-        int add_y = (int) Math.floor((avg_y * 15) + 0.59f); // 상하 좌우가 조금 우선인 둥근
+        int add_x = (int) Math.floor((avg_x * 15) + 0.59f); // 上下左右が少し優先的なラウンド
+        int add_y = (int) Math.floor((avg_y * 15) + 0.59f); // 上下左右が少し優先的なラウンド
 
         if (cx > _targetX) {
             add_x *= -1;
@@ -3746,7 +3654,7 @@ public class L1Attack {
         _targetY = _targetY + add_y;
     }
 
-    /* ■■■■■■■■■■■■■■■ 계산 결과 반영 ■■■■■■■■■■■■■■■ */
+    /* ■■■■■■■■■■■■■■■ 計算結果に反映 ■■■■■■■■■■■■■■■ */
 
     public void commit() {
         if (_isHit) {
@@ -3760,7 +3668,7 @@ public class L1Attack {
             }
         }
 
-        // 대미지치 및 명중율 확인용 메세지
+        // ダメージ値と命中率確認用のメッセージ
         if (!Config.ALT_ATKMSG) {
             return;
         }
@@ -3778,30 +3686,30 @@ public class L1Attack {
         String msg1 = "";
         String msg2 = "";
         String msg3 = "";
-        if (_calcType == PC_PC || _calcType == PC_NPC) { // 어텍커가 PC의 경우
+        if (_calcType == PC_PC || _calcType == PC_NPC) { // アタックカーがPCの場合
             msg0 = _pc.getName();
         } else if (_calcType == NPC_PC) { // 어텍커가 NPC의 경우
             msg0 = _npc.getName();
         }
 
-        if (_calcType == NPC_PC || _calcType == PC_PC) { // 타겟이 PC의 경우
+        if (_calcType == NPC_PC || _calcType == PC_PC) { // ターゲットがPCの場合
             msg3 = _targetPc.getName();
             msg1 = "HP:" + _targetPc.getCurrentHp() + " / HR:" + _hitRate;
-        } else if (_calcType == PC_NPC) { // 타겟이 NPC의 경우
+        } else if (_calcType == PC_NPC) { // ターゲットがNPCの場合
             msg3 = _targetNpc.getName();
             msg1 = "HP:" + _targetNpc.getCurrentHp() + " / HR:" + _hitRate;
         }
         msg2 = "DMG:" + _damage;
 
-        if (_calcType == PC_PC || _calcType == PC_NPC) { // 어텍커가 PC의 경우
+        if (_calcType == PC_PC || _calcType == PC_NPC) { // アタックカーがPCの場合
             _pc.sendPackets(new S_SystemMessage("\\fR[" + msg0 + "->" + msg3 + "] " + msg2 + " / " + msg1));
         }
-        if (_calcType == NPC_PC || _calcType == PC_PC) { // 타겟이 PC의 경우
+        if (_calcType == NPC_PC || _calcType == PC_PC) { // ターゲットがPCの場合
             _targetPc.sendPackets(new S_SystemMessage("\\fY[" + msg0 + "->" + msg3 + "] " + msg2 + " / " + msg1));
         }
     }
 
-    // ●●●● 플레이어에 계산 결과를 반영 ●●●●
+    // ●●●● プレイヤーの計算結果を反映 ●●●●
     private void commitPc() {
         if (_calcType == PC_PC) {
             if (_targetPc.hasSkillEffect(ICE_LANCE)) {
@@ -3814,12 +3722,12 @@ public class L1Attack {
                 _drainMana = 0;
                 _drainHp = 0;
             }
-            if (_targetPc.hasSkillEffect(MOB_BASILL)) { // 바실얼리기대미지0
+            if (_targetPc.hasSkillEffect(MOB_BASILL)) { // バジルアーリー期待未知0
                 _damage = 0;
                 _drainMana = 0;
                 _drainHp = 0;
             }
-            if (_targetPc.hasSkillEffect(MOB_COCA)) { // 코카얼리기대미지0
+            if (_targetPc.hasSkillEffect(MOB_COCA)) { // コカアーリー期待未知0
                 _damage = 0;
                 _drainMana = 0;
                 _drainHp = 0;
@@ -3834,7 +3742,7 @@ public class L1Attack {
                 _pc.setCurrentMp(newMp);
             }
 
-            /** 조우의 돌골렘 **/
+            /** ゾウのストーンゴーレム **/
 
             if (_drainHp > 0 && _targetPc.getCurrentHp() > 0) {
                 if (_drainHp > _targetPc.getCurrentHp()) {
@@ -3845,9 +3753,9 @@ public class L1Attack {
                 newHp = (short) (_pc.getCurrentHp() + _drainHp);
                 _pc.setCurrentHp(newHp);
             }
-            /** 조우의 돌골렘 **/
+            /** ゾウのストーンゴーレム **/
 
-            // damagePcWeaponDurability(); // 무기를 손상시킨다.
+            // damagePcWeaponDurability(); // 武器を損傷させる。
 
             _targetPc.receiveDamage(_pc, _damage);
         } else if (_calcType == NPC_PC) {
@@ -3857,17 +3765,17 @@ public class L1Attack {
             if (_targetPc.hasSkillEffect(EARTH_BIND)) {
                 _damage = 0;
             }
-            if (_targetPc.hasSkillEffect(MOB_BASILL)) { // 바실얼리기대미지0
+            if (_targetPc.hasSkillEffect(MOB_BASILL)) { // バジルアーリー期待未知0
                 _damage = 0;
             }
-            if (_targetPc.hasSkillEffect(MOB_COCA)) { // 코카얼리기대미지0
+            if (_targetPc.hasSkillEffect(MOB_COCA)) { // コカアーリー期待未知0
                 _damage = 0;
             }
             _targetPc.receiveDamage(_npc, _damage);
         }
     }
 
-    // ●●●● NPC에 계산 결과를 반영 ●●●●
+    // ●●●● NPCに計算結果を反映●●●●
     private void commitNpc() {
         if (_calcType == PC_NPC) {
             if (_targetNpc.hasSkillEffect(ICE_LANCE)) {
@@ -3880,12 +3788,12 @@ public class L1Attack {
                 _drainMana = 0;
                 _drainHp = 0;
             }
-            if (_targetNpc.hasSkillEffect(MOB_BASILL)) { // 바실얼리기대미지0
+            if (_targetNpc.hasSkillEffect(MOB_BASILL)) { // バジルアーリー期待未知0
                 _damage = 0;
                 _drainMana = 0;
                 _drainHp = 0;
             }
-            if (_targetNpc.hasSkillEffect(MOB_COCA)) { // 코카얼리기대미지0
+            if (_targetNpc.hasSkillEffect(MOB_COCA)) { // コカアーリー期待未知0
                 _damage = 0;
                 _drainMana = 0;
                 _drainHp = 0;
@@ -3901,15 +3809,15 @@ public class L1Attack {
                 }
             }
 
-            /** 조우의 돌골렘 **/
+            /** ゾウのストーンゴーレム **/
 
             if (_drainHp > 0) {
                 int newHp = _pc.getCurrentHp() + _drainHp;
                 _pc.setCurrentHp(newHp);
             }
-            /** 조우의 돌골렘 **/
+            /** ゾウのストーンゴーレム **/
 
-            damageNpcWeaponDurability(); // 무기를 손상시킨다.
+            damageNpcWeaponDurability(); // 武器を損傷させる。
 
             _targetNpc.receiveDamage(_pc, _damage);
         } else if (_calcType == NPC_NPC) {
@@ -3919,24 +3827,24 @@ public class L1Attack {
             if (_targetNpc.hasSkillEffect(EARTH_BIND)) {
                 _damage = 0;
             }
-            if (_targetNpc.hasSkillEffect(MOB_BASILL)) { // 바실얼리기대미지0
+            if (_targetNpc.hasSkillEffect(MOB_BASILL)) { // バジルアーリー期待未知0
                 _damage = 0;
             }
-            if (_targetNpc.hasSkillEffect(MOB_COCA)) { // 코카얼리기대미지0
+            if (_targetNpc.hasSkillEffect(MOB_COCA)) { // コカアーリー期待未知0
                 _damage = 0;
             }
             _targetNpc.receiveDamage(_npc, _damage);
         }
     }
 
-    /* ■■■■■■■■■■■■■■■ 카운터 배리어 ■■■■■■■■■■■■■■■ */
+    /* ■■■■■■■■■■■■■■■ カウンターバリアー ■■■■■■■■■■■■■■■ */
 
-    // ■■■■ 카운터 배리어시의 공격 모션 송신 ■■■■
+    // ■■■■ カウンターバリアー時の攻撃モーション送信 ■■■■
     public void actionCounterBarrier() {
         if (_calcType == PC_PC) {
             if (_pc == null)
                 return;
-            _pc.setHeading(_pc.targetDirection(_targetX, _targetY)); // 방향세트
+            _pc.setHeading(_pc.targetDirection(_targetX, _targetY)); // 方向セット
             _pc.sendPackets(new S_AttackMissPacket(_pc, _targetId));
             _pc.broadcastPacket(new S_AttackMissPacket(_pc, _targetId), _target);
             _pc.sendPackets(new S_DoActionGFX(_pc.getId(), ActionCodes.ACTION_Damage));
@@ -3947,7 +3855,7 @@ public class L1Attack {
             if (_npc == null || _target == null)
                 return;
             int actId = 0;
-            _npc.setHeading(_npc.targetDirection(_targetX, _targetY)); // 방향세트
+            _npc.setHeading(_npc.targetDirection(_targetX, _targetY)); // 方向セット
             if (getActId() > 0) {
                 actId = getActId();
             } else {
@@ -3963,13 +3871,13 @@ public class L1Attack {
         }
     }
 
-    // ■■■■ 모탈바디 발동시의 공격 모션 송신 ■■■■
+    // ■■■■ モータルボディ発動時の攻撃モーション送信 ■■■■
 
     public void actionMortalBody() {
         if (_calcType == PC_PC) {
             if (_pc == null || _target == null)
                 return;
-            _pc.setHeading(_pc.targetDirection(_targetX, _targetY)); // 방향세트
+            _pc.setHeading(_pc.targetDirection(_targetX, _targetY)); // 方向セット
             S_UseAttackSkill packet = new S_UseAttackSkill(_pc, _target.getId(), 6519, _targetX, _targetY, ActionCodes.ACTION_Attack, false);
             _pc.sendPackets(packet);
             _pc.broadcastPacket(packet, _target);
@@ -3978,13 +3886,13 @@ public class L1Attack {
         } else if (_calcType == NPC_PC) {
             if (_npc == null || _target == null)
                 return;
-            _npc.setHeading(_npc.targetDirection(_targetX, _targetY)); // 방향세트
+            _npc.setHeading(_npc.targetDirection(_targetX, _targetY)); // 方向セット
             _npc.broadcastPacket(new S_SkillSound(_target.getId(), 6519));
             _npc.broadcastPacket(new S_DoActionGFX(_npc.getId(), ActionCodes.ACTION_Damage));
         }
     }
 
-    // ■■■■ 상대의 공격에 대해서 카운터 배리어가 유효한가를 판별 ■■■■
+    // ■■■■ 相手の攻撃に対してカウンターバリアーが有効かを判別 ■■■■
     public boolean isShortDistance() {
         boolean isShortDistance = true;
         if (_calcType == PC_PC) {
@@ -3996,7 +3904,7 @@ public class L1Attack {
                 return false;
             boolean isLongRange = (_npc.getLocation().getTileLineDistance(new Point(_targetX, _targetY)) > 1);
             int bowActId = _npc.getNpcTemplate().getBowActId();
-            // 거리가 2이상, 공격자의 활의 액션 ID가 있는 경우는 원공격
+            // 距離が2以上、攻撃者の弓のアクションIDがある場合は、ワン攻撃
             if (isLongRange && bowActId > 0) {
                 isShortDistance = false;
             }
@@ -4004,7 +3912,7 @@ public class L1Attack {
         return isShortDistance;
     }
 
-    // ■■■■ 카운터 배리어의 대미지를 반영 ■■■■
+    // ■■■■ カウンターバリアーのダメージを反映 ■■■■
     public void commitCounterBarrier() {
         int damage = calcCounterBarrierDamage();
         if (damage == 0) {
@@ -4017,7 +3925,7 @@ public class L1Attack {
         }
     }
 
-    // ■■■■ 모탈바디의 대미지를 반영 ■■■■
+    // ■■■■モータルボディのダメージを反映 ■■■■
     public void commitMortalBody() {
         // int damage = 40;
         // if (damage == 0) {
@@ -4039,7 +3947,7 @@ public class L1Attack {
         }
     }
 
-    // ●●●● 카운터 배리어의 대미지를 산출 ●●●●
+    // ●●●● カウンターバリアーのダメージを算出 ●●●●
     private int calcCounterBarrierDamage() {
         double damage = 0;
         L1ItemInstance weapon = null;
@@ -4053,7 +3961,7 @@ public class L1Attack {
         return (int) damage;
     }
 
-    // ●●●● 전사 타이탄 대미지를 산출 ●●●●
+    // ●●●● 戦士タイタンダメージを算出 ●●●●
     private int 타이탄대미지() {
         double damage = 0;
         L1ItemInstance weapon = null;
@@ -4065,57 +3973,57 @@ public class L1Attack {
     }
 
     /*
-     * 무기를 손상시킨다. 대NPC의 경우, 손상 확률은10%로 한다. 축복 무기는3%로 한다.
+     * 武器を損傷させる。大NPCの場合には、損傷確率は10％とする。祝福武器は3％とする。
      */
     private void damageNpcWeaponDurability() {
-        int chance = 10; //일반 무기
-        int bchance = 3; //축복 받은 무기 손상확률
+        int chance = 10; //一般武器
+        int bchance = 3; //祝福された武器の損傷確率
 
-        /** 로봇시스템 **/
+        /** ロボットシステム **/
         if (_pc.getRobotAi() != null) {
             return;
         }
-        /** 로봇시스템 **/
+        /** ロボットシステム **/
 
         /*
-         * 손상하지 않는 NPC, 맨손, 손상하지 않는 무기 사용, SOF중의 경우 아무것도 하지 않는다.
+         * 損傷していないNPC、素手、損傷していない武器の使用、SOF中の場合は何もしない。
          */
         if (_calcType != PC_NPC || _targetNpc.getNpcTemplate().is_hard() == false || _weaponType == 0 || weapon.getItem().get_canbedmg() == 0
                 || _pc.hasSkillEffect(SOUL_OF_FLAME)) {
             return;
         }
-        // 통상의 무기·저주해진 무기
+        // 通常の武器・呪われた武器
         if ((_weaponBless == 1 || _weaponBless == 2) && ((_random.nextInt(100) + 1) < chance)) {
-            // \f1당신의%0가 손상했습니다.
+            // \f1あなたの%0が破損しました。
             _pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
             _pc.getInventory().receiveDamage(weapon);
         }
-        // 축복된 무기
+        // 祝福された武器
         if (_weaponBless == 0 && ((_random.nextInt(100) + 1) < bchance)) {
-            // \f1당신의%0가 손상했습니다.
+            // \f1あなたの%0が破損しました。
             _pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
             _pc.getInventory().receiveDamage(weapon);
         }
     }
 
-    /** 속성화살 **/
+    /** 属性矢 **/
     private int 속성화살(L1ItemInstance arrow, L1NpcInstance npc) {
         int itemId = arrow.getItem().getItemId();
         int damage = 0;
         int NpcWeakAttr = _targetNpc.getNpcTemplate().get_weakAttr();
-        if (itemId == 820014) {// 수령의 블랙 미스릴 화살
+        if (itemId == 820014) {// 受領のブラックミスリルアロー
             if (NpcWeakAttr == 2) {
                 damage = 3;
             }
-        } else if (itemId == 820015) {// 풍령의 블랙 미스릴 화살
+        } else if (itemId == 820015) {// 風鈴のブラックミスリルアロー
             if (NpcWeakAttr == 8) {
                 damage = 3;
             }
-        } else if (itemId == 820016) {// 지령의 블랙 미스릴 화살
+        } else if (itemId == 820016) {// 指令のブラックミスリルアロー
             if (NpcWeakAttr == 1) {
                 damage = 3;
             }
-        } else if (itemId == 820017) {// 화령의 블랙 미스릴 화살
+        } else if (itemId == 820017) {// ファイアーブラックミスリルアロー
             if (NpcWeakAttr == 4) {
                 damage = 3;
             }
@@ -4123,7 +4031,7 @@ public class L1Attack {
         return damage;
     }
 
-    /** 스탯 + 무기에 따른 공성 **/
+    /** ステータス+武器による攻城 **/
     private int PchitAdd() {
         int value = 0;
         if(_pc instanceof L1RobotInstance){
@@ -4146,13 +4054,13 @@ public class L1Attack {
         } else {
             value += _weaponAddHit + _pc.getBowHitup() + _pc.getBowHitRate() + (_weaponEnchant / 2);
         }
-		if (Sweapon != null){ // 전사 쌍수 공성 추가
+		if (Sweapon != null){ // 戦士両手攻城追加
 			value += _SweaponAddHit + (_SweaponEnchant /2);
 		}
         return value;
     }
 
-    /** 타겟PC 회피 스킬에 대한 연산 **/
+    /** ターゲットPC回避スキルの演算 **/
     private int toPcSkillHit() {
         int value = 0;
         if (_targetPc.hasSkillEffect(UNCANNY_DODGE)) {
@@ -4167,7 +4075,7 @@ public class L1Attack {
         return value;
     }
 
-    /** Hit 최종 연산 **/
+    /** Hit最終演算 **/
     private boolean hitRateCal(int AD, int DD, int fumble, int critical) {
         if (AD <= fumble) {
             _hitRate = 0;
@@ -4185,7 +4093,7 @@ public class L1Attack {
         return false;
     }
 
-    /** 타겟PC DD 연산 **/
+    /** ターゲットPC DD演算 **/
     private int toPcDD(int dv) {
         if (_targetPc.getAC().getAc() >= 0) {
             return 10 - _targetPc.getAC().getAc();

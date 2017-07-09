@@ -1,7 +1,5 @@
 /**
- * 공지 창 
- * 
- * Made by 쪼꼬
+ * お知らせウィンドウ
  */
 
 package l1j.server.server.serverpackets;
@@ -62,9 +60,9 @@ public class S_CommonNews extends ServerBasePacket{
 		writeS(s);
 	}
 	/**
-	 * 계정명으로 읽어야할 공지 갯수 리턴
-	 * @param account 계정명
-	 * @return 공지 갯수
+	 * アカウント名に読むべきお知らせ本数リターン
+	 * @param account アカウント名
+	 * @return お知らせ本数
 	 */
 	public static int NoticeCount(String account){
 		int Count = 0;
@@ -87,9 +85,9 @@ public class S_CommonNews extends ServerBasePacket{
 	}
 	
 	/**
-	 * 계정 테이블에서 계정을 상대로 최종 공지날짜를 가져온다.
+	 * アカウント表でアカウントを相手に最終通知日を持って来る。
 	 * @param client
-	 * @return 최종 공지를 읽은 날짜(yyyy-MM-dd)
+	 * @return 最終的な通知を読んだ日（yyyy-MM-dd）
 	 */
 	private String getDate(String account){
 		String sTemp = "";	
@@ -114,7 +112,7 @@ public class S_CommonNews extends ServerBasePacket{
 	}
 	
 	/**
-	 * 계정명을 대상으로 최종 공지날짜를 현날짜로 갱
+	 *アカウント名を対象に、最終的な公知の日付を現在の日付に更新
 	 * @param account
 	 */
 	public void UpDate(String account, String date){

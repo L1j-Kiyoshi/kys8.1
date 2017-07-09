@@ -26,7 +26,7 @@ public class S_ItemColor extends ServerBasePacket {
 	private static final String S_ITEM_COLOR = "[S] S_ItemColor";
 
 	/**
-	 * 아이템의 색을 변경한다. 축복·저주 상태가 변화했을 때 등에 보낸다
+	 * アイテムの色を変更する。祝福・呪いの状態が変化したときなどに送る
 	 */
 	public S_ItemColor(L1ItemInstance item) {
 		if (item == null) {
@@ -45,13 +45,13 @@ public class S_ItemColor extends ServerBasePacket {
 	private void buildPacket(L1ItemInstance item) {
 		writeC(Opcodes.S_CHANGE_ITEM_BLESS);
 		writeD(item.getId());
-		writeC(item.getBless()); // 0:b 1:n 2:c -의 값:아이템이 봉인되어?
+		writeC(item.getBless()); // 0:b 1:n 2:c  - の値：アイテムが封印されて？
 	}
 	
 	private void buildPacket(L1ItemInstance item, int color) {
 		writeC(Opcodes.S_CHANGE_ITEM_BLESS);
 		writeD(item.getId());
-		// 0 : 축복 1: 보통 2: 저주 3: 미확인 128: 축봉인 129: 봉인 130: 저주봉인 131: 미확인봉인
+		// 0：祝福1：普通2：呪い3：未確認128：軸シール129：封印130：呪い封印131：未確認封印
 		writeC(color);
 	}
 

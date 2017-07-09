@@ -296,19 +296,19 @@ public class HelpBySupport extends RepeatTask {
 		String chat = null;
 		if(rnd > 99){
 		if(i == 0){
-    	chat = "야 엠오링이다 천천히 사냥해ㅋ";
+    	chat = "よエムOリングである、ゆっくり狩り笑";
     	_support.broadcastPacket(new S_NpcChatPacket(_support, chat, 0));
 		}else if(i == 1){
-	    	chat = "엠 반남았다 천천히 사냥해ㅜ";
+	    	chat = "エム半残っゆっくり狩りㅜ";
 	    	_support.broadcastPacket(new S_NpcChatPacket(_support, chat, 0));
 		}
 		}
 		if(i == 2){
-	    	 chat = "마돌없어서 못줘";
+	    	 chat = "マドルなくモトジュォ";
 	    	_support.broadcastPacket(new S_NpcChatPacket(_support, chat, 0));
 		}
 		if(i == 3){
-	    	 chat = "엠"+ _support.getCurrentMp() +"남았어 천천히해";
+	    	 chat = "エム"+ _support.getCurrentMp() +"残ったゆっくりして";
 	    	_support.broadcastPacket(new S_NpcChatPacket(_support, chat, 0));
 		}
 	}
@@ -319,36 +319,36 @@ public class HelpBySupport extends RepeatTask {
 	}
 	
 	public void npctalk3(String chatText) {
-		if (chatText.startsWith("힐줘")) {
+		if (chatText.startsWith("ヒルジュォ")) {
 			heal2();
 			return;
-		}else if(chatText.startsWith("버서줘")){
+		}else if(chatText.startsWith("バーソジュォ")){
 			Berserkers();
 			return;
-		}else if(chatText.startsWith("힘업줘")){
+		}else if(chatText.startsWith("STRアップくれ")){
 			Strup();
 			return;
-		}else if(chatText.startsWith("덱업줘")){
+		}else if(chatText.startsWith("デッキオプジュォ")){
 			Dexup();
 			return;
-		}else if(chatText.startsWith("어벤줘")){
+		}else if(chatText.startsWith("オベンくれ")){
 			Advanceup();
 			return;
-		}else if(chatText.startsWith("뮨줘") && _pc.isGm()){
+		}else if(chatText.startsWith("ミュンジュォ") && _pc.isGm()){
 			Immune();
 			return;
-		}else if(chatText.startsWith("엠몇")){
+		}else if(chatText.startsWith("エムミョト")){
 			npctalk(3);
 			return;
-		}else if(chatText.startsWith("속이기 ") && _pc.isGm()){
-			chatText = chatText.replace("속이기 ","");
+		}else if(chatText.startsWith("欺く ") && _pc.isGm()){
+			chatText = chatText.replace("欺く","");
 			npctalk2(chatText);
 			return;
-		}else if(chatText.startsWith("공격해 ") && _pc.isGm()){
-			chatText = chatText.replace("공격해 ","");
+		}else if(chatText.startsWith("攻撃して") && _pc.isGm()){
+			chatText = chatText.replace("攻撃して","");
 			hate(chatText);
 			return;
-		}else if(chatText.startsWith("그만해") && _pc.isGm()){
+		}else if(chatText.startsWith("停止") && _pc.isGm()){
 			cleartarget();
 			return;
 		}

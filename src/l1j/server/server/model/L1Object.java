@@ -8,14 +8,14 @@ import l1j.server.server.model.map.L1Map;
 import l1j.server.server.model.map.L1WorldMap;
 
 /**
- * 월드상에 존재하는 모든 오브젝트의 베이스 클래스
+ * ワールド上に存在するすべてのオブジェクトのベースクラス
  */
 public class L1Object implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private L1Location _loc = new L1Location();
 	private int _id = 0;
 
-	/**로봇추가**/
+	/**ロボットを追加**/
 	
 	private int _dir = 0;
 	private int _dis = 0;
@@ -66,7 +66,7 @@ public class L1Object implements Serializable {
 		_visibleMapId = mapId;
 	}
 	/**
-	 * 오브젝트가 존재하는 MAP의 MAP ID를 돌려준다
+	 * オブジェクトが存在するMAPのMAP IDを返す
 	 * 
 	 * @return MAP ID
 	 */
@@ -75,7 +75,7 @@ public class L1Object implements Serializable {
 	}
 
 	/**
-	 * 오브젝트가 존재하는 MAP의 MAP ID를 설정한다
+	 * オブジェクトが存在するMAPのMAP IDを設定する
 	 * 
 	 * @param mapId
 	 *            MAP ID
@@ -85,7 +85,7 @@ public class L1Object implements Serializable {
 	}
 
 	/**
-	 * 오브젝트가 존재하는 MAP를 보관 유지하는 L1Map 오브젝트를 돌려준다
+	 * オブジェクトが存在するMAPを保持するL1Mapオブジェクトを返す
 	 * 
 	 */
 	public L1Map getMap() {
@@ -93,10 +93,10 @@ public class L1Object implements Serializable {
 	}
 
 	/**
-	 * 오브젝트가 존재하는 MAP를 설정한다
+	 * オブジェクトが存在するMAPを設定する
 	 * 
 	 * @param map
-	 *            오브젝트가 존재하는 MAP를 보관 유지하는 L1Map 오브젝트
+	 *            オブジェクトが存在するMAPを保持するL1Mapオブジェクト
 	 */
 	public void setMap(L1Map map) {
 		if (map == null) {
@@ -106,66 +106,66 @@ public class L1Object implements Serializable {
 	}
 
 	/**
-	 * 오브젝트를 식별하는 ID를 돌려준다
+	 * オブジェクトを識別するためのIDを返す
 	 * 
-	 * @return 오브젝트 ID
+	 * @return オブジェクトID
 	 */
 	public int getId() {
 		return _id;
 	}
 
 	/**
-	 * 오브젝트를 식별하는 ID를 설정한다
+	 * オブジェクトを識別するためのIDを設定する
 	 * 
 	 * @param id
-	 *            오브젝트 ID
+	 *            オブジェクトID
 	 */
 	public void setId(int id) {
 		_id = id;
 	}
 
 	/**
-	 * 오브젝트가 존재하는 좌표의 X치를 돌려준다
+	 * オブジェクトが存在する座標のX値を返す
 	 * 
-	 * @return 좌표의 X치
+	 * @return 座標のX値
 	 */
 	public int getX() {
 		return _loc.getX();
 	}
 
 	/**
-	 * 오브젝트가 존재하는 좌표의 X치를 설정한다
+	 * オブジェクトが存在する座標のX値を設定する
 	 * 
 	 * @param x
-	 *            좌표의 X치
+	 *            座標のX値
 	 */
 	public void setX(int x) {
 		_loc.setX(x);
 	}
 
 	/**
-	 * 오브젝트가 존재하는 좌표의 Y치를 돌려준다
+	 * オブジェクトが存在する座標のY値を返す
 	 * 
-	 * @return 좌표의 Y치
+	 * @return 座標のY値
 	 */
 	public int getY() {
 		return _loc.getY();
 	}
 
 	/**
-	 * 오브젝트가 존재하는 좌표의 Y치를 설정한다
+	 * オブジェクトが存在する座標のY値を設定する
 	 * 
 	 * @param y
-	 *            좌표의 Y치
+	 *           座標のY値
 	 */
 	public void setY(int y) {
 		_loc.setY(y);
 	}
 
 	/**
-	 * 오브젝트가 존재하는 위치를 보관 유지하는, L1Location 오브젝트에의 참조를 돌려준다.
+	 * オブジェクトが存在する位置を保持する、L1Locationオブジェクトへの参照を返す。
 	 * 
-	 * @return 좌표를 보관 유지하는, L1Location 오브젝트에의 참조
+	 * @return 座標を保持する、L1Locationオブジェクトへの参照
 	 */
 	public L1Location getLocation() {
 		return _loc;
@@ -184,58 +184,58 @@ public class L1Object implements Serializable {
 	}
 
 	/**
-	 * 지정된 오브젝트까지의 직선 거리를 돌려준다.
+	 * 指定されたオブジェクトまでの直線距離を返す。
 	 */
 	public double getLineDistance(L1Object obj) {
 		return this.getLocation().getLineDistance(obj.getLocation());
 	}
 
 	/**
-	 * 지정된 오브젝트까지의 직선 타일수를 돌려준다.
+	 * 指定されたオブジェクトまでの直線タイル数を返す。
 	 */
 	public int getTileLineDistance(L1Object obj) {
 		return this.getLocation().getTileLineDistance(obj.getLocation());
 	}
 
 	/**
-	 * 지정된 오브젝트까지의 타일수를 돌려준다.
+	 * 指定されたオブジェクトまでのタイルの数を返す。
 	 */
 	public int getTileDistance(L1Object obj) {
 		return this.getLocation().getTileDistance(obj.getLocation());
 	}
 
 	/**
-	 * 오브젝트가 플레이어의 화면내에 접어든(인식된) 때에 불려 간다.
+	 * オブジェクトがプレーヤーの画面内に入った（認識された）ときに呼び出される。
 	 * 
 	 * @param perceivedFrom
-	 *            이 오브젝트를 인식한 PC
+	 *            このオブジェクトを認識したPC
 	 */
 	public void onPerceive(L1PcInstance perceivedFrom) {
 	}
 
 	/**
-	 * 오브젝트가 플레이어의 화면내에 접어든(인식된) 때에 불려 간다.
+	 * オブジェクトがプレーヤーの画面内に入った（認識された）ときに呼び出される。
 	 * 
 	 * @param perceivedFrom
-	 *            이 오브젝트를 인식한 PC
+	 *            このオブジェクトを認識したPC
 	 */
 	public void onPerceive(L1SupportInstance perceivedFrom) {
 	}
 
 	/**
-	 * 오브젝트와 액션이 발생할 때 호출
+	 * オブジェクトとアクションが発生したときに呼び出さ
 	 * 
 	 * @param actionFrom
-	 *            액션을 일으킨 PC
+	 *            アクションを起こしたPC
 	 */
 	public void onAction(L1PcInstance actionFrom) {
 	}
 
 	/**
-	 * 오브젝트와 대화할 때 호출
+	 * オブジェクトと対話するときに呼び出さ
 	 * 
 	 * @param talkFrom
-	 *            말을 건넨 PC
+	 *            話しかけたPC
 	 */
 	public void onTalkAction(L1PcInstance talkFrom) {
 	}

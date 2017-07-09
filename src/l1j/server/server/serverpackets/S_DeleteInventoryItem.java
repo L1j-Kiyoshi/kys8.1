@@ -27,8 +27,8 @@ public class S_DeleteInventoryItem extends ServerBasePacket {
 	private static final String S_DELETE_INVENTORY_ITEM = "[S] S_DeleteInventoryItem";
 
 	/**
-	 * 목록으로부터 아이템을 삭제한다.
-	 * @param item - 삭제하는 아이템
+	 *リストからアイテムを削除する。
+	 * @param item - 削除するアイテム
 	 */
 	public S_DeleteInventoryItem(L1ItemInstance item) {
 		if (item != null) {

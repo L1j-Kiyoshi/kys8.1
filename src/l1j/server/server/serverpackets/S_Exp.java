@@ -26,7 +26,7 @@
 //	private static final String S_EXP = "[S] S_Exp";
 //
 //	/**
-//	 * 레벨과 경험치 데이터를 보낸다.
+//	 *レベルと経験値のデータを送る。
 //	 * @param pc - PC
 //	 */
 //	public S_Exp(L1PcInstance pc) {

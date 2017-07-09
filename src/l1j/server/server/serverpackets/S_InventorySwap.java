@@ -40,7 +40,7 @@ public class S_InventorySwap extends ServerBasePacket {
 	
 
 	public void buildPacket(int index) {
-		writeC(Opcodes.S_EXTENDED_PROTOBUF); //스왑
+		writeC(Opcodes.S_EXTENDED_PROTOBUF); //スワップ
 		writeH(0x0320);
 		writeC(0x08);
 		writeC(index);
@@ -49,7 +49,7 @@ public class S_InventorySwap extends ServerBasePacket {
 
 
 	public void buildPacket(int index, Map<Integer, List<Integer>> swap) {
-		writeC(Opcodes.S_EXTENDED_PROTOBUF); //스왑
+		writeC(Opcodes.S_EXTENDED_PROTOBUF); //スワップ
 		writeH(0x0320);
 
 		writeC(0x08); writeC(index);

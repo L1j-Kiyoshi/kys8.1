@@ -56,7 +56,7 @@ public class S_AttackPacket extends ServerBasePacket {
 		writeC(cha.getHeading());
 		writeH(0x0000); // target x
 		writeH(0x0000); // target y
-		writeC(attacktype); // 0:none 2:크로우 4:이도류 0x08:CounterMirror
+		writeC(attacktype); // 0:none 2：クロウ4：デュアルブレード0x08：CounterMirror
 		writeH(0x00);
 	}
 

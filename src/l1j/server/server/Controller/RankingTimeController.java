@@ -110,7 +110,7 @@ public class RankingTimeController {
 			pc.setSkillEffect(L1SkillId.RANK_BUFF_1, -1);
 			pc.sendPackets(new S_Ranking2(L1SkillId.RANK_BUFF_1, rate > 0 ? true : false, rank.getType(), rate > 0 ? -1 : 0));
 		}
-		if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.is전사()) {
+		if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.isWarrior()) {
 			pc.getAbility().addAddedStr(1 * rate);
 		} else if(pc.isElf()) {
 			pc.getAbility().addAddedDex(1 * rate);

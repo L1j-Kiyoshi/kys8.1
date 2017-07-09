@@ -30,7 +30,7 @@ public class S_LetterList extends ServerBasePacket {
         buildPacket(pc, type, count);
     }
 
-    private void buildPacket(L1PcInstance pc, int type, int count) { // 이부분에서 문제 
+    private void buildPacket(L1PcInstance pc, int type, int count) { // この部分での問題
         Connection con = null;
         PreparedStatement pstm = null;
         PreparedStatement pstm1 = null;
@@ -68,7 +68,7 @@ public class S_LetterList extends ServerBasePacket {
                 writeSS(rs.getString(7));
             }
         } catch (SQLException e) {
-            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);//이로그를 없애면 안나옴
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);//これは彼消せばアンナオム
         } finally {
             SQLUtil.close(rs);
             SQLUtil.close(pstm);
@@ -80,7 +80,7 @@ public class S_LetterList extends ServerBasePacket {
         writeC(Opcodes. S_MAIL_INFO);
         writeC(writeType);
         writeD(id);
-        writeC(type); // 0:수신, 1:발신
+        writeC(type); // 0：受信、1：発信
         writeS(name);
         writeSS(title);
     }

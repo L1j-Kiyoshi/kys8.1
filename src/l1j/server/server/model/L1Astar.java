@@ -6,19 +6,18 @@
 //******************************************************************************
 package l1j.server.server.model;
 
-import l1j.server.server.model.L1Character;
+import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.model.map.L1Map;
 import l1j.server.server.model.map.L1WorldMap;
-import l1j.server.server.model.Instance.L1NpcInstance;
 
 public class L1Astar {
-	// 열린 노드, 닫힌 노드 리스트
+	// 開かれたノード、閉じたノードリスト
 	private L1Node	OpenNode, ClosedNode;
-	// 최대 루핑 회수
+	// 最大屋根回収
 	private static final int LIMIT_LOOP = 1000;
 	//*************************************************************************
 	// Name : L1AStar()
-	// Desc : 생성자
+	// Desc : コンストラクタ
 	//*************************************************************************
 	public L1Astar() {
 		OpenNode = null;
@@ -26,7 +25,7 @@ public class L1Astar {
 	}
 	//*************************************************************************
 	// Name : ResetPath()
-	// Desc : 이전에 생성된 경로를 제거
+	// Desc : 以前に作成されたパスを削除
 	//*************************************************************************
 	public void ResetPath() {
 		L1Node tmp;
@@ -43,7 +42,7 @@ public class L1Astar {
 	}
 	//*************************************************************************
 	// Name : FindPath()
-	// Desc : 시작위치와 목표위치를 입력 받아 경로노드 리스트를 반환
+	// Desc : 開始位置と目標位置の入力を受け、パスノードのリストを返す
 	//*************************************************************************
 	public L1Node FindPath(L1NpcInstance npc, L1Character target) {
 		return FindPath(npc, target.getX(), target.getY(), target.getMapId(),target);
@@ -85,7 +84,7 @@ public class L1Astar {
 	}
 	//*************************************************************************
 	// Name : MakeChild()
-	// Desc : 입력받은 노드의 인접한 노드들로 확장
+	// Desc : 入力されたノードの隣接ノードに拡張
 	//*************************************************************************
 	public char MakeChild(L1Node node, int tx, int ty, short m) {
 		int		x, y;
@@ -94,7 +93,7 @@ public class L1Astar {
 		
 		x = node.x;
 		y = node.y;
-		// 인접한 노드로 이동가능한지 검사
+		// 隣接ノードに移動可能かどうかのチェック
 		cc[0] = IsMove(x  , y+1, m);
 		cc[1] = IsMove(x-1, y+1, m);
 		cc[2] = IsMove(x-1, y  , m);
@@ -103,7 +102,7 @@ public class L1Astar {
 		cc[5] = IsMove(x+1, y-1, m);
 		cc[6] = IsMove(x+1, y  , m);
 		cc[7] = IsMove(x+1, y+1, m);
-		// 이동가능한 방향이라면 노드를 생성하고 평가값 계산
+		// 移動可能な方向であれば、ノードを作成し、評価値の計算
 		if ( cc[2] == 1 ) {
 			MakeChildSub(node, x-1, y, tx, ty);
 			flag = 1;
@@ -141,7 +140,7 @@ public class L1Astar {
 	}
 	//*************************************************************************
 	// Name : IsMove()
-	// Desc : 이동가능한 위치인지 검사
+	// Desc : 移動可能な位置であることを確認
 	//*************************************************************************
 	public char IsMove(int x, int y, short mapid) {
 		L1Map map = L1WorldMap.getInstance().getMap(mapid);
@@ -156,15 +155,15 @@ public class L1Astar {
 	}
 	//*************************************************************************
 	// Name : MakeChildSub()
-	// Desc : 노드를 생성. 열린노드나 닫힌노드에 이미 있는 노드라면 
-	//        이전값과 비교하여 f가 더 작으면 정보 수정
-	//        닫힌노드에 있다면 그에 연결된 모든 노드들의 정보도 같이 수정
+	// Desc : ノードを生成します。開かれたノードまたは閉じたノードに既にあるノードであれば、
+	//前の値と比較して、fがより小さければ情報の修正
+	//閉じノードにある場合は、それに接続されたすべてのノードの情報も一緒に修正
 	//*************************************************************************
 	public void MakeChildSub(L1Node node, int x, int y, int tx, int ty) {
 		L1Node	old = null, child = null;
 		int		i;
 		int		g = node.g + 1;
-		// 현재노드가 열린 노드에 있고 f가 더 작으면 정보 수정
+		// 現在のノードが開かれたノードにあり、fがより小さければ情報の修正
 		if ( (old = IsOpen(x, y)) != null ) {
 			for ( i = 0; i < 8; i++ ) {
 				if ( node.direct[i] == null ) {
@@ -178,7 +177,7 @@ public class L1Astar {
 				old.f = old.h + old.g;
 			}
 		}
-		// 현재노드가 닫힌 노드에 있고 f가 더 작으면 정보 수정
+		// 現在のノードが閉じたノードにあり、fがより小さければ情報の修正
 		else if ( (old = IsClosed(x, y)) != null ) {
 			for ( i = 0; i < 8; i++ ) {
 				if ( node.direct[i] == null ) {
@@ -190,13 +189,13 @@ public class L1Astar {
 				old.prev = node;
 				old.g = g;
 				old.f = old.h + old.g;
-				// 현재노드가 닫힌노드에 있다면 그에 연결된 모든 노드들의 정보도 수정
+				//現在のノードが閉じたノードにある場合は、それに接続されたすべてのノードの情報も修正
 				//MakeDown(old);
 			}
 		}
-		// 새로운 노드라면 노드정보 생성하고 열린노드에 추가
+		// 新しいノードであれば、ノード情報生成し、開かれたノードに追加
 		else {
-			// 새로운 노드 생성
+			// 新しいノードを作成
 			child = new L1Node();
 			
 			child.prev = node;
@@ -206,7 +205,7 @@ public class L1Astar {
 			child.x = x;
 			child.y = y;
 			
-			// 새로운 노드를 열린노드에 추가
+			// 新しいノードを開いたノードに追加
 			InsertNode(child);
 
 			for ( i = 0; i < 8; i++ ) {
@@ -219,7 +218,7 @@ public class L1Astar {
 	}
 	//*************************************************************************
 	// Name : IsOpen()
-	// Desc : 입력된 노드가 열린노드인지 검사
+	// Desc : 入力されたノードが開かれたノードである検査
 	//*************************************************************************
 	public L1Node IsOpen(int x, int y) {
 		L1Node tmp = OpenNode;
@@ -233,7 +232,7 @@ public class L1Astar {
 	}
 	//*************************************************************************
 	// Name : IsClosed()
-	// Desc : 입력된 노드가 닫힌노드인지 검사
+	// Desc : 入力されたノードが閉じたノードかどうか確認
 	//*************************************************************************
 	public L1Node IsClosed(int x, int y) {
 		L1Node tmp = ClosedNode;
@@ -247,8 +246,8 @@ public class L1Astar {
 	}
 	//*************************************************************************
 	// Name : InsertNode()
-	// Desc : 입력된 노드를 열린노드에 f값에 따라 정렬하여 추가
-	//        f값이 높은것이 제일 위에 오도록 -> 최적의 노드
+	// Desc : 入力されたノードを開いて、ノードのf値に基づいてソートして追加
+	//        f値が高いことが一番上に来るように - >最適のノード
 	//*************************************************************************
 	public void InsertNode(L1Node src) {
 		L1Node old = null, tmp = null;

@@ -32,7 +32,7 @@ public class S_ClanAttention extends ServerBasePacket{
 		writeH(i);
 	}
 
-	/** 멘트 */
+	/** コメント */
 	public S_ClanAttention(boolean onoff, String clanname) {
 		writeC(Opcodes.S_PLEDGE_WATCH);
 		writeC(onoff ? 32 : 31);

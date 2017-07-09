@@ -188,7 +188,7 @@ public class L1FakeCharacter implements L1CommandExecutor {
 			} else if (newPc.isDarkelf()){ //다크엘프
 				newPc.getInventory().storeItem(item3);
 				newPc.getInventory().setEquipped(item3, true);
-			} else if (newPc.is전사()){ //전사
+			} else if (newPc.isWarrior()){ //전사
 				newPc.getInventory().storeItem(item4);
 				newPc.getInventory().setEquipped(item4, true);
 			}

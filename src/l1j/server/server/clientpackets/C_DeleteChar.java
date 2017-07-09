@@ -55,7 +55,7 @@ public class C_DeleteChar extends ClientBasePacket {
 						pc.setType(37);
 					} else if (pc.isBlackwizard()) {
 						pc.setType(38);
-					} else if (pc.is전사()) {
+					} else if (pc.isWarrior()) {
 						pc.setType(39);						
 					}
 					Timestamp deleteTime = new Timestamp(System.currentTimeMillis() + 86400000);
@@ -76,7 +76,7 @@ public class C_DeleteChar extends ClientBasePacket {
 						pc.setType(5);
 					} else if (pc.isBlackwizard()) {
 						pc.setType(6);
-					} else if (pc.is전사()) {
+					} else if (pc.isWarrior()) {
 						pc.setType(7);
 					}
 					pc.setDeleteTime(null);

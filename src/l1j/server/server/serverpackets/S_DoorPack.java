@@ -73,19 +73,19 @@ public class S_DoorPack extends ServerBasePacket {
 		writeH(0);
 		if (door.getGfxId() == 12164 
 				|| door.getGfxId() == 12167 
-				|| door.getGfxId() == 12170 //64~70 오크요새 외성문
+				|| door.getGfxId() == 12170 //64〜70オーク要塞外城門
 				|| door.getGfxId() == 12987
 				|| door.getGfxId() == 12989
-				|| door.getGfxId() == 12991 //87~91 켄트성 외성문
+				|| door.getGfxId() == 12991 //87〜91ケント城外の門
 				|| door.getGfxId() == 12127
 				|| door.getGfxId() == 12129
 				|| door.getGfxId() == 12131
-				|| door.getGfxId() == 12133 //29~33 기란성 외성문
+				|| door.getGfxId() == 12133 //29〜33ギラン城外の門
 		) { 
 			writeS("$440");
-		} else if (door.getGfxId() == 339 //켄트성 내성문
-				|| door.getGfxId() == 1336 //기란성 내성문
-				|| door.getGfxId() == 12163  //오크요새 내성문
+		} else if (door.getGfxId() == 339 //ケント城内の門
+				|| door.getGfxId() == 1336 //ギラン城内の門
+				|| door.getGfxId() == 12163  //オーク要塞内城門
 		) {
 			writeS("$441");
 		} else {

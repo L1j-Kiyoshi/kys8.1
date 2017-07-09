@@ -54,7 +54,7 @@ public class L1ClanMatching {
 			addMatching(CML);
 			pstm.execute();
 		}catch (Exception e) {
-			_log.log(Level.SEVERE, "클랜매칭 리스트 쓰기, 오류 발생.", e);
+			_log.log(Level.SEVERE, "クランマッチングリスト書き込み、エラーが発生し。", e);
 		}finally{
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
@@ -77,7 +77,7 @@ public class L1ClanMatching {
 			CML._type = htype;
 			pstm.execute();
 		}catch (Exception e) {
-			_log.log(Level.SEVERE, "클랜매칭 리스트 수정, 오류 발생.", e);
+			_log.log(Level.SEVERE, "クランマッチングリストの修正、エラーが発生し。", e);
 		}finally{
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
@@ -111,7 +111,7 @@ public class L1ClanMatching {
 				}
 			}
 		}catch (Exception e) {
-			_log.log(Level.SEVERE, "writeClanMatchingApcList, 오류 발생.", e);
+			_log.log(Level.SEVERE, "writeClanMatchingApcList、エラーが発生し。", e);
 		}finally{
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
@@ -138,7 +138,7 @@ public class L1ClanMatching {
 				addMatching(CML);
 			}
 		}catch (Exception e) {
-			_log.log(Level.SEVERE, "클랜매칭 리스트 불러오기, 오류 발생.", e);
+			_log.log(Level.SEVERE, "クランマッチングリストの読み込み、エラーが発生し。", e);
 		}finally{
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
@@ -146,7 +146,7 @@ public class L1ClanMatching {
 		}
 	}
 
-	// 유저 전용 
+	// ユーザ専用
 	public void writeClanMatchingApcList_User(L1PcInstance pc, L1Clan clan){
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -168,7 +168,7 @@ public class L1ClanMatching {
 				}
 			}
 		}catch (Exception e) {
-			_log.log(Level.SEVERE, "writeClanMatchingApcList_User, 오류 발생.", e);
+			_log.log(Level.SEVERE, "writeClanMatchingApcList_User、エラーが発生し。", e);
 		}finally{
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
@@ -176,7 +176,7 @@ public class L1ClanMatching {
 		}
 	}
 
-	// 유저 전용
+	// ユーザ専用
 	public void loadClanMatchingApcList_User(L1PcInstance pc){
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -192,7 +192,7 @@ public class L1ClanMatching {
 				pc.addCMAList(clanname);
 			}
 		}catch (Exception e) {
-			_log.log(Level.SEVERE, "loadClanMatchingApcList_User, 오류 발생.", e);
+			_log.log(Level.SEVERE, "loadClanMatchingApcList_User、エラーが発生し。", e);
 		}finally{
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
@@ -200,7 +200,7 @@ public class L1ClanMatching {
 		}
 	}
 
-	// 군주, 수호기사, 부군주 전용.
+	// 君主、守護騎士、富君主のみ。
 	public void loadClanMatchingApcList_Crown(L1PcInstance pc){
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -225,7 +225,7 @@ public class L1ClanMatching {
 	}
 
 
-	// 승인
+	// 承認
 	public void deleteClanMatchingApcList(L1PcInstance pc){
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -245,7 +245,7 @@ public class L1ClanMatching {
 				}
 			}
 		}catch (Exception e) {
-			_log.log(Level.SEVERE, "writeClanMatchingApcList, 오류 발생.", e);
+			_log.log(Level.SEVERE, "writeClanMatchingApcList、エラーが発生し。", e);
 		}finally{
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
@@ -253,7 +253,7 @@ public class L1ClanMatching {
 		}
 	}
 
-	// 거절 눌렀을때
+	// 拒絶押されたとき
 	public void deleteClanMatchingApcList(L1PcInstance pc, int objid, L1Clan clan){
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -286,7 +286,7 @@ public class L1ClanMatching {
 				}
 			}
 		}catch (Exception e) {
-			_log.log(Level.SEVERE, "deleteClanMatchingApcList, 오류 발생.", e);
+			_log.log(Level.SEVERE, "deleteClanMatchingApcList、エラーが発生し。", e);
 		}finally{
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
@@ -295,7 +295,7 @@ public class L1ClanMatching {
 	}
 
 
-	// 삭제 눌렀을때
+	// 削除押されたとき
 	public void deleteClanMatchingApcList(L1PcInstance pc, L1Clan clan){
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -316,7 +316,7 @@ public class L1ClanMatching {
 				}
 			}
 		}catch (Exception e) {
-			_log.log(Level.SEVERE, "writeClanMatchingApcList, 오류 발생.", e);
+			_log.log(Level.SEVERE, "writeClanMatchingApcList、エラーが発生し。", e);
 		}finally{
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);

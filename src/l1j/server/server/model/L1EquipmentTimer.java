@@ -42,7 +42,7 @@ public class L1EquipmentTimer implements Runnable {
 
 		if ((_item.getRemainingTime() - 1) > 0) {
 			_item.setRemainingTime(_item.getRemainingTime() - 1);
-			_pc.getInventory().updateItem(_item, L1PcInventory.COL_REMAINING_TIME); //시간아이템 실시간보기
+			_pc.getInventory().updateItem(_item, L1PcInventory.COL_REMAINING_TIME); //時間アイテムリアルタイム表示
 			GeneralThreadPool.getInstance().schedule(this, _scheduleTime);
 		} else {
 			_pc.getInventory().removeItem(_item, 1);

@@ -287,7 +287,7 @@ public class C_CreateChar extends ClientBasePacket {
 			}
 			startPosType = NewHi;
 			// by.lins
-		} else if (pc.is전사()) {
+		} else if (pc.isWarrior()) {
 			init_hp = 16;
 			switch (pc.getAbility().getBaseWis()) {
 			case 9:

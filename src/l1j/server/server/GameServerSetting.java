@@ -14,12 +14,12 @@ public class GameServerSetting
 	}
 
 	/** Server Manager 1 関連部分 **/
-	public static boolean 일반 = false;
-	public static boolean 귓속말 = false;
-	public static boolean 글로벌 = false;
-	public static boolean 혈맹 = false;
-	public static boolean 파티 = false;
-	public static boolean 장사 = false;	
+	public static boolean General = false;
+	public static boolean Whisper = false;
+	public static boolean Global = false;
+	public static boolean Clan = false;
+	public static boolean Party = false;
+	public static boolean Business = false;	
 	public static boolean Att = false;
 	public static boolean NYEvent = false;
 

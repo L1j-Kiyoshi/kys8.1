@@ -35,7 +35,7 @@ public class S_OwnCharStatus extends ServerBasePacket {
 		int time = L1GameTimeClock.getInstance().getGameTime().getSeconds();
 		time = time - (time % 300);
 		// _log.warning((new
-		// StringBuilder()).append("송신 시간:").append(i).toString());
+		// StringBuilder()).append("送信時間：").append(i).toString());
 		writeC(Opcodes.S_STATUS);
 		//writeC(Opcodes.S_ACTION_UI);
 		writeD(pc.getId());
@@ -63,12 +63,12 @@ public class S_OwnCharStatus extends ServerBasePacket {
 		writeC(pc.get_food());
 		writeC(pc.getInventory().getWeight100());
 		writeH(pc.getLawful());
-		/** 3.80 속성방어갱신 **/
+		/** 3.80 属性防御更新 **/
 		writeH(pc.getResistance().getFire());
 		writeH(pc.getResistance().getWater());
 		writeH(pc.getResistance().getWind());
 		writeH(pc.getResistance().getEarth());
-		/** 3.80 속성방어갱신 **/
+		/** 3.80 属性防御更新 **/
 		writeD(pc.getMonsterkill());
 		writeH(0);
 	}

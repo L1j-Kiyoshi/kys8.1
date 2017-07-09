@@ -172,7 +172,7 @@ public class L1Location extends Point {
 	public static L1Location randomLocation(L1Location baseLocation, int min,
 			int max, boolean isRandomTeleport) {
 		if (min > max) {
-			throw new IllegalArgumentException("min > max가 되는 인수는 무효");
+			throw new IllegalArgumentException("min > maxとなる引数は無効");
 		}
 		if (max <= 0) {
 			return new L1Location(baseLocation);
@@ -255,11 +255,11 @@ public class L1Location extends Point {
 		return newLocation;
 	}
 
-	// / 별자리 랜포 수정|
+	///星座レンポ修正|
 	public static L1Location randomLocation2(int x, int y, L1Map maps,
 			short mapid, int min, int max, boolean isRandomTeleport) {
 		if (min > max) {
-			throw new IllegalArgumentException("min > max가 되는 인수는 무효");
+			throw new IllegalArgumentException("min > maxとなる引数は無効");
 		}
 		if (max <= 0) {
 			return new L1Location(x, y, mapid);
@@ -283,13 +283,13 @@ public class L1Location extends Point {
 		int locY1 = locY - max;
 		int locY2 = locY + max;
 
-		// map 범위
+		// map 範囲
 		int mapX1 = map.getX();
 		int mapX2 = mapX1 + map.getWidth();
 		int mapY1 = map.getY();
 		int mapY2 = mapY1 + map.getHeight();
 
-		// 최대에서도 맵의 범위내까지 보정
+		// 最大でもマップの範囲内まで補正
 		if (locX1 < mapX1) {
 			locX1 = mapX1;
 		}
@@ -303,11 +303,11 @@ public class L1Location extends Point {
 			locY2 = mapY2;
 		}
 
-		int diffX = locX2 - locX1; // x방향
-		int diffY = locY2 - locY1; // y방향
+		int diffX = locX2 - locX1; // x方向
+		int diffY = locY2 - locY1; // y方向
 
 		int trial = 0;
-		// 시행 회수를 범위 최소치에 의해 주기 때문에(위해)의 계산
+		// 試行回数を範囲最小値によって周期為の計算
 		int amax = (int) Math.pow(1 + (max * 2), 2);
 		int amin = (min == 0) ? 0 : (int) Math.pow(1 + ((min - 1) * 2), 2);
 		int trialLimit = 40 * amax / (amax - amin);
@@ -333,13 +333,13 @@ public class L1Location extends Point {
 			if (a < min) {
 				continue;
 			}
-			if (isRandomTeleport) { // 랜덤 텔레포트의 경우
-				if (L1CastleLocation.checkInAllWarArea(newX, newY, mapId)) { // 몇개의
-					// 성에리어
+			if (isRandomTeleport) { // ランダムテレポートの場合
+				if (L1CastleLocation.checkInAllWarArea(newX, newY, mapId)) { // いくつかの
+					// 性リア
 					continue;
 				}
 
-				// 몇개의 아지트내
+				// いくつかのアジト内
 				if (L1HouseLocation.isInHouse(newX, newY, mapId)) {
 					continue;
 				}
@@ -351,5 +351,5 @@ public class L1Location extends Point {
 		}
 		return newLocation;
 	}
-	// / 별자리 랜포 수정|
+	// / 星座レンポ修正
 }

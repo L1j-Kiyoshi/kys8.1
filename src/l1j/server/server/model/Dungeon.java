@@ -104,7 +104,7 @@ public class Dungeon {
 				}
 				newDungeon = new NewDungeon(newX, newY, (short) newMapId, heading, dungeonType);
 				if (_dungeonMap.containsKey(key)) {
-					_log.log(Level.WARNING, "같은 키의 dungeon 데이터가 있습니다. key=" + key);
+					_log.log(Level.WARNING, "同じキーのdungeonデータがあります。 key =" + key);
 				}
 				_dungeonMap.put(key, newDungeon);
 			}
@@ -184,7 +184,7 @@ public class Dungeon {
 					pc.dh = heading;
 					return true;
 				}
-				// 3초간은 무적(아브소르트바리아 상태)으로 한다.
+				// 3秒間は無敵（アブ小ガルトバリア状態）とする。
 				pc.setSkillEffect(L1SkillId.ABSOLUTE_BARRIER, 3000);
 				// pc.stopHpRegeneration();
 				// pc.stopMpRegeneration();

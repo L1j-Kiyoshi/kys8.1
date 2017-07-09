@@ -246,7 +246,7 @@ public class C_Shop extends ClientBasePacket {
 			}
 			
 			pc.getNetConnection().getAccount().updateShopOpenCount();
-			pc.sendPackets(new S_PacketBox(S_PacketBox.상점개설횟수, pc
+			pc.sendPackets(new S_PacketBox(S_PacketBox.SHOP_OPEN_COUNT, pc
 					.getNetConnection().getAccount().Shop_open_count), true);
 			
 			pc.setShopChat(chat);

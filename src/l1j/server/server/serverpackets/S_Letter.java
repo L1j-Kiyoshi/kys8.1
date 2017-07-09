@@ -34,7 +34,7 @@ public class S_Letter extends ServerBasePacket {
 			while (rs.next()) {
 				writeC(Opcodes. S_MAIL_INFO);
 				writeD(item.getId());
-				if (item.get_gfxid() == 465) { // 열기 전
+				if (item.get_gfxid() == 465) { // オープン前
 					writeH(466); // 열기 후
 				} else if (item.get_gfxid() == 606) {
 					writeH(605);
@@ -48,8 +48,8 @@ public class S_Letter extends ServerBasePacket {
 				writeS(rs.getString(4));
 				writeByte(rs.getBytes(7));
 				writeByte(rs.getBytes(8));
-				writeC(rs.getInt(6)); // 텐프레
-				writeS(rs.getString(5)); // 일자
+				writeC(rs.getInt(6)); // テンプレ
+				writeS(rs.getString(5)); // 日付
 			}
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

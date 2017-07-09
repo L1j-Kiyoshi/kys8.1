@@ -20,8 +20,8 @@
 package l1j.server.server.serverpackets;
 
 import l1j.server.server.Opcodes;
-import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.Instance.L1DollInstance;
+import l1j.server.server.model.Instance.L1PcInstance;
 
 // Referenced classes of package l1j.server.server.serverpackets:
 // ServerBasePacket , S_DollPack
@@ -49,7 +49,7 @@ public class S_DollPack extends ServerBasePacket {
 		writeH(0);
 		writeS(pet.getNameId());
 		writeS(pet.getTitle());
-		writeC(0); // 시시니테 - 0:mob, item(atk pointer) , 1:poisoned() ,
+		writeC(0); // シシなつ - 0:mob, item(atk pointer) , 1:poisoned() ,
 		// 2:invisable() , 4:pc, 8:cursed() , 16:brave() ,
 		// 32:??, 64:??(??) , 128:invisable but name
 		writeD(0); // ??

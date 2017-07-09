@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,15 +16,11 @@ import l1j.server.server.model.L1MobGroupSpawn;
 import l1j.server.server.model.L1NpcDeleteTimer;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1NpcInstance;
-import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.model.gametime.RealTime;
 import l1j.server.server.model.gametime.RealTimeClock;
 import l1j.server.server.serverpackets.S_MatizAlarm;
-import l1j.server.server.serverpackets.S_Message_YN;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.templates.L1Npc;
-import l1j.server.server.utils.CommonUtil;
 import manager.LinAllManager;
 
 public class BossTimeController implements Runnable {
@@ -98,18 +93,18 @@ public class BossTimeController implements Runnable {
 				if(hour == temp.SpawnHour[i]-1 && minute==temp.SpawnMinute[i]){
 					switch(temp.npcid){
 						case 5136:
-							if(!BossAlive.getInstance().is에르자베){
-								BossAlive.getInstance().is에르자베 = true;
-								BossAlive.getInstance().set에르자베타임(RealTimeClock.getInstance().getRealTime().getSeconds()+3600);
+							if(!BossAlive.getInstance().isErusabe){
+								BossAlive.getInstance().isErusabe = true;
+								BossAlive.getInstance().setErusabeTime(RealTimeClock.getInstance().getRealTime().getSeconds()+3600);
 								int time = (int)(BossAlive.getInstance().ezTime - RealTimeClock.getInstance().getRealTime().getSeconds());
 								L1World.getInstance().broadcastPacketToAll(new S_MatizAlarm(1,time,3600,true));
 
 							}
 						break;
 						case 5135:
-							if(!BossAlive.getInstance().is샌드웜){
-								BossAlive.getInstance().is샌드웜 = true;
-								BossAlive.getInstance().set샌드웜타임(RealTimeClock.getInstance().getRealTime().getSeconds()+3600);
+							if(!BossAlive.getInstance().isSandWarm){
+								BossAlive.getInstance().isSandWarm = true;
+								BossAlive.getInstance().setSandWarmTime(RealTimeClock.getInstance().getRealTime().getSeconds()+3600);
 								int time = (int)(BossAlive.getInstance().sdTime - RealTimeClock.getInstance().getRealTime().getSeconds());
 								L1World.getInstance().broadcastPacketToAll(new S_MatizAlarm(2,time,3600,true));
 							}
@@ -125,7 +120,7 @@ public class BossTimeController implements Runnable {
 	}
 	
 	
-	/**보스 스폰 처리 */
+	/**ボス出現処理 */
 	class BossThread implements Runnable {
 		BossTemp temp;
 		public BossThread(BossTemp _temp){
@@ -149,7 +144,7 @@ public class BossTimeController implements Runnable {
 			L1Npc template = NpcTable.getInstance().getTemplate(npcid);
 			if (template == null) {
 				_log.warning("Boss mob data for id:" + npcid + " missing in npc table");
-				System.out.println("보스스폰 컨트롤러 보스 npcid " + npcid + "가 존재하지 않습니다.");
+				System.out.println("ボス出現コントローラボスnpcid" + npcid + "が存在しません。");
 				return;
 			}
 			L1NpcInstance npc = NpcTable.getInstance().newNpcInstance(npcid);
@@ -185,8 +180,8 @@ public class BossTimeController implements Runnable {
 //				switch (npcid) {
 //				case 7310046:
 //					for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-//						player.set머미로드(true);
-//						player.sendPackets(new S_Message_YN(622, "머미로드를 징벌하러 가시겠습니까?"));
+//						player.setマミーロード(true);
+//						player.sendPackets(new S_Message_YN(622, "マミーロードを懲罰しに行くか？"));
 //					}
 //					break;
 //				case 2:

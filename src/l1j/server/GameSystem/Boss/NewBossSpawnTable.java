@@ -73,12 +73,12 @@ public class NewBossSpawnTable {
 				int number = 0;
 				while (s.hasMoreElements()) {
 					String temp2 = "";
-					StringTokenizer values = new StringTokenizer(s.nextToken(), "스폰데이: 타임랜덤삭제좌표범위그룹YN메세지멘트");
-					while (values.hasMoreElements()) {// 공백제거
+					StringTokenizer values = new StringTokenizer(s.nextToken(), "出現デイタイムランダム削除座標範囲グループYNメッセージコメント");
+					while (values.hasMoreElements()) {// 空白を削除
 						temp2 += values.nextToken();
 					}
 					// System.out.println("temp2 = " + temp2);
-					if (number == 0) { // 날자 월화수목~~
+					if (number == 0) { // 日付月火水木~~
 						StringTokenizer Day = new StringTokenizer(temp2, ",");
 						ArrayList<Integer> list = new ArrayList<Integer>();
 						while (Day.hasMoreElements()) {
@@ -103,7 +103,7 @@ public class NewBossSpawnTable {
 						for (int i = 0; i < list.size(); i++) {
 							temp.Day[i] = list.get(i);
 						}
-					} else if (number == 1) { // 스폰시간
+					} else if (number == 1) { // 出現時間
 						StringTokenizer mdata = new StringTokenizer(temp2, ",");
 						ArrayList<Integer> Hourlist = new ArrayList<Integer>();
 						ArrayList<Integer> Minutelist = new ArrayList<Integer>();
@@ -128,23 +128,23 @@ public class NewBossSpawnTable {
 							 //System.out.println("Minute = " + Minute);
 						}
 						
-					} else if (number == 2) { // 랜덤타임 분
+					} else if (number == 2) { // ランダムタイム分
 						StringTokenizer mdata = new StringTokenizer(temp2, "분");
 						temp.rndTime = Integer.parseInt(mdata.nextToken().trim());
-						// System.out.println("랜덤시간 = " + temp.rndTime);
-					} else if (number == 3) { // 삭제시간 초
+						// System.out.println("ランダム時間 = " + temp.rndTime);
+					} else if (number == 3) { // 削除時間秒
 						StringTokenizer mdata = new StringTokenizer(temp2, "초");
 						temp.DeleteTime = Integer.parseInt(mdata.nextToken().trim());
-						// System.out.println("삭제시간 초 = " + temp.DeleteTime);
-					} else if (number == 4) { // 스폰좌표
+						// System.out.println("削除時間秒= " + temp.DeleteTime);
+					} else if (number == 4) { // 出現座標
 						StringTokenizer mdata = new StringTokenizer(temp2, ",");
 						temp.SpawnLoc = new int[3];
 						temp.SpawnLoc[0] = Integer.parseInt(mdata.nextToken().trim());
 						temp.SpawnLoc[1] = Integer.parseInt(mdata.nextToken().trim());
 						temp.SpawnLoc[2] = Integer.parseInt(mdata.nextToken().trim());
-						// System.out.println("스폰좌표x = " + temp.SpawnLoc[0]);
-						// System.out.println("스폰좌표y = " + temp.SpawnLoc[1]);
-						// System.out.println("스폰좌표m = " + temp.SpawnLoc[2]);
+						// System.out.println("出現座標x = " + temp.SpawnLoc[0]);
+						// System.out.println("出現座標y = " + temp.SpawnLoc[1]);
+						// System.out.println("出現座標m = " + temp.SpawnLoc[2]);
 					}
 
 					number++;
@@ -196,15 +196,15 @@ public class NewBossSpawnTable {
 
 	/*
 	 * 1~6 0 
-	 * 스폰데이: 월,화,수,목,금,토,일 
-	 * 스폰타임: 2시 00분, 5시 30분 
-	 * 랜덤타임: 0분 
-	 * 삭제타임: 3600초 
-	 * 스폰좌표: 32726, 32832, 603 
-	 * 랜덤범위: 0 
-	 * 그룹스폰: 0 
-	 * YN메세지: 1 
-	 * 스폰멘트: 1
+	 * 出現デー：月、火、水、木、金、土、日
+	 * 出現時間：2時00分、5時30分
+	 * ランダムタイム：0分
+	 *削除タイム：3600秒
+	 * 出現座標：32726、32832、603
+	 * ランダム範囲：0
+	 * グループ出現：0
+	 * YNメッセージ：1
+	 * 出現コメント：1
 	 */
 	public static class BossTemp {
 		public int npcid;

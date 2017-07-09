@@ -309,10 +309,10 @@ public class C_ItemUSe2 extends ClientBasePacket {
 				createNewItem2(pc, 800014, 1, 0); // 각반 코인	
 				createNewItem2(pc, 40308, 50000000, 0); // 아데나
 				createNewItem2(pc, 3000119, 1, 0); // 패키지 이동부적
-				if (pc.is전사()) {
+				if (pc.isWarrior()) {
 					createNewItem2(pc, 203006, 1, 9); // 태풍의 도끼
 				}	
-				if (!pc.is전사()) {
+				if (!pc.isWarrior()) {
 					createNewItem2(pc, 800006, 1, 0); // 방패 코인
 				}
 			}

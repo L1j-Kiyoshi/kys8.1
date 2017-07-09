@@ -107,7 +107,7 @@ public class L1HauntedHouse implements Runnable {
 					}
 				} else {
 					if (--_count == 0) {
-						if (_count % 10 == 0) // 얜 10초마다 한번씩
+						if (_count % 10 == 0) // イェン10秒ごとに一度ずつ
 						{
 							removeRetiredMembers();
 						}
@@ -145,14 +145,14 @@ public class L1HauntedHouse implements Runnable {
 				}
 
 				for (L1PcInstance player : getMembersArray()) {
-					// 입장하시겠습니까? (Y/N)
+					// 入場しますか？ （Y / N）
 					if (player.getMap().getId() != 5140)
 						player.sendPackets(new S_Message_YN(1256, ""));
 				}
 			}
-			// 이미 있다면..
+			// 既にある場合。
 		} else {
-			// 이미 입장 예약이 되어있습니다.
+			// 既に入場予約がされています。
 			pc.sendPackets(new S_ServerMessage(1254));
 		}
 
@@ -179,9 +179,9 @@ public class L1HauntedHouse implements Runnable {
 		if (getMembersCount() < 2) {
 			for (L1PcInstance pc : getMembersArray()) {
 				if (pc.getMapId() == 5140) {
-					// 경기 최소 인원이 2명이 만족하지 않아 경기를 강제 종료 합니다. 1000 아데나를 돌려 드렸습니다.
+					// 試合最小人員が2人に満足していない試合を強制的に終了します。 1000アデナを返しました。
 					pc.sendPackets(new S_ServerMessage(1264));
-					pc.getInventory().storeItem(40308, 1000); // 1000 아데나 지급
+					pc.getInventory().storeItem(40308, 1000); // 1000アデナ支給
 
 					new L1Teleport().teleport(pc, 32624, 32813, (short) 4, 5, true);
 				}
@@ -253,7 +253,7 @@ public class L1HauntedHouse implements Runnable {
 			return true;
 		}
 
-		broadcast(_count + "초후 게임이 시작됩니다.");
+		broadcast(_count + "秒後、ゲームが開始されます。");
 
 		--_count;
 
@@ -269,7 +269,7 @@ public class L1HauntedHouse implements Runnable {
 			return true;
 		}
 
-		broadcast(_count + "초후 유령의 집 밖으로 이동합니다.");
+		broadcast(_count + "秒後お化け屋敷の外に移動します。");
 
 		--_count;
 
@@ -291,7 +291,7 @@ public class L1HauntedHouse implements Runnable {
 		for (L1Object object : L1World.getInstance().getObject()) {
 			if (object instanceof L1DoorInstance) {
 				door = (L1DoorInstance) object;
-				// 첫번째 문이라면 연다..
+				// 最初のドアであれば開く。
 				if (door.getMapId() == 5140 && door.getDoorId() == 3001) {
 					door.open();
 				}
@@ -304,7 +304,7 @@ public class L1HauntedHouse implements Runnable {
 		for (L1Object object : L1World.getInstance().getObject()) {
 			if (object instanceof L1DoorInstance) {
 				door = (L1DoorInstance) object;
-				// 첫번째 문이라면 닫는다..
+				// 最初のドアであれば閉める。
 				if (door.getMapId() == 5140 && door.getDoorId() == 3001) {
 					door.close();
 				}
@@ -364,14 +364,14 @@ public class L1HauntedHouse implements Runnable {
 	public void endHauntedHouse() {
 		setHauntedHouseStatus(STATUS_CLEANUP);
 
-		npcBroadcast("시간이 다 되었군. 다음에 또 보세나.");
+		npcBroadcast("時間がなったな。次にまた結合や。");
 
 		_count = 5;
 	}
 
 	public void endHauntedHouse(L1PcInstance pc) {
 		setHauntedHouseStatus(STATUS_CLEANUP);
-		pc.sendPackets(new S_SystemMessage("영혼의 불꽃을 파괴했습니다."));
+		pc.sendPackets(new S_SystemMessage("魂の炎を破壊した。"));
 
 		L1ItemInstance item = ItemTable.getInstance().createItem(41308);
 
@@ -381,7 +381,7 @@ public class L1HauntedHouse implements Runnable {
 				pc.getInventory().storeItem(item);
 				pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
 
-				Random random = new Random(System.nanoTime()); // 펫레이싱
+				Random random = new Random(System.nanoTime()); // ペットレーシング
 
 				if (random.nextInt() < 33) {
 					pc.getInventory().storeItem(3000023, 1);
@@ -395,7 +395,7 @@ public class L1HauntedHouse implements Runnable {
 
 		despawnFire();
 
-		npcBroadcast("예상보다 일찍 도착했군.");
+		npcBroadcast("予想より早く到着したな。");
 
 		_count = 5;
 	}

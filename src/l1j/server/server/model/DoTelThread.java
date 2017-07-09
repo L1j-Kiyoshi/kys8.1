@@ -30,7 +30,7 @@ public class DoTelThread implements Runnable {
 			try {
 				new Teleportation().doTeleportation(pc);
 			} catch (Exception e) {
-				System.out.println("텔 관련 4번오류");
+				System.out.println("テル関連4回エラー");
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
