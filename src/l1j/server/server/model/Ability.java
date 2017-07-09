@@ -496,8 +496,8 @@ public class Ability {
 			minabllity[4] = 8;
 			minabllity[5] = 12;
 			break;
-		case L1PcInstance.CLASSID_전사_MALE:
-		case L1PcInstance.CLASSID_전사_FEMALE:
+		case L1PcInstance.CLASSID_WARRIOR_MALE:
+		case L1PcInstance.CLASSID_WARRIOR_FEMALE:
 			minabllity[0] = 16;
 			minabllity[1] = 13;
 			minabllity[2] = 16;

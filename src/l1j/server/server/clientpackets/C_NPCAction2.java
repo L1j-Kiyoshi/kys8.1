@@ -812,7 +812,7 @@ public class C_NPCAction2 {
 				/** 깃털마을 피아르 **/
 			} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 7310093) {				
 				if (s.equalsIgnoreCase("a")) {
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						htmlid = "pc_tell2";
 						return htmlid;
@@ -837,7 +837,7 @@ public class C_NPCAction2 {
 						pc.sendPackets(new S_ChatPacket(pc, "고대 무덤의 시간이 만료 되었습니다."));
 						return htmlid;
 					}
-					if (pc.PC방_버프) {
+					if (pc.PCRoom_Buff) {
 						new L1Teleport().teleport(pc, 32902, 32811, (short) 430, 5, true);
 					} else {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
@@ -848,7 +848,7 @@ public class C_NPCAction2 {
 						pc.sendPackets(new S_ChatPacket(pc, "고대 무덤의 시간이 만료 되었습니다."));
 						return htmlid;
 					}
-					if (pc.PC방_버프) {
+					if (pc.PCRoom_Buff) {
 						new L1Teleport().teleport(pc, 32869, 32876, (short) 430, 5, true);
 					} else {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
@@ -903,7 +903,7 @@ public class C_NPCAction2 {
 					}
 				}
 				if (s.equalsIgnoreCase("g")) { //얼던PC
-						if (!pc.PC방_버프) {
+						if (!pc.PCRoom_Buff) {
 							pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 							return htmlid;
 						}
@@ -919,7 +919,7 @@ public class C_NPCAction2 {
 						}
 					}
 				if (s.equalsIgnoreCase("h")) { //오만1층
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						return htmlid;
 					}
@@ -931,7 +931,7 @@ public class C_NPCAction2 {
 						}
 					}
 				if (s.equalsIgnoreCase("i")) { //오만2층
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						return htmlid;
 					}
@@ -943,7 +943,7 @@ public class C_NPCAction2 {
 						}
 					}
 				if (s.equalsIgnoreCase("j")) { //오만3층
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						return htmlid;
 					}
@@ -955,7 +955,7 @@ public class C_NPCAction2 {
 						}
 					}
 				if (s.equalsIgnoreCase("k")) { //오만4층
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						return htmlid;
 					}
@@ -967,7 +967,7 @@ public class C_NPCAction2 {
 						}
 					}
 				if (s.equalsIgnoreCase("l")) { //오만5층
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						return htmlid;
 					}
@@ -979,7 +979,7 @@ public class C_NPCAction2 {
 						}
 					}
 				if (s.equalsIgnoreCase("m")) { //오만6층
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						return htmlid;
 					}
@@ -991,7 +991,7 @@ public class C_NPCAction2 {
 						}
 					}
 				if (s.equalsIgnoreCase("n")) { //오만7층
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						return htmlid;
 					}
@@ -1003,7 +1003,7 @@ public class C_NPCAction2 {
 						}
 					}
 				if (s.equalsIgnoreCase("o")) { //오만8층
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						return htmlid;
 					}
@@ -1015,7 +1015,7 @@ public class C_NPCAction2 {
 						}
 					}
 				if (s.equalsIgnoreCase("p")) { //오만9층
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						return htmlid;
 					}
@@ -1027,7 +1027,7 @@ public class C_NPCAction2 {
 						}
 					}
 				if (s.equalsIgnoreCase("q")) { //오만10층
-					if (!pc.PC방_버프) {
+					if (!pc.PCRoom_Buff) {
 						pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 						return htmlid;
 					}

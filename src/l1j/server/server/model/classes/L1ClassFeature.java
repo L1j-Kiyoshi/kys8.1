@@ -50,8 +50,8 @@ public abstract class L1ClassFeature {
 				|| classId == L1PcInstance.CLASSID_BLACKWIZARD_FEMALE) {
 			return new L1BlackWizardClassFeature();
 		}
-		if (classId == L1PcInstance.CLASSID_전사_MALE
-				|| classId == L1PcInstance.CLASSID_전사_FEMALE) {
+		if (classId == L1PcInstance.CLASSID_WARRIOR_MALE
+				|| classId == L1PcInstance.CLASSID_WARRIOR_FEMALE) {
 			return new L1WarriorClassFeature();
 		}
 		throw new IllegalArgumentException();

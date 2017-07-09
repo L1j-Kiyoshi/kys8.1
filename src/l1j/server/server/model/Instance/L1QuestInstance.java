@@ -125,8 +125,8 @@ public class L1QuestInstance extends L1NpcInstance {
 			}
 		}
 
-		// 얘 좀 구린듯. interlockedIncrement하는데 compare&Swap이라니. 어차피 intel 기준 lock
-		// xadd 한번만 콜해주면 되는데.-_-
+		// この子ちょっとグリーンらしい。 interlockedIncrementするcompare＆Swapとは。どうせintel基準lock
+		// xadd一度だけコールしてくれればされるが。-_-
 		if (_restCallCount.getAndIncrement() == 0) {
 			setRest(true);
 		}

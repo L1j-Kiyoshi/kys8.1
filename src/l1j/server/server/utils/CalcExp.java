@@ -449,13 +449,13 @@ public class CalcExp {
 		}
 
 		if (pc.hasSkillEffect(L1SkillId.EXP_POTION)) {
-			if (pc.PC방_버프) {
+			if (pc.PCRoom_Buff) {
 				expposion += 0.3;
 			} else {
 				expposion += 0.2;
 			}
 		} else if (pc.hasSkillEffect(L1SkillId.COMA_B)) {
-			if (pc.PC방_버프) {
+			if (pc.PCRoom_Buff) {
 				expposion += 0.3;
 			} else {
 				expposion += 0.20;
@@ -492,7 +492,7 @@ public class CalcExp {
 			    clan.addBlessCount(exp);
 			einhasadBonus += 0.77;
 			//einhasadBonus = 1.00;
-			if (pc.PC방_버프) {
+			if (pc.PCRoom_Buff) {
 				einhasadBonus += 0.20;
 				pc.calEinhasad(-exp);
 				if (pc.getClan() != null)
@@ -521,7 +521,7 @@ public class CalcExp {
 			pc.calEinhasad(-exp);
 			if (pc.getClan() != null)
 			    clan.addBlessCount(exp);	
-			if (pc.PC방_버프) {
+			if (pc.PCRoom_Buff) {
 				einhasadBonus += 0.20;
 				pc.calEinhasad(-exp);
 				if (pc.getClan() != null)

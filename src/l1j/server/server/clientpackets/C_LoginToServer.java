@@ -1,81 +1,6 @@
 package l1j.server.server.clientpackets;
 
-import static l1j.server.server.model.skill.L1SkillId.ADDITIONAL_FIRE;
-import static l1j.server.server.model.skill.L1SkillId.ANTA_BUFF;
-import static l1j.server.server.model.skill.L1SkillId.ANTA_MAAN;
-import static l1j.server.server.model.skill.L1SkillId.BERSERKERS;
-import static l1j.server.server.model.skill.L1SkillId.BIRTH_MAAN;
-import static l1j.server.server.model.skill.L1SkillId.BLOOD_LUST;
-import static l1j.server.server.model.skill.L1SkillId.CLEAR_MIND;
-import static l1j.server.server.model.skill.L1SkillId.COMA_A;
-import static l1j.server.server.model.skill.L1SkillId.COMA_B;
-import static l1j.server.server.model.skill.L1SkillId.CONCENTRATION;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_BEGIN;
-import static l1j.server.server.model.skill.L1SkillId.COOKING_END;
-import static l1j.server.server.model.skill.L1SkillId.DECAY_POTION;
-import static l1j.server.server.model.skill.L1SkillId.DECREASE_WEIGHT;
-import static l1j.server.server.model.skill.L1SkillId.DISEASE;
-import static l1j.server.server.model.skill.L1SkillId.DRAGON_PUPLE;
-import static l1j.server.server.model.skill.L1SkillId.DRAGON_SKIN;
-import static l1j.server.server.model.skill.L1SkillId.DRAGON_TOPAZ;
-import static l1j.server.server.model.skill.L1SkillId.DRESS_EVASION;
-import static l1j.server.server.model.skill.L1SkillId.ELEMENTAL_FALL_DOWN;
-import static l1j.server.server.model.skill.L1SkillId.ELEMENTAL_FIRE;
-import static l1j.server.server.model.skill.L1SkillId.ELEMENTAL_PROTECTION;
-import static l1j.server.server.model.skill.L1SkillId.EMERALD_NO;
-import static l1j.server.server.model.skill.L1SkillId.EMERALD_YES;
-import static l1j.server.server.model.skill.L1SkillId.ERASE_MAGIC;
-import static l1j.server.server.model.skill.L1SkillId.EXP_POTION;
-import static l1j.server.server.model.skill.L1SkillId.FAFU_BUFF;
-import static l1j.server.server.model.skill.L1SkillId.FAFU_MAAN;
-import static l1j.server.server.model.skill.L1SkillId.FEAR;
-import static l1j.server.server.model.skill.L1SkillId.FEATHER_BUFF_A;
-import static l1j.server.server.model.skill.L1SkillId.FEATHER_BUFF_B;
-import static l1j.server.server.model.skill.L1SkillId.FEATHER_BUFF_C;
-import static l1j.server.server.model.skill.L1SkillId.FEATHER_BUFF_D;
-import static l1j.server.server.model.skill.L1SkillId.GUARD_BREAK;
-import static l1j.server.server.model.skill.L1SkillId.God_buff;
-import static l1j.server.server.model.skill.L1SkillId.HORROR_OF_DEATH;
-import static l1j.server.server.model.skill.L1SkillId.INSIGHT;
-import static l1j.server.server.model.skill.L1SkillId.LIFE_MAAN;
-import static l1j.server.server.model.skill.L1SkillId.LIND_MAAN;
-import static l1j.server.server.model.skill.L1SkillId.MORTAL_BODY;
-import static l1j.server.server.model.skill.L1SkillId.NATURES_TOUCH;
-import static l1j.server.server.model.skill.L1SkillId.PANIC;
-import static l1j.server.server.model.skill.L1SkillId.PATIENCE;
-import static l1j.server.server.model.skill.L1SkillId.POLLUTE_WATER;
-import static l1j.server.server.model.skill.L1SkillId.REDUCE_WEIGHT;
-import static l1j.server.server.model.skill.L1SkillId.RESIST_ELEMENTAL;
-import static l1j.server.server.model.skill.L1SkillId.RESIST_MAGIC;
-import static l1j.server.server.model.skill.L1SkillId.RIND_BUFF;
-import static l1j.server.server.model.skill.L1SkillId.VALA_BUFF;
-import static l1j.server.server.model.skill.L1SkillId.SHAPE_CHANGE;
-import static l1j.server.server.model.skill.L1SkillId.SHAPE_MAAN;
-import static l1j.server.server.model.skill.L1SkillId.SILENCE;
-import static l1j.server.server.model.skill.L1SkillId.SOUL_OF_FLAME;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_BLUE_POTION;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_BLUE_POTION2;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_BRAVE;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_CASHSCROLL;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_CASHSCROLL2;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_CASHSCROLL3;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_CHAT_PROHIBITED;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_DRAGON_PEARL;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_ELFBRAVE;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_FRUIT;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_HASTE;
-import static l1j.server.server.model.skill.L1SkillId.STRIKER_GALE;
-import static l1j.server.server.model.skill.L1SkillId.SetBuff;
-import static l1j.server.server.model.skill.L1SkillId.Tam_Fruit1;
-import static l1j.server.server.model.skill.L1SkillId.Tam_Fruit2;
-import static l1j.server.server.model.skill.L1SkillId.Tam_Fruit3;
-import static l1j.server.server.model.skill.L1SkillId.Tam_Fruit4;
-import static l1j.server.server.model.skill.L1SkillId.Tam_Fruit5;
-import static l1j.server.server.model.skill.L1SkillId.VALA_MAAN;
-import static l1j.server.server.model.skill.L1SkillId.VENOM_RESIST;
-import static l1j.server.server.model.skill.L1SkillId.WEAKNESS;
-import static l1j.server.server.model.skill.L1SkillId.WIND_SHACKLE;
-import static l1j.server.server.model.skill.L1SkillId.레벨업보너스;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -137,6 +62,7 @@ import l1j.server.server.monitor.LoggerInstance;
 import l1j.server.server.serverpackets.S_ACTION_UI;
 import l1j.server.server.serverpackets.S_ACTION_UI2;
 import l1j.server.server.serverpackets.S_AddSkill;
+import l1j.server.server.serverpackets.S_ArdenStore;
 import l1j.server.server.serverpackets.S_Attendance;
 import l1j.server.server.serverpackets.S_BookMarkLoad;
 import l1j.server.server.serverpackets.S_CharStat;
@@ -145,11 +71,9 @@ import l1j.server.server.serverpackets.S_CharacterConfig;
 import l1j.server.server.serverpackets.S_ChatPacket;
 import l1j.server.server.serverpackets.S_ClanAttention;
 import l1j.server.server.serverpackets.S_ElfIcon;
-import l1j.server.server.serverpackets.S_EventNotice;
 import l1j.server.server.serverpackets.S_FairlyConfig;
 import l1j.server.server.serverpackets.S_HPUpdate;
 import l1j.server.server.serverpackets.S_InvList;
-import l1j.server.server.serverpackets.S_InventorySwap;
 import l1j.server.server.serverpackets.S_Karma;
 import l1j.server.server.serverpackets.S_Liquor;
 import l1j.server.server.serverpackets.S_MPUpdate;
@@ -179,10 +103,7 @@ import l1j.server.server.serverpackets.S_UnityIcon;
 import l1j.server.server.serverpackets.S_Unknown1;
 import l1j.server.server.serverpackets.S_War;
 import l1j.server.server.serverpackets.S_Weather;
-import l1j.server.server.serverpackets.S_WeekQuest;
 import l1j.server.server.serverpackets.S_Weight;
-import l1j.server.server.serverpackets.S_Ranking2;
-import l1j.server.server.serverpackets.S_ArdenStore;
 import l1j.server.server.templates.L1BookMark;
 import l1j.server.server.templates.L1GetBackRestart;
 import l1j.server.server.templates.L1Skills;
@@ -986,11 +907,11 @@ public class C_LoginToServer extends ClientBasePacket {
 				} else {
 					pc.sendPackets(new S_SystemMessage("[PC방 이용 시간] " + sc + "초 남았습니다."));
 				}
-				pc.PC방_버프 = true;
+				pc.PCRoom_Buff = true;
 				pc.sendPackets(new S_PacketBox(S_PacketBox.PC_ROOM_BUFF, 1));
 			}
 		} else {
-			pc.PC방_버프 = false;
+			pc.PCRoom_Buff = false;
 		}
 
 		if (Config.아놀드이벤트) {
@@ -1025,7 +946,7 @@ public class C_LoginToServer extends ClientBasePacket {
 		else
 			pc.sendPackets(new S_MonsterBookUI(S_MonsterBookUI.MONSTER_LOAD, null));
 		
-		if (pc.PC방_버프) {
+		if (pc.PCRoom_Buff) {
 			pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.PCBANG_SET, true));
 		} else {
 			pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.PCBANG_SET, false));
@@ -1916,82 +1837,82 @@ public class C_LoginToServer extends ClientBasePacket {
 	  }
 	  
 	  if (pc.getPeerage() == 1) {
-	  pc.set9급병(true);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(true);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 2) {
-	  pc.set9급병(false);pc.set8급병(true);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(false);pc.set8Militia(true);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 3) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(true);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(true);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 4) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(true);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(true);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 5) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(true);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(true);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 6) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(true);pc.set6급병(false);pc.set5급병(false);pc.set4급병(true);pc.set3급병(false);pc.set2급병(false);pc.set1급병
-	  (false); pc.set1성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(true);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(true);pc.set3Militia(false);pc.set2Militia(false);pc.set1Militia
+	  (false); pc.set1Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 7) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(true);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(true);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 8) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(true);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(true);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 9) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(true); pc.set1성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);pc.set2성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(true); pc.set1Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);pc.set2Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 10) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(true);pc.set2성장교(false);pc.set3성장교(false);pc.set4성장교(false);pc.set5성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(true);pc.set2Officer(false);pc.set3Officer(false);pc.set4Officer(false);pc.set5Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 11) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(true);pc.set3성장교(false);pc.set4성장교(false);pc.set5성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false);
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(true);pc.set3Officer(false);pc.set4Officer(false);pc.set5Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false);
 	  
 	  } else if (pc.getPeerage() == 12) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set3성장교(true);pc.set4성장교(false);pc.set5성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false); } else if (pc.getPeerage() == 13) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set3성장교(false);pc.set4성장교(true);pc.set5성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false); } else if (pc.getPeerage() == 14) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set3성장교(false);pc.set4성장교(false);pc.set5성장교(true);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false); } else if (pc.getPeerage() == 15) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set3성장교(false);pc.set4성장교(false);pc.set5성장교(false);
-	  pc.set장군(true);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(false); } else if (pc.getPeerage() == 16) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set3성장교(false);pc.set4성장교(false);pc.set5성장교(false);
-	  pc.set장군(false);pc.set대장군(true);pc.set사령관(false);pc.set총사령관(false); } else if (pc.getPeerage() == 17) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set3성장교(false);pc.set4성장교(false);pc.set5성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(true);pc.set총사령관(false); } else if (pc.getPeerage() == 18) {
-	  pc.set9급병(false);pc.set8급병(false);pc.set7급병(false);pc.set6급병(false);pc.set5급병(false);pc.set4급병(false);pc.set3급병(false);pc.set2급병(false);pc.
-	  set1급병(false); pc.set1성장교(false);pc.set2성장교(false);pc.set3성장교(false);pc.set4성장교(false);pc.set5성장교(false);
-	  pc.set장군(false);pc.set대장군(false);pc.set사령관(false);pc.set총사령관(true); } }
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set3Officer(true);pc.set4Officer(false);pc.set5Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false); } else if (pc.getPeerage() == 13) {
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set3Officer(false);pc.set4Officer(true);pc.set5Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false); } else if (pc.getPeerage() == 14) {
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set3Officer(false);pc.set4Officer(false);pc.set5Officer(true);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false); } else if (pc.getPeerage() == 15) {
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set3Officer(false);pc.set4Officer(false);pc.set5Officer(false);
+	  pc.setGeneral(true);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(false); } else if (pc.getPeerage() == 16) {
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set3Officer(false);pc.set4Officer(false);pc.set5Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(true);pc.setCommander(false);pc.setGeneralCommander(false); } else if (pc.getPeerage() == 17) {
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set3Officer(false);pc.set4Officer(false);pc.set5Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(true);pc.setGeneralCommander(false); } else if (pc.getPeerage() == 18) {
+	  pc.set9Militia(false);pc.set8Militia(false);pc.set7Militia(false);pc.set6Militia(false);pc.set5Militia(false);pc.set4Militia(false);pc.set3Militia(false);pc.set2Militia(false);pc.
+	  set1Militia(false); pc.set1Officer(false);pc.set2Officer(false);pc.set3Officer(false);pc.set4Officer(false);pc.set5Officer(false);
+	  pc.setGeneral(false);pc.setMajorGeneral(false);pc.setCommander(false);pc.setGeneralCommander(true); } }
 	 
 
 	private void setExcludeList(L1PcInstance pc, L1ExcludingList exList) {

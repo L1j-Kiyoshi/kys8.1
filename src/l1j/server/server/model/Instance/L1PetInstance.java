@@ -568,7 +568,7 @@ public class L1PetInstance extends L1NpcInstance {
 	public void usePetWeapon(L1ItemInstance weapon) {
 		if (getWeapon() == null) {
 			setPetWeapon(weapon);
-		} else { // 이미 무엇인가를 장비 하고 있는 경우, 전의 장비를 뗀다
+		} else { // すでに何かを装備している場合は、前の機器をはずす
 			if (getWeapon().equals(weapon)) {
 				removePetWeapon(getWeapon());
 			} else {
@@ -581,7 +581,7 @@ public class L1PetInstance extends L1NpcInstance {
 	public void usePetArmor(L1ItemInstance armor) {
 		if (getArmor() == null) {
 			setPetArmor(armor);
-		} else { // 이미 무엇인가를 장비 하고 있는 경우, 전의 장비를 뗀다
+		} else { // すでに何かを装備している場合は、前の機器をはずす
 			if (getArmor().equals(armor)) {
 				removePetArmor(getArmor());
 			} else {

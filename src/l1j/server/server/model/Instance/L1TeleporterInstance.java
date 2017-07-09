@@ -100,12 +100,12 @@ public class L1TeleporterInstance extends L1NpcInstance {
 					htmlid = "ramuda2";
 				} else if (quest.get_step(L1Quest.QUEST_LEVEL50) == 1) { // ディ教えディーン同意済み
 					if (player.isCrown()) { // 君主
-						if (_isNowDely) { // 텔레포트 지연중
+						if (_isNowDely) { // テレポート遅延中
 							htmlid = "ramuda4";
 						} else {
 							htmlid = "ramudap1";
 						}
-					} else { // 군주 이외
+					} else { // 君主以外
 						htmlid = "ramuda1";
 					}
 				} else {
@@ -442,7 +442,7 @@ public class L1TeleporterInstance extends L1NpcInstance {
 			String[] price = null;
 			switch(npcid){
 			case 50056: // メット
-				html = "hp_storm1"; // 폭풍 수련 지역
+				html = "hp_storm1"; // 嵐修練地域
 				break;
 			case 50020: // スタンレー
 			case 50024: // アスター

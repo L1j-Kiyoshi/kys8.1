@@ -30,32 +30,32 @@ public class L1ScarecrowInstance extends L1NpcInstance {
 					player.sendPackets(new S_MatizCloudia(1));
 				player.setExp(ExpTable.getExpByLevel(player.getLevel()+1));
 				player.sendPackets(new S_MatizCloudia(0,player.getLevel()+1));
-			}else if (player.getLevel() < 99 && !player.noPlayerCK && getNpcId()!=202064) {//레벨5까지만 로봇제외
+			}else if (player.getLevel() < 99 && !player.noPlayerCK && getNpcId()!=202064) {//レベル5までロボットを除く
 				ArrayList<L1PcInstance> targetList = new ArrayList<L1PcInstance>();
 				targetList.add(player);
 				ArrayList<Integer> hateList = new ArrayList<Integer>();
 				hateList.add(1);
 
 				if (player.isInParty() || player.isDead()) { 
-					CalcExp.calcExp(player, getId(), targetList, hateList, 0);//경험치지급
+					CalcExp.calcExp(player, getId(), targetList, hateList, 0);//経験値支給
 				}else{
-					CalcExp.calcExp(player, getId(), targetList, hateList, getExp());//경험치지급
+					CalcExp.calcExp(player, getId(), targetList, hateList, getExp());//経験値支給
 				}
 				
 				if (Config.허수아비탐지급여부) {
 					player.sendPackets(new S_NewCreateItem(S_NewCreateItem.TAM_POINT, player.getNetConnection()), true);// 탐지급
-					player.getNetConnection().getAccount().tam_point += 10;// 탐지급갯수
-					player.getNetConnection().getAccount().updateTam();// 탐업뎃
+					player.getNetConnection().getAccount().tam_point += 10;// 乗車支給本数
+					player.getNetConnection().getAccount().updateTam();// 乗車アップデッドエ
 				}
 			}
 			if (getNpcId() >= 45002 && getNpcId() <= 45003) {
 				player.getInventory().storeItem(40308, 10);
-				//player.sendPackets(new S_ServerMessage(143, "허수아비", "$4 (" + 10 + ")"));
+				//player.sendPackets(new S_ServerMessage(143, "かかし", "$4 (" + 10 + ")"));
 			}
 
 			int dmg = attack.calcDamage();
 			if (this.getNpcId() == 44997 || this.getNpcId() == 44998 || this.getNpcId() == 44999) {	
-				player.sendPackets(new S_SystemMessage("물리대미지: [" + dmg + "]"));
+				player.sendPackets(new S_SystemMessage("物理ダメージ：[" + dmg + "]"));
 			}
 			if (getHeading() < 7) {
 				setHeading(getHeading() + 1);

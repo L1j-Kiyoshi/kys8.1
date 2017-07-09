@@ -615,7 +615,7 @@ public class C_ActionUi extends ClientBasePacket {
 			pc.sendPackets(new S_ACTION_UI2(S_ACTION_UI2.CLAN_JOIN_SETTING, pc.getClan().getJoinSetting(), pc.getClan().getJoinType()));
 			break;*/
 		case 수상한하늘정원:
-			if (!pc.PC방_버프) {
+			if (!pc.PCRoom_Buff) {
 				pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
 				return;
 			}

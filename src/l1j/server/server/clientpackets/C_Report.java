@@ -106,7 +106,7 @@ public class C_Report extends ClientBasePacket {
 						pc.dy = pn.getY() + rnd.nextInt(3) - 1;
 						pc.dm = (short) pn.getMapId();
 						pc.dh = calcheading(pc.dx, pc.dy, pn.getX(), pn.getY());
-						pc.상인찾기Objid = pn.getId();
+						pc.MerchantSearchObjid = pn.getId();
 						new L1Teleport().teleport(pc, pc.dx, pc.dy, pc.dm, pc.dh, false);
 						pc.sendPackets(new S_Teleport(pc));
 					} else {
@@ -116,7 +116,7 @@ public class C_Report extends ClientBasePacket {
 							pc.dy = nn.getY() + rnd.nextInt(3) - 1;
 							pc.dm = (short) nn.getMapId();
 							pc.dh = calcheading(pc.dx, pc.dy, nn.getX(), nn.getY());
-							pc.상인찾기Objid = nn.getId();
+							pc.MerchantSearchObjid = nn.getId();
 							new L1Teleport().teleport(pc, pc.dx, pc.dy, pc.dm, pc.dh, false);
 							pc.sendPackets(new S_Teleport(pc));
 							

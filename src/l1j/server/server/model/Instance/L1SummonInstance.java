@@ -224,7 +224,7 @@ public class L1SummonInstance extends L1NpcInstance {
 			}
 		} else if (!isDead()) 
 		{
-			System.out.println("경고：사몬의 HP감소 처리가 올바르게 행해지지 않은 개소가 있습니다.※혹은 최초부터 HP0");
+			System.out.println("警告：サーモンのHP減少処理が正しく行われていない箇所があります。※あるいは最初からHP0");
 			Death(attacker);
 		}
 	}

@@ -1,5 +1,7 @@
 package l1j.server.server.model.Instance;
 
+import static l1j.server.server.model.item.L1ItemId.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -35,18 +37,17 @@ import l1j.server.server.model.map.L1WorldMap;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.model.skill.L1SkillUse;
 import l1j.server.server.serverpackets.S_ChangeShape;
-import l1j.server.server.serverpackets.S_Door;
-import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.serverpackets.S_DoActionGFX;
+import l1j.server.server.serverpackets.S_Door;
 import l1j.server.server.serverpackets.S_MoveCharPacket;
 import l1j.server.server.serverpackets.S_NPCPack;
+import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.serverpackets.S_SkillBrave;
 import l1j.server.server.serverpackets.S_SkillHaste;
 import l1j.server.server.serverpackets.S_SkillSound;
 import l1j.server.server.templates.L1Npc;
 import l1j.server.server.templates.L1NpcChat;
 import l1j.server.server.types.Point;
-import static l1j.server.server.model.item.L1ItemId.*;
 
 public class L1NpcInstance extends L1Character {
 	private static final long serialVersionUID = 1L;
@@ -66,7 +67,7 @@ public class L1NpcInstance extends L1Character {
 	
 	public long NpcDeleteTime = 0;
 	
-	private static final long DELETE_TIME = 40000L; // 삭제시간 40초
+	private static final long DELETE_TIME = 40000L; // 削除時間40秒
 
 	private L1Npc _npcTemplate;
 	private L1Spawn _spawn;
@@ -103,10 +104,10 @@ public class L1NpcInstance extends L1Character {
 	private L1MobGroupInfo _mobGroupInfo = null;
 	private int _mobGroupId = 0;
 	@SuppressWarnings("unused")
-	private int CubeTime; //큐브시간
-	private L1PcInstance CubePc; //큐브사용자
+	private int CubeTime; //キューブの時間
+	private L1PcInstance CubePc; //キューブユーザー
 	private int Cube = 20;
-	private int num;	/*버경 관련*/
+	private int num;	/*ボギョン関連*/
 	
 	private DeleteTimer _deleteTask;
 	private ScheduledFuture<?> _future = null;
@@ -138,7 +139,7 @@ public class L1NpcInstance extends L1Character {
 
 	private String Spawn_Location;
 	
-	public String getSpawnLocation(){//하딘 시스템
+	public String getSpawnLocation(){//ハーディンシステム
 		return Spawn_Location;
 	}
 	public void setSpawnLocation(String st){
@@ -282,7 +283,7 @@ public class L1NpcInstance extends L1Character {
 				stop();
 			} catch (Exception e) {
 				System.out.println("NPC ID : "+ getNpcTemplate().get_npcId());
-				_log.log(Level.WARNING, "NpcAI에 예외가 발생했습니다.", e);
+				_log.log(Level.WARNING, "NpcAIに例外が発生しました。", e);
 			}
 		}
 
@@ -314,7 +315,7 @@ public class L1NpcInstance extends L1Character {
 
 	public void 몬스터Teleport() {
 		int lvl = this.getLevel();
-		if (lvl > 50) {// 50레벨이상몬스터만적용
+		if (lvl > 50) {// 50レベル以上のモンスターにのみ適用
 			if (this instanceof L1MonsterInstance) {
 				if (getLocation().getTileLineDistance(new Point(getHomeX(), getHomeY())) > 30) {
 					teleport(getHomeX(), getHomeY(), getHeading());
@@ -333,7 +334,7 @@ public class L1NpcInstance extends L1Character {
 		}
 
 		if (this instanceof L1MerchantInstance) {
-			if (this.getNpcId() == 5095) { // 모래 폭풍
+			if (this.getNpcId() == 5095) { //砂嵐
 				for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 					L1Location newLocation = pc.getLocation().randomLocation(30, true);
 					int newX = newLocation.getX();
@@ -347,7 +348,7 @@ public class L1NpcInstance extends L1Character {
 				}
 			}
 		}
-		/** 하이네필드 트랩 **/
+		/** ハイネフィールドトラップ**/
 		if (this instanceof L1MerchantInstance) {
 			if (this.getNpcId() == 7210040) {
 				for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
@@ -522,9 +523,9 @@ public class L1NpcInstance extends L1Character {
 								MOVE_SPEED));
 					}
 					/*else {
-						if (onAStar(target, true)) { 	// 대상까지 이동할 수 있기때문에 A* 알고리즘을 작동한다
+						if (onAStar(target, true)) { 	// 対象まで移動することができますので、A *アルゴリズムを働かせる
 							onAStar(target, false);
-						} else { 						// 대상까지 이동할 수 없기때문에 랜덤워크를 작동한다
+						} else { 						// 対象まで移動することができないため、ランダムウォークを働かせる
 							randomWalk();
 						}
 					}
@@ -745,7 +746,7 @@ public class L1NpcInstance extends L1Character {
 			boolean success = true;
 
 			switch(specialEnchant) {
-				// 여기 각 성능별 처리
+				// ここ各性能別の処理
 				case L1ItemInstance.CHAOS_SPIRIT:
 					success = false;
 					break;
@@ -788,7 +789,7 @@ public class L1NpcInstance extends L1Character {
 			}
 			
 			if (success) {
-				break; // 동시에 2개 이상은 발동 안됨.
+				break; //同時に2つ以上は発動しない。
 			}
 		}
 	}
@@ -1327,12 +1328,12 @@ public class L1NpcInstance extends L1Character {
 	@Override
 	public void onPerceive(L1PcInstance perceivedFrom) {
 		if (this == null || perceivedFrom == null)
-			return;// 하딘 시스템
+			return;// ハーディンシステム
 		perceivedFrom.addKnownObject(this);
 		perceivedFrom.sendPackets(new S_NPCPack(this));
-		if (getNpcTemplate().get_npcId() == 900168) // 보스방 후문 문
-			perceivedFrom.sendPackets(new S_Door(getX(), getY(), 0, PASS));// 하딘
-																			// 시스템
+		if (getNpcTemplate().get_npcId() == 900168) // ボス部屋裏話ドア
+			perceivedFrom.sendPackets(new S_Door(getX(), getY(), 0, PASS));// ハーディン
+																			// システム
 		onNpcAI();
 	}
 
@@ -2203,7 +2204,7 @@ public class L1NpcInstance extends L1Character {
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("DeleteTimer 에러 : " + L1World.getInstance().findObject(_id));
+				System.out.println("DeleteTimerエラー：" + L1World.getInstance().findObject(_id));
 			}
 		}
 
@@ -2267,7 +2268,7 @@ public class L1NpcInstance extends L1Character {
 		npcChatTimer.startChat(npcChat.getStartDelayTime());
 	}
 
-	/** 큐브다 */
+	/** キューブだ */
 	public void setCubeTime(int CubeTime){	this.CubeTime = CubeTime;	}
 
 	public void setCubePc(L1PcInstance CubePc){	this.CubePc = CubePc;	}
@@ -2310,12 +2311,12 @@ public class L1NpcInstance extends L1Character {
 	//}
 
 	/*public boolean onAStar(int tx, int ty, int mapId, boolean check) {
-		// check: true - 경로를 확인만 한다, false - 검색된 경로를 이동시킨다
+		// check: true - パスを確認しますがするが、false  - 検出されたパスを移動させる
 		pfAStar = new L1Astar();
 		iPath = new int[300][2];
-		// 최단경로를 검색한다
+		// 最短経路を検索する
 		nodePath = pfAStar.FindPath(this, tx, ty, mapId);
-		// 현재경로 카운터를 초기화한다
+		// 現在のパスカウンタを初期化する
 		iCurrentPath = 0;
 		// 경로목록을 만든다
 		while ( nodePath != null ) {
@@ -2324,18 +2325,18 @@ public class L1NpcInstance extends L1Character {
 			iCurrentPath++;
 			nodePath = nodePath.prev;
 		}
-		// 최대경로 카운터에 현재경로 카운터를 대입한다
+		// パスの最大カウンターに現在のパスカウンタを代入する
 		iMaxPath = iCurrentPath;
-		// 확인목적이 아니고 목표경로가 대상과 0 또는 1, 2 타일 거리일 경우에만 이동시킨다
-		// 대상의 직접위치는 이동불가(검색불가) 위치이기때문에 0 타일은 될 수 없다
+		// 確認の目的ではなく、ターゲット・パスが対象と0または1、2タイル距離である場合にのみ、移動させる
+		// 対象の直接位置は移動不可（検索不可）の位置であるため、0のタイルは、することができない
 		int tile = Math.max(Math.abs(iPath[0][0] - tx), Math.abs(iPath[0][1] - ty));
 		if (tile < 3) {
-			if (check) { // 확인용
+			if (check) { // 確認用
 				return true;
-			} else { // 확인용이 아닌 경우
+			} else { // 確認が容易でない場合
 				iMonsterX = iPath[iCurrentPath-2][0];
 				iMonsterY = iPath[iCurrentPath-2][1];
-				// 이동할 좌표에 맞게 몹의 방향을 설정한다
+				// 移動座標に合わせてモンスターの方向を設定する
 				if (getX() 			< 	iMonsterX && getY() 	> 	iMonsterY) {
 					setHeading(1);
 				} else if (getX() 	< 	iMonsterX && getY() 	== 	iMonsterY) {
@@ -2353,22 +2354,22 @@ public class L1NpcInstance extends L1Character {
 				} else if (getX() 	== 	iMonsterX && getY() 	> 	iMonsterY) {
 					setHeading(0);
 				}
-				// 이동시킨다
+				// 移動させる
 				getMap().setPassable(getLocation(), true);
 				setX(iMonsterX);
 				setY(iMonsterY);
 				getMap().setPassable(getLocation(), false);
 				broadcastPacket(new S_MoveCharPacket(this));
 				setSleepTime(calcSleepTime(getPassispeed()));
-				// 노드를 초기화 한다
+				// ノードを初期化する
 				pfAStar.ResetPath();
-				// 테스트용 메세지를 출력한다
-				//System.out.println(" 경로: " + (iMaxPath - 1) + " | " +
-				//		"거리: " + Math.max(Math.abs(getX() - tx), Math.abs(getY() - ty)));
+				// テスト用のメッセージを出力する
+				//System.out.println（ "パス" +（iMaxPath  -  1）+ "|" +
+				//		"距離： "+ Math.max（Math.abs（getX（） -  tx）、Math.abs（getY（） -  ty）））;
 			}
 		}
-		// 목표경로가 2 타일 이상 차이가 있다면 대상을 초기화한다
-		// 길이 존재하지 않거나 막혀있기 때문이다
+		// 目標パスが2タイル以上の差がある場合は、ターゲットを初期化する
+		// 長さが存在しないか、詰まっているからである
 		else {
 			tagertClear();
 			return false;

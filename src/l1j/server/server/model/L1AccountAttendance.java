@@ -96,7 +96,7 @@ public class L1AccountAttendance {
 	
 	public void sendPackets(int location){
 		if(_pc != null){
-			_pc.sendPackets(new S_Attendance(this, location , _pc.PC방_버프));
+			_pc.sendPackets(new S_Attendance(this, location , _pc.PCRoom_Buff));
 		}
 	}
 	

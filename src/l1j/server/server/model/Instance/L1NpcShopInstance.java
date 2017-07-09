@@ -5,7 +5,7 @@ import l1j.server.server.serverpackets.S_DoActionShop;
 import l1j.server.server.serverpackets.S_NPCPack;
 import l1j.server.server.templates.L1Npc;
 
-// npc shop 추가
+// npc shop追加
 public class L1NpcShopInstance extends L1NpcInstance {
 	private static final long serialVersionUID = 1L;
 

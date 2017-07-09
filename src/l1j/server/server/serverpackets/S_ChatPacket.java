@@ -77,24 +77,24 @@ public class S_ChatPacket extends ServerBasePacket {
 					writeS("観戦者 : " + chat);
 				}
 			}
-			if(pc.is9급병()){ writeS("[9等兵]"+pc.getName()+": " + chat); }
-			else if(pc.is8급병()){ writeS("[8等兵]"+pc.getName()+": " + chat); }
-			else if(pc.is7급병()){ writeS("[7等兵]"+pc.getName()+": " + chat); }
-			else if(pc.is6급병()){ writeS("[6等兵]"+pc.getName()+": " + chat); }
-			else if(pc.is5급병()){ writeS("[5等兵]"+pc.getName()+": " + chat); }
-			else if(pc.is4급병()){ writeS("[4等兵]"+pc.getName()+": " + chat); }
-			else if(pc.is3급병()){ writeS("[3等兵]"+pc.getName()+": " + chat); }
-			else if(pc.is2급병()){ writeS("[2等兵]"+pc.getName()+": " + chat); }
-			else if(pc.is1급병()){ writeS("[1等兵]"+pc.getName()+": " + chat); }
-			else if(pc.is1성장교()){ writeS("[1将校]"+pc.getName()+": " + chat); }
-			else if(pc.is2성장교()){ writeS("[2将校]"+pc.getName()+": " + chat); }
-			else if(pc.is3성장교()){ writeS("[3将校]"+pc.getName()+": " + chat); }
-			else if(pc.is4성장교()){ writeS("[4将校]"+pc.getName()+": " + chat); }
-			else if(pc.is5성장교()){ writeS("[5将校]"+pc.getName()+": " + chat); }
-			else if(pc.is장군()){ writeS("[将軍]"+pc.getName()+": " + chat); }
-			else if(pc.is대장군()){ writeS("[大将軍]"+pc.getName()+": " + chat); }
-			else if(pc.is사령관()){ writeS("[司令官]"+pc.getName()+": " + chat); }
-			else if(pc.is총사령관()){ writeS("[総司令官]"+pc.getName()+": " + chat); }
+			if(pc.is9Militia()){ writeS("[9等兵]"+pc.getName()+": " + chat); }
+			else if(pc.is8Militia()){ writeS("[8等兵]"+pc.getName()+": " + chat); }
+			else if(pc.is7Militia()){ writeS("[7等兵]"+pc.getName()+": " + chat); }
+			else if(pc.is6Militia()){ writeS("[6等兵]"+pc.getName()+": " + chat); }
+			else if(pc.is5Militia()){ writeS("[5等兵]"+pc.getName()+": " + chat); }
+			else if(pc.is4Militia()){ writeS("[4等兵]"+pc.getName()+": " + chat); }
+			else if(pc.is3Militia()){ writeS("[3等兵]"+pc.getName()+": " + chat); }
+			else if(pc.is2Militia()){ writeS("[2等兵]"+pc.getName()+": " + chat); }
+			else if(pc.is1Militia()){ writeS("[1等兵]"+pc.getName()+": " + chat); }
+			else if(pc.is1Officer()){ writeS("[1将校]"+pc.getName()+": " + chat); }
+			else if(pc.is2Officer()){ writeS("[2将校]"+pc.getName()+": " + chat); }
+			else if(pc.is3Officer()){ writeS("[3将校]"+pc.getName()+": " + chat); }
+			else if(pc.is4Officer()){ writeS("[4将校]"+pc.getName()+": " + chat); }
+			else if(pc.is5Officer()){ writeS("[5将校]"+pc.getName()+": " + chat); }
+			else if(pc.isGeneral()){ writeS("[将軍]"+pc.getName()+": " + chat); }
+			else if(pc.isMajorGeneral()){ writeS("[大将軍]"+pc.getName()+": " + chat); }
+			else if(pc.isCommander()){ writeS("[司令官]"+pc.getName()+": " + chat); }
+			else if(pc.isGeneralCommander()){ writeS("[総司令官]"+pc.getName()+": " + chat); }
 			else {
 				writeS(pc.getName() + ": " + chat); 
 			}
@@ -115,24 +115,24 @@ public class S_ChatPacket extends ServerBasePacket {
         	if (pc.getName().equalsIgnoreCase("메티스")&& !pc.getName().equalsIgnoreCase("미소피아")&& !pc.getName().equalsIgnoreCase("카시오페아")) {
 				writeS("[******] " + chat);
             }
-        	if(pc.is9급병() && !pc.isGm()){ writeS("[9等兵]["+pc.getName()+"] " + chat); }
-			else if(pc.is8급병() && !pc.isGm()){ writeS("[8等兵]["+pc.getName()+"] " + chat); }
-			else if(pc.is7급병() && !pc.isGm()){ writeS("[7等兵]["+pc.getName()+"] " + chat); }
-			else if(pc.is6급병() && !pc.isGm()){ writeS("[6等兵]["+pc.getName()+"] " + chat); }
-			else if(pc.is5급병() && !pc.isGm()){ writeS("[5等兵]["+pc.getName()+"] " + chat); }
-			else if(pc.is4급병() && !pc.isGm()){ writeS("[4等兵]["+pc.getName()+"] " + chat); }
-			else if(pc.is3급병() && !pc.isGm()){ writeS("[3等兵]["+pc.getName()+"] " + chat); }
-			else if(pc.is2급병() && !pc.isGm()){ writeS("[2等兵]["+pc.getName()+"] " + chat); }
-			else if(pc.is1급병() && !pc.isGm()){ writeS("[1等兵]["+pc.getName()+"] " + chat); }
-			else if(pc.is1성장교() && !pc.isGm()){ writeS("\\fR[1将校]["+pc.getName()+"] " + chat); }
-			else if(pc.is2성장교() && !pc.isGm()){ writeS("\\fR[2将校]["+pc.getName()+"] " + chat); }
-			else if(pc.is3성장교() && !pc.isGm()){ writeS("\\fR[3将校]["+pc.getName()+"] " + chat); }
-			else if(pc.is4성장교() && !pc.isGm()){ writeS("\\fR[4将校]["+pc.getName()+"] " + chat); }
-			else if(pc.is5성장교() && !pc.isGm()){ writeS("\\fR[5将校]["+pc.getName()+"] " + chat); }
-			else if(pc.is장군() && !pc.isGm()){ writeS("\\fR[将軍]["+pc.getName()+"] " + chat); }
-			else if(pc.is대장군() && !pc.isGm()){ writeS("\\fR[大将軍]["+pc.getName()+"] " + chat); }
-			else if(pc.is사령관() && !pc.isGm()){ writeS("\\fR[司令官]["+pc.getName()+"] " + chat); }
-			else if(pc.is총사령관() && !pc.isGm()){ writeS("\\fR[総司令官]["+pc.getName()+"] " + chat); }
+        	if(pc.is9Militia() && !pc.isGm()){ writeS("[9等兵]["+pc.getName()+"] " + chat); }
+			else if(pc.is8Militia() && !pc.isGm()){ writeS("[8等兵]["+pc.getName()+"] " + chat); }
+			else if(pc.is7Militia() && !pc.isGm()){ writeS("[7等兵]["+pc.getName()+"] " + chat); }
+			else if(pc.is6Militia() && !pc.isGm()){ writeS("[6等兵]["+pc.getName()+"] " + chat); }
+			else if(pc.is5Militia() && !pc.isGm()){ writeS("[5等兵]["+pc.getName()+"] " + chat); }
+			else if(pc.is4Militia() && !pc.isGm()){ writeS("[4等兵]["+pc.getName()+"] " + chat); }
+			else if(pc.is3Militia() && !pc.isGm()){ writeS("[3等兵]["+pc.getName()+"] " + chat); }
+			else if(pc.is2Militia() && !pc.isGm()){ writeS("[2等兵]["+pc.getName()+"] " + chat); }
+			else if(pc.is1Militia() && !pc.isGm()){ writeS("[1等兵]["+pc.getName()+"] " + chat); }
+			else if(pc.is1Officer() && !pc.isGm()){ writeS("\\fR[1将校]["+pc.getName()+"] " + chat); }
+			else if(pc.is2Officer() && !pc.isGm()){ writeS("\\fR[2将校]["+pc.getName()+"] " + chat); }
+			else if(pc.is3Officer() && !pc.isGm()){ writeS("\\fR[3将校]["+pc.getName()+"] " + chat); }
+			else if(pc.is4Officer() && !pc.isGm()){ writeS("\\fR[4将校]["+pc.getName()+"] " + chat); }
+			else if(pc.is5Officer() && !pc.isGm()){ writeS("\\fR[5将校]["+pc.getName()+"] " + chat); }
+			else if(pc.isGeneral() && !pc.isGm()){ writeS("\\fR[将軍]["+pc.getName()+"] " + chat); }
+			else if(pc.isMajorGeneral() && !pc.isGm()){ writeS("\\fR[大将軍]["+pc.getName()+"] " + chat); }
+			else if(pc.isCommander() && !pc.isGm()){ writeS("\\fR[司令官]["+pc.getName()+"] " + chat); }
+			else if(pc.isGeneralCommander() && !pc.isGm()){ writeS("\\fR[総司令官]["+pc.getName()+"] " + chat); }
 			else {
 			writeS("[" + pc.getName() + "] " + chat);
 			}

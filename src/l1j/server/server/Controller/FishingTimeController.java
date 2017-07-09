@@ -366,7 +366,7 @@ public class FishingTimeController implements Runnable {
 			int exp = Config.FISH_EXP;
 			double dragon = 1;
 			int settingEXP = (int) Config.RATE_XP;
-			if (pc.PC방_버프) {
+			if (pc.PCRoom_Buff) {
 				dragon += 0.20;
 			}	
 			if (pc.hasSkillEffect(L1SkillId.EMERALD_YES)) {

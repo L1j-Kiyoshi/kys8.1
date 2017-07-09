@@ -11151,13 +11151,13 @@ public class C_ItemUSe extends ClientBasePacket {
 		Timestamp deleteTime = null;
 		deleteTime = new Timestamp(sysTime + (86400000 * (long) day) + 10000);// 7일
 		try {
-			if (pc.PC방_버프) {
+			if (pc.PCRoom_Buff) {
 				pc.sendPackets(new S_SystemMessage("알림: 이미 PC방 버프 상품이 적용중입니다."));
 				return;
 			}
 
 			pc.sendPackets(new S_PacketBox(S_PacketBox.PC_ROOM_BUFF, 1));
-			pc.PC방_버프 = true;
+			pc.PCRoom_Buff = true;
 			pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.PCBANG_SET, true));
 			if (day == 7) {
 				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[PC방 이용 시간] 7일 동안 PC방 혜택이 적용 됩니다."));

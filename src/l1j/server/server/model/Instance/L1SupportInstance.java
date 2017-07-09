@@ -2,6 +2,7 @@ package l1j.server.server.model.Instance;
 
 import java.util.Arrays;
 import java.util.Random;
+
 import l1j.server.server.ActionCodes;
 import l1j.server.server.GeneralThreadPool;
 import l1j.server.server.IdFactory;
@@ -32,7 +33,7 @@ public class L1SupportInstance extends L1NpcInstance {
 	private boolean _isPinkName = false;
 	public L1PcInstance _supportMaster;
 	
-	// 타겟이 없는 경우의 처리
+	// ターゲットが存在しない場合の処理
 	@Override
 	public boolean noTarget() {
 		if (_master.isDead()) {
@@ -58,11 +59,11 @@ public class L1SupportInstance extends L1NpcInstance {
 		return false;
 	}
 
-	// 시간 계측용
+	// 時間計測用
 	class SupportTimer implements Runnable {
 		@Override
 		public void run() {
-			if (_destroyed) { // 이미 파기되어 있지 않은가 체크
+			if (_destroyed) { // すでに破棄されていないかチェック
 				return;
 			}
 			deleteSupport();
@@ -170,9 +171,9 @@ public class L1SupportInstance extends L1NpcInstance {
 					attacker.setPetTarget(this);
 					attack.calcDamage();
 					attack.calcStaffOfMana();
-					/** 조우의 돌골렘 **/
+					/** ゾウのストーンゴーレム **/
 					attack.calcDrainOfMana();
-					/** 조우의 돌골렘 **/
+					/** ゾウのストーンゴーレム**/
 					attack.addPcPoisonAttack(attacker, this);
 				}
 			}
@@ -217,7 +218,7 @@ public class L1SupportInstance extends L1NpcInstance {
 				setCurrentHp(newHp);
 			}
 		} else if (!isDead()) { 
-			System.out.println("쫄법사의 HP감소 처리가 올바르게 행해지지 않은 개소가 있습니다.※혹은 최초부터 HP0");
+			System.out.println("つつく玄のHP減少処理が正しく行われていない箇所があります。※あるいは最初からHP0");
 			death(attacker);
 		}
 	}
@@ -262,7 +263,7 @@ public class L1SupportInstance extends L1NpcInstance {
 				setCurrentHp(newHp);
 			}
 		} else if (!isDead()) { 
-			System.out.println("경고：쫄법사의 HP감소 처리가 올바르게 행해지지 않은 개소가 있습니다.※혹은 최초부터 HP0");
+			System.out.println("警告：つつく玄のHP減少処理が正しく行われていない箇所があります。※あるいは最初からHP0");
 			death(attacker);
 		}
 	}
@@ -361,7 +362,7 @@ public class L1SupportInstance extends L1NpcInstance {
 	@Override
 	public void onItemUse() {
 		if (!isActived()) {
-			// 100%의 확률로 헤이 파업 일부 사용
+			// 100％の確率でヘイスト一部使用
 			useItem(USEITEM_HASTE, 100);
 		}
 		if (getCurrentHp() * 100 / getMaxHp() < 40) {

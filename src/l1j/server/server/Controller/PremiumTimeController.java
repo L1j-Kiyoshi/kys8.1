@@ -77,14 +77,14 @@ public class PremiumTimeController implements Runnable {
 			if (pc instanceof L1RobotInstance) {
 				continue;
 			}
-			if (pc.PC방_버프삭제중) {
+			if (pc.PCRoom_Buff_Delete) {
 				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"[PC방 상품 종료 안내] PC방 이용 시간이 종료되어 강제 리스타트가 진행됩니다. "));
 				pc.sendPackets(new S_SystemMessage("[PC방 상품 종료 안내] 리스타트를 진행하지 않아도 혜택은 받을수 없습니다."));
 				pc.sendPackets(new S_Restart(pc.getId(), 1),true);
 			}
 			
 			long sysTime = System.currentTimeMillis();
-			if (pc.PC방_버프) {
+			if (pc.PCRoom_Buff) {
 				if (pc.getAccount().getBuff_PCRoom() != null) {
 					if (sysTime <= pc.getAccount().getBuff_PCRoom().getTime()) {
 						long 피씨타임 = pc.getAccount().getBuff_PCRoom().getTime() - sysTime;
@@ -114,8 +114,8 @@ public class PremiumTimeController implements Runnable {
 							}
 						}
 					} else {
-						pc.PC방_버프 = false;
-						pc.PC방_버프삭제중 = true;
+						pc.PCRoom_Buff = false;
+						pc.PCRoom_Buff_Delete = true;
 						pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.PCBANG_SET, true));
 						pc.sendPackets(new S_Restart(pc.getId(), 1), true);
 					}

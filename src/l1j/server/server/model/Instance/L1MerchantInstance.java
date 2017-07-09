@@ -231,7 +231,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				htmlid = "pago";
 				break;
 			case 81210:
-				if (!player.PC방_버프) {
+				if (!player.PCRoom_Buff) {
 					player.sendPackets(new S_SystemMessage("PC방 코인 상품을 사용 중인 유저만 입장 가능합니다."));
 					return;
 				}
