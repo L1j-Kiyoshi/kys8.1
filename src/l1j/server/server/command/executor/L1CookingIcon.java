@@ -7,15 +7,15 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
-public class L1요리아이콘 implements L1CommandExecutor {
+public class L1CookingIcon implements L1CommandExecutor {
 	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1요리아이콘.class.getName());
+	private static Logger _log = Logger.getLogger(L1CookingIcon.class.getName());
 
-	private L1요리아이콘() {
+	private L1CookingIcon() {
 	}
 
 	public static L1CommandExecutor getInstance() {
-		return new L1요리아이콘();
+		return new L1CookingIcon();
 	}
 
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
