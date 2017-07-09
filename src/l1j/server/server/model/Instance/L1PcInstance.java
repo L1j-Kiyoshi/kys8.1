@@ -3764,7 +3764,7 @@ public class L1PcInstance extends L1Character {
                     S_Lawful s_lawful = new S_Lawful(player.getId(), player.getLawful());
                     player.sendPackets(s_lawful);
                     player.broadcastPacket(s_lawful);
-                    player.sendPackets(new S_PacketBox(S_PacketBox.배틀샷, L1PcInstance.this.getId()));
+                    player.sendPackets(new S_PacketBox(S_PacketBox.BATTLE_SHOT, L1PcInstance.this.getId()));
                 } else {
                     setPinkName(false);
                 }
@@ -4228,7 +4228,7 @@ public class L1PcInstance extends L1Character {
             return "용기사";
         } else if (isBlackwizard()) {
             return "환술사";
-        } else if (is전사()) {
+        } else if (isWarrior()) {
             return "전사";
         }
 
@@ -4283,7 +4283,7 @@ public class L1PcInstance extends L1Character {
         return (getClassId() == CLASSID_BLACKWIZARD_MALE || getClassId() == CLASSID_BLACKWIZARD_FEMALE);
     }
 
-    public boolean is전사() {
+    public boolean isWarrior() {
         return (getClassId() == CLASSID_전사_MALE || getClassId() == CLASSID_전사_FEMALE);
     }
 
@@ -5329,7 +5329,7 @@ public class L1PcInstance extends L1Character {
             } else {
                 _originalMagicHit = 0;
             }
-        } else if (is전사()) {
+        } else if (isWarrior()) {
             if (originalInt == 12 || originalInt == 13) {
                 _originalMagicHit = 1;
             } else if (originalInt == 14) {
@@ -6686,7 +6686,7 @@ public class L1PcInstance extends L1Character {
 					pc.addSp(-3);
 					pc.sendPackets(new S_SPMR(pc));
 				}
-			} else if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.isElf() || pc.is전사()){
+			} else if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.isElf() || pc.isWarrior()){
 				if(pc.getHuntPrice() == Config.수배1단){
 					pc.addDmgup(-1);
 					pc.addBowDmgup(-1);

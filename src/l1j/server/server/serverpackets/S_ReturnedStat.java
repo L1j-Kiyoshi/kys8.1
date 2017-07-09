@@ -302,7 +302,7 @@ public class S_ReturnedStat extends ServerBasePacket {
 					init_mp = 5;
 					break;
 				}
-			} else if(pc.is전사()) {
+			} else if(pc.isWarrior()) {
 				init_hp = 16;
 				switch (pc.getAbility().getBaseWis()) {
 				case 9:

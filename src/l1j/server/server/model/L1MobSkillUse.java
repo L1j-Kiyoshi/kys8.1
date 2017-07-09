@@ -15,10 +15,9 @@ import l1j.server.server.IdFactory;
 import l1j.server.server.datatables.MobSkillTable;
 import l1j.server.server.datatables.NpcTable;
 import l1j.server.server.datatables.SkillsTable;
-import l1j.server.server.model.L1Attack;
 import l1j.server.server.model.Instance.L1MonsterInstance;
-import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.Instance.L1NpcInstance;
+import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.Instance.L1PetInstance;
 import l1j.server.server.model.Instance.L1SummonInstance;
 import l1j.server.server.model.skill.L1SkillId;
@@ -231,7 +230,7 @@ public class L1MobSkillUse {
 		}
 
 		if ((skillid >= 22020 && skillid <= 22029 || skillid >= 22041 && skillid <= 22052) || (skillid >= 7001 && skillid <= 7050)){
-			if(_attacker.hasSkillEffect(L1SkillId.PREDICATEDELAY)){//용언 딜레이 시작.
+			if(_attacker.hasSkillEffect(L1SkillId.PREDICATEDELAY)){//用言ディレイ開始します。
 				return false;
 			} else {
 				_attacker.setSkillEffect(L1SkillId.PREDICATEDELAY, 10 * 1000);
@@ -240,65 +239,65 @@ public class L1MobSkillUse {
 		
 		int npcId = _attacker.getNpcTemplate().get_npcId();
 		switch(npcId){
-		case 45545: // 흑장로
+		case 45545: // ブラックエルダー
 			if (skillid == 7031){
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$2966", 0));
 			} else if (skillid == 7030){
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$3717", 0));
 			}
 			break;
-		case 5096: // 린드 비오르
+		case 5096: // リンドビオル
 		case 5097:
 		case 5098:
 		case 5099:
 		case 5100:
-			if (skillid == 7018 || skillid == 7023){ // 광물골렘 소환
+			if (skillid == 7018 || skillid == 7023){ // 鉱物ゴーレム召喚
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10158", 0));
-			} else if (skillid == 7001){ // 윈드 셰클
+			} else if (skillid == 7001){ // ウィンドシャックル
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10152", 0));
 				if (_target instanceof L1PcInstance){
 					L1PcInstance pc = (L1PcInstance) _target;
 					pc.sendPackets(new S_PacketBox(S_PacketBox.HADIN_DISPLAY, 6));
 				}
-			} else if (skillid == 7013){ // 사일런스
+			} else if (skillid == 7013){ // サイレンス
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10152", 0));
 				if (_target instanceof L1PcInstance){
 					L1PcInstance pc = (L1PcInstance) _target;
 					pc.sendPackets(new S_PacketBox(S_PacketBox.HADIN_DISPLAY, 8));
 				}
-			} else if (skillid == 7002 || skillid == 7004){ // 리콜 캔슬레이션, 웨폰 브레이커
+			} else if (skillid == 7002 || skillid == 7004){ // リコールキャンセレーション、ウェポンブレーカー
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10162", 0));
-			} else if (skillid == 7003){ // 회오리 4개
+			} else if (skillid == 7003){ // 竜巻の4つの
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10150", 0));
-			} else if (skillid == 7022){ // 발작
+			} else if (skillid == 7022){ // 発作
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10165", 0));
-			} else if (skillid == 7023){ // 구름대정령
+			} else if (skillid == 7023){ // グルムデ精霊
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10158", 0));
-			} else if (skillid == 7009){ // 광역 마법 [전기]
+			} else if (skillid == 7009){ // 広域魔法[電気]
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10162", 0));
-			} else if (skillid == 7007){ // 윈드 세클
+			} else if (skillid == 7007){ // ウィンドセクル
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10152", 0));
-			//} else if (skillid == 7010 || skillid == 7008){ //캔슬레이션, 웨폰 브레이커
+			//} else if (skillid == 7010 || skillid == 7008){ //キャンセレーション、ウェポンブレーカー
 			//	Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10162", 0));
 			}
 			break;
-			// 에르자베
+			// エルジャベ
 			case 5136:
-				if (skillid == 7048){ // 토네이도
+				if (skillid == 7048){ // トルネード
 					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14234", 0));
-				} else if (skillid == 7044){ // 독구름
+				} else if (skillid == 7044){ // 毒雲
 					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14233", 0));
-				} else if (skillid == 7049){ // 서먼
+				} else if (skillid == 7049){ // サモン
 					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14236", 0));
-				} else if (skillid == 7042){ // 어스바인드
+				} else if (skillid == 7042){ // アースバインド
 					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14237", 0));
-				} else if (skillid == 7041){ // 커스 패럴라이즈
+				} else if (skillid == 7041){ // カーズパラライズ
 					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14238", 0));
-				} else if (skillid == 7050){ // 모래 폭풍 소환
+				} else if (skillid == 7050){ // 砂嵐召喚
 					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14235", 0));
 				}
 				break;
-		// 샌드웜
+		// サンドワーム
 		case 5135:
 			if (skillid == 7045) {
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14055", 0));
@@ -312,11 +311,11 @@ public class L1MobSkillUse {
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
 			} else if (skillid == 7004) {
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
-			} else if (skillid == 7055) {//이럽
+			} else if (skillid == 7055) {//イロプ
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
-			} else if (skillid == 7056) {//범우 스킬1
+			} else if (skillid == 7056) {//ボムオスキル1
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
-			} else if (skillid == 7057) {//범우 스킬2
+			} else if (skillid == 7057) {//ボムオスキル2
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
 			} else if (skillid == 7058) {//범우 스킬3
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
@@ -324,11 +323,11 @@ public class L1MobSkillUse {
 			break;
 		case 145684:
 				if(skillid == 90009){
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"크어어엉",0));
+					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"クおおアン",0));
 				}else if(skillid==90010){
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"쿠르 둠 크라스 하르파움",0));
+					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"クールドゥームテーションクラスハルパウム",0));
 				}else if(skillid==90011){
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"제르큐오 삼케로누.",0));
+					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"ジェルセキュオ三ケロ押し。",0));
 					for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(_attacker)) {
 						if (pc == null)
 							continue;
@@ -338,7 +337,7 @@ public class L1MobSkillUse {
 						break;
 					}
 				}else if(skillid==90013){
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"쿠르둠 리라스쿰누.",0));
+					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"クールヅムうスクムヌ。",0));
 				}
 			break;
 		default:

@@ -16,39 +16,39 @@ public class S_Board extends ServerBasePacket {
 	private static Logger _log = Logger.getLogger(S_Board.class.getName());
 
 	private static final int TOPIC_LIMIT = 8;
-	
+
 	private byte[] _byte = null;
 
 	public S_Board(L1NpcInstance board) {
 		switch (board.getNpcId()) {
-		case 4200015:// 서버정보게시판
+		case 4200015:// サーバー情報掲示板
 			buildPacketNotice(board, 0);
 			break;
-		case 4200020:// 운영자1
+		case 4200020:// オペレータ1
 			buildPacketNotice1(board, 0);
 			break;
-		case 4200021: // 운영자2
+		case 4200021: // オペレータ2
 			buildPacketNotice2(board, 0);
 			break;
-		case 4200022:// 운영자3
+		case 4200022:// オペレータ3
 			buildPacketNotice3(board, 0);
 			break;
-		case 500002:// 건의사항
+		case 500002:// 提案
 			buildPacketPhone(board, 0);
 			break;
-		case 900006:// 드래곤키 알림게시판
+		case 900006:// ドラゴンキー通知掲示板
 			buildPacketKey(board, 0);
 			break;
-		case 999999:// 버경게시판
+		case 999999:// ボギョン掲示板
 			buildPacket1(board, 0);
 			break;
-		case 500001:// 전체랭킹
+		case 500001:// 全体ランキング
 			buildPacket2(board, 0);
 			break;
-		case 4200013:// 버그게시판
+		case 4200013:// バグ掲示板
 			buildPacket3(board, 0);
 			break;
-		default:// 기본값
+		default:// デフォルト
 			buildPacket(board, 0);
 			break;
 		}
@@ -56,50 +56,50 @@ public class S_Board extends ServerBasePacket {
 
 	public S_Board(L1NpcInstance board, int number) {
 		switch (board.getNpcId()) {
-		case 4200015:// 서버정보게시판
+		case 4200015:// サーバー情報掲示板
 			buildPacketNotice(board, number);
 			break;
-		case 42000162: // 운영자1
+		case 42000162: // オペレータ1
 			buildPacketNotice1(board, number);
 			break;
-		case 42000163:// 운영자2
+		case 42000163:// オペレータ2
 			buildPacketNotice2(board, number);
 			break;
-		case 4200099:// 운영자3
+		case 4200099:// オペレータ3
 			buildPacketNotice3(board, number);
 			break;
-		case 500002:// 건의사항
+		case 500002:// 提案
 			buildPacketPhone(board, number);
 			break;
-		case 900006:// 드래곤키 알림게시판
+		case 900006://ドラゴンキー通知掲示板
 			buildPacketKey(board, number);
 			break;
-		case 999999:// 버경게시판
+		case 999999:// ボギョン掲示板
 			buildPacket1(board, number);
 			break;
-		case 500001:// 전체랭킹
+		case 500001:// 全体ランキング
 			buildPacket2(board, number);
 			break;
-		case 4200013:// 버그게시판
+		case 4200013:// バグ掲示板
 			buildPacket3(board, number);
 			break;
-		default:// 기본값
+		default:// デフォルト
 			buildPacket(board, number);
 			break;
 		}
 	}
-	
-	private void buildPacket1(L1NpcInstance board, int number) {	// 버경 출전 선수 상태
+
+	private void buildPacket1(L1NpcInstance board, int number) {	// ボギョン出場選手の状態
 		writeC(Opcodes.S_HYPERTEXT);
 		writeD(board.getId());
 		writeS("maeno4");
-		writeC(0);                        
+		writeC(0);
 		writeH(15);
 
 		for( int i = 0; i < 5; ++i ) {
-			writeS(BugRaceController.getInstance()._littleBugBear[i].getName()); //버그베어 이름
-			writeS(BugRaceController.getInstance()._bugCondition[i]); //상태
-			writeS(Double.toString(BugRaceController.getInstance()._winRate[i]) + "%"); //승률
+			writeS(BugRaceController.getInstance()._littleBugBear[i].getName()); //バグベア名前
+			writeS(BugRaceController.getInstance()._bugCondition[i]); //状態
+			writeS(Double.toString(BugRaceController.getInstance()._winRate[i]) + "%"); //勝率
 		}
 	}
 	private void buildPacket2(L1NpcInstance board,int number) {
@@ -114,15 +114,15 @@ public class S_Board extends ServerBasePacket {
 			db[count][1] = "";
 			count++;
 		}
-		//db[0][2] = "--------- 전체순위";
-		db[0][2] = "--------- 전     사";
-		db[1][2] = "--------- 군     주";
-		db[2][2] = "--------- 기     사";
-		db[3][2] = "--------- 요     정";
-		db[4][2] = "--------- 법     사";
-		db[5][2] = "--------- 다     엘";
-		db[6][2] = "--------- 용 기 사";
-		db[7][2] = "--------- 환 술 사";
+		//db[0][2] = "--------- 全体順位";
+		db[0][2] = "--------- ウォリアー";
+		db[1][2] = "--------- 君主";
+		db[2][2] = "--------- ナイト";
+		db[3][2] = "--------- エルフ";
+		db[4][2] = "--------- ウィザード";
+		db[5][2] = "--------- ダークエルフ";
+		db[6][2] = "--------- ドラゴンナイト";
+		db[7][2] = "--------- イリュージョニスト";
 		writeC(Opcodes.S_BOARD_LIST);
 		writeC(0);
 		writeD(board.getId());
@@ -147,22 +147,22 @@ public class S_Board extends ServerBasePacket {
 		id = new int[8];
 		while(count < 8) {
 			id[count] = count + 1;
-			db[count][0] = "버그감시";
+			db[count][0] = "バグ監視";
 			db[count][1] = "";
 			count++;
 		}
-		db[0][2] = "1. 무기 랭킹";
-		db[1][2] = "2. 방어구 랭킹";
-		db[2][2] = "3. 아덴 랭킹";
-		db[3][2] = "4. 레벨 랭킹";
-		db[4][2] = "5. 신비깃털 랭킹";
-		db[5][2] = "6. 창고아덴랭킹";
-		db[6][2] = "7. HP랭킹";
-		db[7][2] = "8. MP랭킹";
+		db[0][2] = "1.武器ランキング";
+		db[1][2] = "2.防具ランキング";
+		db[2][2] = "3.アデンランキング";
+		db[3][2] = "4.レベルランキング";
+		db[4][2] = "5.神秘羽ランキング";
+		db[5][2] = "6.倉庫アデンランキング";
+		db[6][2] = "7. HPランキング";
+		db[7][2] = "8. MPランキング";
 
 
 		writeC(Opcodes.S_BOARD_LIST);
-		//writeC(0x00);//10월18일추가
+		//writeC(0x00);//10月18日追加
 		writeC(0);
 		writeD(board.getId());
 		writeC(0xFF); // ?
@@ -178,8 +178,8 @@ public class S_Board extends ServerBasePacket {
 			writeS(db[i][2]);
 		}
   }
-	
-	
+
+
 
 	private void buildPacket(L1NpcInstance board, int number) {
 		List<L1BoardPost> topics = L1BoardPost.index(number, TOPIC_LIMIT);
@@ -313,7 +313,7 @@ public class S_Board extends ServerBasePacket {
 			writeS(topic.getTitle());
 		}
 	}
-	
+
 	private void buildPacketKey(L1NpcInstance board, int number) {
 		List<L1BoardPost> topics = L1BoardPost.indexKey(number, TOPIC_LIMIT);
 		writeC(Opcodes.S_BOARD_LIST);
@@ -336,8 +336,8 @@ public class S_Board extends ServerBasePacket {
 			writeS(topic.getTitle());
 		}
 	}
-	
-	
+
+
 
 	@Override
 	public byte[] getContent() {

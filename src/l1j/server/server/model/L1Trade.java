@@ -12,7 +12,6 @@ import l1j.server.server.datatables.ExpTable;
 import l1j.server.server.datatables.ItemTable;
 import l1j.server.server.datatables.NpcBuyListTable;
 import l1j.server.server.model.Instance.L1ItemInstance;
-import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.Warehouse.PrivateWarehouse;
 import l1j.server.server.model.Warehouse.WarehouseManager;
@@ -27,7 +26,7 @@ import l1j.server.server.serverpackets.S_TradeStatus;
 import manager.LinAllManager;
 
 public class L1Trade {
-	/** 날짜 및 시간 기록 **/
+	/** 日付と時刻の記録 **/
 	Calendar rightNow = Calendar.getInstance();
 	int day = rightNow.get(Calendar.DATE);
 	int hour = rightNow.get(Calendar.HOUR);
@@ -50,7 +49,7 @@ public class L1Trade {
 		if (l1iteminstance != null && trading_partner != null) {
 			if (!l1iteminstance.isEquipped()) {
 				if (l1iteminstance.getCount() < itemcount || 0 >= itemcount) {
-					// 허상버그 관련추가
+					// 虚像のバグに関するその他の
 					TradeCancel(player);
 					return;
 				}
@@ -69,14 +68,14 @@ public class L1Trade {
 					player.sendPackets(new S_TradeAddItem(l1iteminstance, itemName, itemcount, 0));
 					trading_partner.sendPackets(new S_TradeAddItem(l1iteminstance, itemName, itemcount, 1));
 					player.sendPackets(new S_ChatPacket(player, "--------------------------------------------------"));
-					player.sendPackets(new S_ChatPacket(player, "캐릭터 판매중."));
-					player.sendPackets(new S_ChatPacket(player, "거래후 거래한금액은 이 계정창고로 들어갑니다."));
+					player.sendPackets(new S_ChatPacket(player, "キャラクター販売中。"));
+					player.sendPackets(new S_ChatPacket(player, "取引後取引した金額は、このアカウント倉庫に入ります。"));
 					player.sendPackets(new S_ChatPacket(player, "--------------------------------------------------"));
 
 					trading_partner.sendPackets(new S_ChatPacket(player, "--------------------------------------------------"));
-					trading_partner.sendPackets(new S_ChatPacket(player, "상태방 캐릭정보."));
-					trading_partner.sendPackets(new S_ChatPacket(player, "클래스: [" + player.getClassName() + "] 레벨: [" + Integer.toString(player.getLevel()) + "." + per
-							+ "%] 엘릭서: [" + player.getElixirStats() + "]입니다."));
+					trading_partner.sendPackets(new S_ChatPacket(player, "状態の部屋キャラクター情報。"));
+					trading_partner.sendPackets(new S_ChatPacket(player, "クラス：[" + player.getClassName() + "] レベル: [" + Integer.toString(player.getLevel()) + "." + per
+							+ "%] エリクサー: [" + player.getElixirStats() + "]です."));
 					trading_partner.sendPackets(new S_ChatPacket(player, "--------------------------------------------------"));
 				} else {
 					player.sendPackets(new S_TradeAddItem(l1iteminstance, itemcount, 0));
@@ -98,16 +97,16 @@ public class L1Trade {
 
 	public void doCharacterTrade(L1PcInstance player, boolean characterTrade1, L1PcInstance target, boolean characterTrade2) {
 		if (player.getNetConnection() == null || target.getNetConnection() == null) {
-			player.sendPackets(new S_ChatPacket(player, "거래 대상이 비정상 접속중입니다."));
-			target.sendPackets(new S_ChatPacket(player, "거래 대상이 비정상 접속중입니다."));
+			player.sendPackets(new S_ChatPacket(player, "取引先が異常接続中です。"));
+			target.sendPackets(new S_ChatPacket(player, "取引先が異常接続中です。"));
 
 			TradeCancel(player);
 
 			return;
 		}
 		if (characterTrade1 && target.getNetConnection().getAccount().countCharacters() >= target.getNetConnection().getAccount().getCharSlot()) {
-			player.sendPackets(new S_ChatPacket(player, "거래 대상에게 빈 캐릭터 슬롯이 없습니다."));
-			target.sendPackets(new S_ChatPacket(player, "빈 캐릭터 슬롯이 없습니다. 캐릭터 슬롯을 확보하고 다시 시도해주시기 바랍니다."));
+			player.sendPackets(new S_ChatPacket(player, "取引先に空の文字スロットがありません。"));
+			target.sendPackets(new S_ChatPacket(player, "空の文字スロットがありません。キャラクタースロットを確保して、再試行してください。"));
 
 			TradeCancel(player);
 
@@ -115,8 +114,8 @@ public class L1Trade {
 		}
 
 		if (characterTrade2 && player.getNetConnection().getAccount().countCharacters() >= player.getNetConnection().getAccount().getCharSlot()) {
-			target.sendPackets(new S_ChatPacket(player, "거래 대상에게 빈 캐릭터 슬롯이 없습니다."));
-			player.sendPackets(new S_ChatPacket(player, "빈 캐릭터 슬롯이 없습니다. 캐릭터 슬롯을 확보하고 다시 시도해주시기 바랍니다."));
+			target.sendPackets(new S_ChatPacket(player, "取引先に空の文字スロットがありません。"));
+			player.sendPackets(new S_ChatPacket(player, "空の文字スロットがありません。キャラクタースロットを確保して、再試行してください。"));
 
 			TradeCancel(player);
 			return;
@@ -132,7 +131,7 @@ public class L1Trade {
 			for (L1ItemInstance item : target.getTradeWindowInventory().getItems()) {
 				if (warehouse.checkAddItemToWarehouse(item, item.getCount()) == L1Inventory.SIZE_OVER) {
 					target.sendPackets(new S_ServerMessage(75));
-					// \f1상대가 물건을너무 가지고 있어거래할 수 없습니다.
+					// \f1相手がものをも持っており、取引することはできません。
 					TradeCancel(player);
 					return;
 				}
@@ -151,7 +150,7 @@ public class L1Trade {
 			for (L1ItemInstance item : player.getTradeWindowInventory().getItems()) {
 				if (warehouse.checkAddItemToWarehouse(item, item.getCount()) == L1Inventory.SIZE_OVER) {
 					player.sendPackets(new S_ServerMessage(75));
-					// \f1상대가 물건을 너무 가지고 있어거래할 수없습니다.
+					// \f1相手がものをも持っており、取引することはできません。
 					TradeCancel(player);
 					return;
 				}
@@ -250,7 +249,7 @@ public class L1Trade {
 			L1ItemInstance l1iteminstance1 = null;
 			L1ItemInstance l1iteminstance2 = null;
 
-			// 캐릭 교환인지 본다.
+			// キャラクター交換認知見る。
 
 			boolean characterTrade1 = false;
 			boolean characterTrade2 = false;
@@ -277,20 +276,20 @@ public class L1Trade {
 				for (cnt = 0; cnt < player_tradecount; cnt++) {
 					l1iteminstance1 = (L1ItemInstance) player_tradelist.get(0);
 					player.getTradeWindowInventory().tradeItem(l1iteminstance1, l1iteminstance1.getCount(), trading_partner.getInventory());
-					//manager.LogTradeAppend("교환", player.getName(), trading_partner.getName(), l1iteminstance1.getEnchantLevel(), l1iteminstance1.getName(),
+					//manager.LogTradeAppend("交換", player.getName(), trading_partner.getName(), l1iteminstance1.getEnchantLevel(), l1iteminstance1.getName(),
 							//l1iteminstance1.getBless(), l1iteminstance1.getCount(), l1iteminstance1.getId());
 					LinAllManager.getInstance().TradeAppend(l1iteminstance1.getName(), player.getName(), trading_partner.getName());
-					/** 로그파일저장 **/
+					/** ログファイルの保存 **/
 					LoggerInstance.getInstance().addTrade(true, player, trading_partner, l1iteminstance1, l1iteminstance1.getCount());
 
 				}
 				for (cnt = 0; cnt < trading_partner_tradecount; cnt++) {
 					l1iteminstance2 = (L1ItemInstance) trading_partner_tradelist.get(0);
 					trading_partner.getTradeWindowInventory().tradeItem(l1iteminstance2, l1iteminstance2.getCount(), player.getInventory());
-					//manager.LogTradeAppend("교환", trading_partner.getName(), player.getName(), l1iteminstance2.getEnchantLevel(), l1iteminstance2.getName(),
+					//manager.LogTradeAppend("交換", trading_partner.getName(), player.getName(), l1iteminstance2.getEnchantLevel(), l1iteminstance2.getName(),
 							//l1iteminstance2.getBless(), l1iteminstance2.getCount(), l1iteminstance2.getId());
 					LinAllManager.getInstance().TradeAppend(l1iteminstance2.getName(), trading_partner.getName(), player.getName());
-					/** 로그파일저장 **/
+					/** ログファイルの保存 **/
 					LoggerInstance.getInstance().addTrade(true, trading_partner, player, l1iteminstance2, l1iteminstance2.getCount());
 
 				}
@@ -318,7 +317,7 @@ public class L1Trade {
 
 					player.getInventory().removeItem(item);
 					}else{
-						player.sendPackets(new S_SystemMessage("아데나만 올려주세요"));
+						player.sendPackets(new S_SystemMessage("アデナのみ掲載して"));
 					}
 					player.setGambleReady(false);
 					player.sendPackets(new S_TradeStatus(0));
@@ -343,7 +342,7 @@ public class L1Trade {
 					player.sendPackets(new S_TradeStatus(0));
 					player.getTradeWindowInventory().clearItems();
 				    player.isNpcSell = false;
-					String chat = "감사합니다 또 애용해주세요~";
+					String chat = "ありがとうございますまた、愛用してください〜";
 					player.sendPackets(new S_NpcChatPacket(player.isNpcid, chat, 0));
 					player.broadcastPacket(new S_NpcChatPacket(player.isNpcid, chat, 0));
 			}	else{
@@ -366,7 +365,7 @@ public class L1Trade {
 			for (cnt = 0; cnt < player_tradecount; cnt++) {
 				l1iteminstance1 = (L1ItemInstance) player_tradelist.get(0);
 				player.getTradeWindowInventory().tradeItem(l1iteminstance1, l1iteminstance1.getCount(), player.getInventory());
-				/** 로그파일저장 **/
+				/** ログファイルの保存 **/
 				if(trading_partner!=null)
 				LoggerInstance.getInstance().addTrade(false, player, trading_partner, l1iteminstance1, l1iteminstance1.getCount());
 			}
@@ -383,7 +382,7 @@ public class L1Trade {
 			for (cnt = 0; cnt < trading_partner_tradecount; cnt++) {
 				l1iteminstance2 = (L1ItemInstance) trading_partner_tradelist.get(0);
 				trading_partner.getTradeWindowInventory().tradeItem(l1iteminstance2, l1iteminstance2.getCount(), trading_partner.getInventory());
-				/** 로그파일저장 **/
+				/** ログファイルの保存 **/
 				LoggerInstance.getInstance().addTrade(false, trading_partner, player, l1iteminstance2, l1iteminstance2.getCount());
 			}
 

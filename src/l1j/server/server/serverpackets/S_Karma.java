@@ -12,8 +12,8 @@ public class S_Karma extends ServerBasePacket {
 	{
 		writeC(Opcodes.S_EVENT);
 	    writeC(0x57);
-	      // + 욕망쪽, - 그신쪽진영
-	      // 그신을 죽여야 욕망이 올라가야 하니깐 ..
+	      // +欲望方、 - そのシンチョク陣営
+	      //その神を殺すの欲求が上がらなければだから。
 	    writeD(pc.getKarma());
 	}
 

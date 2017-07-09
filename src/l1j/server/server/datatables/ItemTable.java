@@ -327,7 +327,7 @@ public class ItemTable {
 				weapon.setUseDarkelf(rs.getInt("use_darkelf") == 0 ? false : true);
 				weapon.setUseDragonKnight(rs.getInt("use_dragonknight") == 0 ? false : true);
 				weapon.setUseBlackwizard(rs.getInt("use_blackwizard") == 0 ? false : true);
-				weapon.setUse전사(rs.getInt("use_warrior") == 0 ? false : true);
+				weapon.setUseWarrior(rs.getInt("use_warrior") == 0 ? false : true);
 				weapon.setHitModifier(rs.getInt("hitmodifier"));
 				weapon.setDmgModifier(rs.getInt("dmgmodifier"));
 				weapon.set_addstr(rs.getByte("add_str"));
@@ -393,7 +393,7 @@ public class ItemTable {
 				// .get(rs.getString("armor_type"))).intValue()); // 사용하지 않는다
 				armor.setType2(2);
 				armor.setUseType((_useTypes.get(rs.getString("type"))).intValue());
-				armor.set장신구처리(rs.getInt("acctype"));
+				armor.setAccessoryProcess(rs.getInt("acctype"));
 				armor.setGrade(rs.getInt("grade"));
 				armor.setMaterial((_materialTypes.get(rs.getString("material"))).intValue());
 				armor.setWeight(rs.getInt("weight"));
@@ -409,7 +409,7 @@ public class ItemTable {
 				armor.setUseDarkelf(rs.getInt("use_darkelf") == 0 ? false : true);
 				armor.setUseDragonKnight(rs.getInt("use_dragonknight") == 0 ? false : true);
 				armor.setUseBlackwizard(rs.getInt("use_blackwizard") == 0 ? false : true);
-				armor.setUse전사(rs.getInt("use_warrior") == 0 ? false : true);
+				armor.setUseWarrior(rs.getInt("use_warrior") == 0 ? false : true);
 				armor.set_addstr(rs.getByte("add_str"));
 				armor.set_addcon(rs.getByte("add_con"));
 				armor.set_adddex(rs.getByte("add_dex"));

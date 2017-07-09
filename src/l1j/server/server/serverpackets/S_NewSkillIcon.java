@@ -24,25 +24,25 @@ public class S_NewSkillIcon extends ServerBasePacket {
 			writeC(0x20);
 			writeC(0x08);
 			writeC(0x28);
-			if (skillId == L1SkillId.ABSOLUTE_BLADE) {// 앱솔루트 배리어
-				byteWrite(7433);// 인벤 이미지.
-			} else if (skillId == L1SkillId.DEATH_HEAL) {// 데스힐
+			if (skillId == L1SkillId.ABSOLUTE_BLADE) {// アブソルートバリア
+				byteWrite(7433);// インベントリのイメージ。
+			} else if (skillId == L1SkillId.DEATH_HEAL) {// デス・ヒル
 				byteWrite(7439);
-			} else if (skillId == L1SkillId.ASSASSIN) {// 어쌔신
+			} else if (skillId == L1SkillId.ASSASSIN) {// アサシン
 				byteWrite(7445);
-			} else if (skillId == L1SkillId.BLAZING_SPIRITS) {// 블레이징 스피릿츠
+			} else if (skillId == L1SkillId.BLAZING_SPIRITS) {// ブレージングスピリッツ
 				byteWrite(7448);
-			} else if (skillId == L1SkillId.GRACE_AVATAR) {// 그레이스 아바타
+			} else if (skillId == L1SkillId.GRACE_AVATAR) {// グレースアバター
 				byteWrite(7428);
-			} else if (skillId == L1SkillId.SOUL_BARRIER) {// 소울 배리어
+			} else if (skillId == L1SkillId.SOUL_BARRIER) {// ソウルバリア
 				byteWrite(7436);
-			} else if (skillId == L1SkillId.DESTROY) {// 디스트로이
+			} else if (skillId == L1SkillId.DESTROY) {// デストロイ
 				byteWrite(7451);
-			} else if (skillId == L1SkillId.IMPACT) {// 임팩트
+			} else if (skillId == L1SkillId.IMPACT) {// インパクト
 				byteWrite(7457);
-			} else if (skillId == L1SkillId.TITANL_RISING) {// 타이탄: 라이징
+			} else if (skillId == L1SkillId.TITANL_RISING) {// タイタン：ライジング
 				byteWrite(7461);
-			} else if (skillId == L1SkillId.STATUS_CASHSCROLL3) {// 전강
+			} else if (skillId == L1SkillId.STATUS_CASHSCROLL3) {// 銭江
 				byteWrite(2430);
 			}
 		}
@@ -52,23 +52,23 @@ public class S_NewSkillIcon extends ServerBasePacket {
 			writeC(0x03);
 			writeC(0x40);
 			int msgNum = 0;
-			if (skillId == L1SkillId.ABSOLUTE_BLADE)// 앱솔루트 배리어
-				msgNum = 4735;// 메세지.
-			else if (skillId == L1SkillId.DEATH_HEAL)// 데스힐
+			if (skillId == L1SkillId.ABSOLUTE_BLADE)// アブソルートバリア
+				msgNum = 4735;// メッセージ。
+			else if (skillId == L1SkillId.DEATH_HEAL)// デス・ヒル
 				msgNum = 4737;
-			else if (skillId == L1SkillId.ASSASSIN)// 어쌔신
+			else if (skillId == L1SkillId.ASSASSIN)// アサシン
 				msgNum = 4738;
-			else if (skillId == L1SkillId.BLAZING_SPIRITS)// 블레이징 스피릿츠
+			else if (skillId == L1SkillId.BLAZING_SPIRITS)// ブレージングスピリッツ
 				msgNum = 4750;
-			else if (skillId == L1SkillId.GRACE_AVATAR)// 그레이스 아바타
+			else if (skillId == L1SkillId.GRACE_AVATAR)// グレースアバター
 				msgNum = 4734;
-			else if (skillId == L1SkillId.SOUL_BARRIER)// 소울 배리어
+			else if (skillId == L1SkillId.SOUL_BARRIER)// ソウルバリア
 				msgNum = 4736;
-			else if (skillId == L1SkillId.DESTROY)// 디스트로이
+			else if (skillId == L1SkillId.DESTROY)// デストロイ
 				msgNum = 4739;
-			else if (skillId == L1SkillId.IMPACT)// 임팩트
+			else if (skillId == L1SkillId.IMPACT)// インパクト
 				msgNum = 4761;
-			else if (skillId == L1SkillId.STATUS_CASHSCROLL3) // 전강
+			else if (skillId == L1SkillId.STATUS_CASHSCROLL3) // 銭江
 				msgNum = 1316;
 			else if(skillId == L1SkillId.TITANL_RISING)
 				msgNum = 4740;

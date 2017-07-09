@@ -145,7 +145,7 @@ public class S_Ranking extends ServerBasePacket {
 			switch (number) {
 			case 1:
 				pstm = con
-						//.prepareStatement("SELECT char_name FROM characters WHERE AccessLevel = 0 order by Exp desc limit 10"); //전체랭킹 주석
+						//.prepareStatement("SELECT char_name FROM characters WHERE AccessLevel = 0 order by Exp desc limit 10"); //全体ランキングコメント
 						.prepareStatement("SELECT char_name FROM characters WHERE Type = 7 And AccessLevel = 0 order by Exp desc limit 10");
 				break;
 			case 2:

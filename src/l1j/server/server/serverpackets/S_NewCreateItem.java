@@ -35,16 +35,16 @@ public class S_NewCreateItem extends ServerBasePacket {
 	private static final String S_NEWCREATEITEM = "[S] S_NewCreateItem";
 	private byte[] _byte = null;
 	
-	public static final int 버프창 = 0x6e;
+	public static final int BUFF_WINDOW = 0x6e;
 	public static final int TAM_POINT = 0x01c2;
-	public static final int CASTLE_WAR_TIME_END = 0x44;// 아직 미사용
+	public static final int CASTLE_WAR_TIME_END = 0x44;// まだ未使用
 	public static final int CASTLE_WAR_TIME = 0x4C;
 	public static final int CLAN_JOIN_MESSAGE = 0x43;
 	public static final int CLAN_JOIN_SETTING = 0x4D;
 	public static final int EMOTICON = 0x40;
 	public static final int 토마호크_도트 = 0x93;
 	
-	/** 1020이후 새로운 패킷 **/
+	/**1020以降の新しいパケット **/
 	public static final int 사망패널티 = 0xCF;
 	public static final int 도감= 0x30;
 	public static final int 퀘스트대화 = 11;
@@ -63,7 +63,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 	public static final int 신규패킷11= 118;
 	public static final int 신규패킷12= 119;
 	public static final int 신규패킷13 = 0x07;
-	/** 1020이후 새로운 패킷 **/
+	/** 1020以降の新しいパケット **/
 	
 	public S_NewCreateItem(int type, boolean ck) {
 		buildPacket(type, ck);
@@ -83,7 +83,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0x60);
 			writeH(0);
 			break;
-		case 버프창:
+		case BUFF_WINDOW:
 			writeC(0);
 			writeC(8);
 			if (ck) {
@@ -120,7 +120,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			break;
 		case 신규패킷2: // 0x20
 			writeC(2);
-			writeC(8);// 모름
+			writeC(8);// わから
 			writeC(144);
 			writeC(28);
 			writeC(16);
@@ -216,16 +216,6 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0x00);
 			writeC(0x00);
 			break;
-
-		/*
-		 * case 도감: //0x30 -도감!! writeC(2); writeC(8); writeC(0); writeC(0x10);
-		 * writeC(0); writeC(0x1a); writeC(0x04); //원래 04는 잡아야될수가 남았고 05는 다잡음 완료
-		 * writeC(0x08); writeC(0x6d); //10진수 변환하면 리니지내에서 NO붙어있음 writeC(0x10);
-		 * writeC(0x02); //-잡은 마리수- 원래는 0x4e였다 writeC(0x10); writeC(0);
-		 * writeC(0x1a); //원래 00 writeC(0x05); //원래 04는 잡아야될수가 남았고 05는 다잡음 완료
-		 * writeC(0x08); writeC(0xAA); //10진수 변환하면 리니지내에서 NO붙어있음 writeC(4);
-		 * writeC(0x10); writeC(2); writeC(0); writeC(0); break;
-		 */
 
 		case 신규패킷10: // 0x7e
 			writeC(0);
@@ -566,7 +556,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
 		writeH(CASTLE_WAR_TIME);
 		writeC(0x08);
-		writeC(warType);// 1수성 2공성
+		writeC(warType);// 1水性2攻城
 		writeC(0x10);
 		if (second > 0) {
 			int total = second *= 2;
@@ -612,7 +602,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
 		writeC(type);
 		switch (type) { 
-		case 버프창: 
+		case BUFF_WINDOW: 
 			writeC(0x00);
 			writeC(0x08);
 			writeC(0x02);
@@ -746,9 +736,9 @@ public class S_NewCreateItem extends ServerBasePacket {
 	
 			case CLAN_JOIN_SETTING:
 				writeD(0x10010801);
-				writeC(subtype);// 가입 설정
+				writeC(subtype);// 登録設定
 				writeC(0x18);
-				writeC(objid);// 가입 유형
+				writeC(objid);// 登録タイプ
 				writeD(0x00001422);
 				writeD(0x00);
 				writeD(0x00);

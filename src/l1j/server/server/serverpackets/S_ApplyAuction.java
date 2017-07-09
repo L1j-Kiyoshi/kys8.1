@@ -19,7 +19,10 @@
 
 package l1j.server.server.serverpackets;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -57,14 +60,14 @@ public class S_ApplyAuction extends ServerBasePacket {
 				writeC(Opcodes.S_HYPERTEXT_INPUT);
 				writeD(objectId);
 				writeD(0); // ?
-				if (bidderId == 0) { // 입찰자 없음
-					writeD(nowPrice); // 스핀 컨트롤의 초기 가격
-					writeD(nowPrice); // 가격의 하한
-				} else { // 입찰자 있어
-					writeD(nowPrice + 1); // 스핀 컨트롤의 초기 가격
-					writeD(nowPrice + 1); // 가격의 하한
+				if (bidderId == 0) { // 入札者なし
+					writeD(nowPrice); // スピンコントロールの初期価格
+					writeD(nowPrice); // 価格の下限
+				} else { // 入札者あり
+					writeD(nowPrice + 1); // スピンコントロールの初期価格
+					writeD(nowPrice + 1); // 価格の下限
 				}
-				writeD(2000000000); // 가격의 상한
+				writeD(2000000000); // 価格の上限
 				writeH(0); // ?
 				writeS("agapply");
 				writeS("agapply " + houseNumber);

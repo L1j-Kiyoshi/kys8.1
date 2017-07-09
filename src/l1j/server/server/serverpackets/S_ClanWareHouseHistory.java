@@ -59,22 +59,22 @@ public class S_ClanWareHouseHistory extends ServerBasePacket {
 			rs.beforeFirst();
 			writeC(Opcodes.S_EVENT);
 			writeC(117);
-			writeD(count); // 글 갯수.
+			writeD(count); // 文本数。
 			while (rs.next()) {
 				time = (realtime - rs.getInt("elapsed_time")) / 60;
 				charName = rs.getString("char_name");
 				itemName = rs.getString("item_name");
 				itemCount = rs.getInt("item_count");
 				itemIndex = rs.getString("item_getorput");
-				writeS(charName); // 이름
+				writeS(charName); // 名前
 				if (itemIndex.equalsIgnoreCase("맡겼습니다.")) {
-					writeC(0); // 1: 찾았습니다 , 0: 맡겼습니다.
+					writeC(0); // 1：見つかりました、0：任せた。
 				} else {
 					writeC(1);
 				}
-				writeS(itemName); // 아이템명
+				writeS(itemName); //アイテム名
 				writeD(itemCount); // 아이템 갯수
-				writeD(time); // 경과 시간
+				writeD(time); // 経過時間
 			}
 		} catch (SQLException e) {
 

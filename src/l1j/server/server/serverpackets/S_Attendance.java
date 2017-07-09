@@ -5,8 +5,8 @@ import java.io.IOException;
 
 import l1j.server.server.Opcodes;
 import l1j.server.server.datatables.AttendanceTable;
-import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.L1AccountAttendance;
+import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.templates.L1Attendance;
 
 public class S_Attendance extends ServerBasePacket {
@@ -20,11 +20,11 @@ public class S_Attendance extends ServerBasePacket {
 	public static final int 출석체크아이콘 = 0x20;
 	public static final int 출석체크 = 0x21;
 	
-	public S_Attendance(L1AccountAttendance acc, int location, boolean ispc) { //출석
+	public S_Attendance(L1AccountAttendance acc, int location, boolean ispc) { //出席
 		buildPacket(acc, location, ispc);
 	}
 	
-	public S_Attendance(int type,int id, int d) { // 출첵
+	public S_Attendance(int type,int id, int d) { // チュルチェク
 		buildPacket(type, id, d);
 	}
 	
@@ -37,7 +37,7 @@ public class S_Attendance extends ServerBasePacket {
 		writeC(0x02);
 		 
 		writeC(0x0a);
-		writeH(cctime > 127 ? 734 : 733); //28개 494:493 , 42개 734:733
+		writeH(cctime > 127 ? 734 : 733); //28個494：493、42 734：733
 		/*writeC(0xdd);
 		writeC(0x02);*/
 
@@ -88,7 +88,7 @@ public class S_Attendance extends ServerBasePacket {
 		 writeH(0x1c90);//?
 		 
 		 
-		 //pc방 시작
+		 //pc部屋開始
 		 
 		 writeC(0x0a);
 		 writeH(ccpctime > 127 ? 734 : 733);
@@ -137,18 +137,18 @@ public class S_Attendance extends ServerBasePacket {
 			 
 			 writeC(0x38);
 			 writeH(0x1c90);//?
-			 //pc방종료
+			 //pc部屋終了
 			 
 			 
-			 // 창위치값및 표현 부분 
+			 // ウィンドウの位置の値と表現部分 
 			 writeC(0x10);
-			 writeC(location);//0으로하면 일반타임에 녹색불 1으로하면pc타입에 벌건불
+			 writeC(location);//0にすると、通常のタイムが緑色に点灯1にするとpcタイプボルゴン火
 			 
 			 writeC(0x18);
-			 writeC(ispc == true ? 1 : 0); //1로해야 피시방 시간이흐른다.
+			 writeC(ispc == true ? 1 : 0); //1にする必要がインターネットカフェの時間が流れる。
 			 
 			 writeC(0x18);
-			 writeC(location);//출첵을눌럿을때 보여질화면 0 일반 1 pc방
+			 writeC(location);//チュルチェクをヌルロトとき表示される画面0一般的な1 pc部屋
 			 
 			 writeH(0x0000);
 		
@@ -166,7 +166,7 @@ public class S_Attendance extends ServerBasePacket {
 					writeC(0x10);
 					writeC(0x02);
 					writeC(0x18);
-					writeC(id);//00 일반 01 피방
+					writeC(id);//00一般的な01ピバン
 					writeH(0x00);
 					break;
 			case 출석체크아이콘:
@@ -212,7 +212,7 @@ public class S_Attendance extends ServerBasePacket {
 							detail.writeC(0x18);
 							detail.writeBit(cc.getCount());
 							detail.writeC(0x22);
-							detail.writeS2("출석체크");
+							detail.writeS2("出席チェック");
 							detail.writeC(0x28);
 							detail.writeC(0);
 							detail.writeC(0x30);
@@ -266,7 +266,7 @@ public class S_Attendance extends ServerBasePacket {
 							detail.writeC(0x08);detail.writeC(0x02);	
 							detail.writeC(0x10);detail.writeBit(cc.getItempc().getItemDescId());
 							detail.writeC(0x18);detail.writeBit(cc.getCountpc());
-							detail.writeC(0x22);detail.writeLS("출석체크");
+							detail.writeC(0x22);detail.writeLS("出席チェック");
 							detail.writeC(0x28);detail.writeC(0);
 							detail.writeC(0x30);detail.writeBit(cc.getItempc().getGfxId());
 							detail.writeC(0x38);detail.writeC(1);

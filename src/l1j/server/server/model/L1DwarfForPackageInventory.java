@@ -255,7 +255,7 @@
 //
 //		L1Item temp = ItemTable.getInstance().getTemplate(itemid);
 //		if (temp == null) {
-//			throw new Exception("존재하지 않는 아이템 ID");
+//			throw new Exception("存在しないアイテム ID");
 //		}
 //		Connection con = null;
 //		PreparedStatement pstm = null;
@@ -314,7 +314,7 @@
 //				// ignore
 //			}
 //			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-//			throw new Exception(".present 처리중에 에러가 발생했습니다.");
+//			throw new Exception(".present 処理中にエラーが発生しました。");
 //		} finally {
 //			SQLUtil.close(pstm);
 //			SQLUtil.close(con);

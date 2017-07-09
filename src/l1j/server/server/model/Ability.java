@@ -15,9 +15,9 @@ public class Ability {
 	private static final int LIMIT_MIN = 0;
 	private static final int LIMIT_MAX = 127;
 
-	private byte str = 0; // 베이스 힘 + 레벨업 또는 엘릭서로 인해 상승한 힘
-	private byte baseStr = 0; // 베이스 힘
-	private byte addedStr = 0; // 마법 또는 아이템으로 상승한 힘
+	private byte str = 0; //ベース力+レベルアップまたはエリキシルのために上昇した力
+	private byte baseStr = 0; // ベース力
+	private byte addedStr = 0; // 魔法のアイテムに上昇した力
 
 	private byte con = 0;
 	private byte baseCon = 0;
@@ -119,7 +119,7 @@ public class Ability {
 		if (character instanceof L1PcInstance) {
             L1PcInstance pc = (L1PcInstance) character;
             if (pc.getNetConnection() != null) {                    
-                pc.sendPackets(new S_CharStat(pc, S_CharStat.STAT_REFRESH));// 현재순수스탯
+                pc.sendPackets(new S_CharStat(pc, S_CharStat.STAT_REFRESH));// 現在、純粋なステータス
                 pc.sendPackets(new S_Weight(pc));            
                 pc.sendPackets(new S_CharStat(pc, 2, S_CharStat.Stat_Str));
                 pc.sendPackets(new S_OwnCharStatus2(pc)); 
@@ -226,7 +226,7 @@ public class Ability {
 		if (character instanceof L1PcInstance) {
             L1PcInstance pc = (L1PcInstance) character;
             if (pc.getNetConnection() != null) {                       
-                pc.sendPackets(new S_CharStat(pc, S_CharStat.STAT_REFRESH));// 현재순수스탯
+                pc.sendPackets(new S_CharStat(pc, S_CharStat.STAT_REFRESH));// 現在、純粋なステータス
                 pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, pc.get_PlusEr()));             
                 pc.sendPackets(new S_CharStat(pc , 8, S_CharStat.Stat_Dex));
                 pc.sendPackets(new S_OwnCharStatus2(pc));
@@ -321,7 +321,7 @@ public class Ability {
 		 if (character instanceof L1PcInstance) {
 	            L1PcInstance pc = (L1PcInstance) character;
 	            if (pc.getNetConnection() != null) {
-	                pc.sendPackets(new S_CharStat(pc, S_CharStat.STAT_REFRESH));// 현재순수스탯
+	                pc.sendPackets(new S_CharStat(pc, S_CharStat.STAT_REFRESH));// 現在、純粋なステータス
 	                pc.sendPackets(new S_SPMR(pc));             
 	                pc.sendPackets(new S_CharStat(pc , 8, S_CharStat.Stat_Int));            
 	           
@@ -378,7 +378,7 @@ public class Ability {
 	                pc.resetBaseMr();              
 	                pc.sendPackets(new S_CharStat(pc , 8, S_CharStat.Stat_Wis));
 	                pc.sendPackets(new S_SPMR(pc));
-	                pc.sendPackets(new S_CharStat(pc, S_CharStat.STAT_REFRESH));// 현재순수스탯
+	                pc.sendPackets(new S_CharStat(pc, S_CharStat.STAT_REFRESH));// 現在、純粋なステータス
 	            }
 	        }	
 	}

@@ -49,7 +49,7 @@ import l1j.server.server.utils.IntRange;
 
 public class L1Character extends L1Object {
 	private static final long serialVersionUID = 1L;
-	// 캐릭터 기본
+	// キャラクターの基本
 	private String _name;
 	private String _title;
 	private int _level;
@@ -63,30 +63,30 @@ public class L1Character extends L1Object {
 	private int _lawful;
 	private int _karma;
 
-	// 상태
-	private int _heading; // ● 방향 0. 좌상 1. 상 2. 우상 3. 오른쪽 4. 우하 5. 하 6. 좌하 7. 좌
-	private int _moveSpeed; // ● 스피드 0. 통상 1. 헤이 파업 2. 슬로우
-	private int _braveSpeed; // ● 치우침 이브 상태 0. 통상 1. 치우침 이브
-	private int _tempCharGfx; // ● 베이스 그래픽 ID
-	private int _gfxid; // ● 그래픽 ID
+	// 状態
+	private int _heading; // ●方向0.左上1.上2偶像3.右4.右下5.し6左下7左
+	private int _moveSpeed; // ●スピード0.通常1ヘイスト2スロー
+	private int _braveSpeed; // ●ブレイブ状態0.通常1ブレイブ
+	private int _tempCharGfx; // ●ベースのグラフィックスID
+	private int _gfxid; // ●グラフィックスID
 	private L1Poison _poison = null;
 	private boolean _paralyzed;
 	private boolean _sleeped;
 	private L1Paralysis _paralysis;
 	private boolean _isDead;
 
-	protected Light light = null; // 캐릭터 주위 빛
-	private MoveState moveState; // 이동속도, 바라보는 방향
-	protected Ability ability = null; // 능력치
-	protected Resistance resistance = null; // 저항 (마방, 불, 물, 바람, 땅, 스턴, 동빙, 슬립, 석화)
-	protected AC ac = null; // AC 방어
+	protected Light light = null; // キャラクターの周りの光
+	private MoveState moveState; // 移動速度、眺める方向
+	protected Ability ability = null; // 能力値
+	protected Resistance resistance = null; // 抵抗（魔、火、水、風、地、スタン、凍結、スリップ、石化）
+	protected AC ac = null; // AC防御
 
-	// 모르는거
+	// 知らないだろ
 	private boolean _isSkillDelay = false;
 	private int _addAttrKind;
 	private int _status;
 
-	// 대미지
+	// ダメージ
 	private int _dmgup = 0;
 	private int _trueDmgup = 0;
 	private int _bowDmgup = 0;
@@ -98,7 +98,7 @@ public class L1Character extends L1Object {
 
 	private int _sp = 0; // sp
 
-	// 그외
+	// その他
 	private static Random _rnd = new Random(System.nanoTime());
 	private final Map<Integer, L1NpcInstance> _petlist = new HashMap<Integer, L1NpcInstance>();
 	private final Map<Integer, L1SupportInstance> _supportlist = new HashMap<Integer, L1SupportInstance>();
@@ -107,7 +107,7 @@ public class L1Character extends L1Object {
 	private final Map<Integer, L1ItemDelay.ItemDelayTimer> _itemdelay = new HashMap<Integer, L1ItemDelay.ItemDelayTimer>();
 	private final Map<Integer, L1FollowerInstance> _followerlist = new HashMap<Integer, L1FollowerInstance>();
 
-	// ■■■■■■■■■■ L1PcInstance에 이동하는 프롭퍼티 ■■■■■■■■■■
+	// ■■■■■■■■■■ L1PcInstanceに移動するプロパティ ■■■■■■■■■■
 	private final List<L1Object> _knownObjects = new CopyOnWriteArrayList<L1Object>();
 	private final List<L1PcInstance> _knownPlayer = new CopyOnWriteArrayList<L1PcInstance>();
 
@@ -122,10 +122,10 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터를 부활시킨다.
+	 * キャラクターを復活させる。
 	 * 
 	 * @param hp
-	 *            부활 후의 HP
+	 *            復活後のHP
 	 */
 	public void resurrect(int hp) {
 		if (!isDead())
@@ -146,19 +146,19 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터의 현재의 HP를 돌려준다.
+	 * キャラクターの現在のHPを返す。
 	 * 
-	 * @return 현재의 HP
+	 * @return 現在のHP
 	 */
 	public int getCurrentHp() {
 		return _currentHp;
 	}
 
 	/**
-	 * 캐릭터의 HP를 설정한다.
+	 * キャラクターのHPを設定する。
 	 * 
 	 * @param i
-	 *            캐릭터의 새로운 HP
+	 *            キャラクターの新しいHP
 	 */
 	public void setCurrentHp(int i) {
 		if (i >= getMaxHp()) {
@@ -171,19 +171,19 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터의 현재의 MP를 돌려준다.
+	 *キャラクターの現在のMPを返す。
 	 * 
-	 * @return 현재의 MP
+	 * @return 現在のMP
 	 */
 	public int getCurrentMp() {
 		return _currentMp;
 	}
 
 	/**
-	 * 캐릭터의 MP를 설정한다.
+	 * キャラクターのMPを設定する。
 	 * 
 	 * @param i
-	 *            캐릭터의 새로운 MP
+	 *            キャラクターの新しいMP
 	 */
 	public void setCurrentMp(int i) {
 		if (i >= getMaxMp()) {
@@ -196,37 +196,37 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터의 잠상태를 돌려준다.
+	 * キャラクターの睡眠状態を返す。
 	 * 
-	 * @return 잠상태를 나타내는 값. 잠상태이면 true.
+	 * @return 睡眠状態を示す値。睡眠状態であればtrue。
 	 */
 	public boolean isSleeped() {
 		return _sleeped;
 	}
 
 	/**
-	 * 캐릭터의 잠상태를 설정한다.
+	 * キャラクターの睡眠状態を設定する。
 	 * 
 	 * @param sleeped
-	 *            잠상태를 나타내는 값. 잠상태이면 true.
+	 *            睡眠状態を示す値。睡眠状態であればtrue。
 	 */
 	public void setSleeped(boolean sleeped) {
 		_sleeped = sleeped;
 	}
 
 	/**
-	 * 캐릭터의 마비 상태를 돌려준다.
+	 * キャラクターの麻痺状態を返す。
 	 * 
-	 * @return 마비 상태를 나타내는 값. 마비 상태이면 true.
+	 * @return 麻痺状態を示す値。麻痺状態であればtrue。
 	 */
 	public boolean isParalyzed() {
 		return _paralyzed;
 	}
 
 	/**
-	 * 캐릭터의 마비 상태를 돌려준다.
+	 * キャラクターの麻痺状態を返す。
 	 * 
-	 * @return 마비 상태를 나타내는 값. 마비 상태이면 true.
+	 * @return 麻痺状態を示す値。麻痺状態であればtrue。
 	 */
 	public void setParalyzed(boolean paralyzed) {
 		_paralyzed = paralyzed;
@@ -246,10 +246,10 @@ public class L1Character extends L1Object {
 		}
 	}
 	/**
-	 * 캐릭터의 가시 범위에 있는 플레이어에, 패킷을 송신한다.
+	 * キャラクターの可視範囲にあるプレーヤーでは、パケットを送信する。
 	 * 
 	 * @param packet
-	 *            송신하는 패킷을 나타내는 ServerBasePacket 오브젝트.
+	 *            送信するパケットを示すServerBasePacketオブジェクト。
 	 */
 	public void broadcastPacket(ServerBasePacket packet) {
 		for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(this)) {
@@ -269,10 +269,10 @@ public class L1Character extends L1Object {
 		}
 	}
 	/**
-	 * 캐릭터의 가시 범위에 있는 플레이어에, 패킷을 송신한다. 다만 타겟의 화면내에는 송신하지 않는다.
+	 * キャラクターの可視範囲にあるプレーヤーでは、パケットを送信する。ただし、ターゲットの画面には送信しない。
 	 * 
 	 * @param packet
-	 *            송신하는 패킷을 나타내는 ServerBasePacket 오브젝트.
+	 *            送信するパケットを示すServerBasePacketオブジェクト。
 	 */
 	public void broadcastPacketExceptTargetSight(ServerBasePacket packet, L1Character target) {
 		for (L1PcInstance pc : L1World.getInstance().getVisiblePlayerExceptTargetSight(this, target)) {
@@ -283,10 +283,10 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터의 50 매스 이내에 있는 플레이어에, 패킷을 송신한다.
+	 * キャラクターの50マス以内にいるプレイヤーに、パケットを送信する。
 	 * 
 	 * @param packet
-	 *            송신하는 패킷을 나타내는 ServerBasePacket 오브젝트.
+	 *            送信するパケットを示すServerBasePacketオブジェクト。
 	 */
 	public void wideBroadcastPacket(ServerBasePacket packet) {
 		for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(this, 50)) {
@@ -295,9 +295,9 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터의 정면의 좌표를 돌려준다.
+	 * キャラクターの正面の座標を返す。
 	 * 
-	 * @return 정면의 좌표
+	 * @return 正面の座標
 	 */
 	public int[] getFrontLoc() {
 		int[] loc = new int[2];
@@ -351,24 +351,24 @@ public class L1Character extends L1Object {
 
 	
 	/**
-	 * 지정된 좌표에 대할 방향을 돌려준다.
+	 * 指定された座標に接する方向を返す。
 	 * 
 	 * @param tx
-	 *            좌표의 X치
+	 *            座標のX値
 	 * @param ty
-	 *            좌표의 Y치
-	 * @return 지정된 좌표에 대할 방향
+	 *            座標のY値
+	 * @return 指定された座標に接する方向
 	 */
 	public int targetDirection(int tx, int ty) {
-		float dis_x = Math.abs(getX() - tx); // X방향의 타겟까지의 거리
-		float dis_y = Math.abs(getY() - ty); // Y방향의 타겟까지의 거리
-		float dis = Math.max(dis_x, dis_y); // 타겟까지의 거리
+		float dis_x = Math.abs(getX() - tx); // X方向のターゲットまでの距離
+		float dis_y = Math.abs(getY() - ty); //Y方向のターゲットまでの距離
+		float dis = Math.max(dis_x, dis_y); // ターゲットまでの距離
 
 		if (dis == 0)
 			return getHeading();
 
-		int avg_x = (int) Math.floor((dis_x / dis) + 0.59f); // 상하 좌우가 조금 우선인 둥근
-		int avg_y = (int) Math.floor((dis_y / dis) + 0.59f); // 상하 좌우가 조금 우선인 둥근
+		int avg_x = (int) Math.floor((dis_x / dis) + 0.59f); // 上下左右が少し優先的なラウンド
+		int avg_y = (int) Math.floor((dis_y / dis) + 0.59f); // 上下左右が少し優先的なラウンド
 
 		int dir_x = 0;
 		int dir_y = 0;
@@ -389,33 +389,33 @@ public class L1Character extends L1Object {
 			dir_y = 0;
 
 		if (dir_x == 1 && dir_y == -1)
-			return 1; // 상
+			return 1; // 上
 		if (dir_x == 1 && dir_y == 0)
-			return 2; // 우상
+			return 2; // アイドル
 		if (dir_x == 1 && dir_y == 1)
-			return 3; // 오른쪽
+			return 3; // 右
 		if (dir_x == 0 && dir_y == 1)
-			return 4; // 우하
+			return 4; // ウーハー
 		if (dir_x == -1 && dir_y == 1)
-			return 5; // 하
+			return 5; // し
 		if (dir_x == -1 && dir_y == 0)
-			return 6; // 좌하
+			return 6; // 左下
 		if (dir_x == -1 && dir_y == -1)
-			return 7; // 왼쪽
+			return 7; // 左
 		if (dir_x == 0 && dir_y == -1)
-			return 0; // 좌상
+			return 0; // 左上
 
 		return getHeading();
 	}
 
 	/**
-	 * 지정된 좌표까지의 직선상에, 장애물이 존재*하지 않는가*를 돌려준다.
+	 * 指定された座標までの直線上に、障害物が存在*しない*を返す。
 	 * 
 	 * @param tx
 	 *            좌표의 X치
 	 * @param ty
-	 *            좌표의 Y치
-	 * @return 장애물이 없으면 true, 어느 false를 돌려준다.
+	 *            座標のY値
+	 * @return 障害物がなければtrue、あるfalseを返す。
 	 */
 	public boolean glanceCheck(int tx, int ty) {
 		L1Map map = getMap();
@@ -463,7 +463,7 @@ public class L1Character extends L1Object {
 		return true;
 	}
 	/**
-	 * 해당하는 좌표로 방향을 전환할때 사용.
+	 * 該当する座標に方向を転換するために使用。
 	 */
 	public static int calcheading(int myx, int myy, int tx, int ty) {
 		if (tx > myx && ty > myy) {
@@ -490,7 +490,7 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 원하는 타켓에게 장거리 공격 및 근거리 공격이 가능한지 체크
+	 * 希望ターゲットに長距離攻撃と近距離攻撃が可能かどうかチェック
 	 */
 	static public boolean isAreaAttack(L1Character o, int tx, int ty, int tm) {
 		L1Map map = o.getMap();
@@ -512,7 +512,7 @@ public class L1Character extends L1Object {
 				// System.out.println(chx+" "+chy);
 				if (!World.isThroughAttack(chx, chy, map.getId(),
 						calcheading(chx, chy, tx, ty))) {
-					// System.out.println("아 씨발");
+					// System.out.println("ああファック");
 					return false;
 				}
 
@@ -520,7 +520,7 @@ public class L1Character extends L1Object {
 			}
 			if (!World.isThroughAttack(chx, chy, map.getId(),calcheading(chx, chy, tx, ty))) {
 				// System.out.println(chx+" "+chy);
-				// System.out.println(o.getName()+"막혔어!");
+				// System.out.println(o.getName()+"マクヒョトオ！");
 				return false;
 			}
 			if (chx == tx && chy == ty) {
@@ -552,18 +552,18 @@ public class L1Character extends L1Object {
 		return true;
 	}
 	/**
-	 * 지정된 좌표에 공격 가능한가를 돌려준다.
+	 * 指定された座標に攻撃可能かを返す。
 	 * 
 	 * @param x
-	 *            좌표의 X치.
+	 *            座標のX値。
 	 * @param y
-	 *            좌표의 Y치.
+	 *            座標のY値。
 	 * @param range
-	 *            공격 가능한 범위(타일수)
-	 * @return 공격 가능하면 true, 불가능하면 false
+	 *            攻撃可能な範囲（タイル数）
+	 * @return 攻撃可能な場合はtrue、不可能であればfalse
 	 */
 	public boolean isAttackPosition(int x, int y, int range) {
-		if (range >= 7) {// 원격 무기(7이상의 경우 기울기를 고려하면(자) 화면외에 나온다)
+		if (range >= 7) {// リモート武器（7以上の場合の傾きを考慮すると、画面のほかに出てくる）
 			if (getLocation().getTileDistance(new Point(x, y)) > range)
 				return false;
 		} else {
@@ -575,7 +575,7 @@ public class L1Character extends L1Object {
 	}
 	public static boolean isAttackPosition(L1Character cha, int x, int y,
 			int mapid, int range) {
-		if (range >= 7) {// 원격 무기(7이상의 경우 기울기를 고려하면(자) 화면외에 나온다)
+		if (range >= 7) {// リモート武器（7以上の場合の傾きを考慮すると、画面のほかに出てくる）
 			if (cha.getLocation().getTileDistance(new Point(x, y)) > range)
 				return false;
 		} else {
@@ -592,21 +592,21 @@ public class L1Character extends L1Object {
 		return isAreaAttack(cha, x, y, mapid);
 	}
 	/**
-	 * 캐릭터의 목록을 돌려준다.
+	 * キャラクターのリストを返す。
 	 * 
-	 * @return 캐릭터의 목록을 나타내는, L1Inventory 오브젝트.
+	 * @return キャラクターのリストを示す、L1Inventoryオブジェクト。
 	 */
 	public L1Inventory getInventory() {
 		return null;
 	}
 
 	/**
-	 * 캐릭터에, 새롭게 스킬 효과를 추가한다.
+	 * キャラクターでは、新たにスキル効果を追加する。
 	 * 
 	 * @param skillId
-	 *            추가하는 효과의 스킬 ID.
+	 *            追加効果のスキルIDです。
 	 * @param timeMillis
-	 *            추가하는 효과의 지속 시간. 무한의 경우는 0.
+	 *            追加効果の持続時間。無限の場合は0。
 	 */
 	private void addSkillEffect(int skillId, int timeMillis) {
 		L1SkillTimer timer = null;
@@ -618,14 +618,14 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터에, 스킬 효과를 설정한다. <br>
-	 * 중복 하는 스킬이 없는 경우는, 새롭게 스킬 효과를 추가한다. <br>
-	 * 중복 하는 스킬이 있는 경우는, 나머지 효과 시간과 파라미터의 효과 시간의 긴 (분)편을 우선해 설정한다.
+	 * キャラクターでは、スキルの効果を設定する。 <br>
+	 *重複するスキルがない場合は、新たにスキル効果を追加する。 <br>
+	 * 重複するスキルがある場合は、残りの効果時間とパラメータの効果時間の長い方を優先して設定する。
 	 * 
 	 * @param skillId
-	 *            설정하는 효과의 스킬 ID.
+	 *            設定する効果のスキルIDです。
 	 * @param timeMillis
-	 *            설정하는 효과의 지속 시간. 무한의 경우는 0.
+	 *            設定する効果の持続時間。無限の場合は0。
 	 */
 	public void setSkillEffect(int skillId, int timeMillis) {
 		if (hasSkillEffect(skillId)) {
@@ -642,10 +642,10 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터로부터, 스킬 효과를 삭제한다.
+	 * キャラクターから、スキル効果を削除する。
 	 * 
 	 * @param skillId
-	 *            삭제하는 효과의 스킬 ID
+	 *            削除する効果のスキルID
 	 */
 	public void removeSkillEffect(int skillId) {
 		L1SkillTimer timer = _skillEffect.remove(skillId);
@@ -655,10 +655,10 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터로부터, 스킬 효과의 타이머를 삭제한다. 스킬 효과는 삭제되지 않는다.
+	 * キャラクターから、スキル効果のタイマーを削除する。スキル効果は削除されない。
 	 * 
 	 * @param skillId
-	 *            삭제하는 타이머의 스킬 ID
+	 *            削除するタイマーのスキルID
 	 */
 	public void killSkillEffectTimer(int skillId) {
 		L1SkillTimer timer = _skillEffect.remove(skillId);
@@ -668,7 +668,7 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터로부터, 모든 스킬 효과 타이머를 삭제한다. 스킬 효과는 삭제되지 않는다.
+	 * キャラクターから、すべてのスキル効果のタイマーを削除する。スキル効果は削除されない。
 	 */
 	public void clearSkillEffectTimer() {
 		for (L1SkillTimer timer : _skillEffect.values()) {
@@ -680,22 +680,22 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터에, 해당 스킬 효과가 걸려있는지 알려줌
+	 * キャラクターには、そのスキル効果がかかっているかどうか知らせる
 	 * 
 	 * @param skillId
-	 *            스킬 ID
-	 * @return 마법 효과가 있으면 true, 없으면 false.
+	 *           スキルID
+	 * @return 魔法の効果がある場合はtrue、なければfalse。
 	 */
 	public boolean hasSkillEffect(int skillId) {
 		return _skillEffect.containsKey(skillId);
 	}
 
 	/**
-	 * 캐릭터의 스킬 효과의 지속 시간을 돌려준다.
+	 * キャラクターのスキル効果の持続時間を返す。
 	 * 
 	 * @param skillId
-	 *            조사하는 효과의 스킬 ID
-	 * @return 스킬 효과의 남은 시간(초). 스킬이 걸리지 않은가 효과 시간이 무한의 경우,-1.
+	 *            調査する効果のスキルID
+	 * @return スキル効果の残り時間（秒）。スキルがかからないかの効果時間が無限の場合、-1。
 	 */
 	public int getSkillEffectTimeSec(int skillId) {
 		L1SkillTimer timer = _skillEffect.get(skillId);
@@ -706,7 +706,7 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터에, skill delay 추가
+	 * キャラクターでは、skill delay追加
 	 * 
 	 * @param flag
 	 */
@@ -715,82 +715,82 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터의 독 상태를 돌려준다.
+	 * キャラクターの毒状態を返す。
 	 * 
-	 * @return 스킬 지연중인가.
+	 * @return スキルディレイ中なのか。
 	 */
 	public boolean isSkillDelay() {
 		return _isSkillDelay;
 	}
 
 	/**
-	 * 캐릭터에, Item delay 추가
+	 * キャラクターでは、Item delay追加
 	 * 
 	 * @param delayId
-	 *            아이템 지연 ID. 통상의 아이템이면 0, 인비지비리티크로크, 바르로그브랏디크로크이면 1.
+	 *            アイテムの遅延ID。通常のアイテムであれば0、インビジ不正チークロック、バルログブラッディクロークであれば1。
 	 * @param timer
-	 *            지연 시간을 나타내는, L1ItemDelay.ItemDelayTimer 오브젝트.
+	 *            遅延時間を示す、L1ItemDelay.ItemDelayTimerオブジェクト。
 	 */
 	public void addItemDelay(int delayId, L1ItemDelay.ItemDelayTimer timer) {
 		_itemdelay.put(delayId, timer);
 	}
 
 	/**
-	 * 캐릭터로부터, Item delay 삭제
+	 * キャラクターから、Item delay削除
 	 * 
 	 * @param delayId
-	 *            아이템 지연 ID. 통상의 아이템이면 0, 인비지비리티크로크, 바르로그브랏디크로크이면 1.
+	 *           アイテムの遅延ID。通常のアイテムであれば0、インビジ不正チークロック、バルログブラッディクロークであれば1。
 	 */
 	public void removeItemDelay(int delayId) {
 		_itemdelay.remove(delayId);
 	}
 
 	/**
-	 * 캐릭터에, Item delay 이 있을까
+	 * キャラクターでは、Item delayがあるか
 	 * 
 	 * @param delayId
-	 *            조사하는 아이템 지연 ID. 통상의 아이템이면 0, 인비지비리티크로크, 바르로그브랏디 클로크이면 1.
-	 * @return 아이템 지연이 있으면 true, 없으면 false.
+	 *            調査するアイテム遅延IDです。通常のアイテムであれば0、インビジ不正チークロック、バルログブラッディクロークであれば1。
+	 * @return アイテムの遅延がある場合はtrue、なければfalse。
 	 */
 	public boolean hasItemDelay(int delayId) {
 		return _itemdelay.containsKey(delayId);
 	}
 
 	/**
-	 * 캐릭터의 item delay 시간을 나타내는, L1ItemDelay.ItemDelayTimer를 돌려준다.
+	 * キャラクターのitem delay時間を示す、L1ItemDelay.ItemDelayTimerを返す。
 	 * 
 	 * @param delayId
-	 *            조사하는 아이템 지연 ID. 통상의 아이템이면 0, 인비지비리티크로크, 바르로그브랏디 클로크이면 1.
-	 * @return 아이템 지연 시간을 나타내는, L1ItemDelay.ItemDelayTimer.
+	 *            調査するアイテム遅延IDです。通常のアイテムであれば0、インビジ不正チークロック、バルログブラッディクロークであれば1。
+	 * @return アイテム遅延時間を示す、L1ItemDelay.ItemDelayTimer。
 	 */
 	public L1ItemDelay.ItemDelayTimer getItemDelayTimer(int delayId) {
 		return _itemdelay.get(delayId);
 	}
 
 	/**
-	 * 캐릭터에, pet, summon monster, tame monster, created zombie 를 추가한다.
+	 * キャラクターでは、pet、summon monster、tame monster、created zombieを加える。
 	 * 
 	 * @param npc
-	 *            추가하는 Npc를 나타내는, L1NpcInstance 오브젝트.
+	 *            追加するNpcを示す、L1NpcInstanceオブジェクト。
 	 */
 	public void addPet(L1NpcInstance npc) {
 		_petlist.put(npc.getId(), npc);
 	}
 
 	/**
-	 * 캐릭터로부터, pet, summon monster, tame monster, created zombie 를 삭제한다.
+	 * キャラクターから、pet、summon monster、tame monster、created zombieを削除する。
 	 * 
 	 * @param npc
-	 *            삭제하는 Npc를 나타내는, L1NpcInstance 오브젝트.
+	 *            削除するNpcを示す、L1NpcInstanceオブジェクト。
 	 */
 	public void removePet(L1NpcInstance npc) {
 		_petlist.remove(npc.getId());
 	}
 
 	/**
-	 * 캐릭터의 애완동물 리스트를 돌려준다.
+	 *キャラクターのペットのリストを返す。
 	 * 
-	 * @return 캐릭터의 애완동물 리스트를 나타내는, HashMap 오브젝트. 이 오브젝트의 Key는 오브젝트 ID, Value는
+	 * @return キャラクターのペットのリストを示す、HashMapオブジェクト。このオブジェクトのKeyはオブジェクトID、Valueは
 	 *         L1NpcInstance.
 	 */
 	public Map<Integer, L1NpcInstance> getPetList() {
@@ -798,29 +798,29 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터에 doll을 추가한다.
+	 * キャラクターdollを加える。
 	 * 
 	 * @param doll
-	 *            추가하는 doll를 나타내는, L1DollInstance 오브젝트.
+	 *            追加するdollを示す、L1DollInstanceオブジェクト。
 	 */
 	public void addDoll(L1DollInstance doll) {
 		_dolllist.put(doll.getId(), doll);
 	}
 
 	/**
-	 * 캐릭터로부터 dool을 삭제한다.
+	 * キャラクターからdoolを削除する。
 	 * 
 	 * @param doll
-	 *            삭제하는 doll를 나타내는, L1DollInstance 오브젝트.
+	 *            削除するdollを示す、L1DollInstanceオブジェクト。
 	 */
 	public void removeDoll(L1DollInstance doll) {
 		_dolllist.remove(doll.getId());
 	}
 
 	/**
-	 * 캐릭터의 doll 리스트를 돌려준다.
+	 * キャラクターのdollリストを返す。
 	 * 
-	 * @return 캐릭터의 마법인형 리스트를 나타내는, HashMap 오브젝트. 이 오브젝트의 Key는 오브젝트 ID, Value는
+	 * @return キャラクターのマジックドールのリストを示す、HashMapオブジェクト。このオブジェクトのKeyはオブジェクトID、Valueは
 	 *         L1DollInstance.
 	 */
 	public ArrayList<L1DollInstance> getDollList() {
@@ -838,29 +838,29 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터에 쫄법사을 추가한다.
+	 * キャラクターにつつくボプサウル加える。
 	 * 
 	 * @param doll
-	 *            추가하는 doll를 나타내는, L1DollInstance 오브젝트.
+	 *            追加するdollを示す、L1DollInstanceオブジェクト。
 	 */
 	public void addSupport(L1SupportInstance support) {
 		_supportlist.put(support.getId(), support);
 	}
 
 	/**
-	 * 캐릭터로부터 쫄법사을 삭제한다.
+	 * キャラクターからつつくボプサウル削除する。
 	 * 
 	 * @param doll
-	 *            삭제하는 doll를 나타내는, L1DollInstance 오브젝트.
+	 *            削除するdollを示す、L1DollInstanceオブジェクト。
 	 */
 	public void removeSupport(L1SupportInstance support) {
 		_supportlist.remove(support.getId());
 	}
 
 	/**
-	 * 캐릭터의 쫄법사 리스트를 돌려준다.
+	 * キャラクターのつつく玄リストを返す。
 	 * 
-	 * @return 캐릭터의 마법인형 리스트를 나타내는, HashMap 오브젝트. 이 오브젝트의 Key는 오브젝트 ID, Value는
+	 * @return キャラクターのマジックドールのリストを示す、HashMapオブジェクト。このオブジェクトのKeyはオブジェクトID、Valueは
 	 *         L1DollInstance.
 	 */
 	public Map<Integer, L1SupportInstance> getSupportList() {
@@ -868,29 +868,29 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터에 이벤트 NPC(캐릭터를 따라다니는)를 추가한다.
+	 * キャラクターのイベントNPC（キャラクターを付きまとう）を追加する。
 	 * 
 	 * @param follower
-	 *            추가하는 follower를 나타내는, L1FollowerInstance 오브젝트.
+	 *            追加するfollowerを示す、L1FollowerInstanceオブジェクト。
 	 */
 	public void addFollower(L1FollowerInstance follower) {
 		_followerlist.put(follower.getId(), follower);
 	}
 
 	/**
-	 * 캐릭터로부터 이벤트 NPC(캐릭터를 따라다니는)를 삭제한다.
+	 * 文字からイベントNPC（キャラクターを付きまとう）を削除する。
 	 * 
 	 * @param follower
-	 *            삭제하는 follower를 나타내는, L1FollowerInstance 오브젝트.
+	 *            削除するfollowerを示す、L1FollowerInstanceオブジェクト。
 	 */
 	public void removeFollower(L1FollowerInstance follower) {
 		_followerlist.remove(follower.getId());
 	}
 
 	/**
-	 * 캐릭터의 이벤트 NPC(캐릭터를 따라다니는) 리스트를 돌려준다.
+	 * キャラクターのイベントNPC（キャラクターを付きまとう）リストを返す。
 	 * 
-	 * @return 캐릭터의 종자 리스트를 나타내는, HashMap 오브젝트. 이 오브젝트의 Key는 오브젝트 ID, Value는
+	 * @returnキャラクターの種子リストを示す、HashMapオブジェクト。このオブジェクトのKeyはオブジェクトID、Valueは
 	 *         L1FollowerInstance.
 	 */
 	public Map<Integer, L1FollowerInstance> getFollowerList() {
@@ -898,17 +898,17 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터에, 독을 추가한다.
+	 * キャラクターでは、毒を加える。
 	 * 
 	 * @param poison
-	 *            독을 나타내는, L1Poison 오브젝트.
+	 *            毒を示す、L1Poisonオブジェクト。
 	 */
 	public void setPoison(L1Poison poison) {
 		_poison = poison;
 	}
 
 	/**
-	 * 캐릭터의 독을 치료한다.
+	 * キャラクターの毒を治療する。
 	 */
 	public void curePoison() {
 		if (_poison == null) {
@@ -918,16 +918,16 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터의 독상태를 돌려준다.
+	 * キャラクターの毒状態を返す。
 	 * 
-	 * @return 캐릭터의 독을 나타내는, L1Poison 오브젝트.
+	 * @return キャラクターの毒を示す、L1Poisonオブジェクト。
 	 */
 	public L1Poison getPoison() {
 		return _poison;
 	}
 
 	/**
-	 * 캐릭터에 독의 효과를 부가한다
+	 * キャラクターの毒の効果を付加する
 	 * 
 	 * @param effectId
 	 * @see S_Poison#S_Poison(int, int)
@@ -937,14 +937,14 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 캐릭터가 존재하는 좌표가, 어느 존에 속하고 있을까를 돌려준다.
+	 * キャラクターが存在する座標が、どのゾーンに属しているかを返す。
 	 * 
-	 * @return 좌표의 존을 나타내는 값. 세이프티 존이면 1, 컴배트 존이면―1, 노멀 존이면 0.
+	 * @return 座標のゾーンを示す値。セーフティゾーンであれば1、コンバットゾーンであれば-1、ノーマルジョンの場合は0。
 	 */
 
 	public int getZoneType() {
 		if (getMap().isSafetyZone(getLocation())) {
-			/** 배틀존 **/
+			/** バトルゾーン **/
 			if (getMapId() == 5153) {
 				return -1;
 			} else {
@@ -952,7 +952,7 @@ public class L1Character extends L1Object {
 			}
 		} else if (getMap().isCombatZone(getLocation())) {
 			return -1;
-		} else { // 노멀존
+		} else { // ノーマルジョン
 			return 0;
 		}
 	}
@@ -966,40 +966,40 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * 지정된 오브젝트를, 캐릭터가 인식하고 있을까를 돌려준다.
+	 * 指定されたオブジェクトを、文字が認識しているかを返す。
 	 * 
 	 * @param obj
-	 *            조사하는 오브젝트.
-	 * @return 오브젝트를 캐릭터가 인식하고 있으면 true, 하고 있지 않으면 false. 자기 자신에 대해서는 false를
-	 *         돌려준다.
+	 *            調査するオブジェクト。
+	 * @return オブジェクトを文字が認識している場合はtrue、していない場合はfalse。自分自身については、falseを
+	 *         返す。
 	 */
 	public boolean knownsObject(L1Object obj) {
 		return _knownObjects.contains(obj);
 	}
 
 	/**
-	 * 캐릭터가 인식하고 있는 모든 오브젝트를 돌려준다.
+	 * キャラクターが認識しているすべてのオブジェクトを返す。
 	 * 
-	 * @return 캐릭터가 인식하고 있는 오브젝트를 나타내는 List<L1Object>.
+	 * @return キャラクターが認識しているオブジェクトを表すList <L1Object>
 	 */
 	public List<L1Object> getKnownObjects() {
 		return _knownObjects;
 	}
 
 	/**
-	 * 캐릭터가 인식하고 있는 모든 플레이어를 돌려준다.
+	 * キャラクターが認識しているすべてのプレイヤーを返す。
 	 * 
-	 * @return 캐릭터가 인식하고 있는 오브젝트를 나타내는 List<L1PcInstance>
+	 * @return キャラクターが認識しているオブジェクトを表すList <L1PcInstance>
 	 */
 	public List<L1PcInstance> getKnownPlayers() {
 		return _knownPlayer;
 	}
 
 	/**
-	 * 캐릭터에, 새롭게 인식하는 오브젝트를 추가한다.
+	 * キャラクターでは、新たに認識しているオブジェクトを追加します。
 	 * 
 	 * @param obj
-	 *            새롭게 인식하는 오브젝트.
+	 *            新たに認識しているオブジェクト。
 	 */
 	public void addKnownObject(L1Object obj) {
 		if (!_knownObjects.contains(obj)) {
@@ -1010,10 +1010,10 @@ public class L1Character extends L1Object {
 		}
 	}
 	/**
-	 * 캐릭터로부터, 인식하고 있는 오브젝트를 삭제한다.
+	 * キャラクターから、認識しているオブジェクトを削除する。
 	 * 
 	 * @param obj
-	 *            삭제하는 오브젝트.
+	 *            削除するオブジェクト。
 	 */
 	public void removeKnownObject(L1Object obj) {
 		if (_knownObjects.contains(obj))
@@ -1026,7 +1026,7 @@ public class L1Character extends L1Object {
 
 
 	/**
-	 * 캐릭터로부터, 모든 인식하고 있는 오브젝트를 삭제한다.
+	 *キャラクターから、すべての認識しているオブジェクトを削除する。
 	 */
 	/*public void removeAllKnownObjects() {
 		_knownObjects.clear();
@@ -1275,18 +1275,18 @@ public class L1Character extends L1Object {
 		return (hasSkillEffect(L1SkillId.INVISIBILITY) || hasSkillEffect(L1SkillId.BLIND_HIDING));
 	}
 
-	/** 캐릭터의 업을 돌려준다. */
+	/** キャラクターのアップを返す。*/
 	public int getKarma() {
 		return _karma;
 	}
 
-	/** 캐릭터의 업을 설정한다. */
+	/** キャラクターのアップを設定する。 */
 	public void setKarma(int karma) {
 		_karma = karma;
 	}
 
 	
-	/* Kill & Death 시스템?  -by 천국- */
+	/* Kill & Death システム？ - */
 	 private int _Kills;
 
 	 public int getKills() {
@@ -1303,10 +1303,10 @@ public class L1Character extends L1Object {
 	 public void setDeaths(int Deaths) {
 	     _Deaths = Deaths;
 	 }
-	/* Kill & Death 시스템?  -by 천국- */
+	/* Kill & Death システム？- */
 	 
 	
-	// ** 도우너 딜레이 타이머 수정 **// by 도우너
+	// ** ドオノディレイタイマ修正 **// 
 	private long _skilldelay2;
 
 	public long getSkilldelay2() {
@@ -1317,7 +1317,7 @@ public class L1Character extends L1Object {
 		_skilldelay2 = skilldelay2;
 	}
 
-	// **지엠 버프 따로 저장 **// by 도우너
+	// **GMのバフを付けて保存 **//
 	private int _buffnoch;
 
 	public int getBuffnoch() {
@@ -1368,7 +1368,7 @@ public class L1Character extends L1Object {
 		setAc(_trueAc + i);
 	}
 	
-	private int _mr = 0; // ● 마법 방어(0)
+	private int _mr = 0; // ●魔法防御（0）
 	private int _trueMr = 0; // ● 정말의 마법 방어
 
 	public int getMr() {
@@ -1377,11 +1377,11 @@ public class L1Character extends L1Object {
 		} else {
 			return _mr;
 		}
-	} // 사용할 때
+	} // 使用時に
 
 	public int getTrueMr() {
 		return _trueMr;
-	} // 세트 할 때
+	} // セットするとき
 
 	public void addMr(int i) {
 		_trueMr += i;

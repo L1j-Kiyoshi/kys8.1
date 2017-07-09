@@ -691,7 +691,7 @@ public class Robot_ConnectAndRestart {
 					newPc.setType(5);
 				else if (newPc.isBlackwizard())
 					newPc.setType(6);
-				else if (newPc.is전사())
+				else if (newPc.isWarrior())
 					newPc.setType(7);
 				// newPc.setType(1);
 				newPc.getMoveState().setMoveSpeed(0);

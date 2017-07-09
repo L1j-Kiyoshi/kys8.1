@@ -1,9 +1,9 @@
 package l1j.server.server.model;
 
-import static l1j.server.server.model.skill.L1SkillId.DESPERADO;
+import static l1j.server.server.model.skill.L1SkillId.*;
+
 import l1j.server.Config;
 import l1j.server.GameSystem.Robot.L1RobotInstance;
-import l1j.server.server.GeneralThreadPool;
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
@@ -26,7 +26,7 @@ public class L1Teleport {
 	public static final int NODELAY_TELEPORT = 5;
 
 
-	// 차례로 teleport(흰색), change position e(파랑), ad mass teleport e(빨강), call clan(초록)
+	// 順番にteleport（白）、change position e（青）、ad mass teleport e（赤）、call clan（緑）
 	public static final int[] EFFECT_SPR =  { 169, 149, 169, 2281 }; //149
 	public static final int[] EFFECT_TIME = { 280, 440, 440, 1120 };
 
@@ -112,7 +112,7 @@ public class L1Teleport {
 			L1HauntedHouse.getInstance().clearBuff(pc);
 		}
 		
-		/** 몽섬리뉴얼 **/
+		/** モンソムリニューアル **/
 		if (pc.isInFantasy) {
 			if (!(pc.getMapId() >= 1936 && pc.getMapId() <= 2035)) {
 				pc.getInventory().consumeItem(810006);
@@ -122,10 +122,10 @@ public class L1Teleport {
 		}
 		
 		
-		/** 화룡의 안식처 */
+		/** 火竜の聖域 */
 		if (pc.isInValakas) {
 			if (pc.getMap().getBaseMapId() != 2600 && pc.getMap().getBaseMapId() != 2699) {
-				pc.getInventory().consumeItem(203003); // 데스나이트의 불검:진
+				pc.getInventory().consumeItem(203003); // デスナイトのフレイムブレード：ジン
 				pc.isInValakas = false;
 			}
 		}
@@ -134,14 +134,14 @@ public class L1Teleport {
 			pc.isInValakasBoss = false;
 		}
 		
-		/** 크레이 버프 안타지역이 아닐시 삭제 처리 **/		
+		/** クレイバフヒット地域ではない時に削除処理 **/		
 		if (!(pc.getMapId() == 1005 || pc.getMapId() >= 6000 && pc.getMapId() <= 6499)) {
 			if (pc.hasSkillEffect(L1SkillId.BUFF_CRAY)) {			
 				pc.removeSkillEffect(L1SkillId.BUFF_CRAY);				
 			}
 		}
 		
-		/** 사엘버프 파푸지역이 아닐시 삭제 처리 **/		
+		/** サエルバフパプ地域ではない時に削除処理 **/		
 		if (!(pc.getMapId() == 1011 || pc.getMapId() >= 6501 && pc.getMapId() <= 6599)) {
 			if (pc.hasSkillEffect(L1SkillId.BUFF_SAEL)) {			
 				pc.removeSkillEffect(L1SkillId.BUFF_SAEL);	
@@ -149,14 +149,14 @@ public class L1Teleport {
 				pc.sendPackets(new S_SkillIconBlessOfEva(pc.getId(), 1));
 			}
 		}
-		/** 군터버프 린드지역이 아닐시 삭제 처리 **/		
+		/** ギュンターバフリンド地域ではない時に削除処理 **/		
 		if (!(pc.getMapId() >= 1017 && pc.getMapId() <= 1023)) {
 			if (pc.hasSkillEffect(L1SkillId.BUFF_GUNTER)) {			
 				pc.removeSkillEffect(L1SkillId.BUFF_GUNTER);				
 			}
 		}
 		
-		// 화염의 막대/신비한 회복 물약 삭제.
+		// 炎のバー/神秘的な回復ポーション削除します。
 		if (!(pc.getMapId() >= 2101 && pc.getMapId() <= 2151 || pc.getMapId() >= 2151 && pc.getMapId() <= 2201)) {
 			for (L1ItemInstance item : pc.getInventory().getItems()) {
 				if (item.getItemId() == 30055 || item.getItemId() == 30056){
@@ -236,62 +236,62 @@ public class L1Teleport {
 
 		int newmap = pc.getMapId();
 		if (oldmap != newmap) {
-			int setTimer1 = 120 - pc.getGirandungeonTime();// 기란 감옥
-			int setTimer2 = 60 - pc.getnewdodungeonTime();// 상아탑:발록 진영
-			int setTimer3 = 60 - pc.getOrendungeonTime();// 상아탑:야히 진영
-			int setTimer4 = 30 - pc.getSoulTime();// 고대정령무덤
-			int setTimer5 = 30 - pc.geticedungeonTime();// 얼음 던전 PC
-			int setTimer6 = 30 - pc.getSomeTime(); // 몽환의 섬
-			//int setTimer7 = 120 - pc.getRadungeonTime(); // 라스타바드 던전
-			int setTimer8 = 120 - pc.getDrageonTime();// 용의 계곡 던전
-			int setTimer9 = 120 - pc.getislandTime();// 말하는섬던전
+			int setTimer1 = 120 - pc.getGirandungeonTime();// ギラン監獄
+			int setTimer2 = 60 - pc.getnewdodungeonTime();// 象牙の塔：バルログ陣営
+			int setTimer3 = 60 - pc.getOrendungeonTime();// 象牙の塔：ヤヒ陣営
+			int setTimer4 = 30 - pc.getSoulTime();// 古代精霊の墓
+			int setTimer5 = 30 - pc.geticedungeonTime();// 氷のダンジョンPC
+			int setTimer6 = 30 - pc.getSomeTime(); // 夢幻の島
+			//int setTimer7 = 120 - pc.getRadungeonTime(); //ラスタバドダンジョン
+			int setTimer8 = 120 - pc.getDrageonTime();// ドラゴンバレーのダンジョン
+			int setTimer9 = 120 - pc.getislandTime();// 話せる島ダンジョン
 
 			if (pc.noPlayerCK || pc.noPlayerck2 || pc.getRobotAi() != null) {
 				return;
 			}
 			switch (newmap) {
 
-							/** 각 던전 타이머 지정 곱하기 60기준으로맞추기 ( 60분 기준 1시간으로 정의한다 ) **/
-			// 기란 & 글루딘던전
+							/** 各ダンジョンタイマー指定乗算60基準に合わせる（60分あたり1時間で定義する）**/
+			// ギラン・グルーディンダンジョン
 			case 53:case 54:case 55:case 56:
 			case 15403:case 15404:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer1 * 60));// 60분 기준 1시간으로 정의한다.
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer1 * 60));// 60分あたり1時間で定義する。
 				break;
-			// 야히진영
+			// ヤヒ陣営
 			case 285:case 286:case 287:case 288:case 289:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer3 * 60));// 60분 기준 1시간으로 정의한다.
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer3 * 60));// 60分あたり1時間で定義する。
 				break;
-			// 라스타바드
+			// ラスタバド
 			/*case 451:case 452:case 453:case 454:case 455:case 456:case 460:
 			case 461:case 462:case 463:case 464:case 465:case 466:case 470:
 			case 471:case 472:case 473:case 474:case 475:case 476:case 477:
 			case 478:case 479:case 490:case 491:case 492:case 493:case 494:
 			case 495:case 496:case 530:case 531:case 532:case 533:case 534:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer7 * 60));// 60분 기준 1시간으로 정의한다.
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer7 * 60));// 60分あたり1時間で定義する。
 				break;*/
-				// 용의 던전
+				// 用のダンジョン
 		/*	case 30:case 31:case 32:case 33:case 35:case 36:case 814:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer8 * 60));// 60분 기준 1시간으로 정의한다.
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer8 * 60));//60分あたり1時間で定義する。
 				break; */
-				//몽환의섬
+				//夢幻の島
 			case 303:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer6 * 60));// 60분 기준 1시간으로 정의한다.
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer6 * 60));// 60分あたり1時間で定義する。
 				break;
-				//정령무덤,고대의무덤
+				//精霊の墓、古代の墓
 			case 430:case 400:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer4 * 60));// 60분 기준 1시간으로 정의한다.
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer4 * 60));//60分あたり1時間で定義する。
 				break;
-				//얼던PC
+				//オルドンPC
 			case 5555:case 5556:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer5 * 60));// 60분 기준 1시간으로 정의한다.
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer5 * 60));// 60分あたり1時間で定義する。
 				break;
-				//발록진영
+				//バルログ陣営
 			case 280:case 281:case 282:case 283:case 284:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer2 * 60));// 60분 기준 1시간으로 정의한다.
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer2 * 60));// 60分あたり1時間で定義する。
 				break;
-				// 말하는 섬 던전
+				// 話せる島ダンジョン
 			case 1: case 2:
-				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer9 * 60));// 60분 기준 1시간으로 정의한다.
+				pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer9 * 60));// 60分あたり1時間で定義する。
 				break;
 			default:
 				break;

@@ -88,7 +88,7 @@ public class additem {
 
 				}
 				
-				if (pc.is전사()) {
+				if (pc.isWarrior()) {
 					봉인템(pc, 40014, 10, 0, 0 ,0, true); // 용기
 					봉인템(pc, 203006, 1, 7 ,129 , 3, true); 		// 7태풍도끼2개
 					봉인템(pc, 203006, 1, 7 ,129 , 3, true);

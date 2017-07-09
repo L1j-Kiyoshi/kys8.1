@@ -35,13 +35,13 @@ public class S_ClanMatching extends ServerBasePacket {
 
 	/**
 	 * type
-	 * 0: 등록, 수정				' 완료 '
-	 * 1: 등록취소, 군주에게만
-	 * 2: 추천혈맹, 새로고침		' 완료 ' 
-	 * 3: 신청목록, 새로고침
-	 * 4: 요청목록, 새로고침
-	 * 5: 신청하기. 8c bb 84 10
-	 * 6: 신청취소.
+	 * 0：登録、修正、完了」
+	 * 1：登録解除、君主のみ
+	 * 2：推奨血盟、リフレッシュ「完了」
+	 * 3：適用リスト、更新
+	 * 4：要求リスト、更新
+	 *5：適用する。 8c bb 84 10
+	 * 6：適用を取り消します。
 	 */
 	public S_ClanMatching(L1PcInstance pc, int type, int objid, String text1, int htype) {
 		L1Clan clan = null;
@@ -51,7 +51,7 @@ public class S_ClanMatching extends ServerBasePacket {
 
 		writeC(Opcodes.S_MATCH_MAKING);
 		writeC(type);
-		if (type == 2) { // 추천혈맹
+		if (type == 2) { // おすすめ血盟
 			ArrayList<ClanMatchingList> _list = new ArrayList<ClanMatchingList>();
 			String result = null;
 			for (int i=0; i<cml.getMatchingList().size(); i++) {
@@ -63,86 +63,86 @@ public class S_ClanMatching extends ServerBasePacket {
 			int type2 = 0;
 			int size = _list.size();
 			writeC(0x00);
-			writeC(size); // 갯수.
+			writeC(size); // 本数。
 			for (int i=0; i<size; i++) {
 				clanname = _list.get(i)._clanname;
 				text = _list.get(i)._text;
 				type2 = _list.get(i)._type;
 				clan = L1World.getInstance().getClan(clanname);
-				writeD(clan.getClanId()); // 혈마크
-				writeS(clan.getClanName()); // 혈맹 이름.
-				writeS(clan.getLeaderName()); // 군주이름
-				writeD(clan.getOnlineMaxUser()); // 혈맹 규모 : 주간 최대 접속자 수 
+				writeD(clan.getClanId()); // ヒョルマク
+				writeS(clan.getClanName()); // 血盟の名前。
+				writeS(clan.getLeaderName()); // 君主の名前
+				writeD(clan.getOnlineMaxUser()); // 血盟の規模：週間最大接続者数
 				
-				writeC(type2); // 0: 사냥, 1: 전투, 2: 친목
+				writeC(type2); // 0：ハンティング、1：戦い、2：親睦
 
-				if (clan.getHouseId()!=0) writeC(0x01); // 아지트 0: X , 1: O
+				if (clan.getHouseId()!=0) writeC(0x01); // アジト 0: X , 1: O
 				else writeC(0x00);
 
 				boolean inWar = false;
-				List<L1War> warList = L1World.getInstance().getWarList(); // 전쟁 리스트를 취득
+				List<L1War> warList = L1World.getInstance().getWarList(); // 戦争のリストを取得
 				for (L1War war : warList) {
-					if (war.CheckClanInWar(clanname)) { // 자크란이 이미 전쟁중
+					if (war.CheckClanInWar(clanname)) { //ジャックとは、すでに戦争中
 						inWar = true;
 						break;
 					}
 				}
 
-				if (inWar) writeC(0x01); // 전쟁 상태	0: X , 1: O
+				if (inWar) writeC(0x01); // 戦争状態0：X、1：O
 				else writeC(0x00);
-				writeC(0x00); // 고정값.
-				writeS(text);// 소개멘트.
-				writeD(clan.getClanId()); // 혈맹 objid
+				writeC(0x00); // 固定値。
+				writeS(text);// 紹介コメント。
+				writeD(clan.getClanId()); // 血盟objid
 			}
 			_list.clear();
 			_list = null;
-		} else if (type == 3) { // 신청목록
+		} else if (type == 3) { // 申し込みリスト
 			int size = pc.getCMAList().size();
 			int type2 = 0;
 			writeC(0x00);
-			writeC(size); // 갯수.
+			writeC(size); // 本数。
 			
 			for (int i=0; i<size; i++) {
 				clanname = pc.getCMAList().get(i);
 				text = cml.getClanMatchingList(clanname)._text;
 				type2 = cml.getClanMatchingList(clanname)._type;
 				clan = L1World.getInstance().getClan(clanname);
-				writeD(clan.getClanId()); // 삭제 누를때 뜨는 obj값
+				writeD(clan.getClanId()); // 削除クリックすると、浮きobj値
 				writeC(0x00);
-				writeD(clan.getClanId()); // 혈마크.
-				writeS(clan.getClanName()); // 혈맹 이름.
-				writeS(clan.getLeaderName()); // 군주이름
-				writeD(clan.getOnlineMaxUser());// 혈맹 규모 : 주간 최대 접속자 수 
-				writeC(type2); // 0: 사냥, 1: 전투, 2: 친목
+				writeD(clan.getClanId()); // ヒョルマク。
+				writeS(clan.getClanName()); // 血盟の名前。
+				writeS(clan.getLeaderName()); // 君主の名前
+				writeD(clan.getOnlineMaxUser());// 血盟の規模：週間最大接続者数
+				writeC(type2); // 0: 狩猟、1：戦い、2：親睦
 
-				if (clan.getHouseId()!=0) writeC(0x01); // 아지트 0: X , 1: O
+				if (clan.getHouseId()!=0) writeC(0x01); // アジト0：X、1：O
 				else writeC(0x00);
 
 				boolean inWar = false;
-				List<L1War> warList = L1World.getInstance().getWarList(); // 전쟁 리스트를 취득
+				List<L1War> warList = L1World.getInstance().getWarList(); // 戦争のリストを取得
 				for (L1War war : warList) {
-					if (war.CheckClanInWar(clanname)) { // 자크란이 이미 전쟁중
+					if (war.CheckClanInWar(clanname)) { // ジャックとは、すでに戦争中
 						inWar = true;
 						break;
 					}
 				}
 
-				if (inWar) writeC(0x01); // 전쟁 상태	0: X , 1: O
+				if (inWar) writeC(0x01); // 戦争状態0：X、1：O
 				else writeC(0x00);
-				writeC(0x00); // 고정값.
-				writeS(text);// 소개멘트.
+				writeC(0x00); // 固定値。
+				writeS(text);// 紹介コメント。
 				writeD(clan.getClanId()); // 혈맹 objid
 			}
-		} else if (type == 4) { // 요청목록
+		} else if (type == 4) { // リクエストリスト
 			
 			if (!cml.isClanMatchingList(pc.getClanname())) {
-				writeC(0x82); // 요청 목록이 없을땐 이것만 날린다.
+				writeC(0x82); // リクエストリストが存在しない時はこれだけ飛ばす。
 			} else {
 				int size = pc.getCMAList().size();
 				String username = null;
 				writeC(0x00);
 				writeC(0x02);
-				writeC(0x00);// 고정
+				writeC(0x00);// 固定
 				writeC(size); // size
 				L1PcInstance user = null;
 				for (int i=0; i<size; i++) {
@@ -158,14 +158,14 @@ public class S_ClanMatching extends ServerBasePacket {
 							e.printStackTrace();
 						}
 					}
-					writeD(user.getId()); // 신청자의 objectid
+					writeD(user.getId()); // 申請者の objectid
 					writeC(0x00);
-					writeC(user.getOnlineStatus()); // 0x01:접속,  0x00:비접속
-					writeS(username); // 신청자의 이름.
-					writeC(user.getType()); // 캐릭터 클래스
-					writeH(user.getLawful()); // 라우풀
-					writeC(user.getLevel()); // 레벨
-					writeC(0x01); // 이름앞에 나오는 풀잎의 변경
+					writeC(user.getOnlineStatus()); // 0x01：接続、0x00：非接続
+					writeS(username); // 申請者の名前。
+					writeC(user.getType()); // 文字クラス
+					writeH(user.getLawful()); // ラウフル
+					writeC(user.getLevel()); // レベル
+					writeC(0x01); // 名前の前に出てくる葉の変更
 				}
 			}
 		} else if (type == 5 || type == 6) {

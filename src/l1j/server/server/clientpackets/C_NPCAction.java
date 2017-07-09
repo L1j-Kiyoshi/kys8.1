@@ -4770,7 +4770,7 @@ public class C_NPCAction extends ClientBasePacket {
 					y = 32852;
 					mapid = 274;
 					// 기사
-				} else if (pc.isKnight() || pc.is전사()) {
+				} else if (pc.isKnight() || pc.isWarrior()) {
 					x = 32737;
 					y = 32810;
 					mapid = 276;

@@ -25,7 +25,6 @@ import l1j.server.server.datatables.AccountAttendanceTable;
 import l1j.server.server.datatables.AttendanceTable;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_Attendance;
-import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.templates.L1Attendance;
 
@@ -77,12 +76,12 @@ public class L1AccountAttendance {
 		last_check_day = 0;
 	}
 	
-	public void chulchecktry(int type){ //0 진행 1체크완료(미수령) 2 수령까지완료
+	public void chulchecktry(int type){ //0進行1チェック完了（ミスリョン）2受領までに完了
 		chulcheckday.set(_day-1, type);
 		_chultime = 0;
 	}
 	
-	public void chulchecktrypc(int type){ //0 진행 1체크완료(미수령) 2 수령까지완료
+	public void chulchecktrypc(int type){ //0進行1チェック完了（ミスリョン）2受領までに完了
 		chulcheckdaypc.set(_daypc-1, type);
 		_chultimepc = 0;
 	}
@@ -172,7 +171,7 @@ public class L1AccountAttendance {
 				
 				pc.sendPackets(new S_Attendance(S_Attendance.출석완료, location, checkday));
 				pc.getInventory().storeItem(cc.getItem().getItemId(), cc.getCount());
-				pc.sendPackets(new S_SystemMessage(pc, cc.getItem().getName() + "을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage(pc, cc.getItem().getName() + "を獲得しました。"));
 				this.setToday(today);
 				this.setYear(year);
 				isreceive = true;
@@ -187,10 +186,10 @@ public class L1AccountAttendance {
 				_daypc+=1;
 				this.setToday(today);
 				System.out.println("TODAY : "+today);
-				pc.sendPackets(new S_Attendance(S_Attendance.출석완료, location, checkday));
+				pc.sendPackets(new S_Attendance(S_Attendance.出席完了, location, checkday));
 				pc.getInventory().storeItem(cc.getItempc().getItemId(), cc.getCountpc());
-				pc.sendPackets(new S_SystemMessage(pc, cc.getItempc().getName() + "을 얻었습니다."));*/
-				pc.sendPackets(new S_SystemMessage(pc, "PC방 출첵은 운영하지않습니다"));
+				pc.sendPackets(new S_SystemMessage(pc, cc.getItempc().getName() + "を獲得しました。"));*/
+				pc.sendPackets(new S_SystemMessage(pc, "PC部屋チュルチェクは作動しません"));
 			}
 		}
 		
@@ -205,47 +204,7 @@ public class L1AccountAttendance {
 		if(checktypepc()==1)
 			_pc.sendPackets(new S_Attendance(this, 1, false));
 	}
-	/*public void time_init()
-	{
-		_chultime = _chultimepc = 30; //이걸 3600으로 바꾸면됨
-		_pc.sendPackets(new S_Attendance(this, 0, false));
-		if(_pc != null)
-		{
-			_pc.sendPackets(new S_SystemMessage(_pc, "출석체크 시간이 초기화 되었습니다."));
-			_pc.sendPackets(new S_Attendance(this, 0, true));
-		}
-		this.setToday(this.getToday()+1);
-		AccountAttendanceTable.getInstance().save_account(_pc);
 
-	}
-	public void init(){
-		_chultime = _chultimepc = 30; //이걸 3600으로 바꾸면됨
-		
-		int okday = chulcheckday.get(_day-1); // _day : 몇일차 까지 했는가
-		int okdaypc = chulcheckdaypc.get(_daypc-1);
-		
-		if(okday == 1 || okday == 2){
-			_day+=1;
-		}else{
-			if(_pc != null)
-				_pc.sendPackets(new S_ServerMessage(4378));//남은시간이 모자라서 출석체크 실패.
-		}
-		
-		if(okdaypc == 1 || okdaypc == 2){
-			_daypc+=1;
-		}else{
-			if(_pc != null)
-				_pc.sendPackets(new S_ServerMessage(4378));//남은시간이 모자라서 출석체크 실패.
-		}
-		_pc.sendPackets(new S_Attendance(this, 0, false));
-		if(_pc != null)
-		{
-			_pc.sendPackets(new S_SystemMessage(_pc, "출석체크 시간이 초기화 되었습니다."));
-			_pc.sendPackets(new S_Attendance(this, 0, true));
-		}
-		AccountAttendanceTable.getInstance().save_account(_pc);
-	}
-*/
 	public void setToday(int day) {
 		
 			last_check_day = day;

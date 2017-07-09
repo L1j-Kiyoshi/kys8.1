@@ -1,8 +1,6 @@
 package l1j.server.server.model;
 
-import static l1j.server.server.model.skill.L1SkillId.SCALES_EARTH_DRAGON;
-import static l1j.server.server.model.skill.L1SkillId.SCALES_FIRE_DRAGON;
-import static l1j.server.server.model.skill.L1SkillId.SCALES_WATER_DRAGON;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -72,12 +70,12 @@ public class L1PolyMorph {
 
 	private static final int BOOTS_EQUIP = 1024;
 
-	// 변신의 원인을 나타내는 bit
+	// 変身の原因を示すbit
 	public static final int MORPH_BY_ITEMMAGIC = 1;
 
 	public static final int MORPH_BY_GM = 2;
 
-	public static final int MORPH_BY_NPC = 4; // 점성술사 케프리샤 이외의 NPC
+	public static final int MORPH_BY_NPC = 4; // 占星術師ケプリシャ以外のNPC
 
 	public static final int MORPH_BY_KEPLISHA = 8;
 
@@ -199,8 +197,8 @@ public class L1PolyMorph {
 		}
 		if (cha instanceof L1PcInstance) {
 			L1PcInstance pc = (L1PcInstance) cha;
-			if (pc.getMapId() == 5302 || pc.getMapId() == 5490 || pc.getMapId() == 5153) { // 낚시터,배틀존
-				pc.sendPackets(new S_ServerMessage(1170)); // 이곳에서 변신할수 없습니다.
+			if (pc.getMapId() == 5302 || pc.getMapId() == 5490 || pc.getMapId() == 5153) { // 釣り場、バトルゾーン
+				pc.sendPackets(new S_ServerMessage(1170)); //ここで変身することができません。
 				return;
 			}
 
@@ -210,7 +208,7 @@ public class L1PolyMorph {
 				return;	
 			}
 			if (! isMatchCause(polyId, cause)) {
-				pc.sendPackets(new S_ServerMessage(181)); // \f1 그러한 monster에게는 변신할 수 없습니다.
+				pc.sendPackets(new S_ServerMessage(181)); // \f1 そのようなmonsterは変身することができません。
 				return;
 			}			
 			if(cha.hasSkillEffect(SCALES_EARTH_DRAGON)
@@ -224,7 +222,7 @@ public class L1PolyMorph {
 			pc.setSkillEffect(L1SkillId.SHAPE_CHANGE, timeSecs * 1000);
 			if (pc.getTempCharGfx() != polyId) {
 				L1ItemInstance weapon = pc.getWeapon();
-				//용기사 체인소드
+				//竜騎士チェーンソード
 //				if(pc.isDragonknight()){
 //					if(polyId == 9206 || polyId == 6137 || polyId == 6142 || polyId == 6147 || polyId == 6152
 //							|| polyId == 6157 || polyId == 9205 || polyId == 6267 || polyId == 6270 || polyId == 6273
@@ -254,7 +252,7 @@ public class L1PolyMorph {
 //						}
 //					}
 //				}
-				//용기사 체인소드
+				//竜騎士チェーンソード
 				boolean weaponTakeoff = (weapon != null && !isEquipableWeapon(polyId, weapon.getItem().getType()));
 				pc.setTempCharGfx(polyId);
 				pc.sendPackets(new S_ChangeShape(pc.getId(), polyId, weaponTakeoff));
@@ -285,8 +283,8 @@ public class L1PolyMorph {
     						poly == 11408||poly == 11409||poly == 11410||poly == 11411||poly == 11412||poly == 11413||
     						poly == 11414||poly == 11415||poly == 11416||poly == 11417||poly == 11418||poly == 11419||
     						poly == 11420||poly == 11421||poly == 12542||poly == 12541 || poly == 13735 || poly == 13737
-    						|| poly == 14928 //82경비창
-    						|| poly == 13389 //85경비창
+    						|| poly == 14928 //82経費ウィンドウ
+    						|| poly == 13389 //85経費ウィンドウ
     						) {
                 		range = 2;
     					}
@@ -295,9 +293,9 @@ public class L1PolyMorph {
 				}
 				if (weapon.getItem().getType1() == 20) {
 					if (weapon.getItem().getType() == 4)
-						pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, 3, true));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
 					else
-						pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, 3, true));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
 				} else {
 					//
 					int type = 7;
@@ -316,10 +314,10 @@ public class L1PolyMorph {
 						bow_or_tohand = true;
 					}
 					//
-					pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, type, bow_or_tohand));
+					pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, type, bow_or_tohand));
 				}
 			} else {
-				pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, 1, 0, false));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, 1, 0, false));
 			}
 			pc.sendPackets(new S_SkillIconGFX(35, timeSecs));
 		} else if (cha instanceof L1MonsterInstance) {
@@ -333,7 +331,7 @@ public class L1PolyMorph {
 		}
 	}
 	
-	/** 3.80 변신리스트 **/
+	/** 3.80 変身リスト **/
 	public static void doPolyPraivateShop(L1Character cha, int polyIndex){
 		if ((cha == null) || cha.isDead()) {
 			return;
@@ -372,7 +370,7 @@ public class L1PolyMorph {
 			}
 		}
 	}
-	/** 3.80 변신리스트 **/
+	/** 3.80 変身リスト **/
 	
 	public static void undoPolyAutoClanjoin(L1Character cha){
 		if (cha instanceof L1PcInstance) {
@@ -398,7 +396,7 @@ public class L1PolyMorph {
 //				doPoly(pc, gfxid, time, MORPH_BY_ITEMMAGIC);
 //				return;
 //			}
-			if(pc.getMapId() == 5143){ // 펫레이싱
+			if(pc.getMapId() == 5143){ // ペットレーシング
 				doPoly(pc, 5065, 1000, MORPH_BY_NPC);
 				return;
 			}
@@ -407,7 +405,7 @@ public class L1PolyMorph {
 			pc.sendPackets(new S_ChangeShape(pc.getId(), classId));
 			pc.broadcastPacket(new S_ChangeShape(pc.getId(), classId));
 			L1ItemInstance weapon = pc.getWeapon();
-			//용기사 포우
+			//竜騎士ポー
 			if(pc.isDragonknight()){
 				for (L1ItemInstance items : pc.getInventory().getItems()) {		
 					if(items.getItem().getType() == 18){
@@ -443,9 +441,9 @@ public class L1PolyMorph {
 				}
 				if (weapon.getItem().getType1() == 20) {
 					if (weapon.getItem().getType() == 4)
-						pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, 3, true));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
 					else
-						pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, 3, true));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
 				} else {
 					//
 					int type = 7;
@@ -458,10 +456,10 @@ public class L1PolyMorph {
 						bow_or_tohand = true;
 					}
 					//
-					pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, type, bow_or_tohand));
+					pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, type, bow_or_tohand));
 				}
 			} else {
-				pc.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, 1, 0, false));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, 1, 0, false));
 			}
 		} else if (cha instanceof L1MonsterInstance) {
 			L1MonsterInstance mob = (L1MonsterInstance) cha;
@@ -510,7 +508,7 @@ public class L1PolyMorph {
 		}
 		return true;
 	}
-	// 지정한 polyId가 무엇에 의해 변신해, 그것이 변신 당할까?
+	// 指定されたpolyIdが何によって変身して、それは変身を受けるか？
 	public static boolean isMatchCause(int polyId, int cause) {
 		L1PolyMorph poly = PolyTable.getInstance(). getTemplate(polyId);
 		if (poly == null) {

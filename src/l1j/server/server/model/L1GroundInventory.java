@@ -7,8 +7,8 @@ import l1j.server.Config;
 import l1j.server.server.GeneralThreadPool;
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.serverpackets.S_DropItem;
+import l1j.server.server.serverpackets.S_RemoveObject;
 
 public class L1GroundInventory extends L1Inventory {
 	/**
@@ -27,8 +27,8 @@ public class L1GroundInventory extends L1Inventory {
 		public void run() {
 			try {
 				synchronized (L1GroundInventory.this) {
-					if (! _items.contains(_item)) {// 주워진 타이밍에 따라서는 이 조건을 채울 수 있다
-						return; // 이미 주워지고 있다
+					if (! _items.contains(_item)) {// 拾われたタイミングによっては、この条件を満たすことができる
+						return; // 既に拾っている
 					}
 					removeItem(_item);
 				}
@@ -42,7 +42,7 @@ public class L1GroundInventory extends L1Inventory {
 		if (!Config.ALT_ITEM_DELETION_TYPE.equalsIgnoreCase("std")) {
 			return;
 		}
-		if (item.getItemId() == 40515) { // 정령의 돌
+		if (item.getItemId() == 40515) { // 精霊の石
 			return;
 		}
 
@@ -63,12 +63,12 @@ public class L1GroundInventory extends L1Inventory {
 		for (L1ItemInstance item : getItems()) {
 			if (! perceivedFrom.knownsObject(item)) {
 				perceivedFrom.addKnownObject(item);
-				perceivedFrom.sendPackets(new S_DropItem(item)); // 플레이어에 DROPITEM 정보를 통지
+				perceivedFrom.sendPackets(new S_DropItem(item)); // プレイヤーのDROPITEM情報を通知
 			}
 		}
 	}
 
-	// 인식 범위내에 있는 플레이어에 오브젝트 송신
+	// 認識範囲内にいるプレイヤーにオブジェクト送信
 	@Override
 	public void insertItem(L1ItemInstance item) {
 		setTimer(item);
@@ -78,7 +78,7 @@ public class L1GroundInventory extends L1Inventory {
 		}
 	}
 
-	// 보이는 범위내에 있는 플레이어의 오브젝트 갱신
+	//目に見える範囲内にいるプレイヤーのオブジェクト更新
 	@Override
 	public void updateItem(L1ItemInstance item) {
 		for (L1PcInstance pc : L1World.getInstance(). getRecognizePlayer(item)) {
@@ -86,7 +86,7 @@ public class L1GroundInventory extends L1Inventory {
 		}
 	}
 
-	// 하늘 목록 파기 및 보이는 범위내에 있는 플레이어의 오브젝트 삭제
+	//空リスト破棄と見える範囲内にいるプレイヤーのオブジェクトの削除
 	@Override
 	public void deleteItem(L1ItemInstance item) {
 		for (L1PcInstance pc : L1World.getInstance(). getRecognizePlayer(item)) {

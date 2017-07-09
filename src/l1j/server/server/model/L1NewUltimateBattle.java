@@ -73,7 +73,7 @@ public class L1NewUltimateBattle {
 
 	private boolean _enterBlackwizard;
 
-	private boolean _enter전사;
+	private boolean _enterWarrior;
 
 	private boolean _enterMale;
 
@@ -105,22 +105,22 @@ public class L1NewUltimateBattle {
 		case 3:
 		case 5:
 			if (curRound == 1) {
-				sendMessage("콜롯세움 관리인: 제 1 군 투입!"); // 스타트
+				sendMessage("コロシアム管理人：第1群投入！"); // スタート
 			} else if (curRound == 2) {
-				sendMessage("콜롯세움 관리인: 제 2 군 투입!"); // 스타트
+				sendMessage("コロシアム管理人：第2群投入！"); // スタート
 			} else if (curRound == 3) {
-				sendMessage("콜롯세움 관리인: 제 3 군 투입!"); // 스타트
+				sendMessage("コロシアム管理人：第3群投入！"); // スタート
 			} else if (curRound == 4) {
-				sendMessage("콜롯세움 관리인: 최종전 개시! 제한 시간은 5분 입니다"); // 스타트
+				sendMessage("コロシアム管理人：最終戦開始！制限時間は5分です"); // スタート
 			}
 			break;
 		case 4:
 			if (curRound == 1) {
-				sendMessage("콜롯세움 관리인: 제 1 군 투입!"); // 스타트
+				sendMessage("コロシアム管理人：第1群投入！"); // スタート
 			} else if (curRound == 2) {
-				sendMessage("콜롯세움 관리인: 제 2 군 투입!"); // 스타트
+				sendMessage("コロシアム管理人：第2群投入！"); // スタート
 			} else if (curRound == 3) {
-				sendMessage("콜롯세움 관리인: 최종전 개시! 제한 시간은 5분 입니다"); // 스타트
+				sendMessage("コロシアム管理人：最終戦開始！制限時間は5分です"); // スタート
 			}
 			break;
 		}
@@ -137,8 +137,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(L1ItemId.POTION_OF_GREATER_HEALING, 3, 20);
 				spawnGroundItem(40317, 1, 5);
 				spawnGroundItem(40079, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 1 군의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 1분 후에 제 2 군의 투입이 시작됩니다.");
+				sendMessage("コロシアム管理人：第1群の投入が完了しました。");
+				sendMessage("コロシアム管理人：1分後に第2群の投入が開始されます。");
 			} else if (curRound == 2) {
 				spawnGroundItem(L1ItemId.ADENA, 5000, 50);
 				spawnGroundItem(L1ItemId.POTION_OF_CURE_POISON, 7, 20);
@@ -147,8 +147,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(40317, 1, 7);
 				spawnGroundItem(40093, 1, 10);
 				spawnGroundItem(40079, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 2 군의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 2분 후에 제 3 군의 투입이 시작됩니다.");
+				sendMessage("コロシアム管理人：第2群の投入が完了しました。");
+				sendMessage("コロシアム管理人：2分後に第3群の投入が開始されます。");
 			} else if (curRound == 3) {
 				spawnGroundItem(L1ItemId.ADENA, 10000, 30);
 				spawnGroundItem(L1ItemId.POTION_OF_CURE_POISON, 7, 20);
@@ -157,8 +157,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(40317, 1, 10);
 				spawnGroundItem(40094, 1, 10);
 				spawnGroundItem(40079, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 3 군까지의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 6분 후에 최종전이 시작됩니다.");
+				sendMessage("コロシアム管理人：第3群までの投入が完了しました。");
+				sendMessage("コロシアム管理人：6分後に最終戦が開始されます。");
 			}
 			break;
 		case 3:
@@ -169,8 +169,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(L1ItemId.POTION_OF_GREATER_HEALING, 3, 20);
 				spawnGroundItem(40317, 1, 5);
 				spawnGroundItem(40079, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 1 군의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 1분 후에 제 2 군의 투입이 시작됩니다.");
+				sendMessage("コロシアム管理人：第1群の投入が完了しました。");
+				sendMessage("コロシアム管理人：1分後に第2群の投入が開始されます。");
 			} else if (curRound == 2) {
 				spawnGroundItem(L1ItemId.ADENA, 3000, 50);
 				spawnGroundItem(L1ItemId.POTION_OF_CURE_POISON, 5, 20);
@@ -178,8 +178,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(L1ItemId.POTION_OF_GREATER_HEALING, 5, 20);
 				spawnGroundItem(40317, 1, 7);
 				spawnGroundItem(40093, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 2 군의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 2분 후에 제 3 군의 투입이 시작됩니다.");
+				sendMessage("コロシアム管理人：第2群の投入が完了しました。");
+				sendMessage("コロシアム管理人：2分後に第3群の投入が開始されます。");
 			} else if (curRound == 3) {
 				spawnGroundItem(L1ItemId.ADENA, 5000, 30);
 				spawnGroundItem(L1ItemId.POTION_OF_CURE_POISON, 10, 20);
@@ -187,8 +187,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(L1ItemId.POTION_OF_GREATER_HEALING, 7, 10);
 				spawnGroundItem(40317, 1, 10);
 				spawnGroundItem(40094, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 3 군까지의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 6분 후에 최종전이 시작됩니다.");
+				sendMessage("コロシアム管理人：第3群までの投入が完了しました。");
+				sendMessage("コロシアム管理人：6分後に最終戦が開始されます。");
 			}
 			break;
 		case 4:
@@ -198,8 +198,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(L1ItemId.POTION_OF_EXTRA_HEALING, 5, 20);
 				spawnGroundItem(40317, 1, 5);
 				spawnGroundItem(40079, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 1 군의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 2분 후에 제 2 군의 투입이 시작됩니다.");
+				sendMessage("コロシアム管理人：第1群の投入が完了しました。");
+				sendMessage("コロシアム管理人：2分後に第2群の投入が開始されます。");
 			} else if (curRound == 2) {
 				spawnGroundItem(L1ItemId.ADENA, 500, 50);
 				spawnGroundItem(L1ItemId.POTION_OF_CURE_POISON, 7, 20);
@@ -207,8 +207,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(L1ItemId.POTION_OF_GREATER_HEALING, 5, 20);
 				spawnGroundItem(40317, 1, 7);
 				spawnGroundItem(40093, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 2 군까지의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 6분 후에 최종전이 시작됩니다.");
+				sendMessage("コロシアム管理人：第2群までの投入が完了しました。");
+				sendMessage("コロシアム管理人：6分後に最終戦が開始されます。");
 			}
 			break;
 		case 5:
@@ -219,8 +219,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(L1ItemId.POTION_OF_GREATER_HEALING, 3, 20);
 				spawnGroundItem(40317, 1, 5);
 				spawnGroundItem(40079, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 1 군의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 1분 후에 제 2 군의 투입이 시작됩니다.");
+				sendMessage("コロシアム管理人：第1群の投入が完了しました。");
+				sendMessage("コロシアム管理人：1分後に第2群の投入が開始されます。");
 			} else if (curRound == 2) {
 				spawnGroundItem(L1ItemId.ADENA, 5000, 50);
 				spawnGroundItem(L1ItemId.POTION_OF_CURE_POISON, 7, 20);
@@ -229,8 +229,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(40317, 1, 7);
 				spawnGroundItem(40093, 1, 10);
 				spawnGroundItem(40079, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 2 군의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 2분 후에 제 3 군의 투입이 시작됩니다.");
+				sendMessage("コロシアム管理人：第2群の投入が完了しました。");
+				sendMessage("コロシアム管理人：2分後に第3群の投入が開始されます。");
 			} else if (curRound == 3) {
 				spawnGroundItem(L1ItemId.ADENA, 10000, 30);
 				spawnGroundItem(L1ItemId.POTION_OF_CURE_POISON, 7, 20);
@@ -239,8 +239,8 @@ public class L1NewUltimateBattle {
 				spawnGroundItem(40317, 1, 10);
 				spawnGroundItem(40094, 1, 10);
 				spawnGroundItem(40079, 1, 10);
-				sendMessage("콜롯세움 관리인: 제 3 군까지의 투입이 완료되었습니다.");
-				sendMessage("콜롯세움 관리인: 6분 후에 최종전이 시작됩니다.");
+				sendMessage("コロシアム管理人：第3群までの投入が完了しました。");
+				sendMessage("コロシアム管理人：6分後に最終戦が開始されます。");
 			}
 			break;
 		}
@@ -326,24 +326,24 @@ public class L1NewUltimateBattle {
 			}
 			removeRetiredMembers();
 
-			sendMessage("콜롯세움 관리인: 이제 곧 몬스터들이 등장할 것입니다. 건투를 빕니다."); // 10초전
+			sendMessage("コロシアム管理人：今すぐモンスターが登場します。健闘を祈ります。"); // 10秒前
 			Thread.sleep(5000);
-			sendMessage("콜롯세움 관리인: 10초뒤에 경기를 시작 합니다."); // 10초전
+			sendMessage("コロシアム管理人：10秒後試合を開始します。"); // 10秒前
 
 			Thread.sleep(5000);
-			sendMessage("콜롯세움 관리인: 5 !!"); // 5초전
+			sendMessage("コロシアム管理人：5！"); // 5秒前
 
 			Thread.sleep(1000);
-			sendMessage("콜롯세움 관리인: 4 !!"); // 4초전
+			sendMessage("コロシアム管理人：4！"); // 4秒前
 
 			Thread.sleep(1000);
-			sendMessage("콜롯세움 관리인: 3 !!"); // 3초전
+			sendMessage("コロシアム管理人：3！"); // 3秒前
 
 			Thread.sleep(1000);
-			sendMessage("콜롯세움 관리인: 2 !!"); // 2초전
+			sendMessage("コロシアム管理人：2！"); // 2秒前
 
 			Thread.sleep(1000);
-			sendMessage("콜롯세움 관리인: 1 !!"); // 1초전
+			sendMessage("コロシアム管理人：1！"); // 1秒前
 
 			Thread.sleep(1000);
 			removeRetiredMembers();
@@ -418,11 +418,11 @@ public class L1NewUltimateBattle {
 
 	public void start() {
 		switch(getUbId()){
-		case 1: L1World.getInstance().broadcastServerMessage("잠시후 기란 마을의 무한대전이 시작됩니다."); break;
-		case 2: L1World.getInstance().broadcastServerMessage("잠시후 웰던 마을의 무한대전이 시작됩니다."); break;
-		case 3: L1World.getInstance().broadcastServerMessage("잠시후 글루딘 마을의 무한대전이 시작됩니다."); break;
-		case 4: L1World.getInstance().broadcastServerMessage("잠시후 말하는 섬의 무한대전이 시작됩니다."); break;
-		case 5: L1World.getInstance().broadcastServerMessage("잠시후 은기사 마을의 무한대전이 시작됩니다."); break;
+		case 1: L1World.getInstance().broadcastServerMessage("しばらくしてギラン村の無限大戦が開始されます。"); break;
+		case 2: L1World.getInstance().broadcastServerMessage("しばらくしてウェルダン村の無限大戦が開始されます。"); break;
+		case 3: L1World.getInstance().broadcastServerMessage("しばらくしてグルーディン村の無限大戦が開始されます。"); break;
+		case 4: L1World.getInstance().broadcastServerMessage("しばらくして話せる島の無限大戦が開始されます。"); break;
+		case 5: L1World.getInstance().broadcastServerMessage("しばらくしては記事の村の無限大戦が開始されます。"); break;
 		default: break;				
 		}
 		// int patternsMax = UBSpawnTable.getInstance().getMaxPattern(_ubId);
@@ -540,8 +540,8 @@ public class L1NewUltimateBattle {
 		this._enterBlackwizard = enterBlackwizard;
 	}
 
-	public void setEnter전사(boolean enter전사) {
-		this._enter전사 = enter전사;
+	public void setEnterWarrior(boolean enterWarrior) {
+		this._enterWarrior = enterWarrior;
 	}
 
 	public void setEnterMale(boolean enterMale) {
@@ -684,7 +684,7 @@ public class L1NewUltimateBattle {
 	|| (pc.isDarkelf() && _enterDarkelf)
 	|| (pc.isDragonknight() && _enterDragonknight) 
 	|| (pc.isBlackwizard() && _enterBlackwizard)
-	|| (pc.is전사() && _enter전사))) {
+	|| (pc.isWarrior() && _enterWarrior))) {
 			return false;
 		}
 
@@ -700,48 +700,48 @@ public class L1NewUltimateBattle {
 		String nextUbTime = getNextUbTime();
 		StringBuilder classesBuff = new StringBuilder();
 		if (_enterBlackwizard) {
-			classesBuff.append("환술사 ");
+			classesBuff.append("イリュージョニスト ");
 		}
 		if (_enterDragonknight) {
-			classesBuff.append("용기사 ");
+			classesBuff.append("ドラゴンナイト ");
 		}
 		if (_enterDarkelf) {
-			classesBuff.append("다크엘프 ");
+			classesBuff.append("ダークエルフ ");
 		}
 		if (_enterMage) {
-			classesBuff.append("마법사 ");
+			classesBuff.append("ウィザード ");
 		}
 		if (_enterElf) {
-			classesBuff.append("요정 ");
+			classesBuff.append("エルフ ");
 		}
 		if (_enterKnight) {
-			classesBuff.append("기사 ");
+			classesBuff.append("ナイト ");
 		}
 		if (_enterRoyal) {
-			classesBuff.append("군주 ");
+			classesBuff.append("君主 ");
 		}
-		if (_enter전사) {
-			classesBuff.append("전사 ");
+		if (_enterWarrior) {
+			classesBuff.append("ウォリアー ");
 		}
 		String classes = classesBuff.toString().trim();
 
 		StringBuilder sexBuff = new StringBuilder();
 		if (_enterMale) {
-			sexBuff.append("남자 ");
+			sexBuff.append("男 ");
 		}
 		if (_enterFemale) {
-			sexBuff.append("여자 ");
+			sexBuff.append("女性 ");
 		}
 		String sex = sexBuff.toString().trim();
 		String loLevel = String.valueOf(_minLevel);
 		String hiLevel = String.valueOf(_maxLevel);
-		String teleport = _location.getMap().isEscapable() ? "가능" : "불가능";
-		String res = _location.getMap().isUseResurrection() ? "가능" : "불가능";
-		String pot = "가능";
+		String teleport = _location.getMap().isEscapable() ? "可能" : "不可能";
+		String res = _location.getMap().isUseResurrection() ? "可能" : "不可能";
+		String pot = "可能";
 		String hpr = String.valueOf(_hpr);
 		String mpr = String.valueOf(_mpr);
-		String summon = _location.getMap().isTakePets() ? "가능" : "불가능";
-		String summon2 = _location.getMap().isRecallPets() ? "가능" : "불가능";
+		String summon = _location.getMap().isTakePets() ? "可能" : "不可能";
+		String summon2 = _location.getMap().isRecallPets() ? "可能" : "不可能";
 		_ubInfo = new String[] { nextUbTime, classes, sex, loLevel, hiLevel,
 				teleport, res, pot, hpr, mpr, summon, summon2 };
 		return _ubInfo;

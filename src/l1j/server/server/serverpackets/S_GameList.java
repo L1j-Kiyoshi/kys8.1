@@ -2,8 +2,8 @@
 package l1j.server.server.serverpackets;
 
 import l1j.server.server.Opcodes;
-import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.L1Racing;
+import l1j.server.server.model.Instance.L1PcInstance;
 
 public class S_GameList extends ServerBasePacket {
 
@@ -68,13 +68,13 @@ public class S_GameList extends ServerBasePacket {
 		buildPacket1(pc, i);
 	}
 
-    /*스타트*/
+    /*スタート*/
 	private void buildPacket1(L1PcInstance pc, int i) {
 		
 		writeC(Opcodes.S_EVENT);
 		writeC(0x42);
-        writeH(L1Racing.getInstance().size(0)); // 참여자수
-        writeH(i); // 등수
+        writeH(L1Racing.getInstance().size(0)); // 参加者数
+        writeH(i); // 等数
 		for(int j = 0; j < L1Racing.getInstance().size(0) ; j++){
 			writeS(L1Racing.getInstance().arrayList(0).get(j).getName());
 		}

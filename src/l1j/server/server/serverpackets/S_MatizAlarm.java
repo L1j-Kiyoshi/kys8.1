@@ -18,10 +18,7 @@
  */
 package l1j.server.server.serverpackets;
 
-import java.util.StringTokenizer;
-
 import l1j.server.server.Opcodes;
-import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.gametime.RealTimeClock;
 
 public class S_MatizAlarm extends ServerBasePacket {
@@ -31,32 +28,32 @@ public class S_MatizAlarm extends ServerBasePacket {
 
 	public S_MatizAlarm(int type,int time,int duration,boolean mod) {
 		
-		//type 1, 에르자베 2,샌드 웜 3,붉은 기사단의 진격
+		//type 1、エルジャベ2、サンドワーム3、赤騎士団の進撃
 		String name;
 		switch(type){
 			case 1:
-				name = "에르자베";
+				name = "エルジャベ";
 				break;
 			case 2:
-				name = "샌드 웜";
+				name = "サンドワーム";
 				break;
 			case 3:
-				name = "붉은 기사단의 진격";
+				name = "赤き騎士団の進撃";
 				break;
 			default:
-				name = "알람없어요";
+				name = "アラームはありません";
 				break;
 		}
 		int length = name.getBytes().length;
 		
 		int realTime,realTime2;
 		if(mod){
-			realTime =RealTimeClock.getInstance().getRealTime().getSeconds()+time;  //몇시간 남음 표기시간
+			realTime =RealTimeClock.getInstance().getRealTime().getSeconds()+time;  //いくつかの残り時間表記の時間
 		
 			if(realTime <0 )
 				realTime = -realTime;
 			
-			realTime2 =RealTimeClock.getInstance().getRealTime().getSeconds()+duration; //사라지는 시간
+			realTime2 =RealTimeClock.getInstance().getRealTime().getSeconds()+duration; //消える時間
 		
 			if(realTime2 < 0 )
 				realTime2 = -realTime2;

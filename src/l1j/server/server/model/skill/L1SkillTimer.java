@@ -707,7 +707,7 @@ class L1SkillStop {
 				int tamcount = pc.tamcount();
 				if (tamcount > 0) {
 					long tamtime = pc.TamTime();
-					pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.버프창,
+					pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.BUFF_WINDOW,
 							tamtime, tamcount, true), true);
 					if (tamcount == 1) {
 						pc.setSkillEffect(Tam_Fruit1,
@@ -749,7 +749,7 @@ class L1SkillStop {
 				int tamcount = pc.tamcount();
 				if (tamcount > 0) {
 					long tamtime = pc.TamTime();
-					pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.버프창,
+					pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.BUFF_WINDOW,
 							tamtime, tamcount, true), true);
 					if (tamcount == 1) {
 						pc.setSkillEffect(Tam_Fruit1,
@@ -791,7 +791,7 @@ class L1SkillStop {
 				int tamcount = pc.tamcount();
 				if (tamcount > 0) {
 					long tamtime = pc.TamTime();
-					pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.버프창,
+					pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.BUFF_WINDOW,
 							tamtime, tamcount, true), true);
 
 					if (tamcount == 1) {
@@ -828,7 +828,7 @@ class L1SkillStop {
 				int tamcount = pc.tamcount();
 				if (tamcount > 0) {
 					long tamtime = pc.TamTime();
-					pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.버프창,
+					pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.BUFF_WINDOW,
 							tamtime, tamcount, true), true);
 
 					if (tamcount == 1) {
@@ -865,7 +865,7 @@ class L1SkillStop {
 				int tamcount = pc.tamcount();
 				if (tamcount > 0) {
 					long tamtime = pc.TamTime();
-					pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.버프창,
+					pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.BUFF_WINDOW,
 							tamtime, tamcount, true), true);
 
 					if (tamcount == 1) {

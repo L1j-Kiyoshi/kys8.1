@@ -116,13 +116,13 @@ public class L1PetMatch {
 			}
 		}
 
-	    // PC가 시합장에 2명 있는 경우
+	    // PCが試合場に2人いる場合
 		if (pc1.getMapId() == PET_MATCH_MAPID[petMatchNo]
 				&& pc2.getMapId() == PET_MATCH_MAPID[petMatchNo]) {
 			return STATUS_PLAYING;
 		}
 
-		// PC가 시합장에 1명 있는 경우
+		//PCが試合場に1人いる場合
 		if (pc1.getMapId() == PET_MATCH_MAPID[petMatchNo]) {
 			_pc2Name[petMatchNo] = null;
 			_pet2[petMatchNo] = null;

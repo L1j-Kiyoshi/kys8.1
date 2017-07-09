@@ -43,7 +43,7 @@ public abstract class L1Item implements Serializable {
 	public void setName(String name) {
 		_name = name;
 	}
-	
+
 	private String _Magic_name;
 
 	public String getMagicName() {
@@ -69,7 +69,7 @@ public abstract class L1Item implements Serializable {
 
 	/**
 	 * アイテムの種類を返す。<br>
-	 * 
+	 *
 	 * @return
 	 * <p>
 	 * [etcitem]<br>
@@ -86,7 +86,7 @@ public abstract class L1Item implements Serializable {
 
 	 * [armor]<br>
 	 * 1:helm, 2:armor, 3:T, 4:cloak, 5:glove, 6:boots, 7:shield, 8:amulet,
-	 * 9:ring, 10:belt, 11:ring2, 12:earring , 13:garder 14,rune1, 15ゲートル16文章17記章18肩甲ㅂ	 */
+	 * 9:ring, 10:belt, 11:ring2, 12:earring , 13:garder 14,rune1, 15ゲートル16文章17記章18肩甲	 */
 	public int getType() {
 		return _type;
 	}
@@ -99,7 +99,7 @@ public abstract class L1Item implements Serializable {
 
 	/**
 	 * アイテムの種類を返す。<br>
-	 * 
+	 *
 	 * @return
 	 * <p>
 	 * [weapon]<br>
@@ -152,7 +152,7 @@ public abstract class L1Item implements Serializable {
 	public void setGfxId(int gfxId) {
 		_gfxId = gfxId;
 	}
-	
+
 	private int _Mainid;
 
 	public int getMainId() {
@@ -268,15 +268,15 @@ public abstract class L1Item implements Serializable {
 	}
 
 	private boolean _save_at_once;
-	
-	private int _장신구처리;
 
-	public int get장신구처리() {
-		return _장신구처리;
+	private int _AccessoryProcess;
+
+	public int getAccessoryProcess() {
+		return _AccessoryProcess;
 	}
 
-	public void set장신구처리(int i) {
-		_장신구처리 = i;
+	public void setAccessoryProcess(int i) {
+		_AccessoryProcess = i;
 	}
 
 	/**
@@ -293,7 +293,7 @@ public abstract class L1Item implements Serializable {
 	// ■■■■■■ L1EtcItem, L1Weapon に共通する項目 ■■■■■■
 
 
-	private int _dmgSmall = 0; 
+	private int _dmgSmall = 0;
 
 	public int getDmgSmall() {
 		return _dmgSmall;
@@ -326,7 +326,7 @@ public abstract class L1Item implements Serializable {
 	public void set_safeenchant(int safeenchant) {
 		_safeEnchant = safeenchant;
 	}
-	
+
 	private int _enchant = 0;
 
 	public int get_enchant() {
@@ -336,8 +336,8 @@ public abstract class L1Item implements Serializable {
 	public void set_enchant(int enchant) {
 		_enchant = enchant;
 	}
-	
-	
+
+
 
 	private boolean _useRoyal = false;
 
@@ -388,7 +388,7 @@ public abstract class L1Item implements Serializable {
 	public void setUseDarkelf(boolean flag) {
 		_useDarkelf = flag;
 	}
-	
+
 	private boolean _useDragonKnight = false;
 
 	public boolean isUseDragonKnight() {
@@ -398,22 +398,22 @@ public abstract class L1Item implements Serializable {
 	public void setUseDragonKnight(boolean flag) {
 		_useDragonKnight = flag;
 	}
-	
+
 	private boolean _useBlackwizard = false;
 
 	public boolean isUseBlackwizard() {
 		return _useBlackwizard;
 	}
-	
-	private boolean _use전사 = false;
 
-	public boolean isUse전사() {
-		return _use전사;
+	private boolean _useWarrior = false;
+
+	public boolean isUseWarrior() {
+		return _useWarrior;
 	}
-	public void setUse전사(boolean flag) {
-		_use전사 = flag;
+	public void setUseWarrior(boolean flag) {
+		_useWarrior = flag;
 	}
-	
+
 	private boolean _useHighPet = false;
 	public boolean isUseHighPet() {	return _useHighPet;	}
 	public void setUseHighPet(boolean flag) {	_useHighPet = flag;	}
@@ -442,7 +442,7 @@ public abstract class L1Item implements Serializable {
 		_adddex = adddex;
 	}
 
-	private byte _addcon = 0; 
+	private byte _addcon = 0;
 
 	public byte get_addcon() {
 		return _addcon;
@@ -451,8 +451,8 @@ public abstract class L1Item implements Serializable {
 	public void set_addcon(byte addcon) {
 		_addcon = addcon;
 	}
-		
-	private byte _addexp1 = 0; 
+
+	private byte _addexp1 = 0;
 
 	public byte get_addexp1() {
 		return _addexp1;
@@ -462,7 +462,7 @@ public abstract class L1Item implements Serializable {
 		_addexp1 = addexp1;
 	}
 
-	private byte _addint = 0; 
+	private byte _addint = 0;
 
 	public byte get_addint() {
 		return _addint;
@@ -561,7 +561,7 @@ public abstract class L1Item implements Serializable {
 	public void setHasteItem(boolean flag) {
 		_isHasteItem = flag;
 	}
-	
+
 	private int _maxUseTime = 0;
 
 	public int getMaxUseTime() {
@@ -614,23 +614,23 @@ public abstract class L1Item implements Serializable {
 			return 0;
 		}
 	}
-	
+
 	public int getLightFuel() {
-		if (_itemId == 40001) { 
+		if (_itemId == 40001) {
 			return 600;
-		} else if (_itemId == 40002) { 
+		} else if (_itemId == 40002) {
 			return 0;
-		} else if (_itemId == 40003) { 
+		} else if (_itemId == 40003) {
 			return 600;
-		} else if (_itemId == 40004) { 
+		} else if (_itemId == 40004) {
 			return 0;
-		} else if (_itemId == 40005) { 
+		} else if (_itemId == 40005) {
 			return 600;
 		} else {
 			return 0;
 		}
 	}
-	
+
 	/***魔法の触媒の種類を返す。 */
 	public int getMagicCatalystType () {
 		int type = 0;
@@ -663,7 +663,7 @@ public abstract class L1Item implements Serializable {
 		case 40068: //エルヴンワッフル
 		case 140068:
 			type = 86;
-			break;	
+			break;
 		case 41295: //栄養餌
 			type = 14467;
 			break;
@@ -725,13 +725,13 @@ public abstract class L1Item implements Serializable {
 	public int getMaxChargeCount() {
 		return 0;
 	}
-	
+
 	public int get_delayEffect() {
 		return 0;
 	}
 
 	// ■■■■■■ L1Weapon でオーバーライド（override）する項目 ■■■■■■
-		
+
 	public int getHitModifier() {
 		return 0;
 	}
@@ -752,11 +752,11 @@ public abstract class L1Item implements Serializable {
 	public int get_canbedmg() {
 		return 0;
 	}
-	
+
 	public int get_penetration() {
 		return 0;
 	}
-	
+
 	public boolean isTwohandedWeapon() {
 		return false;
 	}
@@ -773,7 +773,7 @@ public abstract class L1Item implements Serializable {
 	public int getDamageReduction() {
 		return 0;
 	}
-	
+
 	public int getWeightReduction() {
 		return 0;
 	}
@@ -781,15 +781,15 @@ public abstract class L1Item implements Serializable {
 	public int getDmgRate() {
 		return 0;
 	}
-	
+
 	public int getHitRate() {
 		return 0;
 	}
-	
+
 	public int getBowHitRate() {
 		return 0;
 	}
-	
+
 	public int getBowDmgRate() {
 		return 0;
 	}
@@ -832,19 +832,19 @@ public abstract class L1Item implements Serializable {
 	public int get_regist_blind() {
 		return 0;
 	}
-	
+
 	public int get_regist_DESPERADO() {
 		return 0;
 	}
-	
+
 	public int get_regist_calcPcDefense() {
 		return 0;
 	}
-	
+
 	public int get_regist_PVPweaponTotalDamage() {
 		return 0;
 	}
-		
+
 	private int _grade; // ● アクセサリーのステップ
 
 	public int getGrade() {
@@ -856,7 +856,7 @@ public abstract class L1Item implements Serializable {
 	}
 
 	private int _price; // ● 価格
-	
+
 	public int get_price() {
 		return _price;
 	}
@@ -864,5 +864,5 @@ public abstract class L1Item implements Serializable {
 	public void set_price(int price) {
 		_price = price;
 	}
-	
+
 }

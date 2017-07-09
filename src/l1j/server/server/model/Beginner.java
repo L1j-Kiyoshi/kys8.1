@@ -62,7 +62,7 @@ public class Beginner {
 				pstm1.setString(2, "T");
 			} else if (pc.isBlackwizard()) {
 				pstm1.setString(2, "B");
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				pstm1.setString(2, "J");
 			} else {
 				pstm1.setString(2, "A");
@@ -88,7 +88,7 @@ public class Beginner {
 							}
 						}
 						if (createCount > 0) {
-							pc.sendPackets(new S_ServerMessage(403, // %0를 손에 넣었습니다.
+							pc.sendPackets(new S_ServerMessage(403, // %0を手に入れました。
 									item.getLogName() + "(ID:" + itemid + ")"));
 						}
 					}
@@ -131,7 +131,7 @@ public class Beginner {
 				p1.execute();
 			}
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, "북마크의 추가로 에러가 발생했습니다.", e);
+			_log.log(Level.SEVERE, "ブックマークの追加でエラーが発生しました。", e);
 		} finally {
 			SQLUtil.close(r);
 			SQLUtil.close(p1);
@@ -164,7 +164,7 @@ public class Beginner {
 				pstm1.setString(2, "T");
 			} else if (pc.isBlackwizard()) {
 				pstm1.setString(2, "B");
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				pstm1.setString(2, "J");
 			} else {
 				pstm1.setString(2, "A");

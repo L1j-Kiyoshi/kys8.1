@@ -1,8 +1,8 @@
 /**
- * 펫 레이싱
- * 4/26 레이싱 시스템 
+ * ペットレーシング
+ * 4/26レーシングシステム
  * LinFreedom
- * 레이싱튜닝: 가니 , 사탄
+ * レーシングチューニング：ガニ、サタン
  */
 
 package l1j.server.server.model;
@@ -45,23 +45,23 @@ public class L1Racing implements Runnable
 	private static final short mapId = 5143;
 
 	public final int 일반 = 0;
-	public final int 순위00 = 1; // 이게.. 최초 시작할때
-	public final int 순위01 = 2; // 0바퀴째 1번째 체크
-	public final int 순위02 = 3; // 0바퀴째 2번째 체크
-	public final int 순위03 = 4; // 0바퀴째 3번째 체크
-	public final int 순위10 = 5; // 1바퀴째 결승점(1바퀴 완주시..)
-	public final int 순위11 = 6; // 1바퀴째 1번째 체크
-	public final int 순위12 = 7; // 1바퀴째 2번째 체크
-	public final int 순위13 = 8; // 1바퀴째 3번째 체크
-	public final int 순위20 = 9; // 2바퀴째 결승점
-	public final int 순위21 = 10; // 2바퀴째 1번째 체크
-	public final int 순위22 = 11; // 2바퀴째 2번째 체크
-	public final int 순위23 = 12; // 2바퀴째 3번째 체크
-	public final int 순위30 = 13; // 3바퀴째 결승점
-	public final int 순위31 = 14; // 3바퀴째 1번째 체크
-	public final int 순위32 = 15; // 3바퀴째 2번째 체크
-	public final int 순위33 = 16; // 3바퀴째 3번째 체크
-	public final int 순위99 = 17; // 이건.. 종료시? 완주일까 
+	public final int 순위00 = 1; // これ..最初の起動時
+	public final int 순위01 = 2; // 0周目1回目のチェック
+	public final int 순위02 = 3; // 0周目2回目のチェック
+	public final int 순위03 = 4; //0周目3回目のチェック
+	public final int 순위10 = 5; // 1周目にフィニッシュ（1周完走時..）
+	public final int 순위11 = 6; // 1周目1回目のチェック
+	public final int 순위12 = 7; // 1周目、2回目のチェック
+	public final int 순위13 = 8; // 1周目の3番目のチェック
+	public final int 순위20 = 9; // 2周目にフィニッシュ
+	public final int 순위21 = 10; // 2周目1回目のチェック
+	public final int 순위22 = 11; // 2周目2回目のチェック
+	public final int 순위23 = 12; // 2周目、3回目のチェック
+	public final int 순위30 = 13; // 3周目にフィニッシュ
+	public final int 순위31 = 14; // 3周目、1回目のチェック
+	public final int 순위32 = 15; //3周目、2回目のチェック
+	public final int 순위33 = 16; // 3周目、3回目のチェック
+	public final int 순위99 = 17; // これ..終了時？完走か
 	
 	
 	private static L1Racing instance;
@@ -77,7 +77,7 @@ public class L1Racing implements Runnable
 		for(int i = 0; i < 18; i++) _List[i] = new ArrayList<L1PcInstance>();
 	}
 
-	/** 기본 생성자 */
+	/** 既定のコンストラクタ */
 	private L1Racing(){}
 
 	/**
@@ -98,7 +98,7 @@ public class L1Racing implements Runnable
 					{
 						_executeStatus = EXECUTE_STATUS_PREPARE;
 
-						npcBroadcast("잠시후 펫 레이싱을 진행하겠습니다.");
+						npcBroadcast("しばらくしてペットレーシングを進めます。");
 
 						GeneralThreadPool.getInstance().schedule(this, 60000L);
 					}
@@ -163,7 +163,7 @@ public class L1Racing implements Runnable
 					{
 						if( --_count == 0 )
 						{
-							if( _count % 10 == 0 )	// 얜 10초마다 한번씩
+							if( _count % 10 == 0 )	// イェン10秒ごとに一度ずつ
 							{
 								removeRetiredMembers();
 							}
@@ -261,9 +261,9 @@ public class L1Racing implements Runnable
 			{
 				for (L1PcInstance pc : toArray(i)) {
 					if(pc.getMapId() == getMapId()){
-					// 경기 최소 인원이 2명이 만족하지 않아 경기를 강제 종료 합니다. 1000 아데나를 돌려 드렸습니다.
+					// 試合最小人員が2人に満足していない試合を強制的に終了します。 1000アデナを返しました。
 						pc.sendPackets(new S_ServerMessage(1264));
-						pc.getInventory().storeItem(40308, 1000); // 1000 아데나 지급
+						pc.getInventory().storeItem(40308, 1000); // 1000アデナ支給
 
 						new L1Teleport().teleport(pc, 32616 + Rnd(4), 32774 + Rnd(4), (short)4, 5, true);
 					}
@@ -280,7 +280,7 @@ public class L1Racing implements Runnable
 
 		int i = 0;
 		for(L1PcInstance pc : toArray(일반)){
-			L1PolyMorph.doPoly(pc, 5065, 1000,L1PolyMorph.MORPH_BY_NPC); //아기 진돗
+			L1PolyMorph.doPoly(pc, 5065, 1000,L1PolyMorph.MORPH_BY_NPC); //赤ちゃんジンドト
 			pc.sendPackets(new S_GameStart(pc));
 			pc.sendPackets(new S_GameRap(pc, 1));
 			pc.sendPackets(new S_GameList(pc, i++));
@@ -342,7 +342,7 @@ public class L1Racing implements Runnable
 			if(obj instanceof L1NpcInstance){
 				L1NpcInstance npc = (L1NpcInstance)obj;
 				if(npc.getNpcTemplate().get_npcId() == 300000){
-					npc.broadcastPacket(new S_NpcChatPacket(npc, "잠시후 펫 레이싱을 진행하겠습니다.", 2));
+					npc.broadcastPacket(new S_NpcChatPacket(npc, "しばらくしてペットレーシングを進めます。", 2));
 				}			
 			}
 		}
@@ -386,7 +386,7 @@ public class L1Racing implements Runnable
 			return true;
 		}
 
-		broadcast( _count + "초후 밖으로 이동합니다." );
+		broadcast( _count + "秒後の外に移動します。" );
 		
 		--_count;
 		
@@ -422,42 +422,42 @@ public class L1Racing implements Runnable
 		return _gameStatus;
 	}
 	/**
-	 * 각 저장소 길이를 리턴
-	 * @param	(int)	index	ArrayList[] 배열의 인덱스
-	 * @return	(int)	ArrayList 인덱스로 접근된 저장소의 길이
+	 * 各ストレージの長さを返し
+	 * @param	(int)	index	ArrayList[] 配列のインデックス
+	 * @return	(int)	ArrayList インデックスでアクセスされたストレージの長さ
 	*/
 	public int size(int index){
 		return _List[index].size();
 	}
 	/**
-	 * 각 저장소 객체 배열 리턴
-	 * @param	(int)	index		ArrayList[] 배열의 인덱스
-	 * @return	(L1PcInstance[])	L1PcInstance[] 배열
+	 * 各ストレージオブジェクトの配列返す
+	 * @param	(int)	index		ArrayList[] 配列のインデックス
+	 * @return	(L1PcInstance[])	L1PcInstance[] 配列
 	*/
 	public L1PcInstance[] toArray(int index){
 		return (L1PcInstance[]) _List[index].toArray(new L1PcInstance[size(index)]);
 	}
 	/**
-	 * 각 저장소 객체 리턴
-	 * @param	(int)	index		ArrayList[] 배열의 인덱스
-	 * @param	(int)	i			인덱스
-	 * @return	(L1PcInstance)	L1PcInstance 배열
+	 * 各ストレージオブジェクトリターン
+	 * @param	(int)	index		ArrayList[] 配列のインデックス
+	 * @param	(int)	i			インデックス
+	 * @return	(L1PcInstance)	L1PcInstance 配列
 	*/
 	public L1PcInstance toArray(int index, int i){
 		return (L1PcInstance) _List[index].get(i);
 	}
 	/**
-	 * 각 저장소 리턴
-	 * @param	(int)	index		ArrayList[] 배열의 인덱스
+	 * 各ストレージリターン
+	 * @param	(int)	index		ArrayList[] 配列のインデックス
 	 * @return	(ArrayList)			ArrayList
 	*/
 	public ArrayList<L1PcInstance> arrayList(int index){
 		return _List[index];
 	}
 	/**
-	 * 객체 추가
-	 * @param	(int)			index	배열인덱스
-	 * @param	(L1PcInstance)	c		객체
+	 *オブジェクトの追加
+	 * @param	(int)			index	配列のインデックス
+	 * @param	(L1PcInstance)	c		オブジェクト
 	*/
 	public void add(int index, L1PcInstance c){
 		if(!_List[index].contains(c)){
@@ -475,7 +475,7 @@ public class L1Racing implements Runnable
 					}
 
 					for(L1PcInstance player : toArray(일반)){
-						// 입장하시겠습니까? (Y/N)
+						// 入場しますか？ （Y / N）
 						if(player.getMap().getId() != getMapId()) player.sendPackets(new S_Message_YN(1256, ""));
 					}
 				}
@@ -487,32 +487,32 @@ public class L1Racing implements Runnable
 		}
 	}
 	/**
-	 * 객체 삭제 
-	 * @param	(int)			index	배열인덱스
-	 * @param	(L1PcInstance)	c		객체
+	 * オブジェクトの削除
+	 * @param	(int)			index配列のインデックス
+	 * @param	(L1PcInstance)	c		オブジェクト
 	*/
 	public void remove(int index, L1PcInstance c){
 		if(_List[index].contains(c)) _List[index].remove(c);
 	}
 	/**
-	 * 객체가 현재 펫레이싱 중인지 체크
-	 * @param	(int)			index	배열인덱스
-	 * @param	(L1PcInstance)	c		객체
-	 * @return	(boolean)	있다면 true, 없다면 false
+	 * オブジェクトが現在のペットレーシングしていることをチェック
+	 * @param	(int)			index	配列のインデックス
+	 * @param	(L1PcInstance)	c		オブジェクト
+	 * @return	(boolean)	場合はtrue、ない場合はfalse
 	*/
 	public  boolean contains(int index, L1PcInstance c){
 		return _List[index].contains(c);
 	}
 
 	/**
-	 * 저장 초기화
-	 * @param	(int)			index	배열인덱스
+	 * 保存初期化
+	 * @param	(int)			index	配列のインデックス
 	*/
 	public void clear(int index){
 		_List[index].clear();
 	}
 	/**
-	 * 저장 초기화
+	 * 保存初期化
 	*/
 	public void clear(){
 		for(int i = 0; i < _List.length; i++){
@@ -521,7 +521,7 @@ public class L1Racing implements Runnable
 	}
 
 	/**
-	 * 참가인원을 다시한번 검색 처음맴버에서 현재없다면 삭제
+	 * 参加人数をもう一度検索初めてメンバーで、現在ない場合削除
 	 */
 
 	public short getMapId() {

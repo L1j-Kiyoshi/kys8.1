@@ -30,7 +30,7 @@ import l1j.server.server.templates.L1Item;
 
 public class L1PcInventory extends L1Inventory {
 
-    /** 날짜 및 시간 기록 **/
+    /** 日付と時刻の記録 **/
     Calendar rightNow = Calendar.getInstance();
     int day = rightNow.get(Calendar.DATE);
     int hour = rightNow.get(Calendar.HOUR);
@@ -79,7 +79,7 @@ public class L1PcInventory extends L1Inventory {
 				return 100;
 			}
 			return WeightRatio;
-		} else { // 웨이트 레이트가 0이라면 중량 항상 0
+		} else { // ウェイトレートが0であれば、重量は常に0
 			return 0;
 		}
 	}
@@ -109,13 +109,13 @@ public class L1PcInventory extends L1Inventory {
         int weight = getWeight() + item.getItem().getWeight() * count / 1000 + 1;
         if (weight < 0 || (item.getItem().getWeight() * count / 1000) < 0) {
             if (message) {
-                sendOverMessage(82); // 아이템이 너무 무거워, 더 이상 가질 수 없습니다.
+                sendOverMessage(82); // アイテムが重すぎる、もはや持つことができません。
             }
             return WEIGHT_OVER;
         }
         if (calcWeight100(weight) >= 240) {
             if (message) {
-                sendOverMessage(82); // 아이템이 너무 무거워, 더 이상 가질 수 없습니다.
+                sendOverMessage(82); // アイテムが重すぎる、もはや持つことができません。
             }
             return WEIGHT_OVER;
         }
@@ -123,42 +123,42 @@ public class L1PcInventory extends L1Inventory {
         L1ItemInstance itemExist = findItemId(item.getItemId());
         if (itemExist != null && ((itemExist.getCount() + count) < 0 || (itemExist.getCount() + count) > MAX_AMOUNT)) {
             if (message) {
-                getOwner().sendPackets(new S_ServerMessage(166, "소지하고 있는 아데나", "2,000,000,000을 초과하고 있습니다."));
-                // \f1%0이%4%1%3%2
+                getOwner().sendPackets(new S_ServerMessage(166, "所持しているアデナ", "20億を超えています。"));
+                // \f1%0この%4%1%3%2
             }
             return AMOUNT_OVER;
         }
-        if (item.getItem().getItemId() == 30041) { // 토벌의 증표
+        if (item.getItem().getItemId() == 30041) { // 討伐の証
             L1ItemInstance inventoryItem = _owner.getInventory().findItemId(30041);
             int inventoryItemCount = 0;
             if (inventoryItem != null) {
                 inventoryItemCount = inventoryItem.getCount();
             }
             if (inventoryItemCount >= 99) {
-                _owner.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "퀘스트 완료: 다음 단계-은기사 마을 토벌대원에게 보고"));
-                _owner.sendPackets(new S_SystemMessage("\\aG[!] : 퀘스트 완료: 다음 단계-은기사 마을 토벌대원에게 보고"));
+                _owner.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "クエスト完了：次のステップ - ナイトタウン討伐隊員に報告"));
+                _owner.sendPackets(new S_SystemMessage("\\aG[!] : クエスト完了：次のステップ - ナイトタウン討伐隊員に報告"));
             }
         }
-        if (item.getItem().getItemId() == 30042) { // 변종 드래곤의 뼈
+        if (item.getItem().getItemId() == 30042) { // バリアントドラゴンの骨
             L1ItemInstance inventoryItem = _owner.getInventory().findItemId(30042);
             int inventoryItemCount = 0;
             if (inventoryItem != null) {
                 inventoryItemCount = inventoryItem.getCount();
             }
             if (inventoryItemCount >= 99) {
-                _owner.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "퀘스트 완료: 다음 단계-은기사 마을 드래곤뼈 수집꾼에게 보고"));
-                _owner.sendPackets(new S_SystemMessage("\\aG[!] : 퀘스트완료: 은기사 마을 드래곤뼈 수집꾼에게 보고"));
+                _owner.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "クエスト完了：次のステップ - ナイトタウンのドラゴンの骨を収集屋に報告"));
+                _owner.sendPackets(new S_SystemMessage("\\aG[!] : クエスト完了：シルバーナイトタウンのドラゴンの骨を収集屋に報告"));
             }
         }
-        if (item.getItem().getItemId() == 700015) { // 얼어붙은 여인의 눈물
+        if (item.getItem().getItemId() == 700015) { // 凍りついた女の涙
             L1ItemInstance inventoryItem = _owner.getInventory().findItemId(700015);
             int inventoryItemCount = 0;
             if (inventoryItem != null) {
                 inventoryItemCount = inventoryItem.getCount();
             }
             if (inventoryItemCount >= 99) {
-                _owner.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "퀘스트 완료: 오렌 마을 마빈에게 보고"));
-                _owner.sendPackets(new S_SystemMessage("퀘스트 완료: 오렌 마을 마빈에게 보고"));
+                _owner.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "クエスト完了：オーレン村マービンに報告"));
+                _owner.sendPackets(new S_SystemMessage("クエスト完了：オーレン村マービンに報告"));
             }
         }
 
@@ -266,12 +266,12 @@ public class L1PcInventory extends L1Inventory {
     }
 
     /**
-     * 목록내의 아이템 상태를 갱신한다.
+     * リスト内のアイテムの状態を更新する。
      * 
      * @param item -
-     *            갱신 대상의 아이템
+     *            更新対象のアイテム
      * @param column -
-     *            갱신하는 스테이터스의 종류
+     *            更新するステータスの種類
      */
     @Override
     public void updateItem(L1ItemInstance item, int column) {
@@ -343,9 +343,9 @@ public class L1PcInventory extends L1Inventory {
     }
 
     /**
-     * 목록내의 아이템 상태를 DB에 보존한다.
-     * @param item - 갱신 대상의 아이템
-     * @param column - 갱신하는 스테이터스의 종류
+     * リスト内のアイテムの状態をDBに保存する。
+     * @param item - 更新対象のアイテム
+     * @param column - 更新するステータスの種類
      */
     public void saveItem(L1ItemInstance item, int column) {
         if (column == 0) {
@@ -432,7 +432,7 @@ public class L1PcInventory extends L1Inventory {
         }
     }
 
-    public L1ItemInstance getItemEquippend(int itemId) {//아이템 착용 상태 확인의 오브젝트 인식
+    public L1ItemInstance getItemEquippend(int itemId) {//アイテム着用状態の確認のオブジェクト認識
         L1ItemInstance equipeitem = null;
         L1ItemInstance item = null;
         for (Object itemObject : _items) {
@@ -486,8 +486,8 @@ public class L1PcInventory extends L1Inventory {
         						poly == 11408||poly == 11409||poly == 11410||poly == 11411||poly == 11412||poly == 11413||
         						poly == 11414||poly == 11415||poly == 11416||poly == 11417||poly == 11418||poly == 11419||
         						poly == 11420||poly == 11421||poly == 12542||poly == 12541 || poly == 13735 || poly == 13737
-        						|| poly == 14928 //82경비창
-        						|| poly == 13389 //85경비창
+        						|| poly == 14928 //82経費ウィンドウ
+        						|| poly == 13389 //85経費ウィンドウ
         						) {
                     		range = 2;
         					}
@@ -496,9 +496,9 @@ public class L1PcInventory extends L1Inventory {
                     }
                     if (item.getItem().getType1() == 20) {
                         if (item.getItem().getType() == 4)
-                            this._owner.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, 3, true));
+                            this._owner.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
                         else
-                            this._owner.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, 3, true));
+                            this._owner.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
                     } else {
                         //
                         int type = 7;
@@ -517,7 +517,7 @@ public class L1PcInventory extends L1Inventory {
                             bow_or_tohand = true;
                         }
                         //
-                        this._owner.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, range, type, bow_or_tohand));
+                        this._owner.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, type, bow_or_tohand));
                     }
                 }
                 item.setEquipped(true);
@@ -534,7 +534,7 @@ public class L1PcInventory extends L1Inventory {
                         timeVisible = System.currentTimeMillis();
                     }
                 }
-                // 양손검을 착용해제 했을때 카운터배리어 효과해제 
+                // 両手剣を着用解除したときのカウンターバリア効果を無効
                 if (item.getItem().isTwohandedWeapon()) {
                     if (_owner.hasSkillEffect(L1SkillId.COUNTER_BARRIER)) {
                         _owner.removeSkillEffect(L1SkillId.COUNTER_BARRIER);
@@ -542,7 +542,7 @@ public class L1PcInventory extends L1Inventory {
                     }
                 }
                 if (item.getItem().getType2() == 1) {
-                    _owner.sendPackets(new S_PacketBox(S_PacketBox.공격가능거리, 1, 0, false));
+                    _owner.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, 1, 0, false));
                     if (_owner.hasSkillEffect(L1SkillId.DANCING_BLADES)) {
                         _owner.removeSkillEffect(L1SkillId.DANCING_BLADES);
                     }
@@ -564,9 +564,9 @@ public class L1PcInventory extends L1Inventory {
                 }
                 // _owner.getNetConnection().saveCharToDisk(_owner); //
             }
-            // 아이템 착용 처리에 대한 패킷 처리.
+            //アイテム着用処理のパケット処理。
             _owner.getInventory().toSlotPacket(_owner, item, false);
-            // 아이템패킷추가
+            // アイテムパケット追加
         }
     }
 
@@ -689,7 +689,7 @@ public class L1PcInventory extends L1Inventory {
         }
     }
 
-    /** 로봇시스템 **/
+    /** ロボットシステム **/
     private L1ItemInstance _arrow;
 
     public L1ItemInstance getArrow() {
@@ -704,7 +704,7 @@ public class L1PcInventory extends L1Inventory {
         }
     }
 
-    /** 로봇시스템 **/
+    /** ロボットシステム **/
 
     public L1ItemInstance getSting() {
         return getBullet(15);
@@ -780,7 +780,7 @@ public class L1PcInventory extends L1Inventory {
         return mpr;
     }
 
-    //해당아이템은 드랍불가
+    //該当のアイテムはドロップ不可
     public L1ItemInstance CaoPenalty() {
         Random random = new Random(System.nanoTime());
         int rnd=0;
@@ -820,9 +820,9 @@ public class L1PcInventory extends L1Inventory {
         return null;
     }
 
-    /** 조우의 돌골렘 (인챈트 아이템 삭제)
-     * @param itemid 	- 제련시 필요한 무기번호
-     * @param enchantLevel 	- 제련시 필요한 무기의 인챈트레벨
+    /** ゾウのストーンゴーレム（エンチャントアイテムの削除）
+     * @param itemid 	- 製錬に必要な武器番号
+     * @param enchantLevel 	- 製錬時に必要な武器のエンチャントレベル
      */
     public boolean MakeDeleteEnchant(int itemid, int enchantLevel) {
         L1ItemInstance[] items = findItemsId(itemid);
@@ -836,10 +836,10 @@ public class L1PcInventory extends L1Inventory {
         return false;
     }
 
-    /** 조우의 돌골렘 (인챈트 아이템 검사)
-     * @param id - 제련시 필요한 무기번호
+    /** ゾウのストーンゴーレム（エンチャントアイテムの検査）
+     * @param id - 製錬に必要な武器番号
      * 	  
-     * @param enchantLevel - 제련시 필요한 무기의 인챈트 레벨
+     * @param enchantLevel - 製錬時に必要な武器のエンチャントレベル
      *	 
      */
     public boolean MakeCheckEnchant(int id, int enchantLevel) {
@@ -877,7 +877,7 @@ public class L1PcInventory extends L1Inventory {
         return false;
     }
 
-    public int getEnchantCount(int id) {//인첸 레벨
+    public int getEnchantCount(int id) {//エンチャンレベル
         int cnt = 0;
         L1ItemInstance item = null;
         for (Object itemObject : _items) {

@@ -124,7 +124,7 @@ public class L1AddSkill implements L1CommandExecutor {
 					skill_id = l1skills.getSkillId();
 					SkillsTable.getInstance().spellMastery(object_id, skill_id, skill_name, 0, 0); // DB에 등록
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				pc.sendPackets(new S_AddSkill(255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 192, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)); // 전사꺼
 				L1Skills l1skills = null;
 

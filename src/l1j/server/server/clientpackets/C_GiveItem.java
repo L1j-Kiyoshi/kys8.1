@@ -257,7 +257,7 @@ public class C_GiveItem extends ClientBasePacket {
 			charisma += 6;
 		} else if (pc.isBlackwizard()) { // 환술사
 			charisma += 6;
-		} else if (pc.is전사()) { // 전사
+		} else if (pc.isWarrior()) { // 전사
 			charisma += 6;
 		}
 		charisma -= petcost;

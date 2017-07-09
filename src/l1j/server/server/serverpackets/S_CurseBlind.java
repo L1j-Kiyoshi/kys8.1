@@ -30,7 +30,7 @@ public class S_CurseBlind extends ServerBasePacket {
 	private byte[] _byte = null;
 
 	public S_CurseBlind(int type) {
-		// type 0:OFF 1:자신 이외 안보이는 2:주위의 캐릭터가 보인다
+		// type 0:OFF 1：自分以外見えない2：周囲のキャラクターが見える
 		buildPacket(type);
 	}
 

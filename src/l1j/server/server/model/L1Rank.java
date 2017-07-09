@@ -1,8 +1,8 @@
 package l1j.server.server.model;
 
 /**
- * 랭킹 시스템<br>
- * 랭킹에 대한 연산은 DB에 접근하지 않고 Map을 활용.
+ * ランキングシステム<br>
+ * ランキングの演算は、DBへのアクセスせずにMapを利用した。
  * 
  * @author
  */
@@ -64,7 +64,7 @@ public class L1Rank {
 
 	private int rankLevel = -1;
 
-	public int getRankLevel() { // 랭킹버프 레벨은 오직 전체랭킹에만 관계가 있다. 클래스랭킹은 버프와 관련없음.(본섭화)
+	public int getRankLevel() { // ランキングバフレベルは、唯一の全体ランキングのみ関係があります。クラスランキングはバフと関連なし（本サーバー火）
 		if (rankLevel != -1) return rankLevel;
 		if (totalRank <= 10) rankLevel = 4;
 		else if (totalRank <= 30) rankLevel = 3;

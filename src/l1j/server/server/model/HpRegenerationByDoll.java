@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 import l1j.server.server.RepeatTask;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.serverpackets.S_SkillSound; //## [A142] MP 회복시 이팩트 보이도록
+import l1j.server.server.serverpackets.S_SkillSound; //## [A142] MP回復時エフェクト見えるように
 
 public class HpRegenerationByDoll extends RepeatTask {
 	private static Logger _log = Logger.getLogger(HpRegenerationByDoll.class.getName());

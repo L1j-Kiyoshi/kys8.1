@@ -17,15 +17,15 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 	public static final int Elixir = 0xe9;
 	public static final int stateProfile = 0xe7;
 	public static final int EMOTICON = 0x40;
-	public static final int DOLL_START = 0x7b; // 시작
-	public static final int DOLL_RESULT = 0x7d; // 결과
-	public static final int DOLL_READY = 0x80; // 시작
+	public static final int DOLL_START = 0x7b; // 開始
+	public static final int DOLL_RESULT = 0x7d; // 結果
+	public static final int DOLL_READY = 0x80; // 開始
 	public static final int CLAN_JOIN_SETTING = 0x4D;
 	public static final int CLAN_JOIN_WAIT = 0x45;
 	public static final int unk1 = 0x41;
 	public static final int unknown1 = 0x4E;
 	public static final int unknown2 = 0x91;
-//	public static final int 활력버프 = 0x6e;
+//	public static final int 活力バフ = 0x6e;
 	public static final int CLAN_RANK = 0x19;
 	public static final int ICON_BUFF = 0x6e;
 	
@@ -116,7 +116,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 			write1(0x02);
 			write1(0x12);
 			try {
-				byte[] name = "상아탑:발록 진영".getBytes("EUC-KR");
+				byte[] name = "象牙の塔：バルログ陣営".getBytes("EUC-KR");
 				write1(name.length);
 				writetext(name);
 			} catch (UnsupportedEncodingException e) {
@@ -139,7 +139,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 			write1(0x0f);
 			write1(0x12);
 			try {
-				byte[] name = "상아탑:야히 진영(PC)".getBytes("EUC-KR");
+				byte[] name = "象牙の塔：ヤヒ陣営（PC）".getBytes("EUC-KR");
 				write1(name.length);
 				writetext(name);
 			} catch (UnsupportedEncodingException e) {
@@ -163,7 +163,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 			write1(0x03);
 			write1(0x12);
 			try {
-				byte[] name = "고대 정령의 무덤(PC)".getBytes("EUC-KR");
+				byte[] name = "古代精霊の墓（PC）".getBytes("EUC-KR");
 				write1(name.length);
 				writetext(name);
 			} catch (UnsupportedEncodingException e) {
@@ -229,7 +229,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 			writeC(0);
 			writeH(0);
 			break;
-		case unknown2:// 모름
+		case unknown2:// わから
 			writeC(01);
 			writeC(0x88);
 			writeC(0xd4);
@@ -301,13 +301,13 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 					writeC(0x2A);
 					writeC("1".getBytes().length);// name.length);
 					writeByte("1".getBytes());
-					// byte[] memo = pc.getTitle().getBytes();//임시로 호칭
+					// byte[] memo = pc.getTitle().getBytes();//一時的に呼称
 					// writeC(memo.length);
 					// writeByte(memo);
 					writeC(0x30);
-					writeC(L1World.getInstance().getPlayer(pc.getName()) != null ? 1: 0);// 접속중
+					writeC(L1World.getInstance().getPlayer(pc.getName()) != null ? 1: 0);// 接続中
 					writeC(0x38);
-					writeC(pc.getType());// 클래스
+					writeC(pc.getType());// クラス
 					i++;
 					if (i == 2)
 						break;
@@ -338,10 +338,10 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 	}
 	
 
-	private static final String 활력_활력버프1 = "00 08 02 10 " + "f2 "// 버프 종류
+	private static final String 활력_활력버프1 = "00 08 02 10 " + "f2 "// バフの種類
 											+ "12 18";
 	private static final String 활력_활력버프2 = "20 09 28 97 34 30 00 38 00 40 "
-											+ "fb 21 "// 버프종류
+											+ "fb 21 "// バフの種類
 											+ "48 " + "00 50 00 58 01 60 01 68 e8 21 70 01 45 63";
 
 	private static final String 활력_공격버프1 = "00 08 02 10 f3 12 18";
@@ -382,7 +382,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 
 	public S_ACTION_UI2(String 활력코드, long 시간) {
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
-//		writeC(활력버프);
+//		writeC(活力バフ);
 		writeC(ICON_BUFF);
 
 		String 활력버프패킷 = "";
@@ -499,7 +499,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 			writeC(stat);
 			break;
 		case stateProfile:
-			writeC(0x0a); //힘
+			writeC(0x0a); //力
 			if(stat == 45){
 				writeH(0x0808);
 				writeC(stat);
@@ -511,7 +511,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 				writeD(0x01180110);
 			}
 
-			writeC(0x12); //인트
+			writeC(0x12); //ポイント
 			if(stat == 45){
 				writeH(0x0808);
 				writeC(stat);
@@ -615,9 +615,9 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 			break;
 		case CLAN_JOIN_SETTING:
 			writeD(0x10010801);
-			writeC(subtype);// 가입 설정
+			writeC(subtype);// 登録設定
 			writeC(0x18);
-			writeC(objid);// 가입 유형
+			writeC(objid);// 登録タイプ
 			writeD(0x00001422);
 			writeD(0x00);
 			writeD(0x00);

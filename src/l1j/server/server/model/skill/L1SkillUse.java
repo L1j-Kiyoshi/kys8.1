@@ -1278,7 +1278,7 @@ public class L1SkillUse {
 				if (_player.getAbility().getBaseInt() >= 15) {
 					_mpConsume--;
 				}
-			} else if (_player.is전사()) {
+			} else if (_player.isWarrior()) {
 				if (_player.getAbility().getBaseInt() >= 11) {
 					_mpConsume--;
 				}
@@ -4115,7 +4115,7 @@ public class L1SkillUse {
 							return;
 						}
 
-						if (pc.is전사() && pc.getEquipSlot().getWeaponCount() == 2) {
+						if (pc.isWarrior() && pc.getEquipSlot().getWeaponCount() == 2) {
 							int count = 0;
 
 							for (L1ItemInstance item2 : pc.getInventory().getItems()) {

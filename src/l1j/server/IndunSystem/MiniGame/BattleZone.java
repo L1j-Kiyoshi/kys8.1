@@ -345,7 +345,7 @@ public class BattleZone implements Runnable {
 		int polyid = 0;
 		int time = 1800;
 		if (pc != null) {
-			if (pc.isKnight() || pc.isCrown() || pc.isDarkelf() || pc.isDragonknight() || pc.is전사()) {
+			if (pc.isKnight() || pc.isCrown() || pc.isDarkelf() || pc.isDragonknight() || pc.isWarrior()) {
 				// 기사 군주 다크엘프 용기사
 				if (DuelLine == 1) {
 					polyid = 11232;// <<1번라인 변신다크>

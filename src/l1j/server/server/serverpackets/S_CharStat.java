@@ -279,7 +279,7 @@ public class S_CharStat extends ServerBasePacket {
 		writeH(0);
 	}
 
-	/** 순수 스탯 리프레쉬 **/
+	/** 純粋なステータスリフレッシュ **/
 	public S_CharStat(L1PcInstance pc, int code) {
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
 		writeC(code);
@@ -309,69 +309,69 @@ public class S_CharStat extends ServerBasePacket {
 		switch (code) {
 		case STAT_VIEW:
 			writeC(0x01);
-			writeC(0x0a);// 힘
+			writeC(0x0a);// 力
 			writeC(i == 45 ? 8 : 6);
 			writeC(0x08);
-			writeC(i);// 레벨
+			writeC(i);// レベル
 			writeC(0x10);
-			writeC(i == 45 ? 3 : 1);// 근거리대미지
+			writeC(i == 45 ? 3 : 1);// 近距離ダメージ
 			writeC(0x18);
-			writeC(i == 45 ? 3 : 1);// 근거리 명중
+			writeC(i == 45 ? 3 : 1);// 近距離命中
 			if (i == 45) {
 				writeC(0x20);
-				writeC(1);// 근거리치명타
+				writeC(1);// 近距離クリティカル
 			}
-			writeC(0x12);// 인트
+			writeC(0x12);// ポイント
 			writeC(i == 45 ? 8 : 6);
 			writeC(0x08);
-			writeC(i);// 레벨
+			writeC(i);// レベル
 			writeC(0x10);
-			writeC(i == 45 ? 3 : 1);// 마법대미지
+			writeC(i == 45 ? 3 : 1);// 魔法ダメージ
 			writeC(0x18);
-			writeC(i == 45 ? 3 : 1);// 마법 명중
+			writeC(i == 45 ? 3 : 1);// 魔法命中
 			if (i == 45) {
 				writeC(0x20);
-				writeC(1);// 마법치명타
+				writeC(1);// 魔法クリティカル
 			}
-			writeC(0x1a);// 위즈
+			writeC(0x1a);// ウィズ
 			writeC(i == 45 ? 9 : 8);
 			writeC(0x08);
-			writeC(i);// 레벨
+			writeC(i);// レベル
 			writeC(0x10);
-			writeC(i == 45 ? 3 : 1);// 엠틱
+			writeC(i == 45 ? 3 : 1);// エムチク
 			writeC(0x18);
-			writeC(i == 45 ? 3 : 1);// 물약회복증가
+			writeC(i == 45 ? 3 : 1);// ポーション回復増加
 			writeC(0x38);
-			writeC(i == 45 ? 150 : i == 35 ? 100 : 50);// 엠50 100 150
+			writeC(i == 45 ? 150 : i == 35 ? 100 : 50);// エム50 100 150
 			if (i == 45)
-				writeC(1);// 패널티완화
-			writeC(0x22);// 데스
+				writeC(1);// ペナルティ緩和
+			writeC(0x22);// デス
 			writeC(i == 45 ? 8 : 6);
 			writeC(0x08);
-			writeC(i);// 레벨
+			writeC(i);// レベル
 			writeC(0x10);
-			writeC(i == 45 ? 3 : 1);// 원거리대미지
+			writeC(i == 45 ? 3 : 1);// 遠距離ダメージ
 			writeC(0x18);
-			writeC(i == 45 ? 3 : 1);// 원거리 명중
+			writeC(i == 45 ? 3 : 1);// 遠距離命中
 			if (i == 45) {
 				writeC(0x20);
-				writeC(1);// 원거리치명타
+				writeC(1);// 遠距離クリティカル
 			}
-			writeC(0x2a);// 콘
+			writeC(0x2a);// コーン
 			writeC(i == 45 ? 9 : i == 35 ? 8 : 6);
 			writeC(0x08);
-			writeC(i);// 레벨
+			writeC(i);// レベル
 			writeC(0x10);
-			writeC(i == 45 ? 3 : 1);// 피틱
+			writeC(i == 45 ? 3 : 1);// ピチク
 			if (i != 25) {
 				writeC(0x18);
-				writeC(i == 35 ? 1 : 2);// 물약회복증가
+				writeC(i == 35 ? 1 : 2);// ポーション回復増加
 			}
 			writeC(0x30);
-			writeC(i == 45 ? 150 : i == 35 ? 100 : 50);// 피50 100 150
+			writeC(i == 45 ? 150 : i == 35 ? 100 : 50);// 被50 100 150
 			if (i == 45)
-				writeC(1);// 패널티완화
-			writeH(0x0b32);// 카리
+				writeC(1);// ペナルティ緩和
+			writeH(0x0b32);// カリー
 			writeC(0x08);
 			writeD(0xffffffff);
 			writeD(0xffffffff);

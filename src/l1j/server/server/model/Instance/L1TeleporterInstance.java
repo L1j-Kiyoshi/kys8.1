@@ -128,7 +128,7 @@ public class L1TeleporterInstance extends L1NpcInstance {
 			case 50001: // 바르니아
 				if (player.isElf()) {
 					htmlid = "barnia3";
-				} else if (player.isKnight() || player.isCrown() || player.is전사()) {
+				} else if (player.isKnight() || player.isCrown() || player.isWarrior()) {
 					htmlid = "barnia2";
 				} else if (player.isWizard() || player.isDarkelf()) {
 					htmlid = "barnia1";

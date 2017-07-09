@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import l1j.server.server.GeneralThreadPool;
-import l1j.server.server.serverpackets.S_Message_YN;
-import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.datatables.ItemTable;
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.serverpackets.S_Message_YN;
+import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_ServerMessage;
 
 public class L1DeathMatch implements Runnable {
@@ -150,10 +150,10 @@ public class L1DeathMatch implements Runnable {
 		if (Count < 1) {
 			for (L1PcInstance pc : getMembersArray()) {
 				if (pc.getMapId() == 5153) {
-					// 경기 최소 인원이 6명이 만족하지 않아 경기를 강제 종료 합니다. 1000 아데나를 돌려 드렸습니다.
+					// 試合最小人員が6人に満足していない試合を強制的に終了します。 1000アデナを返しました。
 					pc.sendPackets(new S_ServerMessage(1270));
 					removeMember(pc);
-					pc.getInventory().storeItem(40308, 1000); // 1000 아데나 지급
+					pc.getInventory().storeItem(40308, 1000); // 1000アデナ支給
 					new L1Teleport().teleport(pc, 32624, 32813, (short) 4, 5, true);
 				} else {
 					removeMember(pc);
@@ -162,7 +162,7 @@ public class L1DeathMatch implements Runnable {
 			return;
 		}
 		for (L1PcInstance pc : getMembersArray()) {
-			pc.getInventory().storeItem(410018, 1); // 이거뭐임?
+			pc.getInventory().storeItem(410018, 1); // これ至って？
 			pc.sendPackets(new S_ServerMessage(1269));
 		}
 	}
@@ -194,7 +194,7 @@ public class L1DeathMatch implements Runnable {
 					new L1Teleport().teleport(pc, 32624, 32813, (short) 4, 5, true);
 					pc.setDeathMatch(false);
 
-					Random random = new Random(System.nanoTime()); // 펫레이싱
+					Random random = new Random(System.nanoTime()); // ペットレーシング
 
 					if (random.nextInt() < 33) {
 						pc.getInventory().storeItem(3000022, 1);
@@ -249,11 +249,11 @@ public class L1DeathMatch implements Runnable {
 	public void addMember(L1PcInstance pc) {
 		if (!_members.contains(pc)) {
 			_members.add(pc);
-			// %d번째 순번으로 입장 예약되었습니다.
+			// %d第順番に入場予約しました。
 			pc.sendPackets(new S_ServerMessage(1265, Integer.toString(getMembersCount())));
-			// 이미 있다면..
+			// 既にある場合。
 		} else {
-			// 이미 데스매치 입장 예약되어있습니다.
+			// すでにデスマッチ入場予約されています。
 			pc.sendPackets(new S_ServerMessage(1266));
 		}
 		if (getDeathMatchStatus() == STATUS_READY) {
@@ -261,10 +261,10 @@ public class L1DeathMatch implements Runnable {
 				pc.sendPackets(new S_Message_YN(1268, ""));
 			return;
 		}
-		if (getMembersCount() > 1 && getDeathMatchStatus() == STATUS_NONE) { // 4명 이상이고 게임상태가 대기상태라면
+		if (getMembersCount() > 1 && getDeathMatchStatus() == STATUS_NONE) { // 4人以上であり、ゲームの状態が待機状態であれば、
 			GeneralThreadPool.getInstance().execute(this);
 			for (L1PcInstance player : getMembersArray()) {
-				// 데스매치에 입장하시겠습니까? (Y/N)
+				// デスマッチに入場しますか？ （Y / N）
 				if (player.getMap().getId() != 5153)
 					player.sendPackets(new S_Message_YN(1268, ""));
 			}

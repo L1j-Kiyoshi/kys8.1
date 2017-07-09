@@ -19,7 +19,7 @@ public class S_AddPartyMember extends ServerBasePacket {
 		writeC(0x01);	// class type
 		writeC(0x00);
 		writeC(0x00);
-		writeD(cha.getMapId());	// 맵아이디라고 유추한거같은데 다른용도인듯. 
+		writeD(cha.getMapId());	// マップ名と類推する理由だ他の用途のようだ。
 		writeC((int)((nowhp / maxhp) * 100));
 		writeC(0x00);
 		writeC(0x00);

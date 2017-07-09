@@ -40,10 +40,10 @@
 //	}
 //
 //	/**
-//	 * 지정된 요소에 포함 된 인스턴스를 반환
+//	 * 指定された要素に含まれているインスタンスを返し
 //	 * 
 //	 * @param x
-//	 * @return 저장되는 인스턴스
+//	 * @return 保存されているインスタンス
 //	 */
 //	public L1OrimQuestInstance getActiveMaps(int mapId) {
 //		if (!_activeMaps.containsKey(mapId)) {
@@ -53,10 +53,10 @@
 //	}
 //
 //	/**
-//	 * 인스턴스 맵을 생성 HashMap으로 링크를 생성
+//	 * インスタンスマップを生成HashMapにリンクを作成
 //	 * 
 //	 * @param mapId
-//	 *            원본 맵 ID
+//	 *            ソースマップID
 //	 * @return
 //	 */
 //	public short setActiveMaps(int mapId) {
@@ -67,7 +67,7 @@
 //	}
 //
 //	/**
-//	 * 퀘스트 완료에 대해 생성 된 인스턴스 맵을 개방
+//	 * クエスト完了に生成されたインスタンスマップを開放
 //	 * 
 //	 * @param mapId
 //	 */
@@ -80,7 +80,7 @@
 //	}
 //
 //	/**
-//	 * 진행중인 퀘스트의 결과
+//	 * 進行中のクエストの結果
 //	 * 
 //	 * @return
 //	 */

@@ -134,7 +134,7 @@ public class C_Report extends ClientBasePacket {
 		case 상점개설횟수:
 			if (pc.getNetConnection() == null || pc.getNetConnection().getAccount() == null)
 				return;
-			pc.sendPackets(new S_PacketBox(S_PacketBox.상점개설횟수, pc
+			pc.sendPackets(new S_PacketBox(S_PacketBox.SHOP_OPEN_COUNT, pc
 					.getNetConnection().getAccount().Shop_open_count), true);
 			break;
 		case 케릭터생성:

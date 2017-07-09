@@ -20,10 +20,10 @@ public class S_LoginResult extends ServerBasePacket {
 	public static final int REASON_WRONG_ACCOUNT = 0x09;
 	public static final int REASON_WRONG_PASSWORD = 0x0A;
 
-	// 2B 도용신고
-	//	06-같은 캐릭터가 이미 있다 9-이름잘못 24-ip정량제 26-가상 ip복수접속
-	//	28-비번변경해라  29-질문답 31-계좌이체 32-시간남은게 없다 34-이캐릭터 사용이 금지
-	//	35-게임내비번변경불가 36-요금문제로정지 37-도용신고 38-버그사용 밴 39-현거래밴
+	// 2B盗用申告
+	//	06-のようなキャラクターが既にある9-名前が間違って24-ipジョンリャンジェ26-仮想ip複数接続
+	//	28-非番変更しろ29-質問の答え31-口座振替32時間残りがない34-この文字の使用が禁止さ
+	//	35-ゲーム内非番変更不可36ユーロの問題に停止37-盗用申告38-バグ使用バン39-県取引バン
 
 	// public static int REASON_SYSTEM_ERROR = 0x01;
 

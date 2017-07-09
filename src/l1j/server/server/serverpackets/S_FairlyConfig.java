@@ -72,7 +72,7 @@ public class S_FairlyConfig extends ServerBasePacket {
 		writeC(0xBC);
 		if (ok != 0) {
 			writeByte(data);
-			// System.out.println("페어리 정보 있어요.");
+			// System.out.println("フェアリー情報を得た。");
 			pc.페어리정보 = data;
 		} else {
 			for (int i = 0; i < 512; i++) {

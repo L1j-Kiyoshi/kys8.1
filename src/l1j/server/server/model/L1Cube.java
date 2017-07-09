@@ -14,28 +14,28 @@ import l1j.server.server.serverpackets.S_Paralysis;
 import l1j.server.server.serverpackets.S_SkillSound;
 
 /**
- * 환술사 큐브 클래스
+ * イリュージョニストキューブクラス
  */
 @SuppressWarnings("unchecked")
 public class L1Cube {
 
-	/** 큐브 리스트 */
+	/** キューブリスト */
 	private ArrayList<L1NpcInstance> CUBE[] = new ArrayList[4];
 
-	/** 단일 클래스 */
+	/** 単一のクラス */
 	private static L1Cube instance;
 	private static Random _random = new Random(System.nanoTime());
 
-	/** 인스턴스 초기화 */
+	/** インスタンスの初期化 */
 	{
 		for (int i = 0; i < CUBE.length; i++)
 			CUBE[i] = new ArrayList<L1NpcInstance>();
 	}
 
 	/**
-	 * 큐브 클래스 반환
+	 * キューブクラス戻り
 	 * 
-	 * @return 단일 클래스 객체
+	 * @return 単一のクラスオブジェクト
 	 */
 	public static L1Cube getInstance() {
 		if (instance == null)
@@ -44,22 +44,22 @@ public class L1Cube {
 	}
 
 	/**
-	 * 큐브 리스트 반납
+	 * キューブリスト返却
 	 * 
 	 * @param index
-	 *            리스트 인덱스
+	 *            リストインデックス
 	 */
 	private L1NpcInstance[] toArray(int index) {
 		return CUBE[index].toArray(new L1NpcInstance[CUBE[index].size()]);
 	}
 
 	/**
-	 * 큐브 리스트 등록
+	 * キューブリスト登録
 	 * 
 	 * @param index
-	 *            리스트 인덱스
+	 *            リストインデックス
 	 * @param npc
-	 *            등록될 npc 객체
+	 *            登録されるnpcオブジェクト
 	 */
 	public void add(int index, L1NpcInstance npc) {
 		if (!CUBE[index].contains(npc)) {
@@ -68,12 +68,12 @@ public class L1Cube {
 	}
 
 	/**
-	 * 큐브 리스트 삭제
+	 * キューブリストの削除
 	 * 
 	 * @param index
-	 *            리스트 인덱스
+	 *            リストインデックス
 	 * @param npc
-	 *            삭제될 npc 객체
+	 *            削除されるnpcオブジェクト
 	 */
 	private void remove(int index, L1NpcInstance npc) {
 		if (CUBE[index].contains(npc)) {
@@ -81,7 +81,7 @@ public class L1Cube {
 		}
 	}
 
-	/** 비공개 */
+	/** プライベート */
 	private L1Cube() {
 		GeneralThreadPool.getInstance().execute(new CUBE1());
 		GeneralThreadPool.getInstance().execute(new CUBE2());
@@ -89,7 +89,7 @@ public class L1Cube {
 		GeneralThreadPool.getInstance().execute(new CUBE4());
 	}
 
-	/** 1단계 */
+	/** ステップ1 */
 	class CUBE1 extends RepeatTask {
 		public CUBE1() {
 			super(1000);
@@ -99,24 +99,24 @@ public class L1Cube {
 		public void execute() {
 			try {
 				for (L1NpcInstance npc : toArray(0)) {
-					// 지속시간이 끝났다면
+					// 持続時間が終わったら
 					if (npc == null || npc.Cube()) {
-					try{	
-						npc.setCubePc(null);
-						remove(0, npc);
-					} catch (Exception e) {						
-					}
+						try {
+							npc.setCubePc(null);
+							remove(0, npc);
+						} catch (Exception e) {
+						}
 						continue;
 					} else {
-						// 주위 3셀 Pc 검색
-						// 큐브를 뽑은 사람의 혈 우리편
-						// 일단 다른혈은 적혈
+						// 周囲3セルPc検索
+						// キューブを抜い人の血味方
+						// 一度他の血は赤血球
 						for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(npc, 3)) {
 							if (pc == null)
 								continue;
-							// 큐브에 있는 사람이 시전자이거나 같은 혈맹이라면
-							if (npc.CubePc().getId() == pc.getId() || npc.CubePc().getClanid() > 0
-									&& npc.CubePc().getClanid() == pc.getClanid()) {
+							// キューブの人が使用者であるか、同じ血盟なら
+							if (npc.CubePc().getId() == pc.getId()
+									|| npc.CubePc().getClanid() > 0 && npc.CubePc().getClanid() == pc.getClanid()) {
 								if (!pc.hasSkillEffect(L1SkillId.STATUS_IGNITION)) {
 									pc.getResistance().addFire(30);
 									pc.setSkillEffect(L1SkillId.STATUS_IGNITION, 8 * 1000);
@@ -148,12 +148,12 @@ public class L1Cube {
 					}
 				}
 			} catch (Exception e) {
-			//	e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 	}
 
-	/** 2단계 */
+	/** 2段階 */
 	class CUBE2 extends RepeatTask {
 		public CUBE2() {
 			super(1000);
@@ -166,20 +166,21 @@ public class L1Cube {
 					// 지속시간이 끝났다면
 					if (npc == null || npc.Cube()) {
 						try {
-						npc.setCubePc(null);
-						remove(1, npc);
+							npc.setCubePc(null);
+							remove(1, npc);
 						} catch (Exception e) {
 						}
 						continue;
 					} else {
-						// 주위 3셀 Pc 검색
-						// 큐브를 뽑은 사람의 혈 우리편
-						// 일단 다른혈은 적혈
+						// 周囲3セルPc検索
+						// キューブを抜い人の血味方
+						// 一度他の血は赤血球
 						for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(npc, 3)) {
-							if (pc == null) continue;
-							// 큐브에 있는 사람이 시전자이거나 같은 혈맹이라면
-							if (npc.CubePc().getId() == pc.getId() || npc.CubePc().getClanid() > 0
-									&& npc.CubePc().getClanid() == pc.getClanid()) {
+							if (pc == null)
+								continue;
+							// キューブの人が使用者であるか、同じ血盟なら
+							if (npc.CubePc().getId() == pc.getId()
+									|| npc.CubePc().getClanid() > 0 && npc.CubePc().getClanid() == pc.getClanid()) {
 								if (!pc.hasSkillEffect(L1SkillId.STATUS_QUAKE)) {
 									pc.getResistance().addEarth(30);
 									pc.setSkillEffect(L1SkillId.STATUS_QUAKE, 8 * 1000);
@@ -209,12 +210,12 @@ public class L1Cube {
 					}
 				}
 			} catch (Exception e) {
-			//	e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 	}
 
-	/** 3단계 */
+	/** 3段階 */
 	class CUBE3 extends RepeatTask {
 		public CUBE3() {
 			super(1000);
@@ -224,25 +225,25 @@ public class L1Cube {
 		public void execute() {
 			try {
 				for (L1NpcInstance npc : toArray(2)) {
-					// 지속시간이 끝났다면
+					// 持続時間が終わったら
 					if (npc == null || npc.Cube()) {
-					try{
-						npc.setCubePc(null);
-						remove(2, npc);
-						npc.deleteMe();
-					} catch (Exception e) {
-					}
+						try {
+							npc.setCubePc(null);
+							remove(2, npc);
+							npc.deleteMe();
+						} catch (Exception e) {
+						}
 						continue;
 					} else {
-						// 주위 3셀 Pc 검색
-						// 큐브를 뽑은 사람의 혈 우리편
-						// 일단 다른혈은 적혈
+						// 周囲3セルPc検索
+						// キューブを抜い人の血味方
+						// 一度他の血は赤血球
 						for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(npc, 3)) {
 							if (pc == null)
 								continue;
-							// 큐브에 있는 사람이 시전자이거나 같은 혈맹이라면
-							if (npc.CubePc().getId() == pc.getId() || npc.CubePc().getClanid() > 0
-									&& npc.CubePc().getClanid() == pc.getClanid()) {
+							// キューブの人が使用者であるか、同じ血盟なら
+							if (npc.CubePc().getId() == pc.getId()
+									|| npc.CubePc().getClanid() > 0 && npc.CubePc().getClanid() == pc.getClanid()) {
 								if (!pc.hasSkillEffect(L1SkillId.STATUS_SHOCK)) {
 									pc.getResistance().addWind(30);
 									pc.setSkillEffect(L1SkillId.STATUS_SHOCK, 8 * 1000);
@@ -271,12 +272,12 @@ public class L1Cube {
 					}
 				}
 			} catch (Exception e) {
-			//	e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 	}
 
-	/** 4단계 */
+	/** 4段階 */
 	class CUBE4 extends RepeatTask {
 		CUBE4() {
 			super(1000);
@@ -286,18 +287,18 @@ public class L1Cube {
 		public void execute() {
 			try {
 				for (L1NpcInstance npc : toArray(3)) {
-					// 지속시간이 끝났다면
+					// 持続時間が終わったら
 					if (npc == null || npc.Cube()) {
-						try{
-						npc.setCubePc(null);
-						remove(3, npc);
-					} catch (Exception e) {
-					}
-					continue;
+						try {
+							npc.setCubePc(null);
+							remove(3, npc);
+						} catch (Exception e) {
+						}
+						continue;
 					} else {
-						// 주위 3셀 Pc 검색
-						// 큐브를 뽑은 사람의 혈 우리편
-						// 일단 다른혈은 적혈
+						// 周囲3セルPc検索
+						// キューブを抜い人の血味方
+						// 一度他の血は赤血球
 						if (npc.getZoneType() == 1) {
 							continue;
 						}
@@ -318,7 +319,7 @@ public class L1Cube {
 					}
 				}
 			} catch (Exception e) {
-		//		e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 	}

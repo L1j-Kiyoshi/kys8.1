@@ -2,19 +2,19 @@ package l1j.server.server.model;
 
 public class L1TaxCalculator {
 	/**
-	 * 전쟁세는15% 고정
+	 * 戦争税15％固定
 	 */
 	//private static final int WAR_TAX_RATES = 15;
 	private static final int WAR_TAX_RATES = 0;
 
 	/**
-	 * 국세는10% 고정(지역세에 대한 비율)
+	 * 国税は10％固定（地域歳の割合）
 	 */
 //	private static final int NATIONAL_TAX_RATES = 10;
 	private static final int NATIONAL_TAX_RATES = 10;
 
 	/**
-	 * 디아드세는10% 고정(전쟁세에 대한 비율)
+	 * ディア強いわけでは10％固定（戦争歳の割合）
 	 */
 //	private static final int DIAD_TAX_RATES = 10;
 	private static final int DIAD_TAX_RATES = 10;
@@ -25,7 +25,7 @@ public class L1TaxCalculator {
 
 	/**
 	 * @param merchantNpcId
-	 *            계산 대상 상점의 NPCID
+	 *            計算対象店のNPCID
 	 */
 	public L1TaxCalculator(int merchantNpcId) {
 		_taxRatesCastle = L1CastleLocation.getCastleTaxRateByNpcId(merchantNpcId);
@@ -39,7 +39,7 @@ public class L1TaxCalculator {
 		return (taxCastle + taxTown + taxWar) / 100;
 	}
 
-	// XXX 개별적으로 계산하기 때문에(위해), 둥근 오차가 나온다.
+	// XXX個別に計算する為、円形誤差が出てくる。
 	public int calcCastleTaxPrice(int price) {
 		return (price * _taxRatesCastle) / 100 - calcNationalTaxPrice(price);
 	}
@@ -61,11 +61,11 @@ public class L1TaxCalculator {
 	}
 
 	/**
-	 * 과세 후의 가격을 요구한다.
+	 * 課税後の価格を要求する。
 	 * 
 	 * @param price
-	 *            과세전의 가격
-	 * @return 과세 후의 가격
+	 *            課税前の価格
+	 * @return 課税後の価格
 	 */
 	public int layTax(int price) {
 		return price + calcTotalTaxPrice(price);

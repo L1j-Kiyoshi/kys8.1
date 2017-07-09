@@ -42,7 +42,7 @@ public class S_NpcChatPacket extends ServerBasePacket {
 			writeD(npc.getId());
 		/*	if(npc instanceof L1SupportInstance){
 				L1SupportInstance support = (L1SupportInstance)npc;
-				writeS("초보쫄순이: " + chat);
+				writeS("初心者つつく順: " + chat);
 			}else{
 				writeS(npc.getName() + ": " + chat);
 			}*/

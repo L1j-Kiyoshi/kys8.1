@@ -1,7 +1,6 @@
 package l1j.server.server.model;
 
-import static l1j.server.server.model.skill.L1SkillId.DANCING_BLADES;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_BRAVE;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +49,7 @@ public class L1EquipmentSlot {
 	private void setWeapon(L1ItemInstance weapon) {
 		int itemId = weapon.getItem().getItemId();
 		int enchant = weapon.getEnchantLevel();
-		if (itemId == 1134 || itemId == 101134) { // 명상의 지팡이
+		if (itemId == 1134 || itemId == 101134) { // 瞑想の杖
 			if (enchant > 0) {
 				_owner.addMpr(enchant);
 			}
@@ -71,7 +70,7 @@ public class L1EquipmentSlot {
 					_owner.setSecondWeapon(null);
 			}
 		}
-		// System.out.println("왼쪽("+_owner.getWeapon()+") 오른쪽("+_owner.getSecondWeapon()+")");
+		// System.out.println("左("+_owner.getWeapon()+") 右("+_owner.getSecondWeapon()+")");
 		if(itemId == 134&&enchant >=1){
 			_owner.getAbility().addSp(enchant);
 			_owner.sendPackets(new S_SPMR(_owner));
@@ -83,7 +82,7 @@ public class L1EquipmentSlot {
 			_owner.setCurrentWeapon(weapon.getItem().getType1());
 		}
 
-		if (itemId == 10000) { // 직장인
+		if (itemId == 10000) { // 会社員
 			L1PolyMorph.doPoly(_owner, 11498, 0, L1PolyMorph.MORPH_BY_ITEMMAGIC);
 		} else if (itemId == 203003) { // 데스나이트의 불검:진
 			L1PolyMorph.doPoly(_owner, 12232, 0, L1PolyMorph.MORPH_BY_ITEMMAGIC);
@@ -105,7 +104,7 @@ public class L1EquipmentSlot {
 	}
 
 	/**
-	 * 착용중인 무기에 젤 마지막 무기를 리턴.
+	 * 着用中の武器のゲル最後の武器を返し。
 	 * 
 	 * @return
 	 */
@@ -114,7 +113,7 @@ public class L1EquipmentSlot {
 	}
 
 	/**
-	 * 착용중인 무기를 번갈아 가면서 리턴.
+	 * 着用中の武器を交互に戻す。
 	 * 
 	 * @return
 	 */
@@ -152,20 +151,20 @@ public class L1EquipmentSlot {
 		if (itemtype >= 8 && itemtype <= 12) {
 			_owner.getAC().addAc(item.get_ac() - armor.getAcByMagic() + armor.get_durability());
 			_owner.sendPackets(new S_OwnCharAttrDef(_owner));
-		}else if( itemtype == 17) { //휘장 일때
+		}else if( itemtype == 17) { //記章時
 			_owner.getAC().addAc(item.get_ac() - armor.getAcByMagic() + armor.get_durability());
 			_owner.sendPackets(new S_OwnCharAttrDef(_owner));
 		}else {
 			_owner.getAC().addAc(item.get_ac() - armor.getEnchantLevel() - armor.getAcByMagic() + armor.get_durability());
 			_owner.sendPackets(new S_OwnCharAttrDef(_owner));
 		}
-		/** 대마법사의 모자 인챈당 mp증가 **/
+		/** 大魔法使いの帽子であるチェンダンmp増加 **/
 		if (itemId == 202022) {
 			if (itemlvl >= 1) {
 				_owner.setMaxMp(_owner.getMaxMp() + (itemlvl * 10));
 			}
 		}
-		/** 리치 로브 인챈당 sp증가 **/
+		/** リッチローブのチェンダンsp増加 **/
 		if (itemId == 20107) {
 			if (itemlvl >= 3) {
 				_owner.getAbility().addSp(itemlvl - 2);
@@ -305,213 +304,213 @@ public class L1EquipmentSlot {
 			}
 		}
 
-		/*** 50레벨 엘릭서 룬 ***/
-		// 민첩의 엘릭서 룬
+		/*** 50レベルエリクサールーン ***/
+		// アジャイルのエリクサールーン
 		if (itemId == 222295) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				break;
-			// 기사//전사
+			// 記事//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(50);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(50);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(3);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(-3);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(3);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(5);
 				break;
 			}
 		}
-		// 체력의 엘릭서 룬
+		// 体力のエリクサールーン
 		if (itemId == 222296) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				break;
-			// 기사//전사
+			// 記事//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(50);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(50);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(3);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(-3);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(3);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(5);
 				break;
 			}
 		}
-		// 지식의 엘릭서 룬
+		// 知識のエリクサールーン
 		if (itemId == 222297) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				break;
-			// 기사//전사
+			// 記事//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(50);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(50);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(3);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(-3);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(3);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(5);
 				break;
 			}
 		}
-		// 지혜의 엘릭서 룬
+		// 知恵のエリクサールーン
 		if (itemId == 222298) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				break;
-			// 기사//전사
+			// 記事//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(50);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(50);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(3);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(-3);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(3);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(5);
 				break;
 			}
 		}
-		// 힘의 엘릭서 룬
+		// 力のエリクサールーン
 		if (itemId == 222299) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				break;
-			// 기사//전사
+			// 記事//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(50);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(50);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(3);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(-3);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(3);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(5);
 				break;
 			}
 		}
 
-		/*** 70레벨 엘릭서 룬 ***/
-		// 민첩의 엘릭서 룬
+		/*** 70レベルエリクサールーン ***/
+		// アジャイルのエリクサールーン
 		if (itemId == 222312) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				_owner.addDmgup(2);
 				break;
-			// 기사
+			// 記事
 			case 1:
 				_owner.addMaxHp(50);
 				_owner.addDmgup(1);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(50);
 				_owner.addBowDmgup(1);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(3);
 				_owner.getAbility().addSp(1);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(-3);
 				_owner.addMaxMp(30);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(3);
 				_owner.addDamageReductionByArmor(1);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(5);
 				_owner.addMaxHp(50);
@@ -523,180 +522,180 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		// 체력의 엘릭서 룬
+		// 体力のエリクサールーン
 		if (itemId == 222313) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				_owner.addDmgup(2);
 				break;
-			// 기사
+			// 記事
 			case 1:
 				_owner.addMaxHp(50);
 				_owner.addDmgup(1);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(50);
 				_owner.addBowDmgup(1);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(3);
 				_owner.getAbility().addSp(1);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(-3);
 				_owner.addMaxMp(30);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(3);
 				_owner.addDamageReductionByArmor(1);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(5);
 				_owner.addMaxHp(50);
 				break;
-			// 전사
+			// 戦士
 			case 7:
 				_owner.getResistance().addMr(5);
 				_owner.addMaxHp(50);
 				break;
 			}
 		}
-		// 지식의 엘릭서 룬
+		// 知識のエリクサールーン
 		if (itemId == 222314) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				_owner.addDmgup(2);
 				break;
-			// 기사
+			// 記事
 			case 1:
 				_owner.addMaxHp(50);
 				_owner.addDmgup(1);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(50);
 				_owner.addBowDmgup(1);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(3);
 				_owner.getAbility().addSp(1);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(-3);
 				_owner.addMaxMp(30);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(3);
 				_owner.addDamageReductionByArmor(1);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(5);
 				_owner.addMaxHp(50);
 				break;
-			// 전사
+			// 戦士
 			case 7:
 				_owner.getResistance().addMr(5);
 				_owner.addMaxHp(50);
 				break;
 			}
 		}
-		// 지혜의 엘릭서 룬
+		// 知恵のエリクサールーン
 		if (itemId == 222315) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				_owner.addDmgup(2);
 				break;
-			// 기사
+			// 記事
 			case 1:
 				_owner.addMaxHp(50);
 				_owner.addDmgup(1);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(50);
 				_owner.addBowDmgup(1);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(3);
 				_owner.getAbility().addSp(1);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(-3);
 				_owner.addMaxMp(30);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(3);
 				_owner.addDamageReductionByArmor(1);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(5);
 				_owner.addMaxHp(50);
 				break;
-			// 전사
+			// 戦士
 			case 7:
 				_owner.getResistance().addMr(5);
 				_owner.addMaxHp(50);
 				break;
 			}
 		}
-		// 힘의 엘릭서 룬
+		// 力のエリクサールーン
 		if (itemId == 222316) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				_owner.addDmgup(2);
 				break;
-			// 기사
+			// 記事
 			case 1:
 				_owner.addMaxHp(50);
 				_owner.addDmgup(1);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(50);
 				_owner.addBowDmgup(1);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(3);
 				_owner.getAbility().addSp(1);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(-3);
 				_owner.addMaxMp(30);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(3);
 				_owner.addDamageReductionByArmor(1);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(5);
 				_owner.addMaxHp(50);
 				break;
-			// 전사
+			// 戦士
 			case 7:
 				_owner.getResistance().addMr(5);
 				_owner.addMaxHp(50);
@@ -704,7 +703,7 @@ public class L1EquipmentSlot {
 			}
 		}
 
-		/** 마법사의가더 **/
+		/** ウィザードのがより **/
 		if (itemId == 22255) {
 			switch (itemlvl) {
 			case 5:
@@ -723,7 +722,7 @@ public class L1EquipmentSlot {
 			}
 		}
 
-		/** 체력의 가더 **/
+		/** 体力のガーダー **/
 		if (itemId == 22256) {
 			switch (itemlvl) {
 			case 5:
@@ -742,7 +741,7 @@ public class L1EquipmentSlot {
 			}
 		}
 		
-		/** 나이트발드 양손검 스턴레벨+1 **/
+		/** ナイトバルド両手剣スタンレベル+1 **/
 		if (itemId == 1121 || itemId == 11121) {
 			switch (itemlvl) {
 			case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
@@ -753,13 +752,13 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 타이탄의분노 기술 발동 HP 구간 5% 증가.**/
+		/** タイタンの怒り技術発動HP区間5％増加した。**/
 		if (itemId == 202014){
 			_owner.set락구간상승(5);
 		}
 	
 		
-		/** 진명황의 집행검 스턴레벨+2 **/
+		/** 真冥王の執行剣スタンレベル+2 **/
 		if (itemId == 61 || itemId == 7000061 || itemId == 202012) {
 			switch (itemlvl) {
 			case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
@@ -771,7 +770,7 @@ public class L1EquipmentSlot {
 			}
 		}
 		
-		/** 고대 투사의 가더 **/
+		/** 古代闘士のガーダー **/
 		if (itemId == 22003) {
 			switch (itemlvl) {
 			case 5:
@@ -790,7 +789,7 @@ public class L1EquipmentSlot {
 			}
 		}
 
-		/** 고대 명궁의 가더 **/
+		/** 古代名弓のガーダー **/
 		if (itemId == 22000) {
 			switch (itemlvl) {
 			case 5:
@@ -808,7 +807,7 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 머미로드왕관 **/
+		/** マミーロードクラウン **/
 		if (itemId == 20017) {
 			switch (itemlvl) {
 			case 7:
@@ -824,7 +823,7 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 수호의 가더 **/
+		/**守護のガーダー **/
 		if (itemId == 22254) {
 			switch (itemlvl) {
 			case 5:
@@ -842,7 +841,7 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 빛나는 마력의장갑 **/
+		/**輝く魔力の手袋 **/
 		if (itemId == 20274) {
 			switch (itemlvl) {
 			case 5:
@@ -864,7 +863,7 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 격분의 장갑 **/
+		/** 激怒の手袋**/
 		if (itemId == 222317) {
 			switch (itemlvl) {
 			case 5:
@@ -893,7 +892,7 @@ public class L1EquipmentSlot {
 		}
 
 		
-		// 고대 암석시리즈
+		// 古代の岩シリーズ
 		if (itemId >= 900011 && itemId <= 900014) {
 			_owner.addDamageReductionByArmor(2);
 			if(itemlvl >= 8){
@@ -901,7 +900,7 @@ public class L1EquipmentSlot {
 				_owner.getResistance().addcalcPcDefense(1);
 			}
 		}
-		// 고대 마물시리즈
+		// 古代魔物シリーズ
 		if (itemId >= 900015 && itemId <= 900018) {
 			_owner.addregist_PVPweaponTotalDamage(2);
 			if(itemlvl>=8){
@@ -909,7 +908,7 @@ public class L1EquipmentSlot {
 				_owner.addBowDmgup(1);
 			}
 		}
-		if (itemId == 900019) { // 실프의 티셔츠
+		if (itemId == 900019) { // シルフのTシャツ
 			switch (itemlvl) {
 			case 0:
 				_owner.getResistance().addMr(7);
@@ -982,13 +981,13 @@ public class L1EquipmentSlot {
 		
 
 
-		if (itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203) {// 파푸리온 갑옷
+		if (itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203) {// パプリオンアーマー
 			_owner.startPapuBlessing();
 		}
 
-		/** 장신구인첸트리뉴얼 **/
+		/** アクセサリーエンチャントリニューアル **/
 		if (itemtype >= 8 && itemtype <= 12) {
-			if ((itemgrade >= 0 && itemgrade <= 2) && (itemtype == 8 || itemtype == 12)) { // 목걸이, 귀걸이
+			if ((itemgrade >= 0 && itemgrade <= 2) && (itemtype == 8 || itemtype == 12)) { //ネックレス、イヤリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(5);
@@ -1030,7 +1029,7 @@ public class L1EquipmentSlot {
 					_owner.getResistance().addStun(4);
 					break;
 				}
-			} else if ((itemgrade >= 0 && itemgrade <= 2) && (itemtype == 9 || itemtype == 11)) { // 반지
+			} else if ((itemgrade >= 0 && itemgrade <= 2) && (itemtype == 9 || itemtype == 11)) { // リング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(5);
@@ -1080,7 +1079,7 @@ public class L1EquipmentSlot {
 					_owner.getResistance().addPVPweaponTotalDamage(3);
 					break;
 				}
-			} else if ((itemgrade >= 0 && itemgrade <= 2) && (itemtype == 10)) { // 벨트
+			} else if ((itemgrade >= 0 && itemgrade <= 2) && (itemtype == 10)) { // ベルト
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxMp(5);
@@ -1122,8 +1121,8 @@ public class L1EquipmentSlot {
 					_owner.getResistance().addPVPweaponTotalDamage(4);
 					break;
 				}
-				// 스냅퍼의 반지 착용착용 부분 // 스턴내성의경우 현질러와 일반유저의 격차를 줄이기위해 579인데 --> 456으로 하향햇음
-			} else if (itemgrade == 3 && itemId >= 22224 && itemId <= 22228) { // 회복,집중,체력,마나,마법
+				// スナップファーリング着用着用部分//スタン耐性の場合現全体と一般ユーザーの格差を減らすために579ですが - > 456に下方ヘトウム
+			} else if (itemgrade == 3 && itemId >= 22224 && itemId <= 22228) { // 回復、集中、体力、マナ、魔法
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(15);
@@ -1170,7 +1169,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 3 && itemId == 222290) { // 지혜의 반지
+			} else if (itemgrade == 3 && itemId == 222290) { // 知恵のリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(5);
@@ -1213,7 +1212,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 3 && itemId == 222291) { // 용사의 반지
+			} else if (itemgrade == 3 && itemId == 222291) { // 勇者のリング
 				switch (itemlvl) {
 				case 1:
 					_owner.getAC().addAc(-1);
@@ -1267,7 +1266,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 체력 반지 **/
+				/** 祝福されたスナップ広がりの体力リング**/
 			} else if (itemgrade == 3 && itemId == 222332) {
 				switch (itemlvl) {
 				case 1:
@@ -1317,7 +1316,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 회복,집중,마나 반지 **/
+				/** 祝福されたスナップファーの回復、集中、マナリング **/
 			} else if (itemgrade == 3 && itemId == 222330 || itemId == 222331 || itemId == 222333) {
 				switch (itemlvl) {
 				case 1:
@@ -1367,7 +1366,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 마법 저항 반지 **/
+				/**祝福されたスナップ広がりの魔法抵抗リング **/
 			} else if (itemgrade == 3 && itemId == 222334) {
 				switch (itemlvl) {
 				case 1:
@@ -1420,7 +1419,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 지혜 반지 **/
+				/** 祝福されたスナップ広がりの知恵リング **/
 			} else if (itemgrade == 3 && itemId == 222335) {
 				switch (itemlvl) {
 				case 1:
@@ -1465,7 +1464,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 용사 반지 **/
+				/** 祝福されたスナップ広がりの勇士リング **/
 			} else if (itemgrade == 3 && itemId == 222336) {
 				switch (itemlvl) {
 				case 1:
@@ -1524,7 +1523,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 검귀 ac처리부분 재수정 **/
+				/** ゴムグィac処理部分再修正 **/
 			} else if (itemId == 222340 || itemId == 222341) {
 				int ac = itemlvl;
 
@@ -1538,7 +1537,7 @@ public class L1EquipmentSlot {
 				_owner.addDmgup(dm);
 				_owner.addBowDmgup(dm);
 
-				/** 성장/회복의 문장 **/
+				/**成長/回復の文章 **/
 			}else if (itemgrade == 3 && itemId == 900020 || itemId == 900021) {
 				switch (itemlvl) {
 				case 0:
@@ -1578,7 +1577,7 @@ public class L1EquipmentSlot {
 					break;
 				}
 
-			} else if (itemgrade == 4 && itemId == 22229) { // 룸티스의 붉은빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 22229) { // ルームティスの赤い光のイヤリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(20);
@@ -1613,7 +1612,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 4 && itemId == 222337) { // 축복받은 룸티스의 붉은빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 222337) { // 祝福されたルームティスの赤い光のイヤリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(20);
@@ -1648,7 +1647,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 4 && itemId == 22230) { // 룸티스의 푸른빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 22230) { // ルームティスの青い光のイヤリング
 				switch (itemlvl) {
 				case 5:
 					_owner.getAC().addAc(-1);
@@ -1665,7 +1664,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 4 && itemId == 222338) { // 축복받은 룸티스의 푸른빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 222338) { // 祝福されたルームティスの青い光のイヤリング
 				switch (itemlvl) {
 				case 4:
 					_owner.getAC().addAc(-1);
@@ -1685,7 +1684,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 4 && itemId == 22231) { // 룸티스의 보랏빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 22231) { // ルームティスの紫イヤリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxMp(10);
@@ -1728,7 +1727,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 4 && itemId == 222339) { // 축복받은 룸티스의 보랏빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 222339) { // 祝福されたルームティスの紫イヤリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxMp(10);
@@ -1797,16 +1796,16 @@ public class L1EquipmentSlot {
 			default: break;
 			}			
 		}
-		if(itemId == 900023 && itemlvl >= 9)  //지룡티셔츠
+		if(itemId == 900023 && itemlvl >= 9)  //地竜のTシャツ
 			_owner.addDamageReductionByArmor(1);
 
-		if(itemId == 900024 && itemlvl >= 9)  //화룡티셔츠
+		if(itemId == 900024 && itemlvl >= 9)  //火竜のTシャツ
 			_owner.addDmgup(1);
 
-		if(itemId == 900025 && itemlvl >= 9)  //풍룡티셔츠
+		if(itemId == 900025 && itemlvl >= 9)  //風竜Tシャツ
 			_owner.addBowDmgup(1);
 
-		if(itemId == 900026)  //수룡티셔츠
+		if(itemId == 900026)  //水竜のTシャツ
 			switch(itemlvl){
 			case 9:	_owner.getAbility().addSp(2);	break;
 			default: _owner.getAbility().addSp(1);break;
@@ -1818,7 +1817,7 @@ public class L1EquipmentSlot {
 			_owner.getResistance().addcalcPcDefense(1);
 			_owner.getResistance().addPVPweaponTotalDamage(1);
 		}
-		// 유니 각반
+		//ユニゲートル
 		if (itemId >= 900027 && itemId <= 900029 && itemlvl >= 9) {
 			switch (itemId) {
 			case 900027:
@@ -1832,8 +1831,8 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 흑기사의 면갑 MR표시 **/
-		/** 신성한 엘름의 축복 MR표시 **/
+		/** 黒騎士のバイザーMR表示 **/
+		/** 神聖なエルムの祝福MR表示 **/
 		if(itemId == 222342 || itemId == 222344){
 			switch(itemlvl){
 			case 5:_owner.getResistance().addMr(4);break;
@@ -1846,7 +1845,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 수호성의 활 골무 원거리 명중 **/
+		/** シールドウィングのブレイサー遠距離命中 **/
 		if(itemId == 222343){
 			switch(itemlvl){
 			case 5:		_owner.addBowHitRate(1);break;
@@ -1857,7 +1856,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 수호성의 파워 글로브 근거리 명중 **/
+		/** シールドウィングのパワーグローブ近距離命中 **/
 		if(itemId == 222345){
 			switch(itemlvl){
 			case 5:		_owner.addHitup(1);break;
@@ -1868,13 +1867,13 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 신성한 영생의 목걸이 스턴내성 **/
+		/** 神聖な永遠のネックレススタン耐性**/
 		if (itemId == 222349) {
 			_owner.getResistance().addStun(7);
 		}
-		/** (지혜/민첩/지식/완력)의 부츠 *
-		 * :	+7부터 최대 HP +20/+40/+60 증가
-		 * :	+9에 대미지 감소+1 추가
+		/** （知恵/機敏/知識/腕力）のブーツ *
+		 * :	+7から最大HP + 20 / + 40 / + 60増加
+		 * :	+9にダメージ減少+ 1を追加
 		 * */
 		if(itemId == 22359 || itemId == 222308 || itemId == 222309 || itemId == 222307){
 			switch(itemlvl){
@@ -1884,7 +1883,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 완력의 문장 **/
+		/** 腕力の文章 **/
 		if(itemId == 222352){
 			switch(itemlvl){
 			case 5:		_owner.addHitup(1);break;
@@ -1896,7 +1895,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 민첩의 문장 **/
+		/** アジャイルの文章**/
 		if(itemId == 222353){
 			switch(itemlvl){
 			case 5:		_owner.addBowHitRate(1);break;
@@ -1908,7 +1907,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 지식의 문장 **/
+		/** 知識の文章 **/
 		if(itemId == 222354){
 			switch(itemlvl){
 			case 6:		_owner.getAbility().addSp(1);break;
@@ -1919,7 +1918,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		if(itemId == 900032 && itemgrade == 5){ //커츠의 투사 휘장
+		if(itemId == 900032 && itemgrade == 5){ //カーツの投影幕
 			switch(itemlvl){
 				case 0:
 					_owner.addMaxHp(5);
@@ -1962,7 +1961,7 @@ public class L1EquipmentSlot {
 					break;
 			}
 		}
-		if(itemId == 900033 && itemgrade == 5){ //커츠의 명궁 휘장
+		if(itemId == 900033 && itemgrade == 5){ //カーツの名弓記章
 			switch(itemlvl){
 				case 0:
 					_owner.addMaxHp(5);
@@ -2005,7 +2004,7 @@ public class L1EquipmentSlot {
 					break;
 			}
 		}
-		if(itemId == 900034 && itemgrade == 5){ //커츠의 현자 휘장 
+		if(itemId == 900034 && itemgrade == 5){ //カーツの賢者記章
 			switch(itemlvl){
 				case 0:
 					_owner.addMaxHp(5);
@@ -2048,7 +2047,7 @@ public class L1EquipmentSlot {
 					break;
 			}
 		}
-		if(itemId == 900035 && itemgrade == 5){ //커츠의 수호 휘장 
+		if(itemId == 900035 && itemgrade == 5){ //カーツの守護記章
 			switch(itemlvl){
 				case 0:
 					_owner.addMaxHp(5);
@@ -2108,7 +2107,7 @@ public class L1EquipmentSlot {
 
 		int itemId = weapon.getItem().getItemId();
 		int enchant = weapon.getEnchantLevel();
-		if (itemId == 1134 || itemId == 101134) { // 명상의 지팡이
+		if (itemId == 1134 || itemId == 101134) { // 瞑想の杖
 			if (enchant > 0) {
 				_owner.addMpr(-enchant);
 			}
@@ -2142,9 +2141,9 @@ public class L1EquipmentSlot {
 			_owner.getAbility().addSp(-enchant);
 			_owner.sendPackets(new S_SPMR(_owner));
 		}
-		if (itemId == 10000) { // 직장인
+		if (itemId == 10000) { // 会社員
 			L1PolyMorph.undoPoly(_owner);
-		} else if (itemId == 203003) { // 데스나이트의 불검:진
+		} else if (itemId == 203003) { // デスナイトのフレイムブレード：ジン
 			L1PolyMorph.undoPoly(_owner);
 		}
 	}
@@ -2161,20 +2160,20 @@ public class L1EquipmentSlot {
 		if (itemtype >= 8 && itemtype <= 12) {
 			_owner.getAC().addAc(-(item.get_ac() - armor.getAcByMagic() + armor.get_durability()));
 			_owner.sendPackets(new S_OwnCharAttrDef(_owner));
-		}else if(itemtype == 17){ //휘장일때 
+		}else if(itemtype == 17){ //記章時 
 			_owner.getAC().addAc(-(item.get_ac() - armor.getAcByMagic() + armor.get_durability()));
 			_owner.sendPackets(new S_OwnCharAttrDef(_owner));
 		}else {
 			_owner.getAC().addAc(-(item.get_ac() - armor.getEnchantLevel() - armor.getAcByMagic() + armor.get_durability()));
 			_owner.sendPackets(new S_OwnCharAttrDef(_owner));
 		}
-		/** 대마법사의 모자 인챈당 mp증가 **/
+		/** 大魔法使いの帽子であるチェンダンmp増加 **/
 		if (itemId == 202022) {
 			if (itemlvl >= 1) {
 				_owner.setMaxMp(_owner.getMaxMp() - (itemlvl * 10));
 			}
 		}
-		/** 리치 로브 인챈당 sp증가 **/
+		/**リッチローブのチェンダンsp増加 **/
 		if (itemId == 20107) {
 			if (itemlvl >= 3) {
 				_owner.getAbility().addSp(-(itemlvl - 2));
@@ -2227,7 +2226,7 @@ public class L1EquipmentSlot {
 			}
 		}
 
-		// 셋트아이템 메소드로 변경..
+		// セットアイテムメソッドに変更。
 		//removeSetItems(itemId);
 
 		if (itemId == 423014) {
@@ -2257,92 +2256,92 @@ public class L1EquipmentSlot {
 		if (itemId == 20207) {
 			_owner.sendPackets(new S_SkillIconBlessOfEva(_owner.getId(), 0));
 		}
-		if (itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203) {// 파푸리온 갑옷
+		if (itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203) {// パプリオンアーマー
 			_owner.stopPapuBlessing();
 		}
 
-		/*** 50레벨 엘릭서 룬 ***/
-		// 민첩의 엘릭서 룬
+		/*** 50レベルエリクサールーン ***/
+		// アジャイルのエリクサールーン
 		if (itemId == 222295) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				break;
-			// 기사//전사
+			// 記事//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(-50);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(-3);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(3);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(-3);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(-5);
 				break;
 			}
 		}
-		// 체력의 엘릭서 룬
+		// 体力のエリクサールーン
 		if (itemId == 222296) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				break;
-			// 기사//전사
+			// 記事//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(-50);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(-3);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(3);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(-3);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(-5);
 				break;
 			}
 		}
-		// 지식의 엘릭서 룬
+		// 知識のエリクサールーン
 		if (itemId == 222297) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				break;
-			// 기사//전사
+			// 記事//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(-50);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
@@ -2350,258 +2349,258 @@ public class L1EquipmentSlot {
 			case 3:
 				_owner.addMpr(-3);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(3);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(-3);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(-5);
 				break;
 			}
 		}
-		// 지혜의 엘릭서 룬
+		// 知恵のエリクサールーン
 		if (itemId == 222298) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				break;
-			// 기사//전사
+			//記事//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(-50);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(-3);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(3);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(-3);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(-5);
 				break;
 			}
 		}
-		// 힘의 엘릭서 룬
+		//力のエリクサールーン
 		if (itemId == 222299) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				break;
-			// 기사//전사
+			// 記事//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(-50);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(-3);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(3);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(-3);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(-5);
 				break;
 			}
 		}
-		/*** 70레벨 엘릭서 룬 ***/
-		// 민첩의 엘릭서 룬
+		/*** 70レベルエリクサールーン ***/
+		// アジャイルのエリクサールーン
 		if (itemId == 222312) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				_owner.addDmgup(-2);
 				break;
-			// 기사
+			// 記事
 			case 1:
 				_owner.addMaxHp(-50);
 				_owner.addDmgup(-1);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(-50);
 				_owner.addBowDmgup(-1);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(-3);
 				_owner.getAbility().addSp(-1);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(3);
 				_owner.addMaxMp(-30);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(-3);
 				_owner.addDamageReductionByArmor(-1);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(-5);
 				_owner.addMaxHp(-50);
 				break;
-			// 전사
+			// 戦士
 			case 7:
 				_owner.getResistance().addMr(-5);
 				_owner.addMaxHp(-50);
 				break;
 			}
 		}
-		// 체력의 엘릭서 룬
+		// 体力のエリクサールーン
 		if (itemId == 222313) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				_owner.addDmgup(-2);
 				break;
-			// 기사
+			// 記事
 			case 1:
 				_owner.addMaxHp(-50);
 				_owner.addDmgup(-1);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(-50);
 				_owner.addBowDmgup(-1);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(-3);
 				_owner.getAbility().addSp(-1);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(3);
 				_owner.addMaxMp(-30);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(-3);
 				_owner.addDamageReductionByArmor(-1);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(-5);
 				_owner.addMaxHp(-50);
 				break;
-			// 전사
+			// 戦士
 			case 7:
 				_owner.getResistance().addMr(-5);
 				_owner.addMaxHp(-50);
 				break;
 			}
 		}
-		// 지식의 엘릭서 룬
+		// 知識のエリクサールーン
 		if (itemId == 222314) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				_owner.addDmgup(-2);
 				break;
-			// 기사
+			// 記事
 			case 1:
 				_owner.addMaxHp(-50);
 				_owner.addDmgup(-1);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(-50);
 				_owner.addBowDmgup(-1);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(-3);
 				_owner.getAbility().addSp(-1);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(3);
 				_owner.addMaxMp(-30);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(-3);
 				_owner.addDamageReductionByArmor(-1);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(-5);
 				_owner.addMaxHp(-50);
 				break;
-			// 전사
+			// 戦士
 			case 7:
 				_owner.getResistance().addMr(-5);
 				_owner.addMaxHp(-50);
 				break;
 			}
 		}
-		// 지혜의 엘릭서 룬
+		// 知恵のエリクサールーン
 		if (itemId == 222315) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				_owner.addDmgup(-2);
 				break;
-			// 기사
+			// 記事
 			case 1:
 				_owner.addMaxHp(-50);
 				_owner.addDmgup(-1);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(-50);
 				_owner.addBowDmgup(-1);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(-3);
 				_owner.getAbility().addSp(-1);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(3);
 				_owner.addMaxMp(-30);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(-3);
 				_owner.addDamageReductionByArmor(-1);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(-5);
 				_owner.addMaxHp(-50);
@@ -2613,45 +2612,45 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		// 힘의 엘릭서 룬
+		// 力のエリクサールーン
 		if (itemId == 222316) {
 			switch (_owner.getType()) {
-			// 군주
+			// 君主
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				_owner.addDmgup(-2);
 				break;
-			// 기사
+			// 記事
 			case 1:
 				_owner.addMaxHp(-50);
 				_owner.addDmgup(-1);
 				break;
-			// 요정
+			// 妖精
 			case 2:
 				_owner.addMaxMp(-50);
 				_owner.addBowDmgup(-1);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(-3);
 				_owner.getAbility().addSp(-1);
 				break;
-			// 다엘
+			// すべてへ
 			case 4:
 				_owner.getAC().addAc(3);
 				_owner.addMaxMp(-30);
 				break;
-			// 용기사
+			// 竜騎士
 			case 5:
 				_owner.addHitup(-3);
 				_owner.addDamageReductionByArmor(-1);
 				break;
-			// 환술사
+			// イリュージョニスト
 			case 6:
 				_owner.addWeightReduction(-5);
 				_owner.addMaxHp(-50);
 				break;
-			// 전사
+			// 戦士
 			case 7:
 				_owner.getResistance().addMr(-5);
 				_owner.addMaxHp(-50);
@@ -2659,7 +2658,7 @@ public class L1EquipmentSlot {
 			}
 		}
 
-		/** 마법사의가더 **/
+		/** ウィザードのがより **/
 		if (itemId == 22255) {
 			switch (itemlvl) {
 			case 5:
@@ -2678,7 +2677,7 @@ public class L1EquipmentSlot {
 			}
 		}
 		
-		/** 체력의 가더 **/
+		/** 体力のガーダー **/
 		if (itemId == 22256) {
 			switch (itemlvl) {
 			case 5:
@@ -2697,7 +2696,7 @@ public class L1EquipmentSlot {
 			}
 		}
 		
-		/** 나이트발드 양손검 스턴레벨+1 **/
+		/** ナイトバルド両手剣スタンレベル+1**/
 		if (itemId == 1121 || itemId == 11121) {
 			switch (itemlvl) {
 			case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
@@ -2708,12 +2707,12 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 타이탄의분노 기술 발동 HP 구간 5% 증가.**/
+		/** タイタンの怒り技術発動HP区間5％増加した。**/
 		if (itemId == 202014){
 			_owner.set락구간상승(-5);
 		}
 		
-		/** 진명황의 집행검 스턴레벨+2 **/
+		/** 真冥王の執行剣スタンレベル+2**/
 		if (itemId == 61 || itemId == 7000061 || itemId == 202012) {
 			switch (itemlvl) {
 			case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
@@ -2725,7 +2724,7 @@ public class L1EquipmentSlot {
 			}
 		}
 		
-		/** 고대 투사의 가더 **/
+		/** 古代闘士のガーダー **/
 		if (itemId == 22003) {
 			switch (itemlvl) {
 			case 5:
@@ -2744,7 +2743,7 @@ public class L1EquipmentSlot {
 			}
 		}
 		
-		/** 고대 명궁의 가더 **/
+		/** 古代名弓のガーダー **/
 		if (itemId == 22000) {
 			switch (itemlvl) {
 			case 5:
@@ -2762,7 +2761,7 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 머미로드왕관 **/
+		/** マミーロードクラウン **/
 		if (itemId == 20017) {
 			switch (itemlvl) {
 			case 7:
@@ -2778,7 +2777,7 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 수호의 가더 **/
+		/** 守護のガーダー **/
 		if (itemId == 22254) {
 			switch (itemlvl) {
 			case 5:
@@ -2797,8 +2796,8 @@ public class L1EquipmentSlot {
 			}
 		}
 
-		/** 안타 시리즈 리덕적용 **/
-		/** 안타리뉴얼 **/
+		/** ヒットシリーズリドク適用 **/
+		/** ヒットリニューアル **/
 		if (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199) {
 			switch (itemlvl) {
 			case 7:
@@ -2814,7 +2813,7 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 빛나는 마력의장갑 **/
+		/** 輝く魔力の手袋 **/
 		if (itemId == 20274) {
 			switch (itemlvl) {
 			case 5:
@@ -2836,7 +2835,7 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 격분의 장갑 **/
+		/** 激怒の手袋 **/
 		if (itemId == 222317) {
 			switch (itemlvl) {
 			case 5:
@@ -2864,7 +2863,7 @@ public class L1EquipmentSlot {
 			}
 		}
 
-		// 고대 암석시리즈
+		// 古代の岩シリーズ
 		if (itemId >= 900011 && itemId <= 900014) {
 			_owner.addDamageReductionByArmor(-2);
 			if(itemlvl >= 8){
@@ -2872,7 +2871,7 @@ public class L1EquipmentSlot {
 				_owner.getResistance().addcalcPcDefense(-1);
 			}
 		}
-		// 고대 마물시리즈
+		//古代魔物シリーズ
 		if (itemId >= 900015 && itemId <= 900018) {
 			_owner.addregist_PVPweaponTotalDamage(-2);
 			if(itemlvl>=8){
@@ -2880,7 +2879,7 @@ public class L1EquipmentSlot {
 				_owner.addBowDmgup(-1);
 			}
 		}
-		if (itemId == 900019) { // 실프의 티셔츠
+		if (itemId == 900019) { // シルフのTシャツ
 			switch (itemlvl) {
 			case 0:
 				_owner.getResistance().addMr(-7);
@@ -2952,7 +2951,7 @@ public class L1EquipmentSlot {
 		}
 
 		if (itemtype >= 8 && itemtype <= 12) {
-			if ((itemgrade >= 0 && itemgrade <= 2) && (itemtype == 8 || itemtype == 12)) { // 목걸이, 귀걸이
+			if ((itemgrade >= 0 && itemgrade <= 2) && (itemtype == 8 || itemtype == 12)) { // ネックレス、イヤリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(-5);
@@ -2994,7 +2993,7 @@ public class L1EquipmentSlot {
 					_owner.getResistance().addStun(-4);
 					break;
 				}
-			} else if ((itemgrade >= 0 && itemgrade <= 2) && (itemtype == 9 || itemtype == 11)) { // 반지
+			} else if ((itemgrade >= 0 && itemgrade <= 2) && (itemtype == 9 || itemtype == 11)) { // リング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(-5);
@@ -3086,7 +3085,7 @@ public class L1EquipmentSlot {
 					_owner.getResistance().addPVPweaponTotalDamage(-4);
 					break;
 				}
-				// 스냅퍼의 반지 착용해제 부분 // 스턴내성의경우 현질러와 일반유저의 격차를 줄이기위해 579인데 --> 456으로 하향햇음
+				// スナップファーリング着用解除部分//スタン耐性の場合現全体と一般ユーザーの格差を減らすために579ですが - > 456に下方ヘトウム
 			} else if (itemgrade == 3 && itemId >= 22224 && itemId <= 22228) {
 				switch (itemlvl) {
 				case 1:
@@ -3134,7 +3133,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 3 && itemId == 222290) { // 지혜의반지
+			} else if (itemgrade == 3 && itemId == 222290) { // 知恵のリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(-5);
@@ -3177,7 +3176,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 3 && itemId == 222291) {// 용사의반지
+			} else if (itemgrade == 3 && itemId == 222291) {// 勇者のリング
 				switch (itemlvl) {
 				case 1:
 					_owner.getAC().addAc(1);
@@ -3231,7 +3230,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 체력 반지 **/
+				/** 祝福されたスナップ広がりの体力リング **/
 			} else if (itemgrade == 3 && itemId == 222332) {
 				switch (itemlvl) {
 				case 1:
@@ -3281,7 +3280,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 회복,집중,마나 반지 **/
+				/** 祝福されたスナップファーの回復、集中、マナリング **/
 			} else if (itemgrade == 3 && itemId == 222330 || itemId == 222331 || itemId == 222333) {
 				switch (itemlvl) {
 				case 1:
@@ -3331,7 +3330,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 마법 저항 반지 **/
+				/** 祝福されたスナップ広がりの魔法抵抗リング **/
 			} else if (itemgrade == 3 && itemId == 222334) {
 				switch (itemlvl) {
 				case 1:
@@ -3384,7 +3383,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 지혜 반지 **/
+				/** 祝福されたスナップ広がりの知恵リング **/
 			} else if (itemgrade == 3 && itemId == 222335) {
 				switch (itemlvl) {
 				case 1:
@@ -3429,7 +3428,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 용사 반지 **/
+				/**祝福されたスナップ広がりの勇士リング **/
 			} else if (itemgrade == 3 && itemId == 222336) {
 				switch (itemlvl) {
 				case 1:
@@ -3488,7 +3487,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-				/** 검귀 ac처리부분 효과 재수정 **/
+				/** ゴムグィac処理部分の効果再修正 **/
 			} else if (itemId == 222340 || itemId == 222341) {
 				int ac = itemlvl;
 				if (item.getBless() == 0 && itemlvl >= 3) {
@@ -3503,7 +3502,7 @@ public class L1EquipmentSlot {
 				_owner.addDmgup(-dm);
 				_owner.addBowDmgup(-dm);
 
-				/** 성장/회복의 문장 **/
+				/** 成長/回復の文章 **/
 			}else if (itemgrade == 3 && itemId == 900020 || itemId == 900021) {
 				switch (itemlvl) {
 				case 0:
@@ -3543,7 +3542,7 @@ public class L1EquipmentSlot {
 					break;
 				}
 
-			} else if (itemgrade == 4 && itemId == 22229) { // 룸티스의 붉은빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 22229) { // ルームティスの赤い光のイヤリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(-20);
@@ -3578,7 +3577,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 4 && itemId == 222337) { // 축복받은 룸티스의 붉은빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 222337) { // 祝福されたルームティスの赤い光のイヤリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxHp(-20);
@@ -3613,7 +3612,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 4 && itemId == 22230) { // 룸티스의 푸른빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 22230) { // ルームティスの青い光のイヤリング
 				switch (itemlvl) {
 				case 5:
 					_owner.getAC().addAc(1);
@@ -3630,7 +3629,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 4 && itemId == 222338) { // 축복받은 룸티스의 푸른빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 222338) { // 祝福されたルームティスの青い光のイヤリング
 				switch (itemlvl) {
 				case 4:
 					_owner.getAC().addAc(1);
@@ -3650,7 +3649,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 4 && itemId == 22231) { // 룸티스의 보랏빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 22231) { // ルームティスの紫イヤリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxMp(-10);
@@ -3693,7 +3692,7 @@ public class L1EquipmentSlot {
 				default:
 					break;
 				}
-			} else if (itemgrade == 4 && itemId == 222339) { // 축복받은 룸티스의 보랏빛 귀걸이
+			} else if (itemgrade == 4 && itemId == 222339) { // 祝福されたルームティスの紫イヤリング
 				switch (itemlvl) {
 				case 1:
 					_owner.addMaxMp(-10);
@@ -3738,7 +3737,7 @@ public class L1EquipmentSlot {
 				}
 			}
 		}
-		/** 용의 티셔츠 **/
+		/** 用のTシャツ **/
 		if(itemId == 900023){
 			switch(itemlvl){
 			case 5:_owner.getResistance().addMr(-4);break;
@@ -3762,16 +3761,16 @@ public class L1EquipmentSlot {
 			default: break;
 			}			
 		}
-		if(itemId == 900023 && itemlvl >= 9)  //지룡티셔츠
+		if(itemId == 900023 && itemlvl >= 9)  //地竜のTシャツ
 			_owner.addDamageReductionByArmor(-1);
 
-		if(itemId == 900024 && itemlvl >= 9)  //화룡티셔츠
+		if(itemId == 900024 && itemlvl >= 9)  //火竜のTシャツ
 			_owner.addDmgup(-1);
 
-		if(itemId == 900025 && itemlvl >= 9)  //풍룡티셔츠
+		if(itemId == 900025 && itemlvl >= 9)  //風竜Tシャツ
 			_owner.addBowDmgup(-1);
 
-		if(itemId == 900026)  //수룡티셔츠
+		if(itemId == 900026)  //水竜のTシャツ
 			switch(itemlvl){
 			case 9:	_owner.getAbility().addSp(-2);	break;
 			default: _owner.getAbility().addSp(-1);break;
@@ -3782,7 +3781,7 @@ public class L1EquipmentSlot {
 			_owner.getResistance().addPVPweaponTotalDamage(-1);
 		}
 
-		//유니 각반
+		//ユニゲートル
 		if (itemId >= 900027 && itemId <= 900029  && itemlvl >= 9) {
 			switch(itemId){
 			case 900027:
@@ -3796,8 +3795,8 @@ public class L1EquipmentSlot {
 				break;
 			}
 		}
-		/** 흑기사의 면갑 MR표시 **/
-		/** 신성한 엘름의 축복 MR표시 **/
+		/** 黒騎士のバイザーMR表示 **/
+		/** 神聖なエルムの祝福MR表示 **/
 		if(itemId == 222342 || itemId == 222344){
 			switch(itemlvl){
 			case 5:_owner.getResistance().addMr(-4);break;
@@ -3810,7 +3809,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 수호성의 활 골무 원거리 명중 **/
+		/**シールドウィングのブレイサー遠距離命中 **/
 		if(itemId == 222343){
 			switch(itemlvl){
 			case 5:		_owner.addBowHitRate(-1);break;
@@ -3821,7 +3820,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 수호성의 파워 글로브 근거리 명중 **/
+		/** シールドウィングのパワーグローブ近距離命中 **/
 		if(itemId == 222345){
 			switch(itemlvl){
 			case 5:		_owner.addHitup(-1);break;
@@ -3832,13 +3831,13 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 신성한 영생의 목걸이 스턴내성 **/
+		/** 神聖な永遠のネックレススタン耐性 **/
 		if (itemId == 222349) {
 			_owner.getResistance().addStun(-7);
 		}
-		/** (지혜/민첩/지식/완력)의 부츠 *
-		 * :	+7부터 최대 HP +20/+40/+60 증가
-		 * :	+9에 대미지 감소+1 추가
+		/** （知恵/機敏/知識/腕力）のブーツ *
+		 * :	+7から最大HP + 20 / + 40 / + 60増加
+		 * :	+9にダメージ減少+ 1を追加
 		 * */
 		if(itemId == 22359 || itemId == 222308 || itemId == 222309 || itemId == 222307){
 			switch(itemlvl){
@@ -3848,7 +3847,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 완력의 문장 **/
+		/** 腕力の文章 **/
 		if(itemId == 222352){
 			switch(itemlvl){
 			case 5:		_owner.addHitup(-1);break;
@@ -3860,7 +3859,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 민첩의 문장 **/
+		/** アジャイルの文章 **/
 		if(itemId == 222353){
 			switch(itemlvl){
 			case 5:		_owner.addBowHitRate(-1);break;
@@ -3872,7 +3871,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		/** 지식의 문장 **/
+		/**知識の文章**/
 		if(itemId == 222354){
 			switch(itemlvl){
 			case 6:		_owner.getAbility().addSp(-1);break;
@@ -3883,7 +3882,7 @@ public class L1EquipmentSlot {
 			default: break;
 			}
 		}
-		if(itemId == 900032 && itemgrade == 5){ //커츠의 투사 휘장 
+		if(itemId == 900032 && itemgrade == 5){ //カーツの投影幕
 			switch(itemlvl){
 				case 0:
 					_owner.addMaxHp(-5);
@@ -3927,7 +3926,7 @@ public class L1EquipmentSlot {
 			}
 		}
 		
-		if(itemId == 900033 && itemgrade == 5){ //커츠의 명궁 휘장 
+		if(itemId == 900033 && itemgrade == 5){ //カーツの名弓記章
 			switch(itemlvl){
 				case 0:
 					_owner.addMaxHp(-5);
@@ -3970,7 +3969,7 @@ public class L1EquipmentSlot {
 					break;
 			}
 		}
-		if(itemId == 900034 && itemgrade == 5){ //커츠의 현자 휘장 
+		if(itemId == 900034 && itemgrade == 5){ //カーツの賢者記章
 			switch(itemlvl){
 				case 0:
 					_owner.addMaxHp(-5);
@@ -4013,7 +4012,7 @@ public class L1EquipmentSlot {
 					break;
 			}
 		}
-		if(itemId == 900035 && itemgrade == 5){ //커츠의 수호 휘장 
+		if(itemId == 900035 && itemgrade == 5){ //カーツの守護記章
 			switch(itemlvl){
 				case 0:
 					_owner.addMaxHp(-5);
@@ -4233,7 +4232,7 @@ public class L1EquipmentSlot {
 	}
 
 	/**
-	 * 셋트 아이템 해제
+	 * セットアイテムを解除
 	 * 
 	 * @param itemId
 	 */

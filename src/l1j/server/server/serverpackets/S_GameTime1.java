@@ -16,7 +16,7 @@ public class S_GameTime1 extends ServerBasePacket {
 
 	//0000 : 7e 41 14 fa 7f 50 80 f9                            ~A..P..
 
-    /*00:00 시간 흘러가는 패킷*/
+    /*00:00 時間流れるパケット*/
 	private void buildPacket(L1PcInstance pc) {
 		writeC(Opcodes.S_EVENT);
     writeC(0x41);

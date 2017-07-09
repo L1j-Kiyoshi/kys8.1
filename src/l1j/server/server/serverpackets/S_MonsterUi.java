@@ -11,15 +11,15 @@
 //	 * 
 //	 * @param S_EXTENDED_PROTOBUF Opcode
 //	 * 
-//	 * @param Type H 값으로 변경 *
+//	 * @param Type H 値に変更 *
 //	 */
-//	public static final int MONSTER_BOOK = 559; // 몬스터 도감활성화
-//	public static final int MONSTER_LOAD = 560; // 몬스터 도감에 몬스터로드
-//	public static final int MONSTER_END = 564; // 몬스터 도감 끝
-//	public static final int MONSTER_ADD = 567; // 몬스터 도감에 몬스터추가
-//	public static final int MONSTER_CLEAR = 568; // 몬스터 도감 퀘스트클리어
+//	public static final int MONSTER_BOOK = 559; // モンスター図鑑有効
+//	public static final int MONSTER_LOAD = 560; // モンスター図鑑にモンスターロード
+//	public static final int MONSTER_END = 564; // モンスター図鑑終わり
+//	public static final int MONSTER_ADD = 567; // モンスター図鑑にモンスターを追加
+//	public static final int MONSTER_CLEAR = 568; // モンスター図鑑クエストクリア
 //
-//	/** 테스트 용 **/
+//	/** テスト用 **/
 //	public S_MonsterUi(int code, int value) {
 //		writeC(Opcodes.S_EXTENDED_PROTOBUF);
 //		writeH(code);
@@ -94,9 +94,9 @@
 //		writeC(0x08);
 //		switch (code) {
 //		case MONSTER_ADD:
-//			write7B(num); // 몬스터번호
+//			write7B(num); // モンスター番号
 //			writeC(0x10);
-//			write7B(counter); // 킬수
+//			write7B(counter); // キルス
 //			break;
 //		}
 //		writeH(0);
@@ -113,11 +113,11 @@
 //			writeC(0);
 //			if (monsterList != null) {
 //				monsterList.forEach((monstertnumber, monsterkillcount) -> {
-//					writeC(0x1a); // 길이
+//					writeC(0x1a); // 長さ
 //						writeC(size7B(monstertnumber) + size7B(monsterkillcount) + 2);
-//						writeC(0x08); // 몬스터넘버
+//						writeC(0x08); // モンスターナンバー
 //						write7B(monstertnumber);
-//						writeC(0x10); // 몬스터킬수
+//						writeC(0x10); // モンスターキルス
 //						write7B(monsterkillcount);
 //					});
 //			}
@@ -132,13 +132,13 @@
 //				monsterList.forEach((questNum, value) -> {
 //					if (value != 0) {
 //						long time = System.currentTimeMillis() / 1000L;
-//						writeC(0x1a); // 길이
+//						writeC(0x1a); // 長さ
 //						writeC(size7B(questNum) + size7B((int) time) + 4);
-//						writeC(0x08); // 퀘스트번호
+//						writeC(0x08); // クエスト番号
 //						write7B(questNum);
-//						writeC(0x10); // 저장시간
+//						writeC(0x10); // 保存時間
 //						write7B((int) time);
-//						writeC(0x18); // 완료여부
+//						writeC(0x18); // 完了するかどうか
 //						writeC(value);
 //					}
 //				});

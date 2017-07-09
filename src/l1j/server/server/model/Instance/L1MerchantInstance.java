@@ -561,7 +561,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 			case 70009:
 				if (player.isCrown()) {
 					htmlid = "gerengp1";
-				} else if (player.isKnight() || player.is전사()) {
+				} else if (player.isKnight() || player.isWarrior()) {
 					htmlid = "gerengk1";
 				} else if (player.isElf()) {
 					htmlid = "gerenge1";
@@ -2282,7 +2282,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				} else if (player.isDragonknight() || player.isBlackwizard()) {
 					htmlid = "sirissnw";
-				} else if (player.isKnight() || player.is전사()) {
+				} else if (player.isKnight() || player.isWarrior()) {
 					htmlid = "sirissnw";
 				}
 				break;
@@ -2306,7 +2306,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 							itemId = 1105; // 엘모어 크로우
 						} else if (player.isBlackwizard()) {
 							itemId = 1106; // 엘모어 키링크
-						} else if (player.is전사()) {
+						} else if (player.isWarrior()) {
 							itemId = 203009; // 엘모어 도끼
 						}
 						createNewItem(player, npcName, 60032, 1, 0); // 낡은고서
@@ -2503,7 +2503,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				}
 				break;
 			case 70854: // 후린달렌
-				if (player.isCrown() || player.isKnight() || player.isWizard() || player.is전사()) {
+				if (player.isCrown() || player.isKnight() || player.isWizard() || player.isWarrior()) {
 					htmlid = "hurinM1";
 				} else if (player.isDarkelf()) {
 					htmlid = "hurinE3";
@@ -2514,7 +2514,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				}
 				break;
 			case 70839: // 도에트
-				if (player.isCrown() || player.isKnight() || player.isWizard() || player.is전사()) {
+				if (player.isCrown() || player.isKnight() || player.isWizard() || player.isWarrior()) {
 					htmlid = "doettM1";
 				} else if (player.isDarkelf()) {
 					htmlid = "doettM2";
@@ -2525,7 +2525,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				}
 				break;
 			case 70843: // 모리엔
-				if (player.isCrown() || player.isKnight() || player.isWizard() || player.is전사()) {
+				if (player.isCrown() || player.isKnight() || player.isWizard() || player.isWarrior()) {
 					htmlid = "morienM1";
 				} else if (player.isDarkelf()) {
 					htmlid = "morienM2";
@@ -2536,7 +2536,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				}
 				break;
 			case 70849: // 테오도르
-				if (player.isCrown() || player.isKnight() || player.isWizard() || player.is전사()) {
+				if (player.isCrown() || player.isKnight() || player.isWizard() || player.isWarrior()) {
 					htmlid = "theodorM1";
 				} else if (player.isDarkelf()) {
 					htmlid = "theodorM2";

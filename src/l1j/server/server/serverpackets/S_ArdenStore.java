@@ -28,8 +28,8 @@ public class S_ArdenStore extends ServerBasePacket {
 		writeC(Opcodes.S_BUY_LIST);
 		writeD(7626);
 		int npcId = 7626;
-		 //아덴상점 엔피씨번호 
-	//	int npcId = 7626; //아덴상점 하고자하는 엔피씨번호 월드상에 없어도됨 
+		 //アデン店エンピシ番号
+	//	int npcId = 7626; //アデン店しようとするエンピシ番号ワールド上になくてもされて
 
 
 		L1Shop shop = ShopTable.getInstance().get(npcId);

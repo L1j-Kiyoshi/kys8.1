@@ -68,7 +68,7 @@ public class S_DelSkill extends ServerBasePacket {
 		writeC(bw1);
 		writeC(bw2);
 		writeC(bw3);
-		//writeD(0); // 신종족 스킬 구조 변경을 위해 주석처리
+		//writeD(0); // 新種族スキルの構造変更のためにコメントアウト
 		writeD(0);
 	}
 

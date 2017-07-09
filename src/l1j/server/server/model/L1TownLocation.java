@@ -113,7 +113,7 @@ public class L1TownLocation {
 			new Point(33419, 32810), new Point(33426, 32823),
 			new Point(33418, 32818), new Point(33432, 32824), };
 	
-	private static final short TOWNID_MAP_claudia = 7783;//클라우디아
+	private static final short TOWNID_MAP_claudia = 7783;//クラウディア
 	private static final Point[] GETBACK_LOC_claudia = { new Point(32640, 32872),
 			new Point(32638, 32869), new Point(32639, 32857),
 			new Point(32647, 32865), new Point(32648, 32861),
@@ -187,8 +187,8 @@ public class L1TownLocation {
 		new Point(32691, 32853), new Point(32692, 32864),
 		new Point(32688, 32876), new Point(32673, 32871),
 		new Point(32670, 32857) };
-//		private static final int[][] START_LOC_X = new int [][] { { 32691, 32692, 32688, 32673, 32670 }  };//리뉴얼 숨계 통합 X
-//		private static final int[][] START_LOC_Y = new int [][] { { 32853, 32864, 32876, 32871, 32857 }  };//리뉴얼 숨계 통합 Y
+//		private static final int[][] START_LOC_X = new int [][] { { 32691, 32692, 32688, 32673, 32670 }  };//リニューアルスムギェ統合X
+//		private static final int[][] START_LOC_Y = new int [][] { { 32853, 32864, 32876, 32871, 32857 }  };//リニューアルスムギェ統合Y
 
 	private L1TownLocation() {
 	}
@@ -222,97 +222,97 @@ public class L1TownLocation {
 			loc[1] = GETBACK_LOC_GLUDIO[rnd].getY();
 			loc[2] = GETBACK_MAP_GLUDIO;}
 			break;
-		case TOWNID_ORCISH_FOREST:{ // 오크마을
+		case TOWNID_ORCISH_FOREST:{ // オーク村
 			int rnd = random.nextInt(GETBACK_LOC_ORCISH_FOREST.length);
 			loc[0] = GETBACK_LOC_ORCISH_FOREST[rnd].getX();
 			loc[1] = GETBACK_LOC_ORCISH_FOREST[rnd].getY();
 			loc[2] = GETBACK_MAP_ORCISH_FOREST;}
 			break;
-		case TOWNID_WINDAWOOD:{ // 윈다우드
+		case TOWNID_WINDAWOOD:{ // ウィンダウッド
 			int rnd = random.nextInt(GETBACK_LOC_WINDAWOOD.length);
 			loc[0] = GETBACK_LOC_WINDAWOOD[rnd].getX();
 			loc[1] = GETBACK_LOC_WINDAWOOD[rnd].getY();
 			loc[2] = GETBACK_MAP_WINDAWOOD;}
 			break;
-		case TOWNID_GIRAN:{ // 기란
+		case TOWNID_GIRAN:{ // ギラン
 			int rnd = random.nextInt(GETBACK_LOC_GIRAN.length);
 			loc[0] = GETBACK_LOC_GIRAN[rnd].getX();
 			loc[1] = GETBACK_LOC_GIRAN[rnd].getY();
 			loc[2] = GETBACK_MAP_GIRAN;}
 			break;
-		case TOWNID_claudia:{ // 클라우디아
+		case TOWNID_claudia:{ // クラウディア
 			int rnd = random.nextInt(GETBACK_LOC_claudia.length);
 			loc[0] = GETBACK_LOC_claudia[rnd].getX();
 			loc[1] = GETBACK_LOC_claudia[rnd].getY();
 			loc[2] = TOWNID_MAP_claudia;}
 			break;
-		case TOWNID_HEINE:{ // 하이네
+		case TOWNID_HEINE:{ // ハイネ
 			int rnd = random.nextInt(GETBACK_LOC_HEINE.length);
 			loc[0] = GETBACK_LOC_HEINE[rnd].getX();
 			loc[1] = GETBACK_LOC_HEINE[rnd].getY();
 			loc[2] = GETBACK_MAP_HEINE;}
 			break;
-		case TOWNID_WERLDAN:{ // 웰던
+		case TOWNID_WERLDAN:{ // ウェルダン
 			int rnd = random.nextInt(GETBACK_LOC_WERLDAN.length);
 			loc[0] = GETBACK_LOC_WERLDAN[rnd].getX();
 			loc[1] = GETBACK_LOC_WERLDAN[rnd].getY();
 			loc[2] = GETBACK_MAP_WERLDAN;}
 			break;
-		case TOWNID_OREN:{ // 오렌
+		case TOWNID_OREN:{ // オレン
 			int rnd = random.nextInt(GETBACK_LOC_OREN.length);
 			loc[0] = GETBACK_LOC_OREN[rnd].getX();
 			loc[1] = GETBACK_LOC_OREN[rnd].getY();
 			loc[2] = GETBACK_MAP_OREN;}
 			break;
-		case TOWNID_ELVEN_FOREST:{ // 요정숲
+		case TOWNID_ELVEN_FOREST:{ // エルフの森
 			int rnd = random.nextInt(GETBACK_LOC_ELVEN_FOREST.length);
 			loc[0] = GETBACK_LOC_ELVEN_FOREST[rnd].getX();
 			loc[1] = GETBACK_LOC_ELVEN_FOREST[rnd].getY();
 			loc[2] = GETBACK_MAP_ELVEN_FOREST;}
 			break;
-		case TOWNID_ADEN:{ // 아덴
+		case TOWNID_ADEN:{ // アデン
 			int rnd = random.nextInt(GETBACK_LOC_ADEN.length);
 			loc[0] = GETBACK_LOC_ADEN[rnd].getX();
 			loc[1] = GETBACK_LOC_ADEN[rnd].getY();
 			loc[2] = GETBACK_MAP_ADEN;}
 			break;
-		case TOWNID_SILENT_CAVERN:{ // 은기사
+		case TOWNID_SILENT_CAVERN:{ // 記事
 			int rnd = random.nextInt(GETBACK_LOC_SILENT_CAVERN.length);
 			loc[0] = GETBACK_LOC_SILENT_CAVERN[rnd].getX();
 			loc[1] = GETBACK_LOC_SILENT_CAVERN[rnd].getY();
 			loc[2] = GETBACK_MAP_SILENT_CAVERN;}
 			break;
-		case TOWNID_OUM_DUNGEON:{ // 오움던전
+		case TOWNID_OUM_DUNGEON:{ // オームダンジョン
 			int rnd = random.nextInt(GETBACK_LOC_OUM_DUNGEON.length);
 			loc[0] = GETBACK_LOC_OUM_DUNGEON[rnd].getX();
 			loc[1] = GETBACK_LOC_OUM_DUNGEON[rnd].getY();
 			loc[2] = GETBACK_MAP_OUM_DUNGEON;}
 			break;
-		case TOWNID_RESISTANCE:{ // 몰라
+		case TOWNID_RESISTANCE:{ // 知らない
 			int rnd = random.nextInt(GETBACK_LOC_RESISTANCE.length);
 			loc[0] = GETBACK_LOC_RESISTANCE[rnd].getX();
 			loc[1] = GETBACK_LOC_RESISTANCE[rnd].getY();
 			loc[2] = GETBACK_MAP_RESISTANCE;}
 			break;
-		case TOWNID_PIRATE_ISLAND:{ // 몰라
+		case TOWNID_PIRATE_ISLAND:{ // 知らない
 			int rnd = random.nextInt(GETBACK_LOC_PIRATE_ISLAND.length);
 			loc[0] = GETBACK_LOC_PIRATE_ISLAND[rnd].getX();
 			loc[1] = GETBACK_LOC_PIRATE_ISLAND[rnd].getY();
 			loc[2] = GETBACK_MAP_PIRATE_ISLAND;}
 			break;
-		case TOWNID_RECLUSE_VILLAGE:{ // 몰라
+		case TOWNID_RECLUSE_VILLAGE:{ // 知らない
 			int rnd = random.nextInt(GETBACK_LOC_RECLUSE_VILLAGE.length);
 			loc[0] = GETBACK_LOC_RECLUSE_VILLAGE[rnd].getX();
 			loc[1] = GETBACK_LOC_RECLUSE_VILLAGE[rnd].getY();
 			loc[2] = GETBACK_MAP_RECLUSE_VILLAGE;}
 			break;
-		case TOWNID_HIDDEN_VALLEY:{ // 숨계진 계곡
+		case TOWNID_HIDDEN_VALLEY:{ // 息ギェジン谷
 			int rnd = random.nextInt(GETBACK_LOC_HIDDEN_VALLEY.length);
 			loc[0] = GETBACK_LOC_HIDDEN_VALLEY[rnd].getX();
 			loc[1] = GETBACK_LOC_HIDDEN_VALLEY[rnd].getY();
 			loc[2] = GETBACK_MAP_HIDDEN_VALLEY;}
 			break;
-		default:{ // 은기사
+		default:{ // 記事
 			int rnd = random.nextInt(GETBACK_LOC_SILVER_KNIGHT_TOWN.length);
 			loc[0] = GETBACK_LOC_SILVER_KNIGHT_TOWN[rnd].getX();
 			loc[1] = GETBACK_LOC_SILVER_KNIGHT_TOWN[rnd].getY();
@@ -410,7 +410,7 @@ public class L1TownLocation {
 			break;
 			
 		case 708601: // 
-			town_id = TOWNID_claudia;//클라우디아
+			town_id = TOWNID_claudia;//クラウディア
 			break;
 
 		case 70860: // 

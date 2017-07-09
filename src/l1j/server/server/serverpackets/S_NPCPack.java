@@ -58,13 +58,13 @@ public class S_NPCPack extends ServerBasePacket {
 		}
 		if (((npc instanceof L1NpcShopInstance)) && (npc.getNpcTemplate().is_doppel())){
 			writeC(70);
-		}else if ((npc.getNpcTemplate().is_doppel() && npc.getGfxId() != 31)	// 슬라임의 모습을 하고 있지 않으면 돕펠
-				|| npc.getGfxId() == 6632 || npc.getGfxId() == 6634		// 얼음던전
-				|| npc.getGfxId() == 6636 || npc.getGfxId() == 6638) {	// 얼음던전
-			writeC(4); // 장검
-		} else if (npc.getGfxId() == 51) { // 창 경비병
+		}else if ((npc.getNpcTemplate().is_doppel() && npc.getGfxId() != 31)	// スライムの姿をしていない場合はドッペル
+				|| npc.getGfxId() == 6632 || npc.getGfxId() == 6634		// 氷のダンジョン
+				|| npc.getGfxId() == 6636 || npc.getGfxId() == 6638) {	// 氷のダンジョン
+			writeC(4); // ソード
+		} else if (npc.getGfxId() == 51) { // ウィンドウガード
 			writeC (24);
-		} else if (npc.getGfxId() == 816) { // 오성 오크스카우트
+		} else if (npc.getGfxId() == 816) { // 五つオークスカウト
 			writeC (20);
 		} else {
 			writeC(npc.getStatus());
@@ -74,11 +74,11 @@ public class S_NPCPack extends ServerBasePacket {
 		writeC(npc.getMoveSpeed());
 		writeD(1);
 		writeH(npc.getTempLawful());
-		/** 공성승리혈맹 버프동상 **/
+		/** 攻城勝利血盟バフ像 **/
 		if (npc.getNpcId() == 6200008) {
 			String clanName = null;
 			for (L1Clan checkClan : L1World.getInstance().getAllClans()) {
-       /** 1.켄트 2.오크 3.윈성 4.기란 5.하이네 6.드워프 7.아덴 8디아드 **/
+       /** 1.ケント2.オーク3ウィンソン4ギラン5ハイネ6ドワーフ7アデン8ディアド **/
 				if (checkClan.getCastleId() == 4) {
 					clanName = checkClan.getClanName();
 					break;
@@ -88,11 +88,11 @@ public class S_NPCPack extends ServerBasePacket {
 		} else {
 			writeS(npc.getNameId());
 		}
-		/** 공성승리혈맹 버프동상 **/
-		if (npc instanceof L1FieldObjectInstance) { // SIC의 벽자, 간판 등
+		/**攻城勝利血盟バフ像 **/
+		if (npc instanceof L1FieldObjectInstance) { // SICのビョクジャ、看板など
 			L1NpcTalkData talkdata = NPCTalkDataTable.getInstance().getTemplate(npc.getNpcTemplate().get_npcId());
 			if (talkdata != null) {
-				writeS(talkdata.getNormalAction()); // 타이틀이 HTML명으로서 해석된다
+				writeS(talkdata.getNormalAction()); // タイトルが HTML人として解釈される
 			} else {
 				writeS(null);
 			}
@@ -140,7 +140,7 @@ public class S_NPCPack extends ServerBasePacket {
 			}
 		}
 		if (npc.getNpcTemplate().is_doppel()) {
-			// PC속성이라면 에바의 축복을 건네줄 수 없기 때문에 WIZ 퀘스트의 돕펠은 예외
+			// PCのプロパティであれば、エヴァの祝福を渡すことができないので、WIZクエストのドッペルは例外
 			if (npc.getNpcTemplate().get_npcId() != 81069) {
 				status |= STATUS_PC;
 			}
@@ -151,11 +151,11 @@ public class S_NPCPack extends ServerBasePacket {
 			status |= STATUS_FREEZE;
 		}
 		writeC(status);
-		/** 공성승리혈맹 버프동상 **/
+		/** 攻城勝利血盟バフ像 **/
 		if (npc.getNpcId() == 6200008) {
 			int emblem = 0;
 			for (L1Clan checkClan : L1World.getInstance().getAllClans()) {
-	 /** 1.켄트 2.오크 3.윈성 4.기란 5.하이네 6.드워프 7.아덴 8디아드 **/
+	 /** 1.ケント2.オーク3ウィンソン4ギラン5ハイネ6ドワーフ7アデン8ディアド **/
 				if (checkClan.getCastleId() == 4) {
 					emblem = checkClan.getEmblemId();
 					break;
@@ -163,11 +163,11 @@ public class S_NPCPack extends ServerBasePacket {
 			}
 			writeD(emblem);
 		} else {
-			writeD(0); // 0이외에 하면(자) C_27이 난다
+			writeD(0); // 0以外とするとC_27が出る
 		}
-		/** 공성승리혈맹 버프동상 **/
+		/** 攻城勝利血盟バフ像 **/
 		writeS(null);
-		writeS(null); // 마스터명?
+		writeS(null); // マスター人?
 		writeC(0);
 		writeC(0xFF); // HP
 		writeC(0);

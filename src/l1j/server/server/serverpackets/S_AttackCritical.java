@@ -14,7 +14,7 @@ public class S_AttackCritical extends ServerBasePacket {
 
     private static AtomicInteger _sequentialNumber = new AtomicInteger(0);
 
-    /** 활이 아닌 경우 **/
+    /** 弓ではない場合 **/
     public S_AttackCritical(L1PcInstance pc, int objid, int type) {
         int gfxid = 0;
         writeC(Opcodes.S_ATTACK);
@@ -27,19 +27,19 @@ public class S_AttackCritical extends ServerBasePacket {
         writeH(0x0000);
 
         switch (type) {
-        case 4: //한손검
+        case 4: //片手剣
             gfxid = 13411;
             break;
-        case 11: // 둔기
+        case 11: // 鈍器
             gfxid = 13414;
             break;
-        case 24: // 체인소드
+        case 24: // チェーンソード
             gfxid = 13402;
             break;
-        case 40: //지팡이
+        case 40: //杖
             gfxid = 13413;
             break;
-        case 46: //단검
+        case 46: //短剣
             gfxid = 13412;
             break;
         case 50:
@@ -69,11 +69,11 @@ public class S_AttackCritical extends ServerBasePacket {
         writeH(0);
     }
 
-    /** 활 모션 **/
+    /** 弓モーション **/
     public S_AttackCritical(L1Character cha, int targetobj, int x, int y, int type, boolean isHit) {
         int gfxid = 0;
         int aid = 1;
-        // 오크 궁수에만 변경
+        // オークアーチャーのみ変更
         if (cha.getTempCharGfx() == 3860 || cha.getTempCharGfx() == 7959) {
             aid = 21;
         }

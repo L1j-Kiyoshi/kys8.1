@@ -20,7 +20,7 @@ public class L1Quest {
 	public static final int QUEST_LEVEL45 = 3;
 	public static final int QUEST_LEVEL50 = 4;
 
-	public static final int QUEST_FIRSTQUEST = 40; // ## A70 말하는 두루마리 퀘스트 추가
+	public static final int QUEST_FIRSTQUEST = 40; // ## A70 トーキングスクロールクエスト追加
 
 	public static final int QUEST_LYRA = 10;
 	public static final int QUEST_OILSKINMANT = 11;
@@ -49,7 +49,7 @@ public class L1Quest {
 	public static final int QUEST_ICEQUEENRING = 41;
 	public static final int QUEST_END = 255;
 
-	// 스냅퍼 방지/귀걸이
+	//スナップファー防止/イヤリング
 	public static final int QUEST_SLOT76 = 60;
 	public static final int QUEST_SLOT81 = 61;
 	public static final int QUEST_SLOT59 = 62;
@@ -59,12 +59,12 @@ public class L1Quest {
 
 	public static final int QUEST_HAMO = 80;
 
-	// 리뉴얼 퀘스트
-	public static final int QUEST_HIDDENVALLEY = 43; // 숨겨진 계곡 초보자 도우미
-	public static final int QUEST_HIGHDAILY = 44; // 토벌 대원 일일 퀘스트
-	public static final int QUEST_HPASS = 45; // 기초 훈련 교관 서브 퀘스트
-	public static final int QUEST_HIGHPASS = 46; // 최종 훈련 심사원 서브 퀘스트
-	public static final int QUEST_HIGHDAILYB = 47; // 드래곤뼈 수집꾼 일일 퀘스트
+	// リニューアルクエスト
+	public static final int QUEST_HIDDENVALLEY = 43; // 隠された渓谷初心者ヘルパー
+	public static final int QUEST_HIGHDAILY = 44; // 討伐隊員デイリークエスト
+	public static final int QUEST_HPASS = 45; // 基礎訓練教官サブクエスト
+	public static final int QUEST_HIGHPASS = 46; // 最終的な訓練審査員サブクエスト
+	public static final int QUEST_HIGHDAILYB = 47; // ドラゴンの骨を収集屋毎日クエスト
 
 	private L1PcInstance _owner = null;
 	private HashMap<Integer, Integer> _quest = null;

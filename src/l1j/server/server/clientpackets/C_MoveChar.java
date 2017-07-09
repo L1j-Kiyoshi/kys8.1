@@ -138,7 +138,7 @@ public class C_MoveChar extends ClientBasePacket {
 		int calcxy = pc.getLocation().getTileLineDistance(pc.MovePoint);
 		if(calcxy == 0 || calcxy > 1){
 			pc.setHeading(heading);
-			pc.sendPackets(new S_PacketBox(S_PacketBox.유저빽스탭, pc));
+			pc.sendPackets(new S_PacketBox(S_PacketBox.USER_BACK_STAB, pc));
 			Broadcaster.broadcastPacket(pc, new S_ChangeHeading(pc));
 			return;
 		}
@@ -157,7 +157,7 @@ public class C_MoveChar extends ClientBasePacket {
 		}
 		
 		if (Dungeon.getInstance().dg(locx, locy, pc.getMap().getId(), pc)) { // 지하 감옥에 텔레포트 했을 경우
-			pc.sendPackets(new S_PacketBox(S_PacketBox.유저빽스탭, pc));
+			pc.sendPackets(new S_PacketBox(S_PacketBox.USER_BACK_STAB, pc));
 			return;
 		}		  
 		  
@@ -187,7 +187,7 @@ public class C_MoveChar extends ClientBasePacket {
 		allList.clear();		
 		if(ck){
 			pc.setHeading(heading);
-			pc.sendPackets(new S_PacketBox(S_PacketBox.유저빽스탭, pc));
+			pc.sendPackets(new S_PacketBox(S_PacketBox.USER_BACK_STAB, pc));
 			Broadcaster.broadcastPacket(pc, new S_ChangeHeading(pc));
 			return;
 		}

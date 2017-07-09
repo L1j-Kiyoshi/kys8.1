@@ -25,7 +25,7 @@ public class S_BoardRead extends ServerBasePacket {
 	private byte[] _byte = null;
 
 	public S_BoardRead(L1NpcInstance board, int number) {
-		if (board.getNpcId() == 4200015){ //서버공지
+		if (board.getNpcId() == 4200015){ //サーバーお知らせ
 			buildPacketNotice(board, number);
 		}else if(board.getNpcId() == 4200020){//Gm1
 			buildPacketNotice1(board, number);
@@ -33,12 +33,12 @@ public class S_BoardRead extends ServerBasePacket {
 			buildPacketNotice2(board, number);
 		}else if(board.getNpcId() == 4200022){//gm3
 			buildPacketNotice3(board, number);
-		}else if(board.getNpcId() == 900006){//드키
+		}else if(board.getNpcId() == 900006){//ドキ
 			buildPacketKey(board, number);
-		}else if(board.getNpcId() == 500002){//건의
+		}else if(board.getNpcId() == 500002){//件
 			buildPacketPhone(board, number);
 		}else{
-			buildPacket(board, number);//기본값
+			buildPacket(board, number);//デフォルト
 		}
 	}
 

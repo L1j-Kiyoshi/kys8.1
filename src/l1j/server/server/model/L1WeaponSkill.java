@@ -1,12 +1,6 @@
 package l1j.server.server.model;
 
-import static l1j.server.server.model.skill.L1SkillId.ABSOLUTE_BARRIER;
-import static l1j.server.server.model.skill.L1SkillId.COUNTER_MAGIC;
-import static l1j.server.server.model.skill.L1SkillId.EARTH_BIND;
-import static l1j.server.server.model.skill.L1SkillId.ERASE_MAGIC;
-import static l1j.server.server.model.skill.L1SkillId.ICE_LANCE;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_FREEZE;
-import static l1j.server.server.model.skill.L1SkillId.TURN_UNDEAD;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.Random;
 
@@ -362,7 +356,7 @@ public class L1WeaponSkill {
 		}
 	}
 	
-	public static void 체인소드( L1PcInstance pc ) { //체인소드 대미지.
+	public static void 체인소드( L1PcInstance pc ) { //チェーンソードダメージ。
 		if(_random.nextInt(100) < 15){
 			if (pc.hasSkillEffect(L1SkillId.CHAINSWORD1)) {
 				pc.killSkillEffectTimer(L1SkillId.CHAINSWORD1);
@@ -379,7 +373,7 @@ public class L1WeaponSkill {
 			}
 		}
 	}
-	public static void 섬멸자의체인소드( L1PcInstance pc ) { //체인소드 대미지.
+	public static void 섬멸자의체인소드( L1PcInstance pc ) { //チェーンソードダメージ。
 		if(_random.nextInt(100) < 18){
 			if (pc.hasSkillEffect(L1SkillId.CHAINSWORD1)) {
 				pc.killSkillEffectTimer(L1SkillId.CHAINSWORD1);
@@ -794,7 +788,7 @@ public class L1WeaponSkill {
 			int intel = pc.getAbility().getTotalInt();
 			int chance = _random.nextInt(100) + 1;
 			if (18 + enchant >= chance) {
-				dmg = _random.nextInt(enchant * 2 + 2) + ((sp + intel) * 2); // <--인첸쪽에 +1 안붙이면 바포지팡이 0일경우 이펙트 안터짐
+				dmg = _random.nextInt(enchant * 2 + 2) + ((sp + intel) * 2); // <--エンチャン側+1ないつけるバポ杖0の場合、エフェクトない発光
 				if (dmg <=0){
 					dmg = 0;
 				}
@@ -861,8 +855,8 @@ public class L1WeaponSkill {
 			return 0;
 		}
 
-		int ran1 = 0; //랜덤 수치 적용
-		int mrset = 0; //엠알에서 랜덤 수치를 뺀값
+		int ran1 = 0; //ランダム数値を適用
+		int mrset = 0; //エムアルでランダム数値をペンガプ
 		int mrs = cha.getResistance().getEffectedMrBySkill();
 		ran1 = _random.nextInt(5) + 1;
 		mrset = mrs - ran1 ;  

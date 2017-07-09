@@ -70,15 +70,15 @@ public class L1Clan {
 
 	private int _emblemStatus = 0;
 	
-	private int _clan_exp; // 클랜경험치
+	private int _clan_exp; // クラン経験値
 	
-	// 혈맹가입 설정
+	// 血盟加入の設定
 	private int _join_setting;
 	private int _join_type;
 	
-	public int getClanExp() {	return _clan_exp;	} // 클랜경험치
-	public synchronized void setClanExp(int clanexp) {	_clan_exp = clanexp;	} // 클랜경험치
-	public synchronized void addClanExp(int clanexp) { 	_clan_exp += clanexp; 	} // 클랜경험치
+	public int getClanExp() {	return _clan_exp;	} // クラン経験値
+	public synchronized void setClanExp(int clanexp) {	_clan_exp = clanexp;	} // クラン経験値
+	public synchronized void addClanExp(int clanexp) { 	_clan_exp += clanexp; 	} // クラン経験値
 
 	public String getAnnouncement() {
 		return _announcement;
@@ -108,11 +108,11 @@ public class L1Clan {
 		this._emblemStatus = emblemStatus;
 	}
 
-	/**혈맹자동가입*/
+	/**血盟自動登録*/
 	private boolean _bot; 
 	private int _bot_style; 
 	private int _bot_level; 
-	/**혈맹자동가입*/
+	/**血盟自動登録*/
 	private ArrayList<ClanMember> clanMemberList = new ArrayList<ClanMember>();
 
 	public ArrayList<ClanMember> getClanMemberList() {
@@ -131,7 +131,7 @@ public class L1Clan {
 			}
 		}
 	}
-	///////////혈맹리뉴얼//////////////
+	///////////血盟リニューアル//////////////
 	public void setClanRank(String name, int data){
 		for (int i = 0; i < clanMemberList.size(); i++) {
 			if (clanMemberList.get(i).name.equals(name)) {
@@ -140,11 +140,11 @@ public class L1Clan {
 			}
 		}
 	}
-	///////////혈맹리뉴얼//////////////
+	///////////血盟リニューアル//////////////
 	public int getOnlineMaxUser() { return _maxuser; }
 	public void setOnlineMaxUser(int i) { _maxuser = i; }
 
-	//실시간 변경
+	//リアルタイム変更
 	public void UpdataClanMember(String name, int rank) {
 		for(int i = 0 ; i < clanMemberList.size() ; i++) {
 			if(clanMemberList.get(i).name.equals(name)) {
@@ -237,7 +237,7 @@ public class L1Clan {
 		_alliance = alliance;
 	}
 
-	// 온라인중의 혈원수
+	// オンライン中の血盟員数
 	public int getOnlineMemberCount() {
 		int count = 0;
 		for (int i = 0; i < clanMemberList.size(); i++) {
@@ -262,7 +262,7 @@ public class L1Clan {
 	
 	
 
-	// 전체 혈원 네임 리스트
+	// 全血盟員ネームリスト
 	public String getAllMembersFP() {
 		String result = "";
 		String rank = "";
@@ -272,7 +272,7 @@ public class L1Clan {
 		return result;
 	}
 
-	// 온라인중의 혈원 네임 리스트
+	// オンライン中の血盟員ネームリスト
 	public String getOnlineMembersFP() {
 		String result = "";
 		String rank = "";
@@ -317,7 +317,7 @@ public class L1Clan {
 	}
 	
 	
-	/**혈맹자동가입*/
+	/**血盟自動登録*/
 	public boolean isBot() {
 		return _bot;
 	}
@@ -339,17 +339,17 @@ public class L1Clan {
 		this._bot_level = _bot_level;
 	}
 	
-	/**혈맹자동가입*/
-	//문장주시 목록
+	/**血盟自動登録*/
+	//文章ウォッチリスト
 	private ArrayList<String> GazeList = new ArrayList<String>();
-	//문장주시 추가
+	//文章注視追加
 	public void addGazelist(String name){
 		if(GazeList.contains(name)){
 			return;
 		}
 		GazeList.add(name);
 	}
-	//문장주시 삭제
+	//文章注視削除
 	public void removeGazelist(String name){
 		if(!GazeList.contains(name)){
 			return;
@@ -357,12 +357,12 @@ public class L1Clan {
 		GazeList.remove(name);
 	}
 
-	//문장주시 사이즈
+	//文章注視サイズ
 	public int getGazeSize(){
 		return GazeList.size();
 	}
 
-	//주시 리스트 반환
+	//注視リスト戻り
 	public ArrayList<String> getGazeList(){
 		return GazeList;
 	}
@@ -403,7 +403,7 @@ public class L1Clan {
 		_join_type = i;
 	}
 	
-	/** 혈맹버프 포인트 **/	
+	/**血盟バフポイント **/	
 	private int _bless = 0;
 	private int _blesscount = 0;
 	private int _attack = 0;

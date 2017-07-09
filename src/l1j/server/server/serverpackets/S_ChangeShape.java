@@ -40,7 +40,7 @@ public class S_ChangeShape extends ServerBasePacket {
 		writeC(Opcodes.S_POLYMORPH);
 		writeD(objId);
 		writeH(polyId);
-		// 왜 29인가 불명
+		// なぜ29か不明
 		writeC(weaponTakeoff ? 0 : 29);
 		writeC(0xff);
 		writeC(0xff);

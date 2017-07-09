@@ -1423,7 +1423,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				case 41415:
 				case 30073:
 					// 용기의 물약, 복지 용기의 물약, 상아탑의 용기의 물약
-					if (pc.isKnight() || pc.is전사()) {
+					if (pc.isKnight() || pc.isWarrior()) {
 						useBravePotion(pc, itemId);
 					} else {
 						pc.sendPackets(new S_ServerMessage(79));
@@ -3117,12 +3117,12 @@ public class C_ItemUSe extends ClientBasePacket {
 							createNewItem2(pc, 30080, 10, 0); // 수련자의 흑요석
 							createNewItem2(pc, 156, 1, 9); // +0 수련자의 크로우
 						}
-						if (pc.is전사()) {
+						if (pc.isWarrior()) {
 							createNewItem2(pc, 40014, 10, 0); // 수련자의 용기의 물약
 							createNewItem2(pc, 147, 1, 9); // +0 수련자의 도끼
 							createNewItem2(pc, 147, 1, 9); // +0 수련자의 도끼
 						}
-						if (pc.isKnight() || pc.isCrown() || pc.isDarkelf() || pc.isDragonknight() || pc.is전사()) {
+						if (pc.isKnight() || pc.isCrown() || pc.isDarkelf() || pc.isDragonknight() || pc.isWarrior()) {
 							createNewItem2(pc, 22300, 1, 6); // +0 수련자의 가죽 투구
 							createNewItem2(pc, 22301, 1, 6); // +0 수련자의 가죽 갑옷
 							createNewItem2(pc, 22302, 1, 6); // +0 수련자의 망토
@@ -3319,7 +3319,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						if (pc.isBlackwizard()) {
 							createNewItem2(pc, 503, 1, 0);
 						}
-						if (pc.is전사()) {
+						if (pc.isWarrior()) {
 							createNewItem2(pc, 22365, 1, 0);
 						}
 					}
@@ -3999,7 +3999,7 @@ public class C_ItemUSe extends ClientBasePacket {
 											robot.getInventory().storeItem(item);
 											robot.getInventory().setEquipped(item, true);
 										}
-									} else if (robot.is전사()) {
+									} else if (robot.isWarrior()) {
 										boolean isWeapon = false;
 										for (L1ItemInstance item : robot.getInventory().getItems()) {
 											if (item.getItemId() == 304) { // 로보트의 도끼
@@ -4120,7 +4120,7 @@ public class C_ItemUSe extends ClientBasePacket {
 											robot.getAbility().addAddedInt(robot.getLevel() - 50);
 										} else if (robot.isDragonknight()) {
 											robot.getAbility().addAddedStr(robot.getLevel() - 50);
-										} else if (robot.is전사()) {
+										} else if (robot.isWarrior()) {
 											robot.getAbility().addAddedStr(robot.getLevel() - 50);
 										}
 									} else {
@@ -4204,7 +4204,7 @@ public class C_ItemUSe extends ClientBasePacket {
 												robot.getInventory().storeItem(item);
 												robot.getInventory().setEquipped(item, true);
 											}
-										} else if (robot.is전사()) {
+										} else if (robot.isWarrior()) {
 											boolean isWeapon = false;
 											for (L1ItemInstance item : robot.getInventory().getItems()) {
 												if (item.getItemId() == 304) { // 로보트의 도끼
@@ -5191,7 +5191,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						MagicDoll = 500214; // 스파토이
 						SpellBook = new int[] { 210000, 210001, 210002, 210003, 210005, 210006, 210007, 210008, 210009, 210010, 210011, 210012,
 								210013, 210015, 210016, 210017, 210018, 210019 };
-					} else if (pc.is전사()) {
+					} else if (pc.isWarrior()) {
 						Weapon = new int[] { 9, 62, 180 }; // 오리하루콘 단검, 무관의 양손검 , 크로스보우
 						// 마투, 힘티, 호갑, 마망, 파글, 강부, 요방, 고투사
 						Armor = new int[] { 20011, 21028, 21060, 20056, 20187, 20194, 20236, 22003 };
@@ -6471,7 +6471,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						}
 
 					} else if (itemId >= 210121 && itemId <= 210132 || itemId == 3000094) { // 전사 스킬
-						if (pc.is전사()) {
+						if (pc.isWarrior()) {
 							if (itemId >= 210121 && itemId <= 210125) { // 액티브 스킬
 								전사스킬(pc, l1iteminstance, false);
 							} else if (itemId == 3000094 && pc.getLevel() >= 80) { // 액티브 스킬
@@ -6525,7 +6525,7 @@ public class C_ItemUSe extends ClientBasePacket {
 							|| pc.isElf() && l1iteminstance.getItem().isUseElf() || pc.isWizard() && l1iteminstance.getItem().isUseMage()
 							|| pc.isDarkelf() && l1iteminstance.getItem().isUseDarkelf()
 							|| pc.isDragonknight() && l1iteminstance.getItem().isUseDragonKnight()
-							|| pc.isBlackwizard() && l1iteminstance.getItem().isUseBlackwizard() || pc.is전사() && l1iteminstance.getItem().isUse전사()) {
+							|| pc.isBlackwizard() && l1iteminstance.getItem().isUseBlackwizard() || pc.isWarrior() && l1iteminstance.getItem().isUseWarrior()) {
 						UseWeapon(pc, l1iteminstance);
 					} else {
 						// \f1당신의 클래스에서는 이 아이템은 사용할 수 없습니다.
@@ -6540,7 +6540,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						|| pc.isElf() && l1iteminstance.getItem().isUseElf() || pc.isWizard() && l1iteminstance.getItem().isUseMage()
 						|| pc.isDarkelf() && l1iteminstance.getItem().isUseDarkelf()
 						|| pc.isDragonknight() && l1iteminstance.getItem().isUseDragonKnight()
-						|| pc.isBlackwizard() && l1iteminstance.getItem().isUseBlackwizard() || pc.is전사() && l1iteminstance.getItem().isUse전사()) {
+						|| pc.isBlackwizard() && l1iteminstance.getItem().isUseBlackwizard() || pc.isWarrior() && l1iteminstance.getItem().isUseWarrior()) {
 
 					int min = ((L1Armor) l1iteminstance.getItem()).getMinLevel();
 					int max = ((L1Armor) l1iteminstance.getItem()).getMaxLevel();
@@ -7783,7 +7783,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					s = "rangking illusionist male";
 				else
 					s = "rangking illusionist female";
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0)
 					s = "rangking warrior male";
 				else
@@ -7855,7 +7855,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				polyId = 12314;
 			}else if(pc.isDarkelf()){
 				polyId = 12280;			
-			}else if(pc.isKnight() || pc.isCrown() || pc.is전사()||pc.isDragonknight()){
+			}else if(pc.isKnight() || pc.isCrown() || pc.isWarrior()||pc.isDragonknight()){
 				polyId = 12283;
 			}else if(pc.isWizard()||pc.isBlackwizard()){
 				polyId = 12286;
@@ -7930,7 +7930,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					polyId = 13739;
 				else
 					polyId = 13741;
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0)
 					polyId = 13743;
 				else
@@ -7987,7 +7987,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				} else {
 					polyId = 7142;
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0) {
 					polyId = 12490;
 				} else {
@@ -8037,7 +8037,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				} else {
 					polyId = 7146;
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0) {
 					polyId = 12490;
 				} else {
@@ -8087,7 +8087,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				} else {
 					polyId = 7150;
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0) {
 					polyId = 12490;
 				} else {
@@ -8137,7 +8137,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				} else {
 					polyId = 7154;
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0) {
 					polyId = 12490;
 				} else {
@@ -8187,7 +8187,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				} else {
 					polyId = 7158;
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0) {
 					polyId = 12490;
 				} else {
@@ -8237,7 +8237,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				} else {
 					polyId = 7162;
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0) {
 					polyId = 12490;
 				} else {
@@ -8287,7 +8287,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				} else {
 					polyId = 7166;
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0) {
 					polyId = 12490;
 				} else {
@@ -8337,7 +8337,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				} else {
 					polyId = 11000;
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0) {
 					polyId = 12490;
 				} else {
@@ -8387,7 +8387,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				} else {
 					polyId = 11014;
 				}
-			} else if (pc.is전사()) {
+			} else if (pc.isWarrior()) {
 				if (pc.get_sex() == 0) {
 					polyId = 12490;
 				} else {
@@ -11156,7 +11156,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				return;
 			}
 
-			pc.sendPackets(new S_PacketBox(S_PacketBox.PC방버프, 1));
+			pc.sendPackets(new S_PacketBox(S_PacketBox.PC_ROOM_BUFF, 1));
 			pc.PC방_버프 = true;
 			pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.PCBANG_SET, true));
 			if (day == 7) {
@@ -11585,7 +11585,7 @@ public class C_ItemUSe extends ClientBasePacket {
 			}
 
 			pc.sendPackets(new S_OwnCharStatus(pc));
-			pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.버프창, pc.TamTime(), aftertamcount, true), true);
+			pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.BUFF_WINDOW, pc.TamTime(), aftertamcount, true), true);
 			pc.sendPackets(new S_ServerMessage(3916));
 			pc.sendPackets(new S_SkillSound(pc.getId(), 2028), true);
 			Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2028), true);

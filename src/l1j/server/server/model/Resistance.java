@@ -9,22 +9,22 @@ public class Resistance {
 	private static final int LIMIT_MIN_MR = 0;
 	private static final int LIMIT_MAX_MR = 250;
 
-	private int baseMr 	= 0; // 기본 마법 방어
-	private int addedMr = 0; // 아이템이나 마법에 의해 추가된 마법 방어를 포함한 마법 방어
+	private int baseMr 	= 0; // 基本魔法防御
+	private int addedMr = 0; // アイテムや魔法によって追加された魔法防御を含む魔法防御
 	
-	private int fire  = 0; // 불 저항
-	private int water = 0; // 물 저항
-	private int wind  = 0; // 바람 저항 
-	private int earth = 0; // 땅 저항
+	private int fire  = 0; // 火抵抗
+	private int water = 0; // 水の抵抗
+	private int wind  = 0; // 風の抵抗
+	private int earth = 0; // 地抵抗
 	
-	private int stun = 0;			// 스턴 내성	
-	private int petrifaction = 0;	// 석화 내성
-	private int sleep = 0; 			// 슬립 내성
-	private int freeze = 0; 		// 동빙 내성
-	private int hold = 0;			// 홀드 내성
-	private int DESPERADO = 0;		// 공포 내성
-	private int calcPcDefense = 0; //PVP 데미지 리덕
-	private int PVPweaponTotalDamage = 0; //PVP 추가 데미지
+	private int stun = 0;			// スタン耐性
+	private int petrifaction = 0;	// 石化耐性
+	private int sleep = 0; 			// 滑り止め
+	private int freeze = 0; 		// 凍結耐性
+	private int hold = 0;			// ホールド耐性
+	private int DESPERADO = 0;		// 恐怖耐性
+	private int calcPcDefense = 0; //PVPダメージリドク
+	private int PVPweaponTotalDamage = 0; //PVP追加ダメージ
 	
 	private L1Character character = null;
 

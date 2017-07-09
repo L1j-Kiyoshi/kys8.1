@@ -1,6 +1,10 @@
 package l1j.server.server.serverpackets;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -41,22 +45,22 @@ public class S_AuctionBoard extends ServerBasePacket {
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				houseId = rs.getInt(1);
-				if (board.getX() == 33421 && board.getY() == 32823) { // 경매 게시판(기란)
+				if (board.getX() == 33421 && board.getY() == 32823) { // オークション掲示板（ギラン）
 					if (houseId >= 262145 && houseId <= 262189) {
 						houseList.add(houseId);
 						count++;
 					}
-				} else if (board.getX() == 33585 && board.getY() == 33235) { // 경매 게시판(Heine)
+				} else if (board.getX() == 33585 && board.getY() == 33235) { // オークション掲示板（Heine）
 					if (houseId >= 327681 && houseId <= 327691) {
 						houseList.add(houseId);
 						count++;
 					}
-				} else if (board.getX() == 33959 && board.getY() == 33253) { // 경매 게시판(에덴)
+				} else if (board.getX() == 33959 && board.getY() == 33253) { // オークション掲示板（エデン）
 					if (houseId >= 458753 && houseId <= 458819) {
 						houseList.add(houseId);
 						count++;
 					}
-				} else if (board.getX() == 32611 && board.getY() == 32775) { // 경매 게시판(글루디오)
+				} else if (board.getX() == 32611 && board.getY() == 32775) { // オークション掲示板（グルーディオ）
 					if (houseId >= 524289 && houseId <= 524294) {
 						houseList.add(houseId);
 						count++;
@@ -107,14 +111,14 @@ public class S_AuctionBoard extends ServerBasePacket {
 
 		writeC(Opcodes.S_AGIT_LIST);
 		writeD(board.getId());
-		writeH(count); // 레코드수
+		writeH(count); // レコード数
 		for (int i = 0; i < count; ++i) {
-			writeD(id[i]); // 아지트의 번호
-			writeS(name[i]); // 아지트의 이름
-			writeH(area[i]); // 아지트의 넓이
-			writeC(month[i]); // 마감월
-			writeC(day[i]); // 마감일
-			writeD(price[i]); // 현재의 입찰 가격
+			writeD(id[i]); // アジトの番号
+			writeS(name[i]); // アジトの名前
+			writeH(area[i]); // アジトの広さ
+			writeC(month[i]); // 締め切り月
+			writeC(day[i]); // 締め切り
+			writeD(price[i]); // 現在の入札価格
 		}
 	}
 

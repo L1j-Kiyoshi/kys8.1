@@ -105,7 +105,7 @@ public class L1BossCycle {
 	public void init() throws Exception {
 		Cycle spawn = getCycle();
 		if (spawn == null || spawn.getPeriod() == null) {
-			throw new Exception("Cycle의 Period는 필수");
+			throw new Exception("CycleのPeriodは必須");
 		}
 
 		String base = spawn.getBase();
@@ -291,13 +291,13 @@ public class L1BossCycle {
 		PerformanceTimer timer = new PerformanceTimer();
 		System.out.print("[L1BossCycle] Loading boss cycle...");
 		try {
-			// BookOrder 클래스를 바인딩 하는 문맥을 생성
+			// BookOrderクラスをバインドするコンテキストを生成
 			JAXBContext context = JAXBContext.newInstance(L1BossCycleList.class);
 
-			// XML -> POJO 변환을 실시하는 언마샬을 생성
+			// XML -> POJO変換を行うアンマーシャルを作成
 			Unmarshaller um = context.createUnmarshaller();
 
-			// XML -> POJO 변환
+			// XML -> POJO変換
 			File file = new File("./data/xml/Cycle/BossCycle.xml");
 			L1BossCycleList bossList = (L1BossCycleList) um.unmarshal(file);
 
@@ -306,10 +306,10 @@ public class L1BossCycle {
 				bossCycleList.add(cycle);
 			}
 
-			// spawnlist_boss로부터 읽어들여 배치
+			// spawnlist_bossから読み込み配置
 			// BossSpawnTable.fillSpawnTable();
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, "BossCycle를 읽어들일 수 없었습니다", e);
+			_log.log(Level.SEVERE, "BossCycleを読み込むことができませんでした", e);
 			System.exit(0);
 		}
 	}

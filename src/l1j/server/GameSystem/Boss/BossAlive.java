@@ -29,15 +29,15 @@ public class BossAlive {
 		isAlive.remove(mapid);
 	}
 	//後でこれHashMapにする
-	public boolean is에르자베 = false;
+	public boolean isErusabe = false;
 	public long ezTime = -1;
 
-	public void set에르자베타임(long s){
+	public void setErusabeTime(long s){
 		ezTime = s;
 	}
-	public boolean is샌드웜 = false;
+	public boolean isSandWarm = false;
 	public long sdTime = -1;
-	public void set샌드웜타임(long s){
+	public void setSandWarmTime(long s){
 		sdTime = s;
 	}
 }
