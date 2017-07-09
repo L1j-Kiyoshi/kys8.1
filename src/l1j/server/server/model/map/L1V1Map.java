@@ -90,7 +90,7 @@ public class L1V1Map extends L1Map {
 
 	}
 	
-	public L1V1Map clone(int id){//레이드
+	public L1V1Map clone(int id){//レイド
 		L1V1Map map = new L1V1Map(this);
 		map._mapId = id;
 		map._isUnderwater = _isUnderwater;
@@ -143,7 +143,7 @@ public class L1V1Map extends L1Map {
 	}
 	
 	@Override
-	public L1V1Map copyMap(int newMapId){//임시 추가
+	public L1V1Map copyMap(int newMapId){//一時的に追加
 		return clone(newMapId);
 	}
 

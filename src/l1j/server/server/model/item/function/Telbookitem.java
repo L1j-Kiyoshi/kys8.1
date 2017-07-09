@@ -1,6 +1,6 @@
 package l1j.server.server.model.item.function;
 
-import static l1j.server.server.model.skill.L1SkillId.MASS_TELEPORT;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.Random;
 
@@ -11,7 +11,6 @@ import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.map.L1Map;
 import l1j.server.server.model.map.L1WorldMap;
-import l1j.server.server.serverpackets.S_ChatPacket;
 import l1j.server.server.serverpackets.S_Paralysis;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SystemMessage;
@@ -21,7 +20,7 @@ public class Telbookitem {
 
 	public static void clickItem(L1PcInstance pc, int itemId, int bookmark_x,int bookmark_y,short bookmark_mapid, L1ItemInstance l1iteminstance) {
 		if (pc.get_DuelLine() != 0) {
-			pc.sendPackets(new S_SystemMessage("배틀존지역에서 사용할 수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 			return;
 		}
 		if(pc.isDead())
@@ -53,19 +52,19 @@ public class Telbookitem {
 				pc.sendPackets(new S_ServerMessage(79));
 			}
 		} else {
-			// 조건검색
+			// 条件検索
 			if(pc.getMapId()>=101 && pc.getMapId()<=110) {
 				int find_item_ids[] = {
-						830022, 	// 1층
-						830023, 	// 2층 
-						830024, 	// 3층 
-						830025, 	// 4층 
-						830026, 	// 5층 
-						830027, 	// 6층 
-						830028, 	// 7층 
-						830029, 	// 8층 
-						830030, 	// 9층
-						830031   // 10층
+						830022, 	// 1階
+						830023, 	// 2階 
+						830024, 	// 3階
+						830025, 	// 4階 
+						830026, 	// 5階 
+						830027, 	// 6階 
+						830028, 	// 7階 
+						830029, 	// 8階 
+						830030, 	// 9階
+						830031   // 10階
 						
 				};
 				L1ItemInstance findItem = pc.getInventory().findItemId(find_item_ids[pc.getMapId() - 101]);

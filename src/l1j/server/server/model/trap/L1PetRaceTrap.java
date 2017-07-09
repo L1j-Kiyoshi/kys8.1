@@ -17,48 +17,48 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.storage.TrapStorage;
 import l1j.server.server.utils.Dice;
 
-/** 기본 펫
- *  4038:라쿤
- *	1540:여우
- *	 929:세인트버나드
- *	 934:콜리
- *	 979:멧돼지
- *	3134:고양이
- *	3211:하이콜리
- *	3918:호랑이
- *	 938:비글
- *	2145:허스키
- *	1022:고블린
- *	3182:하이세인트버나드
+/** 基本ペット
+ *  4038:ラクーン
+ *	1540:キツネ
+ *	 929:セントバーナード
+ *	 934:コリー
+ *	 979:イノシシ
+ *	3134:猫
+ *	3211:ハイコリー
+ *	3918:虎
+ *	 938:ビーグル
+ *	2145:ハスキー
+ *	1022:ゴブリン
+ *	3182:ハイセントバーナード
  */
 
-/** 빠른  펫
- *  4133:하이라쿤
- *  3199:하이울프
- *  1052:코카트리스
- *  3107:하이허스키
- *  3132:하이도베르만
- *  3178:하이캣
- *  3184:하이세퍼트
- *  3156:하이폭스
+/**クイックペット
+ *  4133:ハイラクーン
+ *  3199:ハイウルフ
+ *  1052:コカトリス
+ *  3107:ハイハスキー
+ *  3132:ハイドーベルマン
+ *  3178:ハイキャット
+ *  3184:ハイセポトゥ
+ *  3156:ハイフォックス
  */
 
-/** 느  린  펫 
- *   945:젓소
- *  1649:터틀드래곤
- *    55:개구리
- *  2541:젤라틴큐브
- *  1642:곰
- *  4168:맘보토끼
- *    29:괴물눈
- *  3188:하이베어
- *  3198:호랑이
+/** 遅くリンペット 
+ *   945:乳牛
+ *  1649:タートルドラゴン
+ *    55:カエル
+ *  2541:ゼラチンキューブ
+ *  1642:クマ
+ *  4168:マンボラビット
+ *    29:モンスターの目
+ *  3188:ハイベア
+ *  3198:虎
  */
 
-/** 이벤트 변신
- *  1245:안타라스
- *  2001:발라카스
- *  1590:파프리온
+/** イベント変身
+ *  1245:アンタラス
+ *  2001:ヴァラカス
+ *  1590:波プリオン
  */
 
 public class L1PetRaceTrap extends L1Trap {
@@ -78,14 +78,14 @@ public class L1PetRaceTrap extends L1Trap {
 
 	public synchronized void ListChange(L1PcInstance pc, int i){
 		L1Racing racing = L1Racing.getInstance();
-		racing.arrayList(racing.일반).remove(pc); // 일단 뺀 다음에
-		racing.arrayList(racing.일반).add(i, pc); // 이런다음에..
-		ListUpdate(); // 업데이트 해주고..
+		racing.arrayList(racing.일반).remove(pc); // 一度引いた後に
+		racing.arrayList(racing.일반).add(i, pc); // この後に。
+		ListUpdate(); // アップデートしてくれ。
 	}
 
 	private boolean refreshList(L1PcInstance c, int listf, int lists){
 		L1Racing racing = L1Racing.getInstance();
-		if(racing.contains(listf, c) && !racing.contains(lists, c)){ // 한바퀴 1번째 체크
+		if(racing.contains(listf, c) && !racing.contains(lists, c)){ // 周1回目のチェック
 			racing.add(lists, c);
 			if(racing.size(lists) > 0){ 
 				ListChange(c, racing.size(lists)-1); 
@@ -132,7 +132,7 @@ public class L1PetRaceTrap extends L1Trap {
 			}else if(refreshList(c, racing.순위22, racing.순위23)){
 			}else if(refreshList(c, racing.순위32, racing.순위33)){
 			}
-		}else if(_type.equals("f")) { //결승점
+		}else if(_type.equals("f")) { //フィニッシュライン
 			L1Racing racing = L1Racing.getInstance();
 			if(refreshList(c, racing.순위03, racing.순위10)){
 				c.sendPackets(new S_GameRap(c, 2));
@@ -142,14 +142,14 @@ public class L1PetRaceTrap extends L1Trap {
 				c.sendPackets(new S_GameRap(c, 4));
 			}else if(refreshList(c, racing.순위33, racing.순위99)){
 				if(racing.size(racing.순위99) == 1){
-					c.sendPackets(new S_SystemMessage("1등 하셨습니다."));
+					c.sendPackets(new S_SystemMessage("1等ました。"));
 					c.sendPackets(new S_GameRanking(c));
 				}else{
-					c.sendPackets(new S_SystemMessage(racing.size(racing.순위99) + " 등 하셨습니다."));
+					c.sendPackets(new S_SystemMessage(racing.size(racing.순위99) + "などでした。"));
 				}
 				c.getInventory().storeItem(41308, 1);
 
-				Random random = new Random(System.nanoTime()); // 펫레이싱
+				Random random = new Random(System.nanoTime()); // ペットレーシング
 
 				if(random.nextInt() < 33)
 				{
@@ -162,11 +162,11 @@ public class L1PetRaceTrap extends L1Trap {
 
 				racing.endGame();
 			}
-		}else if (_type.equals("g")) { //변신트랩 55
+		}else if (_type.equals("g")) { //変身トラップ55
 			Random random = new Random();
 			int chance = random.nextInt(31);
 			switch (chance) {
-				/**기본 펫 */
+				/**基本ペット */
 				case 0: 
 					L1PolyMorph.doPoly(c, 4038,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
@@ -200,7 +200,7 @@ public class L1PetRaceTrap extends L1Trap {
 				case 10: 
 					L1PolyMorph.doPoly(c, 1022,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
-				/** 빠른 펫*/
+				/** クイックペット*/
 				case 11: 
 					L1PolyMorph.doPoly(c, 4133,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
@@ -225,7 +225,7 @@ public class L1PetRaceTrap extends L1Trap {
 				case 18: 
 					L1PolyMorph.doPoly(c, 3156,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
-				/**느린펫*/	
+				/**遅いペット*/	
 				case 19: 
 					L1PolyMorph.doPoly(c, 945,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
@@ -253,7 +253,7 @@ public class L1PetRaceTrap extends L1Trap {
 				case 27: 
 					L1PolyMorph.doPoly(c, 3918,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
-				/**이벤트변신*/
+				/**イベント変身*/
 				case 28: 
 					L1PolyMorph.doPoly(c, 1245,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
@@ -264,11 +264,11 @@ public class L1PetRaceTrap extends L1Trap {
 					L1PolyMorph.doPoly(c, 1590,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
 			}
-		}else if (_type.equals("h")) { //변신트랩 56
+		}else if (_type.equals("h")) { //変身トラップ56
 			Random random = new Random();
 			int chance = random.nextInt(31);
 			switch (chance) {
-				/**기본 펫 */
+				/**基本ペット */
 				case 0: 
 					L1PolyMorph.doPoly(c, 4038,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
@@ -302,7 +302,7 @@ public class L1PetRaceTrap extends L1Trap {
 				case 10: 
 					L1PolyMorph.doPoly(c, 1022,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
-				/** 빠른 펫*/
+				/** クイックペット*/
 				case 11: 
 					L1PolyMorph.doPoly(c, 4133,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
@@ -327,7 +327,7 @@ public class L1PetRaceTrap extends L1Trap {
 				case 18: 
 					L1PolyMorph.doPoly(c, 3156,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
-				/**느린펫*/	
+				/**遅いペット*/	
 				case 19: 
 					L1PolyMorph.doPoly(c, 945,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
@@ -355,7 +355,7 @@ public class L1PetRaceTrap extends L1Trap {
 				case 27: 
 					L1PolyMorph.doPoly(c, 3918,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
-				/**이벤트변신*/
+				/**イベント変身*/
 				case 28: 
 					L1PolyMorph.doPoly(c, 1245,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
@@ -366,12 +366,12 @@ public class L1PetRaceTrap extends L1Trap {
 					L1PolyMorph.doPoly(c, 1590,30,L1PolyMorph.MORPH_BY_NPC); 
 					break;
 			}
-		}else if (_type.equals("i")) { //속도트랩 1 53 빛나는거
+		}else if (_type.equals("i")) { //スピードトラップ1 53輝くだろ
 			int time = 15;
 
 			L1BuffUtil.haste(c, time * 1000);
 			L1BuffUtil.brave(c, time * 1000);
-		}else if (_type.equals("j")) { //속도트랩 2 54 안나는거.. 근데 이걸 밟아도 53이 빛이 나야한다. 	
+		}else if (_type.equals("j")) { //スピードトラップ2 54アンナて..ところでこれ踏んでも53が、光が私ですである。	
 			int time = 150;
 
 			L1BuffUtil.haste(c, time * 1000);

@@ -14,8 +14,8 @@ public class OmanRandomAmulet {
 	public static void clickItem(L1PcInstance pc, int itemId, L1ItemInstance l1iteminstance) {
 		int 찬스 = _random.nextInt(100) + 1;
 		switch (itemId) {
-		case 830042: //혼돈의 오만의 탑 1층 이동 부적
-		case 830052: //변이된 오만의 탑 1층 이동 부적
+		case 830042: //混沌の傲慢の塔1階テレポートアミュレット
+		case 830052: //変異された傲慢の塔1階テレポートアミュレット
 			if (찬스 <= 35) {
 				지급(pc, 830022, 1, 0); 
 			} else {
@@ -23,8 +23,8 @@ public class OmanRandomAmulet {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830043: //혼돈의 오만의 탑 2층 이동 부적
-		case 830053: //변이된 오만의 탑 2층 이동 부적
+		case 830043: //混沌の傲慢の塔2階テレポートアミュレット
+		case 830053: //変異された傲慢の塔2階テレポートアミュレット
 			if (찬스 <= 35) {
 				지급(pc, 830023, 1, 0); 
 			} else {
@@ -32,8 +32,8 @@ public class OmanRandomAmulet {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830044: //혼돈의 오만의 탑 3층 이동 부적
-		case 830054: //변이된 오만의 탑 3층 이동 부적
+		case 830044: //混沌の傲慢の塔3階テレポートアミュレット
+		case 830054: //変異された傲慢の塔3階テレポートアミュレット
 			if (찬스 <= 35) {
 				지급(pc, 830024, 1, 0); 
 			} else {
@@ -41,8 +41,8 @@ public class OmanRandomAmulet {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830045: //혼돈의 오만의 탑 4층 이동 부적
-		case 830055: //변이된 오만의 탑 4층 이동 부적
+		case 830045: //混沌の傲慢の塔4階テレポートアミュレット
+		case 830055: //変異された傲慢の塔4階テレポートアミュレット
 			if (찬스 <= 35) {
 				지급(pc, 830025, 1, 0); 
 			} else {
@@ -50,8 +50,8 @@ public class OmanRandomAmulet {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830046: //혼돈의 오만의 탑 5층 이동 부적
-		case 830056: //변이된 오만의 탑 5층 이동 부적
+		case 830046: //混沌の傲慢の塔5階テレポートアミュレット
+		case 830056: //変異された傲慢の塔5階テレポートアミュレット
 			if (찬스 <= 35) {
 				지급(pc, 830026, 1, 0); 
 			} else {
@@ -59,8 +59,8 @@ public class OmanRandomAmulet {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830047: //혼돈의 오만의 탑 6층 이동 부적
-		case 830057: //변이된 오만의 탑 6층 이동 부적
+		case 830047: //混沌の傲慢の塔6階テレポートアミュレット
+		case 830057: //変異された傲慢の塔6階テレポートアミュレット
 			if (찬스 <= 35) {
 				지급(pc, 830027, 1, 0); 
 			} else {
@@ -68,8 +68,8 @@ public class OmanRandomAmulet {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830048: //혼돈의 오만의 탑 7층 이동 부적
-		case 830058: //변이된 오만의 탑 7층 이동 부적
+		case 830048: //混沌の傲慢の塔7階テレポートアミュレット
+		case 830058: //変異された傲慢の塔7階テレポートアミュレット
 			if (찬스 <= 35) {
 				지급(pc, 830028, 1, 0);
 			} else {
@@ -77,8 +77,8 @@ public class OmanRandomAmulet {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830049: //혼돈의 오만의 탑 8층 이동 부적
-		case 830059: //변이된 오만의 탑 8층 이동 부적
+		case 830049: //混沌の傲慢の塔8階テレポートアミュレット
+		case 830059: //変異された傲慢の塔8階テレポートアミュレット
 			if (찬스 <= 35) {
 				지급(pc, 830029, 1, 0);
 			} else {
@@ -86,8 +86,8 @@ public class OmanRandomAmulet {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830050: //혼돈의 오만의 탑 9층 이동 부적
-		case 830060: //변이된 오만의 탑 9층 이동 부적
+		case 830050: //混沌の傲慢の塔9階テレポートアミュレット
+		case 830060: //変異された傲慢の塔9階テレポートアミュレット
 			if (찬스 <= 35) {
 				지급(pc, 830030, 1, 0);
 			} else {
@@ -95,8 +95,8 @@ public class OmanRandomAmulet {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830051: //혼돈의 오만의 탑 10층 이동 부적
-		case 830061: //변이된 오만의 탑 10층 이동 부적
+		case 830051: //混沌の傲慢の塔10階テレポートアミュレット
+		case 830061: //変異された傲慢の塔10階テレポートアミュレット
 			if (찬스 <= 35) {
 				지급(pc, 830031, 1, 0);
 			} else {
@@ -118,7 +118,7 @@ public class OmanRandomAmulet {
 				pc.getInventory().storeItem(item);
 			} else {
 				pc.sendPackets(new S_ServerMessage(82));
-				// 무게 게이지가 부족하거나 인벤토리가 꽉차서 더 들 수 없습니다.
+				// 重量ゲージが不足したり、インベントリがいっぱいよりにできません。
 				return false;
 			}
 			pc.sendPackets(new S_ServerMessage(403, item.getLogName())); 

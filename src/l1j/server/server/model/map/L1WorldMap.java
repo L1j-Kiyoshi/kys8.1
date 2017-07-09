@@ -1,6 +1,6 @@
 package l1j.server.server.model.map;
 
-import java.util.*;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,14 +22,14 @@ public class L1WorldMap {
 
 	private L1WorldMap() {
 		PerformanceTimer timer = new PerformanceTimer();
-//		System.out.print("■ 월  드  맵 데이터 .......................... ");
+//		System.out.print("■ 月のデマップデータ .......................... ");
 
 		MapReader in = MapReader.getDefaultReader();
 
 		try {
 			_maps = in.read();
 			if (_maps == null) {
-				throw new RuntimeException("MAP의 read에 실패");
+				throw new RuntimeException("MAPのreadに失敗");
 			}
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
@@ -37,7 +37,7 @@ public class L1WorldMap {
 			System.exit(0);
 		}
 
-//		System.out.println("■ 로딩 정상 완료 " + timer.get() + "ms");
+//		System.out.println("■ ロード正常終了 " + timer.get() + "ms");
 	}
 
 	public L1Map getMap(short mapId) {
@@ -55,13 +55,13 @@ public class L1WorldMap {
 		}
 		return true;
 	}
-	public void cloneMap(int targetId, int newId){//레이드
+	public void cloneMap(int targetId, int newId){//レイド
 		L1Map copymap = null;
 		copymap = _maps.get(targetId).copyMap(newId);
 		_maps.put(newId, copymap);
 	}
 	
-	// 오림 인던 관련
+	// クリップボードインスタンスダンジョン関連
 	public synchronized void addMap(L1Map map) {
 		_maps.put(map.getId(), map);
 	}

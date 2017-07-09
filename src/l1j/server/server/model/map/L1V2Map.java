@@ -362,7 +362,7 @@ public class L1V2Map extends L1Map {
 	}
 
 	@Override
-	public L1V1Map copyMap(int a) {//레이드
+	public L1V1Map copyMap(int a) {//レイド
 		return null;
 	} 
 	@Override

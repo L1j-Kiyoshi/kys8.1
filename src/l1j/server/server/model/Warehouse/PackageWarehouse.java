@@ -39,7 +39,7 @@ public class PackageWarehouse extends Warehouse {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 		
-		//창고복사방지
+		//倉庫コピー防止
 		HashMap<Integer, L1ItemInstance> _stackableItems = new HashMap<Integer, L1ItemInstance>();
 		int orderid = 0;
 				
@@ -73,7 +73,7 @@ public class PackageWarehouse extends Warehouse {
 				_items.add(item);
 				L1World.getInstance().storeObject(item);
 				
-				//수량성의 경우 순번을 부여하여 리스트에 등록
+				//数量性の場合順番を付与してリストに登録
 				if(item.isStackable()){
 					_stackableItems.put(orderid, item);
 					orderid++;
@@ -87,7 +87,7 @@ public class PackageWarehouse extends Warehouse {
 							if (baseitem.getId() != _stackableItems.get(i).getId()) {
 								L1World.getInstance().removeObject(baseitem);
 								deleteItem(baseitem);
-								System.out.println("패키지창고 복사의심 계정 [" + getName() + "]의 정보를 확인바랍니다.");
+								System.out.println("パッケージ倉庫コピー疑いアカウント[" + getName() + "]の情報をご確認ください。");
 								break;
 							}else{
 								break;
@@ -117,7 +117,7 @@ public class PackageWarehouse extends Warehouse {
 			pstm.setInt(1, IdFactory.getInstance().nextId());
 			pstm.setString(2, accountName);
 			pstm.setInt(3, 41159);
-			pstm.setString(4, "픽시 깃털");
+			pstm.setString(4, "ピクシーの羽");
 			pstm.setInt(5, count);
 			pstm.execute();
 		} catch (SQLException e) {
@@ -272,7 +272,7 @@ public class PackageWarehouse extends Warehouse {
 		}
 
 	}
-	// 부가 상점에서 구입한 아이템 창고로 이동.
+	// 付加店で購入したアイテムの倉庫に移動します。
 	public static void itemshop(String account, int itemid, int enchantlvl, int count) {	
 		java.sql.Connection con = null;
 		PreparedStatement pstm = null;
@@ -301,7 +301,7 @@ public class PackageWarehouse extends Warehouse {
 			pstm.setInt(14, item.getBless());
 			pstm.execute();
 						
-			w.loadItems(); // 패키지 창고 디비 로드
+			w.loadItems(); // パッケージ倉庫ディビロード
 			
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
@@ -315,7 +315,7 @@ public class PackageWarehouse extends Warehouse {
 
 		L1Item temp = ItemTable.getInstance().getTemplate(itemid);
 		if (temp == null) {
-			throw new Exception("존재하지 않는 아이템 ID");
+			throw new Exception("存在しないアイテムID");
 		}
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -375,7 +375,7 @@ public class PackageWarehouse extends Warehouse {
 				// ignore
 			}
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			throw new Exception(".present 처리중에 에러가 발생했습니다.");
+			throw new Exception(".present処理中にエラーが発生しました。");
 		} finally {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);

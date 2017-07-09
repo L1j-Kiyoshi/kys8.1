@@ -10,7 +10,7 @@ public class ChangeItem {
 				int itemid = item.getItemId();
 				int type=-1;
 				/**
-				 * type = 0 집행급 무기
+				 * type = 0 執行級武器
 				 * 
 				 */
 				switch(itemid){
@@ -26,11 +26,11 @@ public class ChangeItem {
 						break;
 				}
 				if(type==-1){
-					pc.sendPackets(new S_SystemMessage("교환할 수 없는 아이템입니다"));
+					pc.sendPackets(new S_SystemMessage("交換することができないアイテムです"));
 				}else{
-					pc.sendPackets(new S_PremiumShopSellList(true,type)); //집행검테스트				
+					pc.sendPackets(new S_PremiumShopSellList(true,type)); //執行剣テスト				
 					pc.setIsChangeItem(true);
-					pc.setDefaultItem(item); //0이 집행급 무기
+					pc.setDefaultItem(item); //0が執行級武器
 				}
 		
 	}

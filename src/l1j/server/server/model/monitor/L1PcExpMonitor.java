@@ -3,7 +3,6 @@ package l1j.server.server.model.monitor;
 import l1j.server.Config;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_Lawful;
-import l1j.server.server.serverpackets.S_MatizCloudia;
 import l1j.server.server.serverpackets.S_OwnCharStatus;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_SPMR;
@@ -26,7 +25,7 @@ public class L1PcExpMonitor extends L1PcMonitor {
 			S_Lawful s_lawful = new S_Lawful(pc.getId(), _old_lawful);
 			pc.sendPackets(s_lawful);
 			pc.broadcastPacket(s_lawful);
-			//LawfulBonus(pc);//바포시스템
+			//LawfulBonus(pc);//バポシステム
 		}
 
 		if (_old_exp != pc.getExp()) {

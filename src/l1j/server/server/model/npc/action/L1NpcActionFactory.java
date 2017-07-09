@@ -43,7 +43,7 @@ public class L1NpcActionFactory {
 			_actions.put("SetQuest", loadConstructor(L1NpcSetQuestAction.class));
 			_actions.put("Teleport", loadConstructor(L1NpcTeleportAction.class));
 		} catch (NoSuchMethodException e) {
-			_log.log(Level.SEVERE, "NpcAction의 클래스 로드에 실패", e);
+			_log.log(Level.SEVERE, "NpcActionのクラスのロードに失敗し", e);
 		}
 	}
 
@@ -52,9 +52,9 @@ public class L1NpcActionFactory {
 			Constructor<L1NpcAction> con = _actions.get(element.getNodeName());
 			return con.newInstance(element);
 		} catch (NullPointerException e) {
-			_log.warning(element.getNodeName() + " 미정도리의 NPC 액션입니다");
+			_log.warning(element.getNodeName() + "未定義のNPCアクションです");
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, "NpcAction의 클래스 로드에 실패", e);
+			_log.log(Level.SEVERE, "NpcActionのクラスのロードに失敗し", e);
 			System.out.println("ERROR"+element.getNodeName());
 		}
 		return null;

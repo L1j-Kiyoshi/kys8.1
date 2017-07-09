@@ -22,7 +22,7 @@ import l1j.server.server.model.Instance.L1TrapInstance;
 import l1j.server.server.types.Point;
 import l1j.server.server.utils.SQLUtil;
 
-// 여기 타이머를 놔두는 이유는;; 자주 콜도 안되는 애인데다가, TimerTask쓰는게 편해서...다.-_-;;; by magik
+// ここタイマーを置いておく理由は、;;よくコールもない恋人うえで、TimerTask使うの楽...だ
 public class L1WorldTraps {
 	private static Logger _log = Logger.getLogger(L1WorldTraps.class.getName());
 
@@ -168,7 +168,7 @@ public class L1WorldTraps {
 		}
 	}
 	
-	// 오림 인던 관련
+	// クリップボードインスタンスダンジョン関連
 	public synchronized void addTrap(L1TrapInstance trap) {
 		_allTraps.add(trap);
 	}

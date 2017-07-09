@@ -156,7 +156,7 @@ public class L1SkillUse {
 
 	private boolean _isGlanceCheckFail = false;
 	private boolean _isCriticalDamage = false;
-	// 시전자가 시전한 트루타겟을 임시로 담을 공간.
+	// 使用者が詠唱したトゥルーターゲットを一時的に入れるスペース。
 	public static Map<Integer, L1Object> _truetarget_list = new HashMap<Integer, L1Object>();
 
 	private static Logger _log = Logger.getLogger(L1SkillUse.class.getName());
@@ -166,8 +166,8 @@ public class L1SkillUse {
 			105, 106, 107, 109, 110, 111, 113, 114, 115, 116, 117, 118, 129, 130, 131, 133, 134, 137, 138, 146, 147, 148, 149, 150, 151, 155, 156,
 			158, 159, 163, 164, 165, 166, 168, 169, 170, 171, 181, SOUL_OF_FLAME, ADDITIONAL_FIRE, ANTA_BUFF, FAFU_BUFF, RIND_BUFF,VALA_BUFF };
 
-	/** 카운터 매직으로 방어할수 없는 스킬 **/
-	// 카운터매직
+	/**カウンターマジックで防御できないスキル **/
+	// カウンターマジック
 	private static final int[] EXCEPT_COUNTER_MAGIC = { 1, 2, 3, 5, 8, 9, 12, 13, 14, 19, 21, 26, 31, 32, 35, 37, 42, 43, 44, 48, 49, 52, 54, 55, 57,
 			60, 61, 63, 67, 68, 69, 72, 73, 75, 78, 79, SHOCK_STUN, BONE_BREAK, REDUCTION_ARMOR, BOUNCE_ATTACK, SOLID_CARRIAGE, COUNTER_BARRIER, 97,
 			98, 99, 100, 101, 102, 104, 105, 106, 107, 109, 110, 111, 113, 114, 115, 116, 117, 118, 129, 130, 131, 132, 134, 137, 138, 146, 147, 148,
@@ -222,28 +222,28 @@ public class L1SkillUse {
 
 	public boolean checkUseSkill(L1PcInstance player, int skillid, int target_id, int x, int y, String message, int time, int type,
 			L1Character attacker) {
-		// ** 아래 버그 체크문 실행하면서 에러 안나게 **// By 도우너
+		// ** 下のバグチェックステートメントを実行してエラーアンナゲ 
 		if (player instanceof L1PcInstance) {
 			L1Object l1object = L1World.getInstance().findObject(target_id);
 			if (l1object instanceof L1ItemInstance) {
 				L1ItemInstance item = (L1ItemInstance) l1object;
-				if (item.getX() != 0 && item.getY() != 0) { // 지면상의 아이템은 아니고,
-					// 누군가의 소유물
+				if (item.getX() != 0 && item.getY() != 0) { // 地面上のアイテムではなく、
+					// 誰かの所有物
 					return false;
 				}
 			}
-			// ** 아래 버그 체크문 실행하면서 에러 안나게 **// By 도우너
+			// ** 下のバグチェックステートメントを実行してエラーアンナゲ
 
-			// ** 노딜 방지 추가 **// by 도우너
+			// ** ノディル防止追加
 			long nowtime = System.currentTimeMillis();
 			if (skillid == 17 && player.getSkilldelay2() >= nowtime || skillid == 25 && player.getSkilldelay2() >= nowtime) {
 				return false;
 			} else if (player.getSkilldelay2() >= nowtime) {
 				return false;
 			}
-			// ** 노딜 방지 추가 **// by 도우너
+			// ** ノディル防止追加
 
-			// ** 2차 스킬 버그 방지 소스 추가 **// by 도우너
+			// ** 2次スキルのバグ防止ソースの追加
 			int[] CheckSkillID = { 45, 46, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74,
 					75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105,
 					106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131,
@@ -251,9 +251,9 @@ public class L1SkillUse {
 					159, 160, 161, 162, 163, 164, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175, 176, 181, 182, 183, 184, 185, 186, 187, 188, 189,
 					190, 191, 192, 193, 194, 195, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219,
 					220 };
-					// 3, 12, 13, 21, 26, 42, 168, 43, 54, 1, 8 치투 신투 힘투 헤이스트는 빠짐
+					// 3、12、13、21、26、42、168、43、54、1、8チツシンツヒムツヘイストは落ち
 
-			// 스킬검사에서 빠지게 할 스킬은 위 번호에서 빼삼!
+			// スキルチェックで落ちることのスキルは、上記番号でペサム！
 
 			int check = 0;
 			for (int chskill : CheckSkillID) {
@@ -269,15 +269,15 @@ public class L1SkillUse {
 					}
 				}
 			}
-			// ** 2차 스킬 버그 방지 소스 추가 **// by 도우너
+			// **2次スキルのバグ防止ソースの追加
 
-		} // ** 위 버그 체크문 실행하면서 에러 안나게 **// By 도우너
+		} // ** 上記のバグチェックステートメントを実行してエラーアンナゲ
 
-		// 존재버그 관련 추가
+		// 存在バグ関連を追加
 		if (player instanceof L1PcInstance) {
 			L1PcInstance jonje = L1World.getInstance().getPlayer(player.getName());
 			if (jonje == null && player.getAccessLevel() != 200) {
-				player.sendPackets(new S_SystemMessage("존재버그 강제종료! 재접속하세요"));
+				player.sendPackets(new S_SystemMessage("存在バグ強制終了！再接続してください"));
 				player.sendPackets(new S_Disconnect());
 				return false;
 			}
@@ -382,9 +382,9 @@ public class L1SkillUse {
 	}
 
 	/**
-	 * 통상의 스킬 사용시에 사용자 상태로부터 스킬이 사용 가능한가 판단한다
+	 * 通常のスキル使用時にユーザーの状態からスキルが使用可能か判断する
 	 * 
-	 * @return false 스킬이 사용 불가능한 상태인 경우
+	 * @return false スキルが使用不可能な状態である場合、
 	 */
 	private boolean isNormalSkillUsable() {
 		if (_user instanceof L1PcInstance) {
@@ -396,7 +396,7 @@ public class L1SkillUse {
 			if ((pc.isInvisble() || pc.isInvisDelay()) && !isInvisUsableSkill() && _skillId != 233) {
 				return false;
 			}
-			if (pc.getRankLevel() < 4 && pc.getInventory().getWeight100() > 82) { // 중량 오버이면 스킬을사용할 수 없다
+			if (pc.getRankLevel() < 4 && pc.getInventory().getWeight100() > 82) { //重量オーバーであればスキルを使用することができない
 				pc.sendPackets(new S_ServerMessage(316));
 				return false;
 			}
@@ -411,15 +411,15 @@ public class L1SkillUse {
 			int castle_id = L1CastleLocation.getCastleIdByArea(pc);
 			if (castle_id != 0) {
 				if (_skillId == 50 || _skillId == 69 || _skillId == 157 || _skillId == 66 || _skillId == 78 || _skillId == 116) {
-					pc.sendPackets(new S_SystemMessage("공성장에서 사용 할 수 없습니다."));
+					pc.sendPackets(new S_SystemMessage("ボール成長で使用することはできません。"));
 					return false;
 				}
 			}
 
 			if (pc.getMap().isSafetyZone(pc.getLocation())) {
 				if (_skillId == 69 || _skillId == 220 || _skillId == 215 || _skillId == 205 || _skillId == 11 || _skillId == 208 || _skillId == 219
-						|| _skillId == 67) { // 67번 SHAPE_CHANGE
-					pc.sendPackets(new S_SystemMessage("마을에서 사용할 수 없습니다."));
+						|| _skillId == 67) { // 67回SHAPE_CHANGE
+					pc.sendPackets(new S_SystemMessage("村では使用できません。"));
 					return false;
 				}
 			}
@@ -439,7 +439,7 @@ public class L1SkillUse {
 
 			if (_skillId == TRUE_TARGET) {
 			} else if ((pc.hasSkillEffect(SILENCE) || pc.hasSkillEffect(AREA_OF_SILENCE) || pc.hasSkillEffect(STATUS_POISON_SILENCE))
-					&& (_skillId < SHOCK_STUN || _skillId > COUNTER_BARRIER)) { // 사일런스상태에서도 트루타겟 시전가능
+					&& (_skillId < SHOCK_STUN || _skillId > COUNTER_BARRIER)) { // サイレンス状態でもトゥルーターゲット詠唱可能
 				pc.sendPackets(new S_ServerMessage(285));
 				return false;
 			}
@@ -452,24 +452,24 @@ public class L1SkillUse {
 			}
 			if (_skillId == ASSASSIN) {
 				if (!pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
-					pc.sendPackets(new S_SystemMessage("블라인드 하인딩 상태에서만 사용할 수 있습니다."));
+					pc.sendPackets(new S_SystemMessage("ブラインド使用人ディング状態でのみ使用することができます。"));
 					return false;
 				}
 			}
 			
 			if (_skillId == DANCING_BLADES) {
 				if (pc.getWeapon() == null) {
-					pc.sendPackets(new S_SystemMessage("\\fU검 착용시 사용가능합니다."));
+					pc.sendPackets(new S_SystemMessage("\\fU剣装備時に使用可能です。"));
 					return false;
 				}
 				if (pc.getWeapon().getItem().getType() != 1 && pc.getWeapon().getItem().getType() != 2) {
-					pc.sendPackets(new S_SystemMessage("\\fU검 착용시 사용가능합니다."));
+					pc.sendPackets(new S_SystemMessage("\\fU剣装備時に使用可能です。"));
 					return false;
 				}
 			}
 
-/*			if (_skillId == ARMOR_BRAKE && _skillId == COUNTER_BARRIER) { // 아머상태카배불가
-				pc.sendPackets(new S_SystemMessage("아머 브레이크가 걸려 있으면 시전할 수 없습니다."));
+/*			if (_skillId == ARMOR_BRAKE && _skillId == COUNTER_BARRIER) { // アーマー状態カベ不可
+				pc.sendPackets(new S_SystemMessage("アーマーブレイクが詰まっている場合詠唱することはできません。"));
 				return false;
 			}*/
 
@@ -545,7 +545,7 @@ public class L1SkillUse {
 			case TYPE_NORMAL:
 				if (!_isGlanceCheckFail || _skill.getArea() > 0 || _skill.getTarget().equals("none")) {
 					if (skillId == DANCING_BLADES || skillId == SOLID_CARRIAGE) {
-						// 특정스킬 시간초과
+						//特定のスキルのタイムアウト
 						sendGrfx(true);
 						runSkill();
 						useConsume();
@@ -581,7 +581,7 @@ public class L1SkillUse {
 			}
 			setCheckedUseSkill(false);
 		} catch (Exception e) {
-			// 이 부분이 NPC안보이던 원인
+			// この部分がNPC見えなかった原因
 			// System.out.println("skillId : " + skillId + " / attacker : " + (attacker==null ? "" : attacker.getName()));
 			// _log.log(Level.SEVERE, "", e);
 		}
@@ -725,7 +725,7 @@ public class L1SkillUse {
 			}
 		}
 
-		/** 아이스랜스 중이라면 디버프 안걸리게 **/
+		/** アイスランスしている場合デバフないかかる **/
 		if ((cha.hasSkillEffect(ICE_LANCE)) && (_skillId == ICE_LANCE || _skillId == SHOCK_STUN || _skillId == DECAY_POTION
 				|| _skillId == WEAPON_BREAK || _skillId == SLOW || _skillId == CURSE_PARALYZE || _skillId == MANA_DRAIN || _skillId == DARKNESS
 				|| _skillId == FOG_OF_SLEEPING || _skillId == ARMOR_BRAKE || _skillId == EARTH_BIND || _skillId == WIND_SHACKLE
@@ -747,14 +747,14 @@ public class L1SkillUse {
 //		}
 //
 //    	if (cha.hasSkillEffect(DESPERADO) && _skillId == DESPERADO) {
-//			return false; //데스페라도 중에는 데스페라도 리턴
+//			return false; //デスペラード中デスペラードリターン
 //		}
 
 		if (cha.hasSkillEffect(MOB_BASILL) && _skillId == MOB_BASILL) {
-			return false; // 바실굳기중에 바실굳기
+			return false; //バジルのかたさの中バジルのかたさ
 		}
 		if (cha.hasSkillEffect(MOB_COCA) && _skillId == MOB_COCA) {
-			return false; // 코카굳기중에 코카굳기
+			return false; // コカかた中コカかた
 		}
 
 		if (!(cha instanceof L1MonsterInstance) && (_skillId == TAMING_MONSTER || _skillId == CREATE_ZOMBIE)) {
@@ -777,7 +777,7 @@ public class L1SkillUse {
 
 		if (cha instanceof L1PcInstance) {
 			L1PcInstance pc = (L1PcInstance) cha;
-			if (pc.hasSkillEffect(ABSOLUTE_BARRIER)) {// 앱솔중
+			if (pc.hasSkillEffect(ABSOLUTE_BARRIER)) {// アブソル中
 				if (_skillId == CURSE_BLIND || _skillId == WEAPON_BREAK || _skillId == DARKNESS || _skillId == WEAKNESS || _skillId == DISEASE
 						|| _skillId == FOG_OF_SLEEPING || _skillId == GREATER_SLOW || _skillId == SLOW || _skillId == CANCELLATION
 						|| _skillId == SILENCE || _skillId == ENTANGLE || _skillId == DECAY_POTION || _skillId == MASS_TELEPORT
@@ -862,7 +862,7 @@ public class L1SkillUse {
 		return _flg;
 	}
 
-	private void EffectSpawn() { // 이펙트 스폰 타입별 나누자
+	private void EffectSpawn() { // エフェクト出現タイプ別分けよう
 		int Effect = 0;
 		if (_skillId == DESERT_SKILL4) {
 			Effect = 5137;
@@ -883,7 +883,7 @@ public class L1SkillUse {
 		int a2 = -3 - randomxy;
 		int b1 = 2 + randomxy;
 		int b2 = -2 - randomxy;
-		int heading = _npc.getHeading(); // 몹 방향
+		int heading = _npc.getHeading(); // モンスター方向
 		switch (heading) {
 		case 1:
 			xx = a1 - r;
@@ -974,7 +974,7 @@ public class L1SkillUse {
 		}
 		int x = _npc.getX() + xx;
 		int y = _npc.getY() + yy;
-		// 마름모 4*4픽셀 모양 (몹 기준에서 정면에 출현)
+		// 菱形4 * 4ピクセルの形状（モンスターの基準で正面に出現）
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x, y, _user.getMapId());
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x, y + 1, _user.getMapId());
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x, y - 1, _user.getMapId());
@@ -993,7 +993,7 @@ public class L1SkillUse {
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 2, y + 1, _user.getMapId());
 		int x1 = _npc.getX() + xx1;
 		int y1 = _npc.getY() + yy1;
-		// 마름모 4*4픽셀 모양 (몹 기준에서 좌측에 출현)
+		// 菱形4 * 4ピクセルの形状（モンスターの基準で左側に出現）
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1, y1, _user.getMapId());
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1, y1 + 1, _user.getMapId());
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1, y1 - 1, _user.getMapId());
@@ -1012,7 +1012,7 @@ public class L1SkillUse {
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 2, y1 + 1, _user.getMapId());
 		int x2 = _npc.getX() + xx2;
 		int y2 = _npc.getY() + yy2;
-		// 마름모 4*4픽셀 모양 (몹 기준에서 우측에 출현)
+		// 菱形4 * 4ピクセルの形状（モンスターの基準から右に出現）
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2, y2, _user.getMapId());
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2, y2 + 1, _user.getMapId());
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2, y2 - 1, _user.getMapId());
@@ -1031,7 +1031,7 @@ public class L1SkillUse {
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 2, y2 + 1, _user.getMapId());
 		int x3 = _npc.getX() + xx3;
 		int y3 = _npc.getY() + yy3;
-		// 마름모 4*4픽셀 모양 (몹 기준에서 좌측2에 출현)
+		// 菱形4 * 4ピクセルの形状（モンスターの基準で左側2に出現）
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3, y3, _user.getMapId());
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3, y3 + 1, _user.getMapId());
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3, y3 - 1, _user.getMapId());
@@ -1050,7 +1050,7 @@ public class L1SkillUse {
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 2, y3 + 1, _user.getMapId());
 		int x4 = _npc.getX() + xx4;
 		int y4 = _npc.getY() + yy4;
-		// 마름모 4*4픽셀 모양 (몹 기준에서 우측2에 출현)
+		// 菱形4 * 4ピクセルの形状（モンスターの基準から右2に出現）
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4, y4, _user.getMapId());
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4, y4 + 1, _user.getMapId());
 		L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4, y4 - 1, _user.getMapId());
@@ -1081,7 +1081,7 @@ public class L1SkillUse {
 				return;
 			}
 
-			if (_skill.getRanged() != -1) {// 사정거리 -1 화면내 오브젝트만
+			if (_skill.getRanged() != -1) {// 射程距離-1画面内のオブジェクトのみ
 				if (_user.getLocation().getTileLineDistance(_target.getLocation()) > _skill.getRanged()) {
 					return;
 				}
@@ -1344,23 +1344,23 @@ public class L1SkillUse {
 			return true;
 		}
 
-		if (itemConsume == 40318) { // 마력의 돌
+		if (itemConsume == 40318) { // 魔力の石
 			if (_player.getInventory().checkItem(30079, itemConsumeCount) && _player.getLevel() < 56) {
 				return true;
 			}
-		} else if (itemConsume == 40321) { // 흑요석
+		} else if (itemConsume == 40321) { // 黒曜石
 			if (_player.getInventory().checkItem(30080, itemConsumeCount) && _player.getLevel() < 56) {
 				return true;
 			}
-		} else if (itemConsume == 210035) { // 각인의 뼈조각
+		} else if (itemConsume == 210035) { // 刻印のボーンピース
 			if (_player.getInventory().checkItem(30081, itemConsumeCount) && _player.getLevel() < 56) {
 				return true;
 			}
-		} else if (itemConsume == 210038) { // 속성석
+		} else if (itemConsume == 210038) { // 属性石
 			if (_player.getInventory().checkItem(30082, itemConsumeCount) && _player.getLevel() < 56) {
 				return true;
 			}
-		} else if (itemConsume == 40319) { // 정령옥
+		} else if (itemConsume == 40319) { // 精霊の玉
 			if (_player.getInventory().checkItem(30078, itemConsumeCount) && _player.getLevel() < 56) {
 				return true;
 			}
@@ -1411,23 +1411,23 @@ public class L1SkillUse {
 			return;
 		}
 
-		if (itemConsume == 40318) { // 마력의 돌
+		if (itemConsume == 40318) { // 魔力の石
 			if (_player.getInventory().checkItem(30079, itemConsumeCount) && _player.getLevel() < 56) {
 				itemConsume = 30079;
 			}
-		} else if (itemConsume == 40321) { // 흑요석
+		} else if (itemConsume == 40321) { // 黒曜石
 			if (_player.getInventory().checkItem(30080, itemConsumeCount) && _player.getLevel() < 56) {
 				itemConsume = 30080;
 			}
-		} else if (itemConsume == 210035) { // 각인의 뼈조각
+		} else if (itemConsume == 210035) { // 刻印のボーンピース
 			if (_player.getInventory().checkItem(30081, itemConsumeCount) && _player.getLevel() < 56) {
 				itemConsume = 30081;
 			}
-		} else if (itemConsume == 210038) { // 속성석
+		} else if (itemConsume == 210038) { // 属性石
 			if (_player.getInventory().checkItem(30082, itemConsumeCount) && _player.getLevel() < 56) {
 				itemConsume = 30082;
 			}
-		} else if (itemConsume == 40319) { // 정령옥
+		} else if (itemConsume == 40319) { // 精霊の玉
 			if (_player.getInventory().checkItem(30078, itemConsumeCount) && _player.getLevel() < 56) {
 				itemConsume = 30078;
 			}
@@ -1600,16 +1600,16 @@ public class L1SkillUse {
 		}
 		if (_isCriticalDamage) {
 			switch (_skillId) {
-			case CALL_LIGHTNING: // 콜라이트닝
+			case CALL_LIGHTNING: // コールライトニング
 				castgfx = 11737;
 				break;
-			case SUNBURST: // 선버스트
+			case SUNBURST: // サンバースト
 				castgfx = 11760;
 				break;
-			case CONE_OF_COLD: // 콘 오브 콜드
+			case CONE_OF_COLD: // コーンオブコールド
 				castgfx = 11742;
 				break;
-			case DISINTEGRATE: // 디스인티그레이트
+			case DISINTEGRATE: // ディスインテグレート
 				castgfx = 11748;
 				break;
 			case ERUPTION:
@@ -1624,7 +1624,7 @@ public class L1SkillUse {
 				}
 			} else {
 				if (castgfx != _skill.getCastGfx()) {
-					return; // 그래픽 번호가 다르다.
+					return; // グラフィック番号が異なっている。
 				}
 			}
 		}
@@ -1655,7 +1655,7 @@ public class L1SkillUse {
 			if (_skillId == SHOCK_STUN || _skillId == MOB_SHOCKSTUN_30 || _skillId == MOB_RANGESTUN_20 || _skillId == MOB_RANGESTUN_19
 					|| _skillId == MOB_RANGESTUN_18 || _skillId == Mob_RANGESTUN_30 || _skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7
 					|| _skillId == ANTA_MESSAGE_8 || _skillId == OMAN_STUN) {
-				if (_targetList.size() == 0) {// 실패 스턴 모션
+				if (_targetList.size() == 0) {// 失敗スターンモーション
 					if (_target instanceof L1PcInstance) { // Gn.89
 						L1PcInstance pc = (L1PcInstance) _target;
 						pc.sendPackets(new S_SkillSound(pc.getId(), 4434));
@@ -1703,7 +1703,7 @@ public class L1SkillUse {
 				Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 11778));
 			}
 
-			if (_skillId == SOLID_CARRIAGE) {// 솔리드캐리지
+			if (_skillId == SOLID_CARRIAGE) {// ソリッドキャリッジ
 				L1PcInstance pc = (L1PcInstance) _target;
 				pc.sendPackets(new S_SkillSound(pc.getId(), 5831, 19));
 				pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, 5831, 192));
@@ -1918,10 +1918,10 @@ public class L1SkillUse {
 		}
 	}
 
-	/** 안타라스 파푸리온 Message */
+	/** アンタラスパプリオンMessage */
 	private void MonsterMessage(int type) {
 		String MonMessage = " ";
-		if (type == 1) { // 안타라스
+		if (type == 1) { // アンタラス
 			switch (_skillId) {
 			case ANTA_MESSAGE_1:
 				MonMessage = "$7861";
@@ -1956,7 +1956,7 @@ public class L1SkillUse {
 			default:
 				break;
 			}
-		} else if (type == 2) { // 파푸리온
+		} else if (type == 2) { // パプリオン
 			switch (_skillId) {
 			case PAP_PREDICATE1:
 				MonMessage = "$8467";
@@ -2098,12 +2098,12 @@ public class L1SkillUse {
 			return;
 		}
 
-		// 독 구름
+		// 毒雲
 		if (_skillId == DESERT_SKILL4) {
 			EffectSpawn();
 		}
 
-		/** MonsterMessage Type 1: 안타라스, Type 2: 파푸리온 **/
+		/** MonsterMessage Type 1: アンタラス、Type 2：パプリオン **/
 		if (_skillId >= ANTA_MESSAGE_1 && _skillId <= ANTA_MESSAGE_10) {
 			MonsterMessage(1);
 		}
@@ -2178,7 +2178,7 @@ public class L1SkillUse {
 						_isCriticalDamage = false;
 					}
 
-					// 공격 스킬일때!! 이레이즈 여부 판멸후 제거
+					// 攻撃スキルの時！イレースかどうか板ミョルフ削除
 					if (_skillId != SHOCK_STUN && _skillId != TRIPLE_ARROW && _skillId != FOU_SLAYER) {
 						if (cha instanceof L1PcInstance) {
 							if (cha.hasSkillEffect(ERASE_MAGIC)) {
@@ -2194,7 +2194,7 @@ public class L1SkillUse {
 					}
 				} else if (_skill.getType() == L1Skills.TYPE_CURSE || _skill.getType() == L1Skills.TYPE_PROBABILITY) {
 					isSuccess = _magic.calcProbabilityMagic(_skillId);
-					// 이레 마법이 아니고 현재 이레중이라면!!!
+					// 七魔法ではなく、現在の七中であれば！
 					if (cha instanceof L1PcInstance && _user instanceof L1PcInstance) {
 						L1PcInstance pc = (L1PcInstance) cha;
 						L1PinkName.onAction(pc, _user);
@@ -2262,7 +2262,7 @@ public class L1SkillUse {
 					}
 				}
 
-				// ●●●● PC, NPC 양쪽 모두 효과가 있는 스킬 ●●●●
+				// ●●●● PC、NPC両方の効果があるスキル ●●●●
 				// GFX Check (Made by HuntBoy)
 				switch (_skillId) {
 				case ASSASSIN: {
@@ -2367,14 +2367,14 @@ public class L1SkillUse {
 							pc.removeSkillEffect(L1SkillId.GRACE_AVATAR);
 						}
 						pc.setGraceLv(pc.getLevel());
-						pc.getResistance().addHold(10 + pc.getGraceLv()); // 홀드 내성(자신)
-						pc.getResistance().addStun(10 + pc.getGraceLv()); // 스턴 내성(자신)
-						pc.getResistance().addDESPERADO(10 + pc.getGraceLv()); // 공포 내성(자신)
+						pc.getResistance().addHold(10 + pc.getGraceLv()); // ホールド耐性（自分）
+						pc.getResistance().addStun(10 + pc.getGraceLv()); // スタン耐性（自分）
+						pc.getResistance().addDESPERADO(10 + pc.getGraceLv()); // 恐怖耐性（自分）
 						pc.setSkillEffect(L1SkillId.GRACE_AVATAR, 15 * 1000);
 						pc.sendPackets(new S_NewSkillIcon(L1SkillId.GRACE_AVATAR, true, 15));
 						pc.sendPackets(new S_SkillSound(pc.getId(), 14495));
 						Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 14495));
-						for (L1PcInstance player : L1World.getInstance().getVisiblePlayer(pc, 18)) {// 18셀
+						for (L1PcInstance player : L1World.getInstance().getVisiblePlayer(pc, 18)) {// 18セル
 							if (pc.getParty() != null) {
 								if (pc.getParty().isMember(player) && player != null) {
 									if (player.hasSkillEffect(L1SkillId.GRACE_AVATAR)) {
@@ -2382,12 +2382,12 @@ public class L1SkillUse {
 										player.removeSkillEffect(L1SkillId.GRACE_AVATAR);
 									}
 									player.setGraceLv(pc.getLevel());
-									player.getResistance().addHold(10 + player.getGraceLv()); // 홀드 내성(파티원)
-									player.getResistance().addStun(10 + player.getGraceLv()); // 스턴 내성(파티원)
-									player.getResistance().addDESPERADO(10 + player.getGraceLv()); // 공포 내성(파티원)
+									player.getResistance().addHold(10 + player.getGraceLv()); // ホールド耐性（パーティーメンバー）
+									player.getResistance().addStun(10 + player.getGraceLv()); // スタン耐性（パーティーメンバー）
+									player.getResistance().addDESPERADO(10 + player.getGraceLv()); // 恐怖耐性（パーティーメンバー）
 									player.sendPackets(new S_NewSkillIcon(GRACE_AVATAR, true, 15));
 									player.setSkillEffect(L1SkillId.GRACE_AVATAR, 15 * 1000);
-									player.sendPackets(new S_ServerMessage(4734));// 파티원 그레이스 아바타 효과 메세지
+									player.sendPackets(new S_ServerMessage(4734));// パーティーメンバーグレースアバター効果メッセージ
 								}
 							}
 						}
@@ -2466,10 +2466,10 @@ public class L1SkillUse {
 					}
 					break;
 				/*
-				 * case STRIKER_GALE:// 원본 if (cha instanceof L1PcInstance) { L1PcInstance pc = (L1PcInstance) cha; // pc.Add_Er(-99);
+				 * case STRIKER_GALE:// ソース if (cha instanceof L1PcInstance) { L1PcInstance pc = (L1PcInstance) cha; // pc.Add_Er(-99);
 				 * pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, pc.get_PlusEr())); pc.sendPackets(new S_OwnCharStatus(pc)); } break;
 				 */
-				case STRIKER_GALE:// 게일 실시간
+				case STRIKER_GALE:// ゲイルリアルタイム
 					if (cha instanceof L1PcInstance) {
 						L1PcInstance pc = (L1PcInstance) cha;
 						int er = 0;
@@ -2482,7 +2482,7 @@ public class L1SkillUse {
 						}
 						pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, er), true);
 					}
-					break; // 수정
+					break; // 修正
 				case REMOVE_CURSE: {
 					cha.curePoison();
 					if (cha.hasSkillEffect(STATUS_CURSE_PARALYZING) || cha.hasSkillEffect(STATUS_CURSE_PARALYZED)
@@ -2516,13 +2516,13 @@ public class L1SkillUse {
 									}
 								}
 							}
-							/** 공성장에서는 부활불가능하도록 **/
+							/** ボール成長は復活できないように **/
 							int castle_id = L1CastleLocation.getCastleIdByArea(pc);
 							if (castle_id != 0) {
-								pc.sendPackets(new S_SystemMessage("사용할 수 없는 지역입니다."));
+								pc.sendPackets(new S_SystemMessage("利用できない地域です。"));
 								return;
 							}
-							/** 공성장에서는 부활불가능하도록 **/
+							/** ボール成長は復活できないように **/
 							if (pc.getCurrentHp() == 0 && pc.isDead()) {
 								if (pc.getMap().isUseResurrection()) {
 									if (_skillId == RESURRECTION) {
@@ -2596,14 +2596,14 @@ public class L1SkillUse {
 					}
 				}
 					break;
-				// UI DG표시
-				case UNCANNY_DODGE: // 언케니닷지
+				// UI DG表示
+				case UNCANNY_DODGE: // アンキャニードッジ
 					if (cha instanceof L1PcInstance) {
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.addDg(-8);
 					}
 					break;
-				// UI DG표시
+				// UI DG表示
 				case DETECTION:
 				case IZE_BREAK:
 				case EYE_OF_DRAGON: {
@@ -2658,7 +2658,7 @@ public class L1SkillUse {
 								pc.sendPackets(new S_TrueTargetNew(_targetID, true));
 							}
 						}
-						// 이전에 시전한 트루타겟 찾아서 강제 종료 시키기.
+						// 以前に詠唱したトゥルーターゲット探し強制終了させる。
 						synchronized (_truetarget_list) {
 							L1Object temp = _truetarget_list.remove(_user.getId());
 							if (temp != null && temp instanceof L1Character) {
@@ -2666,7 +2666,7 @@ public class L1SkillUse {
 								temp2.removeSkillEffect(L1SkillId.TRUE_TARGET);
 							}
 						}
-						// 트루타겟 활성화.
+						// トゥルーターゲット活性化。
 						_target.setSkillEffect(L1SkillId.TRUE_TARGET, 16 * 1000);
 						synchronized (_truetarget_list) {
 							_truetarget_list.put(_user.getId(), _target);
@@ -2751,7 +2751,7 @@ public class L1SkillUse {
 					heal = dmg / 2;
 				}
 					break;
-				case TRIPLE_ARROW: {// 트리플
+				case TRIPLE_ARROW: {// トリプル
 					int playerGFX = _player.getTempCharGfx();
 					int weaponType = _player.getWeapon().getItem().getType1();
 					if (weaponType != 20 || playerGFX == 3784)
@@ -2767,7 +2767,7 @@ public class L1SkillUse {
 					Broadcaster.broadcastPacket(_player, new S_SkillSound(_player.getId(), 11764));
 				}
 					break;
-				case 50011:{ //몹트리플
+				case 50011:{ //モンスタートリプル
 					if (_user instanceof L1NpcInstance) {
 						for (int i = 3; i > 0; i--) {
 							if(_target instanceof L1PcInstance){
@@ -2781,7 +2781,7 @@ public class L1SkillUse {
 					
 				}
 				break;
-				case FOU_SLAYER: { // 포우슬레이어
+				case FOU_SLAYER: { // ポースレイヤー
 					if (_player.getWeapon() == null) {
 						return;
 					}
@@ -2803,16 +2803,16 @@ public class L1SkillUse {
 					if (_player.hasSkillEffect(CHAINSWORD1)) {
 						dmg += 15;
 						_player.killSkillEffectTimer(CHAINSWORD1);
-						_player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 추가
+						_player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
 					}
 					if (_player.hasSkillEffect(CHAINSWORD2)) {
 						dmg += 30;
 						_player.killSkillEffectTimer(CHAINSWORD2);
-						_player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 추가
+						_player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
 					}
 					if (_player.hasSkillEffect(CHAINSWORD3)) {
 						_player.killSkillEffectTimer(CHAINSWORD3);
-						_player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 추가
+						_player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
 						dmg += 45;
 					}
 					for (L1DollInstance doll : _player.getDollList()) {
@@ -2820,7 +2820,7 @@ public class L1SkillUse {
 					}
 				}
 					break;
-				case Sand_worms:{ //샌드웜 이럽션
+				case Sand_worms:{ //サンドワームイラプション
 				     L1PcInstance pc = (L1PcInstance) _player;
 				     S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(),
 				       10145, _player.getX(), _player.getY(), ActionCodes.ACTION_Attack, false);
@@ -2829,7 +2829,7 @@ public class L1SkillUse {
 					pc.sendPackets(new S_SkillSound(pc.getId(), 10145));
 				    }
 				    break;
-				case Sand_worms1:{ //샌드웜 범위공격1
+				case Sand_worms1:{ //サンドワーム範囲攻撃1
 				     L1PcInstance pc = (L1PcInstance) _player;
 				     S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(),
 				     10195, _player.getX(), _player.getY(), ActionCodes.ACTION_Attack, false);
@@ -2838,7 +2838,7 @@ public class L1SkillUse {
 					pc.sendPackets(new S_SkillSound(pc.getId(), 10195));
 				    }
 				    break;
-				case Sand_worms2:{ //샌드웜 범위공격1
+				case Sand_worms2:{ //サンドワーム範囲攻撃1
 				     L1PcInstance pc = (L1PcInstance) _player;
 				     S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(),
 				     10194, _player.getX(), _player.getY(), ActionCodes.ACTION_Attack, false);
@@ -2847,7 +2847,7 @@ public class L1SkillUse {
 					pc.sendPackets(new S_SkillSound(pc.getId(), 10194));
 				    }
 				    break;
-				case Sand_worms3:{ //샌드웜 범위공격1
+				case Sand_worms3:{ //サンドワーム範囲攻撃1
 				     L1PcInstance pc = (L1PcInstance) _player;
 				     S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(),
 				     10191, _player.getX(), _player.getY(), ActionCodes.ACTION_Attack, false);
@@ -2857,8 +2857,8 @@ public class L1SkillUse {
 				    }
 				    break;
 				
-				/** 혈맹버프 **/
-				case CLAN_BUFF1: {// 일반 공격 태세
+				/** 血盟バフ **/
+				case CLAN_BUFF1: {// 通常攻撃態勢
 					L1PcInstance pc = (L1PcInstance) cha;
 					pc.addDmgupByArmor(2);
 					pc.addBowDmgupByArmor(2);
@@ -2867,7 +2867,7 @@ public class L1SkillUse {
 					pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
 				}
 					break;
-				case CLAN_BUFF2: {// 일반 방어 태세
+				case CLAN_BUFF2: {// 一般防御態勢
 					L1PcInstance pc = (L1PcInstance) cha;
 					pc.getAC().addAc(-3);
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
@@ -2876,17 +2876,17 @@ public class L1SkillUse {
 					pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
 				}
 					break;
-				case CLAN_BUFF3: {// 전투 공격 태세
-					L1PcInstance pc = (L1PcInstance) cha;// 따로 없으면 그냥 이렇게 하셔도 되요.
-					// pc.addPvPDmgup(1); //pvp 추가데미지
+				case CLAN_BUFF3: {// 戦闘攻撃態勢
+					L1PcInstance pc = (L1PcInstance) cha;// 別にないとはこのようにしても良い。
+					// pc.addPvPDmgup(1); //pvp追加ダメージ
 					pc.sendPackets(new S_ACTION_UI2(2726, pc.getClan().getBuffTime()[pc.getClan().getBless() - 1], 7, 7237, 4652));
 					pc.sendPackets(new S_ServerMessage(4618, "$22505"));
 					pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
 				}
 					break;
-				case CLAN_BUFF4: {// 전투 방어 태세
+				case CLAN_BUFF4: {// 戦闘防御態勢
 					L1PcInstance pc = (L1PcInstance) cha;
-					// pc.addDmgReducPvp(1); //pvp 리덕
+					// pc.addDmgReducPvp(1); //pvpリドク
 					pc.sendPackets(new S_ACTION_UI2(2727, pc.getClan().getBuffTime()[pc.getClan().getBless() - 1], 7, 7239, 4653));
 					pc.sendPackets(new S_ServerMessage(4618, "$22506"));
 					pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
@@ -2966,7 +2966,7 @@ public class L1SkillUse {
 						pc.sendPackets(new S_PacketBox(S_PacketBox.POSION_ICON, pc, 1, 30));
 					}
 					break;
-				case TOMAHAWK:{  // 토마호크 지속 시간 동안 출혈 상태가 되어 대미지를 입는다. 레벨*2/6
+				case TOMAHAWK:{  // トマホーク持続時間、出血状態になってダメージを受ける。レベル* 2/6
                 	if (cha.hasSkillEffect(TOMAHAWK)) {
 						_player.sendPackets(new S_ServerMessage(280));
 						return;
@@ -3066,8 +3066,8 @@ public class L1SkillUse {
 					}
 				}
 					break;
-				/** 어바지속시간 본섭화 **/
-				case EARTH_BIND: {// 어바지속시간
+				/**語パンツの中の時間本サーバー化 **/
+				case EARTH_BIND: {// 語パンツの中の時間
 
 					int[] ebTimeArray = { 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000 };
 					_shockStunDuration = ebTimeArray[random.nextInt(ebTimeArray.length)];
@@ -3104,7 +3104,7 @@ public class L1SkillUse {
 				}
 					break;
 
-				case SHOCK_STUN: {// 스턴확률
+				case SHOCK_STUN: {// スタン確率
 					int targetLevel = 0;
 					int diffLevel = 0;
 
@@ -3182,7 +3182,7 @@ public class L1SkillUse {
 						// int time = _skill.getBuffDuration() * 1000;
 						int[] grabTime = { 1000, 2000, 3000, 4000 };
 						int rnd = random.nextInt(grabTime.length);
-						int time = grabTime[rnd]; // 시간 랜덤을 위해
+						int time = grabTime[rnd]; // 時間ランダムに
 						L1EffectSpawn.getInstance().spawnEffect(81182, time, cha.getX(), cha.getY(), cha.getMapId());
 						if (cha instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) cha;
@@ -3475,22 +3475,22 @@ public class L1SkillUse {
 					}
 				}
 					break;
-				case ANTA_MESSAGE_1: // 안타[용언1 / 캔슬 -> 오브 모크! 케 네시]
-				case ANTA_MESSAGE_2: // 안타[용언2 / 블레스+독/ 오브 모크! 켄 로우]
+				case ANTA_MESSAGE_1: // ヒット[用言1 /キャンセル - >オブモク！ケインドネシア]
+				case ANTA_MESSAGE_2: // ヒット[用言2 /ブレス+毒/オブモク！ケンロー]
 				case ANTA_MESSAGE_3: // 안타[용언3 / 왼손+오른펀치+고함 / 오브 모크! 티기르]
-				case ANTA_MESSAGE_4: // 안타[용언4 / 펀치+블레스 / 오브 모크! 켄 티기르]
-				case ANTA_MESSAGE_5: // 안타[용언5 / 고함+블레스 / 오브 모크! 루오타]
-				case ANTA_MESSAGE_6: // 안타[용언6 / 스턴+점프/ 오브 모크! 뮤즈삼]
-				case ANTA_MESSAGE_7: // 안타[용언7 / 스턴+발작/ 오브 모크! 너츠삼]
-				case ANTA_MESSAGE_8: // 안타[용언8 / 스턴+발+점/ 오브 모크! 티프삼]
-				case ANTA_MESSAGE_9: // 안타[용언9 / 웨폰+블레스 / 오브 모크! 리라프]
-				case ANTA_MESSAGE_10: // 안타[용언10 / 웨폰+마비 / 오브 모크! 세이 라라프]
+				case ANTA_MESSAGE_4: // ヒット[用言4 /パンチ+ブレス/オブモク！ケンティ育て]
+				case ANTA_MESSAGE_5: // ヒット[用言5 /叫び声+ブレス/オブモク！ルーミス]
+				case ANTA_MESSAGE_6: // ヒット[用言6 /スタン+ジャンプ/オブモク！ミューズ三]
+				case ANTA_MESSAGE_7: // ヒット[用言7 /スタン+発作/オブモク！ナッツ三]
+				case ANTA_MESSAGE_8: // ヒット[用言8 /スタン+足+点/オブモク！ティープサム]
+				case ANTA_MESSAGE_9: // ヒット[用言9 /ウェポンブレス/オブモク！リラのプ]
+				case ANTA_MESSAGE_10: // ヒット[用言10 /ウェポン+麻痺/オブモク！セイララフ]
 				case ANTA_CANCELLATION:
 				case ANTA_WEAPON_BREAK:
 				case ANTA_SHOCKSTUN: {
 					int npcId = _npc.getNpcTemplate().get_npcId();
 					if (npcId == 900011 || npcId == 900012 || npcId == 900013) {
-						if (_skillId == ANTA_MESSAGE_1 || _skillId == ANTA_CANCELLATION) { // 캔슬
+						if (_skillId == ANTA_MESSAGE_1 || _skillId == ANTA_CANCELLATION) { // キャンセル
 							if (cha instanceof L1PcInstance) {
 								L1PcInstance pc = (L1PcInstance) cha;
 								for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
@@ -3549,7 +3549,7 @@ public class L1SkillUse {
 						}
 
 
-						if (_skillId == ANTA_MESSAGE_1 || _skillId == ANTA_MESSAGE_10) {// 마비독
+						if (_skillId == ANTA_MESSAGE_1 || _skillId == ANTA_MESSAGE_10) {// 麻痺毒
 							Random random = new Random();
 							int time = random.nextInt(5) + 1;
 							if (cha instanceof L1PcInstance) {
@@ -3599,31 +3599,31 @@ public class L1SkillUse {
 					}
 				}
 					break;
-				case PAP_PREDICATE1: // 파푸[용언1:리오타! 피로이 나! [오색 진주3 / 신비한 오색 진주1
-										// / 토르나 소환5]
-				case PAP_PREDICATE3: // 파푸[용언3:리오타! 라나 오이므! [데스포션 -> 오른손 ->
-										// 아이스이럽션]
-				case PAP_PREDICATE5: // 파푸[용언5:리오타! 네나 우누스! [리듀스 힐 + 머리 공격 + 아이스
-										// 브레스]
-				case PAP_PREDICATE6: // 파푸[용언6:리오타! 테나 웨인라크! [데스 힐 + 꼬리 공격 + 아이스
-										// 브레스]
-				case PAP_PREDICATE7: // 파푸[용언7:리오타! 라나 폰폰! [캔슬레이션 + 오른속 2번 ] [범위
+				case PAP_PREDICATE1: // パプ[用言1：リオタ！ピロイや！ 【五色パール3 /神秘的な五色真珠1
+										// / トールや召喚5]
+				case PAP_PREDICATE3: // パプ[用言3：リオタ！ラナキュウリので！ 【デスポーション - >右 - >
+										// アイスイイラプション]
+				case PAP_PREDICATE5: // パプ[用言5：リオタ！ネーナウーアヌス！ 【リデュースヒル+頭の攻撃+アイス
+										// ブレス]
+				case PAP_PREDICATE6: // パプ[用言6：リオタ！アンテナウェインラク！ [デスヒル+尾の攻撃+アイス
+										// ブレス]
+				case PAP_PREDICATE7: // パプ[用言7：リオタ！ラナポンポン！ [キャンセレーション+上がった中2回] [範囲
 										// X]
-				case PAP_PREDICATE8: // 파푸[용언8:리오타! 레포 폰폰! [웨폰브레이크 + 왼손 2번 ] [범위
+				case PAP_PREDICATE8: // パプ[用言8：リオタ！レポポンポン！ [ウェポンブレイク+左手2回] [範囲
 										// X]
-				case PAP_PREDICATE9: // 파푸[용언9:리오타! 테나 론디르 ! [꼬리 2연타 + 아이스
-										// 브레스][범위 X]
-				case PAP_PREDICATE11: // 파푸[용언11:리오타! 오니즈 웨인라크! [매스 캔슬레이션 + 데스 힐
-										// + 아이스 미티어 + 아이스 이럽션] [범위 O]
-				case PAP_PREDICATE12: { // 파푸[용언12:리오타! 오니즈 쿠스온 웨인라크! [매스 캔슬레이션
-										// + 데스힐 + 아이스 미티어 + 발작] [범위 0]
+				case PAP_PREDICATE9: // パプ[用言9：リオタ！アンテナ論連邦！ [尾2連打+アイス
+										// ブレス] [範囲X]
+				case PAP_PREDICATE11: // パプ[用言11：リオタ！オニーズウェインラク！ [マスキャンセレーション+デスヒル
+										// + アイスメテオ+アイスイラプション] [範囲O]
+				case PAP_PREDICATE12: { // パプ[用言12：リオタ！オニーズアックスオンウェインラク！ [マスキャンセレーション
+										// + デス・ヒル+アイスメテオ+発作] [範囲0]
 					int npcId = _npc.getNpcTemplate().get_npcId();
 					if (npcId == 900038 || npcId == 900039 || npcId == 900040) {
-						if (_skillId == PAP_PREDICATE1) { // 리콜 소환(사엘-진주-토르나)
+						if (_skillId == PAP_PREDICATE1) { // リコール召喚（サエル - パール - トールや）
 							int i;
-							for (i = 0; i < 2; i++) { // 타이머 테이크 부분의 for 문으로
-														// 돌리게되면 쓰레드 오류 동작이
-														// 발생한다.
+							for (i = 0; i < 2; i++) { // タイマーテイク部分のfor文で
+														// 回すとスレッドエラー動作が
+														// 発生する。
 								L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900049, 8, 60 * 1000, 0);
 								L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900050, 8, 60 * 1000, 0);
 								L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900051, 8, 60 * 1000, 0);
@@ -3689,7 +3689,7 @@ public class L1SkillUse {
 							}
 						}
 
-						if (_skillId == PAP_PREDICATE8) { // 웨폰
+						if (_skillId == PAP_PREDICATE8) { // ウェポン
 							if (cha instanceof L1PcInstance) {
 								L1PcInstance pc = (L1PcInstance) cha;
 								L1ItemInstance weapon = pc.getWeapon();
@@ -3730,7 +3730,7 @@ public class L1SkillUse {
 							}
 						}
 
-						if (_skillId == PAP_PREDICATE11 || _skillId == PAP_PREDICATE12) {// 데스 힐
+						if (_skillId == PAP_PREDICATE11 || _skillId == PAP_PREDICATE12) {// デス・ヒル
 							if (cha instanceof L1PcInstance) {
 								L1PcInstance pc = (L1PcInstance) cha;
 								pc.sendPackets(new S_SkillSound(pc.getId(), 7780));
@@ -3787,16 +3787,16 @@ public class L1SkillUse {
 							}
 						} else {
 							if (pc.getMapId() >= 101 && pc.getMapId() <= 110) {
-								int find_item_ids[] = { 830022, // 1층
-										830023, // 2층
-										830024, // 3층
-										830025, // 4층
-										830026, // 5층
-										830027, // 6층
-										830028, // 7층
-										830029, // 8층
-										830030, // 9층
-										830031 // 10층
+								int find_item_ids[] = { 830022, // 1階
+										830023, // 2階
+										830024, // 3階
+										830025, // 4階
+										830026, // 5階
+										830027, // 6階
+										830028, // 7階
+										830029, //8階
+										830030, // 9階
+										830031 // 10階
 								};
 								L1ItemInstance findItem = pc.getInventory().findItemId(find_item_ids[pc.getMapId() - 101]);
 								if (findItem != null)
@@ -3840,7 +3840,7 @@ public class L1SkillUse {
 						L1PcInstance clanPc = (L1PcInstance) L1World.getInstance().findObject(_targetID);
 						if (clanPc != null) {
 							if (pc.getMap().isEscapable() || pc.isGm()) {
-								// 배틀존
+								// バトルゾーン
 								if (pc.get_DuelLine() != 0) {
 									return;
 								}
@@ -4088,22 +4088,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					/*
-					 * case HOLY_WEAPON: //수정본 코더 case BLESS_WEAPON: { if (!(cha instanceof L1PcInstance)) { return; } L1PcInstance pc =
-					 * (L1PcInstance) cha; if (pc.getWeapon() == null) { useok = false; pc.sendPackets(new S_ServerMessage(79)); return; }
-					 * 
-					 * int count = 0; for (L1ItemInstance item : pc.getInventory().getItems()) { // 착용중인 아이템이 잇을때 if (pc.getWeapon() != null) { //
-					 * 루프도는 아이템과동일하면 버프 적용. if (pc.getWeapon().equals(item)) { count ++; pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON,
-					 * _skill.getBuffDuration(), _skill.getCastGfx(), count - 1)); pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON,2176,
-					 * _skill.getBuffDuration(),false, false)); item.setSkillWeaponEnchant(pc, _skillId,_skill.getBuffDuration() * 1000);
-					 * pc.sendPackets(new S_ServerMessage(161, item.getLogName(), "$245", "$247")); } } // 세컨드 무기 착용중이면 if (pc.getSecondWeapon() !=
-					 * null) { // 세컨드 무기와 동일할때. if (pc.getSecondWeapon().equals(item)) { count ++; pc.sendPackets(new
-					 * S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(), _skill.getCastGfx(), count - 1)); pc.sendPackets(new
-					 * S_PacketBox(S_PacketBox.BUFFICON,2176, _skill.getBuffDuration(),true, false)); item.setSkillWeaponEnchant(pc,
-					 * _skillId,_skill.getBuffDuration() * 1000); pc.sendPackets(new S_ServerMessage(161, item.getLogName(), "$245", "$247")); } } } }
-					 * break;
-					 */
-					/** 쌍수버프 관련 **/
+					/** 双バフ関連 **/
 					case HOLY_WEAPON:
 					case BLESS_WEAPON: {
 						if (!(cha instanceof L1PcInstance)) {
@@ -4255,7 +4240,7 @@ public class L1SkillUse {
 						pc.addHitup(3);
 						pc.addMaxHp(20);
 						pc.addMaxMp(13);
-						pc.getResistance().addHold(10); // 홀드내성
+						pc.getResistance().addHold(10); // ホールド耐性
 						pc.sendPackets(new S_SkillSound(pc.getId(), 4914));
 					}
 						break;
@@ -4304,14 +4289,14 @@ public class L1SkillUse {
 						pc.sendPackets(new S_SkillIconAura(147, _getBuffIconDuration));
 					}
 						break;
-					case REDUCE_WEIGHT:// 환술사,마법사 스킬같이 사용해라
-					case DECREASE_WEIGHT: {// 마법사 마법
+					case REDUCE_WEIGHT:// イリュージョニスト、ウィザードのスキルのように使用してください
+					case DECREASE_WEIGHT: {// ウィザードの魔法
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.addWeightReduction(800);
 					}
 						break;
 					/*
-					 * case DECREASE_WEIGHT:{//마법사 마법 L1PcInstance pc = (L1PcInstance) cha; pc.addWeightReduction(800); } break;
+					 * case DECREASE_WEIGHT:{//ウィザードの魔法 L1PcInstance pc = (L1PcInstance) cha; pc.addWeightReduction(800); } break;
 					 */
 					case DANCING_BLADES: {
 						L1PcInstance pc = (L1PcInstance) cha;
@@ -4366,7 +4351,7 @@ public class L1SkillUse {
 						pc.sendPackets(new S_OwnCharAttrDef(pc));
 					}
 						break;
-					case SCALES_WATER_DRAGON: { // 바이탈라이즈 효과
+					case SCALES_WATER_DRAGON: { // バイタルライズ効果
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.getResistance().addFreeze(10);
 					}
@@ -4377,26 +4362,26 @@ public class L1SkillUse {
 						pc.addHitup(5);
 					}
 						break;
-					case IllUSION_OGRE: { // 일루젼 오거
+					case IllUSION_OGRE: { // イリュージョンオーガスタ
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.addDmgup(4);
 						pc.addHitup(4);
 					}
 						break;
-					case IllUSION_LICH: { // 일루젼 리치
+					case IllUSION_LICH: { // イリュージョンリッチ
 						L1PcInstance pc = (L1PcInstance) cha;
 						// pc.addSp(2);
 						pc.getAbility().addSp(2);
 						pc.sendPackets(new S_SPMR(pc));
 					}
 						break;
-					case IllUSION_DIAMONDGOLEM: { // 일루젼 다이아골렘
+					case IllUSION_DIAMONDGOLEM: { // イリュージョンダイヤゴーレム
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.getAC().addAc(-8);
 						pc.sendPackets(new S_OwnCharAttrDef(pc));
 					}
 						break;
-					case IllUSION_AVATAR: { // 일루젼 아바타
+					case IllUSION_AVATAR: { // イリュージョンアバター
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.addDmgup(10);
 					}
@@ -4474,7 +4459,7 @@ public class L1SkillUse {
 					}
 						break;
 
-					// 전사스킬 : 기간틱
+					// 戦士スキル：ギガンティック
 					case GIGANTIC: {
 						L1PcInstance pc = (L1PcInstance) cha;
 						if (pc.hasSkillEffect(L1SkillId.GIGANTIC)) {
@@ -4491,7 +4476,7 @@ public class L1SkillUse {
 						pc.setSkillEffect(L1SkillId.GIGANTIC, 300 * 1000);
 					}
 						break;
-					/** 파워그립 시전시간 본섭화 **/
+					/** パワーグリップ詠唱時間本サーバー化 **/
 					case POWERRIP: {
 	
 						int[] PowerRipTimeArray = { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000 };
@@ -4576,7 +4561,7 @@ public class L1SkillUse {
 						pc.broadcastPacket(new S_SkillBrave(pc.getId(), 1, 0));
 					}
 						break;
-					// 크레이 혈흔
+					// クレイ血痕
 					case BUFF_CRAY: {
 						if (cha instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) cha;
@@ -4618,7 +4603,7 @@ public class L1SkillUse {
 							pc.sendPackets(new S_SPMR(pc));
 						}
 						break;
-					case FEATHER_BUFF_A: { // 운세버프 (매우 좋은)
+					case FEATHER_BUFF_A: { // 占いバフ（非常に良い）
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.addHpr(3);
 						pc.addMpr(3);
@@ -4636,7 +4621,7 @@ public class L1SkillUse {
 						pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
 					}
 						break;
-					case FEATHER_BUFF_B: { // 운세버프 (좋은)
+					case FEATHER_BUFF_B: { // 占いバフ（良い）
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.addHitup(2);
 						// pc.addSp(1);
@@ -4651,7 +4636,7 @@ public class L1SkillUse {
 						pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
 					}
 						break;
-					case FEATHER_BUFF_C: { // 운세버프 (보통)
+					case FEATHER_BUFF_C: { // 占いバフ（通常）
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.addMaxHp(50);
 						pc.addMaxMp(30);
@@ -4664,26 +4649,26 @@ public class L1SkillUse {
 						pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
 					}
 						break;
-					case FEATHER_BUFF_D: { // 운세버프 (나쁜)
+					case FEATHER_BUFF_D: { // 占いバフ（悪い）
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.getAC().addAc(-1);
 						pc.sendPackets(new S_OwnCharAttrDef(pc));
 					}
 						break;
-					case ANTA_MAAN: {// 지룡의 마안
+					case ANTA_MAAN: {// 地竜の魔眼
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.getAC().addAc(-2);
 						pc.getResistance().addHold(15);
 						pc.sendPackets(new S_OwnCharAttrDef(pc));
 					}
 						break;
-					case FAFU_MAAN: {// 수룡의 마안
+					case FAFU_MAAN: {// 水竜の魔眼
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.getResistance().addFreeze(15);
 						pc.sendPackets(new S_OwnCharAttrDef(pc));
 					}
 						break;
-					case LIND_MAAN: {// 풍룡의 마안
+					case LIND_MAAN: {// 風竜の魔眼
 						L1PcInstance pc = (L1PcInstance) cha;
 						// pc.addSp(1);
 						pc.getAbility().addSp(1);
@@ -4692,14 +4677,14 @@ public class L1SkillUse {
 						pc.sendPackets(new S_OwnCharAttrDef(pc));
 					}
 						break;
-					case VALA_MAAN: {// 화룡의 마안
+					case VALA_MAAN: {// 火竜の魔眼
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.addDmgup(2);
 						pc.getResistance().addStun(15);
 						pc.sendPackets(new S_OwnCharAttrDef(pc));
 					}
 						break;
-					case BIRTH_MAAN: {// 탄생의 마안
+					case BIRTH_MAAN: {// 誕生の魔眼
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.getAC().addAc(-2);
 						pc.getResistance().addHold(15);
@@ -4707,7 +4692,7 @@ public class L1SkillUse {
 						pc.sendPackets(new S_OwnCharAttrDef(pc));
 					}
 						break;
-					case SHAPE_MAAN: {// 형상의 마안
+					case SHAPE_MAAN: {// 形状の魔眼
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.getAC().addAc(-3);
 						// pc.addSp(1);
@@ -4719,7 +4704,7 @@ public class L1SkillUse {
 						pc.sendPackets(new S_OwnCharAttrDef(pc));
 					}
 						break;
-					case LIFE_MAAN: {// 생명의 마안
+					case LIFE_MAAN: {// 生命の魔眼
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.addDmgup(2);
 						pc.getAC().addAc(-5);
@@ -4779,9 +4764,9 @@ public class L1SkillUse {
 						pc.addHitup(6);
 					}
 						break;
-					// 린드비오르
+					// リンドビオル
 					case RINDVIOR_SUMMON_MONSTER_CLOUD: {
-						L1SpawnUtil.spawn(_npc, 5110, 10); // 구름대정령
+						L1SpawnUtil.spawn(_npc, 5110, 10); // グルムデ精霊
 					}
 						break;
 					case RINDVIOR_PREDICATE: {
@@ -4802,8 +4787,8 @@ public class L1SkillUse {
 						break;
 					case RINDVIOR_SUMMON_MONSTER: {
 						Random _random = new Random();
-						int[] MobId = new int[] { 5106, 5107, 5108, 5109 }; // 광물
-																			// 골렘
+						int[] MobId = new int[] { 5106, 5107, 5108, 5109 }; // 鉱物
+																			// ゴーレム
 						int rnd = _random.nextInt(100);
 						for (int i = 0; i < _random.nextInt(2) + 1; i++) {
 							L1SpawnUtil.spawn(_npc, MobId[rnd % MobId.length], _random.nextInt(3) + 8);
@@ -5023,7 +5008,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					// 흑장로 데스 힐 / 캔슬레이션
+					// ブラックエルダーデスヒル/キャンセレーション
 					case BLACKELDER_DEATH_HELL: {
 						Random random = new Random();
 						int Chance = random.nextInt(100) + 1;
@@ -5089,7 +5074,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					// 드레이크 매스텔레포트
+					// ドレイクマステレポート
 					case DRAKE_MASSTELEPORT: {
 						if (cha instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) cha;
@@ -5102,7 +5087,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					// 드레이크 윈드세클
+					// ドレイクウィンドセクル
 					case DRAKE_WIND_SHACKLE: {
 						if (cha instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) cha;
@@ -5116,7 +5101,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					// 흑장로 데스포션
+					// ブラックエルダーデスポーション
 					case BLACKELDER_DEATH_POTION: {
 						if (cha instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) cha;
@@ -5126,7 +5111,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					// 이프리트 서먼 몬스터
+					// イフリートサモンモンスター
 					case EFRETE_SUMMON_MONSTER: {
 						Random _random = new Random();
 						for (int i = 0; i < 2; i++) {
@@ -5134,7 +5119,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					// 피닉스 서먼 몬스터
+					// フェニックスサモンモンスター
 					case PHOENIX_SUMMON_MONSTER: {
 						Random _random = new Random();
 						for (int i = 0; i < 2; i++) {
@@ -5142,7 +5127,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					// 피닉스 캔슬레이션
+					// フェニックスキャンセレーション
 					case PHOENIX_CANCELLATION: {
 						Random random = new Random();
 						int Chance = random.nextInt(100) + 1;
@@ -5212,7 +5197,7 @@ public class L1SkillUse {
 						Broadcaster.broadcastPacket(_target, new S_SkillSound(pc.getId(), 10708));
 					}
 						break;
-					case DESERT_SKILL1: { // 광역 커스 패럴라이즈
+					case DESERT_SKILL1: { // 広域カーズパラライズ
 						if (!cha.hasSkillEffect(EARTH_BIND) && !cha.hasSkillEffect(ICE_LANCE) && !cha.hasSkillEffect(DESERT_SKILL1)
 								&& !cha.hasSkillEffect(DESERT_SKILL2)) {
 							if (cha instanceof L1PcInstance) {
@@ -5224,7 +5209,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					case DESERT_SKILL2: { // 광역 어스 바인드
+					case DESERT_SKILL2: { // 広域アースバインド
 						if (!cha.hasSkillEffect(EARTH_BIND) && !cha.hasSkillEffect(ICE_LANCE) && !cha.hasSkillEffect(DESERT_SKILL1)
 								&& !cha.hasSkillEffect(DESERT_SKILL2)) {
 							if (cha instanceof L1PcInstance) {
@@ -5232,7 +5217,7 @@ public class L1SkillUse {
 								if (pc.isDead())
 									continue;
 
-								pc.setSkillEffect(EARTH_BIND, 12 * 1000); // 디케이 포션
+								pc.setSkillEffect(EARTH_BIND, 12 * 1000); // ディケイポーション
 								pc.sendPackets(new S_Poison(pc.getId(), 2));
 								pc.broadcastPacket(new S_Poison(pc.getId(), 2));
 								pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_FREEZE, true));
@@ -5243,7 +5228,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					case DESERT_SKILL3: { // 광역 마나 드레인
+					case DESERT_SKILL3: { // 広域マナドレイン
 						int ranMp = random.nextInt(20);
 						if (cha instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) cha;
@@ -5255,7 +5240,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					case DESERT_SKILL4: { // 광역 포이즌
+					case DESERT_SKILL4: { // 広域ポイズン
 						Random random = new Random();
 						int PoisonTime = random.nextInt(5) + 1;
 						if (cha instanceof L1PcInstance) {
@@ -5265,14 +5250,14 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					case DESERT_SKILL5: { // 커스/디케이/다크니스/디지즈/위크니스
+					case DESERT_SKILL5: { // カース/ディケイ/ダークネス/ディジーズ/ウィークネス
 						if (cha instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) cha;
 							if (pc.isDead() || pc.hasSkillEffect(CURSE_PARALYZE)) {
 								continue;
 							}
-							L1CurseParalysis.curse(cha, 0, 4000); // 커스 패럴라이즈
-							pc.setSkillEffect(CURSE_PARALYZE, 4 * 1000); // 커스 패럴라이즈
+							L1CurseParalysis.curse(cha, 0, 4000); // カーズパラライズ
+							pc.setSkillEffect(CURSE_PARALYZE, 4 * 1000); // カーズパラライズ
 							pc.sendPackets(new S_SkillSound(pc.getId(), 10704));
 							Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 10704));
 						}
@@ -5281,7 +5266,7 @@ public class L1SkillUse {
 							if (pc.isDead() || pc.hasSkillEffect(DECAY_POTION)) {
 								continue;
 							}
-							pc.setSkillEffect(DECAY_POTION, 16 * 1000); // 디케이 포션
+							pc.setSkillEffect(DECAY_POTION, 16 * 1000); // ディケイポーション
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2232));
 							Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2232));
 						}
@@ -5295,7 +5280,7 @@ public class L1SkillUse {
 							} else {
 								pc.sendPackets(new S_CurseBlind(1));
 							}
-							pc.setSkillEffect(DARKNESS, 32 * 1000); // 다크니스
+							pc.setSkillEffect(DARKNESS, 32 * 1000); // ダークネス
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2175));
 							Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2175));
 						}
@@ -5306,7 +5291,7 @@ public class L1SkillUse {
 							}
 							pc.addDmgup(-6);
 							pc.getAC().addAc(12);
-							pc.setSkillEffect(DISEASE, 64 * 1000); // 디지즈
+							pc.setSkillEffect(DISEASE, 64 * 1000); // ディジーズ
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2230));
 							Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2230));
 						}
@@ -5317,13 +5302,13 @@ public class L1SkillUse {
 							}
 							pc.addDmgup(-5);
 							pc.addHitup(-1);
-							pc.setSkillEffect(WEAKNESS, 64 * 1000); // 위크니스
+							pc.setSkillEffect(WEAKNESS, 64 * 1000); // ウィークネス
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2228));
 							Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2228));
 						}
 					}
 						break;
-					case DESERT_SKILL6: { // 광역 다크니스
+					case DESERT_SKILL6: { // 広域ダークネス
 						if (cha instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) cha;
 							if (pc.isDead() || pc.hasSkillEffect(DARKNESS)) {
@@ -5334,19 +5319,19 @@ public class L1SkillUse {
 							} else {
 								pc.sendPackets(new S_CurseBlind(1));
 							}
-							pc.setSkillEffect(DARKNESS, 32 * 1000); // 다크니스
+							pc.setSkillEffect(DARKNESS, 32 * 1000); // ダークネス
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2175));
 							Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2175));
 						}
 					}
 						break;
-					case DESERT_SKILL7: { // 광역 포그
+					case DESERT_SKILL7: { // 広域フォグ
 						if (cha instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) cha;
 							if (pc.isDead() || pc.hasSkillEffect(FOG_OF_SLEEPING)) {
 								continue;
 							}
-							pc.setSkillEffect(FOG_OF_SLEEPING, 32 * 1000); // 포그 오브 슬리핑
+							pc.setSkillEffect(FOG_OF_SLEEPING, 32 * 1000); // フォグオブスリーピング
 							pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_SLEEP, true));
 							pc.sendPackets(new S_SkillSound(pc.getId(), 760));
 							Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 760));
@@ -5354,7 +5339,7 @@ public class L1SkillUse {
 						cha.setSleeped(true);
 					}
 						break;
-					case DESERT_SKILL8: { // 에르자베 토네이도 대미지
+					case DESERT_SKILL8: { // エルジャベトルネードダメージ
 						if (cha instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) cha;
 							pc.sendPackets(new S_SkillSound(pc.getId(), 10082));
@@ -5362,22 +5347,22 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					case DESERT_SKILL9: { // 에르자베 서먼 몬스터
+					case DESERT_SKILL9: { // エルジャベサモンモンスター
 						for (int i = 0; i < 4; i++) {
-							L1SpawnUtil.spawn(_npc, 5138, 6, 120 * 1000); // 그라카스
-							L1SpawnUtil.spawn(_npc, 5139, 6, 120 * 1000); // 베이카스
-							L1SpawnUtil.spawn(_npc, 5140, 6, 120 * 1000); // 호루카스
-							L1SpawnUtil.spawn(_npc, 5141, 6, 120 * 1000); // 아르카스
-							L1SpawnUtil.spawn(_npc, 5142, 6, 120 * 1000); // 여왕 수호 개미
-							L1SpawnUtil.spawn(_npc, 5143, 6, 120 * 1000); // 여왕 수호 개미
-							L1SpawnUtil.spawn(_npc, 5144, 6, 120 * 1000); // 여왕 수호 개미
-							L1SpawnUtil.spawn(_npc, 5145, 6, 120 * 1000); // 여왕 수호 개미
+							L1SpawnUtil.spawn(_npc, 5138, 6, 120 * 1000); // グラカス
+							L1SpawnUtil.spawn(_npc, 5139, 6, 120 * 1000); // ベイカス
+							L1SpawnUtil.spawn(_npc, 5140, 6, 120 * 1000); // 号ルーカス
+							L1SpawnUtil.spawn(_npc, 5141, 6, 120 * 1000); // アルカス
+							L1SpawnUtil.spawn(_npc, 5142, 6, 120 * 1000); // 女王守護蟻
+							L1SpawnUtil.spawn(_npc, 5143, 6, 120 * 1000); // 女王守護蟻
+							L1SpawnUtil.spawn(_npc, 5144, 6, 120 * 1000); // 女王守護蟻
+							L1SpawnUtil.spawn(_npc, 5145, 6, 120 * 1000); // 女王守護蟻
 						}
 					}
 						break;
 					case DESERT_SKILL10: { // 에르자베 모래 폭풍
 						for (int i = 0; i < random.nextInt(3) + 1; i++) {
-							L1SpawnUtil.spawn(_npc, 5095, 6, 3 * 1000); // 모래 폭풍
+							L1SpawnUtil.spawn(_npc, 5095, 6, 3 * 1000); // 砂嵐
 						}
 					}
 						break;
@@ -5452,34 +5437,7 @@ public class L1SkillUse {
 								_player.sendPackets(new S_ServerMessage(79));
 							}
 						}
-					} /*else if (_skillId == POWERRIP) { // 전사스킬 파워그립
-						L1EffectSpawn.getInstance().spawnEffect(9415, 6000, _target.getX(), _target.getY(), _target.getMapId());
-						if (_target instanceof L1PcInstance) {
-							L1PcInstance pc = (L1PcInstance) _target;
-							_target.setSkillEffect(L1SkillId.POWERRIP, 6000);
-							pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_RIP, true));
-
-						} else if (_target instanceof L1MonsterInstance || _target instanceof L1SummonInstance || _target instanceof L1PetInstance) {
-							L1NpcInstance npc = (L1NpcInstance) _target;
-							npc.setSkillEffect(L1SkillId.POWERRIP, 6000);
-							npc.set발묶임상태(true);
-						}
-
-					} else if (_skillId == DESPERADO) { // 전사스킬 데스페라도
-						int[] stunTimeArray = { 1000, 1300, 1600, 1900, 2200, 2500, 3000, 4000, 5000, 6000 };
-						int rnd = random.nextInt(stunTimeArray.length);
-						_shockStunDuration = stunTimeArray[rnd];
-						L1EffectSpawn.getInstance().spawnEffect(9416, _shockStunDuration, _target.getX(), _target.getY(), _target.getMapId());
-						if (_target instanceof L1PcInstance) {
-							L1PcInstance pc = (L1PcInstance) _target;
-							pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_PERADO, true));
-							_target.setSkillEffect(L1SkillId.DESPERADO, _shockStunDuration);
-						} else if (_target instanceof L1MonsterInstance || _target instanceof L1SummonInstance || _target instanceof L1PetInstance) {
-							L1NpcInstance npc = (L1NpcInstance) _target;
-							npc.setSkillEffect(L1SkillId.DESPERADO, _shockStunDuration);
-							npc.set발묶임상태(true);
-						}
-					}*/
+					}
 				}
 
 				if (_skill.getType() == L1Skills.TYPE_HEAL && _calcType == PC_NPC && undeadType == 1) {
@@ -5504,8 +5462,8 @@ public class L1SkillUse {
 						else
 							cha.setSkillEffect(NO_DIS, 3000);
 					}
-					/** 디스 중첩불가 **/
-					// 포우는 무시하기
+					/** ディスネストさ不可 **/
+					// ポーは無視する
 					if (_skillId != FOU_SLAYER)
 						_magic.commit(dmg, drainMana);
 				}
@@ -5538,9 +5496,9 @@ public class L1SkillUse {
 			}
 
 		} catch (Exception e) {
-			// 스킬 오류 발생 부분에 캐릭터명, 몹명, 타켓명순으로 출력
+			// スキルエラー部分にキャラクター名、モプミョン、ターゲット名順に出力
 
-			System.out.println("오류 발생 : " + (_player != null ? _player.getAccountName() : "") + " | " + (_npc != null ? _npc.getName() : "") + " | "
+			System.out.println("エラー：" + (_player != null ? _player.getAccountName() : "") + " | " + (_npc != null ? _npc.getName() : "") + " | "
 					+ (_target != null ? _target.getName() : ""));
 			// system message output
 			e.printStackTrace();
@@ -5642,7 +5600,7 @@ public class L1SkillUse {
 		}
 	}
 
-	/** 캔슬로 해제할 수 없는 스킬인지를 돌려준다. */
+	/** キャンセルに解除することができないスキルなのかを返す。 */
 	private boolean isNotCancelable(int skillNum) {
 		return skillNum == ABSOLUTE_BARRIER || skillNum == ADVANCE_SPIRIT || skillNum == SHOCK_STUN || skillNum == REDUCTION_ARMOR
 				|| skillNum == SOLID_CARRIAGE || skillNum == COUNTER_BARRIER || skillNum == COMA_A || skillNum == COMA_B || skillNum == ANTA_MAAN

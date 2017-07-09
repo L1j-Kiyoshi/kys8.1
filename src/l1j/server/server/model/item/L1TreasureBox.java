@@ -76,21 +76,21 @@ public class L1TreasureBox {
 			return _count;
 		}
 
-		// 아이템 인첸트 레벨
+		// アイテムエンチャントレベル
 		public int getEnchant() {
 			return _enchant;
 		}
 
-		// 속성 인첸트 레벨
+		//属性エンチャントレベル
 		public int getAttr() {
 			return _attr;
 		}
 		public int getBless() { 
 			return _bless;
-		}  // 트레져박스 아이템 봉인여부 추가 by 개념탑재 2012.03.25
-		//0 : 축복 1: 보통 2: 저주 3: 미확인 128: 축봉인 129: 봉인 130: 저주봉인 131: 미확인봉인
+		}  // トレジャーボックスアイテム封印するかどうかを追加by概念搭載2012.03.25
+		//0 : 祝福1：普通2：呪い3：未確認128：軸シール129：封印130：呪い封印131：未確認封印
 
-		// 확인 상태
+		//確認状態
 		public boolean getIdentified() {
 			return _identified;
 		}
@@ -144,17 +144,17 @@ public class L1TreasureBox {
 			_totalChance += each.getChance();
 			if (ItemTable.getInstance().getTemplate(each.getItemId()) == null) {
 				getItems().remove(each);
-				_log.warning("아이템 ID " + each.getItemId() + " 의 템플릿이 발견되지 않았습니다.");
+				_log.warning("アイテムID" + each.getItemId() + "のテンプレートが見つかりませんでした。");
 			}
 		}
 		if (getType() == TYPE.RANDOM && getTotalChance() != 1000000) {
-			_log.warning("ID " + getBoxId() + "의 확률의 합계가 100%가 되지 않습니다.");
+			_log.warning("ID " + getBoxId() + "の確率の合計が100％ではない。");
 		}
 	}
 
 	public static void load() {
 //		PerformanceTimer timer = new PerformanceTimer();
-//		System.out.print("■ 트래져박스 데이터 .......................... ");
+//		System.out.print("■ トレジャーボックスデータ .......................... ");
 		try {
 			JAXBContext context = JAXBContext.newInstance(L1TreasureBox.TreasureBoxList.class);
 
@@ -168,10 +168,10 @@ public class L1TreasureBox {
 				_dataMap.put(each.getBoxId(), each);
 			}
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, PATH + "의 로드에 실패.", e);
+			_log.log(Level.SEVERE, PATH + "のロードに失敗しまし", e);
 			System.exit(0);
 		}
-//		System.out.println("■ 로딩 정상 완료 " + timer.get() + "ms");
+//		System.out.println("■ ロード正常終了 " + timer.get() + "ms");
 	}
 
 	public boolean open(L1PcInstance pc) {
@@ -182,8 +182,8 @@ public class L1TreasureBox {
 				int itemid = each.getItemId();
 				int itemcount = each.getCount();
 				int enchantlvl = each.getEnchant();
-				int AttrEnchantLevel = each.getAttr(); 		// 트레져박스 무기 속성 추가 by 개념탑재 2012.03.22
-				int bless = each.getBless(); 						// 트레져박스 아이템 봉인여부 추가 by 개념탑재 2012.03.25
+				int AttrEnchantLevel = each.getAttr(); 		// トレジャーボックス武器属性追加by概念搭載2012.03.22
+				int bless = each.getBless(); 						// トレジャーボックスアイテム封印するかどうかを追加by概念搭載2012.03.25
 
 				L1Item temp = ItemTable.getInstance().getTemplate(itemid);
 				if (temp == null) {
@@ -200,19 +200,19 @@ public class L1TreasureBox {
 							switch (temp.getBless()) {
 							case 0:
 								Bless = 128;
-								break; // 축
+								break; // 軸
 
 							case 1:
 								Bless = 129;
-								break; // 보통
+								break; // 通常
 
 							case 2:
 								Bless = 130;
-								break; // 저주
+								break; // 呪い
 
 							case 3:
 								Bless = 131;
-								break; // 미확인
+								break; // 未確認
 							}
 							item.setBless(Bless);
 							pc.getInventory().updateItem(item, L1PcInventory.COL_BLESS);
@@ -229,7 +229,7 @@ public class L1TreasureBox {
 						}
 						item.setCount(1);
 						
-						/** 마족무기함 **/
+						/** 魔族武器さ **/
 						if ((getBoxId() >= 410127 && item.getItemId() <= 410132) || item.getItemId() == 410170) {
 							int[] at = { 1, 6, 11, 16 };
 							random = new Random(System.nanoTime());
@@ -251,19 +251,19 @@ public class L1TreasureBox {
 								switch (temp.getBless()) {
 								case 0:
 									Bless = 128;
-									break; // 축
+									break; // 軸
 
 								case 1:
 									Bless = 129;
-									break; // 보통
+									break; // 通常
 
 								case 2:
 									Bless = 130;
-									break; // 저주
+									break; // 呪い
 
 								case 3:
 									Bless = 131;
-									break; // 미확인
+									break; // 未確認
 								}
 								item.setBless(Bless);
 								pc.getInventory().updateItem(item, L1PcInventory.COL_BLESS);
@@ -286,8 +286,8 @@ public class L1TreasureBox {
 					int itemid = each.getItemId();
 					int itemcount = each.getCount();
 					int enchantlvl = each.getEnchant();
-					int AttrEnchantLevel = each.getAttr(); 	// 트레져박스 무기 속성 추가 by 개념탑재 2012.03.22
-					int bless = each.getBless(); 					// 트레져박스 아이템 봉인여부 추가 by 개념탑재 2012.03.25
+					int AttrEnchantLevel = each.getAttr(); 	// トレジャーボックス武器属性追加by概念搭載2012.03.22
+					int bless = each.getBless(); 					// トレジャーボックスアイテム封印するかどうかを追加by概念搭載2012.03.25
 
 					L1Item temp = ItemTable.getInstance().getTemplate(itemid);
 
@@ -306,19 +306,19 @@ public class L1TreasureBox {
 								switch (temp.getBless()) {
 								case 0:
 									Bless = 128;
-									break; // 축
+									break; // 軸
 
 								case 1:
 									Bless = 129;
-									break; // 보통
+									break; // 通常
 
 								case 2:
 									Bless = 130;
-									break; // 저주
+									break; // 呪い
 
 								case 3:
 									Bless = 131;
-									break; // 미확인
+									break; // 未確認
 								}
 								item.setBless(Bless);
 								pc.getInventory().updateItem(item, L1PcInventory.COL_BLESS);
@@ -331,7 +331,7 @@ public class L1TreasureBox {
 							if (enchantlvl != 0) {
 								item.setIdentified(true);
 								item.setEnchantLevel(enchantlvl);
-								item.setAttrEnchantLevel(AttrEnchantLevel); 	// 트레져박스 무기 속성 추가 by 개념탑재 2012.03.22
+								item.setAttrEnchantLevel(AttrEnchantLevel); 	//トレジャーボックス武器属性追加by概念搭載2012.03.22
 							}
 							item.setCount(1);
 							storeItem(pc, item);
@@ -342,19 +342,19 @@ public class L1TreasureBox {
 									switch (temp.getBless()) {
 									case 0:
 										Bless = 128;
-										break; // 축
+										break; // 軸
 
 									case 1:
 										Bless = 129;
-										break; // 보통
+										break; // 通常
 
 									case 2:
 										Bless = 130;
-										break; // 저주
+										break; // 呪い
 
 									case 3:
 										Bless = 131;
-										break; // 미확인
+										break; // 未確認
 									}
 									item.setBless(Bless);
 									pc.getInventory().updateItem(item, L1PcInventory.COL_BLESS);
@@ -400,12 +400,12 @@ public class L1TreasureBox {
 			if (itemId == 40576 || itemId == 40577 || itemId == 40578 || itemId == 40411 || itemId == 49013) {
 				//pc.death(null, true);
 			}
-			if (itemId == 3000045) { // 고대 물품:무기
+			if (itemId == 3000045) { // 古代物品：武器
 				int[] enchantrnd = { 0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 1, 2, 3, 4, 4 ,0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 6, 3, 3, 3, 1, 2, 3, 4, 4, 5, 1, 2, 3, 7 };
 				int RandomEchant = random.nextInt(enchantrnd.length);
 				item.setEnchantLevel(enchantrnd[RandomEchant]);
 			}
-			if (itemId >= 3000038 && itemId <= 3000044) { // 고대 물품:방어구
+			if (itemId >= 3000038 && itemId <= 3000044) { // 古代物品：防具
 				int[] enchantrnd = { 0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 1, 2, 3, 4, 4 ,0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 1, 2, 3, 4, 4, 5 };
 				int RandomEchant = random.nextInt(enchantrnd.length);
 				item.setEnchantLevel(enchantrnd[RandomEchant]);
@@ -417,11 +417,11 @@ public class L1TreasureBox {
 	private boolean isOpen(L1PcInstance pc) {
 		int totalCount = pc.getInventory().getSize();
 		if (pc.getInventory().getWeight100() >= 82 || totalCount > 165) {
-			 pc.sendPackets(new S_SystemMessage("인벤 확인 : 무게/수량 초과 행동이 제한됩니다.")); 
+			 pc.sendPackets(new S_SystemMessage("インベントリチェック：重量/数量を超える行動が制限されます。")); 
 			return true;
 		}
 		if (pc.getInventory().getSize() > 170) {
-			 pc.sendPackets(new S_SystemMessage("소지하고 있는 아이템이 너무 많습니다.")); 
+			 pc.sendPackets(new S_SystemMessage("所持しているアイテムが多すぎます。")); 
 			return true;
 		}
 		return false;
@@ -430,7 +430,7 @@ public class L1TreasureBox {
 	private static void storeItem(L1PcInstance pc, L1ItemInstance item) {
 		L1Inventory inventory;
 		if (pc.getInventory().checkAddItem(item, item.getCount()) != L1Inventory.OK) {
-			pc.sendPackets(new S_SystemMessage("소지하고 있는 아이템이 너무 많습니다."));
+			pc.sendPackets(new S_SystemMessage("所持しているアイテムが多すぎます。"));
 			return;
 		} else {
 			inventory = pc.getInventory();

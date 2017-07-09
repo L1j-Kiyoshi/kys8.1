@@ -20,7 +20,7 @@ public class L1ShopBuyOrderList {
 	private int _totalPriceTaxIncluded = 0;
 	private int bugok = 0;
 
-	/** 날짜 , 시간 기록 **/
+	/** 日付、時刻の記録 **/
 	Calendar rightNow = Calendar.getInstance();
 	int day = rightNow.get(Calendar.DATE);
 	int hour = rightNow.get(Calendar.HOUR);
@@ -47,7 +47,7 @@ public class L1ShopBuyOrderList {
 		L1ShopItem shopItem = _shop.getSellingItems().get(orderNumber);
 
 		int price = (int) (shopItem.getPrice() * Config.RATE_SHOP_SELLING_PRICE);
-		// 오버플로우 체크
+		// オーバーフローチェック
 		for (int j = 0; j < count; j++) {
 			if (price * j < 0) {
 				return;
@@ -58,19 +58,19 @@ public class L1ShopBuyOrderList {
 		_totalWeight += shopItem.getItem().getWeight() * count * shopItem.getPackCount();
 		long totalprice = _totalPrice;
 
-		// ** 상점 구입 비셔스 방어 **//
+		// ** 店購入ビシャス守る **//
 
 		if (count <= 0 || count > 9999) {
 			pc.sendPackets(new S_Disconnect());
 			bugok = 1;
 			return;
 		}
-		if (totalprice < 0 || price < 0) { // ##### 43억 버그방지 추가
+		if (totalprice < 0 || price < 0) { // ##### 43億のバグを防ぐ追加
 			pc.sendPackets(new S_Disconnect());
 			bugok = 1;
 			return;
 		}
-		// ** 상점 구입 비셔스 방어 **//
+		// ** 店購入ビシャス守る **//
 
 		if (shopItem.getItem().isStackable()) {
 			_list.add(new L1ShopBuyOrder(shopItem, count * shopItem.getPackCount(), orderNumber));
@@ -86,12 +86,12 @@ public class L1ShopBuyOrderList {
 		return _list;
 	}
 
-	// ** 상점 구입 비셔스 방어 **//
+	// ** 店購入ビシャス守る **//
 	public int BugOk() {
 		return bugok;
 	}
 
-	// ** 상점 구입 비셔스 방어 **//
+	// ** 店購入ビシャス守る **//
 
 	public int getTotalWeight() {
 		return _totalWeight;

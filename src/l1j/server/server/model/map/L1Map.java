@@ -10,21 +10,21 @@ public abstract class L1Map {
 
 	public abstract int getId();
 	/**
-	* 새로운 맵 ID를 설정합니다. 이 ID는 맵 오브젝트를 고유하게 식별하는 값임을 보?되어야합니다.
+	* 新しいマップIDを設定します。このIDは、マップオブジェクトを一意に識別するための値であることを見？必要があります。
 	*
 	* @ param mapId
-	* 새로 설정되는 맵 ID입니다.
+	* 新たに設定されているマップのIDです。
 	*/
 	public abstract void setId(int mapId);
 
 	/**
-	* 맵 파일 ID를 반환합니다. 
-	* 이 ID를 맵 객체 고유하게 식별하는 데 사용하지 마십시오.
-	* 이 ID는 맵 파일을 식별하는 데 무슨 게임 클라이언트가 필요로하는 ID이며 고유성을 보?되지 않습니다.
-	* 일부 개체가 동일한 맵 파일 ID를 가질 수 있습니다.
-	* 클라이언트에게 전송하는 맵 파일 ID가 필요한 경우이 방법을 사용합니다.
+	* マップファイルIDを返します。
+	* このIDをマップオブジェクト一意に識別するために使用しないでください。
+	* このIDは、マップファイルを識別するためにどのようなゲームクライアントが必要とするIDであり、一意性を保証？ありません。
+	* 一部のオブジェクトが同じマップファイルIDを持つことができます。
+	* クライアントに送信するマップファイルIDが必要場合は、この方法を使用します。
 	*
-	* @ return 맵 파일 ID
+	* @ return マップファイルID
 	*/
 	public abstract int getBaseMapId();
 	// TODO JavaDoc
@@ -104,7 +104,7 @@ public abstract class L1Map {
 
 	public abstract boolean isExistDoor(int x, int y);
 	
-	public abstract L1V1Map copyMap(int a);//레이드
+	public abstract L1V1Map copyMap(int a);//レイド
 
 	public static L1Map newNull() {
 		return _nullMap;
@@ -116,7 +116,7 @@ public abstract class L1Map {
 		return false;
 	}
 	
-	public static boolean isTeleportable(int x, int y, int mapId){//버경 좌표
+	public static boolean isTeleportable(int x, int y, int mapId){//ボギョン座標
 		if( mapId == 4 && x >= 33469 && x <= 33528 && y >= 32839 && y <= 32869 ){
 			return false;
 		}
@@ -332,7 +332,7 @@ class L1NullMap extends L1Map {
 	}
 	
 	@Override
-	public L1V1Map copyMap(int id){//레이드
+	public L1V1Map copyMap(int id){//レイド
 		return null;
 	}
 	@Override

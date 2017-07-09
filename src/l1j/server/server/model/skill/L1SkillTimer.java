@@ -167,35 +167,35 @@ class L1SkillStop {
 		case GRACE_AVATAR:
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
-				pc.getResistance().addHold(-10 + (pc.getGraceLv() * -1)); // 홀드 내성
-				pc.getResistance().addStun(-10 + (pc.getGraceLv() * -1)); // 스턴 내성
-				pc.getResistance().addDESPERADO(-10 + (pc.getGraceLv() * -1)); // 공포 내성
+				pc.getResistance().addHold(-10 + (pc.getGraceLv() * -1)); // ホールド耐性
+				pc.getResistance().addStun(-10 + (pc.getGraceLv() * -1)); // スタン耐性
+				pc.getResistance().addDESPERADO(-10 + (pc.getGraceLv() * -1)); // 恐怖耐性
 				pc.removeSkillEffect(GRACE_AVATAR);
 				pc.sendPackets(new S_NewSkillIcon(L1SkillId.GRACE_AVATAR, false, -1));
 			}
 			break;
-		/** 혈맹버프 **/
-		case CLAN_BUFF1: {// 일반 공격 태세
+		/** 血盟バフ **/
+		case CLAN_BUFF1: {// 通常攻撃態勢
 			L1PcInstance pc = (L1PcInstance) cha;
 			pc.addDmgupByArmor(-2);
 			pc.addBowDmgupByArmor(-2);			
 			pc.sendPackets(new S_ServerMessage(4619, "$22503"));		
 		}
 			break;
-		case CLAN_BUFF2: {// 일반 방어 태세
+		case CLAN_BUFF2: {// 一般防御態勢
 			L1PcInstance pc = (L1PcInstance) cha;
 			pc.getAC().addAc(3);
 			pc.sendPackets(new S_OwnCharAttrDef(pc));		
 			pc.sendPackets(new S_ServerMessage(4619, "$22504"));		
 		}
 			break;
-		case CLAN_BUFF3: {// 전투 공격 태세
+		case CLAN_BUFF3: {// 戦闘攻撃態勢
 			L1PcInstance pc = (L1PcInstance) cha;
 		//	pc.addPvPDmgup(-1);			
 			pc.sendPackets(new S_ServerMessage(4619, "$22505"));		
 		}
 			break;
-		case CLAN_BUFF4: {// 전투 방어 태세
+		case CLAN_BUFF4: {// 戦闘防御態勢
 			L1PcInstance pc = (L1PcInstance) cha;
 		//	pc.addDmgReducPvp(-1);		
 			pc.sendPackets(new S_ServerMessage(4619, "$22506"));		
@@ -265,13 +265,13 @@ class L1SkillStop {
 				pc.sendPackets(new S_OwnCharStatus(pc));
 			}
 			break;
-		case 800018:// 티칼
+		case 800018:// ティカル
 			if (!cha.isDead()) {
 				CrockController.getInstance().dieCount(0);
 				CrockController.getInstance().BossSpawn(800018, 32753, 32870, (short) 784, 1900000);
 			}
 			break;
-		case 800019:// 티칼
+		case 800019:// ティカル
 			if (!cha.isDead()) {
 				CrockController.getInstance().dieCount(0);
 				CrockController.getInstance().BossSpawn(800019, 32750, 32859, (short) 784, 1900000);
@@ -319,7 +319,7 @@ class L1SkillStop {
 			pc.addHitup(-3);
 			pc.addMaxHp(-20);
 			pc.addMaxMp(-13);
-			pc.getResistance().addHold(-10); // 홀드내성
+			pc.getResistance().addHold(-10); // ホールド耐性
 		}
 			break;
 		case DELAY:
@@ -532,7 +532,7 @@ class L1SkillStop {
 				Broadcaster.broadcastPacket(pc, new S_SkillBrave(pc.getId(), 0, 0));
 			}
 			break;
-		// 크레이 혈흔
+		// クレイ血痕
 		case BUFF_CRAY:
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
@@ -565,14 +565,14 @@ class L1SkillStop {
 				pc.sendPackets(new S_SPMR(pc));
 			}
 			break;
-		// UI DG표시
-		case UNCANNY_DODGE: // 언케니닷지
+		// UI DG表示
+		case UNCANNY_DODGE: // アンキャニードッジ
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.addDg(8);
 			}
 			break;
-		// UI DG표시
+		// UI DG表示
 		case BURNING_WEAPON:
 			cha.addDmgup(-6);
 			cha.addHitup(-3);
@@ -735,7 +735,7 @@ class L1SkillStop {
 				/*
 				 * if(pc.Tam_wait_count()!=0){ Timestamp deleteTime = null;
 				 * deleteTime = new Timestamp(System.currentTimeMillis() +
-				 * (86400000 * (long)pc.Nexttam(pc.getId()))+10000);//7일
+				 * (86400000 * (long)pc.Nexttam(pc.getId()))+10000);//7日
 				 * pc.setTamTime(deleteTime); pc.tamdel(pc.getId()); try {
 				 * pc.save(); } catch (Exception e) { e.printStackTrace(); } }
 				 */
@@ -777,7 +777,7 @@ class L1SkillStop {
 				/*
 				 * if(pc.Tam_wait_count()!=0){ Timestamp deleteTime = null;
 				 * deleteTime = new Timestamp(System.currentTimeMillis() +
-				 * (86400000 * (long)pc.Nexttam(pc.getId()))+10000);//7일
+				 * (86400000 * (long)pc.Nexttam(pc.getId()))+10000);//7日
 				 * pc.setTamTime(deleteTime); pc.tamdel(pc.getId()); try {
 				 * pc.save(); } catch (Exception e) { e.printStackTrace(); } }
 				 */
@@ -1063,12 +1063,12 @@ class L1SkillStop {
 		case MOB_RANGESTUN_18:
 		case MOB_RANGESTUN_19:
 		case MOB_RANGESTUN_20:
-		case Mob_RANGESTUN_30: // 쇼크 스탠
+		case Mob_RANGESTUN_30: // ショックスタン
 		case ANTA_MESSAGE_6:
 		case ANTA_MESSAGE_7:
 		case ANTA_MESSAGE_8:
 		case ANTA_SHOCKSTUN:
-		case OMAN_STUN:// 오만 스턴
+		case OMAN_STUN:// 傲慢スターン
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, false));
@@ -1544,7 +1544,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_OwnCharAttrDef(pc));
 			}
 			break;
-		case ANTA_MAAN:// 지룡의 마안
+		case ANTA_MAAN:// 地竜の魔眼
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getAC().addAc(2);
@@ -1552,14 +1552,14 @@ class L1SkillStop {
 				pc.sendPackets(new S_OwnCharAttrDef(pc));
 			}
 			break;
-		case FAFU_MAAN:// 수룡의 마안
+		case FAFU_MAAN:// 水竜の魔眼
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getResistance().addFreeze(-15);
 				pc.sendPackets(new S_OwnCharAttrDef(pc));
 			}
 			break;
-		case LIND_MAAN:// 풍룡의 마안
+		case LIND_MAAN:// 風竜の魔眼
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 //				pc.addSp(-1);
@@ -1569,7 +1569,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_OwnCharAttrDef(pc));
 			}
 			break;
-		case VALA_MAAN:// 화룡의 마안
+		case VALA_MAAN:// 火竜の魔眼
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.addDmgup(-2);
@@ -1577,7 +1577,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_OwnCharAttrDef(pc));
 			}
 			break;
-		case BIRTH_MAAN:// 탄생의 마안
+		case BIRTH_MAAN://誕生の魔眼
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getAC().addAc(2);
@@ -1586,7 +1586,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_OwnCharAttrDef(pc));
 			}
 			break;
-		case SHAPE_MAAN:// 형상의 마안
+		case SHAPE_MAAN:// 形状の魔眼
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getAC().addAc(3);
@@ -1599,7 +1599,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_OwnCharAttrDef(pc));
 			}
 			break;
-		case LIFE_MAAN:// 생명의 마안
+		case LIFE_MAAN:// 生命の魔眼
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.addDmgup(-2);
@@ -1644,7 +1644,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 88, 0));
 			}
 			break;
-		case STATUS_DRAGON_PEARL: // 드래곤의 진주
+		case STATUS_DRAGON_PEARL: //ドラゴンの真珠
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.sendPackets(new S_Liquor(pc.getId(), 0));
@@ -1811,7 +1811,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_SPMR(pc));
 			}
 			break;
-		case Matiz_Buff2: //방어
+		case Matiz_Buff2: //防御
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getResistance().addMr(-10);
@@ -1823,7 +1823,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_SPMR(pc));
 			}
 			break;
-		case Matiz_Buff3 ://공격
+		case Matiz_Buff3 ://攻撃
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.addDmgup(-3);

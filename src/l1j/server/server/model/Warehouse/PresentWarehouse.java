@@ -193,7 +193,7 @@ public class PresentWarehouse extends Warehouse {
 			pstm.setInt(13, item.getSpecialEnchant());
 			pstm.setInt(14, item.getBless());
 			pstm.execute();
-			w.loadItems(); // 패키지 창고 디비 로드
+			w.loadItems(); // パッケージ倉庫ディビロード
 			
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

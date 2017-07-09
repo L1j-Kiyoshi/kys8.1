@@ -95,7 +95,7 @@ public class L1Shop {
 				if (!isPurchaseableItem(targetItem)) {
 					continue;
 				}
-				if (item.getEnchant() == targetItem.getEnchantLevel()) { // 인챈트가 같은 아이템만
+				if (item.getEnchant() == targetItem.getEnchantLevel()) { // エンチャントが同じアイテムのみ
 					result.add(new L1AssessedItem(targetItem.getId(), getAssessedPrice(item)));
 				}
 			}
@@ -135,12 +135,12 @@ public class L1Shop {
 			pc.sendPackets(new S_ServerMessage(263));
 			return false;
 		}
-		// ## (버그 방지) 상점 버그 방지
+		// ##（バグ防止）店のバグを防ぐ
 		if (price <= 0 || price > 2000000000) {
 			pc.sendPackets(new S_Disconnect());
 			return false;
 		}
-		// ## (버그 방지) 상점 버그 방지
+		// ## （バグ防止）店のバグを防ぐ
 		return true;
 	}
 
@@ -211,7 +211,7 @@ public class L1Shop {
 
 	private void sellItems(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(L1ItemId.ADENA, orderList.getTotalPriceTaxIncluded())) {
-			throw new IllegalStateException("구입에 필요한 아데나를 소비 할 수 없습니다.");
+			throw new IllegalStateException("購入に必要なアデナを消費することはできません。");
 		}
 		L1ItemInstance item = null;
 		Random random = new Random(System.nanoTime());
@@ -243,11 +243,11 @@ public class L1Shop {
 				} else if (chance == 150) {
 					item.setEnchantLevel(7);
 				}
-				/** 인챈상점 추가 **/
+				/** エンチャント店を追加 **/
 			}else if(_npcId == 81008 || _npcId == 200004 || _npcId == 900171 || _npcId == 81007 || _npcId == 611156 || _npcId == 81110) {
 				item.setEnchantLevel(enchant);
 			}
-			// 배당을 측정하기 위한 추가 부분
+			// 配当を測定するための追加の部分
 			if (_npcId == 70035 || _npcId == 70041 || _npcId == 70042) {
 				for (int row = 0; row < 5; row++) {
 					if (BugRaceController.getInstance()._ticketId[row] == item.getItemId()) {
@@ -258,7 +258,7 @@ public class L1Shop {
 			item = inv.storeItem(item);
 		}
 	}
-			/** 여기에 인챈상점하고 중복되면 인챈상점 인챈+표시안됨 [깃털상점 추가] **/
+			/** ここにエンチャント店で重複しエンチャント店エンチャント+表示しない[羽店を追加]**/
 	public void sellItems(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		if (getNpcId() >= 200060 && getNpcId() <= 200063 || getNpcId() == 5000000 || _npcId == 81008 ||
 				getNpcId() == 900047 || getNpcId() == 5072 || getNpcId() == 5073 || getNpcId() == 200005 ||
@@ -277,7 +277,7 @@ public class L1Shop {
 			sellMarkItems1(pc.getInventory(), orderList);
 			return;
 		}
-		// 행베리
+		// 行ベリー
 		if (getNpcId() == 7000077) {
 			if (!ensureMarkSell2(pc, orderList)) {
 				return;
@@ -285,7 +285,7 @@ public class L1Shop {
 			sellMarkItems2(pc.getInventory(), orderList);
 			return;
 		}
-		// 탐(TAM)상인
+		// 乗車（TAM）の商人
 		if (getNpcId() == 7200002) {
 			if (!탐상인1(pc, orderList)) {
 				return;
@@ -294,7 +294,7 @@ public class L1Shop {
 			return;
 		}
 
-		// 영자 엔피씨무인상점
+		// 英字エンピシ無人店舗
 		if (getNpcId() >= 4000001 && getNpcId() <= 4000061) { //
 			if (!NoTaxEnsureSell(pc, orderList)) {
 				return;
@@ -303,7 +303,7 @@ public class L1Shop {
 			return;
 
 		}
-		// 수표상점
+		// 小切手店
 		if (getNpcId() >= 7210061 && getNpcId() <= 7210070) { //
 			if (!수표상점1(pc, orderList)) {
 				return;
@@ -311,7 +311,7 @@ public class L1Shop {
 			수표상점2(pc.getInventory(), orderList);
 			return;
 		}
-		// 엔코인상점
+		// エンコイン店
 		if (getNpcId() == 5) { //
 			if (!NcoinSell(pc, orderList)) {
 				return;
@@ -319,7 +319,7 @@ public class L1Shop {
 			NcoinSellItems(pc, orderList);
 			return;
 		} 
-		// 금빛깃털상점
+		// 金色の羽店
 		if (getNpcId() == 6000002) { //
 			if (!금빛상점1(pc, orderList)) {
 				return;
@@ -328,8 +328,8 @@ public class L1Shop {
 			return;
 		}
 		
-		/** 패키지상점 **/
-		// 1차 코인 상인
+		/** パッケージ店 **/
+		// 1次コインのディーラー
 		if (getNpcId() >= 6100000 && getNpcId() <= 6100013) {
 			if (!ensureCashSell1(pc, orderList, getNpcId())) {
 				return;
@@ -338,7 +338,7 @@ public class L1Shop {
 			return;
 		}
 
-		// 2차 코인 상인
+		// 2次コイン商人
 		if (getNpcId() >= 6100014 && getNpcId() <= 6100027) {
 			if (!ensureCashSell2(pc, orderList, getNpcId())) {
 				return;
@@ -347,7 +347,7 @@ public class L1Shop {
 			return;
 		}
 
-		// 3차 코인 상인
+		// 3次コイン商人
 		if (getNpcId() >= 6100028 && getNpcId() <= 6100041) {
 			if (!ensureCashSell3(pc, orderList, getNpcId())) {
 				return;
@@ -355,9 +355,9 @@ public class L1Shop {
 			sellCashItems3(pc, pc.getInventory(), orderList, getNpcId());
 			return;
 		}
-		/** 패키지상점 **/
+		/** パッケージ店 **/
 		
-		// 장비 코인상점 (종합)
+		// 機器コインショップ（総合）
 		if (getNpcId() >= 2 && getNpcId() <= 4) {
 			if (!ensureCashSell4(pc, orderList, getNpcId())) {
 				return;
@@ -366,7 +366,7 @@ public class L1Shop {
 			return;
 		}
 
-		// 신묘년 이벤트
+		// 辛卯年のイベント
 		if (getNpcId() == 900107) {
 			if (!ensureMarkSell(pc, orderList)) {
 				return;
@@ -398,10 +398,10 @@ public class L1Shop {
 
 		totalPrice = IntRange.ensure(totalPrice, 0, 2000000000);
 		if (0 < totalPrice) {
-			/** 패키지상점 **/
+			/** パッケージ店 **/
 			if (getNpcId() >= 6100000 && getNpcId() <= 6100041) {
 				inv.storeItem(getNpcId() - 5299999, totalPrice);
-			} else if (_npcId == 7000077) {// 행베리
+			} else if (_npcId == 7000077) {// 行ベリー
 				if (0 < totalPrice) {
 					inv.storeItem(41302, totalPrice);
 				}
@@ -421,7 +421,7 @@ public class L1Shop {
 
 	private void sellPremiumItems(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(41159, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 픽시의 깃털을 소비할 수 없었습니다.");
+			throw new IllegalStateException("購入に必要なピクシーの羽を消費することができませんでした。");
 		}
 		L1ItemInstance item = null;
 		for (L1ShopBuyOrder order : orderList.getList()) {
@@ -434,31 +434,31 @@ public class L1Shop {
 		}
 	}
 
-	// 프리미엄 상인으로 부터 아이템을 살수 있는지 체크//
+	// プレミアム商人からアイテムを買うことかどうかをチェック//
 	private boolean ensurePremiumSell(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		int price = orderList.getTotalPrice();
 		int FeatherCount = Config.FEATHER_SHOP_NUM;
-		// 오버플로우 체크
+		// オーバーフローチェック
 		if (!IntRange.includes(price, 0, FeatherCount)) {
-			pc.sendPackets(new S_ChatPacket(pc, "픽시의 깃털은 한번에 10만개 이상 사용할 수 없습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "ピクシーの羽は、一度に10万個以上使用することができません。"));
 			// pc.sendPackets(new S_ServerMessage(904, "10000"));
 			return false;
 		}
-		// 구입할 수 있을까 체크
+		// 購入できるかチェック
 		if (!pc.getInventory().checkItem(41159, price)) {
 			// System.out.println(price);
-			// \f1아데나가 부족합니다.
-			pc.sendPackets(new S_ChatPacket(pc, "픽시의 깃털이 부족합니다."));
+			// \f1アデナが不足します。
+			pc.sendPackets(new S_ChatPacket(pc, "ピクシーの羽が不足します。"));
 			return false;
 		}
-		// 중량 체크
+		// 重量チェック
 		int currentWeight = pc.getInventory().getWeight() * 1000;
 		if (currentWeight + orderList.getTotalWeight() > pc.getMaxWeight() * 1000) {
-			// 아이템이 너무 무거워, 더 이상 가질 수 없습니다.
+			// アイテムが重すぎる、もはや持つことができません。
 			pc.sendPackets(new S_ServerMessage(82));
 			return false;
 		}
-		// 개수 체크
+		// 数チェック
 		int totalCount = pc.getInventory().getSize();
 		L1Item temp = null;
 		for (L1ShopBuyOrder order : orderList.getList()) {
@@ -472,7 +472,7 @@ public class L1Shop {
 			}
 		}
 		if (totalCount > 180) {
-			// \f1한사람의 캐릭터가 가지고 걸을 수 있는 아이템은 최대 180개까지입니다.
+			// \f1一人のキャラクターが持って歩くことができるアイテムは最大180個までです。
 			pc.sendPackets(new S_ServerMessage(263));
 			return false;
 		}
@@ -485,7 +485,7 @@ public class L1Shop {
 
 	private void sellMarkItems1(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(3000032, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 징표를 소비할 수 없습니다.");
+			throw new IllegalStateException("購入に必要な兆候を消費することはできません。");
 
 		}
 		L1ItemInstance item = null;
@@ -500,15 +500,15 @@ public class L1Shop {
 	}
 	
 	private boolean 수표상점1(L1PcInstance pc, L1ShopBuyOrderList orderList) {
-		// 행베리
+		// 行ベリー
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 10000000)) {
-			pc.sendPackets(new S_SystemMessage("수표는 한번에 1,000만개 이상 사용할 수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("小切手は、一度に1,000万個以上使用することができません。"));
 			return false;
 		}
 
 		if (!pc.getInventory().checkItem(400254, price)) {
-			pc.sendPackets(new S_ChatPacket(pc, "수표가 부족합니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "小切手が不足します。"));
 			return false;
 		}
 		int currentWeight = pc.getInventory().getWeight() * 1000;
@@ -541,7 +541,7 @@ public class L1Shop {
 
 	private void 수표상점2(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(400254, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 수표를 소비할 수 없습니다.");
+			throw new IllegalStateException("購入に必要なチェックを消費することはできません。");
 		}
 		L1ItemInstance item = null;
 		for (L1ShopBuyOrder order : orderList.getList()) {
@@ -555,15 +555,15 @@ public class L1Shop {
 	}
 	
 	private boolean 금빛상점1(L1PcInstance pc, L1ShopBuyOrderList orderList) {
-		// 행베리
+		// 行ベリー
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 90000000)) {
-			pc.sendPackets(new S_SystemMessage("금빛깃털은 한번에 9,000만개 이상 사용할 수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("金色の羽は、一度に9,000万個以上使用することができません。"));
 			return false;
 		}
 
 		if (!pc.getInventory().checkItem(41921, price)) {
-			pc.sendPackets(new S_ChatPacket(pc, "픽시의 금빛깃털이 부족합니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "ピクシーの金色の羽が不足します。"));
 			return false;
 		}
 		int currentWeight = pc.getInventory().getWeight() * 1000;
@@ -596,7 +596,7 @@ public class L1Shop {
 
 	private void 금빛상점2(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(41921, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 픽시의 금빛깃털을 소비할 수 없습니다.");
+			throw new IllegalStateException("購入に必要なピクシーの金色の羽を消費することはできません。");
 		}
 		L1ItemInstance item = null;
 		for (L1ShopBuyOrder order : orderList.getList()) {
@@ -615,11 +615,11 @@ public class L1Shop {
 	private boolean NcoinSell(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 50000000)) {
-			pc.sendPackets(new S_SystemMessage("이상점은 한번에 50,000,000만 이상 사용할수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("以上点は、一度に50万万以上使用することができません。"));
 			return false;
 		}
 		if (!pc.getInventory().checkItem(40308, price)) {
-			pc.sendPackets(new S_SystemMessage("아데나가 부족합니다."));
+			pc.sendPackets(new S_SystemMessage("アデナが不足します。"));
 			return false;
 		}
 
@@ -632,7 +632,7 @@ public class L1Shop {
 
 	private void NcoinSellItems(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		if (!pc.getInventory().consumeItem(40308, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 아데나를 소비 할 수 없습니다.");
+			throw new IllegalStateException("購入に必要なアデナを消費することはできません。");
 		}
 
 		for (L1ShopBuyOrder order : orderList.getList()) {
@@ -642,10 +642,10 @@ public class L1Shop {
 
 			PackageWarehouse.itemshop(pc.getAccountName(), itemId,enchant,count);
 			pc.saveInventory();
-//			System.out.println("계정명 : "+ pc.getAccountName() + " 아이템번호 : "+ itemId + " 인첸트 : " + enchant + " 카운터 " + count);
+//			System.out.println("アカウント名 : "+ pc.getAccountName() + " 商品番号 : "+ itemId + " エンチャント : " + enchant + " 카운터 " + count);
 		}
-		pc.sendPackets(new S_SystemMessage("\\fY 아덴상점에서 구입하신 아이템은 TAB키를 눌러서 "));
-		pc.sendPackets(new S_SystemMessage("\\fY 부가 아이템 창고에서 찾을수있습니다."));
+		pc.sendPackets(new S_SystemMessage("\\fY アデン店で購入したアイテムはTABキーを押して "));
+		pc.sendPackets(new S_SystemMessage("\\fY 付加アイテム倉庫から検索できます。"));
 	}
 		
 
@@ -693,7 +693,7 @@ public class L1Shop {
 
 	private void NpcShopSellItems(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(L1ItemId.ADENA, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 아데나를 소비 할 수 없습니다.");
+			throw new IllegalStateException("購入に必要なアデナを消費することはできません。");
 		}
 		L1ItemInstance item = null;
 		boolean[] isRemoveFromList = new boolean[8];
@@ -727,8 +727,8 @@ public class L1Shop {
 
 	private void sellMarkItems(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(410093, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 만월의정기를 소비할 수 없습니다.");
-		}// 신묘년
+			throw new IllegalStateException("購入に必要な満月の定期を消費することはできません。");
+		}// 辛卯年
 		L1ItemInstance item = null;
 		for (L1ShopBuyOrder order : orderList.getList()) {
 			int itemId = order.getItem().getItemId();
@@ -743,15 +743,15 @@ public class L1Shop {
 	}
 
 	private boolean ensureMarkSell2(L1PcInstance pc, L1ShopBuyOrderList orderList) {
-		// 행베리
+		// 行ベリー
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 90000000)) {
-			pc.sendPackets(new S_SystemMessage("베리는 한번에 9,000만개 이상 사용할 수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("ベリーは、一度に9,000万本以上を使用することができません。"));
 			return false;
 		}
 
 		if (!pc.getInventory().checkItem(41302, price)) {
-			pc.sendPackets(new S_ChatPacket(pc, "베리가 부족합니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "ベリーが不足します。"));
 			return false;
 		}
 		int currentWeight = pc.getInventory().getWeight() * 1000;
@@ -784,8 +784,8 @@ public class L1Shop {
 
 	private void sellMarkItems2(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(41302, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 베리를 소비할 수 없습니다.");
-		}// 행베리
+			throw new IllegalStateException("購入に必要なベリーを消費することはできません。");
+		}// 行ベリー
 		L1ItemInstance item = null;
 		for (L1ShopBuyOrder order : orderList.getList()) {
 			int itemId = order.getItem().getItemId();
@@ -800,12 +800,12 @@ public class L1Shop {
 	private boolean 탐상인1(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 9000000)) {
-//			pc.sendPackets(new S_SystemMessage("시스템: TAM은 한번에 900만개 이상 사용할 수 없습니다."));
+//			pc.sendPackets(new S_SystemMessage("システム: TAMは一度900万個以上使用することができません。"));
 			return false;
 		}
 		if (pc.getAccount().getTamPoint() < price){
-			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\fC시스템: TAM이 부족합니다."));	
-			pc.sendPackets(new S_ChatPacket(pc, "시스템: TAM이 부족합니다."));
+			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\fCシステム：TAMが不足します。"));	
+			pc.sendPackets(new S_ChatPacket(pc, "システム：TAMが不足します。"));
 			return false;
 		}
 		
@@ -839,7 +839,7 @@ public class L1Shop {
 
 	private void 탐상인2(L1PcInstance pc, L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (inv.getOwner().getNetConnection().getAccount().tam_point < orderList.getTotalPrice()) {
-			throw new IllegalStateException("구입에 필요한 탐이 부족합니다.");
+			throw new IllegalStateException("購入に必要な乗車が不足します。");
 		}
 		if (orderList.getTotalPrice() <= pc.getAccount().getTamPoint()) {
 			pc.getAccount().addTamPoint(-(orderList.getTotalPrice()));
@@ -863,7 +863,7 @@ public class L1Shop {
 
 	private void sellCashItems1(L1PcInstance pc, L1PcInventory inv, L1ShopBuyOrderList orderList, int npcId) {
 		if (!inv.consumeItem(npcId - 5299999, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 안전코인을 소비할 수 없었습니다.");
+			throw new IllegalStateException("購入に必要な安全コインを消費することができませんでした。");
 		}
 		L1ItemInstance item = null;
 		for (L1ShopBuyOrder order : orderList.getList()) {
@@ -881,7 +881,7 @@ public class L1Shop {
 
 	private void sellCashItems2(L1PcInstance pc, L1PcInventory inv, L1ShopBuyOrderList orderList, int npcId) {
 		if (!inv.consumeItem(npcId - 5299999, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 안전코인을 소비할 수 없었습니다.");
+			throw new IllegalStateException("購入に必要な安全コインを消費することができませんでした。");
 		}
 		L1ItemInstance item = null;
 		for (L1ShopBuyOrder order : orderList.getList()) {
@@ -899,7 +899,7 @@ public class L1Shop {
 
 	private void sellCashItems3(L1PcInstance pc, L1PcInventory inv, L1ShopBuyOrderList orderList, int npcId) {
 		if (!inv.consumeItem(npcId - 5299999, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 안전코인을 소비할 수 없었습니다.");
+			throw new IllegalStateException("購入に必要な安全コインを消費することができませんでした。");
 		}
 		L1ItemInstance item = null;
 		for (L1ShopBuyOrder order : orderList.getList()) {
@@ -917,7 +917,7 @@ public class L1Shop {
 	
 	private void sellCashItems4(L1PcInstance pc, L1PcInventory inv, L1ShopBuyOrderList orderList, int npcId) {
 		if (!inv.consumeItem(747, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 장비 코인을 소비할 수 없었습니다.");
+			throw new IllegalStateException("購入機器のコインを消費することができませんでした。");
 		}
 		L1ItemInstance item = null;
 		for (L1ShopBuyOrder order : orderList.getList()) {
@@ -937,16 +937,16 @@ public class L1Shop {
 		int price = orderList.getTotalPrice();
 		// 9000001 - 5299999 =
 		if (!pc.getInventory().checkItem(npcId - 5299999, price)) {
-			pc.sendPackets(new S_SystemMessage("\\aA[GM]: \\aG코인이 부족합니다."));
+			pc.sendPackets(new S_SystemMessage("\\aA[GM]: \\aGコインが不足します。"));
 			return false;
 		}
 		int currentWeight = pc.getInventory().getWeight() * 1000;
 		if (currentWeight + orderList.getTotalWeight() > pc.getMaxWeight() * 1000) {
-			// 아이템이 너무 무거워, 더 이상 가질 수 없습니다.
+			// アイテムが重すぎる、もはや持つことができません。
 			pc.sendPackets(new S_ServerMessage(82));
 			return false;
 		}
-		// 개수 체크
+		// 数チェック
 		int totalCount = pc.getInventory().getSize();
 		for (L1ShopBuyOrder order : orderList.getList()) {
 			L1Item temp = order.getItem().getItem();
@@ -959,7 +959,7 @@ public class L1Shop {
 			}
 		}
 		if (totalCount > 180) {
-			// \f1한사람의 캐릭터가 가지고 걸을 수 있는 아이템은 최대 180개까지입니다.
+			// \f1一人のキャラクターが持って歩くことができるアイテムは最大180個までです。
 			pc.sendPackets(new S_ServerMessage(263));
 			return false;
 		}
@@ -974,16 +974,16 @@ public class L1Shop {
 		int price = orderList.getTotalPrice();
 
 		if (!pc.getInventory().checkItem(npcId - 5299999, price)) {
-			pc.sendPackets(new S_SystemMessage("\\aA[GM]: \\aG코인이 부족합니다."));
+			pc.sendPackets(new S_SystemMessage("\\aA[GM]: \\aGコインが不足します。"));
 			return false;
 		}
 		int currentWeight = pc.getInventory().getWeight() * 1000;
 		if (currentWeight + orderList.getTotalWeight() > pc.getMaxWeight() * 1000) {
-			// 아이템이 너무 무거워, 더 이상 가질 수 없습니다.
+			// アイテムが重すぎる、もはや持つことができません。
 			pc.sendPackets(new S_ServerMessage(82));
 			return false;
 		}
-		// 개수 체크
+		// 数チェック
 		int totalCount = pc.getInventory().getSize();
 		for (L1ShopBuyOrder order : orderList.getList()) {
 			L1Item temp = order.getItem().getItem();
@@ -996,7 +996,7 @@ public class L1Shop {
 			}
 		}
 		if (totalCount > 180) {
-			// \f1한사람의 캐릭터가 가지고 걸을 수 있는 아이템은 최대 180개까지입니다.
+			// \f1一人のキャラクターが持って歩くことができるアイテムは最大180個までです。
 			pc.sendPackets(new S_ServerMessage(263));
 			return false;
 		}
@@ -1011,16 +1011,16 @@ public class L1Shop {
 		int price = orderList.getTotalPrice();
 
 		if (!pc.getInventory().checkItem(npcId - 5299999, price)) {
-			pc.sendPackets(new S_SystemMessage("\\aA[GM]: \\aG코인이 부족합니다."));
+			pc.sendPackets(new S_SystemMessage("\\aA[GM]: \\aGコインが不足します。"));
 			return false;
 		}
 		int currentWeight = pc.getInventory().getWeight() * 1000;
 		if (currentWeight + orderList.getTotalWeight() > pc.getMaxWeight() * 1000) {
-			// 아이템이 너무 무거워, 더 이상 가질 수 없습니다.
+			// アイテムが重すぎる、もはや持つことができません。
 			pc.sendPackets(new S_ServerMessage(82));
 			return false;
 		}
-		// 개수 체크
+		// 数チェック
 		int totalCount = pc.getInventory().getSize();
 		for (L1ShopBuyOrder order : orderList.getList()) {
 			L1Item temp = order.getItem().getItem();
@@ -1033,7 +1033,7 @@ public class L1Shop {
 			}
 		}
 		if (totalCount > 180) {
-			// \f1한사람의 캐릭터가 가지고 걸을 수 있는 아이템은 최대 180개까지입니다.
+			// \f1一人のキャラクターが持って歩くことができるアイテムは最大180個までです。
 			pc.sendPackets(new S_ServerMessage(263));
 			return false;
 		}
@@ -1048,16 +1048,16 @@ public class L1Shop {
 		int price = orderList.getTotalPrice();
 
 		if (!pc.getInventory().checkItem(747, price)) {
-			pc.sendPackets(new S_SystemMessage("장비코인이 부족합니다."));
+			pc.sendPackets(new S_SystemMessage("機器コインが不足します。"));
 			return false;
 		}
 		int currentWeight = pc.getInventory().getWeight() * 1000;
 		if (currentWeight + orderList.getTotalWeight() > pc.getMaxWeight() * 1000) {
-			// 아이템이 너무 무거워, 더 이상 가질 수 없습니다.
+			//アイテムが重すぎる、もはや持つことができません。
 			pc.sendPackets(new S_ServerMessage(82));
 			return false;
 		}
-		// 개수 체크
+		// 数チェック
 		int totalCount = pc.getInventory().getSize();
 		for (L1ShopBuyOrder order : orderList.getList()) {
 			L1Item temp = order.getItem().getItem();
@@ -1070,7 +1070,7 @@ public class L1Shop {
 			}
 		}
 		if (totalCount > 180) {
-			// \f1한사람의 캐릭터가 가지고 걸을 수 있는 아이템은 최대 180개까지입니다.
+			// \f1一人のキャラクターが持って歩くことができるアイテムは最大180個までです。
 			pc.sendPackets(new S_ServerMessage(263));
 			return false;
 		}
@@ -1082,10 +1082,10 @@ public class L1Shop {
 	}
 
 	private boolean ensureMarkSell(L1PcInstance pc, L1ShopBuyOrderList orderList) {
-		// 신묘년
+		// 辛卯年
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 1000)) {
-			pc.sendPackets(new S_SystemMessage("만월의 정기는 한번에 1,000개 이상 사용할 수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("満月の定期は、一度に1,000個以上使用することができません。"));
 			return false;
 		}
 
@@ -1125,12 +1125,12 @@ public class L1Shop {
 
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 50000)) {
-			pc.sendPackets(new S_ChatPacket(pc, "한번에 50,000개 이상 사용할 수 없습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "一度50,000以上使用することができません。"));
 			return false;
 		}
 
 		if (!pc.getInventory().checkItem(3000032, price)) {
-			pc.sendPackets(new S_ChatPacket(pc, "징표가 부족합니다."));
+			pc.sendPackets(new S_ChatPacket(pc, "兆候が不足します。"));
 
 			return false;
 		}

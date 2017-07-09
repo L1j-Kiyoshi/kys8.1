@@ -1,8 +1,8 @@
 package l1j.server.server.model.poison;
 
-import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.model.L1Character;
 import l1j.server.server.model.Instance.L1PcInstance;
+import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_ServerMessage;
 
 public abstract class L1Poison {
@@ -27,12 +27,12 @@ public abstract class L1Poison {
 		}
 
 		L1PcInstance player = (L1PcInstance) cha;
-		if (player.getInventory().checkEquipped(20298)//제니스의반지
-				|| player.getInventory().checkEquipped(20117)//바포메트의 갑옷
-				|| player.getInventory().checkEquipped(22196)//안타라스의 완력
-				|| player.getInventory().checkEquipped(22197)//안타라스의 예지력
-				|| player.getInventory().checkEquipped(22198)//안타라스의 인내력
-				|| player.getInventory().checkEquipped(22199)//안타라스의 마력
+		if (player.getInventory().checkEquipped(20298)//ゼニスのリング
+				|| player.getInventory().checkEquipped(20117)//バフォメットアーマー
+				|| player.getInventory().checkEquipped(22196)//アンタラスの腕力
+				|| player.getInventory().checkEquipped(22197)//アンタラスの先見の明
+				|| player.getInventory().checkEquipped(22198)//アンタラスの忍耐力
+				|| player.getInventory().checkEquipped(22199)//アンタラスの魔力
 				|| player.hasSkillEffect(L1SkillId.VENOM_RESIST)) {
 			return false;
 		} 

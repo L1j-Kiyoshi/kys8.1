@@ -14,7 +14,7 @@ public class omanTel {
 		int newY = newLocation.getY();
 		short mapId = (short) newLocation.getMapId();
 		if (pc.get_DuelLine() != 0) {
-			pc.sendPackets(new S_SystemMessage("배틀존지역에서 사용할 수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 			return;
 		}
 		if (pc.isParalyzed() || pc.isSleeped() || pc.isDead()) {
@@ -29,7 +29,7 @@ public class omanTel {
 			return;
 		
 		switch (itemId) {
-		case 830001: //오만의 탑 1층 이동 주문서
+		case 830001: //傲慢の塔1階テレポートスクロール
 			if (pc.getMapId() == 101) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 			} else {
@@ -37,7 +37,7 @@ public class omanTel {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830002: //오만의 탑 2층 이동 주문서
+		case 830002: //傲慢の塔2階テレポートスクロール
 			if (pc.getMapId() == 102) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 			} else {
@@ -45,7 +45,7 @@ public class omanTel {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830003: //오만의 탑 3층 이동 주문서
+		case 830003: //傲慢の塔3階テレポートスクロール
 			if (pc.getMapId() == 103) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 			} else {
@@ -53,7 +53,7 @@ public class omanTel {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830004: //오만의 탑 4층 이동 주문서
+		case 830004: //傲慢の塔4階テレポートスクロール
 			if (pc.getMapId() == 104) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 
@@ -62,7 +62,7 @@ public class omanTel {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830005: //오만의 탑 5층 이동 주문서
+		case 830005: //傲慢の塔5階テレポートスクロール
 			if (pc.getMapId() == 105) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 				
@@ -71,7 +71,7 @@ public class omanTel {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830006: //오만의 탑 6층 이동 주문서
+		case 830006: //傲慢の塔6階テレポートスクロール
 			if (pc.getMapId() == 106) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 				
@@ -80,7 +80,7 @@ public class omanTel {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830007: //오만의 탑 7층 이동 주문서
+		case 830007: //傲慢の塔7階テレポートスクロール
 			if (pc.getMapId() == 107) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 			
@@ -89,7 +89,7 @@ public class omanTel {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830008: //오만의 탑 8층 이동 주문서
+		case 830008: //傲慢の塔8階テレポートスクロール
 			if (pc.getMapId() == 108) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 				
@@ -98,7 +98,7 @@ public class omanTel {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830009: //오만의 탑 9층 이동 주문서
+		case 830009: //傲慢の塔9階テレポートスクロール
 			if (pc.getMapId() == 109) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 				
@@ -107,7 +107,7 @@ public class omanTel {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830010: //오만의 탑 10층 이동 주문서
+		case 830010: //傲慢の塔10階テレポートスクロール
 			if (pc.getMapId() == 110) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 				
@@ -116,7 +116,7 @@ public class omanTel {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 830011: //오만의 탑 정상 이동 주문서
+		case 830011: //傲慢の塔頂上テレポートスクロール
 			if (pc.getMapId() == 200) {
 				new L1Teleport().teleport(pc, newX, newY, mapId, pc.getHeading(), true);
 				

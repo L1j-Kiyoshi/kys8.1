@@ -13,8 +13,8 @@ public class RestoreItem {
 			System.out.println("PCID : "+pc.getId()+" itemid : "+item.getItemId());
 			
 			String itemName =  " "+ItemTable.getInstance().findItemIdByName(item.getItemId());
-			String msg = "+"+item.getEnchantLevel()+itemName+"을 복구하시겟습니까?";
-			// pc.sendPackets(new S_Message_YN(2000, "+"+item.getEnchantLevel()+" "+itemName+"를 복구하시겠습니까?"));
+			String msg = "+"+item.getEnchantLevel()+itemName+"を回復希望ゲットか？";
+			// pc.sendPackets(new S_Message_YN(2000, "+"+item.getEnchantLevel()+" "+itemName+"を修復しますか？"));
 			 pc.isRestore = true;
 			 pc.sendPackets(new S_Message_YN(622,msg));
 		}

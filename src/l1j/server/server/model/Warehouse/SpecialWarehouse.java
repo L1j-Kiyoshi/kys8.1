@@ -10,14 +10,12 @@ import java.util.logging.Logger;
 
 import l1j.server.Config;
 import l1j.server.L1DatabaseFactory;
-import l1j.server.server.datatables.ItemTable;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1ItemInstance;
-import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.templates.L1Item;
 import l1j.server.server.utils.SQLUtil;
 
-// 특수창고
+// 特殊倉庫
 public class SpecialWarehouse extends Warehouse {
 	private static final long serialVersionUID = 1L;
 	protected static Logger _log = Logger.getLogger(SpecialWarehouse.class
@@ -60,7 +58,7 @@ public class SpecialWarehouse extends Warehouse {
 			L1ItemInstance item = null;
 			L1Item itemTemplate = null;
 			
-			//창고복사방지
+			//倉庫コピー防止
 			HashMap<Integer, L1ItemInstance> _stackableItems = new HashMap<Integer, L1ItemInstance>();
 			int orderid = 0;
 			
@@ -84,7 +82,7 @@ public class SpecialWarehouse extends Warehouse {
 				_items.add(item);
 				L1World.getInstance().storeObject(item);
 				
-				//수량성의 경우 순번을 부여하여 리스트에 등록
+				//数量性の場合順番を付与してリストに登録
 				if(item.isStackable()){
 					_stackableItems.put(orderid, item);
 					orderid++;
@@ -98,7 +96,7 @@ public class SpecialWarehouse extends Warehouse {
 							if (baseitem.getId() != _stackableItems.get(i).getId()) {
 								L1World.getInstance().removeObject(baseitem);
 								deleteItem(baseitem);
-								System.out.println("스페셜 복사의심 계정 [" + getName() + "]의 정보를 확인바랍니다.");
+								System.out.println("スペシャルコピーの疑いアカウント[" + getName() + "]の情報をご確認ください。");
 								break;
 							}else{
 								break;

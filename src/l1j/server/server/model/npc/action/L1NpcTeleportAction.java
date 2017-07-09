@@ -18,6 +18,8 @@
  */
 package l1j.server.server.model.npc.action;
 
+import org.w3c.dom.Element;
+
 import l1j.server.server.model.L1Location;
 import l1j.server.server.model.L1Object;
 import l1j.server.server.model.L1Teleport;
@@ -26,8 +28,6 @@ import l1j.server.server.model.item.L1ItemId;
 import l1j.server.server.model.npc.L1NpcHtml;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_ServerMessage;
-
-import org.w3c.dom.Element;
 
 public class L1NpcTeleportAction extends L1NpcXmlAction {
 	private final L1Location _loc;
@@ -56,7 +56,7 @@ public class L1NpcTeleportAction extends L1NpcXmlAction {
 		
 		
 		if (_loc.getMapId() == 2010 && (!(pc.getLevel() >= 45 && pc.getLevel() <= 51))){
-			//폭풍 수련지역
+			//嵐修練地域
 			return L1NpcHtml.HTML_CLOSE;
 		}
 		
@@ -81,6 +81,6 @@ public class L1NpcTeleportAction extends L1NpcXmlAction {
 			new L1Teleport().teleport(pc, location.getX(), location.getY(), (short) location.getMapId(), _heading, _effect);
 			//return L1NpcHtml.HTML_CLOSE;
 
-		return null; // 팅방지
+		return null; // ティング防止
 	}
 }

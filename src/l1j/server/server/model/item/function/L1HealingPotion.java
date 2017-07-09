@@ -14,8 +14,7 @@
  */
 package l1j.server.server.model.item.function;
 
-import static l1j.server.server.model.skill.L1SkillId.PAP_DEATH_PORTION;
-import static l1j.server.server.model.skill.L1SkillId.POLLUTE_WATER;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.io.File;
 import java.util.HashMap;
@@ -127,7 +126,7 @@ public class L1HealingPotion {
 
 	private static void loadXml(HashMap<Integer, L1HealingPotion> dataMap) {
 //		PerformanceTimer timer = new PerformanceTimer();
-//		System.out.print("■ 물약회복량 데이터 .......................... ");
+//		System.out.print("■ ポーション回復量データ .......................... ");
 		try {
 			JAXBContext context = JAXBContext.newInstance(L1HealingPotion.ItemEffectList.class);
 
@@ -138,16 +137,16 @@ public class L1HealingPotion {
 
 			for (L1HealingPotion each : list) {
 				if (ItemTable.getInstance().getTemplate(each.getItemId()) == null) {
-					System.out.print("아이템 ID " + each.getItemId() + " 의 템플릿이 발견되지 않았습니다.");
+					System.out.print("アイテムID" + each.getItemId() + "のテンプレートが見つかりませんでした。");
 				} else {
 					dataMap.put(each.getItemId(), each);
 				}
 			}
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, _path + "의 로드에 실패.", e);
+			_log.log(Level.SEVERE, _path + "のロードに失敗しまし", e);
 			System.exit(0);
 		}
-//		System.out.println("■ 로딩 정상 완료 " + timer.get() + "ms");
+//		System.out.println("■ ロード正常終了」+ timer.get（）+ "ms"）;
 	}
 
 	public static void load() {
@@ -161,8 +160,8 @@ public class L1HealingPotion {
 	}
 
 	public boolean use(L1PcInstance pc, L1ItemInstance item) {
-		if (pc.hasSkillEffect(71) == true) {  // 디케이포션 상태
-			pc.sendPackets(new S_ServerMessage(698)); // 마력에 의해 아무것도 마실 수가 없습니다.
+		if (pc.hasSkillEffect(71) == true) {  // ディケイポーションの状態
+			pc.sendPackets(new S_ServerMessage(698)); // 魔力によって何も飲むことができません。
 			return false;
 		}
 
@@ -191,7 +190,7 @@ public class L1HealingPotion {
 		
 		pc.sendPackets(new S_SkillSound(pc.getId(), effect.getGfxId()));
 		pc.broadcastPacket(new S_SkillSound(pc.getId(), effect.getGfxId()));
-		//pc.sendPackets(new S_ServerMessage(77)); // \f1기분이 좋아졌습니다.
+		//pc.sendPackets(new S_ServerMessage(77)); // \f1気分が良くなりました。
 		
 		int chance = effect.getMax() - effect.getMin();
 		double healHp = effect.getMin();
@@ -199,10 +198,10 @@ public class L1HealingPotion {
 			healHp += _random.nextInt(chance) + 1;
 		}
 		healHp *= (double) pc.getPotionRecoveryRatePct() / 100 + 1;
-		if (pc.hasSkillEffect(POLLUTE_WATER) || pc.hasSkillEffect(L1SkillId.DESPERADO)) { // 데스페라도, 폴루트워터 물약 회복량 반감
+		if (pc.hasSkillEffect(POLLUTE_WATER) || pc.hasSkillEffect(L1SkillId.DESPERADO)) { //デスペラード、ポールルートウォーターポーション回復量半減
 			healHp *= 0.3;
 		}
-		if (pc.hasSkillEffect(PAP_DEATH_PORTION)) {  // 데스포션
+		if (pc.hasSkillEffect(PAP_DEATH_PORTION)) {  // デスポーション
 			L1Character cha = null;
 			pc.sendPackets(new S_ServerMessage(167)); 
 			pc.setCurrentHp(pc.getCurrentHp() - (int)healHp);
@@ -215,28 +214,28 @@ public class L1HealingPotion {
 				npc.broadcastPacket(new S_SkillSound(cha.getId(), 7781));
 			}
 		}
-		/** 회복의문장 **/
+		/** 回復の文章 **/
 		if (pc.getInventory().checkEquipped(900021)){
 			int upHp = 0;
 			int cnt_enchant = pc.getInventory().getEnchantCount(900021);
 			upHp = 1 * (cnt_enchant + 1);
 			healHp = healHp * (upHp + 100) / 100 + upHp;
 		}
-		/** 완력의문장 **/
+		/** 腕力の文章 **/
 		if (pc.getInventory().checkEquipped(222352)){
 			int upHp = 0;
 			int cnt_enchant = pc.getInventory().getEnchantCount(222352);
 			upHp = 1 * (cnt_enchant + 1);
 			healHp = healHp * (upHp + 100) / 100 + upHp;
 		}
-		/** 민첩의문장 **/
+		/** アジャイルの文章 **/
 		if (pc.getInventory().checkEquipped(222353)){
 			int upHp = 0;
 			int cnt_enchant = pc.getInventory().getEnchantCount(222352);
 			upHp = 1 * (cnt_enchant + 1);
 			healHp = healHp * (upHp + 100) / 100 + upHp;
 		}
-		/** 지식의문장 **/
+		/** 知識の文章 **/
 		if (pc.getInventory().checkEquipped(222354)){
 			int upHp = 0;
 			int cnt_enchant = pc.getInventory().getEnchantCount(222354);
@@ -258,7 +257,7 @@ public class L1HealingPotion {
 		}
 		
 		pc.setCurrentHp(pc.getCurrentHp() + (int) healHp);
-		//System.out.println("물약 회복량 : " + healHp);
+		//System.out.println("ポーション回復量： "+ healHp）;
 		if (getRemove() > 0) {
 			if (chargeCount > 0) {
 				item.setChargeCount(chargeCount - getRemove());
@@ -271,7 +270,7 @@ public class L1HealingPotion {
 		return true;
 	}
 
-	private void cancelAbsoluteBarrier(L1PcInstance pc) { // 아브소르트바리아의 해제
+	private void cancelAbsoluteBarrier(L1PcInstance pc) { // アブ小ガルトバリアの解除
 		if (pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) {
 			pc.killSkillEffectTimer(L1SkillId.ABSOLUTE_BARRIER);
 			pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 43, false));

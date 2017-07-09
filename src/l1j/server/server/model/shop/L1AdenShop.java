@@ -25,11 +25,11 @@ public class L1AdenShop {
 	private boolean NcoinSell(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 50000000)) {
-			pc.sendPackets(new S_SystemMessage("이상점은 한번에 50,000,000만 이상 사용할수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("以上点は、一度に50万以上使用することができません。"));
 			return false;
 		}
 		if (!pc.getInventory().checkItem(40308, price)) {
-			pc.sendPackets(new S_SystemMessage("아데나가 부족합니다."));
+			pc.sendPackets(new S_SystemMessage("アデナが不足します。"));
 			return false;
 		}
 
@@ -42,7 +42,7 @@ public class L1AdenShop {
 
 	private void NcoinSellItems(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		if (!pc.getInventory().consumeItem(40308, orderList.getTotalPrice())) {
-			throw new IllegalStateException("구입에 필요한 아데나를 소비 할 수 없습니다.");
+			throw new IllegalStateException("購入に必要なアデナを消費することはできません。");
 		}
 
 		for (L1ShopBuyOrder order : orderList.getList()) {
@@ -52,10 +52,10 @@ public class L1AdenShop {
 
 			PackageWarehouse.itemshop(pc.getAccountName(), itemId,enchant,count);
 			pc.saveInventory();
-//			System.out.println("계정명 : "+ pc.getAccountName() + " 아이템번호 : "+ itemId + " 인첸트 : " + enchant + " 카운터 " + count);
+//			System.out.println("アカウント名 : "+ pc.getAccountName() + " 商品番号 : "+ itemId + " エンチャント : " + enchant + " カウンター "+ count）;
 		}
-		pc.sendPackets(new S_SystemMessage("\\fY 아덴상점에서 구입하신 아이템은 TAB키를 눌러서 "));
-		pc.sendPackets(new S_SystemMessage("\\fY 부가 아이템 창고에서 찾을수있습니다."));
+		pc.sendPackets(new S_SystemMessage("\\fY アデン店で購入したアイテムはTABキーを押して "));
+		pc.sendPackets(new S_SystemMessage("\\fY 付加アイテム倉庫から検索できます。"));
 	}
 	
 	private int _totalPrice = 0;
@@ -89,13 +89,13 @@ public class L1AdenShop {
 	}
 
 	public boolean BugOk() {
-		// TODO 자동 생성된 메소드 스텁
+		// TODO 自動生成されたメソッド・スタブ
 		return bugok;
 	}
 
 	public boolean commit(L1PcInstance pc) {
 		if (pc.getNcoin() < _totalPrice) {
-			pc.sendPackets(new S_SystemMessage("N코인이 부족합니다."), true);
+			pc.sendPackets(new S_SystemMessage("Nコインが不足します。"), true);
 			return false;
 		}
 
