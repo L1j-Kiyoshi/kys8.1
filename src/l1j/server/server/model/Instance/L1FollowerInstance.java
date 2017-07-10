@@ -1,6 +1,7 @@
 package l1j.server.server.model.Instance;
 
 import java.lang.reflect.Constructor;
+
 import l1j.server.server.IdFactory;
 import l1j.server.server.datatables.ItemTable;
 import l1j.server.server.datatables.NpcTable;
@@ -10,7 +11,6 @@ import l1j.server.server.model.L1Inventory;
 import l1j.server.server.model.L1Object;
 import l1j.server.server.model.L1Quest;
 import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.serverpackets.S_FollowerPack;
 import l1j.server.server.serverpackets.S_NPCTalkReturn;
 import l1j.server.server.serverpackets.S_ServerMessage;
@@ -29,8 +29,8 @@ public class L1FollowerInstance extends L1NpcInstance {
 			if (object instanceof L1NpcInstance) {
 				npc = (L1NpcInstance) object;
 				switch(npc.getNpcTemplate(). get_npcId()){
-				case 70740: //디가르뎅의 병사
-				case 71093: //조사원
+				case 70740: //ディカルダンの兵士
+				case 71093: //調査員
 					setParalyzed(true);
 					pc = (L1PcInstance) _master;
 					if (!pc.getInventory().checkItem(40593)) {
@@ -38,7 +38,7 @@ public class L1FollowerInstance extends L1NpcInstance {
 					}
 					deleteMe();
 					return true;
-				case 71094: //엔디아
+				case 71094: //エンディア
 					setParalyzed(true);
 					pc = (L1PcInstance) _master;
 					if (!pc.getInventory().checkItem(40582)) {
@@ -50,7 +50,7 @@ public class L1FollowerInstance extends L1NpcInstance {
 				case 71062:
 					if (getLocation().getTileLineDistance(_master.getLocation()) < 3) {
 						pc = (L1PcInstance) _master;
-						if ((pc.getX() >= 32448 && pc.getX() <= 32452) // 모퉁이 모스 주변 좌표
+						if ((pc.getX() >= 32448 && pc.getX() <= 32452) // 角モス周辺の座標
 								&& (pc.getY() >= 33048 && pc.getY() <= 33052) && (pc.getMapId() == 440)) {
 							setParalyzed(true);
 							if (!pc.getInventory().checkItem(40711)) {
@@ -64,10 +64,10 @@ public class L1FollowerInstance extends L1NpcInstance {
 					break;
 				case 71074:
 				case 71075:
-					// 완전히 지쳐 버린 리자드만파이타
+					// 完全に疲れてしまったリザード万ファイター
 					if (getLocation().getTileLineDistance(_master.getLocation()) < 3) {
 						pc = (L1PcInstance) _master;
-						if ((pc.getX() >= 32731 && pc.getX() <= 32735) // 리자드만장로 주변
+						if ((pc.getX() >= 32731 && pc.getX() <= 32735) // リザード万枚で周辺
 			
 								&& (pc.getY() >= 32854 && pc.getY() <= 32858) && (pc.getMapId() == 480)) {
 							setParalyzed(true);
@@ -84,8 +84,8 @@ public class L1FollowerInstance extends L1NpcInstance {
 				case 70957:
 					if (getLocation().getTileLineDistance(_master.getLocation()) < 3) {
 						pc = (L1PcInstance) _master;
-						if ((pc.getX() >= 32917 && pc.getX() <= 32921) // 밧슈 주변
-																		// 좌표
+						if ((pc.getX() >= 32917 && pc.getX() <= 32921) // バッシュ周辺
+																		// 座標
 								&& (pc.getY() >= 32974 && pc.getY() <= 32978) && (pc.getMapId() == 410)) {
 							setParalyzed(true);
 							createNewItem(pc, 41003, 1);
@@ -246,7 +246,7 @@ public class L1FollowerInstance extends L1NpcInstance {
 				L1QuestInstance newnpc = (L1QuestInstance) object;
 				newnpc.onNpcAI();
 				newnpc.getLight().turnOnOffLight();
-				newnpc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+				newnpc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // チャット開始
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

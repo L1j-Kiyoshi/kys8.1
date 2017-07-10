@@ -42,13 +42,13 @@ public class L1BoardInstance extends L1NpcInstance {
 
 	@Override
 	public void onAction(L1PcInstance player) {
-		if (this.getNpcTemplate().get_npcId() == 999999) {// 버그베어 승률 게시판
-			if (BugRaceController.getInstance().getBugState() == 0) { // 표판매중
+		if (this.getNpcTemplate().get_npcId() == 999999) {// バグベア勝率掲示板
+			if (BugRaceController.getInstance().getBugState() == 0) { // 表販売中
 				player.sendPackets(new S_Board(this));
-			} else if (BugRaceController.getInstance().getBugState() == 1) { // 경기중
-				player.sendPackets(new S_ChatPacket(player, "경기 중에는 보실 수 없습니다."));
-			} else if (BugRaceController.getInstance().getBugState() == 2) { // 다음경기준비중
-				player.sendPackets(new S_ChatPacket(player, "다음 경기를 준비 중 입니다."));
+			} else if (BugRaceController.getInstance().getBugState() == 1) { // 試合中
+				player.sendPackets(new S_ChatPacket(player, "試合中に見ることができません。"));
+			} else if (BugRaceController.getInstance().getBugState() == 2) { // 次の試合準備中
+				player.sendPackets(new S_ChatPacket(player, "次の試合の準備をしています。"));
 			}
 		} else {
 			player.sendPackets(new S_Board(this));
@@ -60,20 +60,20 @@ public class L1BoardInstance extends L1NpcInstance {
 	}
 
 	public void onActionRead(L1PcInstance player, int number) {
-		if (this.getNpcTemplate().get_npcId() == 500001) {// 랭킹 게시판
+		if (this.getNpcTemplate().get_npcId() == 500001) {// ランキング掲示板
 			player.sendPackets(new S_Ranking(player, number));
-		} else if (this.getNpcTemplate().get_npcId() == 4200013) {// 인챈 게시판
+		} else if (this.getNpcTemplate().get_npcId() == 4200013) {//エンチャント掲示板
 			player.sendPackets(new S_EnchantRanking(player, number));
 
 		} else {
-			if (this.getNpcTemplate().get_npcId() == 500002) {//건의사항
+			if (this.getNpcTemplate().get_npcId() == 500002) {//提案
 				if (!player.isGm()) {
-					player.sendPackets(new S_SystemMessage("운영자만 열람할 수 있습니다."));
+					player.sendPackets(new S_SystemMessage("オペレータのみ閲覧することができます。"));
 					return;
 				}
 			} else if (this.getNpcTemplate().get_npcId() == 9200036) {
 				if (!player.isGm()) {
-					player.sendPackets(new S_SystemMessage("운영자만 열람할 수 있습니다."));
+					player.sendPackets(new S_SystemMessage("オペレータのみ閲覧することができます。"));
 					return;
 				}
 			}

@@ -6,8 +6,8 @@ import java.util.TimeZone;
 public class RealTime extends BaseTime {
 	@Override
 	protected Calendar makeCalendar(int time) {
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+9")); // 한국
-		// 시간
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+9")); // 韓国
+		// 時間
 		cal.setTimeInMillis(0);
 		cal.add(Calendar.SECOND, _time);
 		return cal;

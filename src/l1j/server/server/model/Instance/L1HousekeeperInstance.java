@@ -79,7 +79,7 @@ public class L1HousekeeperInstance extends L1NpcInstance {
 					}
 				}
 				if (targetHouse == null) {
-					pc.sendPackets(new S_ChatPacket(pc,"현재 아지트는 사용되지않습니다"));
+					pc.sendPackets(new S_ChatPacket(pc,"現在アジトは使用されません"));
 					return;
 				}
 

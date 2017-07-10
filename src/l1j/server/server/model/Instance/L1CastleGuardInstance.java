@@ -389,7 +389,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
 	}
 	@Override
 	public void checkTarget(){
-		//System.out.println("오버라이드 했는데 여기 진입할까?");
+		//System.out.println("オーバーライドしたここ進入しようか？ "）;
 		if (_target == null
 				|| 	(Math.abs(this.getX() - this.getHomeX())) > 20 
 				||  (Math.abs(this.getY() - this.getHomeY())) > 20

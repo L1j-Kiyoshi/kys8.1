@@ -45,7 +45,7 @@ public abstract class BaseTime {
 
 	public boolean isNight() {
 		int hour = _calendar.get(Calendar.HOUR_OF_DAY);
-		return !IntRange.includes(hour, 6, 17); // 6:00-17:59, 낮이 아니면 true
+		return !IntRange.includes(hour, 6, 17); // 6:00-17:59、日の場合はtrue
 	}
 
 	public String toString() {

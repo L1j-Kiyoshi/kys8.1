@@ -49,14 +49,14 @@ public class L1GuardInstance extends L1NpcInstance {
 			if (pc.getCurrentHp() <= 0 || pc.isDead() || pc.isGm() || pc.isGhost()) {
 				continue;
 			}
-		//////// 경비병 인식으로 인해서 주석 ///////////////
+		//////// 警備兵認識に起因コメント///////////////
 //			if (!pc.isInvisble() || getNpcTemplate().is_agrocoi()) {
 //				if (pc.isWanted()) {
 //					targetPlayer = pc;
 //					break;
 //				}
 //			}
-		//////// 경비병 인식으로 인해서 주석 ///////////////
+		//////// 警備兵認識に起因コメント///////////////
 		}
 
 		if (targetPlayer != null) {
@@ -387,7 +387,7 @@ public class L1GuardInstance extends L1NpcInstance {
 
 	@Override
 	public void checkTarget() {
-		// System.out.println("오버라이드 했는데 여기 진입할까?");
+		// System.out.println("オーバーライドしたここ進入しようか？ "）;
 		if (_target == null || (Math.abs(this.getX() - this.getHomeX())) > 20
 				|| (Math.abs(this.getY() - this.getHomeY())) > 20 || _target.getMapId() != getMapId()
 				|| _target.getCurrentHp() <= 0 || _target.isDead()

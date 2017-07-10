@@ -65,19 +65,19 @@ public class L1CataInstance extends L1NpcInstance {
 
 		if (talking != null) {
 			if (!pc.isCrown()) {
-				pc.sendPackets(new S_ServerMessage(2498)); // 투석기 사용: 실패(혈맹 군주만사용 가능)
+				pc.sendPackets(new S_ServerMessage(2498)); //カタパルトを使用：失敗（血盟君主のみ使用可能）
 				return;
 			}
 		}
-		// html 표시 패킷 송신
-		if (htmlid != null) { // htmlid가 지정되고 있는 경우
-			if (htmldata != null) { // html 지정이 있는 경우는 표시
+		// html表示パケットの送信
+		if (htmlid != null) { // htmlidが指定されている場合、
+			if (htmldata != null) { // html指定がある場合は、表示さ
 				pc.sendPackets(new S_NPCTalkReturn(objid, htmlid, htmldata));
 			} else {
 				pc.sendPackets(new S_NPCTalkReturn(objid, htmlid));
 			}
 		} else {
-			if (pc.getLawful() < -1000) { // 플레이어가 카오틱
+			if (pc.getLawful() < -1000) { // プレイヤーがカオティック
 				pc.sendPackets(new S_NPCTalkReturn(talking, objid, 2));
 			} else {
 				pc.sendPackets(new S_NPCTalkReturn(talking, objid, 1));
@@ -119,11 +119,11 @@ public class L1CataInstance extends L1NpcInstance {
 			return;
 
 		int castleid = 0;
-		if (getNpcId() == 7000084 || getNpcId() == 7000085) { // 켄트
+		if (getNpcId() == 7000084 || getNpcId() == 7000085) { //ケント
 			castleid = 1;
-		} else if (getNpcId() == 7000086 || getNpcId() == 7000087) { // 오성
+		} else if (getNpcId() == 7000086 || getNpcId() == 7000087) { //オソン
 			castleid = 2;
-		} else if (getNpcId() == 7000082 || getNpcId() == 7000083) { // 기란
+		} else if (getNpcId() == 7000082 || getNpcId() == 7000083) { //ギラン
 			castleid = 4;
 		}
 

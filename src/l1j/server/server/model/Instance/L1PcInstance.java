@@ -793,7 +793,7 @@ public class L1PcInstance extends L1Character {
     public short dm = 0;
     public int dh = 0;
     public int 상점변신 = 0;
-    /** 캐릭별 추가데미지, 추가리덕션, 확률 **/
+    /** キャラクター別追加ダメージ、追加リダクション、確率 **/
     private int _AddDamage = 0;
     private int _AddDamageRate = 0;
     private int _AddReduction = 0;
@@ -2085,7 +2085,7 @@ public class L1PcInstance extends L1Character {
                 // manager.LogServerAppend("終了", this,
                 // getNetConnection().getIp(), -1);
             	LinAllManager.getInstance().LogLogOutAppend(getName(), getNetConnection().getHostname());
-                /** 로그파일저장 **/
+                /** ログファイルの保存 **/
                 LoggerInstance.getInstance().addConnection(
                         "終了キャラ=" + getName() + "アカウント=" + getAccountName() + " IP=" + getNetConnection().getHostname());
              }
@@ -2239,7 +2239,7 @@ public class L1PcInstance extends L1Character {
                     getPetList().remove(pet.getId());
                     pet.deleteMe();
                 }
-                // 서먼
+                // サモン
                 if (petObject instanceof L1SummonInstance) {
                     L1SummonInstance summon = (L1SummonInstance) petObject;
                     for (L1PcInstance visiblePc : L1World.getInstance().getVisiblePlayer(summon)) {
@@ -3204,7 +3204,7 @@ public class L1PcInstance extends L1Character {
                     if (isGm()) {
                         this.setCurrentHp(getMaxHp());
                     } else {
-                        /** 카운터배리어, 타이탄데미지처리 **/
+                        /** カウンターバリアー、タイタンダメージ処理**/
                         if (Config.BROADCAST_KILL_LOG && getLevel() >= Config.BROADCAST_KILL_LOG_LEVEL) {
                             L1World.getInstance().broadcastPacketToAll(new S_ChatPacket(
                             "\\aH[" + attacker.getName() + "]\\aA 様が \\aG[" + getName() + "]\\aA 様を殺した。", Opcodes.S_MESSAGE));
@@ -4805,10 +4805,10 @@ public class L1PcInstance extends L1Character {
             }
         }
         if (getLevel() >= Config.버땅제한레벨) { // 本サーバーは、52レップまで可能である。
-            if (getMapId() == 777) { // 버림받은 사람들의 땅(그림자의 신전)
+            if (getMapId() == 777) { // 捨てられた人々の地（影の神殿）
             	new L1Teleport().teleport(this, 34043, 32184, (short) 4, 5, true);
             } else if (getMapId() == 778 || getMapId() == 779) {
-                // 버림받은 사람들의땅(욕망의 동굴)
+                // 捨てられた人々の地（欲望の洞窟）
             	new L1Teleport().teleport(this, 32608, 33178, (short) 4, 5, true); // WB
             } else if (getMapId() == 2010) {
                 int[] loc = L1TownLocation.getGetBackLoc(L1TownLocation.TOWNID_SILVER_KNIGHT_TOWN);

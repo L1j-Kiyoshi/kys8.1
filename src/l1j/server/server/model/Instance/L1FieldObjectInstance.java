@@ -41,22 +41,22 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 		int npcid = getNpcTemplate().get_npcId();
 
 		switch(npcid){
-		/** 시간의 균열 **/
+		/** 時間の割れ目 **/
 		case 200:
 			if (CrockController.getInstance().isTimeCrock()) {
 				if (CrockController.getInstance().crocktype() == 0) {
-					new L1Teleport().teleport(pc, 32639, 32876, (short) 780, 4, false);// 테베
+					new L1Teleport().teleport(pc, 32639, 32876, (short) 780, 4, false);// テーベ
 				} else {
-					new L1Teleport().teleport(pc, 32794, 32751, (short) 783, 4, false);// 티칼
+					new L1Teleport().teleport(pc, 32794, 32751, (short) 783, 4, false);// ティカル
 				}
 			} else {
-				pc.sendPackets(new S_ChatPacket(pc, "시간의 균열은 현재 닫혀있습니다."));
-				pc.sendPackets(new S_ChatPacket(pc, "오픈시간은 매일저녁 7시 입니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "時間の割れ目は現在閉鎖されています。"));
+				pc.sendPackets(new S_ChatPacket(pc, "オープン時間は毎日午後7時です。"));
 			}
 			break;
-		/** 시간의 균열 **/
+		/** 時間の割れ目 **/
 			
-		case 900007: // 드래곤 포탈[안타라스] => 레이드 맵! 
+		case 900007: // ドラゴンポータル[アンタラス] =>レイドマップ！ 
 			if (pc.hasSkillEffect(L1SkillId.ANTA_BUFF)){
 				pc.sendPackets(new S_ServerMessage(1626)); 
 				return; 
@@ -64,13 +64,13 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 			new L1Teleport().teleport(pc, 32600, 32741, (short) moveMapId, pc.getHeading(), true);
 //			DragonRaidMap(pc, moveMapId);
 			break;
-		case 810851: //[안타라스 입구] => 안타라스 대기방
+		case 810851: //[アンタラス入口] =>アンタラス待機部屋
 			new L1Teleport().teleport(pc, 32671, 32672, pc.getMapId(), pc.getHeading(), true);
 			break;
-		case 900008: //[안타라스 대기방] => 안타라스 레어 맵
+		case 900008: //[アンタラス待機部屋] =>アンタラスレアマップ
 			telAntarasLair(pc, moveMapId);
 			break;
-		case 900036: // 드래곤 포탈[파푸리온] => 레이드 맵!
+		case 900036: // ドラゴンポータル[パプリオン] =>レイドマップ！
 			if (pc.hasSkillEffect(L1SkillId.FAFU_BUFF)){
 				pc.sendPackets(new S_ServerMessage(1626)); 
 				return; 
@@ -78,20 +78,20 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 			new L1Teleport().teleport(pc, 32916, 32672, (short) moveMapId, pc.getHeading(), true);
 //			DragonRaidMap(pc, moveMapId);
 			break;
-		case 900037: //[파푸리온 대기방] => 파푸리온 레어 맵
+		case 900037: //[パプリオン待機部屋] =>パプリオンレアマップ
 			telFafurionLair(pc, moveMapId);		
 			break;
-		case 900219: // 린드 레이드 포탈
+		case 900219: // リンドレイドポータル
 			if (pc.hasSkillEffect(L1SkillId.RIND_BUFF)){
 				pc.sendPackets(new S_ServerMessage(1626)); 
 				return; 
 			} 
 			new L1Teleport().teleport(pc, 32734, 32855, (short) moveMapId, pc.getHeading(), true);
 			break;
-		case 5101: // 린드 비오르 직계형 입구
+		case 5101: // リンドビオル直系型入口
 			new L1Teleport().teleport(pc, 32736, 32847, (short) moveMapId, 5, true);
 			break;
-		case 5102: // 린드비오르 레어 입구
+		case 5102: // リンドビオルレア入口
 			RindRaid Rind = RindSystem.getInstance().getRind(moveMapId);
 			if (!Rind.isReady()){
 				Rind.setReady(true);
@@ -99,10 +99,10 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 			}
 			new L1Teleport().teleport(pc, 32855, 32881, (short) moveMapId, 5, true);
 			break;
-		case 7210011: //발라카스의 안식처
+		case 7210011: //ヴァラカスの避難所
 			telValakasRoom(pc); 
 			break;
-		case 3310017: // 발라카스 레어 입구
+		case 3310017: // ヴァラカスレア入口
 			ValaRaid vala = ValaRaidSystem.getInstance().getVala(pc.valakasMapId);
 			if (!vala.isReady()){
 				vala.setReady(true);
@@ -113,10 +113,10 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 		case 910008:
 
 			if (pc.hasSkillEffect(L1SkillId.VALA_BUFF)) {
-				pc.sendPackets(new S_SystemMessage("드래곤 레이드 마법으로 인해 드래곤 포탈에 입장 할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("ドラゴンレイド魔法によりドラゴンポータルに入場することができません。"));
 				pc.sendPackets(
 						new S_SystemMessage(
-								ss.format(pc.getNetConnection().getAccount().getDragonRaid()) + " 이후에 입장 가능합니다."),
+								ss.format(pc.getNetConnection().getAccount().getDragonRaid()) + "以降に入場可能です。"),
 						true);
 				return;
 			} else {
@@ -128,8 +128,8 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 		}
 	}
 
-	/** 지정된 맵의 32명이 넘는지 체크해서 텔시킨다 @param pc @param mapid 
-	 * 	1626: 드래곤의 혈흔이 온 몸에서 풍겨집니다. 혈흔의 냄새가 사라질 때까지 드래곤 포탈에 입장 할 수 없습니다.*/
+	/** 指定されたマップの32人を超えるかチェックしテルせる@param pc @param mapid 
+	 * 	1626: ドラゴンの血痕が全身で漂っています。血痕の臭いが消えるまでドラゴンポータルに入場することができません.*/
 	private void DragonRaidMap(L1PcInstance pc, int mapid){
 		int count = 0;
 		for(L1PcInstance player : L1World.getInstance().getAllPlayers()){
@@ -149,7 +149,7 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 				return; 
 			} 
 //			if(AntarasRaidSystem.getInstance().getAR(mapid).isAntaras()){
-//				pc.sendPackets(new S_ServerMessage(1537));// 드래곤이 깨서 진입 못한다
+//				pc.sendPackets(new S_ServerMessage(1537));//ドラゴンが覚めて進入できない
 //				return;
 //			} else {
 				pc.sendPackets(new S_Message_YN(2923, ""));
@@ -164,7 +164,7 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 				return; 
 			} 
 //			if(FafurionRaidSystem.getInstance().getAR(mapid).isFafurion()){
-//				pc.sendPackets(new S_ServerMessage(1537));// 드래곤이 깨서 진입 못한다
+//				pc.sendPackets(new S_ServerMessage(1537));// ドラゴンが覚めて進入できない
 //				return;
 //			} else {
 				pc.sendPackets(new S_Message_YN(2923, ""));
@@ -176,8 +176,8 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 		}
 	}
 
-	/** 1536: 인원이 가득차서 더 이상 입장할 수 없습니다.
-	 *  1537: 드래곤이 깨어나서, 지금은 입장할 수 없습니다.*/
+	/** 1536: 人員がいっぱいでこれ以上入場することができません。
+	 *  1537: ドラゴンが目を覚まし、今では入場できません。*/
 	private void telAntarasLair(L1PcInstance pc, int moveMapId) {
 		int count = 0;
 		AntarasRaid ar = AntarasRaidSystem.getInstance().getAR(moveMapId);
@@ -196,7 +196,7 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 		new L1Teleport().teleport(pc, 32796, 32664, (short) moveMapId, 5, true);
 
 		if(count == 0){ 
-			AntarasRaidTimer antastart = new AntarasRaidTimer(ar, 1, 1, 30 * 1000);// 2분 체크 (안타라스 스폰)
+			AntarasRaidTimer antastart = new AntarasRaidTimer(ar, 1, 1, 30 * 1000);// 2分チェック（アンタラススポン）
 			antastart.begin();
 		}
 	}
@@ -221,7 +221,7 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 		new L1Teleport().teleport(pc, 32988, 32842, (short) moveMapId, 5, true);
 
 		if(count == 0){ 
-			FafurionRaidTimer fafustart = new FafurionRaidTimer(ar, 1, 3, 30 * 1000);// 2분 체크 (파푸리온 스폰)
+			FafurionRaidTimer fafustart = new FafurionRaidTimer(ar, 1, 3, 30 * 1000);// 2分チェック（パプリオン出現）
 			fafustart.begin();
 		}
 	}
@@ -230,7 +230,7 @@ public class L1FieldObjectInstance extends L1NpcInstance {
 		new L1Teleport().teleport(pc, 32833, 32757, (short)getMapId(), 5, false); 
 		pc.isInValakasBoss = true;
 	}
-	/** 이동할 맵을 설정한다. @param id */
+	/** 移動マップを設定する。@param id */
 	public void setMoveMapId(int id){ moveMapId = id; }
 
 	@Override

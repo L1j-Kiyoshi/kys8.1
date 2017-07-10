@@ -195,7 +195,7 @@ public class L1DoorInstance extends L1NpcInstance {
 			int GfxId = getGfxId();
 			setCurrentHp(0);
 			setDead(true);
-			isPassibleDoor(true);//하딘 시스템
+			isPassibleDoor(true);//ハーディンシステム
 			setStatus(DoorAction(GfxId, ActionCodes.ACTION_DoorDie));
 			getMap().setPassable(getLocation(), true);
 			broadcastPacket(new S_DoActionGFX(getId(), DoorAction(GfxId, ActionCodes.ACTION_DoorDie)));
@@ -207,7 +207,7 @@ public class L1DoorInstance extends L1NpcInstance {
 	class DoorTimer implements Runnable {
 		@Override
 		public void run() {
-			if (_destroyed) { // 이미 파기되어 있지 않은가 체크
+			if (_destroyed) { // すでに破棄されていないかチェック
 				return;
 			}
 			close();
@@ -224,7 +224,7 @@ public class L1DoorInstance extends L1NpcInstance {
 		if (size == 0) {
 			sendPacket(pc, entranceX, entranceY);
 		} else { 
-			/** 성문뚫어방지 **/
+			/** 門開け防止 **/
 			if (getDirection() == 0) {
 				for (int x = leftEdgeLocation; x <= rightEdgeLocation; x++) {
 					if(size >= 5) {
@@ -243,17 +243,17 @@ public class L1DoorInstance extends L1NpcInstance {
 						sendPacket(pc, entranceX, y);
 					}
 				}
-				/** 성문뚫어방지 **/
+				/** 門開け防止 **/
 			}
 		}
 	}
 
 	private void sendPacket(L1PcInstance pc, int x, int y) {
 		int att = 0;
-		if(!isDead() || getOpenStatus() == ActionCodes.ACTION_Close){ // 문이 안부서졌거나, 닫혓다면
+		if(!isDead() || getOpenStatus() == ActionCodes.ACTION_Close){ // ドアがない部門れたか、ダトヒョトなら
 			att = 1;
 		}
-		if(isDead() || getOpenStatus() == ActionCodes.ACTION_Open){ // 문이 부서졌거나, 열려잇으면
+		if(isDead() || getOpenStatus() == ActionCodes.ACTION_Open){ // ドアが壊れたか、または開いていったら
 			att = 0;
 		}
 		S_Door packet = new S_Door(x, y, getDirection(), att);
@@ -269,11 +269,11 @@ public class L1DoorInstance extends L1NpcInstance {
 			return;
 		}
 		if (getOpenStatus() == ActionCodes.ACTION_Close) {
-			isPassibleDoor(true);//하딘 시스템
+			isPassibleDoor(true);//ハーディンシステム
 			if (this.getDoorId() == 113 || this.getDoorId() == 125){					
 				GeneralThreadPool.getInstance().schedule(new DoorTimer(), 5000);
 			}
-			// 말하는 섬 던전 2층 보스문 시간 5분
+			// 話せる島ダンジョン2階のボスドア時間5分
 			if (this.getDoorId() >= 4100 && this.getDoorId() <= 4111){
 				GeneralThreadPool.getInstance().schedule(new DoorTimer(), 300000);
 			}
@@ -292,7 +292,7 @@ public class L1DoorInstance extends L1NpcInstance {
 			return;
 		}
 		if (getOpenStatus() == ActionCodes.ACTION_Open) {
-			isPassibleDoor(false);//하딘 시스템
+			isPassibleDoor(false);//ハーディンシステム
 			broadcastPacket(new S_DoActionGFX(this.getId(),ActionCodes.ACTION_Close));
 			setOpenStatus(ActionCodes.ACTION_Close);
 			setPassable(L1DoorInstance.NOT_PASS);
@@ -303,14 +303,14 @@ public class L1DoorInstance extends L1NpcInstance {
 	public int DoorAction(int GfxId, int dooraction) {
 		int Action = dooraction;
 		if (Action == ActionCodes.ACTION_DoorDie) {
-			if (GfxId == 11987 || GfxId == 11989 || GfxId == 11991 // 켄트성문
-					|| GfxId == 12127 || GfxId == 12129 || GfxId == 12133// 기란성문
+			if (GfxId == 11987 || GfxId == 11989 || GfxId == 11991 //ケント門
+					|| GfxId == 12127 || GfxId == 12129 || GfxId == 12133//ギラン門
 					|| GfxId == 12163 || GfxId == 12164 || GfxId == 12167 || GfxId == 12170) {
 				Action = 36;
 			}
 		} else if (Action == ActionCodes.ACTION_DoorAction5) {
-			if (GfxId == 11987 || GfxId == 11989 || GfxId == 11991 // 켄트성문
-					|| GfxId == 12127 || GfxId == 12129 || GfxId == 12133// 기란성문
+			if (GfxId == 11987 || GfxId == 11989 || GfxId == 11991 // ケント門
+					|| GfxId == 12127 || GfxId == 12129 || GfxId == 12133// ギラン門
 					|| GfxId == 12163 || GfxId == 12164 || GfxId == 12167 || GfxId == 12170) {
 				Action = 35;
 			}
@@ -321,7 +321,7 @@ public class L1DoorInstance extends L1NpcInstance {
 
 
 
-	public void isPassibleDoor(boolean flag) {//하딘 시스템
+	public void isPassibleDoor(boolean flag) {//ハーディンシステム
 		int leftEdgeLocation = this.getLeftEdgeLocation();
 		int rightEdgeLocation = this.getRightEdgeLocation();
 		int size = rightEdgeLocation - leftEdgeLocation;

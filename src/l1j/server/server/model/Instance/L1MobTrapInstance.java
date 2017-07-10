@@ -23,7 +23,7 @@ public class L1MobTrapInstance extends L1NpcInstance {
 	private int SleepTime = 500;
 	private boolean AIStart = false;
 
-	/** 유저가 트랩을 발견시 **/
+	/** ユーザがトラップを発見時 **/
 	@Override
 	public void onPerceive(L1PcInstance perceivedFrom) {
 		perceivedFrom.addKnownObject(this);
@@ -59,7 +59,7 @@ public class L1MobTrapInstance extends L1NpcInstance {
 					}
 				}
 			} catch (Exception e) {
-				_log.log(Level.WARNING, "TrapAI에 예외가 발생했습니다.", e);
+				_log.log(Level.WARNING, "TrapAIに例外が発生しました。", e);
 			}
 		}
 	}
@@ -70,8 +70,8 @@ public class L1MobTrapInstance extends L1NpcInstance {
 		}
 		for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(this, 0)) {
 			if (pc != null) {
-				int count = IntRange.random(1) + 3;// 불러낼수치
-				int[] moblist = { 7000056, 7000057, 7000058, 7000059, 7000060 };// 나올몹종류
+				int count = IntRange.random(1) + 3;// 出動数値
+				int[] moblist = { 7000056, 7000057, 7000058, 7000059, 7000060 };// 出てくるモンスターの種類
 				for (int i = 0; i < count; i++) {
 				L1SpawnUtil.spawn5(getX(), getY(), getMapId(), 5, moblist[IntRange.random(moblist.length)], 4,false);
 				}

@@ -19,10 +19,10 @@
 package l1j.server.server.model.Instance;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.Random;
 
 import l1j.server.Config;
 import l1j.server.server.ActionCodes;
@@ -38,8 +38,8 @@ import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_ChangeHeading;
 import l1j.server.server.serverpackets.S_DoActionGFX;
 import l1j.server.server.serverpackets.S_Karma;
-import l1j.server.server.serverpackets.S_NpcChatPacket;
 import l1j.server.server.serverpackets.S_NPCTalkReturn;
+import l1j.server.server.serverpackets.S_NpcChatPacket;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.templates.L1Npc;
 import l1j.server.server.utils.CalcExp;
@@ -72,10 +72,10 @@ public class L1GuardianInstance extends L1NpcInstance {
 			if (pc == null || pc.getCurrentHp() <= 0 || pc.isDead() || pc.isGm() || pc.isGhost()) {
 				continue;
 			}
-			if (!pc.isInvisble() || getNpcTemplate().is_agrocoi()) { // 인비지체크
-				if (!pc.isElf()) { // 요정이아니면
+			if (!pc.isInvisble() || getNpcTemplate().is_agrocoi()) { // インビジチェック
+				if (!pc.isElf()) { // 妖精がなければ
 					targetPlayer = pc;
-					wideBroadcastPacket(new S_NpcChatPacket(this, "$804", 2)); // 그대여. 목숨이 아까우면 빨리 이곳을 떠날지어다. 이곳은 그대같은 자가 더럽히지 못할 신성한 곳이다.
+					wideBroadcastPacket(new S_NpcChatPacket(this, "$804", 2)); // 君よ。命がさっき暑い早くここを離れよ。ここでは、あなたのような者が汚さない神聖な場所である。
 					break;
 				}
 			}
@@ -86,10 +86,10 @@ public class L1GuardianInstance extends L1NpcInstance {
 		}
 	}
 
-	// 링크의 설정
+	// リンクの設定
 	@Override
 	public void setLink(L1Character cha) {
-		if (cha != null && _hateList.isEmpty()) { // 타겟이 없는 경우만 추가
+		if (cha != null && _hateList.isEmpty()) { // ターゲットが存在しない場合のみ追加
 			_hateList.add(cha, 0);
 			checkTarget();
 		}
@@ -113,28 +113,28 @@ public class L1GuardianInstance extends L1NpcInstance {
 			L1Attack attack = new L1Attack(player, this);
 
 			if (attack.calcHit()) {
-				if (getNpcTemplate().get_npcId() == 70848) { // 엔트
+				if (getNpcTemplate().get_npcId() == 70848) { // エント
 					int chance = _random.nextInt(100) + 1;
 					if (chance <= 10) {
 						player.getInventory().storeItem(40506, 1);
 						player.sendPackets(new S_ServerMessage(143, "$755",
-								"$794")); // \f1%0이%1를 주었습니다.
+								"$794")); // \f1%0この％1をくれました。
 					} else if (chance <= 60 && chance > 10) {
 						player.getInventory().storeItem(40507, 1);
 						player.sendPackets(new S_ServerMessage(143, "$755",
-								"$763")); // \f1%0이%1를 주었습니다.
+								"$763")); // \f1%0この％1をくれました。
 					} else if (chance <= 70 && chance > 60) {
 						player.getInventory().storeItem(40505, 1);
 						player.sendPackets(new S_ServerMessage(143, "$755",
-								"$770")); // \f1%0이%1를 주었습니다.
+								"$770")); // \f1%0この％1をくれました。
 					}
 				}
-				if (getNpcTemplate().get_npcId() == 70850) { // 빵
+				if (getNpcTemplate().get_npcId() == 70850) { // パン
 					int chance = _random.nextInt(100) + 1;
 					if (chance <= 30) {
 						player.getInventory().storeItem(40519, 5);
 						player.sendPackets(new S_ServerMessage(143, "$753",
-								"$760" + " (" + 5 + ")")); // \f1%0이%1를 주었습니다.
+								"$760" + " (" + 5 + ")")); // \f1%0この％1をくれました。
 					}
 				}
 				if (getNpcTemplate().get_npcId() == 70846) { 
@@ -142,7 +142,7 @@ public class L1GuardianInstance extends L1NpcInstance {
 					if (chance <= 30) {
 						player.getInventory().storeItem(40503, 1);
 						player.sendPackets(new S_ServerMessage(143, "$752",
-								"$769")); // \f1%0이%1를 주었습니다.
+								"$769")); // \f1%0この％1をくれました。
 					}
 				}
 				attack.calcDamage();
@@ -179,10 +179,10 @@ public class L1GuardianInstance extends L1NpcInstance {
 		String[] htmldata = null;
 
 		if (talking != null) {
-			int pcx = player.getX(); // PC의 X좌표
-			int pcy = player.getY(); // PC의 Y좌표
-			int npcx = target.getX(); // NPC의 X좌표
-			int npcy = target.getY(); // NPC의 Y좌표
+			int pcx = player.getX(); // PCのX座標
+			int pcy = player.getY(); // PCのY座標
+			int npcx = target.getX(); // NPCのX座標
+			int npcy = target.getY(); // NPCのY座標
 
 			if (pcx == npcx && pcy < npcy) {
 				setHeading(0);
@@ -218,7 +218,7 @@ public class L1GuardianInstance extends L1NpcInstance {
 				}
 			}
 
-			// 얘 좀 구린듯. interlockedIncrement하는데 compare&Swap이라니. 어차피 intel 기준 lock xadd 한번만 콜해주면 되는데.-_- 
+			// この子ちょっとグリーンらしい。 interlockedIncrementするcompare＆Swapとは。どうせintel基準lock xadd一度だけコールしてくれればされるが。-_- 
 			if( _restCallCount.getAndIncrement() == 0 )
 			{
 				setRest(true);
@@ -337,7 +337,7 @@ public class L1GuardianInstance extends L1NpcInstance {
 				} catch (Exception e) {
 					_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 				}
-				// 업은 급소를 찌른 플레이어로 설정.애완동물 or사몬으로 넘어뜨렸을 경우도 들어간다.
+				// アップツボを突いたプレーヤーに設定します。ペットorサーモンに倒した場合も入る。
 				player.addKarma((int) (getKarma() * Config.RATE_KARMA));
 				player.sendPackets( new S_Karma(player) );
 			}

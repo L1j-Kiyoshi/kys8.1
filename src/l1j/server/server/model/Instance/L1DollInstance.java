@@ -1,7 +1,6 @@
 package l1j.server.server.model.Instance;
 
-import static l1j.server.server.model.skill.L1SkillId.ERASE_MAGIC;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_HASTE;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -31,47 +30,47 @@ import l1j.server.server.templates.L1Npc;
 public class L1DollInstance extends L1NpcInstance {
 	private static final long serialVersionUID = 1L;
 
-	public static final int DOLLTYPE_BUGBEAR = 0; // 버그
-	public static final int DOLLTYPE_SUCCUBUS = 1; // 서큐
-	public static final int DOLLTYPE_WAREWOLF = 2; // 늑인
+	public static final int DOLLTYPE_BUGBEAR = 0; //バグ
+	public static final int DOLLTYPE_SUCCUBUS = 1; // サーキュ
+	public static final int DOLLTYPE_WAREWOLF = 2; // ヌクイン
 
-	// 마법인형 추가
-	public static final int DOLLTYPE_STONEGOLEM = 3; // 돌골렘
-	public static final int DOLLTYPE_ELDER = 4; // 장로
-	public static final int DOLLTYPE_CRUSTACEA = 5; // 시안
-	public static final int DOLLTYPE_SEADANCER = 6; // 시댄
-	public static final int DOLLTYPE_SNOWMAN = 7; // 에티
-	public static final int DOLLTYPE_COCA = 8; // 코카
+	// マジックドールを追加
+	public static final int DOLLTYPE_STONEGOLEM = 3; // ストーンゴーレム
+	public static final int DOLLTYPE_ELDER = 4; // 長老
+	public static final int DOLLTYPE_CRUSTACEA = 5; // シアン
+	public static final int DOLLTYPE_SEADANCER = 6; // シデン
+	public static final int DOLLTYPE_SNOWMAN = 7; // エティ
+	public static final int DOLLTYPE_COCA = 8; // コカ
 
-	public static final int DOLLTYPE_HATCHLING = 9; // 해츨링
-	public static final int DOLLTYPE_COBO = 10; // 인어           <<<특화인형
-	public static final int DOLLTYPE_ETHYNE = 11; // 에틴 인형
-	public static final int DOLLTYPE_SKELETON = 12; // 스파토이 인형
-	public static final int DOLLTYPE_SCARECROW = 13; // 허수아비 인형
+	public static final int DOLLTYPE_HATCHLING = 9; // ハッチリン
+	public static final int DOLLTYPE_COBO = 10; // 人魚<<<特化人形
+	public static final int DOLLTYPE_ETHYNE = 11; // ブルート人形
+	public static final int DOLLTYPE_SKELETON = 12; // スパルトイ人形
+	public static final int DOLLTYPE_SCARECROW = 13; // かかし人形
 
 	public static final int DOLLTYPE_PSY_CHAMPION = 14;
 	public static final int DOLLTYPE_PSY_BIRD = 15;
 	public static final int DOLLTYPE_PSY_GANGNAM_STYLE = 16;
-	// 마법인형 추가
+	// マジックドールを追加
 
 	public static final int DOLLTYPE_PIXIE_BLAG = 17;
 	public static final int DOLLTYPE_PIXIE_LESDAG = 18;
 	public static final int DOLLTYPE_PIXIE_ELREGEU = 19;
 	public static final int DOLLTYPE_PIXIE_GREG = 20;
-	public static final int DOLLTYPE_GREMLIN = 21;//그렘린
-	public static final int DOLLTYPE_LICH = 22;//리치
-	public static final int DOLLTYPE_DRAKE = 23;//드레이크
-	public static final int DOLLTYPE_SNOWMAN_A = 25; // 눈사람(A)
-	public static final int DOLLTYPE_SNOWMAN_B = 26; // 눈사람(B)
-	public static final int DOLLTYPE_SNOWMAN_C = 27; // 눈사람(C)
+	public static final int DOLLTYPE_GREMLIN = 21;//グレムリン
+	public static final int DOLLTYPE_LICH = 22;//リッチ
+	public static final int DOLLTYPE_DRAKE = 23;//ドレイク
+	public static final int DOLLTYPE_SNOWMAN_A = 25; //雪だるま（A）
+	public static final int DOLLTYPE_SNOWMAN_B = 26; //雪だるま（B）
+	public static final int DOLLTYPE_SNOWMAN_C = 27; // 雪だるま（C）
 	public static final int DOLLTYPE_자이언트 = 28; // 
 	public static final int DOLLTYPE_사이클롭스 = 29;
 	public static final int DOLLTYPE_흑장로 = 30;
 	public static final int DOLLTYPE_서큐버스 = 31;
-	public static final int DOLLTYPE_데스나이트 = 32; //진탱
-	public static final int DOLLTYPE_바포메트 = 80; //진탱
-	public static final int DOLLTYPE_얼음여왕 = 81; //진탱
-	public static final int DOLLTYPE_커츠 = 82; //진탱
+	public static final int DOLLTYPE_데스나이트 = 32; //ジンテン
+	public static final int DOLLTYPE_바포메트 = 80; //ジンテン
+	public static final int DOLLTYPE_얼음여왕 = 81; //ジンテン
+	public static final int DOLLTYPE_커츠 = 82; //ジンテン
 	public static final int DOLLTYPE_인어 = 33;
 	public static final int DOLLTYPE_킹버그베어 = 34;
 	public static final int DOLLTYPE_나이트발드 = 35;
@@ -82,21 +81,21 @@ public class L1DollInstance extends L1NpcInstance {
 	public static final int DOLLTYPE_NIGHTBALD = 74;
 	public static final int DOLLTYPE_SIER = 75;
 	public static final int DOLLTYPE_DEMON = 76;
-	public static final int DOLLTYPE_DEATHNIGHT = 77;//데스나이트 짭
+	public static final int DOLLTYPE_DEATHNIGHT = 77;//デスナイト組み
 	public static final int DOLLTYPE_SNOWMAN_NEW = 78;
 	public static final int DOLL_TIME = 1800000;
-	public static final int DOLL_Iris = 3000086;//마법인형 : 아이리스
-	public static final int DOLL_vampire = 3000087;//마법인형 : 뱀파이어
-	public static final int DOLL_barranca = 3000088;//마법인형 : 바란카
-	public static final int DOLL_머미로드 = 3000089;//마법인형 : 머미로드
-	public static final int DOLL_타락 = 3000090;//마법인형 : 타락
+	public static final int DOLL_Iris = 3000086;//マジックドール：アイリス
+	public static final int DOLL_vampire = 3000087;//マジックドール：ヴァンパイア
+	public static final int DOLL_barranca = 3000088;//マジックドール：バランカ
+	public static final int DOLL_머미로드 = 3000089;//マジックドール：マミーロード
+	public static final int DOLL_타락 = 3000090;//マジックドール：堕落
 	
 	private static Random _random = new Random(System.nanoTime());
 	private int _dollType;
 	private int _itemObjId;
 	private DollItemTimer _itemTimer;
 
-	// 타겟이 없는 경우의 처리
+	// ターゲットが存在しない場合の処理
 	@Override
 	public boolean noTarget() {
 		
@@ -126,18 +125,18 @@ public class L1DollInstance extends L1NpcInstance {
 		return false;
 	}
 
-	// 시간 계측용
+	// 時間計測用
 	class DollTimer implements Runnable {
 		@Override
 		public void run() {
-			if (_destroyed) { // 이미 파기되어 있지 않은가 체크
+			if (_destroyed) { // すでに破棄されていないかチェック
 				return;
 			}
 			deleteDoll();
 		}
 	}
 
-	// 시간 계측용
+	// 時間計測用
 	class DollItemTimer extends RepeatTask {
 		private int _itemId;
 		DollItemTimer(int itemId, int time) {
@@ -147,7 +146,7 @@ public class L1DollInstance extends L1NpcInstance {
 
 		@Override
 		public void execute() {
-			if (_destroyed) { // 이미 파기되어 있지 않은가 체크
+			if (_destroyed) { // すでに破棄されていないかチェック
 				cancel();
 				return;
 			}
@@ -194,37 +193,37 @@ public class L1DollInstance extends L1NpcInstance {
 			master.startHpRegenerationByDoll();
 		}
 		
-		int type = getDollType();//인형을 불러올때 효과를 + 시킨다
+		int type = getDollType();//人形を呼び出すときの効果を+する
 		switch (type) {
-		case DOLLTYPE_COBO://특화인형 다이노스
-			_master.addDmgup(3);//근거리 대미지
-			_master.addHitup(3);// 근거리명중
-			_master.addBowDmgup(3); // 활추타
+		case DOLLTYPE_COBO://特化人形ダイノース
+			_master.addDmgup(3);//近距離ダメージ
+			_master.addHitup(3);// 近距離命中
+			_master.addBowDmgup(3); // 弓ツタ
 			_master.addBowHitup(3);
-			_master.getResistance().addStun(10);//스턴내성
-			_master.getResistance().addcalcPcDefense(10);// 데미지 리덕션
+			_master.getResistance().addStun(10);//スタン耐性
+			_master.getResistance().addcalcPcDefense(10);// ダメージリダクション
 			_master.getAbility().addSp(3);
 			_master.addMaxHp(200);
 			_master.addMaxMp(50);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
 			break;
 		case DOLL_타락:
-			_master.getResistance().addStun(10);//스턴내성
+			_master.getResistance().addStun(10);//スタン耐性
 			_master.getAbility().addSp(3);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
 			break;
-		case DOLL_Iris://아이리스
-//			_master.addDmgup(1);//근거리대미지
-			_master.getResistance().addcalcPcDefense(3);// 데미지 리덕션
-//			_master.addHitup(1);//포스단계별 효과미정
+		case DOLL_Iris://アイリス
+//			_master.addDmgup(1);//近距離ダメージ
+			_master.getResistance().addcalcPcDefense(3);//ダメージリダクション
+//			_master.addHitup(1);//フォースステップ効果未定
 			break;
-		case DOLL_vampire://뱀파이어
-			_master.addDmgup(1);//근거리 대미지
-			_master.addHitup(2);// 근거리명중
+		case DOLL_vampire://ヴァンパイア
+			_master.addDmgup(1);//近距離ダメージ
+			_master.addHitup(2);// 近距離命中
 			_master.set락구간상승(5);
 			break;
-		case DOLL_barranca://바란카
-			_master.getResistance().addStun(12);//스턴내성
+		case DOLL_barranca://バランカ
+			_master.getResistance().addStun(12);//スタン耐性
 			_master.set어택레벨(2);
 			break;
 		case DOLLTYPE_SNOWMAN_NEW:
@@ -235,30 +234,30 @@ public class L1DollInstance extends L1NpcInstance {
 			_master.addMaxHp(50);
 			break;
 		case DOLLTYPE_LAVAGOLREM:
-			_master.addDmgup(1);// 근거리데미지
+			_master.addDmgup(1);// 近距離ダメージ
 			break;
 		case DOLLTYPE_NIGHTBALD:
-			_master.addDmgup(2);// 근거리데미지
-			_master.addHitup(2); // 근거리명중
+			_master.addDmgup(2);// 近距離ダメージ
+			_master.addHitup(2); // 近距離命中
 			break;
 		case DOLLTYPE_SIER:
-			_master.addBowDmgup(5); // 활추타
+			_master.addBowDmgup(5); // 弓ツタ
 			break;
 		case DOLLTYPE_DEMON:
-			_master.getResistance().addStun(12);// 스턴내성
+			_master.getResistance().addStun(12);// スタン耐性
 			_master.set어택레벨(2);
 			break;
 		case DOLLTYPE_바포메트:
-			_master.getResistance().addStun(10);// 스턴내성
+			_master.getResistance().addStun(10);// スタン耐性
 			break;
 		case DOLLTYPE_얼음여왕:
-			_master.addBowDmgup(5); // 활추타
+			_master.addBowDmgup(5); // 弓ツタ
 			_master.addBowHitup(5);
-			_master.getResistance().addStun(10);// 스턴내성
+			_master.getResistance().addStun(10);// スタン耐性
 			break;
 		case DOLLTYPE_커츠:
 			_master.getAC().addAc(-2);
-			_master.getResistance().addStun(10);// 스턴내성
+			_master.getResistance().addStun(10);// スタン耐性
 			break;
 		case DOLLTYPE_사이클롭스:
 			_master.addDmgup(2);
@@ -377,36 +376,36 @@ public class L1DollInstance extends L1NpcInstance {
 		}
 		int type = getDollType();
 		switch (type) {
-		case DOLLTYPE_COBO://특화인형 다이노스
-			_master.addDmgup(-3);//근거리 대미지
-			_master.addHitup(-3);// 근거리명중
-			_master.addBowDmgup(-3); // 활추타
+		case DOLLTYPE_COBO://特化人形ダイノース
+			_master.addDmgup(-3);//近距離ダメージ
+			_master.addHitup(-3);// 近距離命中
+			_master.addBowDmgup(-3); // 弓ツタ
 			_master.addBowHitup(-3);
-			_master.getResistance().addStun(-10);//스턴내성
-			_master.getResistance().addcalcPcDefense(-10);// 데미지 리덕션
+			_master.getResistance().addStun(-10);//スタン耐性
+			_master.getResistance().addcalcPcDefense(-10);//ダメージリダクション
 			_master.getAbility().addSp(-3);
 			_master.addMaxHp(-200);
 			_master.addMaxMp(-50);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
 			break;
 		case DOLL_타락:
-			_master.getResistance().addStun(-10);//스턴내성
+			_master.getResistance().addStun(-10);//スタン耐性
 			_master.getAbility().addSp(-3);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
 			break;
-		case DOLL_Iris://아이리스
-//			_master.addDmgup(-1);//근거리대미지
-			_master.getResistance().addcalcPcDefense(-3);// 데미지 리덕션
-//			_master.addHitup(-1);//포스단계별 효과미정
+		case DOLL_Iris://アイリス
+//			_master.addDmgup(-1);//近距離ダメージ
+			_master.getResistance().addcalcPcDefense(-3);// ダメージリダクション
+//			_master.addHitup(-1);//フォースステップ効果未定
 			break;
-		case DOLL_vampire://뱀파이어
-			_master.addDmgup(-1);//근거리 대미지
-			_master.addHitup(-2);// 근거리명중
+		case DOLL_vampire://ヴァンパイア
+			_master.addDmgup(-1);//近距離ダメージ
+			_master.addHitup(-2);// 近距離命中
 			_master.set락구간상승(-5);
 			break;
-		case DOLL_barranca://바란카
-			_master.getResistance().addStun(-12);//스턴내성
-//			_master.set어택레벨(-2);
+		case DOLL_barranca://バランカ
+			_master.getResistance().addStun(-12);//スタン耐性
+//			_master.setアタックレベル（-2）;
 			break;
 		case DOLLTYPE_SNOWMAN_NEW:
 			_master.addDmgup(-1);
@@ -416,30 +415,30 @@ public class L1DollInstance extends L1NpcInstance {
 			_master.addMaxHp(-50);
 			break;
 		case DOLLTYPE_LAVAGOLREM:
-			_master.addDmgup(-1);// 근거리데미지
+			_master.addDmgup(-1);// 近距離ダメージ
 			break;
 		case DOLLTYPE_NIGHTBALD:
-			_master.addDmgup(-2);// 근거리데미지
-			_master.addHitup(-2); // 근거리명중
+			_master.addDmgup(-2);// 近距離ダメージ
+			_master.addHitup(-2); // 近距離命中
 			break;
 		case DOLLTYPE_SIER:
-			_master.addBowDmgup(-5); // 활추타
+			_master.addBowDmgup(-5); //弓ツタ
 			break;
 		case DOLLTYPE_DEMON:
-			_master.getResistance().addStun(-12);// 스턴내성
+			_master.getResistance().addStun(-12);// スタン耐性
 			_master.set어택레벨(-2);
 			break;
 		case DOLLTYPE_바포메트:
-			_master.getResistance().addStun(-10);// 스턴내성
+			_master.getResistance().addStun(-10);// スタン耐性
 			break;
 		case DOLLTYPE_얼음여왕:
-			_master.addBowDmgup(-5); // 활추타
+			_master.addBowDmgup(-5); // 弓ツタ
 			_master.addBowHitup(-5);
-			_master.getResistance().addStun(-10);// 스턴내성
+			_master.getResistance().addStun(-10);// スタン耐性
 			break;
 		case DOLLTYPE_커츠:
 			_master.getAC().addAc(2);
-			_master.getResistance().addStun(-10);// 스턴내성
+			_master.getResistance().addStun(-10);// スタン耐性
 			break;
 		case DOLLTYPE_사이클롭스:
 			_master.addDmgup(-2);
@@ -577,7 +576,7 @@ public class L1DollInstance extends L1NpcInstance {
 	@Override
 	public void onItemUse() {
 		if (!isActived()) {
-			// 100%의 확률로 헤이 파업 일부 사용
+			// 100％の確率でヘイスト一部使用
 			useItem(USEITEM_HASTE, 100);
 		}
 	}
@@ -608,9 +607,9 @@ public class L1DollInstance extends L1NpcInstance {
 		_itemObjId = i;
 	}
 
-	public int getDamageByDoll() {// 근접무기 착용시에만 불려간다.
+	public int getDamageByDoll() {// 近接武器着用時のみ呼び出される。
 		int damage = 0;
-		if (getDollType() == DOLLTYPE_WAREWOLF) { // 늑인
+		if (getDollType() == DOLLTYPE_WAREWOLF) { // ヌクイン
 			int chance = _random.nextInt(100) + 1;
 			if (chance <= 5) {
 				damage = 15;
@@ -622,7 +621,7 @@ public class L1DollInstance extends L1NpcInstance {
 			}
 		}
 
-		if (getDollType() == DOLLTYPE_CRUSTACEA) { // 시안
+		if (getDollType() == DOLLTYPE_CRUSTACEA) { //シアン
 			int chance = _random.nextInt(100) + 1;
 			if (chance <= 10) {
 				damage = 15;
@@ -708,13 +707,13 @@ public class L1DollInstance extends L1NpcInstance {
 		return (getDollType() == DOLLTYPE_SEADANCER || getDollType() == DOLLTYPE_SIER || getDollType() == DOLLTYPE_SNOWMAN_C);
 	}
 	
-	public int getHpRegenAmount() { //32초마다 피를 채워준다.
+	public int getHpRegenAmount() { //32秒ごとに血液を満たしてくれる。
 		if (getDollType() == DOLLTYPE_SEADANCER) {
 			return 25;
 		} else if (getDollType() == DOLLTYPE_SIER) {
 			return 30;
 		} else if (getDollType() == DOLLTYPE_SNOWMAN_C) {
-			return 60; // 본섭 피틱+60인데 그냥 32초마다 60피 차게 했다.
+			return 60; //本サーバーピチク+60のにちょうど32秒ごとに60血冷やした。
 		}
 		return 0;
 	}
@@ -727,30 +726,30 @@ public class L1DollInstance extends L1NpcInstance {
 		return weightReduction;
 	}
 
-	// 픽시 마법인형 [ 브레그, 레데그, 엘레그 ]
-	@SuppressWarnings("unused")//추가 데스나이트 데미지
+	// ピクシーマジックドール[ブレつまり、レデグー、エルレグ]
+	@SuppressWarnings("unused")//追加デスナイトダメージ
 	public double attackPixieDamage(L1PcInstance pc, L1Character cha) {
 		double dmg = 0;
 		int type = getDollType();
 		int effect = 0;
 		switch (type) {
 		case DOLLTYPE_PIXIE_BLAG:
-			effect = 1809; // 콘 오브 콜드
+			effect = 1809; //コーンオブコールド
 			break;
 		case DOLLTYPE_PIXIE_LESDAG:
-			effect = 1583; // 파이어 애로우
+			effect = 1583; // ファイアーアロー
 			break;
 		case DOLLTYPE_PIXIE_ELREGEU:
-			effect = 7331; // 회오리
+			effect = 7331; //竜巻
 			break;
 		case DOLLTYPE_흑장로:
-			effect = 7004; // 콜라이트닝
+			effect = 7004; // コールライトニング
 			break;
 		case DOLLTYPE_데스나이트:
-			effect = 11660; // 헬파이어
+			effect = 11660; // ヘルファイア
 			break;
 		case DOLLTYPE_DEATHNIGHT:
-			effect = 11660; // 헬파이어
+			effect = 11660; // ヘルファイア
 			break;
 		default:
 			break;
@@ -784,7 +783,7 @@ public class L1DollInstance extends L1NpcInstance {
 				if (cha.hasSkillEffect(ERASE_MAGIC)) {
 					cha.killSkillEffectTimer(ERASE_MAGIC);
 				}
-				damage = 10 + chance2 + (TotalInt * 2); // 데미지 : 고정10 + 랜덤 30 + 케릭인트수치 *2 = 35인트일경우 80~110데미지
+				damage = 10 + chance2 + (TotalInt * 2); // ダメージ：固定10 +ランダム30 +キャライント数値* 2 = 35ポイントの場合、80〜110のダメージ
 				S_UseAttackSkill packet = new S_UseAttackSkill(this, cha.getId(), effect, cha.getX(), cha.getY(), ActionCodes.ACTION_SkillAttack, false);
 				pc.sendPackets(packet);
 				Broadcaster.broadcastPacket(pc, packet);
@@ -793,7 +792,7 @@ public class L1DollInstance extends L1NpcInstance {
 		return dmg;
 	}
 
-	// 픽시 마법인형 [ 그레그 ]
+	// ピクシーマジックドール[グレッグ]
 	public void getPixieGreg(L1PcInstance pc, L1Character cha) {
 		L1Attack attack = new L1Attack(pc, cha);
 		int type = getDollType();

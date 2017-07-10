@@ -25,7 +25,7 @@ import java.util.TimeZone;
 import l1j.server.server.utils.IntRange;
 
 public class L1GameTime {
-	// 2003년 7월 3일 12:00(UTC)이 1월 1일00:00
+	// 2003年7月3日12:00（UTC）が1月1日00:00
 	private static final long BASE_TIME_IN_MILLIS_REAL = 1057233600000L;
 	private final int _time;
 	private final Calendar _calendar;
@@ -43,7 +43,7 @@ public class L1GameTime {
 			throw new IllegalArgumentException();
 		}
 		int t2 = (int) ((t1 * 6) / 1000L);
-		int t3 = t2 % 3; // 시간이 3의 배수가 되도록(듯이) 조정
+		int t3 = t2 % 3; // 時間が3の倍数になるように調整
 		_time = t2 - t3;
 
 		_calendar = makeCalendar(_time);
@@ -67,7 +67,7 @@ public class L1GameTime {
 
 	public boolean isNight() {
 		int hour = _calendar.get(Calendar.HOUR_OF_DAY);
-		return !IntRange.includes(hour, 6, 17); // 6:00-17:59(낮)로 없으면 true
+		return !IntRange.includes(hour, 6, 17); // 6:00-17:59（昼）でなければtrue
 	}
 
 	@Override

@@ -2,11 +2,8 @@ package l1j.server.server.model.Instance;
 
 import l1j.server.IndunSystem.MiniGame.MiniSiege;
 import l1j.server.server.ActionCodes;
-import l1j.server.server.datatables.ItemTable;
 import l1j.server.server.model.L1Attack;
 import l1j.server.server.model.L1Character;
-import l1j.server.server.model.L1GroundInventory;
-import l1j.server.server.model.L1World;
 import l1j.server.server.serverpackets.S_DoActionGFX;
 import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.templates.L1Npc;
@@ -36,7 +33,7 @@ public class L1EventTowerInstance extends L1NpcInstance{
 	@Override
 	public void receiveDamage(L1Character attacker, int damage) {
 		if(MiniSiege.getInstance().getStage()==0){
-			((L1PcInstance)attacker).sendPackets(new S_SystemMessage("아직 미니공성전이 시작하지 않았습니다"));
+			((L1PcInstance)attacker).sendPackets(new S_SystemMessage("まだミニ攻城戦が開始していない"));
 			return;
 		}
 		int towerid = getNpcTemplate().get_npcId();
@@ -44,7 +41,7 @@ public class L1EventTowerInstance extends L1NpcInstance{
 		if (attacker instanceof L1PcInstance) {
 			L1PcInstance pc = (L1PcInstance) attacker;
 			for(int i = 0 ; i < 9 ; i++){
-				System.out.print(i+"번째 타워 : "+MiniSiege.getInstance().isDestory(i)+"\t");
+				System.out.print(i+"第タワー："+MiniSiege.getInstance().isDestory(i)+"\t");
 				if(i==8)
 					System.out.println("");
 			}
@@ -52,39 +49,39 @@ public class L1EventTowerInstance extends L1NpcInstance{
 		switch(towerid){
 			
 			case 4205:
-				if(!MiniSiege.getInstance().isDestory(0)){ //A팀 수호탑
-					pc.sendPackets(new S_SystemMessage("이전 단계 타워를 클리어해주세요"));
+				if(!MiniSiege.getInstance().isDestory(0)){ //Aチーム守護塔
+					pc.sendPackets(new S_SystemMessage("前の手順の塔をクリアしてください"));
 					return;
 				}
 					
 					break;
 			case 4206:
 				if(!MiniSiege.getInstance().isDestory(1)){
-					pc.sendPackets(new S_SystemMessage("이전 단계 타워를 클리어해주세요"));
+					pc.sendPackets(new S_SystemMessage("前の手順の塔をクリアしてください"));
 					return;
 				}
 					break;
 			case 4207:
 				if(!MiniSiege.getInstance().isDestory(2)){
-					pc.sendPackets(new S_SystemMessage("이전 단계 타워를 클리어해주세요"));
+					pc.sendPackets(new S_SystemMessage("前の手順の塔をクリアしてください"));
 					return;
 				}
 					break;
 			case 4209:
-				if(!MiniSiege.getInstance().isDestory(3)){//A팀 중간탑
-					pc.sendPackets(new S_SystemMessage("이전 단계 타워를 클리어해주세요"));
+				if(!MiniSiege.getInstance().isDestory(3)){//Aチーム中トップ
+					pc.sendPackets(new S_SystemMessage("前の手順の塔をクリアしてください"));
 					return;
 				}
 					break;
 			case 4210:
 				if(!MiniSiege.getInstance().isDestory(4)){
-					pc.sendPackets(new S_SystemMessage("이전 단계 타워를 클리어해주세요"));
+					pc.sendPackets(new S_SystemMessage("前の手順の塔をクリアしてください"));
 					return;
 				}
 					break;
 			case 4211:
-				if(!MiniSiege.getInstance().isDestory(5)){ //C팀 중간탑
-					pc.sendPackets(new S_SystemMessage("이전 단계 타워를 클리어해주세요"));
+				if(!MiniSiege.getInstance().isDestory(5)){ //Cチーム中トップ
+					pc.sendPackets(new S_SystemMessage("前の手順の塔をクリアしてください"));
 					return;
 				}
 					break;
@@ -109,7 +106,7 @@ public class L1EventTowerInstance extends L1NpcInstance{
 				MiniSiege.getInstance().setDestroy(2);
 				System.out.println("TEam : "+pc.getTeam());
 				MiniSiege.getInstance().GiveReward(1,pc.getTeam());
-				System.out.println("보상완료");
+				System.out.println("補償完了");
 				break;
 			case 4205:
 				MiniSiege.getInstance().setDestroy(3);

@@ -73,7 +73,7 @@ public class L1ItemInstance extends L1Object {
 
 	private Timestamp _endTime = null;
 
-	/** 패키지상점 **/
+	/** パッケージ店 **/
 	private boolean _isPackage = false;
 
 	private int bless;
@@ -264,7 +264,7 @@ public class L1ItemInstance extends L1Object {
 		_endTime = t;
 	}
 
-	/** 패키지상점 **/
+	/** パッケージ店 **/
 	public boolean isPackage() {
 		return _isPackage;
 	}
@@ -283,74 +283,37 @@ public class L1ItemInstance extends L1Object {
 		_itemdelay3 = itemdelay3;
 	}
 
-	/** 룸티스 푸른빛귀걸이 물약효율표시 **/
+	/** ルームティス青い光のイヤリングポーション効率表示 **/
 	private String RoomtisHealingPotion() {
 		int lvl = getEnchantLevel();
 		String in = "";
-		switch(lvl){
+		switch (lvl) {
 		case 0:
-			in = "물약 회복량 2% +2";
+			in = "ポーション回復量2％+ 2";
 			break;
 		case 1:
-			in = "물약 회복량 6% +6";
+			in = "ポーション回復量6％+6";
 			break;
 		case 2:
-			in = "물약 회복량 8% +8";
+			in = "ポーション回復量8％+8";
 			break;
 		case 3:
-			in = "물약 회복량 10% +10";
+			in = "ポーション回復量10％+ 10";
 			break;
 		case 4:
-			in = "물약 회복량 12% +12";
+			in = "ポーション回復量12％+ 12";
 			break;
 		case 5:
-			in = "물약 회복량 14% +14";
+			in = "ポーション回復量14％+14";
 			break;
 		case 6:
-			in = "물약 회복량 16% +16";
+			in = "ポーション回復量16％+16";
 			break;
 		case 7:
-			in = "물약 회복량 18% +18";
+			in = "ポーション回復量18％+18";
 			break;
 		case 8:
-			in = "물약 회복량 20% +20";
-			break;
-		default:
-			break;
-		}
-		return in;
-	}
-	/** 룸티스 푸른빛귀걸이 물약효율표시 **/
-	private String RoomtisHealingPotion11() {
-		int lvl = getEnchantLevel();
-		String in = "";
-		switch(lvl){
-		case 0:
-			in = "공포 회복감소 효과 상쇄 +2%";
-			break;
-		case 1:
-			in = "공포 회복감소 효과 상쇄 +6%";
-			break;
-		case 2:
-			in = "공포 회복감소 효과 상쇄 +8%";
-			break;
-		case 3:
-			in = "공포 회복감소 효과 상쇄 +10%";
-			break;
-		case 4:
-			in = "공포 회복감소 효과 상쇄 +12%";
-			break;
-		case 5:
-			in = "공포 회복감소 효과 상쇄 +14%";
-			break;
-		case 6:
-			in = "공포 회복감소 효과 상쇄 +16%";
-			break;
-		case 7:
-			in = "공포 회복감소 효과 상쇄 +18%";
-			break;
-		case 8:
-			in = "공포 회복감소 효과 상쇄 +20%";
+			in = "ポーション回復量20％+20";
 			break;
 		default:
 			break;
@@ -358,75 +321,113 @@ public class L1ItemInstance extends L1Object {
 		return in;
 	}
 
-	/** 축복받은 룸티스 푸른빛귀걸이 물약효율표시 **/
-	private String RoomtisHealingPotion1() {
+	/** ルームティス青い光のイヤリングポーション効率表示 **/
+	private String RoomtisHealingPotion11() {
 		int lvl = getEnchantLevel();
 		String in = "";
 		switch (lvl) {
 		case 0:
-			in = "물약 회복량 2% +2";
+			in = "恐怖回復減少効果を相殺+ 2％";
 			break;
 		case 1:
-			in = "물약 회복량 6% +6";
+			in = "恐怖回復減少効果を相殺+ 6％";
 			break;
 		case 2:
-			in = "물약 회복량 8% +8";
+			in = "恐怖回復減少効果を相殺+ 8％";
 			break;
 		case 3:
-			in = "물약 회복량 12% +12";
+			in = "恐怖回復減少効果を相殺+ 10％";
 			break;
 		case 4:
-			in = "물약 회복량 14% +14";
+			in = "恐怖回復減少効果を相殺+ 12％";
 			break;
 		case 5:
-			in = "물약 회복량 16% +16";
+			in = "恐怖回復減少効果を相殺+ 14％";
 			break;
 		case 6:
-			in = "물약 회복량 18% +18";
+			in = "恐怖回復減少効果を相殺+ 16％";
 			break;
 		case 7:
-			in = "물약 회복량 20% +20";
+			in = "恐怖回復減少効果を相殺+ 18％";
 			break;
 		case 8:
-			in = "물약 회복량 22% +22";
+			in = "恐怖回復減少効果を相殺+ 20％";
 			break;
 		default:
 			break;
 		}
 		return in;
 	}
-	
-	/** 룸티스 푸른빛귀걸이 물약효율표시 **/
+
+	/** 祝福されたルームティス青い光のイヤリングポーション効率表示 **/
+	private String RoomtisHealingPotion1() {
+		int lvl = getEnchantLevel();
+		String in = "";
+		switch (lvl) {
+		case 0:
+			in = "ポーション回復量2％+ 2";
+			break;
+		case 1:
+			in = "ポーション回復量6％+6";
+			break;
+		case 2:
+			in = "ポーション回復量8％+8";
+			break;
+		case 3:
+			in = "ポーション回復量12％+ 12";
+			break;
+		case 4:
+			in = "ポーション回復量14％+14";
+			break;
+		case 5:
+			in = "ポーション回復量16％+16";
+			break;
+		case 6:
+			in = "ポーション回復量18％+18";
+			break;
+		case 7:
+			in = "ポーション回復量20％+20";
+			break;
+		case 8:
+			in = "ポーション回復量22％+22";
+			break;
+		default:
+			break;
+		}
+		return in;
+	}
+
+	/** ルームティス青い光のイヤリングポーション効率表示 **/
 	private String RoomtisHealingPotion12() {
 		int lvl = getEnchantLevel();
 		String in = "";
-		switch(lvl){
+		switch (lvl) {
 		case 0:
-			in = "공포 회복감소 효과 상쇄 +2%";
+			in = "恐怖回復減少効果を相殺+ 2％";
 			break;
 		case 1:
-			in = "공포 회복감소 효과 상쇄 +6%";
+			in = "恐怖回復減少効果を相殺+ 6％";
 			break;
 		case 2:
-			in = "공포 회복감소 효과 상쇄 +8%";
+			in = "恐怖回復減少効果を相殺+ 8％";
 			break;
 		case 3:
-			in = "공포 회복감소 효과 상쇄 +12%";
+			in = "恐怖回復減少効果を相殺+ 12％";
 			break;
 		case 4:
-			in = "공포 회복감소 효과 상쇄 +14%";
+			in = "恐怖回復減少効果を相殺+ 14％";
 			break;
 		case 5:
-			in = "공포 회복감소 효과 상쇄 +16%";
+			in = "恐怖回復減少効果を相殺+ 16％";
 			break;
 		case 6:
-			in = "공포 회복감소 효과 상쇄 +18%";
+			in = "恐怖回復減少効果を相殺+ 18％";
 			break;
 		case 7:
-			in = "공포 회복감소 효과 상쇄 +20%";
+			in = "恐怖回復減少効果を相殺+ 20％";
 			break;
 		case 8:
-			in = "공포 회복감소 효과 상쇄 +22%";
+			in = "恐怖回復減少効果を相殺+ 22％";
 			break;
 		default:
 			break;
@@ -437,14 +438,16 @@ public class L1ItemInstance extends L1Object {
 	public int getMr() {
 		int mr = _item.get_mdef();
 		int itemid = getItemId();
-		if (itemid == 20011 || itemid == 20110 || itemid == 120011 || itemid == 22223 || itemid == 20117 // 바포갑빠
-				|| getItemId() == 22204 || itemid == 22205 || itemid == 22206 || itemid == 22207 // 린드비오르 마갑주
-				|| getItemId() == 22213 || itemid == 120110 || itemid == 93001 || itemid == 490008 || itemid == 22365 || itemid == 222328
-				|| getItemId() >= 222300 && getItemId() <= 222303 || itemid == 222328) {
+		if (itemid == 20011 || itemid == 20110 || itemid == 120011 || itemid == 22223 || itemid == 20117 // バポカッパ
+				|| getItemId() == 22204 || itemid == 22205 || itemid == 22206 || itemid == 22207 // リンドビオルマジックアーマー
+				|| getItemId() == 22213 || itemid == 120110 || itemid == 93001 || itemid == 490008 || itemid == 22365
+				|| itemid == 222328 || getItemId() >= 222300 && getItemId() <= 222303 || itemid == 222328) {
 			mr += getEnchantLevel();
-		} else if (itemid == 20056 || itemid == 120056 || itemid == 220056 || itemid == 93002 || itemid == 222324 || itemid == 222325) {
+		} else if (itemid == 20056 || itemid == 120056 || itemid == 220056 || itemid == 93002 || itemid == 222324
+				|| itemid == 222325) {
 			mr += getEnchantLevel() * 2;
-		} else if (itemid == 20079 || itemid == 20078 || itemid == 20074 || itemid == 120074 || itemid == 20049 || itemid == 20050) {
+		} else if (itemid == 20079 || itemid == 20078 || itemid == 20074 || itemid == 120074 || itemid == 20049
+				|| itemid == 20050) {
 			mr += getEnchantLevel() * 3;
 		}
 		if (mr < 0)
@@ -634,22 +637,16 @@ public class L1ItemInstance extends L1Object {
 				L1Npc npc = NpcTable.getInstance().getTemplate(pet.get_npcid());
 				// name.append("[Lv." + pet.get_level() + " "
 				// + npc.get_nameid() + "]");
-				name.append("[Lv." + pet.get_level() + " " + pet.get_name() + "]HP" + pet.get_hp() + " " + npc.get_nameid());
+				name.append("[Lv." + pet.get_level() + " " + pet.get_name() + "]HP" + pet.get_hp() + " "
+						+ npc.get_nameid());
 			}
 		}
-	/*	if(getItem().getType2() ==1 &&getAttrEnchantLevel()>0){
-			switch(getAttrEnchantLevel()){
-			case 1:
-				name.append("$6115");
-				break;
-			case 2:
-				name.append("$6116");
-				break;
-			case 3:
-				name.append("$6117");
-				break;
-			}
-		}*/
+		/*
+		 * if(getItem().getType2() ==1 &&getAttrEnchantLevel()>0){
+		 * switch(getAttrEnchantLevel()){ case 1: name.append("$6115"); break;
+		 * case 2: name.append("$6116"); break; case 3: name.append("$6117");
+		 * break; } }
+		 */
 		if (getItem().getType2() == 0 && getItem().getType() == 2) { // light
 			if (isNowLighting()) {
 				name.append(" ($10)");
@@ -689,7 +686,7 @@ public class L1ItemInstance extends L1Object {
 		return getNumberedName(_count);
 	}
 
-	/** 속성 인챈트 **/
+	/** 属性エンチャント **/
 	public String getNumberedName(int count) {
 		StringBuilder name = new StringBuilder();
 
@@ -698,67 +695,67 @@ public class L1ItemInstance extends L1Object {
 				switch (getAttrEnchantLevel()) {
 				case 1:
 					name.append("$6115");
-					break; // 화령1단
+					break; // ファイアー1段
 				case 2:
 					name.append("$6116");
-					break; // 화령2단
+					break; // ファイアー2段
 				case 3:
 					name.append("$6117");
-					break; // 화령3단 (불의속성)
+					break; // ファイアー3段（火属性）
 				case 4:
 					name.append("$14361");
-					break; // 화령4단
+					break; // ファイアー4段
 				case 5:
 					name.append("$14365");
-					break; // 화령5단
+					break; // ファイアー5段
 
 				case 6:
 					name.append("$6118");
-					break; // 수령1단
+					break; // 受領1段
 				case 7:
 					name.append("$6119");
-					break; // 수령2단
+					break; // 受領2段
 				case 8:
 					name.append("$6120");
-					break; // 수령3단 (물의속성)
+					break; // 受領3段（水属性）
 				case 9:
 					name.append("$14362");
-					break; // 수령4단
+					break; // 受領4段
 				case 10:
 					name.append("$14366");
-					break; // 수령5단
+					break; // 受領5段
 
 				case 11:
 					name.append("$6121");
-					break; // 풍령1단
+					break; // 風鈴1段
 				case 12:
 					name.append("$6122");
-					break; // 풍령2단
+					break; // 風鈴2段
 				case 13:
 					name.append("$6123");
-					break; // 풍령3단 (바람의속성)
+					break; // 風鈴3段（風の属性）
 				case 14:
 					name.append("$14363");
-					break; // 풍령4단
+					break; // 風鈴4段
 				case 15:
 					name.append("$14367");
-					break; // 풍령5단
+					break; // 風鈴5段
 
 				case 16:
 					name.append("$6124");
-					break; // 지령1단
+					break; // 指令1段
 				case 17:
 					name.append("$6125");
-					break; // 지령2단
+					break; // 指令2段
 				case 18:
 					name.append("$6126");
-					break; // 지령3단 (땅의속성)
+					break; // 指令3段（地の属性）
 				case 19:
 					name.append("$14364");
-					break; // 지령4단
+					break; // 指令4段
 				case 20:
 					name.append("$14368");
-					break; // 지령5단
+					break; // 指令5段
 				default:
 					break;
 				}
@@ -769,50 +766,50 @@ public class L1ItemInstance extends L1Object {
 				}
 			}
 		}
-		// 매니저
+		// マネージャー
 		// name.append(_item.getNameId());
 		name.append(_item.getName());
 
-//		if (isSpecialEnchantable()) {
-//			for (int i = 1; i <= 3; ++i) {
-//				if (getSpecialEnchant(i) == 0) {
-//					break;
-//				}
-//
-//				switch (getSpecialEnchant(i)) {
-//				case CHAOS_SPIRIT:
-//					name.append("[혼돈] ");
-//					break;
-//				case CORRUPT_SPIRIT:
-//					name.append("[타락] ");
-//					break;
-//				case BALLACAS_SPIRIT:
-//					name.append("[발라카스] ");
-//					break;
-//				case ANTARAS_SPIRIT:
-//					name.append("[안타라스] ");
-//					break;
-//				case LINDBIOR_SPIRIT:
-//					name.append("[린드비오르] ");
-//					break;
-//				case PAPURION_SPIRIT:
-//					name.append("[파푸리온] ");
-//					break;
-//				case DEATHKNIGHT_SPIRIT:
-//					name.append("[데스나이트] ");
-//					break;
-//				case BAPPOMAT_SPIRIT:
-//					name.append("[바포메트] ");
-//					break;
-//				case BALLOG_SPIRIT:
-//					name.append("[발록] ");
-//					break;
-//				case ARES_SPIRIT:
-//					name.append("[아레스] ");
-//					break;
-//				}
-//			}
-//		}
+		// if (isSpecialEnchantable()) {
+		// for (int i = 1; i <= 3; ++i) {
+		// if (getSpecialEnchant(i) == 0) {
+		// break;
+		// }
+		//
+		// switch (getSpecialEnchant(i)) {
+		// case CHAOS_SPIRIT:
+		// name.append("[混沌] ");
+		// break;
+		// case CORRUPT_SPIRIT:
+		// name.append("[堕落] ");
+		// break;
+		// case BALLACAS_SPIRIT:
+		// name.append("[ヴァラカス] ");
+		// break;
+		// case ANTARAS_SPIRIT:
+		// name.append("[アンタラス] ");
+		// break;
+		// case LINDBIOR_SPIRIT:
+		// name.append("[リンドビオル] ");
+		// break;
+		// case PAPURION_SPIRIT:
+		// name.append("[パプリオン] ");
+		// break;
+		// case DEATHKNIGHT_SPIRIT:
+		// name.append("[デスナイト] ");
+		// break;
+		// case BAPPOMAT_SPIRIT:
+		// name.append("[バフォメット] ");
+		// break;
+		// case BALLOG_SPIRIT:
+		// name.append("[バルログ] ");
+		// break;
+		// case ARES_SPIRIT:
+		// name.append("[アレス] ");
+		// break;
+		// }
+		// }
+		// }
 
 		if (isIdentified()) {
 			if (getItem().getMaxChargeCount() > 0) {
@@ -834,9 +831,9 @@ public class L1ItemInstance extends L1Object {
 	}
 
 	/**
-	 * 아이템 상태로부터 서버 패킷으로 이용하는 형식의 바이트열을 생성해, 돌려준다. 1: 타격치 , 2: 인챈트 레벨, 3: 손상도, 4: 양손검, 5: 공격 성공, 6: 추가 타격 7: 왕자/공주 , 8: Str, 9: Dex, 10: Con, 11: Wiz,
-	 * 12: Int, 13: Cha, 14: Hp,Mp 15: Mr, 16: 마나흡수, 17: 주술력, 18: 헤이스트효과, 19: Ac, 20: 행운, 21: 영양, 22: 밝기, 23: 재질, 24: 활 명중치, 25: 종류[writeH], 26:
-	 * 레벨[writeH], 27: 불속성 28: 물속성, 29: 바람속성, 30: 땅속성, 31: 최대Hp, 32: 최대Mp, 33: 내성, 34: 생명흡수, 35: 활 타격치, 36: branch용dummy, 37: 체력회복률, 38: 마나회복률, 39: `,
+	 * アイテムの状態からサーバーのパケットに利用する形式のバイト列を生成し、返す。 1：打撃、2：エンチャントレベル、3：損傷度、4：両手剣、5：攻撃成功、6：追加打撃7：王子/王女、8：Str、9：Dex、10：Con、11：Wiz、
+	 * 12：Int、13：Cha、14：Hp、Mp 15：Mr、16：マナの吸収、17：呪術力、18：ヘイスト効果、19：Ac、20：幸運、21：栄養、22：明るさ、23：材質、24：弓命中、25：タイプ[writeH]、26：
+	 * レベル[writeH]、27：火属性28：水属性、29：風属性、30：地属性、31：最大Hp、32：最大Mp、33：耐性、34：生命吸収、35：弓打撃、36：branch用dummy、37：体力回復率、38：マナ回復率、39： `、
 	 * 
 	 * @param armor
 	 */
@@ -853,7 +850,7 @@ public class L1ItemInstance extends L1Object {
 			os.writeC(0x29);
 		}*/
 		if(itemId==66&&itemType2==1){
-			/** 클래스 착용 부분 **/
+			/** クラス着用部分 **/
 			int bit = 0;
 			bit |= getItem().isUseRoyal() ? 1 : 0;
 			bit |= getItem().isUseKnight() ? 2 : 0;
@@ -867,106 +864,106 @@ public class L1ItemInstance extends L1Object {
 			os.writeC(bit);
 			
 			os.writeC(39);
-			os.writeS("대미지 "+getItem().getDmgSmall()+"+"+(getEnchantLevel()*2)+"/"+getItem().getDmgLarge()+"+"+(getEnchantLevel()*2));
+			os.writeS("ダメージ"+getItem().getDmgSmall()+"+"+(getEnchantLevel()*2)+"/"+getItem().getDmgLarge()+"+"+(getEnchantLevel()*2));
 			os.writeC(39);
-			os.writeS("양손 무기");
+			os.writeS("両手武器");
 			os.writeC(39);
 			os.writeS("STR +"+getItem().get_addstr());
 			os.writeC(39);
-			os.writeS("추가 대미지 +"+getItem().getDmgModifier());
+			os.writeS("追加ダメージ+"+getItem().getDmgModifier());
 			os.writeC(39);
-			os.writeS("근거리 명중 +"+getItem().getHitModifier());
+			os.writeS("近距離命中+"+getItem().getHitModifier());
 			os.writeC(39);
-			os.writeS("마법 발동: 드래곤의 일격");
+			os.writeS("魔法発動：ドラゴンの一撃");
 			os.writeC(23);
 			os.writeC(getItem().getMaterial());
 			os.writeD(getWeight());
 			return os.getBytes();
 		}
 		if (itemType2 == 0) { // etcitem
-			if(인형SP() != 0){
+			if(dollSP() != 0){
 				os.writeC(39);
-				os.writeS("SP +" + 인형SP());
+				os.writeS("SP +" + dollSP());
 			}
-			if(근거리대미지() != 0){
+			if(ShortDamage() != 0){
 				os.writeC(39);
-				os.writeS("근거리 대미지 +" + 근거리대미지());
+				os.writeS("近距離ダメージ+" + ShortDamage());
 			}
-			if(근거리명중() != 0){
+			if(ShortHit() != 0){
 				os.writeC(39);
-				os.writeS("근거리 명중 +" + 근거리명중());
+				os.writeS("近距離命中+" + ShortHit());
 			}
-			if(원거리대미지() != 0){
+			if(LongDamage() != 0){
 				os.writeC(39);
-				os.writeS("원거리 대미지 +" + 원거리대미지());
+				os.writeS("遠距離ダメージ+" + LongDamage());
 			}
-			if(원거리명중() != 0){
+			if(LongHit() != 0){
 				os.writeC(39);
-				os.writeS("원거리 명중 +" + 원거리명중());
+				os.writeS("遠距離命中+" + LongHit());
 			}
-			if(추가데미지() != 0){
+			if(damageAdd() != 0){
 				os.writeC(39);
-				os.writeS("확률추가데미지 +" + 추가데미지());
+				os.writeS("確率追加ダメージ+" + damageAdd());
 			}
-			if(데미지리덕션() != 0){
+			if(damageReduction() != 0){
 				os.writeC(39);
-				os.writeS("대미지 리덕션 +" + 데미지리덕션());
+				os.writeS("ダメージリダクション+" + damageReduction());
 			}
-			if(스턴레벨() != 0){
+			if(stunLevel() != 0){
 				os.writeC(39);
-				os.writeS("스턴 레벨 +" + 스턴레벨());
+				os.writeS("スタンレベル+" + stunLevel());
 			}
-			if(최대HP() != 0){
+			if(MaxHP() != 0){
 				os.writeC(39);
-				os.writeS("최대 HP +" + 최대HP());
+				os.writeS("最大HP +" + MaxHP());
 			}
-			if(최대MP() != 0){
+			if(MaxMP() != 0){
 				os.writeC(39);
-				os.writeS("최대 MP +" + 최대MP());
+				os.writeS("最大MP +" + MaxMP());
 			}
-			if(경험치보너스() != 0){
+			if(EXPBonus() != 0){
 				os.writeC(39);
-				os.writeS("경험치보너스 +" + 경험치보너스()+"%");
+				os.writeS("経験値ボーナス+" + EXPBonus()+"%");
 			}
-			if(HP회복() != 0){
+			if(HPRecovery() != 0){
 				os.writeC(39);
-				os.writeS("32초마다 HP +" + HP회복()+"회복");
+				os.writeS("32秒ごとにHP +" + HPRecovery()+"回復");
 			}
-			if(MP회복() != 0){
+			if(MPRecovery() != 0){
 				os.writeC(39);
-				os.writeS("64초마다 MP +" + MP회복()+"회복");
+				os.writeS("64秒ごとにMP +" + MPRecovery()+"回復");
 			}
-			if(마법발동() != null){
+			if(magicActivation() != null){
 				os.writeC(39);
-				os.writeS("발동: " + 마법발동());
+				os.writeS("発動：" + magicActivation());
 			}
-			if(아이템획득() != null){
+			if(itemGet() != null){
 				os.writeC(39);
-				os.writeS("일정시간마다 " + 아이템획득() + "획득");
+				os.writeS("一定時間ごとに " + itemGet() + "獲得");
 			}
-			if(무게게이지() != 0){
+			if(weightGauge() != 0){
 				os.writeC(39);
-				os.writeS("무게게이지 +" + 무게게이지()+"%");
+				os.writeS("重量ゲージ +" + weightGauge()+"%");
 			}
-			if(인형방어구() != 0){
+			if(dollArmor() != 0){
 				os.writeC(39);
-				os.writeS("AC-" + 인형방어구());
+				os.writeS("AC-" + dollArmor());
 			}
-			if(인형Mpr() != 0){
+			if(dollMpr() != 0){
 				os.writeC(39);
-				os.writeS("MP 회복률 +" + 인형Mpr());
+				os.writeS("MP回復率+" + dollMpr());
 			}
-			if(스턴내성() != 0){
+			if(resistStun() != 0){
 				os.writeC(39);
-				os.writeS("스턴 내성 +" + 스턴내성());
+				os.writeS("スタン耐性+" + resistStun());
 			}
-			if(인형홀드내성() != 0){
+			if(dollResist_Hold() != 0){
 				os.writeC(39);
-				os.writeS("홀드 내성 +" + 인형홀드내성());
+				os.writeS("ホールド耐性+" + dollResist_Hold());
 			}
-			if(인형동빙내성() != 0){
+			if(dollResist_Freeze() != 0){
 				os.writeC(39);
-				os.writeS("동빙 내성 +" + 인형동빙내성());
+				os.writeS("凍結耐性+" + dollResist_Freeze());
 			}
 			switch (getItem().getType()) {
 			case 2: // light
@@ -991,252 +988,252 @@ public class L1ItemInstance extends L1Object {
 			os.writeD(getWeight());
 
 			switch (getItem().getItemId()) {
-			case 41288: // 환상 개미다리 치즈구이
+			case 41288: //幻想アリの足のチーズ焼き
 				os.writeC(39);
-				os.writeS("AC-1 대미지감소+5");
+				os.writeS("AC-1ダメージ減少+5");
 				break;
-			case 41280: // 개미다리 치즈구이
+			case 41280: // アリの足のチーズ焼き
 				os.writeC(39);
-				os.writeS("AC-1 대미지감소+5");
+				os.writeS("AC-1ダメージ減少+5");
 				break;
-			case 41286: // 환상 곰 고기 구이
+			case 41286: //幻想クマ肉焼き
 				os.writeC(39);
-				os.writeS("HP+30,대미지감소+5");
+				os.writeS("HP + 30、ダメージ減少+5");
 				break;
-			case 41278: // 곰 고기 구이
+			case 41278: // クマ肉焼き
 				os.writeC(39);
-				os.writeS("HP+30,대미지감소+5");
+				os.writeS("HP + 30、ダメージ減少+5");
 				break;
-			case 41289: // 환상 과일 샐러드
+			case 41289: // 幻想のフルーツサラダ
 				os.writeC(39);
 				os.writeS("MP+20");
 				break;
-			case 41281: // 과일 샐러드
+			case 41281: // フルーツサラダ
 				os.writeC(39);
 				os.writeS("MP+20");
 				break;
-			case 41290: // 환상 과일 탕수육
+			case 41290: // 幻想のフルーツ甘酢あんかけ
 				os.writeC(39);
-				os.writeS("HP 회복+3");
+				os.writeS("HP回復+3");
 				break;
-			case 41282: // 과일 탕수육
+			case 41282: // フルーツ甘酸っぱい
 				os.writeC(39);
-				os.writeS("HP 회복+3");
+				os.writeS("HP回復+3");
 				break;
-			case 41285: // 환상 괴물 눈 스테이크
+			case 41285: //幻想モンスターアイステーキ
 				os.writeC(39);
-				os.writeS("모든속성 저항력+10");
+				os.writeS("すべての属性抵抗力+10");
 				break;
-			case 41277: // 괴물 눈 스테이크
+			case 41277: // モンスターの目ステーキ
 				os.writeC(39);
-				os.writeS("모든속성 저항력+10");
+				os.writeS("すべての属性抵抗力+10");
 				break;
-			case 41291: // 환상 멧돼지 꼬치 구이
+			case 41291: // 幻想イノシシ串焼き
 				os.writeC(39);
 				os.writeS("MR+5");
 				break;
-			case 41283: // 멧돼지 꼬치 구이
+			case 41283: // イノシシ肉の串焼き
 				os.writeC(39);
 				os.writeS("MR+5");
 				break;
-			case 41292: // 환상 버섯스프
+			case 41292: // 幻想キノコのスープ
 				os.writeC(39);
-				os.writeS("경험치 획득량+1%");
+				os.writeS("経験値獲得量+ 1％");
 				break;
-			case 41284: // 버섯스프
+			case 41284: // キノコのスープ
 				os.writeC(39);
-				os.writeS("경험치 획득량+1%");
+				os.writeS("経験値獲得量+ 1％");
 				break;
-			case 41287: // 환상 씨호떡
+			case 41287: // 幻想さん餅
 				os.writeC(39);
-				os.writeS("MP 회복+3");
+				os.writeS("MP回復+3");
 				break;
-			case 41279: // 씨호떡
+			case 41279: // ナッツ餅
 				os.writeC(39);
-				os.writeS("MP 회복+3");
+				os.writeS("MP回復+3");
 				break;
-			case 49063: // 환상 거미 다리 꼬치 구이
+			case 49063: // 幻想クモ足串焼き
 				os.writeC(39);
 				os.writeS("SP+1");
 				break;
-			case 49055: // 거미 다리 꼬치 구이
+			case 49055: // クモの脚の串焼き
 				os.writeC(39);
 				os.writeS("SP+1");
 				break;
-			case 49061: // 환상 스콜피온 구이
+			case 49061: // 幻想スコーピオン焼き
 				os.writeC(39);
-				os.writeS("HP 회복+2, MP 회복+2");
+				os.writeS("HP回復+2、MP回復+2");
 				break;
-			case 49053: // 스콜피온 구이
+			case 49053: //スコーピオン焼き
 				os.writeC(39);
-				os.writeS("HP 회복+2, MP 회복+2");
+				os.writeS("HP回復+2、MP回復+2");
 				break;
-			case 49058: // 환상 악어 스테이크
+			case 49058: // 幻想ワニのステーキ
 				os.writeC(39);
-				os.writeS("최대 HP+30, 최대 MP+30");
+				os.writeS("最大HP + 30、最大MP + 30");
 				break;
-			case 49050: // 악어 스테이크
+			case 49050: // ワニのステーキ
 				os.writeC(39);
-				os.writeS("최대 HP+30, 최대 MP+30");
+				os.writeS("最大HP + 30、最大MP + 30");
 				break;
-			case 49062: // 환상 일렉카둠 스튜
+			case 49062: //幻想イレッカドムシチュー
 				os.writeC(39);
 				os.writeS("MR+10");
 				break;
-			case 49054: // 일렉카둠 스튜
+			case 49054: // イレッカドムシチュー
 				os.writeC(39);
 				os.writeS("MR+10");
 				break;
-			case 49057: // 환상 캐비어 카나페
+			case 49057: // 幻想キャビアカナッペ
 				os.writeC(39);
-				os.writeS("근거리 대미지+1,근거리 명중+1");
+				os.writeS("近距離ダメージ+1、近距離命中+1");
 				break;
-			case 49049: // 캐비어 카나페
+			case 49049: // キャビアカナッペ
 				os.writeC(39);
-				os.writeS("근거리 대미지+1,근거리 명중+1");
+				os.writeS("近距離ダメージ+1、近距離命中+1");
 				break;
-			case 49064: // 환상 크랩살스프
+			case 49064: // 幻想クラブ肉スープ
 				os.writeC(39);
-				os.writeS("경험치 획득량+2%");
+				os.writeS("経験値獲得量+ 2％");
 				break;
-			case 49056: // 크랩살스프
+			case 49056: // クラブ肉スープ
 				os.writeC(39);
-				os.writeS("경험치 획득량+2%");
+				os.writeS("経験値獲得量+ 2％");
 				break;
-			case 49060: // 환상 키위 패롯 구이
+			case 49060: // 幻想キウィパロット焼き
 				os.writeC(39);
-				os.writeS("원거리 대미지+1,원거리 명중+1");
+				os.writeS("遠距離ダメージ+1、遠距離命中+1");
 				break;
-			case 49052: // 키위 패롯 구이
+			case 49052: // キウィパロット焼き
 				os.writeC(39);
-				os.writeS("원거리 대미지+1,원거리 명중+1");
+				os.writeS("遠距離ダメージ+1、遠距離命中+1");
 				break;
-			case 49059: // 환상 터틀 드래곤 과자
+			case 49059: // 幻想タートルドラゴンお菓子
 				os.writeC(39);
 				os.writeS("AC-2");
 				break;
-			case 49051: // 터틀 드래곤 과자
+			case 49051: // タートルドラゴンお菓子
 				os.writeC(39);
 				os.writeS("AC-2");
 				break;
-			case 210057: // 환상 그리폰 구이
+			case 210057: // 幻想グリフォン焼き
 				os.writeC(39);
-				os.writeS("최대 HP+50, 최대 MP+50");
+				os.writeS("最大HP + 50、最大MP + 50");
 				break;
-			case 210049: // 그리폰 구이
+			case 210049: // グリフォン焼き
 				os.writeC(39);
-				os.writeS("최대 HP+50, 최대 MP+50");
+				os.writeS("最大HP + 50、最大MP + 50");
 				break;
-			case 210059: // 환상 대왕거북 구이
+			case 210059: //幻想タートル焼き
 				os.writeC(39);
 				os.writeS("AC-3");
 				break;
-			case 210051: // 대왕거북 구이
+			case 210051: // タートル焼き
 				os.writeC(39);
 				os.writeS("AC-3");
 				break;
-			case 210061: // 환상 드레이크 구이
+			case 210061: // 幻想ドレイク焼き
 				os.writeC(39);
-				os.writeS("SP+2, MP 회복+2");
+				os.writeS("SP + 2、MP回復+2");
 				break;
-			case 210053: // 드레이크 구이
+			case 210053: // ドレイク焼き
 				os.writeC(39);
-				os.writeS("SP+2, MP 회복+2");
+				os.writeS("SP + 2、MP回復+2");
 				break;
-			case 210060: // 환상 레서 드래곤 날개 꼬치
+			case 210060: // 幻想レッサードラゴンの翼串
 				os.writeC(39);
-				os.writeS("MR+15,모든속성 저항력+10");
+				os.writeS("MR + 15、すべての属性抵抗力+10");
 				break;
-			case 210052: // 레서 드래곤 날개 꼬치
+			case 210052: // レッサードラゴン羽串
 				os.writeC(39);
-				os.writeS("MR+15,모든속성 저항력+10");
+				os.writeS("MR + 15、すべての属性抵抗力+10");
 				break;
-			case 210063: // 환상 바실리스크 알 스프
+			case 210063: // 幻想バシリスク卵スープ
 				os.writeC(39);
-				os.writeS("경험치 획득량+3%");
+				os.writeS("経験値獲得量+ 3％");
 				break;
-			case 210055: // 바실리스크 알 스프
+			case 210055: // バシリスク卵スープ
 				os.writeC(39);
-				os.writeS("경험치 획득량+3%");
+				os.writeS("経験値獲得量+ 3％");
 				break;
-			case 210062: // 환상 심해어 스튜
+			case 210062: // 幻想深海魚のシチュー
 				os.writeC(39);
-				os.writeS("최대 HP+30,HP 회복+2");
+				os.writeS("最大HP + 30、HP回復+2");
 				break;
-			case 210054: // 심해어 스튜
+			case 210054: // 深海魚のシチュー
 				os.writeC(39);
-				os.writeS("최대 HP+30,HP 회복+2");
+				os.writeS("最大HP + 30、HP回復+2");
 				break;
-			case 210058: // 환상 코카트리스 스테이크
+			case 210058: // 幻想コカトリスステーキ
 				os.writeC(39);
-				os.writeS("근거리 명중+2, 근거리 대미지+1");
+				os.writeS("近距離命中+2、近距離ダメージ+1");
 				break;
-			case 210050: // 코카트리스 스테이크
+			case 210050: //コカトリスステーキ
 				os.writeC(39);
-				os.writeS("근거리 명중+2, 근거리 대미지+1");
+				os.writeS("近距離命中+2、近距離ダメージ+1");
 				break;
-			case 210056: // 환상 크러스트시안 집게발 구이
+			case 210056: // 幻想クラスタシアンニッパー焼き
 				os.writeC(39);
-				os.writeS("원거리 명중+2, 원거리 대미지+1");
+				os.writeS("遠距離命中+2、遠距離ダメージ+1");
 				break;
-			case 210048: // 크러스트시안 집게발 구이
+			case 210048: // クラスタシアンニッパー焼き
 				os.writeC(39);
-				os.writeS("원거리 명중+2, 원거리 대미지+1");
+				os.writeS("遠距離命中+2、遠距離ダメージ+1");
 				break;
 				
-			case 3000159://스프
+			case 3000159://スープ
 				os.writeC(39);
-				os.writeS("경험치 획득량+10%");
+				os.writeS("経験値獲得量+ 10％");
 				os.writeC(39);
-				os.writeS("공포,마법,스턴 저항+1");
+				os.writeS("恐怖、魔法、スタン抵抗+1");
 				break;
-			case 3000160://메티스의 요리
+			case 3000160://メティスの料理
 				os.writeC(39);
-				os.writeS("근,원거리 대미지 +3");
+				os.writeS("根、遠距離ダメージ+3");
 				os.writeC(39);
-				os.writeS("근,원거리 명중 +3");
+				os.writeS("根、遠距離命中+3");
 				os.writeC(39);
 				os.writeS("SP +3");
 				os.writeC(39);
-				os.writeS("근,원거리 치명타 +3");
+				os.writeS("根、遠距離クリティカル+3");
 				break;
-			case 3000161://메티스의 주문서
+			case 3000161://メティスのスクロール
 				os.writeC(39);
-				os.writeS("\\f2메티스의 풀업");
+				os.writeS("\\f2メティスのプルアップ");
 				break;
-			/** 속성 화살 **/
+			/** 属性矢 **/
 			case 820014:
 				os.writeC(39);
-				os.writeS("물 속성 대미지 +3");
+				os.writeS("水属性ダメージ+3");
 				break;
 			case 820015:
 				os.writeC(39);
-				os.writeS("바람 속성 대미지 +3");
+				os.writeS("風属性ダメージ+3");
 				break;
 			case 820016:
 				os.writeC(39);
-				os.writeS("땅 속성 대미지 +3");
+				os.writeS("地属性ダメージ+3");
 				break;
 			case 820017:
 				os.writeC(39);
-				os.writeS("불 속성 대미지 +3");
+				os.writeS("火属性ダメージ+3");
 				break;
-			/** 속성 화살 **/
+			/** 属性矢 **/
 			default:
 				break;
 			}
 
 		} else if (itemType2 == 1 || itemType2 == 2) { // weapon | armor
 			int op_addAc = 0;
-			/** 아이템 안전인챈 표시 추가 **/
+			/** アイテム安全なチャン表示を追加 **/
 			/*int SafeEnchant = getItem().get_safeenchant();
 			os.writeC(39);
 			if (SafeEnchant < 0) {
 				SafeEnchant = 0;
 			}
-			os.writeS("\\fY[안전인챈 : +" + SafeEnchant + "]");*/
+			os.writeS("\\fY[安全なチャン : +" + SafeEnchant + "]");*/
 			
-			if (itemType2 == 1) { // weapon 무기 타격치
+			if (itemType2 == 1) { // weapon武器打撃値
 				os.writeC(1);
 				os.writeC(getItem().getDmgSmall());
 				os.writeC(getItem().getDmgLarge());
@@ -1259,7 +1256,7 @@ public class L1ItemInstance extends L1Object {
 				os.writeC(2);
 				os.writeC(getEnchantLevel());
 								
-				/** 룸티스 검은빛 귀걸이 AC표현처리 부분 **/
+				/** ルームティス黒い光ピアスAC表現処理部 **/
 			} else if (itemType2 == 2 && itemId == 222340 || itemId == 222341) {
 				os.writeC(2);
 				switch (getEnchantLevel()) {
@@ -1315,7 +1312,7 @@ public class L1ItemInstance extends L1Object {
 					os.writeC(0 + op_addAc);
 				}
 				
-				/** 스냅퍼의 반지 AC부분 처리 **/
+				/** スナップファーリングACセクションの処理 **/
 			} else if (itemType2 == 2 && itemId >= 22224 && itemId <= 22228 || itemId == 222290) {
 				os.writeC(2);
 				switch (getEnchantLevel()) {
@@ -1335,7 +1332,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					os.writeC(0 + op_addAc);
 				}
-				/** 스냅퍼의 용사 반지 AC부분 처리 **/
+				/** スナップファーの勇士リングACセクションの処理 **/
 			} else if (itemType2 == 2 && itemId == 222291) {
 				os.writeC(2);
 				switch (getEnchantLevel()) {
@@ -1358,7 +1355,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					os.writeC(0 + op_addAc);
 				}
-				/** 축복받은 스냅퍼 체력,마법저항 반지 AC부분 처리 **/
+				/** 祝福されたスナップパー体力、魔法抵抗リングACセクションの処理 **/
 			} else if (itemType2 == 2 && itemId == 222332 || itemId == 222334 || itemId == 222335) {
 				os.writeC(2);
 				switch (getEnchantLevel()) {
@@ -1380,7 +1377,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					os.writeC(0 + op_addAc);
 				}
-				/** 축복받은 스냅퍼의 회복,집중,마나 반지 AC부분 처리 **/
+				/** 祝福されたスナップファーの回復、集中、マナリングACセクションの処理 **/
 			} else if (itemType2 == 2 && itemId == 222330 || itemId == 222331 || itemId == 222333) {
 				os.writeC(2);
 				switch (getEnchantLevel()) {
@@ -1400,7 +1397,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					os.writeC(0 + op_addAc);
 				}
-				/** 축복받은 스냅퍼 용사의반지 AC부분 처리 **/
+				/** 祝福されたスナップ広がり勇士のリングACセクションの処理 **/
 			} else if (itemType2 == 2 && itemId == 222336) {
 				os.writeC(2);
 				switch (getEnchantLevel()) {
@@ -1425,7 +1422,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					os.writeC(0 + op_addAc);
 				}
-				/** 룸티스의 푸른빛 귀걸이 AC부분 처리 **/
+				/** ルームティスの青い光のイヤリングACセクションの処理**/
 			} else if (itemType2 == 2 && getItem().getGrade() == 4 && itemId == 22230) {
 				os.writeC(2);
 				switch (getEnchantLevel()) {
@@ -1442,7 +1439,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					os.writeC(0 + op_addAc);
 				}
-				/** 축복받은 룸티스의 푸른빛 귀걸이 AC부분 처리 **/
+				/** 祝福されたルームティスの青い光のイヤリングACセクションの処理 **/
 			} else if (itemType2 == 2 && getItem().getGrade() == 4 && itemId == 222338) {
 				os.writeC(2);
 				switch (getEnchantLevel()) {
@@ -1463,7 +1460,7 @@ public class L1ItemInstance extends L1Object {
 					os.writeC(0 + op_addAc);
 				}
 
-			}else if(itemType2 == 2 && (itemId == 900032|| itemId == 900033 || itemId == 900034)){ //휘장 
+			}else if(itemType2 == 2 && (itemId == 900032|| itemId == 900033 || itemId == 900034)){ //記章 
 				os.writeC(2);
 				switch(getEnchantLevel()){
 					case 4:
@@ -1481,7 +1478,7 @@ public class L1ItemInstance extends L1Object {
 						os.writeC(0);
 						break;
 				}
-			}else if(itemType2 == 2 && itemId == 900035){ //휘장
+			}else if(itemType2 == 2 && itemId == 900035){ //記章
 				os.writeC(2);
 				switch(getEnchantLevel()){
 				case 3:
@@ -1510,18 +1507,18 @@ public class L1ItemInstance extends L1Object {
 			
 
 
-			if (getItem().isTwohandedWeapon()) { // 양손무기
+			if (getItem().isTwohandedWeapon()) { // 両手武器
 				os.writeC(4);
 			}
 
-			if (get_durability() != 0) { // 손상도
+			if (get_durability() != 0) { // 損傷も
 				os.writeC(3);
 				os.writeC(get_durability());
 				// os.writeC(39);
-				// os.writeS("\\aG손상도 "+get_durability());
+				// os.writeS("\\aG損傷も「+ get_durability（））;
 			}
 
-			/** 클래스 착용 부분 **/
+			/** クラス着用部分 **/
 			int bit = 0;
 			bit |= getItem().isUseRoyal() ? 1 : 0;
 			bit |= getItem().isUseKnight() ? 2 : 0;
@@ -1537,20 +1534,20 @@ public class L1ItemInstance extends L1Object {
 			if (getSpecialEnchant() != 0) {
 				if (itemType2 == 1 && getSpecialEnchant() == 1) {
 					os.writeC(39);
-					os.writeS("\\f2특화 : 추가데미지 + 5");
+					os.writeS("\\f2特化：追加ダメージ+ 5");
 				}
 				if (itemType2 == 2 && getSpecialEnchant() == 1 && (!(getItem().getType() >= 8 && getItem().getType() <= 12))) {
 					os.writeC(39);
-					os.writeS("\\f2특화 : 대미지 리덕션 + 1");
+					os.writeS("\\f2特化：ダメージリダクション+ 1");
 				}
 			}
 
-			/** 55레벨 엘릭서 룬 옵션 표시 **/
-			if (itemId == 222295) { // 민첩의 엘릭서
+			/** 55レベルエリクサールーンオプションを表示 **/
+			if (itemId == 222295) { // アジャイルのエリクサー
 				switch (_cha.getType()) {
 				case 0:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 +3");
+					os.writeS("ダメージリダクション+3");
 					break;
 				case 1:
 				case 7:
@@ -1563,7 +1560,7 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("MP 회복 +3");
+					os.writeS("MP回復+3");
 					break;
 				case 4:
 					os.writeC(39);
@@ -1571,19 +1568,19 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("근거리 명중 +3");
+					os.writeS("近距離命中+3");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("무게 게이지 +5%");
+					os.writeS("重量ゲージ+ 5％");
 					break;
 				}
 			}
-			if (itemId == 222296) { // 체력의 엘릭서
+			if (itemId == 222296) { // 体力のエリクサー
 				switch (_cha.getType()) {
 				case 0:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 +3");
+					os.writeS("ダメージリダクション+3");
 					break;
 				case 1:
 				case 7:
@@ -1596,7 +1593,7 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("MP 회복 +3");
+					os.writeS("MP回復+3");
 					break;
 				case 4:
 					os.writeC(39);
@@ -1604,19 +1601,19 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("근거리 명중 +3");
+					os.writeS("近距離命中+3");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("무게 게이지 +5%");
+					os.writeS("重量ゲージ+ 5％");
 					break;
 				}
 			}
-			if (itemId == 222297) { // 지식의 엘릭서
+			if (itemId == 222297) { // 知識のエリクサー
 				switch (_cha.getType()) {
 				case 0:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 +3");
+					os.writeS("ダメージリダクション+3");
 					break;
 				case 1:
 				case 7:
@@ -1629,7 +1626,7 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("MP 회복 +3");
+					os.writeS("MP回復+3");
 					break;
 				case 4:
 					os.writeC(39);
@@ -1637,19 +1634,19 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("근거리 명중 +3");
+					os.writeS("近距離命中+3");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("무게 게이지 +5%");
+					os.writeS("重量ゲージ+ 5％");
 					break;
 				}
 			}
-			if (itemId == 222298) { // 지혜의 엘릭서
+			if (itemId == 222298) { // 知恵のエリクサー
 				switch (_cha.getType()) {
 				case 0:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 +3");
+					os.writeS("ダメージリダクション+3");
 					break;
 				case 1:
 				case 7:
@@ -1662,7 +1659,7 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("MP 회복 +3");
+					os.writeS("MP回復+3");
 					break;
 				case 4:
 					os.writeC(39);
@@ -1670,19 +1667,19 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("근거리 명중 +3");
+					os.writeS("近距離命中+3");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("무게 게이지 +5%");
+					os.writeS("重量ゲージ+ 5％");
 					break;
 				}
 			}
-			if (itemId == 222299) { // 힘의 엘릭서
+			if (itemId == 222299) { //力のエリクサー
 				switch (_cha.getType()) {
 				case 0:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 +3");
+					os.writeS("ダメージリダクション+3");
 					break;
 				case 1:
 				case 7:
@@ -1695,7 +1692,7 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("MP 회복 +3");
+					os.writeS("MP回復+3");
 					break;
 				case 4:
 					os.writeC(39);
@@ -1703,282 +1700,282 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("근거리 명중 +3");
+					os.writeS("近距離命中+3");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("무게 게이지 +5%");
-					break;
-				}
-			}
-
-			/** 70레벨 엘릭서 룬 옵션 표시 **/
-			if (itemId == 222312) { // 민첩의 엘릭서
-				switch (_cha.getType()) {
-				case 0:
-					os.writeC(39);
-					os.writeS("대미지 리덕션 +3");
-					os.writeC(39);
-					os.writeS("근거리 명중+2");
-					break;
-				case 1:
-					os.writeC(39);
-					os.writeS("최대 HP +50");
-					os.writeC(39);
-					os.writeS("근거리 대미지+1");
-					break;
-				case 2:
-					os.writeC(39);
-					os.writeS("최대 MP +50");
-					os.writeC(39);
-					os.writeS("원거리 대미지+1");
-					break;
-				case 3:
-					os.writeC(39);
-					os.writeS("MP 회복 +3");
-					os.writeC(39);
-					os.writeS("SP +1");
-					break;
-				case 4:
-					os.writeC(39);
-					os.writeS("AC-3");
-					os.writeC(39);
-					os.writeS("MP +30");
-					break;
-				case 5:
-					os.writeC(39);
-					os.writeS("근거리 명중 +3");
-					os.writeC(39);
-					os.writeS("대미지 리덕션+1");
-					break;
-				case 6:
-					os.writeC(39);
-					os.writeS("무게 게이지 +5%");
-					os.writeC(39);
-					os.writeS("HP +50");
-					break;
-				case 7:
-					os.writeC(39);
-					os.writeS("MR +5");
-					os.writeC(39);
-					os.writeS("HP +50");
-					break;
-				}
-			}
-			if (itemId == 222313) { // 체력의 엘릭서
-				switch (_cha.getType()) {
-				case 0:
-					os.writeC(39);
-					os.writeS("대미지 리덕션 +3");
-					os.writeC(39);
-					os.writeS("근거리 명중+2");
-					break;
-				case 1:
-					os.writeC(39);
-					os.writeS("최대 HP +50");
-					os.writeC(39);
-					os.writeS("근거리 대미지+1");
-					break;
-				case 2:
-					os.writeC(39);
-					os.writeS("최대 MP +50");
-					os.writeC(39);
-					os.writeS("원거리 대미지+1");
-					break;
-				case 3:
-					os.writeC(39);
-					os.writeS("MP 회복 +3");
-					os.writeC(39);
-					os.writeS("SP +1");
-					break;
-				case 4:
-					os.writeC(39);
-					os.writeS("AC-3");
-					os.writeC(39);
-					os.writeS("MP +30");
-					break;
-				case 5:
-					os.writeC(39);
-					os.writeS("근거리 명중 +3");
-					os.writeC(39);
-					os.writeS("대미지 리덕션+1");
-					break;
-				case 6:
-					os.writeC(39);
-					os.writeS("무게 게이지 +5%");
-					os.writeC(39);
-					os.writeS("HP +50");
-					break;
-				case 7:
-					os.writeC(39);
-					os.writeS("MR +5");
-					os.writeC(39);
-					os.writeS("HP +50");
-					break;
-				}
-			}
-			if (itemId == 222314) { // 지식의 엘릭서
-				switch (_cha.getType()) {
-				case 0:
-					os.writeC(39);
-					os.writeS("대미지 리덕션 +3");
-					os.writeC(39);
-					os.writeS("근거리 명중+2");
-					break;
-				case 1:
-					os.writeC(39);
-					os.writeS("최대 HP +50");
-					os.writeC(39);
-					os.writeS("근거리 대미지+1");
-					break;
-				case 2:
-					os.writeC(39);
-					os.writeS("최대 MP +50");
-					os.writeC(39);
-					os.writeS("원거리 대미지+1");
-					break;
-				case 3:
-					os.writeC(39);
-					os.writeS("MP 회복 +3");
-					os.writeC(39);
-					os.writeS("SP +1");
-					break;
-				case 4:
-					os.writeC(39);
-					os.writeS("AC-3");
-					os.writeC(39);
-					os.writeS("MP +30");
-					break;
-				case 5:
-					os.writeC(39);
-					os.writeS("근거리 명중 +3");
-					os.writeC(39);
-					os.writeS("대미지 리덕션+1");
-					break;
-				case 6:
-					os.writeC(39);
-					os.writeS("무게 게이지 +5%");
-					os.writeC(39);
-					os.writeS("HP +50");
-					break;
-				case 7:
-					os.writeC(39);
-					os.writeS("MR +5");
-					os.writeC(39);
-					os.writeS("HP +50");
-					break;
-				}
-			}
-			if (itemId == 222315) { // 지혜의 엘릭서
-				switch (_cha.getType()) {
-				case 0:
-					os.writeC(39);
-					os.writeS("대미지 리덕션 +3");
-					os.writeC(39);
-					os.writeS("근거리 명중+2");
-					break;
-				case 1:
-					os.writeC(39);
-					os.writeS("최대 HP +50");
-					os.writeC(39);
-					os.writeS("근거리 대미지+1");
-					break;
-				case 2:
-					os.writeC(39);
-					os.writeS("최대 MP +50");
-					os.writeC(39);
-					os.writeS("원거리 대미지+1");
-					break;
-				case 3:
-					os.writeC(39);
-					os.writeS("MP 회복 +3");
-					os.writeC(39);
-					os.writeS("SP +1");
-					break;
-				case 4:
-					os.writeC(39);
-					os.writeS("AC-3");
-					os.writeC(39);
-					os.writeS("MP +30");
-					break;
-				case 5:
-					os.writeC(39);
-					os.writeS("근거리 명중 +3");
-					os.writeC(39);
-					os.writeS("대미지 리덕션+1");
-					break;
-				case 6:
-					os.writeC(39);
-					os.writeS("무게 게이지 +5%");
-					os.writeC(39);
-					os.writeS("HP +50");
-					break;
-				case 7:
-					os.writeC(39);
-					os.writeS("MR +5");
-					os.writeC(39);
-					os.writeS("HP +50");
-					break;
-				}
-			}
-			if (itemId == 222316) { // 힘의 엘릭서
-				switch (_cha.getType()) {
-				case 0:
-					os.writeC(39);
-					os.writeS("대미지 리덕션 +3");
-					os.writeC(39);
-					os.writeS("근거리 명중+2");
-					break;
-				case 1:
-					os.writeC(39);
-					os.writeS("최대 HP +50");
-					os.writeC(39);
-					os.writeS("근거리 대미지+1");
-					break;
-				case 2:
-					os.writeC(39);
-					os.writeS("최대 MP +50");
-					os.writeC(39);
-					os.writeS("원거리 대미지+1");
-					break;
-				case 3:
-					os.writeC(39);
-					os.writeS("MP 회복 +3");
-					os.writeC(39);
-					os.writeS("SP +1");
-					break;
-				case 4:
-					os.writeC(39);
-					os.writeS("AC-3");
-					os.writeC(39);
-					os.writeS("MP +30");
-					break;
-				case 5:
-					os.writeC(39);
-					os.writeS("근거리 명중 +3");
-					os.writeC(39);
-					os.writeS("대미지 리덕션+1");
-					break;
-				case 6:
-					os.writeC(39);
-					os.writeS("무게 게이지 +5%");
-					os.writeC(39);
-					os.writeS("HP +50");
-					break;
-				case 7:
-					os.writeC(39);
-					os.writeS("MR +5");
-					os.writeC(39);
-					os.writeS("HP +50");
+					os.writeS("重量ゲージ+ 5％");
 					break;
 				}
 			}
 
-			/** 스냅퍼의 반지 추타 표기 **/
+			/** 70レベルエリクサールーンオプションを表示 **/
+			if (itemId == 222312) { // アジャイルのエリクサー
+				switch (_cha.getType()) {
+				case 0:
+					os.writeC(39);
+					os.writeS("ダメージリダクション+3");
+					os.writeC(39);
+					os.writeS("近距離命中+2");
+					break;
+				case 1:
+					os.writeC(39);
+					os.writeS("最大HP + 50");
+					os.writeC(39);
+					os.writeS("近距離ダメージ+1");
+					break;
+				case 2:
+					os.writeC(39);
+					os.writeS("最大MP + 50");
+					os.writeC(39);
+					os.writeS("遠距離ダメージ+1");
+					break;
+				case 3:
+					os.writeC(39);
+					os.writeS("MP回復+3");
+					os.writeC(39);
+					os.writeS("SP +1");
+					break;
+				case 4:
+					os.writeC(39);
+					os.writeS("AC-3");
+					os.writeC(39);
+					os.writeS("MP +30");
+					break;
+				case 5:
+					os.writeC(39);
+					os.writeS("近距離命中+3");
+					os.writeC(39);
+					os.writeS("ダメージリダクション+1");
+					break;
+				case 6:
+					os.writeC(39);
+					os.writeS("重量ゲージ+ 5％");
+					os.writeC(39);
+					os.writeS("HP +50");
+					break;
+				case 7:
+					os.writeC(39);
+					os.writeS("MR +5");
+					os.writeC(39);
+					os.writeS("HP +50");
+					break;
+				}
+			}
+			if (itemId == 222313) { // 体力のエリクサー
+				switch (_cha.getType()) {
+				case 0:
+					os.writeC(39);
+					os.writeS("ダメージリダクション+3");
+					os.writeC(39);
+					os.writeS("近距離命中+2");
+					break;
+				case 1:
+					os.writeC(39);
+					os.writeS("最大HP + 50");
+					os.writeC(39);
+					os.writeS("近距離ダメージ+1");
+					break;
+				case 2:
+					os.writeC(39);
+					os.writeS("最大MP + 50");
+					os.writeC(39);
+					os.writeS("遠距離ダメージ+1");
+					break;
+				case 3:
+					os.writeC(39);
+					os.writeS("MP回復+3");
+					os.writeC(39);
+					os.writeS("SP +1");
+					break;
+				case 4:
+					os.writeC(39);
+					os.writeS("AC-3");
+					os.writeC(39);
+					os.writeS("MP +30");
+					break;
+				case 5:
+					os.writeC(39);
+					os.writeS("近距離命中+3");
+					os.writeC(39);
+					os.writeS("ダメージリダクション+1");
+					break;
+				case 6:
+					os.writeC(39);
+					os.writeS("重量ゲージ+ 5％");
+					os.writeC(39);
+					os.writeS("HP +50");
+					break;
+				case 7:
+					os.writeC(39);
+					os.writeS("MR +5");
+					os.writeC(39);
+					os.writeS("HP +50");
+					break;
+				}
+			}
+			if (itemId == 222314) { // 知識のエリクサー
+				switch (_cha.getType()) {
+				case 0:
+					os.writeC(39);
+					os.writeS("ダメージリダクション+3");
+					os.writeC(39);
+					os.writeS("近距離命中+2");
+					break;
+				case 1:
+					os.writeC(39);
+					os.writeS("最大HP + 50");
+					os.writeC(39);
+					os.writeS("近距離ダメージ+1");
+					break;
+				case 2:
+					os.writeC(39);
+					os.writeS("最大MP + 50");
+					os.writeC(39);
+					os.writeS("遠距離ダメージ+1");
+					break;
+				case 3:
+					os.writeC(39);
+					os.writeS("MP回復+3");
+					os.writeC(39);
+					os.writeS("SP +1");
+					break;
+				case 4:
+					os.writeC(39);
+					os.writeS("AC-3");
+					os.writeC(39);
+					os.writeS("MP +30");
+					break;
+				case 5:
+					os.writeC(39);
+					os.writeS("近距離命中+3");
+					os.writeC(39);
+					os.writeS("ダメージリダクション+1");
+					break;
+				case 6:
+					os.writeC(39);
+					os.writeS("重量ゲージ+ 5％");
+					os.writeC(39);
+					os.writeS("HP +50");
+					break;
+				case 7:
+					os.writeC(39);
+					os.writeS("MR +5");
+					os.writeC(39);
+					os.writeS("HP +50");
+					break;
+				}
+			}
+			if (itemId == 222315) { // 知恵のエリクサー
+				switch (_cha.getType()) {
+				case 0:
+					os.writeC(39);
+					os.writeS("ダメージリダクション+3");
+					os.writeC(39);
+					os.writeS("近距離命中+2");
+					break;
+				case 1:
+					os.writeC(39);
+					os.writeS("最大HP + 50");
+					os.writeC(39);
+					os.writeS("近距離ダメージ+1");
+					break;
+				case 2:
+					os.writeC(39);
+					os.writeS("最大MP + 50");
+					os.writeC(39);
+					os.writeS("遠距離ダメージ+1");
+					break;
+				case 3:
+					os.writeC(39);
+					os.writeS("MP回復+3");
+					os.writeC(39);
+					os.writeS("SP +1");
+					break;
+				case 4:
+					os.writeC(39);
+					os.writeS("AC-3");
+					os.writeC(39);
+					os.writeS("MP +30");
+					break;
+				case 5:
+					os.writeC(39);
+					os.writeS("近距離命中+3");
+					os.writeC(39);
+					os.writeS("ダメージリダクション+1");
+					break;
+				case 6:
+					os.writeC(39);
+					os.writeS("重量ゲージ+ 5％");
+					os.writeC(39);
+					os.writeS("HP +50");
+					break;
+				case 7:
+					os.writeC(39);
+					os.writeS("MR +5");
+					os.writeC(39);
+					os.writeS("HP +50");
+					break;
+				}
+			}
+			if (itemId == 222316) { //力のエリクサー
+				switch (_cha.getType()) {
+				case 0:
+					os.writeC(39);
+					os.writeS("ダメージリダクション+3");
+					os.writeC(39);
+					os.writeS("近距離命中+2");
+					break;
+				case 1:
+					os.writeC(39);
+					os.writeS("最大HP + 50");
+					os.writeC(39);
+					os.writeS("近距離ダメージ+1");
+					break;
+				case 2:
+					os.writeC(39);
+					os.writeS("最大MP + 50");
+					os.writeC(39);
+					os.writeS("遠距離ダメージ+1");
+					break;
+				case 3:
+					os.writeC(39);
+					os.writeS("MP回復+3");
+					os.writeC(39);
+					os.writeS("SP +1");
+					break;
+				case 4:
+					os.writeC(39);
+					os.writeS("AC-3");
+					os.writeC(39);
+					os.writeS("MP +30");
+					break;
+				case 5:
+					os.writeC(39);
+					os.writeS("近距離命中+3");
+					os.writeC(39);
+					os.writeS("ダメージリダクション+1");
+					break;
+				case 6:
+					os.writeC(39);
+					os.writeS("重量ゲージ+ 5％");
+					os.writeC(39);
+					os.writeS("HP +50");
+					break;
+				case 7:
+					os.writeC(39);
+					os.writeS("MR +5");
+					os.writeC(39);
+					os.writeS("HP +50");
+					break;
+				}
+			}
+
+			/** スナップファーリングツタ表記 **/
 			if (itemType2 == 2 && itemId >= 22224 && itemId <= 22228 && getEnchantLevel() > 4 || itemId == 222291 && getEnchantLevel() > 4) {
 				os.writeC(6);
 				os.writeC(getItem().getDmgModifier() + getEnchantLevel() - 4);
-				/** 축복받은 스냅퍼의 반지 추타 표기 **/
+				/**祝福されたスナップパーリングツタ表記**/
 			} else if (itemType2 == 2 && itemId >= 222330 && itemId <= 222334 && getEnchantLevel() > 3 || itemId == 222336 && getEnchantLevel() > 3) {
 				os.writeC(6);
 				os.writeC(getItem().getDmgModifier() + getEnchantLevel() - 3);
@@ -1986,29 +1983,29 @@ public class L1ItemInstance extends L1Object {
 				os.writeC(6);
 				os.writeC(getItem().getDmgModifier());
 			}
-			/** 스냅퍼의 용사 반지 무기 명중 **/
+			/** スナップファーの勇士リング武器命中 **/
 			if (itemType2 == 2 && itemId == 222291 && getEnchantLevel() > 4) {
 				os.writeC(5);
 				os.writeC(getItem().getHitModifier() + getEnchantLevel() - 4);
-				/** 축복받은 스냅퍼의 용사 반지 무기 명중 **/
+				/** 祝福されたスナップ広がりの勇士リング武器命中 **/
 			} else if (itemType2 == 2 && itemId == 222336 && getEnchantLevel() > 3) {
 				os.writeC(5);
 				os.writeC(getItem().getHitModifier() + getEnchantLevel() - 3);
-				/*** 격분의 장갑 무기 명중 ***/
+				/*** 激怒の手袋武器命中***/
 			} else if (itemType2 == 2 && itemId == 222317 && getEnchantLevel() >= 4 && getEnchantLevel() <= 6) {
 				os.writeC(5);
 				os.writeC(getItem().getHitModifier() + getEnchantLevel() - 4);
 			} else if (itemType2 == 2 && itemId == 222317 && getEnchantLevel() > 6) {
 				os.writeC(5);
 				os.writeC(getItem().getHitModifier() + getEnchantLevel() - 3);
-				/** 수호성의 파워 글로브 근거리 명중 **/
+				/** シールドウィングのパワーグローブ近距離命中**/
 			} else if (itemType2 == 2 && itemId == 222345 && getEnchantLevel() > 4) {
 				os.writeC(5);
 				os.writeC(getItem().getHitModifier() + getEnchantLevel() - 4);
-			} else if (getItem().getHitRate() != 0) { // 방어구 에 붙는 명중
+			} else if (getItem().getHitRate() != 0) { // 防具に付く衝突
 				os.writeC(5);
 				os.writeC(getItem().getHitRate());
-			} else if (getItem().getHitModifier() != 0) { // 무기에 붙는 명중
+			} else if (getItem().getHitModifier() != 0) { //武器につく命中
 				if (itemType2 == 1 && getItem().getType1() != 20) {
 					os.writeC(5);
 					os.writeC(getItem().getHitModifier());
@@ -2019,10 +2016,10 @@ public class L1ItemInstance extends L1Object {
 			}
 
 			if (getItem().getDmgRate() != 0) {
-				os.writeC(6);// 추가데미지
+				os.writeC(6);// 追加ダメージ
 				os.writeC(getItem().getDmgRate());
 			}
-			/** 수호성의 활 골무 원거리 명중 **/
+			/** シールドウィングのブレイサー遠距離命中 **/
 			if (itemType2 == 2 && itemId == 222343 && getEnchantLevel() > 4) {
 				os.writeC(24);
 				os.writeC(getItem().getBowHitRate() + getEnchantLevel() - 4);
@@ -2035,26 +2032,26 @@ public class L1ItemInstance extends L1Object {
 				os.writeC(getItem().getBowDmgRate());
 			}
 			
-			/** 화룡의 티셔츠 **/
+			/** 火竜のTシャツ **/
 			if (itemType2 == 2 && itemId == 491006) {
-				os.writeC(6); // 추가데미지
+				os.writeC(6); //追加ダメージ
 				if (getEnchantLevel() >= 9)
 					os.writeC(2);
 				else
 					os.writeC(1);
 			}
 
-			/** 반지 5이상 추가 대미지 **/
+			/** リング5以上追加ダメージ **/
 			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 9 || getItem().getAccessoryProcess() == 11) {
 				if (getEnchantLevel() > 4) {
 					os.writeC(39);
-					os.writeS("근거리 대미지 +" + (getEnchantLevel() - 4));
+					os.writeS("近距離ダメージ+" + (getEnchantLevel() - 4));
 					os.writeC(39);
-					os.writeS("원거리 대미지 +" + (getEnchantLevel() - 4));
+					os.writeS("遠距離ダメージ+" + (getEnchantLevel() - 4));
 				}
 			}
 
-			/** 반지 7이상 옵션 스펠파워 리뉴얼 **/
+			/** リング7以上のオプションスペルパワーリニューアル **/
 			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 9 || getItem().getAccessoryProcess() == 11) {
 				if (getEnchantLevel() >= 7) {
 					os.writeC(17);
@@ -2062,7 +2059,7 @@ public class L1ItemInstance extends L1Object {
 				}
 			}
 
-			/** 스냅퍼의 반지 PvP추가대미지 표시 (현질러와 일반유저의 격차때문에 실제로 대미지는 들어있지않음) **/
+			/** スナップファーリングPvP追加ダメージ表示（現全体と一般ユーザーの格差のために、実際にダメージは入っていない） **/
 		if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 9 || getItem().getAccessoryProcess() == 11 && getEnchantLevel() > 6) {
 			if (getEnchantLevel() == 7) {
 				os.writeC(59);
@@ -2077,18 +2074,18 @@ public class L1ItemInstance extends L1Object {
 			
 		} else if (itemType2 == 2 && itemId >= 22224 && itemId <= 22228 && getEnchantLevel() == 7
 					|| itemId >= 222290 && itemId <= 222291 && getEnchantLevel() == 7
-					|| itemId >= 222330 && itemId <= 222336 && getEnchantLevel() == 7) { // 인챈트가 7이면
+					|| itemId >= 222330 && itemId <= 222336 && getEnchantLevel() == 7) { // エンチャントが7であれば
 				os.writeC(59);
 				os.writeC(getEnchantLevel() - 6);
 				// os.writeC(39);
-				// os.writeS("PvP 추가 대미지 +1");
+				// os.writeS("PvP追加ダメージ+1 "）;
 			} else if (itemType2 == 2 && itemId >= 22224 && itemId <= 22228 && getEnchantLevel() == 8
 					|| itemId >= 222290 && itemId <= 222291 && getEnchantLevel() == 8
-					|| itemId >= 222330 && itemId <= 222336 && getEnchantLevel() == 8) { // 인챈트가 8이면
+					|| itemId >= 222330 && itemId <= 222336 && getEnchantLevel() == 8) { // エンチャントが8であれば
 				os.writeC(59);
 				os.writeC(getEnchantLevel() - 6);
 				// os.writeC(39);
-				// os.writeS("PvP 추가 대미지 +2");
+				// os.writeS("PvP 追加ダメージ+2 "）;
 			} else if (itemId >= 307 && itemId <= 314) {
 				if (getEnchantLevel() == 7) {
 					os.writeC(59);
@@ -2132,13 +2129,13 @@ public class L1ItemInstance extends L1Object {
 				os.writeC(getItem().get_addcha());
 			}
 
-			/** 스냅퍼의 반지류 HP증가 표시 **/
+			/** スナップファーリング類HP増加表示 **/
 			if (itemType2 == 2 && itemId >= 22224 && itemId <= 22228 && getEnchantLevel() > 0) {
-				int 스냅퍼HP증가 = getEnchantLevel() * 5 + 10;
+				int snapperHpUp = getEnchantLevel() * 5 + 10;
 				os.writeC(14);
-				os.writeH(getItem().get_addhp() + 스냅퍼HP증가);
+				os.writeH(getItem().get_addhp() + snapperHpUp);
 
-				/** 축복받은 스냅퍼의 체력 반지 HP증가 표시 **/
+				/** 祝福されたスナップ広がりの体力リングHP増加表示 **/
 			} else if (itemType2 == 2 && itemId == 222332 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
@@ -2176,7 +2173,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 마법저항,집중,마나 반지 HP증가 표시 **/
+				/**祝福されたスナップ広がりの魔法抵抗力、フォーカス、マナリングHP増加表示 **/
 			} else if (itemType2 == 2 && itemId >= 222330 && itemId <= 222331 || itemId >= 222333 && itemId <= 222334 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
@@ -2211,12 +2208,12 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 스냅퍼의 지혜 반지 HP증가 표시 **/
+				/** スナップファーの知恵リングHP増加表示 **/
 			} else if (itemType2 == 2 && itemId == 222290 && getEnchantLevel() > 0) {
-				int 지혜반지HP증가 = (getEnchantLevel() * 5);
+				int wis_ringHpUp = (getEnchantLevel() * 5);
 				os.writeC(14);
-				os.writeH(getItem().get_addhp() + 지혜반지HP증가);
-				/** 축복받은 스냅퍼의 지혜 반지 HP증가 표시 **/
+				os.writeH(getItem().get_addhp() + wis_ringHpUp);
+				/** 祝福されたスナップ広がりの知恵リングHP増加表示 **/
 			} else if (itemType2 == 2 && itemId == 222335 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
@@ -2254,12 +2251,12 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 스냅퍼의 용사 반지 HP증가 표시 **/
+				/** スナップファーの勇士リングHP増加表示 **/
 			} else if (itemType2 == 2 && itemId == 222291 && getEnchantLevel() >= 3) {
-				int 용사반지HP증가 = (getEnchantLevel() - 2) * 5;
+				int brave_ringHpUP = (getEnchantLevel() - 2) * 5;
 				os.writeC(14);
-				os.writeH(getItem().get_addhp() + 용사반지HP증가);
-				/** 축복받은 스냅퍼의 용사 반지 HP증가 표시 **/
+				os.writeH(getItem().get_addhp() + brave_ringHpUP);
+				/** 祝福されたスナップ広がりの勇士リングHP増加表示**/
 			} else if (itemType2 == 2 && itemId == 222336 && getEnchantLevel() > 2) {
 				switch (getEnchantLevel()) {
 				case 3:
@@ -2286,12 +2283,12 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 룸티스 붉은빛 귀걸이 HP증가 표시 **/
+				/** ルームティス赤い光のイヤリングHP増加表示 **/
 			} else if (itemType2 == 2 && itemId == 22229 && getEnchantLevel() > 0) {
-				int 붉귀HP증가 = (getEnchantLevel() * 10) + 10;
+				int b_roomtisRingHPUp = (getEnchantLevel() * 10) + 10;
 				os.writeC(14);
-				os.writeH(getItem().get_addhp() + 붉귀HP증가);
-				/** 축복받은 룸티스 붉은빛 귀걸이 HP증가 표시 **/
+				os.writeH(getItem().get_addhp() + b_roomtisRingHPUp);
+				/** 祝福されたルームティス赤い光のイヤリングHP増加表示**/
 			} else if (itemType2 == 2 && itemId == 222337 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
@@ -2329,7 +2326,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 체력의 가더 HP증가 표시 **/
+				/** 体力のガーダーHP増加表示 **/
 			} else if (itemType2 == 2 && itemId == 22256 && getEnchantLevel() >= 5) {
 				switch (getEnchantLevel()) {
 				case 5:
@@ -2349,7 +2346,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 반지 귀걸이 목걸이 인챈트 HP증가 표시 **/
+				/** リングピアスネックレスエンチャントHP増加表示**/
 			} else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() != 10 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
@@ -2391,8 +2388,8 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 벨트 6부터 HP 표시 **/
-			} else if (itemType2 == 2 && (getItem().getType() == 10 && getEnchantLevel() > 5)) {// 벨트
+				/** ベルト6からHP表示 **/
+			} else if (itemType2 == 2 && (getItem().getType() == 10 && getEnchantLevel() > 5)) {//ベルト
 				switch (getEnchantLevel()) {
 				case 6:
 					os.writeC(14);
@@ -2417,25 +2414,25 @@ public class L1ItemInstance extends L1Object {
 				os.writeC(14);
 				os.writeH(getItem().get_addhp());
 			}
-			//유니 각반
+			//ユニゲートル
 			if (itemType2 == 2 &&  getEnchantLevel() >= 9 && (itemId >= 900027 && itemId <= 900029)) {		
 				switch(itemId){
-				case 900027://민첩
-					os.writeC(35);//원거리
+				case 900027://アジャイル
+					os.writeC(35);//遠距離
 					os.writeC(1);
 					break;
-				case 900028://완력
-					os.writeC(47);//근거리
+				case 900028://腕力
+					os.writeC(47);//近距離
 					os.writeC(1);
 					break;
-				case 900029://지식
+				case 900029://知識
 					os.writeC(17); //SP
 					os.writeC(1);
 					break;
 				}
 			}
 
-			/** 벨트 인챈트 MP증가 표시 **/
+			/** ベルトエンチャントMP増加表示 **/
 			if (itemType2 == 2 && getItem().getType() == 10 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
@@ -2477,7 +2474,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 룸티스의 보랏빛 귀걸이 MP증가 표시 **/
+				/** ルームティスの紫色のイヤリングMP増加表示 **/
 			} else if (itemType2 == 2 && itemId == 22231 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
@@ -2515,7 +2512,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 축복받은 룸티스의 보랏빛 귀걸이 MP증가 표시 **/
+				/** 祝福されたルームティスの紫色のイヤリングMP増加表示 **/
 			} else if (itemType2 == 2 && itemId == 222339 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
@@ -2548,37 +2545,37 @@ public class L1ItemInstance extends L1Object {
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("최대 MP +130");
+					os.writeS("最大MP + 130");
 					break;
 				default:
 					break;
 				}
-				/** 대마법사의 모자 인챈트 MP증가 표시 **/
+				/** 大魔法使いの帽子エンチャントMP増加表示 **/
 			} else if (itemId == 202022) {
 				os.writeC(32);
 				os.writeH(getItem().get_addmp() + (getEnchantLevel() * 10));
-				/** MP패킷변경됨 C/H **/
+				/** MPパケット変更C / H **/
 			} else if (addmp() != 0) {
 				os.writeC(32);
-				os.writeH(addmp());// mp부분패킷변경됨
+				os.writeH(addmp());// mp部分パケット変更
 			}
 
-			// 피틱 표시
+			// ピチク表示
 			if (getItem().get_addhpr() != 0) {
 				os.writeC(37);
 				os.writeC(getItem().get_addhpr());
 			}
 
-			// 엠틱 표시
+			// エムチク表示
 			if (itemId == 1134 || itemId == 101134) {
 				os.writeC(38);
-				os.writeC(getItem().get_addmpr() + getEnchantLevel()); // 명상의 지팡이
+				os.writeC(getItem().get_addmpr() + getEnchantLevel()); // 瞑想の杖
 			} else if (getItem().get_addmpr() != 0) {
 				os.writeC(38);
 				os.writeC(getItem().get_addmpr());
 			}
 
-			/**룸티스의 푸른빛 귀걸이 물약효율 표시**/
+			/**ルームティスの青い光のイヤリングポーション効率表示**/
 			if(itemType2 == 2 && itemId == 22230 && getEnchantLevel() >= 0){
 				os.writeC(39); 
 				os.writeS(RoomtisHealingPotion());
@@ -2586,18 +2583,18 @@ public class L1ItemInstance extends L1Object {
 				os.writeS(RoomtisHealingPotion11());
 			}
 			
-			/** 축복받은 룸티스의 푸른빛 귀걸이 물약효율 표시 **/
+			/**祝福されたルームティスの青い光のイヤリングポーション効率表示 **/
 			if (itemType2 == 2 && itemId == 222338 && getEnchantLevel() >= 0) {
 				os.writeC(39);
 				os.writeS(RoomtisHealingPotion1());
 				os.writeC(39); 
 				os.writeS(RoomtisHealingPotion12());
 			}
-			/** 목걸이 5이상 물약 회복량 **/
+			/**ネックレス5以上ポーション回復量**/
 			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12) {
 				if (getEnchantLevel() > 4) {
 					os.writeC(39);
-					os.writeS("물약 회복량 " + ((getEnchantLevel() - 4) * 2) + "% +0");
+					os.writeS("ポーション回復量" + ((getEnchantLevel() - 4) * 2) + "% +0");
 				}
 			}
 			if (itemType2 == 2 && itemId == 222340 || itemId == 222341) {
@@ -2620,7 +2617,7 @@ public class L1ItemInstance extends L1Object {
 						os.writeC(35);
 						os.writeC(getEnchantLevel() - 2);
 						os.writeC(39);
-						os.writeS("추가 대미지 확률+20(2%)");
+						os.writeS("追加ダメージ確率+20（2％）");
 					} else {
 						os.writeC(6);
 						os.writeC(getEnchantLevel() - 3);
@@ -2634,14 +2631,14 @@ public class L1ItemInstance extends L1Object {
 						os.writeC(35);
 						os.writeC(getEnchantLevel() - 2);
 						os.writeC(39);
-						os.writeS("추가 대미지 확률+20(3%)");
+						os.writeS("追加ダメージ確率+20（3％）");
 					} else {
 						os.writeC(6);
 						os.writeC(getEnchantLevel() - 3);
 						os.writeC(35);
 						os.writeC(getEnchantLevel() - 3);
 						os.writeC(39);
-						os.writeS("추가 대미지 확률+20(2%)");
+						os.writeS("追加ダメージ確率+20（2％）");
 					}
 				} else if (getEnchantLevel() == 6) {
 					if (getItemId() == 222341) {
@@ -2650,14 +2647,14 @@ public class L1ItemInstance extends L1Object {
 						os.writeC(35);
 						os.writeC(getEnchantLevel() - 2);
 						os.writeC(39);
-						os.writeS("추가 대미지 확률+20(4%)");
+						os.writeS("追加ダメージ確率+ 20（4％）");
 					} else {
 						os.writeC(6);
 						os.writeC(getEnchantLevel() - 3);
 						os.writeC(35);
 						os.writeC(getEnchantLevel() - 3);
 						os.writeC(39);
-						os.writeS("추가 대미지 확률+20(3%)");
+						os.writeS("追加ダメージ確率+20（3％）");
 					}
 				} else if (getEnchantLevel() == 7) {
 					if (getItemId() == 222341) {
@@ -2666,14 +2663,14 @@ public class L1ItemInstance extends L1Object {
 						os.writeC(35);
 						os.writeC(getEnchantLevel() - 2);
 						os.writeC(39);
-						os.writeS("추가 대미지 확률+20(5%)");
+						os.writeS("追加ダメージ確率+ 20（5％）");
 					} else {
 						os.writeC(6);
 						os.writeC(getEnchantLevel() - 3);
 						os.writeC(35);
 						os.writeC(getEnchantLevel() - 3);
 						os.writeC(39);
-						os.writeS("추가 대미지 확률+20(4%)");
+						os.writeS("追加ダメージ確率+ 20（4％）");
 					}
 				} else if (getEnchantLevel() == 8) {
 					if (getItemId() == 222341) {
@@ -2682,24 +2679,24 @@ public class L1ItemInstance extends L1Object {
 						os.writeC(35);
 						os.writeC(getEnchantLevel() - 2);
 						os.writeC(39);
-						os.writeS("추가 대미지 확률+20(6%)");
+						os.writeS("追加ダメージ確率+ 20（6％）");
 					} else {
 						os.writeC(6);
 						os.writeC(getEnchantLevel() - 3);
 						os.writeC(35);
 						os.writeC(getEnchantLevel() - 3);
 						os.writeC(39);
-						os.writeS("추가 대미지 확률+20(5%)");
+						os.writeS("追加ダメージ確率+ 20（5％）");
 					}
 				}
 			}
-			/** 축복받은 스냅퍼의 마법 저항 반지 MR표시 **/
+			/** 祝福されたスナップ広がりの魔法抵抗リングMR表示 **/
 			if (itemType2 == 2 && itemId == 222334 && getEnchantLevel() > 5) {
 				os.writeC(15);
 				os.writeH(getMr() + (getEnchantLevel() - 5));
 				
 			
-				/** 룸티스의 보랏빛 귀걸이 마방 표시 **/
+				/** ルームティスの紫色のイヤリング魔表示 **/
 			} else if (itemType2 == 2 && itemId == 22231 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
@@ -2737,7 +2734,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 축복받은 룸티스의 보랏빛 귀걸이 마방 표시 **/
+				/** 祝福されたルームティスの紫色のイヤリング魔表示 **/
 			} else if (itemType2 == 2 && itemId == 222339 && getEnchantLevel() > 0) {
 				switch (getEnchantLevel()) {
 				case 1:
@@ -2776,7 +2773,7 @@ public class L1ItemInstance extends L1Object {
 					break;
 				}
 
-				/** 지룡의 티셔츠 **/
+				/** 地竜のTシャツ **/
 			}else if (itemType2 == 2 &&itemId == 900023 && getEnchantLevel() > 4) { 
 				switch(getEnchantLevel()){
 				case 5: os.writeC(15); os.writeH(getMr() + 4);break;
@@ -2789,7 +2786,7 @@ public class L1ItemInstance extends L1Object {
 				default: break;
 				}
 				
-				/** 반지 6부터 마방표시 **/
+				/**リング6から魔表示 **/
 			} else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 9 || getItem().getAccessoryProcess() == 11) {	
 				switch (getEnchantLevel()) {
 				case 6:
@@ -2811,8 +2808,8 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 흑기사의 면갑 MR표시 **/
-				/** 신성한 엘름의 축복 MR표시 **/
+				/** 黒騎士のバイザーMR表示 **/
+				/**神聖なエルムの祝福MR表示 **/
 			} else if (itemType2 == 2 && itemId == 900027 || itemId == 910025 && getEnchantLevel() > 4) {
 				switch(getEnchantLevel()){
 				case 5: os.writeC(15); os.writeH(getMr() + 4);break;
@@ -2828,33 +2825,33 @@ public class L1ItemInstance extends L1Object {
 				os.writeC(15);
 				os.writeH(getMr());
 			}	
-			/** 지룡의 티셔츠 **/
+			/** 地竜のTシャツ **/
 			if(itemType2 == 2 && itemId == 900023){ 
-				os.writeC(63); //대미지감소
+				os.writeC(63); //ダメージ減少
 				if(getEnchantLevel() >= 9)
 					os.writeC(2);
 				else
 					os.writeC(1);
 			}
-			/** 지룡의 티셔츠 **/
+			/** 地竜のTシャツ **/
 			if(itemType2 == 2 && itemId == 900024){ 
-				os.writeC(47); //근거리대미지
+				os.writeC(47); //近距離ダメージ
 				if(getEnchantLevel() >= 9)
 					os.writeC(2);
 				else
 					os.writeC(1);
 			}
 
-			/** 풍룡의 티셔츠 **/
+			/** 風竜のTシャツ **/
 			if(itemType2 == 2 && itemId == 900025){ 
-				os.writeC(35);//원거리
+				os.writeC(35);//遠距離
 				if(getEnchantLevel() >= 9)
 					os.writeC(2);
 				else
 					os.writeC(1);
 			}
 			
-			/** 수룡의 티셔츠 **/
+			/** 水竜のTシャツ **/
 			if(itemType2 == 2 && itemId == 900026){ 
 				os.writeC(17); // sp
 				if(getEnchantLevel() >= 9)
@@ -2865,8 +2862,8 @@ public class L1ItemInstance extends L1Object {
 			
 
 
-			/** 수룡/화룡/풍룡 티셔츠 **/
-			if((itemId == 900026 || itemId == 900024 || itemId == 900025) && getEnchantLevel() >= 5) { //수룡 화룡 풍룡 스턴 내성
+			/** 水竜/火竜/風竜Tシャツ **/
+			if((itemId == 900026 || itemId == 900024 || itemId == 900025) && getEnchantLevel() >= 5) { //水竜火竜風竜スタン耐性
 				os.writeC(33);
 				os.writeC(5);
 				switch(getEnchantLevel()){
@@ -2881,17 +2878,17 @@ public class L1ItemInstance extends L1Object {
 				}
 			}
 
-			/** 수룡/화룡/풍룡 티셔츠 **/
-			if((itemId == 900026 || itemId == 900024 || itemId == 900025|| itemId == 900023) && getEnchantLevel() >= 10) { //수룡 화룡 풍룡 스턴 내성
+			/** 水竜/火竜/風竜Tシャツ **/
+			if((itemId == 900026 || itemId == 900024 || itemId == 900025|| itemId == 900023) && getEnchantLevel() >= 10) { //水竜火竜風竜スタン耐性
 				os.writeC(39);
 				os.writeS("HP +100");	
 				os.writeC(39);
-				os.writeS("\\f2PVP 대미지 증가+ " + 1);
+				os.writeS("\\f2PVP ダメージ増加+ " + 1);
 				os.writeC(39);
-				os.writeS("\\f2PVP 대미지 감소+ " + 1);
+				os.writeS("\\f2PVP ダメージ減少+ " + 1);
 			}
 
-			/** 스냅퍼의 지혜 반지 SP표시 **/
+			/** スナップファーの知恵リングSP表示 **/
 			if (itemType2 == 2 && itemId == 222290 && getEnchantLevel() > 4) {
 				switch (getEnchantLevel()) {
 				case 5:
@@ -2913,7 +2910,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 축복받은 스냅퍼의 지혜 반지 SP표시 **/
+				/** 祝福されたスナップ広がりの知恵リングSP表示**/
 			} else if (itemType2 == 2 && itemId == 222335 && getEnchantLevel() > 3) {
 				switch (getEnchantLevel()) {
 				case 4:
@@ -2936,7 +2933,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 룸티스의 보랏빛 귀걸이 SP표시 **/
+				/** ルームティスの紫色のイヤリングSP表示 **/
 			} else if (itemType2 == 2 && itemId == 22231 && getEnchantLevel() > 2) {
 				switch (getEnchantLevel()) {
 				case 3:
@@ -2966,7 +2963,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 축복받은 룸티스의 보랏빛 귀걸이 SP표시 **/
+				/**祝福されたルームティスの紫色のイヤリングSP表示 **/
 			} else if (itemType2 == 2 && itemId == 222339 && getEnchantLevel() > 2) {
 				switch (getEnchantLevel()) {
 				case 3:
@@ -2990,7 +2987,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 마법사의 가더 SP표시 **/
+				/** ウィザードのガーダーSP表示 **/
 			} else if (itemType2 == 2 && itemId == 22255 && getEnchantLevel() > 4) {
 				switch (getEnchantLevel()) {
 				case 5:
@@ -3016,7 +3013,7 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-				/** 리치 로브 SP표시 **/
+				/** リッチローブSP表示 **/
 			} else if (itemType2 == 2 && itemId == 20107 && getEnchantLevel() >= 3) {
 				os.writeC(17);
 				os.writeC(getItem().get_addsp() + getEnchantLevel() - 2);
@@ -3034,100 +3031,100 @@ public class L1ItemInstance extends L1Object {
 				os.writeC(18);
 			}
 
-			// 마나 흡수
+			// マナ吸収
 			if (itemId == 126 || itemId == 127) {
 				os.writeC(16);
 			}
 
-			// 피 흡수
+			// 被吸収
 			if (itemId == 12 || itemId == 601 || itemId == 1123 || itemId == 202013) {
 				os.writeC(34);
 			}
 
-			/** 벨트 5이상 대미지 리덕션 **/
-			if (itemType2 == 2 && (getItem().getType() == 10 && getEnchantLevel() >= 5)) {// 벨트
+			/** ベルト5以上ダメージリダクション**/
+			if (itemType2 == 2 && (getItem().getType() == 10 && getEnchantLevel() >= 5)) {//ベルト
 				os.writeC(39);
-				os.writeS("대미지 리덕션 " + (getEnchantLevel() - 4));
+				os.writeS("ダメージリダクション" + (getEnchantLevel() - 4));
 			}
-			/** 룸티스의 붉은빛 귀걸이 대미지 리덕션 **/
+			/** ルームティスの赤い光のイヤリングダメージリダクション **/
 			if (getItemId() == 22229 && getEnchantLevel() > 2) {
 				switch (getEnchantLevel()) {
 				case 3:
 				case 4:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 1));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 1));
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 2));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 2));
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 3));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 3));
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 4));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 4));
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 5));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 5));
 					break;
 				default:
 					break;
 				}
 			}
-			/** 축복받은 룸티스의 붉은빛 귀걸이 대미지 리덕션 **/
+			/** 祝福されたルームティスの赤い光のイヤリングダメージリダクション **/
 			if (itemId == 222337 && getEnchantLevel() > 2) {
 				switch (getEnchantLevel()) {
 				case 3:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 1));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 1));
 					break;
 				case 4:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 2));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 2));
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 3));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 3));
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 4));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 4));
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 5));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 5));
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + (getItem().getDamageReduction() + 6));
+					os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 6));
 					break;
 				default:
 					break;
 				}
 			}
-			/** 수호의 가더 대미지 리덕션 **/
+			/** 守護のガーダーダメージリダクション **/
 			if (itemId == 22254 && getEnchantLevel() > 4) {
 				switch (getEnchantLevel()) {
 				case 5: case 6:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 +" + (getItem().getDamageReduction() + 0));
+					os.writeS("ダメージリダクション+" + (getItem().getDamageReduction() + 0));
 					break;
 				case 7:	case 8:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 +" + (getItem().getDamageReduction() + 1));
+					os.writeS("ダメージリダクション+" + (getItem().getDamageReduction() + 1));
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("대미지 리덕션 +" + (getItem().getDamageReduction() + 2));
+					os.writeS("ダメージリダクション+" + (getItem().getDamageReduction() + 2));
 					break;
 				default:
 					break;
 				}
 			}
-			/** 귀걸이,목걸이 +6부터 AC부분처리**/
+			/** イヤリング、ネックレス+ 6からACセクションの処理**/
 			if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12 && getEnchantLevel() > 5) {
 				switch (getEnchantLevel()) {
 				case 6:
@@ -3151,530 +3148,530 @@ public class L1ItemInstance extends L1Object {
 				}
 			}
 			
-			/** 나이트발드의 양손검 스턴적중+5 **/
+			/** ナイトバルドの両手剣スターン的中+5 **/
 			if (itemId == 1121 || itemId == 11121) {
 				switch (getEnchantLevel()) {
 				case 0: case 1: case 2: case 3: case 4: case 5: case 6:
 				case 7: case 8: case 9: case 10: case 11:
 				case 12: case 13: case 14: case 15:
 					os.writeC(39);
-					os.writeS("스턴 적중 +" + (getItem().get_regist_stun() + 5));
+					os.writeS("スターン的中+" + (getItem().get_regist_stun() + 5));
 					break;
 				default:
 					break;
 				}
 			}
 			
-			/** 회복의 문장 **/
+			/** 回復の文章**/
 			if (itemId == 900021) {
 				switch (getEnchantLevel()) {
 				case 0:
 					os.writeC(39);
-					os.writeS("물약 회복량 2% +2 %");
+					os.writeS("ポーション回復量2％+ 2％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 2%");
+					os.writeS("恐怖回復減少効果を相殺+ 2％");
 					break;
 				case 1:
 					os.writeC(39);
-					os.writeS("물약 회복량 4% +4 %");
+					os.writeS("ポーション回復量4％+ 4％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 4%");
+					os.writeS("恐怖回復減少効果を相殺+ 4％");
 					break;
 				case 2:
 					os.writeC(39);
-					os.writeS("물약 회복량 6% +6 %");
+					os.writeS("ポーション回復量6％+6％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 6%");
+					os.writeS("恐怖回復減少効果を相殺+ 6％");
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("물약 회복량 8% +8 %");
+					os.writeS("ポーション回復量8％+8％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 8%");
+					os.writeS("恐怖回復減少効果を相殺+ 8％");
 					break;
 				case 4:
 					os.writeC(39);
-					os.writeS("물약 회복량 10% +10 %");
+					os.writeS("ポーション回復量10％+ 10％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 10%");
+					os.writeS("恐怖回復減少効果を相殺+ 10％");
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("물약 회복량 12% +12 %");
+					os.writeS("ポーション回復量12％+ 12％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 12%");
+					os.writeS("恐怖回復減少効果を相殺+ 12％");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("물약 회복량 14% +14 %");
+					os.writeS("ポーション回復量14％+14％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 14%");
+					os.writeS("恐怖回復減少効果を相殺+ 14％");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("물약 회복량 16% +16 %");
+					os.writeS("ポーション回復量16％+ 16％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 16%");
+					os.writeS("恐怖回復減少効果を相殺+ 16％");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("물약 회복량 18% +18 %");
+					os.writeS("ポーション回復量18％+18％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 18%");
+					os.writeS("恐怖回復減少効果を相殺+ 18％");
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("물약 회복량 20% +20 %");
+					os.writeS("ポーション回復量20％+ 20％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 20%");
+					os.writeS("恐怖回復減少効果を相殺+ 20％");
 					break;
 				case 10:
 					os.writeC(39);
-					os.writeS("물약 회복량 22% +22 %");
+					os.writeS("ポーション回復量22％+22％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 22%");
+					os.writeS("恐怖回復減少効果を相殺+ 22％");
 					break;
 				default:
 					break;
 				}
 			}
 				
-			/** 성장의 문장 **/
+			/** 成長の文章 **/
 			if (itemId == 900020) {
 				switch (getEnchantLevel()) {
 				case 0:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 1+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 1+"%"));
 				break;
 				case 1:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 2+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 2+"%"));
 				break;
 				case 2:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 3+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 3+"%"));
 				break;
 				case 3:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 4+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 4+"%"));
 				break;
 				case 4:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 5+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 5+"%"));
 				break;
 				case 5:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 6+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 6+"%"));
 				break;
 				case 6:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 7+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 7+"%"));
 				break;
 				case 7:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 9+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 9+"%"));
 				break;
 				case 8:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 11+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 11+"%"));
 				break;
 				case 9:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 13+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 13+"%"));
 				break;
 				case 10:
 				os.writeC(39);
-				os.writeS("exp 보너스 " + (getItem().get_addexp1() + 15+"%"));
+				os.writeS("expボーナス" + (getItem().get_addexp1() + 15+"%"));
 				break;
 				default:
 					break;
 				}
 			}
-			/** 완력의 문장 **/
+			/** 腕力の文章 **/
 			if (itemId == 222352) {
 				switch (getEnchantLevel()) {
 				case 1:
 					os.writeC(39);
-					os.writeS("물약 회복량 2% +2 %");
+					os.writeS("ポーション回復量2％+ 2％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 2%");
+					os.writeS("恐怖回復減少効果を相殺+ 2％");
 					break;
 				case 2:
 					os.writeC(39);
-					os.writeS("물약 회복량 4% +4 %");
+					os.writeS("ポーション回復量4％+ 4％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 4%");
+					os.writeS("恐怖回復減少効果を相殺+ 4％");
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("물약 회복량 6% +6 %");
+					os.writeS("ポーション回復量6％+6％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 6%");
+					os.writeS("恐怖回復減少効果を相殺+ 6％");
 					break;
 				case 4:
 					os.writeC(39);
-					os.writeS("물약 회복량 8% +8 %");
+					os.writeS("ポーション回復量8％+8％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 8%");
+					os.writeS("恐怖回復減少効果を相殺+ 8％");
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("근거리 명중 +1");
+					os.writeS("近距離命中+1");
 					os.writeC(39);
-					os.writeS("물약 회복량 9% +9 %");
+					os.writeS("ポーション回復量9％+ 9％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 9%");
+					os.writeS("恐怖回復減少効果を相殺+ 9％");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("근거리 명중 +1");
+					os.writeS("近距離命中+1");
 					os.writeC(39);
-					os.writeS("근거리 대미지 +1");
+					os.writeS("近距離ダメージ+1");
 					os.writeC(39);
-					os.writeS("물약 회복량 10% +10 %");
+					os.writeS("ポーション回復量10％+ 10％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 10%");
+					os.writeS("恐怖回復減少効果を相殺+ 10％");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("근거리 명중 +2");
+					os.writeS("近距離命中+2");
 					os.writeC(39);
-					os.writeS("근거리 대미지 +2");
+					os.writeS("近距離ダメージ+2");
 					os.writeC(39);
-					os.writeS("물약 회복량 11% +11 %");
+					os.writeS("ポーション回復量11％+ 11％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 11%");
+					os.writeS("恐怖回復減少効果を相殺+ 11％");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("근거리 명중 +3");
+					os.writeS("近距離命中+3");
 					os.writeC(39);
-					os.writeS("근거리 대미지 +3");
+					os.writeS("近距離ダメージ+3");
 					os.writeC(39);
-					os.writeS("물약 회복량 12% +12 %");
+					os.writeS("ポーション回復量12％+ 12％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 12%");
+					os.writeS("恐怖回復減少効果を相殺+ 12％");
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("근거리 명중 +4");
+					os.writeS("近距離命中+4");
 					os.writeC(39);
-					os.writeS("근거리 대미지 +4");
+					os.writeS("近距離ダメージ+4");
 					os.writeC(39);
-					os.writeS("물약 회복량 13% +13 %");
+					os.writeS("ポーション回復量13％+13％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 13%");
+					os.writeS("恐怖回復減少効果を相殺+ 13％");
 					break;
 				case 10:
 					os.writeC(39);
-					os.writeS("근거리 명중 +5");
+					os.writeS("近距離命中+5");
 					os.writeC(39);
-					os.writeS("근거리 대미지 +5");
+					os.writeS("近距離ダメージ+5");
 					os.writeC(39);
-					os.writeS("물약 회복량 14% +14 %");
+					os.writeS("ポーション回復量14％+14％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 14%");
+					os.writeS("恐怖回復減少効果を相殺+ 14％");
 					break;
 				default:
 					break;
 				}
 			}
-			/** 민첩의 문장 **/
+			/** アジャイルの文章 **/
 			if (itemId == 222353) {
 				switch (getEnchantLevel()) {
 				case 1:
 					os.writeC(39);
-					os.writeS("물약 회복량 2% +2 %");
+					os.writeS("ポーション回復量2％+ 2％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 2%");
+					os.writeS("恐怖回復減少効果を相殺+ 2％");
 					break;
 				case 2:
 					os.writeC(39);
-					os.writeS("물약 회복량 4% +4 %");
+					os.writeS("ポーション回復量4％+ 4％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 4%");
+					os.writeS("恐怖回復減少効果を相殺+ 4％");
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("물약 회복량 6% +6 %");
+					os.writeS("ポーション回復量6％+6％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 6%");
+					os.writeS("恐怖回復減少効果を相殺+ 6％");
 					break;
 				case 4:
 					os.writeC(39);
-					os.writeS("물약 회복량 8% +8 %");
+					os.writeS("ポーション回復量8％+8％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 8%");
+					os.writeS("恐怖回復減少効果を相殺+ 8％");
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("원거리 명중 +1");
+					os.writeS("遠距離命中+1");
 					os.writeC(39);
-					os.writeS("물약 회복량 9% +9 %");
+					os.writeS("ポーション回復量9％+ 9％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 9%");
+					os.writeS("恐怖回復減少効果を相殺+ 9％");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("원거리 명중 +1%");
+					os.writeS("遠距離命中+ 1％");
 					os.writeC(39);
-					os.writeS("원거리 대미지 +1");
+					os.writeS("遠距離ダメージ+1");
 					os.writeC(39);
-					os.writeS("물약 회복량 10% +10 %");
+					os.writeS("ポーション回復量10％+ 10％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 10%");
+					os.writeS("恐怖回復減少効果を相殺+ 10％");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("원거리 명중 +2");
+					os.writeS("遠距離命中+2");
 					os.writeC(39);
-					os.writeS("원거리 대미지 +2");
+					os.writeS("遠距離ダメージ+2");
 					os.writeC(39);
-					os.writeS("물약 회복량 11% +11 %");
+					os.writeS("ポーション回復量11％+ 11％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 11%");
+					os.writeS("恐怖回復減少効果を相殺+ 11％");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("원거리 명중 +3");
+					os.writeS("遠距離命中+3");
 					os.writeC(39);
-					os.writeS("원거리 대미지 +3");
+					os.writeS("遠距離ダメージ+3");
 					os.writeC(39);
-					os.writeS("물약 회복량 12% +12 %");
+					os.writeS("ポーション回復量12％+ 12％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 12%");
+					os.writeS("恐怖回復減少効果を相殺+ 12％");
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("원거리 명중 +4");
+					os.writeS("遠距離命中+4");
 					os.writeC(39);
-					os.writeS("원거리 대미지 +4");
+					os.writeS("遠距離ダメージ+4");
 					os.writeC(39);
-					os.writeS("물약 회복량 13% +13 %");
+					os.writeS("ポーション回復量13％+13％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 13%");
+					os.writeS("恐怖回復減少効果を相殺+ 13％");
 					break;
 				case 10:
 					os.writeC(39);
-					os.writeS("원거리 명중 +5");
+					os.writeS("遠距離命中+5");
 					os.writeC(39);
-					os.writeS("원거리 대미지 +5");
+					os.writeS("遠距離ダメージ+5");
 					os.writeC(39);
-					os.writeS("물약 회복량 14% +14 %");
+					os.writeS("ポーション回復量14％+14％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 14%");
+					os.writeS("恐怖回復減少効果を相殺+ 14％");
 					break;
 				default:
 					break;
 				}
 			}
-			/** 지식의 문장 **/
+			/** 知識の文章 **/
 			if (itemId == 222354) {
 				switch (getEnchantLevel()) {
 				case 1:
 					os.writeC(39);
-					os.writeS("물약 회복량 2% +2 %");
+					os.writeS("ポーション回復量2％+ 2％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 2%");
+					os.writeS("恐怖回復減少効果を相殺+ 2％");
 					break;
 				case 2:
 					os.writeC(39);
-					os.writeS("물약 회복량 4% +4 %");
+					os.writeS("ポーション回復量4％+ 4％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 4%");
+					os.writeS("恐怖回復減少効果を相殺+ 4％");
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("물약 회복량 6% +6 %");
+					os.writeS("ポーション回復量6％+6％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 6%");
+					os.writeS("恐怖回復減少効果を相殺+ 6％");
 					break;
 				case 4:
 					os.writeC(39);
-					os.writeS("물약 회복량 8% +8 %");
+					os.writeS("ポーション回復量8％+8％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 8%");
+					os.writeS("恐怖回復減少効果を相殺+ 8％");
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("마법 적중+1");
+					os.writeS("魔法命中+1");
 					os.writeC(39);
-					os.writeS("물약 회복량 9% +9 %");
+					os.writeS("ポーション回復量9％+ 9％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 9%");
+					os.writeS("恐怖回復減少効果を相殺+ 9％");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("마법 적중 +1");
+					os.writeS("魔法命中+1");
 					os.writeC(39);
 					os.writeS("SP +1");
 					os.writeC(39);
-					os.writeS("물약 회복량 10% +10 %");
+					os.writeS("ポーション回復量10％+ 10％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 10%");
+					os.writeS("恐怖回復減少効果を相殺+ 10％");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("마법 적중 +2");
+					os.writeS("魔法命中+2");
 					os.writeC(39);
 					os.writeS("SP +2");
 					os.writeC(39);
-					os.writeS("물약 회복량 11% +11 %");
+					os.writeS("ポーション回復量11％+ 11％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 11%");
+					os.writeS("恐怖回復減少効果を相殺+ 11％");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("마법 적중 +3");
+					os.writeS("魔法命中+3");
 					os.writeC(39);
 					os.writeS("SP +3");
 					os.writeC(39);
-					os.writeS("물약 회복량 12% +12 %");
+					os.writeS("ポーション回復量12％+ 12％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 12%");
+					os.writeS("恐怖回復減少効果を相殺+ 12％");
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("마법 적중 +4");
+					os.writeS("魔法命中+4");
 					os.writeC(39);
 					os.writeS("SP +4");
 					os.writeC(39);
-					os.writeS("물약 회복량 13% +13 %");
+					os.writeS("ポーション回復量13％+13％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 13%");
+					os.writeS("恐怖回復減少効果を相殺+ 13％");
 					break;
 				case 10:
 					os.writeC(39);
-					os.writeS("마법 적중 +5");
+					os.writeS("魔法命中+5");
 					os.writeC(39);
 					os.writeS("SP +5");
 					os.writeC(39);
-					os.writeS("물약 회복량 14% +14 %");
+					os.writeS("ポーション回復量14％+14％");
 					os.writeC(39);
-					os.writeS("공포 회복감소 효과 상쇄 + 14%");
+					os.writeS("恐怖回復減少効果を相殺+ 14％");
 					break;
 				default:
 					break;
 				}
 			}
 			
-			if (itemId == 900019) { //실프의 티셔츠
+			if (itemId == 900019) { //シルフのTシャツ
 				switch(getEnchantLevel()){
-				case 0: os.writeC(39); os.writeS("MR +7");os.writeC(39); os.writeS("스턴 내성 +7");break;
-				case 1: os.writeC(39); os.writeS("MR +8");os.writeC(39); os.writeS("스턴 내성 +8");break;
-				case 2: os.writeC(39); os.writeS("MR +9");os.writeC(39); os.writeS("스턴 내성 +9");break;
-				case 3: os.writeC(39); os.writeS("MR +10");os.writeC(39); os.writeS("스턴 내성 +10");break;
-				case 4: os.writeC(39); os.writeS("MR +11");os.writeC(39); os.writeS("스턴 내성 +11");break;
-				case 5: os.writeC(39); os.writeS("MR +12");os.writeC(39); os.writeS("스턴 내성 +12");break;
-				case 6: os.writeC(39); os.writeS("MR +13");os.writeC(39); os.writeS("스턴 내성 +13");break;
-				case 7: os.writeC(39); os.writeS("MR +14");os.writeC(39); os.writeS("스턴 내성 +14");break;
-				case 8: os.writeC(39); os.writeS("MR +15");os.writeC(39); os.writeS("스턴 내성 +15");break;
-				case 9: os.writeC(39); os.writeS("MR +16");os.writeC(39); os.writeS("스턴 내성 +16");break;
-				case 10: os.writeC(39); os.writeS("MR +17");os.writeC(39); os.writeS("스턴 내성 +17");break;
-				case 11: os.writeC(39); os.writeS("MR +18");os.writeC(39); os.writeS("스턴 내성 +18");break;
-				case 12: os.writeC(39); os.writeS("MR +19");os.writeC(39); os.writeS("스턴 내성 +19");break;
-				case 13: os.writeC(39); os.writeS("MR +20");os.writeC(39); os.writeS("스턴 내성 +20");break;
-				case 14: os.writeC(39); os.writeS("MR +21");os.writeC(39); os.writeS("스턴 내성 +21");break;
-				case 15: os.writeC(39); os.writeS("MR +22");os.writeC(39); os.writeS("스턴 내성 +22");break;
+				case 0: os.writeC(39); os.writeS("MR +7");os.writeC(39); os.writeS("スタン耐性+7");break;
+				case 1: os.writeC(39); os.writeS("MR +8");os.writeC(39); os.writeS("スタン耐性+8");break;
+				case 2: os.writeC(39); os.writeS("MR +9");os.writeC(39); os.writeS("スタン耐性+9");break;
+				case 3: os.writeC(39); os.writeS("MR +10");os.writeC(39); os.writeS("スタン耐性+10");break;
+				case 4: os.writeC(39); os.writeS("MR +11");os.writeC(39); os.writeS("スタン耐性+11");break;
+				case 5: os.writeC(39); os.writeS("MR +12");os.writeC(39); os.writeS("スタン耐性+12");break;
+				case 6: os.writeC(39); os.writeS("MR +13");os.writeC(39); os.writeS("スタン耐性+13");break;
+				case 7: os.writeC(39); os.writeS("MR +14");os.writeC(39); os.writeS("スタン耐性+14");break;
+				case 8: os.writeC(39); os.writeS("MR +15");os.writeC(39); os.writeS("スタン耐性+15");break;
+				case 9: os.writeC(39); os.writeS("MR +16");os.writeC(39); os.writeS("スタン耐性+16");break;
+				case 10: os.writeC(39); os.writeS("MR +17");os.writeC(39); os.writeS("スタン耐性+17");break;
+				case 11: os.writeC(39); os.writeS("MR +18");os.writeC(39); os.writeS("スタン耐性+18");break;
+				case 12: os.writeC(39); os.writeS("MR +19");os.writeC(39); os.writeS("スタン耐性+19");break;
+				case 13: os.writeC(39); os.writeS("MR +20");os.writeC(39); os.writeS("スタン耐性+20");break;
+				case 14: os.writeC(39); os.writeS("MR +21");os.writeC(39); os.writeS("スタン耐性+21");break;
+				case 15: os.writeC(39); os.writeS("MR +22");os.writeC(39); os.writeS("スタン耐性+22");break;
 				}
 			}
-			/**마물 8인첸이상 **/
+			/**魔物8エンチャン以上 **/
 			if(itemId >=900015 && itemId <= 900018){
 				if(getEnchantLevel() >=8){
 					os.writeC(39);
-					os.writeS("\\f3근거리 대미지 +1");
+					os.writeS("\\f3近距離ダメージ +1");
 					os.writeC(39);
-					os.writeS("\\f3원거리 대미지 +1");
+					os.writeS("\\f3遠距離ダメージ +1");
 				}
 			}
 			/***************************/
-			/**암석 8인첸이상 **/
+			/**岩石8エンチャン以上 **/
 			if(itemId >=900011 && itemId <= 900014){
 				if(getEnchantLevel() >=8){
 					os.writeC(39);
-					os.writeS("\\f3PVP 대미지 감소 +1");
+					os.writeS("\\f3PVPダメージ減少 +1");
 					os.writeC(39);
-					os.writeS("\\f3대미지 리덕션 +1");
+					os.writeS("\\f3ダメージリダクション +1");
 				}
 			}
 			/***************************/
 			
 			
-			/** 진명황의 집행검 스턴적중+10 **/
+			/** 真冥王の執行剣スターン的中+10 **/
 			if (itemId == 61 || itemId == 7000061 || itemId == 202012) {
 				switch (getEnchantLevel()) {
 				case 0: case 1: case 2: case 3: case 4: case 5: case 6:
 				case 7: case 8: case 9: case 10: case 11:
 				case 12: case 13: case 14: case 15:
 					os.writeC(39);
-					os.writeS("스턴 적중 +" + (getItem().get_regist_stun() + 10));
+					os.writeS("スターン的中+" + (getItem().get_regist_stun() + 10));
 					break;
 				default:
 					break;
 				}
 			}
 			
-			/** 고대투사의가더 근거리 대미지 **/
+			/** 古代闘士のがより近距離ダメージ **/
 			if (itemId == 22003 && getEnchantLevel() > 4) {
 				switch (getEnchantLevel()) {
 				case 5: case 6:
 					os.writeC(39);
-					os.writeS("근거리 대미지 +" + (getItem().getDmgRate() + 0));
+					os.writeS("近距離ダメージ+" + (getItem().getDmgRate() + 0));
 					break;
 				case 7:	case 8:
 					os.writeC(39);
-					os.writeS("근거리 대미지 +" + (getItem().getDmgRate() + 1));
+					os.writeS("近距離ダメージ+" + (getItem().getDmgRate() + 1));
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("근거리 대미지 +" + (getItem().getDmgRate() + 2));
+					os.writeS("近距離ダメージ+" + (getItem().getDmgRate() + 2));
 					break;
 				default:
 					break;
 				}
 			}
 			
-			/** 고대명궁의가더 원거리 대미지 **/
+			/** 古代名弓のがより遠距離ダメージ **/
 			if (itemId == 22000 && getEnchantLevel() > 4) {
 				switch (getEnchantLevel()) {
 				case 5: case 6:
 					os.writeC(39);
-					os.writeS("원거리 대미지 +" + (getItem().getBowDmgRate() + 0));
+					os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 0));
 					break;
 				case 7:	case 8:
 					os.writeC(39);
-					os.writeS("원거리 대미지 +" + (getItem().getBowDmgRate() + 1));
+					os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 1));
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("원거리 대미지 +" + (getItem().getBowDmgRate() + 2));
+					os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 2));
 					break;
 				default:
 					break;
 				}
 			}
-			/** 머머로드왕관 원거리 대미지 **/
+			/** モモロードクラウン遠距離ダメージ **/
 			if (itemId == 20017 && getEnchantLevel() > 6) {
 				switch (getEnchantLevel()) {
 				case 7:
 					os.writeC(39);
-					os.writeS("원거리 대미지 +" + (getItem().getBowDmgRate() + 1));
+					os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 1));
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("원거리 대미지 +" + (getItem().getBowDmgRate() + 2));
+					os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 2));
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("원거리 대미지 +" + (getItem().getBowDmgRate() + 2));
+					os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 2));
 					break;
 				default:
 					break;
 				}
 			}
-			/** (지혜/민첩/지식/완력)의 부츠 *
-			 * :	+7부터 최대 HP +20/+40/+60 증가
-			 * :	+9에 대미지 감소+1 추가
+			/** （知恵/機敏/知識/腕力）のブーツ *
+			 * :	+7から最大HP + 20 / + 40 / + 60増加
+			 * :	+9にダメージ減少+ 1を追加
 			 * */
 			if (itemId == 22359 || itemId == 222308 || itemId == 222309 || itemId == 222307 && getEnchantLevel() > 6) {
 				switch (getEnchantLevel()) {
@@ -3690,40 +3687,40 @@ public class L1ItemInstance extends L1Object {
 					os.writeC(39);
 					os.writeS("HP +" + 60);
 					os.writeC(39);
-					os.writeS("대미지 감소 " + 1);
+					os.writeS("ダメージ減少" + 1);
 					break;
 				default:
 					break;
 				}
 			}
-			/** 안타라스 상급 리뉴얼 **/
+			/** アンタラス上級リニューアル **/
 			if (itemId >= 22196 && itemId <= 22199) {
 				int dam = getEnchantLevel() - 6;
 				int total = getItem().getDamageReduction() + dam;
 				int total2 = getItem().getDamageReduction() + 3;
 				if (getEnchantLevel() >= 7 && getEnchantLevel() <= 9) {
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + total);
+					os.writeS("ダメージリダクション" + total);
 				} else if (getEnchantLevel() > 9) {
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + total2);
+					os.writeS("ダメージリダクション" + total2);
 				} else {
 					os.writeC(39);
-					os.writeS("대미지 리덕션 " + getItem().getDamageReduction());
+					os.writeS("ダメージリダクション" + getItem().getDamageReduction());
 				}
-			} else if (itemId == 491005) { // 대미지 리덕션
+			} else if (itemId == 491005) { // ダメージリダクション
 				os.writeC(39);
 				if(getEnchantLevel() >= 9)
-					os.writeS("대미지 리덕션 +" + (getItem().getDamageReduction()+1));
+					os.writeS("ダメージリダクション+" + (getItem().getDamageReduction()+1));
 				else
-					os.writeS("대미지 리덕션 +" + getItem().getDamageReduction());
+					os.writeS("ダメージリダクション+" + getItem().getDamageReduction());
 		 
-			} else if (getItem().getDamageReduction() != 0) { // 대미지 리덕션
+			} else if (getItem().getDamageReduction() != 0) { // ダメージリダクション
 				os.writeC(39);
-				os.writeS("대미지 리덕션 " + getItem().getDamageReduction());
+				os.writeS("ダメージリダクション" + getItem().getDamageReduction());
 			}
-			/** 벨트 7부터 pvp대미지감소 **/
-			if (itemType2 == 2 && (getItem().getType() == 10 && getEnchantLevel() > 6)) {// 벨트
+			/** ベルト7からpvpダメージ減少 **/
+			if (itemType2 == 2 && (getItem().getType() == 10 && getEnchantLevel() > 6)) {// ベルト
 				switch (getEnchantLevel()) {
 				case 7:
 					os.writeC(60);
@@ -3740,254 +3737,254 @@ public class L1ItemInstance extends L1Object {
 				default:
 					break;
 				}
-			/** PVP 데미지 감소 **/
+			/** PVPダメージ減少 **/
 			} else if (getItem().get_regist_calcPcDefense() != 0) {
 				os.writeC(39);
-				os.writeS("\\f2PVP 대미지 감소+ " + getItem().get_regist_calcPcDefense());
+				os.writeS("\\f2PVPダメージ減少+ " + getItem().get_regist_calcPcDefense());
 			}
-				/** PVP 추가 데미지 **/
+				/** PVP追加ダメージ **/
 			if (getItem().get_regist_PVPweaponTotalDamage() != 0) {
 				os.writeC(39);
-				os.writeS("\\f2PVP 추가 대미지+ " + getItem().get_regist_PVPweaponTotalDamage());
+				os.writeS("\\f2PVP追加ダメージ+ " + getItem().get_regist_PVPweaponTotalDamage());
 			}
 
-			/** 대미지 리덕션 무기 표기 부여 **/
+			/** ダメージリダクション武器表記付与 **/
 			if (itemId == 202011) {
 				if (getEnchantLevel() >= 0) {
 					os.writeC(39);
-					os.writeS("대미지 리덕션 무시 +12");
+					os.writeS("ダメージリダクション無視+12");
 				}
-			}if ((itemId >= 22208 && itemId <= 22211)) { // 발라갑옷
+			}if ((itemId >= 22208 && itemId <= 22211)) { // 塗っ鎧
 				if (getEnchantLevel() < 7) {
 					os.writeC(39);
-					os.writeS("대미지 리덕션 무시 +3");
+					os.writeS("ダメージリダクション無視+3");
 				}else if (getEnchantLevel() == 7) {
 					os.writeC(39);
-					os.writeS("대미지 리덕션 무시 +4");
+					os.writeS("ダメージリダクション無視+4");
 				}else if (getEnchantLevel() == 8) {
 					os.writeC(39);
-					os.writeS("대미지 리덕션 무시 +5");
+					os.writeS("ダメージリダクション無視+ 5");
 				}else if (getEnchantLevel() >= 9) {
 					os.writeC(39);
-					os.writeS("대미지 리덕션 무시 +6");
+					os.writeS("ダメージリダクション無視+6");
 				}
 			}
-			if ((itemId == 203025 || itemId == 203026) // 진 싸울아비 대검
+			if ((itemId == 203025 || itemId == 203026) // ジンサウルアビ銃剣
 					&& getEnchantLevel() >= 10) { 				
 					os.writeC(39);
-					os.writeS("발동:싸울 혼");
+					os.writeS("発動：戦う魂");
 				}
-				if ((itemId == 203006) // 태풍의 도끼
+				if ((itemId == 203006) // 台風の斧
 						&& getEnchantLevel() >= 10) { 				
 						os.writeC(39);
-						os.writeS("발동:나락");
+						os.writeS("発動：地獄");
 				}
-				if ((itemId == 1136) // 악몽의 장궁
+				if ((itemId == 1136) // 悪夢のロングボウ
 						&& getEnchantLevel() >= 10) { 				
 						os.writeC(39);
-						os.writeS("발동:악몽");
+						os.writeS("発動：悪夢");
 				}
 				
-				if ((itemId == 203017) // 섬멸자의 체인소드
+				if ((itemId == 203017) // 殲滅者チェーンソード
 						&& getEnchantLevel() >= 10) { 				
 						os.writeC(39);
-						os.writeS("발동:섬멸");
+						os.writeS("発動：殲滅");
 				}		
 				if ((itemId >= 22208 && itemId <= 22211)
 						&& getEnchantLevel() >= 7) { 				
 						os.writeC(39);
-						os.writeS("발동:발라카스의 일격");
+						os.writeS("発動：ヴァラカスの一撃");
 				}
-			/** 신성한 지식의 목걸이 마법적중**/
+			/** 神聖な知識のネックレス魔法命中**/
 			if (itemId == 222348) {
 				os.writeC(39);
-				os.writeS("마법적중 +2");
+				os.writeS("魔法命中+2");
 			}
-			/** 신성한 영생의 목걸이 스턴내성**/
+			/** 神聖な永遠のネックレススタン耐性**/
 			if (itemId == 222349) {
 				os.writeC(39);
-				os.writeS("스턴내성 +7");
+				os.writeS("スタン耐性+7");
 			}
 			
 			
-			/** 태풍의도끼 공포적중 **/
+			/** 台風の斧恐怖的中 **/
 			if (itemId == 203006) {
 				switch (getEnchantLevel()) {
 				case 8:
 					os.writeC(39);
-					os.writeS("공포적중 +1");
+					os.writeS("恐怖的中+1");
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("공포적중 +2");
+					os.writeS("恐怖的中+2");
 					break;
 				case 10:
 					os.writeC(39);
-					os.writeS("공포적중 +3");
+					os.writeS("恐怖的中+3");
 					break;
 				default:
 					break;
 				}
 			}
-			/** 타이탄의분노 공포적중 **/
+			/** タイタンの怒り恐怖的中 **/
 			if (itemId == 202014) {
 				switch (getEnchantLevel()) {
 				case 0:
 					os.writeC(39);
-					os.writeS("공포적중 +5");
+					os.writeS("恐怖的中+5");
 					break;
 				case 1:
 					os.writeC(39);
-					os.writeS("공포적중 +6");
+					os.writeS("恐怖的中+6");
 					break;
 				case 2:
 					os.writeC(39);
-					os.writeS("공포적중 +7");
+					os.writeS("恐怖的中+7");
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("공포적중 +8");
+					os.writeS("恐怖的中+8");
 					break;
 				case 4:
 					os.writeC(39);
-					os.writeS("공포적중 +9");
+					os.writeS("恐怖的中+9");
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("공포적중 +10");
+					os.writeS("恐怖的中+10");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("공포적중 +11");
+					os.writeS("恐怖的中+11");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("공포적중 +12");
+					os.writeS("恐怖的中+12");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("공포적중 +13");
+					os.writeS("恐怖的中+13");
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("공포적중 +14");
+					os.writeS("恐怖的中+14");
 					break;
 				case 10:
 					os.writeC(39);
-					os.writeS("공포적중 +15");
+					os.writeS("恐怖的中+15");
 					break;
 				default:
 					break;
 				}
 			}
 
-			/** 빛나는 마력의 장갑 **/
+			/** 輝く魔力の手袋 **/
 			if (itemId == 20274 && getEnchantLevel() > 4) {
-				int 무게보너스 = getEnchantLevel() - 4;
+				int weightBonus = getEnchantLevel() - 4;
 				os.writeC(39);
-				os.writeS("무게 게이지 " + (getItem().getWeightReduction() + 무게보너스));
-			} else if (getItem().getWeightReduction() != 0) { // 무게 게이지
+				os.writeS("重量ゲージ" + (getItem().getWeightReduction() + weightBonus));
+			} else if (getItem().getWeightReduction() != 0) { // 重量ゲージ
 				os.writeC(39);
-				os.writeS("무게 게이지 " + getItem().getWeightReduction());
+				os.writeS("重量ゲージ" + getItem().getWeightReduction());
 			}
 
 			if (itemId == 22263) {
 				os.writeC(39);
-				os.writeS("인챈수x2 확률로 대미지감소 50");
+				os.writeS("あるチェンスx2の確率でダメージ減少50");
 				switch (getEnchantLevel()) {
 				case 1:
 					os.writeC(39);
-					os.writeS("현재 발동확률: 2%");
+					os.writeS("現在発動確率：2％");
 					break;
 				case 2:
 					os.writeC(39);
-					os.writeS("현재 발동확률: 4%");
+					os.writeS("現在発動確率：4％");
 					break;
 				case 3:
 					os.writeC(39);
-					os.writeS("현재 발동확률: 6%");
+					os.writeS("現在発動確率：6％");
 					break;
 				case 4:
 					os.writeC(39);
-					os.writeS("현재 발동확률: 8%");
+					os.writeS("現在発動確率：8％");
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("현재 발동확률: 10%");
+					os.writeS("現在発動確率：10％");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("현재 발동확률: 12%");
+					os.writeS("現在発動確率：12％");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("현재 발동확률: 14%");
+					os.writeS("現在発動確率：14％");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("현재 발동확률: 16%");
+					os.writeS("現在発動確率：16％");
 					break;
 				case 9:
 					os.writeC(39);
-					os.writeS("현재 발동확률: 18%");
+					os.writeS("現在発動確率：18％");
 					break;
 				default:
 					break;
 				}
 			}
-			/** 룸티스의 붉은빛 귀걸이 확률 **/
+			/** ルームティスの赤い光のイヤリング確率 **/
 			if (itemId == 22229) {
 				switch (getEnchantLevel()) {
 				case 5:
 					os.writeC(39);
-					os.writeS("확률 대미지 리덕션 2%");
+					os.writeS("確率ダメージリダクション2％");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("확률 대미지 리덕션 3%");
+					os.writeS("確率ダメージリダクション3％");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("확률 대미지 리덕션 4%");
+					os.writeS("確率ダメージリダクション4％");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("확률 대미지 리덕션 5%");
+					os.writeS("確率ダメージリダクション5％");
 					break;
 				}
 				os.writeC(39);
 			}
-			/** 축복받은 룸티스의 붉은빛 귀걸이 확률 **/
+			/** 祝福されたルームティスの赤い光のイヤリング確率 **/
 			if (itemId == 222337) {
 				switch (getEnchantLevel()) {
 				case 4:
 					os.writeC(39);
-					os.writeS("확률 대미지 리덕션 2%");
+					os.writeS("確率ダメージリダクション2％");
 					break;
 				case 5:
 					os.writeC(39);
-					os.writeS("확률 대미지 리덕션 3%");
+					os.writeS("確率ダメージリダクション3％");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("확률 대미지 리덕션 4%");
+					os.writeS("確率ダメージリダクション4％");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("확률 대미지 리덕션 5%");
+					os.writeS("確率ダメージリダクション5％");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("확률 대미지 리덕션 6%");
+					os.writeS("確率ダメージリダクション6％");
 					break;
 				}
 				os.writeC(39);
 			}
 
 			
-			if(getItem().get_penetration() == 1){        //관통
+			if(getItem().get_penetration() == 1){        //貫通
 				   os.writeC(39);
-				   os.writeS("관통 효과");
+				   os.writeS("貫通効果");
 				
 			}
 			if (getItem().get_regist_freeze() != 0 && (getMr() == 0)) {
@@ -4011,33 +4008,33 @@ public class L1ItemInstance extends L1Object {
 				os.writeC(4);
 				os.writeH(getItem().get_regist_blind());
 			}
-			/** 공포 내성 **/
+			/** 恐怖耐性 **/
 			if (getItem().get_regist_DESPERADO() != 0 && (getMr() == 0)) {
 				os.writeC(39);
-				os.writeS("공포 내성 +" + getItem().get_regist_DESPERADO());
+				os.writeS("恐怖耐性+" + getItem().get_regist_DESPERADO());
 			}
 
-			/** 스냅퍼의 반지 스턴내성 표시 **/ // 현질러와 일반유저의 격차를 줄이기위해 스턴내성 579 넣어야하는데 456으로 들어가있음.(유저들은 모름)
+			/** スナップファーリングスタン耐性表示**/ //県全体と一般ユーザーの格差を減らすためにスタン耐性579配置する必要が456に入っている。（ユーザーはわからない）
 			if (itemType2 == 2 && itemId >= 22224 && itemId <= 22228 && getEnchantLevel() == 6
 					|| itemId >= 222290 && itemId <= 222291 && getEnchantLevel() == 6
-					|| itemId >= 222330 && itemId <= 222336 && getEnchantLevel() == 6) { // 인챈트가 6이면
+					|| itemId >= 222330 && itemId <= 222336 && getEnchantLevel() == 6) { // エンチャントが6であれば
 				os.writeC(33);
 				os.writeC(5);
 				os.writeH(getItem().get_regist_stun() + 5);
 			} else if (itemType2 == 2 && itemId >= 22224 && itemId <= 22228 && getEnchantLevel() == 7
 					|| itemId >= 222290 && itemId <= 222291 && getEnchantLevel() == 7
-					|| itemId >= 222330 && itemId <= 222336 && getEnchantLevel() == 7) { // 인챈트가 7이면
+					|| itemId >= 222330 && itemId <= 222336 && getEnchantLevel() == 7) { // エンチャントが7であれば
 				os.writeC(33);
 				os.writeC(5);
 				os.writeH(getItem().get_regist_stun() + 7);
 			} else if (itemType2 == 2 && itemId >= 22224 && itemId <= 22228 && getEnchantLevel() == 8
 					|| itemId >= 222290 && itemId <= 222291 && getEnchantLevel() == 8
-					|| itemId >= 222330 && itemId <= 222336 && getEnchantLevel() == 8) { // 인챈트가 8이면
+					|| itemId >= 222330 && itemId <= 222336 && getEnchantLevel() == 8) { //エンチャントが8であれば
 				os.writeC(33);
 				os.writeC(5);
 				os.writeH(getItem().get_regist_stun() + 9);
 				
-				/** 귀걸이,목걸이 +7부터 스턴내성 **/
+				/** イヤリング、ネックレス+7からスタン耐性 **/
 			} else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12 && getEnchantLevel() > 6) {
 				switch (getEnchantLevel()) {
 				case 7:
@@ -4068,155 +4065,155 @@ public class L1ItemInstance extends L1Object {
 				os.writeC(6);
 				os.writeH(getItem().get_regist_sustain());
 			}
-			// 불의 속성
+			// 火属性
 			if (getItem().get_defense_fire() != 0) {
 				os.writeC(27);
 				os.writeC(getItem().get_defense_fire());
 			}
-			// 물의 속성
+			// 水属性
 			if (getItem().get_defense_water() != 0) {
 				os.writeC(28);
 				os.writeC(getItem().get_defense_water());
 			}
-			// 바람 속성
+			// 風属性
 			if (getItem().get_defense_wind() != 0) {
 				os.writeC(29);
 				os.writeC(getItem().get_defense_wind());
 			}
-			// 땅의 속성
+			// 地の属性
 			if (getItem().get_defense_earth() != 0) {
 				os.writeC(30);
 				os.writeC(getItem().get_defense_earth());
 			}
 
-			if (itemType2 == 2 && (getItem().getType() == 8 || getItem().getType() == 12)) {// 목걸이, 귀걸이
+			if (itemType2 == 2 && (getItem().getType() == 8 || getItem().getType() == 12)) {// ネックレス、イヤリング
 				os.writeC(39);
-				os.writeS("$18956 : $18960"); // 근성
-			} else if (itemType2 == 2 && (getItem().getType() == 9 || getItem().getType() == 11)) {// 반지
+				os.writeS("$18956 : $18960"); // 根性
+			} else if (itemType2 == 2 && (getItem().getType() == 9 || getItem().getType() == 11)) {// リング
 				os.writeC(39);
-				os.writeS("$18956 : $18961"); // 열정
-			} else if (itemType2 == 2 && (getItem().getType() == 10)) {// 벨트
+				os.writeS("$18956 : $18961"); // 情熱
+			} else if (itemType2 == 2 && (getItem().getType() == 10)) {// ベルト
 				os.writeC(39);
-				os.writeS("$18956 : $18962"); // 의지
+				os.writeS("$18956 : $18962"); // 意志
 			}
-			if(itemId==900032){ //커츠의 투사 휘장 
+			if(itemId==900032){ //カーツの投影幕 
 				int chp = getEnchantLevel()*5+5;
 				if(getEnchantLevel()==8) chp = 50;
 				os.writeC(39);
-				os.writeS("최대 HP +"+chp);
+				os.writeS("最大HP +"+chp);
 				switch(getEnchantLevel()){
 					case 5:
 						os.writeC(39);
-						os.writeS("근거리 대미지 +1");
+						os.writeS("近距離ダメージ+1");
 						break;
 					case 6:
 						os.writeC(39);
-						os.writeS("근거리 대미지 +2");
+						os.writeS("近距離ダメージ+2");
 						os.writeC(39);
-						os.writeS("근거리 치명타 +1%");
+						os.writeS("近距離クリティカル+ 1％");
 						break;
 					case 7:
 						os.writeC(39);
-						os.writeS("근거리 대미지 +3");
+						os.writeS("近距離ダメージ+3");
 						os.writeC(39);
-						os.writeS("근거리 치명타 +3%");
+						os.writeS("近距離クリティカル+ 3％");
 						break;
 					case 8:
 						os.writeC(39);
-						os.writeS("근거리 대미지 +4");
+						os.writeS("近距離ダメージ+4");
 						os.writeC(39);
-						os.writeS("근거리 치명타 +5%");
+						os.writeS("近距離クリティカル+ 5％");
 						break;
 				}
 				
 			}
-			if(itemId == 900033){ //커츠의 명궁 휘장
+			if(itemId == 900033){ //カーツの名弓記章
 				int chp = getEnchantLevel()*5+5;
 				if(getEnchantLevel()==8) chp = 50;
 				os.writeC(39);
-				os.writeS("최대 HP +"+chp);
+				os.writeS("最大HP +"+chp);
 				switch(getEnchantLevel()){
 				case 5:
 					os.writeC(39);
-					os.writeS("원거리 대미지 +1");
+					os.writeS("遠距離ダメージ+1");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("원거리 대미지 +2");
+					os.writeS("遠距離ダメージ+2");
 					os.writeC(39);
-					os.writeS("원거리 치명타 +1%");
+					os.writeS("遠距離クリティカル+ 1％");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("원거리 대미지 +3");
+					os.writeS("遠距離ダメージ+3");
 					os.writeC(39);
-					os.writeS("원거리 치명타 +3%");
+					os.writeS("遠距離クリティカル+ 3％");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("원거리 대미지 +4");
+					os.writeS("遠距離ダメージ+4");
 					os.writeC(39);
-					os.writeS("원거리 치명타 +5%");
+					os.writeS("遠距離クリティカル+ 5％");
 					break;
 				}
 			}
 			
-			if(itemId == 900034){ //커츠의 현자 휘장 
+			if(itemId == 900034){ //カーツの賢者記章 
 				int chp = getEnchantLevel()*5+5;
 				if(getEnchantLevel()==8) chp = 50;
 				os.writeC(39);
-				os.writeS("최대 HP +"+chp);
+				os.writeS("最大HP +"+chp);
 				switch(getEnchantLevel()){
 				case 5:
 					os.writeC(39);
-					os.writeS("근거리 명중 +1");
+					os.writeS("近距離命中+1");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("근거리 명중 +2");
+					os.writeS("近距離命中+2");
 					os.writeC(39);
-					os.writeS("마법 치명타 +1%");
+					os.writeS("魔法クリティカル+ 1％");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("근거리 명중 +3");
+					os.writeS("近距離命中+3");
 					os.writeC(39);
-					os.writeS("마법 치명타 +2%");
+					os.writeS("魔法クリティカル+ 2％");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("근거리 명중 +4");
+					os.writeS("近距離命中+4");
 					os.writeC(39);
-					os.writeS("마법 치명타 +4%");
+					os.writeS("魔法クリティカル+ 4％");
 					break;
 				}
 			}
 			
-			if(itemId == 900035){ //커츠의 현자 휘장 
+			if(itemId == 900035){ //カーツの賢者記章 
 				int chp = getEnchantLevel()*5+5;
 				if(getEnchantLevel()==8) chp = 50;
 				os.writeC(39);
-				os.writeS("최대 HP +"+chp);
+				os.writeS("最大HP +"+chp);
 				switch(getEnchantLevel()){
 				case 5:
 					os.writeC(39);
-					os.writeS("대미지 감소 +1");
+					os.writeS("ダメージ減少+ 1");
 					break;
 				case 6:
 					os.writeC(39);
-					os.writeS("대미지 감소 +2");
+					os.writeS("ダメージ減少+2");
 					os.writeC(39);
 					os.writeS("MR +3%");
 					break;
 				case 7:
 					os.writeC(39);
-					os.writeS("대미지 감소 +3");
+					os.writeS("ダメージ減少+3");
 					os.writeC(39);
 					os.writeS("MR +5%");
 					break;
 				case 8:
 					os.writeC(39);
-					os.writeS("대미지 감소 +4");
+					os.writeS("ダメージ減少+4");
 					os.writeC(39);
 					os.writeS("MR +7%");
 					break;
@@ -4226,10 +4223,9 @@ public class L1ItemInstance extends L1Object {
 				os.writeC(74);
 				os.writeS(getItem().getMagicName());
 			}
-		} // 주석함
-		return os.getBytes();
-	}
-	
+		} // コメントする
+	return os.getBytes();}
+
 	private static final int _hit = 0x05;
 	private static final int _dmg = 0x06;
 	private static final int _bowhit = 0x18;
@@ -4256,7 +4252,6 @@ public class L1ItemInstance extends L1Object {
 	private static final int _add_ac = 0x38;
 	private static final int _poly = 0x47;
 
-	
 	public byte[] getStatusBytes(L1PcInstance pc, boolean check) {
 		byte[] data = getStatusBytes();
 		@SuppressWarnings("resource")
@@ -4280,16 +4275,16 @@ public class L1ItemInstance extends L1Object {
 
 			if (getItem().getItemId() == 20099) {
 				os.writeC(_poly);
-				os.writeH(1175);// 데몬
+				os.writeH(1175);// デーモン
 			} else if (getItem().getItemId() == 20100) {
 				os.writeC(_poly);
-				os.writeH(18692);// 진데스
+				os.writeH(18692);// ジンデス
 			} else if (getItem().getItemId() == 20151) {
 				os.writeC(_poly);
-				os.writeH(2118);// 케레니스
+				os.writeH(2118);//ケレニス
 			} else if (getItem().getItemId() == 20118) {
 				os.writeC(_poly);
-				os.writeH(2117);// 켄라우헬
+				os.writeH(2117);// ケンラウヘル
 			}
 
 			if (set.getShortHitup() != 0) {
@@ -4385,14 +4380,13 @@ public class L1ItemInstance extends L1Object {
 			if (getItem().getType2() == 2) {
 				if (getItem().getType() == 8 || getItem().getType() == 12) {
 					os.writeC(0x43);
-					os.writeC(0x2b);// 근성
-				} else if (getItem().getType() == 9
-						|| getItem().getType() == 11) {
+					os.writeC(0x2b);// 根性
+				} else if (getItem().getType() == 9 || getItem().getType() == 11) {
 					os.writeC(0x43);
-					os.writeC(0x2c);// 열정
+					os.writeC(0x2c);// 情熱
 				} else if (getItem().getType() == 10) {
 					os.writeC(0x43);
-					os.writeC(0x2d);// 의지
+					os.writeC(0x2d);// 意志
 				} else {
 					os.writeC(0);
 					os.writeC(-1);
@@ -4413,7 +4407,7 @@ public class L1ItemInstance extends L1Object {
 		BinaryOutputStream os = new BinaryOutputStream();
 		try {
 			os.write(data);
-	
+
 			L1ArmorSets set = ArmorSetTable.getInstance().getArmorSets(getItem().getSetId());
 
 			if (set != null && getItem().getMainId() == getItem().getItemId()) {
@@ -4425,16 +4419,16 @@ public class L1ItemInstance extends L1Object {
 				}
 				if (getItem().getItemId() == 20099) {
 					os.writeC(_poly);
-					os.writeH(1175);// 데몬
+					os.writeH(1175);// デーモン
 				} else if (getItem().getItemId() == 20100) {
 					os.writeC(_poly);
-					os.writeH(18692);// 진데스
+					os.writeH(18692);// ジンデス
 				} else if (getItem().getItemId() == 20151) {
 					os.writeC(_poly);
-					os.writeH(2118);// 케레니스
+					os.writeH(2118);// ケレニス
 				} else if (getItem().getItemId() == 20118) {
 					os.writeC(_poly);
-					os.writeH(2117);// 켄라우헬
+					os.writeH(2117);// ケンラウヘル
 				}
 
 				if (set.getShortHitup() != 0) {
@@ -4531,14 +4525,13 @@ public class L1ItemInstance extends L1Object {
 			if (getItem().getType2() == 2) {
 				if (getItem().getType() == 8 || getItem().getType() == 12) {
 					os.writeC(0x43);
-					os.writeC(0x2b);// 근성
-				} else if (getItem().getType() == 9
-						|| getItem().getType() == 11) {
+					os.writeC(0x2b);// 根性
+				} else if (getItem().getType() == 9 || getItem().getType() == 11) {
 					os.writeC(0x43);
-					os.writeC(0x2c);// 열정
+					os.writeC(0x2c);// 情熱
 				} else if (getItem().getType() == 10) {
 					os.writeC(0x43);
-					os.writeC(0x2d);// 의지
+					os.writeC(0x2d);// 意志
 				} else {
 					os.writeC(0);
 					os.writeC(-1);
@@ -4553,8 +4546,7 @@ public class L1ItemInstance extends L1Object {
 		return os.getBytes();
 	}
 
-
-	private L1PcInstance _owner; // 실제로는 장착한 사람.....
+	private L1PcInstance _owner; // 実際には、装着した人.....
 
 	class EnchantTimer implements Runnable {
 
@@ -4628,7 +4620,8 @@ public class L1ItemInstance extends L1Object {
 				addDmgByMagic(-5);
 				break;
 			case L1SkillId.BLESSED_ARMOR:
-				if (_owner != null && _owner.getInventory().getItem(L1ItemInstance.this.getId()) == L1ItemInstance.this && isEquipped()) {
+				if (_owner != null && _owner.getInventory().getItem(L1ItemInstance.this.getId()) == L1ItemInstance.this
+						&& isEquipped()) {
 					_owner.getAC().addAc(3);
 					_owner.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, 748, 0, false, false));
 					_owner.sendPackets(new S_OwnCharStatus(_owner));
@@ -4699,7 +4692,8 @@ public class L1ItemInstance extends L1Object {
 			addAcByMagic(3);
 			setEnchantMagic(skill.getCastGfx());
 
-			if (_owner != null && _owner.getInventory().getItem(L1ItemInstance.this.getId()) == L1ItemInstance.this && isEquipped()) {
+			if (_owner != null && _owner.getInventory().getItem(L1ItemInstance.this.getId()) == L1ItemInstance.this
+					&& isEquipped()) {
 				_owner.getAC().addAc(-3);
 				_owner.sendPackets(new S_OwnCharStatus(_owner));
 			}
@@ -4754,7 +4748,7 @@ public class L1ItemInstance extends L1Object {
 		GeneralThreadPool.getInstance().schedule(timer, skillTime);
 
 		setEnchantMagic(skill.getCastGfx());
-		if (skillId == L1SkillId.HOLY_WEAPON){
+		if (skillId == L1SkillId.HOLY_WEAPON) {
 			setEnchantMagic(2165);
 		}
 	}
@@ -4861,251 +4855,432 @@ public class L1ItemInstance extends L1Object {
 	public void onUnEquip() {
 		_owner = null;
 	}
-	
-	
-	public int 인형SP() {
+
+	public int dollSP() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 447014: case 30022: case 30023: case 30024: case 30025: case 447015:
+		case 447014:
+		case 30022:
+		case 30023:
+		case 30024:
+		case 30025:
+		case 447015:
 		case 510222:
-		value = 1; break; 
-		case 447016: case 5991: value = 2; break;
-		case 752: value = 3; break;
-		default: break;
-		}
-		return value;
-	}
-	
-	public int 근거리대미지() {
-		int value = 0;
-		int itemid = getItemId();
-		switch (itemid) {
-		case 741: value = 1; break; 
-		case 743: case 500214: case 447012: case 30022: case 30023: case 30024: case 30025: 
-		case 447015: case 510220: case 5991:
-			value = 2; break; 
-		case 750: value = 1; break; 
-		default: break;
-		}
-		return value;
-	}
-	public int 근거리명중() {
-		int value = 0;
-		int itemid = getItemId();
-		switch (itemid) {
-		case 743: case 500215: case 510220: case 5991: value = 2; break; 
-		case 750: value = 1; break; 
-		default: break;
-		}
-		return value;
-	}
-	public int 원거리대미지() {
-		int value = 0;
-		int itemid = getItemId();
-		switch (itemid) {
-		case 744: value = 5; break;
-		case 210105: value = 1; break;
-		case 447013: case 30022: case 30023: case 30024: case 30025: case 447015:
-		case 447017: case 5991:
-			value = 2; break;
-		default: break;
-		}
-		return value;
-	}
-	public int 원거리명중() {
-		int value = 0;
-		int itemid = getItemId();
-		switch (itemid) {
-		case 210070: case 210105: value = 1; break;
-		case 500215: case 5991: value = 2; break;
-		case 510216: value = 5; break;
-		default: break;
-		}
-		return value;
-	}
-	public int 최대HP() {
-		int value = 0;
-		int itemid = getItemId();
-		switch (itemid) {
-		case 740: case 500215: value = 50; break;
-		case 447012: case 447013: case 447014: value = 30; break;
-		case 447016: value = 80; break;
-		default: break;
-		}
-		return value;
-	}
-	public int 최대MP() {
-		int value = 0;
-		int itemid = getItemId();
-		switch (itemid) {
-		case 500215: value = 30; break;
-		default: break;
-		}
-		return value;
-	}
-	public int 경험치보너스() {
-		int value = 0;
-		int itemid = getItemId();
-		switch (itemid) {
-		case 746: case 410171: value = 20; break;
-		case 510216: case 510217: case 510218: case 510219: case 751: value = 10; break;
+			value = 1;
+			break;
+		case 447016:
+		case 5991:
+			value = 2;
+			break;
+		case 752:
+			value = 3;
+			break;
 		default:
 			break;
 		}
 		return value;
 	}
-	public int HP회복() {
+
+	public int ShortDamage() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 744: value = 30; break;
-		case 210086: value = 25; break;
-		case 510218: value = 15; break;
-		default: break;
+		case 741:
+			value = 1;
+			break;
+		case 743:
+		case 500214:
+		case 447012:
+		case 30022:
+		case 30023:
+		case 30024:
+		case 30025:
+		case 447015:
+		case 510220:
+		case 5991:
+			value = 2;
+			break;
+		case 750:
+			value = 1;
+			break;
+		default:
+			break;
 		}
 		return value;
 	}
-	public int MP회복() {
+
+	public int ShortHit() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 41249: case 210071: case 447012: case 447013: case 447014: case 510217:
-		case 510221: case 510222: case 751:
-			value = 15; break;
-		case 447015: case 410173: value = 10; break;
-		case 447017: value = 6; break;
-		default: break;
+		case 743:
+		case 500215:
+		case 510220:
+		case 5991:
+			value = 2;
+			break;
+		case 750:
+			value = 1;
+			break;
+		default:
+			break;
 		}
 		return value;
 	}
-	public int 추가데미지(){
+
+	public int LongDamage() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 41250: case 210072: value = 15; break; 
-		case 410172: value = 3; break;
-		default: break;
+		case 744:
+			value = 5;
+			break;
+		case 210105:
+			value = 1;
+			break;
+		case 447013:
+		case 30022:
+		case 30023:
+		case 30024:
+		case 30025:
+		case 447015:
+		case 447017:
+		case 5991:
+			value = 2;
+			break;
+		default:
+			break;
 		}
 		return value;
 	}
-	public int 데미지리덕션(){
+
+	public int LongHit() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 741: case 210070: case 510218: case 510219: 
-			value = 1; 
+		case 210070:
+		case 210105:
+			value = 1;
 			break;
-		case 742: case 751: 
-			value = 2; 
+		case 500215:
+		case 5991:
+			value = 2;
 			break;
-		case 3000152: //커츠
-			value = 3; 
+		case 510216:
+			value = 5;
 			break;
-		case 746: case 410171: 
-			value = 5; 
+		default:
 			break;
-		default: break;
 		}
 		return value;
 	}
-	public int 스턴레벨(){
+
+	public int MaxHP() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 743: value = 1; break;
-		case 745: value = 2; break;
-		default: break;
+		case 740:
+		case 500215:
+			value = 50;
+			break;
+		case 447012:
+		case 447013:
+		case 447014:
+			value = 30;
+			break;
+		case 447016:
+			value = 80;
+			break;
+		default:
+			break;
 		}
 		return value;
 	}
-	public int 스턴내성(){
+
+	public int MaxMP() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 745: case 510220: 
-			value = 12; 
+		case 500215:
+			value = 30;
 			break;
-		case 500214: case 752:  
-		case 3000150: case 3000151: case 3000152: //바포, 얼녀,커츠
-			value = 10; 
+		default:
 			break;
-		case 410173: 
-			value = 8; 
-			break;
-		default: break;
 		}
 		return value;
 	}
-	public String 마법발동(){
+
+	public int EXPBonus() {
+		int value = 0;
+		int itemid = getItemId();
+		switch (itemid) {
+		case 746:
+		case 410171:
+			value = 20;
+			break;
+		case 510216:
+		case 510217:
+		case 510218:
+		case 510219:
+		case 751:
+			value = 10;
+			break;
+		default:
+			break;
+		}
+		return value;
+	}
+
+	public int HPRecovery() {
+		int value = 0;
+		int itemid = getItemId();
+		switch (itemid) {
+		case 744:
+			value = 30;
+			break;
+		case 210086:
+			value = 25;
+			break;
+		case 510218:
+			value = 15;
+			break;
+		default:
+			break;
+		}
+		return value;
+	}
+
+	public int MPRecovery() {
+		int value = 0;
+		int itemid = getItemId();
+		switch (itemid) {
+		case 41249:
+		case 210071:
+		case 447012:
+		case 447013:
+		case 447014:
+		case 510217:
+		case 510221:
+		case 510222:
+		case 751:
+			value = 15;
+			break;
+		case 447015:
+		case 410173:
+			value = 10;
+			break;
+		case 447017:
+			value = 6;
+			break;
+		default:
+			break;
+		}
+		return value;
+	}
+
+	public int damageAdd() {
+		int value = 0;
+		int itemid = getItemId();
+		switch (itemid) {
+		case 41250:
+		case 210072:
+			value = 15;
+			break;
+		case 410172:
+			value = 3;
+			break;
+		default:
+			break;
+		}
+		return value;
+	}
+
+	public int damageReduction() {
+		int value = 0;
+		int itemid = getItemId();
+		switch (itemid) {
+		case 741:
+		case 210070:
+		case 510218:
+		case 510219:
+			value = 1;
+			break;
+		case 742:
+		case 751:
+			value = 2;
+			break;
+		case 3000152: // カーツ
+			value = 3;
+			break;
+		case 746:
+		case 410171:
+			value = 5;
+			break;
+		default:
+			break;
+		}
+		return value;
+	}
+
+	public int stunLevel() {
+		int value = 0;
+		int itemid = getItemId();
+		switch (itemid) {
+		case 743:
+			value = 1;
+			break;
+		case 745:
+			value = 2;
+			break;
+		default:
+			break;
+		}
+		return value;
+	}
+
+	public int resistStun() {
+		int value = 0;
+		int itemid = getItemId();
+		switch (itemid) {
+		case 745:
+		case 510220:
+			value = 12;
+			break;
+		case 500214:
+		case 752:
+		case 3000150:
+		case 3000151:
+		case 3000152: // バポ、オルニョ、カーツ
+			value = 10;
+			break;
+		case 410173:
+			value = 8;
+			break;
+		default:
+			break;
+		}
+		return value;
+	}
+
+	public String magicActivation() {
 		String value = null;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 746: case 410171: value = "헬 파이어"; break;
-		case 500213: value = "헤이스트"; break;
-		case 30022: value = "아이스 대거"; break;
-		case 30023: value = "파이어 애로우"; break; 
-		case 30024: value = "스탈락"; break;
-		case 30025: value = "윈드 커터"; break;
-		case 510221: value = "콜 라이트닝"; break;
-		default: break;
+		case 746:
+		case 410171:
+			value = "ヘルファイア";
+			break;
+		case 500213:
+			value = "ヘイスト";
+			break;
+		case 30022:
+			value = "アイスダガー";
+			break;
+		case 30023:
+			value = "ファイアーアロー";
+			break;
+		case 30024:
+			value = "スタラック";
+			break;
+		case 30025:
+			value = "ウィンドカッター";
+			break;
+		case 510221:
+			value = "コールライトニング";
+			break;
+		default:
+			break;
 		}
 		return value;
 	}
-	public int 무게게이지(){
+
+	public int weightGauge() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 41248: case 210106:case 210107:case 210108:case 210109: value = 10; break;
-		
-		default: break;
+		case 41248:
+		case 210106:
+		case 210107:
+		case 210108:
+		case 210109:
+			value = 10;
+			break;
+
+		default:
+			break;
 		}
 		return value;
 	}
-	public int 인형방어구(){
+
+	public int dollArmor() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 210096: value = 3; break;
-		case 500213: value = 2; break;
-		default: break;
+		case 210096:
+			value = 3;
+			break;
+		case 500213:
+			value = 2;
+			break;
+		default:
+			break;
 		}
 		return value;
 	}
-	public int 인형동빙내성(){
+
+	public int dollResist_Freeze() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 210096: value = 7; break;
-		default: break;
+		case 210096:
+			value = 7;
+			break;
+		default:
+			break;
 		}
 		return value;
 	}
-	public int 인형홀드내성(){
+
+	public int dollResist_Hold() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 500213: value = 10; break;
-		default: break;
+		case 500213:
+			value = 10;
+			break;
+		default:
+			break;
 		}
 		return value;
 	}
-	public int 인형Mpr(){
+
+	public int dollMpr() {
 		int value = 0;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 210106:case 210107:case 210108:case 210109: value = 5; break;
-		default: break;
+		case 210106:
+		case 210107:
+		case 210108:
+		case 210109:
+			value = 5;
+			break;
+		default:
+			break;
 		}
 		return value;
 	}
-	public String 아이템획득(){
+
+	public String itemGet() {
 		String value = null;
 		int itemid = getItemId();
 		switch (itemid) {
-		case 5991: value = "떡 바구니"; break;
-		
-		default: break;
+		case 5991:
+			value = "餅バスケット";
+			break;
+
+		default:
+			break;
 		}
 		return value;
 	}

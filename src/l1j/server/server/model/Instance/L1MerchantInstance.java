@@ -1,15 +1,6 @@
 package l1j.server.server.model.Instance;
 
-import static l1j.server.server.model.skill.L1SkillId.BLESS_WEAPON;
-
-import static l1j.server.server.model.skill.L1SkillId.BRAVE_AURA;
-import static l1j.server.server.model.skill.L1SkillId.FULL_HEAL;
-import static l1j.server.server.model.skill.L1SkillId.GLOWING_AURA;
-import static l1j.server.server.model.skill.L1SkillId.HASTE;
-import static l1j.server.server.model.skill.L1SkillId.INSIGHT;
-import static l1j.server.server.model.skill.L1SkillId.IRON_SKIN;
-import static l1j.server.server.model.skill.L1SkillId.PHYSICAL_ENCHANT_DEX;
-import static l1j.server.server.model.skill.L1SkillId.PHYSICAL_ENCHANT_STR;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -66,7 +57,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 		clanid = i;
 	}
 
-	public String getClanname() { // 크란명
+	public String getClanname() { // クラン名
 		return clanname;
 	}
 
@@ -136,7 +127,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 			}
 			broadcastPacket(new S_ChangeHeading(this));
 
-			// 얘 좀 구린듯. interlockedIncrement하는데 compare&Swap이라니. 어차피 intel 기준 lock xadd 한번만 콜해주면 되는데.-_-
+			// この子ちょっとグリーンらしい。 interlockedIncrementするcompare＆Swapとは。どうせintel基準lock xadd一度だけコールしてくれればされるが。-_-
 			if (_restCallCount.getAndIncrement() == 0) {
 				setRest(true);
 			}
@@ -152,11 +143,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 			if (player.getLevel() >= Config.배틀존입장레벨) {
 				DuelZone(player);
 			} else {
-				player.sendPackets(new S_SystemMessage("\\aG[!] : 레벨 " + Config.배틀존입장레벨 + " 이상만 입장할수 있습니다."));
+				player.sendPackets(new S_SystemMessage("\\aG[!] : レベル " + Config.배틀존입장레벨 + "以上だけ入場することができます。"));
 			}
 		}
 
-		//성혈버프사 
+		//腥血バフ社 
 		if (npcid == 810852) {
 			//L1Clan clan = L1World.getInstance().getClan(player.getClanname());
 			if (player.getInventory().checkItem(40308, 200000)) {
@@ -177,18 +168,18 @@ public class L1MerchantInstance extends L1NpcInstance {
 					player.setBuffnoch(0);
 					htmlid="ep6ev_p3";
 				//} else {
-				//	player.sendPackets(new S_SystemMessage("\\fU성을 소유하고있는 혈원만 사용 가능합니다."));
+				//	player.sendPackets(new S_SystemMessage("\\fU城を所有している血盟員のみ使用可能です。 "））;
 				//}
 			} else {
-				player.sendPackets(new S_SystemMessage("\\fU아데나(200,000)이 부족합니다."));
+				player.sendPackets(new S_SystemMessage("\\fUアデナ(200,000)が不足します。"));
 			}
 		}
 
 			if (talking != null) {
 			switch (npcid) {
-			case 5100018: // 아덴사냥터 입장관리인
+			case 5100018: // アデン狩り場立場管理人
 				if (player.getLevel() < Config.아덴사냥터입장레벨) {
-					player.sendPackets(new S_SystemMessage("레벨 " + Config.아덴사냥터입장레벨 + " 이상만 입장할 수 있습니다."));
+					player.sendPackets(new S_SystemMessage("レベル" + Config.아덴사냥터입장레벨 + "以上だけ入場することができます。"));
 					htmlid = "";
 					return;
 				}
@@ -198,14 +189,14 @@ public class L1MerchantInstance extends L1NpcInstance {
 					int k19 = 32752 + random.nextInt(5); 
 					new L1Teleport().teleport(player, i13, k19, (short)701, player.getHeading(), true); 
 					player.setSkillEffect(L1SkillId.ABSOLUTE_BARRIER, 3000);
-					player.sendPackets(new S_ChatPacket(player,"열린시각으로부터 60분동안 입장이 가능합니다."));
+					player.sendPackets(new S_ChatPacket(player,"開かれた時刻から60分の間入場が可能です。"));
 				} else {         	
-					player.sendPackets(new S_ChatPacket(player,"아덴사냥터가 아직 열리지않았습니다."));
+					player.sendPackets(new S_ChatPacket(player,"アデン狩り場がまだ開いていません。"));
 				} 
 				break;
-			case 70086: // 잊혀진섬
+			case 70086: // 忘れられた島
 				if (player.getLevel() < Config.FG_ISVAL) {
-					player.sendPackets(new S_SystemMessage("입장 불가: 레벨이 맞지 않음 (" + Config.FG_ISVAL + " 레벨 이상)"), true);
+					player.sendPackets(new S_SystemMessage("入場不可：レベルが合わない（" + Config.FG_ISVAL + "レベル以上）"), true);
 					htmlid = "";
 					return;
 				}
@@ -215,9 +206,9 @@ public class L1MerchantInstance extends L1NpcInstance {
 					int k19 = 32782 + random.nextInt(5);
 					new L1Teleport().teleport(player, i13, k19, (short) 1711, player.getHeading(), true);
 					player.setSkillEffect(L1SkillId.ABSOLUTE_BARRIER, 3000);
-					player.sendPackets(new S_SystemMessage("\\aH알림: 열린시각부터 1시간동안 입장가능."));
+					player.sendPackets(new S_SystemMessage("\\aH通知：開かれた時刻から1時間の間入場可能。"));
 				} else {
-					player.sendPackets(new S_SystemMessage("현재 잊혀진섬이 개방 되지않았습니다."));
+					player.sendPackets(new S_SystemMessage("現在忘れられた島が開放されていない。"));
 				} 
 				break;
 			case 7310085:
@@ -227,12 +218,12 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "talkinggate2";
 				}
 				break;
-			case 70005:// 파고
+			case 70005:// 掘り
 				htmlid = "pago";
 				break;
 			case 81210:
 				if (!player.PCRoom_Buff) {
-					player.sendPackets(new S_SystemMessage("PC방 코인 상품을 사용 중인 유저만 입장 가능합니다."));
+					player.sendPackets(new S_SystemMessage("PC部屋コイン商品を使用しているユーザのみ入場可能です。"));
 					return;
 				}
 				break;
@@ -245,7 +236,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "luudiel1";
 				}
 				break;
-			case 70522: // 군터
+			case 70522: //ギュンター
 				if (player.isCrown()) {
 					if (player.getLevel() >= 15) {
 						int lv15_step = quest.get_step(L1Quest.QUEST_LEVEL15);
@@ -276,7 +267,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "gunterde1";
 				}
 				break;
-			case 70653: // 마샤
+			case 70653: // マーシャ
 				if (player.isCrown()) {
 					if (player.getLevel() >= 45) {
 						if (quest.isEnd(L1Quest.QUEST_LEVEL30)) {
@@ -318,7 +309,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 70554: // 제로
+			case 70554: // ゼロ
 				if (player.isCrown()) {
 					if (player.getLevel() >= 15) {
 						int lv15_step = quest.get_step(L1Quest.QUEST_LEVEL15);
@@ -334,7 +325,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 70783: // 아리아
+			case 70783: // アリア
 				if (player.isCrown()) {
 					if (player.getLevel() >= 30) {
 						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) {
@@ -350,7 +341,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 70000: // 마빈
+			case 70000: // マービン
 				if (player.getLevel() < 52) {
 					htmlid = "marbinquestA";
 				} else {
@@ -361,7 +352,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 70782: // 수색개미
+			case 70782: // 調査アリ
 				if (player.getTempCharGfx() == 1037) {
 					if (player.isCrown()) {
 						if (quest.get_step(L1Quest.QUEST_LEVEL30) == 1) {
@@ -374,7 +365,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 70545: // 리차드
+			case 70545: // リチャード
 				if (player.isCrown()) {
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
 					if (lv45_step >= 1 && lv45_step != L1Quest.QUEST_END) {
@@ -386,7 +377,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 70776: // 맥
+			case 70776: // マック
 				if (player.isCrown()) {
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
 					if (lv45_step == 1) {
@@ -398,7 +389,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 71200: // 백마법사피에타
+			case 71200: // バックウィザードピエタ
 				if (player.isCrown()) {
 					int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
 					if (lv45_step == 2 && player.getInventory().checkItem(41422)) {
@@ -411,7 +402,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 70802:// 아논
+			case 70802:// アノン
 				if (player.isKnight()) {
 					if (player.getLevel() >= 15) {
 						int lv15_step = quest.get_step(L1Quest.QUEST_LEVEL15);
@@ -423,7 +414,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 70775:// 마크
+			case 70775:// マーク
 				if (player.isKnight()) {
 					if (player.getLevel() >= 30) {
 						if (quest.isEnd(L1Quest.QUEST_LEVEL15)) {
@@ -437,7 +428,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 70794: // 게라드
+			case 70794: // がロッド
 				if (player.isCrown()) {
 					htmlid = "gerardp1";
 				} else if (player.isKnight()) {
@@ -621,7 +612,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 70739: // 디가르뎅
+			case 70739: // ディカルダン
 				if (player.getLevel() >= 50) {
 					int lv50_step = quest.get_step(L1Quest.QUEST_LEVEL50);
 					if (lv50_step == L1Quest.QUEST_END) {
@@ -773,7 +764,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 3000003: // 장로 프로켈
+			case 3000003: // エルダープロケル
 				if (player.isDragonknight()) {
 					if (player.getLevel() >= 15) {
 						int lv15_step = quest.get_step(L1Quest.QUEST_LEVEL15);
@@ -785,11 +776,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 							htmlid = "prokel2";
 						}
 					} else {
-						htmlid = "prokel1"; // 레벨 15이하
+						htmlid = "prokel1"; // レベル15以下
 					}
 				}
 				break;
-			case 3100004: // 장로 실레인
+			case 3100004: // エルダー実レーン
 				if (player.isBlackwizard()) {
 					if (player.getLevel() >= 15) {
 						int lv15_step = quest.get_step(L1Quest.QUEST_LEVEL15);
@@ -801,7 +792,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 							htmlid = "silrein2";
 						}
 					} else {
-						htmlid = "prokel1"; // 레벨 15이하
+						htmlid = "prokel1"; // レベル15以下
 					}
 				}
 				break;
@@ -1566,7 +1557,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 			/*
 			 * } else if (npcid == 70512) { if (player.getLevel() >= 25) { htmlid = "jpe0102"; } } else if (npcid == 70514) { if (player.getLevel() >= 25) { htmlid = "jpe0092"; }
 			 * 
-			 * case 70035: case 70041: // 버경 상인 case 70042: if(BugRaceController.getInstance().getBugState() == 1){ htmlid = "maeno3"; }else
+			 * case 70035: case 70041: // ボギョン商人case 70042：if（BugRaceController.getInstance（）getBugState（）== 1）{htmlid = "maeno3"; } else
 			 * if(BugRaceController.getInstance().getBugState() == 2){ htmlid = "maeno5"; }else{ htmlid = "pandora"; } break;
 			 */
 			case 70035:
@@ -1837,7 +1828,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 			case 71074:
 				if (player.getQuest().get_step(L1Quest.QUEST_LIZARD) == L1Quest.QUEST_END) {
 					// htmlid = "lelder0";
-					htmlid = "lelder1"; // 퀘스트 무한 재생
+					htmlid = "lelder1"; // クエスト無限再生
 				} else if (player.getQuest().get_step(L1Quest.QUEST_LIZARD) == 3 && player.getInventory().checkItem(40634)) {
 					htmlid = "lelder12";
 				} else if (player.getQuest().get_step(L1Quest.QUEST_LIZARD) == 3) {
@@ -1858,7 +1849,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} else {
 				}
 				break;
-			case 70840: // 달의장궁 로빈후드
+			case 70840: // 月のロングボウロビンフッド
 				if (player.isCrown() && player.isWizard() && player.isKnight()) {
 					// int MOONBOW_step = quest.get_step(L1Quest.QUEST_MOONBOW);
 				} else if (player.getQuest().get_step(L1Quest.QUEST_MOONBOW) == 0) {
@@ -1875,7 +1866,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "robinhood3";
 				}
 				break;
-			case 600005: // 달의장궁 지브릴
+			case 600005: // 月のロングボウジブリル
 				if (player.getQuest().get_step(L1Quest.QUEST_MOONBOW) == 2) {
 					htmlid = "zybril1";
 				} else if (player.getQuest().get_step(L1Quest.QUEST_MOONBOW) == 3) {
@@ -1888,14 +1879,14 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "zybril16";
 				}
 				break;
-			case 71168: // 진명황 단테스
+			case 71168: // 真ダンテス
 				if (player.getInventory().checkItem(41028)) {
 					htmlid = "dantes1";
 				}
 				break;
-			case 71180: // 제이프
+			case 71180: // 第イフ
 				if (player.get_sex() == 0) {
-					htmlid = "jp1";// 남자
+					htmlid = "jp1";// 男
 				} else {
 					htmlid = "jp3";
 				}
@@ -1955,21 +1946,21 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "jeron7";
 				}
 				break;
-			case 6000015:// 마야의 그림자
+			case 6000015:// マヤの影
 				if (player.getInventory().checkItem(41158)) {
 					htmlid = "adenshadow1";
 				} else {
 					htmlid = "adenshadow2";
 				}
 				break;
-			case 7: // 아놀드
+			case 7: // アーノルド
 				if(player.getLevel() >= 52){
 					htmlid = "anold1";
 				} else {
 					htmlid = "anold2";
 				}
 				break;
-			// 에킨스
+			// にホプキンス
 			case 7200000:
 				if (player.getLevel() >= 52) {
 					if (player.getInventory().checkItem(31088, 1)) {
@@ -1986,7 +1977,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "c_belt";
 				}
 				break;
-			case 900135:// 유리에
+			case 900135:// ガラスに
 				if (player.getInventory().checkItem(410096, 1) || player.getInventory().checkItem(410096, 1)) {
 					htmlid = "j_html00";
 				} else {
@@ -1996,53 +1987,53 @@ public class L1MerchantInstance extends L1NpcInstance {
 			case 80076: // 넘어진 항해사
 				if (player.getInventory().checkItem(41058)) { // 완성한 항해 일지
 					htmlid = "voyager8";
-				} else if (player.getInventory().checkItem(49082) // 미완성의 항해 일지
+				} else if (player.getInventory().checkItem(49082) // 未完成の航海日誌
 						|| player.getInventory().checkItem(49083)) {
-					// 페이지를 추가하고 있지 않는 상태
-					if (player.getInventory().checkItem(41038) // 항해 일지 1 페이지
-							|| player.getInventory().checkItem(41039) // 항해 일지 2 페이지
-							|| player.getInventory().checkItem(41039) // 항해 일지 3 페이지
-							|| player.getInventory().checkItem(41039) // 항해 일지 4 페이지
-							|| player.getInventory().checkItem(41039) // 항해 일지 5 페이지
-							|| player.getInventory().checkItem(41039) // 항해 일지 6 페이지
-							|| player.getInventory().checkItem(41039) // 항해 일지 7 페이지
-							|| player.getInventory().checkItem(41039) // 항해 일지 8 페이지
-							|| player.getInventory().checkItem(41039) // 항해 일지 9 페이지
-							|| player.getInventory().checkItem(41039)) { // 항해 일지 10 페이지
+					//ページを追加していない状態
+					if (player.getInventory().checkItem(41038) // 航海日誌1ページ
+							|| player.getInventory().checkItem(41039) // 航海日誌2ページ
+							|| player.getInventory().checkItem(41039) // 航海日誌3ページ
+							|| player.getInventory().checkItem(41039) // 航海日誌4ページ
+							|| player.getInventory().checkItem(41039) // 航海日誌5ページ
+							|| player.getInventory().checkItem(41039) // 航海日誌6ページ
+							|| player.getInventory().checkItem(41039) // 航海日誌7ページ
+							|| player.getInventory().checkItem(41039) // 航海日誌8ページ
+							|| player.getInventory().checkItem(41039) // 航海日誌9ページ
+							|| player.getInventory().checkItem(41039)) { // 航海日誌10ページ
 						htmlid = "voyager9";
 					} else {
 						htmlid = "voyager7";
 					}
-				} else if (player.getInventory().checkItem(49082) // 미완성의 항해 일지
+				} else if (player.getInventory().checkItem(49082) // 未完成の航海日誌
 						|| player.getInventory().checkItem(49083) || player.getInventory().checkItem(49084)
 						|| player.getInventory().checkItem(49085)
 						|| player.getInventory().checkItem(49086) || player.getInventory().checkItem(49087)
 						|| player.getInventory().checkItem(49088)
 						|| player.getInventory().checkItem(49089) || player.getInventory().checkItem(49090) || player.getInventory().checkItem(49091)) {
-					// 페이지를 추가한 상태
+					// ページを追加した状態
 					htmlid = "voyager7";
 				}
 				break;
-			case 205: // 테베 오시리스의 제단 문지기
-				/** 보스 공략 시간이 아니라면 */
+			case 205: // テーベオシリスの祭壇門番
+				/** ボス攻略時間がない場合は */
 				if (CrockController.getInstance().isKillBoss()) {
 					htmlid = "thebegate5";
 				} else if (!CrockController.getInstance().isBoss()) {
 					htmlid = "tebegate2";
-					/** 보스 공략 시간이라면 */
+					/** ボス攻略時間であれば、 */
 				} else {
-					/** 열쇠가 없다면 */
+					/** 鍵がない場合 */
 					if (!player.getInventory().checkItem(100036, 1))
 						htmlid = "tebegate3";
-					/** 선착순 인원이 다 찼다면 */
+					/** 先着順人員が一杯なら */
 					else if (CrockController.getInstance().size() >= 20)
 						htmlid = "tebegate4";
-					/** 만족 */
+					/** 満足 */
 					else
 						htmlid = "tebegate1";
 				}
 				break;
-			case 500063: // 티칼 쿠쿨칸
+			case 500063: // ティカルククルカン
 				if (CrockController.getInstance().isKillBoss()) {
 					htmlid = "tikalgate5";
 				} else if (!CrockController.getInstance().isBoss()) {
@@ -2058,7 +2049,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 50112: // 세리안
+			case 50112: // セリ
 				if (player.isCrown() || player.isWizard() || player.isDragonknight()) {
 					int talk_step = quest.get_step(L1Quest.QUEST_FIRSTQUEST);
 					if (talk_step == 1) {
@@ -2074,7 +2065,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "orenb12";
 				}
 				break;
-			case 50113: // 레크만
+			case 50113: // レクだけ
 				if (player.isKnight() || player.isElf() || player.isDarkelf() || player.isBlackwizard()) {
 					int talk_step = quest.get_step(L1Quest.QUEST_FIRSTQUEST);
 					if (talk_step == 1) {
@@ -2090,27 +2081,27 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "orena12";
 				}
 				break;
-			case 80067: // 첩보원(욕망의 동굴)
+			case 80067: // 諜報員（欲望の洞窟）
 				if (player.getQuest().get_step(L1Quest.QUEST_DESIRE) == L1Quest.QUEST_END) {
 					htmlid = "minicod10";
 				} else if (player.getKarmaLevel() >= 1) {
 					htmlid = "minicod07";
-				} else if (player.getQuest().get_step(L1Quest.QUEST_DESIRE) == 1 && player.getTempCharGfx() == 6034) { // 코라프프리스트 변신
+				} else if (player.getQuest().get_step(L1Quest.QUEST_DESIRE) == 1 && player.getTempCharGfx() == 6034) { // 鼻ラフプリースト変身
 					htmlid = "minicod03";
 				} else if (player.getQuest().get_step(L1Quest.QUEST_DESIRE) == 1 && player.getTempCharGfx() != 6034) {
 					htmlid = "minicod05";
-				} else if (player.getQuest().get_step(L1Quest.QUEST_SHADOWS) == L1Quest.QUEST_END // 그림자의 신전측 퀘스트 종료
-						|| player.getInventory().checkItem(41121) // 카헬의 지령서
-						|| player.getInventory().checkItem(41122)) { // 카헬의 명령서
+				} else if (player.getQuest().get_step(L1Quest.QUEST_SHADOWS) == L1Quest.QUEST_END //影の神殿側クエスト終了
+						|| player.getInventory().checkItem(41121) // カヘルの指令書
+						|| player.getInventory().checkItem(41122)) { // カヘルの命令書
 					htmlid = "minicod01";
-				} else if (player.getInventory().checkItem(41130) // 핏자국의 지령서
-						&& player.getInventory().checkItem(41131)) { // 핏자국의 명령서
+				} else if (player.getInventory().checkItem(41130) // 血痕の指令書
+						&& player.getInventory().checkItem(41131)) { // 血痕の命令書
 					htmlid = "minicod06";
-				} else if (player.getInventory().checkItem(41130)) { // 핏자국의 명령서
+				} else if (player.getInventory().checkItem(41130)) { // 血痕の命令書
 					htmlid = "minicod02";
 				}
 				break;
-			case 4201000: // 환술사 아샤
+			case 4201000: //イリュージョニストアシャ
 				if (player.isBlackwizard())
 					htmlid = "asha1";
 				else
@@ -2153,36 +2144,36 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "zybril16";
 				}
 				break;
-			case 81202: // 첩보원(그림자의 신전)
+			case 81202: // 諜報員（影の神殿）
 				if (player.getQuest().get_step(L1Quest.QUEST_SHADOWS) == L1Quest.QUEST_END) {
 					htmlid = "minitos10";
 				} else if (player.getKarmaLevel() <= -1) {
 					htmlid = "minitos07";
-				} else if (player.getQuest().get_step(L1Quest.QUEST_SHADOWS) == 1 && player.getTempCharGfx() == 6035) { // 렛서데이몬 변신
+				} else if (player.getQuest().get_step(L1Quest.QUEST_SHADOWS) == 1 && player.getTempCharGfx() == 6035) { // レッサーデーモン変身
 					htmlid = "minitos03";
 				} else if (player.getQuest().get_step(L1Quest.QUEST_SHADOWS) == 1 && player.getTempCharGfx() != 6035) {
 					htmlid = "minitos05";
-				} else if (player.getQuest().get_step(L1Quest.QUEST_DESIRE) == L1Quest.QUEST_END // 욕망의 동굴측 퀘스트 종료
-						|| player.getInventory().checkItem(41130) // 핏자국의 지령서
-						|| player.getInventory().checkItem(41131)) { // 핏자국의 명령서
+				} else if (player.getQuest().get_step(L1Quest.QUEST_DESIRE) == L1Quest.QUEST_END // 欲望の洞窟側クエスト終了
+						|| player.getInventory().checkItem(41130) //血痕の指令書
+						|| player.getInventory().checkItem(41131)) { //血痕の命令書
 					htmlid = "minitos01";
-				} else if (player.getInventory().checkItem(41121) // 카헬의 지령서
-						&& player.getInventory().checkItem(41122)) { // 카헬의 명령서
+				} else if (player.getInventory().checkItem(41121) //カヘルの指令書
+						&& player.getInventory().checkItem(41122)) { // カヘルの命令書
 					htmlid = "minitos06";
-				} else if (player.getInventory().checkItem(41121)) { // 카헬의 명령서
+				} else if (player.getInventory().checkItem(41121)) { // カヘルの命令書
 					htmlid = "minitos02";
 				}
 				break;
-			case 81208: // 더러워진 브롭브
-				if (player.getInventory().checkItem(41129) // 핏자국의 정수
-						|| player.getInventory().checkItem(41138)) { // 카헬의 정수
+			case 81208: // 汚れたブロプブ
+				if (player.getInventory().checkItem(41129) //血痕の定数
+						|| player.getInventory().checkItem(41138)) { //カヘルの定数
 					htmlid = "minibrob04";
-				} else if (player.getInventory().checkItem(41126) // 핏자국의 타락 한 정수
-						&& player.getInventory().checkItem(41127) // 핏자국의 무력한 정수
-						&& player.getInventory().checkItem(41128) // 핏자국의 아집인 정수
-						|| player.getInventory().checkItem(41135) // 카헬의 타락 한 정수
-						&& player.getInventory().checkItem(41136) // 카헬의 아집인 정수
-						&& player.getInventory().checkItem(41137)) { // 카헬의 아집인 정수
+				} else if (player.getInventory().checkItem(41126) // 血痕の堕落した整数
+						&& player.getInventory().checkItem(41127) // 血痕の無力整数
+						&& player.getInventory().checkItem(41128) // 血痕の我執の整数
+						|| player.getInventory().checkItem(41135) // カヘルの堕落した整数
+						&& player.getInventory().checkItem(41136) // カヘルの我執の整数
+						&& player.getInventory().checkItem(41137)) { // カヘルの我執の整数
 					htmlid = "minibrob02";
 				}
 				break;
@@ -2190,20 +2181,20 @@ public class L1MerchantInstance extends L1NpcInstance {
 			case 5000006:
 				멘트(player);
 				break;
-			case 4200018:// 경험치지급
+			case 4200018:// 経験値支給
 				경험치멘트(player);
 				break;
-			case 777849: // 킬톤 (호랑이 사육)
+			case 777849: // キルトン（虎の繁殖）
 				if (player.getInventory().checkItem(87050)) {
 					htmlid = "killton2";
 				}
 				break;
-			case 777848: // 메린 (진돗개 사육)
+			case 777848: // メリン（珍島犬の繁殖）
 				if (player.getInventory().checkItem(87051)) {
 					htmlid = "merin2";
 				}
 				break;
-			case 900015: // 숨겨진 용들의 땅 입구(노랑포탈)
+			case 900015: // 隠された龍らの土地入口（黄色ポータル）
 				if (player.getLevel() >= 30 && player.getLevel() <= 51) {
 					htmlid = "dsecret2";
 				} else if (player.getLevel() > 51) {
@@ -2212,8 +2203,8 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "dsecret3";
 				}
 				break;
-			// 숨겨진 계곡 리뉴얼
-			case 9274: // 초보자 도우미
+			// 隠された渓谷リニューアル
+			case 9274: // 初心者ヘルパー
 				if (player.getLevel() < 2) {
 					player.setExp(ExpTable.getExpByLevel(2));
 				} else if (player.getLevel() >= 5 && player.getLevel() <= 9) {
@@ -2226,8 +2217,8 @@ public class L1MerchantInstance extends L1NpcInstance {
 				if (!player.getQuest().isEnd(L1Quest.QUEST_HIDDENVALLEY) && player.getLevel() > 9) {
 					player.getQuest().set_end(L1Quest.QUEST_HIDDENVALLEY);
 					player.setExp(player.getExp() + 10000);
-					createNewItem(player, npcName, L1ItemId.IVORYTOWER_WEAPON_SCROLL, 1, 0); // 상아탑의 무기 마법 주문서
-					createNewItem(player, npcName, L1ItemId.IVORYTOWER_ARMOR_SCROLL, 4, 0); // 상아탑의 갑옷 마법 주문서
+					createNewItem(player, npcName, L1ItemId.IVORYTOWER_WEAPON_SCROLL, 1, 0); // 象牙の塔の武器強化スクロール
+					createNewItem(player, npcName, L1ItemId.IVORYTOWER_ARMOR_SCROLL, 4, 0); // 象牙の塔の防具強化スクロール
 					htmlid = "tutorrw9";
 				}
 				int[] Buff = new int[] { HASTE, FULL_HEAL };
@@ -2239,7 +2230,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				player.setCurrentHp(player.getMaxHp());
 				player.setCurrentMp(player.getMaxMp());
 				break;
-			case 9275: // 수련장 관리인
+			case 9275: // 修練場管理人
 				if (player.getLevel() < 2) {
 					htmlid = "adminrw3";
 				} else if (player.getLevel() == 2) {
@@ -2255,7 +2246,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 9273: // 페이하스
+			case 9273: // ページハース
 				if (player.isElf()) {
 					if (player.getLevel() > 7) {
 						htmlid = "siriss";
@@ -2286,33 +2277,33 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "sirissnw";
 				}
 				break;
-			case 900185: // 최종 훈련 심사관
+			case 900185: // 最終的な訓練審査官
 				if (player.getLevel() < 52) {
-					htmlid = "highpass42"; // 은기사 마을에 있는 '기초 훈련 교관'에게 훈련을 모두 마쳤다면, 52레벨이 된 후 다시 찾아오도록 하게.
+					htmlid = "highpass42"; // は記事の村にいる「基礎訓練教官」に訓練をすべて終えたならば、52レベルになった後、再び見つけるようにすること。
 				} else {
 					if (player.getQuest().isEnd(L1Quest.QUEST_HIGHPASS)) {
 						htmlid = "highpass43";
 					} else if (player.getQuest().isEnd(L1Quest.QUEST_HPASS)) {
 						int itemId = 0;
 						if (player.isCrown() || player.isKnight()) {
-							itemId = 1101; // 엘모어 한손검
+							itemId = 1101; //エルモア片手剣
 						} else if (player.isElf()) {
-							itemId = 1107; // 엘모어 보우건
+							itemId = 1107; // エルモアボウガン
 						} else if (player.isWizard()) {
-							itemId = 1103; // 엘모어 지팡이
+							itemId = 1103; // エルモア杖
 						} else if (player.isDragonknight()) {
-							itemId = 1104; // 엘모어 체인소드
+							itemId = 1104; // エルモアチェーンソード
 						} else if (player.isDarkelf()) {
-							itemId = 1105; // 엘모어 크로우
+							itemId = 1105; // エルモアクロウ
 						} else if (player.isBlackwizard()) {
-							itemId = 1106; // 엘모어 키링크
+							itemId = 1106; // エルモアキーリンク
 						} else if (player.isWarrior()) {
-							itemId = 203009; // 엘모어 도끼
+							itemId = 203009; // エルモア斧
 						}
-						createNewItem(player, npcName, 60032, 1, 0); // 낡은고서
-						createNewItem(player, npcName, 1000004, 3, 0); // 드래곤의 다이아몬드
+						createNewItem(player, npcName, 60032, 1, 0); // 古い古書
+						createNewItem(player, npcName, 1000004, 3, 0); // ドラゴンのダイヤモンド
 						createNewItem(player, npcName, itemId, 1, 0);
-						player.getInventory().consumeItem(L1ItemId.BASE_TRAINING_TOKEN, 1); // 기초 수련 증표 삭제
+						player.getInventory().consumeItem(L1ItemId.BASE_TRAINING_TOKEN, 1); //基礎修練の証削除
 						player.getQuest().set_end(L1Quest.QUEST_HIGHPASS);
 						player.sendPackets(new S_SkillSound(player.getId(), 8688));
 						htmlid = "highpass40";
@@ -2321,7 +2312,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 900187: // 토벌 대원 [ 일일 퀘스트 ]
+			case 900187: // 討伐隊員[デイリークエスト]
 				if (player.getLevel() < 15) {
 					htmlid = "highdaily0";
 				} else if (player.getLevel() >= 15 && player.getLevel() <= 44) {
@@ -2350,7 +2341,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 900188: // 드래곤뼈 수집가 [ 일일 퀘스트 ]
+			case 900188: // ドラゴンの骨コレクター[デイリークエスト]
 				if (player.getLevel() < 45) {
 					htmlid = "highdailyb0";
 				} else if (player.getLevel() >= 45 && player.getLevel() <= 51) {
@@ -2379,44 +2370,44 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 900186: // 기초 훈련 교관 [ 퀘스트 ]
+			case 900186: // 基礎訓練教官[クエスト]
 				switch (player.getQuest().get_step(L1Quest.QUEST_HPASS)) {
 				case 1:
-					if (player.getLevel() > 19) { // 20레벨
-						htmlid = "hpass2"; // 첫번째 미션
+					if (player.getLevel() > 19) { // 20レベル
+						htmlid = "hpass2"; //最初のミッション
 					} else {
-						htmlid = "hpass8"; // 훈련을 받기에는 아직 수련이 모자란 것 같군요.
+						htmlid = "hpass8"; // 訓練を受けるには、まだ修練が足りないようですね。
 					}
 					break;
 				case 2:
-					if (player.getLevel() > 24) { // 25레벨
-						htmlid = "hpass3"; // 두번째 미션
+					if (player.getLevel() > 24) { // 25レベル
+						htmlid = "hpass3"; // 第二ミッション
 					} else {
-						htmlid = "hpass8"; // 훈련을 받기에는 아직 수련이 모자란 것 같군요.
+						htmlid = "hpass8"; // 訓練を受けるには、まだ修練が足りないようですね。
 					}
 					break;
 				case 3:
-					if (player.getLevel() > 29) { // 30레벨
-						htmlid = "hpass4"; // 세번째 미션
+					if (player.getLevel() > 29) { // 30レベル
+						htmlid = "hpass4"; // 第三のミッション
 					} else {
-						htmlid = "hpass8"; // 훈련을 받기에는 아직 수련이 모자란 것 같군요.
+						htmlid = "hpass8"; // 訓練を受けるには、まだ修練が足りないようですね。
 					}
 					break;
 				case 4:
-					if (player.getLevel() > 34) { // 35레벨
-						htmlid = "hpass5"; // 네번째 미션
+					if (player.getLevel() > 34) { // 35レベル
+						htmlid = "hpass5"; // 第四ミッション
 					} else {
-						htmlid = "hpass8"; // 훈련을 받기에는 아직 수련이 모자란 것 같군요.
+						htmlid = "hpass8"; // 訓練を受けるには、まだ修練が足りないようですね。
 					}
 					break;
 				case 5:
-					if (player.getLevel() > 44) { // 45레벨
-						htmlid = "hpass6"; // 마지막 미션
+					if (player.getLevel() > 44) { // 45レベル
+						htmlid = "hpass6"; // 最後のミッション
 					} else {
-						htmlid = "hpass8"; // 훈련을 받기에는 아직 수련이 모자란 것 같군요.
+						htmlid = "hpass8"; // 訓練を受けるには、まだ修練が足りないようですね。
 					}
 					break;
-				case 255: // 완료시 액션
+				case 255: // 完了時のアクション
 					htmlid = "hpass7";
 					break;
 				default:
@@ -2428,7 +2419,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					break;
 				}
 				break;
-			case 5062: // 지그프리드
+			case 5062: //ジークフリード
 				if (player.getLevel() >= Config.라던입장레벨) {
 					htmlid = "zigpride1";
 				} else {
@@ -2446,7 +2437,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					}
 				}
 				break;
-			case 5088: // 보석세공사 데이빗(얼녀귀걸이)
+			case 5088: // 宝石細工師デビッド（オルニョイヤリング）
 				if (player.getInventory().checkItem(49031)) {
 					if (player.getInventory().checkItem(21081)) {
 						htmlid = "gemout1";
@@ -2464,26 +2455,26 @@ public class L1MerchantInstance extends L1NpcInstance {
 						htmlid = "gemout7";
 					} else if (player.getQuest().get_step(L1Quest.QUEST_ICEQUEENRING) == 7) {
 						htmlid = "gemout8";
-					} else { // 보석만 가지고있다.
+					} else { // 宝石だけ持っている。
 						htmlid = "gemout17";
 					}
 				}
 				break;
-			case 5092: // 엘핀 [ 요정의 숲 잡화상 ]
+			case 5092: // エルフィン[妖精の森チャンドラー]
 				if (player.isElf()) {
 					htmlid = "elfin";
 				} else {
 					htmlid = "elfin2";
 				}
 				break;
-			case 5093: // 엘리 [ 요정의 숲 수정 상인 ]
+			case 5093: // エリー[エルフの森の修正商人]
 				if (player.isElf()) {
 					htmlid = "elli";
 				} else {
 					htmlid = "elli2";
 				}
 				break;
-			case 70842: // 마르바
+			case 70842: // マルバ
 				if (player.getLawful() <= -501) {
 					htmlid = "marba1";
 				} else if (!player.isElf()) {
@@ -2502,7 +2493,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "marba3";
 				}
 				break;
-			case 70854: // 후린달렌
+			case 70854: // フリンジダーレン
 				if (player.isCrown() || player.isKnight() || player.isWizard() || player.isWarrior()) {
 					htmlid = "hurinM1";
 				} else if (player.isDarkelf()) {
@@ -2513,7 +2504,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "hurinE5";
 				}
 				break;
-			case 70839: // 도에트
+			case 70839: // もエトナ
 				if (player.isCrown() || player.isKnight() || player.isWizard() || player.isWarrior()) {
 					htmlid = "doettM1";
 				} else if (player.isDarkelf()) {
@@ -2524,7 +2515,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "doettM4";
 				}
 				break;
-			case 70843: // 모리엔
+			case 70843: // エモリ
 				if (player.isCrown() || player.isKnight() || player.isWizard() || player.isWarrior()) {
 					htmlid = "morienM1";
 				} else if (player.isDarkelf()) {
@@ -2535,7 +2526,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "morienM4";
 				}
 				break;
-			case 70849: // 테오도르
+			case 70849: // テオドール
 				if (player.isCrown() || player.isKnight() || player.isWizard() || player.isWarrior()) {
 					htmlid = "theodorM1";
 				} else if (player.isDarkelf()) {
@@ -2546,20 +2537,20 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "theodorM4";
 				}
 				break;
-			case 5131: // 다크엘프 생존자
+			case 5131: // ダークエルフの生存者
 				if (!player.isGhost()) {
 					htmlid = "exitkir1";
 				} else {
 					htmlid = "exitkir";
 				}
 				break;
-			case 5133: // 감시자의 눈
+			case 5133: // モニターの目
 				if (!player.isGhost()) {
 					htmlid = "exitghostel1";
 				} else {
 					htmlid = "exitghostel";
 				}
-			case 71126: // 이리스
+			case 71126: // イリス
 				if (player.getLevel() < Config.라던입장레벨) {
 					htmlid = "eris21";
 				} else {
@@ -2569,15 +2560,15 @@ public class L1MerchantInstance extends L1NpcInstance {
 			default:
 				break;
 			}
-			// html 표시 패킷 송신
-			if (htmlid != null) { // htmlid가 지정되고 있는 경우
-				if (htmldata != null) { // html 지정이 있는 경우는 표시
+			// html 表示パケット送信
+			if (htmlid != null) { // htmlidが指定されている場合、
+				if (htmldata != null) { // html指定がある場合は、表示さ
 					player.sendPackets(new S_NPCTalkReturn(objid, htmlid, htmldata));
 				} else {
 					player.sendPackets(new S_NPCTalkReturn(objid, htmlid));
 				}
 			} else {
-				if (player.getLawful() < -1000) { // 플레이어가 카오틱
+				if (player.getLawful() < -1000) { // プレイヤーがカオティック
 					player.sendPackets(new S_NPCTalkReturn(talking, objid, 2));
 				} else {
 					player.sendPackets(new S_NPCTalkReturn(talking, objid, 1));
@@ -2683,12 +2674,12 @@ public class L1MerchantInstance extends L1NpcInstance {
 	}
 
 	private void 멘트(L1PcInstance pc) {
-		pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "상인에게서 판매하는 무기는 확률적으로 획득 할 수 있습니다."));
+		pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "商人から販売している武器は、確率的に獲得することができます。"));
 	}
 
 	private void 경험치멘트(L1PcInstance pc) {
-		pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "알림: [경험치 지급은 Lv.("+ Config.경험치지급단 +") 까지 가능합니다]"));
-		pc.sendPackets(new S_SystemMessage("\\aA알림: 경험치 지급은 \\aG[" + Config.경험치지급단 + "]\\aA 까지 가능합니다"));
+		pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "通知：[経験値支給は Lv.("+ Config.경험치지급단 +") まで可能です]"));
+		pc.sendPackets(new S_SystemMessage("\\aA通知：経験値支給は \\aG[" + Config.경험치지급단 + "]\\aA まで可能です"));
 	}
 
 	private void createRuler(L1PcInstance pc, int attr, int sealCount) {
@@ -2771,33 +2762,33 @@ public class L1MerchantInstance extends L1NpcInstance {
 	}
 
 	private void DuelZone(L1PcInstance pc) {
-		// 배틀존이 열려 있고 , 입장이 가능하다면
+		// バトルゾーンが開いていて、入場が可能であれば
 		if (BattleZone.getInstance().getDuelOpen()) {
 			if (pc.get_DuelLine() != 0 || BattleZone.getInstance().is배틀존유저(pc)) {
-				pc.sendPackets(new S_SystemMessage("배틀존에서 나왔다가 다시 들어갈 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("バトルゾーンから出たが、再入ることができません。"));
 				return;
 			}
 			if (BattleZone.getInstance().get배틀존유저Count() > 50) {
-				pc.sendPackets(new S_SystemMessage("프리미엄 배틀존의 인원이 모두 찼습니다."));
+				pc.sendPackets(new S_SystemMessage("プレミアムバトルゾーンの人員がすべていっぱいです。"));
 				return;
 			}
 			if (pc.isInParty()) {
-				pc.sendPackets(new S_SystemMessage("파티중에는 프리미엄 배틀존 입장이 불가능합니다."));
+				pc.sendPackets(new S_SystemMessage("パーティー中にプレミアムバトルゾーン入場が不可能です。"));
 				return;
 			}
-			// 라인을 나누자..
+			// ラインを分けよう。
 			if (BattleZone.getInstance().get배틀존유저Count() % 2 == 0) {
-				// 짝수라인
+				// 偶数ライン
 				pc.set_DuelLine(2);
 			} else {
-				// 홀수라인
+				// 奇数ライン
 				pc.set_DuelLine(1);
 			}
-			pc.sendPackets(new S_SystemMessage("프리미엄 배틀존 대기실로 입장하셨습니다."));
+			pc.sendPackets(new S_SystemMessage("プレミアムバトルゾーン控室に入場しました。"));
 			BattleZone.getInstance().add배틀존유저(pc);
 			new L1Teleport().teleport(pc, 32780, 32780, (short) 5001, 0, true);
 		} else {
-			pc.sendPackets(new S_SystemMessage("현재 프리미엄 배틀존이 열리지 않았습니다."));
+			pc.sendPackets(new S_SystemMessage("現在プレミアムバトルゾーンが開かなかった。"));
 		}
 	}
 

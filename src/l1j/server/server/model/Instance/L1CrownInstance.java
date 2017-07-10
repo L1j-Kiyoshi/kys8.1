@@ -37,7 +37,7 @@ public class L1CrownInstance extends L1NpcInstance {
 	@Override
 	public void onAction(L1PcInstance player) {
 		boolean in_war = false;
-		if (player.getClanid() == 0) { // 크란미소속
+		if (player.getClanid() == 0) { // クラン笑顔の中
 			return;
 		}
 		String playerClanName = player.getClanname();
@@ -50,61 +50,61 @@ public class L1CrownInstance extends L1NpcInstance {
 			return;
 		}
 		if (player.getGfxId() != 0 && player.getGfxId() != 1) {
-			player.sendPackets(new S_SystemMessage("변신중에는 면류관을 취득할 수 없습니다."));
+			player.sendPackets(new S_SystemMessage("変身中冠を取得することができません。"));
 			return;
 		}
-		if (player.getId() != clan.getLeaderId()) // 혈맹주 이외
+		if (player.getId() != clan.getLeaderId()) // 血盟主以外
 			return;
 
-		if (!checkRange(player)) // 크라운의 1 셀 이내
+		if (!checkRange(player)) // クラウンの1セル以内
 			return;
 
-		if (clan.getCastleId() != 0) {// 성주 크란
-			player.sendPackets(new S_ServerMessage(474), true);// 당신은 벌써 성을 소유하고
-																// 있으므로, 다른 시로를
-																// 잡을 수 없습니다.
+		if (clan.getCastleId() != 0) {// 城主クラン
+			player.sendPackets(new S_ServerMessage(474), true);// あなたはすでに城を所有して
+																// ので、他の城を
+																// キャッチすることができません。
 			return;
 		}
 
-		// 크라운의 좌표로부터 castle_id를 취득
+		//クラウンの座標からcastle_idを取得
 		int castle_id = L1CastleLocation
 				.getCastleId(getX(), getY(), getMapId());
 
-		// 포고하고 있을까 체크.단, 성주가 없는 경우는 포고 불요
+		// 布告しているかチェック。ただし、城主がない場合は、布告不要
 		boolean existDefenseClan = false;
 		L1Clan defence_clan = null;
 		for (L1Clan defClan : L1World.getInstance().getAllClans()) {
 			if (castle_id == defClan.getCastleId()) {
-				// 전의 성주 크란
+				// 前の城主クラン
 				defence_clan = L1World.getInstance().getClan(
 						defClan.getClanName());
 				existDefenseClan = true;
 				break;
 			}
 		}
-		List<L1War> wars = L1World.getInstance().getWarList(); // 전전쟁 리스트를 취득
+		List<L1War> wars = L1World.getInstance().getWarList(); // 前の戦争のリストを取得し
 		for (L1War war : wars) {
-			if (castle_id == war.GetCastleId()) { // 이마이성의 전쟁
+			if (castle_id == war.GetCastleId()) { //額異性の戦争
 				in_war = war.CheckClanInWar(playerClanName);
 				break;
 			}
 		}
-		if (existDefenseClan && in_war == false) { // 성주가 있어, 포고하고 있지 않는 경우
+		if (existDefenseClan && in_war == false) { // 城主があり、布告していない場合
 			return;
 		}
 
 		if (player.isDead())
 			return;
 
-		// clan_data의 hascastle를 갱신해, 캐릭터에 크라운을 붙인다
-		if (existDefenseClan && defence_clan != null) { // 전의 성주 크란이 있다
+		// clan_dataのhascastleを更新して、文字の王冠を付ける
+		if (existDefenseClan && defence_clan != null) { // 前の城主クランがある
 			defence_clan.setCastleId(0);
 			ClanTable.getInstance().updateClan(defence_clan);
 			L1PcInstance defence_clan_member[] = defence_clan
 					.getOnlineClanMember();
 			for (int m = 0; m < defence_clan_member.length; m++) {
 				if (defence_clan_member[m].getId() == defence_clan
-						.getLeaderId()) { // 전의 성주 크란의 군주
+						.getLeaderId()) { //前の城主クランの君主
 					defence_clan_member[m].sendPackets(new S_CastleMaster(0,
 							defence_clan_member[m].getId()), true);
 					// Broadcaster.broadcastPacket(defence_clan_member[m], new
@@ -125,28 +125,28 @@ public class L1CrownInstance extends L1NpcInstance {
 		// player.getId()));
 		L1World.getInstance().broadcastPacketToAll(new S_CastleMaster(castle_id, player.getId()), true);
 
-		// 크란원 이외를 거리에 강제 텔레포트
+		// クラン員以外の距離強制テレポート
 		GeneralThreadPool.getInstance().execute(new tel(player, castle_id));
 
-		// 메세지 표시
+		// メッセージ表示
 		for (L1War war : wars) {
 			// System.out.println(defence_clan.getClanName() + " > "+
 			// war.GetDefenceClanName());
 			if (defence_clan.getClanName().equalsIgnoreCase(
 					war.GetDefenceClanName())
 					&& war.CheckClanInWar(playerClanName) && existDefenseClan) {
-				// 자크란이 참가중에서, 성주가 교대
-				// System.out.println(war.GetCastleId() + " > 끝");
+				// ジャックとが参加中で、城主が交互
+				// System.out.println(war.GetCastleId() + " > 最後 "）;
 				war.WinCastleWar(playerClanName);
 				break;
 			}
 		}
 
 		if (clan.getOnlineClanMember().length > 0) {
-			// 성을 점거했습니다.
+			// 性を占拠しました。
 			S_ServerMessage s_serverMessage = new S_ServerMessage(643);
 			for (L1PcInstance pc : clan.getOnlineClanMember()) {
-				pc.setCurrentHp(pc.getCurrentHp() + 3000); // 왕관클릭시 군주만피채운다
+				pc.setCurrentHp(pc.getCurrentHp() + 3000); // クラウンクリックする君主だけ血満たす
 				pc.sendPackets(s_serverMessage);
 			}
 		}
@@ -161,7 +161,7 @@ public class L1CrownInstance extends L1NpcInstance {
 			}
 
 		}
-		// 타워를 spawn 한다
+		// タワーをspawnする
 		L1WarSpawn warspawn = new L1WarSpawn();
 		warspawn.SpawnTower(castle_id);
 
@@ -171,7 +171,7 @@ public class L1CrownInstance extends L1NpcInstance {
 			}
 		}
 
-		// 면류관을 잡았으니 전쟁중 삭제해야 다시 선포할수잇음
+		//冠を取ったので、戦争中削除する必要が再び宣言することができあり
 		L1War[] wr = L1World.getInstance().get_wars();
 		for (int i = 0; i < wr.length; i++) {
 			if (castle_id == wr[i].GetCastleId()) {
