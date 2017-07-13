@@ -61,7 +61,7 @@ public final class ProtocolHandler extends SimpleChannelUpstreamHandler {
 	    e.getChannel().close();
 	    return;
 	}
-
+	System.out.println("接続試行中: " + ip);
 	_timerPool.getTimer().schedule(new sessionCheck(e.getChannel()), 3500);
 	/*
 	 * Ip IP = _list.get(ip); if(IP == null){ IP = new Ip(); IP.ip = ip;
