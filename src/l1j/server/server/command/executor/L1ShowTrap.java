@@ -52,7 +52,7 @@ public class L1ShowTrap implements L1CommandExecutor {
 				}
 			}
 		} else {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [켬,끔] 라고 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[入、切]と入力してください。"));
 		}
 	}
 }

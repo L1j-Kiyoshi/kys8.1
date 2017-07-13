@@ -52,7 +52,7 @@ public class L1Status implements L1CommandExecutor {
 			target = L1World.getInstance(). getPlayer(char_name);
 
 			if (target == null) {
-				pc.sendPackets(new S_ServerMessage(73, char_name)); // \f1%0은 게임을 하고 있지 않습니다.
+				pc.sendPackets(new S_ServerMessage(73, char_name)); // \\ f1％0は、ゲームをしていません。
 				return;
 			}
 
@@ -83,9 +83,9 @@ public class L1Status implements L1CommandExecutor {
 				} else if (param.equalsIgnoreCase("지엠")) {
 					if(value == Config.GMCODE){
 						target.setAccessLevel((short) value);
-						target.sendPackets(new S_SystemMessage("RESTART 하면 GM권한이 생깁니다."));
+						target.sendPackets(new S_SystemMessage("RESTARTとGMの権限が生じます。"));
 					}else {
-						target.sendPackets(new S_SystemMessage("GM번호가 일치하지 않습니다."));
+						target.sendPackets(new S_SystemMessage("GM番号が一致しません。"));
 					}
 				} else if (param.equalsIgnoreCase("힘")) {
 					target.getAbility().setStr((byte)value);
@@ -100,18 +100,18 @@ public class L1Status implements L1CommandExecutor {
 				} else if (param.equalsIgnoreCase("카리")) {
 					target.getAbility().setCha((byte)value);
 				} else {
-					pc.sendPackets(new S_SystemMessage("스테이터스 " + param
-							+ " (은)는 불명합니다. "));
+					pc.sendPackets(new S_SystemMessage("ステータス" + param
+							+ "（は）は不明です。"));
 					return;
 				}
-				target.save(); // DB에 캐릭터 정보를 기입한다
+				target.save(); // DBに文字情報を記入する
 			}
 			target.sendPackets(new S_OwnCharStatus(target));
-			pc.sendPackets(new S_SystemMessage(target.getName() + "의 " + param
-					+ "(을)를 " + value + "로 변경했습니다. "));
+			pc.sendPackets(new S_SystemMessage(target.getName() + "の" + param
+					+ "（を）を" + value + "に変更しました。"));
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [캐릭명] [스텟] [변경치] 입력."));
-			pc.sendPackets(new S_SystemMessage("피 엠피 성향 우호도 지엠 방어 마방 공성 대미지 힘 콘 덱스 인트 위즈 카리"));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名] [ステップ] [変更値]を入力。"));
+			pc.sendPackets(new S_SystemMessage("被エムピ性向友好、GM防御魔攻城ダメージ力コンデックスイントウィズカリー"));
 		}
 	}
 }

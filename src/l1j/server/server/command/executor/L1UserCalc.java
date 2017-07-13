@@ -47,20 +47,20 @@ public class L1UserCalc implements L1CommandExecutor {
 
 			if (type.equalsIgnoreCase("+")) {
 				calcUser += count;
-				msg = new StringBuilder().append("뻥튀기 : " + count + "명 추가 / 현재 뻥튀기 : " + calcUser + "명").toString();
+				msg = new StringBuilder().append("あら：" + count + "人の追加/現在のあら：" + calcUser + "人").toString();
 			} else if (type.equalsIgnoreCase("-")) {
 				int temp = calcUser - count;
 				if (temp < 0) {
-					pc.sendPackets(new S_SystemMessage("뻥튀기가 -가 될수는 없습니다. 현재 뻥튀기 : " + calcUser));
+					pc.sendPackets(new S_SystemMessage("あらが - があってはなりません。現在あら：" + calcUser));
 					return;
 				} else {
 					calcUser = temp;
-					msg = new StringBuilder().append("뻥튀기 : " + count + "명 감소 / 현재 뻥튀기 : " + calcUser + "명").toString();
+					msg = new StringBuilder().append("あら：" + count + "人減少/現在のあら：" + calcUser + "人").toString();
 				}
 			}
 		} catch (Exception e) {
 			// _log.log(Level.SEVERE, "", e);
-			msg = new StringBuilder().append(cmdName).append(" [+,-] [COUNT] 입력").toString();
+			msg = new StringBuilder().append(cmdName).append(" [+,-] [COUNT] 入力").toString();
 		} finally {
 			if (msg != null) {
 				pc.sendPackets(new S_SystemMessage(msg));

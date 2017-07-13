@@ -44,7 +44,7 @@ import manager.LinAllManager;
 public class C_PickUpItem extends ClientBasePacket {
 
 	private static final String C_PICK_UP_ITEM = "[C] C_PickUpItem";
-	/** 날짜 , 시간 기록 **/
+	/** 日付、時刻の記録 **/
 	Calendar rightNow = Calendar.getInstance();
 	int day = rightNow.get(Calendar.DATE);
 	int hour = rightNow.get(Calendar.HOUR);
@@ -67,10 +67,10 @@ public class C_PickUpItem extends ClientBasePacket {
 		}
 		if (pc.isInvisble()) {
 			return;
-		}// 인비지 상태
+		}// インビジ状態
 		if (pc.isInvisDelay()) {
 			return;
-		}// 인비지디레이 상태
+		}// インビジディレイ状態
 		if (pc.getOnlineStatus() != 1) {
 			pc.sendPackets(new S_Disconnect());
 			return;
@@ -98,7 +98,7 @@ public class C_PickUpItem extends ClientBasePacket {
 				}
 			}
 			
-			/** 버그방지 **/ 
+			/** バグ防止 **/ 
 			if (objectId != item.getId()) {
 				pc.sendPackets(new S_Disconnect());
 				return;
@@ -107,24 +107,24 @@ public class C_PickUpItem extends ClientBasePacket {
 				pc.sendPackets(new S_Disconnect());
 				return;
 			}
-			if (pickupCount <= 0 || item.getCount() <= 0 || item.getCount() > 2000000000) {	//아데나20억이하
+			if (pickupCount <= 0 || item.getCount() <= 0 || item.getCount() > 2000000000) {	//アデナ20億以下
 				pc.sendPackets(new S_Disconnect());
 				groundInventory.deleteItem(item);
 				return;
 			}			
 			if (pc.getInventory().getWeight100() > 90) {
-				pc.sendPackets(new S_SystemMessage("소지품이 너무 무거워서 사용 할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("持ち物が重すぎて使用することはできません。"));
 				return;
 			}
 			if (pc.getMaxWeight() <= pc.getInventory().getWeight()) {
-				pc.sendPackets(new S_SystemMessage("소지품이 너무 무거워서 행동할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("持ち物が重すぎて行動することができません。"));
 				return;
 			}
 			if (pickupCount > item.getCount()) {
 				pickupCount = item.getCount();
 			}
 			
-			/** 토글 할 수 있는 거리인지 체크 */
+			/** トグルすることができる距離であることをチェック*/
 			if (pc.getLocation().getTileLineDistance(item.getLocation()) > 2) {
 				return;
 			}
@@ -132,7 +132,7 @@ public class C_PickUpItem extends ClientBasePacket {
 				return;
 			}
 			
-			/** 해당 아이템 드랍 체크및 설정 즉 밑 아이템은 위 조건문을 통해 갯수설정 **/ 
+			/** 該当アイテムドロップチェックと設定、すなわち下のアイテムは、上記条件を使用して本数を設定 **/ 
 			if (((item.getCount() >= 100) && ((item.getItemId() == 41159)
 					|| (item.getItemId() == 40087) || (item.getItemId() == 40074)))
 					|| (item.getEnchantLevel() > 0)
@@ -147,19 +147,19 @@ public class C_PickUpItem extends ClientBasePacket {
 				if (inventoryItem != null) {
 					inventoryItemCount = inventoryItem.getCount();
 				}
-				// 주운 후에 2 G를 초과하지 않게 체크
+				// 拾った後2 Gを超えないようにチェック
 				if ((long) inventoryItemCount + (long) pickupCount > 2000000000L) {
-					pc.sendPackets(new S_ServerMessage(166,"소지하고 있는 아데나", "2,000,000,000을 초과하므로 주울 수 없습니다."));
+					pc.sendPackets(new S_ServerMessage(166,"所持しているアデナ", "20億を超えているため拾えません。"));
 					return;
 				}
 			}
 
-			// 용량 중량 확인 및 메세지 송신 //일반 땅바닥에 드랍부분
+			// 容量重量を確認し、メッセージ送信//一般地面にドロップ部分
 			if (pc.getInventory().checkAddItem(item, pickupCount) == L1Inventory.OK) {
 				if (item.getX() != 0 && item.getY() != 0) {
-						if (pc.isInParty()) { // 파티의 경우
+						if (pc.isInParty()) { //パーティーの場合
 							if (pc.getLocation().getTileLineDistance(pc.getLocation()) < 14) {
-							// 자동분배 타입인가?
+							// 自動分配タイプか？
 							if (pc.getParty().getLeader().getPartyType() == 1 && item.isDropMobId() != 0) {
 								List<L1PcInstance> _membersList = new ArrayList<L1PcInstance>();
 								_membersList.add(pc);
@@ -168,10 +168,10 @@ public class C_PickUpItem extends ClientBasePacket {
 										_membersList.add(realUser);
 									}
 								}
-								// 랜덤으로 누구 한테 갈껀지 ㅋ
+								// ランダムに誰に行くコンジ笑
 								int luckuyNum = _random.nextInt(_membersList.size());
 								L1PcInstance luckyUser = _membersList.get(luckuyNum);
-								// 아데나 인가?
+								// アデナか？
 								if (item.getItemId() == L1ItemId.ADENA) {
 									int divAden = pickupCount / _membersList.size();
 									if (_membersList.size() > 1) {
@@ -198,7 +198,7 @@ public class C_PickUpItem extends ClientBasePacket {
 														groundInventory.tradeItem(item, divAden + modNum, pc.getInventory());
 													} else {
 														groundInventory.tradeItem(item, divAden, _membersList.get(row).getInventory());
-														//왜 돈주는거 멘트는 안해주니??
+														//なぜお金くれるんコメントはしなくてくれるので？
 													}
 												}
 											}
@@ -206,7 +206,7 @@ public class C_PickUpItem extends ClientBasePacket {
 									} else {
 										groundInventory.tradeItem(item, pickupCount, pc.getInventory());
 									}
-								} else {// 아니면 다른 아이템인가?
+								} else {// それとも他のアイテムですか？
 									groundInventory.tradeItem(item, pickupCount, luckyUser.getInventory());
 									if (item.isDropMobId() != 0) {
 										L1Npc npc = NpcTable.getInstance().getTemplate(item.isDropMobId());
@@ -218,7 +218,7 @@ public class C_PickUpItem extends ClientBasePacket {
 										}
 									}
 								}
-							} else { // 아니면 그냥인가?
+							} else { // それともですか？
 								groundInventory.tradeItem(item, pickupCount, pc.getInventory());
 								if (item.isDropMobId() != 0) {
 									L1Npc npc = NpcTable.getInstance().getTemplate(item.isDropMobId());
@@ -232,13 +232,13 @@ public class C_PickUpItem extends ClientBasePacket {
 							}
 						}
 						pc.getLight().turnOnOffLight();
-						// 아이템저장시킴
+						// アイテムを保存させる
 						pc.saveInventory();
-						// 아이템저장시킴
-					} else { // 파티가아닐시
+						// アイテムを保存させる
+					} else { // パーティーではない時
 						groundInventory.tradeItem(item, pickupCount, pc.getInventory());
 						pc.getLight().turnOnOffLight();
-						/** 파일로그저장 **/
+						/** ファイルログの保存 **/
 						LoggerInstance.getInstance().addItemAction(ItemActionType.Pickup, pc, item, pickupCount);
 					}
 					pc.sendPackets(new S_AttackStatus(pc, objectId, ActionCodes.ACTION_Pickup));
@@ -256,14 +256,14 @@ public class C_PickUpItem extends ClientBasePacket {
 		return C_PICK_UP_ITEM;
 	}
 	
-	private boolean isTwoLogin(L1PcInstance c) {// 중복체크 변경 
+	private boolean isTwoLogin(L1PcInstance c) {// 重複チェックを変更 
 		boolean bool = false;
 		
 		for (L1PcInstance target : L1World.getInstance().getAllPlayers()) {
 			if (target.noPlayerCK || target.noPlayerck2)continue;
-			/**로봇시스템 **/
+			/**ロボットシステム **/
 			if(target.getRobotAi() != null) continue;
-			/**로봇시스템 **/
+			/**ロボットシステム **/
 			if (c.getId() != target.getId() && (!target.isPrivateShop() && !target.isAutoClanjoin())) {
 				if (c.getNetConnection().getAccountName().equalsIgnoreCase(target.getNetConnection().getAccountName())) {
 					bool = true;

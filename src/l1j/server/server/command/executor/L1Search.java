@@ -27,8 +27,8 @@ public class L1Search implements L1CommandExecutor{
 			String name = tok.nextToken() ;
 			searchObject(pc, type, "%" + name + "%") ;			
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".검색 [0~5] [name]을 입력 해주세요.")) ;
-			pc.sendPackets(new S_SystemMessage("0=잡템, 1=무기, 2=갑옷, 3=엔피시, 4=변신, 5=엔피시(gfxid), 6=스킬(skill)"));
+			pc.sendPackets(new S_SystemMessage("。検索[0〜5] [name]を入力してください。")) ;
+			pc.sendPackets(new S_SystemMessage("0 =ザブテム、1 =武器、2 =鎧、3 =エンピシ、4 =変身、5 =エンピシ（gfxid）、6 =スキル（skill）"));
 		}
 	}
 	
@@ -61,7 +61,7 @@ public class L1Search implements L1CommandExecutor{
 			case 5: // npc(gfxid)
 				statement = con.prepareStatement("select gfxid, name,note from npc where name Like '" + name + "'");
 				break;
-			case 6: // 스킬번호
+			case 6: //スキル番号
 				statement = con.prepareStatement("select skill_id, name,skill_level from skills where name Like '" + name + "'");
 				break;
 			default:
@@ -78,7 +78,7 @@ public class L1Search implements L1CommandExecutor{
 			rs.close();
 			statement.close();
 			con.close();
-			gm.sendPackets(new S_SystemMessage("총 [" + count + "]개 검색이 되었습니다."));
+			gm.sendPackets(new S_SystemMessage("総[" + count + "]の検索がしました。"));
 		} catch (Exception e) { }
 	}
 

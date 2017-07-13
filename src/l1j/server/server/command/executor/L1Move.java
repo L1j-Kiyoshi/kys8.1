@@ -49,9 +49,9 @@ public class L1Move implements L1CommandExecutor {
 				mapid = pc.getMapId();
 			}
 			new L1Teleport().teleport(pc, locx, locy, mapid, 5, false);
-			pc.sendPackets(new S_SystemMessage("좌표 " + locx + ", " + locy + ", " + mapid + "로 이동했습니다. "));
+			pc.sendPackets(new S_SystemMessage("座標 " + locx + ", " + locy + ", " + mapid + "に移動しました。"));
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [X좌표] [Y좌표] [맵ID] 라고 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[X座標] [Y座標] [マップID]と入力してください。"));
 		}
 	}
 }

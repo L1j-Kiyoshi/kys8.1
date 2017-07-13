@@ -70,7 +70,7 @@ public class L1GfxId implements L1CommandExecutor {
 				}
 			}
 		} catch (Exception exception) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [id] [출현시키는 수]로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[id] [出現させることができ】で入力してください。"));
 		}
 	}
 }

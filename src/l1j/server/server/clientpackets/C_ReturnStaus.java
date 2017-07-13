@@ -5,9 +5,9 @@ import l1j.server.server.model.L1Teleport;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_HPUpdate;
 import l1j.server.server.serverpackets.S_MPUpdate;
+import l1j.server.server.serverpackets.S_OwnCharAttrDef;
 import l1j.server.server.serverpackets.S_OwnCharStatus;
 import l1j.server.server.serverpackets.S_ReturnedStat;
-import l1j.server.server.serverpackets.S_OwnCharAttrDef;
 import l1j.server.server.serverpackets.S_SPMR;
 import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.utils.CalcStat;
@@ -141,10 +141,10 @@ public class C_ReturnStaus extends ClientBasePacket {
 					init_mp = 3;
 				break;
 				}
-			} else if (pc.isDragonknight()) { // 용기사
+			} else if (pc.isDragonknight()) { // 竜騎士
 				init_hp = 16;
 				init_mp = 2;
-			} else if (pc.isBlackwizard()) { // 환술사
+			} else if (pc.isBlackwizard()) { // イリュージョニスト
 				init_hp = 14;
 				switch (pc.getAbility().getBaseWis()) {
 				case 10:
@@ -192,7 +192,7 @@ public class C_ReturnStaus extends ClientBasePacket {
 
 			if (pc.getLevel() > pc.getHighLevel()
 					|| (pc.getLevel() == pc.getHighLevel() && levelup != 8 )) {
-				pc.sendPackets(new S_SystemMessage("잘못된 스텟입니다."));
+				pc.sendPackets(new S_SystemMessage("不適切ステップです。"));
 				pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.START));
 				return;
 			}
@@ -202,7 +202,7 @@ public class C_ReturnStaus extends ClientBasePacket {
 					&& levelup != 7
 					&& levelup != 8 )
 			{
-				pc.sendPackets(new S_SystemMessage("잘못된 스텟입니다."));
+				pc.sendPackets(new S_SystemMessage("不適切ステップです。"));
 				pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.START));
 				return;
 			}
@@ -309,7 +309,7 @@ public class C_ReturnStaus extends ClientBasePacket {
 				}
 				break;
 			}
-		} else if (type == 3) { // 스텟 초기화시 엘릭서 처리
+		} else if (type == 3) { // ステータス初期化時にエリクサー処理
 			try {
 				int str = readC() - pc.getAbility().getStr();
 				int intel = readC() - pc.getAbility().getInt();
@@ -328,7 +328,7 @@ public class C_ReturnStaus extends ClientBasePacket {
 						|| con < 0
 						|| cha < 0)
 				{
-					pc.sendPackets(new S_SystemMessage("잘못된 스텟입니다."));
+					pc.sendPackets(new S_SystemMessage("不適切ステップです。"));
 					pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.START));
 					return;
 				}

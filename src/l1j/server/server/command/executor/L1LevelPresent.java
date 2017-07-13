@@ -59,15 +59,15 @@ public class L1LevelPresent implements L1CommandExecutor {
 
 			L1Item temp = ItemTable.getInstance(). getTemplate(itemid);
 			if (temp == null) {
-				pc.sendPackets(new S_SystemMessage("존재하지 않는 아이템 ID입니다. "));
+				pc.sendPackets(new S_SystemMessage("存在しないアイテムのIDです。"));
 				return;
 			}
 
 			present(minlvl, maxlvl, itemid, enchant, count);
 			pc.sendPackets(new S_SystemMessage(temp.getName() + "를 " + count
-					+ " 개 선물 했습니다. (Lv" + minlvl + "~" + maxlvl + ")"));
+					+ "個プレゼントしました。 （Lv" + minlvl + "~" + maxlvl + ")"));
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".렙선물 [최저레벨] [최고레벨] [아이템ID] [인챈트] [갯수]로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage("。レプギフト[最低レベル]、[最高レベル] [アイテムID] [エンチャント] [本数]に入力してください。"));
 		}
 	}
 
@@ -147,7 +147,7 @@ public class L1LevelPresent implements L1CommandExecutor {
 	private static void present(ArrayList<String> accountList, int itemid, int enchant, int count) throws Exception {
 		L1Item temp = ItemTable.getInstance().getTemplate(itemid);
 		if (temp == null) {
-			throw new Exception("존재하지 않는 아이템 ID");
+			throw new Exception("存在しないアイテムID");
 		}
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -204,7 +204,7 @@ public class L1LevelPresent implements L1CommandExecutor {
 				// ignore
 			}
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			throw new Exception(".present 처리중에 에러가 발생했습니다.");
+			throw new Exception(".present処理中にエラーが発生しました。");
 		} finally {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);

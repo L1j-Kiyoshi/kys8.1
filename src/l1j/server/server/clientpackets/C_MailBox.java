@@ -9,8 +9,8 @@ import l1j.server.server.GameClient;
 import l1j.server.server.datatables.LetterTable;
 import l1j.server.server.datatables.SpamTable;
 import l1j.server.server.model.L1Clan;
-import l1j.server.server.model.L1ExcludingList;
 import l1j.server.server.model.L1Clan.ClanMember;
+import l1j.server.server.model.L1ExcludingList;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.item.L1ItemId;
@@ -22,34 +22,34 @@ public class C_MailBox extends ClientBasePacket {
 
 	private static Logger _log = Logger.getLogger(C_MailBox.class.getName());
 
-	private static final int TYPE_PRIVATE_MAIL = 0; // 개인 편지
-	private static final int TYPE_BLOODPLEDGE_MAIL = 1; // 혈맹 편지
-	private static final int TYPE_KEPT_MAIL = 2; // 보관 편지
+	private static final int TYPE_PRIVATE_MAIL = 0; //個人的な手紙
+	private static final int TYPE_BLOODPLEDGE_MAIL = 1; // 血盟メール
+	private static final int TYPE_KEPT_MAIL = 2; // 保管メール
 
-	private static final int READ_PRIVATE_MAIL = 16; // 개인 편지읽기
-	private static final int READ_BLOODPLEDGE_MAIL = 17; // 혈맹 편지읽기
-	private static final int READ_KEPT_MAIL_ = 18; // 보관함 편지읽기
+	private static final int READ_PRIVATE_MAIL = 16; // 個人的な手紙を読む
+	private static final int READ_BLOODPLEDGE_MAIL = 17; // 血盟メールを読む
+	private static final int READ_KEPT_MAIL_ = 18; //アーカイブメールを読む
 
-	private static final int WRITE_PRIVATE_MAIL = 32; // 개인 편지쓰기
-	private static final int WRITE_BLOODPLEDGE_MAIL = 33; // 혈맹 편지쓰기
+	private static final int WRITE_PRIVATE_MAIL = 32; // 個人メールを送る
+	private static final int WRITE_BLOODPLEDGE_MAIL = 33; // 血盟メールを送る
 
-	private static final int DEL_PRIVATE_MAIL = 48; // 개인 편지삭제
-	private static final int DEL_BLOODPLEDGE_MAIL = 49; // 혈맹 편지삭제
-	private static final int DEL_KEPT_MAIL = 50; // 보관함 편지삭제
+	private static final int DEL_PRIVATE_MAIL = 48; // 個人的な手紙の削除
+	private static final int DEL_BLOODPLEDGE_MAIL = 49; // 血盟メールの削除
+	private static final int DEL_KEPT_MAIL = 50; // アーカイブメールの削除
 
-	private static final int TO_KEEP_MAIL = 64; // 편지 보관하기
+	private static final int TO_KEEP_MAIL = 64; // メール保管する
 
-	private static final int PRICE_PRIVATEMAIL = 50; // 개인 편지 가격
+	private static final int PRICE_PRIVATEMAIL = 50; // 個人的な手紙価格
 
-	private static final int DEL_PRIVATE_LIST_MAIL = 96; // 개인 편지리스트삭제
-	private static final int DEL_BLOODPLEDGE_LIST_MAIL = 97; // 혈맹 편지리스트삭제
-	private static final int DEL_KEEP_LIST = 98; // 보관편지 리스트삭제
+	private static final int DEL_PRIVATE_LIST_MAIL = 96; // 個人的な手紙リストの削除
+	private static final int DEL_BLOODPLEDGE_LIST_MAIL = 97; //血盟メールリストの削除
+	private static final int DEL_KEEP_LIST = 98; // 保管メールリストの削除
 
-	private static final int PRICE_BLOODPLEDGEMAIL = 1000; // 혈맹 편지 가격
+	private static final int PRICE_BLOODPLEDGEMAIL = 1000; // 血盟メール価格
 
-	private static final int SIZE_PRIVATE_MAILBOX = 40; // 개인 편지함 크기
-	private static final int SIZE_BLOODPLEDGE_MAILBOX = 80; // 혈맹 편지함 크기
-	private static final int SIZE_KEPTMAIL_MAILBOX = 10; // 편지보관함 크기z
+	private static final int SIZE_PRIVATE_MAILBOX = 40; // 個人メールボックスのサイズ
+	private static final int SIZE_BLOODPLEDGE_MAILBOX = 80; // 血盟メールボックスのサイズ
+	private static final int SIZE_KEPTMAIL_MAILBOX = 10; // メールボックスサイズz
 
 	private static final String C_MailBox = "[C] C_MailBox";
 
@@ -136,13 +136,13 @@ public class C_MailBox extends ClientBasePacket {
 
 	private void WritePrivateMail(L1PcInstance sender) {
 		if (sender.getLevel() <= 29) {
-			sender.sendPackets(new S_SystemMessage("30레벨 이하는 편지를 보낼 수 없습니다."));
+			sender.sendPackets(new S_SystemMessage("30レベル以下はメールを送信することができません。"));
 			return;
 		}
 		if (!payMailCost(sender, PRICE_PRIVATEMAIL))
 			return;
 
-		int paper = readH(); // 편지지
+		int paper = readH(); // 文房具
 
 		Timestamp dTime = new Timestamp(System.currentTimeMillis());
 		String receiverName = readS();
@@ -172,7 +172,7 @@ public class C_MailBox extends ClientBasePacket {
 		if (!payMailCost(sender, PRICE_BLOODPLEDGEMAIL))
 			return;
 
-		int paper = readH(); // 편지지
+		int paper = readH(); // 文房具
 
 		Timestamp dTime = new Timestamp(System.currentTimeMillis());
 		String receiverName = readS();
@@ -233,8 +233,8 @@ public class C_MailBox extends ClientBasePacket {
 
 	private boolean checkCountMail(L1PcInstance from, String to, int type, int max) {
 		int cntMailInMailBox = LetterTable.getInstance().getLetterCount(to, type);
-		if (cntMailInMailBox >= max) { // 편지함 만땅
-			from.sendPackets(new S_SystemMessage(to + "님의 편지함이 가득차서, 새 편지를 보낼 수 없습니다."));
+		if (cntMailInMailBox >= max) { // トレイ満タン
+			from.sendPackets(new S_SystemMessage(to + "様のメールボックスがいっぱいで、新しいメールを送信することができません。"));
 			return false;
 		}
 		return true;

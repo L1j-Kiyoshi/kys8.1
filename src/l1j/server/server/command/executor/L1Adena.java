@@ -25,10 +25,10 @@ public class L1Adena implements L1CommandExecutor {
 			L1ItemInstance adena = pc.getInventory(). storeItem(L1ItemId.ADENA, count);
 			
 			if (adena != null) {
-				pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(count).append("아데나를 생성했습니다.").toString()));
+				pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(count).append("アデナを生成しました。").toString()));
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage((new StringBuilder()). append(".아데나 [액수]로 입력해 주세요. "). toString()));
+			pc.sendPackets(new S_SystemMessage((new StringBuilder()). append("。アデナ[金額]に入力してください。"). toString()));
 		}
 	}
 }

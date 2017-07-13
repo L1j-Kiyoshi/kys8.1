@@ -28,7 +28,7 @@ public class C_KeepALIVE extends ClientBasePacket {
 
 	public C_KeepALIVE(byte decrypt[], GameClient client) {
 		super(decrypt);
-		// XXX:GameTime를 송신(3바이트의 데이터를 보내 와 있으므로 그것을 무언가에 이용하지 않으면 안 될지도 모른다)
+		// XXX:GameTimeを送信（3バイトのデータを送信するとありますので、それを何かに利用しなければならないかもしれない）
 		// L1PcInstance pc = client.getActiveChar();
 		// pc.sendPackets(new S_GameTime());
 	}

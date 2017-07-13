@@ -29,13 +29,13 @@ public class C_DeleteChar extends ClientBasePacket {
 			L1PcInstance pc = CharacterTable.getInstance().restoreCharacter(name);
 
 			if (pc == null) {
-				client.sendPacket(new S_CommonNews("존재하지 않는 캐릭터 입니다."));
+				client.sendPacket(new S_CommonNews("存在しない文字です。"));
 				return;
 			}
 
 			for (L1PcInstance target : L1World.getInstance().getAllPlayers3()) {
 				if (target.getId() == pc.getId()) {
-					client.sendPacket(new S_CommonNews("접속 중인 캐릭터는 삭제할 수 없습니다."));
+					client.sendPacket(new S_CommonNews("接続中のキャラクターは削除することができません。"));
 					return;
 				}
 			}
@@ -91,7 +91,7 @@ public class C_DeleteChar extends ClientBasePacket {
 
 				for (L1ItemInstance item : pc.getInventory().getItems()) {
 					if (item.getBless() >= 128) {
-						client.sendPacket(new S_CommonNews("봉인된 아이템을 가진 캐릭터는 삭제할 수 없습니다."));
+						client.sendPacket(new S_CommonNews("封印されたアイテムを持ったキャラクターを削除することができません。"));
 						return;
 					}
 				}

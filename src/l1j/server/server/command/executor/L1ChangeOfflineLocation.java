@@ -32,7 +32,7 @@ public class L1ChangeOfflineLocation implements L1CommandExecutor  {
 	
 			if (L1World.getInstance().getPlayer(charname) != null)
 			{
-				pc.sendPackets(new S_SystemMessage(charname + " 캐릭터가 월드에 존재합니다."));
+				pc.sendPackets(new S_SystemMessage(charname + "キャラクターがワールドに存在します。"));
 				return;
 			}
 			Connection conn = null;
@@ -49,9 +49,9 @@ public class L1ChangeOfflineLocation implements L1CommandExecutor  {
 				SQLUtil.close(pstm);
 				SQLUtil.close(conn);
 			}
-			pc.sendPackets(new S_SystemMessage(charname + " 캐릭터의 좌표를 변경하였습니다."));
+			pc.sendPackets(new S_SystemMessage(charname + "キャラクターの座標を変更しました。"));
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [아이디]로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[ユーザ名]に入力してください。"));
 		}
 	}
 }

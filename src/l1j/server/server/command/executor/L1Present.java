@@ -37,7 +37,7 @@ public class L1Present implements L1CommandExecutor {
 				target = CharacterTable.getInstance().restoreCharacter(name);
 
 				if (target == null) {
-					pc.sendPackets(new S_SystemMessage("존재하지 않는 캐릭터입니다."));
+					pc.sendPackets(new S_SystemMessage("存在しない文字です。"));
 					return;
 				}
 
@@ -66,7 +66,7 @@ public class L1Present implements L1CommandExecutor {
 			} catch (NumberFormatException e) {
 				itemid = ItemTable.getInstance().findItemIdByNameWithoutSpace(nameid);
 				if (itemid == 0) {
-					pc.sendPackets(new S_SystemMessage("해당 아이템이 발견되지 않았습니다."));
+					pc.sendPackets(new S_SystemMessage("該当のアイテムが見つかりません。"));
 					return;
 				}
 			}
@@ -79,7 +79,7 @@ public class L1Present implements L1CommandExecutor {
 					if (target.getInventory().checkAddItem(item, count) == L1Inventory.OK) {
 						target.getInventory().storeItem(item);
 						target.sendPackets(new S_SkillSound(pc.getId(), 4856));
-						target.sendPackets(new S_SystemMessage("\\aD[선물] " + item.getLogName() + " 획득"));
+						target.sendPackets(new S_SystemMessage("\\aD[ギフト] " + item.getLogName() + " 獲得"));
                         pc.sendPackets(new S_SystemMessage("\\aD["+target.getName()+"] "+ item.getLogName() + " (ID:" + itemid + ") 보냄"));
 					}
 				} else {
@@ -105,15 +105,15 @@ public class L1Present implements L1CommandExecutor {
 					}
 					if (createCount > 0) {
 						target.sendPackets(new S_SkillSound(pc.getId(), 4856));
-						target.sendPackets(new S_SystemMessage("\\aD[선물] +" + enchant + " " + item.getLogName() + " (" + count + "개) 획득"));
+						target.sendPackets(new S_SystemMessage("\\aD[ギフト] +" + enchant + " " + item.getLogName() + " (" + count + "本）獲得"));
         				pc.sendPackets(new S_SystemMessage("\\aD["+target.getName()+"] +" + enchant + " "+ temp.getNameId()+"(ID:" + itemid + ") "+ count +"개 보냄", true));
 					}
 				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("지정 ID의 아이템은 존재하지 않습니다."));
+				pc.sendPackets(new S_SystemMessage("指定IDのアイテムは存在しません。"));
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".[선물] [캐릭] [아이템ID] [갯수] [인챈] [속성] [봉인129]"));
+			pc.sendPackets(new S_SystemMessage("[ギフト] [キャラクター] [アイテムID] [本数] [エンチャント] [属性] [封印129]"));
 			}
 	}
 }

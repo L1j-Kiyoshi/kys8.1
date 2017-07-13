@@ -28,7 +28,7 @@ public class L1ServerName implements L1CommandExecutor{
 				pc.sendPackets(new S_SystemMessage((invid + i)+" : " + "$" + (invid + i)));
 			}
 		} catch (Exception exception) {
-			pc.sendPackets(new S_SystemMessage(".네임  [id] [출현시키는 수]로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage("。ネーム[id] [出現させることができ】で入力してください。"));
 		}
 	}
 }

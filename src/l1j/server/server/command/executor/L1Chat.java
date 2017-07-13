@@ -23,10 +23,10 @@ public class L1Chat implements L1CommandExecutor {
 				String msg;
 				if (flag.compareToIgnoreCase("켬") == 0) {
 					L1World.getInstance(). set_worldChatElabled(true);
-					msg = "월드 채팅을 유효하게 했습니다. ";
+					msg = "ワールドチャットを有効にしました。";
 				} else if (flag.compareToIgnoreCase("끔") == 0) {
 					L1World.getInstance(). set_worldChatElabled(false);
-					msg = "월드 채팅을 정지했습니다. ";
+					msg = "ワールドチャットを停止しました。";
 				} else {
 					throw new Exception();
 				}
@@ -34,14 +34,14 @@ public class L1Chat implements L1CommandExecutor {
 			} else {
 				String msg;
 				if (L1World.getInstance(). isWorldChatElabled()) {
-					msg = "현재 월드 채팅은 유효합니다.. 채팅 끔 로 정지할 수 있습니다. ";
+					msg = "現在ワールドチャットは有効です。チャットオフに停止することができます。";
 				} else {
 					msg = "현재 월드 채팅은 정지하고 있습니다.. 채팅 켬 로 유효하게 할 수 있습니다. ";
 				}
 				pc.sendPackets(new S_SystemMessage(msg));
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [켬, 끔]"));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[入、切]"));
 		}
 	}
 }

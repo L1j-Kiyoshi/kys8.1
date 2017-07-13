@@ -69,15 +69,15 @@ public class HouseTaxTimeController implements Runnable {
 		AuctionBoardTable boardTable = new AuctionBoardTable();
 		L1AuctionBoard board = new L1AuctionBoard();
 		if (board != null) {
-			// 경매 게시판에 신규 기입
+			// オークション掲示板に新規書き込み
 			int houseId = house.getHouseId();
 			board.setHouseId(houseId);
 			board.setHouseName(house.getHouseName());
 			board.setHouseArea(house.getHouseArea());
 			TimeZone tz = TimeZone.getTimeZone(Config.TIME_ZONE);
 			Calendar cal = Calendar.getInstance(tz);
-			cal.add(Calendar.DATE, 5); // 5일 후
-			cal.set(Calendar.MINUTE, 0); // 분 , 초는 잘라서 버림
+			cal.add(Calendar.DATE, 5); // 5日後
+			cal.set(Calendar.MINUTE, 0); // 分、秒は切り捨て
 			cal.set(Calendar.SECOND, 0);
 			board.setDeadline(cal);
 			board.setPrice(100000);
@@ -87,12 +87,12 @@ public class HouseTaxTimeController implements Runnable {
 			board.setBidder("");
 			board.setBidderId(0);
 			boardTable.insertAuctionBoard(board);
-			house.setOnSale(true); // 경매중으로 설정
+			house.setOnSale(true); // オークション中の設定
 			house.setPurchaseBasement(true); // 지하 아지트미구입으로 설정
 			cal.add(Calendar.DATE, Config.HOUSE_TAX_INTERVAL);
 			house.setTaxDeadline(cal);
-			HouseTable.getInstance().updateHouse(house); // DB에 기입해
-			// 이전의 소유자의 아지트를 지운다
+			HouseTable.getInstance().updateHouse(house); // DBに記入して
+			// 以前の所有者のアジトを消す
 			for (L1Clan clan : L1World.getInstance().getAllClans()) {
 				if (clan.getHouseId() == houseId) {
 					clan.setHouseId(0);

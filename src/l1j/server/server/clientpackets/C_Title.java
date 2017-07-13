@@ -37,8 +37,8 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class C_Title extends ClientBasePacket {
 
-    public static final int CLAN_RANK_GUARDIAN = 9;// 수호변경
-    public static final int CLAN_RANK_SUBLEADER = 3; // 부군주추가
+    public static final int CLAN_RANK_GUARDIAN = 9;// 守護変更
+    public static final int CLAN_RANK_SUBLEADER = 3; // 部君主追加
     
 	private static final String C_TITLE = "[C] C_Title";
 	private static Logger _log = Logger.getLogger(C_Title.class.getName());
@@ -52,12 +52,12 @@ public class C_Title extends ClientBasePacket {
 		String charName = readS();
 		String title = readS();
 		if (title.length() > 16) {
-			pc.sendPackets(new S_SystemMessage("호칭으로 쓸 수 있는 글자수를 초과하였습니다."));
+			pc.sendPackets(new S_SystemMessage("呼称として使うことができる文字数を超えています。"));
 			return;
 		}
 
 		if (charName.isEmpty() || title.isEmpty()) {
-			// \f1 다음과 같이 입력해 주세요：「/title \f0캐릭터명 호칭\f1」
+			// \f1 次のように入力してください：「/ title \\ f0キャラクター名呼称\\ f1」
 			pc.sendPackets(new S_ServerMessage(196));
 			return;
 		}
@@ -73,22 +73,22 @@ public class C_Title extends ClientBasePacket {
 		}
 
 		if (isClanLeader(pc)||(pc.getClanid()==target.getClanid()&&
-			(pc.getClanRank()==L1Clan.수호)||(pc.getClanRank()==L1Clan.부군주))) { // 혈맹주
-			if (pc.getId() == target.getId()) { // 자신
+			(pc.getClanRank()==L1Clan.수호)||(pc.getClanRank()==L1Clan.부군주))) { // 血盟主
+			if (pc.getId() == target.getId()) { // 自分
 				if (pc.getLevel() < 10) {
-					// \f1혈맹원의 경우, 호칭을 가지려면 레벨 10이상이 아니면 안됩니다.
+					// \f1血盟員の場合には、呼称を持つためにはレベル10以上でなければなりません。
 					pc.sendPackets(new S_ServerMessage(197));
 					return;
 				}
 				changeTitle(pc, title);
 			} else {
 				if (pc.getClanid() != target.getClanid()) {
-					// \f1혈맹원이 아니면 타인에게 호칭을 줄 수 없습니다.
+					// \f1血盟員でなければ他人に呼称を与えることができません。
 					pc.sendPackets(new S_ServerMessage(199));
 					return;
 				}
 				if (target.getLevel() < 10) {
-					// \f1%0의 레벨이 10 미만이므로 호칭을 줄 수 없습니다.
+					// \f1%0のレベルが10未満であるため、呼称を与えることができません。
 					pc.sendPackets(new S_ServerMessage(202, charName));
 					return;
 				}
@@ -96,29 +96,29 @@ public class C_Title extends ClientBasePacket {
 				L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 				if (clan != null) {
 					for (L1PcInstance clanPc : clan.getOnlineClanMember()) {
-						// \f1%0이%1에 「%2라고 하는 호칭을 주었습니다.
+						// \f1%0この％1に「％2という呼称を与えました。
 						clanPc.sendPackets(new S_ServerMessage(203, pc
 								.getName(), charName, title));
 					}
 				}
 			}
-			///////////혈맹리뉴얼//////////////
+			///////////血盟リニューアル//////////////
 		} else if (pc.getClanRank() == 6||pc.getClanRank() == 3){
-			if (pc.getId() == target.getId()) { // 자신
+			if (pc.getId() == target.getId()) { // 自分
 				if (pc.getLevel() < 10) {
-					// \f1혈맹원의 경우, 호칭을 가지려면  레벨 10이상이 아니면 안됩니다.
+					// \f1血盟員の場合には、呼称を持つためにはレベル10以上でなければなりません。
 					pc.sendPackets(new S_ServerMessage(197));
 					return;
 				}
 				changeTitle(pc, title);
 			} else { 
 				if (pc.getClanid() != target.getClanid()) {
-					// \f1혈맹원이 아니면 타인에게 호칭을 줄 수 없습니다.
+					// \f1血盟員でなければ他人に呼称を与えることができません。
 					pc.sendPackets(new S_ServerMessage(199));
 					return;
 				}
 				if (target.getLevel() < 10) {
-					// \f1%0의 레벨이 10 미만이므로 호칭을 줄 수 없습니다.
+					// \f1%0のレベルが10未満であるため、呼称を与えることができません。
 					pc.sendPackets(new S_ServerMessage(202, charName));
 					return;
 				}
@@ -126,29 +126,29 @@ public class C_Title extends ClientBasePacket {
 				L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 				if (clan != null) {
 					for (L1PcInstance clanPc : clan.getOnlineClanMember()) {
-						// \f1%0이%1에 「%2라고 하는 호칭을 주었습니다.
+						// \f1%0この％1に「％2という呼称を与えました。
 						clanPc.sendPackets(new S_ServerMessage(203, pc.getName(), charName, title));
 					}
 				}
 			}
-			///////////혈맹리뉴얼//////////////
+			///////////血盟リニューアル//////////////
 		} else {
-			if (pc.getId() == target.getId()) { // 자신
+			if (pc.getId() == target.getId()) { // 自分
 				if (pc.getClanid() != 0 && !Config.CHANGE_TITLE_BY_ONESELF) {
-					// \f1혈맹원에게 호칭이 주어지는 것은 프린스와 프린세스 뿐입니다.
+					// \f1血盟員に呼称が与えられるのは、王子とプリンセスだけです。
 					pc.sendPackets(new S_ServerMessage(198));
 					return;
 				}
 				if (target.getLevel() < 40) {
-					// \f1혈맹원은 아닌데 호칭을 가지려면 , 레벨 40이상이 아니면 안됩니다.
-					pc.sendPackets(new S_SystemMessage("초보가 아닌데 호칭을 가지려면 , 레벨 40이상이 아니면 안됩니다.")); 
+					// \f1血盟員ではないのに呼称を持つためには、レベル40以上でなければなりません。
+					pc.sendPackets(new S_SystemMessage("初心者がないのに呼称を持つためには、レベル40以上でなければなりません。")); 
 					return;
 				}
 				changeTitle(pc, title);
-			} else { // 타인
-				if (pc.isCrown()) { // 연합에 소속한 군주
+			} else { // 他人
+				if (pc.isCrown()) { // 連合に所属した君主
 					if (pc.getClanid() == target.getClanid()) {
-						// \f1%0은 당신의 혈맹이 아닙니다.
+						// \f1%0はあなたの血盟がありません。
 						pc.sendPackets(new S_ServerMessage(201, pc
 								.getClanname()));
 						return;
@@ -172,12 +172,12 @@ public class C_Title extends ClientBasePacket {
 
 	private boolean isClanLeader(L1PcInstance pc) {
 		boolean isClanLeader = false;
-		if (pc.getClanid() != 0) { // 크란 소속
+		if (pc.getClanid() != 0) { // クランに所属
 			L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 			if (clan != null) {
-				if (pc.isCrown() && pc.getId() == clan.getLeaderId()) { // 군주,
-					// 한편,
-					// 혈맹주
+				if (pc.isCrown() && pc.getId() == clan.getLeaderId()) { // 君主、
+					//一方、
+					// 血盟主
 					isClanLeader = true;
 				}
 			}

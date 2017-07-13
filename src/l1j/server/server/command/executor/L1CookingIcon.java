@@ -28,15 +28,15 @@ public class L1CookingIcon implements L1CommandExecutor {
 					Thread.sleep(2000);
 					int num = _sprid + i;
 					//new S_PacketBox(53, cookingType, time));
-					pc.sendPackets(new S_PacketBox(S_PacketBox.ICON_COOKING, _sprid+i, 10));//무제한패킷
-					pc.sendPackets(new S_SystemMessage("요리 아이콘 : "+num+" 번."));
+					pc.sendPackets(new S_PacketBox(S_PacketBox.ICON_COOKING, _sprid+i, 10));//無制限のパケット
+					pc.sendPackets(new S_SystemMessage("料理のアイコン："+num+"回。"));
 				} catch (Exception exception) {
 					break;
 				}
 			}
 		} catch (Exception exception) {
 			pc.sendPackets(new S_SystemMessage(cmdName
-					+ " [id] [출현시키는 수]로 입력해 주세요. "));
+					+ "[id] [出現させることができ】で入力してください。"));
 		}
 	}
 }

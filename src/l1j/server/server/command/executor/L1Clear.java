@@ -16,10 +16,10 @@ public class L1Clear implements L1CommandExecutor{
 	}
 	
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		for (L1Object obj : L1World.getInstance().getVisibleObjects(pc, 20)) { // 20 범위 내에 오브젝트를 찾아서
-			if (obj instanceof L1MonsterInstance){ // 몬스터라면
+		for (L1Object obj : L1World.getInstance().getVisibleObjects(pc, 20)) { // 20の範囲内のオブジェクトを探して
+			if (obj instanceof L1MonsterInstance){ // モンスターなら
 				L1NpcInstance npc = (L1NpcInstance) obj;
-				npc.receiveDamage(pc, 50000); // 대미지
+				npc.receiveDamage(pc, 50000); //ダメージ
 				if (npc.getCurrentHp() <= 0){
 					pc.sendPackets(new S_SkillSound(obj.getId() , 2059));
 					pc.broadcastPacket(new S_SkillSound(obj.getId() , 2059));
@@ -27,9 +27,9 @@ public class L1Clear implements L1CommandExecutor{
 					pc.sendPackets(new S_SkillSound(obj.getId() , 2059));
 					pc.broadcastPacket(new S_SkillSound(obj.getId() , 2059));
 				}
-			} else if (obj instanceof L1PcInstance){ // pc라면
+			} else if (obj instanceof L1PcInstance){ // pcなら
 				L1PcInstance player = (L1PcInstance) obj;
-				player.receiveDamage(player, 0); // 대미지
+				player.receiveDamage(player, 0); // ダメージ
 				if (player.getCurrentHp() <= 0){
 				}
 			}

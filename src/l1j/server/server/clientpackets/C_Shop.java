@@ -43,7 +43,7 @@ public class C_Shop extends ClientBasePacket {
 			return;
 		}
 		if (pc.getMapId() != 800) {
-			pc.sendPackets(new S_SystemMessage("개인상점은 시장에서만  열수 있습니다."));
+			pc.sendPackets(new S_SystemMessage("個人商店は、市場でのみ開くことができます。"));
 			return;
 		}
 		
@@ -74,19 +74,19 @@ public class C_Shop extends ClientBasePacket {
 			pc.getInventory().checkEquipped(22242) || pc.getInventory().checkEquipped(22243) || 
 			pc.getInventory().checkEquipped(22244) || pc.getInventory().checkEquipped(22245) ||
 			pc.getInventory().checkEquipped(22246) || pc.getInventory().checkEquipped(22247) || 
-			pc.getInventory().checkEquipped(22248) || pc.getInventory().checkEquipped(22249)) { //룬 방어구				
-			pc.sendPackets(new S_ChatPacket(pc,"룬을 착용하셨다면 해제하시기 바랍니다."));
+			pc.getInventory().checkEquipped(22248) || pc.getInventory().checkEquipped(22249)) { //ルーン防具				
+			pc.sendPackets(new S_ChatPacket(pc,"ルーンを着用した場合は無効にしてください。"));
 			return;
 		}
 		
 		if (pc.getInventory().checkEquipped(10000)) {
-			pc.sendPackets(new S_ChatPacket(pc,"직장인 경험치 아이템을 해제하세요."));
+			pc.sendPackets(new S_ChatPacket(pc,"会社員経験値アイテムを解除してください。"));
 			return;
 		}
 		
 		if (pc.getTempCharGfx() != pc.getClassId()
 				&& pc.getSkillEffectTimeSec(L1SkillId.SHAPE_CHANGE) <= 0) {
-			pc.sendPackets(new S_SystemMessage("변신 아이템을 해제하세요."));
+			pc.sendPackets(new S_SystemMessage("変身アイテムを解除してください。"));
 			return;
 		}
 
@@ -96,7 +96,7 @@ public class C_Shop extends ClientBasePacket {
 		boolean tradable = true;
 
 		int type = readC();
-		if (type == 0) { // 개시
+		if (type == 0) { // 開始
 			int sellTotalCount = readH();
 			int sellObjectId;
 			int sellPrice;
@@ -107,13 +107,13 @@ public class C_Shop extends ClientBasePacket {
 				sellPrice = readD();
 				sellCount = readD();
 				
-				/** 개인상점 오류 수정 */
+				/**個人商店のエラーを修正 */
 				if(sellTotalCount == 8){ 
-					pc.sendPackets(new S_ChatPacket(pc,"물품등록은 7개까지만 가능합니다.")); 
+					pc.sendPackets(new S_ChatPacket(pc,"物品の登録は7個まで可能です。")); 
 					return;
 				}
 				
-				// 거래 가능한 아이템이나 체크
+				// 取引可能なアイテムやチェック
 				checkItem = pc.getInventory().getItem(sellObjectId);
 				if (sellObjectId != checkItem.getId()) {
 					pc.sendPackets(new S_Disconnect());
@@ -132,12 +132,12 @@ public class C_Shop extends ClientBasePacket {
 					 return;
 				}
 				if(checkItem.getBless() >= 128){
-					pc.sendPackets(new S_ServerMessage(210, checkItem.getItem().getName())); // \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+					pc.sendPackets(new S_ServerMessage(210, checkItem.getItem().getName())); // \f1%0はしまったり、または他人に両日をすることができません。
 					return;
 				}
 				if (!checkItem.getItem().isTradable()) {
 					tradable = false;
-					pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "거래 불가능합니다. "));
+					pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "取引は不可能です。"));
 				}
 				
 
@@ -147,7 +147,7 @@ public class C_Shop extends ClientBasePacket {
 						L1PetInstance pet = (L1PetInstance) petObject;
 						if (checkItem.getId() == pet.getItemObjId()) {
 							tradable = false;
-							pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "거래 불가능합니다. "));
+							pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "取引は不可能です。"));
 							break;
 						}
 					}
@@ -158,7 +158,7 @@ public class C_Shop extends ClientBasePacket {
 						L1DollInstance doll = (L1DollInstance) dollObject;
 						if (checkItem.getId() == doll.getItemObjId()) {
 							tradable = false;
-							pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "거래 불가능합니다. "));
+							pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "取引は不可能です。"));
 							break;
 						}
 					}
@@ -179,14 +179,14 @@ public class C_Shop extends ClientBasePacket {
 				buyPrice = readD();
 				buyCount = readD();
 				
-				/** 개인상점 오류 수정 */
+				/** 個人商店のエラーを修正 */
 				if(sellTotalCount == 8){ 
-					pc.sendPackets(new S_ChatPacket(pc,"물품등록은 7개까지만 가능합니다.")); 
+					pc.sendPackets(new S_ChatPacket(pc,"物品の登録は7個まで可能です。")); 
 					return;
 				}
-				// 거래 가능한 아이템이나 체크
+				// 取引可能なアイテムやチェック
 				checkItem = pc.getInventory().getItem(buyObjectId);
-				/*버그방지*/
+				/*バグ防止*/
 				if (buyObjectId != checkItem.getId()) {
 					pc.sendPackets(new S_Disconnect());
 					return;
@@ -202,12 +202,12 @@ public class C_Shop extends ClientBasePacket {
 				if (buyCount > checkItem.getCount()) {
 					buyCount = checkItem.getCount();
 				}
-				/*버그방지*/
-				// 거래 가능한 아이템이나 체크
+				/*バグ防止*/
+				// 取引可能なアイテムやチェック
 				checkItem = pc.getInventory().getItem(buyObjectId);
 				if (!checkItem.getItem().isTradable()) {
 					tradable = false;
-					pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "거래 불가능합니다. "));
+					pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "取引は不可能です。"));
 				}
 				petlist = pc.getPetList().values().toArray();
 				for (Object petObject : petlist) {
@@ -215,7 +215,7 @@ public class C_Shop extends ClientBasePacket {
 						L1PetInstance pet = (L1PetInstance) petObject;
 						if (checkItem.getId() == pet.getItemObjId()) {
 							tradable = false;
-							pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "거래 불가능합니다. "));
+							pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "取引は不可能です。"));
 							break;
 						}
 					}
@@ -227,7 +227,7 @@ public class C_Shop extends ClientBasePacket {
 				psbl.setBuyCount(0);
 				buyList.add(psbl);
 			}
-			if (!tradable) { // 거래 불가능한 아이템이 포함되어 있는 경우, 개인 상점 종료
+			if (!tradable) { // 取引不可能なアイテムが含まれている場合には、個人商店終了
 				sellList.clear();
 				buyList.clear();
 				pc.setPrivateShop(false);
@@ -253,7 +253,7 @@ public class C_Shop extends ClientBasePacket {
 			pc.setPrivateShop(true);
 			pc.sendPackets(new S_DoActionShop(pc.getId(), ActionCodes.ACTION_Shop, chat));
 			pc.broadcastPacket(new S_DoActionShop(pc.getId(), ActionCodes.ACTION_Shop, chat));
-			pc.sendPackets(new S_ChatPacket(pc, "명령어 [.무인상점] 누른후 다른 캐릭터로 접속 가능합니다"));
+			pc.sendPackets(new S_ChatPacket(pc, "コマンド[無人店]クリックして、他のキャラクターで接続可能です"));
 
 			poly = 0;
 			if (test.matches(".*tradezone1.*"))
@@ -281,7 +281,7 @@ public class C_Shop extends ClientBasePacket {
 			Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
 			pc.curePoison();
 			
-		} else if (type == 1) { // 종료
+		} else if (type == 1) { // 終了
 			sellList.clear();
 			buyList.clear();
 			pc.setPrivateShop(false);

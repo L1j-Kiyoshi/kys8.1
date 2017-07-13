@@ -32,7 +32,7 @@ public class C_Drawal extends ClientBasePacket {
 				int castle_id = clan.getCastleId();
 				if (castle_id != 0) {
 					if (WarTimeController.getInstance().isNowWar(clan.getCastleId())) {
-						S_SystemMessage sm = new S_SystemMessage("경고:공성중에는 세금을 찾으실수 없습니다.");
+						S_SystemMessage sm = new S_SystemMessage("警告：攻城中の税金を見つけることができません。");
 						pc.sendPackets(sm, true);
 						return;
 					}
@@ -44,7 +44,7 @@ public class C_Drawal extends ClientBasePacket {
 					int money = l1castle.getPublicMoney();
 					long _money = money;
 
-					if (_money <= 0 || money < j) {//버그방지
+					if (_money <= 0 || money < j) {//バグ防止
 						return;
 					}
 					money -= j;
@@ -58,7 +58,7 @@ public class C_Drawal extends ClientBasePacket {
 						} else {
 							L1World.getInstance().getInventory(pc.getX(), pc.getY(),pc.getMapId()).storeItem(L1ItemId.ADENA, j);
 						}
-//						pc.sendPackets(new S_SystemMessage("공금 " + j + " 아데나를 인출하였습니다."));
+//						pc.sendPackets(new S_SystemMessage("公金 "+ j +"アデナを引き出しました。 "））;
 						S_ServerMessage sm = new S_ServerMessage(143, "$457","$4" + " (" + j + ")");
 						pc.sendPackets(sm, true);
 					}

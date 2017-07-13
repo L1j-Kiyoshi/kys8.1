@@ -22,7 +22,6 @@ package l1j.server.server.clientpackets;
 import l1j.server.server.GameClient;
 import l1j.server.server.model.L1Trade;
 import l1j.server.server.model.L1World;
-import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_Disconnect;
 import l1j.server.server.serverpackets.S_Message_YN;
@@ -51,7 +50,7 @@ public class C_Trade extends ClientBasePacket {
 			return;
 		}
 		if (player.getTradeID() > 0) {
-			S_SystemMessage sm = new S_SystemMessage("당신은 현재 교환 중인 상태 입니다.");
+			S_SystemMessage sm = new S_SystemMessage("あなたは、現在の交換中の状態です。");
 			player.sendPackets(sm);
 			sm = null;
 			return;
@@ -84,10 +83,10 @@ public class C_Trade extends ClientBasePacket {
 				}
 				
 
-				player.setTradeID(target.getId()); // 상대의 오브젝트 ID를 보존해 둔다
+				player.setTradeID(target.getId()); // 相手のオブジェクトIDを保存しておく
 				target.setTradeID(player.getId());
 				target.sendPackets(new S_Message_YN(252, player.getName()));
-				// %0%s가 당신과 아이템의 거래를 바라고 있습니다. 거래합니까? (Y/N)
+				// %0%sがあなたとアイテムの取引を望んでいます。取引のですか？ （Y / N）
 			}
 		}
 	}
@@ -97,16 +96,16 @@ public class C_Trade extends ClientBasePacket {
 		return C_TRADE;
 	}
 
-	private boolean isTwoLogin(L1PcInstance c) {// 중복체크 변경
+	private boolean isTwoLogin(L1PcInstance c) {// 重複チェックを変更
 		boolean bool = false;
 
 		for (L1PcInstance target : L1World.getInstance().getAllPlayers()) {
 			if (target.noPlayerCK || target.noPlayerck2)
 				continue;
-			/** 로봇시스템 **/
+			/** ロボットシステム **/
 			if (target.getRobotAi() != null)
 				continue;
-			/** 로봇시스템 **/
+			/** ロボットシステム **/
 			if (c.getId() != target.getId() && (!target.isPrivateShop() && !target.isAutoClanjoin())) {
 				if (c.getNetConnection().getAccountName().equalsIgnoreCase(target.getNetConnection().getAccountName())) {
 					bool = true;

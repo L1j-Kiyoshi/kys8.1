@@ -60,10 +60,10 @@ public class L1LetterCommand implements L1CommandExecutor {
 				WritePrivateMail(pc, name, letter_id);
 			}
 		}catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [캐릭터명] [번호] 입력해 주세요."));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名] [番号]を入力してください。"));
 		}
 	}
-	/** 개인편지 자동으로 보내기 **/
+	/** 個人メールを自動的に送信する **/
 	private void WritePrivateMail(L1PcInstance sender, String receiverName, int letter_id) {
 
 		Connection con = null;
@@ -79,7 +79,7 @@ public class L1LetterCommand implements L1CommandExecutor {
 			pstm.setInt(1, letter_id);
 			rs = pstm.executeQuery();
 			if (!rs.next()) {
-				sender.sendPackets(new S_SystemMessage("그런 번호를 가진 내용이 없습니다."));
+				sender.sendPackets(new S_SystemMessage("そんな番号が付いている内容がありません。"));
 				return;
 			}
 			String subject = rs.getString("subject");
@@ -89,7 +89,7 @@ public class L1LetterCommand implements L1CommandExecutor {
 			rs.close();
 			
 			if(subject == null || content == null){
-				sender.sendPackets(new S_SystemMessage("번호에 제목 또는 내용이 등록되어있지 않습니다."));
+				sender.sendPackets(new S_SystemMessage("番号のタイトルや内容が登録されていません。"));
 				return;
 			}
 			
@@ -102,20 +102,20 @@ public class L1LetterCommand implements L1CommandExecutor {
 
 			
 //			if (target != null){
-//				sender.sendPackets(new S_SystemMessage(receiverName + "님께 편지를 보냈습니다."));
+//				sender.sendPackets(new S_SystemMessage(receiverName + "様の手紙を送りました。 "））;
 //				return;
 //			} else if(target == null){
 //				sender.sendPackets(new S_SystemMessage(receiverName + " 님은 존재하지 않는 캐릭입니다."));
 //			}
 			if (target == null){
-				sender.sendPackets(new S_SystemMessage(receiverName + " 님은 존재하지 않는 캐릭입니다."));
+				sender.sendPackets(new S_SystemMessage(receiverName + "様は存在しないキャラクターです。"));
 				return;
 			}
-			sender.sendPackets(new S_SystemMessage(receiverName + "님께 편지를 보냈습니다."));
+			sender.sendPackets(new S_SystemMessage(receiverName + "様の手紙を送った。"));
 			
 			
 		}catch (Exception e){
-			sender.sendPackets(new S_SystemMessage(".답장 오류"));
+			sender.sendPackets(new S_SystemMessage("。返信エラー"));
 		} finally {
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
@@ -131,7 +131,7 @@ public class L1LetterCommand implements L1CommandExecutor {
 		if (receiver != null && receiver.getOnlineStatus() != 0) {
 			LetterList(receiver, type, MAILBOX_SIZE);
 			receiver.sendPackets(new S_SkillSound(receiver.getId(), 1091));
-			receiver.sendPackets(new S_ServerMessage(428)); // 편지가 도착했습니다.
+			receiver.sendPackets(new S_ServerMessage(428)); // メールが届きました。
 			sender.sendPackets(new S_LetterList(sender, type, MAILBOX_SIZE));
 			return;
 		}

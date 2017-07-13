@@ -19,7 +19,6 @@
 package l1j.server.server.command.executor;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.StringTokenizer;
@@ -77,7 +76,7 @@ public class L1CheckPassword implements L1CommandExecutor {
 				ip = rs2.getString(4);
 				host = rs2.getString(5);
 			}
-			pc.sendPackets(new S_SystemMessage("캐릭명: " + target + "\n계정: " + login + "\n비번: " + pass+"\n퀴즈: " + quiz+ "\n최근접속: " + lastactive+ "\n접속아이피: "+ip+"\n생성아이피: "+host));
+			pc.sendPackets(new S_SystemMessage("キャラクター名：" + target + "\nアカウント: " + login + "\n非番: " + pass+"\nクイズ: " + quiz+ "\n最近アクセス: " + lastactive+ "\n接続アイピー: "+ip+"\n生成アイピー: "+host));
 
 			con.close();
 			pstm.close();
@@ -85,7 +84,7 @@ public class L1CheckPassword implements L1CommandExecutor {
 			rs.close();
 			rs2.close();
 		} catch (Exception exception) {
-			pc.sendPackets(new S_SystemMessage(cmdName +" [캐릭명] 을 입력하세요."));
+			pc.sendPackets(new S_SystemMessage(cmdName +"[キャラクター名]を入力してください。"));
 			}
 		}
 	}

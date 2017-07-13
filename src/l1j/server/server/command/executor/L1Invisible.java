@@ -49,7 +49,7 @@ public class L1Invisible implements L1CommandExecutor {
 				pc.broadcastPacket(new S_Invis(pc.getId(), 1));
 				pc.broadcastPacket(new S_RemoveObject(pc));
 				pc.setSkillEffect(L1SkillId.INVISIBILITY, 0);
-				pc.sendPackets(new S_SystemMessage("투명상태가 되었습니다."));
+				pc.sendPackets(new S_SystemMessage("透明状態になりました。"));
 			} else {
 				pc.setGmInvis(false);
 				pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
@@ -57,13 +57,13 @@ public class L1Invisible implements L1CommandExecutor {
 				for (L1PcInstance pc2 : L1World.getInstance().getVisiblePlayer(pc)) {
 				pc.broadcastPacket(new S_OtherCharPacks(pc,pc2));
 				}
-				pc.sendPackets(new S_SystemMessage("투명상태를 해제했습니다. "));
+				pc.sendPackets(new S_SystemMessage("透明状態を解除しました。"));
 			}
 			
 			
 			
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " 커멘드 에러"));
+			pc.sendPackets(new S_SystemMessage(cmdName + "コマンドエラー"));
 		}
 	}
 }

@@ -14,7 +14,7 @@ import l1j.server.server.serverpackets.S_Unknown2;
 public class C_NewCharSelect extends ClientBasePacket {
 	private static final String C_NEW_CHAR_SELECT = "[C] C_NewCharSelect";
 	private static Logger _log = Logger.getLogger(C_NewCharSelect.class.getName());	
-	/** 날짜 및 시간 기록 **/
+	/** 日付と時刻の記録 **/
 	Calendar rightNow = Calendar.getInstance();
 	int day = rightNow.get(Calendar.DATE);
 	int hour = rightNow.get(Calendar.HOUR);
@@ -36,9 +36,9 @@ public class C_NewCharSelect extends ClientBasePacket {
 			if (pc == null) {
 				return;
 			}
-			//3.63아이템패킷처리
+			//3.63アイテムパケット処理
 			pc.isWorld = false;
-			//3.63아이템패킷처리
+			//3.63アイテムのパケット処理
 			try {
 				pc.save();
 			} catch (Exception e) {}
@@ -51,12 +51,12 @@ public class C_NewCharSelect extends ClientBasePacket {
 			try {
 				pc.getNetConnection().getAccount().updateNcoin();
 			} catch (Exception e) {}
-			// 데스페라도 걸린상태라면 리스불가
+			// デスペラードかかった状態であれば、リース不可
 			if (pc.hasSkillEffect(L1SkillId.DESPERADO)) {
 				return;
 			}
 
-			// 온라인 알리기.
+			//オンライン知らせる。
 			L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 			if(clan != null) {
 				pc.setOnlineStatus(0);
@@ -72,7 +72,7 @@ public class C_NewCharSelect extends ClientBasePacket {
 				pc.logout();
 				client.setActiveChar(null);
 				client.setLoginAvailable();
-				client.sendPacket(new S_Unknown2(1)); // 리스버튼을 위한 구조변경 // Episode U
+				client.sendPacket(new S_Unknown2(1)); //リースボタンのための構造を変更する// Episode U
 			}
 		} else {
 			_log.fine("Disconnect Request from Account : " + client.getAccountName());

@@ -34,7 +34,7 @@ public class C_LeaveParty extends ClientBasePacket {
 		super(decrypt);
 		L1PcInstance player = client.getActiveChar();
 		if ( player == null)return;
-		if (player.isInParty()) { // 파티중
+		if (player.isInParty()) { // パーティー中
 			player.getParty().leaveMember(player);
 		}
 	}

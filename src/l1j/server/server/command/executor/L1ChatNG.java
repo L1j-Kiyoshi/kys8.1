@@ -29,13 +29,13 @@ public class L1ChatNG implements L1CommandExecutor {
 			if (tg != null) {
 				tg.setSkillEffect(L1SkillId.STATUS_CHAT_PROHIBITED, time * 60 * 1000);
 				tg.sendPackets(new S_SkillIconGFX(36, time * 60));
-				pc.sendPackets(new S_SystemMessage(name + " 채팅금지 : "+ String.valueOf(time) + "분 적용완료."));
-//				tg.sendPackets(new S_ServerMessage(286, String.valueOf(time))); // \f3게임에 적합하지 않는 행동이기 (위해)때문에, 향후%0분간 채팅을 금지합니다.
+				pc.sendPackets(new S_SystemMessage(name + "チャット禁止："+ String.valueOf(time) + "分適用完了。"));
+//				tg.sendPackets(new S_ServerMessage(286, String.valueOf(time))); // \f3ゲームに適していない行動であるため、今後％0分間チャットを禁止します。
 			} else {
-				pc.sendPackets(new S_SystemMessage("해당 캐릭터 미접속."));
+				pc.sendPackets(new S_SystemMessage("そのキャラクター未接続。"));
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [캐릭명] [분] 입력."));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名] [分]入力。"));
 		}
 	}
 }

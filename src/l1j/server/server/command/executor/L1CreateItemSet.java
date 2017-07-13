@@ -25,7 +25,7 @@ public class L1CreateItemSet implements L1CommandExecutor {
 			String name = new StringTokenizer(arg). nextToken();
 			List<L1ItemSetItem> list = GMCommandsConfig.ITEM_SETS.get(name);
 			if (list == null) {
-				pc.sendPackets(new S_SystemMessage(name + "은 없습니다."));
+				pc.sendPackets(new S_SystemMessage(name + "はありません。"));
 				return;
 			}
 			L1Item temp = null;
@@ -43,7 +43,7 @@ public class L1CreateItemSet implements L1CommandExecutor {
 				}
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".세트아이템 세트명으로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage("。セットアイテムセット名で入力してください。"));
 		}
 	}
 }

@@ -34,7 +34,7 @@ public class L1EventSpawn implements L1CommandExecutor {
 			} catch (NumberFormatException e) {
 				npcId = NpcTable.getInstance().findNpcIdByNameWithoutSpace(nameid);
 				if (npcId == 0) {
-					pc.sendPackets(new S_SystemMessage("해당 NPC가 발견되지 않습니다. "));
+					pc.sendPackets(new S_SystemMessage("該当のNPCが見つかりません。"));
 					return;
 				}
 			}
@@ -43,13 +43,13 @@ public class L1EventSpawn implements L1CommandExecutor {
 			nameid = NpcTable.getInstance().getTemplate(npcId).get_name();
 			Eventspawn(pc, npcId, 60000 * time);
 
-			pc.sendPackets(new S_SystemMessage("(" + nameid + ") (ID:" + npcId + ") (" + time + ")분 소환 "));
-			L1World.getInstance().broadcastServerMessage("(" + nameid + ")  (" + time + ")분 동안 소환됩니다. ");
+			pc.sendPackets(new S_SystemMessage("(" + nameid + ") (ID:" + npcId + ") (" + time + "）分召喚"));
+			L1World.getInstance().broadcastServerMessage("(" + nameid + ")  (" + time + "）分間召喚されます。");
 			tok = null;
 			nameid = null;
 		} catch (Exception e) {
 		//	_log.log(Level.SEVERE, "", e);
-			pc.sendPackets(new S_SystemMessage(cmdName + "[NPCID] [시간(분)] "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "【NPCID] [時間（分）]"));
 		}
 	}
 
@@ -70,7 +70,7 @@ public class L1EventSpawn implements L1CommandExecutor {
 			L1World.getInstance().addVisibleObject(npc);
 
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); //チャット開始
 			if (0 < timeMinToDelete) {
 				L1NpcDeleteTimer timer = new L1NpcDeleteTimer(npc, timeMinToDelete);
 				timer.begin();

@@ -34,9 +34,9 @@ public class C_ServerVersion extends ClientBasePacket {
 	super(decrypt);
 	client.sendPacket(new S_ServerVersion());
 	// int type = readH(); //
-	// // System.out.println("크래프트 > " + type);
+	// // System.out.println("クラフト> "+ type）;
 	// switch (type) {
-	// case 클라버전: { // by feel.
+	// case クライアントのバージョン：{// by feel。
 	// client.sendPacket(new S_ServerVersion());
 	// break;
 	// }

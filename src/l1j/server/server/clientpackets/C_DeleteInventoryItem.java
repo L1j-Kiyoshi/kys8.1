@@ -34,7 +34,7 @@ import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class C_DeleteInventoryItem extends ClientBasePacket {
-	/** 날짜 , 시간 기록 **/
+	/** 日付、時刻の記録 **/
 	Calendar rightNow = Calendar.getInstance();
 	int day = rightNow.get(Calendar.DATE);
 	int hour = rightNow.get(Calendar.HOUR);
@@ -59,7 +59,7 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
 
 		L1ItemInstance item = pc.getInventory().getItem(itemObjectId);
 
-		// 삭제하려고 한 아이템이 서버상에 없는 경우
+		// 削除しようとしたアイテムがサーバー上に存在しない場合
 		if (item == null) {
 			return;
 		}
@@ -70,7 +70,7 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
 		}
 		
 //		if(!pc.isGm() &&item.getBless() >= 128){
-//			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+//			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0はしまったり、または他人に両日をすることができません。
 //			return;
 //		}
 //		
@@ -80,7 +80,7 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
 			if (petObject instanceof L1PetInstance) {
 				pet = (L1PetInstance) petObject;
 				if (item.getId() == pet.getItemObjId()) {
-					// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+					// \f1%0はしまったり、または他人に両日をすることができません。
 					pc.sendPackets(new S_ServerMessage(210, item.getItem()
 							.getName()));
 					return;
@@ -91,7 +91,7 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
 			if (dollObject instanceof L1DollInstance) {
 				L1DollInstance doll = (L1DollInstance) dollObject;
 				if (item.getId() == doll.getItemObjId()) {
-					// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+					// \f1%0はしまったり、または他人に両日をすることができません。
 					pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
 					return;
 				}
@@ -99,7 +99,7 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
 		}
 
 		if (item.isEquipped()) {
-			// \f1삭제할 수 없는 아이템이나 장비 하고 있는 아이템은 버릴 수 없습니다.
+			// \f1削除できないアイテムや装備しているアイテムは捨てることができません。
 			pc.sendPackets(new S_ServerMessage(125));
 			return;
 		}
@@ -111,15 +111,15 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
 			if (count != 0){
 				crystal.setCount(crystalCount * count);  
 				pc.getInventory().storeItem(crystal);
-				pc.sendPackets(new S_SystemMessage("\\aB" + item.getName()+ "("+count+")개 삭제: " + crystal.getName()+ "("+crystal.getCount()+")원 획득."));
+				pc.sendPackets(new S_SystemMessage("\\aB" + item.getName()+ "("+count+"）の削除：" + crystal.getName()+ "("+crystal.getCount()+"）ワンを獲得。"));
 			} else {    
 				crystal.setCount(crystalCount * item.getCount()); 
 				pc.getInventory().storeItem(crystal);
-				pc.sendPackets(new S_SystemMessage("\\aB" + item.getName()+ "("+item.getCount()+")개 삭제: " + crystal.getName()+ "("+crystal.getCount()+")원 획득."));
+				pc.sendPackets(new S_SystemMessage("\\aB" + item.getName()+ "("+item.getCount()+"）の削除：" + crystal.getName()+ "("+crystal.getCount()+"）ワンを獲得。"));
 			}
 		}
 		
-		/** 파일로그저장 **/
+		/** ファイルログの保存 **/
 		LoggerInstance.getInstance().addItemAction(ItemActionType.Delete, pc, item, count);
 		
 		if (count == 0)

@@ -28,7 +28,7 @@ public class C_GiveItem extends ClientBasePacket {
 
 	private static Logger _log = Logger.getLogger(C_GiveItem.class.getName());
 
-	/** 날짜 , 시간 기록 **/
+	/** 日付、時刻の記録 **/
 	Calendar rightNow = Calendar.getInstance();
 	int day = rightNow.get(Calendar.DATE);
 	int hour = rightNow.get(Calendar.HOUR);
@@ -70,10 +70,10 @@ public class C_GiveItem extends ClientBasePacket {
 				}
 			}
 			if (item.isEquipped()) {
-				pc.sendPackets(new S_SystemMessage("착용하고 있는 것을 줄수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("着用していることを与えることがありません。"));
 				return;
 			}
-			if (item.getBless() >= 128) { // 봉인
+			if (item.getBless() >= 128) { // 封印
 				pc.sendPackets(new S_ServerMessage(141));
 				return;
 			}
@@ -101,7 +101,7 @@ public class C_GiveItem extends ClientBasePacket {
 				return;
 			}
 			if (item.getItem().getItemId() == 40312) {
-				pc.sendPackets(new S_SystemMessage("여관열쇠는 /교환을 이용하거나 창고를 이용해주세요."));
+				pc.sendPackets(new S_SystemMessage("旅館キーは/交換を利用したり、倉庫を利用してください。"));
 				return;
 			}
 			if (!item.isStackable() && count != 1) {
@@ -127,7 +127,7 @@ public class C_GiveItem extends ClientBasePacket {
 				if (petObject instanceof L1PetInstance) {
 					pet = (L1PetInstance) petObject;
 					if (item.getId() == pet.getItemObjId()) {
-						// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+						// \f1%0はしまったり、または他人に両日をすることができません。
 						pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
 						return;
 					}
@@ -138,7 +138,7 @@ public class C_GiveItem extends ClientBasePacket {
 				if (dollObject instanceof L1DollInstance) {
 					L1DollInstance doll = (L1DollInstance) dollObject;
 					if (item.getId() == doll.getItemObjId()) {
-						// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+						// \f1%0はしまったり、または他人に両日をすることができません。
 						pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
 						return;
 					}
@@ -147,9 +147,9 @@ public class C_GiveItem extends ClientBasePacket {
 
 			if (!pc.isGm()) {
 				if (targetInv.checkAddItem(item, count) != L1Inventory.OK) {
-					pc.sendPackets(new S_ServerMessage(942)); // 상대의 아이템이 너무 무겁기
-																// (위해)때문에, 더 이상
-																// 줄 수 없습니다.
+					pc.sendPackets(new S_ServerMessage(942)); //相手のアイテムがとても重い
+																// (のために）のために、これ以上の
+																// 与えることができません。
 					return;
 				}
 			}
@@ -163,16 +163,16 @@ public class C_GiveItem extends ClientBasePacket {
 
 			if (target instanceof L1PetInstance) {
 				if (target.getLevel() > 30) {
-					if ((item.getItemId() == 40070 && petType.canEvolve() // 진화의열매(당근)
+					if ((item.getItemId() == 40070 && petType.canEvolve() //進化の実（ニンジン）
 					&& petType.getItemIdForTaming() == 40060)
-							|| (item.getItemId() == 41310 && petType.canEvolve() && petType.getItemIdForTaming() == 0)) {// 승리의열매
-						pc.sendPackets(new S_SystemMessage(target.getName() + " 에게 " + item.getName() + " (" + count
-								+ ")를 먹였습니다."));
+							|| (item.getItemId() == 41310 && petType.canEvolve() && petType.getItemIdForTaming() == 0)) {//勝利の実
+						pc.sendPackets(new S_SystemMessage(target.getName() + "に" + item.getName() + " (" + count
+								+ "）を食べました。"));
 					} else
-						pc.sendPackets(new S_SystemMessage(target.getName() + " 에게 " + item.getName() + " (" + count
-								+ ")를 주었습니다."));
+						pc.sendPackets(new S_SystemMessage(target.getName() + "に" + item.getName() + " (" + count
+								+ "）をしました。"));
 				} else {
-					pc.sendPackets(new S_SystemMessage(target.getName() + " 에게 " + item.getName() + " (" + count + ")를 주었습니다."));
+					pc.sendPackets(new S_SystemMessage(target.getName() + "に" + item.getName() + " (" + count + "）をしました。"));
 				}
 			}
 
@@ -184,7 +184,7 @@ public class C_GiveItem extends ClientBasePacket {
 			if (petType == null || target.isDead()) {
 				return;
 			}
-			/** 호랑이리뉴얼 */
+			/** 虎リニューアル */
 			if (item.getItemId() == petType.getItemIdForTaming()
 					&& (item.getItemId() == 490026 && target.getNpcTemplate().get_npcId() == 45711)
 					|| (item.getItemId() == 490027 && target.getNpcTemplate().get_npcId() == 45313)) {
@@ -196,20 +196,20 @@ public class C_GiveItem extends ClientBasePacket {
 						tamePet(pc, target);
 				}
 			}
-			/** 호랑이리뉴얼 **/
+			/** 虎リニューアル **/
 
 			if (item.getItemId() == petType.getItemIdForTaming()) {
 				tamePet(pc, target);
 			}
-			// 진화의열매(당근)
+			// 進化の実（ニンジン）
 			if (item.getItemId() == 40070 && petType.canEvolve() && petType.getItemIdForTaming() == 40060) {
 				evolvePet(pc, target);
 			}
-			// 진화의열매(괴고기)
+			// 進化の実（怪肉）
 			if (item.getItemId() == 40070 && petType.canEvolve() && petType.getItemIdForTaming() == 40057) {
 				evolvePet(pc, target);
 			}
-			// 승리의 열매
+			// 勝利の実
 			if (item.getItemId() == 41310 && petType.canEvolve() && petType.getItemIdForTaming() == 0) {
 				evolvePet(pc, target);
 			}
@@ -221,9 +221,9 @@ public class C_GiveItem extends ClientBasePacket {
 
 	private final static String receivableImpls[] = new String[] { "L1Npc", // NPC
 			"L1Monster", // monster
-			"L1Guardian", // 요정 숲의 수호자
-			"L1Teleporter", // 텔레 포터
-			"L1Guard" }; // 가이드
+			"L1Guardian", // エルフの森の守護者
+			"L1Teleporter", // テレポーター
+			"L1Guard" }; // ガイド
 
 	private boolean isNpcItemReceivable(L1Npc npc) {
 		for (String impl : receivableImpls) {
@@ -245,19 +245,19 @@ public class C_GiveItem extends ClientBasePacket {
 			petcost += ((L1NpcInstance) pet).getPetcost();
 		}
 		int charisma = pc.getAbility().getTotalCha();
-		if (pc.isCrown()) { // 군주
+		if (pc.isCrown()) { // 君主
 			charisma += 6;
-		} else if (pc.isElf()) { // 요정
+		} else if (pc.isElf()) { // 妖精
 			charisma += 12;
-		} else if (pc.isWizard()) { // 마법사
+		} else if (pc.isWizard()) { // ウィザード
 			charisma += 6;
-		} else if (pc.isDarkelf()) { // 다크엘프
+		} else if (pc.isDarkelf()) { // ダークエルフ
 			charisma += 6;
-		} else if (pc.isDragonknight()) { // 용기사
+		} else if (pc.isDragonknight()) { // 竜騎士
 			charisma += 6;
-		} else if (pc.isBlackwizard()) { // 환술사
+		} else if (pc.isBlackwizard()) { // イリュージョニスト
 			charisma += 6;
-		} else if (pc.isWarrior()) { // 전사
+		} else if (pc.isWarrior()) { // 戦士
 			charisma += 6;
 		}
 		charisma -= petcost;
@@ -266,14 +266,14 @@ public class C_GiveItem extends ClientBasePacket {
 		String npcname = target.getNpcTemplate().get_name();
 		if (charisma >= 6 && inv.getSize() < 180) {
 			if (isTamePet(pc, target)) {
-				L1ItemInstance petamu = inv.storeItem(40314, 1); // 펫의 아뮤렛트
+				L1ItemInstance petamu = inv.storeItem(40314, 1); // ペットのアミュレット
 				if (petamu != null) {
 					new L1PetInstance(target, pc, petamu.getId());
 					pc.sendPackets(new S_ItemName(petamu));
-					pc.sendPackets(new S_SystemMessage(npcname + "의 목걸이를 얻었습니다."));
+					pc.sendPackets(new S_SystemMessage(npcname + "のネックレスを獲得しました。"));
 				}
 			} else {
-				pc.sendPackets(new S_ServerMessage(324)); // 길들이는데 실패했습니다.
+				pc.sendPackets(new S_ServerMessage(324)); //道のに失敗しました。
 			}
 		}
 	}
@@ -286,14 +286,14 @@ public class C_GiveItem extends ClientBasePacket {
 		L1PetInstance pet = (L1PetInstance) target;
 		L1ItemInstance petamu = inv.getItem(pet.getItemObjId());
 		String npcname = target.getNpcTemplate().get_name();
-		if (pet.getLevel() >= 30 && // Lv30 이상
-				pc == pet.getMaster() && petamu != null) {// 자신의 애완동물
+		if (pet.getLevel() >= 30 && // Lv30以上
+				pc == pet.getMaster() && petamu != null) {//自分のペット
 			L1ItemInstance highpetamu = inv.storeItem(40316, 1);
 			if (highpetamu != null) {
-				pet.evolvePet(highpetamu.getId()); // 진화시킨다
+				pet.evolvePet(highpetamu.getId()); // 進化させる
 				pc.sendPackets(new S_ItemName(highpetamu));
 				inv.removeItem(petamu, 1);
-				pc.sendPackets(new S_SystemMessage(npcname + "의 진화에 성공 하였습니다."));
+				pc.sendPackets(new S_SystemMessage(npcname + "の進化に成功しました。"));
 			}
 		} else {
 			pc.sendPackets(new S_SystemMessage(npcname + "의 진화조건이 충족돼지 않았습니다."));
@@ -305,8 +305,8 @@ public class C_GiveItem extends ClientBasePacket {
 		int npcId = npc.getNpcTemplate().get_npcId();
 		if (pc.isGm())
 			return true;
-		if (npcId == 45313 || npcId == 45711) { // 호랑이, 아기진돗개
-			if (npc.getMaxHp() / 4 > npc.getCurrentHp() // HP가1/4미만으로1/16의 확률
+		if (npcId == 45313 || npcId == 45711) { //トラ、紀州犬の子犬
+			if (npc.getMaxHp() / 4 > npc.getCurrentHp() // HPが1/4未満で1/16の確率
 					&& _random.nextInt(16) + _random.nextInt(pc.getAbility().getTotalCha()) >= 30) {
 				isSuccess = true;
 			}
@@ -317,8 +317,8 @@ public class C_GiveItem extends ClientBasePacket {
 		}
 
 		if (npcId == 45313 || npcId == 45044 || npcId == 45711) {
-			// 호랑이, 라쿤, 아기 진돗개
-			if (npc.isResurrect()) { // 부활 후는 길들이기 불가
+			// トラ、ラクーン、紀州犬の子犬
+			if (npc.isResurrect()) { //復活後は飼いならす不可
 				isSuccess = false;
 			}
 		}
@@ -326,15 +326,15 @@ public class C_GiveItem extends ClientBasePacket {
 		return isSuccess;
 	}
 
-	private boolean isTwoLogin(L1PcInstance c) {// 중복체크 변경
+	private boolean isTwoLogin(L1PcInstance c) {//重複チェックを変更
 		boolean bool = false;
 		for (L1PcInstance target : L1World.getInstance().getAllPlayers()) {
 			if (target.noPlayerCK || target.noPlayerck2)
 				continue;
-			/** 로봇시스템 **/
+			/** ロボットシステム **/
 			if (target.getRobotAi() != null)
 				continue;
-			/** 로봇시스템 **/
+			/** ロボットシステム **/
 			if (c.getId() != target.getId() && (!target.isPrivateShop() && !target.isAutoClanjoin())) {
 				if (c.getNetConnection().getAccountName().equalsIgnoreCase(target.getNetConnection().getAccountName())) {
 					bool = true;

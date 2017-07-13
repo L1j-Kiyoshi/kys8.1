@@ -113,7 +113,7 @@ import l1j.server.server.utils.SystemUtil;
 import manager.LinAllManager;
 
 public class C_LoginToServer extends ClientBasePacket {
-	/** 날짜 및 시간 기록 **/
+	/** 日付と時刻の記録 **/
 	Calendar rightNow = Calendar.getInstance();
 	int day = rightNow.get(Calendar.DATE);
 	int hour = rightNow.get(Calendar.HOUR);
@@ -140,10 +140,10 @@ public class C_LoginToServer extends ClientBasePacket {
 		Calendar cal = Calendar.getInstance();
 		int 시간 = Calendar.HOUR;
 		int 분 = Calendar.MINUTE;
-		/** 0 오전 , 1 오후 * */
-		String 오전오후 = "오후";
+		/**0時、1午後 * */
+		String 오전오후 = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "오전";
+			오전오후 = "午前";
 		}
 
 		String login = client.getAccountName();
@@ -153,7 +153,7 @@ public class C_LoginToServer extends ClientBasePacket {
 
 		if (client.getAccount() == null) {
 			System.out.println("─────────────────────────────────");
-			System.out.println("계정 Null 접속 시도 " + charName);
+			System.out.println("アカウントNull接続しようと" + charName);
 			System.out.println("─────────────────────────────────");
 			client.kick();
 			client.close();
@@ -162,7 +162,7 @@ public class C_LoginToServer extends ClientBasePacket {
 
 		if (client.getActiveChar() != null) {
 			System.out.println("─────────────────────────────────");
-			System.out.println("동일 ID의 중복 접속이므로 (" + client.getIp() + ")의 접속을 강제 종료합니다. #1");
+			System.out.println("同じIDの重複接続なので、（" + client.getIp() + "）の接続を強制的に終了します。 ＃1");
 			System.out.println("─────────────────────────────────");
 			client.close();
 			return;
@@ -171,13 +171,13 @@ public class C_LoginToServer extends ClientBasePacket {
 
 		if (clientByAccount == null || clientByAccount != client) {
 			System.out.println("─────────────────────────────────");
-			System.out.println("동일 Account의 중복 접속이므로 (" + client.getIp() + ")의 접속을 강제 종료합니다. #1");
+			System.out.println("同じAccountの重複接続なので、（" + client.getIp() + "）の接続を強制的に終了します。 ＃1");
 			System.out.println("─────────────────────────────────");
 			client.close();
 			return;
 		}
 
-		/** 2캐릭 버그 방지 Start */
+		/**2キャラクターのバグを防ぐ Start */
 		L1PcInstance OtherPc = L1World.getInstance().getPlayer(charName);
 
 		if (OtherPc != null) {
@@ -187,7 +187,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			OtherPc = null;
 			if (isPrivateShop == false && isAutoclanjoin==false) {
 				System.out.println("─────────────────────────────────");
-				System.out.println("동일 ID의 중복 접속이므로 (" + client.getIp() + ")의 접속을 강제 종료합니다. #2");
+				System.out.println("同じIDの重複接続なので、（" + client.getIp() + "）の接続を強制的に終了します。 ＃2");
 				System.out.println("─────────────────────────────────");
 				client.kick();
 				return;
@@ -199,7 +199,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			if (bugpc.getAccountName().equals(client.getAccountName())) {
 				if ((!bugpc.isPrivateShop() && !bugpc.isAutoClanjoin()) || bugpc.getNetConnection() != null) {
 					System.out.println("─────────────────────────────────");
-					System.out.println("동일 Account의 중복 접속이므로 (" + client.getIp() + ")의 접속을 강제 종료합니다.");
+					System.out.println("同じAccountの重複接続なので、（" + client.getIp() + "）の接続を強制的に終了します。");
 					System.out.println("─────────────────────────────────");
 					client.kick();
 					GameServer.disconnectChar(bugpc);
@@ -207,11 +207,11 @@ public class C_LoginToServer extends ClientBasePacket {
 			}
 		}
 		pcs = null;
-		/** 2캐릭 버그 방지 End */
+		/** 2キャラバグ防止End*/
 
 		if ((pc == null) || !login.equals(pc.getAccountName())) {
 			System.out.println("─────────────────────────────────");
-			System.out.println("현재 계정에 없는 캐릭 접속시도 : " + charName + " 계정 : " + client.getAccountName());
+			System.out.println("現在のアカウントではないキャラクター接続しようと：" + charName + "アカウント：" + client.getAccountName());
 			System.out.println("─────────────────────────────────");
 			client.kick();
 			client.close();
@@ -221,18 +221,18 @@ public class C_LoginToServer extends ClientBasePacket {
 		if (!pc.isGm() && Config.LEVEL_DOWN_RANGE != 0) {
 			if (pc.getHighLevel() - pc.getLevel() >= Config.LEVEL_DOWN_RANGE) {
 				System.out.println("─────────────────────────────────");
-				_log.info("렙다운 허용범위 초과: " + charName + " 계정= " + login + " host=" + client.getIp());
+				_log.info("レプダウン許容範囲を超え：" + charName + "アカウント=" + login + " host=" + client.getIp());
 				System.out.println("─────────────────────────────────");
 				client.kick();
 				return;
 			}
 		}
 
-		System.out.println("[" + 오전오후 + "] [" + cal.get(시간) + "시] [" + cal.get(분) + "분] [" + "" + charName + "]  [" + login + "]  [" + client.getIp()
-				+ "]  메모리:[" + SystemUtil.getUsedMemoryMB() + "]");
+		System.out.println("[" + 오전오후 + "] [" + cal.get(시간) + "時] [" + cal.get(분) + "分] [" + "" + charName + "]  [" + login + "]  [" + client.getIp()
+				+ "]メモリ：[" + SystemUtil.getUsedMemoryMB() + "]");
 
-		/** 로그파일저장 **/
-		LoggerInstance.getInstance().addConnection("접속 캐릭=" + charName + "	계정=" + login + "	IP=" + client.getHostname());
+		/** ログファイルの保存 **/
+		LoggerInstance.getInstance().addConnection("接続キャラ=" + charName + "	アカウント=" + login + "	IP=" + client.getHostname());
 
 		
 		pc.setOnlineStatus(1);
@@ -261,7 +261,7 @@ public class C_LoginToServer extends ClientBasePacket {
 		pc.sendPackets(new S_BookMarkLoad(pc));
 		WeekQuestTable.getInstance().loadCharacterQuestData(pc);
 		
-		// 엘릭서 섭취량 로드
+		// エリクサー摂取ロード
 		pc.sendPackets(new S_ACTION_UI2(S_ACTION_UI2.Elixir, pc.getElixirStats()));
 		
 
@@ -277,7 +277,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			}
 		}
 
-		// altsettings.properties로 GetBack가 true라면 거리에 이동시킨다
+		// altsettings.propertiesでGetBackがtrueであれば、距離を移動させる
 		if (Config.GET_BACK) {
 			int[] loc = Getback.GetBack_Location(pc, true);
 			pc.setX(loc[0]);
@@ -285,7 +285,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			pc.setMap((short) loc[2]);
 		}
 
-		// 전쟁중의 기내에 있었을 경우, 성주 혈맹이 아닌 경우는 귀환시킨다.
+		// 戦争中の機内であった場合、城主血盟がない場合は、帰還させる。
 		int castle_id = L1CastleLocation.getCastleIdByArea(pc);
 		if (pc.getMapId() == 66) {
 			castle_id = 6;
@@ -325,16 +325,16 @@ public class C_LoginToServer extends ClientBasePacket {
 
 		L1World.getInstance().addVisibleObject(pc);
 
-		// XXX 타이틀 정보는 S_OwnCharPack에 포함되므로 아마 불요
+		// XXXタイトル情報は、S_OwnCharPackに含まれるため、おそらく不要
 		pc.sendPackets(new S_PacketBox(S_PacketBox.INIT_DODGE, 0x0000));
 		pc.sendPackets(new S_PacketBox(S_PacketBox.DODGE, 0));
 
 		List<BuffInfo> buffList = loadBuff(pc);
 		processBuff(pc, buffList);
 
-		// 고정신청한경우 pc방 보안 버프효과
+		// 固定の申請した場合pc部屋のセキュリティバフ効果
 		if (account.getphone() == null || (account.getphone().equalsIgnoreCase(""))) {
-			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[명령어] .고정신청 설정시 보안 버프 발동."));
+			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[コマンド]固定申し込み設定時のセキュリティバフ発動。"));
 		} else {
 			보안버프(pc);
 		}
@@ -342,20 +342,20 @@ public class C_LoginToServer extends ClientBasePacket {
 		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.UI4));
 		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.UI5));
 
-		pc.sendVisualEffectAtLogin(); // 크라운, 독, 수중등의 시각 효과를 표
+		pc.sendVisualEffectAtLogin(); // クラウン、毒、数中等の視覚効果を表
 		pc.getLight().turnOnOffLight();
 		pc.sendPackets(new S_SPMR(pc));
 		pc.sendPackets(new S_PacketBox(32, 1));
 		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.LOGIN));
-		// pc.sendPackets(new S_PacketBox(S_PacketBox.몰라2));
+		// pc.sendPackets(new S_PacketBox(S_PacketBox。知らない2））;
 
 		L1ItemInstance weapon = pc.getWeapon();
 		if (weapon != null) {
 			int range = 1;
 			int poly = pc.getTempCharGfx();
-			if (weapon.getItem().getType() == 4) { // 양손활
+			if (weapon.getItem().getType() == 4) { // 両手弓
 				range = 17;
-			} else if ((weapon.getItem().getType() == 10) || (weapon.getItem().getType() == 13)) {// 건들렛,한손활
+			} else if ((weapon.getItem().getType() == 10) || (weapon.getItem().getType() == 13)) {// の動産レット、片手弓
 				range = 14;
 			} else if (weapon.getItem().getType() == 5 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
 				if (poly == 11330||poly == 11344|| poly == 11351||poly == 11368||poly == 11376||poly == 11447|| 
@@ -365,8 +365,8 @@ public class C_LoginToServer extends ClientBasePacket {
 						poly == 11408||poly == 11409||poly == 11410||poly == 11411||poly == 11412||poly == 11413||
 						poly == 11414||poly == 11415||poly == 11416||poly == 11417||poly == 11418||poly == 11419||
 						poly == 11420||poly == 11421||poly == 12542||poly == 12541 || poly == 13735 || poly == 13737
-						|| poly == 14928 //82경비창
-						|| poly == 13389 //85경비창
+						|| poly == 14928 //82経費ウィンドウ
+						|| poly == 13389 //85経費ウィンドウ
 						) {
 					range = 2;
 					}
@@ -402,7 +402,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, 1, 0, false));
 		}
 
-		pc.sendClanMarks();// 성혈군주 왕관표시
+		pc.sendClanMarks();// 腥血君主冠表示
 		pc.sendPackets(new S_SPMR(pc));
 		
 		
@@ -411,10 +411,10 @@ public class C_LoginToServer extends ClientBasePacket {
 		pc.startObjectAutoUpdate();
 		client.CharReStart(false);
 		pc.beginExpMonitor();
-		// 존재버그 관련 추가
+		// 存在バグ関連を追加
 		L1PcInstance jonje = L1World.getInstance().getPlayer(pc.getName());
 		if (jonje == null) {
-			pc.sendPackets(new S_SystemMessage("존재버그 강제종료! 재접속하세요"));
+			pc.sendPackets(new S_SystemMessage("存在バグ強制終了！再接続してください"));
 			client.kick();
 			return;
 		}
@@ -458,7 +458,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			try {
 				pc.save();
 			} catch (Exception e) {
-				System.out.println("스텟초기화에러");
+				System.out.println("ステータス初期化エラー");
 			}
 		}
 
@@ -478,11 +478,11 @@ public class C_LoginToServer extends ClientBasePacket {
 		WarTimeController.getInstance().checkCastleWar(pc);
 		L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 
-		// 온라인 알리기.
+		// オンライン知らせる。
 		if (clan != null)
 			clan.updateClanMemberOnline(pc);
 
-		if (pc.getClanid() != 0) { // 크란 소속중
+		if (pc.getClanid() != 0) { // クランに所属中
 			if (clan != null) {
 				if (clan.getBless() != 0) {
 					new L1SkillUse().handleCommands(pc, 504 + clan.getBless(), pc.getId(), pc.getX(), pc.getY(), null, clan.getBuffTime()[clan.getBless() - 1], L1SkillUse.TYPE_LOGIN);					
@@ -493,7 +493,7 @@ public class C_LoginToServer extends ClientBasePacket {
 					pc.sendPackets(new S_ClanAttention(clan.getGazeSize(), clan.getGazeList()));
 				}
 				if (pc.getClanid() == clan.getClanId() && 
-						// 크란을 해산해, 재차, 동명의 크란이 창설되었을 때의 대책
+						// クランを解散し、再度、同名のクランが創設されたときの対策
 						pc.getClanname().toLowerCase().equals(clan.getClanName().toLowerCase())) {
 					for (L1PcInstance clanMember : clan.getOnlineClanMember()) {
 						if (clanMember.getId() != pc.getId()) {
@@ -502,13 +502,13 @@ public class C_LoginToServer extends ClientBasePacket {
 						}
 					}
 
-					// 전전쟁 리스트를 취득
+					// 前の戦争のリストを取得し
 					for (L1War war : L1World.getInstance().getWarList()) {
 						boolean ret = war.CheckClanInWar(pc.getClanname());
-						if (ret) { // 전쟁에 참가중
+						if (ret) { // 戦争に参加中
 							String enemy_clan_name = war.GetEnemyClanName(pc.getClanname());
 							if (enemy_clan_name != null) {
-								// 당신의 혈맹이 현재_혈맹과 교전중입니다.
+								//あなたの血盟が現在_血盟と交戦中です。
 								pc.sendPackets(new S_War(8, pc.getClanname(), enemy_clan_name));
 							}
 							break;
@@ -518,24 +518,24 @@ public class C_LoginToServer extends ClientBasePacket {
 					pc.setClanid(0);
 					pc.setClanname("");
 					pc.setClanRank(0);
-					pc.save(); // DB에 캐릭터 정보를 기입한다
+					pc.save(); // DBに文字情報を記入する
 				}
 			} else {
 				pc.setClanid(0);
 				pc.setClanname("");
 				pc.setClanRank(0);
-				pc.save(); // DB에 캐릭터 정보를 기입한다
+				pc.save(); // DBに文字情報を記入する
 			}
 		}
 
-		if (pc.getPartnerId() != 0) { // 결혼중
+		if (pc.getPartnerId() != 0) { // 結婚中
 			L1PcInstance partner = (L1PcInstance) L1World.getInstance().findObject(pc.getPartnerId());
 			if (partner != null && partner.getPartnerId() != 0) {
 				if (pc.getPartnerId() == partner.getId() && partner.getPartnerId() == pc.getId()) {
 					pc.sendPackets(new S_ServerMessage(548));
-					// 당신의 파트너는 지금게임중입니다.
+					// あなたのパートナーは、今のゲーム中です。
 					partner.sendPackets(new S_ServerMessage(549));
-					// 당신의 파트너는 방금로그인했습니다.
+					// あなたのパートナーは、先ほどログインしました。
 				}
 			}
 		}
@@ -576,15 +576,15 @@ public class C_LoginToServer extends ClientBasePacket {
 		}
 
 		pc.setSkillEffect(SetBuff, 30 * 1000);
-		if (pc.getLevel() < Config.NEW_PLAYER) {// 바포메트 시스템 관련 처리
+		if (pc.getLevel() < Config.NEW_PLAYER) {//バフォメットシステム関連の処理
 			pc.sendPackets(new S_PacketBox(S_PacketBox.BAPO, 6, true));
 			pc.setNBapoLevel(7);
 		}
 		
-		//InvSwapController.getInstance().toWorldJoin(pc); //스왑
-		InvSwapController.getInstance().toWorldJoin(pc); //스왑
+		//InvSwapController.getInstance().toWorldJoin(pc); //スワップ
+		InvSwapController.getInstance().toWorldJoin(pc); //スワップ
 		
-		// 아인하사드
+		// アインハザード
 		
 		if (pc.getLevel() > 5) {
 			int einhasad = pc.getEinhasad() + (int) (System.currentTimeMillis() - pc.getLastLoginTime().getTime()) / (15 * 60 * 1000);
@@ -708,31 +708,31 @@ public class C_LoginToServer extends ClientBasePacket {
 						L1SkillId.VALA_BUFF);
 				pc.setSkillEffect(
 						L1SkillId.VALA_BUFF, (int) BloodTime);
-				//pc.sendPackets(new S_PacketBox(S_PacketBox.드래곤레이드버프,(int) BloodTime / 1000), true);
+				//pc.sendPackets(new S_PacketBox(S_PacketBoxドラゴンレイドバフ、（int）BloodTime / 1000）、true）;
 				pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 88, (int) BloodTime/1000));
 			}
 		}*/
 
 		if (pc.getInventory().checkItem(30044, 1) && pc.getLevel() < 45) {
-			// 빛나는구슬
-			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "퀘스트 시작: 은기사 마을 토벌대원을 만나서 시작"));
+			// 輝くビーズ
+			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "クエスト開始：ナイトタウン討伐隊員に会っ開始"));
 		} else if (pc.getInventory().checkItem(30046, 1) && (pc.getLevel() > 45 && pc.getLevel() < 52)) {
 			// 영롱한 구슬
-			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "퀘스트 시작: 은기사 마을 드래곤뼈 수집꾼을 만나서 시작"));
+			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "クエスト開始：シルバーナイトタウンのドラゴンの骨を収集屋に会っ開始"));
 		}
 		if (Config.STANDBY_SERVER) {
-			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "현재 오픈대기 상태로 경험치가 없습니다."));
-			pc.sendPackets(new S_ChatPacket(pc, "현재 오픈대기 상태로 경험치가 없습니다."));
+			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "現在オープン待ち状態に経験値がありません。"));
+			pc.sendPackets(new S_ChatPacket(pc, "現在オープン待ち状態に経験値がありません。"));
 		}
-		/** 차단 리스트 불러오기 **/
+		/**ブロックリストのインポート**/
 		L1ExcludingList exList = SpamTable.getInstance().getExcludeTable(pc.getId());
 		if (exList != null) {
 			setExcludeList(pc, exList);
 		}
-		/** 스탯 리뉴얼 표기 **/
+		/**ステータスリニューアル表記 **/
 		RenewStat(pc);
 
-		/** 무게 게이지 **/
+		/** 重量ゲージ**/
 		pc.sendPackets(new S_Weight(pc));
 		
 
@@ -744,15 +744,15 @@ public class C_LoginToServer extends ClientBasePacket {
 		// 서버 접속 알림 운영자만 보임
 		for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
 			if (player.isGm()) {
-				 player.sendPackets(new S_SystemMessage("\\aD" + pc.getName() + "님 접속 \\aLIP:" + client.getIp() + " \\aF계정:"+ client.getAccountName()));
+				 player.sendPackets(new S_SystemMessage("\\aD" + pc.getName() + "様接続\\aLIP:" + client.getIp() + " \\aFアカウント:"+ client.getAccountName()));
 			}
 		}
 
-		// 3.63아이템패킷처리
+		// 3.63アイテムのパケット処理
 		pc.isWorld = true;
 		L1ItemInstance temp = null;
 		try {
-			// 착용한 아이템이 슬롯에 정상적으로 표현하도록 하기위해 임시로 작업함.
+			// 着用したアイテムがスロットに正常に表現するようにするために一時的に作業する。
 			for (L1ItemInstance item : pc.getInventory().getItems()) {
 				temp = item;
 				if (item.isEquipped())
@@ -760,13 +760,13 @@ public class C_LoginToServer extends ClientBasePacket {
 
 			}
 		} catch (Exception e) {
-			System.out.println("에러 남 의심되는 아이템은 ->> " + temp.getItem().getName());
+			System.out.println("エラー南疑われるアイテムは -  >>" + temp.getItem().getName());
 		}
 		DragonknightPolyCheck(pc);
 		ClanMatching(pc);
 		Clanclan(pc);
 
-		/** 배틀존 **/
+		/** バトルゾーン **/
 		if (pc.getMapId() == 5153) {
 			if (!BattleZone.getInstance().getDuelOpen()) {
 				if (pc.get_DuelLine() != 0) {
@@ -784,19 +784,19 @@ public class C_LoginToServer extends ClientBasePacket {
 			}
 		}
 
-		/** 몽섬리뉴얼 **/
+		/** モンソムリニューアル **/
 		if (pc.getMap().getBaseMapId() == 1936) {
 			new L1Teleport().teleport(pc, 33968, 32961, (short) 4, 2, true);
 		}
-		/** 카이저 훈련소 **/
+		/** カイザー訓練所 **/
 		if (pc.getMap().getBaseMapId() == 1400) {
 			new L1Teleport().teleport(pc, 33491, 32762, (short) 4, 0, true);
 		}
-		/** 화룡의 안식처 **/
+		/** 火竜の聖域 **/
 		if (pc.getMap().getBaseMapId() == 2600 || pc.getMap().getBaseMapId() == 2699) {
 			new L1Teleport().teleport(pc, 33705, 32504, (short) 4, 0, true);
 		}
-		/** 정령의무덤 **/
+		/** 精霊の墓 **/
 		if (pc.getMapId() == 430) {
 			new L1Teleport().teleport(pc, 32779, 32831, (short) 622, 0, true);
 		}
@@ -804,12 +804,12 @@ public class C_LoginToServer extends ClientBasePacket {
 			new L1Teleport().teleport(pc, 33435, 32814, (short) 4, 0, true);
 		}
 
-		// 얼던맵 기
+		// アールドンメプ機
 		if (pc.getMapId() >= 2101 && pc.getMapId() <= 2151 || pc.getMapId() >= 2151 && pc.getMapId() <= 2201) {
 			new L1Teleport().teleport(pc, 33442, 32809, (short) 4, 5, false);
 		}
 
-		// 화염의 막대/신비한 회복 물약 삭제.
+		// 炎のバー/神秘的な回復ポーション削除します。
 		if (!(pc.getMapId() >= 2101 && pc.getMapId() <= 2151 || pc.getMapId() >= 2151 && pc.getMapId() <= 2201)) {
 			for (L1ItemInstance item : pc.getInventory().getItems()) {
 				if (item.getItemId() == 30055 || item.getItemId() == 30056) {
@@ -821,44 +821,44 @@ public class C_LoginToServer extends ClientBasePacket {
 		}
 
 		if (pc.getClanname() != null && pc.getClanid() > 0) {
-			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_ONE && pc.getClan().getClanExp() < Config.CLAN_EXP_TWO) { // 혈맹1레벨
+			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_ONE && pc.getClan().getClanExp() < Config.CLAN_EXP_TWO) { //血盟レベル1
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 154, true));
-				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]혈맹 1레벨버프적용"));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]血盟1レベルバフ適用"));
 			}
 			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_TWO && pc.getClan().getClanExp() < Config.CLAN_EXP_THREE) { // 혈맹2레벨
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 155, true));
-				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]혈맹 2레벨버프적용"));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]血盟2レベルバフ適用"));
 				pc.addDmgup(1);
 				pc.addBowDmgup(1);
 				pc.getAC().addAc(-1);
 			}
-			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_THREE && pc.getClan().getClanExp() < Config.CLAN_EXP_FOUR) { // 혈맹3레벨
+			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_THREE && pc.getClan().getClanExp() < Config.CLAN_EXP_FOUR) { // 血盟レベル3
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 156, true));
-				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]혈맹 3레벨버프적용"));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]血盟レベル3バフ適用"));
 				pc.addDmgup(2);
 				pc.addBowDmgup(2);
 				pc.addDamageReductionByArmor(1);
 				pc.getAC().addAc(-2);
 			}
-			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_FOUR && pc.getClan().getClanExp() < Config.CLAN_EXP_FIVE) { // 혈맹4레벨
+			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_FOUR && pc.getClan().getClanExp() < Config.CLAN_EXP_FIVE) { // 血盟レベル4
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 157, true));
-				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]혈맹 4레벨버프적용"));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]血盟レベル4バフ適用"));
 				pc.addDmgup(3);
 				pc.addBowDmgup(2);
 				pc.addDamageReductionByArmor(3);
 				pc.getAC().addAc(-4);
 			}
-			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_FIVE && pc.getClan().getClanExp() < Config.CLAN_EXP_SIX) { // 혈맹5레벨
+			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_FIVE && pc.getClan().getClanExp() < Config.CLAN_EXP_SIX) { // 血盟レベル5
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 158, true));
-				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]혈맹 5레벨버프적용"));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]血盟レベル5バフ適用"));
 				pc.addDmgup(4);
 				pc.addBowDmgup(4);
 				pc.addDamageReductionByArmor(5);
 				pc.getAC().addAc(-6);
 			}
-			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_SIX && pc.getClan().getClanExp() < Config.CLAN_EXP_SEVEN) { // 혈맹6레벨
+			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_SIX && pc.getClan().getClanExp() < Config.CLAN_EXP_SEVEN) { //血盟レベル6
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 159, true));
-				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]혈맹 6레벨버프적용"));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]血盟レベル6バフ適用"));
 				pc.addDmgup(6);
 				pc.addBowDmgup(6);
 				pc.addHitup(5);
@@ -866,9 +866,9 @@ public class C_LoginToServer extends ClientBasePacket {
 				pc.addDamageReductionByArmor(7);
 				pc.getAC().addAc(-8);
 			}
-			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_SEVEN) { // 혈맹7레벨
+			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_SEVEN) { // 血盟レベル7
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 160, true));
-				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]혈맹 7레벨버프적용"));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]血盟レベル7バフ適用"));
 				pc.addDmgup(8);
 				pc.addBowDmgup(8);
 				pc.addHitup(10);
@@ -877,16 +877,16 @@ public class C_LoginToServer extends ClientBasePacket {
 				pc.getAC().addAc(-10);
 			}
 		}
-		// 로그인시 폭죽
+		// ログイン時に爆竹
 		// welcome(pc);
-		// 어비스 계급갱신
+		// アビス階級更新
 		Abyss(pc);
-		// 페어리시스템
+		// フェアリーシステム
 		pc.sendPackets(new S_FairlyConfig(pc));
-		/** 세이프존패킷 **/
+		/** セーフゾーンのパケット **/
 		safetyzone(pc);
 
-		// 피씨방버프
+		// インターネットカフェバフ
 		if (pc.getAccount().getBuff_PCRoom() != null) {
 			if (sysTime <= pc.getAccount().getBuff_PCRoom().getTime()) {
 				long 피씨타임 = pc.getAccount().getBuff_PCRoom().getTime() - sysTime;
@@ -899,13 +899,13 @@ public class C_LoginToServer extends ClientBasePacket {
 				int sc = calendar.get(Calendar.SECOND);
 
 				if (d > 0) {
-					pc.sendPackets(new S_SystemMessage("[PC방 이용 시간] " + d + "일 " + h + "시간 " + m + "분 " + sc + "초 남았습니다."));
+					pc.sendPackets(new S_SystemMessage("【PC部屋利用時間】" + d + "仕事" + h + "時間" + m + "分" + sc + "秒残りました。"));
 				} else if (h > 0) {
-					pc.sendPackets(new S_SystemMessage("[PC방 이용 시간] " + h + "시간 " + m + "분 " + sc + "초 남았습니다."));
+					pc.sendPackets(new S_SystemMessage("【PC部屋利用時間】" + h + "時間" + m + "分" + sc + "秒残りました。"));
 				} else if (m > 0) {
-					pc.sendPackets(new S_SystemMessage("[PC방 이용 시간] " + m + "분 " + sc + "초 남았습니다."));
+					pc.sendPackets(new S_SystemMessage("【PC部屋利用時間】" + m + "分" + sc + "초 남았습니다."));
 				} else {
-					pc.sendPackets(new S_SystemMessage("[PC방 이용 시간] " + sc + "초 남았습니다."));
+					pc.sendPackets(new S_SystemMessage("【PC部屋利用時間】" + sc + "秒残りました。"));
 				}
 				pc.PCRoom_Buff = true;
 				pc.sendPackets(new S_PacketBox(S_PacketBox.PC_ROOM_BUFF, 1));
@@ -915,12 +915,12 @@ public class C_LoginToServer extends ClientBasePacket {
 		}
 
 		if (Config.아놀드이벤트) {
-			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[이벤트 진행중] 돌아온 아놀드 이벤트"));
+			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[イベント進行中]帰ってきたアーノルドイベント"));
 		}
 		
 		pc.sendPackets(new S_Attendance(S_Attendance.출석체크아이콘, 0, 0));
-		pc.sendPackets(new S_Attendance(S_Attendance.출석리스트, 0, 0));// 일반
-		pc.sendPackets(new S_Attendance(S_Attendance.출석리스트, 1, 0));// pc방
+		pc.sendPackets(new S_Attendance(S_Attendance.출석리스트, 0, 0));// 一般
+		pc.sendPackets(new S_Attendance(S_Attendance.출석리스트, 1, 0));// pc部屋
 		
 		L1AccountAttendance acc = AttendanceController.findacc(pc.getAccountName());
 		if (acc == null) {
@@ -929,10 +929,10 @@ public class C_LoginToServer extends ClientBasePacket {
 		}
 		AttendanceController.accsetPc(pc, pc.getAccountName(), 0);
 		/*if(AttendanceController.findacc(pc.getAccountName()).checktype()==1)
-			acc.getPc().sendPackets(new S_Attendance(acc, 0 , acc.getPc().PC방_버프));
+			acc.getPc().sendPackets(new S_Attendance(acc, 0 , acc.getPc（）.PC部屋_バフ））;
 		if(AttendanceController.findacc(pc.getAccountName()).checktypepc()==1)
 			acc.getPc().sendPackets(new S_Attendance(acc, 1 , acc.getPc().PC방_버프));*/
-		//pc.sendPackets(new S_EventNotice()); // 이벤트알람
+		//pc.sendPackets(new S_EventNotice()); // イベントアラーム
 		
 		HashMap<Integer, Integer> mbq = MonsterBookTable.getInstace().getMonQuest(pc.getId());
 		if (mbq != null)
@@ -963,27 +963,27 @@ public class C_LoginToServer extends ClientBasePacket {
 		}
 		pc.sendPackets(new S_WeekQuest(pc)); */
 		
-		// 76반지 개방완료
+		// 76リング開放完了
 		if (pc.getQuest().isEnd(L1Quest.QUEST_SLOT76)) {
 			pc.sendPackets(new S_ReturnedStat(S_ReturnedStat.RING_RUNE_SLOT, S_ReturnedStat.SUBTYPE_RING, 1));
 		}
-		if (pc.getQuest().isEnd(L1Quest.QUEST_SLOT81)) { // 81반지 개방완료
+		if (pc.getQuest().isEnd(L1Quest.QUEST_SLOT81)) { // 81リング開放完了
 			pc.sendPackets(new S_ReturnedStat(S_ReturnedStat.RING_RUNE_SLOT, S_ReturnedStat.SUBTYPE_RING, 2));
 		}
-		if (pc.getQuest().isEnd(L1Quest.QUEST_SLOT59)) {// 귀걸이 개방완료
+		if (pc.getQuest().isEnd(L1Quest.QUEST_SLOT59)) {//イヤリング開放完了
 			pc.sendPackets(new S_ReturnedStat(S_ReturnedStat.RING_RUNE_SLOT, S_ReturnedStat.SUBTYPE_RING, 16));
 		}
-		if (pc.getQuest().isEnd(L1Quest.QUEST_SLOT70)) {// 휘장 개방완료 
+		if (pc.getQuest().isEnd(L1Quest.QUEST_SLOT70)) {// 記章開放完了 
 			pc.sendPackets(new S_ReturnedStat(S_ReturnedStat.RING_RUNE_SLOT, S_ReturnedStat.SUBTYPE_RING, 128));
 		}
-		if (pc.getQuest().isEnd(L1Quest.QUEST_SLOT83)) {// 견갑
+		if (pc.getQuest().isEnd(L1Quest.QUEST_SLOT83)) {// 肩甲
 			pc.sendPackets(new S_ReturnedStat(S_ReturnedStat.RING_RUNE_SLOT, S_ReturnedStat.SUBTYPE_RING, 64));
 		}
 		if (pc.getHellTime() > 0) {
 			pc.beginHell(false);
 		}
 	
-		huntoption(pc); // 수배효과
+		huntoption(pc); // 手配の効果
 		
 		
 		if(BossAlive.getInstance().isErusabe){
@@ -998,7 +998,7 @@ public class C_LoginToServer extends ClientBasePacket {
 		
 		if (CheckMail(pc) > 0) {
 			pc.sendPackets(new S_SkillSound(pc.getId(), 1091));
-			pc.sendPackets(new S_ServerMessage(428)); // 편지가 도착했습니다.
+			pc.sendPackets(new S_ServerMessage(428)); // メールが届きました。
 		}
 		pc.LoadCheckStatus();
 		if (!CheckInitStat.CheckPcStat(pc)) {
@@ -1014,22 +1014,22 @@ public class C_LoginToServer extends ClientBasePacket {
 		int currentTime = (int) (System.currentTimeMillis() / 1000);
 		if (pc.getSealScrollTime() > 0) {
 			if (pc.getSealScrollTime() < currentTime) {
-				// 인벤에 아이템 지급
+				// インベントリにアイテム支給
 				pc.getInventory().storeItem(50021, pc.getSealScrollCount());
 				pc.setSealScrollTime(0);
 				pc.setSealScrollCount(0);
 				pc.save();
-				pc.sendPackets(new S_ChatPacket(pc, "봉인해제 주문서가 지급되었습니다.", 1));
+				pc.sendPackets(new S_ChatPacket(pc, "封印解除スクロールが支給されました。", 1));
 			} else {
 				int remainMin = (pc.getSealScrollTime() - currentTime) / 60 + 1;
 				int remainHour = remainMin / 60;
 				remainMin -= remainHour * 60;
 				int remainDay = remainHour / 24;
 				remainHour -= remainDay * 24;
-				pc.sendPackets(new S_ChatPacket(pc, "봉인해제주문서 지급까지 " + remainDay + "일 " + remainHour + "시간 " + remainMin + "분 남았습니다.", 1));
+				pc.sendPackets(new S_ChatPacket(pc, "封印解除スクロール支給まで" + remainDay + "仕事" + remainHour + "時間" + remainMin + "分残りました。", 1));
 			}
 		}
-		/** 클라우디아**/
+		/** クラウディア**/
 		if(pc.getLevel() <= 5){
 			Thread.sleep(1000);
 			pc.sendPackets(new S_MatizCloudia(0,pc.getLevel()));
@@ -1041,7 +1041,7 @@ public class C_LoginToServer extends ClientBasePacket {
 	}
 	
 	private void loadItems(final L1PcInstance pc, boolean sendOption) {
-		// DB로부터 캐릭터와 창고의 아이템을 읽어들인다
+		// DBから文字と倉庫のアイテムを読み込む
 		if(sendOption)
 			pc.getInventory().sendOptioon();
 		else
@@ -1077,7 +1077,7 @@ public class C_LoginToServer extends ClientBasePacket {
 					}
 				}
 			}
-		}, 100L);//0.1초 
+		}, 100L);//0.1秒 
 	}
 
 
@@ -1086,7 +1086,7 @@ public class C_LoginToServer extends ClientBasePacket {
 		// pc.sendPackets(new S_InvList(pc));
 	}
 
-	/** Safetyzone 표시 **/
+	/** Safetyzone 表示 **/
 	private void safetyzone(L1PcInstance pc) {
 		if (pc.getZoneType() == 0) {
 			if (pc.getSafetyZone() == true) {
@@ -1101,7 +1101,7 @@ public class C_LoginToServer extends ClientBasePacket {
 		}
 	}
 	
-	private void huntoption(L1PcInstance pc) { // 해당맵 이펙트 보여주기
+	private void huntoption(L1PcInstance pc) { // このマップエフェクト示す
 		if (pc.getHuntCount() != 0) {
 			if (pc.isWizard() || pc.isBlackwizard()) {
 				if (pc.getHuntPrice() == Config.수배1단) {
@@ -1205,7 +1205,7 @@ public class C_LoginToServer extends ClientBasePacket {
 						skillList[l1skills.getSkillLevel() - 1] |= l1skills.getId();
 					}
 				}
-				// 전사스킬 로드
+				// 戦士スキルロード
 				if (l1skills != null && pc.isWarrior() && l1skills.getSkillLevel() == 30) {
 					pc.sendPackets(new S_ACTION_UI(145, l1skills.getId()));
 				}
@@ -1258,18 +1258,18 @@ public class C_LoginToServer extends ClientBasePacket {
 
 	private void RenewStat(L1PcInstance pc) {
 		pc.sendPackets(new S_CharStat(pc, S_CharStat.STAT_REFRESH));
-		pc.sendPackets(new S_CharStat(pc, 1, S_CharStat.Stat_Str)); // 스탯 상세능력
+		pc.sendPackets(new S_CharStat(pc, 1, S_CharStat.Stat_Str)); // ステータスの詳細能力
 		pc.sendPackets(new S_CharStat(pc, 1, S_CharStat.Stat_Int));
 		pc.sendPackets(new S_CharStat(pc, 1, S_CharStat.Stat_Wis));
 		pc.sendPackets(new S_CharStat(pc, 1, S_CharStat.Stat_Dex));
 		pc.sendPackets(new S_CharStat(pc, 1, S_CharStat.Stat_Con));
-		pc.sendPackets(new S_CharStat(S_CharStat.STAT_VIEW, 25)); // 스탯능력치
+		pc.sendPackets(new S_CharStat(S_CharStat.STAT_VIEW, 25)); // ステータス能力値
 		pc.sendPackets(new S_CharStat(S_CharStat.STAT_VIEW, 35));
 		pc.sendPackets(new S_CharStat(S_CharStat.STAT_VIEW, 45));
 		pc.sendPackets(new S_CharStat(pc, S_CharStat.STAT_REFRESH));
 	}
 
-	// 용기사
+	// 竜騎士
 	private void DragonknightPolyCheck(L1PcInstance pc) {
 		L1ItemInstance weapon = pc.getWeapon();
 		int polyId = pc.getTempCharGfx();
@@ -1316,7 +1316,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			case 6:
 			case 10:
 			case 9:
-				// 부군주, 혈맹군주, 수호기사
+				// 部君主、血盟君主、守護騎士
 				cml.loadClanMatchingApcList_Crown(pc);
 				break;
 			}
@@ -1324,16 +1324,16 @@ public class C_LoginToServer extends ClientBasePacket {
 	}
 
 	private void Clanclan(L1PcInstance pc) {
-		// 3245군주의 부름: 혈맹에 가입하세요//3246군주의 부름: 혈원을 모집하세요
-		// 3247혈맹을 창설하고 쉽게 알리세요//3248혈맹 가입 요청이 왔습니다
+		// 3245君主の呼びかけ：血盟に加入してください// 3246君主の呼びかけ：血盟員を募集し
+		// 3247血盟を創設し、簡単にアリですか// 3248血盟加入要請が来ました
 		L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 		if (clan == null && pc.isCrown()) {
-			pc.sendPackets(new S_ServerMessage(3247)); // 혈맹을 창설하고 쉽게 알리세요
-			// pc.sendPackets(new S_SystemMessage(pc.getName() + "의 계급이 " + L1Clan.군주 + " 로 변경되었습니다."));
+			pc.sendPackets(new S_ServerMessage(3247)); //血盟を創設し、簡単にアリください
+			// pc.sendPackets(new S_SystemMessage(pc.getName()+ "のランクが「+ L1Clan。君主+」に変更されました。"））;
 		} else if (clan != null && pc.isCrown()) {
-			pc.sendPackets(new S_ServerMessage(3246)); // 혈맹원을 모집하세요
+			pc.sendPackets(new S_ServerMessage(3246)); //血盟員を募集し
 		} else if (clan == null && !pc.isCrown()) {
-			pc.sendPackets(new S_ServerMessage(3245)); // 혈맹에 가입하세요
+			pc.sendPackets(new S_ServerMessage(3245)); // 血盟に加入してください
 		}
 	}
 
@@ -1381,7 +1381,7 @@ public class C_LoginToServer extends ClientBasePacket {
 				continue;
 			}
 			switch (skillid) {
-			case God_buff: // 흑사 버프
+			case God_buff: // フクサバフ
 				pc.getAC().addAc(-2);
 				pc.getResistance().addHold(10);
 				pc.addMaxHp(20);
@@ -1419,8 +1419,8 @@ public class C_LoginToServer extends ClientBasePacket {
 			case BLOOD_LUST:
 				pc.sendPackets(new S_SkillBrave(pc.getId(), 1, remaining_time));
 				break;
-			case DECREASE_WEIGHT:// 환술사 리듀스 웨이트
-			case REDUCE_WEIGHT:// 마법사 디크리즈 웨이트
+			case DECREASE_WEIGHT:// イリュージョニストリデュースウェイト
+			case REDUCE_WEIGHT:// ウィザードディクリーズウェイト
 				icon[0] = remaining_time / 16;
 				break;
 			case DECAY_POTION:
@@ -1814,26 +1814,26 @@ public class C_LoginToServer extends ClientBasePacket {
 			  } else if(pc.getAbysspoint() >= Config.ONE_CLASS && pc.getAbysspoint() < Config.STAR_ONE){		
 				  pc.setPeerage(9); // 1
 			  } else if(pc.getAbysspoint() >= Config.STAR_ONE && pc.getAbysspoint() < Config.STAR_TWO){ 
-				  pc.setPeerage(10); // 1성 
+				  pc.setPeerage(10); //1つ星 
 			  }	
 	 }else if(pc.getAbysspoint() >= Config.STAR_TWO && pc.getAbysspoint() < Config.STAR_THREE){ 
-		 		  		pc.setPeerage(11); // 2성 
+		 		  		pc.setPeerage(11); // 2つ星 
 				} else if(pc.getAbysspoint() >= Config.STAR_THREE && pc.getAbysspoint() < Config.STAR_FOUR){
-						pc.setPeerage(12); // 3성 
+						pc.setPeerage(12); // 3つ星 
 				} else if(pc.getAbysspoint() >= Config.STAR_FOUR &&  pc.getAbysspoint() < Config.STAR_FIVE){ 
-						pc.setPeerage(13); // 4성 
+						pc.setPeerage(13); // 4つ星 
 				} else if(pc.getAbysspoint() >= Config.STAR_FIVE && pc.getAbysspoint() < Config.GENERAL){ 
-						pc.setPeerage(14); // 5성 
+						pc.setPeerage(14); // 5つ星 
 				} else if(pc.getAbysspoint() >= Config.GENERAL && pc.getAbysspoint() < Config.IMPERATOR){
-						pc.setPeerage(15); // 장군 
+						pc.setPeerage(15); // 将軍 
 				} else if(pc.getAbysspoint() >= Config.IMPERATOR && pc.getAbysspoint() < Config.COMMANDER){
-						pc.setPeerage(16); // 대장군
+						pc.setPeerage(16); // 大将軍
 				} else if(pc.getAbysspoint() >= Config.COMMANDER && pc.getAbysspoint() < Config.SUPREMECOMMANDER){ 
-						pc.setPeerage(17); // 사령관 } else
+						pc.setPeerage(17); // 司令官} else
 				}
 	  
 		  if(pc.getAbysspoint() >= Config.SUPREMECOMMANDER){ 
-		  pc.setPeerage(18); // 총사령관 
+		  pc.setPeerage(18); //総司令官 
 	  }
 	  
 	  if (pc.getPeerage() == 1) {
@@ -1942,7 +1942,7 @@ public class C_LoginToServer extends ClientBasePacket {
 	}
 
 	/*
-	 * private void welcome(L1PcInstance pc) { //해당맵 이펙트 보여주기
+	 * private void welcome(L1PcInstance pc) { //このマップエフェクト示す
 	 * 
 	 * pc.sendPackets(new S_EffectLocation(pc.getX() + 3, pc.getY() + 3, 6415)); // e pc.sendPackets(new S_EffectLocation(pc.getX() + 2, pc.getY() +
 	 * 2, 6423)); // m pc.sendPackets(new S_EffectLocation(pc.getX() + 1, pc.getY() + 1, 6425)); // o pc.sendPackets(new S_EffectLocation(pc.getX() ,

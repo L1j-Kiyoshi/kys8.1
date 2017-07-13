@@ -92,60 +92,60 @@ public class C_NPCTalk extends ClientBasePacket {
 		L1PcInstance pc = client.getActiveChar();	
 		if (pc == null) return;		
 		
-		//장비변경권을 쓰고 캔슬했을때를 대비하여 한줄 추가
+		//機器変更権を使ってキャンセルしたときに備えて、行を追加
 		pc.setIsChangeItem(false);
 		
 		int npcid = ((L1NpcInstance) obj).getNpcTemplate().get_npcId();		
 		int mapvalue = 0;
 		mapvalue = action.length;
 		switch (npcid) {
-		case 50015:// 말하는 섬 (루카스)
+		case 50015:// 話せる島（ルーカス）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_talk_island, mapvalue));
 			break;
-		case 50024:// 글루딘 마을 (아스터)
+		case 50024:// グルーディン村（アスター）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_gludio, mapvalue));
 			break;
-		case 50082:// 화전민 마을 (지프란)
+		case 50082:// 火田村（ジープとは）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_orc, mapvalue));
 			break;
-		case 50054:// 우드벡 마을 (트레이)
+		case 50054:// ウッドベック村（トレイ）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_woodbec, mapvalue));
 			break;
-		case 50056: // 은기사 마을 (메트)
+		case 50056: // は記事の村（メタ）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_silver_knight, mapvalue));
 			break;
-		case 50020:// 켄트성 마을 (스텐리)
+		case 50020:// ケント城の村（スタンレー）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_kent, mapvalue));
 			break;
-		case 50036:// 기란 마을 (윌마)
+		case 50036:// ギラン村（ウィルマ）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_giran, mapvalue));
 			break;
-		case 50066:// 하이네 마을 (리올)
+		case 50066://ハイネ（リオル）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_heine, mapvalue));
 			break;
-		case 50039:// 웰던 마을 (레슬리)
+		case 50039:// ウェルダン村（レスリー）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_werldern, mapvalue));
 			break;
-		case 50051:// 오렌 마을 (키리우스)
+		case 50051:// 象牙の塔の村（キーウス）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_oren, mapvalue));
 			break;
 		case 50044:
-		case 50046:// 아덴 마을 (엘레리스)
+		case 50046:// アデン（エレレス）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_aden, mapvalue));
 			break;
-		case 50079:// 침묵의 동굴 마을 (다니엘)
+		case 50079:// 沈黙の洞窟の村（ダニエル）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_scave, mapvalue));
 			break;
-		case 3000005:// 베히모스 (데카비아)
+		case 3000005:// ベヒーモス（デカビア）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_behemoth, mapvalue));
 			break;
-		case 3100005:// 실베리아 (샤리엘)
+		case 3100005:// シルベリア（シャーリーエル）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_silveria, mapvalue));
 			break;
-	      case 5069: //린지
+	      case 5069: //リンジー
 	          pc.sendPackets(new S_TelePortUi(objid, action, T_giran, mapvalue));
 	          break;
-		case 202055: // 클라우디아 (소피)
+		case 202055: // クラウディア（ソフィー）
 			mapvalue = claudiaact.length;
 			pc.sendPackets(new S_TelePortUi(objid, claudiaact, T_claudia, mapvalue));
 			break;
@@ -161,7 +161,7 @@ public class C_NPCTalk extends ClientBasePacket {
 				}
 				return;
 			}
-			/** 미니게임 **/
+			/** ミニゲーム **/
 			if (obj instanceof L1NpcInstance) {
 				L1NpcInstance npc = (L1NpcInstance) obj;
 				if (npc.getNpcTemplate().get_npcId() == 400064 || npc.getNpcTemplate().get_npcId() == 400065 ||npc.getNpcTemplate().get_npcId() == 400066) {

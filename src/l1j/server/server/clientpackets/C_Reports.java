@@ -20,26 +20,26 @@ public class C_Reports extends ClientBasePacket {
 		if (client == null){
 			return;
 		}
-		int type = readC(); // 타입
-		int objid = readD(); // 케릭터 오브젝트	
+		int type = readC(); // タイプ
+		int objid = readD(); // キャラクターオブジェクト	
 		L1PcInstance pc = client.getActiveChar();
 		if(pc == null)
 			return;
 		L1PcInstance target = (L1PcInstance) L1World.getInstance().findObject(objid);
 		
 		if (!pc.isReport()) {
-			pc.sendPackets(new S_ServerMessage(1021)); // 잠시후 다시 신고 해주세요.
+			pc.sendPackets(new S_ServerMessage(1021)); // しばらくして戻って報告してください。
 			return;
 		}
 		
-		if (target != null) { // objid 이 null 이 아니라면  
+		if (target != null) { // objidがnullでない場合  
 			if (!ReportTable.getInstance().name.contains(target.getName())) { 
 				ReportTable.getInstance().name.add(target.getName());
-				ReportTable.getInstance().report(target.getName(), pc.getName()); // DB에 등록
-				pc.sendPackets(new S_ServerMessage(1019)); // 등록되었습니다.
+				ReportTable.getInstance().report(target.getName(), pc.getName()); // DBに登録
+				pc.sendPackets(new S_ServerMessage(1019)); // 登録された。
 				pc.startReportDeley();
 			} else {
-				pc.sendPackets(new S_ServerMessage(1020)); // 이미 등록 되었습니다.
+				pc.sendPackets(new S_ServerMessage(1020)); // 既に登録された。
 			}
 		} 
 	}

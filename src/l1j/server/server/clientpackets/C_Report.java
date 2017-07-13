@@ -26,11 +26,11 @@ import l1j.server.server.model.Instance.L1NpcShopInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.item.L1ItemId;
 import l1j.server.server.model.skill.L1SkillId;
+import l1j.server.server.serverpackets.S_CreateCharacter;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.serverpackets.S_Teleport;
-import l1j.server.server.serverpackets.S_CreateCharacter;
 import l1j.server.server.templates.L1BookMark;
 import l1j.server.server.utils.SQLUtil;
 
@@ -41,17 +41,17 @@ public class C_Report extends ClientBasePacket {
 	public static final int DragonMenu = 0x06;
 
 	public static final int MINI_MAP_SEND = 0x0b;
-	/**몬스터킬*/
+	/**モンスターキル*/
 	public static final int MonsterKill = 0x2c;
-	/** 홈페이지 연동 아이콘 **/
+	/** ホームページ連動アイコン **/
 	public static final int HTTP = 0x13;
 	public static final int BOOKMARK_SAVE = 0x22;
 	public static final int BOOKMARK_COLOR = 0x27;
 	public static final int BOOKMARK_LOADING_SAVE = 0x28;
-	public static final int EMBLEM = 0x2e; //문장주시
-	public static final int TELPORT = 0x30; // 마을텔레포트
+	public static final int EMBLEM = 0x2e; //文章注視
+	public static final int TELPORT = 0x30; // 村テレポート
 	public static final int 케릭터생성 = 43;
-	//public static final int 페어리 = 0x37;
+	//public static final int フェアリー= 0x37;
 	public static final int 파워북검색 = 0x13;
 	public static final int 상인찾기 = 0x31;
 	public static final int 상점개설횟수 = 0x39;
@@ -83,7 +83,7 @@ public class C_Report extends ClientBasePacket {
 				return;
 			if (pc.hasSkillEffect(L1SkillId.신고딜레이)) {
 				int time = pc.getSkillEffectTimeSec(L1SkillId.신고딜레이);
-				pc.sendPackets(new S_SystemMessage("(" + time + ") 초후 다시 이용해 주세요."));
+				pc.sendPackets(new S_SystemMessage("(" + time + "）秒後再び利用してください。"));
 				return;
 			}
 			pc.setSkillEffect(L1SkillId.신고딜레이,60000);
@@ -121,7 +121,7 @@ public class C_Report extends ClientBasePacket {
 							pc.sendPackets(new S_Teleport(pc));
 							
 						} else {
-							pc.sendPackets(new S_SystemMessage("상인찾기 : 찾으시는 상인이 없습니다."), true);
+							pc.sendPackets(new S_SystemMessage("商人検索：お探しの商人がありません。"), true);
 						}
 					}
 					rnd = null;
@@ -187,19 +187,19 @@ public class C_Report extends ClientBasePacket {
 			  break;
 		  case BOOKMARK_LOADING_SAVE:
 			  if (pc._speedbookmarks.size() == 0) {
-				  pc.sendPackets(new S_SystemMessage("빠른기억창에 기억을 등록시켜주세요."));
+				  pc.sendPackets(new S_SystemMessage("速い記憶ウィンドウに記憶を登録させてください。"));
 				  return;
 			  }
 			  int totalCount = pc.getInventory().getSize();
 			  if (pc.getInventory().getWeight100() > 82 || totalCount > 180) {
-				  pc.sendPackets(new S_SystemMessage("인벤이 가득차서 기억구슬을 생성할수없습니다."));
+				  pc.sendPackets(new S_SystemMessage("インベントリがいっぱいで記憶ビーズを生成することができません。"));
 				  return;
 			  }
 				int citemid = readD();
 				L1ItemInstance SaveMarble = pc.getInventory().getItem(citemid);
 				pc.getInventory().removeItem(SaveMarble);
 				createNewItem(pc, pc.getId());
-				pc.sendPackets(new S_ServerMessage(2920));// 기억 저장 구슬: 기억 장소 목록 저장 완료
+				pc.sendPackets(new S_ServerMessage(2920));//記憶保存玉：記憶場所のリストを保存完了
 			break;
 		case HTTP:
 			break;
@@ -224,7 +224,7 @@ public class C_Report extends ClientBasePacket {
 			int point = readH();
 			int locx = 0;
 			int locy = 0;
-			if (mapIndex == 1) {//아덴
+			if (mapIndex == 1) {//アデン
 				if (point == 0) {
 					locx = 34079 + (int) (Math.random() * 12);
 					locy = 33136 + (int) (Math.random() * 15);
@@ -235,7 +235,7 @@ public class C_Report extends ClientBasePacket {
 					locx = 33925 + (int) (Math.random() * 14);
 					locy = 33351 + (int) (Math.random() * 9);
 				}
-			} else if (mapIndex == 2) {//글루딘
+			} else if (mapIndex == 2) {//グルーディン
 				if (point == 0) {
 					locx = 32615 + (int) (Math.random() * 11);
 					locy = 32719 + (int) (Math.random() * 7);
@@ -243,7 +243,7 @@ public class C_Report extends ClientBasePacket {
 					locx = 32621 + (int) (Math.random() * 9);
 					locy = 32788 + (int) (Math.random() * 13);
 				}
-			} else if (mapIndex == 3) {//기란마을
+			} else if (mapIndex == 3) {//ギラン村
 				if (point == 0) {
 					locx = 33501 + (int) (Math.random() * 11);
 					locy = 32765 + (int) (Math.random() * 9);
@@ -251,7 +251,7 @@ public class C_Report extends ClientBasePacket {
 					locx = 33440 + (int) (Math.random() * 11);
 					locy = 32784 + (int) (Math.random() * 11);
 				} 
-			} else if (mapIndex == 4) {//기란시장
+			} else if (mapIndex == 4) {//ギラン市場
 				if (point == 0) {
 					locx = 32844 + (int) (Math.random() * 2);
 					locy = 32883 + (int) (Math.random() * 2);
@@ -301,19 +301,19 @@ public class C_Report extends ClientBasePacket {
 				pc.sendPackets(new S_ServerMessage(1892));
 				return;
 			}
-			switch (Dragon_Type) {// 1892 : 이곳에서 드래곤 키를 사용할 수 없습니다. 1729 : 아직은 사용할 수 없습니다. 1413 : 현재 상태에서는 사용할수 없습니다.
-			case 0://안타라스
+			switch (Dragon_Type) {// 1892 :ここでドラゴンキーを使用することができません。 1729：まだ利用できません。 1413：現在の状態では使用できません。
+			case 0://アンタラス
 				if (AntarasRaidSystem.getInstance().countRaidPotal() >= 99){
-					pc.sendPackets(new S_SystemMessage("시스템 메세지 : 드래곤이 모두 깨어 있습니다."));
+					pc.sendPackets(new S_SystemMessage("システムメッセージ：ドラゴンがすべて目を覚ましています。"));
 					return;  
 				}
 				L1World.getInstance().broadcastPacketToAll(new S_ServerMessage(2921));
 				AntarasRaidSystem.getInstance().startRaid(pc);
 				pc.getInventory().consumeItem(L1ItemId.DRAGON_KEY, 1);
 				break;
-			case 1://파푸리온
+			case 1://パプリオン
 				if (FafurionRaidSystem.getInstance().countRaidPotal1() >= 99){
-					pc.sendPackets(new S_SystemMessage("시스템 메세지 : 드래곤이 모두 깨어 있습니다."));
+					pc.sendPackets(new S_SystemMessage("システムメッセージ：ドラゴンがすべて目を覚ましています。"));
 					return;  
 				}
 				L1World.getInstance().broadcastPacketToAll(new S_ServerMessage(2921));
@@ -322,17 +322,17 @@ public class C_Report extends ClientBasePacket {
 				break;
 			case 2:
 				if (RindSystem.getInstance().countRind() >= 99){
-					pc.sendPackets(new S_SystemMessage("시스템 메세지 : 드래곤이 모두 깨어 있습니다."));
+					pc.sendPackets(new S_SystemMessage("システムメッセージ：ドラゴンがすべて目を覚ましています。"));
 					return;
 				}
 				L1World.getInstance().broadcastPacketToAll(new S_ServerMessage(2921));
 				RindSystem.getInstance().startRind(pc);
 				pc.getInventory().consumeItem(L1ItemId.DRAGON_KEY, 1);
 				pc.sendPackets(new S_ServerMessage(1729));
-				break; //린드
+				break; //リンド
 			case 3: 
 				pc.sendPackets(new S_ServerMessage(1729));
-				break; //발라
+				break; //塗って
 			}
 			break;
 		case MINI_MAP_SEND:

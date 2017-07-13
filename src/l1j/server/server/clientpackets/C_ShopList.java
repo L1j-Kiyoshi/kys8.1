@@ -56,7 +56,7 @@ public class C_ShopList extends ClientBasePacket {
 			L1PcInstance cha = (L1PcInstance) shopPc;
 			
 			if (pc.getAccountName().equalsIgnoreCase(cha.getAccountName())) {
-				pc.sendPackets(new S_ChatPacket(pc,"자신의 상점은 이용할 수 없습니다."));
+				pc.sendPackets(new S_ChatPacket(pc,"自分の店は利用できません。"));
 				return;
 			}
 			
@@ -66,7 +66,7 @@ public class C_ShopList extends ClientBasePacket {
 			pc.sendPackets(new S_PrivateShopforNpc(pc, objectId, type));
 			
 		}else{
-			pc.sendPackets(new S_ChatPacket(pc,"상점 오브젝트가 없습니다."));
+			pc.sendPackets(new S_ChatPacket(pc,"店オブジェクトがありません。"));
 			return;
 		}
 	}

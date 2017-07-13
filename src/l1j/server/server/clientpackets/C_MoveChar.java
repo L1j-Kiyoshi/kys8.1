@@ -1,6 +1,6 @@
 package l1j.server.server.clientpackets;
 
-import static l1j.server.server.model.Instance.L1PcInstance.REGENSTATE_MOVE;
+import static l1j.server.server.model.Instance.L1PcInstance.*;
 
 import java.util.ArrayList;
 
@@ -32,12 +32,12 @@ import l1j.server.server.serverpackets.S_Party;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class C_MoveChar extends ClientBasePacket {
-	
+
 
 	private static final byte HEADING_TABLE_X[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
 	private static final byte HEADING_TABLE_Y[] = { -1, -1, 0, 1, 1, 1, 0, -1 };
-	
-// 이동
+
+// 移動
 	public C_MoveChar(byte decrypt[], GameClient client) throws Exception {
 		super(decrypt);
 		int locx = readH();
@@ -56,7 +56,7 @@ public class C_MoveChar extends ClientBasePacket {
 			return;
 		}
 		//pc.isNpcSell = false;
-		/** 파티중 지도표시 **/
+		/** パーティー中地図を表示 **/
 		if (pc.isInParty()) {
 			L1PcInstance member[] = pc.getParty().getMembers();
 			if (pc.getParty() != null) {
@@ -65,45 +65,45 @@ public class C_MoveChar extends ClientBasePacket {
 				}
 			}
 		}
-		/** 파티중 지도표시 **/
-		
-		
+		/** パーティー中地図を表示 **/
+
+
 		if (pc.getMapId() == 777 || pc.getMapId() == 778) {
 			if (pc.getLevel() > Config.버땅제한레벨 && !pc.isGm()) {
 				new L1Teleport().teleport(pc, 33443, 32799, (short) 4, 5, true);
-				pc.sendPackets(new S_SystemMessage("레벨 " + Config.버땅제한레벨 + "이하만 출입이 가능합니다."));
+				pc.sendPackets(new S_SystemMessage("レベル" + Config.버땅제한레벨 + "以下のみ出入りが可能です。"));
 			}
 		}
-		/** 용의던전,수룡던전 **/
+		/** 用のダンジョン、水竜ダンジョン **/
 		if (pc.getMapId() >= 30 && pc.getMapId() <= 37 || pc.getMapId() == 814) {
 			if (pc.getLevel() > Config.용던제한레벨 && !pc.isGm()) {
 				new L1Teleport().teleport(pc, 33443, 32799, (short) 4, 5, true);
 			}
 		}
-		/** 용의던전,수룡던전 **/
+		/** 用のダンジョン、水竜ダンジョン **/
 		if (pc.getMapId() == 814) {
 			if (pc.getLevel() > Config.수던제한레벨 && !pc.isGm()) {
 				new L1Teleport().teleport(pc, 33443, 32799, (short) 4, 5, true);
 			}
 		}
-		/** 말하는섬 **/
+		/** 話せる島 **/
 		if (pc.getMapId() >= 1 && pc.getMapId() <= 2 ) {
 			if (pc.getLevel() > Config.말섬제한레벨 && !pc.isGm()) {
 				new L1Teleport().teleport(pc, 33443, 32799, (short) 4, 5, true);
 			}
 		}
-		/** 수련던전제 **//*
+		/** 修練ケイブ第 **//*
 		if (pc.getMapId() >= 25 && pc.getMapId() <= 28 ) {
-			if (pc.getLevel() > Config.수련제한레벨 && !pc.isGm()) {
+			if (pc.getLevel() > Config.修練制限レベル && !pc.isGm()) {
 				new L1Teleport().teleport(pc, 33443, 32799, (short) 4, 5, true);
 			}
 		}*/
-		
-		/** SPR체크 **/
+
+		/** SPRチェック **/
 		if (pc.MoveSpeedCheck >= 1) {
 			if (pc.MoveSpeedCheck == 1) {
 				pc.MoveSpeed = System.currentTimeMillis();
-				pc.sendPackets(new S_ChatPacket(pc,"[체크시작]"));
+				pc.sendPackets(new S_ChatPacket(pc,"[チェック開始]"));
 			}
 			pc.MoveSpeedCheck++;
 			if (pc.MoveSpeedCheck >= 12) {
@@ -112,27 +112,27 @@ public class C_MoveChar extends ClientBasePacket {
 				String s = String.format("%.0f", k);
 				pc.MoveSpeed = 0;
 				pc.sendPackets(new S_ChatPacket(pc,"-----------------------------------------"));
-				pc.sendPackets(new S_ChatPacket(pc,"해당변신은 " + s + "이 이속으로 적절한값입니다."));
+				pc.sendPackets(new S_ChatPacket(pc,"この変身は" + s + "この移動速度に適切な値です。"));
 				pc.sendPackets(new S_ChatPacket(pc,"-----------------------------------------"));
 			}
 		}
-		/** SPR체크 **/
-		
+		/** SPRチェック **/
+
 		pc.killSkillEffectTimer(L1SkillId.MEDITATION);
 		pc.setCallClanId(0);
 
-		if (!pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // 아브소르트바리아중은 아니다
+		if (!pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // アブ小ガルトバリアジュンはない
 			pc.setRegenState(REGENSTATE_MOVE);
 		}
-		
+
 		pc.getMap().setPassable(pc.getLocation(), true);
 
 		locx += HEADING_TABLE_X[heading];
 		locy += HEADING_TABLE_Y[heading];
-		
+
 		/*
-		 * 스턴렉
-		 * 유체이탈, 빠른이동 
+		 * スターンレック
+		 * 유체이탈, 빠른이동
 		 */
 		pc.MovePoint.set(locx, locy);
 		int calcxy = pc.getLocation().getTileLineDistance(pc.MovePoint);
@@ -142,8 +142,8 @@ public class C_MoveChar extends ClientBasePacket {
 			Broadcaster.broadcastPacket(pc, new S_ChangeHeading(pc));
 			return;
 		}
-		
-		/** 낚시 중일 경우 취소 안되고 이동 가능시 * */
+
+		/** 釣り中の場合キャンセルしないように移動可能で * */
 		if (pc.isFishing()) {
 			try {
 				pc.setFishing(false);
@@ -155,16 +155,16 @@ public class C_MoveChar extends ClientBasePacket {
 			} catch (Exception e) {
 			}
 		}
-		
-		if (Dungeon.getInstance().dg(locx, locy, pc.getMap().getId(), pc)) { // 지하 감옥에 텔레포트 했을 경우
+
+		if (Dungeon.getInstance().dg(locx, locy, pc.getMap().getId(), pc)) { // ダンジョンにテレポートした場合
 			pc.sendPackets(new S_PacketBox(S_PacketBox.USER_BACK_STAB, pc));
 			return;
-		}		  
-		  
-		if (DungeonRandom.getInstance().dg(locx, locy, pc.getMap().getId(), pc)) { // 텔레포트처가 랜덤인 텔레포트 지점
+		}
+
+		if (DungeonRandom.getInstance().dg(locx, locy, pc.getMap().getId(), pc)) { // テレポート先ランダムなテレポートポイント
 			return;
 		}
-		// 이동할려는 좌표에 오브젝트가 있으면 뒤로 텔
+		// 移動しようとする座標にオブジェクトがあればバックテル
 		boolean ck = false;
 		ArrayList<L1Object> allList = L1World.getInstance().getVisibleObjects(pc, 5);
 		L1Object[] objs = allList.toArray(new L1Object[allList.size()]);
@@ -184,21 +184,21 @@ public class C_MoveChar extends ClientBasePacket {
 			}
 		}
 		objs = null;
-		allList.clear();		
+		allList.clear();
 		if(ck){
 			pc.setHeading(heading);
 			pc.sendPackets(new S_PacketBox(S_PacketBox.USER_BACK_STAB, pc));
 			Broadcaster.broadcastPacket(pc, new S_ChangeHeading(pc));
 			return;
 		}
-		
+
 		pc.setHeading(heading);
 
-		
+
 		if (pc.getMap().isUserPassable(oriX, oriY, heading) == true
 				&& (!pc.isDeathMatch() || pc.isGhost() || pc.getMapId() != 5153 || !pc.getMap().isSafetyZone(locx, locy)
 				)) {
-			
+
 			pc.getLocation().set(locx, locy);
 			if(!pc.isGmInvis()){
 				pc.broadcastPacket(new S_MoveCharPacket(pc));
@@ -206,39 +206,39 @@ public class C_MoveChar extends ClientBasePacket {
 		} else {
 			new L1Teleport().teleport(pc, pc.getLocation(), pc.getHeading(), false);
 		}
-	
-		  /** 시간의 균열 */
+
+		  /** 時間の割れ目 */
 		if(CrockController.getInstance().isMove()){
 			int[] loc = CrockController.getInstance().loc();
-			/* pc 좌표와 시간의 균열의 좌표가 일치하다면 */
+			/* pc座標と時間の割れ目の座標が一致であれば*/
 			if(loc[0] == pc.getX() && loc[1] == pc.getY() && loc[2] == pc.getMapId()){
 				   if(CrockController.getInstance().crocktype() == 0){
-					   new L1Teleport().teleport(pc, 32639, 32876, (short) 780, 4, false);//테베
+					   new L1Teleport().teleport(pc, 32639, 32876, (short) 780, 4, false);//テーベ
 				   }else{
-					   new L1Teleport().teleport(pc, 32794, 32751, (short) 783, 4, false);//티칼
+					   new L1Teleport().teleport(pc, 32794, 32751, (short) 783, 4, false);//ティカル
 				   }
 				return;
 			}
 		}
-		/** 배틀존 **/
+		/** バトルゾーン **/
 		if (pc.getMapId() == 5153) {
 			if (pc.get_DuelLine() == 0 && !pc.isGm()) {
 				new L1Teleport().teleport(pc, 33419, 32810, (short) 4, 5, true);
 			}
 		}
-		
-		if (pc.getZoneType() == 0) {			
-			if(pc.getSafetyZone() == true) {					
+
+		if (pc.getZoneType() == 0) {
+			if(pc.getSafetyZone() == true) {
 				pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.SAFETYZONE, false));
-				pc.setSafetyZone(false);	
+				pc.setSafetyZone(false);
 			}
-		} else {			
-			if (pc.getSafetyZone() == false) {				
+		} else {
+			if (pc.getSafetyZone() == false) {
 				pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.SAFETYZONE, true));
-				pc.setSafetyZone(true);	
+				pc.setSafetyZone(true);
 			}
 		}
-		
+
 		int castleid = L1CastleLocation.getCastleIdByArea(pc);
 		if (castleid != 0) {
 			if (!pc.war_zone) {
@@ -263,15 +263,15 @@ public class C_MoveChar extends ClientBasePacket {
 				}
 			}
 		}
-	
-		
+
+
 		if (L1HauntedHouse.getInstance().getHauntedHouseStatus() == L1HauntedHouse.STATUS_PLAYING
 				&& L1HauntedHouse.getInstance().isMember(pc) && pc.getX() >= 32872 && pc.getX() <= 32875
 				&& pc.getY() >= 32828 && pc.getY() <= 32833) {
 			L1HauntedHouse.getInstance().endHauntedHouse(pc);
 		}
 
-		//sendMapTileLog(pc); // 이동처 타일의 정보를 보낸다(맵 조사용)
+		//sendMapTileLog(pc); // 移動先のタイルの情報を送る（マップ兆使用）
 
 		L1WorldTraps.getInstance().onPlayerMoved(pc);
 

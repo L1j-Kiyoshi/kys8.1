@@ -1,20 +1,7 @@
 package l1j.server.server.clientpackets;
 
-import static l1j.server.server.model.skill.L1SkillId.ADVANCE_SPIRIT;
 //import static l1j.server.server.model.skill.L1SkillId.ADVANCE_SPIRIT;
-import static l1j.server.server.model.skill.L1SkillId.AQUA_PROTECTER;
-import static l1j.server.server.model.skill.L1SkillId.BRAVE_AURA;
-import static l1j.server.server.model.skill.L1SkillId.CONCENTRATION;
-import static l1j.server.server.model.skill.L1SkillId.GLOWING_AURA;
-import static l1j.server.server.model.skill.L1SkillId.HASTE;
-import static l1j.server.server.model.skill.L1SkillId.INSIGHT;
-import static l1j.server.server.model.skill.L1SkillId.IRON_SKIN;
-import static l1j.server.server.model.skill.L1SkillId.NATURES_TOUCH;
-import static l1j.server.server.model.skill.L1SkillId.PATIENCE;
-import static l1j.server.server.model.skill.L1SkillId.PHYSICAL_ENCHANT_DEX;
-import static l1j.server.server.model.skill.L1SkillId.PHYSICAL_ENCHANT_STR;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_CURSE_BARLOG;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_CURSE_YAHEE;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,9 +17,8 @@ import l1j.server.IndunSystem.Ice.Demon.DemonSystem;
 import l1j.server.IndunSystem.Ice.Queen.QueenSystem;
 import l1j.server.server.GameClient;
 import l1j.server.server.Controller.CrockController;
-import l1j.server.server.Controller.WarTimeController;
 import l1j.server.server.Controller.DevilController;
-import l1j.server.server.Controller.IsleController;
+import l1j.server.server.Controller.WarTimeController;
 import l1j.server.server.datatables.CastleTable;
 import l1j.server.server.datatables.DoorSpawnTable;
 import l1j.server.server.datatables.ExpTable;
@@ -181,7 +167,7 @@ public class C_NPCAction extends ClientBasePacket {
 				if (s.matches("[0-9]+")) {
 					summonMonster(target, s);
 				} else {
-					if (target.isMagicItem()) { // 변신 마법서
+					if (target.isMagicItem()) { // 変身魔法書
 						L1PolyMorph.MagicBookPoly(target, s, 1200);
 						target.setMagicItem(false);
 					} else {
@@ -206,8 +192,8 @@ public class C_NPCAction extends ClientBasePacket {
 		if (s.equalsIgnoreCase("buy")) {
 			int npcid = ((L1NpcInstance) obj).getNpcTemplate().get_npcId();
 //			if (pc.getInventory().getWeight100() > 90) {
-//			if (pc.getInventory().getWeight100() > 82 && !pc.is랭킹제약()) { // 랭커 무게 무시 
-			if (pc.getInventory().getWeight100() > 90 && !pc.hasSkillEffect(L1SkillId.RANK_BUFF_4)) { // 중량 오버
+//			if (pc.getInventory().getWeight100() > 82 && !pc.isランキング制約（））{//ランカー重量無視 
+			if (pc.getInventory().getWeight100() > 90 && !pc.hasSkillEffect(L1SkillId.RANK_BUFF_4)) { //重量オーバー
 				pc.sendPackets(new S_ServerMessage(3561));
 				return;
 			}
@@ -218,7 +204,7 @@ public class C_NPCAction extends ClientBasePacket {
 		
 			if (npcid == 200000 || npcid == 200060 || npcid == 200061 || npcid == 200062 || npcid == 200063 || npcid == 5000000 || npcid == 5000006 || npcid == 900047
 					|| npcid == 5072 || npcid == 5073 || npcid == 7000077 || npcid == 900107 || npcid == 7200002 || npcid == 200005 || npcid == 81008
-					|| npcid == 6000002 // 금빛깃털??
+					|| npcid == 6000002 // 金色の羽？
 					|| npcid >= 7210055 && npcid <= 7210059
 					|| npcid >= 7210061 && npcid <= 7210070
 					) {
@@ -255,7 +241,7 @@ public class C_NPCAction extends ClientBasePacket {
 				// pc.sendPackets(new S_PacketBox(pc, S_PacketBox.CLAN_WAREHOUSE_LIST));
 				pc.sendPackets(new S_ClanWareHouseHistory(pc));
 			else
-				pc.sendPackets(new S_SystemMessage("혈맹 가입후 이용해 주세요."));
+				pc.sendPackets(new S_SystemMessage("血盟加入後利用してください。"));
 		} else if (s.equalsIgnoreCase("retrieve")) {
 			if (pc.getLevel() >= 5) {
 				if (isTwoLogin(pc)) {
@@ -288,7 +274,7 @@ public class C_NPCAction extends ClientBasePacket {
 				htmlid = "noitemret";
 			else
 				pc.sendPackets(rpl, true);
-		} else if (s.equalsIgnoreCase("retrieve-char")) { // 특수창고
+		} else if (s.equalsIgnoreCase("retrieve-char")) { //特殊倉庫
 			if(pc.get_SpecialSize() > 0){
 				if (isTwoLogin(pc))
 					return;
@@ -303,7 +289,7 @@ public class C_NPCAction extends ClientBasePacket {
 				if (isTwoLogin(pc))
 					return;
 				if (pc.getClanid() == 0) {
-					pc.sendPackets(new S_SystemMessage("혈맹창고를 사용하려면 혈맹이 있어야 합니다."));
+					pc.sendPackets(new S_SystemMessage("血盟倉庫を使用するには、血盟があります。"));
 					return;
 				}
 				if (pc.getClanRank() == L1Clan.수련) {
@@ -336,12 +322,12 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "camus3";
 				}
 			}
-			// 결혼반지 충전
+			//結婚指輪の充電
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70702) {
 			if (s.equalsIgnoreCase("chg")) {
 				L1ItemInstance ring = null;
 				if (!pc.getInventory().consumeItem(L1ItemId.ADENA, 1000)) {
-					pc.sendPackets(new S_SystemMessage("아데나가 부족합니다."));
+					pc.sendPackets(new S_SystemMessage("アデナが不足します。"));
 					return;
 				}
 				if (pc.getPartnerId() != 0) {
@@ -361,14 +347,14 @@ public class C_NPCAction extends ClientBasePacket {
 						ring.setChargeCount(ring.getItem().getMaxChargeCount());
 						pc.getInventory().updateItem(ring, L1PcInventory.COL_CHARGE_COUNT);
 
-						pc.sendPackets(new S_SystemMessage("결혼 반지가 충전되었습니다."));
+						pc.sendPackets(new S_SystemMessage("結婚指輪が充電された。"));
 					}
 				}
 
-				pc.sendPackets(new S_SystemMessage("기부해주셔서 감사합니다."));
+				pc.sendPackets(new S_SystemMessage("寄付いただきありがとうございます。"));
 			}
 
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900106) {// 달나라 수호 대장 (토끼모자 교환)
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900106) {//月の国の守護隊長（ウサギの帽子交換）
 			if (s.equalsIgnoreCase("0")) {
 				if (pc.getLevel() > 30) {
 					if (!pc.getInventory().checkItem(22253, 1)) {
@@ -387,13 +373,13 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-			// 호슈
+			// ロッシュ
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 1000004) {
 			/*
-			 * if (s.equalsIgnoreCase("a")) { // 관찰한다. if (pc.getInventory().checkItem(40308, 2000)){ pc.getInventory().consumeItem(40308, 2000); pc.beginGhost(32789, 33186,
+			 * if (s.equalsIgnoreCase("a")) { //観察する。 if（pc.getInventory（）checkItem（40308、2000））{pc.getInventory（）consumeItem（40308、2000）; pc.beginGhost（32789、33186、
 			 * (short) 4, true, 300); htmlid = ""; } else { htmlid = "hyosue1"; } }
 			 */
-			if (s.equalsIgnoreCase("1")) { // 샌드웜 영역 이동
+			if (s.equalsIgnoreCase("1")) { // サンドワーム領域の移動
 				if (pc.getInventory().checkItem(40308, 10000)) {
 					pc.getInventory().consumeItem(40308, 10000);
 					new L1Teleport().teleport(pc, 32789, 33186, (short) 4, 5, true);
@@ -402,7 +388,7 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "hyosue1";
 				}
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 4200018) {//경험치지급단
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 4200018) {//経験値支給団
 			if (s.equalsIgnoreCase("0")) {
 				if (pc.getLevel() < 51) {
 					pc.addExp((ExpTable.getExpByLevel(51) - 1) - pc.getExp() + ((ExpTable.getExpByLevel(51) - 1) / 100));
@@ -413,7 +399,7 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 				if (ExpTable.getLevelByExp(pc.getExp()) >= Config.경험치지급단) {
 					htmlid = "expgive3";
-					pc.sendPackets(new S_SystemMessage("\\aA알림: 경험치 지급은 \\aG" + Config.경험치지급단 + "\\aA 까지 가능합니다"));
+					pc.sendPackets(new S_SystemMessage("\\aA通知: 経験値支給は \\aG" + Config.경험치지급단 + "\\aA まで可能です"));
 				} else {
 					htmlid = "expgive";
 				}
@@ -430,7 +416,7 @@ public class C_NPCAction extends ClientBasePacket {
 						if (clan.getUnderDungeon() == 0) {
 							if (clan.getBlessCount() >= 99000000 && (rank == 3 || rank == 4 || rank == 6 || rank == 9 || rank == 10)) {
 								pc.setTempID(pc.getId());
-								pc.sendPackets(new S_Message_YN(4703, ""));// 통로를 열기 위해 "축복의 기운" 9,900이 필요합니다. 사용 하시겠습니까?
+								pc.sendPackets(new S_Message_YN(4703, ""));// 通路を開くために、 "祝福の元気」9900が必要です。使用しますか？
 							} else
 								htmlid = "agit2";
 						} else if (clan.getUnderDungeon() == 1) {
@@ -438,7 +424,7 @@ public class C_NPCAction extends ClientBasePacket {
 								new L1Teleport().teleport(pc, 32922, 32860, (short) clan.getUnderMapid(), 5, true);							
 							}
 						} else {
-							pc.sendPackets(new S_SystemMessage("\\aA알림:[지하통로]를 클리어 하였습니다. 내일 이용하세요"));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：[地下通路]をクリアしました。明日ご利用ください"));
 						}
 					} else
 						htmlid = "agit2";
@@ -505,7 +491,7 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 				if (k1 >= 0) {
 					htmlid = "inn2";
-					htmldata = (new String[] { "여관주인", "300" });
+					htmldata = (new String[] { "宿主", "300" });
 				} else {
 					htmlid = "inn1";
 				}
@@ -520,7 +506,7 @@ public class C_NPCAction extends ClientBasePacket {
 				if (k1 >= 0) {
 					if (c1 == 0 || c1 == 1) {
 						htmlid = "inn4";
-						htmldata = (new String[] { "여관주인", "600" });
+						htmldata = (new String[] { "宿主", "600" });
 					} else {
 						htmlid = "inn10";
 					}
@@ -537,7 +523,7 @@ public class C_NPCAction extends ClientBasePacket {
 					createcount = (new int[] { cash });
 					htmlid = "inn20";
 					String count = Integer.toString(cash);
-					htmldata = (new String[] { "여관주인", count });
+					htmldata = (new String[] { "宿主", count });
 				} else if (pc.getInventory().checkItem(40312)) {
 					int ct = pc.getInventory().findItemId(40312).getCount();
 					int cash = ct * 120;
@@ -547,10 +533,10 @@ public class C_NPCAction extends ClientBasePacket {
 					createcount = (new int[] { cash });
 					htmlid = "inn20";
 					String count = Integer.toString(cash);
-					htmldata = (new String[] { "여관주인", count });
+					htmldata = (new String[] { "宿主", count });
 				} else {
 					// htmlid = "inn7";
-					pc.sendPackets(new S_SystemMessage("대여한 방 또는 홀이 없습니다."));
+					pc.sendPackets(new S_SystemMessage("レンタルした部屋やホールがありません。"));
 				}
 			} else if (s.equalsIgnoreCase("enter")) {
 				int nowX = pc.getX();
@@ -558,26 +544,26 @@ public class C_NPCAction extends ClientBasePacket {
 				short map = pc.getMapId();
 				if (pc.getInventory().checkItem(40312)) {
 					if (map == 0)
-						new L1Teleport().teleport(pc, 32746, 32803, (short) 16384, 5, false); // 말섬
+						new L1Teleport().teleport(pc, 32746, 32803, (short) 16384, 5, false); // マルソム
 					else if (map > 0)
 						if (nowX < 32641 && nowX > 32621 && nowY < 32760 && nowY > 32740)
-							new L1Teleport().teleport(pc, 32744, 32803, (short) 17408, 5, false); // 글루디오
+							new L1Teleport().teleport(pc, 32744, 32803, (short) 17408, 5, false); // グルーディオ
 						else if (nowX < 32638 && nowX > 32618 && nowY < 33177 && nowY > 33157)
 							new L1Teleport().teleport(pc, 32745, 32803, (short) 20480, 5, false); // 윈다우드
-						// (short) 18432, 5, false); // 기란
+						// (short) 18432, 5, false); // ギラン
 						else if (nowX < 33995 && nowX > 33975 && nowY < 33322 && nowY > 33302)
 							new L1Teleport().teleport(pc, 32745, 32803, (short) 24576, 5, false); // ????
 						else if (nowX < 33447 && nowX > 33427 && nowY < 32799 && nowY > 32779)
 							new L1Teleport().teleport(pc, 32745, 32803,
 
-							// (short) 20480, 5, false); //윈다우드
-									(short) 18432, 5, false); // 기란
+							// (short) 20480, 5, false); //ウィンダウッド
+									(short) 18432, 5, false); // ギラン
 						else if (nowX < 33615 && nowX > 33595 && nowY < 33285 && nowY > 33265)
-							new L1Teleport().teleport(pc, 32745, 32803, (short) 22528, 5, false); // 은기사
+							new L1Teleport().teleport(pc, 32745, 32803, (short) 22528, 5, false); // 記事
 						else if (nowX < 33126 && nowX > 33106 && nowY < 33389 && nowY > 33369)
-							new L1Teleport().teleport(pc, 32745, 32803, (short) 21504, 5, false);// 하이네
+							new L1Teleport().teleport(pc, 32745, 32803, (short) 21504, 5, false);// ハイネ
 						else if (nowX < 34078 && nowX > 34058 && nowY < 32264 && nowY > 32244)
-							new L1Teleport().teleport(pc, 32745, 32803, (short) 19456, 5, false); // 오렌
+							new L1Teleport().teleport(pc, 32745, 32803, (short) 19456, 5, false); // オレン
 
 				} else if (pc.getInventory().checkItem(40312)) {
 					if (map == 0)
@@ -599,14 +585,14 @@ public class C_NPCAction extends ClientBasePacket {
 							new L1Teleport().teleport(pc, 32745, 32807, (short) 25088, 5, false);
 				} else {
 					// htmlid = "inn9";
-					pc.sendPackets(new S_SystemMessage("대여한 방 또는 홀이 없습니다."));
+					pc.sendPackets(new S_SystemMessage("レンタルした部屋やホールがありません。"));
 				}
 			}
 		} else if (s.equalsIgnoreCase("hall") && obj instanceof L1MerchantInstance) {
 
 		} else if (s.equalsIgnoreCase("return")) {
 
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900136) {// 말섬 인던 유키
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900136) {// マルソムインスタンスダンジョンゆき
 			if (s.equalsIgnoreCase("enter")) {
 				if (pc.isInParty()) {
 					if (pc.getParty().isLeader(pc)) {
@@ -614,7 +600,7 @@ public class C_NPCAction extends ClientBasePacket {
 							boolean ck = true;
 							for (L1PcInstance Ppc : pc.getParty().getMembers()) {
 								if (pc.getMapId() != Ppc.getMapId()) {
-									pc.sendPackets(new S_SystemMessage("파티원이 다 모이지 않았습니다."));
+									pc.sendPackets(new S_SystemMessage("パーティーメンバーが多集まらなかった。"));
 									ck = false;
 									break;
 								}
@@ -625,7 +611,7 @@ public class C_NPCAction extends ClientBasePacket {
 								else
 									HadinSystem.getInstance().startHadin(pc);
 								L1PolyMorph.undoPoly(pc);
-								L1World.getInstance().broadcastServerMessage("\\aD" + pc.getName() + " 님이 동료들과 함께 과거로 여행을 떠났습니다.");
+								L1World.getInstance().broadcastServerMessage("\\aD" + pc.getName() + "さんが仲間たちと一緒に、過去への旅に出ました。");
 							}
 							htmlid = "";
 						} else if (pc.getMapId() == 9100) {
@@ -724,7 +710,7 @@ public class C_NPCAction extends ClientBasePacket {
 						}
 					}
 				} else {
-					pc.sendPackets(new S_SystemMessage("아데나가 부족합니다."));
+					pc.sendPackets(new S_SystemMessage("アデナが不足します。"));
 				}
 			}
 			htmlid = "";
@@ -739,7 +725,7 @@ public class C_NPCAction extends ClientBasePacket {
 					pc.sendPackets(new S_ServerMessage(79));
 				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("아데나가 부족합니다."));
+				pc.sendPackets(new S_SystemMessage("アデナが不足します。"));
 			}
 			htmlid = "";
 		} else if (s.equalsIgnoreCase("depositnpc")) {
@@ -773,14 +759,14 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 			if(amuletList.size() <= 0){
-				pc.sendPackets(new S_SystemMessage("보유중인 펫이 없습니다."));
+				pc.sendPackets(new S_SystemMessage("保有しているペットがありません。"));
 			} else {
 				pc.sendPackets(new S_PetList(objid, pc));
 			}
 		} else if (s.equalsIgnoreCase("changename")) {
 			pc.setTempID(objid);
 			pc.sendPackets(new S_Message_YN(325, ""));
-		} else if (s.equalsIgnoreCase("attackchr")) {// 수정부분
+		} else if (s.equalsIgnoreCase("attackchr")) {// 修正部分
 			if (pc.getZoneType() != 1) {
 				if (obj instanceof L1Character) {
 					L1Character cha = (L1Character) obj;
@@ -929,16 +915,16 @@ public class C_NPCAction extends ClientBasePacket {
 			if (pc.isElf()) {
 				if (pc.getElfAttr() != 0) {
 					if (pc.getElfAttr() == 4){
-						pc.sendPackets(new S_SystemMessage("물 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("水精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 8){
-						pc.sendPackets(new S_SystemMessage("바람 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("風の精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 1){
-						pc.sendPackets(new S_SystemMessage("땅 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("地精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 2){
-						pc.sendPackets(new S_SystemMessage("동일 속성의 정령력은 선택할 수 없습니다."));
+						pc.sendPackets(new S_SystemMessage("同じ属性のジョンリョンリョクは選択できません。"));
 						htmlid = "";
 					}
 					return;
@@ -947,23 +933,23 @@ public class C_NPCAction extends ClientBasePacket {
 				pc.sendPackets(new S_SkillIconGFX(15, 1));
 				htmlid = "";
 			} else {
-				pc.sendPackets(new S_SystemMessage("해당 메뉴를 사용할 수 없는 클래스입니다."));
+				pc.sendPackets(new S_SystemMessage("このメニューを使用することができないクラスです。"));
 				htmlid = "";
 			}
 		} else if (s.equalsIgnoreCase("water")) {
 			if (pc.isElf()) {
 				if (pc.getElfAttr() != 0) {
 					if (pc.getElfAttr() == 2){
-						pc.sendPackets(new S_SystemMessage("불 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("火精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 8){
-						pc.sendPackets(new S_SystemMessage("바람 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("風の精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 1){
-						pc.sendPackets(new S_SystemMessage("땅 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("地精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 4){
-						pc.sendPackets(new S_SystemMessage("동일 속성의 정령력은 선택할 수 없습니다."));
+						pc.sendPackets(new S_SystemMessage("同じ属性のジョンリョンリョクは選択できません。"));
 						htmlid = "";
 					}
 					return;
@@ -972,23 +958,23 @@ public class C_NPCAction extends ClientBasePacket {
 				pc.sendPackets(new S_SkillIconGFX(15, 2));
 				htmlid = "";
 			} else {
-				pc.sendPackets(new S_SystemMessage("해당 메뉴를 사용할 수 없는 클래스입니다."));
+				pc.sendPackets(new S_SystemMessage("このメニューを使用することができないクラスです。"));
 				htmlid = "";
 			}
 		} else if (s.equalsIgnoreCase("air")) {
 			if (pc.isElf()) {
 				if (pc.getElfAttr() != 0) {
 					if (pc.getElfAttr() == 2){
-						pc.sendPackets(new S_SystemMessage("불 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("火精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 4){
-						pc.sendPackets(new S_SystemMessage("물 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("水精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 1){
-						pc.sendPackets(new S_SystemMessage("땅 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("地精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 8){
-						pc.sendPackets(new S_SystemMessage("동일 속성의 정령력은 선택할 수 없습니다."));
+						pc.sendPackets(new S_SystemMessage("同じ属性のジョンリョンリョクは選択できません。"));
 						htmlid = "";
 					}
 					return;
@@ -997,23 +983,23 @@ public class C_NPCAction extends ClientBasePacket {
 				pc.sendPackets(new S_SkillIconGFX(15, 3));
 				htmlid = "";
 			} else {
-				pc.sendPackets(new S_SystemMessage("해당 메뉴를 사용할 수 없는 클래스입니다."));
+				pc.sendPackets(new S_SystemMessage("このメニューを使用することができないクラスです。"));
 				htmlid = "";
 			}
 		} else if (s.equalsIgnoreCase("earth")) {
 			if (pc.isElf()) {
 				if (pc.getElfAttr() != 0) {
 					if (pc.getElfAttr() == 2){
-						pc.sendPackets(new S_SystemMessage("불 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("火精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 4){
-						pc.sendPackets(new S_SystemMessage("물 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("水精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 8){
-						pc.sendPackets(new S_SystemMessage("바람 정령의 속성을 먼저 제거하여주세요."));
+						pc.sendPackets(new S_SystemMessage("風の精霊の属性を最初に削除してください。"));
 						htmlid = "";
 					} else if (pc.getElfAttr() == 1){
-						pc.sendPackets(new S_SystemMessage("동일 속성의 정령력은 선택할 수 없습니다."));
+						pc.sendPackets(new S_SystemMessage("同じ属性のジョンリョンリョクは選択できません。"));
 						htmlid = "";
 					}
 					return;
@@ -1022,13 +1008,13 @@ public class C_NPCAction extends ClientBasePacket {
 				pc.sendPackets(new S_SkillIconGFX(15, 4));
 				htmlid = "";
 			} else {
-				pc.sendPackets(new S_SystemMessage("해당 메뉴를 사용할 수 없는 클래스입니다."));
+				pc.sendPackets(new S_SystemMessage("このメニューを使用することができないクラスです。"));
 				htmlid = "";
 			}
 		} else if (s.equalsIgnoreCase("init")) {
 			if (pc.isElf()) {
 				if (pc.getElfAttr() == 0) {
-					pc.sendPackets(new S_SystemMessage("부여받은 정령의 기운이 없습니다."));
+					pc.sendPackets(new S_SystemMessage("与えられた精霊のオーラがありません。"));
 					htmlid = "";
 					return;
 				}
@@ -1042,17 +1028,17 @@ public class C_NPCAction extends ClientBasePacket {
 					pc.sendPackets(new S_SkillIconGFX(15, 0));
 					pc.sendPackets(new S_ServerMessage(678));
 					htmlid = "";
-					pc.sendPackets(new S_SystemMessage("알림 : 아데나 "+adena+ "원 이 소모되었습니다."));
+					pc.sendPackets(new S_SystemMessage("通知：アデナ"+adena+ "ウォンが消費された。"));
 				if (pc.hasSkillEffect(L1SkillId.ELEMENTAL_PROTECTION)) {
 					pc.removeSkillEffect(L1SkillId.ELEMENTAL_PROTECTION);
 				}
 				
 				} else 
 					htmlid = "ellyonne13";
-					pc.sendPackets(new S_SystemMessage("알림 : 아데나 "+adena+ "원 이 부족합니다."));
+					pc.sendPackets(new S_SystemMessage("通知：アデナ"+adena+ "ウォンが不足します。"));
 				
 			} else {
-				pc.sendPackets(new S_SystemMessage("해당 메뉴를 사용할 수 없는 클래스입니다."));
+				pc.sendPackets(new S_SystemMessage("このメニューを使用することができないクラスです。"));
 				htmlid = "";
 			}
 			
@@ -1074,7 +1060,7 @@ public class C_NPCAction extends ClientBasePacket {
 				pc.sendPackets(new S_ServerMessage(739));
 				htmlid = "";
 			}
-		} else if (s.equalsIgnoreCase("material")) { // 구호의 증서
+		} else if (s.equalsIgnoreCase("material")) { // 救済の証書
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			if (pc.getInventory().checkItem(3000049, 1)) {
 				if (pc.getExpRes() == 1) {
@@ -1084,7 +1070,7 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "";
 				}
 			} else {
-				pc.sendPackets(new S_NpcChatPacket(npc, "구호 증서가 필요합니다.", 0));
+				pc.sendPackets(new S_NpcChatPacket(npc, "スローガン証書が必要です。", 0));
 			}
 		} else if (s.equalsIgnoreCase("pk")) {
 			if (pc.getLawful() < 30000) {
@@ -1108,11 +1094,11 @@ public class C_NPCAction extends ClientBasePacket {
 				htmlid = enterDeathMatch(pc);
 			} else if (npcId == 80088) {
 				htmlid = enterPetMatch(pc, Integer.valueOf(s2));
-			} else if (npcId == 300000) { // 펫 레이싱
+			} else if (npcId == 300000) { // ペットレーシング
 				htmlid = enterPe(pc, npcId);
 			} else if (npcId == 200014) {
 				if (pc.getLevel() != pc.getHighLevel()) {
-					pc.sendPackets(new S_SystemMessage("레벨이 다운된 캐릭입니다. 레벨업 후 이용하세요."));
+					pc.sendPackets(new S_SystemMessage("レベルがダウンしたキャラクターです。レベルアップした後ご利用下さい。"));
 					return;
 				}
 				if (pc.getLevel() > 54) {
@@ -1125,10 +1111,10 @@ public class C_NPCAction extends ClientBasePacket {
 						pc.sendPackets(new S_ServerMessage(1290));
 					}
 				} else
-					pc.sendPackets(new S_SystemMessage("스텟초기화는 55레벨 이상만 가능합니다."));
+					pc.sendPackets(new S_SystemMessage("ステータス初期化は、レベル55以上のみ可能です。"));
 
 			} else if (npcId == 50038 || npcId == 50042 || npcId == 50029 || npcId == 50019 || npcId == 50062) {
-				pc.sendPackets(new S_ChatPacket(pc, "무한대전 관람모드 비활성화 상태."));
+				pc.sendPackets(new S_ChatPacket(pc, "無限大戦観覧モードを無効に状態。"));
 			} else {
 				htmlid = enterUb(pc, npcId);
 			}
@@ -1151,7 +1137,7 @@ public class C_NPCAction extends ClientBasePacket {
 					poly(client, 2374);
 					pc.getInventory().consumeItem(40308, 100);
 				} else {
-					pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+					pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 				}
 			}
 			htmlid = "";
@@ -1160,7 +1146,7 @@ public class C_NPCAction extends ClientBasePacket {
 				poly(client, 3874);
 				pc.getInventory().consumeItem(40308, 100);
 			} else {
-				pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+				pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 			}
 			htmlid = "";
 		} else if (s.equalsIgnoreCase("shelob nbmorph")) {
@@ -1169,7 +1155,7 @@ public class C_NPCAction extends ClientBasePacket {
 					poly(client, 95);
 					pc.getInventory().consumeItem(40308, 100);
 				} else {
-					pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+					pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 				}
 			}
 			htmlid = "";
@@ -1179,7 +1165,7 @@ public class C_NPCAction extends ClientBasePacket {
 					poly(client, 3873);
 					pc.getInventory().consumeItem(40308, 100);
 				} else {
-					pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+					pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 				}
 			}
 			htmlid = "";
@@ -1189,7 +1175,7 @@ public class C_NPCAction extends ClientBasePacket {
 					poly(client, 3875);
 					pc.getInventory().consumeItem(40308, 100);
 				} else {
-					pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+					pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 				}
 			}
 			htmlid = "";
@@ -1199,7 +1185,7 @@ public class C_NPCAction extends ClientBasePacket {
 					poly(client, 3868);
 					pc.getInventory().consumeItem(40308, 100);
 				} else {
-					pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+					pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 				}
 			}
 			htmlid = "";
@@ -1209,7 +1195,7 @@ public class C_NPCAction extends ClientBasePacket {
 					poly(client, 2376);
 					pc.getInventory().consumeItem(40308, 100);
 				} else {
-					pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+					pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 				}
 			}
 			htmlid = "";
@@ -1219,7 +1205,7 @@ public class C_NPCAction extends ClientBasePacket {
 					poly(client, 3878);
 					pc.getInventory().consumeItem(40308, 100);
 				} else {
-					pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+					pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 				}
 			}
 			htmlid = "";
@@ -1468,7 +1454,7 @@ public class C_NPCAction extends ClientBasePacket {
 			if (s.equalsIgnoreCase("teleportURL")) {
 				htmlid = "amisoo2";
 			}
-			// 공간의 일그러짐
+			//空間の歪み
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 80048) {
 			if (s.equalsIgnoreCase("2")) {
 				htmlid = "";
@@ -1531,7 +1517,7 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "meet104";
 				}
 			} else if (s.equalsIgnoreCase("d")) {
-				if (pc.getInventory().checkItem(40066)) { // 잠시 아무아이템으로 대쳐하자~송편이잇을경우 못만나기~
+				if (pc.getInventory().checkItem(40066)) { // しばらく何もアイテムでデチョう〜ソンピョンがイトウル場合ない会う〜
 					// || pc.getInventory().checkItem(40616)) {
 					htmlid = "";
 				} else {
@@ -1658,9 +1644,9 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71168) {
-			// 지.상.의.타.락.을.막.기.위.해.서.라.도.
-			// 그.대.와.나.더.이.상.적.일.수.만.은.없.으.리.
-			// 어.서.나.를.그.곳.으.로
+			// か。上。の。他。ロック。を。膜。機。位。した文書ラ。また。
+			// 彼。対。と。私。よりこの。尚敵・日数。だけは。な。的。リ。
+			//語文書。私。をその。ところ。的。に
 			if (s.equalsIgnoreCase("a")) {
 				new L1Teleport().teleport(pc, 32648, 32921, (short) 535, 5, true);
 				pc.getInventory().consumeItem(41028, 1);
@@ -1721,7 +1707,7 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "meet004";
 				}
 			} else if (s.equalsIgnoreCase("d")) {
-				if (pc.getInventory().checkItem(40066) // 잠시 송편으로 대체하자! 송편이있을경우 안날라가지게~
+				if (pc.getInventory().checkItem(40066) // しばらくソンピョンに置き換えてみましょう！ソンピョンがある場合なら運ば持つ〜
 				/*
 				 * || pc.getInventory().checkItem(40910) || pc.getInventory().checkItem(40911) || pc.getInventory().checkItem(40912) || pc.getInventory().checkItem(40913) ||
 				 * pc.getInventory().checkItem(40914) || pc.getInventory().checkItem(40915) || pc.getInventory().checkItem(40916) || pc.getInventory().checkItem(40917) ||
@@ -1850,7 +1836,7 @@ public class C_NPCAction extends ClientBasePacket {
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 7000021) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			if (pc.isInvisble()) {
-				pc.sendPackets(new S_NpcChatPacket(npc, "투명 상태에서 받을 수 없어요.", 0));
+				pc.sendPackets(new S_NpcChatPacket(npc, "透明状態で受けることができません。", 0));
 				return;
 			}
 			if (s.equalsIgnoreCase("1")) {
@@ -1938,7 +1924,7 @@ public class C_NPCAction extends ClientBasePacket {
 			} else if (s.equalsIgnoreCase("4")) {
 				giveComaBuff(pc, objid);
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 500062) {// 조우 티칼
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 500062) {// 遭遇ティカル
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
 			if (s.equalsIgnoreCase("A")) {
@@ -1954,14 +1940,14 @@ public class C_NPCAction extends ClientBasePacket {
 			} else if (s.equalsIgnoreCase("B")) {
 				new L1Teleport().teleport(pc, 34090, 33168, (short) 4, 4, false);
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 500063) {// 티칼 문지기
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 500063) {// ティカル門番
 			if (s.equalsIgnoreCase("e") && CrockController.getInstance().isBoss())
 				if (pc.getInventory().checkItem(500210, 1)) {
 					pc.getInventory().consumeItem(500210);
 					CrockController.getInstance().add(pc);
 					new L1Teleport().teleport(pc, 32732, 32862, (short) 784, 4, false);
 				}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 500064) {// 티칼 탐험가(달력주는애)
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 500064) {// ティカルの探検家（カレンダー与える愛）
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
 			if (s.equalsIgnoreCase("1") && !pc.getInventory().checkItem(500211, 1)) {
@@ -1969,14 +1955,14 @@ public class C_NPCAction extends ClientBasePacket {
 				String itemName = item.getItem().getName();
 				pc.sendPackets(new S_ServerMessage(143, npcName, itemName));
 			}
-			// 라폰스시작
+			// ラホンス開始
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 80074) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			if (pc.getKarma() >= 10000000) {
 				getSoulCrystalByKarma(pc, npc, s);
 			}
 			htmlid = "";
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 50007) { //에스메랄다
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 50007) { //エスメラルダ
 			int[][] ghostloc = { { 32642, 34249, 32878, 33114, 32734, 32736, 32737, 32769, 33931, 33051, 32870, 33972, 33427, 33594, 33446, 32741 },
 					{ 32956, 33453, 32653, 32939, 32831, 32814, 32684, 32800, 33347, 32340, 33254, 33363, 32814, 33244, 32757, 32284, },
 					{ 0, 4, 4, 4, 278, 62, 63, 77, 4, 4, 4, 4, 4, 4, 4, 4, } };
@@ -2252,9 +2238,9 @@ public class C_NPCAction extends ClientBasePacket {
 			}
 			if (s.equalsIgnoreCase("1")) {
 				pc.getQuest().set_end(L1Quest.QUEST_TBOX3);
-				materials = new int[] { 40716 }; // 할아버지의 보물
+				materials = new int[] { 40716 }; // 祖父の宝
 				counts = new int[] { 1 };
-				createitem = new int[] { 20269 }; // 해골목걸이
+				createitem = new int[] { 20269 }; //スケルトンネックレス
 				createcount = new int[] { 1 };
 				htmlid = "lukein0";
 			} else if (s.equalsIgnoreCase("2")) {
@@ -2307,21 +2293,21 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-			// 작은 상자-3번째
+			// 小箱-3番目
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71067 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71068
 				|| ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71069 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71070
 				|| ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71071 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71072) {
 			if (s.equalsIgnoreCase("0")) {
 				htmlid = "maptboxi";
-				materials = new int[] { 40701 }; // 작은 보물의 지도
+				materials = new int[] { 40701 }; // 小さな宝の地図
 				counts = new int[] { 1 };
-				createitem = new int[] { 40716 }; // 할아버지의 보물
+				createitem = new int[] { 40716 }; // 祖父の宝
 				createcount = new int[] { 1 };
 				pc.getQuest().set_end(L1Quest.QUEST_TBOX3);
 				pc.getQuest().set_step(L1Quest.QUEST_LUKEIN1, 11);
 			}
 
-			// 시미즈(해적섬)
+			//清水（海賊島）
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71056) {
 			// 아들을 찾는다
 			if (s.equalsIgnoreCase("a")) {
@@ -2343,9 +2329,9 @@ public class C_NPCAction extends ClientBasePacket {
 				pc.getQuest().set_step(L1Quest.QUEST_SIMIZZ, L1Quest.QUEST_END);
 			}
 
-			// 도일(해적섬)
+			// ドイル（海賊島）
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71057) {
-			// 러쉬에 대해 듣는다
+			// ラッシュについて聞く
 			if (s.equalsIgnoreCase("3")) {
 				htmlid = "doil4";
 			} else if (s.equalsIgnoreCase("6")) {
@@ -2363,9 +2349,9 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-			// 루디 안(해적섬)
+			// ルディない（海賊島）
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71059) {
-			// 루디 안의 부탁을 받아들인다
+			// ルディの中にお願いを受け入れる
 			if (s.equalsIgnoreCase("A")) {
 				htmlid = "rudian6";
 				final int[] item_ids = { 40700 };
@@ -2389,9 +2375,9 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-			// 레스타(해적섬)
+			// レスタ（海賊島）
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71060) {
-			// 동료들에 대해
+			// 仲間たちの
 			if (s.equalsIgnoreCase("A")) {
 				if (pc.getQuest().get_step(L1Quest.QUEST_RUDIAN) == L1Quest.QUEST_END) {
 					htmlid = "resta6";
@@ -2403,9 +2389,9 @@ public class C_NPCAction extends ClientBasePacket {
 				pc.getQuest().set_step(L1Quest.QUEST_RESTA, 2);
 			}
 
-			// 카좀스(해적섬)
+			// カージョムス（海賊島）
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71061) {
-			// 지도를 조합해 주세요
+			// 地図を組み合わせてください
 			if (s.equalsIgnoreCase("A")) {
 				if (pc.getInventory().checkItem(40647, 3)) {
 					htmlid = "cadmus6";
@@ -2430,15 +2416,15 @@ public class C_NPCAction extends ClientBasePacket {
 				pc.getQuest().set_step(L1Quest.QUEST_KAMYLA, 4);
 			} else if (s.equalsIgnoreCase("i")) {
 				htmlid = "kamyla25";
-			} else if (s.equalsIgnoreCase("b")) { // 카 미라(흐랑코의 미궁)
+			} else if (s.equalsIgnoreCase("b")) { //カーミラー（フランコの迷路）
 				if (pc.getQuest().get_step(L1Quest.QUEST_KAMYLA) == 1) {
 					new L1Teleport().teleport(pc, 32679, 32742, (short) 482, 5, true);
 				}
-			} else if (s.equalsIgnoreCase("d")) { // 카 미라(디에고가 닫힌 뇌)
+			} else if (s.equalsIgnoreCase("d")) { // カーミラー（ディエゴが閉じた脳）
 				if (pc.getQuest().get_step(L1Quest.QUEST_KAMYLA) == 3) {
 					new L1Teleport().teleport(pc, 32736, 32800, (short) 483, 5, true);
 				}
-			} else if (s.equalsIgnoreCase("f")) { // 카 미라(호세 지하소굴)
+			} else if (s.equalsIgnoreCase("f")) { // カーミラー（ホセ地下牢）
 				if (pc.getQuest().get_step(L1Quest.QUEST_KAMYLA) == 4) {
 					new L1Teleport().teleport(pc, 32746, 32807, (short) 484, 5, true);
 				}
@@ -2468,7 +2454,7 @@ public class C_NPCAction extends ClientBasePacket {
 				htmlid = "lelder13";
 				materials = new int[] { 40634 };
 				counts = new int[] { 1 };
-				createitem = new int[] { 20167 }; // 리자드망로브
+				createitem = new int[] { 20167 }; //リザード網ローブ
 				createcount = new int[] { 1 };
 				pc.getQuest().set_step(L1Quest.QUEST_LIZARD, L1Quest.QUEST_END);
 			}
@@ -2696,57 +2682,57 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71180) { // 제이프
-			// 49026 고대의 금화
-			if (s.equalsIgnoreCase("A")) { // 꿈꾸는 곰인형
+			// 49026古代の金貨
+			if (s.equalsIgnoreCase("A")) { // 夢見るクマのぬいぐるみ
 				if (pc.getInventory().consumeItem(49026, 1000)) {
 					pc.getInventory().storeItem(41093, 1);
 					htmlid = "jp6";
 				} else {
 					htmlid = "jp5";
 				}
-			} else if (s.equalsIgnoreCase("B")) { // 향수
+			} else if (s.equalsIgnoreCase("B")) { // 香水
 				if (pc.getInventory().consumeItem(49026, 5000)) {
 					pc.getInventory().storeItem(41094, 1);
 					htmlid = "jp6";
 				} else {
 					htmlid = "jp5";
 				}
-			} else if (s.equalsIgnoreCase("C")) { // 드레스
+			} else if (s.equalsIgnoreCase("C")) { // ドレス
 				if (pc.getInventory().consumeItem(49026, 10000)) {
 					pc.getInventory().storeItem(41095, 1);
 					htmlid = "jp6";
 				} else {
 					htmlid = "jp5";
 				}
-			} else if (s.equalsIgnoreCase("D")) { // 반지
+			} else if (s.equalsIgnoreCase("D")) { //リング
 				if (pc.getInventory().consumeItem(49026, 100000)) {
 					pc.getInventory().storeItem(41096, 1);
 					htmlid = "jp6";
 				} else {
 					htmlid = "jp5";
 				}
-			} else if (s.equalsIgnoreCase("E")) { // 위인전
+			} else if (s.equalsIgnoreCase("E")) { // 偉人伝
 				if (pc.getInventory().consumeItem(49026, 1000)) {
 					pc.getInventory().storeItem(41098, 1);
 					htmlid = "jp8";
 				} else {
 					htmlid = "jp5";
 				}
-			} else if (s.equalsIgnoreCase("F")) { // 세련된 모자
+			} else if (s.equalsIgnoreCase("F")) { // 洗練された帽子
 				if (pc.getInventory().consumeItem(49026, 5000)) {
 					pc.getInventory().storeItem(41099, 1);
 					htmlid = "jp8";
 				} else {
 					htmlid = "jp5";
 				}
-			} else if (s.equalsIgnoreCase("G")) { // 최고급 와인
+			} else if (s.equalsIgnoreCase("G")) { // 最高級のワイン
 				if (pc.getInventory().consumeItem(49026, 10000)) {
 					pc.getInventory().storeItem(41100, 1);
 					htmlid = "jp8";
 				} else {
 					htmlid = "jp5";
 				}
-			} else if (s.equalsIgnoreCase("H")) { // 알 수 없는 열쇠
+			} else if (s.equalsIgnoreCase("H")) { // 未知の鍵
 				if (pc.getInventory().consumeItem(49026, 100000)) {
 					pc.getInventory().storeItem(41101, 1);
 					htmlid = "jp8";
@@ -2754,29 +2740,29 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "jp5";
 				}
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71181) { // 에마이
-			if (s.equalsIgnoreCase("A")) { // 곰인형
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71181) { //にマイ
+			if (s.equalsIgnoreCase("A")) { // クマのぬいぐるみ
 				if (pc.getInventory().consumeItem(41093, 1)) {
 					pc.getInventory().storeItem(41097, 1);
 					htmlid = "my5";
 				} else {
 					htmlid = "my4";
 				}
-			} else if (s.equalsIgnoreCase("B")) { // 향수
+			} else if (s.equalsIgnoreCase("B")) { // 香水
 				if (pc.getInventory().consumeItem(41094, 1)) {
 					pc.getInventory().storeItem(41918, 1);
 					htmlid = "my6";
 				} else {
 					htmlid = "my4";
 				}
-			} else if (s.equalsIgnoreCase("C")) { // 드레스
+			} else if (s.equalsIgnoreCase("C")) { // ドレス
 				if (pc.getInventory().consumeItem(41095, 1)) {
 					pc.getInventory().storeItem(41919, 1);
 					htmlid = "my7";
 				} else {
 					htmlid = "my4";
 				}
-			} else if (s.equalsIgnoreCase("D")) { // 반지
+			} else if (s.equalsIgnoreCase("D")) { // リング
 				if (pc.getInventory().consumeItem(41096, 1)) {
 					pc.getInventory().storeItem(41920, 1);
 					htmlid = "my8";
@@ -2815,13 +2801,13 @@ public class C_NPCAction extends ClientBasePacket {
 					}
 				}
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 4202000) { // 용기사
-			// 피에나
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 4202000) { // 竜騎士
+			// ピエナ
 			if (s.equalsIgnoreCase("teleportURL") && pc.isDragonknight()) {
 				htmlid = "feaena3";
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 4201000) { // 환술사
-			// 아샤
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 4201000) { // イリュージョニスト
+			// アシャ
 			if (s.equalsIgnoreCase("teleportURL") && pc.isBlackwizard()) {
 				htmlid = "asha3";
 			}
@@ -2853,11 +2839,11 @@ public class C_NPCAction extends ClientBasePacket {
 							32873 + randomxy, (short) 530, 4, true);
 					pc.sendPackets(new S_PacketBox(
 							S_PacketBox.GREEN_MESSAGE,
-							"\\f3각 집무실에 등장하는 대법관을 차례로 공략하십시오."));
-					// 중앙
+							"\\f3各執務室に登場する最高裁判事を順番に攻略してください。"));
+					// 中央
 					pc.setSkillEffect(L1SkillId.ABSOLUTE_BARRIER, 5000);
 				} else {
-					pc.sendPackets(new S_SystemMessage("입장시간이 아닙니다"));
+					pc.sendPackets(new S_SystemMessage("入場時間はありません"));
 					return;
 				}
 			}
@@ -2992,30 +2978,30 @@ public class C_NPCAction extends ClientBasePacket {
 				htmlid = "sharna5";
 			}
 
-			// 이리스
+			// イリス
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71126) {
 			int TeleportType = 0, TeleportX = 0, TeleportY = 0, TeleportMap = 0;
-			if (s.equals("0")) { // 중앙광장 외각 부근 이동
+			if (s.equals("0")) { // 中央広場外角付近に移動
 				TeleportType = 1;
 				TeleportX = 32746;
 				TeleportY = 32764;
 				TeleportMap = 479;
-			} else if (s.equals("1")) { // 명법군 입구 부근 이동
+			} else if (s.equals("1")) { // 人ボプグン入り口付近に移動
 				TeleportType = 1;
 				TeleportX = 32788;
 				TeleportY = 32682;
 				TeleportMap = 479;
-			} else if (s.equals("2")) { // 마령군 입구 부근 이동
+			} else if (s.equals("2")) { // 魔霊軍入り口付近に移動
 				TeleportType = 1;
 				TeleportX = 32922;
 				TeleportY = 32701;
 				TeleportMap = 479;
-			} else if (s.equals("3")) { // 마수군 입구 부근 이동
+			} else if (s.equals("3")) { // マ水軍入り口付近に移動
 				TeleportType = 1;
 				TeleportX = 32910;
 				TeleportY = 32822;
 				TeleportMap = 479;
-			} else if (s.equals("4")) { // 암살군 입구 부근 이동
+			} else if (s.equals("4")) { // 暗殺軍入り口付近に移動
 				TeleportType = 1;
 				TeleportX = 32739;
 				TeleportY = 32843;
@@ -3125,7 +3111,7 @@ public class C_NPCAction extends ClientBasePacket {
 			}
 			if (TeleportType == 1) {
 				if (pc.getRadungeonTime() >= 120) {
-					pc.sendPackets(new S_ChatPacket(pc, "라스타바드 던전 시간이 만료 되었습니다."));
+					pc.sendPackets(new S_ChatPacket(pc, "ラスタバドケイブ時間が経過しました。"));
 					return;
 				} else {
 					new L1Teleport().teleport(pc, TeleportX, TeleportY, (short) TeleportMap, 0, true);
@@ -3138,14 +3124,14 @@ public class C_NPCAction extends ClientBasePacket {
 				int[] diaryno = { 49082, 49083 };
 				int pid = _random.nextInt(diaryno.length);
 				int di = diaryno[pid];
-				if (di == 49082) { // 홀수 페이지 뽑아라
+				if (di == 49082) { //奇数ページ抜け
 					htmlid = "voyager6a";
 					L1NpcInstance npc = (L1NpcInstance) obj;
 					L1ItemInstance item = pc.getInventory().storeItem(di, 1);
 					String itemName = item.getItem().getName();
 					String npcName = npc.getNpcTemplate().get_name();
 					pc.sendPackets(new S_ServerMessage(143, npcName, itemName));
-				} else if (di == 49083) { // 짝수 페이지 뽑아라
+				} else if (di == 49083) { // 偶数ページ抜け
 					htmlid = "voyager6b";
 					L1NpcInstance npc = (L1NpcInstance) obj;
 					L1ItemInstance item = pc.getInventory().storeItem(di, 1);
@@ -3154,167 +3140,167 @@ public class C_NPCAction extends ClientBasePacket {
 					pc.sendPackets(new S_ServerMessage(143, npcName, itemName));
 				}
 			}
-			// 연금 술사 페리타
+			//錬金術師フェリータ
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71128) {
 			if (s.equals("A")) {
-				if (pc.getInventory().checkItem(41010, 1)) { // 이리스의 추천서
+				if (pc.getInventory().checkItem(41010, 1)) { // イリスの推薦書
 					htmlid = "perita2";
 				} else {
 					htmlid = "perita3";
 				}
 			} else if (s.equals("p")) {
-				// 저주해진 블랙 귀 링 판별
-				if (pc.getInventory().checkItem(40987, 1) // 위저드 클래스
-						&& pc.getInventory().checkItem(40988, 1) // 나이트 클래스
-						&& pc.getInventory().checkItem(40989, 1)) { // 워리아크라스
+				// 呪われたブラック耳リング判別
+				if (pc.getInventory().checkItem(40987, 1) // ウィザードクラス
+						&& pc.getInventory().checkItem(40988, 1) // ナイトクラス
+						&& pc.getInventory().checkItem(40989, 1)) { // ウォーリーアークラス
 					htmlid = "perita43";
-				} else if (pc.getInventory().checkItem(40987, 1) // 위저드 클래스
-						&& pc.getInventory().checkItem(40989, 1)) { // 워리아크라스
+				} else if (pc.getInventory().checkItem(40987, 1) // ウィザードクラス
+						&& pc.getInventory().checkItem(40989, 1)) { // ウォーリーアークラス
 					htmlid = "perita44";
-				} else if (pc.getInventory().checkItem(40987, 1) // 위저드 클래스
-						&& pc.getInventory().checkItem(40988, 1)) { // 나이트 클래스
+				} else if (pc.getInventory().checkItem(40987, 1) // ウィザードクラス
+						&& pc.getInventory().checkItem(40988, 1)) { // ナイトクラス
 					htmlid = "perita45";
-				} else if (pc.getInventory().checkItem(40988, 1) // 나이트 클래스
-						&& pc.getInventory().checkItem(40989, 1)) { // 워리아크라스
+				} else if (pc.getInventory().checkItem(40988, 1) // ナイトクラス
+						&& pc.getInventory().checkItem(40989, 1)) { // ウォーリーアークラス
 					htmlid = "perita47";
-				} else if (pc.getInventory().checkItem(40987, 1)) { // 위저드 클래스
+				} else if (pc.getInventory().checkItem(40987, 1)) { // ウィザードクラス
 					htmlid = "perita46";
-				} else if (pc.getInventory().checkItem(40988, 1)) { // 나이트 클래스
+				} else if (pc.getInventory().checkItem(40988, 1)) { // ナイトクラス
 					htmlid = "perita49";
-				} else if (pc.getInventory().checkItem(40987, 1)) { // 워리아크라스
+				} else if (pc.getInventory().checkItem(40987, 1)) { // ウォーリーアークラス
 					htmlid = "perita48";
 				} else {
 					htmlid = "perita50";
 				}
 			} else if (s.equals("q")) {
-				// 블랙 귀 링 판별
-				if (pc.getInventory().checkItem(41173, 1) // 위저드 클래스
-						&& pc.getInventory().checkItem(41174, 1) // 나이트 클래스
-						&& pc.getInventory().checkItem(41175, 1)) { // 워리아크라스
+				// ブラック耳リング判別
+				if (pc.getInventory().checkItem(41173, 1) // ウィザードクラス
+						&& pc.getInventory().checkItem(41174, 1) // ナイトクラス
+						&& pc.getInventory().checkItem(41175, 1)) { // ウォーリーアークラス
 					htmlid = "perita54";
-				} else if (pc.getInventory().checkItem(41173, 1) // 위저드 클래스
-						&& pc.getInventory().checkItem(41175, 1)) { // 워리아크라스
+				} else if (pc.getInventory().checkItem(41173, 1) // ウィザードクラス
+						&& pc.getInventory().checkItem(41175, 1)) { // ウォーリーアークラス
 					htmlid = "perita55";
-				} else if (pc.getInventory().checkItem(41173, 1) // 위저드 클래스
-						&& pc.getInventory().checkItem(41174, 1)) { // 나이트 클래스
+				} else if (pc.getInventory().checkItem(41173, 1) // ウィザードクラス
+						&& pc.getInventory().checkItem(41174, 1)) { // ナイトクラス
 					htmlid = "perita56";
-				} else if (pc.getInventory().checkItem(41174, 1) // 나이트 클래스
-						&& pc.getInventory().checkItem(41175, 1)) { // 워리아크라스
+				} else if (pc.getInventory().checkItem(41174, 1) // ナイトクラス
+						&& pc.getInventory().checkItem(41175, 1)) { // ウォーリーアークラス
 					htmlid = "perita58";
-				} else if (pc.getInventory().checkItem(41174, 1)) { // 위저드 클래스
+				} else if (pc.getInventory().checkItem(41174, 1)) { // ウィザードクラス
 					htmlid = "perita57";
-				} else if (pc.getInventory().checkItem(41175, 1)) { // 나이트 클래스
+				} else if (pc.getInventory().checkItem(41175, 1)) { // ナイトクラス
 					htmlid = "perita60";
-				} else if (pc.getInventory().checkItem(41176, 1)) { // 워리아크라스
+				} else if (pc.getInventory().checkItem(41176, 1)) { // ウォーリーアークラス
 					htmlid = "perita59";
 				} else {
 					htmlid = "perita61";
 				}
 			} else if (s.equals("s")) {
-				// 신비적인 블랙 귀 링 판별
-				if (pc.getInventory().checkItem(41161, 1) // 위저드 클래스
-						&& pc.getInventory().checkItem(41162, 1) // 나이트 클래스
-						&& pc.getInventory().checkItem(41163, 1)) { // 워리아크라스
+				// 神秘的なブラック耳リング判別
+				if (pc.getInventory().checkItem(41161, 1) // ウィザードクラス
+						&& pc.getInventory().checkItem(41162, 1) //ナイトクラス
+						&& pc.getInventory().checkItem(41163, 1)) { // ウォーリーアークラス
 					htmlid = "perita62";
-				} else if (pc.getInventory().checkItem(41161, 1) // 위저드 클래스
-						&& pc.getInventory().checkItem(41163, 1)) { // 워리아크라스
+				} else if (pc.getInventory().checkItem(41161, 1) // ウィザードクラス
+						&& pc.getInventory().checkItem(41163, 1)) { // ウォーリーアークラス
 					htmlid = "perita63";
-				} else if (pc.getInventory().checkItem(41161, 1) // 위저드 클래스
-						&& pc.getInventory().checkItem(41162, 1)) { // 나이트 클래스
+				} else if (pc.getInventory().checkItem(41161, 1) // ウィザードクラス
+						&& pc.getInventory().checkItem(41162, 1)) { // ナイトクラス
 					htmlid = "perita64";
-				} else if (pc.getInventory().checkItem(41162, 1) // 나이트 클래스
-						&& pc.getInventory().checkItem(41163, 1)) { // 워리아크라스
+				} else if (pc.getInventory().checkItem(41162, 1) // ナイトクラス
+						&& pc.getInventory().checkItem(41163, 1)) { // ウォーリーアークラス
 					htmlid = "perita66";
-				} else if (pc.getInventory().checkItem(41161, 1)) { // 위저드 클래스
+				} else if (pc.getInventory().checkItem(41161, 1)) { // ウィザードクラス
 					htmlid = "perita65";
-				} else if (pc.getInventory().checkItem(41162, 1)) { // 나이트 클래스
+				} else if (pc.getInventory().checkItem(41162, 1)) { // ナイトクラス
 					htmlid = "perita68";
-				} else if (pc.getInventory().checkItem(41163, 1)) { // 워리아크라스
+				} else if (pc.getInventory().checkItem(41163, 1)) { // ウォーリーアークラス
 					htmlid = "perita67";
 				} else {
 					htmlid = "perita69";
 				}
 			} else if (s.equals("B")) {
-				// 정화의 일부
-				if (pc.getInventory().checkItem(40651, 10) // 불의 숨결
-						&& pc.getInventory().checkItem(40643, 10) // 수의 숨결
-						&& pc.getInventory().checkItem(40618, 10) // 대지의 숨결
-						&& pc.getInventory().checkItem(40645, 10) // 돌풍이 심함 취
-						&& pc.getInventory().checkItem(40676, 10) // 어둠의 숨결
-						&& pc.getInventory().checkItem(40442, 5) // 프롭브의 위액
-						&& pc.getInventory().checkItem(40051, 1)) { // 고급 에메랄드
+				// 浄化の一部
+				if (pc.getInventory().checkItem(40651, 10) // 火の息吹
+						&& pc.getInventory().checkItem(40643, 10) // 数の息吹
+						&& pc.getInventory().checkItem(40618, 10) // 大地の息吹
+						&& pc.getInventory().checkItem(40645, 10) // 突風が激しい取り
+						&& pc.getInventory().checkItem(40676, 10) // 闇の息づかい
+						&& pc.getInventory().checkItem(40442, 5) // プロップブの胃液
+						&& pc.getInventory().checkItem(40051, 1)) { // 高級エメラルド
 					htmlid = "perita7";
 					materials = new int[] { 40651, 40643, 40618, 40645, 40676, 40442, 40051 };
 					counts = new int[] { 10, 10, 10, 10, 20, 5, 1 };
-					createitem = new int[] { 40925 }; // 정화의 일부
+					createitem = new int[] { 40925 }; // 浄化の一部
 					createcount = new int[] { 1 };
 				} else {
 					htmlid = "perita8";
 				}
 			} else if (s.equals("G") || s.equals("h") || s.equals("i")) {
-				// 신비적인 일부：1 단계
-				if (pc.getInventory().checkItem(40651, 5) // 불의 숨결
-						&& pc.getInventory().checkItem(40643, 5) // 수의 숨결
-						&& pc.getInventory().checkItem(40618, 5) // 대지의 숨결
-						&& pc.getInventory().checkItem(40645, 5) // 돌풍이 심함 취
-						&& pc.getInventory().checkItem(40676, 5) // 어둠의 숨결
-						&& pc.getInventory().checkItem(40675, 5) // 어둠의 광석
-						&& pc.getInventory().checkItem(40049, 3) // 고급 루비
-						&& pc.getInventory().checkItem(40051, 1)) { // 고급 에메랄드
+				// 神秘的ないくつかのステップ1
+				if (pc.getInventory().checkItem(40651, 5) // 火の息吹
+						&& pc.getInventory().checkItem(40643, 5) // 数の息吹
+						&& pc.getInventory().checkItem(40618, 5) // 大地の息吹
+						&& pc.getInventory().checkItem(40645, 5) // 突風が激しい取り
+						&& pc.getInventory().checkItem(40676, 5) // 闇の息づかい
+						&& pc.getInventory().checkItem(40675, 5) // 闇の鉱石
+						&& pc.getInventory().checkItem(40049, 3) // 高級ルビー
+						&& pc.getInventory().checkItem(40051, 1)) { // 高級エメラルド
 					htmlid = "perita27";
 					materials = new int[] { 40651, 40643, 40618, 40645, 40676, 40675, 40049, 40051 };
 					counts = new int[] { 5, 5, 5, 5, 10, 10, 3, 1 };
-					createitem = new int[] { 40926 }; // 신비적인 일부：1 단계
+					createitem = new int[] { 40926 }; //神秘的ないくつかのステップ1
 					createcount = new int[] { 1 };
 				} else {
 					htmlid = "perita28";
 				}
 			} else if (s.equals("H") || s.equals("j") || s.equals("k")) {
-				// 신비적인 일부：2 단계
-				if (pc.getInventory().checkItem(40651, 10) // 불의 숨결
-						&& pc.getInventory().checkItem(40643, 10) // 수의 숨결
-						&& pc.getInventory().checkItem(40618, 10) // 대지의 숨결
-						&& pc.getInventory().checkItem(40645, 10) // 돌풍이 심함 취
-						&& pc.getInventory().checkItem(40676, 20) // 어둠의 숨결
-						&& pc.getInventory().checkItem(40675, 10) // 어둠의 광석
-						&& pc.getInventory().checkItem(40048, 3) // 고급 다이아몬드
-						&& pc.getInventory().checkItem(40051, 1)) { // 고급 에메랄드
+				// 神秘的ないくつかの2段階
+				if (pc.getInventory().checkItem(40651, 10) // 火の息吹
+						&& pc.getInventory().checkItem(40643, 10) // 数の息吹
+						&& pc.getInventory().checkItem(40618, 10) // 大地の息吹
+						&& pc.getInventory().checkItem(40645, 10) // 突風が激しい取り
+						&& pc.getInventory().checkItem(40676, 20) // 闇の息づかい
+						&& pc.getInventory().checkItem(40675, 10) // 闇の鉱石
+						&& pc.getInventory().checkItem(40048, 3) // 高級ダイヤモンド
+						&& pc.getInventory().checkItem(40051, 1)) { // 高級エメラルド
 					htmlid = "perita29";
 					materials = new int[] { 40651, 40643, 40618, 40645, 40676, 40675, 40048, 40051 };
 					counts = new int[] { 10, 10, 10, 10, 20, 10, 3, 1 };
-					createitem = new int[] { 40927 }; // 신비적인 일부：2 단계
+					createitem = new int[] { 40927 }; // 神秘的ないくつかの2段階
 					createcount = new int[] { 1 };
 				} else {
 					htmlid = "perita30";
 				}
 			} else if (s.equals("I") || s.equals("l") || s.equals("m")) {
-				// 신비적인 일부：3 단계
-				if (pc.getInventory().checkItem(40651, 20) // 불의 숨결
-						&& pc.getInventory().checkItem(40643, 20) // 수의 숨결
-						&& pc.getInventory().checkItem(40618, 20) // 대지의 숨결
-						&& pc.getInventory().checkItem(40645, 20) // 돌풍이 심함 취
-						&& pc.getInventory().checkItem(40676, 30) // 어둠의 숨결
-						&& pc.getInventory().checkItem(40675, 10) // 어둠의 광석
-						&& pc.getInventory().checkItem(40050, 3) // 고급 사파이어
-						&& pc.getInventory().checkItem(40051, 1)) { // 고급 에메랄드
+				// 神秘的ないくつかの手順3
+				if (pc.getInventory().checkItem(40651, 20) // 火の息吹
+						&& pc.getInventory().checkItem(40643, 20) // 数の息吹
+						&& pc.getInventory().checkItem(40618, 20) // 大地の息吹
+						&& pc.getInventory().checkItem(40645, 20) // 突風が激しい取り
+						&& pc.getInventory().checkItem(40676, 30) // 闇の息づかい
+						&& pc.getInventory().checkItem(40675, 10) // 闇の鉱石
+						&& pc.getInventory().checkItem(40050, 3) // 高級サファイア
+						&& pc.getInventory().checkItem(40051, 1)) { // 高級エメラルド
 					htmlid = "perita31";
 					materials = new int[] { 40651, 40643, 40618, 40645, 40676, 40675, 40050, 40051 };
 					counts = new int[] { 20, 20, 20, 20, 30, 10, 3, 1 };
-					createitem = new int[] { 40928 }; // 신비적인 일부：3 단계
+					createitem = new int[] { 40928 }; // 神秘的ないくつかの手順3
 					createcount = new int[] { 1 };
 				} else {
 					htmlid = "perita32";
 				}
 			} else if (s.equals("J") || s.equals("n") || s.equals("o")) {
-				// 신비적인 일부：4 단계
-				if (pc.getInventory().checkItem(40651, 30) // 불의 숨결
-						&& pc.getInventory().checkItem(40643, 30) // 수의 숨결
-						&& pc.getInventory().checkItem(40618, 30) // 대지의 숨결
-						&& pc.getInventory().checkItem(40645, 30) // 돌풍이 심함 취
-						&& pc.getInventory().checkItem(40676, 30) // 어둠의 숨결
-						&& pc.getInventory().checkItem(40675, 20) // 어둠의 광석
-						&& pc.getInventory().checkItem(40052, 1) // 최고급 다이아몬드
-						&& pc.getInventory().checkItem(40051, 1)) { // 고급 에메랄드
+				// 神秘的ないくつかのステップ4
+				if (pc.getInventory().checkItem(40651, 30) // 火の息吹
+						&& pc.getInventory().checkItem(40643, 30) // 数の息吹
+						&& pc.getInventory().checkItem(40618, 30) // 大地の息吹
+						&& pc.getInventory().checkItem(40645, 30) // 突風が激しい取り
+						&& pc.getInventory().checkItem(40676, 30) // 闇の息づかい
+						&& pc.getInventory().checkItem(40675, 20) // 闇の鉱石
+						&& pc.getInventory().checkItem(40052, 1) // 最高級ダイヤモンド
+						&& pc.getInventory().checkItem(40051, 1)) { // 高級エメラルド
 					htmlid = "perita33";
 					materials = new int[] { 40651, 40643, 40618, 40645, 40676, 40675, 40052, 40051 };
 					counts = new int[] { 30, 30, 30, 30, 30, 20, 1, 1 };
@@ -3323,18 +3309,18 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "perita34";
 				}
-			} else if (s.equals("K")) { // 1 단계 귀 링(영혼의 귀 링)
+			} else if (s.equals("K")) { // ステップ1耳リング（魂の耳リング）
 				int earinga = 0;
 				int earingb = 0;
 				if (pc.getInventory().checkEquipped(21014) || pc.getInventory().checkEquipped(21006) || pc.getInventory().checkEquipped(21007)) {
 					htmlid = "perita36";
-				} else if (pc.getInventory().checkItem(21014, 1)) { // 위저드 클래스
+				} else if (pc.getInventory().checkItem(21014, 1)) { // ウィザードクラス
 					earinga = 21014;
 					earingb = 41176;
-				} else if (pc.getInventory().checkItem(21006, 1)) { // 나이트 클래스
+				} else if (pc.getInventory().checkItem(21006, 1)) { //ナイトクラス
 					earinga = 21006;
 					earingb = 41177;
-				} else if (pc.getInventory().checkItem(21007, 1)) { // 워리아크라스
+				} else if (pc.getInventory().checkItem(21007, 1)) { // ウォーリーアークラス
 					earinga = 21007;
 					earingb = 41178;
 				} else {
@@ -3346,7 +3332,7 @@ public class C_NPCAction extends ClientBasePacket {
 					createitem = new int[] { earingb };
 					createcount = new int[] { 1 };
 				}
-			} else if (s.equals("L")) { // 2 단계 귀 링(지혜의 귀 링)
+			} else if (s.equals("L")) { // 2段階の耳リング（知恵の耳リング）
 				if (pc.getInventory().checkEquipped(21015)) {
 					htmlid = "perita22";
 				} else if (pc.getInventory().checkItem(21015, 1)) {
@@ -3357,7 +3343,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "perita22";
 				}
-			} else if (s.equals("M")) { // 3 단계 귀 링(진실의 귀 링)
+			} else if (s.equals("M")) { // 3段階の耳リング（真実の耳リング）
 				if (pc.getInventory().checkEquipped(21016)) {
 					htmlid = "perita26";
 				} else if (pc.getInventory().checkItem(21016, 1)) {
@@ -3368,7 +3354,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "perita26";
 				}
-			} else if (s.equals("b")) { // 2 단계 귀 링(정열의 귀 링)
+			} else if (s.equals("b")) { // 2段階の耳リング（情熱の耳リング）
 				if (pc.getInventory().checkEquipped(21009)) {
 					htmlid = "perita39";
 				} else if (pc.getInventory().checkItem(21009, 1)) {
@@ -3379,7 +3365,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "perita39";
 				}
-			} else if (s.equals("d")) { // 3 단계 귀 링(명예의 귀 링)
+			} else if (s.equals("d")) { // 3段階の耳リング（名誉の耳リング）
 				if (pc.getInventory().checkEquipped(21012)) {
 					htmlid = "perita41";
 				} else if (pc.getInventory().checkItem(21012, 1)) {
@@ -3390,7 +3376,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "perita41";
 				}
-			} else if (s.equals("a")) { // 2 단계 귀 링(분노의 귀 링)
+			} else if (s.equals("a")) { // 2段階の耳リング（怒りの耳リング）
 				if (pc.getInventory().checkEquipped(21008)) {
 					htmlid = "perita38";
 				} else if (pc.getInventory().checkItem(21008, 1)) {
@@ -3401,7 +3387,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "perita38";
 				}
-			} else if (s.equals("c")) { // 3 단계 귀 링(용맹의 귀 링)
+			} else if (s.equals("c")) { // 3段階の耳リング（勇猛の耳リング）
 				if (pc.getInventory().checkEquipped(21010)) {
 					htmlid = "perita40";
 				} else if (pc.getInventory().checkItem(21010, 1)) {
@@ -3414,12 +3400,12 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-			// 보석 세공인 룸스
+			// 宝石細工師ルームズ
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71129) {
 			if (s.equals("Z")) {
 				htmlid = "rumtis2";
 			} else if (s.equals("Y")) {
-				if (pc.getInventory().checkItem(41010, 1)) { // 이리스의 추천서
+				if (pc.getInventory().checkItem(41010, 1)) { //イリスの推薦書
 					htmlid = "rumtis3";
 				} else {
 					htmlid = "rumtis4";
@@ -3428,84 +3414,84 @@ public class C_NPCAction extends ClientBasePacket {
 				htmlid = "rumtis92";
 			} else if (s.equals("A")) {
 				if (pc.getInventory().checkItem(41161, 1)) {
-					// 신비적인 블랙 귀 링
+					// 神秘的なブラック耳リング
 					htmlid = "rumtis6";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("B")) {
 				if (pc.getInventory().checkItem(41164, 1)) {
-					// 신비적인 위저드 귀 링
+					// 神秘的なウィザード耳リング
 					htmlid = "rumtis7";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("C")) {
 				if (pc.getInventory().checkItem(41167, 1)) {
-					// 신비적인 회색 위저드 귀 링
+					// 神秘的な灰色のウィザード耳リング
 					htmlid = "rumtis8";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("T")) {
 				if (pc.getInventory().checkItem(41167, 1)) {
-					// 신비적인 화이트 위저드 귀 링
+					// 神秘的なホワイトウィザード耳リング
 					htmlid = "rumtis9";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("w")) {
 				if (pc.getInventory().checkItem(41162, 1)) {
-					// 신비적인 블랙 귀 링
+					// 神秘的なブラック耳リング
 					htmlid = "rumtis14";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("x")) {
 				if (pc.getInventory().checkItem(41165, 1)) {
-					// 신비적인 나이트 귀 링
+					// 神秘的なナイト耳リング
 					htmlid = "rumtis15";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("y")) {
 				if (pc.getInventory().checkItem(41168, 1)) {
-					// 신비적인 회색 나이트 귀 링
+					// 神秘的なグレーナイト耳リング
 					htmlid = "rumtis16";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("z")) {
 				if (pc.getInventory().checkItem(41171, 1)) {
-					// 신비적인 화이트 나이트 귀 링
+					// 神秘的なホワイトナイト耳リング
 					htmlid = "rumtis17";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("U")) {
 				if (pc.getInventory().checkItem(41163, 1)) {
-					// 신비적인 블랙 귀 링
+					// 神秘的なブラック耳リング
 					htmlid = "rumtis10";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("V")) {
 				if (pc.getInventory().checkItem(41166, 1)) {
-					// 미스테리아스워리아이아링
+					// ミステリアスウォーリー子供阿玲
 					htmlid = "rumtis11";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("W")) {
 				if (pc.getInventory().checkItem(41169, 1)) {
-					// 미스테리아스그레이워리아이아링
+					// ミステリアスグレーウォーリー子供阿玲
 					htmlid = "rumtis12";
 				} else {
 					htmlid = "rumtis101";
 				}
 			} else if (s.equals("X")) {
 				if (pc.getInventory().checkItem(41172, 1)) {
-					// 미스테리아스화이워리아이아링
+					// ミステリアスファイアウォーリー子供阿玲
 					htmlid = "rumtis13";
 				} else {
 					htmlid = "rumtis101";
@@ -3521,10 +3507,10 @@ public class C_NPCAction extends ClientBasePacket {
 				int mrn = 0;
 				int mjn = 0;
 				int ann = 0;
-				if (pc.getInventory().checkItem(40959, 1) // 명법군왕의 인장
-						&& pc.getInventory().checkItem(40960, 1) // 마령군왕의 인장
-						&& pc.getInventory().checkItem(40961, 1) // 마수군왕의 인장
-						&& pc.getInventory().checkItem(40962, 1)) { // 암살군왕의 인장
+				if (pc.getInventory().checkItem(40959, 1) // 冥法軍王の印章
+						&& pc.getInventory().checkItem(40960, 1) // 魔霊軍王の印章
+						&& pc.getInventory().checkItem(40961, 1) // 魔獣軍王の印章
+						&& pc.getInventory().checkItem(40962, 1)) { // 暗殺軍王の印章
 					insn = 1;
 					me = 40959;
 					mr = 40960;
@@ -3534,10 +3520,10 @@ public class C_NPCAction extends ClientBasePacket {
 					mrn = 1;
 					mjn = 1;
 					ann = 1;
-				} else if (pc.getInventory().checkItem(40642, 10) // 명법군의 배지
-						&& pc.getInventory().checkItem(40635, 10) // 마령군의 배지
-						&& pc.getInventory().checkItem(40638, 10) // 마수군의 배지
-						&& pc.getInventory().checkItem(40667, 10)) { // 암살군의 배지
+				} else if (pc.getInventory().checkItem(40642, 10) // 人ボプグンのバッジ
+						&& pc.getInventory().checkItem(40635, 10) // 魔霊軍のバッジ
+						&& pc.getInventory().checkItem(40638, 10) // マ水軍のバッジ
+						&& pc.getInventory().checkItem(40667, 10)) { // 暗殺軍のバッジ
 					bacn = 1;
 					me = 40642;
 					mr = 40635;
@@ -3548,17 +3534,17 @@ public class C_NPCAction extends ClientBasePacket {
 					mjn = 10;
 					ann = 10;
 				}
-				if (pc.getInventory().checkItem(40046, 1) // 사파이어
-						&& pc.getInventory().checkItem(40618, 5) // 대지의 숨결
-						&& pc.getInventory().checkItem(40643, 5) // 수의 숨결
-						&& pc.getInventory().checkItem(40645, 5) // 돌풍이 심함 취
-						&& pc.getInventory().checkItem(40651, 5) // 불의 숨결
-						&& pc.getInventory().checkItem(40676, 5)) { // 어둠의 숨결
+				if (pc.getInventory().checkItem(40046, 1) //サファイア
+						&& pc.getInventory().checkItem(40618, 5) //大地の息吹
+						&& pc.getInventory().checkItem(40643, 5) // 数の息吹
+						&& pc.getInventory().checkItem(40645, 5) // 突風が激しい取り
+						&& pc.getInventory().checkItem(40651, 5) // 火の息吹
+						&& pc.getInventory().checkItem(40676, 5)) { // 闇の息づかい
 					if (insn == 1 || bacn == 1) {
 						htmlid = "rumtis60";
 						materials = new int[] { me, mr, mj, an, 40046, 40618, 40643, 40651, 40676 };
 						counts = new int[] { men, mrn, mjn, ann, 1, 5, 5, 5, 5, 5 };
-						createitem = new int[] { 40926 }; // 가공된 사파이어：1 단계
+						createitem = new int[] { 40926 }; // 加工されたサファイア：1段階
 						createcount = new int[] { 1 };
 					} else {
 						htmlid = "rumtis18";
@@ -3617,9 +3603,9 @@ public class C_NPCAction extends ClientBasePacket {
 				new L1Teleport().teleport(pc, 32731, 32856, (short) 200, 5, true);
 				pc.getInventory().consumeItem(41158, 100);
 			}
-			// 첩보원(욕망의 동굴측)
+			// 諜報員（欲望の洞窟側）
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 80067) {
-			// 「동요하면서도 승낙한다」
+			// 「動揺しながらも承諾する」
 			if (s.equalsIgnoreCase("n")) {
 				htmlid = "";
 				poly(client, 6034);
@@ -3631,23 +3617,23 @@ public class C_NPCAction extends ClientBasePacket {
 					pc.sendPackets(new S_ServerMessage(143, ((L1NpcInstance) obj).getNpcTemplate().get_name(), item.getItem().getName()));
 					pc.getQuest().set_step(L1Quest.QUEST_DESIRE, 1);
 				}
-				// 「그런 임무는 그만둔다」
+				// 「そんな使命はやめておく」
 			} else if (s.equalsIgnoreCase("d")) {
 				htmlid = "minicod09";
 				pc.getInventory().consumeItem(41130, 1);
 				pc.getInventory().consumeItem(41131, 1);
-				// 「초기화한다」
+				// 「初期化する」
 			} else if (s.equalsIgnoreCase("k")) {
 				htmlid = "";
-				pc.getInventory().consumeItem(41132, 1); // 핏자국의 타락 한 가루
-				pc.getInventory().consumeItem(41133, 1); // 핏자국의 무력 한 가루
-				pc.getInventory().consumeItem(41134, 1); // 핏자국의 아집 한 가루
-				pc.getInventory().consumeItem(41135, 1); // 카헬의 타락 한 정수
-				pc.getInventory().consumeItem(41136, 1); // 카헬의 무력 한 정수
-				pc.getInventory().consumeItem(41137, 1); // 카헬의 아집 한 정수
-				pc.getInventory().consumeItem(41138, 1); // 카헬의 정수
+				pc.getInventory().consumeItem(41132, 1); // 血痕の堕落した粉
+				pc.getInventory().consumeItem(41133, 1); // 血痕の武力た粉
+				pc.getInventory().consumeItem(41134, 1); // 血痕の我執た粉
+				pc.getInventory().consumeItem(41135, 1); // カヘルの堕落した整数
+				pc.getInventory().consumeItem(41136, 1); // カヘルの無力な整数
+				pc.getInventory().consumeItem(41137, 1); // カヘルの我執の整数
+				pc.getInventory().consumeItem(41138, 1); // カヘルの定数
 				pc.getQuest().set_step(L1Quest.QUEST_DESIRE, 0);
-				// 정수를 건네준다
+				// 整数を渡す
 			} else if (s.equalsIgnoreCase("e")) {
 				if (pc.getQuest().get_step(L1Quest.QUEST_DESIRE) == L1Quest.QUEST_END || pc.getKarmaLevel() >= 1) {
 					htmlid = "";
@@ -3656,18 +3642,18 @@ public class C_NPCAction extends ClientBasePacket {
 						htmlid = "";
 						pc.addKarma((int) (1600 * Config.RATE_KARMA));
 						pc.sendPackets(new S_Karma(pc));
-						pc.getInventory().consumeItem(41130, 1); // 핏자국의 계약서
-						pc.getInventory().consumeItem(41131, 1); // 핏자국의 지령서
+						pc.getInventory().consumeItem(41130, 1); // 血痕の契約書
+						pc.getInventory().consumeItem(41131, 1); // 血痕の指令書
 						pc.getInventory().consumeItem(41138, 1); // 카헬의 정수
 						pc.getQuest().set_step(L1Quest.QUEST_DESIRE, L1Quest.QUEST_END);
 					} else {
 						htmlid = "minicod04";
 					}
 				}
-				// 선물을 받는다
+				// ギフトを受け取る
 			} else if (s.equalsIgnoreCase("g")) {
 				htmlid = "";
-				final int[] item_ids = { 41130 }; // 핏자국의 계약서
+				final int[] item_ids = { 41130 }; //血痕の契約書
 				final int[] item_amounts = { 1 };
 				L1ItemInstance item = null;
 				for (int i = 0; i < item_ids.length; i++) {
@@ -3675,13 +3661,13 @@ public class C_NPCAction extends ClientBasePacket {
 					pc.sendPackets(new S_ServerMessage(143, ((L1NpcInstance) obj).getNpcTemplate().get_name(), item.getItem().getName()));
 				}
 			}
-								/** 드루가 리뉴얼 **/
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900005) {// 드루가의 베일
+								/** ドリューがリニューアル **/
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900005) {// トゥルがベール
 			L1ItemInstance item = null;
 			if (s.equalsIgnoreCase("a")) {
-				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 이미 주머니가 있다.
+				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 既にポケットがあります。
 					htmlid = "veil3";
-				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000만 아데나가 없다.
+				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000万アデナがない。
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 50000000);
 					item = pc.getInventory().storeItem(490012, 1);
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
@@ -3691,9 +3677,9 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 			if (s.equalsIgnoreCase("b")) {
-				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 이미 주머니가 있다.
+				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 既にポケットがあります。
 					htmlid = "veil3";
-				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000만 아데나가 없다.
+				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000万アデナがない。
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 50000000);
 					item = pc.getInventory().storeItem(490013, 1);
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
@@ -3703,9 +3689,9 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 			if (s.equalsIgnoreCase("c")) {
-				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 이미 주머니가 있다.
+				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 既にポケットがあります。
 					htmlid = "veil3";
-				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000만 아데나가 없다.
+				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000万アデナがない。
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 50000000);
 					item = pc.getInventory().storeItem(490014, 1);
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
@@ -3715,9 +3701,9 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 			if (s.equalsIgnoreCase("e")) {
-				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 이미 주머니가 있다.
+				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { //すでにポケットがあります。
 					htmlid = "veil3";
-				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000만 아데나가 없다.
+				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000万アデナがない。
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 50000000);
 					item = pc.getInventory().storeItem(490012, 1);
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
@@ -3727,9 +3713,9 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 			if (s.equalsIgnoreCase("f")) {
-				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 이미 주머니가 있다.
+				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 既にポケットがあります。
 					htmlid = "veil3";
-				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000만 아데나가 없다.
+				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000万アデナがない。
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 50000000);
 					item = pc.getInventory().storeItem(490013, 1);
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
@@ -3739,7 +3725,7 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 			if (s.equalsIgnoreCase("g")) {
-				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 이미 주머니가 있다.
+				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 既にポケットがあります。
 					htmlid = "veil3";
 				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000만 아데나가 없다.
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 50000000);
@@ -3751,9 +3737,9 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 			if (s.equalsIgnoreCase("i")) {
-				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 이미 주머니가 있다.
+				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { //既にポケットがあります。
 					htmlid = "veil3";
-				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000만 아데나가 없다.
+				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000万アデナがない。
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 50000000);
 					item = pc.getInventory().storeItem(490012, 1);
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
@@ -3763,7 +3749,7 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 			if (s.equalsIgnoreCase("j")) {
-				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 이미 주머니가 있다.
+				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 既にポケットがあります。
 					htmlid = "veil3";
 				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000만 아데나가 없다.
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 50000000);
@@ -3775,9 +3761,9 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 			if (s.equalsIgnoreCase("k")) {
-				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 이미 주머니가 있다.
+				if (pc.getInventory().checkItem(L1ItemId.DRUGA_POKET)) { // 既にポケットがあります。
 					htmlid = "veil3";
-				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000만 아데나가 없다.
+				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 50000000)) {// 1000万アデナがない。
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 50000000);
 					item = pc.getInventory().storeItem(490014, 1);
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
@@ -3787,7 +3773,7 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 			
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900047) {// 수상한 텔레포터
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900047) {//受賞したテレポーター
 			if (s.equalsIgnoreCase("b")) {
 				if (pc.getInventory().checkItem(41159, 1)) {
 					pc.getInventory().consumeItem(41159, 1);
@@ -3893,14 +3879,14 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "pctel2";
 				}
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900017) {// 반쿠
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900017) {// バンク
 			if (s.equalsIgnoreCase("buy 7")) {
-				petbuy(client, 900043, 410045, 1);// 녹색 해츨링 7
+				petbuy(client, 900043, 410045, 1);// 緑ハッチリン7
 			} else if (s.equalsIgnoreCase("buy 8")) {
-				petbuy(client, 900044, 410046, 1);// 황색 해츨링 8
+				petbuy(client, 900044, 410046, 1);// 黄色ハッチリン8
 			}
 			htmlid = "";
-		} else  if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 3310018) {// 발라카스 레이드 데스나이트 버프사
+		} else  if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 3310018) {// ヴァラカスレイドデスナイトバフ社
 			if(s.equalsIgnoreCase("a"))
 			{
 				int[] allBuffSkill = { PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR,
@@ -3918,7 +3904,7 @@ public class C_NPCAction extends ClientBasePacket {
 							pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 				}
 			}
-		}else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900048) {// 수상한 요리사
+		}else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900048) {// 受賞したシェフ
 			if (s.equalsIgnoreCase("0")) {
 				if (pc.getInventory().checkItem(41159, 45)) {
 					pc.getInventory().consumeItem(41159, 45);
@@ -3976,144 +3962,144 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "suschef4";
 				}
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900000) {// 슈에르메
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900000) {// シュエルメ
 //			System.out.println("슈에르메");
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			L1ItemInstance item = null;
-														/** 표식으로 마안해제  **/
-			if (s.equalsIgnoreCase("H")) { // 지룡의 마안 표식
+														/** マーカーとして魔眼解除  **/
+			if (s.equalsIgnoreCase("H")) { // 地竜の魔眼標識
 				if (pc.getInventory().consumeItem(410162, 32) && pc.getInventory().consumeItem(40308, 100000)) {
 					pc.getInventory().storeItem(410034, 1);
 				} else {
 					htmlid = "sherme10";
 				}
-			} else if (s.equalsIgnoreCase("I")) { // 수룡의 마안 표식
+			} else if (s.equalsIgnoreCase("I")) { // 水竜の魔眼標識
 				if (pc.getInventory().consumeItem(410163, 32) && pc.getInventory().consumeItem(40308, 100000)) {
 					pc.getInventory().storeItem(410032, 1);
 				} else {
 					htmlid = "sherme10";
 				}
-			} else if (s.equalsIgnoreCase("J")) { // 화룡의 마안 표식
+			} else if (s.equalsIgnoreCase("J")) { // 火竜の魔眼標識
 				if (pc.getInventory().consumeItem(410164, 32) && pc.getInventory().consumeItem(40308, 100000)) {
 					pc.getInventory().storeItem(410035, 1);
 				} else {
 					htmlid = "sherme10";
 				}
-			} else if (s.equalsIgnoreCase("K")) { // 풍룡의 마안 표식
+			} else if (s.equalsIgnoreCase("K")) { // 風竜の魔眼標識
 				if (pc.getInventory().consumeItem(410165, 32) && pc.getInventory().consumeItem(40308, 100000)) {
 					pc.getInventory().storeItem(410033, 1);
 				} else {
 					htmlid = "sherme10";
 				}
-													/** 봉인된 마안류 해제  **/
+													/**封印された魔眼類解除  **/
 			if (s.equalsIgnoreCase("A")) {
-				if (pc.getInventory().checkItem(410034)) {// 지룡마안
+				if (pc.getInventory().checkItem(410034)) {// 地竜魔眼
 					htmlid = "sherme0";
 				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 100000) && pc.getInventory().checkItem(410030)) {// 봉인 지룡
-					pc.getInventory().consumeItem(410030, 1);// 봉인 지룡
+					pc.getInventory().consumeItem(410030, 1);//封印地竜
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 100000);
 					item = pc.getInventory().storeItem(410034, 1);
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
 					htmlid = "";
 				} else {
-					htmlid = "sherme1"; // 돈이 없거나 마안이 없다.
+					htmlid = "sherme1"; // お金がないか、魔眼はない。
 				}
 			} else if (s.equalsIgnoreCase("B")) {
-				if (pc.getInventory().checkItem(410032)) {// 수룡 마안
+				if (pc.getInventory().checkItem(410032)) {// 水竜魔眼
 					htmlid = "sherme0";
 				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 100000) && pc.getInventory().checkItem(410028)) {// 봉인 수룡
-					pc.getInventory().consumeItem(410028, 1);// 봉인 수룡
+					pc.getInventory().consumeItem(410028, 1);// 封印水竜
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 100000);
 					item = pc.getInventory().storeItem(410032, 1);
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
 					htmlid = "";
 				} else {
-					htmlid = "sherme1"; // 돈이 없거나 마안이 없다.
+					htmlid = "sherme1"; // お金がないか、魔眼はない。
 				}
 			} else if (s.equalsIgnoreCase("C")) {
-				if (pc.getInventory().checkItem(410035)) {// 화룡마안
+				if (pc.getInventory().checkItem(410035)) {// 火竜魔眼
 					htmlid = "sherme0";
 				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 100000) && pc.getInventory().checkItem(410031)) {// 봉인 화룡
-					pc.getInventory().consumeItem(410031, 1);// 봉인 화룡
+					pc.getInventory().consumeItem(410031, 1);// 封印竜
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 100000);
 					item = pc.getInventory().storeItem(410035, 1);
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
 					htmlid = "";
 				} else {
-					htmlid = "sherme1"; // 돈이 없거나 마안이 없다.
+					htmlid = "sherme1"; // お金がないか、魔眼はない。
 				}
 			} else if (s.equalsIgnoreCase("D")) {
-				if (pc.getInventory().checkItem(410033)) {// 풍룡 마안
+				if (pc.getInventory().checkItem(410033)) {// 風竜魔眼
 					htmlid = "sherme0";
 				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 100000) && pc.getInventory().checkItem(410029)) {// 봉인 풍룡
-					pc.getInventory().consumeItem(410029, 1);// 봉인 풍룡
+					pc.getInventory().consumeItem(410029, 1);// 封印風竜
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 100000);
-					item = pc.getInventory().storeItem(410033, 1);// 풍룡
+					item = pc.getInventory().storeItem(410033, 1);// 風竜
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
 					htmlid = "";
 				} else {
-					htmlid = "sherme1"; // 돈이 없거나 마안이 없다.
+					htmlid = "sherme1"; // お金がないか、魔眼はない。
 				}
-			} else if (s.equalsIgnoreCase("E")) {// 탄생의 마안
+			} else if (s.equalsIgnoreCase("E")) {// 誕生の魔眼
 				int chance = _random.nextInt(100) + 1;
-				if (pc.getInventory().checkItem(410036)) {// 탄생
+				if (pc.getInventory().checkItem(410036)) {// 誕生
 					htmlid = "sherme0";
-				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 200000) && pc.getInventory().checkItem(410034)// 지룡
-						&& pc.getInventory().checkItem(410032)) {// 수룡
-					pc.getInventory().consumeItem(410034, 1);// 지룡
-					pc.getInventory().consumeItem(410032, 1);// 수룡
+				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 200000) && pc.getInventory().checkItem(410034)//地竜
+						&& pc.getInventory().checkItem(410032)) {// 水竜
+					pc.getInventory().consumeItem(410034, 1);// 地竜
+					pc.getInventory().consumeItem(410032, 1);// 水竜
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 200000);
 					if (chance <= 40) {
-						item = pc.getInventory().storeItem(410036, 1);// 탄생
+						item = pc.getInventory().storeItem(410036, 1);// 誕生
 						pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
 						htmlid = "";
 					} else {
 						htmlid = "sherme5";
 					}
 				} else {
-					htmlid = "sherme1"; // 돈이 없거나 마안이 없다.
+					htmlid = "sherme1"; //お金がないか、魔眼はない。
 				}
-			} else if (s.equalsIgnoreCase("F")) {// 형상의 마안
+			} else if (s.equalsIgnoreCase("F")) {// 形状の魔眼
 				int chance = _random.nextInt(100) + 1;
-				if (pc.getInventory().checkItem(410037)) {// 형상
+				if (pc.getInventory().checkItem(410037)) {// 形状
 					htmlid = "sherme0";
-				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 200000) && pc.getInventory().checkItem(410036)// 탄생
-						&& pc.getInventory().checkItem(410033)) {// 풍룡
-					pc.getInventory().consumeItem(410036, 1);// 탄생
-					pc.getInventory().consumeItem(410033, 1);// 풍룡
+				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 200000) && pc.getInventory().checkItem(410036)// 誕生
+						&& pc.getInventory().checkItem(410033)) {// 風竜
+					pc.getInventory().consumeItem(410036, 1);// 誕生
+					pc.getInventory().consumeItem(410033, 1);// 風竜
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 200000);
 					if (chance <= 30) {
-						item = pc.getInventory().storeItem(410037, 1);// 형상
+						item = pc.getInventory().storeItem(410037, 1);// 形状
 						pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
 						htmlid = "";
 					} else {
 						htmlid = "sherme5";
 					}
 				} else {
-					htmlid = "sherme1"; // 돈이 없거나 마안이 없다.
+					htmlid = "sherme1"; //お金がないか、魔眼はない。
 				}
-			} else if (s.equalsIgnoreCase("G")) {// 생명의 마안
+			} else if (s.equalsIgnoreCase("G")) {// 生命の魔眼
 				int chance = _random.nextInt(100) + 1;
-				if (pc.getInventory().checkItem(410038)) {// 생명의마안
+				if (pc.getInventory().checkItem(410038)) {// 生命の魔眼
 					htmlid = "sherme0";
-				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 200000) && pc.getInventory().checkItem(410037)// 형상
-						&& pc.getInventory().checkItem(410035)) {// 화룡
-					pc.getInventory().consumeItem(410037, 1);// 형상
-					pc.getInventory().consumeItem(410035, 1);// 화룡
+				} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 200000) && pc.getInventory().checkItem(410037)// 形状
+						&& pc.getInventory().checkItem(410035)) {//火竜
+					pc.getInventory().consumeItem(410037, 1);// 形状
+					pc.getInventory().consumeItem(410035, 1);// 火竜
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 200000);
 					if (chance <= 20) {
-						item = pc.getInventory().storeItem(410038, 1);// 생명
+						item = pc.getInventory().storeItem(410038, 1);// 生命
 						pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
 						htmlid = "";
 					} else {
 						htmlid = "sherme5";
 					}
 				} else {
-					htmlid = "sherme1"; // 돈이 없거나 마안이 없다.
+					htmlid = "sherme1"; //お金がないか、魔眼はない。
 					}
 				}
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900105) { // 마에노브
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900105) { // 前ノブ
 			if (s.equalsIgnoreCase("A")) {
 				if (pc.getInventory().checkItem(40308, 300) && pc.getInventory().checkItem(40104, 2)) {
 					pc.getInventory().consumeItem(40308, 300);
@@ -4200,47 +4186,47 @@ public class C_NPCAction extends ClientBasePacket {
 			int locx = 0, locy = 0, checkitem = 0;
 			if (s.equalsIgnoreCase("A")) {
 				switch (((L1NpcInstance) obj).getNpcTemplate().get_npcId()) {
-				case 900090:// 16층 -> 20층
+				case 900090:// 16階 - > 20階
 					locx = 32754;
 					locy = 32747;
 					checkitem = 40104;
 					break;
-				case 900091:// 26층 -> 30층
+				case 900091:// 26階 - > 30階
 					locx = 32754;
 					locy = 32747;
 					checkitem = 40105;
 					break;
-				case 900092:// 36층 -> 40층
+				case 900092:// 36階 - > 40階
 					locx = 32754;
 					locy = 32747;
 					checkitem = 40106;
 					break;
-				case 900093:// 46층 -> 50층
+				case 900093:// 46階 - > 50階
 					locx = 32754;
 					locy = 32747;
 					checkitem = 40107;
 					break;
-				case 900094:// 56층 -> 60층
+				case 900094:// 56階 - > 60階
 					locx = 32635;
 					locy = 32790;
 					checkitem = 40108;
 					break;
-				case 900095:// 66층 -> 70층
+				case 900095:// 66階 - > 70階
 					locx = 32637;
 					locy = 32791;
 					checkitem = 40109;
 					break;
-				case 900096:// 76층 -> 80층
+				case 900096:// 76階 - > 80階
 					locx = 32637;
 					locy = 32791;
 					checkitem = 40110;
 					break;
-				case 900097:// 86층 -> 90층
+				case 900097:// 86階 - > 90階
 					locx = 32637;
 					locy = 32791;
 					checkitem = 40111;
 					break;
-				case 900098:// 96층 -> 100층
+				case 900098:// 96階 - > 100階
 					locx = 32732;
 					locy = 32857;
 					checkitem = 40112;
@@ -4257,40 +4243,40 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900143) { // 말섬 인던 보조원
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900143) { // マルソムインスタンスダンジョンリーガル
 			if (s.equalsIgnoreCase("a")) {
 				new L1Teleport().teleport(pc, 32583, 32924, (short) 0, 5, true);
 				htmlid = "";
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900146) { // 말섬 인던 휴그린트
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900146) { // マルソムインスタンスダンジョンヒューグリント
 			if (s.equalsIgnoreCase("0")) {
 				if (!pc.getInventory().checkItem(L1ItemId.MAGIC_BREATH, 1)) {
 					if (pc.getInventory().checkItem(40308, 1000)) {
 						pc.getInventory().consumeItem(40308, 1000);
-						pc.getInventory().storeItem(L1ItemId.MAGIC_BREATH, 1); // 마력의 숨결
+						pc.getInventory().storeItem(L1ItemId.MAGIC_BREATH, 1); //魔力の息吹
 						htmlid = "hugrint2";
 					} else {
-						htmlid = "hugrint3"; // 아덴부족
+						htmlid = "hugrint3"; // アデン不足
 					}
 				} else {
 					htmlid = "hugrint4"; // 숨결이미 가지고있음
 				}
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900170) {// 말섬 2층 마법문자
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900170) {// マルソム2階の魔法の文字
 			int storeitem = 0;
-			if (s.equalsIgnoreCase("a")) { // 숨겨진 마족의 무기함 [ 검 ]
+			if (s.equalsIgnoreCase("a")) { // 隠された魔族の武器さ[剣]
 				storeitem = 410127;
-			} else if (s.equalsIgnoreCase("b")) { // 숨겨진 마족의 무기함 [ 지팡이 ]
+			} else if (s.equalsIgnoreCase("b")) { // 隠された魔族の武器さ[杖]
 				storeitem = 410128;
-			} else if (s.equalsIgnoreCase("c")) { // 숨겨진 마족의 무기함 [ 크로우 ]
+			} else if (s.equalsIgnoreCase("c")) { // 隠された魔族の武器さ[クロウ]
 				storeitem = 410129;
-			} else if (s.equalsIgnoreCase("d")) { // 숨겨진 마족의 무기함 [ 활 ]
+			} else if (s.equalsIgnoreCase("d")) { // 隠された魔族の武器さ[弓]
 				storeitem = 410130;
-			} else if (s.equalsIgnoreCase("e")) { // 숨겨진 마족의 무기함 [ 체인소드 ]
+			} else if (s.equalsIgnoreCase("e")) { // 隠された魔族の武器さ[チェーンソード]
 				storeitem = 410131;
-			} else if (s.equalsIgnoreCase("f")) { // 숨겨진 마족의 무기함 [ 키링크 ]
+			} else if (s.equalsIgnoreCase("f")) { // 隠された魔族の武器さ[キーリンク]
 				storeitem = 410132;
-			} else if (s.equalsIgnoreCase("g")) { // 숨겨진 마족의 무기함 [ 도끼 ]
+			} else if (s.equalsIgnoreCase("g")) { // 隠された魔族の武器さ[斧]
 				storeitem = 410170;
 			}
 			if (pc.getInventory().checkItem(410107, 1) && pc.getInventory().checkItem(41246, 20000)) {
@@ -4301,7 +4287,7 @@ public class C_NPCAction extends ClientBasePacket {
 			} else {
 				htmlid = "j_html12";
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70842) { // 마르바
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70842) { // マルバ
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			if (pc.getInventory().checkItem(40665)) {
 				htmlid = "marba17";
@@ -4325,9 +4311,9 @@ public class C_NPCAction extends ClientBasePacket {
 			}
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70840) {
 			if (s.equals("A")) { /* robinhood1~7 */
-				if (pc.getInventory().checkItem(40068)) { /* 엘븐 와퍼 체크 */
-					pc.getInventory().consumeItem(40068, 1); /* 엘븐 와퍼 소비 */
-					pc.getQuest().set_step(L1Quest.QUEST_MOONBOW, 1); /* 1단계 완료 */
+				if (pc.getInventory().checkItem(40068)) { /* エルヴンワッフルチェック */
+					pc.getInventory().consumeItem(40068, 1); /* エルヴンワッフル消費 */
+					pc.getQuest().set_step(L1Quest.QUEST_MOONBOW, 1); /* ステップ1完了 */
 					htmlid = "robinhood4";
 				} else {
 					htmlid = "robinhood19";
@@ -4339,7 +4325,7 @@ public class C_NPCAction extends ClientBasePacket {
 					L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
 					// L1ItemInstance memo = pc.getInventory().storeItem(41346, 1);
 					// L1ItemInstance memo2 = pc.getInventory().storeItem(41348, 1);
-					pc.sendPackets(new S_SystemMessage("로빈후드의 메모지와 소개장을 얻었습니다."));
+					pc.sendPackets(new S_SystemMessage("ロビンフッドのメモ紙と紹介状を獲得しました。"));
 					pc.getQuest().set_step(L1Quest.QUEST_MOONBOW, 2);
 					htmlid = "robinhood13";
 				}
@@ -4347,7 +4333,7 @@ public class C_NPCAction extends ClientBasePacket {
 				if (pc.getInventory().checkItem(41346) && pc.getInventory().checkItem(41351) && pc.getInventory().checkItem(41352, 4) && pc.getInventory().checkItem(40618, 30)
 						&& pc.getInventory().checkItem(40643, 30) && pc.getInventory().checkItem(40645, 30) && pc.getInventory().checkItem(40651, 30)
 						&& pc.getInventory().checkItem(40676, 30)) {
-					pc.getInventory().consumeItem(41346, 1); /* 메모장, 정기, 유뿔, 불, 물, 바람, 대지 어둠숨결 */
+					pc.getInventory().consumeItem(41346, 1); /* メモ帳、定期的に、ユプル、火、水、風、大地闇の息吹 */
 					pc.getInventory().consumeItem(41351, 1);
 					pc.getInventory().consumeItem(41352, 4);
 					pc.getInventory().consumeItem(40651, 30);
@@ -4359,19 +4345,19 @@ public class C_NPCAction extends ClientBasePacket {
 					final int[] item_amounts = { 1, 1, };
 					for (int i = 0; i < item_ids.length; i++) {
 						L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
-						pc.sendPackets(new S_SystemMessage("로빈후드의 반지와 메모지를 얻었습니다."));
+						pc.sendPackets(new S_SystemMessage("ロビンフッドのリングとメモ用紙を獲得しました。"));
 					}
-					pc.getQuest().set_step(L1Quest.QUEST_MOONBOW, 7); /* 7단계 완료 */
-					htmlid = "robinhood10"; /* 나머지 재료를 찾아오게.. */
+					pc.getQuest().set_step(L1Quest.QUEST_MOONBOW, 7); /* ステップ7完了 */
+					htmlid = "robinhood10"; /* 残りの材料を探してくるように。 */
 				} else {
-					htmlid = "robinhood15"; /* 달빛정기, 유뿔 가져왔는가 */
+					htmlid = "robinhood15"; /* 月光定期的に、ユプル持って来た */
 				}
 			} else if (s.equals("E")) { /* robinhood11 */
 				if (pc.getInventory().checkItem(41350) && pc.getInventory().checkItem(41347) && pc.getInventory().checkItem(40491, 30) && pc.getInventory().checkItem(40495, 40)
 						&& pc.getInventory().checkItem(100) && pc.getInventory().checkItem(40509, 12) && pc.getInventory().checkItem(40052) && pc.getInventory().checkItem(40053)
 						&& pc.getInventory().checkItem(40054) && pc.getInventory().checkItem(40055)) {
 					pc.getInventory().consumeItem(41350, 1);
-					/* 반지, 메모지, 그리폰깃털, 미스릴실, 오리뿔, 오판, 최고급보석1개씩 */
+					/* リング、メモ用紙、グリフォンの羽、ミスリルの糸、アヒル角、誤判、最高級の宝石1個ずつ*/
 					pc.getInventory().consumeItem(41347, 1);
 					pc.getInventory().consumeItem(40491, 30);
 					pc.getInventory().consumeItem(40495, 40);
@@ -4385,15 +4371,15 @@ public class C_NPCAction extends ClientBasePacket {
 					final int[] item_amounts = { 1 };
 					for (int i = 0; i < item_ids.length; i++) {
 						L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
-						pc.sendPackets(new S_SystemMessage("달의 장궁을 얻었습니다."));
+						pc.sendPackets(new S_SystemMessage("月のロングボウを獲得しました。"));
 					}
-					pc.getQuest().set_step(L1Quest.QUEST_MOONBOW, 0); /* 퀘스트 리셋 */
-					htmlid = "robinhood12"; /* 완성이야 */
+					pc.getQuest().set_step(L1Quest.QUEST_MOONBOW, 0); /* クエストリセット */
+					htmlid = "robinhood12"; /* 完成だよ */
 				} else {
-					htmlid = "robinhood17"; /* 재료가 부족한걸 */
+					htmlid = "robinhood17"; /*材料が不足していることを */
 				}
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 600005) {// 지브릴
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 600005) {// ジブリル
 			if (s.equals("A")) {
 				if (pc.getInventory().checkItem(41348)) {
 					pc.getInventory().consumeItem(41348, 1);
@@ -4413,7 +4399,7 @@ public class C_NPCAction extends ClientBasePacket {
 					final int[] item_amounts = { 1 };
 					for (int i = 0; i < item_ids.length; i++) {
 						L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
-						pc.sendPackets(new S_SystemMessage("에바의 단검을 얻었습니다."));
+						pc.sendPackets(new S_SystemMessage("エバの短剣を獲得しました。"));
 					}
 					pc.getQuest().set_step(L1Quest.QUEST_MOONBOW, 4);
 					htmlid = "zybril13";
@@ -4428,7 +4414,7 @@ public class C_NPCAction extends ClientBasePacket {
 					final int[] item_amounts = { 1 };
 					for (int i = 0; i < item_ids.length; i++) {
 						L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
-						pc.sendPackets(new S_SystemMessage("신성한 에바의 물을 얻었습니다."));
+						pc.sendPackets(new S_SystemMessage("神聖なエヴァの水を獲得しました。"));
 					}
 					pc.getQuest().set_step(L1Quest.QUEST_MOONBOW, 5);
 					htmlid = "zybril9";
@@ -4442,7 +4428,7 @@ public class C_NPCAction extends ClientBasePacket {
 					final int[] item_amounts = { 1 };
 					for (int i = 0; i < item_ids.length; i++) {
 						L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
-						pc.sendPackets(new S_SystemMessage("달빛의 정기를 얻었습니다."));
+						pc.sendPackets(new S_SystemMessage("月明りの定期を獲得しました。"));
 					}
 					pc.getQuest().set_step(L1Quest.QUEST_MOONBOW, 6);
 					htmlid = "zybril10";
@@ -4451,53 +4437,53 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71179) { // 디에츠(빛고목제작)
-			if (s.equalsIgnoreCase("A")) {// 복원된 고대의 목걸이
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71179) { //ディ悦（光古木製作）
+			if (s.equalsIgnoreCase("A")) {// 復元された古代のネックレス
 				Random random = new Random();
 				if (pc.getInventory().checkItem(49028, 1) && pc.getInventory().checkItem(49029, 1) && pc.getInventory().checkItem(49030, 1)
-						&& pc.getInventory().checkItem(41139, 1)) { // 보석과 볼품없는
-					// 목걸이 확인
+						&& pc.getInventory().checkItem(41139, 1)) { // 宝石と粘着性
+					// ネックレス確認
 					if (random.nextInt(10) > 6) {
 						materials = new int[] { 49028, 49029, 49030, 41139 };
 						counts = new int[] { 1, 1, 1, 1 };
-						createitem = new int[] { 41140 }; // 복원된 고대의 목걸이
+						createitem = new int[] { 41140 }; // 復元された古代のネックレス
 						createcount = new int[] { 1 };
 						htmlid = "dh8";
-					} else { // 실패의 경우 아이템만 사라짐
+					} else { // 失敗の場合アイテムのみ消える
 						materials = new int[] { 49028, 49029, 49030, 41139 };
 						counts = new int[] { 1, 1, 1, 1 };
-						createitem = new int[] { 410027 }; // 보석 가루
+						createitem = new int[] { 410027 }; //宝石パウダー
 						createcount = new int[] { 5 };
 						htmlid = "dh7";
 					}
-				} else { // 재료가 부족한 경우
+				} else { //材料が不足している場合、
 					htmlid = "dh6";
 				}
-			} else if (s.equalsIgnoreCase("B")) {// 빛나는 고대의 목걸이 제작을 부탁한다.
+			} else if (s.equalsIgnoreCase("B")) {// 輝く古代のネックレスをお願いします。
 				Random random = new Random();
-				if (pc.getInventory().checkItem(49027, 1) && pc.getInventory().checkItem(41140, 1)) { // 다이아몬드와
-					// 복원된 목걸이
+				if (pc.getInventory().checkItem(49027, 1) && pc.getInventory().checkItem(41140, 1)) { // ダイヤモンドと
+					// 復元されたネックレス
 					if (random.nextInt(10) > 7) {
 						materials = new int[] { 49027, 41140 };
 						counts = new int[] { 1, 1 };
-						createitem = new int[] { 20422 }; // 빛나는 고대 목걸이
+						createitem = new int[] { 20422 }; // 輝く古代のネックレス
 						createcount = new int[] { 1 };
 						htmlid = "dh9";
 					} else {
 						materials = new int[] { 49027, 41140 };
 						counts = new int[] { 1, 1 };
-						createitem = new int[] { 410027 }; // 보석가루
+						createitem = new int[] { 410027 }; // 宝石の粉
 						createcount = new int[] { 5 };
 						htmlid = "dh7";
 					}
-				} else { // 재료가 부족한 경우
+				} else { // 材料が不足している場合、
 					htmlid = "dh6";
 				}
 			}
 
-			// 첩보원(그림자의 신전측)
+			//諜報員（影の神殿側）
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 81202) {
-			// 「화가 나지만 승낙한다」
+			// 「画家出るが承諾する」
 			if (s.equalsIgnoreCase("n")) {
 				htmlid = "";
 				poly(client, 6035);
@@ -4509,23 +4495,23 @@ public class C_NPCAction extends ClientBasePacket {
 					pc.sendPackets(new S_ServerMessage(143, ((L1NpcInstance) obj).getNpcTemplate().get_name(), item.getItem().getName()));
 					pc.getQuest().set_step(L1Quest.QUEST_SHADOWS, 1);
 				}
-				// 「그런 임무는 그만둔다」
+				// 「そんな使命はやめておく」
 			} else if (s.equalsIgnoreCase("d")) {
 				htmlid = "minitos09";
 				pc.getInventory().consumeItem(41121, 1);
 				pc.getInventory().consumeItem(41122, 1);
-				// 「초기화한다」
+				// 「初期化する」
 			} else if (s.equalsIgnoreCase("k")) {
 				htmlid = "";
-				pc.getInventory().consumeItem(41123, 1); // 카헬의 타락 한 가루
-				pc.getInventory().consumeItem(41124, 1); // 카헬의 무력 한 가루
-				pc.getInventory().consumeItem(41125, 1); // 카헬의 아집 한 가루
-				pc.getInventory().consumeItem(41126, 1); // 핏자국의 타락 한 정수
-				pc.getInventory().consumeItem(41127, 1); // 핏자국의 무력 한 정수
-				pc.getInventory().consumeItem(41128, 1); // 핏자국의 아집 한 정수
-				pc.getInventory().consumeItem(41129, 1); // 핏자국의 정수
+				pc.getInventory().consumeItem(41123, 1); // カヘルの堕落した粉
+				pc.getInventory().consumeItem(41124, 1); // カヘルの無力なパウダー
+				pc.getInventory().consumeItem(41125, 1); // カヘルの我執た粉
+				pc.getInventory().consumeItem(41126, 1); // 血痕の堕落した整数
+				pc.getInventory().consumeItem(41127, 1); // 血痕の武力の整数
+				pc.getInventory().consumeItem(41128, 1); // 血痕の我執の整数
+				pc.getInventory().consumeItem(41129, 1); // 血痕の定数
 				pc.getQuest().set_step(L1Quest.QUEST_SHADOWS, 0);
-				// 정수를 건네준다
+				// 整数を渡す
 			} else if (s.equalsIgnoreCase("e")) {
 				if (pc.getQuest().get_step(L1Quest.QUEST_SHADOWS) == L1Quest.QUEST_END || pc.getKarmaLevel() >= 1) {
 					htmlid = "";
@@ -4534,18 +4520,18 @@ public class C_NPCAction extends ClientBasePacket {
 						htmlid = "";
 						pc.addKarma((int) (-1600 * Config.RATE_KARMA));
 						pc.sendPackets(new S_Karma(pc));
-						pc.getInventory().consumeItem(41121, 1); // 카헬의 계약서
-						pc.getInventory().consumeItem(41122, 1); // 카헬의 지령서
-						pc.getInventory().consumeItem(41129, 1); // 핏자국의 정수
+						pc.getInventory().consumeItem(41121, 1); // カヘルの契約書
+						pc.getInventory().consumeItem(41122, 1); // カヘルの指令書
+						pc.getInventory().consumeItem(41129, 1); // 血痕の定数
 						pc.getQuest().set_step(L1Quest.QUEST_SHADOWS, L1Quest.QUEST_END);
 					} else {
 						htmlid = "minitos04";
 					}
 				}
-				// 재빠르게 받는다
+				//素早く受ける
 			} else if (s.equalsIgnoreCase("g")) {
 				htmlid = "";
-				final int[] item_ids = { 41121 }; // 카헬의 계약서
+				final int[] item_ids = { 41121 }; // カヘルの契約書
 				final int[] item_amounts = { 1 };
 				L1ItemInstance item = null;
 				for (int i = 0; i < item_ids.length; i++) {
@@ -4553,13 +4539,13 @@ public class C_NPCAction extends ClientBasePacket {
 					pc.sendPackets(new S_ServerMessage(143, ((L1NpcInstance) obj).getNpcTemplate().get_name(), item.getItem().getName()));
 				}
 			}
-			// 숨겨진 계곡 리뉴얼 NPC
+			// 隠された渓谷リニューアルNPC
 
-			// 초보자 도우미
+			// 初心者ヘルパー
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 9274) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
-			if (s.equals("A")) { // 상아탑 방어구가 필요합니다.
+			if (s.equals("A")) { // 象牙の塔防具が必要です。
 				if (pc.isKnight() || pc.isCrown() || pc.isDarkelf() || pc.isDragonknight()) {
 					int check = 0;
 					int[] item = new int[] { 22300, 22301, 22302, 22303, 22304 };
@@ -4590,46 +4576,46 @@ public class C_NPCAction extends ClientBasePacket {
 					}
 				}
 			}
-			// 기초 훈련 교관 [ 퀘스트 ]
+			// 基礎訓練教官[クエスト]
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900186) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
-			if (s.equals("0")) { // 저를 단련시켜 주십시오.
+			if (s.equals("0")) { // 私を鍛えてください。
 				createNewItem(pc, npcName, L1ItemId.INSTRUCTOR_PRESENT_POKET_1, 1, 0);
-				// 교관의 선물 주머니 [상아탑의 무기1/갑옷4/수련자의 벨트]
+				// 教官のギフト袋[象牙の塔の武器1 /鎧4 /功学習者のベルト]
 				pc.getQuest().set_step(L1Quest.QUEST_HPASS, 1);
 				htmlid = "hpass9";
-			} else if (s.equals("u")) { // 상아탑 상위 아이템 교환
+			} else if (s.equals("u")) { // 象牙の塔のトップアイテム交換
 				if (pc.getLevel() < 40) {
 					htmlid = "hpass13";
 				} else {
 					int check = 0;
-					// 투구, 망토 , 갑옷 , 장갑 , 샌달 , 방패
+					//ヘルム、マント、鎧、手袋、サンダル、シールド
 					int[] ivory = new int[] { 20028, 20283, 20126, 20173, 20206, 20232 };
 					int[] sacred = new int[] { 30096, 30098, 30097, 30099, 30100, 30101 };
 					int[] strong = new int[] { 30090, 30092, 30091, 30093, 30094, 30095 };
 					for (L1ItemInstance item : pc.getInventory().getItems()) {
 						switch (item.getItemId()) {
-						case 20028: // 투구
-						case 20283: // 망토
-						case 20126: // 갑옷
-						case 20173: // 장갑
-						case 20206: // 샌달
-						case 20232: // 방패
+						case 20028: // 投球
+						case 20283: // マント
+						case 20126: // 鎧
+						case 20173: // 手袋
+						case 20206: // サンダル
+						case 20232: // 盾
 							if (item.getEnchantLevel() == 4) {
 								for (int i = 0; i < ivory.length; i++) {
 									if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight()) {
 										if (item.getItemId() == ivory[i]) {
 											pc.getInventory().MakeDeleteEnchant(ivory[i], 4);
 											createNewItem(pc, npcName, strong[i], 1, 0);
-											// 견고한투구
+											// 堅牢な投球
 										}
 										check = 1;
 									} else {
 										if (item.getItemId() == ivory[i]) {
 											pc.getInventory().MakeDeleteEnchant(ivory[i], 4);
 											createNewItem(pc, npcName, sacred[i], 1, 0);
-											// 신성한 투구
+											// 神聖な投球
 										}
 										check = 1;
 									}
@@ -4646,37 +4632,37 @@ public class C_NPCAction extends ClientBasePacket {
 						htmlid = "hpass12";
 					}
 				}
-			} else if (s.equals("1")) { // 수행할 준비가 됐습니다. [몬스터의 발톱]
+			} else if (s.equals("1")) { // 実行する準備ができてました。 【モンスターの爪]
 				hpassQuest(pc, L1ItemId.MONSTER_TOENAIL, L1ItemId.INSTRUCTOR_PRESENT_POKET_2, objid, 1, "hpass20", npcName);
-			} else if (s.equals("2")) { // 수행할 준비가 됐습니다. [몬스터의 이빨]
+			} else if (s.equals("2")) { // 実行する準備ができてました。 【モンスターの歯]
 				hpassQuest(pc, L1ItemId.MONSTER_TOOTH, L1ItemId.INSTRUCTOR_PRESENT_POKET_3, objid, 2, "hpass21", npcName);
-			} else if (s.equals("3")) { // 수행할 준비가 됐습니다. [녹슨 투구]
+			} else if (s.equals("3")) { // 実行する準備ができてました。 【さび投球]
 				hpassQuest(pc, L1ItemId.RUST_HELM, L1ItemId.INSTRUCTOR_PRESENT_POKET_4, objid, 3, "hpass22", npcName);
-			} else if (s.equals("4")) { // 수행할 준비가 됐습니다. [녹슨 장갑]
+			} else if (s.equals("4")) { // 実行する準備ができてました。 【さび手袋]
 				hpassQuest(pc, L1ItemId.RUST_GLOVE, L1ItemId.INSTRUCTOR_PRESENT_POKET_5, objid, 4, "hpass23", npcName);
-			} else if (s.equals("5")) { // 수행할 준비가 됐습니다. [녹슨 장화]
+			} else if (s.equals("5")) { // 実行する準備ができてました。 【さび長靴]
 				hpassQuest(pc, L1ItemId.RUST_BOOTS, L1ItemId.INSTRUCTOR_PRESENT_POKET_6, objid, 5, "hpass24", npcName);
 			}
 		}
-		// 토벌대원 [ 일일 퀘스트 ]
+		// 討伐隊員[デイリークエスト]
 		else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900187) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
-			if (s.equals("A")) { // 당신을 돕겠습니다.
+			if (s.equals("A")) { // あなたをお手伝いします。
 				pc.getQuest().set_step(L1Quest.QUEST_HIGHDAILY, 1);
-				createNewItem(pc, npcName, L1ItemId.PUNITIVE_EXPEDITION_POKET, 7, 0); // 토벌대원의 주머니 7개 지급
+				createNewItem(pc, npcName, L1ItemId.PUNITIVE_EXPEDITION_POKET, 7, 0); // 討伐隊員のポケット7個支給
 				htmlid = "highdaily4";
-			} else if (s.equals("B")) { // 몬스터를 토벌하러 가겠습니다.
+			} else if (s.equals("B")) { //モンスターを討伐しに行きます。
 				pc.getQuest().set_step(L1Quest.QUEST_HIGHDAILY, pc.getQuest().get_step(L1Quest.QUEST_HIGHDAILY) + 1);
 				htmlid = "highdaily5";
-			} else if (s.equals("C")) { // 약속한 대로 토벌을 완료했습니다.
+			} else if (s.equals("C")) { //約束したように討伐を完了しました。
 				SilverQuest(pc, objid, 30041, 30044, L1Quest.QUEST_HIGHDAILY, "highdaily7", "highdaily31", "highdaily20", "highdaily9");
-			} else if (s.equals("D")) { // 필요없으니 돌려드리겠습니다.
+			} else if (s.equals("D")) { // 必要ないから返しいたします。
 				int ment = 0;
 				for (L1ItemInstance item : pc.getInventory().getItems()) {
 					switch (item.getItemId()) {
-					case L1ItemId.PUNITIVE_EXPEDITION_POKET: // 토벌 대원의주머니
-					case L1ItemId.PUNITIVE_EXPEDITION_BEAD: // 빛나는 구슬
+					case L1ItemId.PUNITIVE_EXPEDITION_POKET: //討伐隊員のポケット
+					case L1ItemId.PUNITIVE_EXPEDITION_BEAD: // 輝くビーズ
 						if (item != null) {
 							pc.getInventory().consumeItem(item.getItemId(), item.getCount());
 							ment = 1;
@@ -4692,59 +4678,59 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "highdaily9";
 				}
 			}
-			// 버경 승률처리 start
+			// ボギョン勝率処理start
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70035 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70041
 				|| ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70042) {
 			if (s.equals("status")) {
 				pc.sendPackets(new S_RaceBoard(1));
 			}
 
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 777849) { // 킬톤
-			// (호랑이)
-			if (s.equalsIgnoreCase("0")) { // 킬톤의 계약서
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 777849) { // キルトン
+			// (虎）
+			if (s.equalsIgnoreCase("0")) { // キルトンの契約
 				if (pc.getInventory().checkItem(40308, 500000)) {
 					pc.getInventory().consumeItem(40308, 500000);
 					pc.getInventory().storeItem(87050, 1);
-					pc.sendPackets(new S_SystemMessage("킬톤이 당신에게 킬톤의 계약서를 주었습니다."));
+					pc.sendPackets(new S_SystemMessage("キルトンがあなたにキルトンの契約をしました。"));
 					htmlid = "";
 				} else {
-					htmlid = "killton3"; // 아데나 부족시
+					htmlid = "killton3"; //アデナ不足時
 				}
 			}
 
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 777848) { // 메린
-			// (진돗개)
-			if (s.equalsIgnoreCase("0")) { // 메린의 계약서
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 777848) { // マリン
+			// (珍島犬）
+			if (s.equalsIgnoreCase("0")) { // マリンの契約
 				if (pc.getInventory().checkItem(40308, 500000)) {
 					pc.getInventory().consumeItem(40308, 500000);
 					pc.getInventory().storeItem(87051, 1);
-					pc.sendPackets(new S_SystemMessage("메린이 당신에게 메린의 계약서를 주었습니다."));
+					pc.sendPackets(new S_SystemMessage("マリンがあなたにマリンの契約をしました。"));
 					htmlid = "";
 				} else {
-					htmlid = "merin3"; // 아데나 부족시
+					htmlid = "merin3"; // アデナ不足時
 				}
 			}
 
-			// 드래곤뼈 수집꾼 [ 일일 퀘스트 ]
+			//ドラゴンの骨を収集屋[デイリークエスト]
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900188) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
-			if (s.equals("A")) { // 당신을 돕겠습니다..
+			if (s.equals("A")) { // あなたをお手伝いします。
 				pc.getQuest().set_step(L1Quest.QUEST_HIGHDAILYB, 1);
-				createNewItem(pc, npcName, L1ItemId.DRAGON_BONE_POKET, 7, 0); // 드래곤뼈 수집꾼의 주머니 7개 지급
+				createNewItem(pc, npcName, L1ItemId.DRAGON_BONE_POKET, 7, 0); // ドラゴンの骨を収集屋のポケット7個支給
 				htmlid = "highdailyb4";
-			} else if (s.equals("B")) { // 네. 준비됐습니다
+			} else if (s.equals("B")) { // はい。準備が整いまし
 				pc.getQuest().set_step(L1Quest.QUEST_HIGHDAILYB, pc.getQuest().get_step(L1Quest.QUEST_HIGHDAILYB) + 1);
 				htmlid = "highdailyb5";
-			} else if (s.equals("C")) { // 네. 가져왔습니다.
+			} else if (s.equals("C")) { // はい。もたらした。
 				SilverQuest(pc, objid, L1ItemId.DRAGON_BONE_POKET, L1ItemId.DRAGON_BONE_BEAD, L1Quest.QUEST_HIGHDAILYB, "highdailyb7", "highdailyb31", "highdailyb20",
 						"highdailyb9");
-			} else if (s.equals("D")) { // 필요없으니 돌려드리겠습니다.
+			} else if (s.equals("D")) { // 必要ないから返しいたします。
 				int ment = 0;
 				for (L1ItemInstance item : pc.getInventory().getItems()) {
 					switch (item.getItemId()) {
-					case L1ItemId.DRAGON_BONE_POKET: // 드래곤뼈 수집꾼의 주머니
-					case L1ItemId.DRAGON_BONE_BEAD: // 영롱한 구슬
+					case L1ItemId.DRAGON_BONE_POKET: // ドラゴンの骨を収集屋のポケット
+					case L1ItemId.DRAGON_BONE_BEAD: // きらめくビーズ
 						if (item != null) {
 							pc.getInventory().consumeItem(item.getItemId(), item.getCount());
 							ment = 1;
@@ -4760,41 +4746,41 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "highdailyb9";
 				}
 			}
-			// 브레드
+			// ブレッド
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70751) {
 			if (s.equalsIgnoreCase("a")) {
 				int x = 0, y = 0, mapid = 0;
-				// 군주
+				// 君主
 				if (pc.isCrown()) {
 					x = 32734;
 					y = 32852;
 					mapid = 274;
-					// 기사
+					// 記事
 				} else if (pc.isKnight() || pc.isWarrior()) {
 					x = 32737;
 					y = 32810;
 					mapid = 276;
-					// 요정
+					// 妖精
 				} else if (pc.isElf()) {
 					x = 32735;
 					y = 32867;
 					mapid = 275;
-					// 다크 엘프
+					// ダークエルフ
 				} else if (pc.isDarkelf()) {
 					x = 32736;
 					y = 32809;
 					mapid = 273;
-					// 용기사
+					// 竜騎士
 				} else if (pc.isDragonknight()) {
 					x = 32734;
 					y = 32852;
 					mapid = 277;
-					// 마법사
+					// ウィザード
 				} else if (pc.isWizard()) {
 					x = 32739;
 					y = 32856;
 					mapid = 271;
-					// 환술사
+					// イリュージョニスト
 				} else if (pc.isBlackwizard()) {
 					x = 32809;
 					y = 32830;
@@ -4802,19 +4788,19 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 				new L1Teleport().teleport(pc, x, y, (short) mapid, pc.getHeading(), true);
 				htmlid = "";
-			} else if (s.equalsIgnoreCase("d")) { //얼던PC
+			} else if (s.equalsIgnoreCase("d")) { //オルドンPC
 				if (pc.geticedungeonTime() > 29){
-					pc.sendPackets(new S_ChatPacket(pc, "얼음 수정 동굴(PC) 던전 시간이 만료 되었습니다."));
+					pc.sendPackets(new S_ChatPacket(pc, "水晶の洞窟（PC）ダンジョン時間の期限が切れました。"));
 					return;
 				}
 				if (pc.getInventory().checkItem(40308, 14000)) {
 					pc.getInventory().consumeItem(40308, 14000);
 					new L1Teleport().teleport(pc, 32816, 32847, (short) 5555, 0, true);		
 				} else {
-					pc.sendPackets(new S_SystemMessage("14,000 아데나가 필요합니다."));
+					pc.sendPackets(new S_SystemMessage("14,000アデナが必要です。"));
 				}
 			} else if (s.equalsIgnoreCase("b")) {
-				if (pc.getInventory().checkItem(700019, 1)) { // 화염의 기운
+				if (pc.getInventory().checkItem(700019, 1)) { // 炎のオーラ
 					pc.getInventory().consumeItem(700019, 1);
 					new L1Teleport().teleport(pc, 32788, 32799, (short) 2100, pc.getHeading(), true);
 					htmlid = "";
@@ -4822,7 +4808,7 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "newbrad3";
 				}
 			}
-			// 마빈
+			// マービン
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70000) {
 			if (s.equalsIgnoreCase("a")) {
 				if (pc.getInventory().checkItem(700013, 1) && pc.getInventory().checkItem(700016, 1) && pc.getInventory().checkItem(700015, 100)) {
@@ -4838,7 +4824,7 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "marbinquest9";
 				}
 			} else if (s.equalsIgnoreCase("b")) {
-				if (pc.getLevel() >= 70) {//70이상 본섭리뉴얼
+				if (pc.getLevel() >= 70) {//70以上の本サーバーリニューアル
 					pc.getInventory().storeItem(700012, 1);
 					htmlid = "marbinquest2";
 				} else {
@@ -4860,24 +4846,24 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-			// 지그프리드
+			// ジークフリード
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5062) {
 			if (s.equals("a")) {
 				if (pc.getRadungeonTime() >= 120) {
-					pc.sendPackets(new S_ChatPacket(pc, "라스타바드 던전 시간이 만료 되었습니다."));
+					pc.sendPackets(new S_ChatPacket(pc, "ラスタバドケイブ時間が経過しました。"));
 					return;
 				} else {
 //					new L1Teleport().teleport(pc, 32690, 32795, (short) 450, 0, true);
-					pc.sendPackets(new S_ChatPacket(pc, "알림: 2015. 10. 14. 업데이트 이후 폐쇄 되었습니다."));
+					pc.sendPackets(new S_ChatPacket(pc, "通知：2015 10. 14.更新後閉鎖された。"));
 				}
 			}
 
-			// 피어스
+			// ピアス
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70908) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
 
-			if (s.equals("a")) { // 어둠의 힘을 원합니다.
+			if (s.equals("a")) { //闇の力を望んでいる。
 				int[] list = new int[2];
 				for (L1ItemInstance item : pc.getInventory().getItems()) {
 					switch (item.getItemId()) {
@@ -4931,16 +4917,16 @@ public class C_NPCAction extends ClientBasePacket {
 				PiersItem(pc, objid, npcName, pc.PiersItemId[8], pc.PiersEnchant[8], pc.PiersItemId[18]);
 			} else if (s.equals("9")) {
 				PiersItem(pc, objid, npcName, pc.PiersItemId[9], pc.PiersEnchant[9], pc.PiersItemId[18]);
-			} else if (s.equals("A")) { // +7 파괴의 크로우
+			} else if (s.equals("A")) { // +7破壊のクロウ
 				PiersCheckItem(pc, objid, 8, 5000000, 30018, 7);
-			} else if (s.equals("B")) { // +7 파괴의 이도류
+			} else if (s.equals("B")) { // +7破壊の二刀流
 				PiersCheckItem(pc, objid, 8, 5000000, 30019, 7);
-			} else if (s.equals("C")) { // +8 파괴의 크로우
+			} else if (s.equals("C")) { // +8破壊のクロウ
 				PiersCheckItem(pc, objid, 9, 10000000, 30020, 8);
-			} else if (s.equals("D")) { // +8 파괴의 이도류
+			} else if (s.equals("D")) { // +8破壊の二刀流
 				PiersCheckItem(pc, objid, 9, 10000000, 30021, 8);
 			}
-			// 시장 경비병/시장 중심지 이동
+			// 市場警備兵/市場の中心に移動
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 50025 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 50032
 				|| ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 50048 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 50058
 				|| ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5067 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5070) {
@@ -4956,52 +4942,52 @@ public class C_NPCAction extends ClientBasePacket {
 			} else if (s.equals("teleport Mobjtele1")) {
 				new L1Teleport().teleport(pc, 32800, 32927, (short) 800, pc.getHeading(), true);
 			}
-			// 적대적인 얼음 여왕 근위병
+			// 敵対的なアイスクイーンの近衛兵
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5079) {
 			if (s.equalsIgnoreCase("enter")) {
 				QueenSystem.getInstance().startQueen(pc);
 			}
-			// 우호적인 얼음 여왕 근위병
+			// 友好的なアイスクイーンの近衛兵
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5078) {
 			if (s.equalsIgnoreCase("enter")) {
 				DemonSystem.getInstance().startDemon(pc);
 			}
-			// 상아탑 첩보원
+			// 象牙の塔のスパイ
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5086) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
 			if (s.equalsIgnoreCase("a")) {
-				if (pc.getInventory().checkItem(30055, 1)) { // 화염의 막대
+				if (pc.getInventory().checkItem(30055, 1)) { // 炎のロッド
 					htmlid = "icqwand4";
 				} else {
 					createNewItem(pc, npcName, 30055, 120, 0);
 					htmlid = "icqwand2";
 				}
 			} else if (s.equalsIgnoreCase("b")) {
-				if (pc.getInventory().checkItem(30056, 1)) { // 신비한 회복 물약
+				if (pc.getInventory().checkItem(30056, 1)) { // 神秘的な回復ポーション
 					htmlid = "icqwand4";
 				} else {
 					createNewItem(pc, npcName, 30056, 100, 0);
 					htmlid = "icqwand3";
 				}
 			}
-			// 스빈
+			// スビン
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5087) {
 			if (s.equalsIgnoreCase("a")) {
-				// createNewItem(pc, npcName, 49031, 1, 0); // 얼음 결정체
-				// createNewItem(pc, npcName, 21081, 1, 0); // 얼음 귀걸이
+				// createNewItem(pc, npcName, 49031, 1, 0); // 氷の結晶
+				// createNewItem(pc, npcName, 21081, 1, 0); // 氷のイヤリング
 				int[] loc = L1TownLocation.getGetBackLoc(L1TownLocation.TOWNID_OREN);
 				new L1Teleport().teleport(pc, loc[0], loc[1], (short) loc[2], pc.getHeading(), true);
 				htmlid = "";
 			}
-			// 베테르랑
+			//ベテルラン
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5111) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
 			int[] weapon = new int[] { 1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133 };
 			int[] armor = new int[] { 22328, 22329, 22330, 22331, 22332, 22333, 22334, 22335 };
 			int result = 0;
-			if (s.equals("a")) { // 1. 베테르랑 단검
+			if (s.equals("a")) { // 1.ベビーテルラン短剣
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isCrown() || pc.isKnight() || pc.isWizard() || pc.isElf() || pc.isDarkelf()) {
 						createNewItem(pc, npcName, 1126, 1, 0);
@@ -5013,7 +4999,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("b")) { // 2. 베테르랑 한손검
+			} else if (s.equals("b")) { // 2。ベビーテルラン片手剣
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isCrown() || pc.isKnight() || pc.isElf() || pc.isDragonknight()) {
 						createNewItem(pc, npcName, 1127, 1, 0);
@@ -5025,7 +5011,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("c")) { // 3. 베테르랑 양손검
+			} else if (s.equals("c")) { // 3.ベテルラン両手剣
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isCrown() || pc.isKnight() || pc.isDragonknight()) {
 						createNewItem(pc, npcName, 1128, 1, 0);
@@ -5037,7 +5023,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("d")) { // 4. 베테르랑 보우건
+			} else if (s.equals("d")) { // 4.ベビーテルランボーガン
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isElf() || pc.isDarkelf() || pc.isBlackwizard()) {
 						createNewItem(pc, npcName, 1129, 1, 0);
@@ -5049,7 +5035,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("e")) { // 5. 베테르랑 지팡이
+			} else if (s.equals("e")) { // 5。ベビーテルラン杖
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isWizard() || pc.isBlackwizard()) {
 						createNewItem(pc, npcName, 1130, 1, 0);
@@ -5061,7 +5047,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("f")) { // 6. 베테르랑 크로우
+			} else if (s.equals("f")) { // 6。ベビーテルランクロウ
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isDarkelf()) {
 						createNewItem(pc, npcName, 1131, 1, 0);
@@ -5073,7 +5059,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("g")) { // 7. 베테르랑 체인소드
+			} else if (s.equals("g")) { // 7。ベビーテルランチェーンソード
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isDragonknight()) {
 						createNewItem(pc, npcName, 1132, 1, 0);
@@ -5085,7 +5071,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("h")) { // 8. 베테르랑 키링크
+			} else if (s.equals("h")) { // 8.ベビーテルランキーリンク
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isBlackwizard()) {
 						createNewItem(pc, npcName, 1133, 1, 0);
@@ -5097,7 +5083,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("i")) { // 1. 베테르랑 판금 갑옷
+			} else if (s.equals("i")) { // 1. ベビーテルランプレートメイル
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isKnight()) {
 						createNewItem(pc, npcName, 22328, 1, 0);
@@ -5109,7 +5095,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("j")) { // 2. 베테르랑 가죽 갑옷
+			} else if (s.equals("j")) { // 2.ベビーテルランレザーアーマー
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isCrown() || pc.isElf() || pc.isDarkelf() || pc.isDragonknight() || pc.isBlackwizard()) {
 						createNewItem(pc, npcName, 22329, 1, 0);
@@ -5121,7 +5107,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("k")) { // 3. 베테르랑 로브
+			} else if (s.equals("k")) { // 3.ベビーテルランローブ
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isWizard() || pc.isBlackwizard()) {
 						createNewItem(pc, npcName, 22330, 1, 0);
@@ -5133,7 +5119,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("l")) { // 4. 베테르랑 방패
+			} else if (s.equals("l")) { // 4. ベビーテルラン盾
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isKnight() | pc.isDragonknight()) {
 						createNewItem(pc, npcName, 22331, 1, 0);
@@ -5145,7 +5131,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("m")) { // 5. 베테르랑 티셔츠
+			} else if (s.equals("m")) { // 5.ベビーテルランTシャツ
 				if (pc.getInventory().checkItem(30065, 1)) {
 					createNewItem(pc, npcName, 22332, 1, 0);
 					pc.getInventory().consumeItem(30065, 1);
@@ -5153,7 +5139,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("n")) { // 6. 베테르랑 장화
+			} else if (s.equals("n")) { // 6. ベビーテルラングブーツ
 				if (pc.getInventory().checkItem(30065, 1)) {
 					createNewItem(pc, npcName, 22333, 1, 0);
 					pc.getInventory().consumeItem(30065, 1);
@@ -5161,7 +5147,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("o")) { // 7. 베테르랑 해골 투구
+			} else if (s.equals("o")) { // 7. ベビーテルランスケルトン投球
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isCrown() || pc.isKnight() || pc.isDragonknight()) {
 						createNewItem(pc, npcName, 22334, 1, 0);
@@ -5173,7 +5159,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("p")) { // 8. 베테르랑 마법 망토
+			} else if (s.equals("p")) { // 8.ベビーテルラングマジッククローク
 				if (pc.getInventory().checkItem(30065, 1)) {
 					if (pc.isElf() || pc.isDarkelf() || pc.isBlackwizard()) {
 						createNewItem(pc, npcName, 22335, 1, 0);
@@ -5185,7 +5171,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE1";
 				}
-			} else if (s.equals("1")) { // 1. 체력 물약(포도주스) 무기</font>를 아이템으로
+			} else if (s.equals("1")) { // 1.体力ポーション（グレープジュース）無機</ font>をアイテムに
 				for (int i = 0; i < weapon.length; i++) {
 					if (pc.getInventory().checkItem(weapon[i], 1)) {
 						pc.getInventory().consumeItem(weapon[i], 1);
@@ -5199,7 +5185,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE4";
 				}
-			} else if (s.equals("2")) { // 2. 용사의 무기 마법 주문서
+			} else if (s.equals("2")) { // 2.勇者の武器強化スクロール
 				for (int i = 0; i < weapon.length; i++) {
 					if (pc.getInventory().checkItem(weapon[i], 1)) {
 						pc.getInventory().consumeItem(weapon[i], 1);
@@ -5213,7 +5199,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE4";
 				}
-			} else if (s.equals("3")) { // 3. 용사의 갑옷 마법 주문서
+			} else if (s.equals("3")) { // 3。勇者の防具強化スクロール
 				for (int i = 0; i < weapon.length; i++) {
 					if (pc.getInventory().checkItem(weapon[i], 1)) {
 						pc.getInventory().consumeItem(weapon[i], 1);
@@ -5227,7 +5213,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE4";
 				}
-			} else if (s.equals("4")) { // 1. 체력 물약(포도주스) 방어구</font>를 아이템으로
+			} else if (s.equals("4")) { // 1。体力ポーション（グレープジュース）防具</ font>をアイテムに
 				for (int i = 0; i < armor.length; i++) {
 					if (pc.getInventory().checkItem(armor[i], 1)) {
 						pc.getInventory().consumeItem(armor[i], 1);
@@ -5241,7 +5227,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE4";
 				}
-			} else if (s.equals("5")) { // 2. 용사의 무기 마법 주문서
+			} else if (s.equals("5")) { // 2.勇者の武器強化スクロール
 				for (int i = 0; i < armor.length; i++) {
 					if (pc.getInventory().checkItem(armor[i], 1)) {
 						pc.getInventory().consumeItem(armor[i], 1);
@@ -5255,7 +5241,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					htmlid = "veteranE4";
 				}
-			} else if (s.equals("6")) { // 3. 용사의 갑옷 마법 주문서
+			} else if (s.equals("6")) { // 3.勇者の防具強化スクロール
 				for (int i = 0; i < armor.length; i++) {
 					if (pc.getInventory().checkItem(armor[i], 1)) {
 						pc.getInventory().consumeItem(armor[i], 1);
@@ -5270,11 +5256,11 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "veteranE4";
 				}
 			}
-			// 캐릭터 지원단
+			// キャラクター支援団
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5112) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
-			if (s.equals("a")) { // 1.레벨 상승(최대 75레벨)
+			if (s.equals("a")) { // 1。レベル上昇（最大75レベル）
 				if (pc.getLevel() < 51) {
 					pc.setExp(ExpTable.getExpByLevel(51));
 				} else if (pc.getLevel() >= 51 && pc.getLevel() < 75) {
@@ -5282,32 +5268,32 @@ public class C_NPCAction extends ClientBasePacket {
 				} else if (pc.getLevel() >= 75) {
 					htmlid = "lind_sm1";
 				}
-			} else if (s.equals("b")) { // 2.지원품 지급
+			} else if (s.equals("b")) { // 2.支援品支給
 				if (pc.getLevel() < 75) {
 					htmlid = "lind_sm9";
-				} else if (pc.getInventory().checkItem(30070, 1)) { // 지급 확인서가 있을경우
+				} else if (pc.getInventory().checkItem(30070, 1)) { //支払い確認書がある場合
 					htmlid = "lind_sm4";
-				} else { // 지급 [ 장비 지급 확인서, 장비 지급함, 회상의 촛불 ]
-					createNewItem(pc, npcName, 30071, 1, 0); // 아덴왕국 장비 지급함
-					createNewItem(pc, npcName, 30070, 1, 0); // 아덴왕국 장비 지급 확인서
-					createNewItem(pc, npcName, 200000, 1, 0); // 회상의 촛불
+				} else { // 支給[機器支給書、設備支給さ、回想のキャンドル]
+					createNewItem(pc, npcName, 30071, 1, 0); // アデン王国機器支給する
+					createNewItem(pc, npcName, 30070, 1, 0); // アデン王国機器支給書
+					createNewItem(pc, npcName, 200000, 1, 0); // 回想のキャンドル
 					htmlid = "lind_sm2";
 				}
-			} else if (s.equals("c")) { // 3.회상의 촛불 지원
-				if (pc.getInventory().checkItem(200000, 1)) { // 회상의 촛불
+			} else if (s.equals("c")) { // 3。回想のキャンドルサポート
+				if (pc.getInventory().checkItem(200000, 1)) { // 回想のキャンドル
 					htmlid = "lind_sm5";
 				} else {
 					createNewItem(pc, npcName, 200000, 1, 0);
 					htmlid = "lind_sm6";
 				}
-			} else if (s.equals("d")) { // 1.드래곤의 혈흔(안타라스) 받기
+			} else if (s.equals("d")) { // 1ドラゴンの血痕（アンタラス）取得
 				pc.sendPackets(new S_SkillSound(pc.getId(), 7783));
 				pc.setSkillEffect(L1SkillId.ANTA_BUFF, 7200 * 1000);
 				pc.sendPackets(new S_OwnCharAttrDef(pc));
 				pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 82, 7200 / 60));
 				htmlid = "lind_sm8";
 				pc.sendPackets(new S_NPCTalkReturn(objid, "lind_sm8"));
-			} else if (s.equals("e")) { // 2.드래곤의 혈흔(파푸리온) 받기.
+			} else if (s.equals("e")) { // 2ドラゴンの血痕（パプリオン）を取得する。
 				pc.sendPackets(new S_SkillSound(pc.getId(), 7783));
 				pc.setSkillEffect(L1SkillId.FAFU_BUFF, 7200 * 1000);
 				pc.sendPackets(new S_OwnCharAttrDef(pc));
@@ -5317,7 +5303,7 @@ public class C_NPCAction extends ClientBasePacket {
 
 			// start
 
-			// 칠흑의 수정
+			// 漆黒の修正
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 7000076) {
 			if (s.equals("D_gludin")) {
 				if (pc.getInventory().checkItem(40308, 5000)) {
@@ -5325,10 +5311,10 @@ public class C_NPCAction extends ClientBasePacket {
 						new L1Teleport().teleport(pc, 32811, 32726, (short) 807, pc.getHeading(), true);
 					}
 				} else {
-					pc.sendPackets(new S_ChatPacket(pc, "아데나(5,000) 부족합니다."));
+					pc.sendPackets(new S_ChatPacket(pc, "アデナ（5000）不足します。"));
 				}	
 			
-			// 안톤
+			// アントン
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70614) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
@@ -5336,10 +5322,10 @@ public class C_NPCAction extends ClientBasePacket {
 			int enchant = 0;
 			int itemId = 0;
 			int oldArmor = 0;
-			if (s.equals("A") || s.equals("B") || s.equals("C") || s.equals("D") // 판금
-					|| s.equals("E") || s.equals("F") || s.equals("G") || s.equals("H") // 비늘
-					|| s.equals("I") || s.equals("J") || s.equals("K") || s.equals("L") // 가죽
-					|| s.equals("M") || s.equals("N") || s.equals("O") || s.equals("P")) { // 로브
+			if (s.equals("A") || s.equals("B") || s.equals("C") || s.equals("D") // 板金
+					|| s.equals("E") || s.equals("F") || s.equals("G") || s.equals("H") //うろこ
+					|| s.equals("I") || s.equals("J") || s.equals("K") || s.equals("L") // レザー
+					|| s.equals("M") || s.equals("N") || s.equals("O") || s.equals("P")) { // ローブ
 				if (s.equals("A") || s.equals("B") || s.equals("C") || s.equals("D")) {
 					if (s.equals("A")) {
 						enchant = 7;
@@ -5391,8 +5377,8 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 				if (pc.getInventory().checkEnchantItem(20110, enchant, 1) && pc.getInventory().checkItem(41246, 100000) && pc.getInventory().checkItem(oldArmor, 1)) {
 					pc.getInventory().consumeEnchantItem(20110, enchant, 1);
-					pc.getInventory().consumeItem(41246, 100000); // 용해제
-					pc.getInventory().consumeItem(oldArmor, 1); // 고대의
+					pc.getInventory().consumeItem(41246, 100000); // 溶解剤
+					pc.getInventory().consumeItem(oldArmor, 1); // 古代の
 					createNewItem(pc, npcName, itemId, 1, enchant - 7);
 					htmlid = "";
 				} else {
@@ -5413,8 +5399,8 @@ public class C_NPCAction extends ClientBasePacket {
 					itemId = 222303;
 				}
 				if (pc.getInventory().checkItem(49015, 1) && pc.getInventory().checkItem(oldArmor, 1)) {
-					pc.getInventory().consumeItem(49015, 1); // 블랙미스릴용액
-					pc.getInventory().consumeItem(oldArmor, 1); // 고대의 시리즈
+					pc.getInventory().consumeItem(49015, 1); // ブラックミスリル溶液
+					pc.getInventory().consumeItem(oldArmor, 1); //古代のシリーズ
 					createNewItem(pc, npcName, itemId, 1, enchant);
 					htmlid = "";
 				} else {
@@ -5422,13 +5408,13 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-			// 카너스
+			// カーナース
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5125) {
-			if (s.equals("a")) { // 기르타스 전방으로 이동
+			if (s.equals("a")) { // ギルタス前方に移動
 				new L1Teleport().teleport(pc, 32855, 32862, (short) 537, pc.getHeading(), true);
-			} else if (s.equals("b")) { // 전초기지로 이동
+			} else if (s.equals("b")) { // 前哨基地に移動
 				new L1Teleport().teleport(pc, 32804, 32864, (short) 537, pc.getHeading(), true);
-			} else if (s.equals("d")) { // 전투 지역을 확인(5000아데나)
+			} else if (s.equals("d")) { // 戦闘地域を確認（5000アデナ）
 				if (pc.getInventory().checkItem(40308, 5000)) {
 					pc.getInventory().consumeItem(40308, 5000);
 					pc.save();
@@ -5440,49 +5426,49 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "canus3";
 				}
 			}
-			// 다크엘프 생존자
+			// ダークエルフの生存者
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5131) {
 			if (s.equals("exitghost")) {
 				pc.makeReadyEndGhost();
 			}
-			// 수호병사 OUT
+			//守護兵OUT
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5128) {
 			if (s.equals("a")) {
 				new L1Teleport().teleport(pc, 32614, 33195, (short) 4, pc.getHeading(), true);
 				htmlid = "";
 			}
 
-			// 수호병사 IN
+			//守護兵IN
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5130) {
 			if (s.equals("a")) {
 				new L1Teleport().teleport(pc, 32617, 33215, (short) 4, pc.getHeading(), true);
 				htmlid = "";
 			}
-			// 감시자의 눈
+			// モニターの目
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5133) {
 			if (s.equals("exitghost")) {
 				pc.makeReadyEndGhost();
 			}
-			// 비자야
+			// ヴィジャヤ
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5161) {
 			L1NpcInstance npc = (L1NpcInstance) obj;
 			String npcName = npc.getNpcTemplate().get_name();
 
 			int itemId = 0, enchant = 0, adena = 0;
 			int[] sealitemId = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 30119, 30120 };
-			if (s.equals("A")) { // +7 공명의 키링크 [ +8 사파이어 키링크 ]
+			if (s.equals("A")) { // +7共鳴のキーリンク[+ 8サファイアキーリンク]
 				itemId = 503;
 				enchant = 8;
 				adena = 5000000;
-			} else if (s.equals("B")) { // +8 공명의 키링크 [ +9 사파이어 키링크 ]
+			} else if (s.equals("B")) { // +8共鳴のキーリンク[+9サファイアキーリンク]
 				itemId = 503;
 				enchant = 9;
 				adena = 10000000;
-			} else if (s.equals("C")) { // +7 공명의 키링크 [ +8 흑요석 키링크 ]
+			} else if (s.equals("C")) { // +7共鳴のキーリンク[+ 8黒曜石キーリンク]
 				itemId = 504;
 				enchant = 8;
 				adena = 5000000;
-			} else if (s.equals("D")) { // +8 공명의 키링크 [ +9 흑요석 키링크 ]
+			} else if (s.equals("D")) { // +8共鳴のキーリンク[+ 9黒曜石キーリンク]
 				itemId = 504;
 				enchant = 9;
 				adena = 10000000;
@@ -5498,7 +5484,7 @@ public class C_NPCAction extends ClientBasePacket {
 			
 			
 
-			/** 마을 강화 버프사 통합 **/
+			/** 村の強化バフ社統合 **/
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900088 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 7310100 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() >= 5000
 				&& ((L1NpcInstance) obj).getNpcTemplate().get_npcId() <= 5012 ) {
 			htmldata = 빈줌제작(s, pc);
@@ -5576,13 +5562,13 @@ public class C_NPCAction extends ClientBasePacket {
 
 		if (htmlid != null) {
 			pc.sendPackets(new S_NPCTalkReturn(objid, htmlid, htmldata));
-			// System.out.println("Npc액션값: " + s);
+			// System.out.println("Npcアクション値： "+ s）;
 			// } else {
-			// System.out.println("Npc액션값: " + s);
+			// System.out.println（「Npcアクション値： "+ s）;
 		}
 	}
 
-	// 피어스
+	// ピアス
 	private void PiersItem(L1PcInstance pc, int objid, String npcName, int checkItem, int checkEnchant, int adena) {
 		if (pc.getInventory().checkEnchant(checkItem, checkEnchant) && pc.getInventory().checkItem(40308, adena)) {
 			pc.getInventory().DeleteEnchant(checkItem, checkEnchant);
@@ -5598,7 +5584,7 @@ public class C_NPCAction extends ClientBasePacket {
 		}
 	}
 
-	// 피어스 아이템 체크
+	// ピアスアイテムチェック
 	private void PiersCheckItem(L1PcInstance pc, int objid, int enchant, int adena, int newItem, int newItemEnchant) {
 		int listcount = 0;
 		String[] list = new String[10];
@@ -5633,7 +5619,7 @@ public class C_NPCAction extends ClientBasePacket {
 		}
 	}
 
-	// 기초 훈련 교관
+	// 基礎訓練教官
 	private void hpassQuest(L1PcInstance pc, int checkItemId, int createItemId, int objid, int step, String falsehtmlid, String npcName) {
 		if (pc.getInventory().checkItem(checkItemId, 20)) {
 			pc.getInventory().consumeItem(checkItemId, 20);
@@ -5649,7 +5635,7 @@ public class C_NPCAction extends ClientBasePacket {
 		}
 	}
 
-	// 일일 퀘스트
+	// デイリークエスト
 	private void SilverQuest(L1PcInstance pc, int objid, int checkItem_1, int checkItem_2, int Quest, String htmlid_0, String htmlid_1, String htmlid_2, String htmlid_3) {
 		int[] count = new int[2];
 		L1SkillUse l1skilluse = new L1SkillUse();
@@ -5723,15 +5709,15 @@ public class C_NPCAction extends ClientBasePacket {
 			charisma += 6;
 		} else if (pc.isDarkelf()) { // DE
 			charisma += 6;
-		} else if (pc.isDragonknight()) { // 용기사
+		} else if (pc.isDragonknight()) { //竜騎士
 			charisma += 6;
-		} else if (pc.isBlackwizard()) { // 환술사
+		} else if (pc.isBlackwizard()) { // イリュージョニスト
 			charisma += 6;
 		}
 		charisma -= petcost;
 		int petCount = charisma / 6;
 		if (petCount <= 0) {
-			pc.sendPackets(new S_ServerMessage(489)); // 물러가려고 하는 애완동물이 너무 많습니다.
+			pc.sendPackets(new S_ServerMessage(489)); // 退いていこうとするペットが多すぎます。
 			return;
 		}
 		if (pc.getInventory().checkItem(paytype, paycount)) {
@@ -5748,7 +5734,7 @@ public class C_NPCAction extends ClientBasePacket {
 						return;
 					}
 					if (charisma >= 6 && inv.getSize() < 180) {
-						petamu = inv.storeItem(40314, 1); // 펫의 아뮤렛트
+						petamu = inv.storeItem(40314, 1); // ペットのアミュレット
 						if (petamu != null) {
 							new L1PetInstance(targetpet, pc, petamu.getId());
 							pc.sendPackets(new S_ItemName(petamu));
@@ -5853,7 +5839,7 @@ public class C_NPCAction extends ClientBasePacket {
 			return "";
 		}
 		if (L1DeathMatch.getInstance().getMembersCount() >= 20) {
-			pc.sendPackets(new S_SystemMessage("이미 데스매치가 포화 상태라네."));
+			pc.sendPackets(new S_SystemMessage("すでにデスマッチが飽和状態だね。"));
 			return "";
 		}
 		if (pc.getLevel() < 52) {
@@ -5871,7 +5857,7 @@ public class C_NPCAction extends ClientBasePacket {
 	private String enterPetMatch(L1PcInstance pc, int objid2) {
 		Object[] petlist = pc.getPetList().values().toArray();
 		if (petlist.length > 0) {
-			pc.sendPackets(new S_ServerMessage(1187)); // 펫의 아뮤렛트가 사용중입니다.
+			pc.sendPackets(new S_ServerMessage(1187)); //ペットのアミュレットが使用中です。
 			return "";
 		}
 		if (!L1PetMatch.getInstance().enterPetMatch(pc, objid2)) {
@@ -5901,12 +5887,12 @@ public class C_NPCAction extends ClientBasePacket {
 				810844, 810845, 810846,// 60
 				810847, // 64
 				810848,// 68
-				810850, 810849 // 72 //-- 이부분 임.
+				810850, 810849 // 72 // - この部分である。
 
-		}; // 소환몹 정하는 구문....
+		}; // ソファンモプ定める構文....
 		summonlvl_list = new int[] { 28, 28, 28, 32, 32, 32, 36, 36, 36, 40, 40, 40, 44, 44, 44, 48, 48, 48, 52, 52, 52, 56, 56, 56, 60, 60, 60, 64, 68, 72, 72 };// 술자 레벨제한
-		summoncha_list = new int[] { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 14, 36, 36, 50 };// 카리
-		// 소비구문
+		summoncha_list = new int[] { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 14, 36, 36, 50 };//カリー
+		// 消費構文
 		for (int loop = 0; loop < summonstr_list.length; loop++) {
 			if (s.equalsIgnoreCase(summonstr_list[loop])) {
 				summonid = summonid_list[loop];
@@ -6105,7 +6091,7 @@ public class C_NPCAction extends ClientBasePacket {
 				pcCastleId = clan.getCastleId();
 			}
 		}
-		if (pcCastleId == 0) { // KKK 혈맹이 없거나, 성혈이 아닌경우
+		if (pcCastleId == 0) { // KKK血盟がないか、聖血ではない場合
 			return;
 		}
 		if (keeperId == 70656 || keeperId == 70549 || keeperId == 70985) {
@@ -6245,7 +6231,7 @@ public class C_NPCAction extends ClientBasePacket {
 					checkCal.set(Calendar.SECOND, 0);
 
 					if (house.getTaxDeadline().after(checkCal)) {
-						pc.sendPackets(new S_SystemMessage("더 이상 납부할 세금이 없습니다."));
+						pc.sendPackets(new S_SystemMessage("もはや納付する税金がありません。"));
 					} else if (pc.getInventory().checkItem(L1ItemId.ADENA, 2000)) {
 						pc.getInventory().consumeItem(L1ItemId.ADENA, 2000);
 						Calendar cal = Calendar.getInstance(tz);
@@ -6488,7 +6474,7 @@ public class C_NPCAction extends ClientBasePacket {
 	private boolean isNpcSellOnly(L1NpcInstance npc) {
 		int npcId = npc.getNpcTemplate().get_npcId();
 		String npcName = npc.getNpcTemplate().get_name();
-		if (npcId == 70027 || "에덴상단".equals(npcName)) {
+		if (npcId == 70027 || "エデンの上部".equals(npcName)) {
 			return true;
 		}
 		return false;
@@ -6768,7 +6754,7 @@ public class C_NPCAction extends ClientBasePacket {
 		pc.sendPackets(new S_NPCTalkReturn(objid, "coma5", htmldata));
 	}
 
-	/** 마빈2%경험치 */
+	/** マービン2％経験値 */
 	public void 마빈경험치지급2(L1PcInstance pc) {
 		int needExp = ExpTable.getNeedExpNextLevel(52);
 		double exppenalty = ExpTable.getPenaltyRate(pc.getLevel());
@@ -6787,7 +6773,7 @@ public class C_NPCAction extends ClientBasePacket {
 		pc.addExp(exp);
 	}
 
-	/** 마빈6%경험치 */
+	/** マービン6％の経験値 */
 	public void 마빈경험치지급6(L1PcInstance pc) {
 		int needExp = ExpTable.getNeedExpNextLevel(52);
 		double exppenalty = ExpTable.getPenaltyRate(pc.getLevel());
@@ -6867,7 +6853,7 @@ public class C_NPCAction extends ClientBasePacket {
 			return htmlid;
 		}
 		if (pc._x == 0) {
-			if (s.equals("a")) { // 마법을 받는다.
+			if (s.equals("a")) { // 魔法を受ける。
 				if (pc.getInventory().checkItem(40308, 1000)) {
 					pc.getInventory().consumeItem(40308, 1000);
 					int[] allBuffSkill = { 26, 37, 42, 48 };
@@ -6879,9 +6865,9 @@ public class C_NPCAction extends ClientBasePacket {
 					pc.setBuffnoch(0);
 					htmlid = "";
 				} else {
-					pc.sendPackets(new S_ChatPacket(pc, "아데나가 부족합니다."));
+					pc.sendPackets(new S_ChatPacket(pc, "アデナが不足します。"));
 				}
-			} else if (s.equals("z")) { // 흑사의 기운을 받는다
+			} else if (s.equals("z")) { // フクサのオーラを受ける
 				if (pc.getInventory().checkItem(65648, 1)) {
 					pc.getInventory().consumeItem(65648, 1);
 					if (pc.getLevel() >= 5) {
@@ -6893,7 +6879,7 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "";
 				} else {
 					htmlid = "bs_01z";
-					pc.sendPackets(new S_ChatPacket(pc, "흑사의 코인이 부족합니다."));
+					pc.sendPackets(new S_ChatPacket(pc, "フクサのコインが不足します。"));
 				}
 			}
 		} else {
@@ -7182,15 +7168,15 @@ public class C_NPCAction extends ClientBasePacket {
 		return htmlid;
 	}
 
-	private boolean isTwoLogin(L1PcInstance c) {// 중복체크 변경
+	private boolean isTwoLogin(L1PcInstance c) {// 重複チェックを変更
 		boolean bool = false;
 		for (L1PcInstance target : L1World.getInstance().getAllPlayers()) {
 			if (target.noPlayerCK || target.noPlayerck2)
 				continue;
-			/** 로봇시스템 **/
+			/** ロボットシステム **/
 			if (target.getRobotAi() != null)
 				continue;
-			/** 로봇시스템 **/
+			/** ロボットシステム **/
 			if (c.getId() != target.getId() && (!target.isPrivateShop() && !target.isAutoClanjoin())) {
 				if (c.getNetConnection().getAccountName().equalsIgnoreCase(target.getNetConnection().getAccountName())) {
 					bool = true;

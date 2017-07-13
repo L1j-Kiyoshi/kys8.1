@@ -49,9 +49,9 @@ public class L1PowerKick implements L1CommandExecutor {
 			L1PcInstance target = L1World.getInstance().getPlayer(arg);
 			IpTable iptable = IpTable.getInstance();
 			if (target != null) {
-				Account.ban(target.getAccountName()); // 계정을 BAN시킨다.
-				iptable.banIp(target.getNetConnection().getIp()); // BAN 리스트에IP를 추가한다.
-				pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(target.getName()).append(" 를 영구 추방 했습니다. ")
+				Account.ban(target.getAccountName()); // アカウントをBANさせる。
+				iptable.banIp(target.getNetConnection().getIp()); // BANリストにIPアドレスを追加します。
+				pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(target.getName()).append("を永久追放しました。")
 						.toString()));
 				target.sendPackets(new S_Disconnect());
 			} else {
@@ -61,11 +61,11 @@ public class L1PowerKick implements L1CommandExecutor {
 					String nc = Account.checkIP(name);
 					if (nc != null)
 						iptable.banIp(nc);
-					pc.sendPackets(new S_SystemMessage(name + " 를 계정압류 하였습니다."));
+					pc.sendPackets(new S_SystemMessage(name + "アカウント差し押さえました。"));
 				}
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [캐릭터명]으로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
 		}
 	}
 

@@ -50,7 +50,7 @@ public class L1HomeTown implements L1CommandExecutor {
 			}
 		} catch (Exception e) {
 			pc.sendPackets(new S_SystemMessage(
-					".홈타운 [매일,매달] 라고 입력해 주세요. "));
+					"。ホームタウン[毎日、毎月]と入力してください。"));
 		}
 	}
 }

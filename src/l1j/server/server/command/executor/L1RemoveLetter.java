@@ -42,9 +42,9 @@ public class L1RemoveLetter implements L1CommandExecutor {
 		try {				
 			checkLetter(pc.getName());	
 			pc.sendPackets(new S_LetterList(pc, 0, 200));
-			pc.sendPackets(new S_SystemMessage("편지를 삭제 하였습니다."));
+			pc.sendPackets(new S_SystemMessage("メールを削除しました。"));
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".편지삭제을 입력해주세요."));
+			pc.sendPackets(new S_SystemMessage("。メール削除を入力してください。"));
 		}
 	}
 

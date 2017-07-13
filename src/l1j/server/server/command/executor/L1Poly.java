@@ -48,16 +48,16 @@ public class L1Poly implements L1CommandExecutor {
 			L1PcInstance tg = L1World.getInstance(). getPlayer(name);
 
 			if (tg == null) {
-				pc.sendPackets(new S_ServerMessage(73, name)); // \f1%0은 게임을 하고 있지 않습니다.
+				pc.sendPackets(new S_ServerMessage(73, name)); // \f1%0は、ゲームをしていません。
 			} else {
 				try {
 					L1PolyMorph.doPoly(tg, polyid, 604800, L1PolyMorph.MORPH_BY_GM);
 				} catch (Exception exception) {
-					pc.sendPackets(new S_SystemMessage(".변신 [캐릭터명] [그래픽ID] 라고 입력해 주세요. "));
+					pc.sendPackets(new S_SystemMessage("。変身[キャラクター名] [グラフィックID]と入力してください。"));
 				}
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [캐릭터명] [그래픽ID] 라고 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名] [グラフィックID]と入力してください。"));
 		}
 	}
 }

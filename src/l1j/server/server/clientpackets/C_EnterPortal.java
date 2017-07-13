@@ -37,10 +37,10 @@ public class C_EnterPortal extends ClientBasePacket {
 		int locy = readH();
 		L1PcInstance pc = client.getActiveChar();
 		if ( pc == null)return;
-		if (pc.isTeleport()) { // 텔레포트 처리중
+		if (pc.isTeleport()) { // テレポート処理中
 			return;
 		}
-		// 지하 감옥에 텔레포트
+		// ダンジョンにテレポート
 		Dungeon.getInstance().dg(locx, locy, pc.getMap().getId(), pc);
 	}
 

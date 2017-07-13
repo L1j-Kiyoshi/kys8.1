@@ -57,14 +57,14 @@ public class C_SkillBuyOK extends ClientBasePacket {
 		}
 		for (int i = 0; i < count; i++) {
 			sid[i] = readD();
-			// 게랭 버그 관련 추가
+			// ゲレンバグ関連を追加
 			if (sid[i] > 24) {
 				pc.sendPackets(new S_Disconnect());
 				return;
 			}
 
 			switch (sid[i]) {
-			// Lv1 마법
+			// Lv1魔法
 			case 0:
 				level1 += 1;
 				level1_cost += 100;
@@ -98,7 +98,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 				level1_cost += 100;
 				break;
 
-			// Lv2 마법
+			// Lv2魔法
 			case 8:
 				level2 += 1;
 				level2_cost += 400;
@@ -132,7 +132,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 				level2_cost += 400;
 				break;
 
-			// Lv3 마법
+			// Lv3魔法
 			case 16:
 				level3 += 1;
 				level3_cost += 900;
@@ -172,7 +172,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 		}
 
 		switch (pc.getType()) {
-		case 0: // 군주
+		case 0: //君主
 			if (pc.getLevel() < 10) {
 				level1 = 0;
 				level1_cost = 0;
@@ -191,7 +191,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 			}
 			break;
 
-		case 1: // 기사
+		case 1: // 記事
 			if (pc.getLevel() < 50) {
 				level1 = 0;
 				level1_cost = 0;
@@ -263,7 +263,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 				level3_cost = 0;
 			}
 			break;
-		case 7: // 전사
+		case 7: // 戦士
 			if (pc.getLevel() < 50) {
 				level1 = 0;
 				level1_cost = 0;
@@ -435,7 +435,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 				SkillsTable.getInstance().spellMastery(pc.getId(), skill_id, skill_name, 0, 0);
 			}
 		} else {
-			pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+			pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 		}
 	}
 

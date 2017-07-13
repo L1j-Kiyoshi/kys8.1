@@ -55,34 +55,34 @@ public class C_War extends ClientBasePacket {
 		String clanName = player.getClanname();
 		int clanId = player.getClanid();
 
-		if (!player.isCrown()) { // 군주 이외
-			player.sendPackets(new S_ServerMessage(478));// \f1프린스와 프린세스만 전쟁을 포고할 수 있습니다.
+		if (!player.isCrown()) { // 君主以外
+			player.sendPackets(new S_ServerMessage(478));// \f1プリンスとプリンセスだけ戦争を布告することができます。
 			return;
 		}
-		if (clanId == 0) { // 크란미소속
-			player.sendPackets(new S_ServerMessage(272)); // \f1전쟁하기 위해서는 우선 혈맹을 창설하지 않으면 안됩니다.
+		if (clanId == 0) { // クラン笑顔の中
+			player.sendPackets(new S_ServerMessage(272)); // \f1戦争するためには、まず血盟を創設しなければなりません。
 			return;
 		}
 		L1Clan clan = L1World.getInstance().getClan(clanName);
 		if (clan == null) {
-			S_SystemMessage sm = new S_SystemMessage("대상 혈맹이 발견되지 않았습니다.");
+			S_SystemMessage sm = new S_SystemMessage("対象血盟が見つかりません。");
 			player.sendPackets(sm);
 			sm = null;
 			return;
 		}
 
-		if (player.getId() != clan.getLeaderId()) { // 혈맹주
-			player.sendPackets(new S_ServerMessage(478)); // \f1프린스와 프린세스만 전쟁을 포고할 수 있습니다.
+		if (player.getId() != clan.getLeaderId()) { // 血盟主
+			player.sendPackets(new S_ServerMessage(478)); // \f1プリンスとプリンセスだけ戦争を布告することができます。
 			return;
 		}
 
-		if (clanName.toLowerCase().equals(s.toLowerCase())) { // 자크란을 지정
+		if (clanName.toLowerCase().equals(s.toLowerCase())) { // ジャックとを指定
 			return;
 		}
 
 		L1Clan enemyClan = null;
 		String enemyClanName = null;
-		for (L1Clan checkClan : L1World.getInstance().getAllClans()) { // 크란명을 체크
+		for (L1Clan checkClan : L1World.getInstance().getAllClans()) { // クラン名をチェック
 			if (checkClan.getClanName().toLowerCase().equals(s.toLowerCase())) {
 				enemyClan = checkClan;
 				enemyClanName = checkClan.getClanName();
@@ -90,63 +90,63 @@ public class C_War extends ClientBasePacket {
 			}
 		}
 		if (enemyClan == null) {
-			S_SystemMessage sm = new S_SystemMessage("대상 혈맹이 발견되지 않았습니다.");
+			S_SystemMessage sm = new S_SystemMessage("対象血盟が見つかりません。");
 			player.sendPackets(sm);
 			sm = null;
 			return;
 		}
 
 		boolean inWar = false;
-		List<L1War> warList = L1World.getInstance().getWarList(); // 전쟁 리스트를 취득
+		List<L1War> warList = L1World.getInstance().getWarList(); // 戦争のリストを取得
 		for (L1War war : warList) {
-			if (war.CheckClanInWar(clanName)) { // 자크란이 이미 전쟁중
-				if (type == 0) { // 선전포고
-					player.sendPackets(new S_ServerMessage(234)); // \f1당신의 혈맹은 벌써 전쟁중입니다.
+			if (war.CheckClanInWar(clanName)) { //ジャックとは、すでに戦争中
+				if (type == 0) { // 宣戦布告
+					player.sendPackets(new S_ServerMessage(234)); // \f1あなたの血盟はすでに戦争中です。
 					return;
 				}
 				inWar = true;
 				break;
 			}
 		}
-		if (!inWar && (type == 2 || type == 3)) { // 자크란이 전쟁중 이외로, 항복 또는 종결
+		if (!inWar && (type == 2 || type == 3)) { // ジャックとは、この戦争中以外で、降伏または終結
 			return;
 		}
 
-		if (clan.getCastleId() != 0) { // 자크란이 성주
-			if (type == 0) { // 선전포고
-				player.sendPackets(new S_ServerMessage(474)); // 당신은 벌써 성을 소유하고 있으므로, 다른 시로를 잡을 수 없습니다.
+		if (clan.getCastleId() != 0) { // ジャックとは城主
+			if (type == 0) { // 宣戦布告
+				player.sendPackets(new S_ServerMessage(474)); // あなたはすでに城を所有しているので、他の城をキャッチすることができません。
 				return;
-			} else if (type == 2 || type == 3) { // 항복, 종결
+			} else if (type == 2 || type == 3) { // 降伏、終結
 				return;
 			}
 		}
 
-		if (enemyClan.getCastleId() == 0 && // 상대 크란이 성주는 아니고, 자캐릭터가 Lv15 이하
+		if (enemyClan.getCastleId() == 0 && //相手クランが城主ではなく、自キャラがLv15以下
 				player.getLevel() <= 15) {
-			player.sendPackets(new S_ServerMessage(232)); // \f1레벨 15 이하의 군주는 선전포고할 수 없습니다.
+			player.sendPackets(new S_ServerMessage(232)); // \f1レベル15以下の君主は宣戦布告することはできません。
 			return;
 		}
 
-		if (enemyClan.getCastleId() != 0 && // 상대 크란이 성주로, 자캐릭터가 Lv25 미만
+		if (enemyClan.getCastleId() != 0 && // 相手クランが城主で、自キャラがLv25未満
 			player.getLevel() <  Config.선포레벨) {
-			player.sendPackets(new S_SystemMessage("레벨 " + Config.선포레벨 + "부터 선포할 수 있습니다."));
+			player.sendPackets(new S_SystemMessage("レベル" + Config.선포레벨 + "から宣言することができます。"));
 			return;
 		}
 		
 		if (clan.getOnlineClanMember().length <= Config.혈맹접속인원) {   
-			player.sendPackets(new S_SystemMessage("접속한 혈맹원이 "+Config.혈맹접속인원+"명 이상이면 선포가 가능합니다."));
+			player.sendPackets(new S_SystemMessage("接続した血盟員が"+Config.혈맹접속인원+"人以上であれば宣言が可能です。"));
 			return;
 		}
 
-		if (enemyClan.getCastleId() != 0) { // 상대 크란이 성주
+		if (enemyClan.getCastleId() != 0) { // 相手クランが城主
 			int castle_id = enemyClan.getCastleId();
-			if (WarTimeController.getInstance().isNowWar(castle_id)) { // 전쟁 시간내
+			if (WarTimeController.getInstance().isNowWar(castle_id)) { // 戦争の時間内
 				L1PcInstance clanMember[] = clan.getOnlineClanMember();
 				for (int k = 0; k < clanMember.length; k++) {
 					if (L1CastleLocation.checkInWarArea(castle_id, clanMember[k])) {
 						if (player != clanMember[k]) {
 							player.sendPackets(new S_ServerMessage(477));
-							// 공성: 선포 불가(성안에 혈맹원이 있음)
+							// 攻城：宣言不可（城内に血盟員があります）
 							int[] loc = Getback.GetBack_Location(clanMember[k], true);
 							L1Location _loc = new L1Location(loc[0], loc[1], (short) loc[2]);
 							L1Map map = _loc.getMap();
@@ -160,18 +160,18 @@ public class C_War extends ClientBasePacket {
 				}
 				boolean enemyInWar = false;
 				for (L1War war : warList) {
-					if (war.CheckClanInWar(enemyClanName)) { // 상대 크란이 이미 전쟁중
-						if (type == 0) { // 선전포고
+					if (war.CheckClanInWar(enemyClanName)) { // 相手クランが既に戦争中
+						if (type == 0) { // 宣戦布告
 							war.DeclareWar(clanName, enemyClanName);
 							war.AddAttackClan(clanName);
 						} else if (type == 2 || type == 3) {
 							if (!war.CheckClanInSameWar(clanName, enemyClanName)) {
-								// 자크란과 상대 크란이 다른 전쟁
+								// ジャックとの相対クランが他の戦争
 								return;
 							}
-							if (type == 2) { // 항복
+							if (type == 2) { // 降伏
 								war.SurrenderWar(clanName, enemyClanName);
-							} else if (type == 3) { // 종결
+							} else if (type == 3) { // 終結
 								war.CeaseWar(clanName, enemyClanName);
 							}
 						}
@@ -179,25 +179,25 @@ public class C_War extends ClientBasePacket {
 						break;
 					}
 				}
-				if (!enemyInWar && type == 0) { // 상대 크란이 전쟁중 이외로, 선전포고
+				if (!enemyInWar && type == 0) { // 相手クランが戦争中以外で、宣戦布告
 					L1War war = new L1War();
-					war.handleCommands(1, clanName, enemyClanName); // 공성전 개시
+					war.handleCommands(1, clanName, enemyClanName); //包囲開始
 				}
-			} else { // 전쟁 시간외
-				if (type == 0) { // 선전포고
-					player.sendPackets(new S_ServerMessage(476)); // 아직 공성전의 시간이 아닙니다.
+			} else { // 戦争時間外
+				if (type == 0) { // 宣戦布告
+					player.sendPackets(new S_ServerMessage(476)); // まだ攻城戦の時間がありません。
 				}
 			}
-		} else { // 상대 크란이 성주는 아니다
+		} else { // 相手クランが城主ではない
 			boolean enemyInWar = false;
 			for (L1War war : warList) {
 				if (war.CheckClanInWar(enemyClanName)) { // 상대 크란이 이미 전쟁중
-					if (type == 0) { // 선전포고
+					if (type == 0) { // 宣戦布告
 						player.sendPackets(new S_ServerMessage(236,
-								enemyClanName)); // %0혈맹이 당신의 혈맹과의 전쟁을 거절했습니다.
+								enemyClanName)); // %0血盟があなたの血盟との戦争を拒否しました。
 						return;
-					} else if (type == 2 || type == 3) { // 항복 또는 종결
-						if (!war.CheckClanInSameWar(clanName, enemyClanName)) { // 자크란과 상대 크란이 다른 전쟁
+					} else if (type == 2 || type == 3) { // 降伏または終結
+						if (!war.CheckClanInSameWar(clanName, enemyClanName)) { // ジャックとの相対クランが他の戦争
 							return;
 						}
 					}
@@ -205,29 +205,29 @@ public class C_War extends ClientBasePacket {
 					break;
 				}
 			}
-			if (!enemyInWar && (type == 2 || type == 3)) { // 상대 크란이 전쟁중 이외로, 항복 또는 종결
+			if (!enemyInWar && (type == 2 || type == 3)) { // 相手クランが戦争中以外で、降伏または終結
 				return;
 			}
 
-			// 공성전이 아닌 경우, 상대의 혈맹주의 승인이 필요
+			// 攻城戦ではない場合には、相手の血盟注意承認が必要
 			L1PcInstance enemyLeader = L1World.getInstance().getPlayer(
 					enemyClan.getLeaderName());
 
-			if (enemyLeader == null) { // 상대의 혈맹주가 발견되지 않았다
-				player.sendPackets(new S_ServerMessage(218, enemyClanName)); // \f1%0 혈맹의 군주는 현재 월드에 없습니다.
+			if (enemyLeader == null) { // 相手の血盟主発見されなかった
+				player.sendPackets(new S_ServerMessage(218, enemyClanName)); // \f1%0血盟の君主は、現在の世界にありません。
 				return;
 			}
 
-			if (type == 0) { // 선전포고
+			if (type == 0) { // 宣戦布告
 				enemyLeader.setTempID(player.getId()); // 상대의 오브젝트 ID를 보존해 둔다
 				enemyLeader.sendPackets(new S_Message_YN(217, clanName,
-						playerName)); // %0혈맹의%1가 당신의 혈맹과의 전쟁을 바라고 있습니다. 전쟁에 응합니까? (Y/N)
-			} else if (type == 2) { // 항복
-				enemyLeader.setTempID(player.getId()); // 상대의 오브젝트 ID를 보존해 둔다
-				enemyLeader.sendPackets(new S_Message_YN(221, clanName)); // %0혈맹이 항복을 바라고 있습니다. 받아들입니까? (Y/N)
-			} else if (type == 3) { // 종결
-				enemyLeader.setTempID(player.getId()); // 상대의 오브젝트 ID를 보존해 둔다
-				enemyLeader.sendPackets(new S_Message_YN(222, clanName)); // %0혈맹이 전쟁의 종결을 바라고 있습니다. 종결합니까? (Y/N)
+						playerName)); // %0血盟の％1があなたの血盟との戦争を望んでいます。戦争に応じますか？ （Y / N）
+			} else if (type == 2) { //降伏
+				enemyLeader.setTempID(player.getId()); // 相手のオブジェクトIDを保存しておく
+				enemyLeader.sendPackets(new S_Message_YN(221, clanName)); // %0血盟が降伏を望んでいます。受け入れですか？ （Y / N）
+			} else if (type == 3) { //終結
+				enemyLeader.setTempID(player.getId()); //相手のオブジェクトIDを保存しておく
+				enemyLeader.sendPackets(new S_Message_YN(222, clanName)); // %0血盟戦争の終結を望んでいます。終結のですか？ （Y / N）
 			}
 		}
 	}

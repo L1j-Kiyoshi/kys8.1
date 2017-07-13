@@ -27,15 +27,15 @@ public class L1SkillIcon implements L1CommandExecutor {
 				try {					
 					Thread.sleep(1000);
 					int num = _sprid + i;
-					pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, _sprid+i, true));//무제한패킷
-					pc.sendPackets(new S_SystemMessage("무제한 아이콘 : "+num+" 번."));
+					pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, _sprid+i, true));//無制限のパケット
+					pc.sendPackets(new S_SystemMessage("無制限のアイコン："+num+"回。"));
 				} catch (Exception exception) {
 					break;
 				}
 			}
 		} catch (Exception exception) {
 			pc.sendPackets(new S_SystemMessage(cmdName
-					+ " [id] [출현시키는 수]로 입력해 주세요. "));
+					+ "[id] [出現させることができ】で入力してください。"));
 		}
 	}
 }

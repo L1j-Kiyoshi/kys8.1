@@ -24,8 +24,8 @@ public class C_Door extends ClientBasePacket {
 
 	public C_Door(byte abyte0[], GameClient client) throws Exception {
 		super(abyte0);
-		int locX = readH();// 문짝 클릭
-		int locY = readH();// 문짝 클릭
+		int locX = readH();// 扉クリック
+		int locY = readH();// 扉クリック
 		int objectId = readD();
 
 		L1PcInstance pc = client.getActiveChar();
@@ -71,7 +71,7 @@ public class C_Door extends ClientBasePacket {
 			// }
 			// }
 
-			// 말하는 섬던 2층 보스 문
+			//言うソムドン2階のボスドア
 			if (door.getDoorId() >= 4100 && door.getDoorId() <= 4111) {
 				if (pc.getInventory().checkItem(40313, 1)) {
 					pc.getInventory().consumeItem(40313, 1);
@@ -89,12 +89,12 @@ public class C_Door extends ClientBasePacket {
 					return;
 				}
 			}
-			if (door.getDoorId() >= 900151 && door.getDoorId() <= 900154) {// 하딘
-																			// 문
+			if (door.getDoorId() >= 900151 && door.getDoorId() <= 900154) {// ハーディン
+																			// ドア
 				return;
 			}
 
-			/** 화룡의 안식처 */
+			/** 火竜の聖域 */
 			if (door.getNpcId() >= 7210013 && door.getNpcId() <= 7210015) {
 				return;
 			}
@@ -111,7 +111,7 @@ public class C_Door extends ClientBasePacket {
 		}
 	}
 
-	// ///////////////////////////////기란감옥상자///////////////////////////////////
+	// ///////////////////////////////ギラン監獄ボックス///////////////////////////////////
 	private void giranCaveBox(L1PcInstance pc, L1DoorInstance door) {
 		int ran = _random.nextInt(100) + 1;
 		// L1ItemInstance item = null;
@@ -120,46 +120,46 @@ public class C_Door extends ClientBasePacket {
 			door.open();
 			if (ran >= 0 && ran <= 15) {
 				pc.getInventory().storeItem(40308, 10000);
-				pc.sendPackets(new S_SystemMessage("아데나 (10000)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("アデナ（10000）を獲得しました。"));
 			} else if (ran >= 16 && ran <= 29) {
 				pc.getInventory().storeItem(40308, 20000);
-				pc.sendPackets(new S_SystemMessage("아데나 (20000)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("アデナ（20000）を獲得しました。"));
 			} else if (ran >= 30 && ran <= 49) {
 				pc.getInventory().storeItem(40308, 30000);
-				pc.sendPackets(new S_SystemMessage("아데나 (30000)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("アデナ（30000）を獲得しました。"));
 			} else if (ran >= 50 && ran <= 59) {
 				pc.getInventory().storeItem(40308, 50000);
-				pc.sendPackets(new S_SystemMessage("아데나 (50000)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("アデナ（50000）を獲得しました。"));
 			} else if (ran >= 60 && ran <= 64) {
 				pc.getInventory().storeItem(40308, 100000);
-				pc.sendPackets(new S_SystemMessage("아데나 (100000)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("アデナ（100000）を獲得しました。"));
 			} else if (ran >= 65 && ran <= 69) {
 				pc.getInventory().storeItem(40308, 200000);
-				pc.sendPackets(new S_SystemMessage("아데나 (200000)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("アデナ（200000）を獲得しました。"));
 			} else if (ran >= 70 && ran <= 72) {
 				pc.getInventory().storeItem(40308, 300000);
-				pc.sendPackets(new S_SystemMessage("아데나 (300000)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("アデナ（300000）を獲得しました。"));
 			} else if (ran >= 73 && ran <= 75) {
 				pc.getInventory().storeItem(40308, 400000);
-				pc.sendPackets(new S_SystemMessage("아데나 (400000)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("アデナ（400000）を獲得しました。"));
 			} else if (ran >= 76 && ran <= 78) {
 				pc.getInventory().storeItem(40308, 500000);
-				pc.sendPackets(new S_SystemMessage("아데나 (500000)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("アデナ（500000）を獲得しました。"));
 			} else if (ran >= 79 && ran <= 80) {
 				pc.getInventory().storeItem(40308, 1000000);
-				pc.sendPackets(new S_SystemMessage("아데나 (1000000)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("アデナ（1000000）を獲得しました。"));
 			} else if (ran >= 81 && ran <= 90) {
 				pc.getInventory().storeItem(40074, 3);
-				pc.sendPackets(new S_SystemMessage("갑옷 마법 주문서 (3)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("防具強化スクロール（3）を獲得しました。"));
 			} else if (ran >= 91 && ran <= 100) {
 				pc.getInventory().storeItem(40087, 3);
-				pc.sendPackets(new S_SystemMessage("무기 마법 주문서 (3)을 얻었습니다."));
+				pc.sendPackets(new S_SystemMessage("武器強化スクロール（3）を獲得しました。"));
 			}
 		}
 
 	}
 
-	// ///////////////////////////////기란감옥상자///////////////////////////////////
+	// ///////////////////////////////ギラン監獄ボックス///////////////////////////////////
 
 	private void phoenixEgg(L1PcInstance pc, L1DoorInstance door) {
 		int ran = _random.nextInt(100) + 1;

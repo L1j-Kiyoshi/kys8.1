@@ -39,12 +39,12 @@ public class C_LeaveClan extends ClientBasePacket {
 		L1Clan clan = L1World.getInstance().getClan(player.getClanname());
 		if (clan == null)
 			return;
-		// 해당 혈의 군주인가?
+		// その血の君主か？
 		if (player.isCrown() && player.getId() == clan.getLeaderId()) {
 			L1ClanMatching Clan = L1ClanMatching.getInstance();
 			Clan.deleteClanMatching(player);
 			leaveClanBoss(clan, player);
-		} else { // 군주가 아닌 혈맹원의 탈퇴
+		} else { // 君主ではなく、血盟員の脱退
 			leaveClanMember(clan, player);
 		}
 	}
@@ -72,14 +72,14 @@ public class C_LeaveClan extends ClientBasePacket {
 
 		L1PcInstance pc = null;
 		for (int i = 0; i < clan.getClanMemberList().size(); i++) { 
-			// 혈맹원들의혈맹정보를초기화
+			// 血盟員の血盟情報を初期化
 			pc = L1World.getInstance().getPlayer(clan.getClanMemberList().get(i).name);
 			
 			if (pc == null) {
-				// 혈맹원이 오프라인인 경우
+				// 血盟員がオフラインの場合
 				pc = CharacterTable.getInstance().restoreCharacter(clan.getClanMemberList().get(i).name);
 			} else {
-				// %1혈맹의 군주 %0가 혈맹을 해산시켰습니다.
+				// %1血盟の君主％0が血盟を解散しました。
 				pc.sendPackets(new S_ServerMessage(269, player_name, clan_name));
 			}
 			pc.ClearPlayerClanData(clan);
@@ -97,8 +97,8 @@ public class C_LeaveClan extends ClientBasePacket {
 		L1PcInstance clanMember[] = clan.getOnlineClanMember();
 
 		for (int i = 0; i < clanMember.length; i++) {
-			clanMember[i].sendPackets(new S_ServerMessage(178, player_name, clan_name)); // \f1%0이%1혈맹을 탈퇴했습니다.
-			// \f1%0이 %1혈맹을탈퇴했습니다.
+			clanMember[i].sendPackets(new S_ServerMessage(178, player_name, clan_name)); //\\ f1％0％1血盟を脱退しました。
+			// \f1%0この％1血盟を脱退しました。
 		}
 		if (player.isClanBuff()) {
 			player.killSkillEffectTimer(L1SkillId.CLANBUFF_YES);

@@ -35,7 +35,7 @@ public class C_Pledge extends ClientBasePacket {
             for(int i = 0 ; i < members.length;i++){
             	System.out.print(members[i]);
             }
-            System.out.println("클랜원들 : "+members.toString());
+            System.out.println("クランに："+members.toString());
             int div = 0;
             try {
                 div = members.length / 127;

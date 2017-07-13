@@ -52,16 +52,16 @@ public class L1PartyRecall implements L1CommandExecutor {
 				for (L1PcInstance pc2 : players) {
 					try {
 						new L1Teleport().teleport(pc2, x, y, map, 5, true);
-						pc2. sendPackets(new S_SystemMessage("게임마스터에 소환되었습니다."));
+						pc2. sendPackets(new S_SystemMessage("ゲームマスターに召喚されました。"));
 					} catch (Exception e) {
 						_log.log(Level.SEVERE, "", e);
 					}
 				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("파티 멤버가 아닙니다. "));
+				pc.sendPackets(new S_SystemMessage("パーティメンバーがありません。"));
 			}
 		} else {
-			pc.sendPackets(new S_SystemMessage("그러한 캐릭터는 없습니다. "));
+			pc.sendPackets(new S_SystemMessage("そのようなキャラクターはありません。"));
 		}
 	}
 }

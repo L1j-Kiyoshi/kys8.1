@@ -22,7 +22,7 @@ import manager.LinAllManager;
 public class C_DropItem extends ClientBasePacket {
 
 	private static final String C_DROP_ITEM = "[C] C_DropItem";
-	/** 날짜 , 시간 기록 **/
+	/** 日付、時刻の記録 **/
 	Calendar rightNow = Calendar.getInstance();
 	int day = rightNow.get(Calendar.DATE);
 	int hour = rightNow.get(Calendar.HOUR);
@@ -60,12 +60,12 @@ public class C_DropItem extends ClientBasePacket {
 			}
 			if (!pc.isGm() && !item.getItem().isTradable() || item.getItemId() == L1ItemId.HIGH_CHARACTER_TRADE
 					|| item.getItemId() == L1ItemId.LOW_CHARACTER_TRADE) {
-				// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+				// \f1%0はしまったり、または他人に両日をすることができません。
 				pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
 				return;
 			}
 
-			/** 버그 방지 **/
+			/** バグ防止 **/
 			int itemType = item.getItem().getType2();
 			int itemId = item.getItem().getItemId();
 
@@ -89,41 +89,41 @@ public class C_DropItem extends ClientBasePacket {
 				count = item.getCount();
 			}
 			
-			/** 드랍방지 외부화 db nodropitem 테이블 에서 리스트 추가 **/
+			/** ドロップ防止外部化db nodropitemテーブルでリストに追加 **/
 			if (!pc.isGm() && NoDropItem.getInstance().isNoDropItem(itemId))  {
 				String itemName = ItemTable.getInstance().findItemIdByName(itemId);
-			    pc.sendPackets(new S_SystemMessage("\\aA경고: 당신은 해당 \\aG["+ itemName +"]\\aA 을(를) 버릴수 없습니다."));
+			    pc.sendPackets(new S_SystemMessage("\\aA警告:あなたは、 \\aG["+ itemName +"]\\aA を捨てることはできません。"));
 				return;
 			}
-			// 인첸된 아이템 버릴수 없게 하자!
+			// エンチャンされたアイテム捨てるなくしよう！
 			if (!pc.isGm() && pc.getLevel() < Config.ALT_DROPLEVELLIMIT) {
-				pc.sendPackets(new S_SystemMessage("레벨 " + Config.ALT_DROPLEVELLIMIT + "부터 버릴 수 있습니다."));
+				pc.sendPackets(new S_SystemMessage("レベル " + Config.ALT_DROPLEVELLIMIT + "から捨てることができます。"));
 				return;
 			}
 			if (item.getEnchantLevel() >= 1 && !pc.isGm()) {
-				pc.sendPackets(new S_SystemMessage("인첸된 아이템은 버릴수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("エンチャンされたアイテムは捨てることができません。"));
 				return;
 			}
 //			if (pc.getInventory().getWeight30() > 240) {
-//				pc.sendPackets(new S_SystemMessage("소지품이 너무 무거워서 사용 할 수 없습니다."));
+//				pc.sendPackets(new S_SystemMessage（ "持ち物が重すぎて使用することはできません。"））;
 //				return;
 //			}
 //			if (pc.getMaxWeight() <= pc.getInventory().getWeight()) {
-//				pc.sendPackets(new S_SystemMessage("소지품이 너무 무거워서 행동할 수 없습니다."));
+//				pc.sendPackets(new S_SystemMessage（「持ち物が重すぎて行動することができません。 "））;
 //				return;
 //			}
 			if (item.getId() >= 0 && (pc.getMapId() == 350 || pc.getMapId() == 340 || pc.getMapId() == 370 || pc.getMapId() == 800)) {
-				pc.sendPackets(new S_SystemMessage("시장에서는 아이템을 버릴수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("市場では、アイテムを捨てるません。"));
 				return;
 			}
 			
 			if (item.getItemId() == 80500) {
 				return;
 			}
-			/** 버그 방지 **/
+			/** バグ防止 **/
 
 			if(!pc.isGm() && item.getBless() >= 128){
-				pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+				pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1％0はたりまたは他人に両日をすることができません。
 				return;
 			}
 
@@ -133,7 +133,7 @@ public class C_DropItem extends ClientBasePacket {
 				if (petObject instanceof L1PetInstance) {
 					pet = (L1PetInstance) petObject;
 					if (item.getId() == pet.getItemObjId()) {
-						// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+						// \f1%0はしまったり、または他人に両日をすることができません。
 						pc.sendPackets(new S_ServerMessage(210, item.getItem()
 								.getName()));
 						return;
@@ -145,7 +145,7 @@ public class C_DropItem extends ClientBasePacket {
 				if (dollObject instanceof L1DollInstance) {
 					L1DollInstance doll = (L1DollInstance) dollObject;
 					if (item.getId() == doll.getItemObjId()) {
-						// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+						// \f1%0はしまったり、または他人に両日をすることができません。
 						pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
 						return;
 					}
@@ -153,7 +153,7 @@ public class C_DropItem extends ClientBasePacket {
 			}
 
 			if (item.isEquipped()) {
-				// \f1삭제할 수 없는 아이템이나 장비 하고 있는 아이템은 버릴 수 없습니다.
+				// \f1削除することができないアイテムや装備しているアイテムは捨てることができません。
 				pc.sendPackets(new S_ServerMessage(125));
 				return;
 			}
@@ -172,7 +172,7 @@ public class C_DropItem extends ClientBasePacket {
 			LinAllManager.getInstance().PicupAppend(item.getLogName(), pc.getName(), count, 1);
 			pc.getInventory().tradeItem(item, count, L1World.getInstance().getInventory(x, y, pc.getMapId()));
 			pc.getLight().turnOnOffLight();
-			/** 파일로그저장 **/
+			/** ファイルログの保存 **/
 			LoggerInstance.getInstance().addItemAction(ItemActionType.Drop, pc, item, count);
 		}
 	}
@@ -183,13 +183,13 @@ public class C_DropItem extends ClientBasePacket {
 		return C_DROP_ITEM;
 	}
 
-	private boolean isTwoLogin(L1PcInstance c) {// 중복체크 변경 
+	private boolean isTwoLogin(L1PcInstance c) {// 重複チェックを変更 
 		boolean bool = false;
 		for (L1PcInstance target : L1World.getInstance().getAllPlayers()) {
 			if (target.noPlayerCK || target.noPlayerck2)continue;
-			/**로봇시스템 **/
+			/**ロボットシステム **/
 			if(target.getRobotAi() != null) continue;
-			/**로봇시스템 **/
+			/**ロボットシステム **/
 			if (c.getId() != target.getId() && (!target.isPrivateShop() && !target.isAutoClanjoin())) {
 				if (c.getNetConnection().getAccountName().equalsIgnoreCase(target.getNetConnection().getAccountName())) {
 					bool = true;

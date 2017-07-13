@@ -79,7 +79,7 @@ public void setAdenaHuntStart(boolean AdenaHunt) {
   }
 
    /**
-    *오픈 시각을 가져온다
+    *オープン時刻を持って来る
     *
     *@return (Strind) 오픈 시각(MM-dd HH:mm)
     */
@@ -90,9 +90,9 @@ public void setAdenaHuntStart(boolean AdenaHunt) {
     }
 
     /**
-    *맵이 열려있는지 확인
+    *マップが開いていることを確認
     *
-    *@return (boolean) 열려있다면 true 닫혀있다면 false
+    *@return (boolean) 開いている場合true閉じている場合false
     */
     private boolean isOpen6() {
      NowTime = getTime();
@@ -100,7 +100,7 @@ public void setAdenaHuntStart(boolean AdenaHunt) {
      return false;
     }
 
-   //악마왕영토 소스 참조하여 추가함.
+   //悪魔王の領土ソース参照して追加する。
     public boolean isOpen7() {
 		NowTime = getTime();
 		if ((Integer.parseInt(NowTime) % ADENTIME) >= 2
@@ -110,23 +110,23 @@ public void setAdenaHuntStart(boolean AdenaHunt) {
 	}
 
     /**
-    *실제 현재시각을 가져온다
+    *実際、現在時刻を持って来る
     *
-    *@return (String) 현재 시각(HH:mm)
+    *@return (String)現在時刻（HH：mm）
     */
     private String getTime() {
      return s.format(Calendar.getInstance().getTime());
     }
 
-    /**기란마을로 팅기게**/
+    /**ギラン村にティンギが**/
     private void TelePort3() {
      for(L1PcInstance c : L1World.getInstance().getAllPlayers()) {
       switch(c.getMap().getId()) {
-       case 701: //아덴사냥터
+       case 701: //アデン狩り場
        c.stopHpRegenerationByDoll();
        c.stopMpRegenerationByDoll();
        new L1Teleport().teleport(c, 32617, 32773, (short) 4, c.getHeading(), true);
-       c.sendPackets(new S_SystemMessage("아덴사냥터가 종료되었습니다."));
+       c.sendPackets(new S_SystemMessage("アデン狩り場が終了しました。"));
        break;
        default:
        break;
@@ -134,15 +134,15 @@ public void setAdenaHuntStart(boolean AdenaHunt) {
      }
     }
 
-    /**기란마을로 팅기게**/
+    /**ギラン村にティンギが**/
     private void TelePort4() {
      for(L1PcInstance c : L1World.getInstance().getAllPlayers()) {
       switch(c.getMap().getId()) {
-       case 701: //아덴사냥터
+       case 701: //アデン狩り場
        c.stopHpRegenerationByDoll();
        c.stopMpRegenerationByDoll();
        new L1Teleport().teleport(c, 32617, 32773, (short) 4, c.getHeading(), true);
-       c.sendPackets(new S_SystemMessage("아덴사냥터가 종료되었습니다."));
+       c.sendPackets(new S_SystemMessage("アデン狩り場が終了しました。"));
        break;
        default:
        break;
@@ -150,11 +150,11 @@ public void setAdenaHuntStart(boolean AdenaHunt) {
      }
     }
 
-    /** 종료 **/
+    /** 終了 **/
     public void End() {
-    	L1World.getInstance().broadcastServerMessage("\\fS아덴사냥터가 종료되었습니다.");
+    	L1World.getInstance().broadcastServerMessage("\\fSアデン狩り場が終了しました。");
 
-    	L1World.getInstance().broadcastServerMessage("\\fS아덴사냥터는 ["+Config.아덴사냥터시간+" 시간]간격으로 진행됩니다.");
+    	L1World.getInstance().broadcastServerMessage("\\fSアデン狩り場は ["+Config.아덴사냥터시간+"時間]間隔で行われます。");
     	setAdenaHuntStart(false);
     }
 }

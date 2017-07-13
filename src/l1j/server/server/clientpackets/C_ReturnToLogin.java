@@ -22,7 +22,7 @@ public class C_ReturnToLogin extends ClientBasePacket {
 				client.kick();
 				client.close();
 				System.out.println("─────────────────────────────────");
-				System.out.println("버그의심됨 -- 계정명 " + client.getAccountName());
+				System.out.println("バグの疑い - アカウント名" + client.getAccountName());
 				System.out.println("─────────────────────────────────");
 				return;
 			}

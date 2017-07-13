@@ -19,7 +19,8 @@
 
 package l1j.server.server.clientpackets;
 
-import static l1j.server.server.model.skill.L1SkillId.SHAPE_CHANGE;
+import static l1j.server.server.model.skill.L1SkillId.*;
+
 import l1j.server.IndunSystem.Orim.OrimController;
 import l1j.server.server.GameClient;
 import l1j.server.server.model.Broadcaster;
@@ -43,13 +44,13 @@ public class C_ExtraCommand extends ClientBasePacket {
 		if (pc == null || pc.isGhost()  ) {
 			return;
 		}
-		if (pc.isInvisble()) { // 인비지비리티, 브라인드하이딘그중
+		if (pc.isInvisble()) { // インビジビリティ、ブラインドハイディーン、そのうち
 			return;
 		}
-		if (pc.isTeleport()) { // 텔레포트 처리중
+		if (pc.isTeleport()) { // テレポート処理中
 			return;
 		}
-		if (pc.hasSkillEffect(SHAPE_CHANGE)) { // 만일을 위해, 변신중은 타플레이어에 송신하지 않는다
+		if (pc.hasSkillEffect(SHAPE_CHANGE)) { // 万一のために、変身中は他のプレイヤーに送信しない
 			int gfxId = pc.getTempCharGfx();
 			if (gfxId != 6080 && gfxId != 6094) {
 				return;

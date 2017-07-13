@@ -22,7 +22,7 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 /**
- * 입력된 인수를 그대로 돌려주는 커멘드.  테스트, 디버그 및 커멘드 실장 샘플용.
+ * 入力された引数をそのまま返すコマンド。テスト、デバッグ、およびコマンド実装サンプル用。
  */
 public class L1Echo implements L1CommandExecutor {
 	private L1Echo() {

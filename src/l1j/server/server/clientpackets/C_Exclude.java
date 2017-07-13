@@ -38,12 +38,12 @@
 //	private static Logger _log = Logger.getLogger(C_Exclude.class.getName());
 //
 //	/**
-//	 * C_1 /exclude 커멘드를 쳤을 때에 보내진다
+//	 * C_1 /exclude コマンドを打った時に送られる
 //	 */
 //	public C_Exclude(byte[] decrypt, GameClient client) {
 //		super(decrypt);
 //		String name = readS();
-//		// 스펨편지차단 1, 일반차단 0
+//		// スペムメールブロック1、一般的なブロック0
 //		int Type = readC();
 //		if (name.isEmpty()) {
 //			return;
@@ -51,11 +51,11 @@
 //		L1PcInstance pc = client.getActiveChar();
 //		if ( pc == null)return;
 //		try {
-//			if (Type == 0) { // 일반차단
+//			if (Type == 0) {//一般的なブロック
 //				L1ExcludingList exList = pc.getExcludingList();
 //				if (exList.isFull()) {
 //					pc.sendPackets(new S_ServerMessage(472));
-//					// \f1차단된 유저가 너무 많습니다.
+//					// \f1ブロックされたユーザーが多すぎます。
 //					return;
 //				}
 //				if (exList.contains(name)) {
@@ -65,7 +65,7 @@
 //					exList.add(name);
 //					pc.sendPackets(new S_PacketBox(S_PacketBox.ADD_EXCLUDE, name));
 //				}
-//			} else if (Type == 1) { // 편지차단
+//			} else if (Type == 1）{//メールをブロック
 //				LetterSpamTable letter = LetterSpamTable.getInstance();
 //				boolean exclude = letter.spamList(pc.getName(), name);
 //				if (exclude) {

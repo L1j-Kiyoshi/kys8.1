@@ -18,8 +18,8 @@
  */
 package l1j.server.server.command.executor;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,17 +47,17 @@ public class L1Favorite implements L1CommandExecutor {
 			}
 			String faviCom = _faviCom.get(pc.getId());
 			if (arg.startsWith("셋팅")) {
-				// 커멘드의 등록
+				// コマンドの登録
 				StringTokenizer st = new StringTokenizer(arg);
 				st.nextToken();
 				if (!st.hasMoreTokens()) {
-					pc.sendPackets(new S_SystemMessage("커멘드가 없습니다. "));
+					pc.sendPackets(new S_SystemMessage("コマンドがありません。"));
 					return;
 				}
 				StringBuilder cmd = new StringBuilder();
-				String temp = st.nextToken(); // 커멘드 타입
+				String temp = st.nextToken(); // コマンドタイプ
 				if (temp.equalsIgnoreCase(cmdName)) {
-					pc.sendPackets(new S_SystemMessage(cmdName + " 자신은 등록할 수 없습니다. "));
+					pc.sendPackets(new S_SystemMessage(cmdName + "自分は登録できません。"));
 					return;
 				}
 				cmd.append(temp + " ");
@@ -66,11 +66,11 @@ public class L1Favorite implements L1CommandExecutor {
 				}
 				faviCom = cmd.toString().trim();
 				_faviCom.put(pc.getId(), faviCom);
-				pc.sendPackets(new S_SystemMessage(faviCom + " 를 등록했습니다. "));
+				pc.sendPackets(new S_SystemMessage(faviCom + "を登録しました。"));
 			} else if (arg.startsWith("보기")) {
-				pc.sendPackets(new S_SystemMessage("현재의 등록 커멘드: " + faviCom));
+				pc.sendPackets(new S_SystemMessage("現在の登録コマンド：" + faviCom));
 			} else if (faviCom.isEmpty()) {
-				pc.sendPackets(new S_SystemMessage("등록하고 있는 커멘드가 없습니다. "));
+				pc.sendPackets(new S_SystemMessage("登録しているコマンドがありません。"));
 			} else {
 				StringBuilder cmd = new StringBuilder();
 				StringTokenizer st = new StringTokenizer(arg);
@@ -86,12 +86,12 @@ public class L1Favorite implements L1CommandExecutor {
 				while (st.hasMoreTokens()) {
 					cmd.append(st.nextToken() + " ");
 				}
-				pc.sendPackets(new S_SystemMessage(cmd + " 를 실행합니다. "));
+				pc.sendPackets(new S_SystemMessage(cmd + "を実行します。"));
 				GMCommands.getInstance().handleCommands(pc, cmd.toString());
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " 셋팅 [커멘드명] " + "| " + cmdName + " 보기 | " + cmdName
-					+ " [인수] 라고 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "セッティング[コマンド名]" + "| " + cmdName + "表示|" + cmdName
+					+ "[引数]と入力してください。"));
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		}
 	}

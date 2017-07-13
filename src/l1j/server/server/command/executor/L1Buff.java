@@ -53,10 +53,10 @@ public class L1Buff implements L1CommandExecutor {
 					new L1SkillUse(). handleCommands(tg, skillId, tg.getId(), tg.getX(), tg.getY(), null, time, L1SkillUse.TYPE_GMBUFF);
 				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("버프계의 스킬이 아닙니다. "));
+				pc.sendPackets(new S_SystemMessage("バフ系のスキルがありません。"));
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [전체, 나] [스킬아이디] [시간] 라고 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[全体、私] [スキル名] [時間]と入力してください。"));
 		}
 	}
 }

@@ -44,10 +44,10 @@ public class L1ToPC implements L1CommandExecutor {
 			if (target != null) {
 				new L1Teleport().teleport(pc, target.getX(), target.getY(), target.getMapId(), 5, false);
 			} else {
-				pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(arg).append(" : 해당 캐릭터는 없습니다. ").toString()));
+				pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(arg).append("：該当のキャラクターはありません。").toString()));
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [캐릭터명]으로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
 		}
 	}
 }

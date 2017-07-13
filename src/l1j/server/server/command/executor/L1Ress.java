@@ -45,14 +45,14 @@ public class L1Ress implements L1CommandExecutor {
 			//pc.broadcastPacket(new S_SkillSound(objid, 759));
 			for (L1PcInstance tg : L1World.getInstance(). getVisiblePlayer(pc)) {
 				if (tg.getCurrentHp() == 0 && tg.isDead()) {
-					//tg.sendPackets(new S_SystemMessage("GM이 부활을 해주었습니다. "));
+					//tg.sendPackets(new S_SystemMessage("GMが復活をくれました。 "））;
 					tg.broadcastPacket(new S_SkillSound(tg.getId(), 3944));
 					tg.sendPackets(new S_SkillSound(tg.getId(), 3944));
-					// 축복된 부활 스크롤과 같은 효과
+					// 祝福された復活スクロールのような効果
 					tg.setTempID(objid);
-					tg.sendPackets(new S_Message_YN(322, "")); // 또 부활하고 싶습니까? (Y/N)
+					tg.sendPackets(new S_Message_YN(322, "")); // また、復活したいですか？ （Y / N）
 				} else {
-					//tg.sendPackets(new S_SystemMessage("GM이 HP,MP를 회복해주었습니다."));
+					//tg.sendPackets(new S_SystemMessage("GMこのHP、MPを回復してくれました。 "））;
 					tg.broadcastPacket(new S_SkillSound(tg.getId(), 832));
 					tg.sendPackets(new S_SkillSound(tg.getId(), 832));
 					tg.setCurrentHp(tg.getMaxHp());
@@ -60,7 +60,7 @@ public class L1Ress implements L1CommandExecutor {
 				}
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " 커멘드 에러"));
+			pc.sendPackets(new S_SystemMessage(cmdName + "コマンドエラー"));
 		}
 	}
 }

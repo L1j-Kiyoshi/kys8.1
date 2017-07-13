@@ -51,7 +51,7 @@ public class L1Shutdown implements L1CommandExecutor {
 			int sec = Math.max(5, Integer.parseInt(arg));
 			GameServer.getInstance().shutdownWithCountdown(sec);
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".종료 [대기초, 지금, 취소] 라고 입력해 주세요."));
+			pc.sendPackets(new S_SystemMessage("。終了[大基礎は、今、キャンセル]と入力してください。"));
 		}
 	}
 }

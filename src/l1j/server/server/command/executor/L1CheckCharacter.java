@@ -55,14 +55,14 @@ public class L1CheckCharacter implements L1CommandExecutor {
 			if (type.equalsIgnoreCase("인벤")){	
 				try {
 
-					// 캐릭 오브젝트 ID 검색 1=objid 2=charname
+					// キャラクターオブジェクトIDを検索1 = objid 2 = charname
 					p = c.prepareStatement("SELECT objid, char_name FROM characters WHERE char_name = '" + charname + "'");
 					r = p.executeQuery();
 					while(r.next()){
-						pc.sendPackets(new S_SystemMessage("\\fW** 검사: "+type+" 캐릭: " + charname + " **"));
+						pc.sendPackets(new S_SystemMessage("\\fW** 検査: "+type+" キャラクター: " + charname + " **"));
 						L1PcInstance target = L1World.getInstance().getPlayer(charname);			
 						if (target != null) target.saveInventory();						
-						// 캐릭 아이템 검색 1-itemid 2-인챈 3-착용 4-수량 5-이름 6-축복 7-속성
+						// キャラクターアイテム検索1-itemid 2-エンチャント3-着用4-数量5名6-祝福7-属性
 						p1 = c.prepareStatement("SELECT item_id,enchantlvl,is_equipped,count,item_name,bless,attr_enchantlvl " +
 								"FROM character_items WHERE char_id = '" + r.getInt(1) + "' ORDER BY 3 DESC,2 DESC, 1 ASC");
 						r1 = p1.executeQuery();				
@@ -71,18 +71,18 @@ public class L1CheckCharacter implements L1CommandExecutor {
 							pc.sendPackets(new S_SystemMessage("\\fU"+ ++searchCount +". " + itemname));
 							itemname = "";
 						}
-						pc.sendPackets(new S_SystemMessage("\\fW** 총 "+searchCount+"건의 아이템이 검색 되었습니다 **"));
+						pc.sendPackets(new S_SystemMessage("\\fW** 総 "+searchCount+"件のアイテムが検索されました**"));
 					}					
 				} catch (Exception e) {
-					pc.sendPackets(new S_SystemMessage("\\fW** [" + charname + "] 캐릭 검색 오류 **"));
+					pc.sendPackets(new S_SystemMessage("\\fW** [" + charname + "]キャラクター検索エラー**"));
 				}
 			} else if (type.equalsIgnoreCase("창고")){
 				try {
 					p = c.prepareStatement("SELECT account_name, char_name FROM characters WHERE char_name = '" + charname + "'");
 					r = p.executeQuery();
 					while (r.next()){
-						pc.sendPackets(new S_SystemMessage("\\fW** 검사: "+type+" 캐릭: " + charname + "(" + r.getString(1) + ") **"));
-						//캐릭 창고 검색 1-itemid 2-인챈 3-수량 4-이름 5-축복 6-속성
+						pc.sendPackets(new S_SystemMessage("\\fW** 検査: "+type+" キャラクター: " + charname + "(" + r.getString(1) + ") **"));
+						//キャラクター倉庫検索1-itemid 2-エンチャント3-数量4-名前5-祝福6-属性
 						p1 = c.prepareStatement("SELECT item_id,enchantlvl,count,item_name,bless,attr_enchantlvl FROM character_warehouse " +
 								"WHERE account_name = '" + r.getString(1) + "' ORDER BY 2 DESC, 1 ASC");
 						r1 = p1.executeQuery();
@@ -91,18 +91,18 @@ public class L1CheckCharacter implements L1CommandExecutor {
 							pc.sendPackets(new S_SystemMessage("\\fU"+ ++searchCount +". " + itemname));
 							itemname = "";
 						}
-						pc.sendPackets(new S_SystemMessage("\\fW** 총 "+searchCount+"건의 아이템이 검색 되었습니다 **"));
+						pc.sendPackets(new S_SystemMessage("\\fW** 総 "+searchCount+"件のアイテムが検索されました**"));
 					}
 				} catch (Exception e) {
-					pc.sendPackets(new S_SystemMessage("\\fW** [" + charname + "] 캐릭 검색 오류 **"));
+					pc.sendPackets(new S_SystemMessage("\\fW** [" + charname + "]キャラクター検索エラー**"));
 				}
 			} else if (type.equalsIgnoreCase("요정창고")){				
 				try {
 					p = c.prepareStatement("SELECT account_name, char_name FROM characters WHERE char_name = '" + charname + "'");
 					r = p.executeQuery();
 					while (r.next()){
-						pc.sendPackets(new S_SystemMessage("\\fW** 검사: "+type+" 캐릭: " + charname + "(" + r.getString(1) + ") **"));
-						//캐릭 요정창고 검색 1-itemid 2-인챈 3-수량 4-이름 5-축복 6-속성
+						pc.sendPackets(new S_SystemMessage("\\fW** 検査: "+type+" キャラクター: " + charname + "(" + r.getString(1) + ") **"));
+						//キャラクターの妖精倉庫検索1-itemid 2-エンチャント3-数量4-名前5-祝福6-属性
 						p1 = c.prepareStatement("SELECT item_id,enchantlvl,count,item_name,bless,attr_enchantlvl FROM character_elf_warehouse " +
 								"WHERE account_name = '" + r.getString(1) + "' ORDER BY 2 DESC, 1 ASC");
 						r1 = p1.executeQuery();
@@ -111,15 +111,15 @@ public class L1CheckCharacter implements L1CommandExecutor {
 							pc.sendPackets(new S_SystemMessage("\\fU"+ ++searchCount +". " + itemname));
 							itemname = "";
 						}
-						pc.sendPackets(new S_SystemMessage("\\fW** 총 "+searchCount+"건의 아이템이 검색 되었습니다 **"));
+						pc.sendPackets(new S_SystemMessage("\\fW** 総 "+searchCount+"件のアイテムが検索されました**"));
 					}
 				} catch (Exception e) {
-					pc.sendPackets(new S_SystemMessage("\\fW** [" + charname + "] 캐릭 검색 오류 **"));
+					pc.sendPackets(new S_SystemMessage("\\fW** [" + charname + "]キャラクター検索エラー**"));
 				}
 			}			
 		} catch (Exception e) {
 		//	_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			pc.sendPackets(new S_SystemMessage(".검사 [캐릭명] [인벤,창고,요정창고]"));
+			pc.sendPackets(new S_SystemMessage("検査[キャラクター名] [インベントリ、倉庫、妖精倉庫]"));
 		} finally {
 			SQLUtil.close(r1);SQLUtil.close(p1);
 			SQLUtil.close(r);SQLUtil.close(p);
@@ -128,8 +128,8 @@ public class L1CheckCharacter implements L1CommandExecutor {
 	}
 	private String getInvenItemMsg(int itemid, int enchant, int equip, int count, String itemname, int bless, int attr){
 		StringBuilder name = new StringBuilder();
-		// +9 축복받은 실프의 흑왕도 (착용)		
-		// 인챈
+		// +9祝福されたシルフのダークネスデュアルブレード（着用）		
+		// エンチャント
 		if (enchant > 0) {
 			name.append("+" + enchant + " ");
 		} else if (enchant == 0) {
@@ -137,14 +137,14 @@ public class L1CheckCharacter implements L1CommandExecutor {
 		} else if (enchant < 0) {
 			name.append(String.valueOf(enchant) + " ");
 		}
-		// 축복
+		// 祝福
 		switch (bless) {
-		case 0:name.append("축복받은 ");break;
+		case 0:name.append("祝福された");break;
 		case 1:name.append("");break;		
-		case 2:name.append("저주받은 ");break;
+		case 2:name.append("呪われた");break;
 		default: break;
 		}
-		// 속성
+		// 属性
 		switch(attr){
 		case 1: name.append("$6115 "); break;
 		case 2: name.append("$6116 "); break;
@@ -158,23 +158,23 @@ public class L1CheckCharacter implements L1CommandExecutor {
 		case 10: name.append("$6124 "); break;
 		case 11: name.append("$6125 "); break;
 		case 12: name.append("$6126 "); break;
-		case 13: name.append("화령:4단 "); break;
-		case 14: name.append("화령:5단 "); break;
-		case 15: name.append("수령:4단 "); break;
-		case 16: name.append("수령:5단 "); break;
-		case 17: name.append("풍령:4단 "); break;
-		case 18: name.append("풍령:5단 "); break;
-		case 19: name.append("지령:4단 "); break;
-		case 20: name.append("지령:5단 "); break;	
+		case 13: name.append("ファイアー：4段"); break;
+		case 14: name.append("ファイアー：5段"); break;
+		case 15: name.append("樹齢：4段"); break;
+		case 16: name.append("樹齢：5段"); break;
+		case 17: name.append("風鈴：4段"); break;
+		case 18: name.append("風鈴：5段"); break;
+		case 19: name.append("指令：4段"); break;
+		case 20: name.append("指令：5段"); break;	
 		default: break;
 		}
-		// 이름
+		// 名前
 		name.append(itemname + " ");
-		// 착용여부
+		// 着用するかどうか
 		if (equip == 1){
-			name.append("(착용)");
+			name.append("（着用）");
 		}
-		// 카운트
+		// カウント
 		if (count > 1){
 			name.append("(" + count + ")");
 		}

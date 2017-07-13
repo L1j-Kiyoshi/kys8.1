@@ -63,13 +63,13 @@ public class L1ToSpawn implements L1CommandExecutor {
 			}
 			if (spawn != null) {
 				new L1Teleport().teleport(pc, spawn.getLocX(), spawn.getLocY(), spawn.getMapId(), 5, false);
-				pc.sendPackets(new S_SystemMessage("spawnid(" + id + ")의 원래로 납니다"));
+				pc.sendPackets(new S_SystemMessage("spawnid(" + id + "）の元にされます"));
 			} else {
-				pc.sendPackets(new S_SystemMessage("spawnid(" + id + ")(은)는 발견되지 않습니다"));
+				pc.sendPackets(new S_SystemMessage("spawnid(" + id + "）は検出されません"));
 			}
 			_spawnId.put(pc.getId(), id);
 		} catch (Exception exception) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [스폰아이디] [+,-]"));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[出現名] [+、 - ]"));
 		}
 	}
 }

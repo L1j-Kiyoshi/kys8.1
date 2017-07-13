@@ -50,7 +50,7 @@ import l1j.server.server.utils.SQLUtil;
 import manager.LinAllManager;
 
 public class C_Result extends ClientBasePacket {
-	/** 날짜 및 시간 기록 **/
+	/** 日付と時刻の記録 **/
 	Calendar rightNow = Calendar.getInstance();
 	int day = rightNow.get(Calendar.DATE);
 	int hour = rightNow.get(Calendar.HOUR);
@@ -86,7 +86,7 @@ public class C_Result extends ClientBasePacket {
 		boolean tradable = true;
 		L1Object findObject = L1World.getInstance().findObject(npcObjectId);
 
-		if (findObject != null) { // 3셀
+		if (findObject != null) { //3セル
 			int diffLocX = Math.abs(pc.getX() - findObject.getX());
 			int diffLocY = Math.abs(pc.getY() - findObject.getY());
 			if (diffLocX > 12 || diffLocY > 12) {
@@ -110,11 +110,11 @@ public class C_Result extends ClientBasePacket {
 		}
 		
 		if (npcObjectId == 7626) {
-			npcId = 7626;   //아덴상점 엔피씨번호 
+			npcId = 7626;   //アデン店エンピシ番号 
 			npcImpl = "L1Merchant";
 		}
 		if(pc.getIsChangeItem()){
-			// 아이템 구입
+			// アイテムの購入
 						L1Shop shop = ShopTable.getInstance().get(pc.changeNpcId);
 						L1ShopBuyOrderList oList = shop.newBuyOrderList();
 						int itemNumber;
@@ -126,7 +126,7 @@ public class C_Result extends ClientBasePacket {
 							System.out.println("ITEMNUMBER = "+itemNumber+" count :"+itemcount);
 							totalcount++;
 							if(totalcount > 1){
-								pc.sendPackets(new S_SystemMessage("아이템은 한개씩 교환할 수 있습니다"));
+								pc.sendPackets(new S_SystemMessage("アイテムは一つずつ交換することができます"));
 								return;
 							}
 							if (itemcount <= 0) {
@@ -156,12 +156,12 @@ public class C_Result extends ClientBasePacket {
 		pc.setIsChangeItem(false);
 		pc.setDefaultItem(null);
 		/********************************************************************************************************		
-		 ****************************************** 아이템 구매 *****************************************************
+		 ****************************************** アイテムを購入する************************************************ *****
 		 *********************************************************************************************************/
 		if (resultType == 0 && size != 0 && npcImpl.equalsIgnoreCase("L1Merchant")) {
 			
 
-			// 아이템 구입
+			//アイテムの購入
 			L1Shop shop = ShopTable.getInstance().get(npcId);
 			L1ShopBuyOrderList orderList = shop.newBuyOrderList();
 			int itemNumber;
@@ -175,7 +175,7 @@ public class C_Result extends ClientBasePacket {
 				}
 			}
 			if (pc.getClan() == null && pc.getLevel() >= Config.상점이용레벨) {
-				pc.sendPackets(new S_SystemMessage(Config.상점이용레벨 + "레벨 이상은 혈맹이 없으면 상점을 이용할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage(Config.상점이용레벨 + "レベル以上は血盟がなければ店を利用することができません。"));
 				if (pc.isGm()) {
 				} else {
 					return;
@@ -184,13 +184,13 @@ public class C_Result extends ClientBasePacket {
 			
 			if(pc.서버다운중 == true){
 				if (npcId == 70035 || npcId == 70041 || npcId == 70042) {
-					pc.sendPackets(new S_SystemMessage("서버다운 진행중에는 구매가 불가능합니다."));
+					pc.sendPackets(new S_SystemMessage("サーバーダウン進行中には、購入ができません。"));
 					return;
 				}
 			}
 			
 			if (shop.getSellingItems().size() < size) {
-				System.out.println("상점이 판매하는 아이템 수(" + shop.getSellingItems().size() + ")보다 더 많이 사려고 함.(" + size + ")개");
+				System.out.println("店が販売しているアイテム数（" + shop.getSellingItems().size() + "）よりも多く購入すること。（" + size + ")개");
 				pc.getNetConnection().kick();
 				pc.getNetConnection().close();
 				return;
@@ -203,7 +203,7 @@ public class C_Result extends ClientBasePacket {
 				}
 				if (npcId >= 6100000 && npcId <= 6100041) {
 					if (itemcount > 1) {
-						pc.sendPackets(new S_SystemMessage("1개씩 구입할 수 있습니다."));
+						pc.sendPackets(new S_SystemMessage("1つずつ購入することができます。"));
 						return;
 					}
 				}
@@ -215,30 +215,30 @@ public class C_Result extends ClientBasePacket {
 				if (orderList.BugOk() != 0) {
 					for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
 						if (player.isGm() || pc == player) {
-							player.sendPackets(new S_SystemMessage(pc.getName() + "님 상점 최대구매 수량초과 (" + itemcount + ")"));
+							player.sendPackets(new S_SystemMessage(pc.getName() + "様店最大の購入数量を超える（" + itemcount + ")"));
 						}
 					}
 				}
 			}
 			int bugok = orderList.BugOk();
 			if (bugok == 0) {
-				// '영양 미끼' 아이템일경우 시간값 갱신해주기.
+				//「栄養餌」アイテムの場合、時間値更新接触。
 				for(L1ShopBuyOrder sbo : orderList.getList()) {
 					if(sbo.getItem().getItemId() == 41295)
 						pc.setFishingShopBuyTime_1(System.currentTimeMillis());
 				}
 				shop.sellItems(pc, orderList);
-				// 아이템저장시킴
+				// アイテムを保存させる
 				pc.saveInventory();
-				// 아이템저장시킴
+				// アイテムを保存させる
 			}
 		
 
 			/********************************************************************************************************		
-			 ****************************************** 아이템 판매 *****************************************************
+			 ****************************************** アイテム販売************************************************ *****
 			 *********************************************************************************************************/
 		} else if (resultType == 1 && size != 0 && npcImpl.equalsIgnoreCase("L1Merchant")) {
-			// 아이템 매각
+			// アイテム売却
 			L1Shop shop = ShopTable.getInstance().get(npcId);
 			L1ShopSellOrderList orderList = shop.newSellOrderList(pc);
 			int itemNumber;
@@ -251,7 +251,7 @@ public class C_Result extends ClientBasePacket {
 					return;
 				}
 				if (npcId >= 6100000 && npcId <= 6100041 && !pc.getInventory().getItem(itemNumber).isPackage()) {
-					pc.sendPackets(new S_SystemMessage("패킷상점에서 구매하지 않은 아이템이 포함되어 있습니다."));
+					pc.sendPackets(new S_SystemMessage("パケットの店で購入していないアイテムが含まれています。"));
 					return;
 				}
 				orderList.add(itemNumber, (int) itemcount, pc);
@@ -259,13 +259,13 @@ public class C_Result extends ClientBasePacket {
 			int bugok = orderList.BugOk();
 			if (bugok == 0) {
 				shop.buyItems(orderList);
-				// 백섭복사 방지 수량성버그방지
+				// ベクソプコピー防止数量性のバグを防ぐ
 				pc.saveInventory();
-				// 백섭복사 방지 수량성버그방지
+				// ベクソプコピー防止数量性のバグを防ぐ
 			}
 
 			/********************************************************************************************************		
-			 ****************************************** 개인 창고 맡기기 **************************************************
+			 ****************************************** 個人倉庫任せる*********************************************** ***
 			 *********************************************************************************************************/			
 		} else if (resultType == 2 && size != 0 && npcImpl.equalsIgnoreCase("L1Dwarf")) {
 
@@ -283,10 +283,10 @@ public class C_Result extends ClientBasePacket {
 				item = (L1ItemInstance) object;
 				if (item == null)
 					return;
-				//창고불가아이템 디비연동 NoShopAndWare
+				//倉庫不可アイテムディビ連動NoShopAndWare
 				int itemId = item.getItem().getItemId();
 				if (!pc.isGm() && NoShopAndWare.getInstance().isNoShopAndWare(itemId))  {// 
-					pc.sendPackets(new S_SystemMessage("해당 아이템은 창고 이용을 할 수 없습니다."));
+					pc.sendPackets(new S_SystemMessage("このアイテムは倉庫の利用をすることはできません。"));
 					return;
 				}
 				
@@ -313,7 +313,7 @@ public class C_Result extends ClientBasePacket {
 					count = item.getCount();
 				}
 				if (pc.hasSkillEffect(L1SkillId.SetBuff)){
-                    pc.sendPackets(new S_SystemMessage("로그인 후 30초간 창고 & 버리기가 불가능 합니다."));
+                    pc.sendPackets(new S_SystemMessage("ログイン後、30秒間の倉庫＆しまうができません。"));
                     return;
                 }
 				if(item.getCount() > 2000000000){
@@ -322,11 +322,11 @@ public class C_Result extends ClientBasePacket {
 				if(count > 2000000000){
 					return;
 				}
-				/**   창고 맡기기 부분 버그 방지 **/  
+				/**   倉庫任せる部分のバグを防ぐ **/  
 
 				if (!item.getItem().isTradable()) {
 					tradable = false;
-					// \f1%0은 버리거나 또는 타인에게 양도 할 수 없습니다.
+					// \f1%0はしまったり、または他人に譲渡することはできません。
 					pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); 
 
 				}
@@ -336,7 +336,7 @@ public class C_Result extends ClientBasePacket {
 						L1PetInstance pet = (L1PetInstance) petObject;
 						if (item.getId() == pet.getItemObjId()) {
 							tradable = false;
-							// \f1%0은 버리거나 또는 타인에게 양도 할 수 없습니다.
+							// \f1%0はしまったり、または他人に譲渡することはできません。
 							pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
 							break;
 						}
@@ -347,7 +347,7 @@ public class C_Result extends ClientBasePacket {
 					if (dollObject instanceof L1DollInstance) {
 						L1DollInstance doll = (L1DollInstance) dollObject;
 						if (item.getId() == doll.getItemObjId()) {
-							// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+							// \f1%0はしまったり、または他人に両日をすることができません。
 							pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
 							return;
 						}
@@ -358,7 +358,7 @@ public class C_Result extends ClientBasePacket {
 				if(warehouse == null) return;
 
 				if (warehouse.checkAddItemToWarehouse(item, count) == L1Inventory.SIZE_OVER) {
-					pc.sendPackets(new S_ServerMessage(75)); // \f1상대가 물건을 너무 가지고 있어 거래할 수 없습니다.
+					pc.sendPackets(new S_ServerMessage(75)); // \f1相手がものをも持っており、取引することはできません。
 					break;
 				}
 
@@ -370,12 +370,12 @@ public class C_Result extends ClientBasePacket {
 				if (tradable) {
 					pc.getInventory().tradeItem(objectId, count, warehouse);					
 					pc.getLight().turnOnOffLight();
-					//manager.LogWareHouseAppend("일반:맡", pc.getName(), "", item, count, objectId);
+					//manager.LogWareHouseAppend("一般：引き受け "、pc.getName（）、" "、item、count、objectId）;
 					LinAllManager.getInstance().WarehouseAppend(item.getLogName(), count, pc.getName(), 0);
 					
-					/** 로그파일저장 **/
+					/** ログファイルの保存 **/
 					LoggerInstance.getInstance().addWarehouse(WarehouseType.Private, true, pc, item, count);
-					// [창고맡기기:일반] 큐브 : 단검(1)		
+					// [倉庫任せる：一般]キューブ：短剣（1）		
 					if(count>=500){
 					}else{
 					}
@@ -383,7 +383,7 @@ public class C_Result extends ClientBasePacket {
 			}
 
 			/********************************************************************************************************		
-			 ****************************************** 개인 창고 찾기 **************************************************
+			 ******************************************個人倉庫検索***************************************** *********
 			 *********************************************************************************************************/			
 		} else if (resultType == 3 && size != 0	&& npcImpl.equalsIgnoreCase("L1Dwarf")) {
 			int objectId, count;
@@ -398,18 +398,18 @@ public class C_Result extends ClientBasePacket {
 				if(warehouse == null) return;
 				item = warehouse.getItem(objectId);  
 
-				/**   창고 찾기 부분 버그 방지 **/
+				/**  倉庫の検索部分のバグを防ぐ **/
 				if (item == null) {
 					return;
 				}
 
 				if (pc.hasSkillEffect(L1SkillId.SetBuff)){
-					pc.sendPackets(new S_SystemMessage("로그인 후 30초간 창고 & 버리기가 불가능 합니다."));
+					pc.sendPackets(new S_SystemMessage("ログイン後、30秒間の倉庫＆しまうができません。"));
 					return;
 				}	
 
 				if (!pc.getInventory().checkItem(L1ItemId.ADENA, 30 + 1)){
-					pc.sendPackets(new S_SystemMessage("아데나가 부족합니다.."));
+					pc.sendPackets(new S_SystemMessage("アデナが不足して。"));
 					return;}
 
 				if (objectId != item.getId()) {
@@ -428,40 +428,40 @@ public class C_Result extends ClientBasePacket {
 					count = item.getCount();
 				}
 
-				/**   창고 찾기 부분 버그 방지 **/  	  
+				/**   倉庫の検索部分のバグを防ぐ **/  	  
 
-				if (pc.getInventory().checkAddItem(item, count) == L1Inventory.OK) // 용량 중량 확인 및 메세지 송신
+				if (pc.getInventory().checkAddItem(item, count) == L1Inventory.OK) // 容量重量を確認し、メッセージ送信
 				{
 					if (pc.getInventory().consumeItem(L1ItemId.ADENA, 30)) {
 						warehouse.tradeItem(item, count, pc.getInventory());	
-						//manager.LogWareHouseAppend("일반:찾", pc.getName(), "", item, count, objectId);
+						//manager.LogWareHouseAppend(「一般：検索 "、pc.getName（）、" "、item、count、objectId）;
 						LinAllManager.getInstance().WarehouseAppend(item.getLogName(), count, pc.getName(), 1);
-						/** 로그파일저장 **/
+						/** ログファイルの保存 **/
 						LoggerInstance.getInstance().addWarehouse(WarehouseType.Private, false, pc, item, count);
-						// [창고찾기:일반] 큐브 : 단검(1)		
+						// [倉庫検索：一般]キューブ：短剣（1）		
 						if(count>=500){
 						}else{
 						}
 					} else {
-						pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+						pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 						break;
 					}
 				} else {
-					pc.sendPackets(new S_ServerMessage(270)); // \f1 가지고 있는 것이 무거워서 거래할 수 없습니다.
+					pc.sendPackets(new S_ServerMessage(270)); // \f1持っていることが重く取引することはできません。
 					break;
 				}
 			}
 
 
 			/********************************************************************************************************		
-			 *************************************** 혈맹 창고 맡기기 *****************************************************
+			 ***************************************血盟倉庫任せる****************************************** ***********
 			 *********************************************************************************************************/
 		} else if (resultType == 4 && size != 0 && npcImpl.equalsIgnoreCase("L1Dwarf")) {   
 			int objectId, count;
 			L1Object object = null;
 			L1ItemInstance item = null;
 			L1Clan clan = null;
-			if (pc.getClanid() != 0) { // 크란 소속
+			if (pc.getClanid() != 0) { // クランに所属
 				for (int i = 0; i < size; i++) {
 					tradable = true;
 					objectId = readD();
@@ -475,10 +475,10 @@ public class C_Result extends ClientBasePacket {
 					if ( item == null ) {
 						return;
 					}					
-					//창고불가아이템 디비연동 NoShopAndWare
+					//倉庫不可アイテムディビ連動NoShopAndWare
 					int itemId = item.getItem().getItemId();
 					if (!pc.isGm() && NoShopAndWare.getInstance().isNoShopAndWare(itemId))  {// 
-						pc.sendPackets(new S_SystemMessage("해당 아이템은 창고 이용을 할 수 없습니다."));
+						pc.sendPackets(new S_SystemMessage("このアイテムは倉庫の利用をすることはできません。"));
 						return;
 					}
 					long nowtime = System.currentTimeMillis();
@@ -507,17 +507,17 @@ public class C_Result extends ClientBasePacket {
 					if (count > item.getCount()) {
 						count = item.getCount();
 					}				
-					/**   창고 맡기기 부분 버그 방지 **/  	  
+					/**   倉庫任せる部分のバグを防ぐ **/  	  
 
 					if(item.getBless() >= 128){
-						pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+						pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0はしまったり、または他人に両日をすることができません。
 						return;
 					}
 
 					if (clan != null) {
 						if (!item.getItem().isTradable()) {
 							tradable = false;
-							pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+							pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1％0はたりまたは他人に両日をすることができません。
 						}
 						Object[] petlist = pc.getPetList().values().toArray();
 						for (Object petObject : petlist) {
@@ -525,7 +525,7 @@ public class C_Result extends ClientBasePacket {
 								L1PetInstance pet = (L1PetInstance) petObject;
 								if (item.getId() == pet.getItemObjId()) {
 									tradable = false;
-									// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+									// \f1％0はたりまたは他人に両日をすることができません。
 									pc.sendPackets(new S_ServerMessage(210,
 											item.getItem().getName()));
 									break;
@@ -534,7 +534,7 @@ public class C_Result extends ClientBasePacket {
 						}
 						ClanWarehouse clanWarehouse = WarehouseManager.getInstance().getClanWarehouse(clan.getClanName());
 						if (clanWarehouse.checkAddItemToWarehouse(item, count) == L1Inventory.SIZE_OVER) {
-							pc.sendPackets(new S_ServerMessage(75)); // \f1상대가 물건을 너무 가지고 있어 거래할 수 없습니다.
+							pc.sendPackets(new S_ServerMessage(75)); // \f1相手がものをも持っており、取引することはできません。
 							break;
 						}
 						if (tradable) {
@@ -542,9 +542,9 @@ public class C_Result extends ClientBasePacket {
 							pc.getLight().turnOnOffLight();
 							//UpdateLog(pc.getName(), pc.getClanname(), item.getName(), count, 0);
 							history(pc, item, count, 1);
-							//manager.LogWareHouseAppend("혈맹:맡", pc.getName(), pc.getClanname(), item, count, objectId);
+							//manager.LogWareHouseAppend（「血盟：預かり "、pc.getName（）、pc.getClanname（）、item、count、objectId）;
 							LinAllManager.getInstance().EPWarehouseAppend(item.getLogName(), count, pc.getName(), 2);
-							/** 로그파일저장 **/
+							/** ログファイルの保存 **/
 							LoggerInstance.getInstance().addWarehouse(WarehouseType.Clan, true, pc, item, count);
 							if(count>=500){
 							}else{
@@ -553,18 +553,18 @@ public class C_Result extends ClientBasePacket {
 					}
 				}
 			} else {
-				pc.sendPackets(new S_ServerMessage(208)); // \f1혈맹 창고를 사용하려면  혈맹에 가입하지 않으면 안됩니다.
+				pc.sendPackets(new S_ServerMessage(208)); // \f1血盟倉庫を使用するには、血盟に加入しなければなりません。
 			}
 
 
 			/********************************************************************************************************		
-			 *************************************** 혈맹 창고 찾기 *****************************************************
+			 ***************************************血盟倉庫検索******************************** *********************
 			 *********************************************************************************************************/
 
 		} else if (resultType == 5 && size != 0 && npcImpl.equalsIgnoreCase("L1Dwarf") && level >= 5) {
-			// ** 창고이용 5렙으로 수정**//
+			// ** 倉庫利用5レップで修正** //
 			if (pc.getInventory().findItemId(40308).getCount() < 31) {
-				pc.sendPackets(new S_SystemMessage("아데나가 부족합니다."));
+				pc.sendPackets(new S_SystemMessage("アデナが不足します。"));
 				return;
 			}
 
@@ -584,7 +584,7 @@ public class C_Result extends ClientBasePacket {
 					count = readD();
 					item = clanWarehouse.getItem(objectId);   
 
-					//** 클랜 창고 찾기 부분 방어 **//		
+					//** クラン倉庫検索部分を守る **//		
 					if ( item == null ) {						
 						return; 
 					}
@@ -594,7 +594,7 @@ public class C_Result extends ClientBasePacket {
 					}
 
 					//					if (pc.hasSkillEffect(L1SkillId.SetBuff)){
-					//						pc.sendPackets(new S_ChatPacket(pc,"로그인 후 30초간 창고 & 버리기가 불가능 합니다."));
+					//						pc.sendPackets（new S_ChatPacket（pc、「ログイン後、30秒間の倉庫＆しまうができません。 "））;
 					//						return;
 					//					}	
 
@@ -610,27 +610,27 @@ public class C_Result extends ClientBasePacket {
 						count = item.getCount();
 					}				
 
-					//** 클랜 창고 찾기 부분 방어 **//		 
+					//** クラン倉庫検索部分を守る**//		 
 
-					if (pc.getInventory().checkAddItem(item, count) == L1Inventory.OK) { // 용량 중량 확인 및 메세지 송신
+					if (pc.getInventory().checkAddItem(item, count) == L1Inventory.OK) { // 容量重量を確認し、メッセージ送信
 						if (pc.getInventory().consumeItem(L1ItemId.ADENA, 30)) {
 							clanWarehouse.tradeItem(item, count, pc.getInventory());
 							//UpdateLog(pc.getName(), pc.getClanname(), item.getName(), count, 1);
 							history(pc, item, count, 2);
-							//manager.LogWareHouseAppend("혈맹:찾", pc.getName(), pc.getClanname(), item, count, objectId);
+							//manager.LogWareHouseAppend（「血盟：検索 "、pc.getName（）、pc.getClanname（）、item、count、objectId）;
 							LinAllManager.getInstance().EPWarehouseAppend(item.getLogName(), count, pc.getName(), 3);
-							/** 로그파일저장 **/
+							/** ログファイルの保存 **/
 							LoggerInstance.getInstance().addWarehouse(WarehouseType.Clan, false, pc, item, count);
 							if (count >= 500) {
 							} else {
 							}
 						} else {
-							// \f1아데나가 부족합니다.
+							// \f1アデナが不足します。
 							pc.sendPackets(new S_ServerMessage(189)); 
 							break;
 						}
 					} else {
-						// \f1 가지고 있는 것이 무거워서 거래할 수 없습니다.
+						// \f1 持っていることが重く取引することはできません。
 						pc.sendPackets(new S_ServerMessage(270));
 						break;
 					}
@@ -640,8 +640,8 @@ public class C_Result extends ClientBasePacket {
 
 
 			/**
-			 * 크란 창고로 꺼낸다 
-			 * Cancel, 또는, ESC 키
+			 *クラン倉庫に取り出す 
+			 * Cancel、または、ESCキー
 			 */
 		}else if(resultType == 5 && size == 0 && npcImpl.equalsIgnoreCase("L1Dwarf")){
 			L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
@@ -655,11 +655,11 @@ public class C_Result extends ClientBasePacket {
 				clanWarehouse.setWarehouseUsingChar(0, 0);
 			}
 
-			/********************************************************************************************************		
-			 *************************************** 요정 창고 맡기기 *****************************************************
+			/*********************************************************************** *********************************		
+			 ***************************************妖精倉庫任せる************************************** ***************
 			 *********************************************************************************************************/
 		} else if (resultType == 8 && size != 0
-				&& npcImpl.equalsIgnoreCase("L1Dwarf") && level >= 5 && pc. isElf()) { // 자신의 에르프 창고에 격납
+				&& npcImpl.equalsIgnoreCase("L1Dwarf") && level >= 5 && pc. isElf()) { //自分のエルフ倉庫に格納
 			int objectId, count;
 			L1Object object = null;
 			L1ItemInstance item = null;
@@ -675,10 +675,10 @@ public class C_Result extends ClientBasePacket {
 				if ( item == null ) {
 					return;
 				}		
-				//창고불가아이템 디비연동 NoShopAndWare
+				//倉庫不可アイテムディビ連動NoShopAndWare
 				int itemId = item.getItem().getItemId();
 				if (!pc.isGm() && NoShopAndWare.getInstance().isNoShopAndWare(itemId))  {// 
-					pc.sendPackets(new S_SystemMessage("해당 아이템은 창고 이용을 할 수 없습니다."));
+					pc.sendPackets(new S_SystemMessage("このアイテムは倉庫の利用をすることはできません。"));
 					return;
 				}
 				if (objectId != item.getId()) {
@@ -702,16 +702,16 @@ public class C_Result extends ClientBasePacket {
 				if(count > 2000000000){
 					return;
 				}
-				/**   창고 맡기기 부분 버그 방지 **/  
+				/**   倉庫任せる部分のバグを防ぐ **/  
 
 				if (! item.getItem(). isTradable()) {
 					tradable = false;
 					pc.sendPackets(new S_ServerMessage(210, item.getItem()
-							. getName())); // \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+							. getName())); // \f1%0はしまったり、または他人に両日をすることができません。
 				}
 
 //				if(item.getBless() >= 128){
-//					pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+//					pc.sendPackets(new S_ServerMessage(210,item.getItem（）。getName（）））; // \\ f1％0はたりまたは他人に両日をすることができません。
 //					return;
 //				}
 
@@ -721,7 +721,7 @@ public class C_Result extends ClientBasePacket {
 						L1PetInstance pet = (L1PetInstance) petObject;
 						if (item.getId() == pet.getItemObjId()) {
 							tradable = false;
-							// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+							// \f1%0はしまったり、または他人に両日をすることができません。
 							pc.sendPackets(new S_ServerMessage(210, item
 									. getItem(). getName()));
 							break;
@@ -730,7 +730,7 @@ public class C_Result extends ClientBasePacket {
 				}
 				ElfWarehouse elfwarehouse = WarehouseManager.getInstance().getElfWarehouse(pc.getAccountName());
 				if (elfwarehouse.checkAddItemToWarehouse(item, count) == L1Inventory.SIZE_OVER) {
-					pc.sendPackets(new S_ServerMessage(75)); // \f1상대가 물건을 너무 가지고 있어 거래할 수 없습니다.
+					pc.sendPackets(new S_ServerMessage(75)); // \\ f1相手がものをも持っており、取引することはできません。
 					break;
 				}
 				if (tradable) {
@@ -739,7 +739,7 @@ public class C_Result extends ClientBasePacket {
 					
 					//manager.LogWareHouseAppend("요정:맡", pc.getName(), "", item, count, objectId);
 					LinAllManager.getInstance().EPWarehouseAppend(item.getLogName(), count, item.getName(), 0);
-					/** 로그파일저장**/
+					/** ログファイルの保存**/
 					LoggerInstance.getInstance().addWarehouse(WarehouseType.Elf, true, pc, item, count);	
 					if(count>=500){
 					}else{
@@ -747,10 +747,10 @@ public class C_Result extends ClientBasePacket {
 				}
 			}
 			/********************************************************************************************************		
-			 *************************************** 요정 창고 찾기 *****************************************************
+			 ***************************************妖精倉庫検索********************* ********************************
 			 *********************************************************************************************************/
 		} else if (resultType == 9 && size != 0	&& npcImpl.equalsIgnoreCase("L1Dwarf") 
-				&& level >= 5 && pc.isElf()) { // 자신의 요정 창고로부터 꺼내
+				&& level >= 5 && pc.isElf()) { //自分の妖精倉庫から取り出して
 			int objectId, count;
 			L1ItemInstance item;
 			for (int i = 0; i < size; i++) {
@@ -762,12 +762,12 @@ public class C_Result extends ClientBasePacket {
 				ElfWarehouse elfwarehouse = WarehouseManager.getInstance().getElfWarehouse(pc.getAccountName());
 				item = elfwarehouse.getItem(objectId);
 
-				/**   창고 찾기 부분 버그 방지 **/				
+				/**   倉庫の検索部分のバグを防ぐ **/				
 				if ( item == null ) {
 					return;
 				}
 				if (!pc.getInventory().checkItem(L1ItemId.ADENA, 30 + 1)){
-					pc.sendPackets(new S_SystemMessage("아데나가 부족합니다.."));
+					pc.sendPackets(new S_SystemMessage("アデナが不足して。"));
 					return;
 				}	
 				if (objectId != item.getId()) {
@@ -785,15 +785,15 @@ public class C_Result extends ClientBasePacket {
 				if (count > item.getCount()) {
 					count = item.getCount();
 				}
-				/**   창고 찾기 부분 버그 방지 **/  
+				/**   倉庫の検索部分のバグを防ぐ **/  
 
 				if (pc.getInventory(). checkAddItem(item, count) == L1Inventory.OK) {
 					if (pc.getInventory().consumeItem(40494, 2)) {
 						elfwarehouse.tradeItem(item, count, pc.getInventory());
 						
-						//manager.LogWareHouseAppend("요정:찾", pc.getName(), "", item, count, objectId);
+						//manager.LogWareHouseAppend（ "妖精：検索"、pc.getName（）、 ""、item、count、objectId）;
 						LinAllManager.getInstance().EPWarehouseAppend(item.getLogName(), count, item.getName(), 1);
-						/** 로그파일저장**/
+						/** ログファイルの保存**/
 						LoggerInstance.getInstance().addWarehouse(WarehouseType.Elf, false, pc, item, count);
 						if(count>=500){
 						}else{
@@ -803,7 +803,7 @@ public class C_Result extends ClientBasePacket {
 						break;
 					}
 				} else {
-					pc.sendPackets(new S_ServerMessage(270)); // \f1 가지고 있는 것이 무거워서 거래할 수 없습니다.
+					pc.sendPackets(new S_ServerMessage(270)); // \f1持っていることが重く取引することはできません。
 					break;
 				}
 			}
@@ -823,12 +823,12 @@ public class C_Result extends ClientBasePacket {
 				count = readD();
 				item = w.getItem(objectId);
 
-				/**   창고 찾기 부분 버그 방지 **/				
+				/**  倉庫の検索部分のバグを防ぐ **/				
 				if ( item == null ) {
 					return;
 				}
 				if (!pc.getInventory().checkItem(L1ItemId.ADENA, 30 + 1)){
-					pc.sendPackets(new S_SystemMessage("아데나가 부족합니다.."));
+					pc.sendPackets(new S_SystemMessage("アデナが不足して。"));
 					return;
 				}	
 				if (objectId != item.getId()) {
@@ -846,30 +846,30 @@ public class C_Result extends ClientBasePacket {
 				if (count > item.getCount()) {
 					count = item.getCount();
 				}
-				/**   창고 찾기 부분 버그 방지 **/  
+				/**   倉庫の検索部分のバグを防ぐ **/  
 				
-				 //** 중계기 노딜버그 막아 보자 **//
+				 //** リピータノディルバグ防ぎましょう **//
 				  long nowtime = System.currentTimeMillis();
 				  if(item.getItemdelay3() >=  nowtime ){
 					  break;
 				  }  
-				  //** 중계기 노딜버그 막아 보자 **//
+				  //** リピータノディルバグ防ぎましょう **//
 					if (item.getItemId() == 40308 && item.getCount() >= 10000000
 							|| item.getCount() >= 1000 && item.getItemId() != 40308) {
 					}
-					 //신선한우유 수량성버그방지
+					 //新鮮な牛乳の量性のバグを防ぐ
 				   if (!item.getItem().isToBeSavedAtOnce()) {
 				   pc.getInventory().saveItem(item, L1PcInventory.COL_COUNT);
 				   }	 
-			      //신선한우유 수량성버그방지
+			      //新鮮な牛乳の量性のバグを防ぐ
 				w.tradeItem(item, count, pc.getInventory());
-				//manager.LogWareHouseAppend("패키지:찾", pc.getName(), "", item, count, objectId);
-				/** 로그파일저장 **/
+				//manager.LogWareHouseAppend("パッケージ：検索 "、pc.getName（）、" "、item、count、objectId）;
+				/** ログファイルの保存 **/
 				LoggerInstance.getInstance().addWarehouse(WarehouseType.Private, false, pc, item, count);
 
 			}
 			/********************************************************************************************************		
-			 *************************************** 특수 창고 맡기기 *************************************************
+			 ***************************************特殊倉庫任せる****************************************** *******
 			 *********************************************************************************************************/
 		} else if (resultType == 17 && size != 0 && npcImpl.equalsIgnoreCase("L1Dwarf") && pc.get_SpecialSize() > 0) {
 			L1Object object = null;
@@ -888,17 +888,17 @@ public class C_Result extends ClientBasePacket {
 					return;
 				}
 				if (pc.getLevel() < 5) {
-					pc.sendPackets(new S_SystemMessage("창고는 5레벨 이상 사용 가능 합니다."));
+					pc.sendPackets(new S_SystemMessage("倉庫は5レベル以上使用可能です。"));
 					return;
 				}
-				/* 버그방지 */
-				// ** 엔진방어 **// By 도우너
+				/* バグ防止 */
+				// **エンジン防御** //
 				if (pc.getInventory().findItemId(40308).getCount() < 31) {
-										S_ChatPacket s_chatpacket = new S_ChatPacket(pc,"아데나가 부족합니다"); 
+										S_ChatPacket s_chatpacket = new S_ChatPacket(pc,"アデナが不足して"); 
 						pc.sendPackets(s_chatpacket);
 					return;
 				}
-				// 월드맵상 내 계정과 같은 동일 한 계정을 가진 캐릭이 접속중이라면
+				// ワールドマップ上マイアカウントなどの同じアカウントを持つキャラクターが接続中であれば、
 				if (isTwoLogin(pc))
 					return;
 				if (objectId != item.getId()) {
@@ -909,28 +909,28 @@ public class C_Result extends ClientBasePacket {
 					pc.sendPackets(new S_Disconnect());
 					break;
 				}
-				/* 버그방지 */
+				/* バグ防止 */
 				if (item == null || item.getCount() < count || count <= 0
 						|| item.getCount() <= 0) {
 					break;
 				}
 			    if (!pc.isGm() && item.getItem().getItemId() == 40308)  {
 		        	if (count > 10000000) {
-		        		 pc.sendPackets(new S_SystemMessage("아데나는 1000만 단위씩 창고이용이 가능합니다."));
+		        		 pc.sendPackets(new S_SystemMessage("アデナは1000万単位ずつ倉庫利用が可能です。"));
 		        		 return;
 		        	}
 			    }
 			    if(item.getItem().getUseType() == 44){
-					pc.sendPackets(new S_SystemMessage("룬,유물은 창고이용이 불가능 합니다."));
+					pc.sendPackets(new S_SystemMessage("ルーン、遺物は、倉庫の利用ができません。"));
 					return;
 				}
 				if(item.getItem().getMaxUseTime() > 0){
-					pc.sendPackets(new S_SystemMessage("시간제 아이템은 창고이용이 불가능 합니다."));
+					pc.sendPackets(new S_SystemMessage("時間制アイテムは倉庫利用が不可能です。"));
 					return;
 				}
 
 				if (item.getItem().getItemId() == 41159 ||item.getItem().getItemId() == 41246){ 
-					S_ChatPacket s_chatpacket = new S_ChatPacket(pc,"해당 아이템은 창고 이용을 할 수 없습니다.");
+					S_ChatPacket s_chatpacket = new S_ChatPacket(pc,"このアイテムは倉庫の利用をすることはできません。");
 					pc.sendPackets(s_chatpacket);
 					return;
 				}
@@ -949,12 +949,12 @@ public class C_Result extends ClientBasePacket {
 				pc.getInventory().tradeItem(objectId, count, warehouse);
 				pc.getLight().turnOnOffLight();
 
-				//manager.LogWareHouseAppend("특수:맡", pc.getName(), "", item, count, objectId);
-				/** 로그파일저장 **/
+				//manager.LogWareHouseAppend("特殊：引き受け "、pc.getName（）、" "、item、count、objectId）;
+				/** ログファイルの保存 **/
 				LoggerInstance.getInstance().addWarehouse(WarehouseType.Private, false, pc, item, count);
 			}
 			/********************************************************************************************************		
-			 *************************************** 특수 창고 찾기 *************************************************
+			 ***************************************特殊倉庫検索********************************************* ****
 			 *********************************************************************************************************/
 		} else if (resultType == 18 && size != 0 && npcImpl.equalsIgnoreCase("L1Dwarf")) {
 			L1ItemInstance item = null;
@@ -966,28 +966,28 @@ public class C_Result extends ClientBasePacket {
 				count = readD();
 				item = warehouse.getItem(objectId);
 				if (pc.getLevel() < 5) {
-					pc.sendPackets(new S_SystemMessage("창고는 5레벨 이상 사용 가능 합니다."));
+					pc.sendPackets(new S_SystemMessage("倉庫は5レベル以上使用可能です。 "));
 					return;
 				}
 			    if (!pc.isGm() && item.getItem().getItemId() == 40308)  {
 		        	if (count > 10000000) {
-		        		 pc.sendPackets(new S_SystemMessage("아데나는 1000만 단위씩 창고이용이 가능합니다."));
+		        		 pc.sendPackets(new S_SystemMessage("アデナは1000万単位ずつ倉庫利用が可能です。"));
 		        		 return;
 		        	}
 			    }
-				/* 버그방지 */
-				if (item.getItem().getItemId() == 41159 ||item.getItem().getItemId() == 41246){ //영혼 훈장
-					S_ChatPacket s_chatpacket = new S_ChatPacket(pc, "해당 아이템은 창고 이용을 할 수 없습니다.");
+				/* バグ防止 */
+				if (item.getItem().getItemId() == 41159 ||item.getItem().getItemId() == 41246){ //魂の装飾
+					S_ChatPacket s_chatpacket = new S_ChatPacket(pc, "このアイテムは倉庫の利用をすることはできません。");
 					pc.sendPackets(s_chatpacket);
 					return;
 				}
 				warehouse.tradeItem(item, count, pc.getInventory());
-				//manager.LogWareHouseAppend("특수:찾", pc.getName(), "", item, count, objectId);
-				/** 로그파일저장 **/
+				//manager.LogWareHouseAppend（「特殊：検索 "、pc.getName（）、" "、item、count、objectId）;
+				/** ログファイルの保存 **/
 				LoggerInstance.getInstance().addWarehouse(WarehouseType.Private, false, pc, item, count);
 			}
 			/********************************************************************************************************		
-			 *************************************** npc 상점 아이템 구매 *************************************************
+			 *************************************** npc店アイテムを購入********************************** ***************
 			 *********************************************************************************************************/
 		} else if (resultType == 0 && size != 0 && isPrivateNpcShop) {
 			L1Shop shop = NpcShopTable.getInstance().get(npcId);
@@ -1000,13 +1000,13 @@ public class C_Result extends ClientBasePacket {
 				if(itemcount <= 0) {
 					return;
 				}
-				if(size >= 2){ //동시에 다른물건을 살수없게 2개가 선택된다면,
-					pc.sendPackets(new S_SystemMessage("한번에 서로 다른아이템을 구입할 수 없습니다."));
+				if(size >= 2){ //同時に、他のものを買うことなく、2つの選択であれば、
+					pc.sendPackets(new S_SystemMessage("一度別のアイテムを購入することができません。"));
 					return;
 				}
 				if(pc.getMapId() == 800){
 					if(itemcount > 15) {
-						pc.sendPackets(new S_SystemMessage("최대 구매수량 : 잡템류(15) / 장비(1)"));
+						pc.sendPackets(new S_SystemMessage("最大購入数量：ザブテム類（15）/機器（1）"));
 						return;
 					}
 				} 
@@ -1015,12 +1015,12 @@ public class C_Result extends ClientBasePacket {
 			int bugok = orderList.BugOk();
 			if (bugok == 0){
 				shop.sellItems(pc, orderList);
-				//백섭복사 방지 수량성버그방지
+				//ベクソプコピー防止数量性のバグを防ぐ
 				pc.saveInventory();
-				//백섭복사 방지 수량성버그방지
+				//ベクソプコピー防止数量性のバグを防ぐ
 			}
 			/********************************************************************************************************		
-			 *************************************** 개인 상점 아이템 구매 *************************************************
+			 *************************************** 個人商店アイテムを購入********************************************** ***
 			 *********************************************************************************************************/
 		} else if (resultType == 0 && size != 0 && isPrivateShop) {
 			int order;
@@ -1047,19 +1047,19 @@ public class C_Result extends ClientBasePacket {
 			sellList = targetPc.getSellList();
 
 			synchronized (sellList) {
-				// 품절이 발생해, 열람중의 아이템수와 리스트수가 다르다
+				// 在庫切れが発生し、閲覧中のアイテム数とリストの数が異なっている
 				if (pc.getPartnersPrivateShopItemCount() != sellList.size()) {
 					return;
 				}
 
-				for (int i = 0; i < size; i++) { // 구입 예정의 상품
+				for (int i = 0; i < size; i++) { // 購入予定の商品
 					order = readD();
 					count = readD();
 					pssl = (L1PrivateShopSellList) sellList.get(order);
 					itemObjectId = pssl.getItemObjectId();
 					sellPrice = pssl.getSellPrice();
-					sellTotalCount = pssl.getSellTotalCount(); // 팔 예정의 개수
-					sellCount = pssl.getSellCount(); // 판 누계
+					sellTotalCount = pssl.getSellTotalCount(); // 腕予定の数
+					sellCount = pssl.getSellCount(); // 板累計
 					item = targetPc.getInventory().getItem(itemObjectId);
 					if (item == null) {
 						continue;
@@ -1076,21 +1076,21 @@ public class C_Result extends ClientBasePacket {
 						continue;
 					}
 					if (item.isEquipped()) {
-						pc.sendPackets(new S_ServerMessage(905, "")); // 장비 하고 있는 아이템 구매못하게.
+						pc.sendPackets(new S_ServerMessage(905, "")); //装備しているアイテムを購入するように。
 						continue;
 					}
 
-					if (pc.getInventory().checkAddItem(item, count) == L1Inventory.OK) { // 용량 중량 확인 및 메세지 송신
-						for (int j = 0; j < count; j++) { // 오버플로우를 체크
+					if (pc.getInventory().checkAddItem(item, count) == L1Inventory.OK) { //容量重量を確認し、メッセージ送信
+						for (int j = 0; j < count; j++) { // オーバーフローをチェック
 							if (sellPrice * j > 2000000000 || sellPrice * j < 0) {
-								pc.sendPackets(new S_ServerMessage(904, // 총판 매가격은%d아데나를 초과할 수 없습니다.
+								pc.sendPackets(new S_ServerMessage(904, // 販売代理店毎の価格は％dアデナを超えることはできません。
 										"2000000000"));
 								return;
 							}
 						}
 						price = count * sellPrice;	 
 
-						/** 개인상점 버그방지 **/  					
+						/** 個人商店のバグを防ぐ **/  					
 
 						if (itemObjectId != item.getId()) {
 							pc.sendPackets(new S_Disconnect());
@@ -1110,11 +1110,11 @@ public class C_Result extends ClientBasePacket {
 						if (count >= item.getCount()) {count = item.getCount();	}
 
 						if (item.isEquipped()) {
-							pc.sendPackets(new S_SystemMessage("상대방이 착용중인 아이템입니다."));
+							pc.sendPackets(new S_SystemMessage("相手が着用しているアイテムです。"));
 							return;
 						}				
 						if (price <= 0 ||price > 2000000000) return;
-						/** 개인상점 버그방지 **/  
+						/** 個人商店のバグを防ぐ **/  
 
 						if (pc.getInventory().checkItem(L1ItemId.ADENA, price)) {
 							L1ItemInstance adena = pc.getInventory()
@@ -1129,12 +1129,12 @@ public class C_Result extends ClientBasePacket {
 								String message = item.getItem().getName()
 										+ " (" + String.valueOf(count) + ")";								
 								targetPc.sendPackets(new S_ServerMessage(877, // %1%o
-										// %0에 판매했습니다.
+										// %0販売しました。
 										pc.getName(), message));
 								pssl.setSellCount(count + sellCount);							
 								sellList.set(order, pssl);
 								writeLogbuyPrivateShop(pc, targetPc, item, count, price);
-								if (pssl.getSellCount() == pssl.getSellTotalCount()) { // 팔 예정의 개수를 팔았다
+								if (pssl.getSellCount() == pssl.getSellTotalCount()) { // 腕予定の数を販売した
 									isRemoveFromList[order] = true;
 								}
 								try {
@@ -1145,15 +1145,15 @@ public class C_Result extends ClientBasePacket {
 								}
 							}
 						} else {
-							pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+							pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 							break;
 						}
 					} else {
-						pc.sendPackets(new S_ServerMessage(270)); // \f1 가지고 있는 것이 무거워서 거래할 수 없습니다.
+						pc.sendPackets(new S_ServerMessage(270)); // \f1 持っていることが重く取引することはできません。
 						break;
 					}
 				}
-				// 품절된 아이템을 리스트의 말미로부터 삭제
+				// 品切れになったアイテムをリストの末尾から削除
 				for (int i = 7; i >= 0; i--) {
 					if (isRemoveFromList[i]) {
 						sellList.remove(i);
@@ -1161,10 +1161,10 @@ public class C_Result extends ClientBasePacket {
 				}
 			}
 			/********************************************************************************************************		
-			 *************************************** Npc 개인 상점 판매 *****************************************************
+			 *************************************** Npc個人商店販売****************************************** ***********
 			 *********************************************************************************************************/			
 
-		} else if (resultType == 1 && size != 0 && isPrivateNpcShop) { // 개인 상점에 아이템 매각
+		} else if (resultType == 1 && size != 0 && isPrivateNpcShop) { // 個人商店にアイテム売却
 			
 			L1Shop shop = NpcShopTable.getInstance().get(npcId);
 			L1ShopSellOrderList orderList = shop.newSellOrderList(pc);
@@ -1181,15 +1181,15 @@ public class C_Result extends ClientBasePacket {
 			int bugok = orderList.BugOk();
 			if (bugok == 0){
 				shop.buyItems(orderList);
-				//백섭복사 방지 수량성버그방지
+				//ベクソプコピー防止数量性のバグを防ぐ
 				pc.saveInventory();
-				//백섭복사 방지 수량성버그방지
+				//ベクソプコピー防止数量性のバグを防ぐ
 			}
 			
 			/********************************************************************************************************		
-			 *************************************** 개인 상점 판매 *****************************************************
+			 *************************************** 個人商店販売*********************************************** ******
 			 *********************************************************************************************************/			
-		} else if (resultType == 1 && size != 0 && isPrivateShop) { // 개인 상점에 아이템 매각
+		} else if (resultType == 1 && size != 0 && isPrivateShop) { // 個人商店にアイテム売却
 			int count;
 			int order;
 			ArrayList<L1PrivateShopBuyList> buyList;
@@ -1222,14 +1222,14 @@ public class C_Result extends ClientBasePacket {
 					}
 
 //					if(item.getBless() >= 128){
-//						pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+//						pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0はしまったり、または他人に両日をすることができません。
 //						return;
 //					}
 
 					psbl = (L1PrivateShopBuyList) buyList.get(order);
 					buyPrice = psbl.getBuyPrice();
-					buyTotalCount = psbl.getBuyTotalCount(); // 살 예정의 개수
-					buyCount = psbl.getBuyCount(); // 산 누계
+					buyTotalCount = psbl.getBuyTotalCount(); // 買う予定の数
+					buyCount = psbl.getBuyCount(); // 山累計
 					if (count > buyTotalCount - buyCount) {
 						count = buyTotalCount - buyCount;
 					}
@@ -1240,19 +1240,19 @@ public class C_Result extends ClientBasePacket {
 						return;
 					}
 					if (item.isEquipped()) {
-						pc.sendPackets(new S_ServerMessage(905)); // 장비 하고 있는 아이템은 판매할 수 없습니다.
+						pc.sendPackets(new S_ServerMessage(905)); // 装備しているアイテムは販売できません。
 						continue;
 					}
 
-					if (targetPc.getInventory().checkAddItem(item, count) == L1Inventory.OK) { // 용량 중량 확인 및 메세지 송신
-						for (int j = 0; j < count; j++) { // 오버플로우를 체크
+					if (targetPc.getInventory().checkAddItem(item, count) == L1Inventory.OK) { //容量重量を確認し、メッセージ送信
+						for (int j = 0; j < count; j++) { //オーバーフローをチェック
 							if (buyPrice * j > 2000000000 || buyPrice * j < 0) {
-								targetPc.sendPackets(new S_ServerMessage(904, // 총판 매가격은%d아데나를 초과할 수 없습니다.
+								targetPc.sendPackets(new S_ServerMessage(904, // 販売代理店毎の価格は％dアデナを超えることはできません。
 										"2000000000"));
 								return;
 							}
 						}	  
-						/** 버그 방지 **/
+						/** バグ防止 **/
 						if (itemObjectId != item.getId()) {
 							pc.sendPackets(new S_Disconnect());
 							targetPc.sendPackets(new S_Disconnect());
@@ -1267,7 +1267,7 @@ public class C_Result extends ClientBasePacket {
 						if (!item.isStackable() && count !=1) return;					
 						if (item.getCount() <= 0 || count <= 0) return;
 						if (buyPrice * count <= 0 || buyPrice * count > 2000000000) return;
-						//** 개인상점 부분 비셔스 방어 **//	
+						//** 個人商店の部分ビシャス防御** //	
 
 						if (targetPc.getInventory().checkItem(L1ItemId.ADENA, count * buyPrice)) {
 							L1ItemInstance adena = targetPc.getInventory().findItemId(L1ItemId.ADENA);
@@ -1277,7 +1277,7 @@ public class C_Result extends ClientBasePacket {
 								psbl.setBuyCount(count + buyCount);
 								buyList.set(order, psbl);
 								if (psbl.getBuyCount() == psbl.getBuyTotalCount()) {
-									// 살 예정의 개수를 샀다
+									// 買う予定の数を買った
 									isRemoveFromList[order] = true;
 								}
 								try {
@@ -1288,7 +1288,7 @@ public class C_Result extends ClientBasePacket {
 								}
 							}
 						} else {
-							targetPc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+							targetPc.sendPackets(new S_ServerMessage(189)); // \\ f1アデナが不足します。
 							break;
 						}
 					} else {
@@ -1296,7 +1296,7 @@ public class C_Result extends ClientBasePacket {
 						break;
 					}
 				}
-				// 매점한 아이템을 리스트의 말미로부터 삭제
+				// 売店たアイテムをリストの末尾から削除
 				for (int i = 7; i >= 0; i--) {
 					if (isRemoveFromList[i]) {
 						buyList.remove(i);
@@ -1316,7 +1316,7 @@ public class C_Result extends ClientBasePacket {
 		String itemadena = item.getName() + "(" + price + ")";
 		//manager.LogShopAppend("개인상점구매", pc.getName(), targetPc.getName(), item.getEnchantLevel(), itemadena, item.getBless(), count, item.getId());
 		LinAllManager.getInstance().ShopAppend(item.getLogName(), count, price, targetPc.getName(), pc.getName());
-		/** 로그파일저장 **/
+		/** ログファイルの保存 **/
 		LoggerInstance.getInstance().개인상점구매(true, pc, targetPc, item, item.getCount());
 	}
 	
@@ -1330,9 +1330,9 @@ public class C_Result extends ClientBasePacket {
 		int elapsed_time = (int) (System.currentTimeMillis() / 1000);
 		String type = null;
 		if (i == 1) {
-			type = "맡겼습니다.";
+			type = "任せた。";
 		} else {
-			type = "찾았습니다.";
+			type = "見つかりました。";
 		}
 		if (item.getItem().getType2() != 0) {
 			if (item_enchant >= 0) {
@@ -1360,14 +1360,14 @@ public class C_Result extends ClientBasePacket {
 		}
 	}
 
-	private boolean isTwoLogin(L1PcInstance c) {// 중복체크 변경 
+	private boolean isTwoLogin(L1PcInstance c) {//重複チェックを変更 
 		boolean bool = false;
 
 		for (L1PcInstance target : L1World.getInstance().getAllPlayers()) {
 			if (target.noPlayerCK || target.noPlayerck2)continue;
-			/**로봇시스템 **/
+			/**ロボットシステム **/
 			if(target.getRobotAi() != null) continue;
-			/**로봇시스템 **/
+			/**ロボットシステム **/
 			if (c.getId() != target.getId() && (!target.isPrivateShop() && !target.isAutoClanjoin())) {
 				if (c.getNetConnection().getAccountName().equalsIgnoreCase(target.getNetConnection().getAccountName())) {
 					bool = true;
@@ -1378,9 +1378,9 @@ public class C_Result extends ClientBasePacket {
 		return bool;
 	}
 	/**
-	 * 월드상에 있는 모든 캐릭의 계정을 비교해 같은 계정이 있다면 true 없다면 false
+	 * ワールド上にあるすべてのキャラクターのアカウントを比較して、同じアカウントがある場合trueない場合false
 	 * @param c L1PcInstance
-	 * @return 있다면 true
+	 * @return場合はtrue
 	 */
 
 }

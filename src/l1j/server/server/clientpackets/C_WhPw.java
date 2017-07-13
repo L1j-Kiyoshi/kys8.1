@@ -13,7 +13,7 @@ public class C_WhPw extends ClientBasePacket{
 	
 	/**
 	 * (0e) (00) (0e 64 03) 00 (0e 64 03) 00 00 00
-	 *  옵	 타입   현재          다음
+	 *  オプションタイプ現在、以下の
 	 */
 	public C_WhPw(byte[] data, GameClient client){
 		super(data);
@@ -21,7 +21,7 @@ public class C_WhPw extends ClientBasePacket{
 		if ( pc == null)return;
 		int gamepassword = client.getAccount().getGamePassword();
 		int type = readC();
-		if(type == 0){	/** 설정 */			
+		if(type == 0){	/** 設定 */			
 			int oldpass = readCH();		
 			//System.out.println(oldpass);
 			readC();	// dummy
@@ -32,7 +32,7 @@ public class C_WhPw extends ClientBasePacket{
 			}else{
 				pc.sendPackets(new S_ServerMessage(835));
 			}			
-		}else if(type == 1){	/** 창고 찾기 */
+		}else if(type == 1){	/** 倉庫の検索*/
 			int chkpass = readCH();							
 			readC();	// dummy
 			int objId = readD();			

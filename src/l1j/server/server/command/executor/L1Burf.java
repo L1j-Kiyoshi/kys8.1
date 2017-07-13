@@ -32,7 +32,7 @@ public class L1Burf implements L1CommandExecutor {
 				try {
 					Thread.sleep(500);
 					int num = _sprid + i;
-					_pc.sendPackets(new S_SystemMessage("스킬번호: "+num+""));
+					_pc.sendPackets(new S_SystemMessage("スキル番号："+num+""));
 					_pc.sendPackets(new S_SkillSound(_pc.getId(), _sprid+i));
 					_pc.broadcastPacket(new S_SkillSound(_pc.getId(), _sprid+i));
 				} catch (Exception exception) {
@@ -55,7 +55,7 @@ public class L1Burf implements L1CommandExecutor {
 			GeneralThreadPool.getInstance().execute(spr);
 			
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [castgfx] 라고 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "【castgfx]と入力してください。"));
 		}
 	}
 /*	@Override
@@ -67,7 +67,7 @@ public class L1Burf implements L1CommandExecutor {
 			pc.sendPackets(new S_SkillSound(pc.getId(), sprid));
 			pc.broadcastPacket(new S_SkillSound(pc.getId(), sprid));
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [castgfx] 라고 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + " [castgfx]と入力してください。 "））;
 		}
 	}*/
 }

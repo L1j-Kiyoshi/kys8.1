@@ -52,12 +52,12 @@ public class L1InsertSpawn implements L1CommandExecutor {
 			L1Npc template = NpcTable.getInstance().getTemplate(npcId);
 
 			if (template == null) {
-				msg = "해당 NPC가 발견되지 않습니다. ";
+				msg = "該当のNPCが見つかりません。";
 				return;
 			}
 			if (type.equalsIgnoreCase("m")) {
 				if (!template.getImpl().equals("L1Monster")) {
-					msg = "지정한 NPC는 L1Monster가 아닙니다. ";
+					msg = "指定されたNPCはL1Monsterがありません。";
 					return;
 				}
 				SpawnTable.storeSpawn(pc, template);
@@ -66,11 +66,11 @@ public class L1InsertSpawn implements L1CommandExecutor {
 			}
 			L1SpawnUtil.spawn(pc, npcId, 0, 0);
 			msg = new StringBuilder().append(template.get_name())
-					.append(" (" + npcId + ") ").append("를 추가했습니다. ")
+					.append(" (" + npcId + ") ").append("を追加しました。")
 					.toString();
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, "", e);
-			msg = cmdName + " [m,n] [NPCID] 라고 입력해 주세요. ";
+			msg = cmdName + "[m、n] [NPCID]と入力してください。";
 		} finally {
 			if (msg != null) {
 				pc.sendPackets(new S_SystemMessage(msg), true);

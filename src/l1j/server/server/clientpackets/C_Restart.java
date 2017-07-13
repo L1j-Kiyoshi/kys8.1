@@ -22,13 +22,13 @@ public class C_Restart extends ClientBasePacket {
 		super(abyte0);
 		
 		L1PcInstance pc = clientthread.getActiveChar();
-		//clientthread.sendPacket(new S_PacketBox(S_PacketBox.LOGOUT));//리스버튼 눌럿을시 보내져오는 패킷 로그인창으로 이동
+		//clientthread.sendPacket(new S_PacketBox(S_PacketBox.LOGOUT));//リースボタンヌルロトを時送られてくるパケットログインウィンドウに移動
 		
 		if (pc == null) {
 			return;
 		}
 		
-		/** 배틀존 **/
+		/** バトルゾーン **/
 		if (pc.get_DuelLine() != 0) {
 			pc.set_DuelLine(0);
 		}
@@ -37,7 +37,7 @@ public class C_Restart extends ClientBasePacket {
 			return;
 		}
 		
-		if (pc.isGhost()){ // 관람모드 버그 막기.
+		if (pc.isGhost()){ // 観覧モードのバグを防ぐ。
 			pc.endGhost();
 		}
 		int[] loc;
@@ -80,9 +80,9 @@ public class C_Restart extends ClientBasePacket {
 
 		pc.removeAllKnownObjects();
 		pc.broadcastPacket(new S_RemoveObject(pc));
-		pc.killSkillEffectTimer(L1SkillId.SHAPE_CHANGE);//랭킹변신 풀리도록
+		pc.killSkillEffectTimer(L1SkillId.SHAPE_CHANGE);//ランキング変身プーリーよう
 		pc.setCurrentHp(pc.getLevel());
-		pc.set_food(39); // 죽었을때 겟지? 10%
+		pc.set_food(39); //死んだときにラゲッジ？ 10％
 		pc.setDead(false);
 		pc.setStatus(0);
 		L1World.getInstance().moveVisibleObject(pc, loc[2]);
@@ -97,14 +97,14 @@ public class C_Restart extends ClientBasePacket {
 		pc.sendPackets(new S_CharVisualUpdate(pc));
 		pc.sendPackets(new S_Weather(L1World.getInstance().getWeather()));
 		
-		/** 인스턴스 던전 아이템삭제**/
+		/** インスタンスダンジョンのアイテムの削除**/
 		for (L1ItemInstance item : pc.getInventory().getItems()) {
 			if (item.getItemId() == 203003 || item.getItemId() == 810006 || item.getItemId() == 810007
 			 || item.getItemId() == 30055  || item.getItemId() == 30056) {
 				pc.getInventory().removeItem(item);
 			}
 		}
-		/** 인스턴스 던전 아이템삭제**/
+		/** インスタンスダンジョンのアイテムの削除**/
 
 	}
 

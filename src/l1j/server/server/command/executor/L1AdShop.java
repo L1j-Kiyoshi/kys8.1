@@ -37,7 +37,7 @@ public class L1AdShop implements L1CommandExecutor {
 			String name = stringtokenizer.nextToken();
 
 			if (CharacterTable.doesCharNameExist(name) || L1World.getInstance().getPlayer(name) != null) {
-				pc.sendPackets(new S_SystemMessage("이미 존재하는 캐릭터 이름입니다"));
+				pc.sendPackets(new S_SystemMessage("既に存在しているキャラクターの名前です"));
 				return;
 			}
 			
@@ -70,7 +70,7 @@ public class L1AdShop implements L1CommandExecutor {
 				SQLUtil.close(con);
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(".장사시작 [캐릭이름]로 입력해 주세요. "). toString()));
+			pc.sendPackets(new S_SystemMessage((new StringBuilder()).append("長沙開始[キャラクター名]に入力してください。"). toString()));
 		}
 	}
 	
@@ -110,13 +110,13 @@ public class L1AdShop implements L1CommandExecutor {
 		} else {
 			klass = FEMALE_LIST[type];			
 		}
-		//newPc.setCurrentWeapon(46);//단검
-		//newPc.setCurrentWeapon(50);}//양검
-			//newPc.setCurrentWeapon(20);//활
-			//newPc.setCurrentWeapon(58);//이도
-			//newPc.setCurrentWeapon(54);//크로우
-			//newPc.setCurrentWeapon(50);//체인소드
-			//newPc.setCurrentWeapon(24);//창
+		//newPc.setCurrentWeapon(46);//短剣
+		//newPc.setCurrentWeapon(50);}//ヤンゴム
+			//newPc.setCurrentWeapon(20);//弓
+			//newPc.setCurrentWeapon(58);//離島
+			//newPc.setCurrentWeapon(54);//クロウ
+			//newPc.setCurrentWeapon(50);//チェーンソード
+			//newPc.setCurrentWeapon(24);//ウィンドウ
 		newPc.setCurrentWeapon(0);
 		newPc.setClassId(klass);
 		newPc.setTempCharGfx(klass);

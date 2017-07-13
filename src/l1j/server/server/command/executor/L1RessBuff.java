@@ -1,13 +1,6 @@
 package l1j.server.server.command.executor;
 
-import static l1j.server.server.model.skill.L1SkillId.BLESS_WEAPON;
-import static l1j.server.server.model.skill.L1SkillId.COMA_B;
-import static l1j.server.server.model.skill.L1SkillId.FEATHER_BUFF_A;
-import static l1j.server.server.model.skill.L1SkillId.God_buff;
-import static l1j.server.server.model.skill.L1SkillId.IRON_SKIN;
-import static l1j.server.server.model.skill.L1SkillId.LIFE_MAAN;
-import static l1j.server.server.model.skill.L1SkillId.PHYSICAL_ENCHANT_DEX;
-import static l1j.server.server.model.skill.L1SkillId.PHYSICAL_ENCHANT_STR;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.logging.Logger;
 
@@ -42,7 +35,7 @@ public class L1RessBuff implements L1CommandExecutor {
 				tg.setBuffnoch(0);
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " 커멘드 에러"));
+			pc.sendPackets(new S_SystemMessage(cmdName + "コマンドエラー"));
 		}
 	}
 }

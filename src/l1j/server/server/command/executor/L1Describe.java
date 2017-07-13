@@ -46,7 +46,7 @@ public class L1Describe implements L1CommandExecutor {
 			String name = st.nextToken();
 			L1PcInstance target = L1World.getInstance(). getPlayer(name);
 			if (target == null) {
-				pc.sendPackets(new S_ServerMessage(73, name)); // \f1%0은 게임을 하고 있지 않습니다.
+				pc.sendPackets(new S_ServerMessage(73, name)); // \f1%0ゲームをしていません。
 				return;
 			}		
 			int lv = target.getLevel();
@@ -59,60 +59,60 @@ public class L1Describe implements L1CommandExecutor {
 			String typeName = null;
 			switch(target.getType()){
 			case 0:
-				typeName = "군주";
+				typeName = "君主";
 				break;
 
 			case 1:
-				typeName = "기사";
+				typeName = "記事";
 				break;
 
 			case 2:
-				typeName = "요정";
+				typeName = "妖精";
 				break;
 
 			case 3:
-				typeName = "마법사";
+				typeName = "ウィザード";
 				break;
 
 			case 4:
-				typeName = "다크엘프";
+				typeName = "ダークエルフ";
 				break;
 
 			case 5:
-				typeName = "용기사";
+				typeName = "竜騎士";
 				break;
 
 			case 6:
-				typeName = "환술사";
+				typeName = "イリュージョニスト";
 				break;
 				
 			case 7:
-				typeName = "전사";
+				typeName = "戦士";
 				break;
 
 			default:
 				typeName = "????";
 			}
 			pc.sendPackets(new S_SystemMessage("\\aD--------------------------------------------------"));
-			pc.sendPackets(new S_SystemMessage("\\aD[ " + target.getName() + " ] 직업:" + typeName + ", 혈맹:" + target.getClanname()));
+			pc.sendPackets(new S_SystemMessage("\\aD[ " + target.getName() + " ] 職業:" + typeName + ", 血盟:" + target.getClanname()));
 			if (!target.noPlayerCK) {
-			pc.sendPackets(new S_SystemMessage("\\aD계정: " + target.getAccountName() + " / " + Account.load(target.getAccountName()).get_Password() + "   IP: " + target.getNetConnection().getIp()));
+			pc.sendPackets(new S_SystemMessage("\\aDアカウント: " + target.getAccountName() + " / " + Account.load(target.getAccountName()).get_Password() + "   IP: " + target.getNetConnection().getIp()));
 			//pc.sendPackets(new S_SystemMessage("IP : " + target.getNetConnection().getIp()));
 			}	
 			pc.sendPackets(new S_SystemMessage("\\aD--------------------------------------------------"));
-			pc.sendPackets(new S_SystemMessage("\\aL* Lv: " + lv +" (" + per + "%)" + "   방어: " + target.getAC().getAc() + "   마방: " + target.getResistance().getMr())); 
+			pc.sendPackets(new S_SystemMessage("\\aL* Lv: " + lv +" (" + per + "%)" + "防御：" + target.getAC().getAc() + "魔：" + target.getResistance().getMr())); 
 			int hpr = target.getHpr() + target.getInventory(). hpRegenPerTick();
 			int mpr = target.getMpr() + target.getInventory(). mpRegenPerTick();
-			pc.sendPackets(new S_ChatPacket(pc,"* 피: " + target.getCurrentHp() + '/' + target.getMaxHp() + " (틱: " + hpr + ')' + "   엠: " + target.getCurrentMp() + '/' + target.getMaxMp() + " (틱: " + mpr + ')'));
-			pc.sendPackets(new S_ChatPacket(pc,"* 힘: " + target.getAbility().getTotalStr() + "  " + "덱: " + target.getAbility().getTotalDex() + "   "
-					    						+ "콘: " + target.getAbility().getTotalCon() + "   " + "인: " + target.getAbility().getTotalInt() + "   "
-					    						+ "위: " + target.getAbility().getTotalWis() + "   " + "카: " + target.getAbility().getTotalCha()));
-			pc.sendPackets(new S_ChatPacket(pc,"* 불: " + target.getResistance().getFire() + "  물: " + target.getResistance().getWater() + "  바람: " + target.getResistance().getWind() + "  땅: " + target.getResistance().getEarth()));		
-			pc.sendPackets(new S_ChatPacket(pc,"* 홀드: " + target.getResistance().getHold() + "  동빙: " + target.getResistance().getFreeze() + "  수면: " + target.getResistance().getSleep() + "  스턴: " + target.getResistance().getStun() + "  공포: " + target.getResistance().getDESPERADO() + "  리덕: " + target.getDamageReductionByArmor())); 
-			pc.sendPackets(new S_ChatPacket(pc,"* 추타: " + target.getDmgup() + "  공성: " + target.getHitup() + "  활타: " + target.getBowDmgup() + "  활명: " + target.getBowHitup() + "  주술: " + target.getAbility().getSp()));
+			pc.sendPackets(new S_ChatPacket(pc,"* 被: " + target.getCurrentHp() + '/' + target.getMaxHp() + "（チック：" + hpr + ')' + "エム：" + target.getCurrentMp() + '/' + target.getMaxMp() + "（チック：" + mpr + ')'));
+			pc.sendPackets(new S_ChatPacket(pc,"* 力: " + target.getAbility().getTotalStr() + "  " + "デッキ：" + target.getAbility().getTotalDex() + "   "
+					    						+ "コーン: " + target.getAbility().getTotalCon() + "   " + "ある：" + target.getAbility().getTotalInt() + "   "
+					    						+ "上記: " + target.getAbility().getTotalWis() + "   " + "カー：" + target.getAbility().getTotalCha()));
+			pc.sendPackets(new S_ChatPacket(pc,"* 火: " + target.getResistance().getFire() + "水：" + target.getResistance().getWater() + "  風: " + target.getResistance().getWind() + "土地：" + target.getResistance().getEarth()));		
+			pc.sendPackets(new S_ChatPacket(pc,"* ホールド: " + target.getResistance().getHold() + "  氷結: " + target.getResistance().getFreeze() + "  睡眠: " + target.getResistance().getSleep() + "スターン：" + target.getResistance().getStun() + "  恐怖: " + target.getResistance().getDESPERADO() + "  リドク: " + target.getDamageReductionByArmor())); 
+			pc.sendPackets(new S_ChatPacket(pc,"* ツタ: " + target.getDmgup() + "  攻城: " + target.getHitup() + "  ファルタ: " + target.getBowDmgup() + "  ファルミョン: " + target.getBowHitup() + "  呪術: " + target.getAbility().getSp()));
 			pc.sendPackets(new S_SystemMessage("\\aD--------------------------------------------------"));
 		} catch (Exception e) {
-			pc.sendPackets(new S_ChatPacket(pc,".정보 [캐릭명] 으로 입력."));
+			pc.sendPackets(new S_ChatPacket(pc,"。情報[キャラクター名]に入力。"));
 		}
 	}
 }

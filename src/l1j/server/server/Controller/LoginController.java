@@ -70,7 +70,7 @@ public class LoginController {
 		synchronized (this) {
 			if (!account.isValid()) {
 				// パスワード認証がされていない、あるいは認証に失敗したアカウントが指定されました。
-				// このコードは、、バグを検出するためにのみ存在する。
+				//このコードは,,バグを検出するためにのみ存在する。
 				throw new IllegalArgumentException("認証されていないアカウントです");
 			} else if ((getMaxAllowedOnlinePlayers() <= getOnlinePlayerCount()) && !account.isGameMaster()) {
 				throw new GameServerFullException();

@@ -1,19 +1,7 @@
 package l1j.server.server.clientpackets;
 
-import static l1j.server.server.model.skill.L1SkillId.ABSOLUTE_BARRIER;
-import static l1j.server.server.model.skill.L1SkillId.CALL_CLAN;
-import static l1j.server.server.model.skill.L1SkillId.CUBE_BALANCE;
-import static l1j.server.server.model.skill.L1SkillId.CUBE_IGNITION;
-import static l1j.server.server.model.skill.L1SkillId.CUBE_QUAKE;
-import static l1j.server.server.model.skill.L1SkillId.CUBE_SHOCK;
-import static l1j.server.server.model.skill.L1SkillId.FIRE_WALL;
-import static l1j.server.server.model.skill.L1SkillId.LIFE_STREAM;
-import static l1j.server.server.model.skill.L1SkillId.MASS_TELEPORT;
-import static l1j.server.server.model.skill.L1SkillId.MEDITATION;
-import static l1j.server.server.model.skill.L1SkillId.RUN_CLAN;
-import static l1j.server.server.model.skill.L1SkillId.SUMMON_MONSTER;
-import static l1j.server.server.model.skill.L1SkillId.TELEPORT;
-import static l1j.server.server.model.skill.L1SkillId.TRUE_TARGET;
+import static l1j.server.server.model.skill.L1SkillId.*;
+
 import l1j.server.server.GameClient;
 import l1j.server.server.datatables.SkillsTable;
 import l1j.server.server.model.L1Character;
@@ -42,11 +30,11 @@ public class C_UseSkill extends ClientBasePacket {
 		if (pc == null || pc.isTeleport() || pc.isDead() ) {
 			return;
 		}
-		/** SPR체크 **/
+		/** SPRチェック **/
 		if (pc.magicSpeedCheck >= 1) {
 			if (pc.magicSpeedCheck == 1) {
 				pc.magicSpeed = System.currentTimeMillis();
-				pc.sendPackets(new S_ChatPacket(pc,"[체크시작]"));
+				pc.sendPackets(new S_ChatPacket(pc,"[チェック開始]"));
 			}
 			pc.magicSpeedCheck++;
 			if (pc.magicSpeedCheck >= 12) {
@@ -55,13 +43,13 @@ public class C_UseSkill extends ClientBasePacket {
 				String s = String.format("%.0f", k);
 				pc.magicSpeed = 0;
 				pc.sendPackets(new S_ChatPacket(pc,"-----------------------------------------"));
-				pc.sendPackets(new S_ChatPacket(pc,"해당변신은 " + s + "이 마법딜로 적절한값입니다."));
+				pc.sendPackets(new S_ChatPacket(pc,"この変身は" + s + "この魔法ディルで適切な値です。"));
 				pc.sendPackets(new S_ChatPacket(pc,"-----------------------------------------"));
 			}
 		}
-		/** SPR체크 **/
+		/** SPRチェック **/
 		if (!pc.getMap().isUsableSkill()) {
-			pc.sendPackets(new S_ServerMessage(563)); // \f1 여기에서는 사용할 수 없습니다.
+			pc.sendPackets(new S_ServerMessage(563)); // \f1 ここでは、使用することができません。
 			return;
 		}
 		
@@ -71,12 +59,12 @@ public class C_UseSkill extends ClientBasePacket {
 //			return;
 //		}
 
-		if (!pc.isGm() && pc.getHighLevel() < pc.getLevel()) { //칼질시 최고레벨보다 레벨이높을경우 버그로판단		
+		if (!pc.isGm() && pc.getHighLevel() < pc.getLevel()) { //シャンク時の最高レベルよりもレベルが高い場合、バグと判断		
 			return;					        
 		}
 
 		if (skillId != TELEPORT && pc.getZoneType() != 1 && pc.getInventory().checkEquipped(10000)) {
-			pc.sendPackets(new S_ChatPacket(pc,"[!] : 직장인 경험치 지급을 해제하시기 바랍니다." ));
+			pc.sendPackets(new S_ChatPacket(pc,"[！]：会社員経験値支給を解除してください。" ));
 			return;
 		}
 
@@ -131,21 +119,21 @@ public class C_UseSkill extends ClientBasePacket {
 
 
 
-		// KKK 스킬 범위버그 수정
+		// KKKスキルの範囲のバグを修正
 		L1Object target2 = L1World.getInstance().findObject(targetId);
 		L1Skills skills = SkillsTable.getInstance().getTemplate(skillId);
 		double skillRange = skills.getRanged();
-		if(skillRange < 0){ // 추가
+		if(skillRange < 0){ // 追加
 			skillRange = 15D;
 		}
-		skillRange += 4.5D; // KKK 직선거리에 유효범위 추가
+		skillRange += 4.5D; // KKKの直線距離に有効範囲を追加
 		if(target2 instanceof L1Character){
 			if(target2.getMapId() != pc.getMapId() || pc.getLocation().getLineDistance(target2.getLocation()) > skillRange){ // 타겟이 이상한 장소에 있으면 종료
 				return;
 			}
 		}
 
-		if (pc.hasSkillEffect(ABSOLUTE_BARRIER)) { // 아브소르트바리아의 해제
+		if (pc.hasSkillEffect(ABSOLUTE_BARRIER)) { //アブ小ガルトバリアの解除
 			pc.killSkillEffectTimer(ABSOLUTE_BARRIER);
 		//	pc.startMpRegeneration();
 			pc.startMpRegenerationByDoll();

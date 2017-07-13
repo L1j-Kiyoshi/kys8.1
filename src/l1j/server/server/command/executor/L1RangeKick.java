@@ -50,9 +50,9 @@ public class L1RangeKick implements L1CommandExecutor {
 			if (target != null) {
 				IpTable ip = IpTable.getInstance();
 
-				Account.ban(target.getAccountName()); // 계정을 BAN시킨다.
+				Account.ban(target.getAccountName()); // アカウントをBANさせる。
 				ip.rangeBanIp(target.getNetConnection().getHostname());
-				pc.sendPackets(new S_SystemMessage(target.getName() + "[" + pc.getNetConnection() + "] 를 광역추방 했습니다."));						
+				pc.sendPackets(new S_SystemMessage(target.getName() + "[" + pc.getNetConnection() + "]を広域追放しました。"));						
 				L1World.getInstance().removeObject(target);
 				target.getNetConnection().kick();
 				target.getNetConnection().close();
@@ -62,10 +62,10 @@ public class L1RangeKick implements L1CommandExecutor {
 //					target.sendPackets(new S_Disconnect());
 //				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("그러한 이름의 캐릭터는 월드내에는 존재하지 않습니다. "));
+				pc.sendPackets(new S_SystemMessage("そのような名前のキャラクターは、ワールド内には存在しません。"));
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [캐릭터명]으로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
 		}
 	}
 }

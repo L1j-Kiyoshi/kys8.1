@@ -28,14 +28,14 @@ public class L1BuffIcon implements L1CommandExecutor {
 					Thread.sleep(1000);
 					int num = _sprid + i;
 					pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _sprid + i, 10000, true));
-					pc.sendPackets(new S_SystemMessage("무제한 아이콘 : "+num+" 번."));
+					pc.sendPackets(new S_SystemMessage("無制限のアイコン："+num+"回。"));
 				} catch (Exception exception) {
 					break;
 				}
 			}
 		} catch (Exception exception) {
 			pc.sendPackets(new S_SystemMessage(cmdName
-					+ " [id] [출현시키는 수]로 입력해 주세요. "));
+					+ "[id] [出現させることができ】で入力してください。"));
 		}
 	}
 }

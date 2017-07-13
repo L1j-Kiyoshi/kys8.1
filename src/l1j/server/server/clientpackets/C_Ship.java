@@ -49,7 +49,7 @@ public class C_Ship extends ClientBasePacket {
 		case 446: pc.getInventory().consumeItem(40303, 1); break;
 		case 447: pc.getInventory().consumeItem(40302, 1); break;
 		default: 
-		 System.out.println("특정 좌표 이동 중계기 버그 > " + pc.getName() + " 이동시도 맵> " + mapId);
+		 System.out.println("特定の座標移動中継器のバグ>" + pc.getName() + "移動時にもマップ>" + mapId);
 		break;
 		}
 		

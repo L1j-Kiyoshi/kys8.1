@@ -1,9 +1,6 @@
 package l1j.server.server.clientpackets;
 
-import static l1j.server.server.model.skill.L1SkillId.ABSOLUTE_BARRIER;
-import static l1j.server.server.model.skill.L1SkillId.EARTH_BIND;
-import static l1j.server.server.model.skill.L1SkillId.ICE_LANCE;
-import static l1j.server.server.model.skill.L1SkillId.SHOCK_STUN;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +14,6 @@ import l1j.server.server.ActionCodes;
 import l1j.server.server.GameClient;
 import l1j.server.server.datatables.ClanTable;
 import l1j.server.server.datatables.ItemTable;
-import l1j.server.server.model.Beginner;
 import l1j.server.server.model.Broadcaster;
 import l1j.server.server.model.Getback;
 import l1j.server.server.model.L1CastleLocation;
@@ -93,47 +89,47 @@ public class C_ItemUSe2 extends ClientBasePacket {
 		
 		switch(itemId){
 		
-		/** 엔코인 아이템화 **/
+		/** エンコインアイテム化 **/
 		case 1000024:	//10
 			pc.getNetConnection().getAccount().Ncoin_point += 10;
 			pc.getNetConnection().getAccount().updateNcoin();
-			pc.sendPackets(new S_SystemMessage("N코인 " + 10 + " 원 충전되었습니다."), true);
+			pc.sendPackets(new S_SystemMessage("Nコイン" + 10 + "ワン充電された。"), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
 		case 1000025:	//100
 			pc.getNetConnection().getAccount().Ncoin_point += 100;
 			pc.getNetConnection().getAccount().updateNcoin();
-			pc.sendPackets(new S_SystemMessage("N코인 " + 100 + " 원 충전되었습니다."), true);
+			pc.sendPackets(new S_SystemMessage("Nコイン" + 100 + "ワン充電された。"), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
 		case 1000026:	//1000
 			pc.getNetConnection().getAccount().Ncoin_point += 1000;
 			pc.getNetConnection().getAccount().updateNcoin();
-			pc.sendPackets(new S_SystemMessage("N코인 " + 1000 + " 원 충전되었습니다."), true);
+			pc.sendPackets(new S_SystemMessage("Nコイン" + 1000 + "ワン充電された。"), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
 		case 1000027:	//5000
 			pc.getNetConnection().getAccount().Ncoin_point += 5000;
 			pc.getNetConnection().getAccount().updateNcoin();
-			pc.sendPackets(new S_SystemMessage("N코인 " + 5000 + " 원 충전되었습니다."), true);
+			pc.sendPackets(new S_SystemMessage("Nコイン" + 5000 + "ワン充電された。"), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
 		case 1000028:	//10000
 			pc.getNetConnection().getAccount().Ncoin_point += 10000;
 			pc.getNetConnection().getAccount().updateNcoin();
-			pc.sendPackets(new S_SystemMessage("N코인 " + 10000 + " 원 충전되었습니다."), true);
+			pc.sendPackets(new S_SystemMessage("Nコイン" + 10000 + "ワン充電された。"), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
 		case 1000029:	//30000
 			pc.getNetConnection().getAccount().Ncoin_point += 30000;
 			pc.getNetConnection().getAccount().updateNcoin();
-			pc.sendPackets(new S_SystemMessage("N코인 " + 30000 + " 원 충전되었습니다."), true);
+			pc.sendPackets(new S_SystemMessage("Nコイン" + 30000 + "ワン充電された。"), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
 		
 		
 		
-		case 410057: {// 운세쪽지a
+		case 410057: {// 占いメッセージa
 			int[] allBuffSkill = { L1SkillId.FEATHER_BUFF_A };
 			L1SkillUse l1skilluse = new L1SkillUse();
 			if (pc.hasSkillEffect(L1SkillId.FEATHER_BUFF_B))
@@ -150,7 +146,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 		}
 		break;
 		
-		case 410058: {// 운세쪽지b
+		case 410058: {// 占いメッセージb
 			int[] allBuffSkill = { L1SkillId.FEATHER_BUFF_B };
 			L1SkillUse l1skilluse = new L1SkillUse();
 			if (pc.hasSkillEffect(L1SkillId.FEATHER_BUFF_A))
@@ -166,7 +162,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 		break;
-		case 410059: {// 운세쪽지c
+		case 410059: {// 占いメッセージc
 			int[] allBuffSkill = { L1SkillId.FEATHER_BUFF_C };
 			L1SkillUse l1skilluse = new L1SkillUse();
 			if (pc.hasSkillEffect(L1SkillId.FEATHER_BUFF_B))
@@ -182,7 +178,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 		break;
-		case 410060: {// 운세쪽지d
+		case 410060: {// 占いメッセージd
 			int[] allBuffSkill = { L1SkillId.FEATHER_BUFF_D };
 			L1SkillUse l1skilluse = new L1SkillUse();
 			if (pc.hasSkillEffect(L1SkillId.FEATHER_BUFF_B))
@@ -201,44 +197,44 @@ public class C_ItemUSe2 extends ClientBasePacket {
 		
 		
 		
-		case 40304:{ // 마프르 유산
+		case 40304:{ // マーブルの遺産
 			int count = _random.nextInt(6) + 5;
-			pc.getInventory().storeItem(40318, count); // 마돌
-			pc.sendPackets(new S_SystemMessage("마력의 돌 (" + count + ") 획득"), true);
+			pc.getInventory().storeItem(40318, count); //マドル
+			pc.sendPackets(new S_SystemMessage("魔力の石（" + count + "）獲得"), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 		break;
-		case 40305:{ // 파아그리오의 유산
+		case 40305:{ // パアグリオの遺産
 			int count = _random.nextInt(6) + 5;
-			pc.getInventory().storeItem(40320, count); // 흑마석
-			pc.sendPackets(new S_SystemMessage("흑마석 (" + count + ") 획득"), true);
+			pc.getInventory().storeItem(40320, count); // 黒魔石
+			pc.sendPackets(new S_SystemMessage("黒魔石（" + count + "）獲得"), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 		break;
-		case 40306: { // 에바의 유산
+		case 40306: { //エヴァの遺産
 			int count = _random.nextInt(6) + 5;
-			pc.getInventory().storeItem(40319, count); // 정령옥
-			pc.sendPackets(new S_SystemMessage("정령옥 (" + count + ") 획득"), true);
+			pc.getInventory().storeItem(40319, count); // 精霊の玉
+			pc.sendPackets(new S_SystemMessage("精霊の玉（" + count + "）獲得"), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 			break;
-		case 40307: { // 사이하의 유산
+		case 40307: { // サイハの遺産
 			int count = _random.nextInt(20) + 1;
-			pc.getInventory().storeItem(40318, count); // 마돌
-			pc.sendPackets(new S_SystemMessage("마력의 돌 (" + count + ") 획득"), true);
+			pc.getInventory().storeItem(40318, count); // マドル
+			pc.sendPackets(new S_SystemMessage("魔力の石（" + count + "）獲得"), true);
 			count = _random.nextInt(30) + 1;
-			pc.getInventory().storeItem(40319, count); // 정령옥
-			pc.sendPackets(new S_SystemMessage("정령옥 (" + count + ") 획득"), true);
+			pc.getInventory().storeItem(40319, count); // 精霊の玉
+			pc.sendPackets(new S_SystemMessage("精霊の玉（" + count + "）獲得"), true);
 			count = _random.nextInt(20) + 1;
-			pc.getInventory().storeItem(40320, count); // 흑마석
-			pc.sendPackets(new S_SystemMessage("흑마석 (" + count + ") 획득"), true);
+			pc.getInventory().storeItem(40320, count); // 黒魔石
+			pc.sendPackets(new S_SystemMessage("黒魔石（" + count + "）獲得"), true);
 			count = _random.nextInt(5) + 1;
-			pc.getInventory().storeItem(40031, count); // 악마의피
-			pc.sendPackets(new S_SystemMessage("악마의 피 (" + count + ") 획득"), true);
+			pc.getInventory().storeItem(40031, count); // 悪魔の血
+			pc.sendPackets(new S_SystemMessage("悪魔の血（" + count + "）獲得"), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 		break;
-		case 410009: { // 성전환 물약
+		case 410009: { // 性転換ポーション
 			int[] MALE_LIST = new int[] { 0, 61, 138, 734, 2786, 6658, 6671, 12490 };
 			int[] FEMALE_LIST = new int[] { 1, 48, 37, 1186, 2796, 6661, 6650, 12494 };
 			if (pc.get_sex() == 0) {
@@ -254,14 +250,14 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 		break;
-		case 700021:// 봉인해제주문서 신청서
+		case 700021:// 封印解除スクロール申請書
 			if (!pc.isQuizValidated()) {
-				pc.sendPackets(new S_ChatPacket(pc, "퀴즈 인증을 하지 않으셨습니다."));
-				pc.sendPackets(new S_ChatPacket(pc, "먼저 [.퀴즈인증]으로 퀴즈 인증 후 다시 시도해주세요."));
+				pc.sendPackets(new S_ChatPacket(pc, "クイズの認証をしていません。"));
+				pc.sendPackets(new S_ChatPacket(pc, "まず[。クイズ認証]でクイズ認証後、再試行してください。"));
 				return;
 			}
 			if (pc.getInventory().checkItem(50021)) { //
-				pc.sendPackets(new S_ChatPacket(pc, "이미 봉인해제 주문서를 갖고 있습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "すでに封印解除スクロールを持っています。"));
 				return;
 			}
 			if (pc.getInventory().checkItem(700021, 1)) {
@@ -269,7 +265,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 				pc.getInventory().storeItem(50021, 15);
 			}
 			break;
-		case 30104: {// 코마의 축복 코인
+		case 30104: {// コマの祝福コイン
 			int[] allBuffSkill = { 50007 };
 			L1SkillUse l1skilluse = new L1SkillUse();
 			for (int i = 0; i < allBuffSkill.length; i++) {
@@ -278,65 +274,65 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 		break;
-		case 30124:// 포탄
-			pc.sendPackets(new S_SystemMessage("공성전 시 투석기를 사용할 때 필요한 소모성 아이템"));
+		case 30124:// 貝
+			pc.sendPackets(new S_SystemMessage("攻城戦の際カタパルトを使用するときに必要な消耗性アイテム"));
 			
 			break;
 		case 800200:// 패키지 1차
 			if (pc.getInventory().getSize() > 120) {
-				pc.sendPackets(new S_ChatPacket(pc, "소지하고 있는 아이템이 너무 많습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "所持しているアイテムが多すぎます。"));
 				return;
 			}
-			if (pc.getInventory().getWeight100() > 82) { // 이부분을 수정하면 오류가 발생한다.
-				pc.sendPackets(new S_ChatPacket(pc, "소지품이 너무 무거워서 사용 할 수 없습니다."));
+			if (pc.getInventory().getWeight100() > 82) { // この部分を変更すると、エラーが発生する。
+				pc.sendPackets(new S_ChatPacket(pc, "持ち物が重すぎて使用することはできません。"));
 				return;
 			}
-			if (pc.getInventory().checkItem(800200, 1)) { // 체크되는 아이템과 수량
+			if (pc.getInventory().checkItem(800200, 1)) { // チェックされているアイテムと数量
 				pc.getInventory().removeItem(l1iteminstance, 1);
-				createNewItem2(pc, 800001, 1, 0); // 무기 코인
-				createNewItem2(pc, 800002, 1, 0); // 투구 코인
-				createNewItem2(pc, 800003, 1, 0); // 티셔츠 코인
-				createNewItem2(pc, 800004, 1, 0); // 망토 코인
-				createNewItem2(pc, 800005, 1, 0); // 갑옷 코인
-				createNewItem2(pc, 800007, 1, 0); // 장갑 코인
-				createNewItem2(pc, 800008, 1, 0); // 부츠 코인
-				createNewItem2(pc, 800009, 1, 0); // 목걸이 코인
-				createNewItem2(pc, 800010, 1, 0); // 귀걸이 코인
-				createNewItem2(pc, 800011, 1, 0); // 반지 코인
-				createNewItem2(pc, 800011, 1, 0); // 반지 코인
-				createNewItem2(pc, 800012, 1, 0); // 벨트 코인
-				createNewItem2(pc, 800013, 1, 0); // 인형 코인
-				createNewItem2(pc, 800014, 1, 0); // 각반 코인	
-				createNewItem2(pc, 40308, 50000000, 0); // 아데나
-				createNewItem2(pc, 3000119, 1, 0); // 패키지 이동부적
+				createNewItem2(pc, 800001, 1, 0); // 武器コイン
+				createNewItem2(pc, 800002, 1, 0); // 投球コイン
+				createNewItem2(pc, 800003, 1, 0); // Tシャツコイン
+				createNewItem2(pc, 800004, 1, 0); // マントコイン
+				createNewItem2(pc, 800005, 1, 0); // 鎧コイン
+				createNewItem2(pc, 800007, 1, 0); // 手袋コイン
+				createNewItem2(pc, 800008, 1, 0); // ブーツコイン
+				createNewItem2(pc, 800009, 1, 0); // ネックレスコイン
+				createNewItem2(pc, 800010, 1, 0); // イヤリングコイン
+				createNewItem2(pc, 800011, 1, 0); // リングコイン
+				createNewItem2(pc, 800011, 1, 0); // リングコイン
+				createNewItem2(pc, 800012, 1, 0); // ベルトコイン
+				createNewItem2(pc, 800013, 1, 0); // 人形コイン
+				createNewItem2(pc, 800014, 1, 0); // ゲートルコイン	
+				createNewItem2(pc, 40308, 50000000, 0); // アデナ
+				createNewItem2(pc, 3000119, 1, 0); // パッケージの移動お守り
 				if (pc.isWarrior()) {
-					createNewItem2(pc, 203006, 1, 9); // 태풍의 도끼
+					createNewItem2(pc, 203006, 1, 9); // 台風の斧
 				}	
 				if (!pc.isWarrior()) {
-					createNewItem2(pc, 800006, 1, 0); // 방패 코인
+					createNewItem2(pc, 800006, 1, 0); // 盾コイン
 				}
 			}
 			break;
-		case 1000010:// 랜덤 무기상자
+		case 1000010:// ランダム武器箱
 			int randomchance1 = _random.nextInt(17);
 			int randomchance2 = _random.nextInt(14);
 			int[] item1 = {1121, 47, 203006, 203018, 76, 1137, 203017, 1119, 1123, 202001,
 						1120, 1136, 202003, 58, 54, 203025, 203023};
 			int[] item2 = {212, 614, 604, 600, 57, 9, 11, 602, 74, 157, 205, 127, 1134, 603};
 			if(_random.nextInt(100) + 1 <= 10){
-				createNewItem2(pc, item1[randomchance1], 1, 5); // 랜덤무기 2천만등급
+				createNewItem2(pc, item1[randomchance1], 1, 5); // ランダム武器2万評価
 			}else{
-				createNewItem2(pc, item2[randomchance2], 1, 5); // 랜덤무기 1천만등급
+				createNewItem2(pc, item2[randomchance2], 1, 5); // ランダム武器1万評価
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 430507:// 4~6단계 법서
+		case 430507:// 4~ステップ6スペルブック
 			if (pc.getInventory().getSize() > 120) {
-				pc.sendPackets(new S_ChatPacket(pc, "소지하고 있는 아이템이 너무 많습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "所持しているアイテムが多すぎます。"));
 				return;
 			}
-			if (pc.getInventory().getWeight100() > 82) { // 이부분을 수정하면 오류가 발생한다.
-				pc.sendPackets(new S_ChatPacket(pc, "소지품이 너무 무거워서 사용 할 수 없습니다."));
+			if (pc.getInventory().getWeight100() > 82) { // この部分を変更すると、エラーが発生する。
+				pc.sendPackets(new S_ChatPacket(pc, "持ち物が重すぎて使用することはできません。"));
 				return;
 			}
 			for(int i = 40170; i < 40194; i++){
@@ -344,13 +340,13 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 1000050:// 4~10단계 법서(디스, 데스힐, 미티어, 앱솔 세이프 제외)
+		case 1000050:// 4〜ステップ10スペルブック（ディス、デス・ヒル、メテオ、アブソセーフ除く）
 			if (pc.getInventory().getSize() > 120) {
-				pc.sendPackets(new S_ChatPacket(pc, "소지하고 있는 아이템이 너무 많습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "所持しているアイテムが多すぎます。"));
 				return;
 			}
-			if (pc.getInventory().getWeight100() > 82) { // 이부분을 수정하면 오류가 발생한다.
-				pc.sendPackets(new S_ChatPacket(pc, "소지품이 너무 무거워서 사용 할 수 없습니다."));
+			if (pc.getInventory().getWeight100() > 82) { // この部分を変更すると、エラーが発生する。
+				pc.sendPackets(new S_ChatPacket(pc, "持ち物が重すぎて使用することはできません。"));
 				return;
 			}
 			for(int i = 40170; i < 40226; i++){
@@ -361,89 +357,89 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 500219:// 발록봉헌주문서(우호도)
+		case 500219:// バルログ献呈書（友好度）
 			if (pc.getKarma() <= 10000000) {
 				pc.addKarma((int) (+15000 * Config.RATE_KARMA));
 				pc.sendPackets(new S_Karma(pc));
-				pc.sendPackets(new S_SystemMessage(pc.getName() + "님의 우호도가 향상되었습니다."));
-				// pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"Ctrl+A 누르고 4번째창에서 현재 우호도 상태를 확인할수 있습니다."));
+				pc.sendPackets(new S_SystemMessage(pc.getName() + "さんの友好度が向上しました。"));
+				// pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE、「Ctrl + Aキー押し4番目のウィンドウで、現在の友好度の状態を確認することができます。 "））;
 				pc.getInventory().removeItem(l1iteminstance, 1);
 			} else
 				pc.sendPackets(new S_ServerMessage(79));
 			break;
-		case 500218:// 야히봉헌주문서(우호도)
+		case 500218:// ヤヒ献呈書（友好度）
 			if (pc.getKarma() >= -10000000) {
 				pc.addKarma((int) (-15000 * Config.RATE_KARMA));
 				pc.sendPackets(new S_Karma(pc));
-				pc.sendPackets(new S_SystemMessage(pc.getName() + "님의 우호도가 향상되었습니다."));
-				// pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"Ctrl+A 누르고 4번째창에서 현재 우호도 상태를 확인할수 있습니다."));
+				pc.sendPackets(new S_SystemMessage(pc.getName() + "さんの友好度が向上しました。"));
+				// pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE、「Ctrl + Aキー押し4番目のウィンドウで、現在の友好度の状態を確認することができます。 "））;
 
 				pc.getInventory().removeItem(l1iteminstance, 1);
 			} else
 				pc.sendPackets(new S_ServerMessage(79));
 			break;
-		case 1000011:// 기란감옥 충전 코인
+		case 1000011:// ギラン監獄充電コイン
 			if (pc.getGirandungeonTime() > 115) {
 				pc.getInventory().removeItem(l1iteminstance, 1);
 				pc.setGirandungeonTime(0);
 				pc.save();
-				pc.sendPackets(new S_ChatPacket(pc, "기감, 지배자의결계 던전 체류 시간이 2시간 충전 되었습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "技監、支配者の結界ダンジョン滞留時間が2時間の充電された。"));
 			} else {
-				pc.sendPackets(new S_ChatPacket(pc, "기감, 지배자의결계 체류 시간이 아직 남아 있습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "技監、支配者の結界滞留時間がまだ残っています。"));
 			}
 			break;
-		case 410062:// 상아탑 던전 충전 코인
+		case 410062://象牙の塔のダンジョン充電コイン
 			if (pc.getOrendungeonTime() > 55) {
 				pc.getInventory().removeItem(l1iteminstance, 1);
 				pc.setOrendungeonTime(0);
 				pc.save();
-				pc.sendPackets(new S_ChatPacket(pc, "상아탑 던전 체류 시간이 1시간 충전 되었습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "象牙の塔のダンジョン滞留時間が1時間の充電された。"));
 			} else {
-				pc.sendPackets(new S_ChatPacket(pc, "상아탑 던전 체류 시간이 아직 남아 있습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "象牙の塔のダンジョン滞留時間がまだ残っています。"));
 			}
 			break;
-		case 1000012:// 몽섬충전코인
+		case 1000012:// モンソム充電コイン
 			if (pc.getSomeTime() > 25) {
 				pc.getInventory().removeItem(l1iteminstance, 1);
 				pc.setSomeTime(0);
 				pc.save();
-				pc.sendPackets(new S_ChatPacket(pc, "몽환의 섬 체류 시간이 충전 되었습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "夢幻の島滞在時間が充電された。"));
 			} else {
-				pc.sendPackets(new S_ChatPacket(pc, "몽환의 섬 체류 시간이 아직 남아 있습니다"));
+				pc.sendPackets(new S_ChatPacket(pc, "夢幻の島滞在時間がまだ残っています"));
 			}
 			break;
-		case 1000013:// 정무충전
+		case 1000013://政務充電
 			if (pc.getSoulTime() > 25) {
 				pc.getInventory().removeItem(l1iteminstance, 1);
 				pc.setSoulTime(0);
 				pc.save();
-				pc.sendPackets(new S_ChatPacket(pc, "무덤 체류 시간이 30분 충전 되었습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "墓滞留時間が30分の充電された。"));
 			} else {
-				pc.sendPackets(new S_ChatPacket(pc, "무덤 체류 시간이 아직 남아 있습니다"));
+				pc.sendPackets(new S_ChatPacket(pc, "墓滞留時間がまだ残っています"));
 			}
 			break;
 
-		case 410135:// 라스타바드 던전 충전 코인
+		case 410135:// ラスタバドケイブ充電コイン
 			if (pc.getRadungeonTime() > 115) {
 				pc.getInventory().removeItem(l1iteminstance, 1);
 				pc.setRadungeonTime(0);
 				pc.save();
-				pc.sendPackets(new S_ChatPacket(pc, "라스타바드 체류 시간이 2시간 충전 되었습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "ラスタバド滞留時間が2時間の充電された。"));
 			} else {
-				pc.sendPackets(new S_ChatPacket(pc, "라스타바드 체류 시간이 아직 남아 있습니다"));
+				pc.sendPackets(new S_ChatPacket(pc, "ラスタバド滞留時間がまだ残っています"));
 			}
 			break;
-		case 500216:// 용의 던전 충전 코인
+		case 500216:// 用のダンジョン充電コイン
 			if (pc.getDrageonTime() > 115) {
 				pc.getInventory().removeItem(l1iteminstance, 1);
 				pc.setDrageonTime(0);
 				pc.save();
-				pc.sendPackets(new S_ChatPacket(pc, "용의 던전 체류 시간 2시간이 충전 되었습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "用のダンジョン滞留時間2時間充電しました。"));
 			} else {
-				pc.sendPackets(new S_ChatPacket(pc, "용의 던전 체류 시간이 아직 남아 있습니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "用のダンジョン滞留時間がまだ残っています。"));
 			}
 			break;
-		case 40867: {// 큐어포이즌 빈주문서
+		case 40867: {// キュアポイズンブランクスクロール
 			int[] allBuffSkill = { 9 };
 			L1SkillUse l1skilluse = null;
 			l1skilluse = new L1SkillUse();
@@ -456,7 +452,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 			break;
-		case 40877: {// 익스트라힐
+		case 40877: {// エクストラ・ヒル
 			int[] allBuffSkill = { 19 };
 			L1SkillUse l1skilluse = null;
 			l1skilluse = new L1SkillUse();
@@ -469,7 +465,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 			break;
-		case 40893: {// 그레이트힐
+		case 40893: {// グレートヒル
 			int[] allBuffSkill = { 35 };
 			L1SkillUse l1skilluse = null;
 			l1skilluse = new L1SkillUse();
@@ -483,10 +479,10 @@ public class C_ItemUSe2 extends ClientBasePacket {
 		}
 			break;
 
-		/** 오만의탑 혼돈부적,변이된 부적 **/
-		case 30106: {// 숨겨진 계곡 마을 귀환 부적
+		/** 傲慢の塔混沌お守り、変異されたお守り **/
+		case 30106: {// 隠された渓谷の村帰還お守り
 			if (pc.get_DuelLine() != 0) {
-				pc.sendPackets(new S_SystemMessage("배틀존지역에서 사용할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 				return;
 			}
 			if(pc.isDead())
@@ -498,15 +494,15 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			new L1Teleport().teleport(pc, loc[0], loc[1], (short) loc[2], pc.getHeading(), true);
 		}
 		break;
-		case 3000108:// 발록진영4층
+		case 3000108:// バルログ陣営4階
 			if (pc.getnewdodungeonTime() >= 59) {
-				pc.sendPackets(new S_SystemMessage("\\aA경고: \\aG[발록진영]\\aA 던전 시간이 만료되었습니다."));
+				pc.sendPackets(new S_SystemMessage("\\aA警告: \\aG[バルログ陣営]\\aA ダンジョン時間が経過しました。"));
 				return;
 			}
 			if (pc.getMap().isEscapable() || pc.isGm()) {
 				int rx = _random.nextInt(2);
 				int ux = 32901 + rx;
-				int uy = 32765 + rx; // 상아탑
+				int uy = 32765 + rx; // 象牙の塔
 				if (itemId == 3000108) {
 					new L1Teleport().teleport(pc, ux, uy, (short) 280, pc.getHeading(), true);
 				}
@@ -515,11 +511,11 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			} else {
 				pc.sendPackets(new S_ServerMessage(647));
 			}
-			cancelAbsoluteBarrier(pc); // 아브소르트바리아의 해제
+			cancelAbsoluteBarrier(pc); //アブ小ガルトバリアの解除
 			break;
-		case 3000120:// 글루디오 던전1층
+		case 3000120://メインランドのダンジョン1階
 			if (pc.getGirandungeonTime() >= 180) {
-				pc.sendPackets(new S_SystemMessage("\\aA경고: \\aG[글루디오]\\aA 던전 시간이 만료되었습니다."));
+				pc.sendPackets(new S_SystemMessage("\\aA警告: \\aG[グルーディオ]\\aA ダンジョン時間が経過しました。"));
 				return;
 			 }
 			if (pc.getMap().isEscapable() || pc.isGm()) {
@@ -534,11 +530,11 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			} else {
 				pc.sendPackets(new S_ServerMessage(647));
 			}
-			cancelAbsoluteBarrier(pc); // 아브소르트바리아의 해제
+			cancelAbsoluteBarrier(pc); // アブ小ガルトバリアの解除
 			break;
-		case 42069:// 말던1층
+		case 42069:// 巻い1階
 			if (pc.getislandTime() >= 59) {
-				pc.sendPackets(new S_SystemMessage("\\aA경고: \\aG[말하는섬]\\aA 던전 시간이 만료되었습니다."));
+				pc.sendPackets(new S_SystemMessage("\\aA警告: \\aG[話せる島]\\aA ダンジョン時間が経過しました。"));
 				return;
 			}
 			if (pc.getMap().isEscapable() || pc.isGm()) {
@@ -553,11 +549,11 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			} else {
 				pc.sendPackets(new S_ServerMessage(647));
 			}
-			cancelAbsoluteBarrier(pc); // 아브소르트바리아의 해제
+			cancelAbsoluteBarrier(pc); // アブ小ガルトバリアの解除
 			break;
-		case 301067: {// 벚꽃마을
+		case 301067: {// 桜の村
 			if (pc.get_DuelLine() != 0) {
-				pc.sendPackets(new S_SystemMessage("배틀존지역에서 사용할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 				return;
 			}
 			if(pc.isDead())
@@ -570,9 +566,9 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 		}
 		break;  
-		case 600232: {// 잊섬탈출주문서
+		case 600232: {// イッソム脱出書
 			if (pc.get_DuelLine() != 0) {
-				pc.sendPackets(new S_SystemMessage("배틀존지역에서 사용할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 				return;
 			}
 			if(pc.isDead())
@@ -581,7 +577,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 				return;
 			
 			if (!(pc.getMapId() >= 1700 && pc.getMapId() <= 1711)) {
-				pc.sendPackets(new S_SystemMessage("잊혀진섬에서만 사용가능합니다."));
+				pc.sendPackets(new S_SystemMessage("忘れられた島でのみ使用可能です。"));
 				return;
 			}
 			new L1Teleport().teleport(pc, 33452, 32788, (short) 4, pc.getHeading(), true);
@@ -589,9 +585,9 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			break;
 		
 		
-		case 202099: {// 클라우디아 마을
+		case 202099: {// クラウディア村
 				if (pc.get_DuelLine() != 0) {
-				pc.sendPackets(new S_SystemMessage("배틀존지역에서 사용할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 				return;
 			}
 				if(pc.isDead())
@@ -605,10 +601,10 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 		}
 		break;
-		case 40081: // 기란마을주문서
+		case 40081: //ギラン村書
 		case 301066:
 			if (pc.get_DuelLine() != 0) {
-				pc.sendPackets(new S_SystemMessage("배틀존지역에서 사용할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 				return;
 			}
 			if(pc.isDead())
@@ -629,9 +625,9 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 			cancelAbsoluteBarrier(pc);
 			break;
-		case 40117: // 은기사마을
+		case 40117: // は記事の村
 			if (pc.get_DuelLine() != 0) {
-				pc.sendPackets(new S_SystemMessage("배틀존지역에서 사용할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 				return;
 			}
 			if(pc.isDead())
@@ -650,11 +646,11 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 			break;
 
-		case 41260:// 장착
+		case 41260:// 装着
 			for (L1Object object : L1World.getInstance().getVisibleObjects(pc, 3)) {
 				if (object instanceof L1EffectInstance) {
 					if (((L1NpcInstance) object).getNpcTemplate().get_npcId() == 81170) {
-						// 벌써 주위에 모닥불이 있습니다.
+						// すでに周囲に焚き火があります。
 						pc.sendPackets(new S_ServerMessage(1162));
 						return;
 					}
@@ -665,9 +661,9 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			L1EffectSpawn.getInstance().spawnEffect(81170, 300000, loc1[0], loc1[1], pc.getMapId());
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 240100:// 저주해진 텔레포트 스크롤(오리지날 아이템)
+		case 240100://呪われたテレポートスクロール（オリジナルアイテム）
 			if (pc.get_DuelLine() != 0) {
-				pc.sendPackets(new S_SystemMessage("배틀존지역에서 사용할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 				return;
 			}
 			if(pc.isDead())
@@ -677,18 +673,18 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			
 			new L1Teleport().teleport(pc, pc.getX(), pc.getY(), pc.getMapId(), pc.getHeading(), true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
-			pc.cancelAbsoluteBarrier(); // 아브소르트바리아의 해제
+			pc.cancelAbsoluteBarrier(); // アブ小ガルトバリアの解除
 			break;
-		case 748: // 잡화상점 이동부적
+		case 748: // 雑貨店に移動お守り
 			new L1Teleport().teleport(pc, 33453, 32820, (short) 4, pc.getHeading(), true);
 			break;
-		case 749: // 장비상점 이동부적
+		case 749: // 装置の店に移動お守り
 			new L1Teleport().teleport(pc, 33435, 32754, (short) 4, pc.getHeading(), true);
 			break;
 			
-		case 500076:{//근거리버프물약
+		case 500076:{//近距離バフポーション
 			int[] allBuffSkill = { 14, 26, 42, 48,  168, 160, 206, 211, 216, 148, 158 };
-			//디크리즈,덱,힘,블레스웨폰,어밴,어스,아쿠아,컨센트,페이션스,인사이트,파이어웨폰,아바타,네이쳐스
+			//ディクリーズ、デッキ、力、ブレスウェポン、オベン、アース、アクア、コンセント、ペイシェンスは、Insight、ファイアーウェポン、アバター、ネイチャーズ
 			pc.setBuffnoch(1);
 			L1SkillUse l1skilluse = null;
 			l1skilluse = new L1SkillUse();
@@ -701,9 +697,9 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			pc.getInventory().removeItem(l1iteminstance, 1);
 		}
 		break;
-		case 500077:{//원거리버프물약
+		case 500077:{//遠距離バフポーション
 			int[] allBuffSkill = { 14,26,42,43,48,151,160,206,211,216,149 };
-			//디크리즈,덱,힘,블레스웨폰,어밴,어스,아쿠아,컨센트,페이션스,인사이트,스톰샷,아바타,네이쳐스
+			//ディクリーズ、デッキ、力、ブレスウェポン、オベン、アース、アクア、コンセント、ペイシェンスは、Insight、ストームショット、アバター、ネイチャーズ
 			pc.setBuffnoch(1);
 			L1SkillUse l1skilluse = null;
 			l1skilluse = new L1SkillUse();
@@ -718,7 +714,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 		break;
 
 		
-		/** 패키지이동주문서 **/ 
+		/** パッケージレポートスクロール **/ 
 		case 800100:
 			pc.setCashStep(1);
 			new L1Teleport().teleport(pc, 32672, 32793, (short) 514, 5, true);
@@ -734,9 +730,9 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			new L1Teleport().teleport(pc, 32672, 32793, (short) 516, 5, true);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 3000119: //패키지상점 이동주문서
+		case 3000119: //パッケージ店レポートスクロール
 			if (pc.getZoneType() != 1 || pc.getMapId() != 4) {
-				pc.sendPackets(new S_SystemMessage("마을에서만 사용할 수 있습니다."));
+				pc.sendPackets(new S_SystemMessage("村でのみ使用することができます。"));
 				return;
 			}
 			else{
@@ -744,9 +740,9 @@ public class C_ItemUSe2 extends ClientBasePacket {
 				new L1Teleport().teleport(pc, 32672, 32785, (short) 514, 5, true);
 			}
 			break;
-		case 40124:case 30086:// 혈맹 귀환 스크롤
+		case 40124:case 30086:// 血盟帰還スクロール
 			if (pc.get_DuelLine() != 0) {
-				pc.sendPackets(new S_SystemMessage("배틀존지역에서 사용할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 				return;
 			}
 			if(pc.isDead())
@@ -757,14 +753,14 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			if (pc.getMap().isEscapable() || pc.isGm()) {
 				int castle_id = 0;
 				int house_id = 0;
-				if (pc.getClanid() != 0) { // 크란 소속
+				if (pc.getClanid() != 0) { // クランに所属
 					L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 					if (clan != null) {
 						castle_id = clan.getCastleId();
 						house_id = clan.getHouseId();
 					}
 				}
-				if (castle_id != 0) { // 성주 크란원
+				if (castle_id != 0) { //城主クラン員
 					if (pc.getMap().isEscapable() || pc.isGm()) {
 						int[] loc = new int[3];
 						loc = L1CastleLocation.getCastleLoc(castle_id);
@@ -777,7 +773,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 						pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
 						pc.sendPackets(new S_ServerMessage(647));
 					}
-				} else if (house_id != 0) { // 아지트 소유 크란원
+				} else if (house_id != 0) { // アジトを所有クラン員
 					if (pc.getMap().isEscapable() || pc.isGm()) {
 						int[] loc = new int[3];
 						loc = L1HouseLocation.getHouseLoc(house_id);
@@ -809,10 +805,10 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			} else {
 				pc.sendPackets(new S_ServerMessage(647));
 			}
-			cancelAbsoluteBarrier(pc); // 아브소르트바리아의 해제
+			cancelAbsoluteBarrier(pc); // アブ小ガルトバリアの解除
 			break;
 			
-		case 40312:// 여관열쇠
+		case 40312:// 旅館鍵
 			if (pc.isstop()){
 				return;
 			}
@@ -824,16 +820,16 @@ public class C_ItemUSe2 extends ClientBasePacket {
 				new L1Teleport().teleport(pc, 32742, 32803, (short) 18432, 5, false);
 			}
 			break;
-		case 5988: //어비스포인트물약
+		case 5988: //アビスポイントポーション
 			pc.addAbysspoint(100);
-			pc.sendPackets(new S_SystemMessage("어비스포인트 100점 획득"));	
+			pc.sendPackets(new S_SystemMessage("アビスポイント100点獲得"));	
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
-		case 5989: //혈맹경험치 물약
+		case 5989: //血盟経験値ポーション
 			if(pc.getClanid() != 0){
 				pc.getClan().addClanExp(100);
 				pc.getInventory().removeItem(l1iteminstance, 1);
-				ClanTable.getInstance().updateClan(pc.getClan()); // 죽인사람 혈맹업데이트
+				ClanTable.getInstance().updateClan(pc.getClan()); // 殺した人血盟の更新
 			} else {
 				pc.sendPackets(new S_ServerMessage(4055));	
 			}
@@ -852,7 +848,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 		case 60256:
 			if(pc.getInventory().checkItem(60255)){
 				pc.sendPackets(new S_ServerMessage(939));
-				pc.sendPackets(new S_SystemMessage("드래곤의 자수정 보유."));
+				pc.sendPackets(new S_SystemMessage("ドラゴンのアメジストを保有。"));
 				return;
 			}
 			pc.getInventory().storeItem(60255, 1);
@@ -874,33 +870,33 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 			break;
 		case 51093:case 51094:case 51095:case 51096:case 51097:case 51098:case 51099:case 51100:
-			//클래스 변경물약 
+			//クラス変更ポーション 
 			if (pc.getClanid() != 0) {
-				pc.sendPackets(new S_ChatPacket(pc,"혈맹을 먼저 탈퇴하여 주시기 바랍니다."));
+				pc.sendPackets(new S_ChatPacket(pc,"血盟をまず脱退してください。"));
 				return;
-			} else if (itemId == 51093 && pc.getType() == 0) { // 자네 군주?
-				pc.sendPackets(new S_ChatPacket(pc,"당신은 이미 군주 클래스 입니다."));
+			} else if (itemId == 51093 && pc.getType() == 0) { // あなた君主？
+				pc.sendPackets(new S_ChatPacket(pc,"あなたは既に君主クラスです。"));
 				return;
-			} else if (itemId == 51094 && pc.getType() == 1) { // 자네 기사?
-				pc.sendPackets(new S_ChatPacket(pc,"당신은 이미 기사 클래스 입니다."));
+			} else if (itemId == 51094 && pc.getType() == 1) { // あなたの記事？
+				pc.sendPackets(new S_ChatPacket(pc,"あなたは既に記事クラスです。"));
 				return;
-			} else if (itemId == 51095 && pc.getType() == 2) { // 자네 요정?
-				pc.sendPackets(new S_ChatPacket(pc,"당신은 이미 요정 클래스 입니다."));
+			} else if (itemId == 51095 && pc.getType() == 2) { // あなたの妖精？
+				pc.sendPackets(new S_ChatPacket(pc,"あなたは既にエルフクラスです。"));
 				return;
-			} else if (itemId == 51096 && pc.getType() == 3) { // 자네 마법사?
-				pc.sendPackets(new S_ChatPacket(pc,"당신은 이미 마법사 클래스 입니다."));
+			} else if (itemId == 51096 && pc.getType() == 3) { // あなたのウィザード？
+				pc.sendPackets(new S_ChatPacket(pc,"あなたは既にウィザードクラスです。"));
 				return;
-			} else if (itemId == 51097 && pc.getType() == 4) { // 자네 다크엘프?
-				pc.sendPackets(new S_ChatPacket(pc,"당신은 이미 다크엘프 클래스 입니다."));
+			} else if (itemId == 51097 && pc.getType() == 4) { // あなたダークエルフ？
+				pc.sendPackets(new S_ChatPacket(pc,"あなたは既にダークエルフクラスです。"));
 				return;
-			} else if (itemId == 51098 && pc.getType() == 5) { // 자네 용기사?
-				pc.sendPackets(new S_ChatPacket(pc,"당신은 이미 용기사 클래스 입니다."));
+			} else if (itemId == 51098 && pc.getType() == 5) { // あなたの記事？
+				pc.sendPackets(new S_ChatPacket(pc,"あなたは既に用の記事のクラスです。"));
 				return;
-			} else if (itemId == 51099 && pc.getType() == 6) { // 자네 환술사?
-				pc.sendPackets(new S_ChatPacket(pc,"당신은 이미 환술사 클래스 입니다."));
+			} else if (itemId == 51099 && pc.getType() == 6) { // あなたイリュージョニスト？
+				pc.sendPackets(new S_ChatPacket(pc,"あなたは既にイリュージョニストクラスです。"));
 				return;
-			} else if (itemId == 51100 && pc.getType() == 7) { // 자네 환술사?
-				pc.sendPackets(new S_ChatPacket(pc,"당신은 이미 전사 클래스 입니다."));
+			} else if (itemId == 51100 && pc.getType() == 7) { // あなたイリュージョニスト？
+				pc.sendPackets(new S_ChatPacket(pc,"あなたは既に戦士クラスです。"));
 				return;
 			}
 			int[] Mclass = new int[] { 0, 61, 138, 734, 2786, 6658, 6671, 12490 };
@@ -908,46 +904,46 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			if (itemId == 51093 && pc.getType() != 0 && pc.get_sex() == 0) {
 				pc.setType(0);
 				pc.setClassId(Mclass[pc.getType()]);
-			} else if (itemId == 51093 && pc.getType() != 0 && pc.get_sex() == 1) {//군주
+			} else if (itemId == 51093 && pc.getType() != 0 && pc.get_sex() == 1) {//君主
 				pc.setType(0);
 				pc.setClassId(Wclass[pc.getType()]);
-			} else if (itemId == 51094 && pc.getType() != 1 && pc.get_sex() == 0) { // 변경: 기사
+			} else if (itemId == 51094 && pc.getType() != 1 && pc.get_sex() == 0) { // 変更：記事
 				pc.setType(1);
 				pc.setClassId(Mclass[pc.getType()]);
 			} else if (itemId == 51094 && pc.getType() != 1 && pc.get_sex() == 1) {
 				pc.setType(1);
 				pc.setClassId(Wclass[pc.getType()]);
-			} else if (itemId == 51095 && pc.getType() != 2 && pc.get_sex() == 0) { // 변경: 요정
+			} else if (itemId == 51095 && pc.getType() != 2 && pc.get_sex() == 0) { // 変更：妖精
 				pc.setType(2);
 				pc.setClassId(Mclass[pc.getType()]);
 			} else if (itemId == 51095 && pc.getType() != 2 && pc.get_sex() == 1) {
 				pc.setType(2);
 				pc.setClassId(Wclass[pc.getType()]);
-			} else if (itemId == 51096 && pc.getType() != 3 && pc.get_sex() == 0) { // 변경: 마법사
+			} else if (itemId == 51096 && pc.getType() != 3 && pc.get_sex() == 0) { // 変更：ウィザード
 				pc.setType(3);
 				pc.setClassId(Mclass[pc.getType()]);
 			} else if (itemId == 51096 && pc.getType() != 3 && pc.get_sex() == 1) {
 				pc.setType(3);
 				pc.setClassId(Wclass[pc.getType()]);
-			} else if (itemId == 51097 && pc.getType() != 4 && pc.get_sex() == 0) { // 변경: 다크엘프
+			} else if (itemId == 51097 && pc.getType() != 4 && pc.get_sex() == 0) { // 変更：ダークエルフ
 				pc.setType(4);
 				pc.setClassId(Mclass[pc.getType()]);
 			} else if (itemId == 51097 && pc.getType() != 4 && pc.get_sex() == 1) {
 				pc.setType(4);
 				pc.setClassId(Wclass[pc.getType()]);
-			} else if (itemId == 51098 && pc.getType() != 5 && pc.get_sex() == 0) { // 변경: 용기사
+			} else if (itemId == 51098 && pc.getType() != 5 && pc.get_sex() == 0) { // 変更：竜騎士
 				pc.setType(5);
 				pc.setClassId(Mclass[pc.getType()]);
 			} else if (itemId == 51098 && pc.getType() != 5 && pc.get_sex() == 1) {
 				pc.setType(5);
 				pc.setClassId(Wclass[pc.getType()]);
-			} else if (itemId == 51099 && pc.getType() != 6 && pc.get_sex() == 0) { // 변경: 환술사
+			} else if (itemId == 51099 && pc.getType() != 6 && pc.get_sex() == 0) { // 変更：イリュージョニスト
 				pc.setType(6);
 				pc.setClassId(Mclass[pc.getType()]);
 			} else if (itemId == 51099 && pc.getType() != 6 && pc.get_sex() == 1) {
 				pc.setType(6);
 				pc.setClassId(Wclass[pc.getType()]);
-			} else if (itemId == 51100 && pc.getType() != 7 && pc.get_sex() == 0) { // 변경: 전사
+			} else if (itemId == 51100 && pc.getType() != 7 && pc.get_sex() == 0) { // 変更：戦士
 				pc.setType(7);
 				pc.setClassId(Mclass[pc.getType()]);
 			} else if (itemId == 51100 && pc.getType() != 7 && pc.get_sex() == 1) {
@@ -975,7 +971,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			try {
 				pc.save();
 			} catch (Exception e) { }
-			pc.sendPackets(new S_SystemMessage("클래스변경으로 자동접속종료됩니다."));
+			pc.sendPackets(new S_SystemMessage("クラス変更に自動的に接続を終了します。"));
 			new L1Teleport().teleport(pc, 32723 + _random.nextInt(10), 32851 + _random.nextInt(10), (short) 5166, 5, true);
 			StatInitialize(pc);
 			Thread.sleep(500);
@@ -1007,29 +1003,29 @@ public class C_ItemUSe2 extends ClientBasePacket {
 		pc.sendPackets(new S_DoActionGFX(pc.getId(), ActionCodes.ACTION_Attack));
 		 Broadcaster.broadcastPacket(pc, new S_DoActionGFX(pc.getId(), ActionCodes.ACTION_Damage));
 		 if (pc.getPeerage() < 14){
-			 pc.sendPackets(new S_SystemMessage("5성장교 이상 사용가능한 아이템 입니다."));
+			 pc.sendPackets(new S_SystemMessage("5星将校以上使用可能なアイテムです。"));
 			 return;
 		 }
 		 if (pc.hasSkillEffect(L1SkillId.ABYSS_LIGHTNING_TIME)){
 			 int time = pc.getSkillEffectTimeSec(L1SkillId.ABYSS_LIGHTNING_TIME);
-			 pc.sendPackets(new S_SystemMessage("스킬딜레이로 사용이 중지됩니다.[남은시간 : "+ time +"초]"));
+			 pc.sendPackets(new S_SystemMessage("スキルディレイでの使用が停止されます。[残り時間："+ time +"秒]"));
 			 return;
 		 }
 		 if (pc.getZoneType() == 1){
-			 pc.sendPackets(new S_SystemMessage("마을에선 사용할 수 없습니다."));
+			 pc.sendPackets(new S_SystemMessage("村では使用できません。"));
 			 return;
 		 }
 		 L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 		 int dmg = 0;
 			for (L1PcInstance tg : L1World.getInstance(). getVisiblePlayer(pc)) {
-				if (clan != null){ // 혈맹이 있다면
+				if (clan != null){ //血盟がある場合
 					if (tg.getClanid() > 0){
-						if(tg.getClanid() == pc.getClanid()){ //같은 혈맹이라면
+						if(tg.getClanid() == pc.getClanid()){ //同じ血盟なら
 							break;
 						}
 					}
 				}
-				if (tg.isInParty()){// 같은 파티원이라면 데미지x
+				if (tg.isInParty()){// 同じパーティーメンバーであればダメージx
 					if(tg.getParty().getLeader() == pc.getParty().getLeader()){ 
 						break;
 					}
@@ -1040,9 +1036,9 @@ public class C_ItemUSe2 extends ClientBasePacket {
 				if (tg.getId() == pc.getId()){
 					break;
 				}
-				tg.sendPackets(new S_SystemMessage("심연의 폭풍으로 데미지를 입었습니다."));
-				pc.sendPackets(new S_SkillSound(tg.getId(), 10407));// /이건 자기한데 보이게
-				Broadcaster.broadcastPacket(pc, new S_SkillSound(tg.getId(), 10407));// 이거는 다른 사람도 보게...
+				tg.sendPackets(new S_SystemMessage("深淵の嵐にダメージを負った。"));
+				pc.sendPackets(new S_SkillSound(tg.getId(), 10407));// /これ自己のに見える
+				Broadcaster.broadcastPacket(pc, new S_SkillSound(tg.getId(), 10407));// これは、他の人も見る...
 				pc.sendPackets(new S_DoActionGFX(tg.getId(), ActionCodes.ACTION_Damage));
 				Broadcaster.broadcastPacket(pc, new S_DoActionGFX(tg.getId(), ActionCodes.ACTION_Damage));
 				if (pc.getPeerage() == 18){
@@ -1065,8 +1061,8 @@ public class C_ItemUSe2 extends ClientBasePacket {
 					if(npc.isDead()){
 						break;
 					}
-					pc.sendPackets(new S_SkillSound(obj.getId(), 10407));// /이건 자기한데 보이게
-					Broadcaster.broadcastPacket(pc, new S_SkillSound(obj.getId(), 10407));// 이거는 다른 사람도 보게...
+					pc.sendPackets(new S_SkillSound(obj.getId(), 10407));// /これ自己のに見える
+					Broadcaster.broadcastPacket(pc, new S_SkillSound(obj.getId(), 10407));// これは、他の人も見る...
 					pc.sendPackets(new S_DoActionGFX(obj.getId(), ActionCodes.ACTION_Damage));
 					Broadcaster.broadcastPacket(pc, new S_DoActionGFX(obj.getId(), ActionCodes.ACTION_Damage));
 					if (pc.getPeerage() == 18){
@@ -1088,24 +1084,24 @@ public class C_ItemUSe2 extends ClientBasePacket {
 	
 	public static void 어비스스턴스킬(L1PcInstance pc) {
 		if (pc.getAbysspoint() < Config.STAR_FIVE || pc.isGm()) {
-			if (pc.hasSkillEffect(L1SkillId.DELAY)) { // 딜레이
-				pc.sendPackets(new S_SystemMessage("아직 광역 스턴을 사용할 수 없습니다."));
+			if (pc.hasSkillEffect(L1SkillId.DELAY)) { // ディレイ
+				pc.sendPackets(new S_SystemMessage("まだ広域スタンを使用することができません。"));
 				return;
 			}
 			if (pc.isInvisble()) {
-				pc.sendPackets(new S_SystemMessage("광역 스턴은 투명상태로 시전이 불가능합니다."));
+				pc.sendPackets(new S_SystemMessage("広域スタンは透明状態で使用が不可能です。"));
 				return;
 			}
 			if (pc.getMapId() == 800) {
-				pc.sendPackets(new S_SystemMessage("광역 스턴은 시장에서 시전이 불가능합니다."));
+				pc.sendPackets(new S_SystemMessage("広域スターンは、市場での使用が不可能です。"));
 				return;
 			}
 			if (pc.getZoneType() == 1) {
-				pc.sendPackets(new S_SystemMessage("광역 스턴은 마을에서 시전이 불가능합니다."));
+				pc.sendPackets(new S_SystemMessage("広域スターンは村で使用が不可能です。"));
 				return;
 			}
 			
-			pc.sendPackets(new S_SystemMessage("광역 스턴을 시전 합니다."));
+			pc.sendPackets(new S_SystemMessage("広域スタンを使用します。"));
 			pc.setSkillEffect(L1SkillId.DELAY, 300000);
 			
 			int actionId = ActionCodes.ACTION_SkillBuff;
@@ -1130,7 +1126,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 								L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, target.getX(), target.getY(), target.getMapId());
 								target.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
 								target.setSkillEffect(SHOCK_STUN, _shockStunDuration);
-								target.sendPackets(new S_SkillSound(target.getId(), 4434)); // 스턴
+								target.sendPackets(new S_SkillSound(target.getId(), 4434)); //スターン
 								Broadcaster.broadcastPacket(target, new S_SkillSound(target.getId(), 4434));
 							}
 						}
@@ -1146,7 +1142,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 				}
 			}
 		} else {
-			pc.sendPackets(new S_SystemMessage("해당 기술은 5성장교이상만 시전이 가능합니다."));
+			pc.sendPackets(new S_SystemMessage("この技術は、5将校以上のみ使用が可能です。"));
 		}
 		System.currentTimeMillis();
 		return;
@@ -1189,18 +1185,18 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			item.setIdentified(true);
 			if (pc.getInventory().checkAddItem(item, count) == L1Inventory.OK) {
 				pc.getInventory().storeItem(item);
-			} else { // 가질 수 없는 경우는 지면에 떨어뜨리는 처리의 캔슬은 하지 않는다(부정 방지)
+			} else { //持つことができない場合は、地面に落とす処理のキャンセルはしない（不正防止）
 				L1World.getInstance().getInventory(pc.getX(), pc.getY(), pc.getMapId()).storeItem(item);
 			}
-			pc.sendPackets(new S_ServerMessage(403, item.getLogName())); // %0를
-																			// 손에
-																			// 넣었습니다.
+			pc.sendPackets(new S_ServerMessage(403, item.getLogName())); // %0を
+																			// 手に
+																			//入れました。
 			return true;
 		} else {
 			return false;
 		}
 	}
-	private void cancelAbsoluteBarrier(L1PcInstance pc) { // 아브소르트바리아의 해제
+	private void cancelAbsoluteBarrier(L1PcInstance pc) { // アブ小ガルトバリアの解除
 		if (pc.hasSkillEffect(ABSOLUTE_BARRIER)) {
 			pc.killSkillEffectTimer(ABSOLUTE_BARRIER);
 			//pc.startMpRegeneration();

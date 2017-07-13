@@ -27,7 +27,7 @@ public class C_ExitGhost extends ClientBasePacket {
 
 	private static final String C_EXIT_GHOST = "[C] C_ExitGhost";
 
-	// 이동
+	// 移動
 	public C_ExitGhost(byte decrypt[], GameClient client)
 			throws Exception {
 		super(decrypt);

@@ -4,7 +4,6 @@ import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
 import l1j.server.server.datatables.ItemTable;
-import l1j.server.server.model.L1Inventory;
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
@@ -25,7 +24,7 @@ public class L1CreateItem implements L1CommandExecutor {
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
 			StringTokenizer st = new StringTokenizer(arg);
-//			if (st.hasMoreTokens()) {  //추가
+//			if (st.hasMoreTokens()) {  //追加
 			String nameid = st.nextToken();
 			int count = 1;
 			if (st.hasMoreTokens()) {
@@ -52,7 +51,7 @@ public class L1CreateItem implements L1CommandExecutor {
 				itemid = ItemTable.getInstance(). findItemIdByNameWithoutSpace(
 						nameid);
 				if (itemid == 0) {
-					pc.sendPackets(new S_SystemMessage("해당 아이템이 발견되지 않습니다. "));
+					pc.sendPackets(new S_SystemMessage("該当のアイテムが見つかりません。"));
 					return;
 				}
 			}
@@ -65,9 +64,9 @@ public class L1CreateItem implements L1CommandExecutor {
 					if (isId == 1) {
 						item.setIdentified(true);
 					}
-					//if (pc.getInventory().checkAddItem(item, count) == L1Inventory.OK) { //무거우면 안들어오게
+					//if (pc.getInventory().checkAddItem(item, count) == L1Inventory.OK) { //重いと入らない来る
 					pc.getInventory().storeItem(item);
-					pc.sendPackets(new S_SystemMessage("\\aD" + item.getLogName() + " (ID " + itemid + ") 획득"));
+					pc.sendPackets(new S_SystemMessage("\\aD" + item.getLogName() + " (ID " + itemid + "）獲得"));
 					//}
 				} else {
 					L1ItemInstance item = null;
@@ -90,12 +89,12 @@ public class L1CreateItem implements L1CommandExecutor {
 					}
 				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("지정 ID의 아이템은 존재하지 않습니다"));
+				pc.sendPackets(new S_SystemMessage("指定IDのアイテムは存在しません"));
 			}
 //			}
 		} catch (Exception e) {
 		//	_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			pc.sendPackets(new S_SystemMessage(".아이템 [이름] [갯수] [인챈] [속성1~20] [확인0~1] "));
+			pc.sendPackets(new S_SystemMessage("。アイテム[名前] [本数] [エンチャント] [属性1〜20]、[OK 0〜1]"));
 		}
 	}
 }

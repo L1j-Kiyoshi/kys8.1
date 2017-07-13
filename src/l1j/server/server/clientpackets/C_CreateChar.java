@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import l1j.server.RobotSystem.RobotAIThread;
 import l1j.server.server.BadNamesList;
 import l1j.server.server.GameClient;
 import l1j.server.server.IdFactory;
@@ -38,23 +37,23 @@ public class C_CreateChar extends ClientBasePacket {
 		Calendar cal = Calendar.getInstance();
 		int 시간 = Calendar.HOUR;
 		int 분 = Calendar.MINUTE;
-		/** 0 오전 , 1 오후 * */
-		String 오전오후 = "오후";
+		/** 0時、1午後* */
+		String 오전오후 = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "오전";
+			오전오후 = "午前";
 		}
 
 		for (int i = 0; i < name.length(); i++) {
-			if (name.charAt(i) == 'ㄱ' || name.charAt(i) == 'ㄲ' || name.charAt(i) == 'ㄴ' || name.charAt(i) == 'ㄷ' || // 한문자(char)단위로 비교.
-					name.charAt(i) == 'ㄸ' || name.charAt(i) == 'ㄹ' || name.charAt(i) == 'ㅁ' || name.charAt(i) == 'ㅂ' || // 한문자(char)단위로 비교
-					name.charAt(i) == 'ㅃ' || name.charAt(i) == 'ㅅ' || name.charAt(i) == 'ㅆ' || name.charAt(i) == 'ㅇ' || // 한문자(char)단위로 비교
-					name.charAt(i) == 'ㅈ' || name.charAt(i) == 'ㅉ' || name.charAt(i) == 'ㅊ' || name.charAt(i) == 'ㅋ' || // 한문자(char)단위로 비교.
-					name.charAt(i) == 'ㅌ' || name.charAt(i) == 'ㅍ' || name.charAt(i) == 'ㅎ' || name.charAt(i) == 'ㅛ' || // 한문자(char)단위로 비교.
-					name.charAt(i) == 'ㅕ' || name.charAt(i) == 'ㅑ' || name.charAt(i) == 'ㅐ' || name.charAt(i) == 'ㅔ' || // 한문자(char)단위로 비교.
-					name.charAt(i) == 'ㅗ' || name.charAt(i) == 'ㅓ' || name.charAt(i) == 'ㅏ' || name.charAt(i) == 'ㅣ' || // 한문자(char)단위로 비교.
-					name.charAt(i) == 'ㅠ' || name.charAt(i) == 'ㅜ' || name.charAt(i) == 'ㅡ' || name.charAt(i) == 'ㅒ' || // 한문자(char)단위로 비교.
-					name.charAt(i) == 'ㅖ' || name.charAt(i) == 'ㅢ' || name.charAt(i) == 'ㅟ' || name.charAt(i) == 'ㅝ' || // 한문자(char)단위로 비교.
-					name.charAt(i) == 'ㅞ' || name.charAt(i) == 'ㅙ' || name.charAt(i) == 'ㅚ' || name.charAt(i) == 'ㅘ' || // 한문자(char)단위로 비교.
+			if (name.charAt(i) == 'ㄱ' || name.charAt(i) == 'ㄲ' || name.charAt(i) == 'ㄴ' || name.charAt(i) == 'ㄷ' || //一文字（char）単位で比較。
+					name.charAt(i) == 'ㄸ' || name.charAt(i) == 'ㄹ' || name.charAt(i) == 'ㅁ' || name.charAt(i) == 'ㅂ' || //一文字（char）単位で比較
+					name.charAt(i) == 'ㅃ' || name.charAt(i) == 'ㅅ' || name.charAt(i) == 'ㅆ' || name.charAt(i) == 'ㅇ' || //一文字（char）単位で比較
+					name.charAt(i) == 'ㅈ' || name.charAt(i) == 'ㅉ' || name.charAt(i) == 'ㅊ' || name.charAt(i) == 'ㅋ' || //一文字（char）単位で比較。
+					name.charAt(i) == 'ㅌ' || name.charAt(i) == 'ㅍ' || name.charAt(i) == 'ㅎ' || name.charAt(i) == 'ㅛ' || // 一文字（char）単位で比較。
+					name.charAt(i) == 'ㅕ' || name.charAt(i) == 'ㅑ' || name.charAt(i) == 'ㅐ' || name.charAt(i) == 'ㅔ' || //一文字（char）単位で比較。
+					name.charAt(i) == 'ㅗ' || name.charAt(i) == 'ㅓ' || name.charAt(i) == 'ㅏ' || name.charAt(i) == 'ㅣ' || //一文字（char）単位で比較。
+					name.charAt(i) == 'ㅠ' || name.charAt(i) == 'ㅜ' || name.charAt(i) == 'ㅡ' || name.charAt(i) == 'ㅒ' || //一文字（char）単位で比較。
+					name.charAt(i) == 'ㅖ' || name.charAt(i) == 'ㅢ' || name.charAt(i) == 'ㅟ' || name.charAt(i) == 'ㅝ' || //一文字（char）単位で比較。
+					name.charAt(i) == 'ㅞ' || name.charAt(i) == 'ㅙ' || name.charAt(i) == 'ㅚ' || name.charAt(i) == 'ㅘ' || //一文字（char）単位で比較。
 					name.charAt(i) == '씹' || name.charAt(i) == '좃' || name.charAt(i) == '좆' || name.charAt(i) == 'ㅤ') {
 				S_CharCreateStatus s_charcreatestatus = new S_CharCreateStatus(S_CharCreateStatus.REASON_INVALID_NAME);
 				client.sendPacket(s_charcreatestatus);
@@ -62,8 +61,8 @@ public class C_CreateChar extends ClientBasePacket {
 			}
 		}
 
-		if (name.length() <= 0) { // 한글자 아이디 안되게 픽스
-			// 영어는 한글자당 1의 길이, 한글은 한글자당 2의 길이
+		if (name.length() <= 0) { // 一字名途方もなく修正
+			// 英語は、ハングルショ糖1の長さは、ハングルはハングルのショ糖2の長さ
 			S_CharCreateStatus s_charcreatestatus = new S_CharCreateStatus(S_CharCreateStatus.REASON_INVALID_NAME);
 			client.sendPacket(s_charcreatestatus);
 			return;
@@ -71,7 +70,7 @@ public class C_CreateChar extends ClientBasePacket {
 
 		if (BadNamesList.getInstance().isBadName(name)) {
 			S_CharCreateStatus s_charcreatestatus = new S_CharCreateStatus(S_CharCreateStatus.REASON_INVALID_NAME);
-			// _log.info("생성 금지된 캐릭터 이름, 생성실패");
+			// _log.info（「生成禁止されたキャラクターの名前、作成に失敗 "）;
 			client.sendPacket(s_charcreatestatus);
 			return;
 		}
@@ -82,7 +81,7 @@ public class C_CreateChar extends ClientBasePacket {
 			client.sendPacket(s_charcreatestatus);
 			return;
 		}
-		/**로봇 이름 중복 **/
+		/**ロボットの名前の重複 **/
 		if (CharacterTable.RobotNameExist(name) || L1World.getInstance().getPlayer(name) != null) {
 			_log.fine("charname: " + pc.getName() + " already exists. creation failed.");
 			S_CharCreateStatus s_charcreatestatus1 = new S_CharCreateStatus(S_CharCreateStatus.REASON_ALREADY_EXSISTS);
@@ -103,7 +102,7 @@ public class C_CreateChar extends ClientBasePacket {
 		}
 
 		if (client.getAccount().countCharacters() >= 8) {
-			// _log.fine("account: " + client.getAccountName() + " 8를 넘는 캐릭터 작성 요구. ");
+			// _log.fine("account: " + client.getAccountName() + " 8を超えるキャラクター作成要求。 "）;
 			S_CharCreateStatus s_charcreatestatus1 = new S_CharCreateStatus(S_CharCreateStatus.REASON_WRONG_AMOUNT);
 			client.sendPacket(s_charcreatestatus1);
 			return;
@@ -134,7 +133,7 @@ public class C_CreateChar extends ClientBasePacket {
 		S_CharCreateStatus s_charcreatestatus2 = new S_CharCreateStatus(S_CharCreateStatus.REASON_OK);
 		client.sendPacket(s_charcreatestatus2);
 		initNewChar(client, pc);
-		System.out.println("" + 오전오후 + " " + cal.get(시간) + "시" + cal.get(분) + "분" + "   ■ 신규 캐릭: [" + pc.getName() + "]님 생성완료 ■");
+		System.out.println("" + 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "■新規キャラクター：[" + pc.getName() + "]さんの作成完了■");
 		LinAllManagerInfoThread.CharCount += 1;
 	}
 
@@ -143,15 +142,15 @@ public class C_CreateChar extends ClientBasePacket {
 	public static final int[] FEMALE_LIST = new int[] { 1, 48, 37, 1186, 2796, 6661, 6650, 12494 };
 	// by.lins
 
-	public static final int[][] START_LOC_X = new int[][] { { 33434, 33435, 33440, 33424, 33415 } };// 리뉴얼 숨계 통합 X
-	public static final int[][] START_LOC_Y = new int[][] { { 32815, 32823, 32797, 32813, 32824 } };// 리뉴얼 숨계 통합 Y
+	public static final int[][] START_LOC_X = new int[][] { { 33434, 33435, 33440, 33424, 33415 } };// リニューアルスムギェ統合X
+	public static final int[][] START_LOC_Y = new int[][] { { 32815, 32823, 32797, 32813, 32824 } };//リニューアルスムギェ統合Y
 
-	public static final short[] MAPID_LIST = new short[] { 4, 4, 4, 4, 4, 4, 4, 4 };// 리뉴얼 숨계
+	public static final short[] MAPID_LIST = new short[] { 4, 4, 4, 4, 4, 4, 4, 4 };//リニューアルスムギェ
 
 	private static void initNewChar(GameClient client, L1PcInstance pc) throws IOException, Exception {
 		short init_hp = 0, init_mp = 0;
 		Random random = new Random();
-		final int NewHi = 0; // 숨계
+		final int NewHi = 0; // スムギェ
 
 		int startPosType = NewHi; // defalut
 		int startPos = random.nextInt(5);
@@ -263,11 +262,11 @@ public class C_CreateChar extends ClientBasePacket {
 				break;
 			}
 			startPosType = NewHi;
-		} else if (pc.isDragonknight()) { // 용기사
+		} else if (pc.isDragonknight()) { // 竜騎士
 			init_hp = 16;
 			init_mp = 2;
 			startPosType = NewHi;
-		} else if (pc.isBlackwizard()) { // 환술사
+		} else if (pc.isBlackwizard()) { // イリュージョニスト
 			init_hp = 14;
 			switch (pc.getAbility().getBaseWis()) {
 			case 12:
@@ -309,7 +308,7 @@ public class C_CreateChar extends ClientBasePacket {
 		/*pc.setX(START_LOC_X[startPosType][startPos]);
 		pc.setY(START_LOC_Y[startPosType][startPos]);
 		pc.setMap(MAPID_LIST[pc.getType()]);*/
-		//클라우디아로 위치이동
+		//クラウディアに位置移動
 		pc.setX(32772);
 		pc.setY(32819);
 		pc.setMap((short)7783);
@@ -330,7 +329,7 @@ public class C_CreateChar extends ClientBasePacket {
 		pc.setGm(false);
 		pc.setMonitor(false);
 		pc.setGmInvis(false);
-		pc.setExp(0);// 경험치 0
+		pc.setExp(0);// 経験値0
 		pc.setHighLevel(1);
 		pc.setStatus(0);
 		pc.setAccessLevel((short) 0);
@@ -349,24 +348,24 @@ public class C_CreateChar extends ClientBasePacket {
 		pc.setBanned(false);
 		pc.setKarma(0);
 		pc.setReturnStat(0);
-		pc.setGirandungeonTime(0);//기감
-		pc.setOrendungeonTime(0);//야히
-		pc.setDrageonTime(0);//용던
-		//pc.setRadungeonTime(0);//라바
-		pc.setSomeTime(0);//몽섬
-		pc.setSoulTime(0);//고무
-		pc.setnewdodungeonTime(0);//발록진영
-		pc.seticedungeonTime(0);//얼던
-		pc.setislandTime(0);//말던
+		pc.setGirandungeonTime(0);//技監
+		pc.setOrendungeonTime(0);//ヤヒ
+		pc.setDrageonTime(0);//ヨンドン
+		//pc.setRadungeonTime(0);//ラバー
+		pc.setSomeTime(0);//モンソム
+		pc.setSoulTime(0);//ゴム
+		pc.setnewdodungeonTime(0);//バルログ陣営
+		pc.seticedungeonTime(0);//オルドン
+		pc.setislandTime(0);//巻い
 		pc.setMark_count(60);
 		pc.setEinhasad(2000000);
 
-		/** 수정본 신규혈맹 타이틀 자동 **/
+		/** 修正新規血盟タイトルの自動 **/
 		/*
 		 * pc.addBaseMaxHp(init_hp); pc.setCurrentHp(init_hp); pc.addBaseMaxMp(init_mp); pc.setCurrentMp(init_mp); pc.resetBaseAc();
-		 * pc.setTitle("\\f:신규보호혈맹"); pc.setClanid(1); pc.setClanRank(L1Clan.수련); pc.set_food(39); // 17% pc.setAccessLevel((short) 0);
-		 * pc.setGm(false); pc.setMonitor(false); pc.setGmInvis(false); pc.setExp(0);//경험치 0 pc.setHighLevel(1); pc.setStatus(0);
-		 * pc.setAccessLevel((short) 0); pc.setClanname("신규보호혈맹"); pc.setClanMemberNotes(""); pc.setBonusStats(0); pc.setElixirStats(0);
+		 * pc.setTitle("\\f:新規保護血盟 "）; pc.setClanid（1）; pc.setClanRank（L1Clan修煉）; pc.set_food（39）; // 17％pc.setAccessLevel（（short）0）;
+		 * pc.setGm(false); pc.setMonitor（false）; pc.setGmInvis（false）; pc.setExp（0）; //経験値0 pc.setHighLevel（1）; pc.setStatus（0）;
+		 * pc.setAccessLevel((short) 0）; pc.setClanname（「新規保護血盟 "）; pc.setClanMemberNotes（ ""）; pc.setBonusStats（0）; pc.setElixirStats（0）;
 		 * pc.resetBaseMr(); pc.setElfAttr(0); pc.set_PKcount(0); pc.setExpRes(0); pc.setPartnerId(0); pc.setOnlineStatus(0); pc.setHomeTownId(0);
 		 * pc.setContribution(0); pc.setBanned(false); pc.setKarma(0); pc.setReturnStat(0); pc.setGirandungeonTime(0); pc.setOrendungeonTime(0);
 		 * pc.setDrageonTime(0); pc.setRadungeonTime(0); pc.setSomeTime(0); pc.setSoulTime(0); pc.setMark_count(60); pc.setEinhasad(2000000);
@@ -382,12 +381,12 @@ public class C_CreateChar extends ClientBasePacket {
 			L1Skills l1skills = SkillsTable.getInstance().getTemplate(4); // EB
 			String skill_name = l1skills.getName();
 			int skill_id = l1skills.getSkillId();
-			SkillsTable.getInstance().spellMastery(object_id, skill_id, skill_name, 0, 0); // DB에 등록
+			SkillsTable.getInstance().spellMastery(object_id, skill_id, skill_name, 0, 0); // DBに登録
 		}
-		if (pc.isElf()) { // 요정 텔리포터투마더 캐릭생성시 추가
+		if (pc.isElf()) { // 妖精テルレポーターツーマザーキャラクター作成時に追加
 			pc.sendPackets(new S_AddSkill(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, pc.getElfAttr()));
 			int object_id = pc.getId();
-			L1Skills l1skills = SkillsTable.getInstance().getTemplate(131); // 텔레포투마더
+			L1Skills l1skills = SkillsTable.getInstance().getTemplate(131); // テレパスパルトゥーマザー
 			String skill_name = l1skills.getName();
 			int skill_id = l1skills.getSkillId();
 			SkillsTable.getInstance().spellMastery(object_id, skill_id, skill_name, 0, 0);
@@ -442,8 +441,8 @@ public class C_CreateChar extends ClientBasePacket {
 			return false;
 		}
 
-		// XXX - 본청의 사양과 동등한가 미확인
-		// 전각 문자가 5 문자를 넘는지, 전체로 12바이트를 넘으면(자) 무효인 이름으로 한다
+		// XXX -本庁の仕様と同等未確認
+		// 全角文字が5文字を超えるか、全体に12バイトを超えると無効な名前である
 		if (5 < (numOfNameBytes - name.length()) || 12 < numOfNameBytes) {
 			return false;
 		}

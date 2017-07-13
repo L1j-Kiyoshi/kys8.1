@@ -62,11 +62,11 @@ public class L1Robot4 implements L1CommandExecutor {
 
 		} catch (Exception e) {
 		}
-		pc.sendPackets(new S_SystemMessage(".인공지능 1:캐릭생성 2:캐릭시작 3:캐릭종료"));
+		pc.sendPackets(new S_SystemMessage("人工知能1：キャラクター作成2：キャラクター開始3：キャラクター終了"));
 	}
 
 	/**
-	 * 로봇 생성처리 함수.
+	 * ロボット作成処理関数です。
 	 * 
 	 * @param pc
 	 * @param st
@@ -74,7 +74,7 @@ public class L1Robot4 implements L1CommandExecutor {
 	private void toAppendBot(L1PcInstance pc, StringTokenizer st) {
 		try {
 			int count = Integer.valueOf(st.nextToken());
-			// 캐릭터 생성 디비 등록.
+			//キャラクター作成ディビ登録。
 			while (count-- > 0) {
 				int startPosType = 0; // default
 				int startPos = CommonUtil.random(0, 4);
@@ -83,41 +83,41 @@ public class L1Robot4 implements L1CommandExecutor {
 				String name = RobotAIThread.getName();
 
 				if (name == null) {
-					pc.sendPackets(new S_SystemMessage("더이상 생성할 이름이 존재하지않습니다."));
+					pc.sendPackets(new S_SystemMessage("もう生成する名前が存在しません。"));
 					return;
 				}
 
 				L1PcInstance robot = new L1PcInstance();
 				
 				
-				robot.setAccountName("인공지능"); // 계정명
-				robot.setId(IdFactory.getInstance().nextId()); // 고유 ID
-				robot.setName(name); // 캐릭터명
+				robot.setAccountName("人工知能"); // アカウント名
+				robot.setId(IdFactory.getInstance().nextId()); // 一意のID
+				robot.setName(name); // キャラクター名
 
 				int ra = _random.nextInt(100);
 				if (ra < 50) {
-					robot.setLevel(1); // 레벨
-					robot.setHighLevel(1); // 최고레벨
-					robot.setExp(0); // 경험치
-					robot.addBaseMaxHp((short) 200); // 최대 HP
-					robot.setCurrentHp(init_hp); // 현재 HP
+					robot.setLevel(1); // レベル
+					robot.setHighLevel(1); // 最高レベル
+					robot.setExp(0); // 経験値
+					robot.addBaseMaxHp((short) 200); // 最大HP
+					robot.setCurrentHp(init_hp); //現在、HP
 					robot.addBaseMaxMp((short) 50); // 최대 MP
 				} else {
-					robot.setLevel(55); // 레벨
-					robot.setHighLevel(55); // 최고레벨
-					robot.setExp(596787342 + _random.nextInt(50000)); // 경험치
-					robot.addBaseMaxHp((short) 700); // 최대 HP
-					robot.setCurrentHp(init_hp); // 현재 HP
-					robot.addBaseMaxMp((short) 200); // 최대 MP
+					robot.setLevel(55); // レベル
+					robot.setHighLevel(55); //最高レベル
+					robot.setExp(596787342 + _random.nextInt(50000)); // 経験値
+					robot.addBaseMaxHp((short) 700); // 最大HP
+					robot.setCurrentHp(init_hp); // 現在、HP
+					robot.addBaseMaxMp((short) 200); // 最大MP
 				}
 
-				robot.setCurrentMp(init_mp); // 현재 MP
-				robot.getAbility().setBaseStr(18); // 스텟 STR
-				robot.getAbility().setBaseDex(18); // 스텟 DEX
-				robot.getAbility().setBaseCon(18); // 스텟 CON
-				robot.getAbility().setBaseWis(18); // 스텟 WIS
-				robot.getAbility().setBaseCha(18); // 스텟 CHA
-				robot.getAbility().setBaseInt(18); // 스텟 INT
+				robot.setCurrentMp(init_mp); // 現在MP
+				robot.getAbility().setBaseStr(18); // ステップSTR
+				robot.getAbility().setBaseDex(18); // ステップDEX
+				robot.getAbility().setBaseCon(18); // ステップCON
+				robot.getAbility().setBaseWis(18); // ステップWIS
+				robot.getAbility().setBaseCha(18); // ステップCHA
+				robot.getAbility().setBaseInt(18); // ステップINT
 
 				int ran = _random.nextInt(100);
 				if (ran >= 0 && ran < 20) {
@@ -146,12 +146,12 @@ public class L1Robot4 implements L1CommandExecutor {
 
 				int rnd1 = _random.nextInt(100);
 				if (rnd1 < 55) {
-					robot.set_sex(0); // 남
+					robot.set_sex(0); // 南
 				} else {
-					robot.set_sex(1); // 여
+					robot.set_sex(1); // 以上
 				}
 
-				// 클래스 이미지
+				//クラスの画像
 				if (robot.get_sex() == 0) {
 					robot.setClassId(C_CreateChar.MALE_LIST[robot.getType()]);
 				} else {
@@ -193,14 +193,14 @@ public class L1Robot4 implements L1CommandExecutor {
 				CharacterTable.getInstance().storeNewCharacter(robot);
 				robot.refresh();
 			}
-			pc.sendPackets(new S_SystemMessage("\\aG시스템:\\aA 인공지능 캐릭들 생성완료"));
+			pc.sendPackets(new S_SystemMessage("\\aGシステム:\\aA 人工知能キャラクターたち生成完了"));
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".인공지능  1  [생성할갯수]"));
+			pc.sendPackets(new S_SystemMessage(".人工知能  1  [生成する本数]"));
 		}
 	}
 
 	/**
-	 * 로봇 인공지능 활성화.
+	 * ロボット人工知能活性化。
 	 * 
 	 * @param pc
 	 * @param st
@@ -216,11 +216,11 @@ public class L1Robot4 implements L1CommandExecutor {
 			try {
 				con = L1DatabaseFactory.getInstance().getConnection();
 				if (type == 1) {
-					pstm = con.prepareStatement("SELECT * FROM characters WHERE account_name = '인공지능' and level <= 55 order by rand()");
+					pstm = con.prepareStatement("SELECT * FROM characters WHERE account_name = '人工知能' and level <= 55 order by rand()");
 				} else if (type == 2) {
-					pstm = con.prepareStatement("SELECT * FROM characters WHERE account_name = '인공지능' and level >= 55  order by rand()");
+					pstm = con.prepareStatement("SELECT * FROM characters WHERE account_name = '人工知能' and level >= 55  order by rand()");
 				} else if (type == 3) {
-					pstm = con.prepareStatement("SELECT * FROM characters WHERE account_name = '인공지능' order by rand()");
+					pstm = con.prepareStatement("SELECT * FROM characters WHERE account_name = '人工知能' order by rand()");
 				}
 				rs = pstm.executeQuery();
 				while (rs.next()) {
@@ -507,12 +507,12 @@ public class L1Robot4 implements L1CommandExecutor {
 			}
 
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".인공지능 (2) [1.허수아비] [2.사냥] [3.마을]  [갯수]"));
+			pc.sendPackets(new S_SystemMessage("人工知能（2）[1かかし] [2.狩り] [3.村] [本数]"));
 		}
 	}
 
 	/**
-	 * 로봇 인공지능 비활성화.
+	 * ロボット人工知能無効にする。
 	 * 
 	 * @param pc
 	 * @param st
@@ -533,7 +533,7 @@ public class L1Robot4 implements L1CommandExecutor {
 							player.setRobotAi(null);
 							player.logout();
 							if (type == 1 && count >= 10) {
-								pc.sendPackets(new S_SystemMessage("허수아비 인공지능 " + count + " 캐릭 종료."));
+								pc.sendPackets(new S_SystemMessage("かかし人工知能" + count + "キャラクター終了。"));
 								count = 0;
 								break;
 							}
@@ -542,12 +542,12 @@ public class L1Robot4 implements L1CommandExecutor {
 				}
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".인공지능 3 [1허수,2사냥,3마을]"));
+			pc.sendPackets(new S_SystemMessage("人工知能3 [1虚数、2狩猟、3村]"));
 		}
 	}
 
 	private void items(L1PcInstance pc) {
-		// DB로부터 캐릭터와 창고의 아이템을 읽어들인다
+		// DBから文字と倉庫のアイテムを読み込む
 		CharacterTable.getInstance().restoreInventory(pc);
 	}
 

@@ -52,7 +52,7 @@ public class C_UsePetItem extends ClientBasePacket {
 			return;
 		}
 
-		if (item.getItem().getType2() == 0 // 종별：그 외의 아이템
+		if (item.getItem().getType2() == 0 // 種別：その他のアイテム
 				&& item.getItem().getType() == 11) { // petitem
 			int itemId = item.getItem().getItemId();
 			if (itemId >= 40749 && itemId <= 40752
@@ -61,10 +61,10 @@ public class C_UsePetItem extends ClientBasePacket {
 			} else if (itemId >= 40761 && itemId <= 40766) {
 				usePetArmor(pc, pet, item);
 			} else {
-				pc.sendPackets(new S_ServerMessage(79)); // \f1 아무것도 일어나지 않았습니다.
+				pc.sendPackets(new S_ServerMessage(79)); // \f1何も起こらなかった。
 			}
 		} else {
-			pc.sendPackets(new S_ServerMessage(79)); // \f1 아무것도 일어나지 않았습니다.
+			pc.sendPackets(new S_ServerMessage(79)); // \f1 何も起こらなかった。
 		}
 	}
 
@@ -72,7 +72,7 @@ public class C_UsePetItem extends ClientBasePacket {
 			L1ItemInstance weapon) {
 		if (pet.getWeapon() == null) {
 			setPetWeapon(pc, pet, weapon);
-		} else { // 이미 무엇인가를 장비 하고 있는 경우, 전의 장비를 뗀다
+		} else { // すでに何かを装備している場合は、前の機器をはずす
 			if (pet.getWeapon().equals(weapon)) {
 				removePetWeapon(pc, pet, pet.getWeapon());
 			} else {
@@ -86,7 +86,7 @@ public class C_UsePetItem extends ClientBasePacket {
 			L1ItemInstance armor) {
 		if (pet.getArmor() == null) {
 			setPetArmor(pc, pet, armor);
-		} else { // 이미 무엇인가를 장비 하고 있는 경우, 전의 장비를 뗀다
+		} else { // すでに何かを装備している場合は、前の機器をはずす
 			if (pet.getArmor().equals(armor)) {
 				removePetArmor(pc, pet, pet.getArmor());
 			} else {

@@ -31,7 +31,7 @@ public class L1Recall implements L1CommandExecutor {
 				targets = new ArrayList<L1PcInstance>();
 				L1PcInstance tg = L1World.getInstance().getPlayer(arg);
 				if (tg == null) {
-					pc.sendPackets(new S_SystemMessage("그러한 캐릭터는 없습니다. "));
+					pc.sendPackets(new S_SystemMessage("そのようなキャラクターはありません。"));
 					return;
 				}
 				targets.add(tg);
@@ -54,13 +54,13 @@ public class L1Recall implements L1CommandExecutor {
 				target.dh = target.getHeading();
 				target.setTelType(7);
 				new L1Teleport().teleport(target, target.dx, target.dy, target.dm, target.dh, true);
-				pc.sendPackets(new S_SystemMessage("알림: \\aG"+target.getName()+" 님을 소환했습니다. "));
-				target.sendPackets(new S_SystemMessage("\\aG게임마스터님께서 \\aA당신\\aG을 소환하였습니다."));
+				pc.sendPackets(new S_SystemMessage("通知：\\\\ aG"+target.getName()+"様を召喚しました。"));
+				target.sendPackets(new S_SystemMessage("\\aGゲームマスター様が \\aAあなた\\aGを召喚しました。"));
 			}
 			
 			
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "[.소환:캐릭터명]으로 입력해 주세요.]"));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[。召喚：キャラクター名]で入力してください。]"));
 		}
 	}
 }

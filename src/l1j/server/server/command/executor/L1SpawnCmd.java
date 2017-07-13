@@ -40,7 +40,7 @@ public class L1SpawnCmd implements L1CommandExecutor {
 	}
 
 	private void sendErrorMessage(L1PcInstance pc, String cmdName) {
-		String errorMsg = cmdName + " npcid|name [수] [범위] 라고 입력해 주세요. ";
+		String errorMsg = cmdName + "npcid | name [数] [範囲]と入力してください。";
 		pc.sendPackets(new S_SystemMessage(errorMsg));
 	}
 
@@ -71,13 +71,13 @@ public class L1SpawnCmd implements L1CommandExecutor {
 
 			L1Npc npc = NpcTable.getInstance().getTemplate(npcid);
 			if (npc == null) {
-				pc.sendPackets(new S_SystemMessage("해당 NPC가 발견되지 않습니다."));
+				pc.sendPackets(new S_SystemMessage("該当のNPCが見つかりません。"));
 				return;
 			}
 			for (int i = 0; i < count; i++) {
 				L1SpawnUtil.spawn(pc, npcid, randomrange, 0);
 			}
-			String msg = String.format("%s(%d) (%d) 를 소환했습니다. (범위:%d)", npc
+			String msg = String.format("%s(%d) (%d) を召喚しました。 （範囲：%d)", npc
 					.get_name(), npcid, count, randomrange);
 			pc.sendPackets(new S_SystemMessage(msg));
 		} catch (NoSuchElementException e) {
@@ -86,7 +86,7 @@ public class L1SpawnCmd implements L1CommandExecutor {
 			sendErrorMessage(pc, cmdName);
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			pc.sendPackets(new S_SystemMessage(cmdName + " 내부 에러입니다."));
+			pc.sendPackets(new S_SystemMessage(cmdName + "内部エラーです。"));
 		}
 	}
 }

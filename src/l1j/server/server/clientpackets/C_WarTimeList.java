@@ -43,16 +43,16 @@ public class C_WarTimeList extends ClientBasePacket {
 
 			if (clan != null) {
 				int castle_id = clan.getCastleId();
-				if (castle_id != 0) { // 성주 클랜 아이디
+				if (castle_id != 0) { // 城主クラン名
 					L1Castle l1castle = CastleTable.getInstance()
 							.getCastleTable(castle_id);
 					S_ServerMessage sm = new S_ServerMessage(305);
-					pc.sendPackets(sm, true);// \f1지금은 전쟁 시간을 변경할 수 없습니다.
+					pc.sendPackets(sm, true);// \f1今は戦争の時間を変更することができません。
 					return;
 					/*
 					 * if (l1castle.getWarBaseTime() == 0) { S_ServerMessage sm
 					 * = new S_ServerMessage(305); pc.sendPackets(sm, true);//
-					 * \f1지금은 전쟁 시간을 변경할 수 없습니다. return; }
+					 * \f1今は戦争の時間を変更することができません。 return; }
 					 * 
 					 * Calendar warTime = l1castle.getWarTime(); int year =
 					 * warTime.get(Calendar.YEAR); int month =
@@ -62,16 +62,16 @@ public class C_WarTimeList extends ClientBasePacket {
 					 * warBase.set(year, month, day, 12, 00);// 4 23
 					 * 
 					 * Calendar base_cal = Calendar.getInstance();
-					 * base_cal.set(1997, 0, 1, 17, 0);// 1997/01/01 17:00(을)를
-					 * 기점으로 하고 있다 long base_millis = base_cal.getTimeInMillis();
-					 * long millis = warBase.getTimeInMillis(); long diff =
-					 * millis - base_millis; diff -= 1200 * 60 * 1000; // 오차수정
-					 * diff = diff / 60000; // 분 이하 잘라버림 // time는 1을 더하면
-					 * 3:02(182분 ) 진행된다 int time = (int) (diff / 182);
+					 * base_cal.set（1997、0、1、17、0）; // 1997/01/01 17:00を
+					 * 起点としているlong base_millis = base_cal.getTimeInMillis（）;
+					 * long millis = warBase.getTimeInMillis（）; long diff =
+					 * millis - base_millis; diff  -  = 1200 * 60 * 1000; //誤差修正
+					 * diff = diff / 60000; //分以下切捨て// timeは1を加えると
+					 * 3:02(182分）進行されるint time =（int）（diff / 182）;
 					 * 
 					 * S_WarTime wt = new S_WarTime(time); pc.sendPackets(wt,
 					 * true); S_ServerMessage sm = new S_ServerMessage(300);
-					 * pc.sendPackets(sm, true);// 다음 공성전을 위한 시간을 지정해 주십시오.
+					 * pc.sendPackets（sm、true）; //次の攻城戦の時間を指定してください。
 					 */
 				}
 			}

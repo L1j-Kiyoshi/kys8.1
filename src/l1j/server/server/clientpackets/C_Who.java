@@ -21,14 +21,14 @@ public class C_Who extends ClientBasePacket {
 		L1NpcShopInstance find1 = L1World.getInstance().getShopNpc(s);
 		L1PcInstance pc = client.getActiveChar();
 		
-		//실시간 플레이어수를 체크하기위함..
+		//リアルタイムプレイヤー数をチェックするため。
 		int playercount = 0; 
 		Collection<L1PcInstance> players = L1World.getInstance().getAllPlayers();
 		for (L1PcInstance each : players) {
 			if(each.noPlayerCK || each.noPlayerck2)
 				playercount++;
 		}
-		//실시간 플레이어수를 체크하기위함..실패..ㅋ
+		//リアルタイムプレイヤー数をチェックするため。失敗です..
 		
 		if (pc == null) return;
 

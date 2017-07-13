@@ -24,7 +24,7 @@ public class L1Speed implements L1CommandExecutor {
 			L1BuffUtil.brave(pc, 9999 * 1000);
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			pc.sendPackets(new S_SystemMessage(".속도 커멘드 에러"));
+			pc.sendPackets(new S_SystemMessage("速度コマンドエラー"));
 		}
 	}
 }

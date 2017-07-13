@@ -42,7 +42,7 @@ public class L1QueryCharacter implements L1CommandExecutor  {
 				
 				if (client == null)
 				{
-					pc.sendPackets(new S_SystemMessage("접속중이지 않은 캐릭터에 대해 조회할 수 없습니다."));
+					pc.sendPackets(new S_SystemMessage("接続中でないキャラクターに対して照会することができません。"));
 					return;
 				}
 				
@@ -64,15 +64,15 @@ public class L1QueryCharacter implements L1CommandExecutor  {
 				}
 				
 				pc.sendPackets(new S_SystemMessage(
-				"모든 계정내의 아데나 총합계는 [" + totalAdena + "] 입니다."));
+				"すべてのアカウント内のアデナ合計は[" + totalAdena + "]です。"));
 				
 			} else {
 				pc.sendPackets(new S_SystemMessage(
-						"그러한 이름의 캐릭터는 월드내에는 존재하지 않습니다. "));
+						"そのような名前のキャラクターは、ワールド内には存在しません。"));
 			}
 			
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [캐릭터명] 으로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
 		}
 	}
 	
@@ -117,7 +117,7 @@ public class L1QueryCharacter implements L1CommandExecutor  {
 			SQLUtil.close(conn);
 		}
 	
-		master.sendPackets(new S_SystemMessage(ip + "에서 [" + pc.getName() + "]가 현재 접속중이며 계정 창고 아데나는 [" + storageAdena + "] 캐릭 내 아데나 총 합은 [" + characterAdena + "] 입니다."));
+		master.sendPackets(new S_SystemMessage(ip + "で [" + pc.getName() + "]が現在の接続中のアカウント倉庫アデナは[" + storageAdena + "]キャラクターマイアデナ総合計は、[" + characterAdena + "]です。"));
 		
 		return storageAdena + characterAdena;
 	}

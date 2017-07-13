@@ -6,7 +6,6 @@ import java.util.StringTokenizer;
 import l1j.server.server.IdFactory;
 import l1j.server.server.datatables.CharacterTable;
 import l1j.server.server.datatables.ItemTable;
-import l1j.server.server.model.L1Clan;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
@@ -34,7 +33,7 @@ public class L1FakeCharacter implements L1CommandExecutor {
 			String name = stringtokenizer.nextToken();
 
 			if (CharacterTable.doesCharNameExist(name) || L1World.getInstance().getPlayer(name) != null) {
-				pc.sendPackets(new S_SystemMessage("이미 존재하는 캐릭터 이름입니다"));
+				pc.sendPackets(new S_SystemMessage("既に存在しているキャラクターの名前です"));
 				return;
 			}
 			L1PcInstance newPc = new L1PcInstance();
@@ -62,12 +61,12 @@ public class L1FakeCharacter implements L1CommandExecutor {
 			newPc.getAbility().setBaseWis(11);
 			newPc.getAbility().setWis(11);
 			int ran = _random.nextInt(120);			
-			if (ran >= 0 && ran < 15) { // 15 남기사가 15프로
+			if (ran >= 0 && ran < 15) { // 15南記事が15プロ
 				newPc.setClassId(61);
 				newPc.setTempCharGfx(61);
 				newPc.setGfxId(61);
 				newPc.setType(61);
-			} else if (ran >= 15 && ran < 20){ // 5// 여캐릭은 무조건 5프로 왜냐 프리섭은 여캐릭은 거의 안함.
+			} else if (ran >= 15 && ran < 20){ // 5 //余りキャラは無条件5プロなぜならプリソプは余りキャラクターはほとんどない。
 				newPc.setClassId(48);
 				newPc.setTempCharGfx(48);
 				newPc.setGfxId(48);
@@ -170,25 +169,25 @@ public class L1FakeCharacter implements L1CommandExecutor {
 			newPc.setGmInvis(false);
 			newPc.noPlayerck2 = true;
 
-			L1ItemInstance  item = ItemTable.getInstance().createItem(35);//수련자의 한손검
-			L1ItemInstance item1 = ItemTable.getInstance().createItem(175);//수련자의 활
-			L1ItemInstance item2 = ItemTable.getInstance().createItem(120);//수련자의 지팡이
-			L1ItemInstance item3 = ItemTable.getInstance().createItem(73);// 수련자의 이도류
-			L1ItemInstance item4 = ItemTable.getInstance().createItem(203012);// 수련자의 도끼
+			L1ItemInstance  item = ItemTable.getInstance().createItem(35);//修練者の片手剣
+			L1ItemInstance item1 = ItemTable.getInstance().createItem(175);//修練者の弓
+			L1ItemInstance item2 = ItemTable.getInstance().createItem(120);//修練者の杖
+			L1ItemInstance item3 = ItemTable.getInstance().createItem(73);// 修練者の二刀流
+			L1ItemInstance item4 = ItemTable.getInstance().createItem(203012);// 修練者の斧
 
-			if (newPc.isKnight() || newPc.isCrown() || newPc.isDragonknight()) {// 기사.군주.용기사
+			if (newPc.isKnight() || newPc.isCrown() || newPc.isDragonknight()) {// 記事。君主。の記事
 				newPc.getInventory().storeItem(item);
 				newPc.getInventory().setEquipped(item, true);
-			} else if (newPc.isElf()){ //요정
+			} else if (newPc.isElf()){ //妖精
 				newPc.getInventory().storeItem(item1);
 				newPc.getInventory().setEquipped(item1, true);
-			} else if (newPc.isWizard() || newPc.isBlackwizard()){//마법사. 환술사
+			} else if (newPc.isWizard() || newPc.isBlackwizard()){//ウィザード。イリュージョニスト
 				newPc.getInventory().storeItem(item2);
 				newPc.getInventory().setEquipped(item2, true);
-			} else if (newPc.isDarkelf()){ //다크엘프
+			} else if (newPc.isDarkelf()){ //ダークエルフ
 				newPc.getInventory().storeItem(item3);
 				newPc.getInventory().setEquipped(item3, true);
-			} else if (newPc.isWarrior()){ //전사
+			} else if (newPc.isWarrior()){ //戦士
 				newPc.getInventory().storeItem(item4);
 				newPc.getInventory().setEquipped(item4, true);
 			}
@@ -201,7 +200,7 @@ public class L1FakeCharacter implements L1CommandExecutor {
 			newPc.startObjectAutoUpdate();
 
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage((new StringBuilder()). append(".무인 [캐릭이름]로 입력해 주세요. "). toString()));
+			pc.sendPackets(new S_SystemMessage((new StringBuilder()). append("無人[キャラクター名]に入力してください。"). toString()));
 		}
 	}
 

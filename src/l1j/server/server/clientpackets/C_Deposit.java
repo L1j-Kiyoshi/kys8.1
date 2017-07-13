@@ -59,16 +59,16 @@ public class C_Deposit extends ClientBasePacket {
 				
 				if( WarTimeController.getInstance().isNowWar(castle_id) )
 				{
-					player.sendPackets(new S_ChatPacket(player,"공성 중에는 불가능합니다."));
+					player.sendPackets(new S_ChatPacket(player,"攻城中は不可能です。"));
 					return;
 				}
 
-				if (castle_id != 0) { // 성주 크란
+				if (castle_id != 0) { // 城主クラン
 					L1Castle l1castle = CastleTable.getInstance()
 							.getCastleTable(castle_id);
 					synchronized (l1castle) {
 						int money = l1castle.getPublicMoney();
-						if( j < 0 || money < 0 ){  //공과급 버그
+						if( j < 0 || money < 0 ){  //ボール級のバグ
 							return;
 						}
 						if (player.getInventory()

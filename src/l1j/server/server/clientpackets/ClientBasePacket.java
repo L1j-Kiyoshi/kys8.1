@@ -203,13 +203,13 @@ public abstract class ClientBasePacket {
 			StringBuffer test = new StringBuffer(); 
 			do{ 
 				if ((_decrypt[start]&0xff)>=127 || (_decrypt[start+1]&0xff)>=127){ 
-				/** 한글 **/ 
+				/** ハングルの **/ 
 					byte[] t = new byte[2]; 
 					t[0] = _decrypt[start+1]; 
 					t[1] = _decrypt[start]; 
 					test.append(new String(t, 0, 2, "MS949")); 
 				}else{ 
-					/** 영문&숫자 **/ 
+					/** 英語＆数字 **/ 
 					test.append(new String(_decrypt, start, 1, "MS949")); 
 				} 
 				start+=2; 
@@ -257,7 +257,7 @@ public abstract class ClientBasePacket {
 	}
 
 	/**
-	 * 클라이언트 패킷의 종류를 나타내는 캐릭터 라인을 돌려준다. ("[C] C_DropItem" 등 )
+	 * クライアントパケットの種類を表す文字列を返す。 （「[C] C_DropItem "など）
 	 */
 	public String getType() {
 		return "[C] " + this.getClass().getSimpleName();

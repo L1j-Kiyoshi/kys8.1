@@ -30,7 +30,7 @@ public class L1DeleteGroundItem implements L1CommandExecutor {
 		for (L1Object l1object : L1World.getInstance().getObject()) {
 			if (l1object instanceof L1ItemInstance) {
 				l1iteminstance = (L1ItemInstance) l1object;
-				if (l1iteminstance.getX() == 0 && l1iteminstance.getY() == 0) { // 지면상의 아이템은 아니고, 누군가의 소유물
+				if (l1iteminstance.getX() == 0 && l1iteminstance.getY() == 0) { //地面上のアイテムではなく、誰かの所有物
 					continue;
 				}
 
@@ -38,15 +38,15 @@ public class L1DeleteGroundItem implements L1CommandExecutor {
 				if (0 == players.size()) {
 					groundInventory = L1World.getInstance().getInventory(l1iteminstance.getX(), l1iteminstance.getY(), l1iteminstance.getMapId());
 					int itemId = l1iteminstance.getItem(). getItemId();
-					if (itemId == 40314 || itemId == 40316) { // 펫의 아뮤렛트
+					if (itemId == 40314 || itemId == 40316) { // ペットのアミュレット
 						PetTable.getInstance().deletePet(l1iteminstance.getId());
-					} else if (itemId >= 49016 && itemId <= 49025) { // 편지지
+					} else if (itemId >= 49016 && itemId <= 49025) { // 文房具
 						lettertable = new LetterTable();
 						lettertable.deleteLetter(l1iteminstance.getId());
-					} else if (itemId >= 41383 && itemId <= 41400) { // 가구
+					} else if (itemId >= 41383 && itemId <= 41400) { // 家具
 						if (l1object instanceof L1FurnitureInstance) {
 							furniture = (L1FurnitureInstance) l1object;
-							if (furniture.getItemObjId() == l1iteminstance.getId()) { // 이미 꺼내고 있는 가구
+							if (furniture.getItemObjId() == l1iteminstance.getId()) { // すでに取り出している家具
 								FurnitureSpawnTable.getInstance().deleteFurniture(furniture);
 							}
 						}
@@ -57,6 +57,6 @@ public class L1DeleteGroundItem implements L1CommandExecutor {
 				}
 			}
 		}
-		//L1World.getInstance().broadcastServerMessage("월드 맵상의 아이템이 GM에 의해 삭제되었습니다. ");
+		//L1World.getInstance().broadcastServerMessage("ワールドマップ上のアイテムがGMによって削除されました。 "）;
 	}
 }

@@ -41,7 +41,7 @@ public class C_PledgeContent extends ClientBasePacket {
 		}
 		
 		int data = readC();
-		if (data == 15) { // 공지
+		if (data == 15) { // お知らせ
 			String announce = readS();
 			L1Clan clan = ClanTable.getInstance().getTemplate(pc.getClanid());
 			if (clan != null) {
@@ -49,9 +49,9 @@ public class C_PledgeContent extends ClientBasePacket {
 				ClanTable.getInstance().updateClan(clan);
 				pc.sendPackets(new S_PacketBox(S_PacketBox.HTML_PLEDGE_REALEASE_ANNOUNCE, announce));
 			} else {
-				pc.sendPackets(new S_SystemMessage("존재하지 않는 혈맹입니다."));
+				pc.sendPackets(new S_SystemMessage("存在しない血盟です。"));
 			}
-		} else if(data == 16){ //메모
+		} else if(data == 16){ //メモ
 			String notes = readS();
 			L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 			if (clan != null) {
@@ -65,7 +65,7 @@ public class C_PledgeContent extends ClientBasePacket {
 					e.printStackTrace();
 				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("존재하지 않는 혈맹입니다."));
+				pc.sendPackets(new S_SystemMessage("存在しない血盟です。"));
 			}
 		}
 	}

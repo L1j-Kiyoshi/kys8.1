@@ -58,7 +58,7 @@ public class L1Robot3 implements L1CommandExecutor {
 			while (count-- > 0) {
 				String name = RobotAIThread.getName();
 				if (name == null) {
-					pc.sendPackets(new S_SystemMessage("더이상 생성할 이름이 존재하지않습니다."));
+					pc.sendPackets(new S_SystemMessage("もう生成する名前が存在しません。"));
 					return;
 				}
 
@@ -73,15 +73,15 @@ public class L1Robot3 implements L1CommandExecutor {
 				newPc.setId(IdFactory.getInstance().nextId());
 				newPc.setName(name);
 
-				if (robot == 1) { // 낚시
+				if (robot == 1) { // 釣り
 					newPc.setHighLevel(5);
 					newPc.setLevel(5);
 					newPc.setExp(0);
 					newPc.setLawful(0);
 					newPc.setClanMemberNotes("");
 					newPc.setClanid(1);
-					newPc.setClanname("신규보호혈맹");
-					newPc.setTitle("\\f:신규보호혈맹");
+					newPc.setClanname("新規保護血盟");
+					newPc.setTitle("\\f:新規保護血盟");
 					newPc.setClanRank(L1Clan.수련);
 					int typeCount = 0;
 					for (L1PcInstance tempPc : L1World.getInstance().getAllPlayers()) {
@@ -134,11 +134,11 @@ public class L1Robot3 implements L1CommandExecutor {
 					continue;
 				}
 			}
-			pc.sendPackets(new S_ChatPacket(pc, SearchCount + "명의 낚시터로봇 캐릭터가 배치 되었습니다."));
+			pc.sendPackets(new S_ChatPacket(pc, SearchCount + "人の釣り場ロボットキャラクターが配置されました。"));
 			pc.sendPackets(new S_ChatPacket(pc, "----------------------------------------------------"));
 
 		} catch (Exception e) {
-			pc.sendPackets(new S_ChatPacket(pc, (new StringBuilder()).append(".로봇  (낚시=1)  (인원)  (행동=1)").toString()));
+			pc.sendPackets(new S_ChatPacket(pc, (new StringBuilder()).append("。ロボット（釣り= 1）（人員）（アクション= 1）").toString()));
 		}
 	}
 
@@ -182,7 +182,7 @@ public class L1Robot3 implements L1CommandExecutor {
 	}
 
 	/**
-	 * 랜덤 함수
+	 * ランダム関数
 	 * 
 	 * @param lbound
 	 * @param ubound

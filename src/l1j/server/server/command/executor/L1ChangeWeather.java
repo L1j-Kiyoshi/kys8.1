@@ -24,7 +24,7 @@ public class L1ChangeWeather implements L1CommandExecutor {
 			L1World.getInstance(). setWeather(weather);
 			L1World.getInstance(). broadcastPacketToAll(new S_Weather(weather));
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " 0~3(눈), 16~19(비)라고 입력 해주세요."));
+			pc.sendPackets(new S_SystemMessage(cmdName + "0〜3（目）、16〜19（非）と入力してください。"));
 		}
 	}
 }

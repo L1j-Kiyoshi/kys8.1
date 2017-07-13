@@ -24,19 +24,19 @@ public class L1AccountBanKick implements L1CommandExecutor {
 				target = CharacterTable.getInstance().restoreCharacter(arg);
 			}
 
-			if (target != null) { // 어카운트를 BAN 한다
+			if (target != null) { //アカウントをBANする
 				Account.ban(target.getAccountName());
-				pc.sendPackets(new S_SystemMessage(target.getName() + " 를 계정압류 하였습니다."));
+				pc.sendPackets(new S_SystemMessage(target.getName() + "アカウント差し押さえました。"));
 				target.sendPackets(new S_Disconnect());
 				
 				if (target.getOnlineStatus() == 1) {
 					target.sendPackets(new S_Disconnect());
 				}
 			} else {
-				pc.sendPackets(new S_SystemMessage("그러한 이름의 캐릭터는 월드내에는 존재하지 않습니다. "));
+				pc.sendPackets(new S_SystemMessage("そのような名前のキャラクターは、ワールド内には存在しません。"));
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [캐릭터명] 으로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
 		}
 	}
 }

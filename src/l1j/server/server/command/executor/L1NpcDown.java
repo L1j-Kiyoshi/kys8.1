@@ -25,7 +25,7 @@ public class L1NpcDown implements L1CommandExecutor {
 			if (type.equals("배치")) {
 				
 				SpawnTable.getInstance().reload1();
-				pc.sendPackets(new S_SystemMessage("모든 엔피씨가 배치되었습니다."));
+				pc.sendPackets(new S_SystemMessage("すべてのエンピシが配置されました。"));
 				SpawnTable.isMonsterDown = false;
 			} else if (type.equals("삭제")) {
 				for (L1Object l1object : L1World.getInstance().getObject()) {
@@ -42,10 +42,10 @@ public class L1NpcDown implements L1CommandExecutor {
 					}
 				}
 				
-				pc.sendPackets(new S_SystemMessage("모든 몬스터가 삭제되었습니다."));
+				pc.sendPackets(new S_SystemMessage("すべてのモンスターが削除されました。"));
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".몹다운 [배치/삭제] 를 입력해주세요."));
+			pc.sendPackets(new S_SystemMessage("。モンスターダウン[配置/削除]を入力してください。"));
 		}
 	}
 }

@@ -43,20 +43,20 @@ public class C_SelectList extends ClientBasePacket {
 
 	public C_SelectList(byte abyte0[], GameClient clientthread) {
 		super(abyte0);
-		// 아이템마다 리퀘스트가 온다.
+		// アイテムごとにリクエストが来る。
 		int itemObjectId = readD();
 		int npcObjectId = readD();
 		L1PcInstance pc = clientthread.getActiveChar();
 		if ( pc == null)return;
 
-		if (npcObjectId != 0) { // 무기의 수리
+		if (npcObjectId != 0) { // 武器の修理
 			L1Object obj = L1World.getInstance().findObject(npcObjectId);
 			if (obj != null) {
 				if (obj instanceof L1NpcInstance) {
 					L1NpcInstance npc = (L1NpcInstance) obj;
 					int difflocx = Math.abs(pc.getX() - npc.getX());
 					int difflocy = Math.abs(pc.getY() - npc.getY());
-					// 3 매스 이상 떨어졌을 경우 액션 무효
+					// 3マス以上落ちた場合のアクション無効
 					if (difflocx > 3 || difflocy > 3) {
 						return;
 					}
@@ -71,7 +71,7 @@ public class C_SelectList extends ClientBasePacket {
 			}
 			item.set_durability(0);
 			pcInventory.updateItem(item, L1PcInventory.COL_DURABILITY);
-		} else { // 펫의 인출
+		} else { //ペットの引き出し
 			int petCost = 0;
 			Object[] petList = pc.getPetList().values().toArray();
 			for (Object pet : petList) {
@@ -86,15 +86,15 @@ public class C_SelectList extends ClientBasePacket {
 				charisma += 6;
 			} else if (pc.isDarkelf()) { // DE
 				charisma += 6;
-			} else if (pc.isDragonknight()) { // 용기사
+			} else if (pc.isDragonknight()) { // 竜騎士
 				charisma += 6;
-			} else if (pc.isBlackwizard()) { // 환술사
+			} else if (pc.isBlackwizard()) { // イリュージョニスト
 				charisma += 6;
 			}
 			charisma -= petCost;
 			int petCount = charisma / 6;
 			if (petCount <= 0) {
-				pc.sendPackets(new S_ServerMessage(489)); // 물러가려고 하는 애완동물이 너무 많습니다.
+				pc.sendPackets(new S_ServerMessage(489)); // 退いていこうとするペットが多すぎます。
 				return;
 			}
 

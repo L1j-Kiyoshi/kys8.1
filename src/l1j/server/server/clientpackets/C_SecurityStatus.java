@@ -42,7 +42,7 @@ public class C_SecurityStatus extends ClientBasePacket {
 		if (castle.getCastleSecurity() == 0) status = "$1118";
 		else status = "$1117";
 
-//		System.out.println("동작: " +npcName);
+//		System.out.println("動作： "+ npcName）;
 		String[] htmldata = new String[]{ npcName, status};
 
 		pc.sendPackets(new S_NPCTalkReturn(objid, "CastleS", htmldata));

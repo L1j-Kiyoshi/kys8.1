@@ -37,24 +37,24 @@ public class L1PackagePresent implements L1CommandExecutor {
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
 			StringTokenizer st = new StringTokenizer(arg);
-			if (pc.isGm()) { // 운영자의 반지 착용했을때 운영자 명령어 사용가능
+			if (pc.isGm()) { // オペレータのリングを着用したときのオペレータコマンドを使用可能
 				String account = st.nextToken();
 				int itemid = Integer.parseInt(st.nextToken(), 10);
 				int enchant = Integer.parseInt(st.nextToken(), 10);
 				int count = Integer.parseInt(st.nextToken(), 10);
 				L1Item temp = ItemTable.getInstance().getTemplate(itemid);
 				if (temp == null) {
-					pc.sendPackets(new S_SystemMessage("존재하지 않는 아이템 ID입니다."));
+					pc.sendPackets(new S_SystemMessage("存在しないアイテムのIDです。"));
 					return;
 				}
 				PackageWarehouse.present(account, itemid, enchant, count);
-				pc.sendPackets(new S_SystemMessage(temp.getNameId() + "를" + count+ "개 선물 했습니다.", true));
+				pc.sendPackets(new S_SystemMessage(temp.getNameId() + "を" + count+ "個プレゼントしました。", true));
 			} else {
-				pc.sendPackets(new S_SystemMessage("당신은 운영자가 될 조건이 되지 않습니다."));
+				pc.sendPackets(new S_SystemMessage("あなたは、オペレータになる条件ではありません。"));
 				return;
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(".패키지 [계정명] [아이템 ID] [인챈트수] [아이템수]를 입력 해주세요.(계정명을 *으로 하면 전체 지급)"));
+			pc.sendPackets(new S_SystemMessage("パッケージ[アカウント名] [アイテムID] [エンチャント数] [アイテム数]を入力してください。（アカウント名を*にすると、全体の支払い）"));
 		}
 	}
 }

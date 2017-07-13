@@ -34,14 +34,14 @@ import l1j.server.server.model.item.L1ItemId;
 import l1j.server.server.serverpackets.S_ChatPacket;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SystemMessage;
-/** 로그 남기기 **/
+/** ログを残す **/
 //Referenced classes of package l1j.server.server.clientpackets:
 //ClientBasePacket
 
 public class C_TradeAddItem extends ClientBasePacket {
 	private static final String C_TRADE_ADD_ITEM = "[C] C_TradeAddItem";
 
-	/** 날짜 , 시간 기록 **/
+	/** 日付、時刻の記録 **/
 	Calendar rightNow = Calendar.getInstance();
 	int day = rightNow.get(Calendar.DATE);
 	int hour = rightNow.get(Calendar.HOUR);
@@ -63,7 +63,7 @@ public class C_TradeAddItem extends ClientBasePacket {
 		if ( item == null) return; 
 			
 		System.out.println("ITEMID  "+itemid+"itemcount : "+itemcount);
-		/** 버그 방지 **/
+		/** バグ防止 **/
 		if (itemid != item.getId()) {
 			return;
 		}
@@ -76,39 +76,39 @@ public class C_TradeAddItem extends ClientBasePacket {
 		if (itemcount > item.getCount()) {
 			itemcount = item.getCount();
 		}
-		if (itemcount > 2000000000)  {  // 복사 버그 방지
+		if (itemcount > 2000000000)  {  // コピーのバグを防ぐ
 			return;
 		}
-		/** 버그 방지 **/
+		/** バグ防止 **/
 		
 		if (item.getItemId() == L1ItemId.HIGH_CHARACTER_TRADE || item.getItemId() == L1ItemId.LOW_CHARACTER_TRADE) {
 			if (!pc.isQuizValidated()) {
-				pc.sendPackets(new S_ChatPacket(pc, "퀴즈 인증을 하지 않으셨습니다."));
-				pc.sendPackets(new S_ChatPacket(pc, "먼저 [.퀴즈인증]으로 퀴즈 인증 후 거래를 시도해주세요."));
+				pc.sendPackets(new S_ChatPacket(pc, "クイズの認証をしていません。"));
+				pc.sendPackets(new S_ChatPacket(pc, "まず[。クイズ認証]で、クイズの認証後、取引をしようとしてください。"));
 				return;
 			}
 			if (pc.getLevel() >= 70 && item.getItemId() == L1ItemId.LOW_CHARACTER_TRADE) {
-				pc.sendPackets(new S_ChatPacket(pc, "70레벨 이상은 상급 캐릭터교환주문서를 사용하셔야 합니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "70レベル以上は上級のキャラクターの交換スクロールを使用する必要があります。"));
 				return;
 			} else if (pc.getLevel() < 70 && item.getItemId() == L1ItemId.HIGH_CHARACTER_TRADE) {
-				pc.sendPackets(new S_ChatPacket(pc, "70레벨 미만은 하급 캐릭터교환주문서를 사용하셔야 합니다."));
+				pc.sendPackets(new S_ChatPacket(pc, "70レベル未満は下級キャラクター交換スクロールを使用する必要があります。"));
 				return;
 			}
 		}
 		
-		//교환불가아이템 디비연동 NoTradable
+		//交換不可アイテムディビ連動NoTradable
 		int itemId = item.getItem().getItemId();
 		if (!pc.isGm() && NoTradable.getInstance().isNoTradable(itemId))  {// 
-			pc.sendPackets(new S_SystemMessage("\\aG[!] : 해당 아이템은 교환 불가능합니다."));
+			pc.sendPackets(new S_SystemMessage("\\aG[!] : このアイテムは交換できません。"));
 			return;
 		}
 
 		if (!item.getItem().isTradable()) {
-			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0はしまったり、または他人に両日をすることができません。
 			return;
 		}
 		if(item.getBless() >= 128){
-			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1％0はたりまたは他人に両日をすることができません。
 			return;
 		}
 		if(item.isEquipped()){
@@ -122,7 +122,7 @@ public class C_TradeAddItem extends ClientBasePacket {
 			if (petObject instanceof L1PetInstance) {
 				pet = (L1PetInstance) petObject;
 				if (item.getId() == pet.getItemObjId()) {
-					// \f1%0은 버리거나 또는 타인에게 양일을 할 수 없습니다.
+					// \f1%0はしまったり、または他人に両日をすることができません。
 					pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
 					return;
 				}
@@ -148,8 +148,8 @@ public class C_TradeAddItem extends ClientBasePacket {
 			return;
 		}
 		if (pc.getTradeOk() || tradingPartner.getTradeOk()) { 
-			pc.sendPackets(new S_SystemMessage("올리기 불가능 : 한쪽이 완료를 누른 상태"));
-			tradingPartner.sendPackets(new S_SystemMessage("올리기 불가능 : 한쪽이 완료를 누른 상태"));
+			pc.sendPackets(new S_SystemMessage("上げる不可能：一方が完了を押したまま"));
+			tradingPartner.sendPackets(new S_SystemMessage("上げる不可能：一方が完了を押したまま"));
 			return;
 		}
 		if (tradingPartner.getInventory().checkAddItem(item, itemcount) != L1Inventory.OK) {

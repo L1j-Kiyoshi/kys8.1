@@ -46,12 +46,12 @@ public class L1Level implements L1CommandExecutor {
 					return;
 				}
 				if (!IntRange.includes(level, 1, 99)) {
-					pc.sendPackets(new S_SystemMessage("1-99의 범위에서 지정해 주세요"));
+					pc.sendPackets(new S_SystemMessage("1-99の範囲で指定してください"));
 					return;
 				}
 				pc.setExp(ExpTable.getExpByLevel(level));
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "lv 라고 입력해 주세요"));
+			pc.sendPackets(new S_SystemMessage(cmdName + "lvと入力してください"));
 		}
 	}
 }

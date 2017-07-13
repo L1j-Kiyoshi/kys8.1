@@ -37,12 +37,12 @@ public class L1GMQuestion implements L1CommandExecutor {
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try{
 			if(L1Question.mainstart){
-				pc.sendPackets(new S_SystemMessage("현재 설문조사가 진행중입니다."));
-				pc.sendPackets(new S_SystemMessage("진행중인 설문 내용 : " + L1Question.maintext));
+				pc.sendPackets(new S_SystemMessage("現在調査が進行中です。"));
+				pc.sendPackets(new S_SystemMessage("進行中のアンケート内容：" + L1Question.maintext));
 			}
 			L1Question.getInstance(arg);
 		}catch(Exception e){
-			pc.sendPackets(new S_SystemMessage(".설문 [설문내용] 을 입력 해주세요"));
+			pc.sendPackets(new S_SystemMessage("。アンケート[アンケートの内容]を入力してください"));
 		}
 	}
 }
