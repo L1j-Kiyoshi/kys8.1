@@ -34,8 +34,8 @@ public class ChatLogTable {
 	private static Logger _log = Logger.getLogger(ChatLogTable.class.getName());
 
 	/*
-	 * 코드적으로는 HashMap를 이용해야 하지만, 퍼포먼스상의 문제가 있을지도 모르기 때문에, 배열로 타협.
-	 * HashMap에의 변경을 검토하는 경우는, 퍼포먼스상 문제가 없는가 충분히 주의하는 것.
+	 * コード的には、HashMapを利用するが、パフォーマンス上の問題があるかもしれないので、配列に妥協。
+	 * HashMapへの変更を検討する場合は、パフォーマンス上の問題がないか十分に注意すること。
 	 */
 	private final boolean[] loggingConfig = new boolean[15];
 
@@ -74,14 +74,14 @@ public class ChatLogTable {
 		}
 
 		// type
-		// 0:통상 채팅
+		// 0:通常のチャット
 		// 1:Whisper
-		// 2:절규
-		// 3:전체 채팅
-		// 4:혈맹 채팅
-		// 11:파티 채팅
-		// 13:연합 채팅
-		// 14:채팅 파티
+		// 2:絶叫
+		// 3:全体チャット
+		// 4:血盟チャット
+		// 11:パーティーチャット
+		// 13:連合チャット
+		// 14:チャットパーティー
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {

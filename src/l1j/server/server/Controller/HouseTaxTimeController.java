@@ -57,7 +57,7 @@ public class HouseTaxTimeController implements Runnable {
 
 	private void checkTaxDeadline() {
 		for (L1House house : HouseTable.getInstance().getHouseTableList()) {
-			if (!house.isOnSale()) { // 경매중의 아지트는 체크하지 않는다
+			if (!house.isOnSale()) { // オークション中のアジトはチェックしない
 				if (house.getTaxDeadline().before(getRealTime())) {
 					sellHouse(house);
 				}

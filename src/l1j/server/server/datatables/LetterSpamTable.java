@@ -53,7 +53,7 @@ public class LetterSpamTable {
 	}
 
 	/**
-	 * 편지를 보낼 수 있는지 체크한다.
+	 * メールを送信できるかどうかチェックする。
 	 * @param senderName
 	 * @param receiverName
 	 * @return
@@ -81,7 +81,7 @@ public class LetterSpamTable {
 	
 
 	/**
-	 * 편지 차단자를 저장한다.
+	 * メールブロック者保存する。
 	 * @param pcName 
 	 * @param excludeName
 	 */
@@ -98,7 +98,7 @@ public class LetterSpamTable {
 				no = rs.getInt("cnt");
 			}
 			if (no >= 50) {
-				pc.sendPackets(new S_ServerMessage(472)); // 차단된 사용자가 너무 많습니다.
+				pc.sendPackets(new S_ServerMessage(472)); // ブロックされたユーザーが多すぎます。
 				return;
 			}
 			
@@ -119,7 +119,7 @@ public class LetterSpamTable {
 	}
 	
 	/**
-	 * 편지 차단자를 삭제한다.
+	 * メールブロック者削除する。
 	 * @param pcName
 	 * @param excludeName
 	 */
@@ -144,7 +144,7 @@ public class LetterSpamTable {
 	}
 	
 	/**
-	 * 내 차단목록에 상대방이 있는지 체크한다.
+	 * 私のブロックリストに相手がいるかどうかチェックする。
 	 * @param PcName
 	 * @param spamname
 	 * @return
@@ -172,7 +172,7 @@ public class LetterSpamTable {
 	
 	
 	/**
-	 * 월드 접속시에 불러와서 S패킷을 날려준다.
+	 * ワールド接続時に呼び出してSパケットを飛ばしてくれる。
 	 * @param pcName
 	 * @param spamname
 	 */

@@ -49,9 +49,9 @@ public class WeaponSkillTable {
 
 	private WeaponSkillTable() {
 //		PerformanceTimer timer = new PerformanceTimer();
-//		System.out.print("■ 무기이펙트 데이터 .......................... ");		
+//		System.out.print("■ 武器エフェクトデータ.......................... "）;		
 		loadWeaponSkill();
-//		System.out.println("■ 로딩 정상 완료 " + timer.get() + " ms");	
+//		System.out.println("■ ロード正常終了」+ timer.get（）+ "ms"）;	
 	}
 
 	public static void reload() {
@@ -100,7 +100,7 @@ public class WeaponSkillTable {
 					effectTarget, isArrowType, attr);
 			_weaponIdIndex.put(weaponId, weaponSkill);
 		}
-		_log.config("무기 스킬 리스트 " + _weaponIdIndex.size() + "건 로드");
+		_log.config("武器スキルリスト" + _weaponIdIndex.size() + "件ロード");
 	}
 
 	public L1WeaponSkill getTemplate(int weaponId) {

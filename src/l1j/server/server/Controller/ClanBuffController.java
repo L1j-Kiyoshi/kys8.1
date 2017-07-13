@@ -1,9 +1,6 @@
 package l1j.server.server.Controller;
 
-import static l1j.server.server.model.skill.L1SkillId.ANTA_BUFF;
-import static l1j.server.server.model.skill.L1SkillId.FAFU_BUFF;
-import static l1j.server.server.model.skill.L1SkillId.RIND_BUFF;
-import static l1j.server.server.model.skill.L1SkillId.VALA_BUFF;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,7 +33,7 @@ public class ClanBuffController extends Thread {
 //		System.out.println("ClanBuffThread start real time thread...loanding Ok!");
 		while (true) {
 			try {				
-				/** 혈맹버프 **/
+				/** 血盟バフ **/
 				Clanbuff();	
 				checkDragonBlood();
 				Thread.sleep(60000);

@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import l1j.server.L1DatabaseFactory;
 import l1j.server.server.utils.SQLUtil;
 
@@ -49,9 +50,9 @@ public class CharacterHitRate {
 	}
 
 /*	private CharacterHitRate() {
-		System.out.print("■ 클래스공성 데이터 .......................... ");		
+		System.out.print("■ クラス攻城データ.......................... "）;		
 		characterHitrate();
-		System.out.println("■ 로딩 정상 완료");				
+		System.out.println("■ ロード正常終了 "）;				
 	}*/
 
 	public void characterHitrate() {

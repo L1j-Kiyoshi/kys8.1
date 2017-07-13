@@ -108,7 +108,7 @@ public class BraveavatarController implements Runnable {
 
 	private void Bravestart(L1PcInstance pc, int count) {
 		try{
-		for (L1PcInstance player : L1World.getInstance().getVisiblePlayer(pc, 16)) { // 8칸에서 15칸으로 리뉴얼 
+		for (L1PcInstance player : L1World.getInstance().getVisiblePlayer(pc, 16)) { // 8カンヌで15軒にリニューアル 
 			if (pc.getParty().isMember(player)) {
 				if (count >= 2 && count <= 3) {
 					BraveState(player, 1);

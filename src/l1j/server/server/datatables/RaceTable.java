@@ -59,8 +59,8 @@ public class RaceTable{
 			_namelist.put		(name.getNum(), name);
 		}
 		//Data.close();
-//		System.out.println("[::::::] util_racer: "+_namelist.size()+"개의 정보가 로드되었습니다.");
-//                eros.tarea.append("\n[::::::] util_racer: "+_namelist.size()+"개의 정보가 로드되었습니다.");
+//		System.out.println("[::::::] util_racer: "+_namelist.size()+"本情報が読み込まれました。 "）;
+//                eros.tarea.append("\n[::::::] util_racer: "+_namelist.size()+"本情報が読み込まれました。 "）;
 	}
 
 	public L1Racer getTemplate(int name)

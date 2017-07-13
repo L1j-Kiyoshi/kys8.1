@@ -7,7 +7,6 @@ import java.util.Map;
 
 import l1j.server.server.model.AcceleratorChecker;
 import l1j.server.server.model.L1Character;
-import l1j.server.server.model.L1PolyMorph;
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1MonsterInstance;
 import l1j.server.server.model.Instance.L1NpcInstance;
@@ -61,15 +60,15 @@ public class AttackController implements Runnable {
 						//
 						L1Character target = list.get(attacker);
 
-						if(target instanceof L1Character){ // npc도 일단 characters를 상속하니까 그냥 이거만 쓰면 됨다
-							if(target.getMapId() != attacker.getMapId()){ // 타겟이  이상한 장소에 있으면(자) 종료
+						if(target instanceof L1Character){ // npcも一応charactersを継承するからただこれだけ書けばドゥェムダ
+							if(target.getMapId() != attacker.getMapId()){ // ターゲットが奇妙な場所にいると終了
 								remove.add(attacker);
 								continue;
 							}
 						}
-						// 유효성 검사.
-						// 텔햇는지 판단하는 함수 필요.
-						// 공격거래 체크 및 화면상에 존재하는지 확인.
+						// 検証。
+						// テルヘトか判断する関数が必要です。
+						// 攻撃取引チェックと画面上に存在するかどうかを確認した。
 						if (!action(attacker, target)) {
 							remove.add(attacker);
 							continue;
@@ -84,8 +83,8 @@ public class AttackController implements Runnable {
 	}
 
 	public boolean action(L1PcInstance attacker, L1Character target) {
-		// 공격 액션을 취할 수 있는 경우의 처리
-		if ( attacker.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // 아브소르트바리아의 해제
+		// 攻撃アクションを取ることができる場合の処理
+		if ( attacker.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // アブ小ガルトバリアの解除
 			attacker.removeSkillEffect(L1SkillId.ABSOLUTE_BARRIER);
 			attacker.startMpRegenerationByDoll();
 		}
@@ -95,7 +94,7 @@ public class AttackController implements Runnable {
 			return false;
 		}
 		
-		// 변신 및 무기상태에 따른 공격거리 계산.
+		// 変身や武器の状態に応じた攻撃距離の計算。
 		int poly = attacker.getTempCharGfx();
 		L1ItemInstance weapon = attacker.getWeapon();
 		//int weapon_type = attacker.getWeapon().getItem().getType();
@@ -112,7 +111,7 @@ public class AttackController implements Runnable {
 					poly == 11408||poly == 11409||poly == 11410||poly == 11411||poly == 11412||poly == 11413||
 					poly == 11414||poly == 11415||poly == 11416||poly == 11417||poly == 11418||poly == 11419||
 					poly == 11420||poly == 11421||poly == 12542||poly == 12541 || poly == 13735 || poly == 13737
-					|| poly == 14928 //82경비창
+					|| poly == 14928 //82経費ウィンドウ
 					|| poly == 13389) {
 					attackRange = 2;
 				}
@@ -120,7 +119,7 @@ public class AttackController implements Runnable {
 				attackRange = 1;
 			}
 		}
-		// 특정 몬스터별 공격거리 계산.
+		// 特定のモンスターごとの攻撃距離の計算。
 		if(target instanceof L1MonsterInstance) {
 			L1MonsterInstance mi = (L1MonsterInstance)target;
 			if(mi.getNpcTemplate().get_size().equalsIgnoreCase("small"))
@@ -129,7 +128,7 @@ public class AttackController implements Runnable {
 				attackRange += 1;
 		}
 		
-		/** 무기가 없거나 도끼를 낀상태이고 활쟁이 변신이라면 칼질 안되게 **/
+		/** 武器がないか斧をはめた状態であり、ファルジェンイ変身ならシャンク途方もなく **/
 		if (weapon == null || weapon.getItem().getType1() == 11) {
 			if (a == 11331 || a == 11342 || a == 11352 || a == 11353 || a == 11362 || a == 11363 || a == 11369 || a == 11378
 					|| a == 11382 || a == 11386 || a == 11390 || a == 11394 || a == 11402 || a == 11406 || a == 8860 || a == 3871
@@ -161,16 +160,16 @@ public class AttackController implements Runnable {
 		if(attacker.hasSkillEffect(1009)){
 			return false;
 		}
-		/** 중량 오버 **/
+		/** 重量オーバー **/
 		if (attacker.getRankLevel() < 4 && attacker.getInventory().getWeight100() > 82) { 
 			return false;
 		}
-		/** 데스나이트의 불검:진 **/
+		/** デスナイトのフレイムブレード：ジン **/
 		if (!(attacker.getMapId() >= 2600 && attacker.getMapId() <= 2699) && attacker.getInventory().checkEquipped(203003)) { 
 			return false;
 		}
-		if (attacker.getZoneType() != 1 && attacker.getInventory().checkEquipped(10000)) { //직장인 경험치 지급
-			attacker.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"허수아비무기를 해제하시기 바랍니다."));;
+		if (attacker.getZoneType() != 1 && attacker.getInventory().checkEquipped(10000)) { //会社員経験値支給
+			attacker.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"かかしの武器を解除してください。"));;
 			return false;
 		}
 		

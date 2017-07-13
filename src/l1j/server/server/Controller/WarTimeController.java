@@ -42,7 +42,7 @@ public class WarTimeController implements Runnable {
 	private long[] _war_end_time = new long[8];
 	private boolean[] _is_now_war = new boolean[8];
 
-	private long[] end_time = new long[8]; //면류관 취득후 15분동안 유지
+	private long[] end_time = new long[8]; //冠取得後15分間維持
 	
 	private boolean[] 강제종료 = new boolean[8];
 
@@ -69,7 +69,7 @@ public class WarTimeController implements Runnable {
 
 	public String WarTimeString(int castle) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
-				"yyyy년 MM월 dd일 HH시 mm분");
+				"yyyy年MM月dd日HH時mm分");
 		String time = dateFormat.format(new Timestamp(
 				_war_start_time[castle - 1]));
 		return time;
@@ -121,7 +121,7 @@ public class WarTimeController implements Runnable {
 			if (castle.getName().startsWith(name)) {
 				강제종료[castle.getId() - 1] = true;
 				pc.sendPackets(new S_SystemMessage(castle.getName()
-						+ " 공성 강제 종료"), true);
+						+ "攻城強制終了"), true);
 			}
 		}
 	}
@@ -137,8 +137,8 @@ public class WarTimeController implements Runnable {
 		try {
 			// while (true) {
 			// if(Config.WAR_TIME_AUTO_SETTING)
-			// 고정시간셋팅();
-			checkWarTime(); // 전쟁 시간을 체크
+			// 固定時間設定（）;
+			checkWarTime(); // 戦争の時間をチェック
 			// Thread.sleep(1000);
 			GeneralThreadPool.getInstance().schedule(this, 1000);
 			// }
@@ -147,11 +147,11 @@ public class WarTimeController implements Runnable {
 		}
 	}
 
-	// 오후9시 일요일, 수요일 각각 공성 시간 셋팅
+	// 午後9時、日曜日、水曜日それぞれ攻城時間設定
 	int ccc = 60;
 
 	private void 고정시간셋팅() {
-		// TODO 자동 생성된 메소드 스텁
+		// TODO 自動生成されたメソッド・スタブ
 		if (ccc-- < 0)
 			ccc = 60;
 		else {
@@ -172,7 +172,7 @@ public class WarTimeController implements Runnable {
 			return;
 		}
 		for (int i = 0; i < 8; i++) {
-			// 0 켄트 1 오성 2 윈성 3 기란성 4 하이네성 5 난성 6 아덴성 7 디아드
+			// 0ケント1五つ2ウィンソン3ギラン城の4ハイネ城5乱性6アデン7ディアド
 			if (i == 3 || i == 0) {
 				long time = System.currentTimeMillis();
 				if (!_is_now_war[i] && !(_war_start_time[i] <= time && _war_end_time[i] >= time)) {
@@ -182,16 +182,16 @@ public class WarTimeController implements Runnable {
 					// Thursday, 5 = Friday, 6 = Saturday
 
 					/*
-					 * 금요일 공성 if(CurrentDay == 5){//금요일
+					 * 金曜日攻城if（CurrentDay == 5）{//金曜日
 					 * if(cal.getTime().getHours() > 21) cal.setTimeInMillis((7
 					 * * 24 * 3600000) + cal.getTimeInMillis()); }else
-					 * if(CurrentDay == 6){//토요일 cal.setTimeInMillis((6 * 24 *
+					 * if(CurrentDay == 6){//土曜日cal.setTimeInMillis（（6 * 24 *
 					 * 3600000) + cal.getTimeInMillis()); }else if(CurrentDay >=
 					 * 0 && CurrentDay <= 4){ cal.setTimeInMillis(((5 -
 					 * CurrentDay) * 24 * 3600000) + cal.getTimeInMillis()); }
 					 */
 
-					if (CurrentDay == 0) {// 일요일
+					if (CurrentDay == 0) {// 日曜日
 						if (cal.getTime().getHours() > 21)
 							cal.setTimeInMillis((7 * 24 * 3600000)
 									+ cal.getTimeInMillis());
@@ -200,11 +200,11 @@ public class WarTimeController implements Runnable {
 								+ cal.getTimeInMillis());
 					}
 
-					// 일, 수 공성진행
+					// 日、数攻城進行
 					/*
-					 * if(CurrentDay == 0){//일요일 if(cal.getTime().getHours() >
+					 * if(CurrentDay == 0){//日曜日if（cal.getTime（）。getHours（）>
 					 * 21) cal.setTimeInMillis((3 * 24 * 3600000) +
-					 * cal.getTimeInMillis()); }else if(CurrentDay == 3){//수요일
+					 * cal.getTimeInMillis()); }else if(CurrentDay == 3){//水曜日
 					 * if(cal.getTime().getHours() > 21) cal.setTimeInMillis((4
 					 * * 24 * 3600000) + cal.getTimeInMillis()); }else
 					 * if(CurrentDay >= 1 && CurrentDay <= 2){
@@ -215,12 +215,12 @@ public class WarTimeController implements Runnable {
 					 */
 
 					/*
-					 * if(i == 0){ if(CurrentDay == 0){//일요일
+					 * if(i == 0){ if(CurrentDay == 0){//日曜日
 					 * if(cal.getTime().getHours() > 21) cal.setTimeInMillis((7
 					 * * 24 * 3600000) + cal.getTimeInMillis()); }else{
 					 * cal.setTimeInMillis(((7 - CurrentDay) * 24 * 3600000) +
 					 * cal.getTimeInMillis()); } }else if(i == 2){ if(CurrentDay
-					 * == 3){//수요일 if(cal.getTime().getHours() > 21)
+					 * == 3){//水曜日if（cal.getTime（）。getHours（）> 21）
 					 * cal.setTimeInMillis((7 * 24 * 3600000) +
 					 * cal.getTimeInMillis()); }else if(CurrentDay >= 0 &&
 					 * CurrentDay <= 2){ cal.setTimeInMillis(((3 - CurrentDay) *
@@ -239,21 +239,21 @@ public class WarTimeController implements Runnable {
 		}
 	}
 
-	// 오후 9시 일요일 공성 시간 셋팅
+	// 午後9時、日曜日攻城時間設定
 	/*
-	 * private void 고정시간셋팅() { // TODO 자동 생성된 메소드 스텁 if(ccc-- < 0) ccc = 60;
-	 * else return; for (int i = 0; i < 8; i++) { // 0 켄트 1 오성 2 윈성 3 기란성 4 하이네성
-	 * 5 난성 6 아덴성 7 디아드 if(i == 0 || i == 2){ long time =
+	 * private void 固定時間設定（）{// TODO自動生成されたメソッドスタブif（ccc-- <0）ccc = 60;
+	 * else return; for（int i = 0; i <8; i ++）{// 0ケント1五つ2ウィンソン3ギラン城の4ハイネ城
+	 * 5乱性6アデン7ディアドif（i == 0 || i == 2）{long time =
 	 * System.currentTimeMillis(); if (!_is_now_war[i] && !(_war_start_time[i]
 	 * <= time && _war_end_time[i] >= time)) { Calendar cal =
 	 * (Calendar)Calendar.getInstance().clone(); int CurrentDay =
-	 * cal.getTime().getDay(); //월, 화 if(CurrentDay >= 1 && CurrentDay <= 2){
+	 *cal.getTime（）getDay（）; //月、火if（CurrentDay> = 1 && CurrentDay <= 2）{
 	 * cal.setTimeInMillis(((3 - CurrentDay) * 24 * 3600000) +
-	 * cal.getTimeInMillis()); //목, 금, 토 }else if(CurrentDay >= 4 && CurrentDay
+	 * cal.getTimeInMillis（））; //首、金、土} else if（CurrentDay> = 4 && CurrentDay
 	 * <= 6){ cal.setTimeInMillis(((7 - CurrentDay) * 24 * 3600000) +
-	 * cal.getTimeInMillis()); //일 }else if(CurrentDay == 0){
+	 * cal.getTimeInMillis（））; //バッチelse if（CurrentDay == 0）{
 	 * if(cal.getTime().getHours() > 21) cal.setTimeInMillis((3 * 24 * 3600000)
-	 * + cal.getTimeInMillis()); //수 }else if(CurrentDay == 3){
+	 * + cal.getTimeInMillis（））; //でき} else if（CurrentDay == 3）{
 	 * if(cal.getTime().getHours() > 21) cal.setTimeInMillis((4 * 24 * 3600000)
 	 * + cal.getTimeInMillis()); } cal.set(Calendar.HOUR_OF_DAY, 21);
 	 * cal.set(Calendar.MINUTE, 0); cal.set(Calendar.SECOND, 0);
@@ -273,40 +273,40 @@ public class WarTimeController implements Runnable {
 		for (int i = 0; i < 8; i++) {
 			if (_is_now_war[i]) {
 				if (!ck) {
-					player.sendPackets(new S_SystemMessage("공성전이 진행중입니다."),true);
-					player.sendPackets(new S_SystemMessage("성을 소유하고 있는 혈맹은 다음과 같습니다."), true);
+					player.sendPackets(new S_SystemMessage("攻城戦が進行中です。"),true);
+					player.sendPackets(new S_SystemMessage("城を所有している血盟は次のとおりです。"), true);
 					ck = true;
 				}
-				String castleName = "켄트성";
+				String castleName = "ケント城";
 				switch (i + 1) {
 				case 2:
-					castleName = "오크 요새";
+					castleName = "オーク要塞";
 					break;
 				case 3:
-					castleName = "윈다우드성";
+					castleName = "ウィンダウッド城";
 					break;
 				case 4:
-					castleName = "기란성";
+					castleName = "ギラン城";
 					break;
 				case 5:
-					castleName = "하이네성";
+					castleName = "ハイネ城";
 					break;
 				case 6:
-					castleName = "지저성";
+					castleName = "ドワーフ城";
 					break;
 				case 7:
-					castleName = "아덴성";
+					castleName = "アデン城";
 					break;
 				default:
 					break;
 				}
 				String clanName = "";
-				for (L1War war : L1World.getInstance().getWarList()) { // 전쟁리스트를 취득
+				for (L1War war : L1World.getInstance().getWarList()) { // 戦争のリストを取得
 					if (war.GetCastleId() == i + 1) {
 						clanName = war.GetDefenceClanName();
 					}
 				}
-				player.sendPackets(new S_SystemMessage("[" + castleName + " = " + clanName + " 혈맹]"), true);
+				player.sendPackets(new S_SystemMessage("[" + castleName + " = " + clanName + "血盟]"), true);
 			}
 		}
 	}
@@ -317,9 +317,9 @@ public class WarTimeController implements Runnable {
 					war.GetEnemyClanName(war.GetDefenceClanName()));
 			L1World.getInstance().broadcastPacketToAll(
 					new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "["
-							+ war.GetDefenceClanName() + " 혈맹] VS ["
+							+ war.GetDefenceClanName() + "血盟] VS ["
 							+ war.GetEnemyClanName(war.GetDefenceClanName())
-							+ " 혈맹]의 전쟁을 강제 종결 시킵니다."), true);
+							+ "血盟]の戦争を強制終結させます。"), true);
 		}
 	}
 
@@ -334,7 +334,7 @@ public class WarTimeController implements Runnable {
 
 		@Override
 		public void run() {
-			// TODO 자동 생성된 메소드 스텁
+			// TODO 自動生成されたメソッド・スタブ
 			try {
 				if (!on)
 					return;
@@ -359,44 +359,44 @@ public class WarTimeController implements Runnable {
 			if ( (_war_start_time[i] <= System.currentTimeMillis() && _war_end_time[i] >= System.currentTimeMillis()) && end_time[i] >= System.currentTimeMillis() ) {
 				if((_war_end_time[i]-60000 <= System.currentTimeMillis() && _war_end_time[i]-59000 >= System.currentTimeMillis() )  || end_time[i]-60000 <= System.currentTimeMillis() && end_time[i]-59000 >= System.currentTimeMillis()){
 					L1World.getInstance().broadcastPacketToAll(
-							new S_SystemMessage("공성: " + _l1castle[i].getName() + " 공성전이 종료까지 1분남았습니다!"), true); // %s의
+							new S_SystemMessage("攻城：" + _l1castle[i].getName() + "攻城戦が終了まで1分残って！"), true); // %s의
 				}
 				if((_war_end_time[i]-300000 <= System.currentTimeMillis() && _war_end_time[i]-299000 >= System.currentTimeMillis() )  || end_time[i]-300000 <= System.currentTimeMillis() && end_time[i]-299000 >= System.currentTimeMillis()){
 					L1World.getInstance().broadcastPacketToAll(
-							new S_SystemMessage("공성: " + _l1castle[i].getName() + " 공성전이 종료까지 5분남았습니다!"), true); // %s의
+							new S_SystemMessage("공성: " + _l1castle[i].getName() + "攻城戦が終了まで5分残っ！"), true); // %s의
 				}
 				if (강제종료[i] == true) {
 					try {
 						L1World.getInstance().broadcastPacketToAll(
-								new S_SystemMessage("공성: " + _l1castle[i].getName() + " 공성전이 종료되었습니다!"), true); // %s의
-																												// 공성전이시작되었습니다.
+								new S_SystemMessage("攻城：" + _l1castle[i].getName() + "攻城戦が終了しました！"), true); // %s의
+																												//攻城戦が開始されました。
 						// L1World.getInstance().broadcastPacketToAll(new
 						// S_PacketBox(S_PacketBox.MSG_WAR_END, i + 1), true);
-						// // %s의 공성전이 종료했습니다.
+						// // %sの攻城戦が終了しました。
 						_war_start_time[i] = LongType_setTime(_war_start_time[i], Config.ALT_WAR_INTERVAL_UNIT,
 								Config.ALT_WAR_INTERVAL);
 						_war_end_time[i] = LongType_setTime(_war_end_time[i], Config.ALT_WAR_INTERVAL_UNIT,
 								Config.ALT_WAR_INTERVAL);
 						end_time[i] = _war_end_time[i];
 						_l1castle[i].setWarTime(castle_Calendar_save(_war_start_time[i]));
-						_l1castle[i].setTaxRate(10); // 세율10프로
+						_l1castle[i].setTaxRate(10); // 税率10プロ
 						CastleTable.getInstance().updateCastle(_l1castle[i]);
-						securityStart(_l1castle[i]);// 치안관리
+						securityStart(_l1castle[i]);// 治安管理
 						int castle_id = i + 1;
 						
 						int castle_id2 = 0; 
 						try {
-						// 현제 월드에 있는 플레이어만 지급하기위해서 ..짱돌
+						// 現在ワールドのプレイヤーのみ支給するために。チャンドル
 						for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 							L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 							if (clan != null && pc.isPrivateShop() == false) {
 								castle_id2 = clan.getCastleId();
 								if (castle_id2 == castle_id) {
-									// 지급할 아이템 아이디
+									// 支給するアイテム名
 									String[] itemIds = null;
 									try{
 										int idx = Config.EVENTITEM_ITEMID.indexOf(",");
-										// ,로 있을경우
+										// 、である場合、
 										if(idx > -1){
 											itemIds = Config.EVENTITEM_ITEMID.split(",");
 										}else{
@@ -404,11 +404,11 @@ public class WarTimeController implements Runnable {
 											itemIds[0] = Config.EVENTITEM_ITEMID;
 										}
 									}catch(Exception e){}
-									// 지급할 아이템 갯수
+									// 支給するアイテムの数
 									String[] counts = null;
 									try{
 										int idx = Config.EVENTITEM_NUMBER.indexOf(",");
-										// ,로 있을경우
+										// 、である場合
 										if(idx > -1){
 											counts = Config.EVENTITEM_NUMBER.split(",");
 										}else{
@@ -416,7 +416,7 @@ public class WarTimeController implements Runnable {
 											counts[0] = Config.EVENTITEM_NUMBER;
 										}
 									}catch(Exception e){}
-									// 아이템 아이디나 카운트가 없을경우
+									// アイテム名やカウントがない場合
 									if (itemIds == null || counts == null)
 										return;
 									for (int j = 0; j < itemIds.length; j++) {
@@ -428,19 +428,19 @@ public class WarTimeController implements Runnable {
 											continue;
 										L1ItemInstance item = pc.getInventory().storeItem(itemId, count);
 										if (item != null)
-											pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + ")을 얻었습니다."));
+											pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + "）を獲得しました。"));
 										    pc.getInventory().storeItem(60411, 10);
 									}
 
 								}
 							}
-//							System.out.println("공성아이템지급완료");
+//							System.out.println("攻城アイテム支給完了 "）;
 							
 						}
 						} catch (Exception e) {
-							System.out.println("공성아이템지급에러" + e);
+							System.out.println("攻城アイテム支給エラー" + e);
 						}
-//						System.out.println("공성아이템지급에러111");
+//						System.out.println("攻城アイテム支給エラー111 "）;
 						
 						
 						L1FieldObjectInstance flag = null;
@@ -449,14 +449,14 @@ public class WarTimeController implements Runnable {
 						for (L1Object l1object : L1World.getInstance().getObject()) {
 							if (l1object == null)
 								continue;
-							// 전쟁 에리어내의 기를 지운다
+							// 戦争エリア内の基消す
 							if (l1object instanceof L1FieldObjectInstance) {
 								flag = (L1FieldObjectInstance) l1object;
 								if (L1CastleLocation.checkInWarArea(castle_id, flag)) {
 									flag.deleteMe();
 								}
 							}
-							// 크라운이 있는 경우는, 크라운을 지워 타워를 spawn 한다
+							// クラウンがある場合は、クラウンを消してタワーをspawnする
 							if (l1object instanceof L1CrownInstance) {
 								crown = (L1CrownInstance) l1object;
 								if (L1CastleLocation.checkInWarArea(castle_id, crown)) {
@@ -492,7 +492,7 @@ public class WarTimeController implements Runnable {
 							}
 						}
 					} catch (Exception e) {
-						System.out.println("공성 시간 내 강제 종료 에러 : \r\n");
+						System.out.println("攻城時間内強制終了エラー：\\ r \\ n");
 						e.printStackTrace();
 					}
 
@@ -500,22 +500,22 @@ public class WarTimeController implements Runnable {
 
 				강제종료[i] = false;
 
-				if (_war_end[i] == true) { // 공성 미리 끝이면
+				if (_war_end[i] == true) { //攻城あらかじめ終了する場合
 					_war_end[i] = false;
 					try {
 						_is_now_war[i] = false;
 						L1World.getInstance().broadcastPacketToAll(
-								new S_SystemMessage("공성: "
+								new S_SystemMessage("攻城："
 										+ _l1castle[i].getName()
-										+ " 공성전이 종료되었습니다!"), true); // %s의 공성전이
-																	// 시작되었습니다.
+										+ "攻城戦が終了しました！"), true); //％sの攻城戦が
+																	// 開始された。
 						_war_start_time[i] = LongType_setTime(_war_start_time[i],Config.ALT_WAR_INTERVAL_UNIT,Config.ALT_WAR_INTERVAL);
 						_war_end_time[i] = LongType_setTime(_war_end_time[i],Config.ALT_WAR_INTERVAL_UNIT,Config.ALT_WAR_INTERVAL);
 						end_time[i] = _war_end_time[i];
 						_l1castle[i].setWarTime(castle_Calendar_save(_war_start_time[i]));
-						_l1castle[i].setTaxRate(10); // 세율10프로
+						_l1castle[i].setTaxRate(10); // 税率10プロ
 						CastleTable.getInstance().updateCastle(_l1castle[i]);
-						securityStart(_l1castle[i]);// 치안관리
+						securityStart(_l1castle[i]);// 治安管理
 						int castle_id = i + 1;
 						L1FieldObjectInstance flag = null;
 						L1CrownInstance crown = null;
@@ -570,22 +570,22 @@ public class WarTimeController implements Runnable {
 							int castleid = L1CastleLocation.getCastleIdByArea(tp);
 							if (castleid != 0) {
 								if (tp.getClan().getCastleId() == castleid) {
-								/** 공성 강제 종료후 해당 아이템 지급  **/
-									tp.getInventory().storeItem(40308, 10000000);//강종일때
+								/** 攻城強制終了後、アイテム支給  **/
+									tp.getInventory().storeItem(40308, 10000000);//ガンジョンイル時
 								}
 							}
 						}
-								/** 공성 강제 종료후 해당 좌표에 버프동상 출물  **/
+								/** 攻城強制終了し、その座標にバフ像チュルムル  **/
 						for (L1Clan c : L1World.getInstance().getAllClans()) {
 							if (i + 1 == c.getCastleId()) {
 								ClanTable.getInstance().updateClan(c);
-								if (i == 0)// 켄성
+								if (i == 0)//ケンソン
 									L1SpawnUtil.spawn10(33067, 32764, (short) 4,
 									6, 6200008, 0, 1000 * 60 * 60, c);
-								else if (i == 1)// 오크성
+								else if (i == 1)// オーク性
 									L1SpawnUtil.spawn10(32734, 32441, (short) 4,
 									6, 6200008, 0, 1000 * 60 * 60, c);
-								else if (i == 3)// 기란성
+								else if (i == 3)// ギラン城
 									L1SpawnUtil.spawn10(32441, 32805, (short) 4,
 									6, 6200008, 0, 1000 * 60 * 60, c);
 								break;
@@ -599,18 +599,18 @@ public class WarTimeController implements Runnable {
 				if (_is_now_war[i] == false) {
 					try {
 						_is_now_war[i] = true;
-						// 기를 spawn 한다
+						// 気spawnする
 						L1Clan clan = null;
 
 						warspawn = new L1WarSpawn();
 						warspawn.SpawnFlag(i + 1);
 						// warspawn.SpawnCrown(i + 1);
-						// 성문을 수리해 닫는다
+						// 門を修理して閉じる
 
 						for (L1DoorInstance door : DoorSpawnTable.getInstance()
 								.getDoorList()) {
 							if (L1CastleLocation.checkInWarArea(i + 1, door)) {
-								door.setAutoStatus(0);// 자동수리를 해제
+								door.setAutoStatus(0);//自動修復を解除
 								door.repairGate();
 							}
 						}
@@ -618,12 +618,12 @@ public class WarTimeController implements Runnable {
 						모의전종료();
 
 						if (_l1castle[i].getCastleSecurity() == 1)
-						securityStart(_l1castle[i]);// 치안관리
+						securityStart(_l1castle[i]);// 治安管理
 						L1World.getInstance().broadcastPacketToAll(
-						new S_SystemMessage("공성: " + _l1castle[i].getName()+ " 공성전이 시작되었습니다!"), true);
+						new S_SystemMessage("攻城：" + _l1castle[i].getName()+ "攻城戦が開始されました！"), true);
 						// L1World.getInstance().broadcastPacketToAll(new
 						// S_PacketBox(S_PacketBox.MSG_WAR_BEGIN, i + 1), true);
-						// // %s의 공성전이 시작되었습니다.
+						// // %sの攻城戦が開始されました。
 						int[] loc = new int[3];
 
 						for (L1PcInstance pc : L1World.getInstance()
@@ -661,7 +661,7 @@ public class WarTimeController implements Runnable {
 										&& guard.getX() <= locb[1]
 										&& guard.getY() >= locb[2]
 										&& guard.getY() <= locb[3]) {
-									Broadcaster.broadcastPacket(guard, new S_NpcChatPacket( guard, "공성전이 시작되었다! 모두 경계상태를 늦추지 마라!",0), true);
+									Broadcaster.broadcastPacket(guard, new S_NpcChatPacket( guard, "攻城戦が開始されました！すべて警戒状態を緩めないでください！",0), true);
 								}
 							}
 							for (L1CastleGuardInstance guard : L1World.getInstance().getAllCastleGuard()) {
@@ -671,48 +671,48 @@ public class WarTimeController implements Runnable {
 										&& guard.getX() <= locb[1]
 										&& guard.getY() >= locb[2]
 										&& guard.getY() <= locb[3]) {
-									Broadcaster.broadcastPacket(guard,new S_NpcChatPacket(guard,"공성전이 시작되었다! 모두 경계상태를 늦추지 마라!",0), true);
+									Broadcaster.broadcastPacket(guard,new S_NpcChatPacket(guard,"攻城戦が開始されました！すべて警戒状態を緩めないでください！",0), true);
 								}
 							}
 						} catch (Exception e) {
 						}
 					} catch (Exception e) {
-						System.out.println("공성 시간 내 시작 에러 : \r\n");
+						System.out.println("攻城時間内開始エラー：\\ r \\ n");
 						e.printStackTrace();
 					}
 				}
-			} else { // 전쟁 종료 //이전 코드 [else if (_war_end_time[i].before(Rtime))]
+			} else { // 戦争終了//前のコード[else if（_war_end_time [i] .before（Rtime））]
 				if (강제종료[i] == true) {
 					try {
 						L1World.getInstance().broadcastPacketToAll(
-						new S_SystemMessage("공성: " + _l1castle[i].getName() + " 공성전이 종료되었습니다!"), true);
+						new S_SystemMessage("攻城：" + _l1castle[i].getName() + "攻城戦が終了しました！"), true);
 						// L1World.getInstance().broadcastPacketToAll(
 						// new S_PacketBox(S_PacketBox.MSG_WAR_END, i + 1)); //
-						// %s의 공성전이 종료했습니다.
+						// %sの攻城戦が終了しました。
 						_war_start_time[i] = LongType_setTime(_war_start_time[i],Config.ALT_WAR_INTERVAL_UNIT,
 						Config.ALT_WAR_INTERVAL);
 						_war_end_time[i] = LongType_setTime(_war_end_time[i],Config.ALT_WAR_INTERVAL_UNIT,
 						Config.ALT_WAR_INTERVAL);
 						end_time[i] = _war_end_time[i];
 						_l1castle[i].setWarTime(castle_Calendar_save(_war_start_time[i]));
-						_l1castle[i].setTaxRate(10); // 세율10프로
+						_l1castle[i].setTaxRate(10); // 税率10プロ
 						CastleTable.getInstance().updateCastle(_l1castle[i]);
-						securityStart(_l1castle[i]);// 치안관리
+						securityStart(_l1castle[i]);// 治安管理
 						int castle_id = i + 1;
 						
 						try{
 							int castle_id2 = 0; 
-							// 현제 월드에 있는 플레이어만 지급하기위해서 ..짱돌
+							// 現在ワールドのプレイヤーのみ支給するために。チャンドル
 							for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 								L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 								if (clan != null && pc.isPrivateShop() == false) {
 									castle_id2 = clan.getCastleId();
 									if (castle_id2 == castle_id) {
-										// 지급할 아이템 아이디
+										// 支給するアイテム名
 										String[] itemIds = null;
 										try{
 											int idx = Config.EVENTITEM_ITEMID.indexOf(",");
-											// ,로 있을경우
+											// 、である場合
 											if(idx > -1){
 												itemIds = Config.EVENTITEM_ITEMID.split(",");
 											}else{
@@ -720,11 +720,11 @@ public class WarTimeController implements Runnable {
 												itemIds[0] = Config.EVENTITEM_ITEMID;
 											}
 										}catch(Exception e){}
-										// 지급할 아이템 갯수
+										// 支給するアイテムの数
 										String[] counts = null;
 										try{
 											int idx = Config.EVENTITEM_NUMBER.indexOf(",");
-											// ,로 있을경우
+											// 、である場合
 											if(idx > -1){
 												counts = Config.EVENTITEM_NUMBER.split(",");
 											}else{
@@ -732,7 +732,7 @@ public class WarTimeController implements Runnable {
 												counts[0] = Config.EVENTITEM_NUMBER;
 											}
 										}catch(Exception e){}
-										// 아이템 아이디나 카운트가 없을경우
+										// アイテム名やカウントがない場合
 										if (itemIds == null || counts == null)
 											return;
 										for (int j = 0; j < itemIds.length; j++) {
@@ -744,18 +744,18 @@ public class WarTimeController implements Runnable {
 												continue;
 											L1ItemInstance item = pc.getInventory().storeItem(itemId, count);
 											if (item != null)
-												pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + ")을 얻었습니다."));
+												pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + "）を獲得しました。"));
 											    pc.getInventory().storeItem(60411, 5);
 										}
 
 									}
 								}
-								System.out.println("공성아이템지급완료");
+								System.out.println("攻城アイテム支給完了");
 							}
 							} catch (Exception e) {
-								System.out.println("공성아이템지급에러" + e);
+								System.out.println("攻城アイテム支給エラー" + e);
 							}
-							//System.out.println("공성아이템지급에러444");
+							//System.out.println("攻城アイテム支給エラー444 "）;
 						
 						L1FieldObjectInstance flag = null;
 						L1CrownInstance crown = null;
@@ -763,14 +763,14 @@ public class WarTimeController implements Runnable {
 						for (L1Object l1object : L1World.getInstance().getObject()) {
 							if (l1object == null)
 								continue;
-							// 전쟁 에리어내의 기를 지운다
+							// 戦争エリア内の基消す
 							if (l1object instanceof L1FieldObjectInstance) {
 								flag = (L1FieldObjectInstance) l1object;
 								if (L1CastleLocation.checkInWarArea(castle_id,flag)) {
 									flag.deleteMe();
 								}
 							}
-							// 크라운이 있는 경우는, 크라운을 지워 타워를 spawn 한다
+							// クラウンがある場合は、クラウンを消してタワーをspawnする
 							if (l1object instanceof L1CrownInstance) {
 								crown = (L1CrownInstance) l1object;
 								if (L1CastleLocation.checkInWarArea(castle_id,crown)) {
@@ -805,7 +805,7 @@ public class WarTimeController implements Runnable {
 							}
 						}
 					} catch (Exception e) {
-						System.out.println("공성 시간 외 강제 종료 에러 : \r\n");
+						System.out.println("攻城時間外に強制終了エラー：\\ r \\ n");
 						e.printStackTrace();
 					}
 				}
@@ -823,10 +823,10 @@ public class WarTimeController implements Runnable {
 						} catch (Exception e) {
 						}
 						L1World.getInstance().broadcastPacketToAll(
-						new S_SystemMessage("공성: " + _l1castle[i].getName() + " 공성전이 종료되었습니다!"), true);
+						new S_SystemMessage("攻城：" + _l1castle[i].getName() + "攻城戦が終了しました！"), true);
 						// L1World.getInstance().broadcastPacketToAll(
 						// new S_PacketBox(S_PacketBox.MSG_WAR_END, i + 1),
-						// true); // %s의 공성전이 종료했습니다.
+						// true); // %sの攻城戦が終了しました。
 						_war_start_time[i] = LongType_setTime(
 								_war_start_time[i],
 								Config.ALT_WAR_INTERVAL_UNIT,
@@ -837,25 +837,25 @@ public class WarTimeController implements Runnable {
 						end_time[i] = _war_end_time[i];
 						_l1castle[i]
 								.setWarTime(castle_Calendar_save(_war_start_time[i]));
-						_l1castle[i].setTaxRate(10); // 세율10프로
-						// _l1castle[i].setPublicMoney(0); // 공금클리어
+						_l1castle[i].setTaxRate(10); //税率10プロ
+						// _l1castle[i].setPublicMoney(0); // 公金クリア
 						CastleTable.getInstance().updateCastle(_l1castle[i]);
-						securityStart(_l1castle[i]);// 치안관리
+						securityStart(_l1castle[i]);// 治安管理
 						int castle_id = i + 1;
 						
 						int castle_id2 = 0; 
 						try {
-						// 현제 월드에 있는 플레이어만 지급하기위해서 ..짱돌
+						// 現在ワールドのプレイヤーのみ支給するために。チャンドル
 						for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 							L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 							if (clan != null && pc.isPrivateShop() == false) {
 								castle_id2 = clan.getCastleId();
 								if (castle_id2 == castle_id) {
-									// 지급할 아이템 아이디
+									// 支給するアイテム名
 									String[] itemIds = null;
 									try{
 										int idx = Config.EVENTITEM_ITEMID.indexOf(",");
-										// ,로 있을경우
+										// ,である場合、
 										if(idx > -1){
 											itemIds = Config.EVENTITEM_ITEMID.split(",");
 										}else{
@@ -863,11 +863,11 @@ public class WarTimeController implements Runnable {
 											itemIds[0] = Config.EVENTITEM_ITEMID;
 										}
 									}catch(Exception e){}
-									// 지급할 아이템 갯수
+									// 支給するアイテムの数
 									String[] counts = null;
 									try{
 										int idx = Config.EVENTITEM_NUMBER.indexOf(",");
-										// ,로 있을경우
+										// 、である場合
 										if(idx > -1){
 											counts = Config.EVENTITEM_NUMBER.split(",");
 										}else{
@@ -875,7 +875,7 @@ public class WarTimeController implements Runnable {
 											counts[0] = Config.EVENTITEM_NUMBER;
 										}
 									}catch(Exception e){}
-									// 아이템 아이디나 카운트가 없을경우
+									// アイテム名やカウントがない場合
 									if (itemIds == null || counts == null)
 										return;
 									for (int j = 0; j < itemIds.length; j++) {
@@ -887,19 +887,19 @@ public class WarTimeController implements Runnable {
 											continue;
 										L1ItemInstance item = pc.getInventory().storeItem(itemId, count);
 										if (item != null)
-											pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + ")을 얻었습니다."));
+											pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + "）を獲得しました。"));
 										    pc.getInventory().storeItem(60411, 5);
 									}
 
 								}
 							}
-//							System.out.println("공성아이템지급완료");
+//							System.out.println("攻城アイテム支給完了 "）;
 							
 						}
 						} catch (Exception e) {
-							System.out.println("공성아이템지급에러" + e);
+							System.out.println("攻城アイテム支給エラー" + e);
 						}
-//						System.out.println("공성아이템지급에러999");
+//						System.out.println("攻城アイテム支給エラー999 "）;
 						
 						L1FieldObjectInstance flag = null;
 						L1CrownInstance crown = null;
@@ -908,7 +908,7 @@ public class WarTimeController implements Runnable {
 								.getObject()) {
 							if (l1object == null)
 								continue;
-							// 전쟁 에리어내의 기를 지운다
+							// 戦争エリア内の基消す
 							if (l1object instanceof L1FieldObjectInstance) {
 								flag = (L1FieldObjectInstance) l1object;
 								if (L1CastleLocation.checkInWarArea(castle_id,
@@ -916,7 +916,7 @@ public class WarTimeController implements Runnable {
 									flag.deleteMe();
 								}
 							}
-							// 크라운이 있는 경우는, 크라운을 지워 타워를 spawn 한다
+							// クラウンがある場合は、クラウンを消してタワーをspawnする
 							if (l1object instanceof L1CrownInstance) {
 								crown = (L1CrownInstance) l1object;
 								if (L1CastleLocation.checkInWarArea(castle_id,
@@ -959,31 +959,31 @@ public class WarTimeController implements Runnable {
 							int castleid = L1CastleLocation.getCastleIdByArea(tp);
 							if (castleid != 0) { 
 								if (tp.getClan().getCastleId() == castleid) {
-									/** 공성 정상적으로 종료후 해당 아이템 지급 **/
-									//tp.getInventory().storeItem(41159, 1000);//깃털
+									/** 攻城正常に終了した後、該当のアイテム支給 **/
+									//tp.getInventory().storeItem(41159, 1000);//羽
 								}
 							}
 						}
-									/** 공성 정상적으로 종료후 해당 좌표에 버프동상 출물 **/
+									/** 攻城正常に終了し、その座標にバフ像チュルムル **/
 						for (L1Clan c : L1World.getInstance().getAllClans()) {
 							if (i + 1 == c.getCastleId()) {
 								ClanTable.getInstance().updateClan(c);
-								if (i == 0)// 켄성
+								if (i == 0)// ケンソン
 									L1SpawnUtil.spawn10(33067, 32764, (short) 4,
 									6, 6200008, 0, 1000 * 60 * 60, c);
-								else if (i == 1)// 오크성
+								else if (i == 1)// オーク性
 									L1SpawnUtil.spawn10(32734, 32441, (short) 4,
 									6, 6200008, 0, 1000 * 60 * 60, c);
-								else if (i == 3)// 기란성
+								else if (i == 3)// ギラン城
 									L1SpawnUtil.spawn10(32441, 32805, (short) 4,
 									6, 6200008, 0, 1000 * 60 * 60, c);
 								break;
 							}
 						}
 
-						// 공성 끝날시에 정예계급 '군주의 포상' 상자 지급, 동상 세움
+						// 攻城終わる時に精鋭階級「君主の賞」ボックスの支払い、像立てる
 					} catch (Exception e) {
-						System.out.println("공성 시간 외  종료 에러 : \r\n");
+						System.out.println("攻城時間外終了エラー：\\ r \\ n");
 						e.printStackTrace();
 					}
 				}
@@ -1048,7 +1048,7 @@ public class WarTimeController implements Runnable {
 	}
 
 	private Calendar castle_Calendar_save(long time) {
-		// System.out.println("수정 전 Time : "+time);
+		// System.out.println("修正前Time： "+ time）;
 		Calendar cal = (Calendar) Calendar.getInstance().clone();
 		Date date = new Date();
 		date.setTime(time);

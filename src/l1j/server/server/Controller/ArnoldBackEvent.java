@@ -57,7 +57,7 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
 	  try {
 		  while (true) {
 			  Thread.sleep(1000); 
-			  /** 오픈 **/
+			  /** オープン **/
 			  if(!isOpen6() && !isGmOpen아놀드)
 				  continue;
 			  if(L1World.getInstance().getAllPlayers().size() <= 0)
@@ -66,19 +66,19 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
 			  isGmOpen아놀드 = false;
 			  
 			  Config.아놀드이벤트 = true;
-			  L1SpawnUtil.spawn2(33433, 32798, (short) 4, 6, 0, (Config.아놀드이벤트시간 * 3600000), 0);//텔레포터 
-			  L1SpawnUtil.spawn2(33431, 32798, (short) 4, 7, 0, (Config.아놀드이벤트시간 * 3600000), 0);//텔레포터 
-			  L1SpawnUtil.spawn2(33429, 32798, (short) 4, 8, 0, (Config.아놀드이벤트시간 * 3600000), 0);//텔레포터 
-			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"운영자님께서 아놀드 이벤트를 오픈합니다."));
-			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"기란여관앞 엔피씨를 이용하시기 바랍니다."));
-			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"아놀드 이벤트는 " + Config.아놀드이벤트시간 + "시간동안 유지됩니다."));
+			  L1SpawnUtil.spawn2(33433, 32798, (short) 4, 6, 0, (Config.아놀드이벤트시간 * 3600000), 0);//テレポーター 
+			  L1SpawnUtil.spawn2(33431, 32798, (short) 4, 7, 0, (Config.아놀드이벤트시간 * 3600000), 0);//テレポーター 
+			  L1SpawnUtil.spawn2(33429, 32798, (short) 4, 8, 0, (Config.아놀드이벤트시간 * 3600000), 0);//テレポーター 
+			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"運営者様がアーノルドイベントをオープンします。"));
+			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"ギラン旅館前エンピシをご利用ください。"));
+			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"アーノルドイベントは" + Config.아놀드이벤트시간 + "時間維持されます。"));
 			  
 			  set돌아온아놀드이벤트(true);
 			  
-			  Thread.sleep(Config.아놀드이벤트시간*3600000); //60분정도
+			  Thread.sleep(Config.아놀드이벤트시간*3600000); //60分程度
 			  
 			  Config.아놀드이벤트 = false;
-			  /** 종료 **/
+			  /** 終了 **/
 			  End();
 		  }
 		  
@@ -101,9 +101,9 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
   }
   
   /**
-   *오픈 시각을 가져온다
+   *オープン時刻を持って来る
    *
-   *@return (Strind) 오픈 시각(MM-dd HH:mm)
+   *@return (Strind) オープン時刻（MM-dd HH：mm）
    */
   public String 아놀드Open() {
 	  Calendar c = Calendar.getInstance();
@@ -112,9 +112,9 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
   }
   
   /**
-   *맵이 열려있는지 확인
+   *マップが開いていることを確認
    *
-   *@return (boolean) 열려있다면 true 닫혀있다면 false
+   *@return (boolean) 開いている場合true閉じている場合false
    */
    private boolean isOpen6() {
     NowTime = getTime();
@@ -122,7 +122,7 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
     return false;
    }
    
-  //악마왕영토 소스 참조하여 추가함.
+  //悪魔王の領土ソース参照して追加する。
    public boolean isOpen7() {
 		NowTime = getTime();
 		if ((Integer.parseInt(NowTime)) >= 2 
@@ -132,9 +132,9 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
 	}
    
    /**
-   *실제 현재시각을 가져온다
+   *実際、現在時刻を持って来る
    *
-   *@return (String) 현재 시각(HH:mm)
+   *@return (String) 現在時刻（HH：mm）
    */
    private String getTime() {
     return s.format(Calendar.getInstance().getTime());
@@ -255,14 +255,14 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
 	  }
   }
 	
-	/** 종료 **/
+	/** 終了 **/
   public void End() {
 	  Config.아놀드이벤트 = false;
 	  delenpc(6);
 	  delenpc(7);
 	  delenpc(8);
 	  아놀드이벤트삭제();
-	  L1World.getInstance().broadcastServerMessage("\\fS아놀드 이벤트가 종료되었습니다.");
+	  L1World.getInstance().broadcastServerMessage("\\fSアーノルドイベントが終了しました。");
 	  set돌아온아놀드이벤트(false);
   }
   

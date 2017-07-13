@@ -15,9 +15,9 @@ import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_CharVisualUpdate;
+import l1j.server.server.serverpackets.S_Fishing2;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_ServerMessage;
-import l1j.server.server.serverpackets.S_Fishing2;
 
 public class FishingTimeController implements Runnable {
 
@@ -73,10 +73,10 @@ public class FishingTimeController implements Runnable {
 				if (pc.isFishing()) {
 					long time = pc.getFishingTime();
 					if (currentTime > (time + 1000)) {
-						/** 미끼가 있을경우 * */
-						// 미끼 확인. 성장의 낚싯대면 미끼없어도됨.
+						/** 餌がある場合 * */
+						// 餌確認した。成長の釣り竿面餌なくてもされる。
 						if(pc._fishingRod.getItemId()==600229 || pc.getInventory().consumeItem(41295, 1)){
-							//릴 장착 고탄력 낚싯대
+							//リール装着高弾力釣り竿
 							if(pc._fishingRod.getItemId() == 41294){
 								L1ItemInstance item = pc._fishingRod;
 								if (item != null) {
@@ -94,7 +94,7 @@ public class FishingTimeController implements Runnable {
 										릴장착고탄력낚싯대(pc);
 									}
 								}
-							} else if(pc._fishingRod.getItemId() == 41305){ //릴장착 은빛 낚싯대
+							} else if(pc._fishingRod.getItemId() == 41305){ //リール装着銀色釣り竿
 								L1ItemInstance item = pc._fishingRod;
 								if (item != null) {
 									if (item.getChargeCount() <= 0) {
@@ -111,7 +111,7 @@ public class FishingTimeController implements Runnable {
 										릴장착은빛낚싯대(pc);
 									}
 								}
-							} else if(pc._fishingRod.getItemId() == 41306){ //릴장착 금빛 낚싯대
+							} else if(pc._fishingRod.getItemId() == 41306){ //リール装着金色釣り竿
 								L1ItemInstance item = pc._fishingRod;
 								if (item != null) {
 									if (item.getChargeCount() <= 0) {
@@ -128,7 +128,7 @@ public class FishingTimeController implements Runnable {
 										릴장착금빛낚싯대(pc);
 									}
 								}
-							} else if (pc._fishingRod.getItemId() == 600229){ // 성장의 낚시대
+							} else if (pc._fishingRod.getItemId() == 600229){ // 成長の釣り竿
 								L1ItemInstance item = pc._fishingRod;
 								if (item != null) {
 									if (item.getChargeCount() <= 0) {
@@ -150,13 +150,13 @@ public class FishingTimeController implements Runnable {
 										}
 									}
 								}
-							} else if (pc._fishingRod.getItemId() == 9991){ // 황소개구리 낚시대
+							} else if (pc._fishingRod.getItemId() == 9991){ //ウシガエル釣り竿
 								L1ItemInstance item = pc._fishingRod;
 								if (item != null) {
 									if (item.getChargeCount() <= 0) {
 										L1ItemInstance newfishingRod = null;
 										pc.getInventory().removeItem(item, 1);
-										newfishingRod = pc.getInventory().storeItem(9993, 1); //부러진낚싯대
+										newfishingRod = pc.getInventory().storeItem(9993, 1); //折れた釣り竿
 										pc._fishingRod = newfishingRod;
 										endFishing(pc);
 									} else {
@@ -167,14 +167,14 @@ public class FishingTimeController implements Runnable {
 										황소개구리낚싯대(pc);
 									}
 								}
-								//일반 낚싯대
+								//一般釣り竿
 							} else if (pc._fishingRod.getItemId() == 41293){
 								pc.setFishingTime(System.currentTimeMillis() + 240000);
 								pc.sendPackets(new S_Fishing2(240));
 								고탄력낚싯대(pc);
 							} 
 						} else {
-							// 미끼가 없어서 종료 처리 구간.
+							// 餌がなくて終了処理区間。
 							endFishing(pc);
 						}
 					}
@@ -193,144 +193,144 @@ public class FishingTimeController implements Runnable {
 		}
 		pc.sendPackets(new S_CharVisualUpdate(pc));
 		Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
-		pc.sendPackets(new S_ServerMessage(1163));  // 낚시가 종료했습니다.
+		pc.sendPackets(new S_ServerMessage(1163));  // 釣りが終了しました。
 		removeMember(pc);
 	}
 
 	private void 성장의낚시대(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
-		if (chance < 6000) { //블루베리아나
+		if (chance < 6000) { //ブルーベリーアナ
 			successFishing(pc, 41297 , "$15565"); 
-		} else if (chance < 8000) { //베리아나
+		} else if (chance < 8000) { //ベリーアナ
 			successFishing(pc, 41296 , "$15564");
-		} else if (chance < 8020) { //앵무베리아나
+		} else if (chance < 8020) { //インコベリーアナ
 			successFishing(pc, 41298 , "$15566");
-		} else if (chance < 8350) { //퓨어 엘릭서
+		} else if (chance < 8350) { //ピュアエリクサー
 			successFishing(pc, 820018, "$20462");
-		} else if (chance < 8351) { //아인하사드의 선물
+		} else if (chance < 8351) { //アインハザードのギフト
 			successFishing(pc, 600230 , "$20909");
 		} else {
 			pc.sendPackets(new S_ServerMessage(1136));
-			// 낚시에 실패했습니다.
+			// 釣りに失敗しました。
 		}
 	}
 	private void 성장의낚시대1(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
-		if (chance < 6000) { //블루베리아나
-			successFishing(pc, 600231 , "성장의낚시선물상자"); 
-		} else if (chance < 8000) { //베리아나
-			successFishing(pc, 600231 , "성장의낚시선물상자");
-		} else if (chance < 8020) { //앵무베리아나
-			successFishing(pc, 600231 , "성장의낚시선물상자");
-		} else if (chance < 8350) { //퓨어 엘릭서
-			successFishing(pc, 600231, "성장의낚시선물상자");
-		} else if (chance < 8351) { //아인하사드의 선물
-			successFishing(pc, 600231 , "성장의낚시선물상자");
+		if (chance < 6000) { //ブルーベリーアナ
+			successFishing(pc, 600231 , "成長の釣りのギフトボックス"); 
+		} else if (chance < 8000) { //ベリーアナ
+			successFishing(pc, 600231 , "成長の釣りのギフトボックス");
+		} else if (chance < 8020) { //インコベリーアナ
+			successFishing(pc, 600231 , "成長の釣りのギフトボックス");
+		} else if (chance < 8350) { //ピュアエリクサー
+			successFishing(pc, 600231, "成長の釣りのギフトボックス");
+		} else if (chance < 8351) { //アインハザードのギフト
+			successFishing(pc, 600231 , "成長の釣りのギフトボックス");
 		} else {
 			pc.sendPackets(new S_ServerMessage(1136));
-			// 낚시에 실패했습니다.
+			// 釣りに失敗しました。
 		}
 	}
 	
 	private void 황소개구리낚싯대(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
-		if (chance < 6000) { //블루베리아나
+		if (chance < 6000) { //ブルーベリーアナ
 			successFishing(pc, 41297 , "$15565"); 
-		} else if (chance < 8000) { //베리아나
+		} else if (chance < 8000) { //ベリーアナ
 			successFishing(pc, 41296 , "$15564");
-		} else if (chance < 8020) { //앵무베리아나
+		} else if (chance < 8020) { //インコベリーアナ
 			successFishing(pc, 41298 , "$15566");
-		} else if (chance < 8150) { // 황소 개구리
+		} else if (chance < 8150) { // ウシガエル
 			successFishing(pc, 9992, "$22045"); 
-		} else if (chance < 8350) { //축축한 낚시가방
+		} else if (chance < 8350) { //湿った釣りバッグ
 			successFishing(pc, 41301, "$15815");
-		} else if (chance < 8351) { //작은 은빛 베리아나
+		} else if (chance < 8351) { //小さな銀色のベリーアナ
 			successFishing(pc, 41299 , "$17521");
-		} else if (chance < 8352) { //작은 금빛 베리아나
+		} else if (chance < 8352) { //小さな金色ベリーアナ
 			successFishing(pc, 41300 , "$17523");
 		} else {
 			pc.sendPackets(new S_ServerMessage(1136));
-			// 낚시에 실패했습니다.
+			// 釣りに失敗しました。
 		}
 	}
 
 	private void 릴장착고탄력낚싯대(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
-		if (chance < 6000) { //블루베리아나
+		if (chance < 6000) { //ブルーベリーアナ
 			successFishing(pc, 41297 , "$15565"); 
-		} else if (chance < 8000) { //베리아나
+		} else if (chance < 8000) { //ベリーアナ
 			successFishing(pc, 41296 , "$15564");
-		} else if (chance < 8020) { //앵무베리아나
+		} else if (chance < 8020) { //インコベリーアナ
 			successFishing(pc, 41298 , "$15566");
-		} else if (chance < 8350) { //축축한 낚시가방
+		} else if (chance < 8350) { //湿った釣りバッグ
 			successFishing(pc, 41301, "$15815");
-		} else if (chance < 8351) { //작은 은빛 베리아나
+		} else if (chance < 8351) { //小さな銀色のベリーアナ
 			successFishing(pc, 41299 , "$17521");
-		} else if (chance < 8352) { //작은 금빛 베리아나
+		} else if (chance < 8352) { //小さな金色ベリーアナ
 			successFishing(pc, 41300 , "$17523");
 		} else {
 			pc.sendPackets(new S_ServerMessage(1136));
-			// 낚시에 실패했습니다.
+			// 釣りに失敗しました。
 		}
 	}
 
 	private void 릴장착은빛낚싯대(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
-		if (chance < 4000) { //블루베리아나
+		if (chance < 4000) { //ブルーベリーアナ
 			successFishing(pc, 41297 , "$15565"); 
-		} else if (chance < 8000) { //베리아나
+		} else if (chance < 8000) { //ベリーアナ
 			successFishing(pc, 41296 , "$15564");
-		} else if (chance < 8040) { //앵무베리아나
+		} else if (chance < 8040) { //インコベリーアナ
 			successFishing(pc, 41298 , "$15566"); 
-		} else if (chance < 8350) { //축축한 낚시가방
+		} else if (chance < 8350) { //湿った釣りバッグ
 			successFishing(pc, 41301, "$15815");
-		} else if (chance < 8352) { //작은 은빛 베리아나
+		} else if (chance < 8352) { //小さな銀色のベリーアナ
 			successFishing(pc, 41299, "$17521"); 
-		} else if (chance < 8353) { //큰 은빛 베리아나
+		} else if (chance < 8353) { //大きな銀色のベリーアナ
 			successFishing(pc, 41303, "$17522"); 
 		} else {
 			pc.sendPackets(new S_ServerMessage(1136));
-			// 낚시에 실패했습니다.
+			// 釣りに失敗しました。
 		}
 	}
 
 	private void 릴장착금빛낚싯대(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
-		if (chance < 3500) { //블루베리아나
+		if (chance < 3500) { //ブルーベリーアナ
 			successFishing(pc, 41297 , "$15565"); 
-		} else if (chance < 8000) { //베리아나
+		} else if (chance < 8000) { //ベリーアナ
 			successFishing(pc, 41296 , "$15564");
-		} else if (chance < 8050) { //앵무베리아나
+		} else if (chance < 8050) { //インコベリーアナ
 			successFishing(pc, 41298 , "$15566"); 
-		} else if (chance < 8350) { //축축한 낚시가방
+		} else if (chance < 8350) { //湿った釣りバッグ
 			successFishing(pc, 41301, "$15815");
-		} else if (chance < 8352) { //작은 금빛 베리아나
+		} else if (chance < 8352) { //小さな金色ベリーアナ
 			successFishing(pc, 41300 , "$17523"); 
-		} else if (chance < 8354) { //큰 금빛 베리아나
+		} else if (chance < 8354) { //大きな金色ベリーアナ
 			successFishing(pc, 41304 , "$17524"); // 
 		} else {
 			pc.sendPackets(new S_ServerMessage(1136));
-			// 낚시에 실패했습니다.
+			// 釣りに失敗しました。
 		}
 	}
 
 	private void 고탄력낚싯대(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1; //100%
-		//베리아나
+		//ベリーアナ
 		if (chance < 4000) {
 			successFishing(pc, 41296 , "$15564");
-			//블루베리아나
+			//ブルーベリーアナ
 		} else if (chance < 8000) {
 			successFishing(pc, 41297 , "$15565"); 
-			//앵무베리아나
+			//インコベリーアナ
 		} else if (chance < 8010) {
 			successFishing(pc, 41298 , "$15566"); 
-			//축축한 낚시가방
+			//湿った釣りバッグ
 		} else if (chance < 8350) {
 			successFishing(pc, 41301, "$15815");
 		} else {
 			pc.sendPackets(new S_ServerMessage(1136)); // 16%
-			// 낚시에 실패했습니다.
+			// 釣りに失敗しました。
 		}
 		pc.sendPackets(new S_ServerMessage(1147));
 	}
@@ -343,14 +343,14 @@ public class FishingTimeController implements Runnable {
 		}
 		L1ItemInstance item = pc.getInventory().storeItem(itemid, 1);
 		if (item != null) {
-			pc.sendPackets(new S_ServerMessage(1185, message)); // 낚시에 성공해%0%o를 낚시했습니다.
+			pc.sendPackets(new S_ServerMessage(1185, message)); // 釣りに成功して％0％oを釣りました。
 		}
 		
 		if (itemid == 41300) {
 			for (L1Object obj : L1World.getInstance().getVisibleObjects(5490).values()) {
 				if (obj instanceof L1PcInstance) {
 					L1PcInstance player = (L1PcInstance) obj;
-					String chatText = "누군가가 작은 금빛 베리아나를 낚아 올렸습니다!";
+					String chatText = "誰かが小さな金色ベリア私釣ってアップしました！";
 					player.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, chatText));
 				}
 			}
@@ -358,7 +358,7 @@ public class FishingTimeController implements Runnable {
 			for (L1Object obj : L1World.getInstance().getVisibleObjects(5490).values()) {
 				if (obj instanceof L1PcInstance) {
 					L1PcInstance player = (L1PcInstance) obj;
-					String chatText = "누군가가 큰 금빛 베리아나를 낚아 올렸습니다!";
+					String chatText = "誰かが大きな金色ベリア私釣ってアップしました！";
 					player.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, chatText));
 				}
 			}

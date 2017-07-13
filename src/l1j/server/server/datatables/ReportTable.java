@@ -9,7 +9,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import l1j.server.L1DatabaseFactory;
-
 import l1j.server.server.utils.SQLUtil;
 
 public class ReportTable {
@@ -29,7 +28,7 @@ public class ReportTable {
 			pstm = con.prepareStatement("SELECT * FROM report");
 			rs = pstm.executeQuery();
 			while (rs.next()) {
-				String objid = rs.getString(1); // 이 부분 수정
+				String objid = rs.getString(1); // この部分の修正
 				name.add(rs.getString("objid"));
 				name.add(rs.getString(2));
 			}

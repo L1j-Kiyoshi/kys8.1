@@ -36,7 +36,7 @@ public class CharactersGiftItemTable {
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
 
-		// 아이템
+		// アイテム
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
 			pstm = con.prepareStatement("select level from levelup_quests_item group by level order by level");
@@ -56,7 +56,7 @@ public class CharactersGiftItemTable {
 		
 		ArrayList<Item> list = new ArrayList<CharactersGiftItemTable.Item>();
 		
-		// 아이템
+		// アイテム
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;

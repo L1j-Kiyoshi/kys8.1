@@ -127,7 +127,7 @@ public class UBTable {
 		} finally {
 			SQLUtil.close(rs, pstm, con);
 		}
-		_log.config("UB리스트 " + _ub.size() + "건 로드");
+		_log.config("UBリスト" + _ub.size() + "件ロード");
 	}
 
 	public L1UltimateBattle getUb(int ubId) {
@@ -148,11 +148,11 @@ public class UBTable {
 	}
 
 	/**
-	 * 지정된 UBID에 대한 패턴의 최대수를 돌려준다.
+	 *指定されたUBIDのパターンの最大数を返す。
 	 * 
 	 * @param ubId
-	 *            조사하는 UBID.
-	 * @return 패턴의 최대수.
+	 *           調査するUBID。
+	 * @returnパターンの最大数。
 	 */
 	public int getMaxPattern(int ubId) {
 		int n = 0;
@@ -181,7 +181,7 @@ public class UBTable {
 	
 
 	/**
-	 * 디비에 UB의 랭킹등록
+	 * ディビにUBのランキング登録
 	 */
 	public void writeUbScore(int ubId, L1PcInstance pc) {
 		java.sql.Connection con = null;

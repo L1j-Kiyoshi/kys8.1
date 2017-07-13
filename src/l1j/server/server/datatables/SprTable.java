@@ -18,32 +18,7 @@
  */
 package l1j.server.server.datatables;
 
-import static l1j.server.server.ActionCodes.ACTION_AltAttack;
-import static l1j.server.server.ActionCodes.ACTION_Attack;
-import static l1j.server.server.ActionCodes.ACTION_AxeAttack;
-import static l1j.server.server.ActionCodes.ACTION_AxeWalk;
-import static l1j.server.server.ActionCodes.ACTION_BowAttack;
 import static l1j.server.server.ActionCodes.*;
-import static l1j.server.server.ActionCodes.ACTION_ClawAttack;
-import static l1j.server.server.ActionCodes.ACTION_ClawWalk;
-import static l1j.server.server.ActionCodes.ACTION_DaggerAttack;
-import static l1j.server.server.ActionCodes.ACTION_DaggerWalk;
-import static l1j.server.server.ActionCodes.ACTION_EdoryuAttack;
-import static l1j.server.server.ActionCodes.ACTION_EdoryuWalk;
-import static l1j.server.server.ActionCodes.ACTION_SkillAttack;
-import static l1j.server.server.ActionCodes.ACTION_SkillBuff;
-import static l1j.server.server.ActionCodes.ACTION_SpearAttack;
-import static l1j.server.server.ActionCodes.ACTION_SpearWalk;
-import static l1j.server.server.ActionCodes.ACTION_SpellDirectionExtra;
-import static l1j.server.server.ActionCodes.ACTION_StaffAttack;
-import static l1j.server.server.ActionCodes.ACTION_StaffWalk;
-import static l1j.server.server.ActionCodes.ACTION_SwordAttack;
-import static l1j.server.server.ActionCodes.ACTION_SwordWalk;
-import static l1j.server.server.ActionCodes.ACTION_ThrowingKnifeAttack;
-import static l1j.server.server.ActionCodes.ACTION_ThrowingKnifeWalk;
-import static l1j.server.server.ActionCodes.ACTION_TwoHandSwordAttack;
-import static l1j.server.server.ActionCodes.ACTION_TwoHandSwordWalk;
-import static l1j.server.server.ActionCodes.ACTION_Walk;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -91,7 +66,7 @@ public class SprTable {
 	}
 
 	/**
-	 * spr_action 테이블을 로드한다.
+	 * spr_actionテーブルをロードする。
 	 */
 	public void loadSprAction() {
 		Connection con = null;
@@ -173,24 +148,25 @@ public class SprTable {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
 		}
-		_log.config("SPR 데이터 " + _dataMap.size() + "건 로드");
+		_log.config("SPRデータ" + _dataMap.size() + "件ロード");
 	}
 	
 	/**
-	 * 프레임수와 frame rate로부터 액션의 합계 시간(ms)을 계산해 돌려준다.
+	 * フレーム数とframe rateからアクションの合計時間（ms）を計算して返す。
 	 */
 	private int calcActionSpeed(int frameCount, int frameRate) {
 		return (int) (frameCount * 40 * (24D / frameRate));
 	}
 
 	/**
-	 * 지정된 spr의 공격 속도를 돌려준다. 만약 spr로 지정된 weapon_type의 데이터가 설정되어 있지 않은 경우는, 1. attack의 데이터를 돌려준다.
+	 * 指定されたsprの攻撃速度を返す。
+	 * もしsprに指定されたweapon_typeのデータが設定されていない場合は、1 attackのデータを返す。
 	 * 
 	 * @param sprid -
-	 *            조사하는 spr의 ID
+	 *            調査するsprのID
 	 * @param actid -
-	 *            무기의 종류를 나타내는 값. L1Item.getType1()의 변환값 +1과 일치한다
-	 * @return 지정된 spr의 공격 속도(ms)
+	 *            武器の種類を示す値。 L1Item.getType1（）の変換値+1と一致する
+	 * @return 指定されたsprの攻撃速度（ms）
 	 */
 
 	
@@ -199,7 +175,7 @@ public class SprTable {
 		if(((11328 <= sprid && 11407 >= sprid) && sprid != 11333 && sprid != 11364 && sprid != 11379) 
 				|| (11408 <= sprid && 11421 >= sprid) || sprid == 12681 || sprid == 12702
 				 || sprid == 11447 || sprid == 11446 || sprid == 12237 || sprid == 12240|| sprid == 12232
-				|| sprid == 13152 || sprid == 13153 || sprid == 13388 || sprid ==13389 ){//자가 공속 변신들
+				|| sprid == 13152 || sprid == 13153 || sprid == 13388 || sprid ==13389 ){//自己攻撃速度変身たち
 			
 			int fc = 22;
             if(actid == 12){
@@ -250,10 +226,10 @@ public class SprTable {
 			if(lv >= 80){
 				fc--;
 			}
-			//System.out.println("스탭3 : "+calcActionSpeed(fc, f.framerate));
+			//System.out.println("ステップ3：「+ calcActionSpeed（fc、f.framerate））;
 			return calcActionSpeed(fc, 24);
 		}else{
-			//System.out.println("스탭4 : ");
+			//System.out.println("スタッフ4： "）;
 			if (_dataMap.containsKey(sprid)) {
 				if (_dataMap.get(sprid).attackSpeed.containsKey(actid)) {
 					Frame f = _dataMap.get(sprid).attackSpeed.get(actid);

@@ -53,7 +53,7 @@ public class ItemTable {
 
 	public final Map<Integer, L1Weapon> _weapons;
 
-	/** 버경 추가 **/
+	/** ボギョン追加 **/
 	private final Map<Integer, L1RaceTicket> _race = new HashMap<Integer, L1RaceTicket>();
 	static {
 
@@ -74,24 +74,24 @@ public class ItemTable {
 		_etcItemTypes.put("event", new Integer(14));
 		_etcItemTypes.put("sting", new Integer(15));
 		_etcItemTypes.put("treasure_box", new Integer(16));
-		_useTypes.put("none", new Integer(-1)); // 사용 불가능
+		_useTypes.put("none", new Integer(-1)); // 使用不可
 		_useTypes.put("normal", new Integer(0));
 		_useTypes.put("weapon", new Integer(1));
 		_useTypes.put("armor", new Integer(2));
 		// _useTypes.put("wand1", new Integer(3));
 		// _useTypes.put("wand", new Integer(4));
-		// wand를 거절하는 액션을 잡는다(C_RequestExtraCommand가 보내진다)
-		_useTypes.put("spell_long", new Integer(5)); // 지면 / 오브젝트 선택(원거리)
+		// wandを拒絶するアクションをとる（C_RequestExtraCommandが送られる）
+		_useTypes.put("spell_long", new Integer(5)); // 地面/オブジェクトの選択（遠距離）
 		_useTypes.put("ntele", new Integer(6));
 		_useTypes.put("identify", new Integer(7));
 		_useTypes.put("res", new Integer(8));
-		_useTypes.put("teleport", new Integer(9)); // 텔포땜에
+		_useTypes.put("teleport", new Integer(9)); // テルポテムに
 		_useTypes.put("letter", new Integer(12));
 		_useTypes.put("letter_w", new Integer(13));
 		_useTypes.put("choice", new Integer(14));
 		_useTypes.put("instrument", new Integer(15));
 		_useTypes.put("sosc", new Integer(16));
-		_useTypes.put("spell_short", new Integer(17)); // 지면 / 오브젝트 선택(근거리)
+		_useTypes.put("spell_short", new Integer(17)); //地面/オブジェクトの選択（近距離）
 		_useTypes.put("T", new Integer(18));
 		_useTypes.put("cloak", new Integer(19));
 		_useTypes.put("glove", new Integer(20));
@@ -105,8 +105,8 @@ public class ItemTable {
 		_useTypes.put("zel", new Integer(27));
 		_useTypes.put("blank", new Integer(28));
 		_useTypes.put("btele", new Integer(29));
-		_useTypes.put("spell_buff", new Integer(30)); // 오브젝트 선택(원거리)
-		// Ctrl를 누르지 않는다고 패킷이 날지 않아?
+		_useTypes.put("spell_buff", new Integer(30)); //オブジェクトの選択（遠距離）
+		// Ctrlを押さないと、パケットが飛ばない？
 		_useTypes.put("ccard", new Integer(31));
 		_useTypes.put("ccard_w", new Integer(32));
 		_useTypes.put("vcard", new Integer(33));
@@ -114,19 +114,19 @@ public class ItemTable {
 		_useTypes.put("wcard", new Integer(35));
 		_useTypes.put("wcard_w", new Integer(36));
 		_useTypes.put("belt", new Integer(37));
-		_useTypes.put("spell_long2", new Integer(39)); // 지면 / 오브젝트 선택(원거리) 5로 같은?
+		_useTypes.put("spell_long2", new Integer(39)); // 地面/オブジェクトの選択（遠距離）5と同じ？
 		_useTypes.put("earring", new Integer(40));
 		_useTypes.put("fishing_rod", new Integer(42));
-		_useTypes.put("ron", new Integer(44));// 룬1
-		_useTypes.put("ron2", new Integer(45));// 성장/회복의 문장
+		_useTypes.put("ron", new Integer(44));// ルーン1
+		_useTypes.put("ron2", new Integer(45));//成長/回復の文章
 		_useTypes.put("acczel", new Integer(46));
-		_useTypes.put("pair", new Integer(47));// 각반
+		_useTypes.put("pair", new Integer(47));// ゲートル
 		_useTypes.put("healing", new Integer(51));
-		_useTypes.put("sentence", new Integer(74));//문장0x4a 74
-		_useTypes.put("shoulder", new Integer(75));// 견갑
-		_useTypes.put("badge", new Integer(76));// 휘장
+		_useTypes.put("sentence", new Integer(74));//文章0x4a 74
+		_useTypes.put("shoulder", new Integer(75));// 肩甲
+		_useTypes.put("badge", new Integer(76));// 記章
 		
-					/** 방어구 타입 **/
+					/** 防具タイプ **/
 		_armorTypes.put("none", new Integer(0));
 		_armorTypes.put("helm", new Integer(1));
 		_armorTypes.put("armor", new Integer(2));
@@ -141,12 +141,12 @@ public class ItemTable {
 		_armorTypes.put("ring2", new Integer(11));
 		_armorTypes.put("earring", new Integer(12));
 		_armorTypes.put("garder", new Integer(13));
-		_armorTypes.put("ron", new Integer(14));// 룬1
-		_armorTypes.put("pair", new Integer(15));// 각반
+		_armorTypes.put("ron", new Integer(14));// ルーン1
+		_armorTypes.put("pair", new Integer(15));// ゲートル
 		_armorTypes.put("sentence", new Integer(16));// 문장		
-		_armorTypes.put("badge", new Integer(17));// 휘장
-		_armorTypes.put("shoulder", new Integer(18));// 견갑
-				/** 웨폰 타입 **/
+		_armorTypes.put("badge", new Integer(17));// 記章
+		_armorTypes.put("shoulder", new Integer(18));// 肩甲
+				/** ウェポンタイプ **/
 		_weaponTypes.put("sword", new Integer(1));
 		_weaponTypes.put("dagger", new Integer(2));
 		_weaponTypes.put("tohandsword", new Integer(3));
@@ -164,7 +164,7 @@ public class ItemTable {
 		_weaponTypes.put("tohandblunt", new Integer(15));
 		_weaponTypes.put("tohandstaff", new Integer(16));
 		_weaponTypes.put("keyring", new Integer(17));
-		_weaponTypes.put("chainsword", new Integer(18)); // 용기사 체인소드관련.
+		_weaponTypes.put("chainsword", new Integer(18)); // 竜騎士チェーンソード関連する。
 
 		_weaponId.put("sword", new Integer(4));
 		_weaponId.put("dagger", new Integer(46));
@@ -252,7 +252,7 @@ public class ItemTable {
 				item.setNameId(rs.getString("name_id"));
 				item.setType((_etcItemTypes.get(rs.getString("item_type"))).intValue());
 				item.setUseType(_useTypes.get(rs.getString("use_type")).intValue());
-				// item.setType1(0); // 사용하지 않는다
+				// item.setType1(0); // 使用しない
 				item.setType2(0);
 				item.setMaterial((_materialTypes.get(rs.getString("material"))).intValue());
 				item.setWeight(rs.getInt("weight"));
@@ -355,7 +355,7 @@ public class ItemTable {
 				weapon.setHasteItem(rs.getInt("haste_item") == 0 ? false : true);
 				weapon.setMaxUseTime(rs.getInt("max_use_time"));
 				weapon.setMagicName(rs.getString("Magic_name"));
-				// setAuto(weapon);//임시
+				// setAuto(weapon);//一時的
 				result.put(new Integer(weapon.getItemId()), weapon);
 			}
 		} catch (NullPointerException e) {
@@ -390,7 +390,7 @@ public class ItemTable {
 				armor.setNameId(rs.getString("name_id"));
 				armor.setType((_armorTypes.get(rs.getString("type"))).intValue());
 				// armor.setType1((_armorId
-				// .get(rs.getString("armor_type"))).intValue()); // 사용하지 않는다
+				// .get(rs.getString("armor_type"))).intValue()); // 使用しない
 				armor.setType2(2);
 				armor.setUseType((_useTypes.get(rs.getString("type"))).intValue());
 				armor.setAccessoryProcess(rs.getInt("acctype"));
@@ -454,7 +454,7 @@ public class ItemTable {
 				armor.setMainId3(rs.getInt("MainId3"));
 				armor.setSetId(rs.getInt("Set_Id"));
 				armor.setMagicName(rs.getString("Magic_name"));
-				// setAuto(armor);//임시
+				// setAuto(armor);//一時的
 				result.put(new Integer(armor.getItemId()), armor);
 			}
 		} catch (NullPointerException e) {
@@ -470,7 +470,7 @@ public class ItemTable {
 		return result;
 	}
 
-	/* 버경 추가 */
+	/* ボギョン追加 */
 	public void initRace() {
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -592,7 +592,7 @@ public class ItemTable {
 		return itemid;
 	}
 
-	/* 버경 추가 */
+	/* ボギョン追加 */
 	public void AddTicket(L1RaceTicket race) {
 		_race.put(new Integer(race.getItemId()), race);
 		_allTemplates[race.getItemId()] = race;
@@ -602,10 +602,10 @@ public class ItemTable {
 		return _race.size();
 	}
 
-	/** 새로운 Template 객체를 생성(복사) */
+	/** 新しいTemplateオブジェクトを生成（コピー） */
 	public L1Item clone(L1Item item, String name) {
-		// 이름때문에..
-		// 무기
+		// 名前のために。
+		// 武器
 		if (item.getType2() == 1) {
 			L1Weapon weapon = new L1Weapon();
 			weapon.setItemId(item.getItemId());
@@ -657,7 +657,7 @@ public class ItemTable {
 			weapon.setHasteItem(item.isHasteItem());
 			weapon.setMaxUseTime(item.getMaxUseTime());
 			return weapon;
-			// 방어구
+			// 防具
 		} else if (item.getType2() == 2) {
 			L1Armor armor = new L1Armor();
 			armor.setItemId(item.getItemId());

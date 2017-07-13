@@ -69,9 +69,9 @@ public class LoginController {
 	public void login(GameClient client, Account account) throws GameServerFullException, AccountAlreadyLoginException {
 		synchronized (this) {
 			if (!account.isValid()) {
-				// 패스워드 인증이되어 있지 않은, 혹은 인증에 실패한 어카운트가 지정되었다.
-				// 이 코드는, 버그 검출을 위해 마셔 존재한다.
-				throw new IllegalArgumentException("인증되지 않은 계정입니다");
+				// パスワード認証がされていない、あるいは認証に失敗したアカウントが指定されました。
+				// このコードは、、バグを検出するためにのみ存在する。
+				throw new IllegalArgumentException("認証されていないアカウントです");
 			} else if ((getMaxAllowedOnlinePlayers() <= getOnlinePlayerCount()) && !account.isGameMaster()) {
 				throw new GameServerFullException();
 			} else if (_accounts.containsKey(account.getName())) {

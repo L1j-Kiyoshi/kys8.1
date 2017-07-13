@@ -22,7 +22,7 @@ public class L1Commands {
 
 	public static L1Command get(String name) {
 		/*
-		 * 디버그나 테스트 용이성을 위해 매회 DB에 읽으러 갑니다. 캐쉬하는 것보다 이론상 퍼포먼스는 내립니다만, 무시할 수 있는 범위입니다.
+		 * デバッグやテストを容易にするために、毎回DBに読みに行きます。キャッシュするよりも理論上のパフォーマンスは下がりますが、無視できる範囲です。
 		 */
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -37,7 +37,7 @@ public class L1Commands {
 			}
 			return fromResultSet(rs);
 		} catch (SQLException e) {
-			_log.log(Level.SEVERE, "커멘드 취득 에러", e);
+			_log.log(Level.SEVERE, "コマンド取得エラー", e);
 		} finally {
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);
@@ -60,7 +60,7 @@ public class L1Commands {
 				result.add(fromResultSet(rs));
 			}
 		} catch (SQLException e) {
-			_log.log(Level.SEVERE, "커멘드 취득 에러", e);
+			_log.log(Level.SEVERE, "コマンド取得エラー", e);
 		} finally {
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);

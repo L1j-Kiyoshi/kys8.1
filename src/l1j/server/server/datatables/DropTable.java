@@ -35,7 +35,7 @@ public class DropTable {
 
 	private static DropTable _instance;
 
-	private final HashMap<Integer, ArrayList<L1Drop>> _droplists; // monster 마다의 드롭 리스트
+	private final HashMap<Integer, ArrayList<L1Drop>> _droplists; // monsterごとのドロップリスト
 
 	public static DropTable getInstance() {
 		if (_instance == null) {
@@ -92,22 +92,22 @@ public class DropTable {
 		return droplistMap;
 	}
 
-	// 인벤트리에 드롭을 설정
+	//インベントリツリーにドロップを設定
 	public void setDrop(L1NpcInstance npc, L1Inventory inventory) {
 		if(npc.getNpcId()==145684){
-			System.out.println("발라카스젠");
+			System.out.println("ヴァラカスジェン");
 		}
 		if (Config.STANDBY_SERVER){ 
 			return;
 		}
-		// 드롭 리스트의 취득
+		// ドロップリストの取得
 		int mobId = npc.getNpcTemplate().get_npcId();
 		ArrayList<L1Drop> dropList = _droplists.get(mobId);
 		if (dropList == null) {
 			return;
 		}
 
-		// 레이트 취득
+		//レート取得
 		double droprate = Config.RATE_DROP_ITEMS;
 		if (droprate <= 0) {
 			droprate = 0;
@@ -125,20 +125,20 @@ public class DropTable {
 		int addCount;
 		int randomChance;
 		L1ItemInstance item;
-		/** 환상 이벤트 **/
+		/** 幻想イベント **/
 		L1ItemInstance Fitem;		
 		Random random = new Random(System.nanoTime());
 		if(npc.getNpcId()==145684){
 			System.out.println("DropListSize : "+dropList.size());
 		}
 		for (L1Drop drop : dropList) {
-			// 드롭 아이템의 취득
+			// ドロップアイテムの取得
 			itemId = drop.getItemid();
 			if (adenarate == 0 && itemId == L1ItemId.ADENA) {
-				continue; // 아데나레이트 0으로 드롭이 아데나의 경우는 스르
+				continue; // アデナレート0にドロップがアデナの場合はスルー
 			}
 
-			// 드롭 찬스 판정
+			// ドロップチャンス判定
 			randomChance = random.nextInt(0xf4240) + 1;
 			int npcMapid = npc.getMapId();
 			if (npcMapid > 1017 && npcMapid < 1023 
@@ -154,7 +154,7 @@ public class DropTable {
 				continue;
 			}
 
-			// 드롭 개수를 설정
+			//ドロップ数を設定
 			double amount = DropItemTable.getInstance().getDropAmount(itemId);
 			int min = (int)(drop.getMin() * amount);
 			int max = (int)(drop.getMax() * amount);
@@ -165,7 +165,7 @@ public class DropTable {
 			if (addCount > 1) {
 				itemCount += random.nextInt(addCount);
 			}
-			if (itemId == L1ItemId.ADENA) { // 드롭이 아데나의 경우는 아데나레이트를 건다
+			if (itemId == L1ItemId.ADENA) { //ドロップがアデナの場合はアデナレートをかける
 				itemCount *= adenarate;
 			}
 			if (itemCount < 0) {
@@ -175,19 +175,19 @@ public class DropTable {
 				itemCount = 2000000000;
 			}
 
-			// 아이템의 생성
+			// アイテムの作成
 			if (ItemTable.getInstance().getTemplate(itemId) != null) {
 				item = ItemTable.getInstance().createItem(itemId);
 				if (item == null) continue;
 				item.setCount(itemCount);		
 				if (drop.getEnchant() != 0) {
-					System.out.println("[오류] droplist : 겹쳐지는 아이템에 인첸됨.(" + item.getItemId() + ")");
+					System.out.println("[エラー] droplist：重なるアイテムエンチャンされる。（" + item.getItemId() + ")");
 					item.setEnchantLevel(drop.getEnchant());
 				}
-				// 아이템 격납
+				// アイテム格納
 				inventory.storeItem(item);
 			} else {
-				_log.info("[드랍 리스트 로딩중]없는 아이템입니다: " + itemId);
+				_log.info("[ドロップリストの読み込み中]ないアイテムです：" + itemId);
 			}
 		}
 
@@ -208,21 +208,21 @@ public class DropTable {
 				inventory.storeItem(lastabard[라던], 1);
 			}break;
 		case 78:case 79:case 80:case 81:case 82:
-			if (2 >= 드랍율) {// 상아탑
+			if (2 >= 드랍율) {// 象牙の塔
 				inventory.storeItem(tower[상아탑], 1);
 			}break;
 		case 807:case 808:case 809:case 810:case 811:case 812:case 813:
-			if (2 >= 드랍율) {// 본던
+			if (2 >= 드랍율) {// ボンドン
 				inventory.storeItem(glu[본던], 1);
 			}break;
 		case 101:case 102:case 103:case 104:case 105:case 106:case 107:case 108:case 109:case 110:case 111:
-			if (3 >= 드랍율) {// 오만
+			if (3 >= 드랍율) {// 傲慢
 				inventory.storeItem(oman[오만], 1);
 			}break;
 		}
 
 
-		/** 환상 이벤트 **/
+		/** 幻想イベント**/
 		if (Config.ALT_FANTASYEVENT == true) {
 			//Random random1 = new Random();
 			int itemRandom = random.nextInt(100)+1;
@@ -251,10 +251,10 @@ public class DropTable {
 				inventory.storeItem(Fitem);					
 			}				
 		}
-		/** 환상 이벤트 **/
+		/** 幻想イベント **/
 	}
 
-	// 드롭을 분배
+	// ドロップを分配
 	public void dropShare(L1NpcInstance npc, ArrayList<?> acquisitorList, ArrayList<?> hateList, L1PcInstance pc) {
 		if (Config.STANDBY_SERVER) {
 			return;
@@ -266,18 +266,18 @@ public class DropTable {
 		if (pc instanceof L1RobotInstance) {
 			return;
 		}
-		/** 보스몹 자동분배**/
+		/** ボスモンスターの自動分配**/
 		if (mobId == 400016 || mobId == 400017 || mobId == 400017||mobId == 145684){
 			Mapdrop(npc);
 		}
-		/** 보스몹 자동분배**/
+		/**ボスモンスターの自動分配**/
 
-		/** 대흑장로 오토루팅 **/
-		//if (mobId == 7000094){ 대흑장로(npc);
+		/** 大黒長老オートルーティング **/
+		//if (mobId == 7000094){ 大黒長老（npc）;
 		//}
-		/** 대흑장로 오토루팅 **/
+		/** 大黒長老オートルーティング **/
 
-		if (mobId == 5100 || mobId == 900013 || mobId == 900040){ // 드래곤 드랍 설정.
+		if (mobId == 5100 || mobId == 900013 || mobId == 900040){ // ドラゴンドロップ設定します。
 			if (npc.getMapId() >= 1005 && npc.getMapId() <= 1022 
 					|| npc.getMapId() > 6000 && npc.getMapId() < 6499
 					|| npc.getMapId() > 6501 && npc.getMapId() < 6999){
@@ -290,18 +290,18 @@ public class DropTable {
 		if (acquisitorList.size() != hateList.size()) {
 			return;
 		}
-		/** 로봇시스템 **/
+		/** ロボットシステム **/
 		if (pc.getRobotAi() != null) {
 			return;
 		}
-		/** 로봇시스템 **/
-		// 헤이트의 합계를 취득
+		/** ロボットシステム **/
+		// ヘイトの合計を取得
 		int totalHate = 0;
 		L1Character acquisitor;
 		for (int i = hateList.size() - 1; i >= 0; i--) {
 			acquisitor = (L1Character) acquisitorList.get(i);
 			if ((Config.AUTO_LOOT == 0)
-					// 오토 루팅 2의 경우는 사몬 및 애완동물은 생략한다
+					// オートルーティング2の場合は、サーモンとペットは省略する
 					&& (acquisitor instanceof L1SummonInstance || acquisitor instanceof L1PetInstance)) {
 				acquisitorList.remove(i);
 				hateList.remove(i);
@@ -309,13 +309,13 @@ public class DropTable {
 					&& acquisitor.getLocation().getTileLineDistance(npc.getLocation()) <= Config.LOOTING_RANGE) {
 				totalHate += (Integer) hateList.get(i);
 			} else {
-				// null였거나 죽기도 하고 멀었으면 배제
+				// nullだったり死ぬもして遠かったら排除
 				acquisitorList.remove(i);
 				hateList.remove(i);
 			}
 		}
 
-		// 드롭의 분배
+		// ドロップの分配
 		L1Inventory targetInventory = null;
 		L1PcInstance player;
 		Random random = new Random();
@@ -330,11 +330,11 @@ public class DropTable {
 					continue;
 				}
 			} catch (Exception e) {
-				System.out.println("드랍리스트 오류 표시 아이디 :" + npc.getNpcId() + " [이름] :" + npc.getName());
+				System.out.println("ドロップリストエラー表示名：" + npc.getNpcId() + "[名前]：" + npc.getName());
 			}
 
 			int itemId = item.getItem().getItemId();
-			if (item.getItem().getType2() == 0 && item.getItem().getType() == 2) { // light계 아이템
+			if (item.getItem().getType2() == 0 && item.getItem().getType() == 2) { // light系アイテム
 				item.setNowLighting(false);
 			}
 			if ((Config.AUTO_LOOT != 0 || AutoLoot.getInstance().isAutoLoot(itemId)) && totalHate > 0) {
@@ -350,13 +350,13 @@ public class DropTable {
 							if (acquisitor instanceof L1PcInstance) {
 								player = (L1PcInstance) acquisitor;
 								L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA);
-								// 소지 아데나를 체크
+								// 所持アデナをチェック
 								if (l1iteminstance != null && l1iteminstance.getCount() > 2000000000) {
 									targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(), acquisitor.getMapId());
-									// 가질 수 없기 때문에 발밑에 떨어뜨린다
-									player.sendPackets(new S_ServerMessage(166, "소지하고 있는 아데나","2,000,000,000을 초과하고 있습니다."));
+									// 持つことができないので、足元に落とす
+									player.sendPackets(new S_ServerMessage(166, "所持しているアデナ","20億を超えています。"));
 								} else {
-									if (player.isInParty()) { // 파티의 경우
+									if (player.isInParty()) { // パーティーの場合
 										partyMember = player.getParty().getMembers();
 										int Who = random.nextInt(partyMember.length);
 										L1PcInstance pc1 = partyMember[Who];
@@ -367,25 +367,25 @@ public class DropTable {
 												targetInventory = pc1.getInventory();
 												for (int p = 0; p < partyMember.length; p++) {
 													if (player.RootMent) {
-														partyMember[p].sendPackets(new S_SystemMessage("" + 아이템이름 + " 획득 : " + 이름 + " (" + npc.getName() + ") "));
+														partyMember[p].sendPackets(new S_SystemMessage("" + 아이템이름 + "獲得：" + 이름 + " (" + npc.getName() + ") "));
 													}
 												}
 											}
 										}
-									} else if (player.RootMent) { // 솔로의 경우
+									} else if (player.RootMent) { // ソロの場合
 										player.sendPackets(new S_ServerMessage(143, npc.getName(), item.getLogName()));
 									}
 								}
 							}
 						} else {
 							targetInventory = L1World.getInstance().getInventory(acquisitor.getX(), acquisitor.getY(),acquisitor.getMapId()); 
-							// 가질 수 없기 때문에발밑에떨어뜨린다
+							// 持つことができないので、足元に落とす
 						}
 						break;
 					}
 				}
-			} else { // Non 오토 루팅
-				/** 악령의씨앗 무조건오토루팅 **/
+			} else { // Nonオートルーティング
+				/** 悪霊の種無条件オートルーティング **/
 				if (itemId == 810008) {
 					return; 
 				}
@@ -473,7 +473,7 @@ public class DropTable {
 					inventory.tradeItem(item, 아데나, user.getInventory());
 					for (L1PcInstance partymember : pc.getParty().getMembers()) {
 						if (pc.RootMent) {
-							partymember.sendPackets(new S_SystemMessage("아데나 (" + 아데나 + ") 획득 : " + user.getName() + " (" + npc.getName() + ") "));
+							partymember.sendPackets(new S_SystemMessage("アデナ（" + 아데나 + "）獲得：" + user.getName() + " (" + npc.getName() + ") "));
 						}
 					}
 				}
@@ -486,7 +486,7 @@ public class DropTable {
 		npc.getLight().turnOnOffLight();
 	}
 
-	/** 보스몹 자동분배**/
+	/** ボスモンスターの自動分配**/
 	private void Mapdrop(L1NpcInstance npc) {
 		L1Inventory inventory = npc.getInventory();
 		L1ItemInstance item;
@@ -510,11 +510,11 @@ public class DropTable {
 			if (acquisitor.getInventory().checkAddItem(item, item.getCount()) == L1Inventory.OK) {
 				targetInventory = acquisitor.getInventory();
 				player = acquisitor;
-				L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA); // 소지
+				L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA); //所持
 				if (l1iteminstance != null && l1iteminstance.getCount() > 2000000000) {
 					targetInventory = L1World.getInstance().getInventory(acquisitor.getX(), acquisitor.getY(),
 							acquisitor.getMapId()); // 가질 수
-					player.sendPackets(new S_ServerMessage(166, "소지하고 있는 아데나", "2,000,000,000을 초과하고 있습니다."));
+					player.sendPackets(new S_ServerMessage(166, "所持しているアデナ", "20億を超えています。"));
 				} else {
 					for (L1PcInstance temppc : acquisitorList) {
 						temppc.sendPackets(new S_ServerMessage(813, npc.getName(), item.getLogName(), player.getName()));
@@ -522,7 +522,7 @@ public class DropTable {
 				}
 			} else {
 				targetInventory = L1World.getInstance().getInventory(acquisitor.getX(), acquisitor.getY(),
-						acquisitor.getMapId()); // 가질 수
+						acquisitor.getMapId()); // 持つことができ
 			}
 			if (item.getItem().getItemId() == 40308)
 				LinAllManagerInfoThread.AdenMake = Long.valueOf(LinAllManagerInfoThread.AdenMake.longValue() + item.getCount());
@@ -530,7 +530,7 @@ public class DropTable {
 		}
 		npc.getLight().turnOnOffLight();
 	}
-	/*private void 대흑장로(L1NpcInstance npc) {
+	/*private void 大黒長老（L1NpcInstance npc）{
 		L1Inventory inventory = npc.getInventory();
 		L1ItemInstance item;
 		L1Inventory targetInventory = null;
@@ -549,11 +549,11 @@ public class DropTable {
 				if (acquisitor.getInventory().checkAddItem(item, item.getCount()) == L1Inventory.OK) {
 					targetInventory = acquisitor.getInventory();
 					player = acquisitor;
-					L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA); // 소지
+					L1ItemInstance l1iteminstance= player.getInventory（）findItemId（L1ItemId.ADENA）; //所持
 					if (l1iteminstance != null && l1iteminstance.getCount() > 2000000000) {
 						targetInventory = L1World.getInstance().getInventory(acquisitor.getX(), acquisitor.getY(),
-								acquisitor.getMapId()); // 가질 수
-						player.sendPackets(new S_ServerMessage(166, "소지하고 있는 아데나", "2,000,000,000을 초과하고 있습니다."));
+								acquisitor.getMapId()); //持つことができ
+						player.sendPackets(new S_ServerMessage（166、 "所持しているアデナ"、 "20億を超えています。"））;
 					} else {
 						for (L1PcInstance temppc : acquisitorList) {
 							temppc.sendPackets(new S_ServerMessage(813, npc.getName(), item.getLogName(), player.getName()));

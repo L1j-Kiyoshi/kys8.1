@@ -21,7 +21,7 @@ public class L1Who implements L1CommandExecutor {
 		try {
 			int CalcUser = L1UserCalc.getClacUser();
 			Collection<L1PcInstance> players = L1World.getInstance().getAllPlayers();
-			int robotcount = 0; // 무인
+			int robotcount = 0; // 無人
 			int playercount = 0; 
 			int AutoShopUser = 0;
 			for (L1PcInstance each : players) {
@@ -36,13 +36,13 @@ public class L1Who implements L1CommandExecutor {
 			String amount = String.valueOf(playercount);
 			S_WhoAmount s_whoamount = new S_WhoAmount(amount);
 			pc.sendPackets(s_whoamount);
-			pc.sendPackets(new S_ChatPacket(pc,"접 속 중 : " + playercount));
-			pc.sendPackets(new S_ChatPacket(pc,"로 보 트 : " + robotcount));
-			pc.sendPackets(new S_ChatPacket(pc,"무인상점 : " + AutoShopUser));
-			pc.sendPackets(new S_ChatPacket(pc,"뻥 튀 기 : " + CalcUser));
+			pc.sendPackets(new S_ChatPacket(pc,"接続中：" + playercount));
+			pc.sendPackets(new S_ChatPacket(pc,"で見アップデート：" + robotcount));
+			pc.sendPackets(new S_ChatPacket(pc,"無人店舗：" + AutoShopUser));
+			pc.sendPackets(new S_ChatPacket(pc,"ポン跳ね期：" + CalcUser));
 
 			
-			// 온라인의 플레이어 리스트를 표시
+			// オンラインのプレイヤーのリストを表示
 			if (arg.equalsIgnoreCase("전체")) {
 				StringBuffer gmList = new StringBuffer();
 				StringBuffer playList = new StringBuffer();
@@ -73,26 +73,26 @@ public class L1Who implements L1CommandExecutor {
 					}
 				}
 				if (gmList.length() > 0) {
-					pc.sendPackets(new S_ChatPacket(pc,"-- 운영자 (" + countGM + "명)"));
+					pc.sendPackets(new S_ChatPacket(pc," - オペレータ（" + countGM + "人）"));
 					pc.sendPackets(new S_ChatPacket(pc,gmList.toString()));
 				}
 
 				if (playList.length() > 0) {
-					pc.sendPackets(new S_ChatPacket(pc,"-- 플레이어 (" + countPlayer + "명)"));
+					pc.sendPackets(new S_ChatPacket(pc," - プレイヤー（" + countPlayer + "人）"));
 					pc.sendPackets(new S_ChatPacket(pc,playList.toString()));
 				}
 				if (robotList.length() > 0) {
-					pc.sendPackets(new S_ChatPacket(pc,"-- 로봇유저 (" + countRobot + "명)"));
+					pc.sendPackets(new S_ChatPacket(pc," - ロボットユーザ（" + countRobot + "人）"));
 					pc.sendPackets(new S_ChatPacket(pc,robotList.toString()));
 				}
 				if (shopList.length() > 0) {
-					pc.sendPackets(new S_ChatPacket(pc,"-- 개인상점 (" + countShop + "명)"));
+					pc.sendPackets(new S_ChatPacket(pc," - 個人商店（" + countShop + "人）"));
 					pc.sendPackets(new S_ChatPacket(pc,shopList.toString()));
 				}
 			}
 			players = null;
 		} catch (Exception e) {
-			pc.sendPackets(new S_ChatPacket(pc,".누구 [전체] 라고 입력해 주세요. "));
+			pc.sendPackets(new S_ChatPacket(pc,"だれ[フル]と入力してください。"));
 		}
 	}
 }

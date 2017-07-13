@@ -93,15 +93,15 @@ public class AdenShopTable {
 						|| item.getItemId() == 5000034
 						|| item.getItemId() == 430003
 						|| item.getItemId() == 430505)
-					itemname = itemname + " [7일]";
+					itemname = itemname + "[7日]";
 				else if (item.getItemId() >= 60173 && item.getItemId() <= 60176)
 					itemname = itemname + " [18000]";
 				else if (item.getItemId() >= 21113 && item.getItemId() <= 21120)
-					itemname = itemname + " [3시간]";
+					itemname = itemname + "[3時間]";
 				data_length += 30;
-				data_length += itemname.getBytes("UTF-16LE").length + 2; // 이름
-																			// 글자
-																			// 사이즈
+				data_length += itemname.getBytes("UTF-16LE").length + 2; // 名前
+																			// 文字
+																			// サイズ
 				if (!html.equalsIgnoreCase("")) {
 					byte[] test = html.getBytes("EUC-KR");
 					for (int i = 0; i < test.length;) {

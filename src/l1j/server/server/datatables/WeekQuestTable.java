@@ -6,27 +6,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import l1j.server.Config;
 import l1j.server.L1DatabaseFactory;
-
 import l1j.server.server.model.L1Spawn;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.utils.SQLUtil;
 
-public class WeekQuestTable {//주퀘
+public class WeekQuestTable {//ジュクウェ
 	
-	public HashMap<Integer,Integer> WeekList = new HashMap<Integer,Integer>(); //초급 (index아이디) <npcid,index>
-	public HashMap<Integer,Integer> WeekList2 = new HashMap<Integer,Integer>(); //중급
-	public HashMap<Integer,Integer> WeekList3 = new HashMap<Integer,Integer>(); //고급
+	public HashMap<Integer,Integer> WeekList = new HashMap<Integer,Integer>(); //初級（index名）<npcid、index>
+	public HashMap<Integer,Integer> WeekList2 = new HashMap<Integer,Integer>(); //中級
+	public HashMap<Integer,Integer> WeekList3 = new HashMap<Integer,Integer>(); //高級
 	
-	public HashMap<Integer,Integer> NpcidList = new HashMap<Integer,Integer>(); //초급 (npcid) <index,npcid>
-	public HashMap<Integer,Integer> NpcidList2 = new HashMap<Integer,Integer>(); //중급
-	public HashMap<Integer,Integer> NpcidList3 = new HashMap<Integer,Integer>(); //고급
+	public HashMap<Integer,Integer> NpcidList = new HashMap<Integer,Integer>(); //初級（npcid）<index、npcid>
+	public HashMap<Integer,Integer> NpcidList2 = new HashMap<Integer,Integer>(); //中級
+	public HashMap<Integer,Integer> NpcidList3 = new HashMap<Integer,Integer>(); //高級
 	
-	public HashMap<Integer,L1Spawn> SpawnData = new HashMap<Integer,L1Spawn>(); //스폰리스트를 가져옴(텔레포트를위한).
+	public HashMap<Integer,L1Spawn> SpawnData = new HashMap<Integer,L1Spawn>(); //スポンリストをインポート（テレポートのための）。
 	public ArrayList<Integer> maxcount = new ArrayList<Integer>();
 	public int test = 0;
 	public static WeekQuestTable ins;
@@ -164,7 +161,7 @@ public class WeekQuestTable {//주퀘
 				for(int i = 0 ; i < 9 ;i++)
 					pc.setWcount(rs.getInt(i+2));
 					
-					pc.setQuestWeek(rs.getInt(11)); //추가 
+					pc.setQuestWeek(rs.getInt(11)); //追加 
 				//2 3 4 5 6 7 8 9 10
 				for(int i = 0 ; i < 3;i++){
 					if(rs.getInt(i+12)==1)

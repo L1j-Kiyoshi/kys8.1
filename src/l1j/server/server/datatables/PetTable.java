@@ -150,11 +150,11 @@ public class PetTable {
 	}
 
 	/**
-	 * Pets 테이블에 이미 이름이 존재할까를 돌려준다.
+	 * Pets テーブルには既に名前が存在するかを返す。
 	 * 
 	 * @param nameCaseInsensitive
-	 *            조사하는 애완동물의 이름. 대문자 소문자의 차이는 무시된다.
-	 * @return 이미 이름이 존재하면 true
+	 *            調査するペットの名前。大文字小文字の違いは無視される。
+	 * @return すでに名前が存在する場合はtrue
 	 */
 	public static boolean isNameExists(String nameCaseInsensitive) {
 		String nameLower = nameCaseInsensitive.toLowerCase();
@@ -165,17 +165,17 @@ public class PetTable {
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
 			/*
-			 * 같은 이름을 찾는다. MySQL는 디폴트로 case insensitive인 싶은
-			 * 본래 LOWER는 필요없지만, binary로 변경되었을 경우에 대비해.
+			 * 同じ名前を探す。 MySQLはデフォルトでcase insensitiveなたい
+			 * 本来LOWERは必要ありませんが、binaryに変更された場合に備えて。
 			 */
 			pstm = con
 					.prepareStatement("SELECT item_obj_id FROM pets WHERE LOWER(name)=?");
 			pstm.setString(1, nameLower);
 			rs = pstm.executeQuery();
-			if (!rs.next()) { // 같은 이름이 없었다
+			if (!rs.next()) { // 同じ名前がなかった
 				result = false;
 			}
-			else if (PetTypeTable.getInstance().isNameDefault(nameLower)) { // 디폴트의 이름이라면 중복 하고 있지 않으면 간주한다
+			else if (PetTypeTable.getInstance().isNameDefault(nameLower)) { // デフォルトの名前であれば、重複していないとみなす
 				result = false;
 			}
 		} catch (SQLException e) {

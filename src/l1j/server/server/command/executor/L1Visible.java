@@ -47,9 +47,9 @@ public class L1Visible implements L1CommandExecutor {
 			for (L1PcInstance pc2 : L1World.getInstance().getVisiblePlayer(pc)) {
 				pc2.sendPackets(new S_OtherCharPacks(pc, pc2));
 			}
-			pc.sendPackets(new S_SystemMessage("투명상태를 해제했습니다. "));
+			pc.sendPackets(new S_SystemMessage("透明状態を解除しました。"));
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " 커멘드 에러"));
+			pc.sendPackets(new S_SystemMessage(cmdName + "コマンドエラー"));
 		}
 	}
 }

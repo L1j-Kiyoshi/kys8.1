@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Random;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import l1j.server.Config;
@@ -51,7 +50,7 @@ public class HpMpRegenController implements Runnable {
 						if (pc.isDead() || pc.isPrivateShop() || pc.isAutoClanjoin()) {
 							continue;
 						} else {
-							// HP 부문 먼저 쳐리
+							// HP部門まずチョリ
 							pc.updateLevel();
 							pc.addHpregenPoint(pc.getHpcurPoint());
 							pc.setHpcurPoint(4);
@@ -77,7 +76,7 @@ public class HpMpRegenController implements Runnable {
 					}
 				}
 			} catch (Exception e) {
-				System.out.println("피엠틱컨트롤러 오류  : " + e);
+				System.out.println("ピーエムティックコントローラエラー：" + e);
 			} finally {
 				try {
 					_list = null;
@@ -94,11 +93,11 @@ public class HpMpRegenController implements Runnable {
 			Collection<L1PcInstance> _list;
 			_list = L1World.getInstance().getAllPlayers();
 			for (L1PcInstance pc : _list) {
-			//다시 주간퀘스트로 할라면 W로 변경
+			//再び週間クエストでハラ面Wに変更
 			SimpleDateFormat day = new SimpleDateFormat("D"); 
 			String nowday = day.format(new Date());
 			if(pc.getQuestWeek() != Integer.parseInt(nowday)){
-					//재설정
+					//リセット
 					if(pc.getLevel() <= 65){
 						pc.setWeekType(1);
 					}else if(pc.getLevel()>65 && pc.getLevel() <= 85 ){
@@ -107,15 +106,15 @@ public class HpMpRegenController implements Runnable {
 						pc.setWeekType(3);
 					}
 					for(int i = 0 ; i < 3; i++)
-						pc.setLineClear(i, false); //라인클리어 false
+						pc.setLineClear(i, false); //ラインクリアfalse
 					
 					for(int i = 0 ; i < 3; i++)
-						pc.setReward(i, false);//보상받기 여부 false
+						pc.setReward(i, false);//補償受けるかどうかfalse
 					
 					for(int i = 0; i <9; i++)
-						pc.setWcount(i, 0); //잡은 마리수 초기화
+						pc.setWcount(i, 0); //キャッチ匹数の初期化
 					
-			//		pc.sendPackets(new S_SystemMessage("\\aG 몬스터 일일 퀘스트가 초기화 되었습니다."), true);
+			//		pc.sendPackets(new S_SystemMessage("\\aG モンスタークエストが初期化されました。 "）、true）;
 					pc.setQuestWeek(Integer.parseInt(nowday));
 					//
 					pc.sendPackets(new S_WeekQuest(pc));
@@ -146,12 +145,12 @@ public class HpMpRegenController implements Runnable {
 			}
 			baseMpr = 1;
 			itemMpr = _pc.getInventory().mpRegenPerTick();
-			// 베이스 WIS 회복 보너스
+			// ベースWIS回復ボーナス
 			baseStatMpr =  CalcStat.calcMpr(_pc.getAbility().getBaseWis());
 
 			itemMpr += _pc.getMpr();
 
-			/** 배고픔, 중량 * */
+			/** 空腹、体重 * */
 			if (_pc.get_food() < 40 || isOverWeight(_pc)) {
 				baseMpr = 0;
 				baseStatMpr = 0;
@@ -235,24 +234,24 @@ public class HpMpRegenController implements Runnable {
 			equipHpr = 0;
 			bonus = 0;
 			inLifeStream = false;
-			// 공복과 중량의 체크
+			// 空腹と重量のチェック
 			if (_pc.get_food() < 40 || isOverWeight(_pc) || _pc.hasSkillEffect(L1SkillId.BERSERKERS)) {
 				bonus = 0;
 				basebonus = 0;
-				// 장비에 의한 HPR 증가는 만복도, 중량에 의해 없어지지만, 감소인 경우는 만복도, 중량에 관계없이 효과가
-				// 남는다
+				// 機器によるHPRの増加は満腹度、重量によって失わが、減少の場合は満腹度、重量に関係なく効果が
+				// 残る
 				if (equipHpr > 0) {
 					equipHpr = 0;
 				}
 			} else {
-				// CON 보너스
+				// CONボーナス
 				if (11 < _pc.getLevel() && 14 <= _pc.getAbility().getTotalCon()) {
 					maxBonus = _pc.getAbility().getTotalCon() - 12;
 					if (25 < _pc.getAbility().getTotalCon()) {
 						maxBonus = 14;
 					}
 				}
-				// 베이스 CON 보너스
+				// ベースCONボーナス
 				basebonus = CalcStat.calcHpr(_pc.getAbility().getBaseCon());
 
 				equipHpr = _pc.getInventory().hpRegenPerTick();
@@ -274,7 +273,7 @@ public class HpMpRegenController implements Runnable {
 
 				if (isPlayerInLifeStream(_pc)) {
 					inLifeStream = true;
-					// 고대의 공간, 마족의 신전에서는 HPR+3은 없어져?
+					// 古代のスペース、魔族の神殿では、HPR + 3は無くなって？
 					bonus += 3;
 				}
 			}
@@ -283,37 +282,37 @@ public class HpMpRegenController implements Runnable {
 			newHp += bonus + equipHpr + basebonus;
 			
 			if (newHp < 1) {
-				newHp = 1; // HPR 감소 장비에 의해 사망은 하지 않는다
+				newHp = 1; // HPRの減少装置によって死亡はしない
 			}
-			// 수중에서의 감소 처리
-			// 라이프 시냇물로 감소를 없앨 수 있을까 불명
+			// 水中での減少処理
+			// ライフストリームに減少をなくすことができるか不明
 			if (isUnderwater(_pc)) {
 				newHp -= 20;
 				if (newHp < 1) {
 					if (_pc.isGm()) {
 						newHp = 1;
 					} else {
-						_pc.death(null, true); // HP가 0이 되었을 경우는 사망한다.
+						_pc.death(null, true); // HPが0になった場合は死亡する。
 					}
 				}
-				// Lv50 퀘스트의 고대의 공간 1 F2F에서의 감소 처리
+				// Lv50クエストの古代の空間1 F2Fでの減少処理
 			} else if (isLv50Quest(_pc) && !inLifeStream) {
 				newHp -= 10;
 				if (newHp < 1) {
 					if (_pc.isGm()) {
 						newHp = 1;
 					} else {
-						_pc.death(null, true); // HP가 0이 되었을 경우는 사망한다.
+						_pc.death(null, true); // HPが0になった場合は死亡する。
 					}
 				}
-				// 마족의 신전에서의 감소 처리
+				// 魔族の神殿での減少処理
 			} else if (_pc.getMapId() == 410 && !inLifeStream) {
 				newHp -= 10;
 				if (newHp < 1) {
 					if (_pc.isGm()) {
 						newHp = 1;
 					} else {
-						_pc.death(null, true); // HP가 0이 되었을 경우는 사망한다.
+						_pc.death(null, true); // HPが0になった場合は死亡する。
 					}
 				}
 			}
@@ -333,7 +332,7 @@ public class HpMpRegenController implements Runnable {
 	}
 
 	private boolean isUnderwater(L1PcInstance pc) {
-		// 워터 부츠 장비시인가, 에바의 축복 상태이면, 수중은 아니면 간주한다.
+		// ウォーターブーツ装備時か、エヴァの祝福状態であれば、水中ではないと考えられている。
 		if (pc.hasSkillEffect(L1SkillId.STATUS_UNDERWATER_BREATH)) {
 			return false;
 		}
@@ -382,7 +381,7 @@ public class HpMpRegenController implements Runnable {
 				pc.sendPackets(new S_SPMR(pc));
 				pc.isDanteasBuff = true;
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON, 5219, true));
-				pc.sendPackets(new S_SystemMessage("단테스 버프 : 근거리/원거리 대미지+2, SP+1, MP 회복+2 "));
+				pc.sendPackets(new S_SystemMessage("ダンテスバフ：近距離/遠距離ダメージ+2、SP + 1、MP回復+2"));
 			}
 		} else {
 			boolean DanteasOk = false;
@@ -398,7 +397,7 @@ public class HpMpRegenController implements Runnable {
 				pc.sendPackets(new S_SPMR(pc));
 				pc.isDanteasBuff = false;
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON, 5219, false));
-				pc.sendPackets(new S_SystemMessage("단테스의 버프 : 버프가 사라짐"));
+				pc.sendPackets(new S_SystemMessage("ダンテスのバフ：バフが消える"));
 			}
 		}
 	}
@@ -419,11 +418,11 @@ public class HpMpRegenController implements Runnable {
 	}
 
 	/**
-	 * 지정한 PC가 라이프 시냇물의 범위내에 있는지 체크한다
+	 * 指定されたPCがライフストリームの範囲内であることをチェックする
 	 * 
 	 * @param pc
 	 *            PC
-	 * @return true PC가 라이프 시냇물의 범위내에 있는 경우
+	 * @return true PCがライフストリームの範囲内にある場合
 	 */
 	private static L1EffectInstance effect = null;
 

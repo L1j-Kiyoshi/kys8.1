@@ -22,8 +22,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -92,7 +92,7 @@ public class RestoreItemTable {
 	public L1RestoreItemInstance getRestoreItemInstance(int objid){
 		return restoreItemList.get(objid);
 	}
-	public void DeleteReStoreItem(int id){ //주문서를 쓰면 만듬
+	public void DeleteReStoreItem(int id){ //スクロールを使えば作成の
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try{

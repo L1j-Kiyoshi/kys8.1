@@ -34,7 +34,7 @@ public class OneTimeController implements TimeListener {
         int h = time.get(Calendar.HOUR_OF_DAY);     
         if (h == 0) {
             UnderReset();
-            L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("알림: 모든 클랜의 지하통로가 리셋 되었습니다."));
+            L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("通知：すべてのクランの地下通路がリセットされました。"));
         } 
     }
 
@@ -51,7 +51,7 @@ public class OneTimeController implements TimeListener {
             clan.setUnderDungeon(0);
             ClanTable.getInstance().updateUnderDungeon(clan.getClanId(), 0);
             clan.setUnderMapid(0);
-            /** 아즈모단 클랜ID 삭제 **/
+            /** アズモダンクランIDの削除 **/
             AzmodanSystem.getInstance().removeClan(clan.getClanId());
         }
     }

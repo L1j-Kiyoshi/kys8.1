@@ -105,7 +105,7 @@ public class ShopTable {
 		}
 		return new L1Shop(npcId, sellingList, purchasingList);
 	}
-	public void Reload(int npcid) { //특정 NPC리로드
+	public void Reload(int npcid) { //特定NPCリロード
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -157,12 +157,12 @@ public class ShopTable {
 	public L1Shop get(int npcId) {
 		return _allShops.get(npcId);
 	}
-	/*버경 관련*/
+	/*ボギョン関連*/
 	public void addShop(int npcId, L1Shop shop){		
 		_allShops.put(npcId, shop);
 	}
 
-	/*버경 관련*/
+	/*ボギョン関連*/
 	public void delShop(int npcId) {
 	_allShops.remove(npcId);	
 	}

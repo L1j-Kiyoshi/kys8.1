@@ -31,7 +31,7 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 public class EventItemController implements Runnable {
 	private static EventItemController _instance;
 	
-	public static final int SleepTime = 1 * 60 * 1000; //1분 마다 체크
+	public static final int SleepTime = 1 * 60 * 1000; //1分ごとにチェック
 
 	public static EventItemController getInstance() {
 		if (_instance == null) {
@@ -70,7 +70,7 @@ public class EventItemController implements Runnable {
 					L1ItemInstance item = pc.getInventory().storeItem(EventItem, EventNumber);
 					if (item == null)continue;
 					if (item != null)
-		 			pc.sendPackets(new S_SystemMessage(item.getName() + " (" + EventNumber + ") 획득"));
+		 			pc.sendPackets(new S_SystemMessage(item.getName() + " (" + EventNumber + ") 獲得"));
 				}
 			}
 		} else {

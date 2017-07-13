@@ -51,9 +51,9 @@ public class WeaponAddDamage {
 
 	private WeaponAddDamage() {
 //		PerformanceTimer timer = new PerformanceTimer();
-//		System.out.print("■ 무기데미지 데이터 .......................... ");
+//		System.out.print("■ 武器ダメージデータ.......................... "）;
 		weaponAddDamage();
-//		System.out.println("■ 로딩 정상 완료 " + timer.get() + " ms");
+//		System.out.println("■ ロード正常終了」+ timer.get（）+ "ms"）;
 	}
 
 	public void weaponAddDamage() {

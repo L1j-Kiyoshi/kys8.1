@@ -81,14 +81,14 @@ public class HomeTownTimeController {
 	}
 
 	public void dailyProc() {
-		_log.info("홈 타운 시스템：일시 처리 개시");
+		_log.info("ホームタウンシステム：一時処理開始");
 		TownTable.getInstance().updateTaxRate();
 		TownTable.getInstance().updateSalesMoneyYesterday();
 		TownTable.getInstance().load();
 	}
 
 	public void monthlyProc() {
-		_log.info("홈 타운 시스템：월시 처리 개시");
+		_log.info("ホームタウンシステム：ウォルシュ処理開始");
 		L1World.getInstance().setProcessingContributionTotal(true);
 
 		for (int townId = 1; townId <= 10; townId++) {
@@ -112,7 +112,7 @@ public class HomeTownTimeController {
 			}
 			pc.setContribution(0);
 			try {
-				// DB에 캐릭터 정보를 기입한다
+				// DBに文字情報を記入する
 				pc.save();
 			} catch (Exception e) {
 				_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
@@ -219,9 +219,9 @@ public class HomeTownTimeController {
 	}
 
 	/**
-	 * 보수를 취득해 클리어 한다
+	 * 保守を取得してクリアする
 	 * 
-	 * @return 보수
+	 * @return 保守
 	 */
 	public static int getPay(int objid) {
 		Connection con = null;

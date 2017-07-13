@@ -54,7 +54,7 @@ public class NpcBuyListTable {
 				price=search3.get(i).price;
 			}
 		}
-		//0이 축 1이 보통 2가 저주
+		//0軸1が通常2呪い
 		search.clear();
 		search2.clear();
 		search3.clear();

@@ -14,12 +14,12 @@ public class DungeonQuitController implements Runnable {
 	
 	private static DungeonQuitController _instance;
 
-	/** 게임오픈유무 **/
+	/** ゲームオープンの有無 **/
 	public boolean isgameStart = false;
 
-	/** 게임상태 **/
-	public int Status = 0;// 진행 상태
-	private final int 대기 = 0;// 진행
+	/** ゲームの状態 **/
+	public int Status = 0;// 進行状況
+	private final int 대기 = 0;// 進行
 	private final int 오픈 = 1;
 	private final int 진행 = 2;
 	private final int 종료 = 3;//
@@ -38,14 +38,14 @@ public class DungeonQuitController implements Runnable {
 				switch (Status) {
 				case 대기:
 					Thread.sleep(10000);
-					/** 오픈이 아니면 진행 **/
+					/** オープンでなければ進行 **/
 					if (isgameStart == false) {
 						continue;
 					}
 					Status = 오픈;
 					continue;
 				case 오픈:
-					L1World.getInstance().broadcastServerMessage("알림: 잠시 후 모든 인스턴스 던전 시간이 초기화 됩니다.");
+					L1World.getInstance().broadcastServerMessage("通知：しばらくして、すべてのインスタンスダンジョンの時間が初期化されます。");
 					Thread.sleep(3000L);
 					Status = 진행;
 					continue;
@@ -55,7 +55,7 @@ public class DungeonQuitController implements Runnable {
 					Status = 종료;
 					continue;
 				case 종료:
-					L1World.getInstance().broadcastServerMessage("알림: 모든 인스턴스 던전 시간이 초기화 되었습니다.");
+					L1World.getInstance().broadcastServerMessage("通知：すべてのインスタンスダンジョンの時間が初期化されました。");
 					isgameStart = false;
 					Status = 대기;
 					continue;
@@ -65,22 +65,22 @@ public class DungeonQuitController implements Runnable {
 			e.printStackTrace();
 		}
 	}
-				/** 던전 초기화 **/
+				/** ダンジョン初期化 **/
 	 public void 초기화() {
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 			if (pc == null || pc.getNetConnection() == null || pc.noPlayerCK || pc.noPlayerck2) {
 				continue;
 			}
 			try {
-				pc.setGirandungeonTime(0);//기감
-				pc.setOrendungeonTime(0);//상아탑 야히
-				pc.setDrageonTime(0);//용계
-				//pc.setRadungeonTime(0);//라바
-				pc.setSomeTime(0);//몽섬
-				pc.setSoulTime(0);//고무
-				pc.seticedungeonTime(0);//얼던
-				pc.setislandTime(0);//말던
-				pc.setnewdodungeonTime(0);//상아탑 발록
+				pc.setGirandungeonTime(0);//技監
+				pc.setOrendungeonTime(0);//象牙の塔ヤヒ
+				pc.setDrageonTime(0);//龍界
+				//pc.setRadungeonTime(0);//ラバー
+				pc.setSomeTime(0);//モンソム
+				pc.setSoulTime(0);//ゴム
+				pc.seticedungeonTime(0);//オルドン
+				pc.setislandTime(0);//巻い
+				pc.setnewdodungeonTime(0);//象牙の塔バルログ
 				던전초기화(pc);
 			} catch (SQLException e) {
 				e.printStackTrace();

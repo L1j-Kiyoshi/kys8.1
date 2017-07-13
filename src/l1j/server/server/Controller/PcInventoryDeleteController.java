@@ -62,7 +62,7 @@ public class PcInventoryDeleteController implements Runnable {
 						}else if (itemId == 80500){
 							KeyTable.DeleteKeyId(item.getKeyId());
 						}else if (itemId >= 30022 && itemId <= 30025) {
-							// 해당 아이템 인형이 사용중이라면 리스트 삭제.
+							// 該当のアイテム人形が使用中であれば、リストの削除。
 							for (Object dollObject : pc.getDollList()) {
 								if (dollObject instanceof L1DollInstance) {
 									L1DollInstance doll = (L1DollInstance) dollObject;
@@ -74,7 +74,7 @@ public class PcInventoryDeleteController implements Runnable {
 								}
 							}
 						}
-						pc.sendPackets(new S_SystemMessage(item.getName() + "의 사용시간이 만료 되어 소멸되었습니다."));
+						pc.sendPackets(new S_SystemMessage(item.getName() + "の使用時間が経過されて消滅しました。"));
 						pcInventory.removeItem(item);
 					}
 				}

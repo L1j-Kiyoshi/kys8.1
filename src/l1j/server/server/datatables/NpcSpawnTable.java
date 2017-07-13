@@ -96,21 +96,21 @@ public class NpcSpawnTable {
 					}
 				}
 
-				/** [환상 이벤트 본섭화] **/
+				/** [幻想イベント本サーバー化] **/
 				if (Config.ALT_FANTASYEVENT == false){
 					int npcid = rs.getInt("id");
 					if (npcid >= 6000000 && npcid <= 6000006){
 						continue;
 					}
 				}
-				/** [환상 이벤트 본섭화] **/
+				/** [幻想イベント本サーバー化] **/
 
 				if (Config.ALT_FISHEVENT == false) {
 					if (npcTemplateid >= 73341 && npcTemplateid <= 73345) {
 						continue; 
 					}
 				}
-				if (Config.ALT_RABBITEVENT == false){ //신묘 이벤트
+				if (Config.ALT_RABBITEVENT == false){ //神妙イベント
 					int npcid = rs.getInt("id");
 					if (npcid >= 1310387 && npcid <= 1310414) {
 						continue;
@@ -162,8 +162,8 @@ public class NpcSpawnTable {
 			SQLUtil.close(con);
 		}
 
-		_log.config("NPC 배치 리스트 " + _spawntable.size() + "건 로드");
-		_log.fine("총NPC수 " + spawnCount + "건");
+		_log.config("NPCの配置リスト" + _spawntable.size() + "件ロード");
+		_log.fine("総NPC数" + spawnCount + "件");
 	}
 
 	public void storeSpawn(L1PcInstance pc, L1Npc npc) {

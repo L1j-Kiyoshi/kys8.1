@@ -265,7 +265,7 @@ public class CharacterTable {
 		}
 	}
 	
-	public int PcLevelInDB(int pcid) { // DB에 저장된 레벨값을 불러온다. 
+	public int PcLevelInDB(int pcid) { // DBに格納されたレベル値を呼んでいます。 
 		  int result = 0;
 		  java.sql.Connection con = null;
 		  PreparedStatement pstm = null;

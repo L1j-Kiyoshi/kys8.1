@@ -26,14 +26,14 @@ public class L1NpcDown implements L1CommandExecutor {
 				
 				SpawnTable.getInstance().reload1();
 				pc.sendPackets(new S_SystemMessage("모든 엔피씨가 배치되었습니다."));
-				SpawnTable.몹다운 = false;
+				SpawnTable.isMonsterDown = false;
 			} else if (type.equals("삭제")) {
 				for (L1Object l1object : L1World.getInstance().getObject()) {
 					if(l1object instanceof L1MonsterInstance){
 						L1MonsterInstance npc = (L1MonsterInstance)l1object;
 						if (npc != null) {
 							if (npc.isBoss()) {
-								SpawnTable.몹다운 = true;
+								SpawnTable.isMonsterDown = true;
 								continue;
 							}
 							npc.setRespawn(false);

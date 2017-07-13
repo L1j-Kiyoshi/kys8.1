@@ -34,11 +34,11 @@ public class TamController implements Runnable {
 	private void PremiumTime() {
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 //			System.out.println("PremiumTime");
-//		int premium = Config.탐갯수;
-//		int premium1 = Config.탐혈맹갯수;
-//		int premium2 = Config.탐성혈갯수;
-//		int premium3 = Config.탐홍보갯수;
-										/** 탐지급부분 본섭화 by.라인 **/
+//		int premium = Config.乗車本数;
+//		int premium1 = Config.乗車血盟本数;
+//		int premium2 = Config.乗車腥血本数;
+//		int premium3 = Config.乗車広報本数;
+										/** 乗車支給部分本サーバー化 **/
 			if (!pc.isPrivateShop() && !pc.isAutoClanjoin() && !pc.noPlayerCK && !pc.noPlayerck2 && pc != null && !pc.isDead()) {
 				
 				String savedir = "c:\\uami\\" + new SimpleDateFormat("yyyyMMdd").format(new Date()) + "\\"+ pc.getName();
@@ -51,7 +51,7 @@ public class TamController implements Runnable {
 								pc.getNetConnection().getAccount().updateTam();
 							} catch (Exception e) {
 							}
-							pc.sendPackets(new S_SystemMessage("\\aA알림:성장("+tamcount+")단계 Tam포인트\\aG("+addtam+")\\aA개 획득"));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：成長("+tamcount+")段階Tamポイント\\aG("+addtam+")\\aA개 획득"));
 							try {
 								pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.TAM_POINT,pc.getNetConnection()),true);
 							} catch (Exception e) {
@@ -61,33 +61,3 @@ public class TamController implements Runnable {
 		}
 	}
 }
-			/*	if (dir.exists()) { // 우아미홍보기 켰을때
-					pc.getAccount().addTamPoint(premium3);
-					pc.sendPackets(new S_SystemMessage("홍보기알림: Tam (" + premium3 + ")개 획득 하셨습니다"));
-					pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.TAM, pc.getAccount().getTamPoint()));//탐 포인트 실시간화 S패킷류
-					pc.getNetConnection().getAccount().updateTam();//탐 업데이트부분
-				} else { // 홍보기 안켰을때
-					pc.getAccount().addTamPoint(premium);
-					pc.sendPackets(new S_SystemMessage("\\aA알림: Tam (\\aG" + premium + "\\aA)개 획득 하셨습니다."));
-					L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
-					pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.TAM, pc.getAccount().getTamPoint()));//탐 포인트 실시간화 S패킷류
-					pc.getNetConnection().getAccount().updateTam();//탐 업데이트부분
-					if (clan != null) {
-						if (clan.getClanId() != 0) {
-							pc.getAccount().addTamPoint(premium1);
-							pc.sendPackets(new S_SystemMessage("\\aA혈맹알림: Tam (\\aG" + premium1 + "\\aA)획득 하셨습니다."));
-							pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.TAM, pc.getAccount().getTamPoint()));//탐 포인트 실시간화 S패킷류
-							pc.getNetConnection().getAccount().updateTam();//탐 업데이트부분
-						}
-						if (clan.getCastleId() != 0) {
-							pc.getAccount().addTamPoint(premium2);
-							pc.sendPackets(new S_SystemMessage("\\aA성혈알림: Tam (\\aG" + premium2 + "\\aA)획득 하셨습니다."));
-							pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.TAM, pc.getAccount().getTamPoint()));//탐 포인트 실시간화 S패킷류
-							pc.getNetConnection().getAccount().updateTam();//탐 업데이트부분
-						}
-					}
-				}
-			}
-		}
-	}
-}*/

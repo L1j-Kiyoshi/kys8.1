@@ -41,7 +41,7 @@ public class UbTimeController implements Runnable {
 	@Override
 	public void run() {
 		try {
-			checkUbTime(); // UB개시 시간을 체크
+			checkUbTime(); // UB開始時間をチェック
 		} catch (Exception e1) {
 			_log.warning(e1.getMessage());
 		}

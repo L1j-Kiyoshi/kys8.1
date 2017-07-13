@@ -2,7 +2,7 @@ package l1j.server.server.monitor;
 
 
 import java.io.BufferedWriter;
-//////////// 날짜폴더별로 파일생성하기////////////////
+//////////// 日フォルダごとファイルを作成する////////////////
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

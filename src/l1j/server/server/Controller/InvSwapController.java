@@ -19,7 +19,7 @@ import l1j.server.server.utils.SQLUtil;
 public final class InvSwapController {
 	private static InvSwapController _instance;
 	private static Map<Integer, Map<Integer, List<Integer>>> list;
-	private static Map<Integer, Integer> code_list; // 현재 설정된 셋트위치.
+	private static Map<Integer, Integer> code_list; // 現在設定されセット位置。
 
 	public static InvSwapController getInstance() {
 		if (_instance == null) {
@@ -173,7 +173,7 @@ public final class InvSwapController {
 	}
 
 	/**
-	 * 저장 클릭시 호출됨.
+	 * 保存をクリック時に呼び出される。
 	 * 
 	 * @param pc
 	 * @param code
@@ -205,7 +205,7 @@ public final class InvSwapController {
 				db.add(item.getId());
 			}
 			if (db.size() > 21) {
-				System.out.println("착용갯수 토탈 오버 " + pc.getName());
+				System.out.println("着用本数トータルオーバー" + pc.getName());
 			}
 		}
 	}

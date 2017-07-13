@@ -129,7 +129,7 @@ public class TownTable {
 //		town.set_town_tax(town.get_town_tax() + townTax);
 //		town.set_town_fix_tax(town.get_town_fix_tax() + townFixTax);
 //
-//		if( town.get_lastSaveTime() + 60 * 60 * 1000 < System.currentTimeMillis() ) // 1시간마다 세이브.
+//		if( town.get_lastSaveTime() + 60 * 60 * 1000 < System.currentTimeMillis() ) // 1時間ごとにセーブ。
 //		{
 //			try {
 //				con = L1DatabaseFactory.getInstance().getConnection();

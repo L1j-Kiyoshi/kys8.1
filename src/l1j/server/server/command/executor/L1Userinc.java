@@ -77,18 +77,18 @@ public class L1Userinc implements L1CommandExecutor {
 				_totalBuffTime = 0;
 				return;
 			} else if (inc.equalsIgnoreCase("0")) {
-				pc.sendPackets(new S_SystemMessage("현재 뻥튀기 인원 : " + Config.WHOIS_CONTER));
-				pc.sendPackets(new S_SystemMessage("전체 뻥튀기 인원 : " + _buffMaxCount));
-				pc.sendPackets(new S_SystemMessage("남은 뻥튀기 인원 : " + (_buffMaxCount - Config.WHOIS_CONTER)));
-				pc.sendPackets(new S_SystemMessage("전체 뻥튀기 시간 : " + _totalBuffTime + "초"));
-				pc.sendPackets(new S_SystemMessage("남은 뻥튀기 시간 : " + _remainBuffTime + "초"));
+				pc.sendPackets(new S_SystemMessage("現在あら人員：" + Config.WHOIS_CONTER));
+				pc.sendPackets(new S_SystemMessage("全体あら人数：" + _buffMaxCount));
+				pc.sendPackets(new S_SystemMessage("残りあら人員：" + (_buffMaxCount - Config.WHOIS_CONTER)));
+				pc.sendPackets(new S_SystemMessage("全体あら時間：" + _totalBuffTime + "超"));
+				pc.sendPackets(new S_SystemMessage("残りあら時間：" + _remainBuffTime + "超"));
 				return;
 			}
 
 			int count = Integer.parseInt(st.nextToken());
 
 			if (count < 0) {
-				pc.sendPackets(new S_SystemMessage("0 이상의 숫자를 넣어주세요."));
+				pc.sendPackets(new S_SystemMessage("0以上の数字を入れてください。"));
 				return;
 			}
 
@@ -96,17 +96,17 @@ public class L1Userinc implements L1CommandExecutor {
 				int time = Integer.parseInt(st.nextToken());
 
 				if (time < 1) {
-					pc.sendPackets(new S_SystemMessage("0 이상의 시간를 넣어주세요."));
+					pc.sendPackets(new S_SystemMessage("0以上の時間を入れてください。"));
 					return;
 				}
 
 				if (time < _totalBuffTime) {
-					pc.sendPackets(new S_SystemMessage("입력된 시간이 현재 설정된 뻥튀기 시간보다 적습니다."));
+					pc.sendPackets(new S_SystemMessage("入力された時刻が現在設定されてあら時間よりも少なくなります。"));
 					return;
 				}
 
 				if (count < _buffMaxCount) {
-					pc.sendPackets(new S_SystemMessage("입력된 숫자가 현재 설정된 뻥튀기 인원보다 적습니다."));
+					pc.sendPackets(new S_SystemMessage("入力された数字が、現在設定されてあら人員より少なくなります。"));
 					return;
 				}
 
@@ -126,9 +126,9 @@ public class L1Userinc implements L1CommandExecutor {
 
 			}
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage("+뻥 [0] 로 현재 상태 확인."));
-			pc.sendPackets(new S_SystemMessage("+뻥 [~] [숫자] [시간] (시간 단위는 초)으로 자동 뻥."));
-			pc.sendPackets(new S_SystemMessage("+뻥 [초기화] 로 초기화."));
+			pc.sendPackets(new S_SystemMessage("+ポン[0]に現在の状態を確認。"));
+			pc.sendPackets(new S_SystemMessage("+ポン[〜] [数字] [時間]（時間単位は秒）で自動的にぽっかり。"));
+			pc.sendPackets(new S_SystemMessage("+ポン[初期化]で初期化。"));
 		}
 	}
 }

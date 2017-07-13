@@ -23,7 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat; //## A1 war_time 오류 수정 위해 임포트 추가 
+import java.text.SimpleDateFormat; //## A1 war_timeエラー修正のためにインポートを追加 
 import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -128,7 +128,7 @@ public class CastleTable {
 			pstm.setString(1, castle.getName());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			String fm = sdf.format(castle.getWarTime().getTime());
-			// String fm = DateFormat.getDateTimeInstance().format( //## A1 원본
+			// String fm = DateFormat.getDateTimeInstance().format( //##A1ソース
 			// castle.getWarTime().getTime()); //#
 			pstm.setString(2, fm);
 			pstm.setInt(3, castle.getTaxRate());

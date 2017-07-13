@@ -22,7 +22,7 @@ package l1j.server.server.datatables;
 import l1j.server.Config;
 
 /**
- * 경험치 테이블을 제공하는 클래스
+ * 経験値テーブルを提供するクラス
  */
 public final class ExpTable {
 	private ExpTable() {
@@ -33,21 +33,21 @@ public final class ExpTable {
 	public static final int MAX_EXP = 0x6ecf16da;
 
 	/**
-	 * 지정된 레벨이 되는데 필요한 누적 경험치를 요구한다.
+	 * 指定されたレベルになるのに必要な累積経験値を必要とする。
 	 * 
 	 * @param level
-	 *            레벨
-	 * @return 필요한 누적 경험치
+	 *            レベル
+	 * @return 必要な累積経験値
 	 */
 	public static int getExpByLevel(int level) {
 		return _expTable[level - 1];
 	}
 
 	/**
-	 * 다음의 레벨이 되는데 필요한 경험치를 요구한다.
+	 * 次のレベルになるが、必要な経験値を必要とする。
 	 * 
 	 * @param level
-	 *            현재의 레벨
+	 *            現在のレベル
 	 * @return 필요한 경험치
 	 */
 	public static int getNeedExpNextLevel(int level) {
@@ -55,17 +55,17 @@ public final class ExpTable {
 	}
 
 	/**
-	 * 누적 경험치로부터 레벨을 요구한다.
+	 * 累積経験値からレベルを要求する。
 	 * 
 	 * @param exp
-	 *            누적 경험치
-	 * @return 요구된 레벨
+	 *            累積経験値
+	 * @return 要求されたレベル
 	 */
 	public static int getLevelByExp(int exp) {
 
 		int level;
 		for (level = 1; level < _expTable.length; level++) {
-			// 트리키일지도 모른다···
+			// トリッキーかもしれない···
 			if (exp < _expTable[level]) {
 				break;
 			}
@@ -81,11 +81,11 @@ public final class ExpTable {
 	}
 
 	/**
-	 * 현재의 레벨로부터, 경험치의 페널티 레이트를 요구한다
+	 * 現在のレベルから、経験値のペナルティレートを要求する
 	 * 
 	 * @param level
-	 *            현재의 레벨
-	 * @return 요구된 경험치의 페널티 레이트
+	 *            現在のレベル
+	 * @return 要求された経験値のペナルティレート
 	 */
 	public static double getPenaltyRate(int level) {
 		if (level < 50) {
@@ -98,7 +98,7 @@ public final class ExpTable {
 	}
 
 	/**
-	 * 경험치 테이블(누적치) Lv0-100
+	 * 経験値テーブル（累積値）Lv0-100
 	 */
 	private static final int _expTable[] = { 0, 125, 300, 500, 750, 1296, 2401,
 			4096, 6581, 10000, 14661, 20756, 28581, 38436, 50645, 0x10014,

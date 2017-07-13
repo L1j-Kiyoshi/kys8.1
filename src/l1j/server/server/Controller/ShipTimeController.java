@@ -37,7 +37,7 @@ public class ShipTimeController implements Runnable {
 	@Override
 	public void run() {
 		try {
-				checkShipTime(); // 배의 도착 시간을 체크
+				checkShipTime(); // 船の到着時間をチェック
 				
 				GeneralThreadPool.getInstance().schedule(this, 5000);
 		} catch (Exception e1) {
@@ -59,7 +59,7 @@ public class ShipTimeController implements Runnable {
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 				if (pc.getMapId() == 83) {
 					new L1Teleport().teleport(pc, 32936, 33057, (short) 70, 0, false);
-					pc.getInventory().consumeItem(40300, 1); // 잊혀진 섬행 배표
+					pc.getInventory().consumeItem(40300, 1); // 忘れられた島船の切符
 				}
 			}
 		}
@@ -75,7 +75,7 @@ public class ShipTimeController implements Runnable {
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 				if (pc.getMapId() == 84) {
 					new L1Teleport().teleport(pc, 33426, 33501, (short) 4, 0, false);
-					pc.getInventory().consumeItem(40301, 1); // 하이네행 배표
+					pc.getInventory().consumeItem(40301, 1); //ハイネの船の切符
 				}
 			}
 		}
@@ -91,7 +91,7 @@ public class ShipTimeController implements Runnable {
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 				if (pc.getMapId() == 447) {
 					new L1Teleport().teleport(pc, 32297, 33087, (short) 440, 0, false);
-					pc.getInventory().consumeItem(40302, 1); // 해적섬행 배표
+					pc.getInventory().consumeItem(40302, 1); // 海賊島船の切符
 				}
 			}
 		}
@@ -107,7 +107,7 @@ public class ShipTimeController implements Runnable {
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 				if (pc.getMapId() == 446) {
 					new L1Teleport().teleport(pc, 32750, 32874, (short) 445, 0, false);
-					pc.getInventory().consumeItem(40303, 1); // 숨겨진 섬 선착장행 배표
+					pc.getInventory().consumeItem(40303, 1); // 隠された島の船着場の船の切符
 				}
 			}
 		}
@@ -124,7 +124,7 @@ public class ShipTimeController implements Runnable {
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 				if (pc.getMapId() == 6) {
 					new L1Teleport().teleport(pc, 32631, 32983, (short) 0, 0, false);
-					pc.getInventory().consumeItem(40298, 1); // 말하는 섬행 배표
+					pc.getInventory().consumeItem(40298, 1); // 言う島船の切符
 				}
 			}
 		}
@@ -141,7 +141,7 @@ public class ShipTimeController implements Runnable {
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 				if (pc.getMapId() == 5) {
 					new L1Teleport().teleport(pc, 32538, 32728, (short) 4, 0, false);
-					pc.getInventory().consumeItem(40299, 1); // 본토행 배표
+					pc.getInventory().consumeItem(40299, 1); // 本土の船の切符
 				}
 			}
 		}

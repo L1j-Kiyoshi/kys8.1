@@ -22,8 +22,8 @@ import l1j.server.server.serverpackets.S_Ranking2;
 import l1j.server.server.utils.SQLUtil;
 
 /**
- * 랭킹 시스템<br>
- * 랭킹에 대한 연산은 DB에 접근하지 않고 Map을 활용.
+ * ランキングシステム<br>
+ * ランキングの演算は、DBへのアクセスせずにMapを利用した。
  * 
  * @author
  */
@@ -58,8 +58,8 @@ public class RankingTimeController {
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			} finally {//랭킹갱신 시간
-				GeneralThreadPool.getInstance().scheduleAtFixedRate(new UpdateRank(), 0, 600 * 1000);//3600 1시간 600 10분 60초 30초
+			} finally {//ランキング更新時間
+				GeneralThreadPool.getInstance().scheduleAtFixedRate(new UpdateRank(), 0, 600 * 1000);//3600 1時間600 10分60秒30秒
 			}
 		}
 	}

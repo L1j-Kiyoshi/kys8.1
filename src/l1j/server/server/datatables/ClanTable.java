@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 import l1j.server.L1DatabaseFactory;
 import l1j.server.server.IdFactory;
-
 import l1j.server.server.model.L1Clan;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
@@ -61,11 +60,11 @@ public class ClanTable {
 					clan.setHouseId(rs.getInt(6));
 					clan.setAlliance(rs.getInt(7));
 					clan.setClanBirthDay(rs.getTimestamp(8));
-					/** 혈맹자동가입 */
+					/** 血盟自動登録 */
 					clan.setBot(rs.getString(9).equalsIgnoreCase("true"));
 					clan.setBotStyle(rs.getInt(10));
 					clan.setBotLevel(rs.getInt(11));
-					/** 혈맹자동가입 */
+					/** 血盟自動登録 */
 					clan.setOnlineMaxUser(rs.getInt(12));
 					clan.setAnnouncement(rs.getString(13));
 					clan.setEmblemId(rs.getInt(14));
@@ -267,7 +266,7 @@ public class ClanTable {
 //			player.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.CLAN_RANK_LEAGUE_PRINCE, player.getName()));
 //		} else {
 			player.setClanRank(L1Clan.군주);
-		//	player.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.군주, player.getName()));
+		//	player.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.君主、player.getName（）））;
 		//}
 		clan.addClanMember(player.getName(), player.getClanRank(), player.getLevel(), "", player.getId(), player.getType(), player.getOnlineStatus(), player);
 		try {
@@ -348,7 +347,7 @@ public class ClanTable {
 //			player.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.CLAN_RANK_LEAGUE_PRINCE, player.getName()));
 //		} else {
 			player.setClanRank(L1Clan.군주);
-		//	player.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.군주, player.getName()));
+		//	player.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.君主、player.getName（）））;
 		//}
 		clan.addClanMember(player.getName(), player.getClanRank(), player.getLevel(), "", player.getId(), player.getType(), player.getOnlineStatus(), player);
 		try {
@@ -371,10 +370,10 @@ public class ClanTable {
 			pstm.setInt(5, clan.getHouseId());
 			pstm.setInt(6, clan.getAlliance());
 			pstm.setTimestamp(7, clan.getClanBirthDay());
-			/** 혈맹자동가입 */
+			/** 血盟自動登録 */
 			pstm.setInt(8, clan.getBotStyle());
 			pstm.setInt(9, clan.getBotLevel());
-			/** 혈맹자동가입 */
+			/** 血盟自動登録 */
 			pstm.setInt(10, clan.getOnlineMaxUser());
 			pstm.setString(11, clan.getAnnouncement());
 			pstm.setInt(12, clan.getEmblemId());
@@ -392,7 +391,7 @@ public class ClanTable {
 	}
 
 	/**
-	 ** 혈맹자동가입*
+	 ** 血盟自動登録*
 	 * 
 	 * @param player
 	 * @param clan_name
@@ -440,10 +439,10 @@ public class ClanTable {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
 		}
-		/** 혈맹자동가입 */
+		/** 血盟自動登録 */
 		L1World.getInstance().storeClan(clan);
 		_clans.put(clan.getClanId(), clan);
-		/** 혈맹자동가입 */
+		/** 血盟自動登録 */
 	}
 
 	public void deleteClan(String clan_name) {
@@ -477,7 +476,7 @@ public class ClanTable {
 		return _clans.get(clan_id);
 	}
 
-	/** 혈맹자동가입 */
+	/** 血盟自動登録 */
 	public static void reload() {
 		ClanTable oldInstance = _instance;
 		_instance = new ClanTable();
@@ -495,7 +494,7 @@ public class ClanTable {
 		return null;
 	}
 
-	/** 혈맹자동가입 */
+	/** 血盟自動登録 */
 	public HashMap<Integer, L1Clan> getClanCastles() {
 		return _clancastle;
 	}
@@ -550,7 +549,7 @@ public class ClanTable {
 		return year + "/" + Month2 + "/" + date2;
 	}
 	
-	  /** 혈맹버프 **/
+	  /** 血盟バフ **/
     public void updateBlessCount(int clanid, int count) {
 		try (Connection con = L1DatabaseFactory.getInstance().getConnection();
 				PreparedStatement pstm = con.prepareStatement("UPDATE clan_data SET bless_count=? WHERE clan_id=?")) {

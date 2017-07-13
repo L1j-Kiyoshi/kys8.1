@@ -33,7 +33,7 @@ import l1j.server.server.templates.L1ShopItem;
 public class BugRaceController implements Runnable {
 	private static BugRaceController _instance;	
 
-	private static int RACE_INTERVAL = 3 * 60 * 1000;  //버경시작시간 젤앞에 숫자 1이면 1분
+	private static int RACE_INTERVAL = 3 * 60 * 1000;  //ボギョン開始時刻ゲルの前の数字1であれば1分
 
 	public static final int EXECUTE_STATUS_NONE = 0;
 	public static final int EXECUTE_STATUS_PREPARE = 1;
@@ -68,7 +68,7 @@ public class BugRaceController implements Runnable {
 	int Lucky =  0;
 	private static Random rnd = new Random(System.nanoTime());
 	
-	/** 버경 추가 **/
+	/** ボギョン追加 **/
 	private final Map<Integer, L1RaceTicket> _race = new HashMap<Integer, L1RaceTicket>();
 	private L1Item _allTemplates[] = new L1Item[9000000];
 
@@ -103,23 +103,23 @@ public class BugRaceController implements Runnable {
 			{ 26, 27, 28, 29, 30 } 
 	};
 	public String[][] BugbearName = { 
-			{ "제씨", "부르니", "버기", "큐밍", "써니" }, 
-			{ "아노그", "아리", "셔나안", "헤이얀", "코키오" }, 
-			{ "큐큐", "히도크", "히오스", "쿠오", "스누거" }, 
-			{ "이너", "범도르", "가비", "제스퍼", "플루토" }, 
-			{ "부카", "퀘니버", "그로돈", "투투", "버기" }, 
-			{ "쿤두라", "투투", "쿠마토", "두렉", "두리바" }
+			{ "デュープインパクト", "オルフェーブル", "エムコンドルパサー", "テイエヌオペラオー", "キタサンフラッグ" }, 
+			{ "キングカヌハヌハ", "グラスフンダー", "スペシャルフィーク", "サクラコーレル", "サドノダイアモンド" }, 
+			{ "シンボリクリスエヌ", "ドゥラヌンテ", "マンハッタンカフュ", "サイレンススズキ", "ヘイセイコー" }, 
+			{ "バリバリルドルフ", "オグリキァップ", "メジロナックイーン", "トーカイテイオー", "ハネダブライアン" }, 
+			{ "ウォッカ", "ジェントルドンナ", "タイキシァトル", "ワンポイント", "コールドシップ" }, 
+			{ "アグネスタキヨン", "クラスワンダー", "ジャスタウェーイ", "ロードカナエリア", "カポデテュティカピ" }
 	};
 
 	public static int[] _time = new int[5];
 	public static String _first = null;
-	//티켓 초기화
+	//チケットの初期化
 	public int[] ticket = {0,0,0,0,0};
-	//승률 초기화
+	//勝率の初期化
 	public double[] _winRate = {0,0,0,0,0};
-	//상태 초기화
-	public String[] _bugCondition = {"좋음","좋음","좋음","좋음","좋음"};
-	//배율 초기화
+	//状態の初期化
+	public String[] _bugCondition = {"良い","良い","良い","良い","良い"};
+	//倍率の初期化
 	public double _ration[] = {0,0,0,0,0};
 
 	public static BugRaceController getInstance() {
@@ -138,7 +138,7 @@ public class BugRaceController implements Runnable {
 					_executeStatus = EXECUTE_STATUS_PREPARE;
 					GeneralThreadPool.getInstance().schedule(this, 60 * 1000L);
 				} else {
-					GeneralThreadPool.getInstance().schedule(this, 1000L); // 1초
+					GeneralThreadPool.getInstance().schedule(this, 1000L); // 1秒
 				}
 
 			}
@@ -208,20 +208,20 @@ public class BugRaceController implements Runnable {
 			_first = null;
 			Lucky =  rnd.nextInt(50);
 
-			broadcastNpc("잠시 후 버그베어 경주가 시작됩니다.");
-			//토탈 판매 장수 초기화 
+			broadcastNpc("しばらくしてバグベアレースが開始されます。");
+			//トータル販売長寿の初期化 
 			initTicketCount();
-			//버그베어 경주 초기화 
+			//バグベアレースの初期化 
 			initNpc();
-			//상점 Npc초기화
+			//店Npc初期化
 			initShopNpc();
-			//버그베어 달리기 속도 지정
+			//バグベアランニング速度を指定
 			sleepTime();
-			//버그베어 초기화 및 로딩
+			//バグベアの初期化と読み込み
 			loadDog();
-			//승률 초기화
+			//勝率の初期化
 			initWinRate();
-			//게임시
+			//ゲーム時
 			doorAction(false);
 		} catch (Exception e) {
 		}
@@ -233,7 +233,7 @@ public class BugRaceController implements Runnable {
 		}
 	}
 
-	//생성된 Npc객체를 이니셜라이즈 한다.
+	//生成されたNpcオブジェクトをイニシャライズする。
 	public void initNpc(){
 		L1NpcInstance n = null;
 		for (Object obj : L1World.getInstance().getVisibleObjects(4).values()) {
@@ -267,16 +267,16 @@ public class BugRaceController implements Runnable {
 			int addValue = 0;
 
 			switch(bugState) {
-			case 0: _bugCondition[i] = "매우좋음"; addValue = -20; break;
-			case 1: _bugCondition[i] = "좋음"; addValue = -10; break;
-			case 2: _bugCondition[i] = "나쁨"; addValue = 10; break;
-			case 3: _bugCondition[i] = "매우나쁨"; addValue = 20; break;
-			default: _bugCondition[i] = "보통"; addValue = 0; break;
+			case 0: _bugCondition[i] = "よい"; addValue = -20; break;
+			case 1: _bugCondition[i] = "良い"; addValue = -10; break;
+			case 2: _bugCondition[i] = "悪"; addValue = 10; break;
+			case 3: _bugCondition[i] = "非常に悪い"; addValue = 20; break;
+			default: _bugCondition[i] = "通常"; addValue = 0; break;
 			}
 			_time[i] = 260 + addValue;
 		}
 	}
-	//승률처리 
+	//勝率処理 
 	public void initWinRate(){
 		L1Racer racer = null; 
 		for(int i=0; i<5; i++){
@@ -360,7 +360,7 @@ public class BugRaceController implements Runnable {
 
 	public void startSellTicket() {
 		LoadNpcShopList();
-		broadcastNpc("레이스표 판매를 시작하였습니다.");
+		broadcastNpc("レース切符の販売を開始しました。");
 
 		this.setBugState(0);
 
@@ -370,23 +370,23 @@ public class BugRaceController implements Runnable {
 	public long checkTicketSellTime() {
 		if (_ticketSellRemainTime == 3 * 60) {
 			_ticketSellRemainTime -= 60;
-			broadcastNpc("경기 시작 3분전!");
+			broadcastNpc("試合開始3分前！");
 			return 30 * 1000;
 		} else if (_ticketSellRemainTime == 2 * 60) { // 2
 			_ticketSellRemainTime -= 60;
-			broadcastNpc("경기 시작 2분전!");
+			broadcastNpc("試合開始2分前！");
 			return 30 * 1000;
 		} else if (_ticketSellRemainTime == 1 * 60) { // 1
 			_ticketSellRemainTime -= 60;
-			broadcastNpc("경기 시작 1분전!");
+			broadcastNpc("試合開始1分前！");
 			return 30 * 1000;
-		} else if (_ticketSellRemainTime == 1 * 30) { // 30초
+		} else if (_ticketSellRemainTime == 1 * 30) { // 30秒
 			_ticketSellRemainTime = 0;
-			broadcastNpc("30초 후 레이스표 판매가 마감됩니다.");
+			broadcastNpc("30秒後にレースの表の販売終了します。");
 			return 30 * 1000;
 		}
 		initShopNpc();
-		broadcastNpc("출발 준비!");
+		broadcastNpc("出発の準備を！");
 		SettingRate();
 		_raceWatingTime = 5;
 		return 0;
@@ -395,7 +395,7 @@ public class BugRaceController implements Runnable {
 	private boolean checkWatingTime() {
 		setBugState(1);
 		if (_raceWatingTime > 0) {
-			broadcastNpc(_raceWatingTime + "초");
+			broadcastNpc(_raceWatingTime + "超");
 			--_raceWatingTime;
 
 			return false;
@@ -406,7 +406,7 @@ public class BugRaceController implements Runnable {
 
 	private void startBugRace() {
 		
-		broadcastNpc("출발!");
+		broadcastNpc("出発！");
 		doorAction(true);
 
 		StartGame();
@@ -420,7 +420,7 @@ public class BugRaceController implements Runnable {
 		}
 
 		if (_currentBroadcastRacer == 0) {
-			broadcastNpc("배팅 배율을 발표하겠습니다.");
+			broadcastNpc("バッティング倍率を発表いたします。");
 		}
 
 		broadcastNpc(_littleBugBear[_currentBroadcastRacer].getNameId() + ": " + _ration[_currentBroadcastRacer] + " ");
@@ -472,12 +472,12 @@ public class BugRaceController implements Runnable {
 		PreparedStatement statement = null;
 		try{
 			con = L1DatabaseFactory.getInstance().getConnection();
-			statement = con.prepareStatement("UPDATE util_racer SET 승리횟수=?, 패횟수=? WHERE 레이서번호=" + num);
+			statement = con.prepareStatement("UPDATE util_racer SET勝利回数= ?,敗回数=？ WHEREレーサー番号=" + num);
 			statement.setInt(1, racer.getWinCount());
 			statement.setInt(2, racer.getLoseCount());
 			statement.execute();
 		}catch(SQLException e){
-			System.out.println("[::::::] SaveAllRacer 메소드 에러 발생");
+			System.out.println("【::::::] SaveAllRacerメソッドエラーが発生");
 		}finally{
 			if(statement != null){try{statement.close();}catch(Exception e){}};
 			if(con != null){try{con.close();}catch(Exception e){}};
@@ -485,13 +485,13 @@ public class BugRaceController implements Runnable {
 	}
 
 	public void SetWinRaceTicketPrice(int id,double rate) {
-		L1ShopItem newItem = new L1ShopItem(id, (int)(450 * rate), 1);//승리표 판매 리스트 // 레이스표 매입
+		L1ShopItem newItem = new L1ShopItem(id, (int)(450 * rate), 1);//勝利切符の販売リスト//レース表買い取り
 		_purchasingList.add(newItem);
 		initShopNpc();
 	}
 	
 	public void SetLoseRaceTicketPrice(int id,double rate) {
-		L1ShopItem newItem = new L1ShopItem(id, 0, 1);//승리표 판매 리스트 // 레이스표 매입
+		L1ShopItem newItem = new L1ShopItem(id, 0, 1);//勝利切符の販売リスト//レース表買い取り
 		_purchasingList.add(newItem);
 		initShopNpc();
 	}
@@ -503,8 +503,8 @@ public class BugRaceController implements Runnable {
 			for(int i=0; i < 5; i++){
 				//ticket[i] = 8000000 + ItemTable.getInstance().GetIssuedTicket() + 1;
 				ticket[i] = 8000000 + GetIssuedTicket() + 1;
-				SaveRace(ticket[i], "레이스표 #" + _littleBugBear[i].getNameId() + "-" + (i+1));
-				L1ShopItem item = new L1ShopItem(ticket[i], 500, 1);//판매 리스트
+				SaveRace(ticket[i], "レース表＃" + _littleBugBear[i].getNameId() + "-" + (i+1));
+				L1ShopItem item = new L1ShopItem(ticket[i], 500, 1);//販売リスト
 				sellingList.add(item);
 				this._ticketId[i] = ticket[i];
 			}
@@ -525,8 +525,8 @@ public class BugRaceController implements Runnable {
 			List<L1ShopItem> sellingList = new ArrayList<L1ShopItem>();
 
 			for(int i=0; i < 5; i++){
-				SaveRace(ticket[i], "레이스표 #" + _littleBugBear[i].getNameId() + "-" + (i+1));
-				L1ShopItem item = new L1ShopItem(ticket[i], 500, 1);//판매 리스트
+				SaveRace(ticket[i], "レース表＃" + _littleBugBear[i].getNameId() + "-" + (i+1));
+				L1ShopItem item = new L1ShopItem(ticket[i], 500, 1);//販売リスト
 				sellingList.add(item);
 				this._ticketId[i] = ticket[i];
 			}
@@ -574,7 +574,7 @@ public class BugRaceController implements Runnable {
 				_first = _littleBugBear[i].getName();
 				SetWinRaceTicketPrice(ticket[i], _ration[i]);
 				AddWinCount(i);
-				우승자멘트("제 "+ _raceCount + " 회 우승자는 '" +_littleBugBear[i].getNameId() + "' 입니다.");
+				우승자멘트("第"+ _raceCount + "会の勝者は、" +_littleBugBear[i].getNameId() + "です。");
 			} else {
 				SetLoseRaceTicketPrice(ticket[i], _ration[i]);
 				AddLoseCount(i);
@@ -595,7 +595,7 @@ public class BugRaceController implements Runnable {
 		_littleBugBear[4].deleteMe();
 		_raceCount = _raceCount + 1;
 		setBugState(2);
-		broadcastNpc("다음 경기를 준비중입니다.");
+		broadcastNpc("次の試合を準備中です。");
 	}
 
 	public void BroadcastAllUser(String text) {
@@ -787,7 +787,7 @@ public class BugRaceController implements Runnable {
 		this._raceCount = cnt;
 	}
 	
-	/*버경 추가*/
+	/*ボギョン追加*/
 	public void AddTicket(L1RaceTicket race){
 		_race.put(new Integer(race.getItemId()), race);
 		ItemTable.getInstance().getAllTemplates()[race.getItemId()] = race;

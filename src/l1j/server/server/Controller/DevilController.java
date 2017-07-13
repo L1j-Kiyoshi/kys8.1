@@ -1,8 +1,8 @@
 package l1j.server.server.Controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.text.SimpleDateFormat;
 
 import l1j.server.Config;
 import l1j.server.server.datatables.DoorSpawnTable;
@@ -31,11 +31,11 @@ public class DevilController extends Thread {
 
 	private static long sTime = 0;
 
-	public boolean isGmOpen = false; // 추가
+	public boolean isGmOpen = false; // 追加
 
 	private String NowTime = "";
 
-	// 시간 간격
+	//時間間隔
 	private static final int LOOP = Config.구라던오픈주기;;
 
 	private static final SimpleDateFormat s = new SimpleDateFormat("HH",
@@ -56,7 +56,7 @@ public class DevilController extends Thread {
 		try {
 			while (true) {
 				Thread.sleep(1000);
-				/** 오픈 * */
+				/** オープン * */
 				if (!isOpen() && !isGmOpen)
 					continue;
 				if (L1World.getInstance().getAllPlayers().size() <= 0)
@@ -64,7 +64,7 @@ public class DevilController extends Thread {
 
 				isGmOpen = false;
 
-				/** 오픈 메세지 * */
+				/** オープンメッセージ * */
 				L1SpawnUtil.spawn2(33430, 32802, (short) 4, 200001, 0, 3600 * 1000, 0);
 				L1SpawnUtil.spawn2(33430, 32802, (short) 4, 199997, 0, 3600 * 1000, 0);
 		//		L1SpawnUtil.spawn2(33430, 32802, (short) 4, 777854, 0, 3600 * 1000, 0);	
@@ -87,25 +87,25 @@ public class DevilController extends Thread {
 				reset(533, 4064);
 				reset(533, 4065);
 				reset(534, 4066);*/
-				//UserRankingController.isRenewal = true; //랭킹갱신 3시간에 한번
+				//UserRankingController.isRenewal = true; //ランキング更新3時間に一回
 				L1World.getInstance().broadcastPacketToAll(
-						new S_SystemMessage("\\aG구 라스타바드던전 4층 이동포탈이 생성되었습니다."));
-				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\f3구 라스타바드던전 4층 이동포탈이 생성되었습니다."));
-				/** 악마왕영토 시작* */
+						new S_SystemMessage("\\aG旧ラスタバドのダンジョン4階に移動ポータルが作成されました。"));
+				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\f3旧ラスタバドのダンジョン4階に移動ポータルが作成されました。"));
+				/** 悪魔王の領土を開始* */
 				setDevilStart(true);
 
-				/** 실행 1시간 시작* */
+				/** 実行1時間開始* */
 				
 				
-				Thread.sleep(3600000L); // 3600000L 1시간 10분정도
+				Thread.sleep(3600000L); // 3600000L 1時間10分程度
 
-				/** 1시간 후 자동 텔레포트* */
+				/** 1時間後に自動テレポート* */
 				TelePort();
-				close(); //추가
+				close(); //追加
 				Thread.sleep(5000L);
 				TelePort2();
 
-				/** 종료 * */
+				/** 終了 * */
 				End();
 			}
 
@@ -115,9 +115,9 @@ public class DevilController extends Thread {
 	}
 
 	/**
-	 * 오픈 시각을 가져온다
+	 * オープン時刻を持って来る
 	 * 
-	 * @return (Strind) 오픈 시각(MM-dd HH:mm)
+	 * @return (Strind）オープン時刻（MM-dd HH：mm）
 	 */
 	public String OpenTime() {
 		Calendar c = Calendar.getInstance();
@@ -126,9 +126,9 @@ public class DevilController extends Thread {
 	}
 
 	/**
-	 * 영토가 열려있는지 확인
+	 * 領土が開いていることを確認
 	 * 
-	 * @return (boolean) 열려있다면 true 닫혀있다면 false
+	 * @return (boolean) 開いている場合true閉じている場合false
 	 */
 	private boolean isOpen() {
 		NowTime = getTime();
@@ -138,15 +138,15 @@ public class DevilController extends Thread {
 	}
 
 	/**
-	 * 실제 현재시각을 가져온다
+	 * 実際、現在時刻を持って来る
 	 * 
-	 * @return (String) 현재 시각(HH:mm)
+	 * @return (String) 現在時刻（HH：mm）
 	 */
 	private String getTime() {
 		return s.format(Calendar.getInstance().getTime());
 	}
 
-	/** 아덴마을로 팅기게* */
+	/** アデン村にティンギが* */
 	private void TelePort() {
 		for (L1PcInstance c : L1World.getInstance().getAllPlayers()) {
 			switch (c.getMap().getId()) {
@@ -161,15 +161,15 @@ public class DevilController extends Thread {
 				c.stopMpRegenerationByDoll();
 				new L1Teleport().teleport(c, 33437, 32799, (short) 4, 4, true);
 				L1World.getInstance().broadcastPacketToAll(
-						new S_SystemMessage("\\aG구 라스타바드던전 4층 이동포탈이 소멸되었습니다."));
-				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\f3구 라스타바드던전 4층 이동포탈이 소멸되었습니다."));
+						new S_SystemMessage("\\aG旧ラスタバドのダンジョン4階に移動ポータルが消滅しました。"));
+				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\f3旧ラスタバドのダンジョン4階に移動ポータルが消滅しました。"));
 				break;
 			default:
 				break;
 			}
 		}
 	}
-	/**캐릭터가 죽었다면 종료시키기**/
+	/**キャラクターが死亡した場合、終了させる**/
 	 private void close() {
 	  for(L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 	   if ((pc.getMap().getId() >= 530 && pc.getMap().getId() <= 536) && pc.isDead()) {
@@ -180,7 +180,7 @@ public class DevilController extends Thread {
 	  }
 	 }
 
-	/** 아덴마을로 팅기게* */
+	/** アデン村にティンギが* */
 	private void TelePort2() {
 		for (L1PcInstance c : L1World.getInstance().getAllPlayers()) {
 			switch (c.getMap().getId()) {
@@ -205,13 +205,13 @@ public class DevilController extends Thread {
 		if(relatedDoor == 0) return;
 		L1DoorInstance door = DoorSpawnTable.getInstance().getDoor(relatedDoor);
 		if(door != null) {
-			door.setDead(false); // 있으나 마나?
+			door.setDead(false); // が、マナ？
 			door.close();
 		}
 	}
-	/** 종료 * */
+	/** 終了 * */
 	private void End() {
-		L1World.getInstance().broadcastServerMessage("구 라스타바드던전 4층 이동포탈이 소멸되었습니다.");
+		L1World.getInstance().broadcastServerMessage("旧ラスタバドのダンジョン4階に移動ポータルが消滅しました。");
 		setDevilStart(false);
 		reset(530, 4058);
 		reset(531, 4059);

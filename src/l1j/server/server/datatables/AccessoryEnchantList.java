@@ -51,10 +51,10 @@ public class AccessoryEnchantList {
 
 /*	private AccessoryEnchantList() {
 		PerformanceTimer timer = new PerformanceTimer();
-		System.out.print("【악세인첸트】  ");		
+		System.out.print("【アクセエンチャント】 "）;		
 		weaponEnchantList();
-		//조우서버 CMD창 변형
-		System.out.println("불러오기 성공 " + timer.get() + "ms");				
+		//遭遇サーバCMDウィンドウ変形
+		System.out.println("インポート成功」+ timer.get（）+ "ms"）;				
 	}*/
 
 	public void weaponEnchantList() {

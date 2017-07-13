@@ -13,12 +13,12 @@ public class IsleController implements Runnable {
     private static IsleController _instance;
     
 
-    /** 게임오픈유무 **/
+    /** ゲームオープンの有無 **/
     public boolean isgameStart = false;
 
-    /** 게임상태 **/
-    public int Status = 0;//진행 상태
-    private final int 대기 = 0;//진행
+    /** ゲームの状態 **/
+    public int Status = 0;//進行状況
+    private final int 대기 = 0;//進行
     private final int 오픈 = 1;
     private final int 진행 = 2;
     private final int 종료 = 3;//
@@ -36,35 +36,35 @@ public class IsleController implements Runnable {
             while (true) {
                 switch (Status) {
                 case 대기:
-                    Thread.sleep(10000);//10초마다 현재오픈된상태인지체크
-                    /** 오픈이 아니면 진행 **/
-                    if (isgameStart == false) {//오픈아니면 다시되돌려보냄
-                        continue;//되돌리기 
+                    Thread.sleep(10000);//10秒ごとに現在オープンされた状態であるかをチェック
+                    /** オープンでなければ進行 **/
+                    if (isgameStart == false) {//オープンまたは再戻し送信
+                        continue;//元に戻す 
                     }
                     Status = 오픈;
-                    L1World.getInstance().broadcastServerMessage("\\aH알림: 잠시후 [잊혀진 섬] 입장이 가능합니다.");
+                    L1World.getInstance().broadcastServerMessage("\\aH通知：しばらくして、[忘れられた島]入場が可能です。");
                     continue;
                 case 오픈:
-                	L1World.getInstance().broadcastServerMessage("\\aH알림: 잊혀진 섬 1시간 사냥가능하오니, 조심하시오.");
-    				L1World.getInstance().broadcastServerMessage("\\aH알림: 시간이 되면 강제귀환 됩니다.");
-                	System.out.println("...... 잊혀진섬 열림");
+                	L1World.getInstance().broadcastServerMessage("\\aH通知：忘れられた島1時間狩り可能ので、注意してください。");
+    				L1World.getInstance().broadcastServerMessage("\\aH通知：時間になると、強制的に帰還されます。");
+                	System.out.println("......忘れられた島開");
                 	Status = 진행;
                     continue;
                 case 진행:
                    
-                	/** 실행 1시간 시작 **/
-                	Thread.sleep(3800000L);  // 3800000L 1시간 10분정도
-    				/** 1시간 후 자동 텔레포트 **/
+                	/** 実行1時間開始**/
+                	Thread.sleep(3800000L);  // 3800000L 1時間10分程度
+    				/** 1時間後に自動テレポート **/
     				TelePort();
-    				close(); //추가
+    				close(); //追加
     				Thread.sleep(5000L);
     				TelePort2();
                     Status = 종료;
                     continue;
                 case 종료:
-                	//L1World.getInstance().broadcastServerMessage("\\aG지옥사냥터는 2시간동안 사냥가능합니다.");
-                	L1World.getInstance().broadcastServerMessage("\\aH알림: 잊혀진섬이 종료되었습니다.");
-                	System.out.println("...... 잊섬 종료됨");
+                	//L1World.getInstance（）broadcastServerMessage（ "\\\\ aG地獄狩り場は2時間狩りが可能です。"）;
+                	L1World.getInstance().broadcastServerMessage("\\aH通知：忘れられた島が終了しました。");
+                	System.out.println("......イッソム終了");
                     isgameStart = false;
                     Status = 대기;
             		//delenpc(1231231);
@@ -86,14 +86,14 @@ public class IsleController implements Runnable {
 				c.stopHpRegenerationByDoll();
 				c.stopMpRegenerationByDoll();
 				new L1Teleport().teleport(c, 33970, 33246, (short) 4, 4, true);
-				c.sendPackets(new S_SystemMessage("잊혀진섬이 닫혔습니다."));
+				c.sendPackets(new S_SystemMessage("忘れられた島が閉じられました。"));
 				break;
 			default:
 				break;
 			}
 		}
 	}
-	/**캐릭터가 죽었다면 종료시키기**/
+	/**キャラクターが死亡した場合、終了させる**/
 	 private void close() {
 	  for(L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 	   if (pc.getMap().getId() >= 1700 && pc.getMap().getId() <= 1703 && pc.isDead()) {
@@ -104,7 +104,7 @@ public class IsleController implements Runnable {
 	  }
 	 }
 
-	/** 아덴마을로 팅기게* */
+	/** アデン村にティンギが**/
 	private void TelePort2() {
 		for (L1PcInstance c : L1World.getInstance().getAllPlayers()) {
 			switch (c.getMap().getId()) {
@@ -113,7 +113,7 @@ public class IsleController implements Runnable {
 				c.stopHpRegenerationByDoll();
 				c.stopMpRegenerationByDoll();
 				new L1Teleport().teleport(c, 33430, 32797, (short) 4, 4, true);
-				c.sendPackets(new S_SystemMessage("잊혀진섬이 닫혔습니다."));
+				c.sendPackets(new S_SystemMessage("忘れられた島が閉じられました。"));
 				break;
 			default:
 				break;

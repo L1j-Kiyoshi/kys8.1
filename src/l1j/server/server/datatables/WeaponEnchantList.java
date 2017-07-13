@@ -51,9 +51,9 @@ public class WeaponEnchantList {
 
 	/*private WeaponEnchantList() {
 		PerformanceTimer timer = new PerformanceTimer();
-		System.out.print("■ 무기인첸트 데이터 .......................... ");
+		System.out.print("■ 武器エンチャントデータ.......................... "）;
 		weaponEnchantList();
-		System.out.println("■ 로딩 정상 완료 " + timer.get() + " ms");
+		System.out.println("■ ロード正常終了」+ timer.get（）+ "ms"）;
 	}*/
 
 	public void weaponEnchantList() {

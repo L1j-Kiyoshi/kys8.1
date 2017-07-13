@@ -148,7 +148,7 @@ public class MonsterBookTable {
 			int mon = mbl._monlist.get(num);
 			if(mon > 100000) mon = 100000;
 			mbl._monlist.put(num, mon += 1);
-		} else { //최초등록.
+		} else { //最初の登録。
 			mbl._monlist.put(num, 1); 			
 		}
 	}
@@ -226,7 +226,7 @@ public class MonsterBookTable {
 				}
 				_monsterBookLists.put(id, mbl);			
 			}
-//			System.out.println("【MonsterBook List Data】  " + _monsterBookLists.size() + " 개 loanding... OK!");
+//			System.out.println("【MonsterBook List Data】  " + _monsterBookLists.size() + " 本loanding ... OK！ "）;
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		}

@@ -51,9 +51,9 @@ public class ArmorEnchantList {
 
 /*	private ArmorEnchantList() {
 		PerformanceTimer timer = new PerformanceTimer();
-		System.out.print("■ 방어인첸트 데이터 .......................... ");		
+		System.out.print("■防御エンチャントデータ.......................... "）;		
 		armorEnchantList();
-		System.out.println("■ 로딩 정상 완료 " + timer.get() + " ms");			
+		System.out.println("■ロード正常終了」+ timer.get（）+ "ms"）;			
 	}*/
 
 	public void armorEnchantList() {

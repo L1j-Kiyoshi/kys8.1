@@ -30,7 +30,6 @@ import java.util.logging.Logger;
 import l1j.server.Config;
 import l1j.server.L1DatabaseFactory;
 import l1j.server.server.model.L1Spawn;
-import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.templates.L1Npc;
 import l1j.server.server.utils.NumberUtil;
@@ -48,7 +47,7 @@ public class SpawnTable {
 	
 	private boolean isReload = false;
 	
-	public static boolean 몹다운 = false;
+	public static boolean isMonsterDown = false;
 	
 
 	public static SpawnTable getInstance() {
@@ -60,11 +59,11 @@ public class SpawnTable {
 
 	private SpawnTable() {
 //		PerformanceTimer timer = new PerformanceTimer();
-//		System.out.print("■ 클래스추타 데이터 .......................... ");
+//		System.out.print("■ クラスツタデータ.......................... "）;
 		fillSpawnTable();
 		
-//		_log.config("배치 리스트 " + _spawntable.size() + "건 로드");
-//		System.out.println("■ 로딩 정상 완료 " + timer.get() + " ms");
+//		_log.config("バッチリスト」+ _spawntable.size（）+ "はロード"）;
+//		System.out.println("■ ロード正常終了」+ timer.get（）+ "ms"）;
 	}
 	
 	public static void reload() {
@@ -107,106 +106,106 @@ public class SpawnTable {
 						continue;
 					}
 				}
-				if (몹다운 == true){
-					if (npcTemplateId ==	7210037		//자이언트크토커타일					
-							||	npcTemplateId ==	45456	//네크로맨서
-							||	npcTemplateId ==	45458	//드레이크의 영혼
-							||	npcTemplateId ==	45488	//카스파
-							||	npcTemplateId ==	45534	//맘보 토끼
-							||	npcTemplateId ==	7210023	//이프리트
-							||	npcTemplateId ==	45529	//거대 드레이크
-							||	npcTemplateId ==	45535	//맘보 킹
-							||	npcTemplateId ==	45545	//흑장로
-							||	npcTemplateId ==	45546	//도펠갱어
-							||	npcTemplateId ==	45573	//바포메트
-							||	npcTemplateId ==	45583	//베레스
-							||	npcTemplateId ==	45584	//그레이트 미노타우르스
-							||	npcTemplateId ==	45600	//커츠
-							||	npcTemplateId ==	45601	//데스나이트
-							||	npcTemplateId ==	45609	//얼음 여왕
-							||	npcTemplateId ==	45610	//모닝스타
-							||	npcTemplateId ==	45614	//거대 여왕 개미(미사용)
-							||	npcTemplateId ==	45617	//피닉스(구형)
-							||	npcTemplateId ==	45625	//혼돈
-							||	npcTemplateId ==	45640	//유니콘
-							||	npcTemplateId ==	45642	//땅의 대정령
-							||	npcTemplateId ==	45643	//물의 대정령
-							||	npcTemplateId ==	45644	//바람의 대정령
-							||	npcTemplateId ==	45645	//불의 대정령
-							||	npcTemplateId ==	45646	//정령 감시자
-							||	npcTemplateId ==	45649	//데몬
-							||	npcTemplateId ==	45651	//마수군왕 바란카
-							||	npcTemplateId ==	45671	//아리오크
-							||	npcTemplateId ==	45674	//죽음
-							||	npcTemplateId ==	45675	//야히
-							||	npcTemplateId ==	45680	//켄 라우헬
-							||	npcTemplateId ==	45681	//린드비오르(구형)
-							||	npcTemplateId ==	45684	//발라카스(구형)
-							||	npcTemplateId ==	45685	//타락
-							||	npcTemplateId ==	45734	//대왕 오징어
-							||	npcTemplateId ==	45735	//우두머리 반어인
-							||	npcTemplateId ==	45752	//발록
+				if (isMonsterDown == true){
+					if (npcTemplateId ==	7210037		//ジャイアントサイズトーカタイル					
+							||	npcTemplateId ==	45456	//ネクロマンサー
+							||	npcTemplateId ==	45458	//ドレイクの魂
+							||	npcTemplateId ==	45488	//カスパー
+							||	npcTemplateId ==	45534	//マンボラビット
+							||	npcTemplateId ==	7210023	//イフリート
+							||	npcTemplateId ==	45529	//巨大ドレイク
+							||	npcTemplateId ==	45535	//マンボキング
+							||	npcTemplateId ==	45545	//ブラックエルダー
+							||	npcTemplateId ==	45546	//ドッペルゲンガー
+							||	npcTemplateId ==	45573	//バフォメット
+							||	npcTemplateId ==	45583	//ベレス
+							||	npcTemplateId ==	45584	//グレートミノタウルス
+							||	npcTemplateId ==	45600	//カーツ
+							||	npcTemplateId ==	45601	//デスナイト
+							||	npcTemplateId ==	45609	//アイスクイーン
+							||	npcTemplateId ==	45610	//モーニングスター
+							||	npcTemplateId ==	45614	//ジャイアントアントクイーン（未使用）
+							||	npcTemplateId ==	45617	//フェニックス（旧型）
+							||	npcTemplateId ==	45625	//混沌
+							||	npcTemplateId ==	45640	//ユニコーン
+							||	npcTemplateId ==	45642	//土地の大精霊
+							||	npcTemplateId ==	45643	//水の大精霊
+							||	npcTemplateId ==	45644	//風の大精霊
+							||	npcTemplateId ==	45645	//火の大精霊
+							||	npcTemplateId ==	45646	//精霊のモニター
+							||	npcTemplateId ==	45649	//デーモン
+							||	npcTemplateId ==	45651	//魔獣軍王バランカ
+							||	npcTemplateId ==	45671	//アリオーク
+							||	npcTemplateId ==	45674	//死
+							||	npcTemplateId ==	45675	//ヤヒ
+							||	npcTemplateId ==	45680	//ケンラウヘル
+							||	npcTemplateId ==	45681	//リンドビオル（旧型）
+							||	npcTemplateId ==	45684	//ヴァラカス（旧型）
+							||	npcTemplateId ==	45685	//堕落
+							||	npcTemplateId ==	45734	//大王イカ
+							||	npcTemplateId ==	45735	//ヘッダー皮肉な
+							||	npcTemplateId ==	45752	//バルログ
 							||  npcTemplateId ==   45753	
-							||	npcTemplateId ==	45772	//오염된 오크 투사
-							||	npcTemplateId ==	45795	//스피리드
-							||	npcTemplateId ==	45801	//마이노 샤먼의 다이아몬드 골렘
-							||	npcTemplateId ==	45802	//테스트
-							||	npcTemplateId ==	45829	//발바도스
-							||	npcTemplateId ==	45548	//호세
-							||	npcTemplateId ==	46024	//백작 친위대장
-							||	npcTemplateId ==	46025	//타로스 백작
-							||	npcTemplateId ==	46026	//맘몬
-							||	npcTemplateId ==	46037	//흑마법사 마야
-							||	npcTemplateId ==	45935	//저주받은 메두사
-							||	npcTemplateId ==	45942	//저주해진 물의 대정령
-							||	npcTemplateId ==	45941	//저주받은 무녀 사엘
-							||	npcTemplateId ==	45931	//물의 정령
-							||	npcTemplateId ==	45943	//카푸
-							||	npcTemplateId ==	45944	//자이언트 웜
-							||	npcTemplateId ==	45492	//쿠만
-							||	npcTemplateId ==	4037000	//산적 두목 클라인
-							||	npcTemplateId ==	81163	//기르타스
-							||	npcTemplateId ==	45513	//왜곡의 제니스 퀸
-							||	npcTemplateId ==	45547	//불신의 시어
-							||	npcTemplateId ==	45606	//공포의 뱀파이어
-							||	npcTemplateId ==	45650	//죽음의 좀비로드
-							||	npcTemplateId ==	45652	//지옥의 쿠거
-							||	npcTemplateId ==	45653	//불사의 머미로드
-							||	npcTemplateId ==	45654	//냉혹한 아이리스
-							||	npcTemplateId ==	45618	//어둠의 나이트발드
-							||	npcTemplateId ==	45672	//불멸의 리치
-							||	npcTemplateId ==	45673	//그림 리퍼
-							||	npcTemplateId ==	5134	//리칸트
-							||	npcTemplateId ==	5146	//큰발의마요
-							||	npcTemplateId ==	5046	//케팔레
-							||	npcTemplateId ==	5019	//질풍의 샤스키
-							||	npcTemplateId ==	5020	//광풍의 샤스키
-							||	npcTemplateId ==	5047	//아르피어
-							||	npcTemplateId ==	7000098	//버모스
-							||	npcTemplateId ==	707026	//에이션트 가디언
-							||	npcTemplateId ==	707037	//타이탄 골렘
-							||	npcTemplateId ==	707023	//하피 퀸
-							||	npcTemplateId ==	707024	//코카트리스 킹
-							||	npcTemplateId ==	707025	//오우거 킹
-							||	npcTemplateId ==	707022	//그레이트 미노타우르스
-							||	npcTemplateId ==	707017	//드레이크 킹
-							||  npcTemplateId == 	5048	//네크로스
-							||  npcTemplateId == 	5135	//샌드윔
-							||  npcTemplateId == 	5136	//에르자베
-							||  npcTemplateId == 	7210022	//피닉스
-							||	npcTemplateId ==	76021	//키메라이드
-							||	npcTemplateId == 	7310015 // 왜곡의 제니스퀸
-							||	npcTemplateId == 	7310021 // 불신의 시어
-							||	npcTemplateId == 	7310028 // 공포의 뱀파이어
-							||	npcTemplateId == 	7310034 // 죽음의좀비로드
-							||	npcTemplateId ==	7310041 // 지옥의 쿠거
-							||	npcTemplateId == 	7310046 // 불사의 머미로드
-							||	npcTemplateId == 	7310051 // 잔혹한 아이리스
-							||	npcTemplateId == 	7310056 // 어둠의 나이트 발드
-							||	npcTemplateId == 	7310061 // 불멸의 리치
-							||	npcTemplateId == 	7310066 // 오만한 우그느스
-							||	npcTemplateId == 	7310077 // 그림리퍼
-							||	npcTemplateId == 	45752){ //발록) {
+							||	npcTemplateId ==	45772	//汚れたオークウォリアー
+							||	npcTemplateId ==	45795	//スピリッド
+							||	npcTemplateId ==	45801	//マイノシャーマンのダイヤモンドゴーレム
+							||	npcTemplateId ==	45802	//テスト
+							||	npcTemplateId ==	45829	//バルバドス
+							||	npcTemplateId ==	45548	//ホセ
+							||	npcTemplateId ==	46024	//伯爵親衛隊長
+							||	npcTemplateId ==	46025	//タロス伯爵
+							||	npcTemplateId ==	46026	//マンモン
+							||	npcTemplateId ==	46037	//黒魔術師マヤ
+							||	npcTemplateId ==	45935	//呪われたメデューサ
+							||	npcTemplateId ==	45942	//呪われた水の大精霊
+							||	npcTemplateId ==	45941	//呪われた巫女サエル
+							||	npcTemplateId ==	45931	//水の精霊
+							||	npcTemplateId ==	45943	//カプ
+							||	npcTemplateId ==	45944	//ジャイアントワーム
+							||	npcTemplateId ==	45492	//クーマン
+							||	npcTemplateId ==	4037000	//バンデットボスクライン
+							||	npcTemplateId ==	81163	//ギルタス
+							||	npcTemplateId ==	45513	//歪みのゼニスクイーン
+							||	npcTemplateId ==	45547	//不信のシアー
+							||	npcTemplateId ==	45606	//恐怖の吸血鬼
+							||	npcTemplateId ==	45650	//死のゾンビロード
+							||	npcTemplateId ==	45652	//地獄のクーガー
+							||	npcTemplateId ==	45653	//不死のマミーロード
+							||	npcTemplateId ==	45654	//冷酷なアイリス
+							||	npcTemplateId ==	45618	//闇のナイトバルド
+							||	npcTemplateId ==	45672	//不滅のリッチ
+							||	npcTemplateId ==	45673	//グリムリーパー
+							||	npcTemplateId ==	5134	//リーカント
+							||	npcTemplateId ==	5146	//大きな足のマヨ
+							||	npcTemplateId ==	5046	//けパレ
+							||	npcTemplateId ==	5019	//疾風のシャースキー
+							||	npcTemplateId ==	5020	//嵐のシャースキー
+							||	npcTemplateId ==	5047	//アールピア
+							||	npcTemplateId ==	7000098	//バーモス
+							||	npcTemplateId ==	707026	//エンシェントガーディアン
+							||	npcTemplateId ==	707037	//タイタンゴーレム
+							||	npcTemplateId ==	707023	//ハーピークイーン
+							||	npcTemplateId ==	707024	//コカトリスキング
+							||	npcTemplateId ==	707025	//オーガキング
+							||	npcTemplateId ==	707022	//グレートミノタウルス
+							||	npcTemplateId ==	707017	//ドレイクキング
+							||  npcTemplateId == 	5048	//ネクロス
+							||  npcTemplateId == 	5135	//サンドワーム
+							||  npcTemplateId == 	5136	//エルジャベ
+							||  npcTemplateId == 	7210022	//フェニックス
+							||	npcTemplateId ==	76021	//キメラグレード
+							||	npcTemplateId == 	7310015 //歪みのゼニスクイーン
+							||	npcTemplateId == 	7310021 //不信のシアー
+							||	npcTemplateId == 	7310028 // 恐怖の吸血鬼
+							||	npcTemplateId == 	7310034 //死のゾンビロード
+							||	npcTemplateId ==	7310041 //地獄のクーガー
+							||	npcTemplateId == 	7310046 //不死のマミーロード
+							||	npcTemplateId == 	7310051 //残酷なアイリス
+							||	npcTemplateId == 	7310056 //闇のナイトバルド
+							||	npcTemplateId == 	7310061 //不滅のリッチ
+							||	npcTemplateId == 	7310066 //傲慢なオグヌス
+							||	npcTemplateId == 	7310077 //グリムリーパー
+							||	npcTemplateId == 	45752){ //バルログ
 						continue;
 					}
 				}
@@ -257,8 +256,8 @@ public class SpawnTable {
 					}
 					
 					if (count > 1 && spawnDat.getLocX1() == 0) {
-						// 복수 또한 고정 spawn의 경우는, 개체수 * 6 의 범위 spawn로 바꾼다.
-						// 다만 범위가 30을 넘지 않게 한다
+						// 複数また、固定spawnの場合は、個体数* 6の範囲spawnに変える。
+						//ただし範囲が30を超えないようにする
 						int range = Math.min(count * 6, 30);
 						spawnDat.setLocX1(spawnDat.getLocX() - range);
 						spawnDat.setLocY1(spawnDat.getLocY() - range);
@@ -287,7 +286,7 @@ public class SpawnTable {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
 		}
-		_log.fine("총monster수 " + spawnCount + "마리");
+		_log.fine("総monster数" + spawnCount + "マリー");
 	}
 
 	public L1Spawn getTemplate(int Id) {

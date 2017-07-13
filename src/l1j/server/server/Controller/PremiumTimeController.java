@@ -1,21 +1,14 @@
 package l1j.server.server.Controller;
 
-import static l1j.server.server.model.skill.L1SkillId.ANTA_BUFF;
-import static l1j.server.server.model.skill.L1SkillId.FAFU_BUFF;
-import static l1j.server.server.model.skill.L1SkillId.RIND_BUFF;
-import static l1j.server.server.model.skill.L1SkillId.VALA_BUFF;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.TimeZone;
-import java.util.Collection;
 
 import l1j.server.Config;
 import l1j.server.GameSystem.AttendanceController;
 import l1j.server.GameSystem.Robot.L1RobotInstance;
 import l1j.server.server.Opcodes;
-
 import l1j.server.server.datatables.SpamTable;
 import l1j.server.server.model.L1AccountAttendance;
 import l1j.server.server.model.L1Clan;
@@ -25,7 +18,6 @@ import l1j.server.server.model.Instance.L1DollInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_ACTION_UI;
 import l1j.server.server.serverpackets.S_Attendance;
-
 import l1j.server.server.serverpackets.S_ChatPacket;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_Restart;
@@ -34,7 +26,7 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class PremiumTimeController implements Runnable {
 
-	public static final int SLEEP_TIME = Config.FEATHER_TIME * 60000; // 원본 600초 
+	public static final int SLEEP_TIME = Config.FEATHER_TIME * 60000; // ソース600秒 
 
 	private static PremiumTimeController _instance;
 
@@ -78,8 +70,8 @@ public class PremiumTimeController implements Runnable {
 				continue;
 			}
 			if (pc.PCRoom_Buff_Delete) {
-				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"[PC방 상품 종료 안내] PC방 이용 시간이 종료되어 강제 리스타트가 진행됩니다. "));
-				pc.sendPackets(new S_SystemMessage("[PC방 상품 종료 안내] 리스타트를 진행하지 않아도 혜택은 받을수 없습니다."));
+				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"【PC部屋の商品終了案内] PC部屋利用時間が終了して強制的にリスタートが行われます。"));
+				pc.sendPackets(new S_SystemMessage("【PC部屋の商品終了案内]リスタートを進めていなくてもメリットはできません。"));
 				pc.sendPackets(new S_Restart(pc.getId(), 1),true);
 			}
 			
@@ -98,18 +90,18 @@ public class PremiumTimeController implements Runnable {
 						if (d == 0) {
 							if (h > 0) {
 								if (h == 1 && m == 0) {
-									pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"[PC방 이용 시간] " + h + "시간 " + m + "분 " + sc+ "초 남았습니다."));
+									pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"【PC部屋利用時間】" + h + "時間 " + m + "分" + sc+ "秒残りました。"));
 								}
 							} else {
 								if (m == 30) {
-									pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"[PC방 이용 시간] " + m + "분 " + sc + "초 남았습니다."));
-									pc.sendPackets(new S_SystemMessage("[PC방 상품 종료 안내] 이용 시간 소진시 강제 리스타트가 진행 됩니다."));
+									pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"【PC部屋利用時間】" + m + "分" + sc + "秒残りました。"));
+									pc.sendPackets(new S_SystemMessage("【PC部屋の商品終了案内]利用時間排出時に強制リスタートが行われます。"));
 								} else if (m == 20) {
-									pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[PC방 이용 시간] " + m + "분 " + sc + "초 남았습니다."));
-									pc.sendPackets(new S_SystemMessage("[PC방 상품 종료 안내] 이용 시간 소진시 강제 리스타트가 진행 됩니다."));
+									pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "【PC部屋利用時間】" + m + "分" + sc + "秒残りました。"));
+									pc.sendPackets(new S_SystemMessage("【PC部屋の商品終了案内]利用時間排出時に強制リスタートが行われます。"));
 								} else if (m <= 10) {
-									pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"[PC방 이용 시간] " + m + "분 " + sc + "초 남았습니다."));
-									pc.sendPackets(new S_SystemMessage("[PC방 상품 종료 안내] 종료후 버프가 남아있어도 혜택은 받을수 없습니다. 종료시 자동 리스타트가 진행됩니다."));
+									pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"【PC部屋利用時間】" + m + "分" + sc + "秒残りました。"));
+									pc.sendPackets(new S_SystemMessage("【PC部屋の商品終了案内]終了後バフが残っていてもメリットはできません。終了時に自動的リスタートが行われます。"));
 								}
 							}
 						}
@@ -128,34 +120,34 @@ public class PremiumTimeController implements Runnable {
 		}
 	}
 	
-	private void checkPremiumTime() {//일정시간 깃털지급
+	private void checkPremiumTime() {//一定時間羽支給
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 			if (!pc.isPrivateShop() && !pc.isAutoClanjoin() && !pc.noPlayerCK && !pc.noPlayerck2 && pc != null && !pc.isDead()) {
 				int FN = Config.FEATHER_NUM;
 				int CLN = Config.FEATHER_NUM1;
 				int CAN = Config.FEATHER_NUM2;
-				int FN2 = Config.useritem;//아이템번호
-				int FN3 = Config.usercount;//갯수
+				int FN2 = Config.useritem;//商品番号
+				int FN3 = Config.usercount;//本数
 				L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
-				/** 전체유저에게 선물을 지급한다 **/
+				/** 全ユーザーにプレゼントを支給する **/
 				
 				if (Config.전체선물작동유무) {
 				pc.getInventory().storeItem(FN2, FN3);
-				pc.sendPackets(new S_SystemMessage("\\aA알림:선물상자 (\\aG" + FN3 + "\\aA) 획득 하셨습니다."));
+				pc.sendPackets(new S_SystemMessage("\\aA通知：ギフトボックス (\\aG" + FN3 + "\\aA) 獲得されました。"));
 				}
 				
-				if (pc.getClanid() == 0) { // 무혈
+				if (pc.getClanid() == 0) { // 無血
 					pc.getInventory().storeItem(41159, FN);
-					pc.sendPackets(new S_SystemMessage("\\aA알림:픽시의 깃털 (\\aG" + FN + "\\aA) 획득 하셨습니다."));
+					pc.sendPackets(new S_SystemMessage("\\aA通知：ピクシーの羽 (\\aG" + FN + "\\aA) 獲得されました。"));
 				}
 				if (clan != null) {
-				if (clan.getCastleId() == 0 && pc.getClanid() != 0) { // 혈맹
+				if (clan.getCastleId() == 0 && pc.getClanid() != 0) { // 血盟
 					pc.getInventory().storeItem(41159, (CLN + FN));
-					pc.sendPackets(new S_SystemMessage("\\aA알림:픽시의 깃털 (\\aG" + FN + "+" + CLN + "\\aA) 획득 하셨습니다."));
+					pc.sendPackets(new S_SystemMessage("\\aA通知：ピクシーの羽 (\\aG" + FN + "+" + CLN + "\\aA)獲得されました。"));
 				}
-				if (clan.getCastleId() != 0) { // 성혈
+				if (clan.getCastleId() != 0) { // 腥血
 					pc.getInventory().storeItem(41159, (CAN + FN));
-					pc.sendPackets(new S_SystemMessage("\\aA알림:픽시의 깃털 (\\aG" + FN + "+" + CAN + "\\aA) 획득하셨습니다."));
+					pc.sendPackets(new S_SystemMessage("\\aA通知：ピクシーの羽 (\\aG" + FN + "+" + CAN + "\\aA) 獲得されました."));
 				}
 			}
 			}
@@ -166,7 +158,7 @@ public class PremiumTimeController implements Runnable {
 		try{
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 				if(pc.isAutoClanjoin()){
-					S_ChatPacket s_chatpacket = new S_ChatPacket(pc, pc.getClanname() + " 혈맹에서 혈원 모집중입니다. 앞에서/가입 치세요", Opcodes.S_SAY, 0);			
+					S_ChatPacket s_chatpacket = new S_ChatPacket(pc, pc.getClanname() + "血盟で血盟員募集中です。前/登録パット", Opcodes.S_SAY, 0);			
 						for (L1PcInstance listner : L1World.getInstance().getRecognizePlayer(pc)) {
 							L1ExcludingList spamList3 = SpamTable.getInstance().getExcludeTable(listner.getId());
 							if (!spamList3.contains(0, pc.getName())) {

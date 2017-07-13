@@ -23,18 +23,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import l1j.server.L1DatabaseFactory;
 import l1j.server.GameSystem.AttendanceController;
-import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.L1AccountAttendance;
-import l1j.server.server.templates.L1Attendance;
+import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.utils.SQLUtil;
 
 public class AccountAttendanceTable {
@@ -90,7 +86,7 @@ public class AccountAttendanceTable {
 				acc.setYear(rs.getInt("laste_check_year"));
 				if(acc.getDay()==42){
 					if(acc.checktype()==2){
-						//초기화
+						//初期化
 						acc.clearday();
 						//acc.setDay(1);
 					}
@@ -98,7 +94,7 @@ public class AccountAttendanceTable {
 				
 				if(acc.getDaypc()==42){
 					if(acc.checktypepc()==2){
-						//초기화
+						//初期化
 						acc.cleardaypc();
 						//acc.setDaypc(1);
 					}

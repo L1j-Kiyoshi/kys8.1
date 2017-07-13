@@ -19,9 +19,9 @@
 package l1j.server.server.Controller;
 
 import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.TimeZone;
 
 import l1j.server.Config;
 import l1j.server.server.datatables.AuctionBoardTable;
@@ -82,16 +82,16 @@ public class AuctionTimeController implements Runnable {
 		String bidder = board.getBidder();
 		int bidderId = board.getBidderId();
 
-		if (oldOwnerId != 0 && bidderId != 0) { // 이전의 소유자 있어·낙찰자 있어
+		if (oldOwnerId != 0 && bidderId != 0) { // 以前の所有者あり・落札者あり
 			L1PcInstance oldOwnerPc = (L1PcInstance) L1World.getInstance()
 					.findObject(oldOwnerId);
 			int payPrice = (int) (price * 0.9);
-			if (oldOwnerPc != null) { // 이전의 소유자가 온라인중
+			if (oldOwnerPc != null) { // 以前の所有者がオンライン中
 				oldOwnerPc.getInventory().storeItem(L1ItemId.ADENA, payPrice);
-				// 당신이 소유하고 있던 집이 최종 가격%1아데나로 낙찰되었습니다.%n
-				// 수수료10%%를 제외한 나머지의 금액%0아데나를 드립니다.%n 감사합니다.%n%n
+				// あなたが所有していた家が最終価格％1アデナで落札された。％n
+				// 手数料10 %%を除いた残りの金額％0アデナをいたします。％nありがとうございます。％n％n
 				oldOwnerPc.sendPackets(new S_ServerMessage(527, String.valueOf(payPrice)));
-			} else { // 이전의 소유자가 오프 라인중
+			} else { // 以前の所有者がオフライン中
 				L1ItemInstance item = ItemTable.getInstance().createItem(L1ItemId.ADENA);
 				item.setCount(payPrice);
 				try {
@@ -103,35 +103,35 @@ public class AuctionTimeController implements Runnable {
 			}
 
 			L1PcInstance bidderPc = (L1PcInstance) L1World.getInstance().findObject(bidderId);
-			if (bidderPc != null) { // 낙찰자가 온라인중
-				// 축하합니다.%n당신이 참가된 경매는 최종 가격%0아데나의 가격으로 낙찰되었습니다.%n
-				// 모양이 구입하신 집은 곧바로 이용하실 수 있습니다.%n 감사합니다.%n%n
+			if (bidderPc != null) { // 落札者がオンライン中
+				// おめでとうございます。％nあなたが参加したオークションは、最終的な価格％0アデナの価格で落札された。％n
+				// 形が購入した家はすぐにご利用いただけます。％nありがとうございます。％n％n
 				bidderPc.sendPackets(new S_ServerMessage(524, String.valueOf(price), bidder));
 			}
 			deleteHouseInfo(houseId);
 			setHouseInfo(houseId, bidderId);
 			deleteNote(houseId);
-		} else if (oldOwnerId == 0 && bidderId != 0) { // 이전의 소유자 없음·낙찰자 있어
+		} else if (oldOwnerId == 0 && bidderId != 0) { // 以前の所有者なし・落札者あり
 			L1PcInstance bidderPc = (L1PcInstance) L1World.getInstance().findObject(bidderId);
-			if (bidderPc != null) { // 낙찰자가 온라인중
-				// 축하합니다.%n당신이 참가된 경매는 최종 가격%0아데나의 가격으로 낙찰되었습니다.%n
-				// 모양이 구입하신 집은 곧바로 이용하실 수 있습니다.%n 감사합니다.%n%n
+			if (bidderPc != null) { // 落札者がオンライン中
+				// おめでとうございます。％nあなたが参加したオークションは、最終的な価格％0アデナの価格で落札された。％n
+				// 形が購入した家はすぐにご利用いただけます。％nありがとうございます。％n％n
 				bidderPc.sendPackets(new S_ServerMessage(524, String
 						.valueOf(price), bidder));
 			}
 			setHouseInfo(houseId, bidderId);
 			deleteNote(houseId);
-		} else if (oldOwnerId != 0 && bidderId == 0) { // 이전의 소유자 있어·낙찰자 없음
+		} else if (oldOwnerId != 0 && bidderId == 0) { // 以前の所有者あり・落札者なし
 			L1PcInstance oldOwnerPc = (L1PcInstance) L1World.getInstance()
 					.findObject(oldOwnerId);
-			if (oldOwnerPc != null) { // 이전의 소유자가 온라인중
-				// 당신이 신청 하신 경매는, 경매 기간내에 제시한 금액 이상에서의 지불을 표명하는 것이 나타나지 않았기 (위해)때문에, 결국 삭제되었습니다.%n
-				// 따라서, 소유권이 당신에게 되돌려진 것을 알려 드리겠습니다.%n 감사합니다.%n%n
+			if (oldOwnerPc != null) { //以前の所有者がオンライン中
+				// あなたが適用されたオークションは、オークション期間内に提示した金額以上でのお支払いを表明することが表示されていなかったため、最終的には削除されました。％n
+				// したがって、所有権があなたに戻されたことをお知らせします。％nありがとうございます。％n％n
 				oldOwnerPc.sendPackets(new S_ServerMessage(528));
 			}
 			deleteNote(houseId);
-		} else if (oldOwnerId == 0 && bidderId == 0) { // 이전의 소유자 없음·낙찰자 없음
-			// 마감을 5일 후로 설정해 재차 경매에 붙인다
+		} else if (oldOwnerId == 0 && bidderId == 0) { // 以前の所有者なし・落札者なし
+			// 締め切りを5日後に設定して再度オークションに付ける
 			Calendar cal = getRealTime();
 			cal.add(Calendar.DATE, 1); 
 			cal.set(Calendar.MINUTE, 0); 
@@ -143,7 +143,7 @@ public class AuctionTimeController implements Runnable {
 	}
 
 	/**
-	 * 이전의 소유자의 아지트를 지운다
+	 * 以前の所有者のアジトを消す
 	 * 
 	 * @param houseId
 	 * 
@@ -159,7 +159,7 @@ public class AuctionTimeController implements Runnable {
 	}
 
 	/**
-	 * 낙찰자의 아지트를 설정한다
+	 * 落札者のアジトを設定する
 	 * 
 	 * @param houseId
 	 *            bidderId
@@ -177,24 +177,24 @@ public class AuctionTimeController implements Runnable {
 	}
 
 	/**
-	 * 아지트의 경매 상태를 OFF로 설정해, 경매 게시판으로부터 지운다
+	 * アジトの競売状態をOFFに設定し、オークション掲示板から消す
 	 * 
 	 * @param houseId
 	 * 
 	 * @return
 	 */
 	private void deleteNote(int houseId) {
-		// 아지트의 경매 상태를 OFF로 설정한다
+		// アジトの競売状態をOFFに設定する
 		L1House house = HouseTable.getInstance().getHouseTable(houseId);
 		house.setOnSale(false);
 		Calendar cal = getRealTime();
 		cal.add(Calendar.DATE, Config.HOUSE_TAX_INTERVAL);
-		cal.set(Calendar.MINUTE, 0); // 분 , 초는 잘라서 버림
+		cal.set(Calendar.MINUTE, 0); // 分、秒は切り捨て
 		cal.set(Calendar.SECOND, 0);
 		house.setTaxDeadline(cal);
 		HouseTable.getInstance().updateHouse(house);
 		
-		// 경매 게시판으로부터 지운다
+		// オークション掲示板から消す
 		AuctionBoardTable boardTable = new AuctionBoardTable();
 		boardTable.deleteAuctionBoard(houseId);
 	}

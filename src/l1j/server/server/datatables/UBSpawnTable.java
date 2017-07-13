@@ -89,7 +89,7 @@ public class UBSpawnTable {
 			SQLUtil.close(pstm);
 			SQLUtil.close(con);
 		}
-		_log.config("UBmonster 배치 리스트 " + _spawnTable.size() + "건 로드");
+		_log.config("UBmonster配置リスト" + _spawnTable.size() + "件ロード");
 	}
 
 	public L1UbSpawn getSpawn(int spawnId) {

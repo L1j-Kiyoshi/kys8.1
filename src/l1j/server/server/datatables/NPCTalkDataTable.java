@@ -18,9 +18,13 @@
  */
 package l1j.server.server.datatables;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Logger;
+
 import l1j.server.L1DatabaseFactory;
 import l1j.server.server.model.L1NpcTalkData;
 import l1j.server.server.utils.SQLUtil;
@@ -72,7 +76,7 @@ public class NPCTalkDataTable {
 				_datatable.put(new Integer(l1npctalkdata.getNpcID()),
 						l1npctalkdata);
 			}
-			_log.config("NPC 액션 리스트 " + _datatable.size() + "건 로드");
+			_log.config("NPCアクションリスト" + _datatable.size() + "件ロード");
 		} catch (SQLException e) {
 			_log.warning("error while creating npc action table " + e);
 		} finally {

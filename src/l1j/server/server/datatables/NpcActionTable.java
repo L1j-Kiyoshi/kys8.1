@@ -29,14 +29,14 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
 import l1j.server.server.model.L1Object;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.npc.action.L1NpcAction;
 import l1j.server.server.model.npc.action.L1NpcXmlParser;
 import l1j.server.server.utils.FileUtil;
-
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 public class NpcActionTable {
 	private static Logger _log = Logger.getLogger(NpcActionTable.class
@@ -88,11 +88,11 @@ public class NpcActionTable {
 	public static void load() {
 		try {
 //			PerformanceTimer timer = new PerformanceTimer();
-//			System.out.print("■ 엔피씨액션 데이터 .......................... ");
+//			System.out.print("■ エンピシアクションデータ.......................... "）;
 			_instance = new NpcActionTable();
-//			System.out.println("■ 로딩 정상 완료 " + timer.get() + "ms");
+//			System.out.println("■ ロード正常終了」+ timer.get（）+ "ms"）;
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, "NpcAction를 읽어들일 수 없었습니다", e);
+			_log.log(Level.SEVERE, "NpcActionを読み込むことができませんでした", e);
 			System.exit(0);
 		}
 	}

@@ -93,7 +93,7 @@ public class DoorSpawnTable {
 					door.setMaxHp(rs.getInt(10));
 					door.setCurrentHp(rs.getInt(10));
 					door.setKeeperId(rs.getInt(11));
-					door.isPassibleDoor(false);//하딘 시스템
+					door.isPassibleDoor(false);//ハーディンシステム
 					L1World.getInstance().storeObject(door);
 					L1World.getInstance().addVisibleObject(door);
 

@@ -1,5 +1,5 @@
 /**
- * 타이머 관련 맵에 대한 컨트롤러
+ * タイマー関連マップのコントローラ
  * 2008. 12. 04
 */
 
@@ -20,19 +20,19 @@ public class TimeMapController implements Runnable{
 	private static Logger _log = Logger.getLogger(TimeMapController.class
 			. getName());
 
-	private ArrayList<L1TimeMap> mapList;												// 맵 저장소
-	private static TimeMapController instance;										// 단일 싱글톤 객체
+	private ArrayList<L1TimeMap> mapList;												// マップストア
+	private static TimeMapController instance;										// シングルシングルトンオブジェクト
 
 	/**
-	 * 싱글톤 구현 - 단일 객체 리턴
-	 * @return	(TimeMapController)	단일객체
+	 * シングルトンの実装 - 単一のオブジェクト返さ
+	 * @return	(TimeMapController)	単一のオブジェクト
 	*/
 	public static TimeMapController getInstance(){
 		if(instance == null) instance = new TimeMapController();
 		return instance;
 	}
 	/**
-	 * 기본생성자(싱글톤 구현으로 private)
+	 *既定のコンストラクタ（シングルトン実装でprivate）
 	*/
 	private TimeMapController(){
 		mapList = new ArrayList<L1TimeMap>();
@@ -92,10 +92,10 @@ public class TimeMapController implements Runnable{
 		}
 	}
 	/**
-	 * 타임 이벤트가 있는 맵 등록
-	 * 중복 등록이 되지 않도록 이미 등록된 맵 아이디와 비교 없다면 등록
-	 * 사이즈가 0 이라면 즉 초기라면 비교대상이 없기때문에 무조건 등록
-	 * @param	(TimeMap)	등록할 맵 객체
+	 *タイムイベントがあるマップの登録
+	 * 重複登録がされていないように、既に登録されたマップ名と比較ない場合登録
+	 * サイズが0であれば、つまり、初期であれば、比較対象がないので、無条件に登録
+	 * @param	(TimeMap)	登録するマップオブジェクト
 	*/
 	public void add(L1TimeMap map){
 		if(mapList.size() > 0){
@@ -113,9 +113,9 @@ public class TimeMapController implements Runnable{
 		}else mapList.add(map);
 	}
 	/**
-	 * 타임 이벤트가 있는 맵 삭제
-	 * 중복 삭제 또는 IndexOutOfBoundsException이 되지 않도록 이미 등록된 맵 아이디와 비교 있다면 삭제
-	 * @param	(TimeMap)	삭제할 맵 객체
+	 * タイムイベントがあるマップの削除
+	 * 重複削除またはIndexOutOfBoundsExceptionがないように、既に登録されたマップ名と比較の場合、削除
+	 * @param	（TimeMap）削除マップオブジェクト
 	*/
 	private void remove(L1TimeMap map){
 		for(L1TimeMap m : array()){
@@ -127,8 +127,8 @@ public class TimeMapController implements Runnable{
 		map = null;
 	}
 	/**
-	 * 등록된 이벤트 맵 배열 리턴
-	 * @return	(TimeMap[])	맵 객체 배열
+	 * 登録されたイベントマップ配列戻り
+	 * @return	(TimeMap[])	マップオブジェクトの配列
 	*/
 	private L1TimeMap[] array(){
 		return mapList.toArray(new L1TimeMap[mapList.size()]);

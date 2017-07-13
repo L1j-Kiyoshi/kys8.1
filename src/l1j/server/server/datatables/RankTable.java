@@ -21,8 +21,8 @@ import l1j.server.server.serverpackets.S_Ranking2;
 import l1j.server.server.utils.SQLUtil;
 
 /**
- * 랭킹 시스템<br>
- * 랭킹에 대한 연산은 DB에 접근하지 않고 Map을 활용.
+ * ランキングシステム<br>
+ * ランキングの演算は、DBへのアクセスせずにMapを利用した。
  * 
  * @author
  */
@@ -49,10 +49,10 @@ public class RankTable {
 	}
 
 	/**
-	 * 서버 구동시 데이터 로드.
+	 * サーバー起動時にデータのロード。
 	 */
 	private void load() {
-		// 데이터베이스 로드시에 갱신 시간이 되어버릴 경우에 대비하여 반드시 동기화.
+		// データベースのロード時に更新時間になってしまう場合に備えて、必ず同期します。
 		final ReentrantLock lock = this.lock;
 		lock.lock();
 		try {
@@ -100,10 +100,10 @@ public class RankTable {
 	}
 
 	/**
-	 * 랭킹에 관한 모든 데이터를 업데이트.
+	 * ランキングに関するすべてのデータを更新します。
 	 */
-	public void updateRank() {//랭킹갱신
-//		System.out.println("CMD MSG: 랭킹이 갱신되었습니다.");
+	public void updateRank() {//ランキング更新
+//		System.out.println("CMD MSG：ランキングが更新されました。 "）;
 		final ReentrantLock lock = this.lock;
 		lock.lock();
 		try {
@@ -125,7 +125,7 @@ public class RankTable {
 	}
 
 	/**
-	 * 기존의 랭킹을 저장.
+	 * 既存のランキングを格納します。
 	 */
 	private void setOldRank() {
 		old_ranks.clear();
@@ -137,7 +137,7 @@ public class RankTable {
 	}
 
 	/**
-	 * 현재의 모든 랭킹을 새롭게 로드.
+	 * 現在のすべてのランキングを新たに読み込まれます。
 	 */
 	private void reLoadCurrentRank() {
 		allClear();
@@ -173,7 +173,7 @@ public class RankTable {
 	}
 
 	/**
-	 * 현재의 전체 랭킹과 기존의 전체 랭킹을 비교 분석.
+	 * 現在の全体ランキングと既存の全ランキングを比較分析。
 	 */
 	private void operateTotalRank() {
 		for (int i = 0; i < 전체.size(); i++) {
@@ -225,7 +225,7 @@ public class RankTable {
 	}
 
 	/**
-	 * 현재의 클래스 랭킹과 기존의 클래스 랭킹을 비교 분석.
+	 * 現在のクラスのランキングと、既存のクラスのランキングを比較分析。
 	 */
 	private void operateClassRank() {
 		for (int i = 0; i < 8; i++) {
@@ -258,7 +258,7 @@ public class RankTable {
 	}
 
 	/** 
-	 * 데이터베이스에 새롭게 기록.
+	 * データベースに新たに記録した。
 	 */
 	private void writeDatabase() { 
 		clearDB();
@@ -293,7 +293,7 @@ public class RankTable {
 	}
 
 	/**
-	 * 기존 랭킹정보를 데이터베이스에서 모두 삭제. 
+	 * 既存のランキング情報をデータベースから削除。 
 	 */
 	private void clearDB() {  
 		try (Connection con = L1DatabaseFactory.getInstance().getConnection();
