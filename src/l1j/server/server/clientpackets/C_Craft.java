@@ -78,8 +78,6 @@ public class C_Craft extends ClientBasePacket {
 		int type = readC();
 		if(type!=NewStat && pc==null)
 			return;
-		
-		//System.out.println("크래프트 > " + type);
 		switch (type) {
 		case 33:{
 			readH();
