@@ -14,8 +14,8 @@ public class C_CheckPK extends ClientBasePacket {
 		L1PcInstance player = clientthread.getActiveChar();
 		if (player == null)
 			return;
-		player.sendPackets(new S_ServerMessage(562, String.valueOf(player.get_PKcount()))); // 현재의
-																							// PK회수는%0입니다.
+		player.sendPackets(new S_ServerMessage(562, String.valueOf(player.get_PKcount()))); //現在の
+																							// PK回数は％0です。
 	}
 
 	@Override

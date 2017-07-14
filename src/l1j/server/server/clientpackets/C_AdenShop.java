@@ -5,14 +5,14 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.Warehouse.PackageWarehouse;
 import l1j.server.server.model.Warehouse.WarehouseManager;
 import l1j.server.server.model.shop.L1AdenShop;
+import l1j.server.server.serverpackets.S_ArdenStore;
 import l1j.server.server.serverpackets.S_NPCTalkReturn;
 import l1j.server.server.serverpackets.S_RetrievePackageList;
 import l1j.server.server.serverpackets.S_SurvivalCry;
-import l1j.server.server.serverpackets.S_ArdenStore;
 
 public class C_AdenShop extends ClientBasePacket {
 
-	private static final String C_아덴상점 = "[C] C_아덴상점";
+	private static final String C_AdenShop = "[C] C_AdenShop";
 
 	public C_AdenShop(byte[] decrypt, GameClient client) {
 		super(decrypt);
@@ -21,14 +21,14 @@ public class C_AdenShop extends ClientBasePacket {
 			L1PcInstance pc = client.getActiveChar();
 			
 			switch (type) {
-			case 1: { // 상점 열기
+			case 1: { // 店オープン
 			
 				if (pc == null)
 					return;
 				pc.sendPackets(new S_ArdenStore(pc));
 			}
 				break;
-			case 4: { // OTP 입력
+			case 4: { // OTP入力
 				for (int i = 0; i < 1000; i++) {
 					int ff = readH();
 					if (ff == 0)
@@ -55,7 +55,7 @@ public class C_AdenShop extends ClientBasePacket {
 				}
 			}
 				break;
-			case 6: { // 부가서비스 창고
+			case 6: { // 付加サービス倉庫
 				PackageWarehouse w = WarehouseManager.getInstance().getPackageWarehouse(pc.getAccountName());
 				if (w.getSize() != 0){
 					pc.setPackegeWarehouse(true);
@@ -65,7 +65,7 @@ public class C_AdenShop extends ClientBasePacket {
 				}
 			}
 			break;
-			case 0x32: {// 동의 및 구매
+			case 0x32: {// 同意と購入
 				client.sendPacket(new S_SurvivalCry(S_SurvivalCry.OTP_SHOW, pc));
 			}
 				break;
@@ -79,6 +79,6 @@ public class C_AdenShop extends ClientBasePacket {
 
 	@Override
 	public String getType() {
-		return C_아덴상점;
+		return C_AdenShop;
 	}
 }

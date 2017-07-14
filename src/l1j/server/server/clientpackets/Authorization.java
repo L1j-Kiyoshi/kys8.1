@@ -33,21 +33,21 @@ public class Authorization {
 	    throws IOException {
 	if (!Config.ALLOW_2PC) {
 	    if (LoginController.getInstance().getIpCount(ip) > 0) {
-		_log.info("동일 IP로 접속한 두 PC의 로그인 거부. account=" + accountName + " ip=" + ip);
-		client.sendPacket(new S_CommonNews("현재 IP로 다른 계정이 이미 접속중입니다."));
+		_log.info("同じIPに接続した2台のPCのログインを拒否。 account =" + accountName + " ip=" + ip);
+		client.sendPacket(new S_CommonNews("現在のIPで別のアカウントがすでに接続中です。"));
 		client.close();
 		return;
 	    }
 	    /*
 	     * } else if (LoginController.getInstance().getIpCount(ip) > 2 &&
 	     * !ip.equals(Config.AUTH_IP)) {
-	     * _log.info("동일한 IP로 접속한 두 PC의 로그인을 거부했습니다. account=" + accountName
+	     * _log.info("同じIPアドレスに接続した2台のPCのログインを拒否した。 account = "+ accountName
 	     * + " ip=" + ip); client.sendPacket(new
 	     * S_CommonNews("현재 IP로 다른 계정이 이미 접속중입니다.")); client.close();
 	     * return;
 	     */
 	}
-	// System.out.println("아이디 : " + accountName);
+	// System.out.println("ユーザ名： "+ accountName）;
 	// System.out.println("비밀번호 : " + password);
 
 	Account account = Account.load(accountName);
@@ -55,16 +55,16 @@ public class Authorization {
 	if (account == null) {
 	    if (Config.AUTO_CREATE_ACCOUNTS) {
 		if (Account.checkLoginIP(ip)) {
-		    _log.info("         ★★★ 계정 생성 초과 ★★★ " + ip);
+		    _log.info("         ★★★ アカウントの作成を超え ★★★ " + ip);
 		    client.sendPacket(new S_CommonNews(
-			    "\n\n계정 생성은 IP당 5개입니다. \n\n당신의 IP에서 이미 5개가 생성됐습니다.\n\n다른 IP에서 생성하거나 운영자에게 요청하세요"));
+			    "\n\nアカウントの作成は、 IPごとに5個です。 \n\nあなたのIPアドレスから既に5つ作成されました。\n\n別のIPで作成するか、オペレータに依頼してください"));
 		    try {
 			GeneralThreadPool.getInstance().schedule(new Runnable() {
 			    @Override
 			    public void run() {
 				client.kick();
 			    }
-			}, 1500); // 팅기는 딜레이 시간
+			}, 1500); // ティンギはディレイ時間
 		    } catch (Exception e1) {
 		    }
 		    return;
@@ -94,19 +94,19 @@ public class Authorization {
 	    return;
 	}
 
-	if (account.isBanned()) { // BAN 어카운트
-	    _log.info("압류된 계정의 로그인을 거부했습니다. account=" + accountName + " ip=" + ip);
+	if (account.isBanned()) { // BANアカウント
+	    _log.info("差し押さえされたアカウントのログインを拒否した。 account =" + accountName + " ip=" + ip);
 	    // client.sendPacket(new
 	    // S_LoginResult(S_LoginResult.REASON_BUG_WRONG));
-	    client.sendPacket(new S_CommonNews("\n\n\n\n현재 이 계정은 압류되어있습니다.\n\n차단될 사유가없다면 운영자에게 문의하세요"));
+	    client.sendPacket(new S_CommonNews("\n\n\n\n現在、このアカウントは押収されています。\n\nブロックされる理由がない場合は、オペレーターにお問い合わせください"));
 	    return;
 	}
 	if (Account.checkLoginBanIP(ip)) {
 	    System.out.println("\n┌───────────────────────────────┐");
-	    System.out.println("\t 차단된 IP 접속 차단! 계정=" + accountName + " 아이피=" + ip);
+	    System.out.println("\t ブロックされたIP接続をブロック！アカウント=" + accountName + "アイピー=" + ip);
 	    System.out.println("└───────────────────────────────┘\n");
 	    client.sendPacket(new S_CommonNews(
-		    "\n\n               " + ip + " \n\n   해당 IP는 운영자에 의해 차단되었습니다.\n\n     서버 운영자에게 문의하시기바랍니다."));
+		    "\n\n               " + ip + " \n\n   そのIPは、オペレーターによってブロックされました。\n\nサーバー管理者にお問い合わせください。"));
 	    return;
 	}
 
@@ -120,20 +120,20 @@ public class Authorization {
 
 	try {
 	    LoginController.getInstance().login(client, account);
-	    Account.updateLastActive(account, ip); // 최종 로그인일을 갱신한다
+	    Account.updateLastActive(account, ip); // 最終ログイン日を更新する
 	    client.setAccount(account);
 	    sendNotice(client);
 	} catch (GameServerFullException e) {
 	    client.kick();
-	    _log.info("최대 접속인원 초과 : (" + client.getIp() + ") 로그인을 절단했습니다. ");
+	    _log.info("最大接続人数を超え：（" + client.getIp() + "）ログインを切断しました。");
 	    return;
 	} catch (AccountAlreadyLoginException e) {
-	    _log.info("동일한 ID의 접속 : (" + client.getIp() + ") 강제 절단 했습니다. ");
-	    client.sendPacket(new S_CommonNews("이미 접속 중 입니다. 접속을 강제 종료합니다."));
+	    _log.info("同じIDの接続：（" + client.getIp() + "）強​​制切断しました。");
+	    client.sendPacket(new S_CommonNews("すでに接続中です。接続を強制的に終了します。"));
 	    client.kick();
 	    return;
 	} catch (Exception e) {
-	    _log.info("비정상적인 로그인 에러 . account=" + accountName + " host=" + host);
+	    _log.info("異常なログインエラー。 account =" + accountName + " host=" + host);
 	    client.kick();
 	    return;
 	} finally {
@@ -145,16 +145,16 @@ public class Authorization {
     private void sendNotice(GameClient client) {
 	String accountName = client.getAccountName();
 
-	// 읽어야할 공지가 있는지 체크
+	// 読むべきお知らせがあるかチェック
 	if (S_CommonNews.NoticeCount(accountName) > 0) {
 	    client.sendPacket(new S_CommonNews(accountName, client));
 	} else {
 	    new C_CommonClick(client);
 	    client.setLoginAvailable();
-	    // 캐릭터창에서 공지
-	    // client.sendPacket(new S_Notice("\\aF [ 공지사항] \n\n\n\\aA 1. \n\\aA
-	    // 2.홈페이지에서 모든 정보 확인가능합니다. \n\\aA 3.문의는'메티스'에게 편지로 부탁드립니다.\n\\aA
-	    // 4..명령어 를 활용해주세요. \n\n\\f3 [주의] 버그유저는 경고없이 영구추방 대상입니다."));
+	    //キャラクターウィンドウで公知
+	    // client.sendPacket(new S_Notice("\\aF [お知らせ] \\ n \\ n \\ n \\\\ aA 1 \\ n \\\\ aA
+	    // 2.ホームページでは、すべての情報を確認できます。 \\ n \\\\ aA 3.お問い合わせは、「メティス」に手紙でお願いします。\\ n \\\\ aA
+	    // 4..コマンドを利用してください。 \\ n \\ n \\\\ f3【注意】バグユーザーは警告なしに永久追放対象です。 "））;
 
 	}
     }

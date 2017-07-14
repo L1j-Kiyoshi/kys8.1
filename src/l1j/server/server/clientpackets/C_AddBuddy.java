@@ -46,7 +46,7 @@ public class C_AddBuddy extends ClientBasePacket {
 		if (charName.equalsIgnoreCase(pc.getName())) {
 			return;
 		} else if (buddyList.containsName(charName)) {
-			pc.sendPackets(new S_ServerMessage(1052, charName)); //	(은)는 이미 등록되어 있습니다.
+			pc.sendPackets(new S_ServerMessage(1052, charName)); //（）は、既に登録されています。
 			return;
 		}
 
@@ -63,7 +63,7 @@ public class C_AddBuddy extends ClientBasePacket {
 				return;
 			}
 		}
-		pc.sendPackets(new S_ServerMessage(109, charName)); // %0라는 이름의 사람은 없습니다.
+		pc.sendPackets(new S_ServerMessage(109, charName)); // %0という名前の人はありません。
 	}
 
 	@Override

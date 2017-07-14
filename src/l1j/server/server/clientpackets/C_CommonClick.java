@@ -42,7 +42,7 @@ public class C_CommonClick {
 		if (amountOfChars > 0) {
 			sendCharPacks(client);
 		}
-		client.sendPacket(new S_Unknown2(0)); // 로그인시 언노처리
+		client.sendPacket(new S_Unknown2(0)); // ログイン時オンノ処理
 	}
 
 	public static void sendCharPacks(GameClient client) {
@@ -103,8 +103,8 @@ public class C_CommonClick {
 				int intel = rs.getByte("Intel");
 				int accessLevel = rs.getShort("AccessLevel");
 				int birth = rs.getInt("BirthDay");
-//				System.out.println("이름은?" + name);
-				RankTable.getInstance().sendRankStatusPacks(client, name);//랭킹
+//				System.out.println("名前は？ "+ name）;
+				RankTable.getInstance().sendRankStatusPacks(client, name);//ランキング
 			    cpk = new S_CharPacks(name, clanname, type, sex, lawful, currenthp, currentmp, ac, lvl, str, dex, con,
 				wis, cha, intel, accessLevel, birth);
 

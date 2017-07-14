@@ -37,8 +37,8 @@ public class C_BanParty extends ClientBasePacket {
 		L1PcInstance player = client.getActiveChar();
 		if ( player == null)return;
 		if (!player.getParty().isLeader(player)) {
-			// 파티 리더가 아닌 경우
-			player.sendPackets(new S_ServerMessage(427)); // 파티의 리더만을 추방할 수 있습니다.
+			// パーティーリーダーがない場合
+			player.sendPackets(new S_ServerMessage(427)); //パーティーのリーダーだけ追放することができます。
 			return;
 		}
 
@@ -48,8 +48,8 @@ public class C_BanParty extends ClientBasePacket {
 				return;
 			}
 		}
-		// 발견되지 않았다
-		player.sendPackets(new S_ServerMessage(426, s)); // %0는 파티 멤버가 아닙니다.
+		// 発見されなかった
+		player.sendPackets(new S_ServerMessage(426, s)); // %0はパーティーメンバーがありません。
 	}
 
 	@Override

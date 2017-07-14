@@ -14,9 +14,9 @@ import l1j.server.server.utils.SQLUtil;
 
 public class Sabu_CMBox {
 	private static Sabu_CMBox _instance;
-	private static ArrayList<Sabu_cm> cmlist;// map으로 구현하는게 맞을지도 모른다.
-	private static ArrayList<Sabu_um> umlist;// 유저가 신청목록을 열람했을시에 모든 등록혈맹을 검색하지
-												// 않기위해 추가
+	private static ArrayList<Sabu_cm> cmlist;// mapに実装するのが正しいかもしれない。
+	private static ArrayList<Sabu_um> umlist;// ユーザが申請リストを閲覧した時にすべての登録血盟を検索してい
+												//ないために、追加
 
 	public static Sabu_CMBox getInstance() {
 		if (_instance == null) {

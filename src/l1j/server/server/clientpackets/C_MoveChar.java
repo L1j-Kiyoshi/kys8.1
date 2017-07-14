@@ -132,7 +132,7 @@ public class C_MoveChar extends ClientBasePacket {
 
 		/*
 		 * スターンレック
-		 * 유체이탈, 빠른이동
+		 * 流体離脱、速い移動
 		 */
 		pc.MovePoint.set(locx, locy);
 		int calcxy = pc.getLocation().getTileLineDistance(pc.MovePoint);

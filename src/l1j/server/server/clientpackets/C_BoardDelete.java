@@ -32,7 +32,7 @@ public class C_BoardDelete extends ClientBasePacket {
 			return;
 		}
 		if (!pc.isGm()) {
-			pc.sendPackets(new S_SystemMessage("게시판 글은 삭제 불가능 합니다."));
+			pc.sendPackets(new S_SystemMessage("掲示板書き込みは削除できません。"));
 			return;
 		}
 		if (board.getNpcId() == 4200015) {

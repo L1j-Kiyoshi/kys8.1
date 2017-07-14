@@ -1,6 +1,7 @@
 package l1j.server.server.clientpackets;
 
-import static l1j.server.server.model.Instance.L1PcInstance.REGENSTATE_ATTACK;
+import static l1j.server.server.model.Instance.L1PcInstance.*;
+
 import l1j.server.IndunSystem.MiniGame.L1Gambling3;
 import l1j.server.server.ActionCodes;
 import l1j.server.server.GameClient;
@@ -8,7 +9,6 @@ import l1j.server.server.Controller.FishingTimeController;
 import l1j.server.server.model.Broadcaster;
 import l1j.server.server.model.L1Character;
 import l1j.server.server.model.L1Object;
-import l1j.server.server.model.L1PolyMorph;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1DoorInstance;
 import l1j.server.server.model.Instance.L1ItemInstance;
@@ -42,9 +42,9 @@ public class C_Attack extends ClientBasePacket {
 
 		L1Object target = L1World.getInstance().findObject(targetId);
 
-		// 공격 액션을 취할 수 있는 상태나 확인
-		if (pc.getRankLevel() < 4 && pc.getInventory().getWeight100() > 82) { // 중량 오버
-			pc.sendPackets(new S_ServerMessage(110)); // \f1아이템이 너무 무거워 전투할 수가 없습니다.
+		// 攻撃アクションを取ることができる状態または確認
+		if (pc.getRankLevel() < 4 && pc.getInventory().getWeight100() > 82) { // 重量オーバー
+			pc.sendPackets(new S_ServerMessage(110)); // \f1アイテムが重すぎる戦闘することができません。
 			return;
 		}
 		if (pc.isPrivateShop()) {
@@ -54,7 +54,7 @@ public class C_Attack extends ClientBasePacket {
 			if (target instanceof L1NpcInstance) {
 				pc._npcnum = ((L1NpcInstance) target).getNpcTemplate().get_npcId();
 				pc._npcname = ((L1NpcInstance) target).getNpcTemplate().get_name();
-				pc.sendPackets(new S_SystemMessage("npcid :" + pc._npcnum + " 이름 :" + pc._npcname));
+				pc.sendPackets(new S_SystemMessage("npcid :" + pc._npcnum + "名前：" + pc._npcname));
 			}
 			if (target instanceof L1DoorInstance) {
 				L1DoorInstance fi = (L1DoorInstance) target;
@@ -62,24 +62,24 @@ public class C_Attack extends ClientBasePacket {
 						+ fi.getDoorId()));
 			}
 		}
-		if (pc.getZoneType() != 1 && pc.getInventory().checkEquipped(10000)) { // 직장인 경험치 지급
-			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "허수아비무기를 해제하시기 바랍니다."));
+		if (pc.getZoneType() != 1 && pc.getInventory().checkEquipped(10000)) { //会社員経験値支給
+			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "かかしの武器を解除してください。"));
 			;
 			return;
 		}
-		if (!(pc.getMapId() >= 2600 && pc.getMapId() <= 2699) && pc.getInventory().checkEquipped(203003)) { // 데스나이트의 불검:진
-			pc.sendPackets(new S_SystemMessage("화룡의 안식처에서만 사용이 가능합니다."));
+		if (!(pc.getMapId() >= 2600 && pc.getMapId() <= 2699) && pc.getInventory().checkEquipped(203003)) { //デスナイトのフレイムブレード：ジン
+			pc.sendPackets(new S_SystemMessage("火竜の聖域でのみ使用が可能です。"));
 			return;
 		}
 
 		if (target instanceof L1NpcInstance) {
-			if (((L1NpcInstance) target).getHiddenStatus() != 0) { // 지중에 기어들고 있는지, 날고 있다
+			if (((L1NpcInstance) target).getHiddenStatus() != 0) { //地中にギア持っているのか、飛んでいる
 				return;
 			}
 		}
 
 		/**
-		 * 아이템의 종류를 돌려준다.<br>
+		 * アイテムの種類を返す。<br>
 		 * 
 		 * @return <p>
 		 *         [weapon]<br>
@@ -88,8 +88,8 @@ public class C_Attack extends ClientBasePacket {
 		 *         </p>
 		 */
 
-		if (target instanceof L1Character) { // npc도 일단 characters를 상속하니까 그냥 이거만 쓰면 됨다
-			if (target.getMapId() != pc.getMapId()) { // 타겟이 이상한 장소에 있으면(자) 종료
+		if (target instanceof L1Character) { // npcも一応charactersを継承するからただこれだけ書けばドゥェムダ
+			if (target.getMapId() != pc.getMapId()) { //ターゲットが奇妙な場所にいると終了
 				return;
 			}
 			int attackRange = 1;
@@ -109,7 +109,7 @@ public class C_Attack extends ClientBasePacket {
 							poly == 11408||poly == 11409||poly == 11410||poly == 11411||poly == 11412||poly == 11413||
 							poly == 11414||poly == 11415||poly == 11416||poly == 11417||poly == 11418||poly == 11419||
 							poly == 11420||poly == 11421||poly == 12542||poly == 12541 || poly == 13735 || poly == 13737
-							|| poly == 14928 //82경비창
+							|| poly == 14928 //82経費ウィンドウ
 							|| poly == 13389) {
 						attackRange = 2;
 					}
@@ -123,7 +123,7 @@ public class C_Attack extends ClientBasePacket {
 				return;
 			}
 
-			if (target.getLocation().getTileLineDistance(new Point(x, y)) > 1) { // 이건 클라 측정 버그...
+			if (target.getLocation().getTileLineDistance(new Point(x, y)) > 1) { //これはクライアントの測定バグ...
 				return;
 			}
 
@@ -141,7 +141,7 @@ public class C_Attack extends ClientBasePacket {
 			}
 		}
 
-		/** 미니게임 **/
+		/** ミニゲーム **/
 		if (((pc.getX() == 33515 && pc.getY() == 32851)) && pc.getMapId() == 4) {
 			if (target instanceof L1NpcInstance) {
 				L1NpcInstance npc = (L1NpcInstance) target;
@@ -151,7 +151,7 @@ public class C_Attack extends ClientBasePacket {
 				}
 			}
 		}
-		/**매입상점**/
+		/**買取店**/
 		if(target instanceof L1NpcInstance){
 			L1NpcInstance npc = (L1NpcInstance) target;
 			if(npc.getNpcTemplate().get_npcId()>=400067 && npc.getNpcTemplate().get_npcId()<=400080){
@@ -163,15 +163,15 @@ public class C_Attack extends ClientBasePacket {
 			}
 		}
 
-		// 공격 액션을 취할 수 있는 경우의 처리
-		if (pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // 아브소르트바리아의 해제
-			pc.removeSkillEffect(L1SkillId.ABSOLUTE_BARRIER);//추가 앱솔수정
-//			pc.killSkillEffectTimer(L1SkillId.ABSOLUTE_BARRIER);//원본 앱솔수정
+		// 攻撃アクションを取ることができる場合の処理
+		if (pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // アブ小ガルトバリアの解除
+			pc.removeSkillEffect(L1SkillId.ABSOLUTE_BARRIER);//追加アブソル修正
+//			pc.killSkillEffectTimer(L1SkillId.ABSOLUTE_BARRIER);//オリジナルアブソル修正
 			pc.startMpRegenerationByDoll();
 		}
 		pc.killSkillEffectTimer(L1SkillId.MEDITATION);
 
-		pc.delInvis(); // 투명상태의 해제
+		pc.delInvis(); // 透明状態の解除
 
 		pc.setRegenState(REGENSTATE_ATTACK);
 		
@@ -180,15 +180,15 @@ public class C_Attack extends ClientBasePacket {
 		}
 
 		// if (target != null && !((L1Character) target).isDead()) {
-		// 미리 타입검사
+		// 事前に型チェック
 		if (target != null && target instanceof L1Character && !((L1Character) target).isDead()) {
 			target.onAction(pc);
 			
-		} else { // 하늘 공격
-			pc.setHeading(pc.targetDirection(x, y)); // 방향세트
+		} else { // 空の攻撃
+			pc.setHeading(pc.targetDirection(x, y)); //方向セット
 			pc.sendPackets(new S_AttackStatus(pc, 0, ActionCodes.ACTION_Attack));
 			pc.broadcastPacket(new S_AttackStatus(pc, 0, ActionCodes.ACTION_Attack));
-			// TODO 활로 지면에 하늘 공격했을 경우는 화살이 날지 않으면 안 된다
+			// TODO 弓床の空攻撃した場合は、矢が飛ばなければならない
 		}
 
 	}

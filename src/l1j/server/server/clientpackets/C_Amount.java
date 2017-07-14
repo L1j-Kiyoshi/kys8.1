@@ -36,9 +36,9 @@ public class C_Amount extends ClientBasePacket {
 		int objectId = readD();
 		int amount = readD();
 		
-		//아지트 경매 게시판 버그 수정
+		//アジト競売掲示板のバグを修正
 		long _amount = amount;
-		if(_amount <= 0){ //추가 부분
+		if(_amount <= 0){ //追加部分
 			return;
 		}
 		
@@ -64,12 +64,12 @@ public class C_Amount extends ClientBasePacket {
 			s1 = "";
 			s2 = "";
 		}
-		if (s1.equalsIgnoreCase("agapply")) { // 경매에 입찰했을 경우
+		if (s1.equalsIgnoreCase("agapply")) { //オークションに入札した場合
 			String pcName = pc.getName();
 			AuctionBoardTable boardTable = new AuctionBoardTable();
 			for (L1AuctionBoard board : boardTable.getAuctionBoardTableList()) {
 				if (pcName.equalsIgnoreCase(board.getBidder())) {
-					pc.sendPackets(new S_ServerMessage(523)); // 벌써 다른 집의 경매에 참가하고 있습니다.
+					pc.sendPackets(new S_ServerMessage(523)); //すでに他の家のオークションに参加しています。
 					return;
 				}
 			}
@@ -78,34 +78,34 @@ public class C_Amount extends ClientBasePacket {
 			if (board != null) {
 				int nowPrice = board.getPrice();
 			    long _nowPrice = nowPrice;
-			    if (_nowPrice <= 0 ){ //추가 부분
+			    if (_nowPrice <= 0 ){ //追加部分
 			    	return;
 			    }
-			    //경매게시판 관련 버그 추가 
-			    if (_amount < _nowPrice){//추가 부분
+			    //オークション掲示板関連のバグを追加 
+			    if (_amount < _nowPrice){//追加部分
 			       return; 
 			    }
 			    
-			    if (pc.getInventory().findItemId(L1ItemId.ADENA).getCount() < _amount){//추가 부분
+			    if (pc.getInventory().findItemId(L1ItemId.ADENA).getCount() < _amount){//追加部分
 					return; 
 				}
 
 				int nowBidderId = board.getBidderId();
 				if (pc.getInventory().consumeItem(L1ItemId.ADENA, amount)) {
-					// 경매 게시판을 갱신
+					// オークション掲示板を更新
 					board.setPrice(amount);
 					board.setBidder(pcName);
 					board.setBidderId(pc.getId());
 					boardTable.updateAuctionBoard(board);
 					if (nowBidderId != 0) {
-						// 입찰자에게 아데나를 환불
+						//入札者にアデナを返金
 						L1PcInstance bidPc = (L1PcInstance) L1World.getInstance().findObject(nowBidderId);
-						if (bidPc != null) { // 온라인중
+						if (bidPc != null) { //オンライン中
 							bidPc.getInventory().storeItem(L1ItemId.ADENA,nowPrice);
-							// 당신이 제시된 금액보다 좀 더 비싼 금액을 제시한 (분)편이 나타났기 때문에, 유감스럽지만 입찰에 실패했습니다. %n
-							// 당신이 경매에 맡긴%0아데나를 답례합니다. %n 감사합니다. %n%n
+							// あなたが提示された金額よりも少し高価な金額を提示した方が現われたので、残念ながら入札に失敗しました。 ％n
+							// あなたがオークションに任せ％0アデナをお返しします。 ％nありがとうございます。 ％n％n
 							bidPc.sendPackets(new S_ServerMessage(525, String.valueOf(nowPrice)));
-						} else { // 오프 라인중
+						} else { // オフライン中
 							L1ItemInstance item = ItemTable.getInstance().createItem(L1ItemId.ADENA);
 							item.setCount(nowPrice);
 							CharactersItemStorage storage = CharactersItemStorage.create();
@@ -113,10 +113,10 @@ public class C_Amount extends ClientBasePacket {
 						}
 					}
 				} else {
-					pc.sendPackets(new S_ServerMessage(189)); // \f1아데나가 부족합니다.
+					pc.sendPackets(new S_ServerMessage(189)); // \f1アデナが不足します。
 				}
 			}
-		} else if (s1.equalsIgnoreCase("agsell")) { // 가를 팔았을 경우
+		} else if (s1.equalsIgnoreCase("agsell")) { // 行売った場合
 			int houseId = Integer.valueOf(s2);
 			AuctionBoardTable boardTable = new AuctionBoardTable();
 			L1AuctionBoard board = new L1AuctionBoard();
@@ -142,19 +142,19 @@ public class C_Amount extends ClientBasePacket {
 			
 			if( pc.getInventory().findItemId(L1ItemId.ADENA).getCount() < amount)
 			{
-				pc.sendPackets(new S_SystemMessage("소지금액 이상을 설정할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("所持金額以上を設定することができません。"));
 				return;
 			}
 
 			if (board != null) {
-				// 경매 게시판에 신규 기입
+				// オークション掲示板に新規書き込み
 				board.setHouseId(houseId);
 				board.setHouseName(house.getHouseName());
 				board.setHouseArea(house.getHouseArea());
 				TimeZone tz = TimeZone.getTimeZone(Config.TIME_ZONE);
 				Calendar cal = Calendar.getInstance(tz);
-				cal.add(Calendar.DATE, 1); // 5일 후
-				cal.set(Calendar.MINUTE, 0); // 분 , 초는 잘라서 버림
+				cal.add(Calendar.DATE, 1); //5日後
+				cal.set(Calendar.MINUTE, 0); //分、秒は切り捨て
 				cal.set(Calendar.SECOND, 0);
 				board.setDeadline(cal);
 				board.setPrice(amount);
@@ -165,9 +165,9 @@ public class C_Amount extends ClientBasePacket {
 				board.setBidderId(0);
 				boardTable.insertAuctionBoard(board);
 
-				house.setOnSale(true);  // 경매중으로 설정
-				house.setPurchaseBasement(true); // 지하 아지트미구입으로 설정
-				HouseTable.getInstance().updateHouse(house); // DB에 기입해
+				house.setOnSale(true);  // オークション中の設定
+				house.setPurchaseBasement(true); // 地下アジト未購入に設定
+				HouseTable.getInstance().updateHouse(house); // DBに書き込まれ
 			}
 		} else {
 		    L1NpcAction action = NpcActionTable.getInstance().get(s, pc, npc);

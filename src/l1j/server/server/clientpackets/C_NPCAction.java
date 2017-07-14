@@ -2309,7 +2309,7 @@ public class C_NPCAction extends ClientBasePacket {
 
 			//清水（海賊島）
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71056) {
-			// 아들을 찾는다
+			// 息子を探す
 			if (s.equalsIgnoreCase("a")) {
 				pc.getQuest().set_step(L1Quest.QUEST_SIMIZZ, 1);
 				htmlid = "SIMIZZ7";
@@ -3118,7 +3118,7 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-			// 넘어진 항해사
+			// 倒れた航海士
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 80076) {
 			if (s.equalsIgnoreCase("A")) {
 				int[] diaryno = { 49082, 49083 };
@@ -5890,7 +5890,7 @@ public class C_NPCAction extends ClientBasePacket {
 				810850, 810849 // 72 // - この部分である。
 
 		}; // ソファンモプ定める構文....
-		summonlvl_list = new int[] { 28, 28, 28, 32, 32, 32, 36, 36, 36, 40, 40, 40, 44, 44, 44, 48, 48, 48, 52, 52, 52, 56, 56, 56, 60, 60, 60, 64, 68, 72, 72 };// 술자 레벨제한
+		summonlvl_list = new int[] { 28, 28, 28, 32, 32, 32, 36, 36, 36, 40, 40, 40, 44, 44, 44, 48, 48, 48, 52, 52, 52, 56, 56, 56, 60, 60, 60, 64, 68, 72, 72 };// 術者レベル制限
 		summoncha_list = new int[] { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 14, 36, 36, 50 };//カリー
 		// 消費構文
 		for (int loop = 0; loop < summonstr_list.length; loop++) {

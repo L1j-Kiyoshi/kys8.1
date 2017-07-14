@@ -44,11 +44,11 @@ public class C_ChangeWarTime extends ClientBasePacket {
 		L1Clan clan = L1World.getInstance().getClan(player.getClanname());
 		if (clan != null) {
 			int castle_id = clan.getCastleId();
-			if (castle_id != 0) { // 성주 크란
+			if (castle_id != 0) { // 城主クラン
 				L1Castle l1castle = CastleTable.getInstance().getCastleTable(castle_id);
-				player.sendPackets(new S_ServerMessage(305)); // 추가
-				//Calendar cal = l1castle.getWarTime(); // 주석처리
-				//player.sendPackets(new S_WarTime(cal)); // 주석처리
+				player.sendPackets(new S_ServerMessage(305)); // 追加
+				//Calendar cal = l1castle.getWarTime(); // コメントアウト
+				//player.sendPackets(new S_WarTime(cal)); // コメントアウト
 			}
 		}
 	}

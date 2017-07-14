@@ -31,11 +31,11 @@ public class C_BanClan extends ClientBasePacket {
 		L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 		if (clan != null) {
 			int i;
-			if (pc.isCrown() && pc.getId() == clan.getLeaderId()) { // 군주, 한편,
-				// 혈맹주
+			if (pc.isCrown() && pc.getId() == clan.getLeaderId()) { // 君主、一方、
+				// 血盟主
 				for (i = 0; i < clan.getClanMemberList().size(); i++) {
-					if (pc.getName().toLowerCase().equals(s.toLowerCase())) { // 군주
-						// 자신
+					if (pc.getName().toLowerCase().equals(s.toLowerCase())) { // 君主
+						//自分
 						return;
 					}
 				}
@@ -45,39 +45,39 @@ public class C_BanClan extends ClientBasePacket {
 					return;
 				}
 				L1PcInstance tempPc = L1World.getInstance().getPlayer(s);
-				if (tempPc != null) { // 온라인중
-					if (tempPc.getClanid() == pc.getClanid()) { // 같은 크란
+				if (tempPc != null) { // オンライン中
+					if (tempPc.getClanid() == pc.getClanid()) { // 同じクラン
 						tempPc.ClearPlayerClanData(clan);
 						clan.removeClanMember(tempPc.getName());
 						pc.sendPackets(new S_PacketBox(pc, S_PacketBox.PLEDGE_REFRESH_MINUS));
 						tempPc.sendPackets(new S_ServerMessage(238, pc.getClanname()));
-						// 당신은%0혈맹으로부터추방되었습니다.
-						pc.sendPackets(new S_ServerMessage(240, tempPc.getName())); // %0가
-						// %0가당신의 혈맹으로부터추방되었습니다.
+						// あなたは％0血盟から追放されました。
+						pc.sendPackets(new S_ServerMessage(240, tempPc.getName())); // ％0が
+						// %0があなたの血盟から追放されました。
 					} else {
 						pc.sendPackets(new S_ServerMessage(109, s));
-						// %0라는이름의사람은없습니다.
+						// %0という名前の人はありません。
 					}
-				} else { // 오프 라인중
+				} else { //オフライン中
 					try {
 						L1PcInstance restorePc = CharacterTable.getInstance().restoreCharacter(s);
 						if (restorePc != null && restorePc.getClanid() == pc.getClanid()) {
-							// 같은 혈맹
+							//同じ血盟
 							restorePc.ClearPlayerClanData(clan);
 							clan.removeClanMember(restorePc.getName());
 							pc.sendPackets(new S_ServerMessage(240, restorePc.getName()));
-							// %0가당신의 혈맹으로부터추방되었습니다.
+							// %0があなたの血盟から追放されました。
 						} else {
 							pc.sendPackets(new S_ServerMessage(109, s));
-							// %0라는이름의사람은없습니다.
+							// %0という名前の人はありません。
 						}
 					} catch (Exception e) {
 						_log.log(Level.SEVERE, "C_BanClan[]Error", e);
 					}
 				}
 			} else {
-				pc.sendPackets(new S_ServerMessage(518)); // 이 명령은 혈맹의 군주만 이용할
-				// 수 있습니다.
+				pc.sendPackets(new S_ServerMessage(518)); //このコマンドは、血盟の君主のみ利用
+				//することができます。
 			}
 		}
 	}

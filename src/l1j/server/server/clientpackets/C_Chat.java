@@ -34,7 +34,7 @@ public class C_Chat extends ClientBasePacket {
 		if (pc.getLevel() >= Config.GLOBAL_CHAT_LEVEL) {
 			
 			if (pc.isGm() || L1World.getInstance().isWorldChatElabled()) {
-				if (pc.get_food() >= 12) { // 5%겟지?
+				if (pc.get_food() >= 12) { // 5％ラゲッジ？
 					S_PacketBox pb = new S_PacketBox(S_PacketBox.FOOD,pc.get_food());
 					pc.sendPackets(pb, true);
 					S_PacketBox pb2 = new S_PacketBox(S_PacketBox.FOOD,pc.get_food());
@@ -48,8 +48,8 @@ public class C_Chat extends ClientBasePacket {
 					for (L1PcInstance listner : L1World.getInstance().getAllPlayers()) {
 						L1ExcludingList spamList15 = SpamTable.getInstance().getExcludeTable(listner.getId());
 						if (!spamList15.contains(0, pc.getName())) {
-							S_NewChat cp = new S_NewChat(pc,4,12,chatText,""); //장사채팅
-							//S_NewChat cp = new S_NewChat(pc, 4, 3, chatText, ""); //일반채팅
+							S_NewChat cp = new S_NewChat(pc,4,12,chatText,""); //商売チャット
+							//S_NewChat cp = new S_NewChat(pc, 4, 3, chatText, ""); //一般的なチャット
 							listner.sendPackets(cp, true);
 						}
 					}

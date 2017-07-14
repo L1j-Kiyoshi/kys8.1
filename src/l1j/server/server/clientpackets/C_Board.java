@@ -5,8 +5,8 @@ import l1j.server.server.model.L1Object;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1AuctionBoardInstance;
 import l1j.server.server.model.Instance.L1BoardInstance;
-// 랭킹 게시판
-// 랭킹 게시판  
+//ランキング掲示板
+// ランキング掲示板  
 
 public class C_Board extends ClientBasePacket {
 
@@ -21,7 +21,7 @@ public class C_Board extends ClientBasePacket {
 		int objectId = readD();
 		L1Object obj = L1World.getInstance().findObject(objectId);
 		if (!isBoardInstance(obj)) {
-			return; // 부정 클라이언트가 아니면 있을 수 없겠지만···
+			return; // 不正クライアントでなければすることができないだろうが···
 		}
 		
 		obj.onAction(clientthread.getActiveChar());

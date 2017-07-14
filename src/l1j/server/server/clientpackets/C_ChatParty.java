@@ -19,18 +19,18 @@ public class C_ChatParty extends ClientBasePacket {
 			return;
 		}
 	    int type = readC();
-		if (type == 0) { // /chatbanish 커멘드
+		if (type == 0) { // /chatbanishコマンド
 			String name = readS();
-			if (!pc.isInChatParty()) { // 파티에 가입하고 있지 않습니다.
+			if (!pc.isInChatParty()) { // パーティーに加入していません。
 				pc.sendPackets(new S_ServerMessage(425));
 				return;
 			}
-			if (!pc.getChatParty().isLeader(pc)) { // 파티의 리더만을 추방할 수 있습니다.
+			if (!pc.getChatParty().isLeader(pc)) { // パーティーのリーダーだけ追放することができます。
 				pc.sendPackets(new S_ServerMessage(427));
 				return;
 			}
 			L1PcInstance targetPc = L1World.getInstance().getPlayer(name);
-			if (targetPc == null) { // %0라는 이름의 사람은 없습니다.
+			if (targetPc == null) { // %0という名前の人はありません。
 				pc.sendPackets(new S_ServerMessage(109));
 				return;
 			}
@@ -44,14 +44,14 @@ public class C_ChatParty extends ClientBasePacket {
 					return;
 				}
 			}
-			// 발견되지 않았다
-			// %0는 파티 멤버가 아닙니다.
+			// 発見されなかった
+			// %0は、パーティーメンバーがありません。
 			pc.sendPackets(new S_ServerMessage(426, name));
-		} else if (type == 1) { // /chatoutparty 커멘드
+		} else if (type == 1) { // /chatoutpartyコマンド
 			if (pc.isInChatParty()) {
 				pc.getChatParty().leaveMember(pc);
 			}
-		} else if (type == 2 || type == 4 || type == 5) { // /chatparty 커멘드
+		} else if (type == 2 || type == 4 || type == 5) { // /chatpartyコマンド
 			L1ChatParty chatParty = pc.getChatParty();
 			if (pc.isInChatParty()) {
 				pc.sendPackets(new S_Party("party", pc.getId(), chatParty.getLeader().getName(), chatParty.getMembersNameList()));

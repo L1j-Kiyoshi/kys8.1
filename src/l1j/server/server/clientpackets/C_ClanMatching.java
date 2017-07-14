@@ -47,13 +47,13 @@ public class C_ClanMatching extends ClientBasePacket {
 		}
 		/**
 		 * type
-		 * 0: 등록, 수정						' 완료 ' 
-		 * 1: 등록취소, 군주에게만			' 완료 '
-		 * 2: 추천혈맹, 새로고침				' 완료 ' 
-		 * 3: 신청목록, 새로고침				' 완료 '
-		 * 4: 요청목록, 새로고침				' 완료 '
-		 * 5: 신청하기. clanobjid			' 완료 '
-		 * 6: type 1: 승인, 2: 거절, 3: 삭제	' 완료 '
+		 * 0: 登録、修正、完了」 
+		 * 1:登録解除、君主のみ「完了」
+		 * 2: おすすめ血盟、リフレッシュ「完了」 
+		 * 3: 申し込みリスト、更新[完了]
+		 * 4: 欲しい物のリスト、更新[完了]
+		 * 5: 適用する。 clanobjid「完了」
+		 * 6: type 1：承認、2：拒絶、3：削除[完了]
 		 */
 		int type = readC();
 		int objid = 0;
@@ -82,7 +82,7 @@ public class C_ClanMatching extends ClientBasePacket {
 				}
 			} else {
 				switch (pc.getClanRank()) {
-					case 4:	case 6: case 9:case 10: // 부군주, 혈맹군주, 수호기사
+					case 4:	case 6: case 9:case 10: // 部君主、血盟君主、守護騎士
 						cml.loadClanMatchingApcList_Crown(pc);
 					break; 
 				}
@@ -97,21 +97,21 @@ public class C_ClanMatching extends ClientBasePacket {
 			}
 		} else if (type == 6) {
 			objid = readD();
-			htype = readC(); // 1: 승인, 2: 거절, 3: 삭제
+			htype = readC(); // 1: 承認、2：拒絶、3：削除
 			L1ClanMatching cml = L1ClanMatching.getInstance();
 			if (htype == 1) {
 				L1Object target = L1World.getInstance().findObject(objid);
 				if (target != null & target instanceof L1PcInstance) {
 					L1PcInstance user = (L1PcInstance) target;
 					if (!pc.getCMAList().contains(user.getName())) {
-						pc.sendPackets(new S_SystemMessage("신청을 취소한 유저입니다."));
+						pc.sendPackets(new S_SystemMessage("申請をキャンセルしたユーザーです。"));
 					} else {
 						if (L1ClanJoin.getInstance().ClanJoin(pc, user)) {
 							cml.deleteClanMatchingApcList(user);
 						}
 					}
 				} else if (target == null) {
-					pc.sendPackets(new S_SystemMessage("비접속중인 유저 입니다."));
+					pc.sendPackets(new S_SystemMessage("非接続中のユーザです。"));
 				}
 			} else if (htype == 2) {
 				L1Object target = L1World.getInstance().findObject(objid);

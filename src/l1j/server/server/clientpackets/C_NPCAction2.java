@@ -328,7 +328,7 @@ public class C_NPCAction2 {
 		/** セシリア */
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 7000080) {
 				L1NpcInstance npc = (L1NpcInstance) obj;
-				if (s.equalsIgnoreCase("A")) {// 상아탑몬스터
+				if (s.equalsIgnoreCase("A")) {// 象牙の塔のモンスター
 					if (pc.getInventory().checkItem(80466)) {
 						pc.getInventory().consumeItem(80466, 1);
 						L1SpawnUtil.spawn2(32878, 32816, (short) pc.getMapId() , 900076, 0, 3600 * 1000 , 0);
@@ -587,7 +587,7 @@ public class C_NPCAction2 {
 					if (pc.getInventory().checkItem(80478)) {
 						pc.getInventory().consumeItem(80478, 1);
 						L1SpawnUtil.spawn2(32878, 32816, (short) pc.getMapId(), 45600, 0, 3600 * 1000 , 0);
-						pc.sendPackets(new S_NpcChatPacket(npc, "'흑기사 대장 커츠'가 중앙에 소환되었습니다.", 0));
+						pc.sendPackets(new S_NpcChatPacket(npc, "「黒騎士隊長カーツ」が中央に召喚されました。", 0));
 					} else {
 						htmlid = "bosskey10";
 					}
@@ -615,7 +615,7 @@ public class C_NPCAction2 {
 				}
 			}
 				
-				//슈콘,슈고
+				//シュコン、シューゴ
 			} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 7210047
 					|| ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 7210048) {
 				if (s.equalsIgnoreCase("a")){
@@ -649,11 +649,11 @@ public class C_NPCAction2 {
 						htmlid = "";
 					} else {
 						htmlid = "dvdgate2";
-						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\fQ지룡의 던전: \\f3[Lv."+ Config.용던입장레벨 +"~ "+Config.용던제한레벨+"]\\fQ まで入場可能レベルです。"));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\fQ地竜のダンジョン: \\f3[Lv."+ Config.용던입장레벨 +"~ "+Config.용던제한레벨+"]\\fQ まで入場可能レベルです。"));
 						}
 					}
 				
-				//수룡의던전
+				//水竜のダンジョン
 			} else if (((L1NpcInstance)obj).getNpcTemplate().get_npcId() == 7210000) { 
 				if (s.equalsIgnoreCase("1")){
 					if (pc.getDrageonTime() >= 120){
@@ -2158,7 +2158,7 @@ public class C_NPCAction2 {
 							pc.getInventory().consumeItem(41246,1000);
 							pc.getInventory().storeItem(820016, 1000);
 							pc.sendPackets(new S_SystemMessage("風鈴のブラックミスリルアロー（1000）を獲得。"));
-							htmlid = "";//풍령의 블랙 미스릴 화살
+							htmlid = "";//風鈴のブラックミスリルアロー
 						} else {
 							pc.sendPackets(new S_SystemMessage("ブラックミスリルアロー（1000）、結晶（1000）が必要です。"));
 						}
@@ -2267,7 +2267,7 @@ public class C_NPCAction2 {
 						인첸트지급(pc, 203005, 1, 0);
 						htmlid = "";
 					} else {
-//						+9 질풍의 도끼 1개 + 봉인된 산적의 도끼
+//						+9疾風の斧1個+封印された盗賊の斧
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
 					}
 				}
@@ -2354,7 +2354,7 @@ public class C_NPCAction2 {
 						htmlid = "anold2";
 					}
 				}
-				//나루터
+				//渡し場
 			} else if (npcid == 9){
 				if (s.equals("a")) {// 一般補償
 					if(pc.getLevel() >= 30){

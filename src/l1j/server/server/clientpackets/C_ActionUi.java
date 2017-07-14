@@ -19,7 +19,6 @@ import l1j.server.server.datatables.ClanTable;
 import l1j.server.server.datatables.ExpTable;
 import l1j.server.server.datatables.ItemTable;
 import l1j.server.server.datatables.NpcActionTable;
-import l1j.server.server.datatables.NpcTable;
 import l1j.server.server.datatables.RankTable;
 import l1j.server.server.datatables.WeekQuestTable;
 import l1j.server.server.model.Broadcaster;
@@ -53,12 +52,12 @@ import l1j.server.server.serverpackets.S_MatizCloudia;
 import l1j.server.server.serverpackets.S_NPCTalkReturn;
 import l1j.server.server.serverpackets.S_NewCreateItem;
 import l1j.server.server.serverpackets.S_PacketBox;
+import l1j.server.server.serverpackets.S_Ranking2;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SkillSound;
 import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.serverpackets.S_TamWindow;
 import l1j.server.server.serverpackets.S_WeekQuest;
-import l1j.server.server.serverpackets.S_Ranking2;
 import l1j.server.server.templates.L1PrivateShopBuyList;
 import l1j.server.server.templates.L1PrivateShopSellList;
 import l1j.server.server.utils.SQLUtil;
@@ -70,15 +69,15 @@ public class C_ActionUi extends ClientBasePacket {
 	private static final String C_ACTION_UI = "[C] C_ActionUi";
 	private static final int CRAFT_ITEM = 0x36;
 	private static final int CRAFT_ITEMLIST = 0x38; // 0x38;
-	private static final int CRAFT_OK = 0x3a; // 첫번째 타입
-	private static final int ACCOUNT_TAM = 0x01cc;//탐창
-	private static final int ACCOUNT_TAM_CANCEL = 0x01e0;//탐 취소
-	private static final int ACCOUNT_TAM_UPDATE = 0x013d;//탐
-	private static final int 액션 = 0x013F;
+	private static final int CRAFT_OK = 0x3a; // 最初のタイプ
+	private static final int ACCOUNT_TAM = 0x01cc;//タムチャン
+	private static final int ACCOUNT_TAM_CANCEL = 0x01e0;//乗車キャンセル
+	private static final int ACCOUNT_TAM_UPDATE = 0x013d;//乗車
+	private static final int ACTION = 0x013F;
 	private static final int 수상한하늘정원 = 0x84;
-	/*private static final int 혈맹가입 = 0x0142;
-	private static final int 혈맹가입신청받기설정 = 0x0146;
-	private static final int 혈맹모집세팅 = 0x014C;*/
+	/*private static final int血盟加入= 0x0142;
+	private static final int 血盟加入申請受信設定= 0x0146;
+	private static final int 血盟募集セッティング = 0x014C;*/
 	private static final int 가입대기 = 0x44;
 	private static final int 공성관련 = 0x45;
 	private static final int 표식설정 = 0x0152;
@@ -100,7 +99,7 @@ public class C_ActionUi extends ClientBasePacket {
 		String s = null;
 		L1NpcInstance npc;
 		L1NpcAction action;
-		//System.out.println("액션 > " + type);
+		//System.out.println("アクション > " + type);
 		switch (type) {
 		case 클라우디아:
 			//0000: f1 0c 02 03 00 08 80 02 4a 0e b9 36
@@ -121,13 +120,13 @@ public class C_ActionUi extends ClientBasePacket {
 		case 알람:
 			readH();
 			readC();
-			int num =readC(); //에르자베 1, 샌드 웜 2, 기사단 3 등등 S_MatizAlarm에서 추가하신 case대로 나옵니다.
+			int num =readC(); //エルジャベ1、サンドワーム2、騎士団3等S_MatizAlarmで追加されたcase通り出てきます。
 			readC();
 			switch(num){
-				case 1 ://에르자베
+				case 1 ://エルジャベ
 					new L1Teleport().teleport(pc, 32899, 33244, (short)4,pc.getMoveState().getHeading(), true);
 					break;
-				case 2: //샌드웜
+				case 2: //サンドワーム
 					new L1Teleport().teleport(pc, 32899, 33244, (short)4,pc.getMoveState().getHeading(), true);
 					break;
 				case 3:
@@ -172,12 +171,12 @@ public class C_ActionUi extends ClientBasePacket {
 	              }
 	              if (sellObjectId != checkItem.getId()) {
 	                tradable = false;
-	                pc.sendPackets(new S_SystemMessage("비정상 아이템 입니다. 다시 시도해주세요."), true);
+	                pc.sendPackets(new S_SystemMessage("異常アイテムです。再試行してください。"), true);
 	              }
 
 	              if ((!checkItem.isStackable()) && (sellCount != 1)) {
 	                tradable = false;
-	                pc.sendPackets(new S_SystemMessage("비정상 아이템 입니다. 다시 시도해주세요."), true);
+	                pc.sendPackets(new S_SystemMessage("異常アイテムです。再試行してください。"), true);
 	              }
 
 	              if (sellCount > checkItem.getCount()) {
@@ -185,7 +184,7 @@ public class C_ActionUi extends ClientBasePacket {
 	              }
 	              if ((checkItem.getCount() < sellCount) || (checkItem.getCount() <= 0) || (sellCount <= 0)) {
 	                tradable = false;
-	                pc.sendPackets(new S_SystemMessage("비정상 아이템 입니다. 다시 시도해주세요."), true);
+	                pc.sendPackets(new S_SystemMessage("異常アイテムです。再試行してください。"), true);
 	              }
 
 	              if (checkItem.getBless() >= 128) {
@@ -193,7 +192,7 @@ public class C_ActionUi extends ClientBasePacket {
 	                pc.sendPackets(new S_ServerMessage(210, checkItem.getItem().getName()));
 	              }
 
-	              if (checkItem.getEndTime() != null) { pc.sendPackets(new S_SystemMessage("시간제 아이템은 상점등록이 불가능합니다."), true);
+	              if (checkItem.getEndTime() != null) { pc.sendPackets(new S_SystemMessage("時間制アイテムは商店登録ができません。"), true);
 	                return; }
 					L1DollInstance 인형 = null;
 					for (Object 인형오브젝트 : pc.getDollList()) {
@@ -202,21 +201,21 @@ public class C_ActionUi extends ClientBasePacket {
 							if (checkItem.getId() == 인형.getItemObjId()) {
 
 								tradable = false;
-								pc.sendPackets(new S_SystemMessage("소환중인 인형은 상점에 올릴 수 없습니다."), true);
+								pc.sendPackets(new S_SystemMessage("召喚中の人形は、お店に上げることができません。"), true);
 							}
 						}
 					}
 
 	              if (!checkItem.getItem().isTradable()) {
 	                tradable = false;
-	                pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "거래 불가능합니다. "), true);
+	                pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "取引は不可能です。"), true);
 	              }
 					for (Object petObject : pc.getPetList().values().toArray()) {
 						if (petObject instanceof L1PetInstance) {
 							L1PetInstance pet = (L1PetInstance) petObject;
 							if (checkItem.getId() == pet.getItemObjId()) { 
 								tradable = false;
-								pc.sendPackets(new S_ServerMessage(166,checkItem.getItem().getName(),"거래 불가능합니다. "), true);
+								pc.sendPackets(new S_ServerMessage(166,checkItem.getItem().getName(),"取引は不可能です。"), true);
 								break;
 							}
 						}
@@ -246,12 +245,12 @@ public class C_ActionUi extends ClientBasePacket {
 	              }
 	              if (buyObjectId != checkItem.getId()) {
 	                tradable = false;
-	                pc.sendPackets(new S_SystemMessage("비정상 아이템 입니다. 다시 시도해주세요."), true);
+	                pc.sendPackets(new S_SystemMessage("異常アイテムです。再試行してください。"), true);
 	              }
 
 	              if ((!checkItem.isStackable()) && (buyCount != 1)) {
 	                tradable = false;
-	                pc.sendPackets(new S_SystemMessage("비정상 아이템 입니다. 다시 시도해주세요."), true);
+	                pc.sendPackets(new S_SystemMessage("異常アイテムです。再試行してください。"), true);
 	              }
 
 	              if (buyCount > checkItem.getCount()) {
@@ -259,7 +258,7 @@ public class C_ActionUi extends ClientBasePacket {
 	              }
 	              if ((checkItem.getCount() < buyCount) || (checkItem.getCount() <= 0) || (buyCount <= 0)) {
 	                tradable = false;
-	                pc.sendPackets(new S_SystemMessage("비정상 아이템 입니다. 다시 시도해주세요."), true);
+	                pc.sendPackets(new S_SystemMessage("異常アイテムです。再試行してください。"), true);
 	              }
 
 	              if (checkItem.getBless() >= 128) {
@@ -267,7 +266,7 @@ public class C_ActionUi extends ClientBasePacket {
 	                pc.sendPackets(new S_ServerMessage(210, checkItem.getItem().getName()));
 	              }
 
-	              if (checkItem.getEndTime() != null) { pc.sendPackets(new S_SystemMessage("시간제 아이템은 상점등록이 불가능합니다."), true);
+	              if (checkItem.getEndTime() != null) { pc.sendPackets(new S_SystemMessage("時間制アイテムは商店登録ができません。"), true);
 	                return; }
 					L1DollInstance 인형 = null;
 					for (Object 인형오브젝트 : pc.getDollList()) {
@@ -276,21 +275,21 @@ public class C_ActionUi extends ClientBasePacket {
 							if (checkItem.getId() == 인형.getItemObjId()) {
 
 								tradable = false;
-								pc.sendPackets(new S_SystemMessage("소환중인 인형은 상점에 올릴 수 없습니다."), true);
+								pc.sendPackets(new S_SystemMessage("召喚中の人形は、お店に上げることができません。"), true);
 							}
 						}
 					}
 
 	              if (!checkItem.getItem().isTradable()) {
 	                tradable = false;
-	                pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "거래 불가능합니다. "), true);
+	                pc.sendPackets(new S_ServerMessage(166, checkItem.getItem().getName(), "取引は不可能です。"), true);
 	              }
 					for (Object petObject : pc.getPetList().values().toArray()) {
 						if (petObject instanceof L1PetInstance) {
 							L1PetInstance pet = (L1PetInstance) petObject;
 							if (checkItem.getId() == pet.getItemObjId()) { 
 								tradable = false;
-								pc.sendPackets(new S_ServerMessage(166,checkItem.getItem().getName(),"거래 불가능합니다. "), true);
+								pc.sendPackets(new S_ServerMessage(166,checkItem.getItem().getName(),"取引は不可能です。"), true);
 								break;
 							}
 						}
@@ -449,7 +448,7 @@ public class C_ActionUi extends ClientBasePacket {
 
 				if (!pc.getInventory().consumeItem(140100, 1)) {
 					S_SystemMessage sm = new S_SystemMessage(
-							"\\aG 축복의 순간이동 주문서가 부족 합니다.");
+							"\\aG 祝福のテレポートスクロールが不足します。");
 					pc.sendPackets(sm, true);
 					return;
 				}
@@ -459,12 +458,12 @@ public class C_ActionUi extends ClientBasePacket {
 
 					new L1Teleport().teleport(pc, spawndata.getLocX(), spawndata.getLocY(), spawndata.getMapId(), pc.getHeading(), true);
 					S_SystemMessage sm = new S_SystemMessage(
-							"\\aG잠시후 주간 퀘스트 몬스터 지역으로 이동합니다.");
+							"\\aGしばらくして週間クエストモンスターの地域に移動します。");
 
 					pc.sendPackets(sm, true);
 				} else {
-					System.out.println(" 도감 퀘스트 몬스터 : " + npc_id
-							+ " 의 텔레포트 위치를 찾지 못했습니다.");
+					System.out.println("図鑑クエストモンスター：" + npc_id
+							+ "のテレポート位置が見つかりません。");
 
 					pc.sendPackets(new S_WeekQuest(566));
 				}
@@ -490,7 +489,7 @@ public class C_ActionUi extends ClientBasePacket {
 				
 			
 			}
-			pc.getInventory().storeItem(500001, 1); // 군터의 인장
+			pc.getInventory().storeItem(500001, 1); //ギュンターの引張
 			pc.sendPackets(new S_WeekQuest(pc));
 			break;
 		case 출석: 
@@ -532,8 +531,8 @@ public class C_ActionUi extends ClientBasePacket {
 				pc.sendPackets(new S_Ranking2(S_Ranking2.SHOW_RANK_UI));
 			}
 			break;
-		/*case 혈맹가입신청받기설정:
-			if (pc.getClanid() == 0 || (!pc.isCrown() && pc.getClanRank() != L1Clan.수호))
+		/*case 血盟加入申請受信設定：
+			if (pc.getClanid() == 0 || (!pc.isCrown() && pc.getClanRank() != L1Clan.守護））
 				return;
 			readC();
 			readH();
@@ -541,7 +540,7 @@ public class C_ActionUi extends ClientBasePacket {
 			readC();
 			int setting2 = readC();
 			if (setting2 == 2) {
-				pc.sendPackets(new S_SystemMessage("현재 암호 가입 유형으로 설정할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage（「現在のパスワード登録のタイプに設定することができません。 "））;
 				setting2 = 1;
 			}
 			
@@ -551,7 +550,7 @@ public class C_ActionUi extends ClientBasePacket {
 			ClanTable.getInstance().updateClan(pc.getClan());
 			pc.sendPackets(new S_ServerMessage(3980));
 			break;*/
-		/*case 혈맹가입:
+		/*case 血盟加入：
 			try {
 				readC();
 				readH();
@@ -572,7 +571,7 @@ public class C_ActionUi extends ClientBasePacket {
 				
 				L1Clan clan = L1World.getInstance().getClan(clanname);
 				if (clan == null) {
-					pc.sendPackets(new S_SystemMessage("존재하지않는 혈맹입니다."));
+					pc.sendPackets(new S_SystemMessage（「存在しない血盟です。 "））;
 					pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.CLAN_JOIN_MESSAGE, 4));
 					return;
 				}
@@ -593,13 +592,13 @@ public class C_ActionUi extends ClientBasePacket {
 							pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.CLAN_JOIN_MESSAGE, 0));
 							return;
 						} else {
-							cra.setTempID(pc.getId()); // 상대의 오브젝트 ID를 보존해 둔다
+							cra.setTempID(pc.getId()); //相手のオブジェクトIDを保存しておく
 							S_Message_YN myn = new S_Message_YN(97, pc.getName());
 							cra.sendPackets(myn, true);
 							pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.CLAN_JOIN_MESSAGE, 1));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("혈맹의 군주나 수호계급혈맹원이 접속되어있어야 사용가능합니다."));
+						pc.sendPackets(new S_SystemMessage（「血盟の君主や守護階級血盟員が接続されている必要があり使用可能です。 "））;
 						pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.CLAN_JOIN_MESSAGE, 11));
 						return;
 					}
@@ -609,18 +608,18 @@ public class C_ActionUi extends ClientBasePacket {
 				clear();
 			}
 			break;*/
-		/*case 혈맹모집세팅:
+		/*case血盟募集セッティング：
 			if (pc.getClanid() == 0)
 				return;
 			pc.sendPackets(new S_ACTION_UI2(S_ACTION_UI2.CLAN_JOIN_SETTING, pc.getClan().getJoinSetting(), pc.getClan().getJoinType()));
 			break;*/
 		case 수상한하늘정원:
 			if (!pc.PCRoom_Buff) {
-				pc.sendPackets(new S_SystemMessage("PC방 이용권을 사용중에만 사용 가능한 행동입니다."));
+				pc.sendPackets(new S_SystemMessage("PC部屋利用権を使用中のみ使用可能なアクションです。"));
 				return;
 			}
 			if (pc.getMapId() == 99 || pc.getMapId() == 6202) {
-				pc.sendPackets(new S_SystemMessage("주위의 마력에의해 순간이동을 사용할 수 없습니다."));
+				pc.sendPackets(new S_SystemMessage("周囲の魔力によって瞬間移動を使用することができません。"));
 				return;
 			}
 
@@ -641,7 +640,7 @@ public class C_ActionUi extends ClientBasePacket {
 				new L1Teleport().teleport(pc, 32770, 32839, (short) 622, pc.getHeading(), true);
 			}
 			break;
-		case CRAFT_ITEM: // 제작 시스템
+		case CRAFT_ITEM: // 制作システム
 			pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.CRAFT_ITEM));
 			break;
 		case CRAFT_ITEMLIST:
@@ -671,8 +670,8 @@ public class C_ActionUi extends ClientBasePacket {
 			if (obj instanceof L1NpcInstance) {
 				npc = (L1NpcInstance) obj;
 				if (itemtype == 116) {
-					if ((pc.getInventory().checkEnchantItem(5, 8, 1) // [+7]마력의
-																		// 단검
+					if ((pc.getInventory().checkEnchantItem(5, 8, 1) // [+7]馬力の
+																		//短剣
 							|| pc.getInventory().checkEnchantItem(6, 8, 1)
 							|| pc.getInventory().checkEnchantItem(32, 8, 1)
 							|| pc.getInventory().checkEnchantItem(37, 8, 1)
@@ -701,8 +700,8 @@ public class C_ActionUi extends ClientBasePacket {
 						인첸트지급(pc, 602, 1, 7);
 					}
 				} else if (itemtype == 123) {
-					if ((pc.getInventory().checkEnchantItem(5, 9, 1) // [+8]마력의
-																		// 단검
+					if ((pc.getInventory().checkEnchantItem(5, 9, 1) // [+8]馬力の
+																		// 短剣
 							|| pc.getInventory().checkEnchantItem(6, 9, 1)
 							|| pc.getInventory().checkEnchantItem(32, 9, 1)
 							|| pc.getInventory().checkEnchantItem(37, 9, 1)
@@ -731,654 +730,654 @@ public class C_ActionUi extends ClientBasePacket {
 						인첸트지급(pc, 602, 1, 8);
 					}
 					
-					/** 엘릭서 제작아이템 확률 **/
-				} else if (itemtype == 1043) {//엘릭서 [STR]
+					/** エリクサー製作アイテム確率 **/
+				} else if (itemtype == 1043) {//エリクサー[STR]
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//재료아이템
-						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//아이템 회수
+					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//材料アイテム
+						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 10) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 10) { // 20％の確率で成功
 							인첸트지급(pc, 40033, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'엘릭서[STR]'\\aA을 획득"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して \\aG「エリクサー[STR]「\\aAを獲得"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1044) {//엘릭서 [STR]
+				} else if (itemtype == 1044) {//エリクサー [STR]
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//재료아이템
-						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//아이템 회수
+					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//材料アイテム
+						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 30) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 30) { // 20％の確率で成功
 							인첸트지급(pc, 40034, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'엘릭서[STR]'\\aA을 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して \\aG「エリクサー[STR]「\\aAを獲得"));
+						} else { //残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
 				} else if (itemtype == 1045) {//엘릭서 [DEX]
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//재료아이템
-						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//아이템 회수
+					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//材料アイテム
+						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//アイテム回収
 							;
 						}
 						if (random.nextInt(100) < 30) { // 20%의 확률로 성공
 							인첸트지급(pc, 40035, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'엘릭서[DEX]'\\aA을 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して \\aG「エリクサー[DEX]」\\aAを獲得"));
+						} else { // 残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました."));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1046) {//엘릭서 [INT]
+				} else if (itemtype == 1046) {//エリクサー[INT]
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//재료아이템
-						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//아이템 회수
+					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//材料アイテム
+						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 30) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 30) { // 20％の確率で成功
 							인첸트지급(pc, 40036, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'엘릭서[INT]'\\aA을 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して \\aG「エリクサー[INT]」\\aAを獲得"));
+						} else { // 残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1047) {//엘릭서 [WIS]
+				} else if (itemtype == 1047) {//エリクサー[WIS]
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//재료아이템
-						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//아이템 회수
+					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//材料アイテム
+						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 30) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 30) { // 20％の確率で成功
 							인첸트지급(pc, 40037, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'엘릭서[WIS]'\\aA을 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して \\aG「エリクサー[WIS]」\\aAを獲得"));
+						} else { //残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1048) {//엘릭서 [CHA]
+				} else if (itemtype == 1048) {//エリクサー[CHA]
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//재료아이템
-						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//아이템 회수
+					if ((pc.getInventory().checkItem(820018, 35) && pc.getInventory().checkItem(410061, 2))) {//材料アイテム
+						if (pc.getInventory().consumeItem(820018, 35) && pc.getInventory().consumeItem(410061, 2)) {//アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 30) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 30) { // 20％の確率で成功
 							인첸트지급(pc, 40038, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'엘릭서[CHA]'\\aA을 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して \\aG「エリクサー[CHA]」\\aAを獲得"));
+						} else { // 残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
 					
 					
-				} else if (itemtype == 2747) {//오림 주문서
+				} else if (itemtype == 2747) {//クリップボード書
 					Random random = new Random();
-					if (pc.getInventory().checkItem(810012, 3)) {//재료아이템
-						if (pc.getInventory().consumeItem(810012, 3)) {//아이템 회수
+					if (pc.getInventory().checkItem(810012, 3)) {//材料アイテム
+						if (pc.getInventory().consumeItem(810012, 3)) {//アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 5) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 5) { // 20％の確率で成功
 							인첸트지급(pc, 810013, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("제작에 성공 하였습니다."));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("製作に成功しました。"));
+						} else { // 残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
-							pc.sendPackets(new S_SystemMessage("제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다."));
+						pc.sendPackets(new S_SystemMessage("材料が不足しています。"));
 					}
 					
 					
-					/** 아놀드 제작아이템 **/
+					/** アーノルド製作アイテム **/
 				} else if (itemtype == 1647) {//양손검
 					if ((pc.getInventory().checkEnchantItem(307, 10, 1))) {
 						pc.getInventory().consumeEnchantItem(307, 10, 1);
 						인첸트지급(pc, 30148, 1, 0);
 					}
-				} else if (itemtype == 1648) {//지팡이
+				} else if (itemtype == 1648) {//杖
 					if ((pc.getInventory().checkEnchantItem(308, 10, 1))) {
 						pc.getInventory().consumeEnchantItem(308, 10, 1);
 						인첸트지급(pc, 30148, 1, 0);
 					}
-				} else if (itemtype == 1649) {//검
+				} else if (itemtype == 1649) {//剣
 					if ((pc.getInventory().checkEnchantItem(309, 10, 1))) {
 						pc.getInventory().consumeEnchantItem(309, 10, 1);
 						인첸트지급(pc, 30148, 1, 0);
 					}
-				} else if (itemtype == 1650) {//활
+				} else if (itemtype == 1650) {//弓
 					if ((pc.getInventory().checkEnchantItem(310, 10, 1))) {
 						pc.getInventory().consumeEnchantItem(310, 10, 1);
 						인첸트지급(pc, 30148, 1, 0);
 					}
-				} else if (itemtype == 1651) {//이도류
+				} else if (itemtype == 1651) {//二刀流
 					if ((pc.getInventory().checkEnchantItem(311, 10, 1))) {
 						pc.getInventory().consumeEnchantItem(311, 10, 1);
 						인첸트지급(pc, 30148, 1, 0);
 					}
-				} else if (itemtype == 1652) {//체인소드
+				} else if (itemtype == 1652) {//チェーンソード
 					if ((pc.getInventory().checkEnchantItem(312, 10, 1))) {
 						pc.getInventory().consumeEnchantItem(312, 10, 1);
 						인첸트지급(pc, 30148, 1, 0);
 					}
-				} else if (itemtype == 1653) {//키링크
+				} else if (itemtype == 1653) {//キーリンク
 					if ((pc.getInventory().checkEnchantItem(313, 10, 1))) {
 						pc.getInventory().consumeEnchantItem(313, 10, 1);
 						인첸트지급(pc, 30148, 1, 0);
 					}
-				} else if (itemtype == 1654) {//도끼
+				} else if (itemtype == 1654) {//斧
 					if ((pc.getInventory().checkEnchantItem(314, 10, 1))) {
 						pc.getInventory().consumeEnchantItem(314, 10, 1);
 						인첸트지급(pc, 30148, 1, 0);
 					}
-				} else if (itemtype == 1655) {//장갑
+				} else if (itemtype == 1655) {//手袋
 					if ((pc.getInventory().checkEnchantItem(21095, 10, 1))) {
 						pc.getInventory().consumeEnchantItem(21095, 10, 1);
 						인첸트지급(pc, 30148, 1, 0);
 					}
 					
 					
-					/** 타라스 제작아이템 **/
-				} else if (itemtype == 214) {//대마법사모자
+					/** タラス製作アイテム **/
+				} else if (itemtype == 214) {//大魔法使いの帽子
 					Random random = new Random();
 					if ((pc.getInventory().checkItem(20040, 1) || pc.getInventory().checkItem(20025, 1) || pc.getInventory().checkItem(20018, 1)
-							|| pc.getInventory().checkItem(20029, 1) || pc.getInventory().checkItem(410061, 200) || pc.getInventory().checkItem(41246, 100000))) {// 재료아이템
+							|| pc.getInventory().checkItem(20029, 1) || pc.getInventory().checkItem(410061, 200) || pc.getInventory().checkItem(41246, 100000))) {// 材料アイテム
 						
 						if (pc.getInventory().consumeItem(20040, 1) && pc.getInventory().consumeItem(20025, 1) && pc.getInventory().consumeItem(20018, 1)
-								&& pc.getInventory().consumeItem(20029, 1) && pc.getInventory().consumeItem(410061, 200) && pc.getInventory().consumeItem(41246, 100000)) {// 아이템 회수
+								&& pc.getInventory().consumeItem(20029, 1) && pc.getInventory().consumeItem(410061, 200) && pc.getInventory().consumeItem(41246, 100000)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 100) { // 100%의 확률로 성공
+						if (random.nextInt(100) < 100) { // 100％の確率で成功
 							인첸트지급(pc, 202022, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'대마법사모자'\\aA를 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「大魔法使いの帽子」\\aAを獲得"));
+						} else { // 残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 2057) {//그레이스 아바타
+				} else if (itemtype == 2057) {//グレースアバター
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000114, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000114, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000114, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000114, 1)) {//アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 100) { // 100%의 확률로 성공
+						if (random.nextInt(100) < 100) { // 100％の確率で成功
 							인첸트지급(pc, 3000090, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'그레이스 아바타'\\aA를 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して \\aG「グレースアバター」\\aAを獲得"));
+						} else { //残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 2058) {//앱솔루트 블레이드
+				} else if (itemtype == 2058) {//アブソリュートブレード
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000110, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000110, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000110, 1))) {//材料アイテム
+						if (pc.getInventory().consumeItem(3000110, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 100) { // 100%의 확률로 성공
+						if (random.nextInt(100) < 100) { // 100％の確率で成功
 							인첸트지급(pc, 3000092, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'앱솔루트 블레이드'\\aA를 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して \\aG「アブソリュートブレード」\\aAを獲得"));
+						} else { // 残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 2059) {//소울 배리어
+				} else if (itemtype == 2059) {//ソウルバリア
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000116, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000116, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000116, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000116, 1)) {// アイテム回収
 							;
 						}
 						if (random.nextInt(100) < 100) { // 100%의 확률로 성공
 							인첸트지급(pc, 3000091, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'소울 배리어'\\aA를 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して \\aG「ソウルバリア」\\aAを獲得"));
+						} else { // 残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 2060) {//(데스힐)
+				} else if (itemtype == 2060) {//（デス・ヒル）
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000111, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000111, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000111, 1))) {//材料アイテム
+						if (pc.getInventory().consumeItem(3000111, 1)) {//アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 100) { // 100%의 확률로 성공
+						if (random.nextInt(100) < 100) { // 100％の確率で成功
 							인첸트지급(pc, 3000095, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'데스힐'\\aA을 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「デス・ヒル」\\aAを獲得"));
+						} else { // 残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して "));
 					}
-				} else if (itemtype == 2061) {//어쌔신
+				} else if (itemtype == 2061) {//アサシン
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000117, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000117, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000117, 1))) {//材料アイテム
+						if (pc.getInventory().consumeItem(3000117, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 100) { // 100%의 확률로 성공
+						if (random.nextInt(100) < 100) { // 100％の確率で成功
 							인첸트지급(pc, 3000089, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'흑정령의수정(어쌔신)'\\aA을 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して \\aG「闇精霊の水晶（アサシン）」\\aAを獲得"));
+						} else { // 残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 2062) {//블레이징 
+				} else if (itemtype == 2062) {//ブレイジング 
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000117, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000117, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000117, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000117, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 100) { // 100%의 확률로 성공
+						if (random.nextInt(100) < 100) { // 100％の確率で成功
 							인첸트지급(pc, 3000097, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'블레이징 스피릿츠'\\aA를 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「ブレイジングスピリッツ」\\aAを獲得"));
+						} else { //残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 2064) {//디스트로이
+				} else if (itemtype == 2064) {//デストロイ
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000113, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000113, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000113, 1))) {//材料アイテム
+						if (pc.getInventory().consumeItem(3000113, 1)) {//アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 100) { // 100%의 확률로 성공
+						if (random.nextInt(100) < 100) { // 100％の確率で成功
 							인첸트지급(pc, 3000093, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'용기사서판(디스트로이)'\\aA를 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「容器買っ版（デストロイ）」\\aAを獲得"));
+						} else { //残り確率失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 2063) {//임팩트
+				} else if (itemtype == 2063) {//インパクト
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000112, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000112, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000112, 1))) {//材料アイテム
+						if (pc.getInventory().consumeItem(3000112, 1)) {//アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 100) { // 100%의 확률로 성공
+						if (random.nextInt(100) < 100) { // 100％の確率で成功
 							인첸트지급(pc, 3000096, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'기억의 수정(임팩트)'\\aA를 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「記憶の修正（インパクト）」\\aAを獲得"));
+						} else { //残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 2065) {//타이탄 라이징
+				} else if (itemtype == 2065) {//タイタンライジング
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000115, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000115, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000115, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000115, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 100) { // 100%의 확률로 성공
+						if (random.nextInt(100) < 100) { // 100％の確率で成功
 							인첸트지급(pc, 3000094, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'전사의 인장(타이탄:라이징)'\\aA을 획득"));
-						} else { // 나머지 확률 실패
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「戦士の引張（タイタン：ライジング）」\\aAを獲得"));
+						} else { // 残りの確率が失敗
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 							//pc.getInventory().consumeEnchantItem(40308, 0, 1);
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
 					
 					
-					/** 레옹 제작아이템 확률 **/
-				} else if (itemtype == 1763) {//고대암석각반
+					/** レオン製作アイテム確率 **/
+				} else if (itemtype == 1763) {//古代の岩ゲートル
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000064, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000064, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000064, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000064, 1)) {// アイテム回収
 							;
 						}
 						if (random.nextInt(100) < 20) { // 10%의 확률로 성공
 							인첸트지급(pc, 900011, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대암석각반'\\aA을 획득"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代の岩ゲートル」\\aAを獲得"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1764) {//고대암석부츠
+				} else if (itemtype == 1764) {//古代の岩ブーツ
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000064, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000064, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000064, 1))) {//材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000064, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 20) { // 10%의 확률로 성공
+						if (random.nextInt(100) < 20) { // 10％の確率で成功
 							인첸트지급(pc, 900012, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대암석부츠'\\aA를 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代の岩ブーツ」\\aAを獲得!"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1765) {//고대암석망토
+				} else if (itemtype == 1765) {//古代の岩の岬
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000064, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000064, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000064, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000064, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 20) { // 10%의 확률로 성공
+						if (random.nextInt(100) < 20) { // 10％の確率で成功
 							인첸트지급(pc, 900013, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대암석망토'\\aA를 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代の岩の岬」\\aAを獲得!"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1766) {//고대암석장갑
+				} else if (itemtype == 1766) {//古代の岩の手袋
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000064, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000064, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000064, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000064, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 20) { // 10%의 확률로 성공
+						if (random.nextInt(100) < 20) { // 10%の確率で成功
 							인첸트지급(pc, 900014, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대암석장갑'\\aA을 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代の岩の手袋」\\aAを獲得！"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1767) {//고대마물의각반
+				} else if (itemtype == 1767) {//古代魔物のゲートル
 					Random random = new Random();
-						if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000075, 1))) {// 재료아이템
-							if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000075, 1)) {// 아이템 회수
+						if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000075, 1))) {// 材料アイテム
+							if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000075, 1)) {// アイテム回収
 								;
 							}
-						if (random.nextInt(100) < 10) { // 10%의 확률로 성공
+						if (random.nextInt(100) < 10) { // 10％の確率で成功
 							인첸트지급(pc, 900015, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 당신은 \\aG'고대마물의각반'\\aA을 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA注意：あなたは、\\aG「古代魔物のゲートル」\\aAを獲得！"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1768) {//고대마물의부츠
+				} else if (itemtype == 1768) {//古代魔物のブーツ
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000075, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000075, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000075, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000075, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 10) { // 10%의 확률로 성공
+						if (random.nextInt(100) < 10) { // 10％の確率で成功
 							인첸트지급(pc, 900018, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 당신은 \\aG'고대마물의부츠'\\aA를 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA注意：あなたは、 \\aG「古代魔物のブーツ」\\aAを獲得!"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1769) {//고대마물의망토
+				} else if (itemtype == 1769) {//古代魔物のマント
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000075, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000075, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000075, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000075, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 10) { // 10%의 확률로 성공
+						if (random.nextInt(100) < 10) { // 10％の確率で成功
 							인첸트지급(pc, 900017, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 당신은 \\aG'고대마물의망토'\\aA를 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA注意：あなたは、 \\aG「古代魔物のマント」\\aAを獲得!"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1770) {//고대마물의장갑
+				} else if (itemtype == 1770) {//古代魔物の手袋
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000075, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000075, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1) || pc.getInventory().checkItem(3000075, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1) && pc.getInventory().consumeItem(3000075, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 10) { // 10%의 확률로 성공
+						if (random.nextInt(100) < 10) { // 10％の確率で成功
 							인첸트지급(pc, 900016, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 당신은 \\aG'고대마물의장갑'\\aA을 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA注意：あなたは、 \\aG「古代魔物の手袋」\\aAを獲得！"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
 					
-					/** 럭키 제작아이템 확률 **/
-				} else if (itemtype == 1771) {//고대 기술서
+					/** ラッキー製作アイテム確率 **/
+				} else if (itemtype == 1771) {//古代技術書
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1)) {// アイテム回収
 							;
 						}
 						if (random.nextInt(100) < 20) { // 20%의 확률로 성공
 							인첸트지급(pc, 3000110, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대 기술서'\\aA를 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代技術書」\\aAを獲得!"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1772) {//고대 서판
+				} else if (itemtype == 1772) {//古代タブレット
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 20) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 20) { // 20％の確率で成功
 							인첸트지급(pc, 3000113, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대 서판'\\aA을 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代タブレット」\\aAを獲得！"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1773) {//고대 기억의수정
+				} else if (itemtype == 1773) {//古代の記憶の修正
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1)) {// アイテム回収
 							;
 						}
 						if (random.nextInt(100) < 20) { // 20%의 확률로 성공
 							인첸트지급(pc, 3000112, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대기억의수정'\\aA을 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代の記憶の修正」\\aAを獲得！"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1774) {//고대 정령의수정
+				} else if (itemtype == 1774) {//古代精霊の水晶
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 20) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 20) { // 20％の確率で成功
 							인첸트지급(pc, 3000116, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대정령의수정'\\aA을 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代精霊の水晶」\\aAを獲得！"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1775) {//고대 흑정령의수정
+				} else if (itemtype == 1775) {//古代闇精霊の水晶
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 20) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 20) { // 20％の確率で成功
 							인첸트지급(pc, 3000117, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대흑정령의수정'\\aA을 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代闇精霊の水晶」\\aAを獲得！"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1776) {//고대 전사의인장
+				} else if (itemtype == 1776) {//古代戦士の印章
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1)) {// アイテム回収
 							;
 						}
 						if (random.nextInt(100) < 20) { // 20%의 확률로 성공
 							인첸트지급(pc, 3000115, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대전사의인장'\\aA을 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代の戦士の印章」\\aAを獲得！"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1777) {//고대 마법서
+				} else if (itemtype == 1777) {//古代魔法書
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 20) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 20) { // 20％の確率で成功
 							인첸트지급(pc, 3000111, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대마법서'\\aA를 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代魔法書」\\aAを獲得!"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
-				} else if (itemtype == 1778) {//고대 오라
+				} else if (itemtype == 1778) {//古代オーラ
 					Random random = new Random();
-					if ((pc.getInventory().checkItem(3000065, 1))) {// 재료아이템
-						if (pc.getInventory().consumeItem(3000065, 1)) {// 아이템 회수
+					if ((pc.getInventory().checkItem(3000065, 1))) {// 材料アイテム
+						if (pc.getInventory().consumeItem(3000065, 1)) {// アイテム回収
 							;
 						}
-						if (random.nextInt(100) < 20) { // 20%의 확률로 성공
+						if (random.nextInt(100) < 20) { // 20％の確率で成功
 							인첸트지급(pc, 3000114, 1, 0);
 							pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 							Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 성공하여 \\aG'고대오라'\\aA를 획득!"));
-						} else { // 나머지 확률 실패
-							pc.sendPackets(new S_SystemMessage("\\aA알림: 제작에 실패 하였습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に成功して\\aG「古代オーラ」\\aAを獲得!"));
+						} else { // 残りの確率が失敗
+							pc.sendPackets(new S_SystemMessage("\\aA通知：製作に失敗しました。"));
 						}
 					} else {
-						pc.sendPackets(new S_SystemMessage("재료가 부족합니다"));
+						pc.sendPackets(new S_SystemMessage("材料が不足して"));
 					}
 					
 				} else if (itemtype == 159) {
-					if ((pc.getInventory().checkEnchantItem(500, 8, 1) // [+7]환영의 체인소드
+					if ((pc.getInventory().checkEnchantItem(500, 8, 1) // [+7]歓迎のチェーンソード
 							|| pc.getInventory().checkEnchantItem(501, 8, 1))
 							&& pc.getInventory().checkItem(40308, 5000000)) {
 						if (pc.getInventory().consumeEnchantItem(500, 8, 1) || pc.getInventory().consumeEnchantItem(501, 8, 1)) {
@@ -1388,7 +1387,7 @@ public class C_ActionUi extends ClientBasePacket {
 						인첸트지급(pc, 202001, 1, 7);
 					}
 				} else if (itemtype == 160) {
-					if ((pc.getInventory().checkEnchantItem(500, 9, 1) // [+8]환영의 체인소드
+					if ((pc.getInventory().checkEnchantItem(500, 9, 1) // [+8]歓迎のチェーンソード
 							|| pc.getInventory().checkEnchantItem(501, 9, 1))
 							&& pc.getInventory().checkItem(40308, 10000000)) {
 						if (pc.getInventory().consumeEnchantItem(500, 9, 1) || pc.getInventory().consumeEnchantItem(501, 9, 1)) {
@@ -1398,8 +1397,8 @@ public class C_ActionUi extends ClientBasePacket {
 						인첸트지급(pc, 202001, 1, 8);
 					}
 				} else if (itemtype == 161) {
-					if ((pc.getInventory().checkEnchantItem(503, 8, 1) // [+7]공명의
-																		// 키링크
+					if ((pc.getInventory().checkEnchantItem(503, 8, 1) // [+7]共鳴の
+																		// キーリンク
 							|| pc.getInventory().checkEnchantItem(504, 8, 1))
 							&& pc.getInventory().checkItem(40308, 5000000)) {
 						if (pc.getInventory().consumeEnchantItem(503, 8, 1) || pc.getInventory().consumeEnchantItem(504, 8, 1)) {
@@ -1409,8 +1408,8 @@ public class C_ActionUi extends ClientBasePacket {
 						인첸트지급(pc, 1135, 1, 7);
 					}
 				} else if (itemtype == 162) {
-					if ((pc.getInventory().checkEnchantItem(503, 9, 1) // [+8]공명의
-																		// 키링크
+					if ((pc.getInventory().checkEnchantItem(503, 9, 1) // [+8]共鳴の
+																		// キーリンク
 							|| pc.getInventory().checkEnchantItem(504, 9, 1))
 							&& pc.getInventory().checkItem(40308, 10000000)) {
 						if (pc.getInventory().consumeEnchantItem(503, 9, 1) || pc.getInventory().consumeEnchantItem(504, 9, 1)) {
@@ -1420,7 +1419,7 @@ public class C_ActionUi extends ClientBasePacket {
 						인첸트지급(pc, 1135, 1, 8);
 					}
 				} else if (itemtype == 287) {
-					if ((pc.getInventory().checkEnchantItem(81, 8, 1) // [+7]파괴의 크로우
+					if ((pc.getInventory().checkEnchantItem(81, 8, 1) // [+7]破壊のクロウ
 							|| pc.getInventory().checkEnchantItem(162, 8, 1) || pc.getInventory().checkEnchantItem(177, 8, 1) || pc.getInventory().checkEnchantItem(194, 8, 1) || pc
 							.getInventory().checkEnchantItem(13, 8, 1))
 
@@ -1433,7 +1432,7 @@ public class C_ActionUi extends ClientBasePacket {
 						인첸트지급(pc, 1124, 1, 7);
 					}
 				} else if (itemtype == 288) {
-					if ((pc.getInventory().checkEnchantItem(81, 9, 1) // [+8]파괴의 크로우
+					if ((pc.getInventory().checkEnchantItem(81, 9, 1) // [+8]破壊のクロウ
 							|| pc.getInventory().consumeEnchantItem(162, 8, 1) || pc.getInventory().checkEnchantItem(177, 9, 1) || pc.getInventory().checkEnchantItem(194, 9, 1) || pc
 							.getInventory().checkEnchantItem(13, 9, 1)) && pc.getInventory().checkItem(40308, 10000000)) {
 						if (pc.getInventory().consumeEnchantItem(81, 9, 1) || pc.getInventory().consumeEnchantItem(162, 9, 1) || pc.getInventory().consumeEnchantItem(177, 9, 1)
@@ -1444,7 +1443,7 @@ public class C_ActionUi extends ClientBasePacket {
 						인첸트지급(pc, 1124, 1, 8);
 					}
 				} else if (itemtype == 289) {
-					if ((pc.getInventory().checkEnchantItem(81, 8, 1) // [+7]파괴의 이도류
+					if ((pc.getInventory().checkEnchantItem(81, 8, 1) // [+7]破壊の二刀流
 							|| pc.getInventory().checkEnchantItem(162, 8, 1) || pc.getInventory().checkEnchantItem(177, 8, 1) || pc.getInventory().checkEnchantItem(194, 8, 1) || pc
 							.getInventory().checkEnchantItem(13, 8, 1)) && pc.getInventory().checkItem(40308, 5000000)) {
 						if (pc.getInventory().consumeEnchantItem(81, 8, 1) || pc.getInventory().consumeEnchantItem(162, 8, 1) || pc.getInventory().consumeEnchantItem(177, 8, 1)
@@ -1455,7 +1454,7 @@ public class C_ActionUi extends ClientBasePacket {
 						인첸트지급(pc, 1125, 1, 7);
 					}
 				} else if (itemtype == 290) {
-					if ((pc.getInventory().checkEnchantItem(81, 9, 1) // [+8]파괴의 이도류
+					if ((pc.getInventory().checkEnchantItem(81, 9, 1) // [+8]破壊の二刀流
 							|| pc.getInventory().checkEnchantItem(162, 9, 1) || pc.getInventory().checkEnchantItem(177, 9, 1) || pc.getInventory().checkEnchantItem(194, 9, 1) || pc
 							.getInventory().checkEnchantItem(13, 9, 1)) && pc.getInventory().checkItem(40308, 10000000)) {
 						if (pc.getInventory().consumeEnchantItem(81, 9, 1) || pc.getInventory().consumeEnchantItem(162, 9, 1) || pc.getInventory().consumeEnchantItem(177, 9, 1)
@@ -1465,35 +1464,35 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(40308, 10000000);
 						인첸트지급(pc, 1125, 1, 8);
 					}
-				} else if (itemtype == 577) { // 힘의룬주머니
+				} else if (itemtype == 577) { // 力のルーンポケット
 					if (pc.getInventory().checkItem(60033, 1) && pc.getInventory().checkItem(60034, 1) && pc.getInventory().checkItem(40087, 70)) {
 						pc.getInventory().consumeItem(60033, 1);
 						pc.getInventory().consumeItem(60034, 1);
 						pc.getInventory().consumeItem(40087, 70);
 					}
 					인첸트지급(pc, 60041, 1, 0);
-				} else if (itemtype == 578) { // 민첩의룬주머니
+				} else if (itemtype == 578) { // アジャイルのルーンポケット
 					if (pc.getInventory().checkItem(60033, 1) && pc.getInventory().checkItem(60034, 1) && pc.getInventory().checkItem(40087, 70)) {
 						pc.getInventory().consumeItem(60033, 1);
 						pc.getInventory().consumeItem(60034, 1);
 						pc.getInventory().consumeItem(40087, 70);
 					}
 					인첸트지급(pc, 60042, 1, 0);
-				} else if (itemtype == 579) { // 체력의룬주머니
+				} else if (itemtype == 579) { // 体力のルーンポケット
 					if (pc.getInventory().checkItem(60033, 1) && pc.getInventory().checkItem(60034, 1) && pc.getInventory().checkItem(40087, 70)) {
 						pc.getInventory().consumeItem(60033, 1);
 						pc.getInventory().consumeItem(60034, 1);
 						pc.getInventory().consumeItem(40087, 70);
 					}
 					인첸트지급(pc, 60043, 1, 0);
-				} else if (itemtype == 580) { // 지식의의룬주머니
+				} else if (itemtype == 580) { //知識のルーンポケット
 					if (pc.getInventory().checkItem(60033, 1) && pc.getInventory().checkItem(60034, 1) && pc.getInventory().checkItem(40087, 70)) {
 						pc.getInventory().consumeItem(60033, 1);
 						pc.getInventory().consumeItem(60034, 1);
 						pc.getInventory().consumeItem(40087, 70);
 					}
 					인첸트지급(pc, 60044, 1, 0);
-				} else if (itemtype == 581) { // 지혜의의룬주머니
+				} else if (itemtype == 581) { // 知恵ののルーンポケット
 					if (pc.getInventory().checkItem(60033, 1) && pc.getInventory().checkItem(60034, 1) && pc.getInventory().checkItem(40087, 70)) {
 						pc.getInventory().consumeItem(60033, 1);
 						pc.getInventory().consumeItem(60034, 1);
@@ -1502,19 +1501,19 @@ public class C_ActionUi extends ClientBasePacket {
 					인첸트지급(pc, 60045, 1, 0);
 					
 					
-				}else if (itemtype == 3385){  //완력유물
+				}else if (itemtype == 3385){  //腕力遺物
 					if (pc.getInventory().checkItem(30072, 4) && pc.getInventory().checkItem(40308, 7000)){	
 						pc.getInventory().consumeItem(30072, 4);
 						pc.getInventory().consumeItem(40308, 7000);
 					}
 					인첸트지급(pc, 8023, 1, 0);
-				}else if (itemtype == 3386){  //민첩유물
+				}else if (itemtype == 3386){  //アジャイル遺物
 					if (pc.getInventory().checkItem(30072, 4) && pc.getInventory().checkItem(40308, 7000)){	
 						pc.getInventory().consumeItem(30072, 4);
 						pc.getInventory().consumeItem(40308, 7000);
 					} 
 					인첸트지급(pc, 8024, 1, 0);
-				}else if (itemtype == 3387){  //지식유물
+				}else if (itemtype == 3387){  //知識の遺物
 					if (pc.getInventory().checkItem(30072, 4) && pc.getInventory().checkItem(40308, 7000)){	
 						pc.getInventory().consumeItem(30072, 4);
 						pc.getInventory().consumeItem(40308, 7000);
@@ -1522,13 +1521,13 @@ public class C_ActionUi extends ClientBasePacket {
 					인첸트지급(pc, 8025, 1, 0);
 					
 					
-				}else if (itemtype == 3387){  //드래곤고급상자
+				}else if (itemtype == 3387){  //ドラゴン高級ボックス
 					if (pc.getInventory().checkEnchantItem(1000006, 0, 4)){
 						인첸트지급(pc, 1000008, 1, 0);
 						pc.getInventory().consumeEnchantItem(1000006, 0, 4);
 					} 	
 					
-				}else if (itemtype == 107){                                               // 탄생마안
+				}else if (itemtype == 107){                                               //誕生魔眼
 					int chance = _Random.nextInt(100) + 1;
 					if (pc.getInventory().checkItem(410032, 1)
 				     || pc.getInventory().checkItem(410034, 1)
@@ -1536,7 +1535,7 @@ public class C_ActionUi extends ClientBasePacket {
 						if (chance <= 30){	
 							인첸트지급(pc, 410036, 1, 0);	
 						} else {
-							pc.sendPackets(new S_SystemMessage("마안 조합에 실패하였습니다."));
+							pc.sendPackets(new S_SystemMessage("魔眼の組み合わせに失敗しました。"));
 						}
 						pc.getInventory().consumeItem(410032, 1);
 						pc.getInventory().consumeItem(410034, 1);
@@ -1544,7 +1543,7 @@ public class C_ActionUi extends ClientBasePacket {
 						
 					}
 					
-				}else if (itemtype == 108){                                               // 형상마안
+				}else if (itemtype == 108){                                               // 形状魔眼
 					int chance = _Random.nextInt(100) + 1;
 					if (pc.getInventory().checkItem(410033, 1)
 				     || pc.getInventory().checkItem(410036, 1)
@@ -1553,14 +1552,14 @@ public class C_ActionUi extends ClientBasePacket {
 						if (chance <= 30){	
 							인첸트지급(pc, 410037, 1, 0);	
 						} else {
-							pc.sendPackets(new S_SystemMessage("마안 조합에 실패하였습니다."));
+							pc.sendPackets(new S_SystemMessage("魔眼の組み合わせに失敗しました。"));
 						}
 						pc.getInventory().consumeItem(410033, 1);
 						pc.getInventory().consumeItem(410036, 1);
 						pc.getInventory().consumeItem(40308, 200000);
 					}
 					
-				}else if (itemtype == 109){                                               // 생명의마안
+				}else if (itemtype == 109){                                               // 生命の魔眼
 					int chance = _Random.nextInt(100) + 1;
 					if (pc.getInventory().checkItem(410037, 1)
 				     || pc.getInventory().checkItem(410035, 1)
@@ -1569,7 +1568,7 @@ public class C_ActionUi extends ClientBasePacket {
 						if (chance <= 30){	
 							인첸트지급(pc, 410038, 1, 0);	
 						} else {
-							pc.sendPackets(new S_SystemMessage("마안 조합에 실패하였습니다."));
+							pc.sendPackets(new S_SystemMessage("魔眼の組み合わせに失敗しました。"));
 						}
 						pc.getInventory().consumeItem(410037, 1);
 						pc.getInventory().consumeItem(410035, 1);
@@ -1579,14 +1578,14 @@ public class C_ActionUi extends ClientBasePacket {
 					
 					/** 진명황집행검**/
 				} else if (itemtype == 46) {
-					if (pc.getInventory().checkItem(49, 1) // 무관장검
-							&& pc.getInventory().checkItem(40965, 1) // 미법서
-							&& pc.getInventory().checkItem(40445, 10) // 미스릴판금
-							&& pc.getInventory().checkItem(40677, 50) // 어둠의주괴
-							&& pc.getInventory().checkItem(40525, 10) // 그랑카인눈물
-							&& pc.getInventory().checkItem(40969, 300) // 다영결
-							&& pc.getInventory().checkItem(40967, 100) // 성지의 유물
-							&& pc.getInventory().checkItem(40964, 50)) { // 흑마법가루
+					if (pc.getInventory().checkItem(49, 1) // 関係ソード
+							&& pc.getInventory().checkItem(40965, 1) //米スペルブック
+							&& pc.getInventory().checkItem(40445, 10) //ミスリルプレート
+							&& pc.getInventory().checkItem(40677, 50) // 闇のインゴット
+							&& pc.getInventory().checkItem(40525, 10) // グランカインの涙
+							&& pc.getInventory().checkItem(40969, 300) //多ヨウンギョル
+							&& pc.getInventory().checkItem(40967, 100) // 聖地の遺物
+							&& pc.getInventory().checkItem(40964, 50)) { //黒魔法の粉
 						pc.getInventory().consumeItem(40965, 1);
 						pc.getInventory().consumeItem(40445, 10);
 						pc.getInventory().consumeItem(40677, 50);
@@ -1631,19 +1630,19 @@ public class C_ActionUi extends ClientBasePacket {
 						if (chance <= 20){	
 							인첸트지급(pc, 31093, 1, 0);	
 						} else {
-							pc.sendPackets(new S_SystemMessage("고대의 무기 상자 제작에 실패하였습니다."));
+							pc.sendPackets(new S_SystemMessage("古代の武器箱製作に失敗しました。"));
 						}
 						pc.getInventory().consumeItem(40087, 5);
 						pc.getInventory().consumeItem(40308, 100000);
 					}
-					// 고대의방어구상자
+					//古代の防具箱
 				}else if (itemtype == 2653){                                               
 					int chance = _Random.nextInt(100) + 1;
 					if (pc.getInventory().checkItem(40074, 5) && pc.getInventory().checkItem(40308, 100000)){
 						if (chance <= 20){	
 							인첸트지급(pc, 31094, 1, 0);	
 						} else {
-							pc.sendPackets(new S_SystemMessage("고대의 무기 상자 제작에 실패하였습니다."));
+							pc.sendPackets(new S_SystemMessage("古代の武器箱製作に失敗しました。"));
 						}
 						pc.getInventory().consumeItem(40074, 5);
 						pc.getInventory().consumeItem(40308, 100000);
@@ -1664,7 +1663,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(500020, 1);
 					}
 					
-					/** 신성한요정족판금갑옷**/
+					/** 神聖なエルヴンプレートメイル**/
 				}else if (itemtype == 2864){
 					if (pc.getInventory().checkItem(40396, 5) &&pc.getInventory().checkItem(31096, 50)	
 					 || pc.getInventory().checkItem(820018, 5)
@@ -1674,7 +1673,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(31096, 50);
 						pc.getInventory().consumeItem(820018, 5);
 					}
-					/** 신성한 요정족 방패**/
+					/**神聖なエルヴンシールド**/
 				}else if (itemtype == 2865){
 					if (pc.getInventory().checkItem(40396, 2) &&pc.getInventory().checkItem(31096, 25)	
 					 || pc.getInventory().checkItem(820018, 2)
@@ -1684,7 +1683,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(31096, 25);
 						pc.getInventory().consumeItem(820018, 2);
 					}
-					/** 6수호성파워글로브	**/
+					/**6ウイングパワーグローブ	**/
 				}else if (itemtype == 2784){
 					if (pc.getInventory().checkEnchantItem(20187, 7, 1) && pc.getInventory().checkItem(31096, 75)	
 					 || pc.getInventory().checkEnchantItem(22212, 6, 1)
@@ -1694,7 +1693,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeEnchantItem(22212, 6, 1);
 						pc.getInventory().consumeItem(31096, 75);
 					}
-					/** 7수호성파워글로브	**/
+					/** 7ウイングパワーグローブ	**/
 				}else if (itemtype == 2785){
 					if (pc.getInventory().checkEnchantItem(20187, 8, 1) && pc.getInventory().checkItem(31096, 100)	
 					 || pc.getInventory().checkEnchantItem(22212, 7, 1)
@@ -1704,7 +1703,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeEnchantItem(22212, 7, 1);
 						pc.getInventory().consumeItem(31096, 100);
 					}
-					/** 8수호성파워글로브	**/
+					/** 8ウイングパワーグローブ	**/
 				}else if (itemtype == 2786){
 					if (pc.getInventory().checkEnchantItem(20187, 9, 1) && pc.getInventory().checkItem(31096, 125)	
 					 || pc.getInventory().checkEnchantItem(22212, 8, 1)
@@ -1714,7 +1713,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeEnchantItem(22212, 8, 1);
 						pc.getInventory().consumeItem(31096, 125);
 					}
-					/** 9수호성파워글로브	**/
+					/** 9ウイングパワーグローブ	**/
 				}else if (itemtype == 2787){
 					if (pc.getInventory().checkEnchantItem(20187, 10, 1) && pc.getInventory().checkItem(31096, 150)	
 					 || pc.getInventory().checkEnchantItem(22212, 9, 1)
@@ -1724,7 +1723,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeEnchantItem(22212, 9, 1);
 						pc.getInventory().consumeItem(31096, 150);
 					}
-					/** 빛나는신체의벨트**/
+					/** 輝くボディベルト**/
 				}else if (itemtype == 232){
 					if (pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(40458, 50)	
 					 && pc.getInventory().checkItem(40049, 30) && pc.getInventory().checkItem(20306, 1)			
@@ -1737,7 +1736,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(20306, 1);
 						pc.getInventory().consumeItem(20312, 1);
 					}
-					/** 빛나는정신의벨트**/
+					/** 輝く精神のベルト**/
 				}else if (itemtype == 233){
 					if (pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(40458, 50)	
 					 && pc.getInventory().checkItem(40050, 30) && pc.getInventory().checkItem(20308, 1)			
@@ -1750,7 +1749,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(20308, 1);
 						pc.getInventory().consumeItem(20319, 1);
 					}
-					/** 빛나는영혼의벨트**/
+					/** 輝く魂のベルト**/
 				}else if (itemtype == 234){
 					if (pc.getInventory().checkItem(40308, 100000) && pc.getInventory().checkItem(40458, 50)	
 					 && pc.getInventory().checkItem(40050, 20) && pc.getInventory().checkItem(40049, 20) && pc.getInventory().checkItem(20307, 1)			
@@ -1764,7 +1763,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(20307, 1);
 						pc.getInventory().consumeItem(20316, 1);
 					}
-					/** 9진싸울	**/
+					/** 9ジンと戦う	**/
 				}else if (itemtype == 2876){
 					if (pc.getInventory().checkEnchantItem(57, 11, 1) && pc.getInventory().checkItem(67, 1)	
 					 || pc.getInventory().checkItem(68, 1)	
@@ -1774,7 +1773,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(67, 1);
 						pc.getInventory().consumeItem(68, 1);
 					}
-					/** 7진싸울	**/
+					/** 7ジンと戦う	**/
 				}else if (itemtype == 2877){
 					if (pc.getInventory().checkEnchantItem(57, 10, 1) && pc.getInventory().checkItem(67, 1)	
 					 || pc.getInventory().checkItem(68, 1)	
@@ -1785,7 +1784,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(68, 1);
 					}
 				
-					//신성한 완력의모걸이	
+					//神聖な腕力のモゴルが	
 				}else if (itemtype == 2775){
 					if (pc.getInventory().checkItem(40393, 15) && pc.getInventory().checkItem(31096, 10)	
 					 || pc.getInventory().checkItem(31095, 30)	
@@ -1795,7 +1794,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(31096, 10);
 						pc.getInventory().consumeItem(31095, 30);
 					}
-					//신성한 민첩의목걸	
+					//神聖なアジャイルのネッ、	
 				}else if (itemtype == 2776){
 					if (pc.getInventory().checkItem(40394, 15) && pc.getInventory().checkItem(31096, 10)	
 					 || pc.getInventory().checkItem(31095, 30)	
@@ -1805,7 +1804,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(31096, 10);
 						pc.getInventory().consumeItem(31095, 30);
 					}
-					//신성한 지식의목걸	
+					//神聖な知識のネッ、	
 				}else if (itemtype == 2777){
 					if (pc.getInventory().checkItem(40395, 15) && pc.getInventory().checkItem(31096, 10)	
 					 || pc.getInventory().checkItem(31095, 30)	
@@ -1815,7 +1814,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(31096, 10);
 						pc.getInventory().consumeItem(31095, 30);
 					}
-					//신성한 영생의목걸	
+					//神聖な永遠のネッ、	
 				}else if (itemtype == 2778){
 					if (pc.getInventory().checkItem(40396, 25) && pc.getInventory().checkItem(31096, 50)	
 					 || pc.getInventory().checkItem(31095, 50)	
@@ -1826,7 +1825,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(31095, 50);
 					}
 					
-					/** 10)신성한목걸이조각	**/
+					/** 10）神聖なネックレス彫刻	**/
 				}else if (itemtype == 2779){
 					if (pc.getInventory().checkEnchantItem(22194, 5, 1) || pc.getInventory().checkEnchantItem(900008, 5, 1)
 					 || pc.getInventory().checkEnchantItem(22195, 5, 1) || pc.getInventory().checkEnchantItem(20264, 5, 1)
@@ -1849,7 +1848,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeEnchantItem(22361, 5, 1);
 						pc.getInventory().consumeEnchantItem(22362, 5, 1);
 					}
-					/** 20)신성한목걸이조각		**/
+					/** 20）神聖なネックレス彫刻		**/
 				}else if (itemtype == 2780){
 					if (pc.getInventory().checkEnchantItem(22194, 6, 1) || pc.getInventory().checkEnchantItem(900008, 6, 1)
 					 || pc.getInventory().checkEnchantItem(22195, 6, 1) || pc.getInventory().checkEnchantItem(20264, 6, 1)
@@ -1872,7 +1871,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeEnchantItem(22361, 6, 1);
 						pc.getInventory().consumeEnchantItem(22362, 6, 1);
 					}
-					/** 40)신성한목걸이조각			**/
+					/** 40)神聖なネックレス彫刻			**/
 				}else if (itemtype == 2781){
 					if (pc.getInventory().checkEnchantItem(22194, 7, 1) || pc.getInventory().checkEnchantItem(900008, 7, 1)
 					 || pc.getInventory().checkEnchantItem(22195, 7, 1) || pc.getInventory().checkEnchantItem(20264, 7, 1)
@@ -1895,7 +1894,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeEnchantItem(22361, 7, 1);
 						pc.getInventory().consumeEnchantItem(22362, 7, 1);
 					}
-					/** 80)신성한목걸이조각				**/
+					/** 80)神聖なネックレス彫刻				**/
 				}else if (itemtype == 2782){
 					if (pc.getInventory().checkEnchantItem(22194, 8, 1) || pc.getInventory().checkEnchantItem(900008, 8, 1)
 					 || pc.getInventory().checkEnchantItem(22195, 8, 1) || pc.getInventory().checkEnchantItem(20264, 8, 1)
@@ -1919,7 +1918,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeEnchantItem(22362, 8, 1);
 					}
 					
-					//관용의귀걸이		
+					//寛容のイヤリング		
 				}else if (itemtype == 305){
 					if (pc.getInventory().checkItem(40651, 60) && pc.getInventory().checkItem(40643, 60)	
 					 && pc.getInventory().checkItem(40645, 60) && pc.getInventory().checkItem(40618, 60)
@@ -1948,7 +1947,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(40642, 90);
 						pc.getInventory().consumeItem(21012, 1);
 					}
-					//불사의귀걸이		
+					//不死のイヤリング		
 				}else if (itemtype == 309){
 					if (pc.getInventory().checkItem(40651, 60) && pc.getInventory().checkItem(40643, 60)	
 					 && pc.getInventory().checkItem(40645, 60) && pc.getInventory().checkItem(40618, 60)
@@ -1977,7 +1976,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(40642, 90);
 						pc.getInventory().consumeItem(21010, 1);
 					}
-					//지배의귀걸이		
+					//支配のイヤリング		
 				}else if (itemtype == 313){
 					if (pc.getInventory().checkItem(40651, 60) && pc.getInventory().checkItem(40643, 60)	
 					 && pc.getInventory().checkItem(40645, 60) && pc.getInventory().checkItem(40618, 60)
@@ -2011,7 +2010,7 @@ public class C_ActionUi extends ClientBasePacket {
 					
 					
 					
-				}else if(itemtype==2619){ //드슬
+				}else if(itemtype==2619){ //ドゥスル
 					if(pc.getInventory().checkAttrEnchantItem(1121, 10, 3, 1) && pc.getInventory().checkItem(40346,3) && pc.getInventory().checkItem(40354,3) 
 							&& pc.getInventory().checkItem(40362,3) &&pc.getInventory().checkItem(40370,3)&&pc.getInventory().checkItem(40308,10000000)){
 						pc.getInventory().consumeAttrItem(1121, 10, 3, 1);
@@ -2022,7 +2021,7 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeItem(40308,10000000);
 						인첸트지급(pc, 66, 1, 0);
 					}
-				}else if(itemtype == 2626){//드슬 +5
+				}else if(itemtype == 2626){//ドゥスル+5
 					if(pc.getInventory().checkAttrEnchantItem(66, 4, 3, 1) && pc.getInventory().checkItem(40346,1) && pc.getInventory().checkItem(40354,1)
 							&& pc.getInventory().checkItem(40362,1) && pc.getInventory().checkItem(40370,1)){
 							pc.getInventory().consumeAttrItem(66, 4, 3, 1);
@@ -2032,7 +2031,7 @@ public class C_ActionUi extends ClientBasePacket {
 							pc.getInventory().consumeItem(40370,1);
 							인첸트지급(pc,66,1,5);
 					}
-				}else if(itemtype == 2625){//드슬 +4
+				}else if(itemtype == 2625){//ドゥスル+4
 					if(pc.getInventory().checkAttrEnchantItem(66, 3, 3, 1) && pc.getInventory().checkItem(40346,1) && pc.getInventory().checkItem(40354,1)
 							&& pc.getInventory().checkItem(40362,1) && pc.getInventory().checkItem(40370,1)){
 							pc.getInventory().consumeAttrItem(66, 3, 3, 1);
@@ -2042,7 +2041,7 @@ public class C_ActionUi extends ClientBasePacket {
 							pc.getInventory().consumeItem(40370,1);
 							인첸트지급(pc,66,1,4);
 					}
-				}else if(itemtype == 2624){//드슬 +3
+				}else if(itemtype == 2624){//ドゥスル+3
 					if(pc.getInventory().checkAttrEnchantItem(66, 2, 3, 1) && pc.getInventory().checkItem(40346,1) && pc.getInventory().checkItem(40354,1)
 							&& pc.getInventory().checkItem(40362,1) && pc.getInventory().checkItem(40370,1)){
 							pc.getInventory().consumeAttrItem(66, 2, 3, 1);
@@ -2052,7 +2051,7 @@ public class C_ActionUi extends ClientBasePacket {
 							pc.getInventory().consumeItem(40370,1);
 							인첸트지급(pc,66,1,3);
 					}
-				}else if(itemtype == 2623){//드슬 +2
+				}else if(itemtype == 2623){//ドゥスル+2
 					if(pc.getInventory().checkAttrEnchantItem(66, 1, 3, 1) && pc.getInventory().checkItem(40346,1) && pc.getInventory().checkItem(40354,1)
 							&& pc.getInventory().checkItem(40362,1) && pc.getInventory().checkItem(40370,1)){
 							pc.getInventory().consumeAttrItem(66, 1, 3, 1);
@@ -2062,7 +2061,7 @@ public class C_ActionUi extends ClientBasePacket {
 							pc.getInventory().consumeItem(40370,1);
 							인첸트지급(pc,66,1,2);
 					}
-				}else if(itemtype == 2622){//드슬 +1
+				}else if(itemtype == 2622){//ドゥスル+1
 					if(pc.getInventory().checkAttrEnchantItem(66, 0, 3, 1) && pc.getInventory().checkItem(40346,1) && pc.getInventory().checkItem(40354,1)
 							&& pc.getInventory().checkItem(40362,1) && pc.getInventory().checkItem(40370,1)){
 							pc.getInventory().consumeAttrItem(66, 0, 3, 1);
@@ -2073,56 +2072,56 @@ public class C_ActionUi extends ClientBasePacket {
 							인첸트지급(pc,66,1,1);
 					}
 					
-				}else if (itemtype == 3541){  //3완력성장
+				}else if (itemtype == 3541){  //3腕力成長
 					if (pc.getInventory().checkEnchantItem(900020, 3, 1) && pc.getInventory().checkEnchantItem(222352, 3, 1)	
 							){
 						인첸트지급(pc, 232355, 1, 3);
 						pc.getInventory().consumeEnchantItem(900020, 3, 1);
 						pc.getInventory().consumeEnchantItem(222352, 3, 1);
 					}
-				}else if (itemtype == 3542){  //4완력성장
+				}else if (itemtype == 3542){  //4腕力成長
 					if (pc.getInventory().checkEnchantItem(900020, 4, 1) && pc.getInventory().checkEnchantItem(222352, 4, 1)	
 							){
 						인첸트지급(pc, 232355, 1, 4);
 						pc.getInventory().consumeEnchantItem(900020, 4, 1);
 						pc.getInventory().consumeEnchantItem(222352, 4, 1);
 					}
-				}else if (itemtype == 3543){  //5완력성장
+				}else if (itemtype == 3543){  //5腕力成長
 					if (pc.getInventory().checkEnchantItem(900020, 5, 1) && pc.getInventory().checkEnchantItem(222352, 5, 1)	
 							){
 						인첸트지급(pc, 232355, 1, 5);
 						pc.getInventory().consumeEnchantItem(900020, 5, 1);
 						pc.getInventory().consumeEnchantItem(222352, 5, 1);
 					}
-				}else if (itemtype == 3544){  //6완력성장
+				}else if (itemtype == 3544){  //6腕力成長
 					if (pc.getInventory().checkEnchantItem(900020, 6, 1) && pc.getInventory().checkEnchantItem(222352, 6, 1)	
 							){
 						인첸트지급(pc, 232355, 1, 6);
 						pc.getInventory().consumeEnchantItem(900020, 6, 1);
 						pc.getInventory().consumeEnchantItem(222352, 6, 1);
 					} 
-				}else if (itemtype == 3545){  //7완력성장
+				}else if (itemtype == 3545){  //7腕力成長
 					if (pc.getInventory().checkEnchantItem(900020, 7, 1) && pc.getInventory().checkEnchantItem(222352, 7, 1)	
 							){
 						인첸트지급(pc, 232355, 1, 7);
 						pc.getInventory().consumeEnchantItem(900020, 7, 1);
 						pc.getInventory().consumeEnchantItem(222352, 7, 1);
 					} 
-				}else if (itemtype == 3546){  //8완력성장
+				}else if (itemtype == 3546){  //8腕力成長
 					if (pc.getInventory().checkEnchantItem(900020, 8, 1) && pc.getInventory().checkEnchantItem(222352, 8, 1)	
 							){
 						인첸트지급(pc, 232355, 1, 8);
 						pc.getInventory().consumeEnchantItem(900020, 8, 1);
 						pc.getInventory().consumeEnchantItem(222352, 8, 1);
 					} 
-				}else if (itemtype == 3547){  //9완력성장
+				}else if (itemtype == 3547){  //9腕力成長
 					if (pc.getInventory().checkEnchantItem(900020, 9, 1) && pc.getInventory().checkEnchantItem(222352, 9, 1)	
 							){
 						인첸트지급(pc, 232355, 1, 9);
 						pc.getInventory().consumeEnchantItem(900020, 9, 1);
 						pc.getInventory().consumeEnchantItem(222352, 9, 1);
 					} 
-				}else if (itemtype == 3548){  //10완력성장
+				}else if (itemtype == 3548){  //10腕力成長
 					if (pc.getInventory().checkEnchantItem(900020, 10, 1) && pc.getInventory().checkEnchantItem(222352, 10, 1)	
 							){
 						인첸트지급(pc, 232355, 1, 10);
@@ -2131,56 +2130,56 @@ public class C_ActionUi extends ClientBasePacket {
 					} 
 					
 					
-				}else if (itemtype == 3549){  //3민첩성장
+				}else if (itemtype == 3549){  //3アジャイル成長
 					if (pc.getInventory().checkEnchantItem(900020, 3, 1) && pc.getInventory().checkEnchantItem(222353, 3, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 3);
 						pc.getInventory().consumeEnchantItem(900020, 3, 1);
 						pc.getInventory().consumeEnchantItem(222353, 3, 1);
 					} 
-				}else if (itemtype == 3550){  //4민첩성장
+				}else if (itemtype == 3550){  //4アジャイル成長
 					if (pc.getInventory().checkEnchantItem(900020, 4, 1) && pc.getInventory().checkEnchantItem(222353, 4, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 4);
 						pc.getInventory().consumeEnchantItem(900020, 4, 1);
 						pc.getInventory().consumeEnchantItem(222353, 4, 1);
 					} 
-				}else if (itemtype == 3551){  //5민첩성장
+				}else if (itemtype == 3551){  //5アジャイル成長
 					if (pc.getInventory().checkEnchantItem(900020, 5, 1) && pc.getInventory().checkEnchantItem(222353, 5, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 5);
 						pc.getInventory().consumeEnchantItem(900020, 5, 1);
 						pc.getInventory().consumeEnchantItem(222353, 5, 1);
 					} 
-				}else if (itemtype == 3552){  //6민첩성장
+				}else if (itemtype == 3552){  //6アジャイル成長
 					if (pc.getInventory().checkEnchantItem(900020, 6, 1) && pc.getInventory().checkEnchantItem(222353, 6, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 6);
 						pc.getInventory().consumeEnchantItem(900020, 6, 1);
 						pc.getInventory().consumeEnchantItem(222353, 6, 1);
 					} 
-				}else if (itemtype == 3553){  //7민첩성장
+				}else if (itemtype == 3553){  //7速成長
 					if (pc.getInventory().checkEnchantItem(900020, 7, 1) && pc.getInventory().checkEnchantItem(222353, 7, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 7);
 						pc.getInventory().consumeEnchantItem(900020, 7, 1);
 						pc.getInventory().consumeEnchantItem(222353, 7, 1);
 					} 
-				}else if (itemtype == 3554){  //8민첩성장
+				}else if (itemtype == 3554){  //8アジャイル成長
 					if (pc.getInventory().checkEnchantItem(900020, 8, 1) && pc.getInventory().checkEnchantItem(222353, 8, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 8);
 						pc.getInventory().consumeEnchantItem(900020, 8, 1);
 						pc.getInventory().consumeEnchantItem(222353, 8, 1);
 					} 
-				}else if (itemtype == 3555){  //9민첩성장
+				}else if (itemtype == 3555){  //9アジャイル成長
 					if (pc.getInventory().checkEnchantItem(900020, 9, 1) && pc.getInventory().checkEnchantItem(222353, 9, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 9);
 						pc.getInventory().consumeEnchantItem(900020, 9, 1);
 						pc.getInventory().consumeEnchantItem(222353, 9, 1);
 					} 
-				}else if (itemtype == 3556){  //10민첩성장
+				}else if (itemtype == 3556){  //10機敏成長
 					if (pc.getInventory().checkEnchantItem(900020, 10, 1) && pc.getInventory().checkEnchantItem(222353, 10, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 10);
@@ -2189,56 +2188,56 @@ public class C_ActionUi extends ClientBasePacket {
 					} 
 					
 					
-				}else if (itemtype == 3557){  //3지식성장
+				}else if (itemtype == 3557){  //3知識成長
 					if (pc.getInventory().checkEnchantItem(900020, 3, 1) && pc.getInventory().checkEnchantItem(222354, 3, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 3);
 						pc.getInventory().consumeEnchantItem(900020, 3, 1);
 						pc.getInventory().consumeEnchantItem(222354, 3, 1);
 					} 
-				}else if (itemtype == 3558){  //4지식성장
+				}else if (itemtype == 3558){  //4知識成長
 					if (pc.getInventory().checkEnchantItem(900020, 4, 1) && pc.getInventory().checkEnchantItem(222354, 4, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 4);
 						pc.getInventory().consumeEnchantItem(900020, 4, 1);
 						pc.getInventory().consumeEnchantItem(222354, 4, 1);
 					} 
-				}else if (itemtype == 3559){  //5지식성장
+				}else if (itemtype == 3559){  //5知識成長
 					if (pc.getInventory().checkEnchantItem(900020, 5, 1) && pc.getInventory().checkEnchantItem(222354, 5, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 5);
 						pc.getInventory().consumeEnchantItem(900020, 5, 1);
 						pc.getInventory().consumeEnchantItem(222354, 5, 1);
 					} 
-				}else if (itemtype == 3560){  //6지식성장
+				}else if (itemtype == 3560){  //6知識成長
 					if (pc.getInventory().checkEnchantItem(900020, 6, 1) && pc.getInventory().checkEnchantItem(222354, 6, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 6);
 						pc.getInventory().consumeEnchantItem(900020, 6, 1);
 						pc.getInventory().consumeEnchantItem(222354, 6, 1);
 					} 
-				}else if (itemtype == 3561){  //7지식성장
+				}else if (itemtype == 3561){  //7知識成長
 					if (pc.getInventory().checkEnchantItem(900020, 7, 1) && pc.getInventory().checkEnchantItem(222354, 7, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 7);
 						pc.getInventory().consumeEnchantItem(900020, 7, 1);
 						pc.getInventory().consumeEnchantItem(222354, 7, 1);
 					} 
-				}else if (itemtype == 3562){  //8지식성장
+				}else if (itemtype == 3562){  //8知識成長
 					if (pc.getInventory().checkEnchantItem(900020, 8, 1) && pc.getInventory().checkEnchantItem(222354, 8, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 8);
 						pc.getInventory().consumeEnchantItem(900020, 8, 1);
 						pc.getInventory().consumeEnchantItem(222354, 8, 1);
 					} 
-				}else if (itemtype == 3563){  //9지식성장
+				}else if (itemtype == 3563){  //9知識成長
 					if (pc.getInventory().checkEnchantItem(900020, 9, 1) && pc.getInventory().checkEnchantItem(222354, 9, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 9);
 						pc.getInventory().consumeEnchantItem(900020, 9, 1);
 						pc.getInventory().consumeEnchantItem(222354, 9, 1);
 					} 
-				}else if (itemtype == 3564){  //10지식성장
+				}else if (itemtype == 3564){  //10知識成長
 					if (pc.getInventory().checkEnchantItem(900020, 10, 1) && pc.getInventory().checkEnchantItem(222354, 10, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 10);
@@ -2248,56 +2247,56 @@ public class C_ActionUi extends ClientBasePacket {
 					
 					
 					
-				}else if (itemtype == 3566){  //3완력회복
+				}else if (itemtype == 3566){  //3腕力回復
 					if (pc.getInventory().checkEnchantItem(900021, 3, 1) && pc.getInventory().checkEnchantItem(222352, 3, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 3);
 						pc.getInventory().consumeEnchantItem(900020, 3, 1);
 						pc.getInventory().consumeEnchantItem(222354, 3, 1);
 					} 
-				}else if (itemtype == 3567){  //4완력회복
+				}else if (itemtype == 3567){  //4腕力回復
 					if (pc.getInventory().checkEnchantItem(900021, 4, 1) && pc.getInventory().checkEnchantItem(222352, 4, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 4);
 						pc.getInventory().consumeEnchantItem(900020, 4, 1);
 						pc.getInventory().consumeEnchantItem(222354, 4, 1);
 					} 
-				}else if (itemtype == 3568){  //5완력회복
+				}else if (itemtype == 3568){  //5腕力回復
 					if (pc.getInventory().checkEnchantItem(900021, 5, 1) && pc.getInventory().checkEnchantItem(222352, 5, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 5);
 						pc.getInventory().consumeEnchantItem(900020, 5, 1);
 						pc.getInventory().consumeEnchantItem(222354, 5, 1);
 					} 
-				}else if (itemtype == 3569){  //6완력회복
+				}else if (itemtype == 3569){  //6腕力回復
 					if (pc.getInventory().checkEnchantItem(900021, 6, 1) && pc.getInventory().checkEnchantItem(222352, 6, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 6);
 						pc.getInventory().consumeEnchantItem(900020, 6, 1);
 						pc.getInventory().consumeEnchantItem(222354, 6, 1);
 					} 
-				}else if (itemtype == 3570){  //7완력회복
+				}else if (itemtype == 3570){  //7腕力回復
 					if (pc.getInventory().checkEnchantItem(900021, 7, 1) && pc.getInventory().checkEnchantItem(222352, 7, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 7);
 						pc.getInventory().consumeEnchantItem(900020, 7, 1);
 						pc.getInventory().consumeEnchantItem(222354, 7, 1);
 					} 
-				}else if (itemtype == 3571){  //8완력회복
+				}else if (itemtype == 3571){  //8腕力回復
 					if (pc.getInventory().checkEnchantItem(900021, 8, 1) && pc.getInventory().checkEnchantItem(222352, 8, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 8);
 						pc.getInventory().consumeEnchantItem(900020, 8, 1);
 						pc.getInventory().consumeEnchantItem(222354, 8, 1);
 					} 
-				}else if (itemtype == 3572){  //9완력회복
+				}else if (itemtype == 3572){  //9腕力回復
 					if (pc.getInventory().checkEnchantItem(900021, 9, 1) && pc.getInventory().checkEnchantItem(222352, 9, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 9);
 						pc.getInventory().consumeEnchantItem(900020, 9, 1);
 						pc.getInventory().consumeEnchantItem(222354, 9, 1);
 					} 
-				}else if (itemtype == 3573){  //10완력회복
+				}else if (itemtype == 3573){  //10腕力回復
 					if (pc.getInventory().checkEnchantItem(900021, 10, 1) && pc.getInventory().checkEnchantItem(222352, 10, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 10);
@@ -2307,56 +2306,56 @@ public class C_ActionUi extends ClientBasePacket {
 					
 					
 					
-				}else if (itemtype == 3574){  //3민첩회복
+				}else if (itemtype == 3574){  //3アジャイル回復
 					if (pc.getInventory().checkEnchantItem(900021, 3, 1) && pc.getInventory().checkEnchantItem(222353, 3, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 3);
 						pc.getInventory().consumeEnchantItem(900020, 3, 1);
 						pc.getInventory().consumeEnchantItem(222354, 3, 1);
 					}
-				}else if (itemtype == 3575){  //4민첩회복
+				}else if (itemtype == 3575){  //4アジャイル回復
 					if (pc.getInventory().checkEnchantItem(900021, 4, 1) && pc.getInventory().checkEnchantItem(222353, 4, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 4);
 						pc.getInventory().consumeEnchantItem(900020, 4, 1);
 						pc.getInventory().consumeEnchantItem(222354, 4, 1);
 					} 
-				}else if (itemtype == 3576){  //5민첩회복
+				}else if (itemtype == 3576){  //5アジャイル回復
 					if (pc.getInventory().checkEnchantItem(900021, 5, 1) && pc.getInventory().checkEnchantItem(222353, 5, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 5);
 						pc.getInventory().consumeEnchantItem(900020, 5, 1);
 						pc.getInventory().consumeEnchantItem(222354, 5, 1);
 					} 
-				}else if (itemtype == 3577){  //6민첩회복
+				}else if (itemtype == 3577){  //6速回復
 					if (pc.getInventory().checkEnchantItem(900021, 6, 1) && pc.getInventory().checkEnchantItem(222353, 6, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 6);
 						pc.getInventory().consumeEnchantItem(900020, 6, 1);
 						pc.getInventory().consumeEnchantItem(222354, 6, 1);
 					} 
-				}else if (itemtype == 3578){  //7민첩회복
+				}else if (itemtype == 3578){  //7速回復
 					if (pc.getInventory().checkEnchantItem(900021, 7, 1) && pc.getInventory().checkEnchantItem(222353, 7, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 7);
 						pc.getInventory().consumeEnchantItem(900020, 7, 1);
 						pc.getInventory().consumeEnchantItem(222354, 7, 1);
 					} 
-				}else if (itemtype == 3579){  //8민첩회복
+				}else if (itemtype == 3579){  //8機敏回復
 					if (pc.getInventory().checkEnchantItem(900021, 8, 1) && pc.getInventory().checkEnchantItem(222353, 8, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 8);
 						pc.getInventory().consumeEnchantItem(900020, 8, 1);
 						pc.getInventory().consumeEnchantItem(222354, 8, 1);
 					} 
-				}else if (itemtype == 3580){  //9민첩회복
+				}else if (itemtype == 3580){  //9機敏回復
 					if (pc.getInventory().checkEnchantItem(900021, 9, 1) && pc.getInventory().checkEnchantItem(222353, 9, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 9);
 						pc.getInventory().consumeEnchantItem(900020, 9, 1);
 						pc.getInventory().consumeEnchantItem(222354, 9, 1);
 					} 
-				}else if (itemtype == 3581){  //10민첩회복
+				}else if (itemtype == 3581){  //10機敏回復
 					if (pc.getInventory().checkEnchantItem(900021, 10, 1) && pc.getInventory().checkEnchantItem(222353, 10, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 10);
@@ -2364,56 +2363,56 @@ public class C_ActionUi extends ClientBasePacket {
 						pc.getInventory().consumeEnchantItem(222354, 10, 1);
 					} 
 					
-				}else if (itemtype == 3582){  //3지식회복
+				}else if (itemtype == 3582){  //3知識回復
 					if (pc.getInventory().checkEnchantItem(900021, 3, 1) && pc.getInventory().checkEnchantItem(222354, 3, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 3);
 						pc.getInventory().consumeEnchantItem(900020, 3, 1);
 						pc.getInventory().consumeEnchantItem(222354, 3, 1);
 					} 
-				}else if (itemtype == 3583){  //4지식회복
+				}else if (itemtype == 3583){  //4知識回復
 					if (pc.getInventory().checkEnchantItem(900021, 4, 1) && pc.getInventory().checkEnchantItem(222354, 4, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 4);
 						pc.getInventory().consumeEnchantItem(900020, 4, 1);
 						pc.getInventory().consumeEnchantItem(222354, 4, 1);
 					} 
-				}else if (itemtype == 3584){  //5지식회복
+				}else if (itemtype == 3584){  //5知識回復
 					if (pc.getInventory().checkEnchantItem(900021, 5, 1) && pc.getInventory().checkEnchantItem(222354, 5, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 5);
 						pc.getInventory().consumeEnchantItem(900020, 5, 1);
 						pc.getInventory().consumeEnchantItem(222354, 5, 1);
 					} 
-				}else if (itemtype == 3585){  //6지식회복
+				}else if (itemtype == 3585){  //6知識回復
 					if (pc.getInventory().checkEnchantItem(900021, 6, 1) && pc.getInventory().checkEnchantItem(222354, 6, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 6);
 						pc.getInventory().consumeEnchantItem(900020, 6, 1);
 						pc.getInventory().consumeEnchantItem(222354, 6, 1);
 					} 
-				}else if (itemtype == 3586){  //7지식회복
+				}else if (itemtype == 3586){  //7知識回復
 					if (pc.getInventory().checkEnchantItem(900021, 7, 1) && pc.getInventory().checkEnchantItem(222354, 3, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 7);
 						pc.getInventory().consumeEnchantItem(900020, 7, 1);
 						pc.getInventory().consumeEnchantItem(222354, 7, 1);
 					} 
-				}else if (itemtype == 3587){  //8지식회복
+				}else if (itemtype == 3587){  //8知識回復
 					if (pc.getInventory().checkEnchantItem(900021, 8, 1) && pc.getInventory().checkEnchantItem(222354, 8, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 8);
 						pc.getInventory().consumeEnchantItem(900020, 8, 1);
 						pc.getInventory().consumeEnchantItem(222354, 8, 1);
 					} 
-				}else if (itemtype == 3588){  //9지식회복
+				}else if (itemtype == 3588){  //9知識回復
 					if (pc.getInventory().checkEnchantItem(900021, 9, 1) && pc.getInventory().checkEnchantItem(222354, 9, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 9);
 						pc.getInventory().consumeEnchantItem(900020, 9, 1);
 						pc.getInventory().consumeEnchantItem(222354, 9, 1);
 					} 
-				}else if (itemtype == 3589){  //10지식회복
+				}else if (itemtype == 3589){  //10知識回復
 					if (pc.getInventory().checkEnchantItem(900021, 10, 1) && pc.getInventory().checkEnchantItem(222354, 10, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 10);
@@ -2422,56 +2421,56 @@ public class C_ActionUi extends ClientBasePacket {
 					} 
 					
 					
-				}else if (itemtype == 3590){  //3회복성장
+				}else if (itemtype == 3590){  //3回復成長
 					if (pc.getInventory().checkEnchantItem(900021, 3, 1) && pc.getInventory().checkEnchantItem(900020, 3, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 3);
 						pc.getInventory().consumeEnchantItem(900020, 3, 1);
 						pc.getInventory().consumeEnchantItem(900020, 3, 1);
 					} 
-				}else if (itemtype == 3591){  //4회복성장
+				}else if (itemtype == 3591){  //4回復成長
 					if (pc.getInventory().checkEnchantItem(900021, 4, 1) && pc.getInventory().checkEnchantItem(900020, 4, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 4);
 						pc.getInventory().consumeEnchantItem(900020, 4, 1);
 						pc.getInventory().consumeEnchantItem(900020, 4, 1);
 					} 
-				}else if (itemtype == 3592){  //5회복성장
+				}else if (itemtype == 3592){  //5回復成長
 					if (pc.getInventory().checkEnchantItem(900021, 5, 1) && pc.getInventory().checkEnchantItem(900020, 5, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 5);
 						pc.getInventory().consumeEnchantItem(900020, 5, 1);
 						pc.getInventory().consumeEnchantItem(900020, 5, 1);
 					} 
-				}else if (itemtype == 3593){  //6회복성장
+				}else if (itemtype == 3593){  //6回復成長
 					if (pc.getInventory().checkEnchantItem(900021, 6, 1) && pc.getInventory().checkEnchantItem(900020, 6, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 6);
 						pc.getInventory().consumeEnchantItem(900020, 6, 1);
 						pc.getInventory().consumeEnchantItem(900020, 6, 1);
 					} 
-				}else if (itemtype == 3594){  //7회복성장
+				}else if (itemtype == 3594){  //7回復成長
 					if (pc.getInventory().checkEnchantItem(900021, 7, 1) && pc.getInventory().checkEnchantItem(900020, 7, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 7);
 						pc.getInventory().consumeEnchantItem(900020, 7, 1);
 						pc.getInventory().consumeEnchantItem(900020, 7, 1);
 					} 
-				}else if (itemtype == 3595){  //8회복성장
+				}else if (itemtype == 3595){  //8回復成長
 					if (pc.getInventory().checkEnchantItem(900021, 8, 1) && pc.getInventory().checkEnchantItem(900020, 8, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 8);
 						pc.getInventory().consumeEnchantItem(900020, 8, 1);
 						pc.getInventory().consumeEnchantItem(900020, 8, 1);
 					} 
-				}else if (itemtype == 3596){  //9회복성장
+				}else if (itemtype == 3596){  //9回復成長
 					if (pc.getInventory().checkEnchantItem(900021, 9, 1) && pc.getInventory().checkEnchantItem(900020, 9, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 9);
 						pc.getInventory().consumeEnchantItem(900020, 9, 1);
 						pc.getInventory().consumeEnchantItem(900020, 9, 1);
 					} 
-				}else if (itemtype == 3597){  //10회복성장
+				}else if (itemtype == 3597){  //10回復成長
 					if (pc.getInventory().checkEnchantItem(900021, 10, 1) && pc.getInventory().checkEnchantItem(900020, 10, 1)	
 							){
 						인첸트지급(pc, 232356, 1, 10);
@@ -2480,27 +2479,27 @@ public class C_ActionUi extends ClientBasePacket {
 					} 
 					
 					
-				}else if (itemtype == 2871){  //+3성장문장
+				}else if (itemtype == 2871){  //+3成長文章
 					if (pc.getInventory().checkEnchantItem(3000099, 0, 6)){
 						인첸트지급(pc, 900020, 1, 3);
 						pc.getInventory().consumeEnchantItem(3000099, 0, 6);
 					} 
-				}else if (itemtype == 2872){  //+3회복문장
+				}else if (itemtype == 2872){  //+3回復文章
 					if (pc.getInventory().checkEnchantItem(3000098, 0, 6)){
 						인첸트지급(pc, 900021, 1, 3);
 						pc.getInventory().consumeEnchantItem(3000098, 0, 6);
 					} 
-				}else if (itemtype == 2873){  //+3완력문장
+				}else if (itemtype == 2873){  //+3腕力文章
 					if (pc.getInventory().checkEnchantItem(61523, 0, 6)){
 						인첸트지급(pc, 222352, 1, 3);
 						pc.getInventory().consumeEnchantItem(61523, 0, 6);
 					} 
-				}else if (itemtype == 2874){  //+3민첩문장
+				}else if (itemtype == 2874){  //+3機敏文章
 					if (pc.getInventory().checkEnchantItem(61524, 0, 6)){
 						인첸트지급(pc, 222353, 1, 3);
 						pc.getInventory().consumeEnchantItem(61524, 0, 6);
 					} 
-				}else if (itemtype == 2875){  //+3지식문장
+				}else if (itemtype == 2875){  //+3知識の文章
 					if (pc.getInventory().checkEnchantItem(61525, 0, 6)){
 						인첸트지급(pc, 222352, 1, 3);
 						pc.getInventory().consumeEnchantItem(61525, 0, 6);
@@ -2520,14 +2519,14 @@ public class C_ActionUi extends ClientBasePacket {
 				if (result != null) {
 					pc.sendPackets(new S_NPCTalkReturn(npc.getId(), result));
 				} else {
-					pc.sendPackets(new S_SystemMessage("해당 제작 아이템은 서버에 준비되지 않았습니다."));
+					pc.sendPackets(new S_SystemMessage("その製作アイテムはサーバーに準備ができていません。"));
 				}
 				pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.CRAFT_OK));
 				pc.sendPackets(new S_SkillSound(pc.getId(), 7976));
 				pc.broadcastPacket(new S_SkillSound(pc.getId(), 7976));
 			}
 			break;
-		case 0x0146:	// 혈맹 가입신청 받기 설정
+		case 0x0146:	// 血盟加入申請受信設定
 			if (pc.getClanid()==0 || (!pc.isCrown() && pc.getClanRank() != L1Clan.수호))
 				return;
 			readC();
@@ -2536,7 +2535,7 @@ public class C_ActionUi extends ClientBasePacket {
 			readC();
 			int setting2 = readC();
 			if (setting2 == 2) {
-				pc.sendPackets(new S_SystemMessage("현재 암호 가입 유형으로 설정할 수 없습니다."), true);
+				pc.sendPackets(new S_SystemMessage("現在のパスワード登録のタイプに設定することができません。"), true);
 				setting2 = 1;
 			}
 
@@ -2546,31 +2545,31 @@ public class C_ActionUi extends ClientBasePacket {
 			ClanTable.getInstance().updateClan(pc.getClan());
 			pc.sendPackets(new S_ServerMessage(3980), true);
 			break;
-		case 0x014C:	// 혈맹 모집 셋팅
+		case 0x014C:	//血盟募集セッティング
 			if (pc.getClanid() == 0)
 				return;
 			pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.CLAN_JOIN_SETTING, pc.getClan().getJoinSetting(), pc.getClan().getJoinType()), true);
 			break;
-		case 322: // 혈맹가입
+		case 322: // 血盟加入
 		{
 			readC();
 			readH();
 			int length = readC();
 			byte[] BYTE = readByte();
 			
-			// 존재하지 않는 혈맹입니다.
+			//存在しない血盟です。
 			if(pc.isCrown()) {
 				pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.CLAN_JOIN_MESSAGE, 4), true);
 				break;
 			}
 
-			// 이미 혈맹에 가입한 상태 입니다.
+			// すでに血盟に加入した状態です。
 			if (pc.getClanid() != 0) {
 				pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.CLAN_JOIN_MESSAGE, 9), true);
 				break;
 			}
 
-			//  군주를 만나 가입해 주세요.
+			//  君主に会って登録してください。
 			try {
 				String clanname = new String(BYTE, 0, length, "MS949");
 				L1Clan clan = L1World.getInstance().getClan(clanname);
@@ -2598,7 +2597,7 @@ public class C_ActionUi extends ClientBasePacket {
 			} catch (Exception e) { }
 			break;
 		}
-		case 표식설정: // 파티 표식설정
+		case 표식설정: // パーティー標識設定
 			int size = readH();
 			byte[] flag = new byte[size];
 			for (int i = 0; i < size; ++i)
@@ -2611,13 +2610,13 @@ public class C_ActionUi extends ClientBasePacket {
 			for (L1PcInstance member : party.getMembers())
 				member.sendPackets(new S_ACTION_UI(flag));
 			break;
-		case ACCOUNT_TAM_UPDATE://탐창띄우기
+		case ACCOUNT_TAM_UPDATE://タムチャンオフセット
 			//pc.sendPackets(new S_TamWindow(pc.getAccountName()));
 			break;
-		case ACCOUNT_TAM://탐창띄우기
+		case ACCOUNT_TAM://タムチャンオフセット
 			pc.sendPackets(new S_TamWindow(pc.getAccountName()));
 			break;
-		case ACCOUNT_TAM_CANCEL://탐 
+		case ACCOUNT_TAM_CANCEL://乗車 
 			readC();
 			readH();
 			byte[] BYTE = readByte();
@@ -2632,14 +2631,14 @@ public class C_ActionUi extends ClientBasePacket {
 			int day = Nexttam(sb.toString());
 			int charobjid = TamCharid(sb.toString());
 			if (charobjid != pc.getId()) {
-				pc.sendPackets(new S_SystemMessage("알림: 해당 케릭터만 취소를 할 수 있습니다."));
+				pc.sendPackets(new S_SystemMessage("通知：このキャラクターのみキャンセルをすることができます。"));
 				return;
 			}
 			int itemid = 0;
 			if (day != 0) {
-				if (day == 3) {//기간 3일
+				if (day == 3) {//期間3日
 					itemid = 600226;
-				} else if (day == 30){//기간30일
+				} else if (day == 30){//期間30日
 					itemid = 600227;
 				}
 				L1ItemInstance item = pc.getInventory().storeItem(itemid, 1);
@@ -2650,7 +2649,7 @@ public class C_ActionUi extends ClientBasePacket {
 				}
 			}
 			break;
-		case 액션: // 소셜액션
+		case ACTION: // ソーシャルアクション
 			readD();
 			readC();
 			int action1 = readC();
@@ -2664,7 +2663,7 @@ public class C_ActionUi extends ClientBasePacket {
 				readH();
 				readC();
 				int castleType = readC();
-				// 1켄트 2기란 4오크요새
+				// 1ケント2ギラン4オーク要塞
 				for (L1Clan cc : L1World.getInstance().getAllClans()) {
 					if (castleType == cc.getCastleId()) {
 						s = cc.getClanName();
@@ -2680,43 +2679,43 @@ public class C_ActionUi extends ClientBasePacket {
 				String clanName = player.getClanname();
 				int clanId = player.getClanid();
 
-				if (!player.isCrown()) { // 군주 이외
+				if (!player.isCrown()) { //君主以外
 					S_ServerMessage sm = new S_ServerMessage(478);
 					player.sendPackets(sm, true);
 					return;
 				}
-				if (clanId == 0) { // 크란미소속
+				if (clanId == 0) { // クラン笑顔の中
 					S_ServerMessage sm = new S_ServerMessage(272);
 					player.sendPackets(sm, true);
 					return;
 				}
 				L1Clan clan = L1World.getInstance().getClan(clanName);
 				if (clan == null) { // 자크란이 발견되지 않는다
-					S_SystemMessage sm = new S_SystemMessage("대상 혈맹이 발견되지 않았습니다.");
+					S_SystemMessage sm = new S_SystemMessage("対象血盟が見つかりません。");
 					player.sendPackets(sm, true);
 					return;
 				}
-				if (player.getId() != clan.getLeaderId()) { // 혈맹주
+				if (player.getId() != clan.getLeaderId()) { // 血盟主
 					S_ServerMessage sm = new S_ServerMessage(478);
 					player.sendPackets(sm, true);
 					return;
 				}
-				if (clanName.toLowerCase().equals(s.toLowerCase())) { // 자크란을 지정
-					S_SystemMessage sm = new S_SystemMessage("자신의 혈에 공성 선포는 불가능합니다.");
+				if (clanName.toLowerCase().equals(s.toLowerCase())) { // ジャックとを指定
+					S_SystemMessage sm = new S_SystemMessage("自分の血に攻城宣言はできません。");
 					player.sendPackets(sm, true);
 					return;
 				}
 				L1Clan enemyClan = null;
 				String enemyClanName = null;
-				for (L1Clan checkClan : L1World.getInstance().getAllClans()) { // 크란명을 체크
+				for (L1Clan checkClan : L1World.getInstance().getAllClans()) { // クラン名をチェック
 					if (checkClan.getClanName().toLowerCase().equals(s.toLowerCase())) {
 						enemyClan = checkClan;
 						enemyClanName = checkClan.getClanName();
 						break;
 					}
 				}
-				if (enemyClan == null) { // 상대 크란이 발견되지 않았다
-					S_SystemMessage sm = new S_SystemMessage("대상 혈맹이 발견되지 않았습니다.");
+				if (enemyClan == null) { //相手クランが発見されなかった
+					S_SystemMessage sm = new S_SystemMessage("対象血盟が見つかりません。");
 					player.sendPackets(sm, true);
 					return;
 				}
@@ -2725,31 +2724,31 @@ public class C_ActionUi extends ClientBasePacket {
 //					player.sendPackets(sm, true);
 //					return;
 //				}
-				List<L1War> warList = L1World.getInstance().getWarList(); // 전쟁 리스트를 취득
-				if (clan.getCastleId() != 0) { // 자크란이 성주
+				List<L1War> warList = L1World.getInstance().getWarList(); // 戦争のリストを取得
+				if (clan.getCastleId() != 0) { //ジャックとは城主
 					S_ServerMessage sm = new S_ServerMessage(474);
 					player.sendPackets(sm, true);
 					return;
 				}
 				if (enemyClan.getCastleId() != 0 && player.getLevel() < Config.선포레벨) {
-					player.sendPackets(new S_SystemMessage("레벨 " + Config.선포레벨 + "부터 선포할 수 있습니다."));
+					player.sendPackets(new S_SystemMessage("レベル" + Config.선포레벨 + "から宣言することができます。"));
 					return;
 				}
 
 
 				if (clan.getOnlineClanMember().length <= Config.혈맹접속인원) {   
-					player.sendPackets(new S_SystemMessage("접속한 혈맹원이 "+Config.혈맹접속인원+"명 이상이면 선포가 가능합니다."));
+					player.sendPackets(new S_SystemMessage("接続した血盟員が"+Config.혈맹접속인원+"人以上であれば宣言が可能です。"));
 					return;
 				}
 
 				/*if (clan.getHouseId() > 0) {
-					S_SystemMessage sm = new S_SystemMessage("아지트가 있는 상태에서는 선전 포고를 할 수 없습니다.");
+					S_SystemMessage sm = new S_SystemMessage("アジトがある状態では、宣戦布告をすることができません。 "）;
 					player.sendPackets(sm, true);
 					return;
 				}*/
-				if (enemyClan.getCastleId() != 0) { // 상대 크란이 성주
+				if (enemyClan.getCastleId() != 0) { // 相手クランが城主
 					int castle_id = enemyClan.getCastleId();
-					if (WarTimeController.getInstance().isNowWar(castle_id)) { // 전쟁 시간내
+					if (WarTimeController.getInstance().isNowWar(castle_id)) { // 戦争の時間内
 						L1PcInstance clanMember[] = clan.getOnlineClanMember();
 						for (int k = 0; k < clanMember.length; k++) {
 							if (L1CastleLocation.checkInWarArea(castle_id, clanMember[k])) {
@@ -2767,22 +2766,22 @@ public class C_ActionUi extends ClientBasePacket {
 						}
 						boolean enemyInWar = false;
 						for (L1War war : warList) {
-							if (war.CheckClanInWar(enemyClanName)) { // 상대 크란이 이미 전쟁중
+							if (war.CheckClanInWar(enemyClanName)) { // 相手クランが既に戦争中
 								war.DeclareWar(clanName, enemyClanName);
 								war.AddAttackClan(clanName);
 								enemyInWar = true;
 								break;
 							}
 						}
-						if (!enemyInWar) { // 상대 크란이 전쟁중 이외로, 선전포고
+						if (!enemyInWar) { // 相手クランが戦争中以外で、宣戦布告
 							L1War war = new L1War();
-							war.handleCommands(1, clanName, enemyClanName); // 공성전 개시
+							war.handleCommands(1, clanName, enemyClanName); // 包囲開始
 						}
-					} else { // 전쟁 시간외
+					} else { // 戦争時間外
 						S_ServerMessage sm = new S_ServerMessage(476);
-						player.sendPackets(sm, true); // 아직 공성전의 시간이 아닙니다.
+						player.sendPackets(sm, true); // まだ攻城戦の時間がありません。
 					}
-				} else { // 상대 크란이 성주는 아니다
+				} else { //相手クランが城主ではない
 					return;
 				}
 			} catch (Exception e) {
@@ -2805,11 +2804,11 @@ public class C_ActionUi extends ClientBasePacket {
 			if (pc.getInventory().checkAddItem(item, count) == L1Inventory.OK) {
 				pc.getInventory().storeItem(item);
 			} else {
-				pc.sendPackets(new S_ServerMessage(82));// 무게 게이지가 부족하거나 인벤토리가 꽉차서 더 들 수 없습니다.
+				pc.sendPackets(new S_ServerMessage(82));// 重量ゲージが不足したり、インベントリがいっぱいよりにできません。
 				return false;
 			}
-			pc.sendPackets(new S_SystemMessage("아이템 제작에 성공했습니다."));
-			pc.sendPackets(new S_ServerMessage(143, item.getLogName())); // %0를 손에 넣었습니다.
+			pc.sendPackets(new S_SystemMessage("アイテム製作に成功しました。"));
+			pc.sendPackets(new S_ServerMessage(143, item.getLogName())); // %0を手に入れました。
 			pc.sendPackets(new S_SkillSound(pc.getId(), 7976));
 			pc.broadcastPacket(new S_SkillSound(pc.getId(), 7976));
 			return true;
@@ -2825,7 +2824,7 @@ public class C_ActionUi extends ClientBasePacket {
 		int day = 0;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT day FROM `tam` WHERE encobjid = ? order by id asc limit 1"); // 케릭터 테이블에서 군주만 골라와서
+			pstm = con.prepareStatement("SELECT day FROM `tam` WHERE encobjid = ? order by id asc limit 1"); // キャラクターテーブルで君主だけを選んで来て
 			pstm.setString(1, encobj);
 			rs = pstm.executeQuery();
 			while (rs.next()) {
@@ -2847,7 +2846,7 @@ public class C_ActionUi extends ClientBasePacket {
 		int objid = 0;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT objid FROM `tam` WHERE encobjid = ? order by id asc limit 1"); // 케릭터 테이블에서 군주만 골라와서
+			pstm = con.prepareStatement("SELECT objid FROM `tam` WHERE encobjid = ? order by id asc limit 1"); // キャラクターテーブルで君主だけを選んで来て
 			pstm.setString(1, encobj);
 			rs = pstm.executeQuery();
 			while (rs.next()) {

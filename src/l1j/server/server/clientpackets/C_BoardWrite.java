@@ -30,66 +30,66 @@ public class C_BoardWrite extends ClientBasePacket {
 			return;
 		}
 		if (title.length() > 16) {
-			pc.sendPackets(new S_SystemMessage("게시판 제목 글자수가 초과하였습니다."));
+			pc.sendPackets(new S_SystemMessage("掲示板タイトルの文字数を超えました。"));
 			return;
 		}
 		if (tg instanceof L1BoardInstance) {
 			L1BoardInstance board = (L1BoardInstance) tg;
 			if (board != null) {
 				if (pc.getLevel() < 30 && board.getNpcId() != 900006) {
-					pc.sendPackets(new S_SystemMessage("\\aH글쓰기 레벨 : 30"));
+					pc.sendPackets(new S_SystemMessage("\\aH書き込みレベル : 30"));
 					
 					return;
 				}
 			}
 			switch (board.getNpcId()) {
-			case 900006:// 드키 board_posts_key
+			case 900006:// ドキboard_posts_key
 				if (pc.getInventory().checkItem(L1ItemId.DRAGON_KEY, 1)) {
 					L1BoardPost.createKey(pc.getName(), title, content);
-					pc.sendPackets(new S_SystemMessage("드래곤키 판매는 마을게시판을 이용해주세요"));
+					pc.sendPackets(new S_SystemMessage("ドラゴンキー販売は村の掲示板をご利用ください"));
 				} else {
-					pc.sendPackets(new S_SystemMessage("드래곤 키를 소지하고 있지 않습니다."));
+					pc.sendPackets(new S_SystemMessage("ドラゴンキーを所持していません。"));
 				}
 				break;
-			case 4200015: // GM 서버정보게시판 board_posts_notice
+			case 4200015: // GMサーバー情報掲示板board_posts_notice
 				if (pc.getAccessLevel() == Config.GMCODE) {
 					L1BoardPost.createGM(pc.getName(), title, content);
 				} else {
-					pc.sendPackets(new S_SystemMessage("\\aH운영자 전용 게시판 입니다."));
+					pc.sendPackets(new S_SystemMessage("\\aHオペレータ専用掲示板です。"));
 					return;
 				}
 				break;
-			case 4200020: // GM게시판1 board_notice1
+			case 4200020: // GM掲示板1 board_notice1
 				if (pc.getAccessLevel() == Config.GMCODE) {
 					L1BoardPost.createGM1(pc.getName(), title, content);
 				} else {
-					pc.sendPackets(new S_SystemMessage("\\aH운영자 전용 게시판 입니다."));
+					pc.sendPackets(new S_SystemMessage("\\aHオペレータ専用掲示板です。"));
 					return;
 				}
 				break;
-			case 4200021: // GM게시판2 board_notice2
+			case 4200021: // GM掲示板2 board_notice2
 				if (pc.getAccessLevel() == Config.GMCODE) {
 					L1BoardPost.createGM2(pc.getName(), title, content);
 				} else {
-					pc.sendPackets(new S_SystemMessage("\\aH운영자 전용 게시판 입니다."));
+					pc.sendPackets(new S_SystemMessage("\\aHオペレータ専用掲示板です。"));
 					return;
 				}
 				break;
-			case 4200022: // 패키지 GM게시판3 board_notice3
+			case 4200022: // パッケージGM掲示板3 board_notice3
 				if (pc.getAccessLevel() == Config.GMCODE) {
 					L1BoardPost.createGM3(pc.getName(), title, content);
 				} else {
-					pc.sendPackets(new S_SystemMessage("\\aH운영자 전용 게시판 입니다."));
+					pc.sendPackets(new S_SystemMessage("\\aHオペレータ専用掲示板です。"));
 					return;
 				}
 				break;
-			case 500002: // 건의 사항^건의 게시판 board_posts_fix
+			case 500002: //提案^件掲示板board_posts_fix
 				if (pc.getInventory().checkItem(L1ItemId.ADENA, 300)) {
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 300);
-					L1BoardPost.createPhone(pc.getName(), "-비밀글-", content);
-					pc.sendPackets(new S_SystemMessage("\\aH등록 완료 : 글 제목은 운영자도 못보니 참고하세요."));
+					L1BoardPost.createPhone(pc.getName(), " - 非公開文 - ", content);
+					pc.sendPackets(new S_SystemMessage("\\aH登録完了：記事のタイトルは、運営者もいない見て参照してください。"));
 				} else {
-					pc.sendPackets(new S_SystemMessage("아데나가 부족합니다."));
+					pc.sendPackets(new S_SystemMessage("アデナが不足します。"));
 				}
 				break;
 
@@ -97,9 +97,9 @@ public class C_BoardWrite extends ClientBasePacket {
 				if (pc.getInventory().checkItem(L1ItemId.ADENA, 300)) {
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 300);
 					L1BoardPost.create(pc.getName(), title, content);
-					pc.sendPackets(new S_SystemMessage("게시글 등록이 완료되었습니다."));
+					pc.sendPackets(new S_SystemMessage("スレッドの登録が完了しました。"));
 				} else {
-					pc.sendPackets(new S_SystemMessage("아데나가 부족합니다."));
+					pc.sendPackets(new S_SystemMessage("アデナが不足します。"));
 				}
 				break;
 			}

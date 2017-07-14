@@ -57,15 +57,15 @@ public class C_Craft extends ClientBasePacket {
 
 	//private static Logger _log = Logger.getLogger(C_Craft.class.getName());
 
-	public static final int DOLL_START = 122; // 시작
-	public static final int DOLL_RESULT = 124; // 클릭
+	public static final int DOLL_START = 122; // 開始
+	public static final int DOLL_RESULT = 124; // クリック
 	private static final int Chat = 0x02;
 	private static final int Exclude = 0x1f;
 	private static final int NewStat = 228;
-	private static final int SEAL = 0x39; // 봉인 아이콘
-	private static final int CLAN_BUFF = 140; // 혈맹버프
+	private static final int SEAL = 0x39; // 封印のアイコン
+	private static final int CLAN_BUFF = 140; // 血盟バフ
 	private static final int MONSTER_CLEAR = 0x33;
-	private static final int MONSTERBOOK_TEL = 53; // 몬스터 북 텔레포트
+	private static final int MONSTERBOOK_TEL = 53; // モンスターブックテレポート
 	private static final int CLAN_RANKING = 146;
 
 	public C_Craft(byte[] data, GameClient client) throws IOException {
@@ -91,17 +91,17 @@ public class C_Craft extends ClientBasePacket {
 			}
 		}
 		break;
-		//리스창
+		//リースウィンドウ
 		case 34:{
 			pc.sendPackets(new S_ACTION_UI2(pc, S_ACTION_UI2.DUNGEON_TIME));
-			//pc.sendPackets(new S_ChatPacket(pc,"------>던전남은시간은 /입장시간을 입력해주세요  <-----"));
+			//pc.sendPackets(new S_ChatPacket(pc,"------>ダンジョン残り時間は/入場時間を入力してください<----- "））;
 			break;
 		}
 			case CLAN_BUFF: {
 				readH();
 				readH();// 08
 				L1Clan clan = pc.getClan();
-				int buffId = read4(read_size()) - 2724;// 2724:일반공격 2725:일반방어 2726:전투공격 2727:전투방어
+				int buffId = read4(read_size()) - 2724;// 2724：一般攻撃2725：一般防御2726：戦闘攻撃2727：戦闘防衛
 				int consume = 300000000;
 				int time = 172800;
 				if (clan.getBuffTime()[buffId] != 0) {
@@ -140,18 +140,18 @@ public class C_Craft extends ClientBasePacket {
 				readH();
 				readH();
 				L1ItemInstance l1iteminstance1 = pc.getInventory().getItem(read4(read_size()));
-				if(l1iteminstance1.getItem().getType2()==0){ // etc 아이템이라면 
-					pc.sendPackets(new S_ServerMessage(79)); // 아무일도 일어나지 않는다 (멘트)
+				if(l1iteminstance1.getItem().getType2()==0){ // etc アイテムなら 
+					pc.sendPackets(new S_ServerMessage(79)); // 何も起こらない（コメント）
 					return;
 				}
 				if (l1iteminstance1.getBless() == 0 || l1iteminstance1.getBless() == 1
 						|| l1iteminstance1.getBless() == 2 || l1iteminstance1.getBless() == 3) {
 					int Bless = 0;
 					switch (l1iteminstance1.getBless()) {
-				case 0: Bless = 128; break; //축
-				case 1: Bless = 129; break; //보통
-				case 2: Bless = 130; break; //저주
-				case 3: Bless = 131; break; //미확인
+				case 0: Bless = 128; break; //軸
+				case 1: Bless = 129; break; //普通
+				case 2: Bless = 130; break; //呪わ
+				case 3: Bless = 131; break; //未確認
 				}
 					l1iteminstance1.setBless(Bless);
 	                int st = 0;
@@ -171,7 +171,7 @@ public class C_Craft extends ClientBasePacket {
 					pc.getInventory().updateItem(l1iteminstance1, L1PcInventory.COL_IS_ID);
 					pc.getInventory().saveItem(l1iteminstance1, L1PcInventory.COL_IS_ID);
 				} else
-				pc.sendPackets(new S_ServerMessage(79)); // \f1 아무것도 일어나지 않았습니다.
+				pc.sendPackets(new S_ServerMessage（79））; // \\ f1、何も起こらなかった。
 				break;
 				*/
 			case CLAN_RANKING: {
@@ -214,50 +214,50 @@ public class C_Craft extends ClientBasePacket {
 					pc.getInventory().removeItem(item);
 				}
 	//			int random = CommonUtil.random(5);
-				int chance = ((total * Config.인형확률) / step); // 인형합성 확률 설정
-				//int chance = 100; // 인형합성 확률 설정
+				int chance = ((total * Config.인형확률) / step); // 人形合成確率設定
+				//int chance = 100; //人形合成確率設定
 				if (CommonUtil.random(100) + 1 <= chance) {
 				switch (step) {
 					case 1:
 						dollids = new int[] { 
-								210071, // 장로
-								41249, // 서큐버스
-								210105, // 코카트리스
-								750, // 눈사람(A) ?
-								410172, // 인어
-								741, // 라바골렘
+								210071, // 長老
+								41249, //サキュバス
+								210105, //コカトリス
+								750, //雪だるま（A）？
+								410172, //人魚
+								741, //ラヴァゴーレム
 						};
 						break;
 					case 2:
 						dollids = new int[] { 
-								510222, // 서큐 퀸
-								510221, // 흑장로
-								510219, // 자이언트
-								447017, // 드레이크
-								410173, // 킹 버그베어
-								742, // 다이아몬드골렘
+								510222, // サーキュクイーン
+								510221, // ブラックエルダー
+								510219, //ジャイアント
+								447017, // ドレイク
+								410173, // キングバグベア
+								742, // ダイヤモンドゴーレム
 						};
 						break;
 					case 3:
 						dollids = new int[] { 
-								510220, // 사이클롭스
-								447016, // 리치
-								743, // 나이트발드
-								744, // 시어
-								3000086, // 아이리스
-								3000087, // 뱀파이어
-								751, // 머미로드
+								510220, // サイクロプス
+								447016, // リッチ
+								743, //ナイトバルド
+								744, //シ
+								3000086, // アイリス
+								3000087, //ヴァンパイア
+								751, //マミーロード
 						};
 						break;
-					case 4://마지막 나오는 단계
+					case 4://最後出てくる段階
 						dollids = new int[] { 
-								745, // 데몬
-								410171, // 데스나이트 746
-								3000088, // 바란카
-								752, // 타락
-								3000150, //바포
-								3000151, //얼녀
-								3000152 //커츠
+								745, // デーモン
+								410171, // デスナイト746
+								3000088, // バランカ
+								752, //堕落
+								3000150, //バポ
+								3000151, //オルニョ
+								3000152 //カーツ
 						};
 					}
 				item = ItemTable.getInstance().createItem(dollids[CommonUtil.random(dollids.length)]);
@@ -290,7 +290,7 @@ public class C_Craft extends ClientBasePacket {
 					value = monNum % 3;
 				}
 				switch (value) {
-				/** 도감 1~3단계별로 아이템지급 **/
+				/** 図鑑1〜3ステップでアイテム支給 **/
 				case 1:
 					pc.addExp(50000);
 					if (pc.hasSkillEffect(1541))
@@ -300,7 +300,7 @@ public class C_Craft extends ClientBasePacket {
 					String[] itemIds = null;
 					try {
 						int idx = Config.도감1단아이템.indexOf(",");
-						// ,로 있을경우
+						// 、である場合
 						if (idx > -1) {
 							itemIds = Config.도감1단아이템.split(",");
 						} else {
@@ -309,11 +309,11 @@ public class C_Craft extends ClientBasePacket {
 						}
 					} catch (Exception e) {
 					}
-					// 지급할 아이템 갯수
+					// 支給するアイテムの数
 					String[] counts = null;
 					try {
 						int idx = Config.도감1단아이템갯수.indexOf(",");
-						// ,로 있을경우
+						// 、である場合
 						if (idx > -1) {
 							counts = Config.도감1단아이템갯수.split(",");
 						} else {
@@ -322,7 +322,7 @@ public class C_Craft extends ClientBasePacket {
 						}
 					} catch (Exception e) {
 					}
-					// 아이템 아이디나 카운트가 없을경우
+					// アイテム名やカウントがない場合
 					if (itemIds == null || counts == null)
 						return;
 					for (int j = 0; j < itemIds.length; j++) {
@@ -334,19 +334,19 @@ public class C_Craft extends ClientBasePacket {
 							continue;
 						L1ItemInstance item = pc.getInventory().storeItem(itemId, count);
 						if (item != null)
-							pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + ")을 얻었습니다."));
+							pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + "）を獲得しました。"));
 					}
 
 
-					//pc.getInventory().storeItem(41159, 2000);//도감 깃털지급
-					//pc.getInventory().storeItem(40308, 20000000);//도감 깃털지급
+					//pc.getInventory().storeItem(41159, 2000);//図鑑羽支給
+					//pc.getInventory().storeItem(40308, 20000000);//図鑑羽支給
 					break;
 				case 2:
 					pc.addExp(500000);
 					String[] itemIds1 = null;
 					try {
 						int idx = Config.도감2단아이템.indexOf(",");
-						// ,로 있을경우
+						// 、である場合
 						if (idx > -1) {
 							itemIds1 = Config.도감2단아이템.split(",");
 						} else {
@@ -355,11 +355,11 @@ public class C_Craft extends ClientBasePacket {
 						}
 					} catch (Exception e) {
 					}
-					// 지급할 아이템 갯수
+					//支給するアイテムの数
 					String[] counts1 = null;
 					try {
 						int idx = Config.도감2단아이템갯수.indexOf(",");
-						// ,로 있을경우
+						//、である場合
 						if (idx > -1) {
 							counts1 = Config.도감2단아이템갯수.split(",");
 						} else {
@@ -368,7 +368,7 @@ public class C_Craft extends ClientBasePacket {
 						}
 					} catch (Exception e) {
 					}
-					// 아이템 아이디나 카운트가 없을경우
+					// アイテム名やカウントがない場合
 					if (itemIds1 == null || counts1 == null)
 						return;
 					for (int j = 0; j < itemIds1.length; j++) {
@@ -380,21 +380,21 @@ public class C_Craft extends ClientBasePacket {
 							continue;
 						L1ItemInstance item = pc.getInventory().storeItem(itemId, count);
 						if (item != null)
-							pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + ")을 얻었습니다."));
+							pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + "）を獲得しました。"));
 					}
 					
 					
 					
 					
-					//pc.getInventory().storeItem(41159, 4000);//도감 깃털지급
-					//pc.getInventory().storeItem(40308, 40000000);//도감 깃털지급
+					//pc.getInventory().storeItem(41159, 4000);//図鑑羽支給
+					//pc.getInventory().storeItem(40308, 40000000); //図鑑羽支給
 					break;
 				case 3:
 					pc.addExp(5000000);
 					String[] itemIds2 = null;
 					try {
 						int idx = Config.도감3단아이템.indexOf(",");
-						// ,로 있을경우
+						//、である場合
 						if (idx > -1) {
 							itemIds2 = Config.도감3단아이템.split(",");
 						} else {
@@ -403,11 +403,11 @@ public class C_Craft extends ClientBasePacket {
 						}
 					} catch (Exception e) {
 					}
-					// 지급할 아이템 갯수
+					//支給するアイテムの数
 					String[] counts2 = null;
 					try {
 						int idx = Config.도감3단아이템갯수.indexOf(",");
-						// ,로 있을경우
+						//、である場合
 						if (idx > -1) {
 							counts2 = Config.도감3단아이템갯수.split(",");
 						} else {
@@ -416,7 +416,7 @@ public class C_Craft extends ClientBasePacket {
 						}
 					} catch (Exception e) {
 					}
-					// 아이템 아이디나 카운트가 없을경우
+					//アイテム名やカウントがない場合
 					if (itemIds2 == null || counts2 == null)
 						return;
 					for (int j = 0; j < itemIds2.length; j++) {
@@ -428,12 +428,12 @@ public class C_Craft extends ClientBasePacket {
 							continue;
 						L1ItemInstance item = pc.getInventory().storeItem(itemId, count);
 						if (item != null)
-							pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + ")을 얻었습니다."));
+							pc.sendPackets(new S_SystemMessage(item.getName() + " (" + count + "）を獲得しました。"));
 					}
 					
 					
-					//pc.getInventory().storeItem(41159, 6000);//도감 깃털지급
-					//pc.getInventory().storeItem(40308, 60000000);//도감 깃털지급
+					//pc.getInventory().storeItem(41159, 6000);//図鑑羽支給
+					//pc.getInventory().storeItem(40308, 60000000）; //図鑑羽支給
 					pc.getInventory().storeItem(5548, 1);
 					
 					break;
@@ -481,13 +481,13 @@ public class C_Craft extends ClientBasePacket {
 				readC();
 				int totallength = readH(); // size
 				readH(); // 08 01
-				readC(); // 0X10 클래스구분
+				readC(); // 0X10クラス区分
 				int Classtype = readC();
 				if (pc != null) {
 					Classtype = pc.getType();
 				}
-				readC(); // 0x18 초기화구분
-				int value = readC(); // 0x01:최초생성,초기화 0x08:혼합,개별 0x10:보너스스탯
+				readC(); // 0x18初期化区分
+				int value = readC(); // 0x01：最初の作成、初期化0x08：ブレンド、個別0x10：ボーナスステータス
 				for (int i = 0; i < (totallength - 6) / 2; i++) {
 					int charstat = readC();
 					if (charstat == 0 || (charstat % 8) != 0) {
@@ -567,7 +567,7 @@ public class C_Craft extends ClientBasePacket {
 				if (pc == null)
 					return;
 				L1ExcludingList exList = SpamTable.getInstance().getExcludeTable(pc.getId());
-				int Type = readC(); // 0:리스트, 1:추가, 2:삭제
+				int Type = readC(); // 0：リスト、1：追加、2：削除
 				if (Type == 0) {
 					pc.sendPackets(new S_PacketBox(S_PacketBox.SHOW_LIST_EXCLUDE, exList.getExcludeList(0), 0));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.SHOW_LIST_EXCLUDE, exList.getExcludeList(1), 1));
@@ -583,7 +583,7 @@ public class C_Craft extends ClientBasePacket {
 							break;
 						String charName = readS2(enamelength);
 						if (charName.equalsIgnoreCase(pc.getName())) {
-							pc.sendPackets(new S_SystemMessage("\\aD알림: 자기 자신은 차단 할 수 없습니다."));
+							pc.sendPackets(new S_SystemMessage("\\aD通知：自分はブロックすることができません。"));
 							break;
 						}
 						if (exList.contains(subType, charName)) {
@@ -609,7 +609,7 @@ public class C_Craft extends ClientBasePacket {
 			case Chat: 
 				try {
 				if (pc != null && !pc.isGm() && pc.isGhost()) {
-					pc.sendPackets(new S_SystemMessage("현재 채팅을 하실 수 없는 상태입니다."));
+					pc.sendPackets(new S_SystemMessage("現在チャットをすることができない状態です。"));
 					return;
 				}
 				readP(4);
@@ -647,7 +647,7 @@ public class C_Craft extends ClientBasePacket {
 					}
 					String name = new String(os.getBytes(), "MS949");
 					ChatWhisper(pc, chatType, chatcount, chat2, name);
-				} else { // 일반 및 전쳇등
+				} else { // 一般ジョンチェトなど
 					Chat(pc, chatType, chatcount, chat2);
 				}
 				os.close();
@@ -662,7 +662,7 @@ public class C_Craft extends ClientBasePacket {
 			if (targetName.length() > 50)
 				return;
 			if (text.length() > 25) {
-				whisperFrom.sendPackets(new S_SystemMessage("귓말로 보낼 수 있는 글자수를 초과하였습니다."));
+				whisperFrom.sendPackets(new S_SystemMessage("ウィスパーで送ることができる文字数を超えています。"));
 				return;
 			}
 	
@@ -677,22 +677,22 @@ public class C_Craft extends ClientBasePacket {
 	
 			L1PcInstance whisperTo = L1World.getInstance().getPlayer(targetName);
 	
-			// 월드에 없는 경우
+			// ワールドに存在しない場合
 			if (whisperTo == null) {
 				whisperFrom.sendPackets(new S_ServerMessage(73, targetName));
 				return;
 			}
 			if (whisperTo.hasSkillEffect(L1SkillId.STATUS_CHAT_PROHIBITED)) {
-				whisperFrom.sendPackets(new S_SystemMessage("채팅금지중인 PC에게는 귓말을 할수 없습니다."));
+				whisperFrom.sendPackets(new S_SystemMessage("チャット禁止しているPCにはウィスパーをすることができません。"));
 				return;
 			}
 	
-			// 자기 자신에 대한 wis의 경우
+			//自分自身のためにwisの場合
 			if (whisperTo.equals(whisperFrom)) {
 				return;
 			}
 	
-			// 차단되고 있는 경우
+			// ブロックされている場合
 			if (whisperTo != null) {
 				L1ExcludingList spamList2 = SpamTable.getInstance().getExcludeTable(whisperTo.getId());
 				if (spamList2.contains(0, whisperFrom.getName())) {
@@ -710,7 +710,7 @@ public class C_Craft extends ClientBasePacket {
 				if (whisperTo.getName().equalsIgnoreCase("메티스") || whisperTo.getName().equalsIgnoreCase("미소피아")) {
 					//whisperTo.sendPackets(new S_NewChat(chatType, chatdata, chatcount, whisperFrom));
 					whisperTo.sendPackets(new S_NewChat(whisperFrom, 4, chatType, text, whisperTo.getName()));
-					whisperFrom.sendPackets(new S_SystemMessage("-> (" + whisperTo.getName() + ") 편지 주시면 잠시후 답변 드리겠습니다."));
+					whisperFrom.sendPackets(new S_SystemMessage("-> (" + whisperTo.getName() + "）メールいただければしばらく回答いたします。"));
 					return;
 				}
 			}
@@ -722,7 +722,7 @@ public class C_Craft extends ClientBasePacket {
 			LinAllManager.getInstance().WisperChatAppend(whisperFrom.getName(), whisperTo.getName(), text);
 			
 			ChatLogTable.getInstance().storeChat(whisperFrom, null, "-> " +  whisperTo.getName() + " : " + text, chatType);	
-			/** 파일로그저장 **/
+			/** ファイルログの保存 **/
 			LoggerInstance.getInstance().addWhisper(whisperFrom, whisperTo, text);		
 		}
 	
@@ -731,9 +731,9 @@ public class C_Craft extends ClientBasePacket {
 			if (pc.waitAutoAuth()) {
 				if (chatText.equals(pc.getAutoAuthCode())) {
 					pc.resetAutoInfo();
-					//pc.getInventory().storeItem(41159, 3); // 양말 3개 지급.
-					pc.sendPackets(new S_SystemMessage("오토 방지 코드가 인증되었습니다."));
-					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "오토 방지 코드입력으로 픽시의 깃털 (3개)지급 합니다."));
+					//pc.getInventory().storeItem(41159, 3); //靴下3つ支給。
+					pc.sendPackets(new S_SystemMessage("オート防止コードが認証されました。"));
+					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "オート防止コードを入力としてピクシーの羽（3）支給します。"));
 					;
 					return;
 				}
@@ -744,27 +744,27 @@ public class C_Craft extends ClientBasePacket {
 					|| pc.hasSkillEffect(L1SkillId.STATUS_POISON_SILENCE)) {
 				return;
 			}
-			if (pc.hasSkillEffect(1005)) { // 채팅 금지중
-				pc.sendPackets(new S_ServerMessage(242)); // 현재 채팅 금지중입니다.
+			if (pc.hasSkillEffect(1005)) { // チャット禁止中
+				pc.sendPackets(new S_ServerMessage(242)); // 現在のチャット禁止中です。
 				return;
 			}
 			if (pc.getMapId() == 631 && !pc.isGm()) {
-				pc.sendPackets(new S_ServerMessage(912)); // 채팅을 할 수 없습니다.
+				pc.sendPackets(new S_ServerMessage(912)); // チャットをすることができません。
 				return;
 			}
 			if (pc.getMapId() >= 514 && pc.getMapId() <= 516 && !pc.isGm()) {
-				pc.sendPackets(new S_ServerMessage(912)); // 채팅을 할 수 없습니다.
+				pc.sendPackets(new S_ServerMessage(912)); //チャットをすることができません。
 				return;
 			}
 	
 			if (pc.isDeathMatch() && !pc.isGm() && !pc.isGhost()) {
-				pc.sendPackets(new S_SystemMessage("데스매치 경기중에는 채팅이 금지됩니다.")); // 현재 채팅 금지중입니다.
+				pc.sendPackets(new S_SystemMessage("デスマッチゲームの中には、チャットが禁止されます。")); // 現在のチャット禁止中です。
 				return;
 			}
-			/** 배틀존 **/
+			/** バトルゾーン **/
 			if (!pc.isGm() && pc.getMapId() == 5153) {
 				if (chatType != 0) {
-					pc.sendPackets(new S_SystemMessage("프리미엄 배틀존 진행중에는 일반채팅만 가능합니다."));
+					pc.sendPackets(new S_SystemMessage("プレミアムバトルゾーン進行中には、一般的なチャットのみ可能です。"));
 					return;
 				}
 			}
@@ -774,7 +774,7 @@ public class C_Craft extends ClientBasePacket {
 				if (pc.isGhost() && !(pc.isGm() || pc.isMonitor())) {
 					return;
 				}
-				// GM커멘드
+				// GMコマンド
 				if (chatText.startsWith(".") && (pc.getAccessLevel() == Config.GMCODE || pc.isMonitor())) {//+
 					String cmd = chatText.substring(1);
 					GMCommands.getInstance().handleCommands(pc, cmd);
@@ -788,7 +788,7 @@ public class C_Craft extends ClientBasePacket {
 	
 				if(pc.isSupporting()){
 					new HelpBySupport(pc, 0).npctalk3(chatText);
-					if(chatText.startsWith("속이 기")){
+					if(chatText.startsWith("騙した")){
 						return;
 					}
 				}
@@ -796,10 +796,10 @@ public class C_Craft extends ClientBasePacket {
 				
 				if (pc.isGambling()) {
 					L1Gambling gam = new L1Gambling();
-					if (chatText.startsWith("홀")) {
+					if (chatText.startsWith("ホール")) {
 						gam.Gambling2(pc, chatText, 1);
 						return;
-					} else if (chatText.startsWith("짝")) {
+					} else if (chatText.startsWith("ペア")) {
 						gam.Gambling2(pc, chatText, 2);
 						return;
 					} else if (chatText.startsWith("1")) {
@@ -824,31 +824,31 @@ public class C_Craft extends ClientBasePacket {
 				}
 				if (pc.isGambling3()) {
 					L1Gambling3 gam1 = new L1Gambling3();
-					if (chatText.startsWith("오크전사")) {
+					if (chatText.startsWith("オークの戦士")) {
 						gam1.Gambling3(pc, chatText, 1);
 						return;
-					} else if (chatText.startsWith("스파토이")) {
+					} else if (chatText.startsWith("スパルトイ")) {
 						gam1.Gambling3(pc, chatText, 2);
 						return;
-					} else if (chatText.startsWith("멧돼지")) {
+					} else if (chatText.startsWith("イノシシ")) {
 						gam1.Gambling3(pc, chatText, 3);
 						return;
-					} else if (chatText.startsWith("슬라임")) {
+					} else if (chatText.startsWith("スライム")) {
 						gam1.Gambling3(pc, chatText, 4);
 						return;
-					} else if (chatText.startsWith("해골")) {
+					} else if (chatText.startsWith("スケルトン")) {
 						gam1.Gambling3(pc, chatText, 5);
 						return;
-					} else if (chatText.startsWith("늑대인간")) {
+					} else if (chatText.startsWith("狼")) {
 						gam1.Gambling3(pc, chatText, 6);
 						return;
-					} else if (chatText.startsWith("버그베어")) {
+					} else if (chatText.startsWith("バグベア")) {
 						gam1.Gambling3(pc, chatText, 7);
 						return;
-					} else if (chatText.startsWith("장로")) {
+					} else if (chatText.startsWith("長老")) {
 						gam1.Gambling3(pc, chatText, 8);
 						return;
-					} else if (chatText.startsWith("괴물눈")) {
+					} else if (chatText.startsWith("モンスターの目")) {
 						gam1.Gambling3(pc, chatText, 9);
 						return;
 					}
@@ -869,7 +869,7 @@ public class C_Craft extends ClientBasePacket {
 						listner.sendPackets(s_chatpacket);
 					}
 				}
-				// 돕펠 처리
+				// ドッペル処理
 				L1MonsterInstance mob = null;
 				for (L1Object obj : pc.getKnownObjects()) {
 					if (obj instanceof L1MonsterInstance) {
@@ -882,19 +882,19 @@ public class C_Craft extends ClientBasePacket {
 			}
 			LinAllManager.getInstance().NomalchatAppend(pc.getName(), chatText);
 			 LoggerInstance.getInstance().addChat(Logger.ChatType.Shouting, pc, chatText);
-			/** 파일로그저장 **/
+			/** ファイルログの保存 **/
 			ChatLogTable.getInstance().storeChat(pc, null, chatText, chatType);
 			break;
 	
 			case 3: {
 				chatWorld(pc, chatType, chatcount, chatText);
-				/** 파일로그저장 **/
+				/** ファイルログの保存 **/
 				LoggerInstance.getInstance().addChat(Logger.ChatType.Global, pc, chatText);
 				ChatLogTable.getInstance().storeChat(pc, null, chatText, chatType);
 			}
 			break;
 			case 4 : {
-				if (pc.getClanid() != 0) { // 크란 소속중
+				if (pc.getClanid() != 0) { // クランに所属中
 					L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 					if (clan != null) {
 						ChatLogTable.getInstance().storeChat(pc, null, chatText, chatType);
@@ -910,14 +910,14 @@ public class C_Craft extends ClientBasePacket {
 					}
 				}
 			}
-			/** 파일로그저장 **/
+			/** ファイルログの保存 **/
 	
 			break;
 			case 11: {
-				if (pc.isInParty()) { // 파티중
+				if (pc.isInParty()) { // パーティー中
 					S_NewChat s_chatpacket2 = new S_NewChat(pc, 4, chatType, chatText, ""); 
 					LinAllManager.getInstance().PartyChatAppend(pc.getName(), chatText);
-					/** 파일로그저장 **/
+					/** ファイルログの保存 **/
 					ChatLogTable.getInstance().storeChat(pc, null, chatText, chatType);
 					LoggerInstance.getInstance().addChat(Logger.ChatType.Party, pc, chatText);
 					for (L1PcInstance listner : pc.getParty().getMembers()) {
@@ -933,14 +933,14 @@ public class C_Craft extends ClientBasePacket {
 				if (pc.isGm()) chatWorld(pc, chatType, chatcount, chatText);
 				else chatWorld(pc, 12, chatcount, chatText);
 				break;
-			case 13 : { // 연합 채팅
+			case 13 : { //連合チャット
 				if (pc.getClanid() != 0) { // 크란 소속중
 					L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 					int rank = pc.getClanRank();
 					if (clan != null&& (rank == L1Clan.군주 || (rank == L1Clan.수호))) {
 						S_NewChat s_chatpacket3 = new S_NewChat(pc, 4, chatType, chatText, ""); 
 						LinAllManager.getInstance().ClanChatAppend(pc.getClanname(), pc.getName(), chatText);
-						/** 파일로그저장 **/
+						/** ファイルログの保存 **/
 						ChatLogTable.getInstance().storeChat(pc, null, chatText, chatType);
 						LoggerInstance.getInstance().addChat(Logger.ChatType.Guardian, pc, chatText);
 						for (L1PcInstance listner : clan.getOnlineClanMember()) {
@@ -954,11 +954,11 @@ public class C_Craft extends ClientBasePacket {
 				}
 			}
 			break;
-			case 14 : { // 채팅 파티
-				if (pc.isInChatParty()) { // 채팅 파티중
+			case 14 : { // チャットパーティー
+				if (pc.isInChatParty()) { //チャットパーティー中
 					S_NewChat s_chatpacket4 = new S_NewChat(pc, 4, chatType, chatText, ""); 
 					LinAllManager.getInstance().PartyChatAppend(pc.getName(), chatText);
-					/** 파일로그저장 **/
+					/** ファイルログの保存 **/
 					ChatLogTable.getInstance().storeChat(pc, null, chatText, chatType);
 					LoggerInstance.getInstance().addChat(Logger.ChatType.Group, pc, chatText);
 					for (L1PcInstance listner : pc.getChatParty().getMembers()) {
@@ -972,12 +972,12 @@ public class C_Craft extends ClientBasePacket {
 			break;
 	
 			case 17:
-				if (pc.getClanid() != 0) { // 혈맹 소속중
+				if (pc.getClanid() != 0) { // 血盟所属の
 					L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 					if (clan != null && (pc.isCrown() && pc.getId() == clan.getLeaderId())) {
 						S_NewChat s_chatpacket5 = new S_NewChat(pc, 4, chatType, chatText, ""); 
 						LinAllManager.getInstance().ClanChatAppend(pc.getClanname(), pc.getName(), chatText);
-						/** 파일로그저장 **/
+						/** ファイルログの保存 **/
 						ChatLogTable.getInstance().storeChat(pc, null, chatText, chatType);
 						LoggerInstance.getInstance().addChat(Logger.ChatType.Clan, pc, chatText);
 						for (L1PcInstance listner : clan.getOnlineClanMember()) {
@@ -1009,7 +1009,7 @@ public class C_Craft extends ClientBasePacket {
 			} else if (pc.getLevel() >= Config.GLOBAL_CHAT_LEVEL) {
 				
 				if (L1World.getInstance().isWorldChatElabled()) {
-					if (pc.get_food() >= 12) { // 5%겟지?
+					if (pc.get_food() >= 12) { // 5％ラゲッジ？
 						ChatLogTable.getInstance().storeChat(pc, null, text, chatType);
 						pc.sendPackets(new S_PacketBox(S_PacketBox.FOOD, pc.get_food()));
 						if (chatType == 12){
