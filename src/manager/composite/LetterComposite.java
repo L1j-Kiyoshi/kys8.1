@@ -4,12 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import l1j.server.L1DatabaseFactory;
-import l1j.server.server.utils.SQLUtil;
-import manager.LinAllManager;
-import manager.SWTResourceManager;
-import manager.dialog.LetterDialog;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -20,6 +14,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+
+import l1j.server.L1DatabaseFactory;
+import l1j.server.server.utils.SQLUtil;
+import manager.LinAllManager;
+import manager.SWTResourceManager;
+import manager.dialog.LetterDialog;
 
 public class LetterComposite extends Composite {
 	private Table table;
@@ -127,7 +127,8 @@ public class LetterComposite extends Composite {
 		ResultSet rs = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("select * from letter where receiver in ('메티스', '미소피아', '운영자') ORDER BY item_object_id DESC");
+			//なんかGM系の名前
+			pstm = con.prepareStatement("select * from letter where receiver in ('メティス', 'Misopia', 'オペレータ') ORDER BY item_object_id DESC");
 			rs = pstm.executeQuery();
 			
 			while (rs.next()) {

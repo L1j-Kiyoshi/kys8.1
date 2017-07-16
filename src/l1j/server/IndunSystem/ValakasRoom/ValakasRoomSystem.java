@@ -24,7 +24,7 @@ public class ValakasRoomSystem {
 		
 	public void startRaid(L1PcInstance pc){
 		if(countStartRaid() >= 49){
-			pc.sendPackets(new S_SystemMessage("인스턴스 던전을 더 이상 생성할수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("インスタンスダンジョンをこれ以上作成できません。"));
 			return;
 		}
 		int id = blankMapId();

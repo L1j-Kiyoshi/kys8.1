@@ -23,7 +23,7 @@ public class ValakasReadyStart {
 
 	public void startReady(L1PcInstance pc) {
 		if (countReadyRaid() >= 49) {
-			pc.sendPackets(new S_SystemMessage("인스턴스 던전을 더 이상 생성할수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("インスタンスダンジョンをこれ以上作成できません。"));
 			return;
 		}
 		int id = blankMapId();
@@ -38,7 +38,7 @@ public class ValakasReadyStart {
 	}
 
 	/**
-	 * 빈 맵 아이디를 가져온다
+	 * 空のマップIDを持って来る
 	 * 
 	 * @return
 	 */

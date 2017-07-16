@@ -2,14 +2,14 @@ package l1j.server.IndunSystem.DragonRaid.Fafu;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 import l1j.server.IndunSystem.DragonRaid.Anta.AntarasRaidSpawn;
 import l1j.server.server.model.L1Inventory;
 import l1j.server.server.model.L1Object;
-import l1j.server.server.model.L1World;
 import l1j.server.server.model.L1Teleport;
+import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1MonsterInstance;
 import l1j.server.server.model.Instance.L1NpcInstance;
@@ -53,17 +53,17 @@ public class FafurionRaidSystem {
 		@Override
 		public void run() {
 			try {
-				/**Lair = 파푸방 , Romm1 = 1번방, Room2 = 2번방, Room3= 3번방 Room4 = 4번방*/
+				/**Lair = 波プバン、Romm1 = 1番の部屋、Room2 = 2番の部屋、Room3 = 3番の部屋Room4 = 4番の部屋*/
 				ArrayList<L1PcInstance> Lair = FafurionRaidSystem.getInstance().getAR(_mapid).getRoomList(5);
 				switch(_type){
 				/**
-				1차 레어 입장 
-				1657 : 파푸리온 : 감히 나의 영역에 들어오다니... 용기가 가상하구나..
-				1658 : 무녀사엘 : 이 비열한 파푸리온! 이제 나를 속인 댓가를 치루게 될 것이다!
-				1659 : 파푸리온 : 봉인을 풀 때 네가 큰 도움이 되었지만..나에게 두 번의 자비는 없다..				
-				1660 : 무녀 사엘 : 그때는 네 녀석이 내 뼈 속까지 저주를 내렸지만.. 지금은 다르다!
-				1661 : 파푸리온 : 가소롭구나! 저둘이 너와 함께 이승을 떠돌게 될 나의 제물들인 거이냐!
-				1662 : 무녀사엘 : 용사들이여! 저 사악한 파푸리온을 물리치고 에바 왕국에 내려진 피의 저주를 부디 풀어 주소서!
+				1次レア立場 
+				1657：パプリオン：あえて私の領域に入って来るなんて...勇気が仮想ね。
+				1658：巫女サエル：この卑劣なパプリオン！今私だまさ代価を戦いになる！
+				1659：パプリオン：封印を解くとき、あなたは大きな助けとなったが。私に二度の慈悲はない。				
+				1660：巫女サエル：それはあなたの人が私の骨の中まで呪いを下したが..今は違う！
+				1661：パプリオン：可塑ロブだ！その二人君と一緒にこの世をさまようこと私の第染めてか！
+				1662：巫女サエル：勇者よ！その邪悪なパプリオンを破りハイネに下された血の呪いを是非解放与えてください！
 				 */
 				case 1:
 					for(int i =0; i < Lair.size(); i++){
@@ -92,13 +92,13 @@ public class FafurionRaidSystem {
 					}Thread.sleep(3000);
 					for(int i =0; i < Lair.size(); i++){
 						L1PcInstance pc = Lair.get(i);
-						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ChatPacket(pc,"시스템 메세지 : 파푸리온을 공략 하실수 있습니다.")); }
+						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ChatPacket(pc,"システムメッセージ：パプリオンを攻略出来ます。")); }
 					}Thread.sleep(3000);
 					AntarasRaidSpawn.getInstance().fillSpawnTable(_mapid, _stage);
 					break;
-					/** 1차 죽은후 메시지 방출 
-					1663 : 파푸리온 : 놀잇감으로는 충분하구나! 흐흐흐...
-					1664 : 파푸리온 : 뼈 속까지 파고드는 두려움이 무엇인지 이몸이 알게 해주마!
+					/** 1次死んだ後にメッセージ放出 
+					1663：パプリオン：ノルイトガムには十分だな！フフフ...
+					1664：パプリオン：骨の中まで食い込む恐れが何なのかオイラが知るしてやる！
 					 */
 				case 2:
 					for(int i =0; i < Lair.size(); i++){
@@ -110,10 +110,10 @@ public class FafurionRaidSystem {
 						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ServerMessage(1664)); }
 					}
 					break;
-					/** 2차 죽은후 메시지 방출  
-					1665 : 무녀사엘 : 이제 파푸리온의 힘이 많이 떨어진것 같습니다! 용사들이어 조금 더 힘을 내주소서!
-					1666 : 파푸리온 : 네 놈들이 희망이라는 부르는 것이, 단지 헛된 몽상이었음을 알게 해주마! 
-					1667 : 파푸리온 : 사엘과 함께 한것을 후회하게 될 것이다! 어리석은 존재들이여...
+					/** 2次死んだ後メッセージ放出  
+					1665：巫女サエル：今パプリオンの力がたくさん落ちたようです！勇士続いもう少し力を私与えてください！
+					1666：パプリオン：あなたのセリ希望という呼ばれることが、単に無駄夢想あったことを知ることしてやる！ 
+					1667：パプリオン：サエルと一緒にしたことを後悔することになるだろう！愚かな存在よ...
 					 */
 				case 3:
 					for(int i =0; i < Lair.size(); i++){
@@ -128,11 +128,11 @@ public class FafurionRaidSystem {
 						L1PcInstance pc = Lair.get(i);
 						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ServerMessage(1667)); } }
 					break;
-					/** 3차  죽은후 메세지 방출 
-				1668 : 파푸리온 : 사엘.. 네 녀석이..어떻게...나의 어머니..실렌이시여 나의 숨을..거두소서...
-				1669 : 무녀사엘 : 감사합니다.. 당신들은 역시 아덴 최고의 용사들입니다. 드디어.. 에바 왕국의 오랜 저주가 풀릴 수 있을 것 같습니다.
-				1682 : 카임사무의 외침 : 파푸리온의 검은 숨결을 멈추게 한 용사들이 탄생 하였습니다.!!		
-				1641 : 난쟁이의 외침 : 파푸리온의 검은 숨결을 멈추게 한 용사들이 탄생 하였습니다.!!		
+					/** 3次死んだ後のメッセージ放出 
+				1668 : パプリオン：サエル。貴様が...どのように...私の母。シーレンよ私の呼吸を。おさめソーサー...
+				1669 :巫女サエル：ありがとうございます。あなたは、やはりアデン最高勇士です。いよいよ..エヴァ王国の長い呪いが解けることができるようになります。
+				1682 : カイム事務の呼出し：パプリオンの黒い息を止めるた勇士たち誕生しました。！		
+				1641 : ドワーフの呼出し：パプリオンの黒い息を止めるた勇士たち誕生しました。！		
 					 */
 				case 4:
 					for (int i = 0; i < Lair.size(); i++){
@@ -194,18 +194,18 @@ public class FafurionRaidSystem {
 					//					} Thread.sleep(3000);
 					for(int i =0; i < Lair.size(); i++){
 						L1PcInstance pc = Lair.get(i);
-						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ChatPacket(pc,"시스템 메시지 : 잠시 후 마을로 텔레포트 됩니다."));
-						System.out.println("■■■■■■■■■■ 파푸리온 레이드 종료 ■■■■■■■■■■");
+						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ChatPacket(pc,"システムメッセージ：しばらくして村にテレポートされます。"));
+						System.out.println("■■■■■■■■■■パプリオンレイド終了■■■■■■■■■■");
 						}
 					} Thread.sleep(15000);
-					for(int i =0; i < Lair.size(); i++){ // [성공 기란 텔 ]
+					for(int i =0; i < Lair.size(); i++){ // [成功ギランテル]
 						L1PcInstance pc = Lair.get(i);
 						if(pc.getMapId() == _mapid){
 							Random random = new Random();
 							int Dragontel = random.nextInt(3)+ 1;
-							if(Dragontel == 1) new L1Teleport().teleport(pc, 33440, 32817, (short)4, 5, true); // 기란 
-							else if(Dragontel == 2) new L1Teleport().teleport(pc, 33436, 32800, (short)4, 5, true); // 기란 
-							else new L1Teleport().teleport(pc, 33443, 32798, (short)4, 5, true); // 기란						
+							if(Dragontel == 1) new L1Teleport().teleport(pc, 33440, 32817, (short)4, 5, true); //ギラン 
+							else if(Dragontel == 2) new L1Teleport().teleport(pc, 33436, 32800, (short)4, 5, true); //ギラン 
+							else new L1Teleport().teleport(pc, 33443, 32798, (short)4, 5, true); //ギラン						
 						}
 					} break;
 				default: 
@@ -214,7 +214,7 @@ public class FafurionRaidSystem {
 			} catch (Exception exception) {}
 		}
 		
-		// 자동 분배
+		//自動分配
 		private void Mapdrop(L1NpcInstance npc){
 			L1Inventory inventory = npc.getInventory();
 			L1ItemInstance item;
@@ -238,17 +238,17 @@ public class FafurionRaidSystem {
 				if (acquisitor.getInventory().checkAddItem(item,item.getCount()) == L1Inventory.OK) {
 						targetInventory = acquisitor.getInventory();
 						player = acquisitor;
-						L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA); // 소지
+						L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA); // 所持
 						if (l1iteminstance != null&& l1iteminstance.getCount() > 2000000000) {
-								targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); // 가질 수
-								player.sendPackets(new S_ServerMessage(166,"소지하고 있는 아데나","2,000,000,000을 초과하고 있습니다."));
+								targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); //持つことができ
+								player.sendPackets(new S_ServerMessage(166,"所持しているアデナ","20億を超えています。"));
 						}else{
 							for(L1PcInstance temppc : acquisitorList){
 									temppc.sendPackets(new S_ServerMessage(813, npc.getName(), item.getLogName(), player.getName()));
 							}
 						}
 				} else {
-						targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); // 가질 수
+						targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); //持つことができ
 				}
 				inventory.tradeItem(item, item.getCount(), targetInventory);
 			}
@@ -260,13 +260,13 @@ public class FafurionRaidSystem {
 		int id = blankMapId();
 		if (id != 1011) L1WorldMap.getInstance().cloneMap(1011, id);
 		FafurionRaid ar = new FafurionRaid(id);
-		AntarasRaidSpawn.getInstance().fillSpawnTable(id, 2); // 생성된 포탈맵에 [스폰 파푸리온 / 2번타입스폰]
-		System.out.println("■■■■■■■■■■ 파푸리온 레이드 시작 ■■■■■■■■■■ MAP - " + _map);
-		L1SpawnUtil.spawn2(pc.getX(), pc.getY(), pc.getMapId(), 900036, 0, 3600 * 1000, id); // 파푸리온 스폰 7200
-		L1SpawnUtil.spawn2(32941, 32670, (short)id, 900037, 0, 3600 * 1000, id);//[파푸리온 대기방] => 파푸레어
-		L1SpawnUtil.spawn2(32941, 32671, (short)id, 900037, 0, 3600 * 1000, id);//[파푸리온 대기방] => 파푸레어
+		AntarasRaidSpawn.getInstance().fillSpawnTable(id, 2); //生成されたポータルマップに[出現パプリオン/ 2回タイプスポン]
+		System.out.println("■■■■■■■■■■パプリオンレイド開始■■■■■■■■■■MAP  - " + _map);
+		L1SpawnUtil.spawn2(pc.getX(), pc.getY(), pc.getMapId(), 900036, 0, 3600 * 1000, id); //パプリオン出現7200
+		L1SpawnUtil.spawn2(32941, 32670, (short)id, 900037, 0, 3600 * 1000, id);//[パプリオン待機部屋] =>パプレア
+		L1SpawnUtil.spawn2(32941, 32671, (short)id, 900037, 0, 3600 * 1000, id);//[パプリオン待機部屋] =>パプレア
 		_list.put(id, ar);
-		FafurionRaidTimer RaidEndTime = new FafurionRaidTimer(ar, 5, 0, 1800 * 1000);// 2시간 7200
+		FafurionRaidTimer RaidEndTime = new FafurionRaidTimer(ar, 5, 0, 1800 * 1000);// 2時間7200
 		RaidEndTime.begin();
 	}
 
@@ -278,7 +278,7 @@ public class FafurionRaidSystem {
 		mapid = 6501 + _list.size();
 		return mapid;
 	}
-	/** 포탈 갯수 */
+	/** ポータル本数 */
 	public int countRaidPotal1(){ return _list.size(); }
 
 }

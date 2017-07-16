@@ -3273,7 +3273,7 @@ public class L1PcInstance extends L1Character {
             if (damage > 0) {
     			if (this instanceof L1RobotInstance) {
 					L1RobotInstance bot = (L1RobotInstance) this;
-					if (bot.이동딜레이 == 0) {
+					if (bot.delay_Bot == 0) {
 						int sleepTime = bot
 								.calcSleepTime(L1RobotInstance.DMG_MOTION_SPEED);
 						}

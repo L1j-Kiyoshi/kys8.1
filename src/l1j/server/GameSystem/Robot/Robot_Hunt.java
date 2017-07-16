@@ -1,6 +1,6 @@
 package l1j.server.GameSystem.Robot;
 
-import static l1j.server.server.model.skill.L1SkillId.HASTE;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,7 +22,6 @@ import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_ServerMessage;
-import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.utils.SQLUtil;
 
 public class Robot_Hunt {
@@ -75,31 +74,31 @@ public class Robot_Hunt {
 		}
 	}
 
-	// 용계리뉴얼로인해 제외 15마리
-	private static final String[] mapName = { "지저", "개미굴1", "개미굴2", "개미굴3",
-			"개미굴4", "개미굴5", "개미굴6", "에바1층", "에바2층", "에바3층", "에바4층", "지하침공로1층",
-			"지하침공로2층", "지하침공로3층", "선박심해", "잊섬", "지배자1층", "지배자2층",
+	// 竜界リニューアルにより除く15匹
+	private static final String[] mapName = { "地底", "アリの巣1", "アリの巣2", "アリの巣3",
+			"蟻のダンジョン4", "アリの巣5", "アリの巣6", "エヴァ1階", "エヴァ2階", "エヴァ3階", "エヴァ4階", "地下侵攻路1階",
+			"地下侵攻路2階", "地下侵攻路3階", "船舶深海", "イッソム", "支配者1階", "支配者2階",
 			/*
-			 * "자이언트밭", "화둥", "하이네잡밭",
+			 * "ジャイアント畑 "、"華東 "、"ハイネジャプバト "、
 			 */
-			"용던1층", "용던2층", "용던3층", "용던4층", "용던5층", "용던6층", "용던7층", "본던1층",
-			"본던2층", "본던3층", "본던4층", "본던5층", "본던6층", "본던7층", "기감1층", "기감2층",
-			"기감3층", "기감4층", "리뉴얼오만1층", "리뉴얼오만2층", "리뉴얼오만3층", "리뉴얼오만4층",
-			"리뉴얼오만5층", "리뉴얼오만6층", "리뉴얼오만7층", "리뉴얼오만8층", "리뉴얼오만9층", "리뉴얼오만10층",
-	/* "상아탑4층", "상아탑5층" */};
+			"ヨンドン1階", "ヨンドン2階", "ヨンドン3階", "ヨンドン4階", "ヨンドン5階", "ヨンドン6階", "ヨンドン7階", "ボンドン1階",
+			"ボンドン2階", "ボンドン3階", "ボンドン4階", "ボンドン5階", "ボンドン6階", "ボンドン7階", "技監1階", "技監2階",
+			"技監3階", "技監4階", "リニューアル傲慢1階", "リニューアル傲慢2階", "リニューアル傲慢3階", "リニューアル傲慢4階",
+			"リニューアル傲慢5階", "リニューアル傲慢6階", "リニューアル傲慢7階", "リニューアル傲慢8階", "リニューアル傲慢9階", "リニューアル傲慢10階",
+	/* "象牙の塔4階」、「象牙の塔5階" */};
 
 	private static final int[] mapCount = { 
-			0, // 지저
-			0, 0, 0, 0, 0, 0,// 개미굴
-			0, 0, 0, 0, // 에바
-			0, 0, 0,// 침공로
-			0,// 선박심해
-			0, // 잊섬
-			30, 30, // 지배자
-			10, 10, 10, 0, 0, 0, 0, // 용던1 -7
-			40, 30, 0, 0, 30, 0, 0, // 본던
-			30, 10, 0, 30,// 기감
-			20, 20, 20, 20, 20, 20, 20, 20, 20, 20 // 리뉴얼오만 (1층부터 10층) 20마리씩 배포
+			0, //地底
+			0, 0, 0, 0, 0, 0,//アリの巣
+			0, 0, 0, 0, //エヴァ
+			0, 0, 0,// 侵攻に
+			0,// 船舶深海
+			0, // イッソム
+			30, 30, // 支配者
+			10, 10, 10, 0, 0, 0, 0, //ヨンドン1 -7
+			40, 30, 0, 0, 30, 0, 0, // ボンドン
+			30, 10, 0, 30,// 技監
+			20, 20, 20, 20, 20, 20, 20, 20, 20, 20 // リニューアル傲慢（1階から10階）20匹ずつ配布
 	};
 
 	public void start_spawn() {
@@ -110,7 +109,7 @@ public class Robot_Hunt {
 				if (bot == null)
 					continue;
 				//if(testcount%175==0)
-				GeneralThreadPool.getInstance().schedule(new botVisible(bot, mapName[a]),	1000 * (_random.nextInt(6))); // 원래 120*/
+				GeneralThreadPool.getInstance().schedule(new botVisible(bot, mapName[a]),	1000 * (_random.nextInt(6))); //元120 * /
 				// GeneralThreadPool.getInstance().schedule(new botVisible(bot,
 				// mapName[a]), 6000*(_random.nextInt(10)+1));
 				testcount++;
@@ -118,26 +117,26 @@ public class Robot_Hunt {
 		}
 	}
 
-	private void direct_spawn(String 위치) {
+	private void direct_spawn(String location) {
 		if (!GMCommands.huntBot)
 			return;
 		synchronized (_queue) {
 			L1RobotInstance bot = _queue.poll();
 			if (bot == null)
 				return;
-			GeneralThreadPool.getInstance().schedule(new botVisible(bot, 위치),
+			GeneralThreadPool.getInstance().schedule(new botVisible(bot, location),
 					1 * (_random.nextInt(2) + 1));
 		}
 	}
 
-	public void delay_spawn(String 위치, int time) {
+	public void delay_spawn(String location, int time) {
 		if (!GMCommands.huntBot)
 			return;
 		synchronized (_queue) {
 			L1RobotInstance bot = _queue.poll();
 			if (bot == null)
 				return;
-			GeneralThreadPool.getInstance().schedule(new botVisible(bot, 위치),
+			GeneralThreadPool.getInstance().schedule(new botVisible(bot, location),
 					time);
 		}
 	}
@@ -145,40 +144,40 @@ public class Robot_Hunt {
 	// private static boolean spawning = false;
 	class botVisible implements Runnable {
 		private L1RobotInstance bot;
-		private String 사냥위치;
+		private String huntLoc;
 
-		public botVisible(L1RobotInstance bot, String _사냥위치) {
+		public botVisible(L1RobotInstance bot, String _huntLoc) {
 			this.bot = bot;
-			this.사냥위치 = _사냥위치;
+			this.huntLoc = _huntLoc;
 		}
 
 		@Override
 		public void run() {
-			// TODO 자동 생성된 메소드 스텁
+			// TODO 自動生成されたメソッド・スタブ
 			try {
 			L1PcInstance rob = L1World.getInstance().getPlayer(bot.getName());
 				if (rob != null || bot.isCrown()) {
 				//	put(bot);
-				//	direct_spawn(사냥위치);
+				//	direct_spawn(狩猟位置);
 					return;
 				}
 				if (!GMCommands.huntBot) {
 					put(bot);
 					return;
 				}
-				if (bot.isWizard() && 사냥위치.equalsIgnoreCase("용계")) {
+				if (bot.isWizard() && huntLoc.equalsIgnoreCase("龍界")) {
 					put(bot);
 					return;
 				}
 				int map = _random.nextInt(2);
 				while (true) {
-					// 좌표 설정
+					// 座標設定
 					switch (map) {
-					case 0:// 기란
+					case 0:// ギラン
 						bot.setX(33436 + _random.nextInt(20));
 						bot.setY(32799 + _random.nextInt(20));
 						break;
-					case 1:// 오렌
+					case 1:// オレン
 						bot.setX(34055 + _random.nextInt(30));
 						bot.setY(32278 + _random.nextInt(30));
 						break;
@@ -200,10 +199,10 @@ public class Robot_Hunt {
 					Thread.sleep(100);
 				}
 
-				if (사냥위치.equalsIgnoreCase("지저")
-						|| 사냥위치.equalsIgnoreCase("선박심해")
-						|| 사냥위치.equalsIgnoreCase("상아탑4층")
-						|| 사냥위치.equalsIgnoreCase("상아탑5층")) {
+				if (huntLoc.equalsIgnoreCase("地底")
+						|| huntLoc.equalsIgnoreCase("船舶深海")
+						|| huntLoc.equalsIgnoreCase("象牙の塔4階")
+						|| huntLoc.equalsIgnoreCase("象牙の塔5階")) {
 					bot.getAC().setAc(-80);
 					if (bot.getCurrentWeapon() == 20) {
 						bot.addHitup(50);
@@ -213,7 +212,7 @@ public class Robot_Hunt {
 						bot.addDmgup(30);
 					}
 					bot.addDamageReductionByArmor(30);
-				} else if (사냥위치.startsWith("잊섬")) {
+				} else if (huntLoc.startsWith("イッソム")) {
 					bot.getAC().setAc(-100);
 					if (bot.getCurrentWeapon() == 20) {
 						bot.addHitup(30);
@@ -223,7 +222,7 @@ public class Robot_Hunt {
 						bot.addDmgup(50);
 					}
 					bot.addDamageReductionByArmor(50);
-				} else if (사냥위치.startsWith("본던")) {
+				} else if (huntLoc.startsWith("ボンドン")) {
 					bot.getAC().setAc(-80);
 					if (bot.getCurrentWeapon() == 20) {
 						bot.addHitup(30);
@@ -233,7 +232,7 @@ public class Robot_Hunt {
 						bot.addDmgup(30);
 					}
 					bot.addDamageReductionByArmor(30);
-				} else if (사냥위치.startsWith("기감")) {
+				} else if (huntLoc.startsWith("技監")) {
 					bot.getAC().setAc(-70);
 					if (bot.getCurrentWeapon() == 20) {
 						bot.addHitup(10);
@@ -258,9 +257,9 @@ public class Robot_Hunt {
 				 * }else{ bot.getAC().setAc(-60); bot.addHitup(20);
 				 * bot.addBowHitup(20); bot.addDamageReductionByArmor(5); }
 				 */
-				bot.사냥봇 = true;
-				bot.사냥봇_위치 = 사냥위치;
-				bot._스레드종료 = false;
+				bot.huntingBot = true;
+				bot.huntingBot_Location = huntLoc;
+				bot._EndThread = false;
 				bot.setHeading(_random.nextInt(8));
 				bot.setMoveSpeed(1);
 				bot.setSkillEffect(HASTE,(_random.nextInt(400) + 1700) * 1000);
@@ -279,9 +278,9 @@ public class Robot_Hunt {
 				}
 				L1Clan clan = L1World.getInstance().getClan(bot.getClanname());
 				if (clan != null) {
-					if (bot.getClanid() == clan.getClanId() && // 크란을 해산해, 재차,
-																// 동명의 크란이 창설되었을
-																// 때의 대책
+					if (bot.getClanid() == clan.getClanId() && // クランを解散し、再度、
+																// 同名のクランが創設された
+																//時の対策
 							bot.getClanname().toLowerCase()
 									.equals(clan.getClanName().toLowerCase())) {
 						clan.updateClanMemberOnline(bot);
@@ -303,9 +302,9 @@ public class Robot_Hunt {
 				Robot.clan_join(bot);
 				//Robot.Doll_Spawn(bot);
 				bot.updateconnect(true);
-				bot.딜레이(3000 + _random.nextInt(15000));
-				// if ((_random.nextInt(100)+1) >= 60) //타격귀환 원래 false
-				bot.타격귀환무시 = true;
+				bot.delayBot(3000 + _random.nextInt(15000));
+				// if ((_random.nextInt(100)+1) >= 60) //打撃帰還元false
+				bot.IgnoreHitReturn = true;
 				bot.Hunt_Exit_Time = System.currentTimeMillis()
 						+ (60000 * (60 + _random.nextInt(40)));
 				bot.startAI();
@@ -331,7 +330,7 @@ public class Robot_Hunt {
 				newPc.setAccountName("");
 				newPc.setName(rs.getString("name"));
 				// rs.getInt("step");
-				int level = _random.nextInt(10) + 80; // 사냥 로봇레벨
+				int level = _random.nextInt(10) + 80; //ハンティングロボットレベル
 				newPc.setHighLevel(level);
 				newPc.setLevel(level);
 				newPc.setExp(ExpTable.getExpByLevel(level)
@@ -374,16 +373,16 @@ public class Robot_Hunt {
 					newPc.setType(4);
 				} else if (newPc.isDragonknight()) {
 					// if (ran < 10)
-					// newPc.setCurrentWeapon(4); //단검
+					// newPc.setCurrentWeapon(4); //短剣
 					// else
-					newPc.setCurrentWeapon(50); // 양손
+					newPc.setCurrentWeapon(50); // 両手
 					// newPc.setCurrentWeapon(24);
 					newPc.setType(5);
 				} else if (newPc.isBlackwizard()) {
 					// if (ran < 10)
-					// newPc.setCurrentWeapon(40); //지팡이
+					// newPc.setCurrentWeapon(40); //杖
 					// else
-					newPc.setCurrentWeapon(58); // 키링크
+					newPc.setCurrentWeapon(58); // キーリンク
 					newPc.setType(6);
 				} else if (newPc.isCrown()) {
 					newPc.setCurrentWeapon(0);
@@ -422,7 +421,7 @@ public class Robot_Hunt {
 				newPc.setRobot(true);
 				newPc.getLight().turnOnOffLight();
 				newPc.setOnlineStatus(1);
-				newPc.setClanMemberNotes("로봇");
+				newPc.setClanMemberNotes("ロボット");
 				if (_random.nextInt(1000) > 200) {
 					newPc.setKills(0);
 					newPc.setDeaths(0);

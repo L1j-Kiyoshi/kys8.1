@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import l1j.server.server.model.L1AccountAttendance;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_Attendance;
-import l1j.server.server.model.L1AccountAttendance;
 
 public final class AttendanceController {
 	
@@ -18,15 +18,15 @@ public final class AttendanceController {
 		init = false;
 	}
 	/**
-	 * acc.setPc() 접속할때 pc정함
-	 * acc.checktype 0,진행 1 미보상 2보상
+	 * acc.setPc() 接続する際にpc定める
+	 * acc.checktype 0,進行1米補償2補償
 	 * 
-	 * ToTimer라는게 1초마다 돌아옴 ㅡㅡ어이가없네 컨트롤러라해놓고 
+	 * ToTimerというの1秒ごとに帰還ーーとんでもないねコントローラとしておいて 
 	 * 
 	 * @param time
 	 */
 	 public static void toTimer(long time){
-		 //	if(!Config.출석체크) return;
+		 //	if(!Config.出席チェック）return;
 		 Calendar cal = Calendar.getInstance();
 		 int today = cal.get(cal.DAY_OF_YEAR);
 		 int year = cal.get(cal.YEAR);
@@ -57,11 +57,11 @@ public final class AttendanceController {
 			 		}
 			 		try{
 			 			if(acc.checktype() == 0)
-			 				acc.setTime(acc.getTime()-1); //1초 줄임
+			 				acc.setTime(acc.getTime()-1); //1秒減少
 
 	 			
 			 			if(acc.checktype() == 0 && acc.getTime() < 1){
-			 				acc.chulchecktry(1); //진행으로 바꿈
+			 				acc.chulchecktry(1); //進行的に改行
 			 				acc.getPc().sendPackets(new S_Attendance(acc, 0 ,false));
 			 			}
 
@@ -145,9 +145,9 @@ public final class AttendanceController {
 		 for(L1AccountAttendance acc : accountlist){
 			 acc.init();
 			 if(acc.getPc() != null)
-				 acc.getPc().sendPackets(new S_Attendance(acc, 0 , acc.getPc().PC방_버프));
+				 acc.getPc().sendPackets(new S_Attendance(acc, 0 , acc.getPc（）PC部屋_バフ））;
 		 }	
-		 System.out.println("출석체크 시간 초기화");
+		 System.out.println（「出席チェック時間の初期化 "）;
 		 init = false;
 	 }*/
 }

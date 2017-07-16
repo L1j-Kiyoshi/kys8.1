@@ -45,7 +45,7 @@ public class L1Teleport {
 	}
 	public static void 로봇텔(L1RobotInstance rob, int x, int y, short m,
 			boolean swich) {
-		rob.텔(x, y, m);
+		rob.telBot(x, y, m);
 		/*
 		 * rob.setTeleport(true); for (L1PcInstance pc :
 		 * L1World.getInstance().getRecognizePlayer(rob)) { if(swich){

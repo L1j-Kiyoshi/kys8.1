@@ -82,14 +82,14 @@ public class Robot_Location {
 
 	public static ArrayList<Robot_Location_bean> 로케이션(L1RobotInstance bot) {
 		_random.setSeed(System.currentTimeMillis());
-		if (bot.사냥봇_타입 == L1RobotInstance.SETTING) {
-			if (bot.사냥봇_위치.equalsIgnoreCase("용던1층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던2층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던3층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던4층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던5층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던6층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던7층")) {
+		if (bot.huntingBot_Type == L1RobotInstance.SETTING) {
+			if (bot.huntingBot_Location.equalsIgnoreCase("용던1층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던2층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던3층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던4층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던5층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던6층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던7층")) {
 				return _random.nextInt(1000) > 500 ? 기란셋팅 : 기란셋팅2;
 			}
 			int rr = _random.nextInt(16);
@@ -120,63 +120,63 @@ public class Robot_Location {
 			case 5:
 			case 2:
 				return _random.nextInt(1000) >= 500 ? 기란셋팅 : 기란셋팅3;
-				// return 글말셋팅; //원래 글말셋팅
+				// returnグルマル設定; //元のグルマル設定
 			case 14:
 			case 6:
 			case 3:
 				return 글말셋팅;
-				// return 웰던셋팅;
+				// return ウェルダン設定;
 			default:
 				break;
 			}
 			return 기란셋팅;
-		} else if (bot.사냥봇_타입 == L1RobotInstance.TEL_NPC_MOVE) {
-			if (bot.사냥봇_위치.equalsIgnoreCase("용던1층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던2층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던3층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던4층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던5층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던6층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("용던7층")) {
+		} else if (bot.huntingBot_Type == L1RobotInstance.TEL_NPC_MOVE) {
+			if (bot.huntingBot_Location.equalsIgnoreCase("용던1층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던2층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던3층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던4층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던5층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던6층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("용던7층")) {
 				return 용던입구;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("본던1층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("본던2층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("본던3층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("본던4층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("본던5층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("본던6층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("본던7층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만1층")// 160316
-					|| bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만2층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만3층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만4층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만5층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만6층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만7층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만8층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만9층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만10층")
-					|| bot.사냥봇_위치.startsWith("잊섬")
-					|| bot.사냥봇_위치.startsWith("지배자1층")
-					|| bot.사냥봇_위치.startsWith("지배자2층")) { // 잊섬
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("본던1층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("본던2층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("본던3층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("본던4층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("본던5층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("본던6층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("본던7층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만1층")// 160316
+					|| bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만2층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만3층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만4층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만5층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만6층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만7층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만8층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만9층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만10층")
+					|| bot.huntingBot_Location.startsWith("잊섬")
+					|| bot.huntingBot_Location.startsWith("지배자1층")
+					|| bot.huntingBot_Location.startsWith("지배자2층")) { //イッソム
 
-				return 텔녀; // 원래null
-			} else if (bot.사냥봇_위치.startsWith("오만")
-					|| bot.사냥봇_위치.startsWith("개미굴")) {
+				return 텔녀; // 元null
+			} else if (bot.huntingBot_Location.startsWith("오만")
+					|| bot.huntingBot_Location.startsWith("개미굴")) {
 				return null;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("기감1층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("기감2층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("기감3층")
-					|| bot.사냥봇_위치.equalsIgnoreCase("기감4층"))
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("기감1층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("기감2층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("기감3층")
+					|| bot.huntingBot_Location.equalsIgnoreCase("기감4층"))
 				return 기감입구;
 			if (bot.getX() >= 33410 && bot.getX() <= 33461
 					&& bot.getY() >= 32788 && bot.getY() <= 32838
-					&& bot.getMapId() == 4)// 기란
+					&& bot.getMapId() == 4)//ギラン
 				return 텔녀;
-		} else if (bot.사냥봇_타입 == L1RobotInstance.HUNT_MOVE) {
-			bot.텔사냥 = false;
-			if (bot.사냥봇_위치.equalsIgnoreCase("선박심해")) {
-				bot.텔사냥 = true;
+		} else if (bot.huntingBot_Type == L1RobotInstance.HUNT_MOVE) {
+			bot.tel_Hunting = false;
+			if (bot.huntingBot_Location.equalsIgnoreCase("선박심해")) {
+				bot.tel_Hunting = true;
 				switch (_random.nextInt(3)) {
 				case 0:
 					return 선박심해;
@@ -187,8 +187,8 @@ public class Robot_Location {
 				default:
 					break;
 				}
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("잊섬")) {
-				// bot.텔사냥 = false;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("잊섬")) {
+				// bot.テル狩り= false;
 				switch (_random.nextInt(5)) {
 				case 0:
 					return 잊섬;
@@ -203,124 +203,124 @@ public class Robot_Location {
 				default:
 					break;
 				}
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("개미굴1")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("개미굴1")) {
+				bot.tel_Hunting = true;
 				return 개미굴1;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("개미굴2")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("개미굴2")) {
+				bot.tel_Hunting = true;
 				return 개미굴2;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("개미굴3")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("개미굴3")) {
+				bot.tel_Hunting = true;
 				return 개미굴3;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("개미굴4")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("개미굴4")) {
+				bot.tel_Hunting = true;
 				return 개미굴4;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("개미굴5")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("개미굴5")) {
+				bot.tel_Hunting = true;
 				return 개미굴5;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("개미굴6")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("개미굴6")) {
+				bot.tel_Hunting = true;
 				return 개미굴6;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("상아탑4층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("상아탑4층")) {
+				bot.tel_Hunting = true;
 				return 상아탑4층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("상아탑5층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("상아탑5층")) {
+				bot.tel_Hunting = true;
 				return 상아탑5층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("지저")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("지저")) {
+				bot.tel_Hunting = true;
 				return 지저;
 				// 160316
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만1층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만1층")) {
+				bot.tel_Hunting = true;
 				return 리뉴얼오만1층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만2층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만2층")) {
+				bot.tel_Hunting = true;
 				return 리뉴얼오만2층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만3층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만3층")) {
+				bot.tel_Hunting = true;
 				return 리뉴얼오만3층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만4층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만4층")) {
+				bot.tel_Hunting = true;
 				return 리뉴얼오만4층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만5층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만5층")) {
+				bot.tel_Hunting = true;
 				return 리뉴얼오만5층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만6층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만6층")) {
+				bot.tel_Hunting = true;
 				return 리뉴얼오만6층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만7층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만7층")) {
+				bot.tel_Hunting = true;
 				return 리뉴얼오만7층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만8층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만8층")) {
+				bot.tel_Hunting = true;
 				return 리뉴얼오만8층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만9층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만9층")) {
+				bot.tel_Hunting = true;
 				return 리뉴얼오만9층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("리뉴얼오만10층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("리뉴얼오만10층")) {
+				bot.tel_Hunting = true;
 				return 리뉴얼오만10층;
 				// 160316
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("용던1층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("용던1층")) {
+				bot.tel_Hunting = true;
 				return 용던1층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("용던2층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("용던2층")) {
+				bot.tel_Hunting = true;
 				return 용던2층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("용던3층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("용던3층")) {
+				bot.tel_Hunting = true;
 				return 용던3층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("용던4층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("용던4층")) {
+				bot.tel_Hunting = true;
 				return 용던4층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("용던5층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("용던5층")) {
+				bot.tel_Hunting = true;
 				return 용던5층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("용던6층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("용던6층")) {
+				bot.tel_Hunting = true;
 				return 용던6층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("용던7층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("용던7층")) {
+				bot.tel_Hunting = true;
 				return 용던7층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("본던1층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("본던1층")) {
+				bot.tel_Hunting = true;
 				return 본던1층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("본던2층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("본던2층")) {
+				bot.tel_Hunting = true;
 				return 본던2층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("본던3층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("본던3층")) {
+				bot.tel_Hunting = true;
 				return 본던3층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("본던4층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("본던4층")) {
+				bot.tel_Hunting = true;
 				return 본던4층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("본던5층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("본던5층")) {
+				bot.tel_Hunting = true;
 				return 본던5층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("본던6층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("본던6층")) {
+				bot.tel_Hunting = true;
 				return 본던6층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("본던7층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("본던7층")) {
+				bot.tel_Hunting = true;
 				return 본던7층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("기감1층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("기감1층")) {
+				bot.tel_Hunting = true;
 				return 기감1층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("기감2층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("기감2층")) {
+				bot.tel_Hunting = true;
 				return 기감2층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("기감3층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("기감3층")) {
+				bot.tel_Hunting = true;
 				return 기감3층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("기감4층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("기감4층")) {
+				bot.tel_Hunting = true;
 				return 기감4층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("지배자1층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("지배자1층")) {
+				bot.tel_Hunting = true;
 				return 지배자1층;
-			} else if (bot.사냥봇_위치.equalsIgnoreCase("지배자2층")) {
-				bot.텔사냥 = true;
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("지배자2층")) {
+				bot.tel_Hunting = true;
 				return 지배자2층;
 			}
 		}
@@ -328,7 +328,7 @@ public class Robot_Location {
 	}
 
 	public static void setRLOC() {
-		// 물약, 창고, 버프
+		//ポーション、倉庫、バフ
 		기란셋팅.add(new Robot_Location_bean(33457, 32819, 4));
 		기란셋팅.add(new Robot_Location_bean(33431, 32816, 4));
 		기란셋팅.add(new Robot_Location_bean(33437, 32804, 4));
@@ -350,26 +350,26 @@ public class Robot_Location {
 		웰던셋팅.add(new Robot_Location_bean(33738, 32494, 4));
 		웰던셋팅.add(new Robot_Location_bean(33723, 32488, 4));
 		웰던셋팅.add(new Robot_Location_bean(33714, 32498, 4));
-		// 기란 텔녀 이동
+		//ギランテルニョ移動
 		텔녀.add(new Robot_Location_bean(33437, 32795, 4));
-		// 용던 입구
+		// ヨンドン入口
 		용던입구.add(new Robot_Location_bean(33446, 32828, 4));
-		// 기감 입구
+		// 技監入口
 		기감입구.add(new Robot_Location_bean(33428, 32820, 4));
-		// 본던 입구
+		// ボンドン入口
 		본던입구.add(new Robot_Location_bean(32727, 32929, 4));
 		
 
 		지저.add(new Robot_Location_bean(32800, 33051, 420));
 
-		잊섬.add(new Robot_Location_bean(32645, 33009, 1700)); // 입섬세프티존입구
-		잊섬2.add(new Robot_Location_bean(32754, 32942, 1700)); // 남쪽골렘연구소입구
-		잊섬3.add(new Robot_Location_bean(32694, 32716, 1700)); // 서쪽골렘입구
-		잊섬4.add(new Robot_Location_bean(32926, 32890, 1700)); // 동쪽골렘입구
-		잊섬5.add(new Robot_Location_bean(32955, 32800, 1700)); // 히든상점
+		잊섬.add(new Robot_Location_bean(32645, 33009, 1700)); //口繊細プチジョン入口
+		잊섬2.add(new Robot_Location_bean(32754, 32942, 1700)); //南ゴーレム研究所の入口
+		잊섬3.add(new Robot_Location_bean(32694, 32716, 1700)); //西ゴーレムの入口
+		잊섬4.add(new Robot_Location_bean(32926, 32890, 1700)); //東ゴーレム入口
+		잊섬5.add(new Robot_Location_bean(32955, 32800, 1700)); //ヒドゥン店
 
-		지배자1층.add(new Robot_Location_bean(32794, 32853, 15403)); // 지배자의결계1층
-		지배자2층.add(new Robot_Location_bean(32678, 32860, 15404)); // 지배자의결계2층
+		지배자1층.add(new Robot_Location_bean(32794, 32853, 15403)); //支配者の結界1階
+		지배자2층.add(new Robot_Location_bean(32678, 32860, 15404)); //支配者の結界2階
 
 		선박심해.add(new Robot_Location_bean(33011, 33011, 558));
 		선박심해2.add(new Robot_Location_bean(33011, 33012, 558));

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-
 import l1j.server.Config;
 import l1j.server.server.IdFactory;
 import l1j.server.server.datatables.NpcTable;
@@ -24,7 +23,7 @@ public class MiniSiege extends Thread {
 		public int count=0;
 		private HashMap<Integer,ArrayList<L1PcInstance>> teamcount = new HashMap<Integer,ArrayList<L1PcInstance>>();
 	//	private final int maxcount = 20;
-		private int stage=0; //0 : 준비단계, 1: 가로막고있는 Object 제거 , 2: 미니공성전 진행 , 3: 공성전완료 보상품 지급
+		private int stage=0; //0 : 準備段階では、1：遮っているObjectの除去、2：ミニ包囲進行、3：包囲完了ボー商品の支払い
 		public boolean running = false;
 
 		private boolean destroyed[] = { false, false, false, false, false, false,false,false,false };
@@ -33,7 +32,7 @@ public class MiniSiege extends Thread {
 		L1Party party2 = new L1Party();
 		L1Party party3 = new L1Party();
 		
-		private String msg[] = {"참가자를 모으는 중입니다 잠시 기다려주세요!", "수호탑,중간탑,사령탑 순으로 격파해주세요!", "각각 타워를 철거하면 추가 보상이 있습니다!"};
+		private String msg[] = {"参加者を集めていますしばらくお待ちください！", "守護塔、中塔、司令塔の順に撃破してください！", "それぞれの塔を破壊すると、追加の補償があります！"};
 		public boolean isDestory(int i){
 			return destroyed[i];
 		}
@@ -61,36 +60,36 @@ public class MiniSiege extends Thread {
 
 
 		public void setDestroy(int i){
-			//0,1,2,3,4,5,6,7,8 {순서대로 A~C 1차, 2차, 사령}
+			//0,1,2,3,4,5,6,7,8 {順番にA〜C 1次、2次、司令}
 			switch(i){
 				case 0:
-					sendMsg("A팀 수호탑이 파괴되었습니다");
+					sendMsg("Aチーム守護塔が破壊されました");
 					destroyed[0] = true;
 					break;
 				case 1:
-					sendMsg("B팀 수호탑이 파괴되었습니다");
+					sendMsg("Bチーム守護塔が破壊されました");
 					destroyed[1] = true;
 					break;
 				case 2:
-					sendMsg("C팀 수호탑이 파괴되었습니다");
+					sendMsg("Cチーム守護塔が破壊されました");
 					destroyed[2] = true;
 					break;
 				case 3:
-					sendMsg("A팀 중간탑이 파괴되었습니다");
+					sendMsg("Aチーム中トップが破壊されました");
 					destroyed[3] = true;
 					break;
 				case 4:
-					sendMsg("B팀 중간탑이 파괴되었습니다");
+					sendMsg("Bチーム中トップが破壊されました");
 					destroyed[4] = true;
 					break;
 				case 5:
-					sendMsg("C팀 중간탑이 파괴되었습니다");
+					sendMsg("Cチーム中トップが破壊されました");
 					destroyed[5] = true;
 					break;
 				case 6:
-					sendMsg("A팀 사령탑이 파괴되었습니다");
+					sendMsg("Aチームの司令塔が破壊されました");
 					destroyed[6] = true;
-//					System.out.println("멤버함보자 : "+teamcount.get(0).size()+" 멤바브 : "+teamcount.get(0).get(0).getName());
+//					System.out.println（「メンバーする見てみよう：「+ teamcount.get（0）.size（）+ "メンボブ：" + teamcount.get（0）.get（0）.getName（））;
 					for(int j = 0 ; j < teamcount.get(0).size();j++){
 						new L1Teleport().teleport(teamcount.get(0).get(j), 33438, 32810, (short) 4, teamcount.get(0).get(j).getMoveState().getHeading(), true);
 						teamcount.get(0).get(j).setTeam(-1);
@@ -99,7 +98,7 @@ public class MiniSiege extends Thread {
 					//teamcount.remove(0);
 					break;
 				case 7:
-					sendMsg("B팀 사령탑이 파괴되었습니다");
+					sendMsg("Bチームの司令塔が破壊されました");
 					destroyed[7] = true;
 					for(int j = 0 ; j < teamcount.get(1).size();j++){
 						new L1Teleport().teleport(teamcount.get(1).get(j), 33438, 32810, (short) 4, teamcount.get(1).get(j).getMoveState().getHeading(), true);
@@ -109,7 +108,7 @@ public class MiniSiege extends Thread {
 					//teamcount.remove(1);
 					break;
 				case 8:
-					sendMsg("C팀 사령탑이 파괴되었습니다");
+					sendMsg("Cチームの司令塔が破壊されました");
 					destroyed[8] = true;
 					for(int j = 0 ; j < teamcount.get(2).size();j++){
 						new L1Teleport().teleport(teamcount.get(2).get(j), 33438, 32810, (short) 4, teamcount.get(2).get(j).getMoveState().getHeading(), true);
@@ -131,13 +130,13 @@ public class MiniSiege extends Thread {
 					itemid = Config.Tower;
 					count2 = Config.TowerC;
 					teamcount.get(team2).get(i).getInventory().storeItem(itemid,count2);
-					teamcount.get(team2).get(i).sendPackets(new S_SystemMessage("보상 지급 완료"));
+					teamcount.get(team2).get(i).sendPackets(new S_SystemMessage("補償支給完了"));
 					break;
 				case 2:
 					 itemid= Config.MTower;
 					 count2= Config.MTowerC;
 					teamcount.get(team2).get(i).getInventory().storeItem(itemid,count2);
-					teamcount.get(team2).get(i).sendPackets(new S_SystemMessage("보상 지급 완료"));
+					teamcount.get(team2).get(i).sendPackets(new S_SystemMessage("補償支給完了"));
 					break;
 				}
 			}
@@ -147,20 +146,20 @@ public class MiniSiege extends Thread {
 			for(int i = 0 ; i < 3; i++){
 				teamcount.put(i, new ArrayList<L1PcInstance>());
 			}
-			//A진형 수호탑
+			//A陣形守護塔
 			spawn(4201,32771,32871,10502);
 			spawn(4205,32772,32839,10502);
 			spawn(4209,32773,32798,10502);
-			//B 진형 수호탑
+			//B陣形守護塔
 			spawn(4202,32747,32895,10502);
 			spawn(4206,32715,32894,10502);
 			spawn(4210,32678,32894,10502);
-			//C진형 수호탑
+			//C陣形守護塔
 			spawn(4203,32771,32919,10502);
 			spawn(4207,32772,32951,10502);
 			spawn(4211,32771,32987,10502);
 			}
-			L1World.getInstance().broadcastPacketToAll2(new S_Message_YN(622,"미니공성전이 개최되었습니다. 참여하시겠습니까?"));
+			L1World.getInstance().broadcastPacketToAll2(new S_Message_YN(622,"ミニ攻城戦が開催されました。参加しますか？"));
 			running = true;
 		}
 		private void sendMsg(String msg){
@@ -172,12 +171,12 @@ public class MiniSiege extends Thread {
 		}
 		public synchronized void EnterTeam(L1PcInstance pc){
 				if(pc.getTeam()==-1){
-					System.out.println("들어와서 저장됨"+count%3);
+					System.out.println("入ってきて保存された"+count%3);
 					pc.setTeam(count%3);
 					teamcount.get(count%3).add(pc);
 					count++;
 				}else{
-					System.out.println("이미 이벤트 참가중");
+					System.out.println("すでにイベント参加中");
 				}
 				
 			System.out.println("COUNT:"+count+teamcount.get(count%3)+" pc : " +pc.getTeam());
@@ -240,7 +239,7 @@ public class MiniSiege extends Thread {
 			while(running){
 				try{
 				switch(stage){
-					case 0:// 준비단계
+					case 0:// 準備段階
 						int m = rnd.nextInt(3);
 						for(int i = 0 ; i < 3 ; i++){
 							for(int j = 0 ; j<teamcount.get(i).size();j++){
@@ -252,28 +251,28 @@ public class MiniSiege extends Thread {
 					case 1:
 						for(int i = 0 ; i < 3 ; i++){
 							for(int j = 0 ; j<teamcount.get(i).size();j++){
-								teamcount.get(i).get(j).sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "미니공성전을 시작합니다!", true));
+								teamcount.get(i).get(j).sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "ミニ包囲を開始します！", true));
 							}
 						}
 						stage = 2;
 						break;
-					case 2: //진행중
+					case 2: //進行中
 						for(int i = 0 ; i < 3; i++){
 							if(getNexuscount()==1){
 								stage = 3;
 							}
 						}
 						break;
-					case 3://진행완료 보상지급
+					case 3://進行完了補償支給
 						int winteam = checkWinTeam();
-						//이긴팀 전원보상 및 마을로 귀환;
+						//勝ったチーム全員の報酬と村に帰還。
 						int itemid = Config.LTower;
 						int count2 = Config.LTowerC;
 						for(int i = 0 ; i < teamcount.get(winteam).size();i++){
 							teamcount.get(winteam).get(i).getInventory().storeItem(itemid,count2);
-							teamcount.get(winteam).get(i).sendPackets(new S_SystemMessage("보상 지급 완료"));
-							teamcount.get(winteam).get(i).sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "최종승리를 축하합니다~~!!!", true));
-							teamcount.get(winteam).get(i).sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"30초뒤 마을로 귀환됩니다!"));
+							teamcount.get(winteam).get(i).sendPackets(new S_SystemMessage("補償支給完了"));
+							teamcount.get(winteam).get(i).sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "最終的な勝利を祝う~~ !!!", true));
+							teamcount.get(winteam).get(i).sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"30チョドィ村に帰還されます！"));
 							
 						}
 						Thread.sleep(30000);
@@ -324,7 +323,7 @@ public class MiniSiege extends Thread {
 				L1World.getInstance().storeObject(npc);
 				L1World.getInstance().addVisibleObject(npc);
 				npc.getLight().turnOnOffLight();
-				npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+				npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); //チャット開始
 			} catch (Exception e) {
 			
 			}

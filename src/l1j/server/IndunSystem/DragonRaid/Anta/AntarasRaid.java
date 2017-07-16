@@ -27,20 +27,20 @@ public class AntarasRaid {
 
 	public void timeOverRun(int type, int stage) {
 		switch(type){
-		case 1: // 안타라스 1차 스폰
+		case 1: // アンタラス1次出現
 			AntarasMsgTimer Anta1 = new AntarasMsgTimer(_id, type, stage);
 			GeneralThreadPool.getInstance().execute(Anta1);
 			_isAntaras = true; 
 			break;
-		case 2: // 안타라스 1차 죽은후 [ 메세지만]
+		case 2: // アンタラス1次死んだ後、[メッセージのみ]
 			AntarasMsgTimer Anta1Die = new AntarasMsgTimer(_id, type, stage);
 			GeneralThreadPool.getInstance().execute(Anta1Die);
 			break;
-		case 3: // 안타라스 2차 죽은후 [ 메세지만]
+		case 3: // アンタラス2次死んだ後、[メッセージのみ]
 			AntarasMsgTimer Anta2Die = new AntarasMsgTimer(_id, type, stage);
 			GeneralThreadPool.getInstance().execute(Anta2Die);
 			break;
-		case 4: // 안타라스 3차 죽은후 [ 메세지만]
+		case 4: // アンタラス3次死んだ後、[メッセージのみ]
 			AntarasMsgTimer Anta3Die = new AntarasMsgTimer(_id, type, stage);
 			GeneralThreadPool.getInstance().execute(Anta3Die);
 			break;
@@ -51,26 +51,26 @@ public class AntarasRaid {
 			break;
 		}
 	}
-	/** 레이드 종료 **/
+	/**レイド終了**/
 	private void EndRaid(int map) {
 		AntarasRaid ar = AntarasRaidSystem.getInstance().getAR(map);
 		for(L1PcInstance pc : L1World.getInstance().getAllPlayers()){ 
 			if(pc.getMapId() == map){ 
 				Random random = new Random();
 				int Dragontel = random.nextInt(3)+ 1;
-				pc.sendPackets(new S_ChatPacket(pc,"시스템 메시지: 레이드가 종료 되었습니다."));
-//				System.out.println("■■■■■■■■■■ 안타라스 레이드 실패 ■■■■■■■■■■ MAP - " + map);
-				if(Dragontel == 1) new L1Teleport().teleport(pc, 33705, 32504, (short)4, 5, true); // 웰던 
-				else if(Dragontel == 2) new L1Teleport().teleport(pc, 33744, 32499, (short)4, 5, true); // 웰던 
-				else new L1Teleport().teleport(pc, 33742, 32483, (short)4, 5, true); // 웰던 
+				pc.sendPackets(new S_ChatPacket(pc,"システムメッセージ：レイドが終了しました。"));
+//				System.out.println("■■■■■■■■■■ アンタラスレイド失敗■■■■■■■■■■ MAP - " + map);
+				if(Dragontel == 1) new L1Teleport().teleport(pc, 33705, 32504, (short)4, 5, true); // ウェルダン 
+				else if(Dragontel == 2) new L1Teleport().teleport(pc, 33744, 32499, (short)4, 5, true); // ウェルダン 
+				else new L1Teleport().teleport(pc, 33742, 32483, (short)4, 5, true); // ウェルダン 
 			}
-			ar.RemoveLairUser(pc); // 모든 리스트 초기화
+			ar.RemoveLairUser(pc); // すべてのリストの初期化
 		}
 		_isAntaras = false;
-		DelMonster(map); // 맵내 모든 오브젝트 삭제
+		DelMonster(map); //マップ内のすべてのオブジェクトを削除
 	}
 
-	/** 레이드 종료후 맵내 오브젝트들 삭제 **/
+	/**レイド終了後マップ内のオブジェクトの削除 **/
 	private void DelMonster(int map) {
 		L1MonsterInstance mon = null;
 		L1FieldObjectInstance tel = null;
@@ -94,20 +94,20 @@ public class AntarasRaid {
 		}
 	}
 
-	/** 해당 리스트를 넘겨준다 */
+	/** このリストを渡してくれる */
 	public ArrayList<L1PcInstance> getRoomList(int num){
 		switch(num){
 		case 5: return _antalist; default: return null; }
 	}
-	/** 안타라스레어에 진입한 유저 수를 가져온다 */
+	/** アンタラスレアに進入したユーザーの数を持って来る*/
 	public int countLairUser() { return _antalist.size(); }
-	/** 안타라스레어에 진입할 유저를 넣는다 */
+	/** アンタラスレアに進入するユーザを入れる */
 	public void addLairUser(L1PcInstance pc) { if (!_antalist.contains(pc)) _antalist.add(pc); }
-	/** 안타라스레어에 진입했던 유저인지 아닌지를 확인 */
+	/** アンタラスレアに進入していたユーザーかどうかを確認し */
 	public boolean isLairUser(L1PcInstance pc) { return _antalist.contains(pc); }
-	/** 안타라스레어에 진입했던 유저를 지운다 */
+	/** アンタラスレアに進入していたユーザーを消す */
 	public void RemoveLairUser(L1PcInstance pc) { if (_antalist.contains(pc)) _antalist.remove(pc); }
-	/** 안타라스가 떴는지 알려준다 */
+	/**アンタラスが浮かび上がったのか教えてくれる */
 	public boolean isAntaras() { return _isAntaras; }
 	public int getAntaId() { return _id; }
 }

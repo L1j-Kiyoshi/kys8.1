@@ -29,7 +29,7 @@ public class AzmodanSystem {
 
 	public void startAzmodan(int clanid, L1PcInstance pc){
 		if(countAzmodan() >= 100){
-			pc.sendPackets(new S_SystemMessage("현재 오픈중인 던전이 너무 많습니다. 잠시후에 이용해주세요"));
+			pc.sendPackets(new S_SystemMessage("現在オープン中のダンジョンが多すぎます。しばらくご利用ください"));
 			return;
 		}
 		int id = blankMapId();

@@ -1,6 +1,6 @@
 package l1j.server.GameSystem.Robot;
 
-import static l1j.server.server.model.skill.L1SkillId.POLLUTE_WATER;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +12,6 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import l1j.server.Config;
 import l1j.server.L1DatabaseFactory;
 import l1j.server.GameSystem.AStar.AStar;
 import l1j.server.GameSystem.AStar.Node;
@@ -36,8 +35,6 @@ import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1MonsterInstance;
 import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.model.map.L1Map;
-import l1j.server.server.model.map.L1WorldMap;
 import l1j.server.server.model.skill.L1SkillDelay;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.model.skill.L1SkillUse;
@@ -47,7 +44,6 @@ import l1j.server.server.serverpackets.S_ChangeShape;
 import l1j.server.server.serverpackets.S_CharVisualUpdate;
 import l1j.server.server.serverpackets.S_ChatPacket;
 import l1j.server.server.serverpackets.S_DoActionGFX;
-import l1j.server.server.serverpackets.S_Fishing;
 import l1j.server.server.serverpackets.S_MoveCharPacket;
 import l1j.server.server.serverpackets.S_OtherCharPacks;
 import l1j.server.server.serverpackets.S_Paralysis;
@@ -72,36 +68,36 @@ public class L1RobotInstance extends L1PcInstance {
 	public L1PcInstance _target2;
 	public L1ItemInstance _targetItem;
 
-	public byte 리스봇_스폰위치 = -1;
-	public boolean 리스봇 = false;
-	public boolean 가입군주 = false;
-	public boolean 사냥봇 = false;
-	public boolean 인형스폰 = false;
-	private byte 리스봇_이동 = 0;
-	public boolean 텔사냥 = false;
+	public byte LisBot_SpawnLocation = -1;
+	public boolean LisBot = false;
+	public boolean clan = false;
+	public boolean huntingBot = false;
+	public boolean spawnDoll = false;
+	private byte LisBot_Move = 0;
+	public boolean tel_Hunting = false;
 	private int actionStatus = 0;
 	private boolean FirstSkill = false;
-	public boolean 사냥_종료 = false;
-	public boolean 타격귀환무시 = true;
+	public boolean Hunt_End = false;
+	public boolean IgnoreHitReturn = true;
 
-	public String 사냥봇_위치;
-	public int 사냥봇_타입 = 0;
-	// private short 빨갱이 = 900;
-	// private short 주홍이 = 10;
-	private short 말갱이 = 1000;
-	private short 비취물약 = 10;
+	public String huntingBot_Location;
+	public int huntingBot_Type = 0;
+	// private shortアカ= 900;
+	// private short朱が= 10;
+	private short potCount = 1000;
+	private short cyanPotion = 10;
 
-	private AStar aStar; // 길찾기 변수
-	private int[][] iPath; // 길찾기 변수
-	private Node tail; // 길찾기 변수
-	private int iCurrentPath; // 길찾기 변수
+	private AStar aStar; //ルート変数
+	private int[][] iPath; // ルート変数
+	private Node tail; // ルート変数
+	private int iCurrentPath; // ルート変数
 	// private L1RobotInstance _instance = null;
 
 	/*
 	 * private boolean _Rsaid = false;
-	 * 
+	 *
 	 * private boolean Rsaid() { return _Rsaid; }
-	 * 
+	 *
 	 * protected void setRsaid(boolean flag) { _Rsaid = flag; }
 	 */
 
@@ -117,9 +113,9 @@ public class L1RobotInstance extends L1PcInstance {
 
 	/*
 	 * private boolean _Dissaid = false;
-	 * 
+	 *
 	 * private boolean Dissaid() { return _Dissaid; }
-	 * 
+	 *
 	 * protected void setDissaid(boolean flag) { _Dissaid = flag; }
 	 */
 
@@ -137,21 +133,21 @@ public class L1RobotInstance extends L1PcInstance {
 	private static final int[] stunTimeArray = { 2000, 3000, 4000, 5000 };
 
 	private String _himent;
-	private static final String[] himentArray = { "ㅎㅇ", "들어와 들어와!!", "구경하지마",
-			"하이?", "님?", "저리가라", "싸우는거 첨보냐?" };
+	private static final String[] himentArray = { "ああ", "入って来て！", "口径ないで",
+			"ハイ？", "様？", "すぐ近くに行け", "戦って添付が気に？" };
 
 	private String _townment;
-	
+
 
 	/*
 	 * private String _disment; private static final String[] dismentArray = {
-	 * "님  ", "님 잠만요", "님?" , "님 잠만서봐요" , " 님 잠시만~", " 님"};
+	 *「様」、「様睡眠待って "、"様？」 、 "様ジャムマンで見"、 "様少々〜"、 "様"};
 	 */
 
 	private String _glment;
 
 
-	private static final int[] 리스봇BuffSkill4 = {
+	private static final int[] LisBotBuffSkill4 = {
 			L1SkillId.PHYSICAL_ENCHANT_STR, L1SkillId.PHYSICAL_ENCHANT_DEX,
 			L1SkillId.BLESS_WEAPON, L1SkillId.REMOVE_CURSE };
 
@@ -195,20 +191,20 @@ public class L1RobotInstance extends L1PcInstance {
 		return _sleep_time;
 	}
 
-	public boolean _스레드종료 = false;
+	public boolean _EndThread = false;
 
 	class BrainThread implements Runnable {
 
 		public void start() {
 			setAiRunning(true);
 			GeneralThreadPool.getInstance().execute(BrainThread.this);
-			if (사냥봇)
+			if (huntingBot)
 				GeneralThreadPool.getInstance().execute(new PotionThread());
 		}
 
 		public void run() {
 			try {
-				if (_스레드종료) {
+				if (_EndThread) {
 					setAiRunning(false);
 					return;
 				}
@@ -217,14 +213,14 @@ public class L1RobotInstance extends L1PcInstance {
 					return;
 				}
 
-				if (딜레이 != 0) {
-					GeneralThreadPool.getInstance().schedule(this, 딜레이);
-					딜레이 = 0;
+				if (delay != 0) {
+					GeneralThreadPool.getInstance().schedule(this, delay);
+					delay = 0;
 					return;
 				}
-				if (actionStatus == MOVE && 이동딜레이 != 0) {
-					GeneralThreadPool.getInstance().schedule(this, 이동딜레이);
-					이동딜레이 = 0;
+				if (actionStatus == MOVE && delay_Bot != 0) {
+					GeneralThreadPool.getInstance().schedule(this, delay_Bot);
+					delay_Bot = 0;
 					return;
 				}
 				if (AI()) {
@@ -249,7 +245,7 @@ public class L1RobotInstance extends L1PcInstance {
 
 		public void run() {
 			try {
-				if (_스레드종료) {
+				if (_EndThread) {
 					setAiRunning(false);
 					return;
 				}
@@ -271,15 +267,15 @@ public class L1RobotInstance extends L1PcInstance {
 
 				int percent = (int) Math.round((double) getCurrentHp()
 						/ (double) getMaxHp() * 100);
-				if (percent < 10 && 사냥봇_타입 == HUNT && !사냥봇_위치.startsWith("잊섬")) {
+				if (percent < 10 && huntingBot_Type == HUNT && !huntingBot_Location.startsWith("イッソム")) {
 					setCurrentHp(getCurrentHp() + 500);
-					귀환();
+					returnBot();
 					GeneralThreadPool.getInstance().schedule(this, 2000);
 					return;
-				} else if (percent < 30 && 사냥봇_타입 == HUNT
-						&& !사냥봇_위치.startsWith("잊섬")) {
+				} else if (percent < 30 && huntingBot_Type == HUNT
+						&& !huntingBot_Location.startsWith("イッソム")) {
 					setCurrentHp(getCurrentHp() + 500);
-					랜덤텔();
+					randomTel();
 					GeneralThreadPool.getInstance().schedule(this, 2000);
 					return;
 				}
@@ -308,56 +304,56 @@ public class L1RobotInstance extends L1PcInstance {
 		if (isTeleport()) {
 			return false;
 		}
-		
-		if (리스봇) {
-			if (리스봇_스폰위치 == 1 || 리스봇_스폰위치 == 0 || 리스봇_스폰위치 == 3)
+
+		if (LisBot) {
+			if (LisBot_SpawnLocation == 1 || LisBot_SpawnLocation == 0 || LisBot_SpawnLocation == 3)
 				return false;
-			if (리스봇_이동 > 0)
-				리스봇이동();
+			if (LisBot_Move > 0)
+				moveLisBot();
 			else if (_random.nextInt(1000) <= 1)
-				리스봇_이동 = 1;
-		} else if (사냥봇) {
-			사냥봇();
+				LisBot_Move = 1;
+		} else if (huntingBot) {
+			huntingBot();
 		}
 		return false;
 	}
 
 	private int Debuff() {
-		// TODO 자동 생성된 메소드 스텁
-		// 커스 대기
+		// TODO 自動生成されたメソッド・スタブ
+		// カース待機
 		if (hasSkillEffect(
 				L1SkillId.STATUS_CURSE_PARALYZING)) {
-			귀환();
-			딜레이 = 8000;
+			returnBot();
+			delay = 8000;
 			return 8000;
 		}
 		if (hasSkillEffect(L1SkillId.DECAY_POTION)) {
-			귀환();
+			returnBot();
 			int time = getSkillEffectTimeSec(
 					L1SkillId.DECAY_POTION) * 1000;
-			return (int) (딜레이 = time);
+			return (int) (delay = time);
 		}
 		if (hasSkillEffect(L1SkillId.SILENCE)) {
-			귀환();
+			returnBot();
 			int time = getSkillEffectTimeSec(
 					L1SkillId.SILENCE) * 1000;
-			return (int) (딜레이 = time);
+			return (int) (delay = time);
 		}
 		return 0;
 	}
 
 	public boolean Poison() {
-		// TODO 자동 생성된 메소드 스텁
-		if (hasSkillEffect(71) == true) { // 디케이포션 상태
+		// TODO 自動生成されたメソッド・スタブ
+		if (hasSkillEffect(71) == true) { // ディケイポーションの状態
 			return false;
 		}
 		if (getPoison() != null) {
-			cancelAbsoluteBarrier(); // 아브소르트바리아의 해제
+			cancelAbsoluteBarrier(); // アブ小ガルトバリアの解除
 			Broadcaster.broadcastPacket(this, new S_SkillSound(getId(), 192),
 					true);
 			curePoison();
-			비취물약--;
-			if (비취물약 <= 0)
+			cyanPotion--;
+			if (cyanPotion <= 0)
 				물약리셋();
 			return true;
 		}
@@ -376,26 +372,26 @@ public class L1RobotInstance extends L1PcInstance {
 
 	public long Hunt_Exit_Time = 0;
 
-	private boolean 타_마을_텔이동 = false;
+	private boolean etc_Village_Move = false;
 	private int cnt2 = 0;
 	private Queue<Robot_Location_bean> location_queue = new ConcurrentLinkedQueue<Robot_Location_bean>();
 	private Queue<L1ItemInstance> item_queue = new ConcurrentLinkedQueue<L1ItemInstance>();
 
-	private void 사냥봇() {
+	private void huntingBot() {
 		try {
-			if (isDead() && 사냥봇_타입 != DEATH) {
-				딜레이(2000 + _random.nextInt(3000));
-				사냥봇_타입 = DEATH;
+			if (isDead() && huntingBot_Type != DEATH) {
+				delayBot(2000 + _random.nextInt(3000));
+				huntingBot_Type = DEATH;
 				return;
 			}
 			if (!isDead() && !isTeleport()) {
-		
+
 
 				if (!hasSkillEffect(L1SkillId.SHAPE_CHANGE)) {
 					setSkillEffect(	L1SkillId.SHAPE_CHANGE, 1800 * 1000);
 					int time = getSkillEffectTimeSec(L1SkillId.SHAPE_CHANGE);
 					if (time == -1) {
-						종료();
+						endBot();
 						return;
 					}
 					Robot.poly(this);
@@ -440,25 +436,25 @@ public class L1RobotInstance extends L1PcInstance {
 
 			}
 
-			// 타지역인지 체크 그위치로 텔
+			// 他の地域であることをチェックその位置にテル
 			if (loc == null) {
 				location_queue.clear();
 				ArrayList<Robot_Location_bean> list = Robot_Location.로케이션(this);
 				if (list != null) {
 					for (Robot_Location_bean ro : list) {
 
-						if (사냥봇_타입 == SETTING)
-							추가SETTING좌표(ro);
+						if (huntingBot_Type == SETTING)
+							add_SETTING_Loc(ro);
 						location_queue.offer(ro);
 					}
 					loc = location_queue.poll();
 				}
 			}
 
-			switch (사냥봇_타입) {
-			case SETTING:// 상점, 창고, 버프
-			case TEL_NPC_MOVE:// 텔녀이동
-				/** 마을에서 채팅 **/
+			switch (huntingBot_Type) {
+			case SETTING:// 店舗、倉庫、バフ
+			case TEL_NPC_MOVE:// テルニョ移動
+				/** 村でのチャット **/
 				int townrandom = _random.nextInt(1000) + 1;
 				if (townrandom > 980) {
 					try {
@@ -472,44 +468,44 @@ public class L1RobotInstance extends L1PcInstance {
 						return;
 					}
 				}
-				/** 마을에서 채팅 **/
+				/** 村でのチャット **/
 				if (loc == null) {
-					사냥봇_타입++;
+					huntingBot_Type++;
 					return;
 				}
 				if (isDistance(getX(), getY(), getMapId(), loc.getX(),	loc.getY(), loc.getMapId(), 1 + _random.nextInt(10))) {
 					loc = location_queue.poll();
-					딜레이(5000 + _random.nextInt(15000));
-					if (loc != null && 타_마을_텔이동) {
+					delayBot(5000 + _random.nextInt(15000));
+					if (loc != null && etc_Village_Move) {
 						setHeading(5);
-						텔(loc.getX(), loc.getY(), loc.getMapId(),
+						telBot(loc.getX(), loc.getY(), loc.getMapId(),
 								3000 + _random.nextInt(3000));
 						loc = location_queue.poll();
-						타_마을_텔이동 = false;
+						etc_Village_Move = false;
 					}
 					if (loc == null) {
-						if (사냥봇_타입 == SETTING)
-							젠도르버프();
-						사냥봇_타입++;
+						if (huntingBot_Type == SETTING)
+							zendleBuff();
+						huntingBot_Type++;
 					}
 					return;
 				}
 				break;
-			case HUNT_MOVE: // 사냥터로 이동
-				딜레이(500 + _random.nextInt(1000));
-				텔(loc.getX(), loc.getY(), loc.getMapId());
+			case HUNT_MOVE: //狩り場に移動
+				delayBot(500 + _random.nextInt(1000));
+				telBot(loc.getX(), loc.getY(), loc.getMapId());
 				location_queue.offer(loc);
 				loc = location_queue.poll();
-				사냥봇_타입++;
+				huntingBot_Type++;
 				return;
-			case HUNT: // 사냥
+			case HUNT: //狩猟
 				if (checkTarget() || checkTarget2()) {
 					return;
 				}
 
-				if (텔사냥) {
-					딜레이(1000 + _random.nextInt(500));
-					랜덤텔(500 + _random.nextInt(1000));
+				if (tel_Hunting) {
+					delayBot(1000 + _random.nextInt(500));
+					randomTel(500 + _random.nextInt(1000));
 					setTownsaid(false);
 					setGlsaid(false);
 					return;
@@ -517,8 +513,8 @@ public class L1RobotInstance extends L1PcInstance {
 				}
 
 				if (loc == null) {
-					딜레이(3000 + _random.nextInt(6000));
-					귀환(1000 + _random.nextInt(2000));
+					delayBot(3000 + _random.nextInt(6000));
+					returnBot(1000 + _random.nextInt(2000));
 					return;
 				}
 
@@ -537,12 +533,12 @@ public class L1RobotInstance extends L1PcInstance {
 					}
 				}
 				break;
-			case DEATH: // 죽음
+			case DEATH: //死
 				int[] loc = Getback.GetBack_Restart(this);
 				Broadcaster.broadcastPacket(this, new S_RemoveObject(this),
 						true);
 				setCurrentHp(getLevel());
-				set_food(225); // 죽었을때 100%
+				set_food(225); // 死んだときに100％
 				setDead(false);
 				L1World.getInstance().moveVisibleObject(this, loc[0], loc[1],
 						loc[2]);
@@ -553,15 +549,15 @@ public class L1RobotInstance extends L1PcInstance {
 						this)) {
 					pc2.sendPackets(new S_OtherCharPacks(this, pc2));
 				}
-				_target = null; // 누수방지
-				_targetItem = null; // 누수방지
-				_target2 = null; // 누수방지
-				딜레이(3000 + _random.nextInt(6000));
-				귀환(1000 + _random.nextInt(2000));
+				_target = null; // 漏水防止
+				_targetItem = null; //漏水防止
+				_target2 = null; // 漏水防止
+				delayBot(3000 + _random.nextInt(6000));
+				returnBot(1000 + _random.nextInt(2000));
 				setTownsaid(false);
 				setGlsaid(false);
 				return;
-			case EXIT: // 종료
+			case EXIT: // 終了
 				return;
 			default:
 				break;
@@ -576,135 +572,135 @@ public class L1RobotInstance extends L1PcInstance {
 		}
 	}
 
-	private void 추가SETTING좌표(Robot_Location_bean ro) {
-		// TODO 자동 생성된 메소드 스텁
-		if (ro.getX() == 33457 && ro.getY() == 32819 && ro.getMapId() == 4) {// 기란
-																				// 물약상점
+	private void add_SETTING_Loc(Robot_Location_bean ro) {
+		// TODO 自動生成されたメソッド・スタブ
+		if (ro.getX() == 33457 && ro.getY() == 32819 && ro.getMapId() == 4) {//ギラン
+																				// ポーション店
 			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {// 오렌
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// 텔녀
-																				// 위치
-				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));// 텔
-																				// 할
-																				// 위치
+					&& getY() <= 32297 && getMapId() == 4) {// オレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テルニョ
+																				// 位置
+				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));//テル
+																				// する
+																				// 位置
 			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 은기사
+					&& getY() <= 33411 && getMapId() == 4) {// 記事
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));
 			}
 			if (location_queue.size() > 0)
-				타_마을_텔이동 = true;
+				etc_Village_Move = true;
 		} else if (ro.getX() == 33432 && ro.getY() == 32815
-				&& ro.getMapId() == 4) {// 기란2 물약상점
+				&& ro.getMapId() == 4) {//ギラン2ポーション店
 			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {// 오렌
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// 텔녀
-																				// 위치
-				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));// 텔
-																				// 할
-																				// 위치
+					&& getY() <= 32297 && getMapId() == 4) {//オレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));//テルニョ
+																				//位置
+				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));// テル
+																				// する
+																				// 位置
 			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 은기사
+					&& getY() <= 33411 && getMapId() == 4) {// 記事
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));
 			}
 			if (location_queue.size() > 0)
-				타_마을_텔이동 = true;
+				etc_Village_Move = true;
 		} else if (ro.getX() == 33428 && ro.getY() == 32806
-				&& ro.getMapId() == 4) {// 기란3,5 아덴상단
+				&& ro.getMapId() == 4) {//ギラン3,5アデン上段
 			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {// 오렌
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// 텔녀
-																				// 위치
-				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));// 텔
-																				// 할
-																				// 위치
+					&& getY() <= 32297 && getMapId() == 4) {// オレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テルニョ
+																				//位置
+				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));//テル
+																				//する
+																				// 位置
 			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 은기사
+					&& getY() <= 33411 && getMapId() == 4) {//記事
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));
 			}
 			if (location_queue.size() > 0)
-				타_마을_텔이동 = true;
+				etc_Village_Move = true;
 		} else if (ro.getX() == 33437 && ro.getY() == 32803
-				&& ro.getMapId() == 4) {// 기란4 젠도르
+				&& ro.getMapId() == 4) {//ギラン4ジェンドール
 			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {// 오렌
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// 텔녀
-																				// 위치
-				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));// 텔
-																				// 할
-																				// 위치
+					&& getY() <= 32297 && getMapId() == 4) {//オレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));//テルニョ
+																				// 位置
+				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));//テル
+																				// する
+																				// 位置
 			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 은기사
+					&& getY() <= 33411 && getMapId() == 4) {// 記事
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));
 			}
 			if (location_queue.size() > 0)
-				타_마을_텔이동 = true;
+				etc_Village_Move = true;
 		} else if (ro.getX() == 34065 && ro.getY() == 32287
-				&& ro.getMapId() == 4) {// 오렌 물약상점
+				&& ro.getMapId() == 4) {// オーレンポーション店
 			if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 은기사
+					&& getY() <= 33411 && getMapId() == 4) {// 記事
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(34062, 32278, 4));
 			} else if (getX() >= 33410 && getX() <= 33461 && getY() >= 32788
-					&& getY() <= 32838 && getMapId() == 4) {// 기란
+					&& getY() <= 32838 && getMapId() == 4) {// ギラン
 				location_queue.offer(new Robot_Location_bean(33437, 32794, 4));
 				location_queue.offer(new Robot_Location_bean(34062, 32278, 4));
 			}
 			if (location_queue.size() > 0)
-				타_마을_텔이동 = true;
+				etc_Village_Move = true;
 		} else if (ro.getX() == 32596 && ro.getY() == 32741
-				&& ro.getMapId() == 4) {// 글말 물약상점
+				&& ro.getMapId() == 4) {// グルマルポーション店
 			if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 은기사
+					&& getY() <= 33411 && getMapId() == 4) {// 記事
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(32608, 32734, 4));
 			} else if (getX() >= 33410 && getX() <= 33461 && getY() >= 32788
-					&& getY() <= 32838 && getMapId() == 4) {// 기란
+					&& getY() <= 32838 && getMapId() == 4) {// ギラン
 				location_queue.offer(new Robot_Location_bean(33437, 32794, 4));
 				location_queue.offer(new Robot_Location_bean(32608, 32734, 4));
 			} else if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {// 오렌
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// 텔녀
-																				// 위치
+					&& getY() <= 32297 && getMapId() == 4) {// オレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テルニョ
+																				// 位置
 				location_queue.offer(new Robot_Location_bean(32608, 32734, 4));
 			}
 			if (location_queue.size() > 0)
-				타_마을_텔이동 = true;
+				etc_Village_Move = true;
 		} else if (ro.getX() == 33738 && ro.getY() == 32494
-				&& ro.getMapId() == 4) {// 웰던 물약상점
+				&& ro.getMapId() == 4) {// ウェルダンポーション店
 			if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 은기사
+					&& getY() <= 33411 && getMapId() == 4) {//記事
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(33709, 32500, 4));
 			} else if (getX() >= 33410 && getX() <= 33461 && getY() >= 32788
-					&& getY() <= 32838 && getMapId() == 4) {// 기란
+					&& getY() <= 32838 && getMapId() == 4) {//ギラン
 				location_queue.offer(new Robot_Location_bean(33437, 32794, 4));
 				location_queue.offer(new Robot_Location_bean(33709, 32500, 4));
 			} else if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {// 오렌
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// 텔녀
-																				// 위치
+					&& getY() <= 32297 && getMapId() == 4) {// オレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));//テルニョ
+																				//位置
 				location_queue.offer(new Robot_Location_bean(33709, 32500, 4));
 			}
 			if (location_queue.size() > 0)
-				타_마을_텔이동 = true;
+				etc_Village_Move = true;
 		}
 	}
 
-	public void 종료() {
-		종료(1000 + _random.nextInt(20000));
+	public void endBot() {
+		endBot(1000 + _random.nextInt(20000));
 	}
 
-	public void 종료(int time) {
-		사냥_종료 = true;
+	public void endBot(int time) {
+		Hunt_End = true;
 		GeneralThreadPool.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
-				// TODO 자동 생성된 메소드 스텁
-				_스레드종료 = true;
+				// TODO自動生成されたメソッド・スタブ
+				_EndThread = true;
 				for (L1PcInstance pc : L1World.getInstance()
 						.getRecognizePlayer(L1RobotInstance.this)) {
 					pc.sendPackets(new S_RemoveObject(L1RobotInstance.this),
@@ -723,11 +719,11 @@ public class L1RobotInstance extends L1PcInstance {
 				stopSHRegeneration();
 				stopMpDecreaseByScales();
 				stopEtcMonitor();
-				사냥봇_위치 = null;
-				사냥봇 = false;
-				사냥봇_타입 = 0;
-				사냥_종료 = false;
-				타격귀환무시 = true; // 타격귀환 원래 false
+				huntingBot_Location = null;
+				huntingBot = false;
+				huntingBot_Type = 0;
+				Hunt_End = false;
+				IgnoreHitReturn = true; // 打撃帰還元false
 				loc = null;
 				updateconnect(false);
 				Robot.Doll_Delete(L1RobotInstance.this, true);
@@ -737,27 +733,27 @@ public class L1RobotInstance extends L1PcInstance {
 		}, time);
 	}
 
-	public void 랜덤텔() {
-		딜레이(1000);
-		랜덤텔(1);
+	public void randomTel() {
+		delayBot(1000);
+		randomTel(1);
 		passTargetList.clear();
 		passTargetList2.clear();
 
 	}
 
-	private void 랜덤텔(int time) {
+	private void randomTel(int time) {
 		L1Location newLocation = getLocation().randomLocation(200, true);
 		int newX = newLocation.getX();
 		int newY = newLocation.getY();
 		short mapId = (short) newLocation.getMapId();
-		텔(newX, newY, mapId, time);
+		telBot(newX, newY, mapId, time);
 	}
 
-	public void 귀환() {
-		귀환(1);
+	public void returnBot() {
+		returnBot(1);
 	}
 
-	public void 귀환(int time) {
+	public void returnBot(int time) {
 		int[] loc = new int[3];
 		_random.setSeed(System.currentTimeMillis());
 		switch (_random.nextInt(10)) {
@@ -801,12 +797,12 @@ public class L1RobotInstance extends L1PcInstance {
 			loc[2] = 4;
 			break;
 		}
-		텔(loc[0], loc[1], loc[2], time);
-		if (사냥봇) {
+		telBot(loc[0], loc[1], loc[2], time);
+		if (huntingBot) {
 			item_queue.clear();
 			passTargetList.clear();
 			passTargetList2.clear();
-			사냥봇_타입 = SETTING;
+			huntingBot_Type = SETTING;
 			this.loc = null;
 		}
 	}
@@ -814,7 +810,7 @@ public class L1RobotInstance extends L1PcInstance {
 	private int Potion() {
 		if (hasSkillEffect(10513))
 			return 1000;
-		if (hasSkillEffect(71) == true) { // 디케이포션 상태
+		if (hasSkillEffect(71) == true) { // ディケイポーションの状態
 			return 0;
 		}
 		int percent = (int) Math.round((double) getCurrentHp()
@@ -824,26 +820,26 @@ public class L1RobotInstance extends L1PcInstance {
 		int delay = 0;
 
 		if (percent < 95) {
-			gfxid = 197; // 빨갱이 189
+			gfxid = 197; // アカ189
 			healHp = 45 + _random.nextInt(35);
 			delay = 800;
-			말갱이--;
+			potCount--;
 		}
 
 		if (healHp == 0)
 			return 0;
-		// 앱솔루트베리어의 해제
+		// アブソリュートバリアの解除
 		cancelAbsoluteBarrier();
 		Broadcaster.broadcastPacket(this, new S_SkillSound(getId(), gfxid),
 				true);
 		if (hasSkillEffect(POLLUTE_WATER)
-				|| hasSkillEffect(10517)) { // 포르트워타중은
-																		// 회복량1/2배
+				|| hasSkillEffect(10517)) { // ポルトウォーター中は
+																		// 回復量1/2倍
 			healHp /= 2;
 		}
 
 		setCurrentHp(getCurrentHp() + healHp);
-		if (말갱이 <= 0) {
+		if (potCount <= 0) {
 			물약리셋();
 		}
 		return delay;
@@ -851,11 +847,11 @@ public class L1RobotInstance extends L1PcInstance {
 
 	private void 물약리셋() {
 		/*
-		 * 딜레이(2000+_random.nextInt(14000)); 귀환();
+		 *ディレイ（2000 + _random.nextInt（14000））;帰還（）;
 		 */
 
-		말갱이 = (short) (800 + _random.nextInt(1000));
-		비취물약 = (short) (1000);
+		potCount = (short) (800 + _random.nextInt(1000));
+		cyanPotion = (short) (1000);
 	}
 
 	private boolean checkTarget() {
@@ -879,20 +875,20 @@ public class L1RobotInstance extends L1PcInstance {
 					_targetItem.getMapId());
 			if (!groundInventory.checkItem(_targetItem.getItemId())) {
 				_targetItem = null;
-				searchTarget(); // 인공지능
+				searchTarget(); //人工知能
 				setSleepTime(100);
 			} else {
 				onTargetItem();
 				return true;
 			}
-		} else if (_target != null && _target2 == null) { // 때릴놈없을때
+		} else if (_target != null && _target2 == null) { //殴る奴いないとき
 			return onTarget();
 		}
 		return false;
 	}
 
 	private boolean checkTarget2() {
-		// TODO 자동 생성된 메소드 스텁
+		// TODO自動生成されたメソッド・スタブ
 		if (_target2 == null) {
 			searchTarget();
 		}
@@ -913,7 +909,7 @@ public class L1RobotInstance extends L1PcInstance {
 	private void searchTarget() {
 
 		int MaxRange = 2;
-		// if (사냥봇_위치.startsWith("잊섬"))
+		// if （狩猟ボット_位置.startsWith（ "イッソム"））
 		// MaxRange = 3;
 
 		ArrayList<L1Object> list = L1World.getInstance()
@@ -924,7 +920,7 @@ public class L1RobotInstance extends L1PcInstance {
 		if (list2.contains(_target2)) {
 			return;
 		}
-		// 때린놈 안때리게? 인공지능
+		// 殴っ奴ない殴らせ？人工知能
 
 		if (list.size() > 1)
 			Collections.shuffle(list);
@@ -935,7 +931,7 @@ public class L1RobotInstance extends L1PcInstance {
 				L1GroundInventory inv = (L1GroundInventory) obj;
 				for (L1ItemInstance item : inv.getItems()) {
 					// if (item.getItemOwner() != null && item.getItemOwner() ==
-					// this) { //모든템먹게
+					// this) { //すべてのシステム食べ
 					if (item != null
 							&& !isDistance(getX(), getY(), mapid, item.getX(),
 									item.getY(), mapid, 20)) {
@@ -953,12 +949,12 @@ public class L1RobotInstance extends L1PcInstance {
 							continue;
 						}
 
-						// } //모든템먹게
+						// } //すべてのシステム食べ
 
 						item_queue.offer(item);
-						list = null; // 누수방지 2015.11.26
-						obj = null; // 누수방지 2015.11.26
-						item = null; // 누수방지
+						list = null; // 漏水防止2015.11.26
+						obj = null; // 漏水防止2015.11.26
+						item = null; // 漏水防止
 
 					}
 
@@ -983,7 +979,7 @@ public class L1RobotInstance extends L1PcInstance {
 				Collections.shuffle(list);
 			if (list.size() > 1 && list2.size() > 1)
 				Collections.shuffle(list2);
-			
+
 			for (L1PcInstance obj2 : list2) {
 				if (obj2 instanceof L1PcInstance) {
 					L1PcInstance saram = (L1PcInstance) obj2;
@@ -1023,10 +1019,10 @@ public class L1RobotInstance extends L1PcInstance {
 
 					_target2 = saram;
 					FirstSkill = false;
-					// setRsaid(false); //로봇채팅
-					// setDissaid(false); //거리채팅
-					list2 = null;// 누수방지 2015.11.26
-					obj2 = null; // 누수방지 2015.11.26
+					// setRsaid(false); //ロボットチャット
+					// setDissaid(false); //距離チャット
+					list2 = null;// 漏水防止2015.11.26
+					obj2 = null; // 漏水防止2015.11.26
 					saram = null;
 					return;
 				}
@@ -1068,11 +1064,11 @@ public class L1RobotInstance extends L1PcInstance {
 						passTargetList.add(obj);
 						continue;
 					}
-					
+
 					_target = mon;
 					FirstSkill = false;
-					list = null; // 누수방지 2015.11.26
-					obj = null; // 누수방지 2015.11.26
+					list = null; //漏水防止2015.11.26
+					obj = null; // 漏水防止2015.11.26
 					mon = null;
 					return;
 				}
@@ -1138,7 +1134,7 @@ public class L1RobotInstance extends L1PcInstance {
 				/ (double) getMaxHp() * 100);
 		if (_target2 != null && percent < 85) {
 			_target = null;
-			return checkTarget2(); // 인공지능
+			return checkTarget2(); //人工知能
 
 		}
 
@@ -1146,12 +1142,12 @@ public class L1RobotInstance extends L1PcInstance {
 			return false;
 		}
 
-		/** 외창 **/
+		/** ウェチャン **/
 		int glrandom = _random.nextInt(1000) + 1;
 		if (!Glsaid() && glrandom > 980) {
-			외창();
+			etcWindow();
 		}
-		/** 외창 **/
+		/** ウェチャン **/
 
 		int escapeDistance = 15;
 		if (hasSkillEffect(L1SkillId.DARKNESS)
@@ -1179,7 +1175,7 @@ public class L1RobotInstance extends L1PcInstance {
 		int range = 1;
 		if (isElf() && getCurrentWeapon() == 20)
 			range = 11;
-		// 첫타 포우 또는 트리플 또는 마법?
+		// 初段ポーまたはトリプルまたは魔法？
 		if (!FirstSkill && !isSkillDelay() && getCurrentMp() > 30) {
 			int skillId = 0;
 			int skill_range = 11;
@@ -1199,13 +1195,13 @@ public class L1RobotInstance extends L1PcInstance {
 				}
 			}
 		}
-		
+
 		if (isAttackPosition(this, target.getX(), target.getY(),
 				target.getMapId(), range) == true
 				&& isAttackPosition(target, getX(), getY(),
 						getMapId(), range) == true
 
-		) {// 기본 공격범위
+		) {// 基本攻撃範囲
 			if (door || !tail) {
 				cnt++;
 				if (cnt > 5) {
@@ -1261,7 +1257,7 @@ public class L1RobotInstance extends L1PcInstance {
 
 		}
 
-		/** 조우시 채팅 **/
+		/** 遭遇時のチャット **/
 		int hirandom = _random.nextInt(1000) + 1;
 		if (hirandom > 995 && !Glsaid() && !target2.isRobot()) {
 			_himent = himentArray[_random.nextInt(himentArray.length)];
@@ -1274,7 +1270,7 @@ public class L1RobotInstance extends L1PcInstance {
 			} catch (Exception e) {
 			}
 		}
-		/** 조우시 채팅 **/
+		/** 遭遇時のチャット **/
 
 		int escapeDistance = 15;
 		if (hasSkillEffect(L1SkillId.DARKNESS)
@@ -1290,7 +1286,7 @@ public class L1RobotInstance extends L1PcInstance {
 			return false;
 		}
 
-		/** 도망갈시 채팅 **/
+		/** 逃げる時のチャット**/
 		/*
 		 * int disrandom= _random.nextInt(100)+1; if(disrandom > 50 && !isElf()
 		 * && Rsaid() && !target2.isRobot() && Math.abs(calcx) > 6 && !Dissaid()
@@ -1302,7 +1298,7 @@ public class L1RobotInstance extends L1PcInstance {
 		 * 0)); cnt++; if (cnt > 2) { setDissaid(true); _disment = null; }
 		 * }catch(Exception e){} }
 		 */
-		/** 도망갈시 채팅 **/
+		/** 逃げる時のチャット **/
 
 		boolean tail = World.isThroughAttack(getX(), getY(), getMapId(),
 				calcheading(this, target2.getX(), target2.getY()));
@@ -1318,13 +1314,13 @@ public class L1RobotInstance extends L1PcInstance {
 		if (isElf() && getCurrentWeapon() == 20)
 			range = 11;
 
-		// 첫타 포우 또는 트리플 또는 마법?
+		// 初段ポーまたはトリプルまたは魔法？
 		if (!FirstSkill && !isSkillDelay() && getCurrentMp() > 30) {
 			int skillId = 0;
 			int skill_range = 11;
 			if (isElf() && getCurrentWeapon() == 20) {
 				skillId = L1SkillId.TRIPLE_ARROW;
-			} else if (isWizard()) { // 법사봇 디스
+			} else if (isWizard()) { // 玄ボットディス
 				skillId = L1SkillId.DISINTEGRATE;
 			} else if (isDragonknight()) {
 				skillId = L1SkillId.FOU_SLAYER;
@@ -1383,7 +1379,7 @@ public class L1RobotInstance extends L1PcInstance {
 								L1SkillUse.TYPE_NORMAL);
 					}
 					int drandom = _random.nextInt(10) + 1;
-					if (drandom > 6 && isDarkelf()) { // 다엘봇 더블
+					if (drandom > 6 && isDarkelf()) { // すべてへボットダブル
 						Broadcaster.broadcastPacket(_target2, new S_SkillSound(
 								_target2.getId(), 3398));
 						_target2.sendPackets(new S_SkillSound(_target2.getId(),
@@ -1399,7 +1395,7 @@ public class L1RobotInstance extends L1PcInstance {
 		if (isAttackPosition(this, target2.getX(), target2.getY(),
 				target2.getMapId(), range) == true
 				&& isAttackPosition(target2, getX(), getY(),
-						getMapId(), range) == true) {// 기본 공격범위
+						getMapId(), range) == true) {// 基本攻撃範囲
 			if (door || !tail) {
 				cnt++;
 				if (cnt > 5) {
@@ -1497,9 +1493,9 @@ public class L1RobotInstance extends L1PcInstance {
 
 	}
 
-	// 사냥봇 이동
+	// 狩猟ボットの移動
 	private void 이동() {
-		이동(loc.getX(), loc.getY());
+		moveBot(loc.getX(), loc.getY());
 	}
 
 	private L1Location BackLoc_1th = null;
@@ -1507,17 +1503,17 @@ public class L1RobotInstance extends L1PcInstance {
 	private int cnt3 = 0;
 	private boolean BackRR = false;
 
-	private void 이동(int x, int y) {
+	private void moveBot(int x, int y) {
 		//int dir = moveDirection(x, y, getMapId());
 		int dir = moveDirectionMatiz(x,y,getMapId());
 		if (dir == -1) {
 			dir = new Random().nextInt(8);
 			cnt++;
 			if (cnt > 20) {
-				딜레이(3000 + _random.nextInt(2000));
-				귀환(1000 + _random.nextInt(2000));
+				delayBot(3000 + _random.nextInt(2000));
+				returnBot(1000 + _random.nextInt(2000));
 				cnt = 0;
-				
+
 				return;
 			}
 			setSleepTime(1000 + _random.nextInt(1000));
@@ -1529,8 +1525,8 @@ public class L1RobotInstance extends L1PcInstance {
 			if (door || !tail2) {
 				cnt++;
 				if (cnt > 20) {
-					딜레이(3000 + _random.nextInt(2000));
-					귀환(1000 + _random.nextInt(2000));
+					delayBot(3000 + _random.nextInt(2000));
+					returnBot(1000 + _random.nextInt(2000));
 					cnt = 0;
 					return;
 				}
@@ -1539,7 +1535,7 @@ public class L1RobotInstance extends L1PcInstance {
 			setDirectionMove(dir);
 			setSleepTime(calcSleepTime(MOVE_SPEED));
 
-			
+
 
 			if ((BackLoc_1th != null && getLocation().getTileDistance(
 					BackLoc_1th) == 0)
@@ -1557,31 +1553,31 @@ public class L1RobotInstance extends L1PcInstance {
 			BackRR = !BackRR;
 
 			if (cnt3 > 20) {
-				딜레이(3000 + _random.nextInt(2000));
-				귀환(1000 + _random.nextInt(2000));
+				delayBot(3000 + _random.nextInt(2000));
+				returnBot(1000 + _random.nextInt(2000));
 				cnt3 = 0;
-				
+
 				return;
 			}
 		}
 	}
 
-	public void 텔(int x, int y, int mapid) {
-		텔(x, y, mapid, 1, true);
+	public void telBot(int x, int y, int mapid) {
+		telBot(x, y, mapid, 1, true);
 	}
 
-	public void 텔(int x, int y, int mapid, int time) {
-		텔(x, y, mapid, time, true);
+	public void telBot(int x, int y, int mapid, int time) {
+		telBot(x, y, mapid, time, true);
 	}
 
-	public void 텔(final int x, final int y, final int mapid, int time,
+	public void telBot(final int x, final int y, final int mapid, int time,
 			final boolean effect) {
-		if (사냥봇)
+		if (huntingBot)
 			item_queue.clear();
 		GeneralThreadPool.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
-				// TODO 자동 생성된 메소드 스텁
+				// TODO 自動生成されたメソッド・スタブ
 				try {
 					if (L1RobotInstance.this.isDead()
 							|| L1RobotInstance.this.isTeleport()
@@ -1604,7 +1600,7 @@ public class L1RobotInstance extends L1PcInstance {
 							.getRecognizePlayer(L1RobotInstance.this)) {
 						pc.removeKnownObject(
 								L1RobotInstance.this);
-						pc.sendPackets(ro); // 텔허상 안남게?
+						pc.sendPackets(ro); // テル虚像ないまま？
 
 					}
 					L1World.getInstance().moveVisibleObject(
@@ -1625,10 +1621,10 @@ public class L1RobotInstance extends L1PcInstance {
 	private int moveDirectionMatiz(int x,int y,int m){
 		int dir = 0 ;
 		//dir : 0 : -1
-		//현재위치보다 크고 목적지위치보다 작으며 이동가능한곳
+		//現在の位置よりも大きく、目的地の位置よりも小さく移動可能な場所
 		int mX = x-getX();
 		int mY = y-getY();
-		
+
 		int dCase = 9;
 		if(mX > 0 && mY >0){
 			dCase = 1;
@@ -1659,42 +1655,42 @@ public class L1RobotInstance extends L1PcInstance {
 					direction[2] = 3;
 					break;
 				case 2:
-					direction[0] = 4; 
+					direction[0] = 4;
 					direction[1] = 4;
 					direction[2] = 4;
 					break;
 				case 3:
-					direction[0] = 6; 
+					direction[0] = 6;
 					direction[1] = 4;
 					direction[2] =5;
 					break;
 				case 4:
-					direction[0] = 6; 
+					direction[0] = 6;
 					direction[1] = 6;
 					direction[2] = 6;
 					break;
 				case 5:
-					direction[0] = 6; 
+					direction[0] = 6;
 					direction[1] = 0;
 					direction[2] =7;
 					break;
 				case 6:
-					direction[0] = 0; 
+					direction[0] = 0;
 					direction[1] = 0;
 					direction[2] =0;
 					break;
 				case 7:
-					direction[0] = 2; 
+					direction[0] = 2;
 					direction[1] = 0;
 					direction[2] =1;
 					break;
 				case 8:
-					direction[0] = 2; 
+					direction[0] = 2;
 					direction[1] = 2;
 					direction[2] =2;
 					break;
 				case 9:
-					direction[0] = -1; 
+					direction[0] = -1;
 					direction[1] = -1;
 					direction[2] =-1;
 					break;
@@ -1710,7 +1706,7 @@ public class L1RobotInstance extends L1PcInstance {
 					break;
 				}
 			}
-			
+
 		}
 		return dir;
 	}
@@ -1724,9 +1720,9 @@ public class L1RobotInstance extends L1PcInstance {
 		}
 		if (tail != null) {
 			iCurrentPath = -1;
-			while (!_스레드종료 && tail != null) {
+			while (!_EndThread && tail != null) {
 				if (tail.x == getX() && tail.y == getY()) {
-					// 현재위치 라면 종료
+					//現在の位置であれば、終了
 					break;
 				}
 				if (iCurrentPath >= 299 || isDead()) {
@@ -1760,9 +1756,9 @@ public class L1RobotInstance extends L1PcInstance {
 			}
 			if (tail != null && !(tail.x == getX() && tail.y == getY())) {
 				iCurrentPath = -1;
-				while (!_스레드종료 && tail != null) {
+				while (!_EndThread && tail != null) {
 					if (tail.x == getX() && tail.y == getY()) {
-						// 현재위치 라면 종료
+						// 現在の位置であれば、終了
 						break;
 					}
 					if (iCurrentPath >= 299 || isDead()) {
@@ -1780,7 +1776,7 @@ public class L1RobotInstance extends L1PcInstance {
 				}
 			} else {
 				dir = -1;
-				if (!사냥봇) {
+				if (!huntingBot) {
 					int chdir = calcheading(this, x, y);
 					if (getHeading() != chdir) {
 						this.setHeading(calcheading(this, x, y));
@@ -1807,7 +1803,7 @@ public class L1RobotInstance extends L1PcInstance {
 				return;
 			}
 			// Broadcaster.broadcastPacket(this, new S_ChatPacket(this,
-			// ""+사냥맵.getId(), Opcodes.S_OPCODE_NORMALCHAT, 0));
+			// ""+狩りマップ.getId（）、Opcodes.S_OPCODE_NORMALCHAT、0））;
 			int heading = 0;
 			nx = HEADING_TABLE_X[dir];
 			ny = HEADING_TABLE_Y[dir];
@@ -1880,14 +1876,14 @@ public class L1RobotInstance extends L1PcInstance {
 				break;
 			}
 
-			if (gfxid == 13719 || gfxid == 13725 || gfxid == 13735) {// 로봇공속수정
-				interval += 90; // 랭커변신 속도느리게
+			if (gfxid == 13719 || gfxid == 13725 || gfxid == 13735) {//ロボット攻撃速度修正
+				interval += 90; // ランカー変身速度遅い
 
 			}
 
 			/*
 			 * if (type != MOVE_SPEED) { if (gfxid >= 11328 && gfxid <= 13635)
-			 * {// 로봇공속수정 if (getLevel() >= 15) interval -= 43; if (getLevel()
+			 * {// ロボット攻撃速度の変更if（getLevel（）> = 15）interval  -  = 43; if（getLevel（）
 			 * >= 30) interval -= 43; if (getLevel() >= 45) interval -= 34; if
 			 * (getLevel() >= 50) interval -= 34; if (getLevel() >= 52) interval
 			 * -= 25; if (getLevel() >= 55) interval -= 24; if (getLevel() >=
@@ -1905,7 +1901,7 @@ public class L1RobotInstance extends L1PcInstance {
 					&& this.isUgdraFruit()) {
 				interval *= HASTE_RATE;
 			}
-			if (this.isBlood_lust()) { // 블러드러스트
+			if (this.isBlood_lust()) { //ブラッドラスト
 				interval *= HASTE_RATE;
 			}
 			if (this.isBrave()) {
@@ -1948,61 +1944,61 @@ public class L1RobotInstance extends L1PcInstance {
 		return interval;
 	}
 
-	public long 딜레이 = 0;
-	public int 이동딜레이 = 0;
+	public long delay = 0;
+	public int delay_Bot = 0;
 
-	public void 딜레이(int i) {
-		딜레이 = i;
-		// 딜레이 = System.currentTimeMillis() + i;
+	public void delayBot(int i) {
+		delay = i;
+		// ディレイ = System.currentTimeMillis() + i;
 	}
 
 	private int cnt = 0;
 
-	public void 리스봇이동() {
-		if (리스봇_이동 == 1) {
+	public void moveLisBot() {
+		if (LisBot_Move == 1) {
 			if (loc == null) {
-				if (리스봇_스폰위치 == 2 || 리스봇_스폰위치 == 4 || 리스봇_스폰위치 == 5
-						|| 리스봇_스폰위치 == 9 || 리스봇_스폰위치 == 8) // 기란
+				if (LisBot_SpawnLocation == 2 || LisBot_SpawnLocation == 4 || LisBot_SpawnLocation == 5
+						|| LisBot_SpawnLocation == 9 || LisBot_SpawnLocation == 8) // ギラン
 					loc = new Robot_Location_bean(33437, 32804, 4);
-				else if (리스봇_스폰위치 == 6 || 리스봇_스폰위치 == 7) // 하이네
+				else if (LisBot_SpawnLocation == 6 || LisBot_SpawnLocation == 7) // ハイネ
 					loc = new Robot_Location_bean(33613, 33248, 4);
 				/*
-				 * else if (리스봇_스폰위치 == 8) // 라던 정문 loc = new
-				 * Robot_Location_bean(32693, 32794, 450); else if (리스봇_스폰위치 ==
-				 * 9) // 우즈벡 loc = new Robot_Location_bean(32640, 33183, 4);
+				 * else if（リースボット_出現位置== 8）//といってい正門loc = new
+				 * Robot_Location_bean（32693、32794、450）; else if（リースボット_出現位置==
+				 * 9) // ウズベクloc = new Robot_Location_bean（32640、33183、4）;
 				 */
-				else if (리스봇_스폰위치 == 10 || 리스봇_스폰위치 == 11) // 글루딘
+				else if (LisBot_SpawnLocation == 10 || LisBot_SpawnLocation == 11) //グルーディン
 					loc = new Robot_Location_bean(32609, 32738, 4);
-				else if (리스봇_스폰위치 == 12) // 말섬
+				else if (LisBot_SpawnLocation == 12) //マルソム
 					loc = new Robot_Location_bean(32587, 32929, 0);
-				else if (리스봇_스폰위치 == 13) // 은기사
+				else if (LisBot_SpawnLocation == 13) // 記事
 					loc = new Robot_Location_bean(33089, 33393, 4);
-				else if (리스봇_스폰위치 == 14) // 오렌
+				else if (LisBot_SpawnLocation == 14) // オレン
 					loc = new Robot_Location_bean(34065, 32280, 4);
-				else if (리스봇_스폰위치 == 15) // 아덴
+				else if (LisBot_SpawnLocation == 15) // アデン
 					loc = new Robot_Location_bean(33938, 33358, 4);
 			}
-		} else if (리스봇_이동 == 2) {
+		} else if (LisBot_Move == 2) {
 			if (loc == null) {
-				if (리스봇_스폰위치 == 2 || 리스봇_스폰위치 == 4 || 리스봇_스폰위치 == 5
-						|| 리스봇_스폰위치 == 9 || 리스봇_스폰위치 == 8) // 기란
+				if (LisBot_SpawnLocation == 2 || LisBot_SpawnLocation == 4 || LisBot_SpawnLocation == 5
+						|| LisBot_SpawnLocation == 9 || LisBot_SpawnLocation == 8) //ギラン
 					loc = new Robot_Location_bean(33437, 32795, 4);
-				else if (리스봇_스폰위치 == 6 || 리스봇_스폰위치 == 7) // 하이네
+				else if (LisBot_SpawnLocation == 6 || LisBot_SpawnLocation == 7) // ハイネ
 					loc = new Robot_Location_bean(33613, 33257, 4);
 				/*
-				 * else if (리스봇_스폰위치 == 8) // 라던 정문 loc = new
-				 * Robot_Location_bean(32685, 32795, 450); else if (리스봇_스폰위치 ==
-				 * 9) // 우즈벡 loc = new Robot_Location_bean(32640, 33189, 4);
+				 * else if（リースボット_出現位置== 8）//といってい正門loc = new
+				 * Robot_Location_bean（32685、32795、450）; else if（リースボット_出現位置==
+				 * 9) //ウズベクloc = new Robot_Location_bean（32640、33189、4）;
 				 */
-				else if (리스봇_스폰위치 == 10 || 리스봇_스폰위치 == 11) // 글루딘
+				else if (LisBot_SpawnLocation == 10 || LisBot_SpawnLocation == 11) //グルーディン
 					loc = new Robot_Location_bean(32611, 32732, 4);
-				else if (리스봇_스폰위치 == 12) // 말섬
+				else if (LisBot_SpawnLocation == 12) //マルソム
 					loc = new Robot_Location_bean(32583, 32922, 0);
-				else if (리스봇_스폰위치 == 13) // 은기사
+				else if (LisBot_SpawnLocation == 13) //記事
 					loc = new Robot_Location_bean(33089, 33396, 4);
-				else if (리스봇_스폰위치 == 14) // 오렌
+				else if (LisBot_SpawnLocation == 14) //オレン
 					loc = new Robot_Location_bean(34063, 32278, 4);
-				else if (리스봇_스폰위치 == 15) // 아덴
+				else if (LisBot_SpawnLocation == 15) // アデン
 					loc = new Robot_Location_bean(33934, 33351, 4);
 			}
 		}
@@ -2012,13 +2008,13 @@ public class L1RobotInstance extends L1PcInstance {
 		if (isDistance(getX(), getY(), getMapId(), loc.getX(), loc.getY(),
 				getMapId(), 1 + _random.nextInt(3))) {
 			loc = null;
-			if (리스봇_이동 == 1) {
-				리스봇_이동 = 2;
-				젠도르버프();
+			if (LisBot_Move == 1) {
+				LisBot_Move = 2;
+				zendleBuff();
 			} else {
-				리스봇_이동 = 0;
-				텔(32750, 32809, 39, 1000 + _random.nextInt(3000));
-				_스레드종료 = true;
+				LisBot_Move = 0;
+				telBot(32750, 32809, 39, 1000 + _random.nextInt(3000));
+				_EndThread = true;
 				stopHalloweenRegeneration();
 				stopPapuBlessing();
 				stopAHRegeneration();
@@ -2053,12 +2049,12 @@ public class L1RobotInstance extends L1PcInstance {
 	}
 
 	/*
-	 * private static final int[] 리스봇BuffSkill4 = {
+	 * private static final int []レスボットBuffSkill4 = {
 	 * L1SkillId.PHYSICAL_ENCHANT_STR, L1SkillId.PHYSICAL_ENCHANT_DEX,
 	 * L1SkillId.BLESS_WEAPON, L1SkillId.REMOVE_CURSE };
 	 */
 
-	private void 외창() {
+	private void etcWindow() {
 		try {
 			_glment = Robot_Hunt.getInstance().getMessage();
 			Delay(30);
@@ -2067,7 +2063,7 @@ public class L1RobotInstance extends L1PcInstance {
 						Opcodes.S_MESSAGE, 3);
 				listner.sendPackets(cp, true);
 				setGlsaid(true);
-				listner = null; // 누수방지
+				listner = null; //漏れ防止
 				cp = null;
 			}
 		} catch (Exception e) {
@@ -2075,13 +2071,13 @@ public class L1RobotInstance extends L1PcInstance {
 		}
 	}
 
-	private void 젠도르버프() {
+	private void zendleBuff() {
 		GeneralThreadPool.getInstance().schedule(new Runnable() {
 			@Override
 			public void run() {
-				// TODO 자동 생성된 메소드 스텁
+				// TODO 自動生成されたメソッド・スタブ
 				try {
-					int[] skillt = 리스봇BuffSkill4;
+					int[] skillt = LisBotBuffSkill4;
 					if (_random.nextInt(2) == 0) {
 						for (Integer i : skillt) {
 							L1Skills skill = SkillsTable.getInstance()
@@ -2100,12 +2096,12 @@ public class L1RobotInstance extends L1PcInstance {
 												skill.getCastGfx()), true);
 						}
 						Thread.sleep(1000 + _random.nextInt(1000));
-						// 흑사코인
+						// フクサコイン
 						// Broadcaster.broadcastPacket(L1RobotInstance.this, new
 						// S_SkillSound(L1RobotInstance.this.getId(), 4914),
 						// true);
 					} else {
-						// 흑사코인
+						// フクサコイン
 						// Broadcaster.broadcastPacket(L1RobotInstance.this, new
 						// S_SkillSound(L1RobotInstance.this.getId(), 4914),
 						// true);
@@ -2135,8 +2131,8 @@ public class L1RobotInstance extends L1PcInstance {
 	}
 
 	/**
-	 * 거리값 추출.
-	 * 
+	 *距離の値を抽出する。
+	 *
 	 * @param o
 	 * @param oo
 	 * @return
@@ -2148,7 +2144,7 @@ public class L1RobotInstance extends L1PcInstance {
 	}
 
 	/**
-	 * 거리안에 있다면 참
+	 * 距離内にある場合は真
 	 */
 	public boolean isDistance(int x, int y, int m, int tx, int ty, int tm,
 			int loc) {
@@ -2210,7 +2206,7 @@ public class L1RobotInstance extends L1PcInstance {
 		}
 	}
 
-	public void updateclan(String 혈이름, int clanid, String 호칭, boolean swich) {
+	public void updateclan(String clanName, int clanid, String title, boolean swich) {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -2218,9 +2214,9 @@ public class L1RobotInstance extends L1PcInstance {
 			pstm = con
 					.prepareStatement("UPDATE robots SET clanname = ?,clanid = ?,title = ? WHERE name = ?");
 			if (swich) {
-				pstm.setString(1, 혈이름);
+				pstm.setString(1, clanName);
 				pstm.setInt(2, clanid);
-				pstm.setString(3, 호칭);
+				pstm.setString(3, title);
 			} else {
 				pstm.setString(1, "");
 				pstm.setInt(2, 0);
@@ -2261,9 +2257,9 @@ public class L1RobotInstance extends L1PcInstance {
 			}
 		}
 		// 32666 32820 32647 32795 19 25
-		// locbase = 현재좌표 - (타겟좌표-25)
-		// locNext로 복사
-		// locNext에 한칸이동
+		// locbase =現在の座標 - （ターゲット座標-25）
+		// locNextにコピー
+		// locNextに一間移動
 		// locCenter = 26;
 		int[] firstCource = { 2, 4, 6, 0, 1, 3, 5, 7 };
 		for (i = 0; i < 8; i++) {

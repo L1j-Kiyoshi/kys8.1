@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Random;
 
 import l1j.server.L1DatabaseFactory;
@@ -16,7 +15,6 @@ import l1j.server.server.model.L1Clan;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_ServerMessage;
-import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.utils.SQLUtil;
 
 public class Robot_Crown {
@@ -121,7 +119,7 @@ public class Robot_Crown {
 				newPc.setDeaths(0);
 				newPc.setNetConnection(null);
 				newPc._userTitle = rs.getString("user_title");
-				newPc.가입군주 = true;
+				newPc.clan = true;
 				GeneralThreadPool.getInstance().schedule(new on(newPc),
 						_random.nextInt(60000));
 				// GeneralThreadPool.getInstance().schedule(new on(newPc),
@@ -146,15 +144,15 @@ public class Robot_Crown {
 
 		@Override
 		public void run() {
-			// TODO 자동 생성된 메소드 스텁
+			// TODO 自動生成されたメソッド・スタブ
 			try {
 				L1Clan clan = L1World.getInstance()
 						.getClan(newPc.getClanname());
 				if (clan != null) {
-					if (newPc.getClanid() == clan.getClanId() && // 크란을 해산해, 재차,
-																	// 동명의 크란이
-																	// 창설되었을 때의
-																	// 대책
+					if (newPc.getClanid() == clan.getClanId() && // クランを解散し、再度、
+																	// 同名のクランが
+																	// 創設されたときの
+																	// 対策
 							newPc.getClanname().toLowerCase()
 									.equals(clan.getClanName().toLowerCase())) {
 						clan.updateClanMemberOnline(newPc);

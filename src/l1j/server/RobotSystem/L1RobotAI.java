@@ -1,8 +1,6 @@
 package l1j.server.RobotSystem;
 
-import static l1j.server.server.model.skill.L1SkillId.POLLUTE_WATER;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_BLUE_POTION;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_BRAVE;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.util.Random;
 
@@ -78,7 +76,7 @@ public class L1RobotAI {
 		this.cancellationCount = cancellationCount;
 	}
 
-	private L1PcInstance robot; // 로봇대상		
+	private L1PcInstance robot; // ロボット対象		
 	private L1Character target;
 	private L1Object dropItem;
 	private L1Astar aStar;
@@ -97,25 +95,25 @@ public class L1RobotAI {
 	private L1Object object;
 
 
-	private long ai_start_time; // 인공지능 시작된 시간값
+	private long ai_start_time; // 人工知能の開始時刻の値
 	@SuppressWarnings("unused")
-	private long ai_time; // 인공지능 처리에 사용될 프레임참고 값
+	private long ai_time; // 人工知能処理に使用されるフレーム参考値
 
-	// 텔레포트한 사냥터의 위치 임시 저장용.
+	// テレポートした狩り場の位置一時的に保存用。
 	private RobotLocation location;
 	private L1Skills l1skills;
-	// 인공지능 상태 변수	
-	public final int AI_STATUS_SETTING = 0;  // 초반 세팅처리
-	public final int AI_STATUS_WALK = 1;     // 랜덤워킹 상태
-	public final int AI_STATUS_ATTACK = 2;   // 공격 상태
-	public final int AI_STATUS_DEAD = 3;     // 죽은 상태
-	public final int AI_STATUS_CORPSE = 4;   // 시체 상태
-	public final int AI_STATUS_SPAWN = 5;    // 스폰 상태
-	public final int AI_STATUS_ESCAPE = 6;   // 도망 상태
-	public final int AI_STATUS_PICKUP = 7;   // 아이템 줍기 상태
-	public final int AI_STATUS_SHOP = 8;     // 상점으로이동처리
+	// 人工知能の状態変数	
+	public final int AI_STATUS_SETTING = 0;  //序盤セッティング処理
+	public final int AI_STATUS_WALK = 1;     // ランダムウォーク状態
+	public final int AI_STATUS_ATTACK = 2;   //攻撃状態
+	public final int AI_STATUS_DEAD = 3;     // 死んだ状態
+	public final int AI_STATUS_CORPSE = 4;   // 死体の状態
+	public final int AI_STATUS_SPAWN = 5;    // スポン状態
+	public final int AI_STATUS_ESCAPE = 6;   // 逃げ状態
+	public final int AI_STATUS_PICKUP = 7;   // アイテム拾い状態
+	public final int AI_STATUS_SHOP = 8;     // 店に移動処理
 
-	// 마을에서 버프 스탭 확인용
+	// 村でバフスタッフ確認用
 	private int buff_step;
 
 	public L1RobotAI(L1PcInstance pc) {
@@ -126,7 +124,7 @@ public class L1RobotAI {
 		postionCount = CommonUtil.random(50, 200);				
 	}
 
-	private boolean active = false;    // 활성화
+	private boolean active = false;    // 有効
 
 	public boolean isActive() {
 		return active;
@@ -148,7 +146,7 @@ public class L1RobotAI {
 
 	public int statusType = 0;
 
-	private int ai_Status = 1; // 인공지능 처리해야할 상태
+	private int ai_Status = 1; //人工知能処理すべき状態
 
 	public int getAiStatus() {
 		return ai_Status;
@@ -193,9 +191,9 @@ public class L1RobotAI {
 		}
 
 		switch (gfxmode) {
-		case 0: // 이동
+		case 0: // 移動
 			return 1000;
-		case 1: // 공격
+		case 1: //攻撃
 			return 800 + AttackSpeed;
 		}
 		return 1000;
@@ -257,15 +255,15 @@ public class L1RobotAI {
 			ai_start_time = time;
 
 
-			// 물약 복용 처리.
+			//ポーション服用処理。
 
 			toHealingPostion(false);			
-
-			// 속도 물약 복용 처리.
+			//ポーション服用処理。
+			// 速度ポーション服用処理。
 			if (cancellationCount <= 0) {
 				toSpeedPostion();
 
-				// 변신 처리
+				// 変身処理
 				if (type == 1) {
 					int ran = CommonUtil.random(100);
 
@@ -330,7 +328,7 @@ public class L1RobotAI {
 			case AI_STATUS_SHOP:
 				toShopMove(time);
 				break;
-			default://여기
+			default://ここ
 				ai_time = 1000;
 				break;
 			}	
@@ -394,14 +392,14 @@ public class L1RobotAI {
 				setAiStatus(AI_STATUS_DEAD);
 			}
 			ai_start_time = time;
-			// 물약 복용 처리.
+			// ポーション服用処理。
 
 			toHealingPostion(false);			
 
-			// 속도 물약 복용 처리.
+			// 速度ポーション服用処理。
 			if (cancellationCount <= 0) { 
-				toSpeedPostion1();//허수아비 로봇 물약처리 설정
-				// 변신 처리
+				toSpeedPostion1();//かかしロボットポーション処理の設定
+				// 変身処理
 				if (type == 1) {
 					int ran = CommonUtil.random(100);
 
@@ -459,7 +457,7 @@ public class L1RobotAI {
 			case AI_STATUS_SHOP:
 				toShopMove(time);
 				break;
-			default://여기
+			default://ここ
 				ai_time = 1000;
 				break;
 			}	
@@ -501,7 +499,7 @@ public class L1RobotAI {
 					y = 0;
 				}
 			}
-			// 상태 변경.					
+			// 状態の変更。					
 			setAiStatus(AI_STATUS_WALK);		
 		} catch (Exception e) {
 
@@ -553,7 +551,7 @@ public class L1RobotAI {
 	}
 
 	/**
-	 * 인공지능 활성화할 시간이 됫는지 확인해주는 함수.
+	 * 人工知能有効にする時間がドゥェトことを確認してくれる関数です。
 	 * 
 	 * @param time
 	 * @return
@@ -577,10 +575,10 @@ public class L1RobotAI {
 
 		gfxid = robot.getTempCharGfx();
 		weapon = robot.getCurrentWeapon();		
-		// -- 추가소스
+		//  - 追加のソース
 		interval = SprTable.getInstance().getAttackSpeed(robot.getTempCharGfx(), robot.getCurrentWeapon() + 1, robot.getLevel(), robot.getClassId());
 	
-		// 윈드세클 걸린상태라면
+		// ウィンドセクルかかった状態であれば、
 		if (robot.equals(ACT_TYPE.ATTACK) && this.robot.hasSkillEffect(167)) { 
 			interval *= 2;
 		}
@@ -643,7 +641,7 @@ public class L1RobotAI {
 	}
 
 	/**
-	 * 마을에서 기본적인 세팅처리할때 사용.
+	 * 村での基本的なセッティングを処理するときに使用。
 	 * 
 	 * @param time
 	 */
@@ -652,9 +650,9 @@ public class L1RobotAI {
 
 		ai_time = getFrame(robot.getGfxId(), 0);
 
-		// 마을로 귀환.
+		// 村に帰還。
 		if (!robot.getMap().isSafetyZone(robot.getLocation())) {
-			// 딜레이.		
+			// ディレイ。		
 			int ran = L1Robot4.random(5, 15);
 			ai_time = 1000 * ran;
 
@@ -665,13 +663,13 @@ public class L1RobotAI {
 			return;
 		}
 
-		// hp 회복처리.
+		// hp回復処置。
 		if (robot.getMaxHp() != robot.getCurrentHp()) {
 			toHealingPostion(true);
 			return;
 		}
 
-		// 로봇 변신 처리.		
+		// ロボットに変身処理。		
 		if (robot.getGfxId() == robot.getTempCharGfx()) {
 			Poly(robot);
 			return;
@@ -712,7 +710,7 @@ public class L1RobotAI {
 				return;
 			}
 
-			// 버프시전.
+			//バフ詠唱。
 			if (robot.isKnight()) {
 				switch (buff_step++) {
 				case 0:
@@ -868,7 +866,7 @@ public class L1RobotAI {
 	}
 
 	/**
-	 * 객체가 공격가능한 상태인지 확인해주는 함수.
+	 * オブジェクトが攻撃可能な状態であることを確認してくれる関数です。
 	 * 
 	 * @param o
 	 * @param walk
@@ -921,11 +919,11 @@ public class L1RobotAI {
 	}
 	
 
-	private void toAiAttack() {//사냥로봇 설정
+	private void toAiAttack() {//狩りロボット設定
 		try {			
 			if (target != null && target.isDead()) {
 				if (robot.getName().equals(Config.ROBOT_NAME)) {
-					System.out.println("로봇다이");
+					System.out.println("ロボットダイ");
 				}
 				attackList.remove(target);			
 				target = null;	
@@ -948,11 +946,11 @@ public class L1RobotAI {
 					pickupCount = 0;
 				}
 				if (robot.getName().equals(Config.ROBOT_NAME)) {
-					System.out.println("로봇드랍   " + ((L1ItemInstance)dropItem).getName());
+					System.out.println("ロボットドロップ" + ((L1ItemInstance)dropItem).getName());
 				}
 				return;
 			}
-			//워킹
+			//ウォーキング
 			if (type != 1 && target != null && !(target instanceof L1PcInstance) && !(target instanceof L1GuardianInstance) && ((L1MonsterInstance)target).getHiddenStatus() >= 1) {
 				attackList.remove(target);			
 				target = null;
@@ -966,17 +964,17 @@ public class L1RobotAI {
 				target = null;
 			}
 
-			// 객체를 찾지못했다면 랜덤워킹 변경.
+			// オブジェクトが見つからなかった場合はランダムウォークに変更。
 			if (target == null && dropItem == null) {				
 				ai_time = 0;
 				setAiStatus(AI_STATUS_WALK);
 				return;
 			}
-			// 객체 거리 확인
+			// オブジェクトの距離を確認し
 			if (type > 1 && isDistance(robot.getX(), robot.getY(), robot.getMapId(), target.getX(), target.getY(), target.getMapId(), robot.isElf() ? 8 : 1)) {
-				// 사용자는 구분 처리.
-				if (target instanceof L1PcInstance) { // PC랑 싸운다면.		
-					//마법사
+				// ユーザーは区分処理します。
+				if (target instanceof L1PcInstance) { // PCラング戦っ場合。		
+					//ウィザード
 					if (robot.isWizard() && robot.getCurrentMp() >= 50 && isDistance(robot.getX(), robot.getY(), robot.getMapId(), target.getX(), target.getY(), target.getMapId(), robot.isWizard() ? 5 : 1)) {
 						if (target.hasSkillEffect(L1SkillId.SILENCE) || 
 								target.hasSkillEffect(L1SkillId.DECAY_POTION) || 
@@ -994,7 +992,7 @@ public class L1RobotAI {
 							toWizardMagic(target);
 							return;
 						}
-						//기사
+						//記事
 					} else if (robot.isKnight() && robot.getCurrentMp() >= 50 && isDistance(robot.getX(), robot.getY(), robot.getMapId(), target.getX(), target.getY(), target.getMapId(), robot.isKnight() ? 2 : 1)) {
 						if (target.hasSkillEffect(L1SkillId.SILENCE) || 
 								target.hasSkillEffect(L1SkillId.DECAY_POTION) || 
@@ -1012,7 +1010,7 @@ public class L1RobotAI {
 							toKnightMagic(target);
 							return;
 						}
-						//용기사
+						//竜騎士
 					} else if (robot.isDragonknight() && robot.getCurrentMp() >= 50 && isDistance(robot.getX(), robot.getY(), robot.getMapId(), target.getX(), target.getY(), target.getMapId(), robot.isDragonknight() ? 2 : 1)) {
 						if (target.hasSkillEffect(L1SkillId.SILENCE) || 
 								target.hasSkillEffect(L1SkillId.DECAY_POTION) || 
@@ -1030,7 +1028,7 @@ public class L1RobotAI {
 							toDragonknightMagic(target);
 							return;
 						}
-						//환술사
+						//イリュージョニスト
 					} else if (robot.isBlackwizard() && robot.getCurrentMp() >= 50 
 							&& isDistance(robot.getX(), robot.getY(), robot.getMapId(), 
 									target.getX(), target.getY(), target.getMapId(), robot.isBlackwizard() ? 4 : 1)) {
@@ -1050,7 +1048,7 @@ public class L1RobotAI {
 							toIllusionistMagic(target);
 							return;
 						}
-						//요정
+						//妖精
 					} else if (robot.isElf() && robot.getCurrentMp() >= 50 && isDistance(robot.getX(), robot.getY(), robot.getMapId(), target.getX(), target.getY(), target.getMapId(), robot.isElf() ? 7 : 1)) {
 						if (target.hasSkillEffect(L1SkillId.SILENCE) || 
 								target.hasSkillEffect(L1SkillId.DECAY_POTION) || 
@@ -1100,7 +1098,7 @@ public class L1RobotAI {
 	}
 
 	/**
-	 * 각클레스가 마법을 시전하게 한다.
+	 * 各クレスが魔法を詠唱している。
 	 * 
 	 * @param o
 	 */
@@ -1244,7 +1242,7 @@ public class L1RobotAI {
 	}
 
 	/**
-	 * 공격 처리 함수.
+	 *攻撃処理関数です。
 	 * 
 	 * @param o
 	 * @param x
@@ -1260,7 +1258,7 @@ public class L1RobotAI {
 			searchCount = 0;
 			if (target == null) {
 				if (robot.getName().equals(Config.ROBOT_NAME)) {
-					System.out.println("로봇클리어");
+					System.out.println("ロボットクリア");
 				}
 				attackList.clear();
 				setAiStatus(AI_STATUS_WALK);
@@ -1297,7 +1295,7 @@ public class L1RobotAI {
 	}
 
 	/**
-	 * 공격목록이 등록되어 있지 않으면 주변에 공격목록을 검색한다.
+	 * 攻撃のリストが登録されていない場合、周辺に攻撃のリストを取得する。
 	 */
 	private void toSearchTarget() {
 		int distance = 20;
@@ -1308,7 +1306,7 @@ public class L1RobotAI {
 		}
 		if (robot.getName().equals(Config.ROBOT_NAME)) {
 			System.out.println("+++++++++++++++++++++++++++++++++++++++");
-			System.out.println("리서치 " + attackList.toTargetArrayList().size());
+			System.out.println("リサーチ" + attackList.toTargetArrayList().size());
 		}
 		
 		
@@ -1402,7 +1400,7 @@ public class L1RobotAI {
 				if (target != null && attackList.toTargetArrayList().size() == 0) {
 					if (!attackList.containsKey(target)) {
 						if (robot.getName().equals(Config.ROBOT_NAME)) {
-							System.out.println("로봇텔레포트.");
+							System.out.println("ロボットテレポート。");
 						}
 						attackList.clear();
 						target = null;			
@@ -1426,14 +1424,14 @@ public class L1RobotAI {
 	}
 
 	/**
-	 * 공격목록에 등록된 객체중 위험한 객체를 우선검색해서 리턴. : 리턴된 객체를 타켓으로 공격함.
+	 * 攻撃リストに登録されたオブジェクトの中に危険なオブジェクトを優先検索し返す。 ：返されたオブジェクトをターゲットに攻撃する。
 	 * 
 	 * @return
 	 */
 	private L1Character findDangerousObject() {		
 		L1Character o = null;
 		try {
-			// 사용자 우선 검색.
+			// ユーザー優先検索します。
 			for (int i = attackList.toTargetArrayList().size() - 1; i >= 0; i--) {
 				L1Character oo = attackList.toTargetArrayList().get(i);
 				if (oo instanceof L1PcInstance) {	
@@ -1464,7 +1462,7 @@ public class L1RobotAI {
 				return o;
 			}
 
-							/** 몬스터 검색 **/
+							/** モンスター検索 **/
 			for (int i = attackList.toTargetArrayList().size() - 1; i >= 0; i--) {
 				L1Character oo = attackList.toTargetArrayList().get(i);
 				if (oo.isDead()) {
@@ -1493,7 +1491,7 @@ public class L1RobotAI {
 	}
 
 	/**
-	 * 물약 복용처리 함수.
+	 * ポーション服用処理関数です。
 	 * 
 	 * @param direct
 	 */
@@ -1502,7 +1500,7 @@ public class L1RobotAI {
 			return;
 		}
 
-		if (robot.hasSkillEffect(71) == true) { // 디케이포션 상태
+		if (robot.hasSkillEffect(71) == true) { // ディケイポーションの状態
 		} else {
 			curePostionCount++;
 			if (robot.getPoison() != null && curePostionCount >= 3) {
@@ -1521,7 +1519,7 @@ public class L1RobotAI {
 			Broadcaster.broadcastPacket(robot, new S_SkillSound(robot.getId(), 197));
 
 			int healHp = 30;
-			// 포르트워타중은 회복량1/2배
+			// ポルトウォーター中は回復量1/2倍
 			if (robot.hasSkillEffect(POLLUTE_WATER))
 				healHp /= 2;	
 
@@ -1545,8 +1543,8 @@ public class L1RobotAI {
 			return;
 		}
 
-		// 50퍼센트 미만 되면 마을로 이동하기위해 상태 변경.
-		if (p < 15) { // 50% 이상시 베르하기 // 기본 15
+		// 50％未満と、村に移動するために状態を変更する。
+		if (p < 15) { // 50％以上でベルする//基本15
 			setAiStatus(AI_STATUS_SETTING);
 			postionCount = CommonUtil.random(400, 600);
 			attackList.clear();
@@ -1559,19 +1557,19 @@ public class L1RobotAI {
 			return;
 		}
 
-		// 로봇 변신 처리.		
+		// ロボットに変身処理。		
 		if (robot.getGfxId() == robot.getTempCharGfx()) {
 			Poly(robot);
 			return;
 		}
 	}
 
-	private void toSpeedPostion1() {//로봇전용 용기		
+	private void toSpeedPostion1() {//ロボット専用容器		
 		if (robot.isDead()) {
 			return;
 		}
 		if (robot.getMoveSpeed() == 0) {
-			// 촐기떠러졌을경우 복용하기.
+			// チォルギトロた場合服用する。
 			Broadcaster.broadcastPacket(robot, new S_SkillSound(robot.getId(),191));
 			Broadcaster.broadcastPacket(robot, new S_SkillHaste(robot.getId(),1, 0));
 			robot.setMoveSpeed(1);
@@ -1585,7 +1583,7 @@ public class L1RobotAI {
 			return;
 		}
 		if (robot.getMoveSpeed() == 0) {
-			// 촐기떠러졌을경우 복용하기.
+			// チォルギトロた場合服用する。
 			Broadcaster.broadcastPacket(robot, new S_SkillSound(robot.getId(), 191));
 			Broadcaster.broadcastPacket(robot, new S_SkillHaste(robot.getId(), 1, 0));
 			robot.setMoveSpeed(1);			
@@ -1593,7 +1591,7 @@ public class L1RobotAI {
 			return;
 		}
 		if (!robot.isWizard() && !robot.isDarkelf() && robot.getBraveSpeed() == 0) {
-			// 용기 떠러졌을경우 복용하기.
+			// 容器トロた場合服用する。
 			Broadcaster.broadcastPacket(robot, new S_SkillBrave(robot.getId(), 1, 0));
 			robot.setBraveSpeed(1);
 			robot.setSkillEffect(STATUS_BRAVE, 300 * 1000);
@@ -1601,7 +1599,7 @@ public class L1RobotAI {
 			return;
 		}
 		if (robot.isWizard() && !robot.hasSkillEffect(L1SkillId.STATUS_BLUE_POTION)) {
-			// 파랭이떠러졌을경우 복용하기.
+			// パレンイトロた場合服用する。
 			robot.sendPackets(new S_SkillIconGFX(34, 600));
 			robot.sendPackets(new S_SkillSound(robot.getId(), 190));
 			robot.setSkillEffect(STATUS_BLUE_POTION, 600 * 1000);
@@ -1623,7 +1621,7 @@ public class L1RobotAI {
 		robot.removeAllKnownObjects();		
 		Broadcaster.broadcastPacket(robot, new S_RemoveObject(robot));
 		robot.setCurrentHp(robot.getLevel());
-		robot.set_food(39); // 죽었을때 겟지? 10%
+		robot.set_food(39); // 死んだときにラゲッジ？ 10％
 		robot.setDead(false);
 		robot.setActionStatus(0);		
 		L1World.getInstance().moveVisibleObject(robot, loc[2]);
@@ -1702,8 +1700,8 @@ public class L1RobotAI {
 		}
 
 		moveCount++;
-		//System.out.println("로봇이름 : " + robot.getName() + " 상태 : " + getAiStatus() + " 타입 : " + type);
-		//System.out.println("몹리스트 : " + attackList.toHateArrayList().size() + " 물약수 : " + postionCount + " 움직임 : " + moveCount);
+		//System.out.println("ロボット名： "+ robot.getName（）+"状態： "+ getAiStatus（）+"タイプ： "+ type）;
+		//System.out.println("モンスターリスト： "+ attackList.toHateArrayList（）。size（）+"ポーション数： "+ postionCount +"動き "+ moveCount）;
 		if (moveCount >= 5) {
 			if (robot.getMap().isTeleportable()) {				
 				L1Location newLocation = robot.getLocation().randomLocation(200, true);
@@ -1759,7 +1757,7 @@ public class L1RobotAI {
 				iCurrentPath = -1;
 				while (tail != null) {
 					if (tail.x == robot.getX() && tail.y == robot.getY()) {						
-						// 현재위치 라면 종료
+						//現在の位置であれば、終了
 						break;
 					}
 					iPath[++iCurrentPath][0] = tail.x;
@@ -1943,9 +1941,9 @@ public class L1RobotAI {
 		int polyid = 0;
 		int time = 1800;
 		if (pc.getWeapon() != null) {
-			// 타입별 분류
+			// タイプ別分類
 			switch (pc.getWeapon().getItem().getType()) {
-			// 활
+			// 弓
 			case 4:
 			case 13:
 				if (pc.getLevel() < 55) {
@@ -1972,7 +1970,7 @@ public class L1RobotAI {
 				}
 				L1PolyMorph.doPoly(pc, polyid, time, 1);
 				break;
-				// 크로우 이도류
+				// クロウデュアルブレード
 			case 11:
 			case 12:
 				if (pc.getLevel() < 55) {
@@ -1999,7 +1997,7 @@ public class L1RobotAI {
 				}
 				L1PolyMorph.doPoly(pc, polyid, time, 1);
 				break;
-				// 지팡이
+				// 杖
 			case 7:
 			case 16:
 				if (pc.getLevel() < 55) {
@@ -2026,7 +2024,7 @@ public class L1RobotAI {
 				}
 				L1PolyMorph.doPoly(pc, polyid, time, 1);
 				break;
-				// 그외..
+				// その他。
 			default:
 				if (pc.getLevel() < 55) {
 					int[] polyList = { 6142 };
@@ -2161,7 +2159,7 @@ public class L1RobotAI {
 				}
 
 				if (robot.getName().equals(Config.ROBOT_NAME)) {
-					System.out.println("로봇토글");
+					System.out.println("ロボット切り替え");
 				}
 				if (dropItem != null && !isDistance(robot.getX(), robot.getY(), robot.getMapId(), dropItem.getX(), dropItem.getY(), dropItem.getMapId(), (robot.isElf() ? 8 : 1))) {
 

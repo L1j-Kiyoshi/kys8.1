@@ -2,13 +2,12 @@ package l1j.server.GameSystem;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
+
 import l1j.server.Config;
 import l1j.server.server.model.L1World;
 import l1j.server.server.serverpackets.S_PacketBox;
-import l1j.server.server.utils.L1SpawnUtil;
 
 @SuppressWarnings("unused")
 public class TimeEventController extends Thread {
@@ -20,7 +19,7 @@ public class TimeEventController extends Thread {
  private boolean Close;
  private static long sTime = 0L;
  private String NowTime = "";
- private static final int LOOP = 19; // 저녁7시에 시작
+ private static final int LOOP = 19; //夕方7時に始まる
  private static final SimpleDateFormat s = new SimpleDateFormat("HH",
    Locale.KOREA);
 
@@ -83,16 +82,16 @@ public class TimeEventController extends Thread {
     if (L1World.getInstance().getAllPlayers().size() <= 0)
      continue;
     L1World.getInstance().broadcastServerMessage(
-      "\\fW[이벤트관리자] : 안녕하세요~! 곧 타임이벤트가 시작됩니다.");
+      "\\fW[イベントマネージャ]：こんにちは〜！すぐにタイムイベントが開始されます。");
     try {
      Thread.sleep(2000L);
     } catch (Exception e) {
     }
     L1World.getInstance().broadcastPacketToAll(
       new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-        "\\fC[이벤트관리자] : 자~ 어떤 이벤트가 걸릴까요?"));
+        "\\fC[イベントマネージャ]：文字〜どのようなイベントがかかりますか？"));
     L1World.getInstance().broadcastServerMessage(
-      "\\fW[이벤트관리자] : 이벤트를 추첨중입니다.!");
+      "\\fW[イベントマネージャ]：イベントを抽選しています！");
     try {
      Thread.sleep(5000L);
     } catch (Exception e) {
@@ -105,7 +104,7 @@ public class TimeEventController extends Thread {
     TimeEventGo(i);
     setTimeEventTing(i);
     int t = 0;
-    while (t <= 10) {  //5시간동안 30분씩 진행시키고 10번 돌리자
+    while (t <= 10) {  //5時間30分進行させ、10回回そう
      try {
       Thread.sleep(1000 * 60 * 30L);
      } catch (Exception e) {
@@ -114,9 +113,9 @@ public class TimeEventController extends Thread {
      ++t;
     }
     L1World.getInstance().broadcastServerMessage(
-      "\\fW[이벤트관리자] 잠시후 타임이벤트가 변경됩니다.");
+      "\\fW[イベントマネージャ]しばらくして、タイムイベントが変更されます。");
     L1World.getInstance().broadcastServerMessage(
-      "\\fW[이벤트관리자] 한가지 이벤트가 끝나면  랜덤으로 다시 진행됩니다.");
+      "\\fW[イベントマネージャ]の一つのイベントが終わるとランダムに再実行されます。");
     try {
      Thread.sleep(30000L);
     } catch (Exception e) {
@@ -143,7 +142,7 @@ public class TimeEventController extends Thread {
 
  private boolean isOpen() {
   NowTime = getTime();
-  if ((Integer.parseInt(NowTime) % LOOP) == 0) //매일 저녁7시에 시작된다
+  if ((Integer.parseInt(NowTime) % LOOP) == 0) //毎晩7時に始まる
    return true;
   return false;
  }
@@ -167,7 +166,7 @@ public class TimeEventController extends Thread {
 
  
 
-// 타임이벤트 시작 메시지 + 효과
+//タイムイベント開始メッセージ+効果
 
  private void TimeEventGo(int i) {
   switch (i) {
@@ -175,173 +174,173 @@ public class TimeEventController extends Thread {
    Config.RATE_XP *= 1.1;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[경험치이벤트] : 경험치 10%상승"));
+       "\\fC[経験値イベント]：経験値10％上昇"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 경험치획득량이 10% 증가됩니다.");
+     "\\fU[イベントマネージャ]今から経験値獲得量が10％増加します。");
    break;
   case 1:
    Config.RATE_KARMA *= 1.3;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[우호도이벤트] : 우호도 30%상승"));
+       "\\fC[友好度イベント]：友好度30％上昇"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 우호도획득량이 30% 증가됩니다.");
+     "\\fU[イベントマネージャ]今から友好獲得量が30％増加します。");
    break;
   case 2:
    Config.RATE_XP *= 1.2;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[경험치이벤트] : 경험치 20%상승"));
+       "\\fC[経験値イベント]：経験値20％上昇"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 경험치획득량이 20% 증가됩니다.");
+     "\\fU[イベントマネージャ]今から経験値獲得量が20％増加します。");
    break;
   case 3:
    Config.RATE_DROP_ADENA *= 1.1;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[아데나이벤트] : 아데나 10%상승"));
+       "\\fC[アデナイベント]：アデナ10％上昇"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 아데나획득량이 10% 증가됩니다.");
+     "\\fU[イベントマネージャ]今からアデナ獲得量が10％増加します。");
    break;
   case 4:
    Config.RATE_DROP_ADENA *= 1.2;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[아데나이벤트] : 아데나 20%상승"));
+       "\\fC[アデナイベント]：アデナ20％上昇"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 아데나획득량이 20% 증가됩니다.");
+     "\\fU[イベントマネージャ]今からアデナ獲得量が20％増加します。");
    break;
   case 5:
    Config.RATE_DROP_ADENA *= 1.3;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[아데나이벤트] : 아데나 30%상승"));
+       "\\fC[アデナイベント]：アデナ30％上昇"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 아데나획득량이 30% 증가됩니다.");
+     "\\fU[イベントマネージャ]今からアデナ獲得量が30％増加します。");
    break;
   case 6:
    Config.FEATHER_NUM *= 1.1;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[깃털이벤트] : 깃털 10%추가지급"));
+       "\\fC[羽イベント]：フェザー10％追加支給"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 깃털지급량이 10% 증가됩니다.");
+     "\\fU[イベントマネージャ]今から羽支給量が10％増加します。");
    break;
   case 7:
    Config.ENCHANT_CHANCE_WEAPON *= 1.1;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[인첸이벤트] : 무기인첸률 10%증가"));
+       "\\fC[エンチャンイベント]：武器エンチャン率10％増加"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 무기인첸률이 10% 증가합니다.");
+     "\\fU[イベントマネージャ]今から武器エンチャン率が10％増加します。");
    break;
   case 8:
    Config.FEATHER_NUM *= 1.2;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[깃털이벤트] : 깃털 20%추가지급"));
+       "\\fC[羽イベント]：フェザー20％追加支給"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 깃털지급량이 20% 증가됩니다.");
+     "\\fU[イベントマネージャ]今から羽支給量が20％増加します。");
    break;
   case 9:
    Config.RATE_DROP_ITEMS *= 1.2;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[득템이벤트] : 드랍률 20%증가"));
+       "\\fC[ドゥクテムイベント]：ドロップ率20％増加"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 드랍률이 20% 증가됩니다.");
+     "\\fU[イベントマネージャ]今からドロップ率が20％増加します。");
    break;
   case 10:
    Config.ENCHANT_CHANCE_ARMOR *= 1.1;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[인첸이벤트] : 방어구인첸률 10%증가]"));
+       "\\fC[エンチャンイベント]：防具エンチャン率10％増加]"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 방어구인첸률이 10% 증가합니다.");
+     "\\fU[イベントマネージャ]今から防具エンチャン率が10％増加します。");
    break;
   case 11:
    Config.RATE_DROP_ITEMS *= 1.3;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[득템이벤트] : 드랍률 30%증가"));
+       "\\fC[ドゥクテムイベント]：ドロップ率30％増加"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[이벤트관리자] 지금부터 드랍률이 30% 증가됩니다.");
+     "\\fU[イベントマネージャ]今からドロップ率が30％増加します。");
    break;
   }
  }
 
  
 
-// 타임이벤트 진행 메시지를 보낸다
+// タイムイベント進行メッセージを送る
 
  private void TimeEventMent(int i) {
   switch (i) {
   case 0:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[경험치이벤트 : 경험치10%증가]"));
+       "\\fC[経験値イベント：経験値10％増加]"));
    break;
   case 1:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[우호도이벤트 : 우호도30%추가획득]"));
+       "\\fC[友好度イベント：友好30％追加取得]"));
    break;
   case 2:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[경험치이벤트 : 경험치20%증가]"));
+       "\\fC[経験値イベント：経験値20％増加]"));
    break;
   case 3:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[아데나이벤트 : 아데나10%증가]"));
+       "\\fC[アデナイベント：アデナ10％増加]"));
    break;
   case 4:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[아데나이벤트 : 아데나20%증가]"));
+       "\\fC[アデナイベント：アデナ20％増加]"));
    break;
   case 5:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[아데나이벤트 : 아데나30%증가]"));
+       "\\fC[アデナイベント：アデナ30％増加]"));
    break;
   case 6:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[깃털이벤트 : 깃털10%추가지급]"));
+       "\\fC[羽イベント：フェザー10％追加支給]"));
    break;
   case 7:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[인첸트이벤트 : 무기인첸률10%증가]"));
+       "\\fC[エンチャントイベント：武器エンチャン率10％増加]"));
    break;
   case 8:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[깃털이벤트 : 깃털20%추가지급]"));
+       "\\fC[羽イベント：フェザー20％追加支給]"));
    break;
   case 9:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[드랍이벤트 : 드랍률20%증가]"));
+       "\\fC[ドロップイベント：ドロップ率20％増加]"));
    break;
   case 10:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[인첸트이벤트 : 방어구인첸률10%증가]"));
+       "\\fC[エンチャントイベント：防具エンチャン率10％増加]"));
    break;
   case 11:
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC[드랍이벤트 : 드랍률30%증가]"));
+       "\\fC[ドロップイベント：ドロップ率30％増加]"));
    break;
   }
  }
 
  
 
-// 타임이벤트 종료 메시지 + 효과
+//タイムイベント終了メッセージ+効果
 
  private void TimeEventStop(int i) {
   switch (i) {
@@ -349,97 +348,97 @@ public class TimeEventController extends Thread {
    Config.RATE_XP /= 1.1;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC경험치 증가 효과가 사라집니다."));
+       "\\fC経験値増加効果が消えます。"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 경험치 증가 효과가 사라집니다.");
+     "\\fU[タイムイベント]経験値増加効果が消えます。");
    break;
   case 1:
    Config.RATE_KARMA /= 1.3;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC우호도 증가 효과가 사라집니다."));
+       "\\fC友好度増加の効果が消えます。"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 우호도 증가 효과가 사라집니다.");
+     "\\fU[タイムイベント]友好増加効果が消えます。");
    break;
   case 2:
    Config.RATE_XP /= 1.2;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC경험치 증가 효과가 사라집니다."));
+       "\\fC経験値増加効果が消えます。"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 경험치 증가 효과가 사라집니다.");
+     "\\fU[タイムイベント]経験値増加効果が消えます。");
    break;
   case 3:
    Config.RATE_DROP_ADENA /= 1.1;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC아데나드랍률 증가 효과가 사라집니다."));
+       "\\fCアデナドロップ率増加効果が消えます。"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 아데나드랍률 증가 효과가 사라집니다.");
+     "\\fU[タイムイベント]アデナドロップ率増加効果が消えます。");
    break;
   case 4:
    Config.RATE_DROP_ADENA /= 1.2;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC아데나드랍률 증가 효과가 사라집니다."));
+       "\\fCアデナドロップ率増加効果が消えます。"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 아데나드랍률 증가 효과가 사라집니다.");
+     "\\fU[タイムイベント]アデナドロップ率増加効果が消えます。");
    break;
   case 5:
    Config.RATE_DROP_ADENA /= 1.3;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC아데나드랍률 증가 효과가 사라집니다."));
+       "\\fCアデナドロップ率増加効果が消えます。"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 아데나드랍률 증가 효과가 사라집니다.");
+     "\\fU[タイムイベント]アデナドロップ率増加効果が消えます。");
    break;
   case 6:
    Config.FEATHER_NUM /= 1.1;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC깃털 추가지급 효과가 사라집니다."));
+       "\\fC羽追加支給効果が消えます。"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 깃털 추가지급 효과가 사라집니다.");
+     "\\fU[タイムイベント]の羽を追加支給効果が消えます。");
    break;
   case 7:
    Config.ENCHANT_CHANCE_WEAPON /= 1.1;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC무기인첸률 증가 효과가 사라집니다."));
+       "\\fC武器エンチャン率増加効果が消えます。"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 무기인첸률 증가 효과가 사라집니다.");
+     "\\fU[タイムイベント]武器エンチャン率増加効果が消えます。");
    break;
   case 8:
    Config.FEATHER_NUM /= 1.2;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC깃털 주가지급 효과가 사라집니다."));
+       "\\fC羽株価支給効果が消えます。"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 깃털 주가지급 효과가 사라집니다.");
+     "\\fU[タイムイベント]羽株価支給効果が消えます。");
    break;
   case 9:
    Config.RATE_DROP_ITEMS /= 1.2;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC아이템드랍률 증가 효과가 사라집니다"));
+       "\\fCアイテムドロップ率増加効果が消えます"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 아이템드랍률 증가 효과가 사라집니다.");
+     "\\fU[タイムイベント]アイテムドロップ率増加効果が消えます。");
    break;
   case 10:
    Config.ENCHANT_CHANCE_ARMOR /= 1.1;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC방어구인첸률 증가 효과가 사라집니다."));
+       "\\fC防具エンチャン率増加効果が消えます。"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 방어구인첸률 증가 효과가 사라집니다.");
+     "\\fU[タイムイベント]防具エンチャン率増加効果が消えます。");
    break;
   case 11:
    Config.RATE_DROP_ITEMS /= 1.3;
    L1World.getInstance().broadcastPacketToAll(
      new S_PacketBox(S_PacketBox.GREEN_MESSAGE,
-       "\\fC아이템드랍률 증가 효과가 사라집니다"));
+       "\\fCアイテムドロップ率増加効果が消えます"));
    L1World.getInstance().broadcastServerMessage(
-     "\\fU[타임이벤트] 아이템드랍률 증가 효과가 사라집니다.");
+     "\\fU[タイムイベント]アイテムドロップ率増加効果が消えます。");
    break;
   }
   setTimeEventStart(false);
@@ -447,5 +446,5 @@ public class TimeEventController extends Thread {
  }
 }
 
-// 실시간 배율 변동 끝
+// リアルタイム倍率変動終わり
 

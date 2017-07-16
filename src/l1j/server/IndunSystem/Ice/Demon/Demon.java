@@ -55,10 +55,10 @@ public class Demon implements Runnable {
 		Calendar cal = Calendar.getInstance();
 		int 시간 = Calendar.HOUR;
 		int 분 = Calendar.MINUTE;
-		/** 0 오전 , 1 오후 * */
-		String 오전오후 = "오후";
+		/** 0 午前、1午後 * */
+		String 오전오후 = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "오전";
+			오전오후 = "午前";
 		}
 		Running = true;
 		FirstRoom = true;
@@ -91,20 +91,20 @@ public class Demon implements Runnable {
 			}
 		}
 		Demon_Delete();
-	  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "시" + cal.get(분) + "분" + "   ■■■■■■ 아이스데몬 종료 " +  _map+" ■■■■■■");
+	  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "   ■■■■■■ アイスデーモン終了 " +  _map+" ■■■■■■");
 	}
 
 	public void Start(){
 		Calendar cal = Calendar.getInstance();
 		int 시간 = Calendar.HOUR;
 		int 분 = Calendar.MINUTE;
-		/** 0 오전 , 1 오후 * */
-		String 오전오후 = "오후";
+		/** 0 午前、1午後 * */
+		String 오전오후 = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
 			오전오후 = "오전";
 		}
 		GeneralThreadPool.getInstance().schedule(this, 2000);
-	  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "시" + cal.get(분) + "분" + "   ■■■■■■ 아이스데몬 시작 " +  _map+" ■■■■■■");
+	  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "   ■■■■■■ 아이스데몬 시작 " +  _map+" ■■■■■■");
 	}
 
 	private void Check() {
@@ -121,7 +121,7 @@ public class Demon implements Runnable {
 			for (L1Object obj : L1World.getInstance().getVisibleObjects(_map).values()) {
 				if (obj instanceof L1PcInstance) {
 					L1PcInstance pc = (L1PcInstance) obj;
-					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, min+"분 후에 마을로 강제 이동 됩니다."));
+					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, min+"分後に村に強制移動されます。"));
 				}
 			}
 		}
@@ -136,7 +136,7 @@ public class Demon implements Runnable {
 				}
 			}
 		} else {
-			openDoor(5147); // 첫번째 문 개방.
+			openDoor(5147); // 最初のドア開放。
 			FirstRoom = false;
 			SecondRoom = true;
 		}
@@ -151,7 +151,7 @@ public class Demon implements Runnable {
 				}
 			}
 		} else {
-			openDoor(5148); // 두번째 문 개방.
+			openDoor(5148); // 第二扉開放​​。
 			SecondRoom = false;
 			ThirdRoom = true;
 		}
@@ -166,7 +166,7 @@ public class Demon implements Runnable {
 				}
 			}
 		} else {
-			openDoor(5149); // 세번째 문 개방.
+			openDoor(5149); // 第三扉開放。
 			ThirdRoom = false;
 			FourthRoom = true;
 		}
@@ -180,7 +180,7 @@ public class Demon implements Runnable {
 				}
 			}
 		} else {
-			openDoor(5150); // 네번째 문 개방.
+			openDoor(5150); // 第四ドア開放。
 			FourthRoom = false;
 			BossRoom = true;
 		}
@@ -197,10 +197,10 @@ public class Demon implements Runnable {
 			for (L1Object obj : L1World.getInstance().getVisibleObjects(_map).values()) {
 				if (obj instanceof L1PcInstance) {
 					L1PcInstance pc = (L1PcInstance) obj;
-					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "벽 뒤에 있는 스빈을 만나십시오."));
+					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "壁の後ろにあるスビンに会いなさい。"));
 				}
 			}
-			openDoor(5151); // 다섯번째 문 개방.
+			openDoor(5151); // 5番目のステートメント開放。
 			BossRoom = false;
 		}
 	}
@@ -266,7 +266,7 @@ public class Demon implements Runnable {
 		for (L1Object obj : L1World.getInstance().getVisibleObjects(_map).values()) {
 			if (obj instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) obj;
-				new L1Teleport().teleport(pc, 34068, 32311, (short)4, 4, true); // 이부분이 떨어질 좌표에요
+				new L1Teleport().teleport(pc, 34068, 32311, (short)4, 4, true); // この部分が落ちる座標です
 			}
 		}
 
@@ -326,18 +326,18 @@ public class Demon implements Runnable {
 	}
 	
 	private void SpawnMonster() {
-		// NPC스폰
-		spawn(32734, 32802, (short) _map, 4, 5086, 1, 2, 0); // 상아탑 첩보원
-		spawn(32860, 32920, (short) _map, 6, 5087, 1, 2, 0); // 스빈
+		// NPC出現
+		spawn(32734, 32802, (short) _map, 4, 5086, 1, 2, 0); //象牙の塔のスパイ
+		spawn(32860, 32920, (short) _map, 6, 5087, 1, 2, 0); //スビン
 		
-		// 문짝 스폰
+		//扉出現
 		spawn(32784, 32818, (short) _map, 0, 5147, 1, 2, 0);
 		spawn(32852, 32806, (short) _map, 0, 5148, 1, 2, 0);
 		spawn(32822, 32855, (short) _map, 0, 5149, 1, 2, 0);
 		spawn(32762, 32916, (short) _map, 0, 5150, 1, 2, 0);
 		spawn(32852, 32920, (short) _map, 0, 5151, 1, 2, 0);
 		
-		// 1번방 뿌리기
+		//1番の部屋まき
 		for (int i = 0; i < 15; i++) { 
 			spawn(32765, 32818, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 12, 2, 1);
 		}
@@ -346,7 +346,7 @@ public class Demon implements Runnable {
 		spawn(32766, 32833, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 0, 2, 1);
 		spawn(32772, 32802, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 0, 2, 1);
 
-		// 2번 방 뿌리기
+		// 2回の部屋まき
 		spawn(32813, 32805, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 0, 2, 2);
 		spawn(32819, 32807, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 0, 2, 2);
 		spawn(32819, 32805, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 0, 2, 2);
@@ -354,7 +354,7 @@ public class Demon implements Runnable {
 			spawn(32833, 32806, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 13, 2, 2);
 		}
 		
-		// 3번 방 뿌리기
+		// 3回部屋まき
 		spawn(32859, 32832, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 0, 2, 3);
 		spawn(32857, 32831, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 0, 2, 3);
 		spawn(32855, 32834, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 0, 2, 3);
@@ -362,20 +362,20 @@ public class Demon implements Runnable {
 			spawn(32850, 32853, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 10, 2, 3);
 		}
 
-		// 4번 방 뿌리기
+		// 4番の部屋まき
 		for (int i = 0; i < 15; i++) {
 			spawn(32767, 32892, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 12, 2, 4);
 		}
 
-		// 5번 방 뿌리기 ( 보스 몬스터 추가 : 아이스 데몬 ) 
+		// 5番の部屋播種（ボスモンスター追加：アイスデーモン） 
 		for (int i = 0; i < 15; i++) {
 			spawn(32767, 32892, (short) _map, 6, _MonsterList[_random.nextInt(100) % _MonsterList.length], 12, 2, 5);
 		}
-		spawn(32845, 32920, (short) _map, 6, 81201, 0, 2, 5); // 아이스데몬
+		spawn(32845, 32920, (short) _map, 6, 81201, 0, 2, 5); // アイスデーモン
 	}
 	
 	public static void spawn(int x, int y, short MapId, int Heading, int npcId, int randomRange, int type, int roomnumber) {
-		try {// 타입이란부분에 월래2였는데 얼음여왕은 1을 죠 타입을따라가보면
+		try {//タイプと部分にウォルレ2だったアイスクイーンは1ジョータイプに沿って行ってみれば
 			L1NpcInstance npc = NpcTable.getInstance().newNpcInstance(npcId);
 			npc.setId(IdFactory.getInstance().nextId());
 			npc.setMap(MapId);
@@ -462,7 +462,7 @@ public class Demon implements Runnable {
 				break;
 			}
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); //チャット開始
 
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

@@ -28,7 +28,7 @@ public class QueenSystem {
 
 	public void startQueen(L1PcInstance pc){
 		if(countQueen() >= 49){
-			pc.sendPackets(new S_ChatPacket(pc,"인스턴스 던전에 진입한 인원이 너무 많습니다"));
+			pc.sendPackets(new S_ChatPacket(pc,"インスタンスダンジョンに進入した人員が多すぎます"));
 			return;
 		}
 		int id = blankMapId();

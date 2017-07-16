@@ -1,10 +1,10 @@
 package l1j.server.GameSystem.MiniGame;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Random;
-import java.text.SimpleDateFormat;
 
 import l1j.server.Config;
 import l1j.server.server.model.L1Teleport;
@@ -46,7 +46,7 @@ public class HellController extends Thread {
 		}
 		
 		private HellController() {
-			System.out.println("■ 지옥사냥터 데이터 .......................... ■ 로딩 정상 완료");
+			System.out.println("■地獄狩り場データ..........................■ロード正常終了");
 		}
 		
 		@Override
@@ -54,7 +54,7 @@ public class HellController extends Thread {
 			try	{
 					while (true) {
 						Thread.sleep(1000); 
-						/** 오픈 **/
+						/** オープン **/
 						if(!isOpen6() && !isGmOpen3)
 							continue;
 						if(L1World.getInstance().getAllPlayers().size() <= 0)
@@ -62,34 +62,34 @@ public class HellController extends Thread {
 						
 						isGmOpen3 = false;
 
-						/** 오픈 메세지 **/
-						L1World.getInstance().broadcastServerMessage("지옥입장권 추첨이 시작되었습니다. 모두 참여하세요.");
-						L1World.getInstance().broadcastServerMessage("예) [.지옥참여]   채팅창에 치시면됩니다.");
-						L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"지옥이 열렸습니다. 오픈후부터 1시간동안 입장가능합니다."));
+						/** オープンメッセージ **/
+						L1World.getInstance().broadcastServerMessage("地獄入場券抽選が開始されました。すべての参加してください。");
+						L1World.getInstance().broadcastServerMessage("例）[地獄参加]チャットウィンドウにチシミョンされます。");
+						L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"地獄が開かれました。オープン後から1時間の間に入場可能です。"));
 
-						/** 지옥 영토 시작**/
+						/** 地獄の領土を開始**/
 						setHellStart(true);
 
-						/** 실행 1시간 시작**/
-						L1World.getInstance().broadcastServerMessage("2분후 추첨이 종료됩니다.");
-						L1World.getInstance().broadcastServerMessage("지옥입장권 참여하세요. 예) [.지옥참여] ");
-						Thread.sleep(60000L); // 2분간 대기
-						L1World.getInstance().broadcastServerMessage("1분후 추첨이 종료됩니다.");
-						L1World.getInstance().broadcastServerMessage("지옥입장권 참여하세요. 예) [.지옥참여] ");
-						Thread.sleep(60000L); // 2분간 대기
+						/** 実行1時間開始**/
+						L1World.getInstance().broadcastServerMessage("2分後、抽選が終了します。");
+						L1World.getInstance().broadcastServerMessage("地獄の入場券に参加してください。例）[地獄参加]");
+						Thread.sleep(60000L); // 2分間待機
+						L1World.getInstance().broadcastServerMessage("1分後、抽選が終了します。");
+						L1World.getInstance().broadcastServerMessage("地獄の入場券に参加してください。例）[地獄参加]");
+						Thread.sleep(60000L); // 2分間待機
 						 if(_Members.size() <= 4){
-							 L1World.getInstance().broadcastServerMessage("입장권추첨이 인원이 적어 취소되었습니다.");
-							 setRaidJoin(false); // 참여 가능시간 종료
+							 L1World.getInstance().broadcastServerMessage("入場券抽選が人員が少なくキャンセルされました。");
+							 setRaidJoin(false); // 参加可能時間終了
 							 _Members.clear();
 						 } else {
-							 setRaidJoin(false); // 참여 가능시간 종료
-							 Choice(); // 당첨자 3명 추첨
+							 setRaidJoin(false); // 参加可能時間終了
+							 Choice(); // 当選者3人抽選
 						 }
-						Thread.sleep(2080000L); //3800000L 1시간 10분정도
+						Thread.sleep(2080000L); //3800000L 1時間10分程度
 						Boss();
-						Thread.sleep(1500000L); //3800000L 1시간 10분정도
+						Thread.sleep(1500000L); //3800000L 1時間10分程度
 						 
-						/** 1시간뒤에 영토맵에 있는 유저 마을로 **/
+						/** 1時間後に領土マップのユーザー町に **/
 						for(L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 							if (pc.getMapId() == 666){
 								new L1Teleport().teleport(pc, 33970, 33246, (short) 4, pc.getMoveState().getHeading(), true);
@@ -97,18 +97,18 @@ public class HellController extends Thread {
 							}
 						}
 						
-						/** 5초 뒤에 다시한번 텔레포트 마을로 **/
+						/** 5秒後、再びテレポート村で **/
 						Thread.sleep(5000L);
 						close();
 						TelePort5();
 						setHellStart(false);
 						
-						/** 5초 뒤에 다시한번 텔레포트 마을로 **/
+						/** 5秒後、再びテレポート村で **/
 						Thread.sleep(5000L);
 						TelePort6();
 						setHellStart(false);
 
-						/** 종료메세지 출력 **/
+						/** 終了メッセージ出力 **/
 						End();
 					
 					}
@@ -126,11 +126,11 @@ public class HellController extends Thread {
 			 int Cmem2 = rnd2.nextInt(getMemberCount());
 			 int Cmem3 = rnd3.nextInt(getMemberCount());
 			 RaidList = getMemberArray();
-			 RaidList[Cmem1].sendPackets(new S_SystemMessage("지옥 입장권 추첨에 당첨되셨습니다."));
+			 RaidList[Cmem1].sendPackets(new S_SystemMessage("地獄入場券抽選に当たるました。"));
 			 RaidList[Cmem1].getInventory().storeItem(42050, 1);
-			 RaidList[Cmem2].sendPackets(new S_SystemMessage("지옥 입장권 추첨에 당첨되셨습니다."));
+			 RaidList[Cmem2].sendPackets(new S_SystemMessage("地獄入場券抽選に当たるました。"));
 			 RaidList[Cmem2].getInventory().storeItem(42050, 1);
-			 RaidList[Cmem3].sendPackets(new S_SystemMessage("지옥 입장권 추첨에 당첨되셨습니다."));
+			 RaidList[Cmem3].sendPackets(new S_SystemMessage("地獄入場券抽選に当たるました。"));
 			 RaidList[Cmem3].getInventory().storeItem(42050, 1);
 			 }
 		 
@@ -139,7 +139,7 @@ public class HellController extends Thread {
 			public void AddMember(L1PcInstance pc) {
 				if (!_Members.contains(pc)) {
 					_Members.add(pc);
-					pc.sendPackets(new S_SystemMessage("\\aD신청 되었습니다. 잠시후 추첨이 시작됩니다."));
+					pc.sendPackets(new S_SystemMessage("\\aD申し込みされた。しばらくして抽選が開始されます。"));
 				}
 			}
 			public void removeMember(L1PcInstance pc) {
@@ -163,9 +163,9 @@ public class HellController extends Thread {
 			}
 			
 			/**
-			 *오픈 시각을 가져온다
+			 *オープン時刻を持って来る
 			 *
-			 *@return (Strind) 오픈 시각(MM-dd HH:mm)
+			 *@return (Strind）オープン時刻（MM-dd HH：mm）
 			 */
 			 public String HellOpen() {
 				 Calendar c = Calendar.getInstance();
@@ -175,16 +175,16 @@ public class HellController extends Thread {
 			 
 			 private void Boss(){
 				 	L1SpawnUtil.spawn2(32807, 32731, (short) 666, 40173, 0, 600*1000, 0);
-					L1World.getInstance().broadcastServerMessage("\\aD지옥을 지배하는 구미호가 지옥에 나타났습니다.");
+					L1World.getInstance().broadcastServerMessage("\\aD地獄を支配する禁断のが地獄に気づいた。");
 					L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, 
-							"지옥을 지배하는 구미호가 지옥에 나타났습니다.."));
+							"地獄を支配する禁断のが地獄に気づいた。"));
 				 }
 			 /**
-			 *영토가 열려있는지 확인
+			 *領土が開いていることを確認
 			 *
-			 *@return (boolean) 열려있다면 true 닫혀있다면 false
+			 *@return (boolean)開いている場合true閉じている場合false
 			 */
-			 	// 열리는 시간을 정해주기 다른곳 응용 참조 할것!!
+			 	// 開催時間を決めて与える他の場所のアプリケーション参照すること！
 			/* private boolean isOpen() {
 				  Calendar calender = Calendar.getInstance();
 				  int hour, minute;
@@ -199,9 +199,9 @@ public class HellController extends Thread {
 
 			 
 			 /**
-				 * 영토가 열려있는지 확인
+				 * 領土が開いていることを確認
 				 * 
-				 * @return (boolean) 열려있다면 true 닫혀있다면 false
+				 * @return (boolean) 開いている場合true閉じている場合false
 				 */
 				private boolean isOpen6() {
 					NowTime = getTime();
@@ -220,15 +220,15 @@ public class HellController extends Thread {
 
 
 			 /**
-			 *실제 현재시각을 가져온다
+			 *実際、現在時刻を持って来る
 			 *
-			 *@return (String) 현재 시각(HH:mm)
+			 *@return (String) 現在時刻（HH：mm）
 			 */
 			 private String getTime() {
 				 return s.format(Calendar.getInstance().getTime());
 			 }
 			 
-				/**캐릭터가 죽었다면 종료시키기**/
+				/**キャラクターが死亡した場合、終了させる**/
 			 private void close() {
 			  for(L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 			   if (pc.getMap().getId() == 666 && pc.isDead()) {
@@ -239,7 +239,7 @@ public class HellController extends Thread {
 			  }
 			 }
 
-			 /**아덴마을로 팅기게**/
+			 /**アデン村にティンギが**/
 			 private void TelePort5() {
 				 for(L1PcInstance c : L1World.getInstance().getAllPlayers()) {
 					 switch(c.getMap().getId()) {
@@ -254,7 +254,7 @@ public class HellController extends Thread {
 				 }
 			 }
 			 
-			 /**아덴마을로 팅기게**/
+			 /**アデン村にティンギが**/
 			 private void TelePort6() {
 				 for(L1PcInstance c : L1World.getInstance().getAllPlayers()) {
 					 switch(c.getMap().getId()) {
@@ -269,10 +269,10 @@ public class HellController extends Thread {
 				 }
 			 }
 
-			 /** 종료 **/
+			 /** 終了 **/
 			 public void End() {
-				L1World.getInstance().broadcastServerMessage("지옥의 불꽃이 사라졌습니다. 3시간후 다시 개방됩니다.");
-				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"지옥의 불꽃이 사라졌습니다. 3시간후 다시 개방됩니다."));
+				L1World.getInstance().broadcastServerMessage("地獄の炎が消えました。 3時間後に再び開放されます。");
+				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"地獄の炎が消えました。 3時間後に再び開放されます。"));
 				setHellStart(false);
 			 }
 }

@@ -80,11 +80,11 @@ public class HadinSpawn {
 						if(field instanceof L1DoorInstance){
 							L1DoorInstance fi = (L1DoorInstance) field;
 							fi.setDoorId(rs.getInt("npc_id"));
-							if(fi.getDoorId() == 900151 || fi.getDoorId() == 900153){//11시
+							if(fi.getDoorId() == 900151 || fi.getDoorId() == 900153){//11時
 								fi.setDirection(0);
 								fi.setLeftEdgeLocation(fi.getX());
 								fi.setRightEdgeLocation(fi.getX());
-							} else if(fi.getDoorId() == 900152 || fi.getDoorId() == 900154){//1시
+							} else if(fi.getDoorId() == 900152 || fi.getDoorId() == 900154){//1時
 								fi.setDirection(1);
 								fi.setLeftEdgeLocation(fi.getY());
 								fi.setRightEdgeLocation(fi.getY());

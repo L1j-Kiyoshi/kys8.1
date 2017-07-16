@@ -24,7 +24,7 @@ public class FantasyIslandSystem {
 
 	public void startRaid(L1PcInstance pc){
 		if(countRaid() >= 49){
-			pc.sendPackets(new S_SystemMessage("몽환의 섬 던전에 진입한 인원이 너무 많습니다"));
+			pc.sendPackets(new S_SystemMessage("夢幻の島ダンジョンに進入した人員が多すぎます"));
 			return;
 		}
 		int id = blankMapId();
@@ -39,7 +39,7 @@ public class FantasyIslandSystem {
 	}
 
 	/**
-	 * 빈 맵 아이디를 가져온다
+	 * 空のマップIDを持って来る
 	 * @return
 	 */
 	public int blankMapId(){

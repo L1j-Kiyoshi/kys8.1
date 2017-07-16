@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 
 import l1j.server.server.Opcodes;
 import l1j.server.server.datatables.ChatLogTable;
-import l1j.server.server.datatables.NpcTable;
 import l1j.server.server.model.L1Object;
 import l1j.server.server.model.L1World;
 import l1j.server.server.model.Instance.L1NpcInstance;
@@ -46,18 +45,18 @@ public class L1Gambling {
 					L1NpcInstance Npc = (L1NpcInstance) l1object;
 					if (Npc.getNpcTemplate().get_npcId() == player.gembleNpc.getNpcId()) {
 						L1NpcInstance dealer = Npc;
-						if (bettingmoney >= 500000) { // 추가
-							String chat = "배팅금액 초과입니다 꿀꺽!";
+						if (bettingmoney >= 500000) { // 追加
+							String chat = "バッティング金額を超えていますがぶ飲み！";
 							player.sendPackets(new S_NpcChatPacket(dealer, chat, 0));
 							player.broadcastPacket(new S_NpcChatPacket(dealer, chat, 0));
 						}
-						String chat = player.getName() + "님 " + bettingmoney + "원 배팅하셨습니다.";
+						String chat = player.getName() + "様" + bettingmoney + "ワンバッティングました。";
 						player.sendPackets(new S_NpcChatPacket(dealer, chat, 0));
 						player.broadcastPacket(new S_NpcChatPacket(dealer, chat, 0));
 						Thread.sleep(1000);
 						Thread.sleep(1000);
 						Thread.sleep(1000);
-						String chat2 = "홀 or 짝 2배//// 1 ~ 6 숫자 3배///홀짝or숫자를 입력해주세요";
+						String chat2 = "ホールorペア2倍//// 1〜6の数字の3倍///すすりor数字を入力してください";
 						player.sendPackets(new S_NpcChatPacket(dealer, chat2, 0));
 						player.broadcastPacket(new S_NpcChatPacket(dealer, chat2, 0));
 						player.setGamblingMoney(bettingmoney);
@@ -85,17 +84,17 @@ public class L1Gambling {
 					L1NpcInstance Npc = (L1NpcInstance) l1object;
 					if (Npc.getNpcTemplate().get_npcId() == pc.gembleNpc.getNpcId()) {
 						L1NpcInstance dealer = Npc;
-						//String chat9 = pc.getName() + "님 맞추셧습니다. " + pc.getGamblingMoney() * 2 + "원 입금했습니다.";
+						//String chat9 = pc.getName() + "様合わせシャットた。" + pc.getGamblingMoney（）* 2 + "ワン入金しました。";
 						//String chat10 = pc.getName() + "님 맞추셧습니다." + pc.getGamblingMoney() * 3 + "원 입금했습니다.";
-						String chat9 = "축하드립니다~";
-						String chat10 ="축하드립니다~";
-						String chat11 = pc.getName() + "님 틀리셧습니다 뽀찌는없습니다 즐.";
-						String chat12 = "시작!";
+						String chat9 = "おめでとうございます〜";
+						String chat10 ="おめでとうございます〜";
+						String chat11 = pc.getName() + "様間違っシャットたポケット蒸すません楽しん。";
+						String chat12 = "開始！";
 						int gfxid = 3204 + random.nextInt(6);
 						switch (type) {
 						case 1:
 							Thread.sleep(2000);
-							String chat = pc.getName() + "님 홀을 선택하셨습니다. 멀리가시면 게임이 취소됩니다.";
+							String chat = pc.getName() + "様ホールを選択した。遠く行けばゲームがキャンセルされます。";
 							pc.sendPackets(new S_NpcChatPacket(dealer, chat, 0));
 							pc.broadcastPacket(new S_NpcChatPacket(dealer, chat, 0));
 							Thread.sleep(1000);
@@ -116,7 +115,7 @@ public class L1Gambling {
 							break;
 						case 2:
 							Thread.sleep(2000);
-							String chat2 = pc.getName() + "님 짝을 선택하셨습니다. 멀리가시면 게임이 취소됩니다.";
+							String chat2 = pc.getName() + "様ペアを選択した。遠く行けばゲームがキャンセルされます。";
 							pc.sendPackets(new S_NpcChatPacket(dealer, chat2, 0));
 							pc.broadcastPacket(new S_NpcChatPacket(dealer, chat2, 0));
 							Thread.sleep(1000);
@@ -137,7 +136,7 @@ public class L1Gambling {
 							break;
 						case 3:
 							Thread.sleep(2000);
-							String chat3 = pc.getName() + "님 1을 선택하셨습니다. 멀리가시면 게임이 취소됩니다.";
+							String chat3 = pc.getName() + "様1を選択した。遠く行けばゲームがキャンセルされます。";
 							pc.sendPackets(new S_NpcChatPacket(dealer, chat3, 0));
 							pc.broadcastPacket(new S_NpcChatPacket(dealer, chat3, 0));
 							Thread.sleep(1000);
@@ -158,7 +157,7 @@ public class L1Gambling {
 							break;
 						case 4:
 							Thread.sleep(2000);
-							String chat4 = pc.getName() + "님 2을 선택하셨습니다. 멀리가시면 게임이 취소됩니다.";
+							String chat4 = pc.getName() + "様2を選択した。遠く行けばゲームがキャンセルされます。";
 							pc.sendPackets(new S_NpcChatPacket(dealer, chat4, 0));
 							pc.broadcastPacket(new S_NpcChatPacket(dealer, chat4, 0));
 							Thread.sleep(1000);
@@ -179,7 +178,7 @@ public class L1Gambling {
 							break;
 						case 5:
 							Thread.sleep(2000);
-							String chat5 = pc.getName() + "님 3을 선택하셨습니다. 멀리가시면 게임이 취소됩니다.";
+							String chat5 = pc.getName() + "様3を選択した。遠く行けばゲームがキャンセルされます。";
 							pc.sendPackets(new S_NpcChatPacket(dealer, chat5, 0));
 							pc.broadcastPacket(new S_NpcChatPacket(dealer, chat5, 0));
 							Thread.sleep(1000);
@@ -200,7 +199,7 @@ public class L1Gambling {
 							break;
 						case 6:
 							Thread.sleep(2000);
-							String chat6 = pc.getName() + "님 4을 선택하셨습니다. 멀리가시면 게임이 취소됩니다.";
+							String chat6 = pc.getName() + "様4を選択した。遠く行けばゲームがキャンセルされます。";
 							pc.sendPackets(new S_NpcChatPacket(dealer, chat6, 0));
 							pc.broadcastPacket(new S_NpcChatPacket(dealer, chat6, 0));
 							Thread.sleep(1000);
@@ -221,7 +220,7 @@ public class L1Gambling {
 							break;
 						case 7:
 							Thread.sleep(2000);
-							String chat7 = pc.getName() + "님 5을 선택하셨습니다. 멀리가시면 게임이 취소됩니다.";
+							String chat7 = pc.getName() + "様5を選択した。遠く行けばゲームがキャンセルされます。";
 							pc.sendPackets(new S_NpcChatPacket(dealer, chat7, 0));
 							pc.broadcastPacket(new S_NpcChatPacket(dealer, chat7, 0));
 							Thread.sleep(1000);
@@ -242,7 +241,7 @@ public class L1Gambling {
 							break;
 						case 8:
 							Thread.sleep(2000);
-							String chat8 = pc.getName() + "님 6을 선택하셨습니다. 멀리가시면 게임이 취소됩니다.";
+							String chat8 = pc.getName() + "様6を選択した。遠く行けばゲームがキャンセルされます。";
 							pc.sendPackets(new S_NpcChatPacket(dealer, chat8, 0));
 							pc.broadcastPacket(new S_NpcChatPacket(dealer, chat8, 0));
 							Thread.sleep(1000);
@@ -282,7 +281,7 @@ public class L1Gambling {
 	//	if ( ( player.getX() == 33447 && player.getY() == 32826&&player.getHeading()==2 ) || ( (player.getX() == 33448 && player.getY()==32828) ) || ( player.getX() == 33448 && player.getY() ==32830 )  ) {
 		if(player.getHeading()==2){
 			player.sendPackets(new S_Message_YN(252, npc.get_name()));
-			// %0%s가 당신과 아이템의 거래를 바라고 있습니다. 거래합니까? (Y/N)	
+			// %0%sがあなたとアイテムの取引を望んでいます。取引のですか？ （Y / N）	
 		}
 	}
 

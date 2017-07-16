@@ -83,19 +83,19 @@ public class NewBossSpawnTable {
 						ArrayList<Integer> list = new ArrayList<Integer>();
 						while (Day.hasMoreElements()) {
 							String day = Day.nextToken();
-							if (day.equalsIgnoreCase("일")) {
+							if (day.equalsIgnoreCase("日")) {
 								list.add(new Integer(0));
-							} else if (day.equalsIgnoreCase("월")) {
+							} else if (day.equalsIgnoreCase("月")) {
 								list.add(new Integer(1));
-							} else if (day.equalsIgnoreCase("화")) {
+							} else if (day.equalsIgnoreCase("火")) {
 								list.add(new Integer(2));
-							} else if (day.equalsIgnoreCase("수")) {
+							} else if (day.equalsIgnoreCase("水")) {
 								list.add(new Integer(3));
-							} else if (day.equalsIgnoreCase("목")) {
+							} else if (day.equalsIgnoreCase("木")) {
 								list.add(new Integer(4));
-							} else if (day.equalsIgnoreCase("금")) {
+							} else if (day.equalsIgnoreCase("金")) {
 								list.add(new Integer(5));
-							} else if (day.equalsIgnoreCase("토")) {
+							} else if (day.equalsIgnoreCase("土")) {
 								list.add(new Integer(6));
 							}
 						}
@@ -109,9 +109,9 @@ public class NewBossSpawnTable {
 						ArrayList<Integer> Minutelist = new ArrayList<Integer>();
 						while (mdata.hasMoreElements()) {
 							String Times = mdata.nextToken();
-							StringTokenizer Hours = new StringTokenizer(Times, "시");
+							StringTokenizer Hours = new StringTokenizer(Times, "時");
 							String Hour = Hours.nextToken();
-							StringTokenizer Minutes = new StringTokenizer(Hours.nextToken(), "분");
+							StringTokenizer Minutes = new StringTokenizer(Hours.nextToken(), "分");
 							String Minute = Minutes.nextToken();
 							Hourlist.add(Integer.parseInt(Hour.trim()));
 							Minutelist.add(Integer.parseInt(Minute.trim()));
@@ -129,11 +129,11 @@ public class NewBossSpawnTable {
 						}
 						
 					} else if (number == 2) { // ランダムタイム分
-						StringTokenizer mdata = new StringTokenizer(temp2, "분");
+						StringTokenizer mdata = new StringTokenizer(temp2, "分");
 						temp.rndTime = Integer.parseInt(mdata.nextToken().trim());
 						// System.out.println("ランダム時間 = " + temp.rndTime);
 					} else if (number == 3) { // 削除時間秒
-						StringTokenizer mdata = new StringTokenizer(temp2, "초");
+						StringTokenizer mdata = new StringTokenizer(temp2, "超");
 						temp.DeleteTime = Integer.parseInt(mdata.nextToken().trim());
 						// System.out.println("削除時間秒= " + temp.DeleteTime);
 					} else if (number == 4) { // 出現座標

@@ -541,84 +541,84 @@ public class OrimController extends Thread {
 		checkMember();
 		switch (i) {
 		case 0:
-			sendMessage("오림: 여러분 당황하지 마시고 제 말을 들어주세요.");
-			talkPartyleader("여러분 당황하지 마시고 제 말을 들어주세요.");
+			sendMessage("クリップボード：あなた慌てないで聞いてください。");
+			talkPartyleader("皆さん慌てないで聞いてください。");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림: 스승님을 만나러 섬을 떠나 본토로 가고 있습니다.");
-			talkPartyleader("오림은 지금 스승을 만나러 섬을 떠나 본토로 가고 있습니다.");
+			sendMessage("クリップボード：マスターに会いに島を離れて本土に行っています。");
+			talkPartyleader("クリップボードは今師匠に会いに島を離れて本土に行っています。");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림: 저는 지금 흑마법사 올딘에게 쫓기고 있습니다.");
-			talkPartyleader("오림은 지금 흑마법사 올딘에게 몰리우고 있습니다.");
+			sendMessage("クリップボード：私は今黒ウィザードオルディンに追われています。");
+			talkPartyleader("クリップボードは今黒ウィザードオルディンにモリーシースます。");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림 : 상황 설명이 필요 없다면, [alt + 1]으로 생략하겠습니다.");
-			talkPartyleader("상황 설명이 필요 없다면, [alt + 1]으로 생략합니다.");
+			sendMessage("クリップボード：状況説明が必要ない場合は、[alt + 1]に省略します。");
+			talkPartyleader("状況説明が必要ない場合は、[alt + 1]に省略します。");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
 			}
 		case 1:
-			sendMessage("오림 : 우리 배를 공격하고 있는 것은 올딘이라 불리는 것입니다.");
-			talkPartyleader("우리 배를 공격하고 있는 것은 올딘이라 불리는 것입니다.");
+			sendMessage("クリップボード：私たちの船を攻撃しているのは、オルディンと呼ばれるものです。");
+			talkPartyleader("私たちの船を攻撃しているのは、オルディンと呼ばれるものです。");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림 : 우선 함포를 사용하는 방법을 알려 드리겠습니다.");
-			talkPartyleader("우선 함포를 사용하는 방법을 알려 드리겠습니다.");
+			sendMessage("クリップボード：まず砲を使用する方法をお知らせします。");
+			talkPartyleader("まず艦砲を使用する方法をお知らせします。");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림 : 잠시후 바닥에 붉은색 원이 생기면 중심에 들어가주세요.");
-			talkPartyleader("잠시후 바닥에 붉은색 원이 생기면 중심에 들어가주세요.");
+			sendMessage("クリップボード：しばらくして床に赤い色員が生じた場合に中心に入ってください。");
+			talkPartyleader("しばらくして、床に赤い色員が生じた場合に中心に入ってください。");
 			try {
 				Thread.sleep(3000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림 : 저는 대포 사이에 있는 같은 무늬의 발판위에 서겠습니다.");
-			talkPartyleader("저는 대포 사이에 있는 같은 무늬의 발판위에 서겠습니다.");
+			sendMessage("クリップボード：私は大砲の間にあるような柄の足場の上に立ち。");
+			talkPartyleader("私は大砲の間にあるような柄の足場の上に立ち。");
 			StarZone(1, 0);
 			try {
 				Thread.sleep(3000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림 : 그런 뒤, 제가 [alt + 4]를 누르게 되면 포가 발사됩니다.");
-			talkPartyleader("그런 뒤, 제가 [alt + 4]를 누르게 되면 포가 발사됩니다.");
+			sendMessage("クリップボード：そのあと、私[alt + 4]を押すとキャリッジ発射されます。");
+			talkPartyleader("そんなの後、私[alt + 4]を押すとキャリッジ発射されます。");
 			try {
 				Thread.sleep(10000L);
 			} catch (Exception e) {
 			}
 			attackFormat();
-			sendMessage("오림 : 시간이 없으니 다음으로 넘어가겠습니다.");
-			talkPartyleader("시간이 없으니 다음으로 넘어가겠습니다.");
+			sendMessage("クリップボード：時間がないから次のように進んでいきます。");
+			talkPartyleader("時間がないから次のように進んでいきます。");
 			try {
 				Thread.sleep(3000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림 : 하지만 적들도 공격을 하기 때문에, 방어 역시 필요합니다.");
-			talkPartyleader("하지만 적들도 공격을 하기 때문에, 방어 역시 필요합니다.");
+			sendMessage("クリップボード：しかし、敵も攻撃をするので、防御も必要です。");
+			talkPartyleader("しかし、敵も攻撃をするので、防御も必要です。");
 			try {
 				Thread.sleep(3000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림 : 방어를 위해서는, 노란색 원 안에 들어가 주세요.");
-			talkPartyleader("방어를 위해서는, 노란색 원 안에 들어가 주세요.");
+			sendMessage("クリップボード：防御のためには、黄色い丸の中に入ってください。");
+			talkPartyleader("防御のためには、黄色い丸の中に入ってください。");
 			StarZone(0, 1);
 			try {
 				Thread.sleep(3000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림 : 저는 같은 자리에서 [alt + 2]로 방어 주문을 시전 합니다.");
-			talkPartyleader("저는 같은 자리에서 [alt + 2]로 방어 주문을 시전 합니다.");
+			sendMessage("クリップボード：私は同じ場所で[alt + 2]で防御注文を詠唱します。");
+			talkPartyleader("私は同じ場所で[alt + 2]で防御注文を詠唱します。");
 			try {
 				Thread.sleep(12000L);
 			} catch (Exception e) {
@@ -630,15 +630,15 @@ public class OrimController extends Thread {
 		checkMember();
 		switch (i) {
 		case 0:
-			sendMessage("오림: 이제, 적의 공격에 대비해야 합니다. 서둘러 주세요.");
+			sendMessage("オリム：今、敵の攻撃に備えてください。急いでください。");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림: 배에 숨어들었던 몬스터들이 있습니다. 처치해주세요.");
+			sendMessage("クリップボード：船に隠れて聞いていたモンスターがいます。処置してください。");
 			break;
 		case 1:
-			sendMessage("오림: 주변에 뭔가가 맴돌고 있는 기운이 감지됩니다. 조심하세요.");
+			sendMessage("クリップボード：周辺に何かがぐるぐる回っている元気が検出されます。注意してください。");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
@@ -648,73 +648,73 @@ public class OrimController extends Thread {
 			case 4:
 			case 7:
 			case 10:
-				sendMessage("오림 : 주변에 상어떼가 있습니다. 조심하세요.");
+				sendMessage("クリップボード：周辺にサメの群れがあります。注意してください。");
 				break;
 			case 2:
 			case 5:
 			case 8:
 			case 11:
-				sendMessage("오림: 근처에 바다 하피의 서식지가 있나 봅니다. 조심하세요.");
+				sendMessage("クリップボード：近くに海ハーピーの生息地があるか表示します。注意してください。");
 				break;
 			case 3:
 			case 6:
 			case 9:
 			case 12:
-				sendMessage("오림 : 바다 드레이크네요. 신기하다고 가까이 가지 마세요.");
+				sendMessage("クリップボード：海ドレイクね。不思議と近く行っていない。");
 			}
 
 			break;
 		case 2:
 			if (stageNum == 1)
-				sendMessage("오림 : 적의 배가 다가오고 있습니다! 준비해주세요!");
+				sendMessage("クリップボード：敵の船に近づいています！準備してください！");
 			else if (stageNum == 4)
-				sendMessage("오림 : 으..! 이번에 오는 배에서는 올딘의 기운이 느껴집니다!");
+				sendMessage("クリップボード：的...！今回の船では、オルディンの機運が感じられます！");
 			else if (stageNum == 8)
-				sendMessage("오림 : 조심하세요! 이번에 오는 배는 여느때보다 강한 기운이 있습니다.");
+				sendMessage("クリップボード：注意してください！今回の船はいつもよりも強い力があります。");
 			else {
-				sendMessage("오림 : 전보다 강한 기운이 느껴집니다! 조심하세요!");
+				sendMessage("クリップボード：前より強いオーラが感じられます！注意してください！");
 			}
 			Effect(0);
 			break;
 		case 3:
-			sendMessage("오림 : 적의 공격으로 배가 손상됩니다. 여러번 손상되면 배가 침몰하니 주의하세요.");
+			sendMessage("クリップボード：敵の攻撃に倍破損します。何度も破損した場合船沈没ので注意してください。");
 			Effect(0);
 			break;
 		case 4:
-			sendMessage("오림 : 배가 곧 충돌합니다! 바다에 빠지지 않게 조심하세요!");
+			sendMessage("クリップボード：船はすぐに衝突し！海に陥らないように注意してください！");
 			Effect(0);
 			break;
 		case 5:
-			sendMessage("오림 : 배가 충돌하면, 적들이 뛰여들것입니다! 조심하세요!");
+			sendMessage("クリップボード：船の衝突すれば、敵が飛び出し者になります！注意してください！");
 			Effect(0);
 			break;
 		case 6:
-			sendMessage("오림 : 어서 탈출하세요! 어딘가에 당신을 가둔 물건이 있을겁니다!");
+			sendMessage("クリップボード：さあ脱出してください！どこかを閉じ込めたものがあるでしょう！");
 			break;
 		case 7:
-			sendMessage("오림 : 배가 침몰하기 직전입니다. 어떻게든 배를 사수해야 합니다!");
+			sendMessage("クリップボード：船沈没する直前です。何とか船を死守する必要があります！");
 			Effect(0);
 			break;
 		case 8:
-			sendMessage("오림 : 배가 침몰합니다! 서둘러 탈출하세요! 이상태로는 무리입니다!");
+			sendMessage("クリップボード：船沈没です！お早めに脱出してください！この状態では無理です！");
 			Effect(1);
 			break;
 		case 9:
-			sendMessage("오림 : 거의다 물리쳤습니다. 조금 더 힘내주세요!");
+			sendMessage("クリップボード：極めて少ししか退けた。もう少し頑張ってください！");
 			break;
 		case 10:
-			sendMessage("오림 : 난입한 적이 우리 배에 손상을 입히고 있습니다! 서둘러주세요!");
+			sendMessage("クリップボード：乱入したことが、私たち倍に損傷を与えています！急いでください！");
 			break;
 		case 11:
-			sendMessage("오림 : 시간이 별로 없습니다. 서둘러주세요.");
+			sendMessage("クリップボード：時間があまりありません。急いでください。");
 			break;
 		case 12:
-			sendMessage("오림 : 저 징그러운건 뭐지! 위험해 보입니다!");
+			sendMessage("クリップボード：私いやらしい件何！危険に見えます！");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
 			}
-			sendMessage("오림 : 으윽! 바다 생물까지 공격해 오고 있습니다! 하필, 이럴때!");
+			sendMessage("クリップボード：ウウック！海の生き物まで攻撃してきています！よりによって、こんな時！");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
@@ -726,22 +726,22 @@ public class OrimController extends Thread {
 		checkMember();
 		switch (j) {
 		case 0:
-			sendMessage1("전투가 시작됩니다 [" + stageNum + "/12]");
+			sendMessage1("戦闘が開始されます[" + stageNum + "/12]");
 			try {
 				Thread.sleep(5000L);
 			} catch (Exception e) {
 			}
 		case 1:
-			sendMessage1("첫번째 부대가 난입 했습니다.");
+			sendMessage1("最初の部隊が乱入しました。");
 			break;
 		case 2:
-			sendMessage1("두번째 부대가 난입 했습니다.");
+			sendMessage1("第二部隊が乱入しました。");
 			break;
 		case 3:
 			if ((stageNum == 4) || (stageNum == 8) || (stageNum == 12))
 				MSGOrim(9, 0);
 			else
-				sendMessage1("세번째 부대가 난입 했습니다.");
+				sendMessage1("第三部隊が乱入しました。");
 		}
 	}
 
@@ -749,10 +749,10 @@ public class OrimController extends Thread {
 		checkMember();
 		switch (i) {
 		case 1:
-			sendMessage2("올딘 : 게으른것들! 어서 나가 싸워라! 저것들을 다 쓸어버려!");
+			sendMessage2("オルディン：怠惰なもの！さあ私ファイト！すべてのことを一掃ちゃう！");
 			break;
 		case 2:
-			sendMessage2("올딘 : 저놈을 잡아 들여라!");
+			sendMessage2("オルディン：あいつを保持つけよう！");
 		}
 	}
 
@@ -888,6 +888,6 @@ public class OrimController extends Thread {
 		EndTelePort();
 		InDunclear();
 		clearPlayMember();
-		L1World.getInstance().broadcastServerMessage("해상던전이 초기화 되였습니다.");
+		L1World.getInstance().broadcastServerMessage("海上ダンジョンが初期化されました。");
 	}
 }

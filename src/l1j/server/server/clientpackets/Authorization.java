@@ -43,12 +43,12 @@ public class Authorization {
 	     * !ip.equals(Config.AUTH_IP)) {
 	     * _log.info("同じIPアドレスに接続した2台のPCのログインを拒否した。 account = "+ accountName
 	     * + " ip=" + ip); client.sendPacket(new
-	     * S_CommonNews("현재 IP로 다른 계정이 이미 접속중입니다.")); client.close();
+	     * S_CommonNews("現在のIPで別のアカウントがすでに接続中です。 "））; client.close（）;
 	     * return;
 	     */
 	}
 	// System.out.println("ユーザ名： "+ accountName）;
-	// System.out.println("비밀번호 : " + password);
+	// System.out.println("パスワード： "+ password）;
 
 	Account account = Account.load(accountName);
 

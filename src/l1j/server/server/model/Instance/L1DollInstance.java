@@ -549,7 +549,7 @@ public class L1DollInstance extends L1NpcInstance {
 		}
 		if (_master instanceof L1RobotInstance) {
 			L1RobotInstance bot = (L1RobotInstance) _master;
-			bot.인형스폰 = false;
+			bot.spawnDoll = false;
 		}
 		} catch (Exception e) {
 		}

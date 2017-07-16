@@ -1,13 +1,10 @@
 package l1j.server.GameSystem.valakas;
 
-import static l1j.server.server.model.skill.L1SkillId.SHOCK_STUN;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +13,6 @@ import l1j.server.Config;
 import l1j.server.server.ActionCodes;
 import l1j.server.server.GeneralThreadPool;
 import l1j.server.server.IdFactory;
-import l1j.server.server.datatables.DropTable;
 import l1j.server.server.datatables.NpcTable;
 import l1j.server.server.model.Broadcaster;
 import l1j.server.server.model.L1EffectSpawn;
@@ -29,20 +25,13 @@ import l1j.server.server.model.Instance.L1ItemInstance;
 import l1j.server.server.model.Instance.L1MonsterInstance;
 import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.model.Instance.L1PcInstance;
-import l1j.server.server.model.Instance.L1PetInstance;
-import l1j.server.server.model.Instance.L1SummonInstance;
-import l1j.server.server.model.item.L1ItemId;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_DoActionGFX;
 import l1j.server.server.serverpackets.S_NpcChatPacket;
-import l1j.server.server.serverpackets.S_OwnCharAttrDef;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_Paralysis;
-import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SkillSound;
-import l1j.server.server.serverpackets.S_SystemMessage;
-import l1j.server.server.templates.L1Npc;
 import l1j.server.server.utils.L1SpawnUtil;
 
 public class ValaRaid implements Runnable {
@@ -90,7 +79,7 @@ public class ValaRaid implements Runnable {
 
 	public void AllShockStun()
 	{
-		System.out.println("쇼크스턴사용");
+		System.out.println("ショックスタンを使用");
 		int[] stunTimeArray = { 4500, 5000, 5500 };
 		int rnd = _random.nextInt(stunTimeArray.length);
 		int _shockStunDuration = stunTimeArray[rnd];
@@ -98,7 +87,7 @@ public class ValaRaid implements Runnable {
 			L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, pc.getX(), pc.getY(), pc.getMapId());
 			pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
 			pc.setSkillEffect(SHOCK_STUN, _shockStunDuration);
-			pc.sendPackets(new S_SkillSound(pc.getId(), 4434)); // 스턴
+			pc.sendPackets(new S_SkillSound(pc.getId(), 4434)); //スターン
 			Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 4434));
 		}
 	}
@@ -117,41 +106,41 @@ public class ValaRaid implements Runnable {
 					}
 					Thread.sleep(sleep * 1000);
 					for (L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "오림 : 다들 조심하게 놈은 이미 잠에서 깨어났어"));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "クリップボード：みんな気をつけて奴はすでに眠りから目が覚めた"));
 						//pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "Test"));
-						//pc.sendPackets(new S_ServerMessage(1755)); // 린드비오르 : 누가 나의 단잠을 방해 하는가?
+						//pc.sendPackets(new S_ServerMessage(1755)); // リンドビオル：誰私熟睡を妨げるか
 					}
 					Thread.sleep(5 * 1000);
 					for (L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "오림 : 주변의 화염... 자네들을 가두기 위해 덫을 놓은 것 같으니 조심하게"));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "オリム周辺の炎...あなたの投獄に引っ掛かるようだから注意して"));
 					}
 					Thread.sleep(5 * 1000);
 					for (L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "발라카스 : 크르르르... 귀찮은 벌레들이 찾아왔구나..", true));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "ヴァラカス：クールルルー...面倒な虫が見つけてきた。", true));
 
 					}
 					Thread.sleep(5 * 1000);
 					for (L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "발라카스 : 네놈들도 할파스의 권속들이냐..? ", true));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "ヴァラカス：貴様らもパスの眷属ドゥルイニャ..？", true));
 
 					}
-					// 검은 화면 비내리는 효과
+					// 黒い画面雨の効果
 					L1SpawnUtil.spawn2(32773, 32889, (short) _map, 3310030, 0, 1 * 1000, 3310030);
 					L1SpawnUtil.spawn2(32773, 32889, (short) _map, 3310031, 0, 1 * 1000, 3310031);
 
 					
 					Thread.sleep(10 * 1000);
 					for (L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "발라카스 : 상관없겠지.. 벌레라면 다 쓸어버리면 그만인것을"), true);
+						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "ヴァラカス：関係ないだろう。虫なら多一掃しまうやめであることを"), true);
 
 					}
 					Thread.sleep(5 * 1000);
-					//  눈 보이고 발라카스 출현
+					//  目に見えヴァラカス出現
 		
 					L1SpawnUtil.spawn2(32773, 32889, (short) _map, 3310032, 0, 1 * 1000, 3310032);
 					Thread.sleep(2 * 1000);
 					for (L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "발라카스 : 감시 신성한 곳에 더러운 발을 들이민 것을 후회하게 해주마...!", true));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,S_PacketBox.RED_MESSAGE, "ヴァラカス：監視神聖な場所に汚れ足を突きつけたことを後悔してくれるか...！", true));
 						
 						pc.sendPackets(new S_SkillSound (pc.getId(), 15930));	
 					}
@@ -172,7 +161,7 @@ public class ValaRaid implements Runnable {
 					
 					int rand = _random.nextInt(100)+1;
 					if(rand < 40) {
-						// 제르큐오 삼케로누..
+						// ジェルセキュオ三ケロ押し。
 						valakas_talk(vala, 0);
 						AllShockStun();
 						
@@ -193,7 +182,7 @@ public class ValaRaid implements Runnable {
 					Thread.sleep(5000);
 					int max = vala.getMaxHp();
 					int cur = vala.getCurrentHp();
-					// 발라카스 피 70% 일때 할파스 소환
+					// ヴァラカス被70％の時にするパス召喚
 					if(cur <= max * 3/4)
 						stage = StageThree;
 					break;
@@ -202,7 +191,7 @@ public class ValaRaid implements Runnable {
 						stage = StageFive;
 						break;
 					}
-					// 할파스 출현 단계 
+					//するパス出現段階 
 					valakas_talk(vala, 4);
 					for (L1PcInstance pc : PcStageCK()) {
 						pc.sendPackets(new S_SkillSound (pc.getId(), 15837));	
@@ -228,11 +217,11 @@ public class ValaRaid implements Runnable {
 					}
 					Thread.sleep(1000);
 					
-					//마지막 단계
+					//最後のステップ
 					rand = _random.nextInt(100)+1;
 					System.out.println("VALARAID RND: "+rand);
 					if(rand < 15) {
-						// 제르큐오 삼케로누..
+						//ジェルセキュオ三ケロ押し。
 						valakas_talk(vala, 0);
 						AllShockStun();
 						
@@ -252,7 +241,7 @@ public class ValaRaid implements Runnable {
 						
 					}
 					rand = _random.nextInt(100)+1;
-					// 전역 스턴만
+					// 全域スターンのみ
 					if(rand < 25) {
 						valakas_talk(vala, 3);
 						AllShockStun();
@@ -260,10 +249,10 @@ public class ValaRaid implements Runnable {
 					Thread.sleep(10000);
 					break;
 				case StageFive:
-					for (L1PcInstance pc : PcStageCK()){ // 드래곤 버프
+					for (L1PcInstance pc : PcStageCK()){ //ドラゴンバフ
 						pc.setSkillEffect(L1SkillId.VALA_BUFF, (10800 * 1000));
-						Timestamp deleteTime = new Timestamp(System.currentTimeMillis()+ (10800000 * Config.레이드시간));// 7일
-						//pc.sendPackets(new S_PacketBox(S_PacketBox.드래곤레이드버프, 86400 * 2),true);
+						Timestamp deleteTime = new Timestamp(System.currentTimeMillis()+ (10800000 * Config.레이드시간));//7日
+						//pc.sendPackets(new S_PacketBox(S_PacketBoxドラゴンレイドバフ、86400 * 2）、true）;
 						pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 88, 10800/60));
 						pc.sendPackets(new S_SkillSound(pc.getId(), 7783));
 						Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7783));
@@ -273,17 +262,17 @@ public class ValaRaid implements Runnable {
 							
 			
 					
-					// 정리 및 대기
+					//クリーンアップと待機
 					for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
-						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "발라카스 레이드에 성공 하였습니다."));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "ヴァラカスレイドに成功しました。"));
 					}
 			//		ValaRaidSystem.clear();
 					Thread.sleep(2000);
 
 					Vala_Delete();
 					for (L1PcInstance pc : PcStageCK()) {
-						pc.sendPackets(new S_ServerMessage(1476)); // 30초 후에
-																	// 텔레포트
+						pc.sendPackets(new S_ServerMessage(1476)); // 30秒後に
+																	// テレポート
 					}
 					
 					Thread.sleep(30000);
@@ -310,11 +299,13 @@ public class ValaRaid implements Runnable {
 		
 	}
 
-	public static String []talkStr = { "발라카스 : 제르큐오 삼케로누..", "발라카스 : 제르큐오 카오프..", "발라카스 : 쿠르 둠 크라스 하르파움..", "발라카스 : 쿠르둠 리라스쿰..",
-	"발라카스 : 쿠르 둠 크라스 하르파움.." };
+	public static String []talkStr = {
+			"ヴァラカス：ジェルセキュオ三ケロ押し。", "ヴァラカス：ジェルセキュオカーオフ。",
+			"ヴァラカス：クールドゥームテーションクラスハルパウム。", "ヴァラカス：クルヅムうスクム。",
+			"ヴァラカス：クールドゥームテーションクラスハルパウム。"
+	};
 	
-	public void valakas_talk(L1MonsterInstance vala, int talkNum)
-	{
+	public void valakas_talk(L1MonsterInstance vala, int talkNum){
 		
 		try {
 			Thread.sleep(5000);
@@ -388,7 +379,7 @@ public class ValaRaid implements Runnable {
 				mob = (L1MonsterInstance)object;
 				int npc = mob.getNpcTemplate().get_npcId();
 				switch(npc){
-				case 145684: // 발라카스
+				case 145684: // ヴァラカス
 					if (mob != null && mob.isDead()){
 						return true;
 					}
@@ -466,7 +457,7 @@ public class ValaRaid implements Runnable {
 			L1World.getInstance().addVisibleObject(npc);
 
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); //チャット開始
 			npc.onNpcAI();	
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);

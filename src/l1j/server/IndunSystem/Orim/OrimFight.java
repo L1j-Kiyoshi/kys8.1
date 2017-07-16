@@ -125,11 +125,11 @@ class OrimFight extends Thread {
 	private void oldinMSG(int i) {
 		switch (i) {
 		case 1:
-			Broadcaster.broadcastPacket(oldin, new S_NpcChatPacket(oldin, "자네는 지금 오림에게 속고 있는거야.", 0));
+			Broadcaster.broadcastPacket(oldin, new S_NpcChatPacket(oldin, "あなたは今クリップボードにだまされているの。", 0));
 			break;
 		case 2:
 			Broadcaster
-			.broadcastPacket(oldin, new S_NpcChatPacket(oldin, "그를 믿어서는 안돼!. 어서 이 배를 빠져 나가 말하는 섬으로 돌아가!", 0));
+			.broadcastPacket(oldin, new S_NpcChatPacket(oldin, "彼信じはない！てこの船を抜け話せる島に戻り！", 0));
 		}
 	}
 

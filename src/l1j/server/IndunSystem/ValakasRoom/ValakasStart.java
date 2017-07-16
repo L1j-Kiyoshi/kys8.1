@@ -102,38 +102,38 @@ public class ValakasStart implements Runnable {
 				switch(stage){
 				case FIRST_STEP:
 					Thread.sleep(2000); 
-					//그 검의 힘을 이용하여 어서 이 곳을 빠져나가게.
+					//その剣の力を利用しててこの場所を逃がす。
 					Broadcaster.broadcastPacket(death, new S_NpcChatPacket(death, "$18645"));
 					Thread.sleep(3000); 
-					//사용하면 저주의 영향 때문인지 과거 나와 발라카스의 전투가 자꾸 떠오르더군...
+					//使用すると、呪いの影響からか、過去出ヴァラカスの戦闘がどんどん浮上たよ...
 					Broadcaster.broadcastPacket(death, new S_NpcChatPacket(death, "$18646"));
 					Thread.sleep(3000);
 					S_NpcChatPacket s_chatpacket = new S_NpcChatPacket(death, "$18647");
-					//어쩌면 자네도 그 전투를 볼 수 있겠군. 가게나..더 이상 버틸 수 없을 것 같네.
+					//多分あなたもその戦闘を見ることができるでしょね。お店や..これ以上持ちこたえることができないようだね。
 					Broadcaster.broadcastPacket(death, s_chatpacket);
 					stage = WAIT_RAID;
 					break;
 				case WAIT_RAID:
 					break;
 				case VALAKAS:
-					//발라카스:누가 나를 깨우는가?
+					//ヴァラカス：誰が私ケオヌンガ？
 					Broadcaster.broadcastPacket(valakas, new S_NpcChatPacket(valakas, "$18869"));
 					Thread.sleep(2000);
 					if(pc.getMapId() == _map){ 
-						//데스나이트:발라카스! 드디어 너를 만나게 되는구나..
+						//デスナイト：ヴァラカス！いよいよ君会うんだ。
 						pc.sendPackets(new S_NpcChatPacket(pc, "$18870"));
 					}
 
 					Thread.sleep(2000);
-					//발라카스:나의 잠을 깨운 댓가는..나의 노예가 되어 평생 갚게 되리라..
+					//ヴァラカス：私の睡眠を起こした代価は...私の奴隷になって一生返済あろう。
 					Broadcaster.broadcastPacket(valakas, new S_NpcChatPacket(valakas, "$18871"));
 					Thread.sleep(2000);
 					if(pc.getMapId() == _map){ 
-						//데스나이트:그런 말은 내가 패배했을 때 해도 늦지 않는다.
+						//デスナイト：そんな言葉は、私が負けたときも遅くない。
 						pc.sendPackets(new S_NpcChatPacket(pc, "$18872"));
 					}
 					Thread.sleep(2000);
-					//발라카스:크크..자신감이 넘치는구나..
+					//ヴァラカス：クク...自信に満ちね..
 					Broadcaster.broadcastPacket(valakas, new S_NpcChatPacket(valakas, "$18873"));
 					pc.isInValakasBoss = false;
 					stage = WAIT_RAID;
@@ -142,8 +142,8 @@ public class ValakasStart implements Runnable {
 					Thread.sleep(2000);
 					if(pc.getMapId() == _map){ 
 						//pc.sendPackets(new S_ServerMessage(1480));  
-						//시스템 메시지: 5초 후에 텔레포트 합니다.
-						pc.sendPackets(new S_SystemMessage("잠시 후 마을로 이동됩니다."));
+						//システムメッセージ：5秒後にテレポートします。
+						pc.sendPackets(new S_SystemMessage("しばらくして村に移動されます。"));
 					}
 					Thread.sleep(3000);
 					if(pc.getMapId() == _map){ 
@@ -169,15 +169,15 @@ public class ValakasStart implements Runnable {
 
 	public void Start(){
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
-		/** 0 오전 , 1 오후 * */
-		String 오전오후 = "오후";
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
+		/** 0 午前、1午後 * */
+		String AMorPM = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "오전";
+			AMorPM = "午前";
 		}
 		GeneralThreadPool.getInstance().schedule(this,2000);
-	        System.out.println(""+ 오전오후 + " " + cal.get(시간) + "시" + cal.get(분) + "분" + "   ■■■■■■ 화룡안식처 시작 " +  _map+" ■■■■■■");
+	        System.out.println(""+ AMorPM + " " + cal.get(hour) + "時" + cal.get(minute) + "分" + "   ■■■■■■ 火竜の避難所を開始 " +  _map+" ■■■■■■");
 	}
 
 
@@ -245,12 +245,12 @@ public class ValakasStart implements Runnable {
 
 	private void endRaid(){
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
-		/** 0 오전 , 1 오후 * */
-		String 오전오후 = "오후";
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
+		/** 0 午前、1午後 * */
+		String AMorPM = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "오전";
+			AMorPM = "午前";
 		}
 		for (L1Object ob : L1World.getInstance().getVisibleObjects(_map).values()) {
 			if(ob == null)
@@ -279,7 +279,7 @@ public class ValakasStart implements Runnable {
 		if (BasicNpcList != null) BasicNpcList.clear();
 		if (BossList != null) BossList.clear();
 		ValakasRoomSystem.getInstance().removeStart(_map);
-		        System.out.println(""+ 오전오후 + " " + cal.get(시간) + "시" + cal.get(분) + "분" + "   ■■■■■■ 화룡안식처 종료 " +  _map+" ■■■■■■");
+		        System.out.println(""+ AMorPM + " " + cal.get(hour) + "時" + cal.get(minute) + "分" + "   ■■■■■■ 火竜避難所終了 " +  _map+" ■■■■■■");
 
 	}
 }

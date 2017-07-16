@@ -122,7 +122,7 @@ public class Hadin implements Runnable {
 				}
 				for(L1PcInstance pc : list2){
 					if(pc == null) continue;
-					if(getParty().getNumOfMembers() < 5 || !pc.isInParty() || pc.getMapId() != _map){//7명
+					if(getParty().getNumOfMembers() < 5 || !pc.isInParty() || pc.getMapId() != _map){//7人
 						new L1Teleport().teleport(pc, 32574, 32942, (short) 0, 5, true);
 						if(list2.contains(pc)){
 							list2.remove(pc);
@@ -133,7 +133,7 @@ public class Hadin implements Runnable {
 							getParty().leaveMember(pc);
 						}
 					}
-					if(getParty().getNumOfMembers() < 5){//7명
+					if(getParty().getNumOfMembers() < 5){// 7人
 						listck = true;
 						Running = false;
 					}
@@ -148,38 +148,38 @@ public class Hadin implements Runnable {
 					}
 				}
 				switch(stage){
-				/** 하딘 로비 **/
+				/** ハーディンロビー **/
 				case SECRET_HADIN:
 						Sleep(3000);
-						//오, 왔는가? 잠시 기다리게나, 준비할 것이 있네.
+						//ああ、来たかしばらく待っても、準備することがあるのね。
 						Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7598", 0));
 						Sleep(3000);
-						//최종 점검을 시작해볼까? 
+						//最終点検を開始するには？ 
 						Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$8693", 0));
 						BonginSendPacekt(8693);
 						Sleep(3000);
-						//던전에 들어서면, 자네들의 최소한의 자격을 시험받게 될것이네
+						//ダンジョンに入ると、あなたの最小限の資格を試さなるね
 						Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$8695", 0));
 						Sleep(3000);
-						//어렵지 않은 상대들일테니, 쉽게 통과할것이라고 믿고있네
+						//難しくない相手許容だろうから、簡単に通過するものと信じているのね
 						Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$8696", 0));
 						Sleep(3000);
-						//그리고, 자네들이 트랩을 해제하거나, 설치하기 위한 발판이 준비되어 있네
+						//そして、あなたがトラップを無効にするか、インストールするための足場が用意されているのね
 						Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$8697", 0));
 						Sleep(3000);
-						//발판은 최대한 알기쉽게 표현해 놓았지만..
+						//足場は、可能な限り分かりやすく表現しましたが。
 						Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$8698", 0));
 						Sleep(3000);
-						//내 미적 감각에 태클은 사양하네
+						//私美的感覚に取り組むには仕様ね
 						Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$8699", 0));
 						Sleep(3000);
-						//그 밖에도, 무언가 기대할만한 것이 보이기도 하겠지만, 시간에 늦지않게 서둘러주게
+						//他にも、何か期待すべきでは見えたりしますが、時間に遅れないように急いで与える
 						Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$8700", 0));
 						Sleep(3000);
-						//조심하게! 안전은 책임질 수 없네
+						//注意して！安全は責任を負うことができないね
 						Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$8701", 0));
 						Sleep(3000);
-						//그럼 시작해볼까?
+						//その後、開始するには？
 						Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$8702", 0));                           
 					Sleep(3000);
 					for(L1PcInstance pc : getParty().getMembers()){
@@ -191,7 +191,7 @@ public class Hadin implements Runnable {
 					Sleep(5000);
 					stage = 2;
 					break;
-					/** 첫방 -> 문 오픈 -> 2번째방 몬스터 2번 스폰**/
+					/** 初めての部屋 - >ドアオープン - > 2番目の部屋のモンスター2回出現**/
 				case TALK_ISLAND_DUNGEON_1:
 					if(NpcList != null && NpcList.size() > 0)
 						continue;
@@ -200,7 +200,7 @@ public class Hadin implements Runnable {
 						Sleep(2000);
 						Teleportation.teleport(Npc_Hadin, 32716, 32846, _map, 6);
 						Teleportation.teleport(Hadin_Effect, 32716, 32846, _map, 6);
-						DoorOpen("해골문 1");
+						DoorOpen("スケルトンドア1");
 					}
 					if(SubStep <= 0){
 						NpcList = HadinSpawn.getInstance().fillSpawnTable(_map, 1, true);
@@ -210,16 +210,16 @@ public class Hadin implements Runnable {
 						SubStep = 0;
 					}
 					break;
-					/** 몬스터 다 잡았을시 -> 발판 체크 4개**/
+					/**モンスターだ取った時 - >足場チェック4つ**/
 				case TALK_ISLAND_DUNGEON_2:
 					if(HT.LEVEL_1_TRAP_CK){
-						DoorOpen("해골문 2");
+						DoorOpen("スケルトンドア2");
 						NpcList = HadinSpawn.getInstance().fillSpawnTable(_map, 2, true);
 						Effect();
 						stage = 4;
 					}
 					break;
-					/** 3번째방 몬스터 스폰 **/
+					/** 3番目の部屋のモンスター出現 **/
 				case TALK_ISLAND_DUNGEON_3:
 					if(NpcList != null && NpcList.size() > 0)
 						continue;
@@ -231,18 +231,18 @@ public class Hadin implements Runnable {
 						SubStep = 0;
 					}
 					break;
-					/** 트랩 1개 4개 문 오픈 **/
+					/** トラップ1個4個ドアオープン **/
 				case TALK_ISLAND_DUNGEON_4:
 					if (HT.LEVEL_2_TRAP_CK){
-						DoorOpen("해골문 4");
-						DoorOpen("해골문 5");
-						DoorOpen("해골문 6");
-						DoorOpen("해골문 8");
+						DoorOpen("スケルトンドア4");
+						DoorOpen("スケルトンドア5");
+						DoorOpen("スケルトンドア6");
+						DoorOpen("スケルトンドア8");
 						Effect();
 						stage = 6;
 					}
 					break;
-					/** 몬스터 스폰  **/
+					/** モンスター出現  **/
 				case TALK_ISLAND_DUNGEON_5:
 					if(NpcList != null && NpcList.size() > 0)
 						continue;
@@ -254,11 +254,11 @@ public class Hadin implements Runnable {
 						SubStep = 0;
 					}
 					break;
-					/** 발판 5개 체크 -> 문 2개 오픈**/
+					/** 足場の5つのチェック - >ドアの2つのオープン**/
 				case TALK_ISLAND_DUNGEON_6:
 					if (HT.LEVEL_3_TRAP_CK){
-						DoorOpen("해골문 7");
-						DoorOpen("해골문 9");
+						DoorOpen("スケルトンドア7");
+						DoorOpen("スケルトンドア9");
 						Effect();
 						stage = 8;
 					}
@@ -270,7 +270,7 @@ public class Hadin implements Runnable {
 						NpcList = HadinSpawn.getInstance().fillSpawnTable(_map, 4, true);
 						SubStep++;
 					} else {
-						DoorOpen("철창문 7");
+						DoorOpen("鉄の窓7");
 						Effect();
 						stage = 9;
 						SubStep = 0;
@@ -284,7 +284,7 @@ public class Hadin implements Runnable {
 						NpcList = HadinSpawn.getInstance().fillSpawnTable(_map, 5, true);
 						SubStep++;
 					} else {
-						DoorOpen("해골문 10");
+						DoorOpen("スケルトンドア10");
 						Effect();
 						SubStep = 0;
 						stage = 10;
@@ -298,9 +298,9 @@ public class Hadin implements Runnable {
 						NpcList = HadinSpawn.getInstance().fillSpawnTable(_map, 6, true);
 						SubStep++;
 					} else {
-						DoorOpen("해골문 11");
-						DoorOpen("철창문 8");
-						DoorOpen("철창문 9");
+						DoorOpen("スケルトンドア11");
+						DoorOpen("鉄の窓8");
+						DoorOpen("鉄の窓9");
 						Effect();						
 						SubStep = 0;
 						stage = 11;
@@ -321,7 +321,7 @@ public class Hadin implements Runnable {
 						NpcList = HadinSpawn.getInstance().fillSpawnTable(_map, 7, true);
 						SubStep++;
 					} else {
-						DoorOpen("해골문 12");
+						DoorOpen("スケルトンドア12");
 						Effect();
 						SubStep = 0;
 						stage = 13;
@@ -335,7 +335,7 @@ public class Hadin implements Runnable {
 						NpcList = HadinSpawn.getInstance().fillSpawnTable(_map, 8, true);
 						SubStep++;
 					} else {
-						DoorOpen("해골문 13");
+						DoorOpen("スケルトンドア13");
 						Effect();
 						SubStep = 0;
 						stage = 14;
@@ -350,22 +350,22 @@ public class Hadin implements Runnable {
 						SubStep++;
 					} else {
 						SubStep = 0;
-						DoorOpen("해골문 14");
+						DoorOpen("スケルトンドア14");
 						Effect();
 						stage = 15;
 					}
 					break;
 				case TALK_ISLAND_DUNGEON_14://15
 					Sleep(30000);
-					//모두들 긴장하게! 거대한 어둠이 다가오네!
+					//みんな緊張して！巨大な闇が迫っ生じ！
 					Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7654", 0));
 					BonginSendPacekt(7654);
 					Sleep(3000);
-					//악한것들이 또 몰려오고 있네! 준비하게!
+					//悪のものがまた集まってきてね！準備に！
 					Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7653", 0));
 					BonginSendPacekt(7653);
 					Sleep(3000);
-					//예상보다 빠르게 다가오고 있네! 조심하게!
+					//予想より早く近づいてね！注意して！
 					Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7652", 0));
 					BonginSendPacekt(7652);
 					Sleep(3000);
@@ -537,7 +537,7 @@ public class Hadin implements Runnable {
 						Sleep(10000);
 					}
 					break;
-				case TALK_ISLAND_DUNGEON_26://여기서 케레 스폰
+				case TALK_ISLAND_DUNGEON_26://ここけれど出現
 					if(NpcList != null && NpcList.size() > 0)
 						continue;
 					if(SubStep <= 0){
@@ -558,49 +558,49 @@ public class Hadin implements Runnable {
 					break;
 				case TALK_ISLAND_DUNGEON_27:
 					L1NpcInstance door = null;
-					door = BossRoomDoor.get("보스방 후문 문 8");
+					door = BossRoomDoor.get("ボス部屋裏話ドア8");
 					door.PASS = 0;
 					door.broadcastPacket(new S_Door(door.getX(), door.getY(), 0, door.PASS));
-					//케레니스가 쓰러지다니..
+					//ケレニスが倒れなんて。
 					door.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7833", 0));
 					Sleep(3000);
-					door = BossRoomDoor.get("보스방 후문 문 7");
+					door = BossRoomDoor.get("ボス部屋裏話ドア7");
 					door.PASS = 0;
-					//이건 무슨 현상이지!
+					//これは何現象で！
 					Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7835", 0));
 					door.broadcastPacket(new S_Door(door.getX(), door.getY(), 0, door.PASS));
 					Sleep(3000);
 					Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7836", 0));					
 					Sleep(3000);
-					door = BossRoomDoor.get("보스방 후문 문 6");
+					door = BossRoomDoor.get("ボス部屋裏話ドア6");
 					door.PASS = 0;
 					door.broadcastPacket(new S_Door(door.getX(), door.getY(), 0, door.PASS));
-					//모두들 대피해라! 이곳을 봉인하겠다!
+					//みんな避難しろ！ここを封印したい！
 					Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7837", 0));
 					Sleep(3000);
-					door = BossRoomDoor.get("보스방 후문 문 5");
+					door = BossRoomDoor.get("ボス部屋裏話ドア5");
 					door.PASS = 0;
 					door.broadcastPacket(new S_Door(door.getX(), door.getY(), 0, door.PASS));
 					//남쪽 출구를 곧 막을테니, 어서 빠져나가게!
 					Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7838", 0));
 					Sleep(3000);
-					door = BossRoomDoor.get("보스방 후문 문 16");
+					door = BossRoomDoor.get("ボス部屋裏話ドア16");
 					door.PASS = 0;
 					door.broadcastPacket(new S_Door(door.getX(), door.getY(), 0, door.PASS));
-					//동쪽으로 빠져나가면, 탈출구가 보일 것이다!
+					//東に抜けていくと、出口が見える！
 					Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7839", 0));
 					Sleep(3000);
-					door = BossRoomDoor.get("보스방 후문 문 15");
+					door = BossRoomDoor.get("ボス部屋裏話ドア15");
 					door.PASS = 0;
 					door.broadcastPacket(new S_Door(door.getX(), door.getY(), 0, door.PASS));
-					//살아있다면 다음을 노릴 수 있다! 어서들 탈출해라!
+					//生きている場合は、次の狙える！ての脱出しろ！
 					Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7840", 0));
 					Sleep(3000);
-					door = BossRoomDoor.get("보스방 후문 문 14");
+					door = BossRoomDoor.get("ボス部屋裏話ドア14");
 					door.PASS = 0;
 					door.broadcastPacket(new S_Door(door.getX(), door.getY(), 0, door.PASS));
 					Sleep(3000);
-					door = BossRoomDoor.get("보스방 후문 문 13");
+					door = BossRoomDoor.get("ボス部屋裏話ドア13");
 					door.PASS = 0;
 					door.broadcastPacket(new S_Door(door.getX(), door.getY(), 0, door.PASS));
 					Npc_Hadin.broadcastPacket(new S_SkillSound(Npc_Hadin.getId(), 169));
@@ -612,11 +612,11 @@ public class Hadin implements Runnable {
 					break;
 				case TALK_ISLAND_DUNGEON_28:
 					Sleep(3000);
-					DoorOpen("철창문 14");
-					DoorOpen("철창문 13");
-					DoorOpen("철창문 12");
-					DoorOpen("철창문 11");
-					DoorOpen("철창문 10");
+					DoorOpen("鉄の窓14");
+					DoorOpen("鉄の窓13");
+					DoorOpen("鉄の窓12");
+					DoorOpen("鉄の窓11");
+					DoorOpen("鉄の窓10");
 					Effect();
 					stage = 30;
 					break;
@@ -627,7 +627,7 @@ public class Hadin implements Runnable {
 					}
 					Sleep(15000);
 					break;
-					/** 보상방 이벤트 이후 **/
+					/** 報酬部屋イベントの後 **/
 				case TALK_ISLAND_DUNGEON_END:
 					if(!HT.Running){
 						RETURN_TEL();
@@ -664,9 +664,9 @@ public class Hadin implements Runnable {
 	private void Hadin_Setting(){
 		for(L1NpcInstance npc : BasicNpcList){
 			if(npc != null){
-				if(npc.getName().equalsIgnoreCase("하딘")){
+				if(npc.getName().equalsIgnoreCase("ハーディン")){
 					Npc_Hadin = npc;
-				} else if(npc.getName().equalsIgnoreCase("하딘 바닥 이펙트")){
+				} else if(npc.getName().equalsIgnoreCase("ハーディン床エフェクト")){
 					Hadin_Effect = npc;
 				}
 			}
@@ -696,7 +696,7 @@ public class Hadin implements Runnable {
 			}
 		}
 		HadinSystem.getInstance().removeHadin(_map);
-		if(HT != null){//트랩 쓰레드 같이 종료
+		if(HT != null){//トラップスレッドのように終了
 			HT.Running = false;
 			HT = null;
 		}
@@ -725,7 +725,7 @@ public class Hadin implements Runnable {
 		}
 	}
 
-	private void Effect() { // 화면 떨림 이펙트.
+	private void Effect() { // 画面のブレエフェクト。
 		for(L1PcInstance c : getParty().getMembers()) {
 			c.sendPackets(new S_SkillSound(c.getId(), 1249));
 		}

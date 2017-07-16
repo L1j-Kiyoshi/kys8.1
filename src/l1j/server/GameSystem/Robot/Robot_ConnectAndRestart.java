@@ -1,6 +1,6 @@
 package l1j.server.GameSystem.Robot;
 
-import static l1j.server.server.model.skill.L1SkillId.HASTE;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +23,6 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.serverpackets.S_ServerMessage;
-import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.utils.SQLUtil;
 
 public class Robot_ConnectAndRestart {
@@ -76,8 +75,8 @@ public class Robot_ConnectAndRestart {
 		}
 	}
 
-	// 버경장, 깃털, 기란 로테이션 스폰
-	// 스폰하고 1~2시간 있다가 사라지고 하나 더나오고
+	// バー軽装、羽、ギランローテーション出現
+	// 出現し、1〜2時間あるが消えもう一つ出てきて
 
 	public void start_spawn() {
 		for (int i = 0; i < 230; i++) {
@@ -130,7 +129,7 @@ public class Robot_ConnectAndRestart {
 
 		@Override
 		public void run() {
-			// TODO 자동 생성된 메소드 스텁
+			// TODO 自動生成されたメソッド・スタブ
 			try {
 				if (spawn_type == 1) {
 					if (System.currentTimeMillis() >= time) {
@@ -138,7 +137,7 @@ public class Robot_ConnectAndRestart {
 						GeneralThreadPool.getInstance().execute(this);
 						return;
 					} else {
-						if (bot.isDead() || bot._스레드종료) {
+						if (bot.isDead() || bot._EndThread) {
 							spawn_type = 3;
 							GeneralThreadPool.getInstance().schedule(this,
 									10000 + _random.nextInt(20000));
@@ -161,9 +160,9 @@ public class Robot_ConnectAndRestart {
 						pc.sendPackets(new S_RemoveObject(bot), true);
 					}
 					bot.removeAllKnownObjects();
-					bot.리스봇 = false;
-					bot._스레드종료 = true;
-					bot.리스봇_스폰위치 = -1;
+					bot.LisBot = false;
+					bot._EndThread = true;
+					bot.LisBot_SpawnLocation = -1;
 					bot.updateconnect(false);
 					put(bot);
 					spawn();
@@ -184,7 +183,7 @@ public class Robot_ConnectAndRestart {
 					// int map_type = _random.nextInt(20);
 					while (true) {
 						switch (map_type) {
-						case 19:// 버경 3시 방량 라인 20명
+						case 19://ボギョン3時バンリャンライン20人
 							if (_random.nextInt(100) > 75) {
 								bot.setX(33532 + _random.nextInt(2));
 								bot.setY(32860 + _random.nextInt(13));
@@ -194,7 +193,7 @@ public class Robot_ConnectAndRestart {
 							}
 							bot.setMap((short) 4);
 							break;
-						case 18:// 버경 윗 11시 라인 10명
+						case 18://ボギョン上11時ライン10人
 							if (_random.nextInt(100) > 50) {
 								bot.setX(33522 + _random.nextInt(8));
 								bot.setY(32836 + _random.nextInt(3));
@@ -205,7 +204,7 @@ public class Robot_ConnectAndRestart {
 							bot.setMap((short) 4);
 							break;
 						case 17:
-						case 16:// 버경 밑 라인 26
+						case 16://ボギョン下ライン26
 							// if(_random.nextInt(1000) > 200){
 							if (_random.nextInt(100) > 50) {
 								// 33494
@@ -228,7 +227,7 @@ public class Robot_ConnectAndRestart {
 							bot.setMap((short) 4);
 							break;
 						case 3:
-						case 0:// 버경 //6마리
+						case 0://ボギョン// 6匹
 							if (_random.nextInt(100) > 60) {
 								map_type = _random.nextInt(20);
 								continue;
@@ -238,53 +237,53 @@ public class Robot_ConnectAndRestart {
 							bot.setY(32858 + _random.nextInt(2));
 							bot.setMap((short) 4);
 							break;
-						case 1:// 깃털 // 25마리
+						case 1:// 羽// 25匹
 							bot.setX(32755 + _random.nextInt(28));
 							bot.setY(32823 + _random.nextInt(15));
 							bot.setMap((short) 622);
 							break;
-						case 6:// 하이네 텔녀 //5마리
+						case 6:// ハイネテルニョ// 5匹
 							bot.setX(33608 + _random.nextInt(7));
 							bot.setY(33253 + _random.nextInt(7));
 							bot.setMap((short) 4);
 							break;
-						case 7:// 하이네 창고 //5마리
+						case 7:// ハイネ倉庫// 5匹
 							bot.setX(33597 + _random.nextInt(8));
 							bot.setY(33239 + _random.nextInt(2));
 							bot.setMap((short) 4);
 							break;
-						case 8:// 라던정문 창고 //3마리
+						case 8:// といってい正門倉庫// 3匹
 							bot.setX(32682 + _random.nextInt(5));
 							bot.setY(32798 + _random.nextInt(12));
 							bot.setMap((short) 450);
 							break;
-						case 9:// 우즈벡 창고 //15마리
+						case 9:// ウズベク倉庫// 15匹
 							bot.setX(32626 + _random.nextInt(3));
 							bot.setY(33176 + _random.nextInt(16));
 							bot.setMap((short) 4);
 							break;
-						case 10:// 글루딘 창고 //5마리
+						case 10://グルーディン倉庫// 5匹
 							bot.setX(32616 + _random.nextInt(7));
 							bot.setY(32796 + _random.nextInt(7));
 							bot.setMap((short) 4);
 							break;
-						case 11:// 글루딘 요리상인 //5마리
+						case 11:// グルーディン料理商人// 5匹
 							bot.setX(32607 + _random.nextInt(4));
 							bot.setY(32735 + _random.nextInt(4));
 							bot.setMap((short) 4);
 							break;
-						case 12:// 말섬 마을 //10마리
+						case 12:// マルソム村// 10匹
 							bot.setX(32575 + _random.nextInt(9));
 							bot.setY(32929 + _random.nextInt(10));
 							bot.setMap((short) 0);
 							break;
-						case 13:// 은기사 창고 //15마리
+						case 13:// 記事倉庫// 15匹
 							// 33072 33379 33060 33391 33078 33409 33091 33397
 							bot.setX(33060 + _random.nextInt(32));
 							bot.setY(33379 + _random.nextInt(31));
 							bot.setMap((short) 4);
 							break;
-						case 14:// 오렌 창고 //15마리
+						case 14:// オレン倉庫// 15匹
 							if (_random.nextInt(3) == 0) {
 								bot.setX(34062 + _random.nextInt(14));
 								bot.setY(32277 + _random.nextInt(13));
@@ -294,34 +293,34 @@ public class Robot_ConnectAndRestart {
 							}
 							bot.setMap((short) 4);
 							break;
-						case 20:// 시장 10마리
+						case 20:// 市場10匹
 							bot.setX(32801 + _random.nextInt(5));
 							bot.setY(32926 + _random.nextInt(5));
 							bot.setMap((short) 800);
 							break;
-						case 15:// 아덴 창고 //5마리
+						case 15:// アデン倉庫// 5匹
 							bot.setX(33923 + _random.nextInt(5));
 							bot.setY(33340 + _random.nextInt(5));
 							bot.setMap((short) 4);
 							break;
 						case 5:
 						case 4:
-						case 2:// 기란
+						case 2://ギラン
 							/*
 							 * byte sub_type = (byte) _random.nextInt(100);
-							 * if(sub_type >= 95){ // 게시판, 창고 밑에 추가
+							 * if(sub_type >= 95){//掲示板、倉庫の下に追加
 							 * bot.setX(33412+_random.nextInt(8));
 							 * bot.setY(32800+_random.nextInt(15)); }else
-							 * if(sub_type >= 5){ // 광장
+							 * if(sub_type >= 5){ //広場
 							 * bot.setX(33422+_random.nextInt(25));
 							 * bot.setY(32801+_random.nextInt(30));
 							 * while(bot.getX() >= 33440 && bot.getX() <= 33446
 							 * && bot.getY() >= 32824 && bot.getY() <= 32830){
 							 * bot.setX(33422+_random.nextInt(25));
 							 * bot.setY(32801+_random.nextInt(30)); } }else
-							 * if(sub_type >= 5){ // 게시판 근처
+							 * if(sub_type> = 5）{//掲示板の近く
 							 * bot.setX(33420+_random.nextInt(5));
-							 * bot.setY(32803+_random.nextInt(10)); }else{ // 물약
+							 * bot.setY(32803 + _random.nextInt（10））; } else {//ポーション
 							 * bot.setX(33457+_random.nextInt(4));
 							 * bot.setY(32815+_random.nextInt(10)); }
 							 */
@@ -335,9 +334,9 @@ public class Robot_ConnectAndRestart {
 						int bot_count = 0;
 						for (L1RobotInstance Robot : L1World.getInstance()
 								.getAllRobot()) {
-							if (Robot.리스봇) {
-								if (Robot.리스봇_스폰위치 != -1) {
-									if (Robot.리스봇_스폰위치 == map_type)
+							if (Robot.LisBot) {
+								if (Robot.LisBot_SpawnLocation != -1) {
+									if (Robot.LisBot_SpawnLocation == map_type)
 										bot_count++;
 								}
 							}
@@ -393,7 +392,7 @@ public class Robot_ConnectAndRestart {
 								continue;
 							}
 						} else if (map_type == 16 || map_type == 17) {
-							if (bot_count >= 13) {// 16 17 각 13마리씩
+							if (bot_count >= 13) {// 16 17各13匹
 								map_type = _random.nextInt(21);
 								// map_type = _random.nextInt(20);
 								continue;
@@ -430,9 +429,9 @@ public class Robot_ConnectAndRestart {
 										bot.getY()))
 							break;
 					}
-					bot.리스봇 = true;
-					bot._스레드종료 = false;
-					bot.리스봇_스폰위치 = (byte) map_type;
+					bot.LisBot = true;
+					bot._EndThread = false;
+					bot.LisBot_SpawnLocation = (byte) map_type;
 
 					bot.getMoveState().setHeading(_random.nextInt(8));
 					bot.getMoveState().setMoveSpeed(1);
@@ -463,7 +462,7 @@ public class Robot_ConnectAndRestart {
 							bot.getClanname());
 					if (clan != null) {
 						if (bot.getClanid() == clan.getClanId()
-								&& // 크란을 해산해, 재차, 동명의 크란이 창설되었을 때의 대책
+								&& // クランを解散し、再度、同名のクランが創設されたときの対策
 								bot.getClanname()
 										.toLowerCase()
 										.equals(clan.getClanName()
@@ -508,9 +507,9 @@ public class Robot_ConnectAndRestart {
 					}
 					Robot.Doll_Delete(bot);
 					bot.removeAllKnownObjects();
-					bot.리스봇 = false;
-					bot._스레드종료 = true;
-					bot.리스봇_스폰위치 = -1;
+					bot.LisBot = false;
+					bot._EndThread = true;
+					bot.LisBot_SpawnLocation = -1;
 					bot.updateconnect(false);
 					put(bot);
 					spawn();

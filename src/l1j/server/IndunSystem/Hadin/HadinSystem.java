@@ -30,14 +30,14 @@ public class HadinSystem {
 	}
 
 	/**
-		HadinSystem.java는 맵 관리만 해준다고 보면됨
-		맵 생성 및 연구소로 텔 시키고
-		하딘.java에 파티를 넘겨주고
-		스레드 가동해서 파티 이용 이벤트 처리 
+		HadinSystem.javaは、マップ管理だけしてくれる見ればされる
+		マップの作成と研究所でテルせ
+		ハーディン.javaにパーティーを渡し
+		スレッド稼働してパーティー利用イベント処理 
 	**/
 	public void startHadin(L1PcInstance pc){
 		if(countHadin() >= 99){
-			pc.sendPackets(new S_ChatPacket(pc,"인스턴스 던전에 진입한 인원이 너무 많습니다"));
+			pc.sendPackets(new S_ChatPacket(pc,"インスタンスダンジョンに進入した人員が多すぎます"));
 			return;
 		}
 		int id = blankMapId();
@@ -55,7 +55,7 @@ public class HadinSystem {
 	}
 
 	/**
-	 * 빈 맵 아이디를 가져온다
+	 * 空のマップIDを持って来る
 	 * @return
 	 */
 	public int blankMapId(){

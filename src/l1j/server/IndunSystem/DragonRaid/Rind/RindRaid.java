@@ -80,35 +80,35 @@ public class RindRaid implements Runnable {
 				case ONE:
 					Thread.sleep(sleep * 1000);
 					for (L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_ServerMessage(1755)); // 린드비오르 : 누가 나의 단잠을 방해 하는가?
+						pc.sendPackets(new S_ServerMessage(1755)); //リンドビオル：誰私熟睡を妨げるか
 					}
 					Thread.sleep(2000);
 					for (L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_ServerMessage(1756)); // 린드비오르 : 케레니스 또 나를 화나게 하려는 건가?
+						pc.sendPackets(new S_ServerMessage(1756)); // リンドビオル：ケレニスまたむかつくするのか？
 					}
 					Thread.sleep(2000);
 					for (L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_ServerMessage(1757)); // 린드비오르 : 어리석은 인간들 이군...
+						pc.sendPackets(new S_ServerMessage(1757)); //リンドビオル：愚かな人間だな...
 					}
 					Thread.sleep(2000);
 					for (L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_ServerMessage(1758)); // 린드비오르 : 나 린드비오르를 화나게 한 대가를 치룰 것이다.
+						pc.sendPackets(new S_ServerMessage(1758)); // リンドビオル：私リンドビオルを怒らせた対価を経るものである。
 					}
 					Thread.sleep(2000);
 					spawn(32848, 32877, (short) _map, _random.nextInt(8), 5096, 0);
 					stage = 2;
-					// 1차 린드비오르 스폰.
+					// 1次リンドビオル出現。
 				case ONE_RESULT:
 					if (one_die == true){
 						/*for (L1PcInstance pc : PcStageCK()){
-							createNewItem(pc, 30061, 1); // 달아난 드래곤의 흔적
+							createNewItem(pc, 30061, 1); // 逃げたドラゴンの痕跡
 						}*/
 						for(L1PcInstance pc : PcStageCK()){ 
-							pc.sendPackets(new S_ServerMessage(1759)); // 린드비오르 : 가소롭구나! 너희들의 어리석음을 뼈속 깊이 후회하게 만들어주겠다!
+							pc.sendPackets(new S_ServerMessage(1759)); // リンドビオル：可塑ロブだ！君たちの愚かさを骨の中深く後悔することに作ってやる！
 						}
 						Thread.sleep(2000);
 						for(L1PcInstance pc : PcStageCK()){ 
-							pc.sendPackets(new S_ServerMessage(1761)); // 린드비오르 : 그래도 제법이구나! 하지만 언제까지 버틸 수 있을까?
+							pc.sendPackets(new S_ServerMessage(1761)); // リンドビオル：それでも結構だ！しかし、いつまで持ちこたえることができますか？
 						}
 						stage = 3;
 						break;
@@ -116,9 +116,9 @@ public class RindRaid implements Runnable {
 					Object_Check();
 					break;
 				case TWO:
-					Thread.sleep(sleep * 1000); // 2분 슬립
+					Thread.sleep(sleep * 1000); //2分スリップ
 					for(L1PcInstance pc : PcStageCK()){ 
-						pc.sendPackets(new S_ServerMessage(1762)); // 린드비오르 : 오랫동안 몸을 풀지 못했는데, 놀아보도록 하자!!
+						pc.sendPackets(new S_ServerMessage(1762)); //リンドビオル：長い体を解かなかったが、遊んでみよう！
 					}						
 					Thread.sleep(2000);
 //					int[][] id = new int[][] { 
@@ -151,10 +151,10 @@ public class RindRaid implements Runnable {
 							}
 						}
 						/*for (L1PcInstance pc : PcStageCK()){
-							createNewItem(pc, 30061, 1); // 달아난 드래곤의 흔적
+							createNewItem(pc, 30061, 1); //逃げたドラゴンの痕跡
 						}*/
 						for(L1PcInstance pc : PcStageCK()){ 
-							pc.sendPackets(new S_ServerMessage(1764)); // 1764	린드비오르 : 조금 얕보았던 것같군. 이번엔 어떨지 궁금하군.
+							pc.sendPackets(new S_ServerMessage(1764)); // 1764リンドビオル：少し軽蔑しまったようだ。今回はどうかのだろう。
 						}
 						stage = 5;
 						break;
@@ -162,17 +162,17 @@ public class RindRaid implements Runnable {
 					Object_Check();
 					break;
 				case THREE:
-					Thread.sleep(sleep * 1000); // 2분 슬립
+					Thread.sleep(sleep * 1000); // 2分スリップ
 					for(L1PcInstance pc : PcStageCK()){
-						pc.sendPackets(new S_ServerMessage(1765)); // 1765	린드비오르 : 너희의 그 오만이 어떠한 결과를 가져 오는지 몸소 보여주도록 하겠다.
+						pc.sendPackets(new S_ServerMessage(1765)); // 1765	リンドビオル：あなたのその傲慢がどのような結果をもたらすか自ら示すようにする。
 					}
 					Thread.sleep(2000);
-					spawn(32848, 32877, (short) _map, _random.nextInt(8), 5100, 0); // 3차 린드비오르 스폰
+					spawn(32848, 32877, (short) _map, _random.nextInt(8), 5100, 0); // 3次リンドビオルスポン
 					stage = 6;
 					break;
 				case THREE_RESULT:
 					if (three_die == true){
-						for (L1PcInstance pc : PcStageCK()){ // 드래곤 버프
+						for (L1PcInstance pc : PcStageCK()){ // ドラゴンバフ
 							pc.setSkillEffect(L1SkillId.RIND_BUFF, 10800 * 1000);
 							pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 88, 10800/60));
 							pc.sendPackets(new S_SkillSound(pc.getId(), 7783));
@@ -181,11 +181,11 @@ public class RindRaid implements Runnable {
 							pc.sendPackets(new S_OwnCharAttrDef(pc));
 						}
 						for (L1PcInstance pc : PcStageCK()){
-							pc.sendPackets(new S_ServerMessage(1772)); // 1772	린드비오르 : 이럴수가!! 크아악..너희들을 얕본 내가 너무나도 어리석었구나...
+							pc.sendPackets(new S_ServerMessage(1772)); // 1772	リンドビオル：信じられない！ク雅楽。君たちを軽視私はあまりにも愚かだったんだ...
 						}
 						Thread.sleep(2000);
 						for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
-							pc.sendPackets(new S_ServerMessage(1754)); // 난쟁이의 외침: 린드비오르의 날개를 꺾은 용사들이 탄생 하였습니다.!!
+							pc.sendPackets(new S_ServerMessage(1754)); //ドワーフの呼出し：リンドビオルの翼を下した勇士たち誕生しました。！
 						}
 						Thread.sleep(2000);
 						for (L1Object obj : L1World.getInstance().getVisibleObjects(_map).values()){
@@ -197,7 +197,7 @@ public class RindRaid implements Runnable {
 							}
 						}
 						for (L1PcInstance pc : PcStageCK()) {
-							pc.sendPackets(new S_ServerMessage(1476)); // 30초 후에 텔레포트
+							pc.sendPackets(new S_ServerMessage(1476)); // 30秒後にテレポート
 						}
 						Thread.sleep(30000);
 						stage = 7;
@@ -221,12 +221,12 @@ public class RindRaid implements Runnable {
 			}
 		}
 		Rind_Delete();
-		System.out.println("■■■■■■■■■■ 린드비올 레이드 종료 ■■■■■■■■■■ MAP - " + _map);
+		System.out.println("■■■■■■■■■■リンド雨のリード終了■■■■■■■■■■MAP  - " + _map);
 	}
 
 	public void Start(){
 		GeneralThreadPool.getInstance().schedule(this, 5000);
-		//System.out.println("■■■■■■■■■■ 린드비올 레이드 시작 ■■■■■■■■■■ MAP - " + _map);
+		//System.out.println("■■■■■■■■■■リンド雨のレイド開始■■■■■■■■■■MAP  -  "+ _map）;
 	}
 
 	private void RETURN_TEL(){
@@ -257,19 +257,19 @@ public class RindRaid implements Runnable {
 				mob = (L1MonsterInstance)object;
 				int npc = mob.getNpcTemplate().get_npcId();
 				switch(npc){
-				case 5096: // 1차 린드비오르
+				case 5096: //1次リンドビオル
 					if (mob != null && mob.isDead()){
 						check[0] = 1;
 					}
 					break;
-				case 5097: // 2차 린드비오르 [ 허상 캐릭터 포함 ]
+				case 5097: // 2次リンドビオル【虚像キャラクターを含む]
 				case 5098:
 				case 5099:
 					if (mob != null && mob.isDead()/* && RealId == npc*/){
 						check[1] = 1;
 					}
 					break;
-				case 5100: // 3차 린드비오르
+				case 5100: //3次リンドビオル
 					if (mob != null && mob.isDead()){
 						check[2] = 1; 
 					}
@@ -279,13 +279,13 @@ public class RindRaid implements Runnable {
 				}
 			}
 		}
-		if (check[0] == 1){ // 1차 린드비오르 사망
+		if (check[0] == 1){ //1次リンドビオル死亡
 			one_die = true;
 		}
-		if (check[1] == 1){ // 2차 린드비오르 사망
+		if (check[1] == 1){ // 2次リンドビオル死亡
 			 two_die = true;
 		}
-		if (check[2] == 1){ // 3차 린드비오르 사망
+		if (check[2] == 1){ //3次リンドビオル死亡
 			three_die = true;
 		}
 	}
@@ -353,14 +353,14 @@ public class RindRaid implements Runnable {
 			L1World.getInstance().addVisibleObject(npc);
 
 			npc.getLight().turnOnOffLight();
-			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // 채팅 개시
+			npc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE); // チャット開始
 
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		}
 	}
 	
-	// 자동 분배
+	// 自動分配
 	private void Mapdrop(L1NpcInstance npc){
 		L1Inventory inventory = npc.getInventory();
 		L1ItemInstance item;
@@ -384,17 +384,17 @@ public class RindRaid implements Runnable {
 			if (acquisitor.getInventory().checkAddItem(item,item.getCount()) == L1Inventory.OK) {
 					targetInventory = acquisitor.getInventory();
 					player = acquisitor;
-					L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA); // 소지
+					L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA); // 所持
 					if (l1iteminstance != null&& l1iteminstance.getCount() > 2000000000) {
-							targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); // 가질 수
-							player.sendPackets(new S_ServerMessage(166,"소지하고 있는 아데나","2,000,000,000을 초과하고 있습니다."));
+							targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); // 持つことができ
+							player.sendPackets(new S_ServerMessage(166,"所持しているアデナ","20億を超えています。"));
 					}else{
 						for(L1PcInstance temppc : acquisitorList){
 								temppc.sendPackets(new S_ServerMessage(813, npc.getName(), item.getLogName(), player.getName()));
 						}
 					}
 			} else {
-					targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); // 가질 수
+					targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); //持つことができ
 			}
 			inventory.tradeItem(item, item.getCount(), targetInventory);
 		}

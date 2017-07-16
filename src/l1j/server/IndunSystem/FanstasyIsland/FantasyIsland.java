@@ -82,90 +82,90 @@ public class FantasyIsland implements Runnable {
 						continue;
 					Sleep(5000);
 					Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17691", 0));
-					//도와주러 와 주셔서 감사합니다.
+					//助けに来てくれてありがとうございます。
 					Sleep(2000);
 					Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17692", 0));
-					//이계의 존재가 곧 돌아올겁니다.
+					//異界の存在がすぐに戻ってです。
 					Sleep(2000);
 					Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17693", 0));
-					//그전에 제가 봉인을 풀 수 있도록 시간을 벌어주세요.
+					//その前に、私は封印を解くことができるよう時間を稼ぐください。
 					Sleep(3000);
 					Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17947", 0));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17947"));
-					//마법 막대를 이용해 적을 처치해주세요.
+					//魔法の棒を使って敵を倒してください。
 					pc.getInventory().storeItem(810006, 1);
 					pc.sendPackets(new S_SystemMessage("$17948"));
 					Sleep(5000);
 					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17701"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.ROUND, 1, 3));
-					//적들이 몰려오고 있습니다.
-					//11시 방향 스폰 포르시스, 베네보스
+					//敵が集まってきています。
+					//11時方向スポンポールシステム、ベネボス
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200008, 0, 0, 5);
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200012, 0, 0, 5);
 					stage = 2;
 					break;
 				case FIRST_STEP:
 					Sleep(10000);
-					//1시방향 스폰 스콜피온+ 메두사
+					//1時方向出現スコーピオン+メデューサ
 					L1SpawnUtil.spawnCount(32810, 32863, _map, 7200009, 0, 0, 5);
 					L1SpawnUtil.spawnCount(32810, 32863, _map, 7200013, 0, 0, 5);
 					Sleep(10000);
-					//5시방향 코트룻+페르페르 스폰
+					//5時方向コートルツ+フェルフェルスポン
 					L1SpawnUtil.spawnCount(32801, 32873, _map, 7200010, 0, 0, 5);
 					L1SpawnUtil.spawnCount(32801, 32873, _map, 7200014, 0, 0, 5);
 					Sleep(10000);
-					//7시방향 메가+비아
+					//7時方向メガ+ビア
 					L1SpawnUtil.spawnCount(32789, 32861, _map, 7200011, 0, 0, 5);
 					L1SpawnUtil.spawnCount(32789, 32861, _map, 7200015, 0, 0, 5);
-					//땅의 대정령이 나타났습니다!!!
+					//土地の大精霊が現れました！
 					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17944"));
 					stage = 3;
 					break;
-					/** 2번째 단계진행 **/
+					/** 2番目の手順に進む **/
 				case SECOND_STEP:
 					Sleep(10000);
 					pc.sendPackets(new S_PacketBox(S_PacketBox.ROUND, 2, 3));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17703"));
-					//적들이 더 몰려옵니다. 준비해 주세요
+					//敵がより集まってきます。準備してください
 					pc.getInventory().storeItem(810006, 1);
 					pc.sendPackets(new S_SystemMessage("$17948"));
 					Sleep(5000);
-					//11시 포르시스, 베네보스
+					//11時フォルシス、ベネボス
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200008, 0, 0, 5);
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200012, 0, 0, 5);
-					//1시방향 메두사+스콜피온 + 땅의대정령
+					//1時方向メドゥーサ+スコーピオン+地医大精霊
 					L1SpawnUtil.spawnCount(32810, 32863, _map, 7200009, 0, 0, 5);
 					L1SpawnUtil.spawnCount(32810, 32863, _map, 7200013, 0, 0, 5);
 					L1SpawnUtil.spawnCount(32810, 32863, _map, 7200018, 0, 0, 1);
 					Sleep(10000);
-					//5시 코트룻+페르페르
+					//5時コートルツ+フェルフェル
 					L1SpawnUtil.spawnCount(32801, 32873, _map, 7200010, 0, 0, 5);
 					L1SpawnUtil.spawnCount(32801, 32873, _map, 7200014, 0, 0, 5);
 					Sleep(20000);
-					//7시 메가+비아
+					//7時メガ+ビア
 					L1SpawnUtil.spawnCount(32789, 32861, _map, 7200011, 0, 0, 5);
 					L1SpawnUtil.spawnCount(32789, 32861, _map, 7200015, 0, 0, 5);
 					Sleep(5000);
-					//11시 포르시스, 베네보스
+					//11時フォルシス、ベネボス
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200008, 0, 0, 5);
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200012, 0, 0, 5);
 					Sleep(5000);
 					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17942"));
-					//바람의 대정령이 나타났습니다!!!
+					//風の大精霊が現れました！
 					stage = 4;
 					break;
-					/** 3단계 **/
+					/** 3段階 **/
 				case THIRD_STEP:
 					Sleep(3000);
 					pc.sendPackets(new S_PacketBox(S_PacketBox.ROUND, 3, 3));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17703"));
-					//적들이 더 몰려옵니다. 준비해 주세요
+					//敵がより集まってきます。準備してください
 					pc.getInventory().storeItem(810006, 1);
 					pc.sendPackets(new S_SystemMessage("$17948"));
 					Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17706", 0));
 	
 					Sleep(5000);
-					//4군대 동시 스폰 + 바람의대정령
+					//4軍隊の同時出現+風医大精霊
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200008, 0, 0, 3);
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200012, 0, 0, 3);
 					L1SpawnUtil.spawnCount(32810, 32863, _map, 7200009, 0, 0, 3);
@@ -176,7 +176,7 @@ public class FantasyIsland implements Runnable {
 					L1SpawnUtil.spawnCount(32789, 32861, _map, 7200015, 0, 0, 3);
 					L1SpawnUtil.spawnCount(32801, 32873, _map, 7200016, 0, 0, 1);
 					Sleep(5000);
-					//4군대 동시 스폰
+					//4軍の同時出現
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200008, 0, 0, 3);
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200012, 0, 0, 3);
 					L1SpawnUtil.spawnCount(32810, 32863, _map, 7200009, 0, 0, 3);
@@ -187,9 +187,9 @@ public class FantasyIsland implements Runnable {
 					L1SpawnUtil.spawnCount(32789, 32861, _map, 7200015, 0, 0, 3);
 					Sleep(15000);
 					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17995 : $17713"));
-					//유니콘을 빼앗아가려고? 그렇게 놔둘 순 없지!!
+					//ユニコーンを奪っていこうと？そう聞かせ順なかっ!!
 					Sleep(5000);
-					//몽환의 지배자+ 4군대 스폰
+					//夢幻の支配者+ 4軍出現
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200008, 0, 0, 4);
 					L1SpawnUtil.spawnCount(32799, 32852, _map, 7200012, 0, 0, 4);
 					L1SpawnUtil.spawnCount(32810, 32863, _map, 7200009, 0, 0, 4);
@@ -202,11 +202,11 @@ public class FantasyIsland implements Runnable {
 					Random random = new Random(System.nanoTime());
 					int chance = random.nextInt(45) + 1;
 					if (chance <= 15) {
-						boss = L1SpawnUtil.spawnCount(32789, 32861, _map, 7200020, 0, 0, 1);	//구미호
+						boss = L1SpawnUtil.spawnCount(32789, 32861, _map, 7200020, 0, 0, 1);	//禁断
 					} else if (chance <= 30) {
-						boss = L1SpawnUtil.spawnCount(32789, 32861, _map, 7199998, 0, 0, 1);	//아비쉬
+						boss = L1SpawnUtil.spawnCount(32789, 32861, _map, 7199998, 0, 0, 1);	//ああヴィシー
 					} else if (chance <= 45) {
-						boss = L1SpawnUtil.spawnCount(32789, 32861, _map, 7199999, 0, 0, 1);	//아즈모단
+						boss = L1SpawnUtil.spawnCount(32789, 32861, _map, 7199999, 0, 0, 1);	//アズモダン
 					}
 
 					stage = 5;
@@ -215,28 +215,28 @@ public class FantasyIsland implements Runnable {
 					if (boss.isDead() || boss == null) {
 						Sleep(5000);
 						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17707"));
-						//몽환의 지배자가 퇴치 되었습니다.
+						//夢幻の支配者が退治しました。
 						Sleep(5000);
 						Broadcaster.broadcastPacket(unicorn, new S_SkillSound(unicorn.getId(), 1911));
 						Sleep(1000);
 						Broadcaster.broadcastPacket(unicorn, new S_ChangeShape(unicorn.getId(), 12493));
 						//Sleep(5000);
-						//감사합니다!
+						//ありがとうございます！
 						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17708"));
 						Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17708", 0));
 
 						Sleep(3000);
-						//당분간 그것은 돌아올 수 없을 것입니다.
+						//しばらくそれ戻れないでしょう。
 						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17709"));
 						Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17709", 0));
 
 						Sleep(3000);
-						//어서 몽환의 섬으로 돌아가 봐야겠군요.
+						//て夢幻の島に戻って見なければならね。
 						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17710"));
 						Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17710", 0));
 
 						Sleep(3000);
-						//선물을 드리고 싶군요. 마음에 드셨으면 좋겠네요.
+						//プレゼントを差し上げたいですね。心にドたらいいですね。
 						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "$17712"));
 						Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17712", 0));
 
@@ -245,18 +245,18 @@ public class FantasyIsland implements Runnable {
 
 //						int itemId = 0;
 //						int rnd = new Random().nextInt(1000) + 1;
-//						if (rnd < 300) { itemId = 40074; //갑옷 마법 주문서
-//						} else if (rnd < 600) { itemId = 40087; //무기 마법 주문서
-//						} else if (rnd < 610) { itemId = 600; //뇌신검
-//						} else if (rnd < 620) { itemId = 601; //파멸의 대검
-//						} else if (rnd < 630) { itemId = 605; //광풍의 도끼
-//						} else if (rnd < 640) { itemId = 604; //혹한의 창
-//						} else if (rnd < 650) { itemId = 603; //천사의 지팡이
-//						} else if (rnd < 660) { itemId = 191;// 살천의 활
-//						} else if (rnd < 670) { itemId = 1125; //파괴의 이도류
-//						} else if (rnd < 680) { itemId = 1124; //파괴의 크로우
-//						} else if (rnd < 682) { itemId = 1136; //악몽의 장궁
-//						} else if (rnd < 684) { itemId = 1137; //진노의 크로우
+//						if (rnd < 300) { itemId = 40074; //防具強化スクロール
+//						} else if (rnd < 600) { itemId = 40087; //武器強化スクロール
+//						} else if (rnd < 610) { itemId = 600; //脳身体検査
+//						} else if (rnd < 620) { itemId = 601; //破滅のグレートソード
+//						} else if (rnd < 630) { itemId = 605; //狂風の斧
+//						} else if (rnd < 640) { itemId = 604; //酷寒のウィンドウ
+//						} else if (rnd < 650) { itemId = 603; //天使の杖
+//						} else if (rnd < 660) { itemId = 191;// サルチョンの弓
+//						} else if (rnd < 670) { itemId = 1125; //破壊の二刀流
+//						} else if (rnd < 680) { itemId = 1124; //破壊のクロウ
+//						} else if (rnd < 682) { itemId = 1136; //悪夢のロングボウ
+//						} else if (rnd < 684) { itemId = 1137; //怒りのクロウ
 //						}
 						
 						L1ItemInstance item = ItemTable.getInstance().createItem(31089);
@@ -274,8 +274,8 @@ public class FantasyIsland implements Runnable {
 					Thread.sleep(2000);
 					if(pc.getMapId() == _map){ 
 						//pc.sendPackets(new S_ServerMessage(1480));  
-						//시스템 메시지: 5초 후에 텔레포트 합니다.
-						pc.sendPackets(new S_SystemMessage("잠시 후 마을로 이동됩니다."));
+						//システムメッセージ：5秒後にテレポートします。
+						pc.sendPackets(new S_SystemMessage("しばらくして村に移動されます。"));
 					}
 					Thread.sleep(10000);
 
@@ -306,7 +306,7 @@ public class FantasyIsland implements Runnable {
 	private void setting(){
 		for(L1NpcInstance npc : BasicNpcList){
 			if(npc != null){
-				if(npc.getName().equalsIgnoreCase("유니콘")){
+				if(npc.getName().equalsIgnoreCase("ユニコーン")){
 					unicorn = npc;
 				}
 			}
@@ -317,13 +317,13 @@ public class FantasyIsland implements Runnable {
 		if ((unicorn.getMaxHp() * 1 / 5) > unicorn.getCurrentHp()) { //2000
 			if (_status != 4) {
 				Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17949", 0));
-				//더 이상은 힘들 것 같습니다.
+				//これ以上は難しいと思われる。
 				_status = 4;
 			}
 		} else if ((unicorn.getMaxHp() * 2 / 5) > unicorn.getCurrentHp()) { //4000
 			if (_status != 3) {
 				Broadcaster.broadcastPacket(unicorn, new S_NpcChatPacket(unicorn, "$17950", 0));
-				//조금만 더 버틸 수 있다면...
+				//もう少し耐えている場合...
 				_status = 3;
 			}
 		} else if ((unicorn.getMaxHp() * 3 / 5) > unicorn.getCurrentHp()) { //6000
@@ -357,22 +357,22 @@ public class FantasyIsland implements Runnable {
 		Calendar cal = Calendar.getInstance();
 		int 시간 = Calendar.HOUR;
 		int 분 = Calendar.MINUTE;
-		/** 0 오전 , 1 오후 * */
-		String 오전오후 = "오후";
+		/** 0 午前、1午後 * */
+		String 오전오후 = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "오전";
+			오전오후 = "午前";
 		}
 		GeneralThreadPool.getInstance().schedule(this, 2000);
-		  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "시" + cal.get(분) + "분" + "   ■■■■■■ 몽환의  섬 시작 " +  _map+" ■■■■■■");
+		  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "   ■■■■■■ 夢幻の島開始 " +  _map+" ■■■■■■");
 	}
 	private void endRaid(){
 		Calendar cal = Calendar.getInstance();
 		int 시간 = Calendar.HOUR;
 		int 분 = Calendar.MINUTE;
-		/** 0 오전 , 1 오후 * */
-		String 오전오후 = "오후";
+		/** 0 午前、1午後 * */
+		String 오전오후 = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "오전";
+			오전오후 = "午前";
 		}
 		if (Running) {
 			Collection<L1Object> cklist = L1World.getInstance().getVisibleObjects(_map).values();
@@ -389,7 +389,7 @@ public class FantasyIsland implements Runnable {
 			}
 			Running = false;
 			FantasyIslandSystem.getInstance().remove(_map);
-		  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "시" + cal.get(분) + "분" + "   ■■■■■■ 몽환의  섬 종료 " +  _map+" ■■■■■■");
+		  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "   ■■■■■■ 夢幻の島終了 " +  _map+" ■■■■■■");
 		}
 	}
 }

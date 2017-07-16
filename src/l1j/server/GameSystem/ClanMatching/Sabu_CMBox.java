@@ -51,7 +51,7 @@ public class Sabu_CMBox {
 			synchronized (cmlist) {
 				if (cmlist.contains(cm)) {
 					cmlist.remove(cm);
-					혈맹등록취소(cm.getClanId());
+					unregisterClan(cm.getClanId());
 					cm = null;
 				}
 			}
@@ -82,7 +82,7 @@ public class Sabu_CMBox {
 					if (cm.getClanId() == clanid) {
 						cm.setInfo(info);
 						cm.settype(type);
-						등록수정(clanid, type, info);
+						editRegist(clanid, type, info);
 					}
 				}
 			}
@@ -95,7 +95,7 @@ public class Sabu_CMBox {
 		try {
 			synchronized (cmlist) {
 				if (!cmlist.contains(cm)) {
-					혈맹등록(cm.getClanId(), cm.gettype(), cm.getInfo());
+					registClan(cm.getClanId(), cm.gettype(), cm.getInfo());
 					cmlist.add(cm);
 				}
 			}
@@ -177,7 +177,7 @@ public class Sabu_CMBox {
 		}
 	}
 
-	private void 가입신청(String name, int clanid, String info, int num, int type) {
+	private void joinApply(String name, int clanid, String info, int num, int type) {
 		try {
 			Sabu_um um = new Sabu_um();
 			um.setcharname(name);
@@ -201,9 +201,9 @@ public class Sabu_CMBox {
 				for (Sabu_cm cm : l) {
 					if (cm.getnum() == num) {
 						cm.add(charname);
-						가입신청(charname, cm.getClanId(), cm.getInfo(), num,
+						joinApply(charname, cm.getClanId(), cm.getInfo(), num,
 								cm.gettype());
-						유저가입신청(charname, cm.getClanId(), num);
+						applyUserRegist(charname, cm.getClanId(), num);
 					}
 				}
 			}
@@ -230,7 +230,7 @@ public class Sabu_CMBox {
 				for (Sabu_um um : l) {
 					if (um.getcharname().equalsIgnoreCase(charname)) {
 						if (clanId == um.getClanId()) {
-							유저가입취소(um.getcharname(), um.getClanId());
+							cancellUserRegist(um.getcharname(), um.getClanId());
 							cmCharRemove(um.getcharname(), um.getClanId());
 							umlist.remove(um);
 							um = null;
@@ -284,10 +284,10 @@ public class Sabu_CMBox {
 	}
 
 	public int getnextnum() {
-		return 매칭번호() + 1;
+		return matchingNumber() + 1;
 	}
 
-	private synchronized static int 매칭번호() {
+	private synchronized static int matchingNumber() {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -309,7 +309,7 @@ public class Sabu_CMBox {
 		return 0;
 	}
 
-	private synchronized static void 유저가입신청(String charname, int clanid, int num) {
+	private synchronized static void applyUserRegist(String charname, int clanid, int num) {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -329,7 +329,7 @@ public class Sabu_CMBox {
 		}
 	}
 
-	private synchronized static void 유저가입취소(String charname, int clanid) {
+	private synchronized static void cancellUserRegist(String charname, int clanid) {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -347,7 +347,7 @@ public class Sabu_CMBox {
 		}
 	}
 
-	private synchronized static void 혈맹등록(int clanid, int type, String info) {
+	private synchronized static void registClan(int clanid, int type, String info) {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -366,7 +366,7 @@ public class Sabu_CMBox {
 		}
 	}
 
-	private synchronized static void 등록수정(int clanid, int type, String info) {
+	private synchronized static void editRegist(int clanid, int type, String info) {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
@@ -385,7 +385,7 @@ public class Sabu_CMBox {
 		}
 	}
 
-	private synchronized static void 혈맹등록취소(int clanid) {
+	private synchronized static void unregisterClan(int clanid) {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {

@@ -1,7 +1,6 @@
 package l1j.server.GameSystem.Robot;
 
-import static l1j.server.server.model.skill.L1SkillId.HASTE;
-import static l1j.server.server.model.skill.L1SkillId.STATUS_UNDERWATER_BREATH;
+import static l1j.server.server.model.skill.L1SkillId.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,57 +40,57 @@ public class Robot {
 	public static void poly(L1RobotInstance bot) {
 		int rr = 0;
 
-		if (bot.리스봇 || bot.사냥봇)
+		if (bot.LisBot || bot.huntingBot)
 			rr = _random.nextInt(3);
 		else
 			rr = _random.nextInt(2);
 
-		if (rr == 0 || (bot.리스봇_스폰위치 == 1 && _random.nextInt(10) < 8)) {
+		if (rr == 0 || (bot.LisBot_SpawnLocation == 1 && _random.nextInt(10) < 8)) {
 			polyNormal51(bot);
 		} else {
-			if (bot.getLevel() > 75) { // 75레벨 이상
+			if (bot.getLevel() > 75) { // 75レベル以上
 				polyNormal75(bot);
-			} else if (bot.getLevel() > 80) { // 80레벨 이상
+			} else if (bot.getLevel() > 80) { // 80レベル以上
 				polyNormal80(bot);
 			} else {
-				polyNormal51(bot); // 그렇지않을경우
+				polyNormal51(bot); // それ以外の場合
 			}
 		}
 	}
-private static void polyNormal51(L1RobotInstance bot) { // 로봇변신
-	if (bot.사냥봇) {
+private static void polyNormal51(L1RobotInstance bot) { // ロボットに変身
+	if (bot.huntingBot) {
 		if (bot.isElf() && bot.getCurrentWeapon() == 20) {
 			int f = _random.nextInt(4);
 			if (f == 0)
-				bot.setTempCharGfx(11378); // 다크엘프
+				bot.setTempCharGfx(11378); //ダークエルフ
 			else if (f == 1)
-				bot.setTempCharGfx(11386); // 실버 레인저
+				bot.setTempCharGfx(11386); //シルバーレンジャー
 			else if (f == 2)
-				bot.setTempCharGfx(11394); // 아크 스카우트
+				bot.setTempCharGfx(11394); //アークスカウト
 			else if (f == 3)
-				bot.setTempCharGfx(15848); // 포노스 오크 궁수
+				bot.setTempCharGfx(15848); // フォーノースオークアーチャー
 		} else {
 			int f1 = _random.nextInt(4);
 			if (f1 == 0 && bot.isKnight())
-				bot.setTempCharGfx(11392); // 아크 나이트
+				bot.setTempCharGfx(11392); //アークナイト
 			
 			else if (f1 == 1 && bot.getCurrentWeapon() != 20)
-				bot.setTempCharGfx(11329); // 해골
+				bot.setTempCharGfx(11329); // スケルトン
 			
-			else if (f1 == 2 && bot.isDragonknight()) // 용기사
-				bot.setTempCharGfx(11447); // 나이트 워치
+			else if (f1 == 2 && bot.isDragonknight()) //竜騎士
+				bot.setTempCharGfx(11447); // ナイトウォッチ
 			
 			else if (f1 == 3 && bot.getCurrentWeapon() != 20)
-				bot.setTempCharGfx(11392); // 아크 나이트
+				bot.setTempCharGfx(11392); //アークナイト
 			else
 				bot.setTempCharGfx(11392); //
 		}
 	} else {
 		// int f = _random.nextInt(100);
-		// 버경 봇들
+		// ボギョンボトドゥル
 		/*
-		 * if(bot.리스봇 && (bot.리스봇_스폰위치 == 0 || bot.리스봇_스폰위치 == 3 ||
-		 * (bot.리스봇_스폰위치 >= 16 && bot.리스봇_스폰위치 <= 19))) f =
+		 * if(bot.リースボット&&（bot。リースボット_出現位置== 0 || bot。リースボット_出現位置== 3 ||
+		 * (bot。リースボット_出現位置> = 16 && bot。リースボット_出現位置<= 19）））f =
 		 * _random.nextInt(100);
 		 */
 		bot.setTempCharGfx(bot.getGfxId());
@@ -99,7 +98,7 @@ private static void polyNormal51(L1RobotInstance bot) { // 로봇변신
 		/*
 		 * if(f < 15){
 		 * bot.getGfxId().setTempCharGfx(bot.getGfxId().getGfxId());
-		 * if(bot.버경봇 && bot.isCrown()){ if(_random.nextInt(2) == 0){
+		 * if(bot。バーギョンボト&& bot.isCrown（））{if（_random.nextInt（2）== 0）{
 		 * if(bot.get_sex() == 0) bot.getGfxId().setTempCharGfx(6094); else
 		 * bot.getGfxId().setTempCharGfx(6080); } } }else if(f < 50){
 		 * bot.getGfxId().setTempCharGfx(11375); }else if(f < 75){
@@ -112,88 +111,66 @@ private static void polyNormal51(L1RobotInstance bot) { // 로봇변신
 	}
 }
 
-private static void polyNormal75(L1RobotInstance bot) { // 로봇변신
-	if (bot.사냥봇) {
+private static void polyNormal75(L1RobotInstance bot) { //ロボット変身
+	if (bot.huntingBot) {
 		if (bot.isElf() && bot.getCurrentWeapon() == 20) {
 			int f = _random.nextInt(4);
 			if (f == 0)
-				bot.setTempCharGfx(15848); // 포노스 오크
+				bot.setTempCharGfx(15848); //フォーノースオーク
 			else if (f == 1)
-				bot.setTempCharGfx(15848); // 포노스 오크
+				bot.setTempCharGfx(15848); //フォーノースオーク
 			else if (f == 2)
-				bot.setTempCharGfx(13346); // 진 다크엘프
+				bot.setTempCharGfx(13346); //ジンダークエルフ
 			else if (f == 3)
-				bot.setTempCharGfx(13346); // 진 다크엘프
+				bot.setTempCharGfx(13346); //ジンダークエルフ
 		} else {
 			int f1 = _random.nextInt(4);
 			if (f1 == 0 && bot.isKnight())
-				bot.setTempCharGfx(12702); // 75 진데스
+				bot.setTempCharGfx(12702); // 75たデス
 			else if (f1 == 1 && bot.getCurrentWeapon() != 20)
-				bot.setTempCharGfx(12702); // 75 진데스
+				bot.setTempCharGfx(12702); // 75たデス
 			else if (f1 == 2 && bot.isDragonknight())
-				bot.setTempCharGfx(15834); // 75 랜스 마스터
+				bot.setTempCharGfx(15834); // 75ランスマスター
 			else if (f1 == 3 && bot.getCurrentWeapon() != 20)
-				bot.setTempCharGfx(12702); // 75 진데스
+				bot.setTempCharGfx(12702); // 75たデス
 			else
-				bot.setTempCharGfx(12702); // 75 진데스
+				bot.setTempCharGfx(12702); // 75たデス
 		}
 	} else {
-		// int f = _random.nextInt(100);
-		// 버경 봇들
-		/*
-		 * if(bot.리스봇 && (bot.리스봇_스폰위치 == 0 || bot.리스봇_스폰위치 == 3 ||
-		 * (bot.리스봇_스폰위치 >= 16 && bot.리스봇_스폰위치 <= 19))) f =
-		 * _random.nextInt(100);
-		 */
-		bot.setTempCharGfx(bot.getGfxId());
-
-		/*
-		 * if(f < 15){
-		 * bot.getGfxId().setTempCharGfx(bot.getGfxId().getGfxId());
-		 * if(bot.버경봇 && bot.isCrown()){ if(_random.nextInt(2) == 0){
-		 * if(bot.get_sex() == 0) bot.getGfxId().setTempCharGfx(6094); else
-		 * bot.getGfxId().setTempCharGfx(6080); } } }else if(f < 50){
-		 * bot.getGfxId().setTempCharGfx(11375); }else if(f < 75){
-		 * bot.getGfxId().setTempCharGfx(11328+_random.nextInt(3)); //else
-		 * if(f == 3) // bot.getGfxId().setTempCharGfx(11341); }else{
-		 * bot.getGfxId().setTempCharGfx(11370); } if(bot.isElf() && f != 0
-		 * && bot.getCurrentWeapon() == 20)
-		 * bot.getGfxId().setTempCharGfx(bot.getGfxId().getGfxId());
-		 */
 	}
 }
 
-private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
-	if (bot.사냥봇) {
+private static void polyNormal80(L1RobotInstance bot) { // ロボットに変身
+	if (bot.huntingBot) {
 		if (bot.isElf() && bot.getCurrentWeapon() == 20) {
 			int f = _random.nextInt(4);
 			if (f == 0)
-				bot.setTempCharGfx(15814); // 80 하이엘프
+				bot.setTempCharGfx(15814); // 80ハイエルフ
 			else if (f == 1)
-				bot.setTempCharGfx(15814); // 80 하이엘프
+				bot.setTempCharGfx(15814); // 80ハイエルフ
 			else if (f == 2)
-				bot.setTempCharGfx(15814); // 80 하이엘프
+				bot.setTempCharGfx(15814); // 80ハイエルフ
 			else if (f == 3)
-				bot.setTempCharGfx(15814); // 80 하이엘프
+				bot.setTempCharGfx(15814); // 80ハイエルフ
 		} else {
 			int f1 = _random.nextInt(4);
 			if (f1 == 0 && bot.isKnight())
-				bot.setTempCharGfx(12681); // 80 진데스
+				bot.setTempCharGfx(12681); // 80ジンデス
 			else if (f1 == 1 && bot.getCurrentWeapon() != 20)
-				bot.setTempCharGfx(12681); // 80 진데스
+				bot.setTempCharGfx(12681); // 80ジンデス
 			else if (f1 == 2 && bot.isDragonknight())
-				bot.setTempCharGfx(15534); // 80 진 랜스마스터
+				bot.setTempCharGfx(15534); // 80ジンランスマスター
 			else if (f1 == 3 && bot.getCurrentWeapon() != 20)
-				bot.setTempCharGfx(12681); // 80 진데스
+				bot.setTempCharGfx(12681); // 80ジンデス
 			else
-				bot.setTempCharGfx(12681); // 80 진데스
+				bot.setTempCharGfx(12681); // 80ジンデス
 		}
 	} else {
 		// int f = _random.nextInt(100);
-		// 버경 봇들
+		// ボギョンボトドゥル
 		/*
-		 * if(bot.리스봇 && (bot.리스봇_스폰위치 == 0 || bot.리스봇_스폰위치 == 3 ||
-		 * (bot.리스봇_스폰위치 >= 16 && bot.리스봇_스폰위치 <= 19))) f =
+		 * if(bot。リースボット&&（bot。リースボット_出現位置== 0 || bot。リースボット_出現位置== 3 ||
+		 * (bot.リースボット_出現位置> = 16 && bot。リースボット_出現位置<= 19）））f =
 		 * _random.nextInt(100);
 		 */
 		bot.setTempCharGfx(bot.getGfxId());
@@ -201,7 +178,7 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 		/*
 		 * if(f < 15){
 		 * bot.getGfxId().setTempCharGfx(bot.getGfxId().getGfxId());
-		 * if(bot.버경봇 && bot.isCrown()){ if(_random.nextInt(2) == 0){
+		 * if(bot。バーギョンボト&& bot.isCrown（））{if（_random.nextInt（2）== 0）{
 		 * if(bot.get_sex() == 0) bot.getGfxId().setTempCharGfx(6094); else
 		 * bot.getGfxId().setTempCharGfx(6080); } } }else if(f < 50){
 		 * bot.getGfxId().setTempCharGfx(11375); }else if(f < 75){
@@ -216,7 +193,7 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 
 	public static boolean 속도버프(L1RobotInstance bot) {
 
-		// 디케이 아닐때
+		// ディケイないとき
 		if (bot.getMap().isUnderwater()) {
 			if (!bot.hasSkillEffect(
 					STATUS_UNDERWATER_BREATH)) {
@@ -239,7 +216,7 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 		if (_random.nextInt(100) > 10)
 			return false;
 		if (bot.isKnight() || bot.isCrown()) {
-			// 디케이아닐때
+			//ディケイないとき
 			if (!bot.hasSkillEffect(
 					L1SkillId.STATUS_BRAVE)
 					&& !bot.hasSkillEffect(
@@ -416,8 +393,8 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 			joinTime = System.currentTimeMillis()
 					+ (60000 * (20 + _random.nextInt(21)));
 		}
-		// 로봇중 가입 되어있는 케릭이 650케릭 이상인지
-		// 가입하려는혈 총혈 다 받아와서 유저 비교 제일적은혈
+		//ロボットの登録されているキャラが650キャラ以上であること
+		//登録しようとする血チョンヒョルだ受けてきて、ユーザの比較一番少ない血
 		String clanname = robot_clan_count();
 		if (clanname == null)
 			return;
@@ -427,24 +404,24 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 		L1PcInstance pc = L1World.getInstance().getPlayer(clan.getLeaderName());
 		if (pc == null)
 			return;
-		// 군주근처에 혈원이 있는지
+		//君主の近くに血盟員がいるかどうか
 		for (L1PcInstance pp : L1World.getInstance().getVisiblePlayer(pc)) {
 			if (!(pp instanceof L1RobotInstance)
 					&& pc.getClanid() == pp.getClanid())
 				return;
 		}
-		// 내 근처에 같은혈 있는지
+		//私の近くに同じ血かどうか
 		for (L1PcInstance pp : L1World.getInstance().getVisiblePlayer(bot)) {
 			if (!(pp instanceof L1RobotInstance)
 					&& pc.getClanid() == pp.getClanid())
 				return;
 		}
-		// 가입
+		//登録
 		for (L1PcInstance clanMembers : clan.getOnlineClanMember()) {
-			clanMembers.sendPackets(new S_ServerMessage(94, bot.getName())); // \f1%0이
-																				// 혈맹의
-																				// 일원으로서
-																				// 받아들여졌습니다.
+			clanMembers.sendPackets(new S_ServerMessage(94, bot.getName())); // \f1％0が
+																				// 血盟の
+																				// 一員として
+																				//受け入れられました。
 		}
 		bot.setClanid(clan.getClanId());
 		bot.setClanname(clan.getClanName());
@@ -453,7 +430,7 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 		bot.setClanJoinDate(new Timestamp(System.currentTimeMillis()));
 		Broadcaster.broadcastPacket(bot, new S_CharTitle(bot.getId(), ""));
 		if(bot.isCrown()){
-		clan.addClanMember(bot.getName(),L1Clan.군주 , bot.getLevel(), "로봇" ,bot.getId(), bot.getType(),1, bot);
+		clan.addClanMember(bot.getName(),L1Clan.군주 , bot.getLevel(), "ロボット" ,bot.getId(), bot.getType(),1, bot);
 		}else{
 			clan.addClanMember(bot.getName(),8 , bot.getLevel(),	bot.getClanMemberNotes(),bot.getId(), bot.getType(),1, bot);	
 		}
@@ -592,7 +569,7 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 						joinchar.updateclan(joinchar.getClanname(),
 								joinchar.getClanid(), crown._userTitle, true);
 					else
-						joinchar.save(); // DB에 캐릭터 정보를 써 우
+						joinchar.save(); // DBに文字情報を書いて右
 				} catch (Exception e) {
 				}
 
@@ -600,7 +577,7 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 						.getClan(crown.getClanname());
 				if (clan != null) {
 					for (L1PcInstance clanPc : clan.getOnlineClanMember()) {
-						// \f1%0이%1에 「%2라고 하는 호칭을 주었습니다.
+						// \f1％0％1に「％2という呼称を与えました。
 						S_ServerMessage sm = new S_ServerMessage(203,
 								crown.getName(), joinchar.getName(),
 								joinchar.getTitle());
@@ -637,16 +614,16 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 
 		if (!인형)
 			return;
-		if (bot.인형스폰)
+		if (bot.spawnDoll)
 			return;
 		if (bot.getDollList().size() > 0)
 			return;
-		if (!bot.사냥봇 && _random.nextInt(100) < 70)
+		if (!bot.huntingBot && _random.nextInt(100) < 70)
 			return;
 		int time = 2000 + _random.nextInt(8000);
 		GeneralThreadPool.getInstance().schedule(new DollSpawn(bot, time != 1),
 				time);
-		bot.인형스폰 = true;
+		bot.spawnDoll = true;
 	}
 
 	static class DollSpawn implements Runnable {
@@ -663,7 +640,7 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 			try {
 
 				if (bot.isDead()
-						|| bot._스레드종료
+						|| bot._EndThread
 						|| L1World.getInstance().getPlayer(bot.getName()) == null)
 					return;
 				int npcId = 0;
@@ -675,8 +652,8 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 					npcId = 900180;
 					dollType = L1DollInstance.DOLLTYPE_SCARECROW;
 				} else {
-					// npcId = 4500161; //스파토이
-					npcId = 81211; // 데나
+					// npcId = 4500161; //スパトイ
+					npcId = 81211; // でも
 					dollType = L1DollInstance.DOLLTYPE_SKELETON;
 				}
 				if (_random.nextInt(3) == 0) {
@@ -713,7 +690,7 @@ private static void polyNormal80(L1RobotInstance bot) { // 로봇변신
 			try {
 
 				if (bot.isDead()
-						|| bot._스레드종료
+						|| bot._EndThread
 						|| L1World.getInstance().getPlayer(bot.getName()) == null)
 					return;
 				poly(bot);

@@ -2,8 +2,8 @@ package l1j.server.IndunSystem.DragonRaid.Anta;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 import l1j.server.server.model.L1Inventory;
 import l1j.server.server.model.L1Object;
@@ -53,16 +53,16 @@ public class AntarasRaidSystem {
 		@Override
 		public void run() {
 			try {
-				/**Lair = 안타방 , Romm1 = 1번방, Room2 = 2번방, Room3= 3번방 Room4 = 4번방*/
+				/**Lair = ヒット部屋、Romm1 = 1番の部屋、Room2 = 2番の部屋、Room3 = 3番の部屋Room4 = 4番の部屋**/
 				ArrayList<L1PcInstance> Lair = AntarasRaidSystem.getInstance().getAR(_mapid).getRoomList(5);
 				switch(_type){
-				/**1차 안타라스 나올때
-				 * 1570	안타라스 : 나의 잠을 깨우는자! 누구인가? 
-				 * 1571	크레이 : 안타라스! 너를 쫓아 이곳 칠흑의 어둠까지 왔다! 
-				 * 1572	안타라스 : 가소롭군. 다시 한번 죽여주마, 크레이! 
-				 * 1573	안타라스 : 어리석은 자여! 나의 분노를 자극하는 구나. 
-				 * 1574	크레이 : 용사들이여 그대들의 칼에 아덴의 운명이 걸려있다. 
-				 *              안타라스의 검은 숨결을 멈추게 할 자는 그대들 뿐이다! 
+				/**1次アンタラス出る
+				 * 1570アンタラス：私の睡眠を目覚めさせるう！誰ですか？ 
+				 * 1571クレイ：アンタラス！君追いかけ、ここ漆黒の闇まできた！ 
+				 * 1572アンタラス：可塑ロプグン。もう一度殺してやる、クレイ！ 
+				 * 1573アンタラス：愚かな者よ！私の怒りを刺激するな。 
+				 * 1574クレイ：勇者たちよ君のナイフのアデンの運命がかかっている。 
+				 *             アンタラスの黒い息を止めることは君だけだ！ 
 				 *
 				 *              */
 				case 1:
@@ -88,13 +88,13 @@ public class AntarasRaidSystem {
 					}Thread.sleep(3000);
 					for(int i =0; i < Lair.size(); i++){
 						L1PcInstance pc = Lair.get(i);
-						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ChatPacket(pc,"시스템 메세지 : 안타라스를 공략할 수 있습니다.")); }
+						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ChatPacket(pc,"システムメッセージ：アンタラスを攻略することができます。")); }
 					}Thread.sleep(3000);
 					AntarasRaidSpawn.getInstance().fillSpawnTable(_mapid, _stage);
 					break;
-					/** 1차 죽은후 메세지
-					 ** 1575	안타라스 : 이런 조무래기들로 나를 이길 수 있을 것 같은가! 크하하하.. 
-					 ** 1576	안타라스 : 이제 맛있는 식사를 해볼까? 너희 피냄새가 나를 미치게 하는구나. */
+					/**1次死んだ後のメッセージ
+					 ** 1575アンタラス：このジョムレギたちには私を倒すことができるらしい！クハハハ。 
+					 ** 1576アンタラス：今おいしい食事をするには？あなた血の匂いが私を狂わせるんだ。 * /
 				case 2:
 					for(int i =0; i < Lair.size(); i++){
 						L1PcInstance pc = Lair.get(i);
@@ -105,10 +105,10 @@ public class AntarasRaidSystem {
 						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ServerMessage(1576)); }
 					}
 					break;
-					/**2차 안타라스 죽은후 메세지
-					 * 1577	크레이 : 우오오오옷! 피맺힌 원혼들의 외침이 들리지 않는가! 죽어랏! 
-					 * 1578	안타라스 : 감히 나를 상대하려 하다니..그러고도 너희가 살길 바라느냐? 
-					 * 1579	안타라스 : 나의 분노가 하늘에 닿았다. 이제 곧 나의 아버지가 나설 것이다. */
+					/**2次アンタラス死んだ後のメッセージ
+					 * 1577クレイ：うおおおっ！被固まった怨霊の叫びが聞こえない！死んロット！ 
+					 * 1578アンタラス：あえて私の相手しようとするなんて。それでも、あなたがたは生きる道を見たか？ 
+					 * 1579アンタラス：私の怒りが天に届いた。もうすぐ私の父が出るだろう。*/
 				case 3:
 					for(int i =0; i < Lair.size(); i++){
 						L1PcInstance pc = Lair.get(i);
@@ -122,11 +122,12 @@ public class AntarasRaidSystem {
 						L1PcInstance pc = Lair.get(i);
 						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ServerMessage(1579)); } }
 					break; 
-					/**3차 안타라스 죽은후 메세지
-					 * 1580 안타라스 : 황혼의 저주가 그대들에게 있을 지어다! 실렌이여, 나의 어머니여,나의 숨을.. 거두소서... 
-					 * 1581 크레이 : 오오.. 최강의 용사임을 증명한 최고의 기사여! 
-					 * 엄청난 시련을 이겨내고 당신의 손에 안타라스의 피를 묻혔는가! 드디어 이 원한을 풀겠구나. 
-					 * 으하하하하!! 고맙다. 땅 위에 가장 강한 용사들이여! */
+					/**3次アンタラス死んだ後のメッセージ
+					 * 1580アンタラス：夕暮れの呪いが君にあるように！シーレンよ、私の母よ、私の呼吸を。おさめソーサー... 
+					 * 1581クレイ：おお...最強の勇者であることを証明した最高の記事よ！ 
+					 *巨大な試練を乗り越えて、あなたの手にアンタラスの血を埋葬された！いよいよこの恨みをフル得ない。 
+					 * ウハハハハ！ありがとう。地上に最も強い勇士たちよ！
+				 */
 				case 4:
 					for (int i = 0; i < Lair.size(); i++){
 						L1PcInstance pc = Lair.get(i);
@@ -170,9 +171,9 @@ public class AntarasRaidSystem {
 					//						if(pc.isPrivateShop()){
 					//							continue;
 					//						}
-					//						pc.removeSkillEffect(L1SkillId.ANTA_BUFF); //이미 스킬이 있는 경우 삭제후
+					//						pc.removeSkillEffect(L1SkillId.ANTA_BUFF）; //すでにスキルがある場合は、削除した後
 					//						if (pc.getMapId() == _mapid){
-					//							pc.setSkillEffect(L1SkillId.ANTA_BUFF, 18000 * 1000);// 재 스킬 생성을 실행해준다.
+					//							pc.setSkillEffect(L1SkillId.ANTA_BUFF、18000 * 1000）; //再スキルの生成を実行してくれる。
 					//							pc.getAC().addAc(-2);
 					//							pc.getResistance().addWater(50);
 					//							pc.sendPackets(new S_OwnCharStatus(pc));
@@ -184,33 +185,33 @@ public class AntarasRaidSystem {
 					//					} Thread.sleep(3000);
 					for(int i =0; i < Lair.size(); i++){
 						L1PcInstance pc = Lair.get(i);
-						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ChatPacket(pc,"시스템 메시지 : 잠시 후 마을로 텔레포트 됩니다."));
-//						System.out.println("■■■■■■■■■■ 안타라스 레이드 종료 ■■■■■■■■■■");
+						if(pc.getMapId() == _mapid){ pc.sendPackets(new S_ChatPacket(pc,"システムメッセージ：しばらくして村にテレポートされます。"));
+//						System.out.println("■■■■■■■■■■アンタラスレイド終了■■■■■■■■■■ "）;
 						}
 					} Thread.sleep(15000); 
-					for(int i =0; i < Lair.size(); i++){ // [성공 기란 텔 ]
+					for(int i =0; i < Lair.size(); i++){ //[成功ギランテル]
 						L1PcInstance pc = Lair.get(i);
 						if(pc.getMapId() == _mapid){
 							Random random = new Random();
 							int Dragontel = random.nextInt(3)+ 1;
-							if(Dragontel == 1) new L1Teleport().teleport(pc, 33440, 32817, (short)4, 5, true); // 기란 
-							else if(Dragontel == 2) new L1Teleport().teleport(pc, 33436, 32800, (short)4, 5, true); // 기란 
-							else new L1Teleport().teleport(pc, 33443, 32798, (short)4, 5, true); // 기란						
+							if(Dragontel == 1) new L1Teleport().teleport(pc, 33440, 32817, (short)4, 5, true); //ギラン 
+							else if(Dragontel == 2) new L1Teleport().teleport(pc, 33436, 32800, (short)4, 5, true); // ギラン 
+							else new L1Teleport().teleport(pc, 33443, 32798, (short)4, 5, true); // ギラン						
 						}
 					}
 					break;
-					/**1582	난쟁이의 외침 : 웰던 마을에 숨겨진 용들의 땅으로 가는 문이 열렸습니다.
-					 * 1583	난쟁이의 외침 : 숨겨진 용들의 땅으로 가는 문이 이미 웰던 마을에 열려 있습니다.
-					 * 1593	난쟁이의 외침 : 안타라스의 검은 숨결을 멈추게 한 용사들이 탄생 하였습니다.!!
-					 * 1608안타라스 : 네 녀석의 무모함도 여기까지다..! 이 곳에서 종말을 맞이하라!
-					 * 1609	크레이 : 더 이상 소중한 용사들을 잃을 수는 없소. 마지막 남은 힘으로 이제 그대들을 소환하겠소.*/
+					/**1582	ドワーフの呼出し：ウェルダン村に隠された龍らの土地に行くドアが開かれました。
+					 * 1583ドワーフの呼出し：隠された龍らの土地に行くドアがすでにウェルダン村に開いている。
+					 * 1593	ドワーフの呼出し：アンタラスの黒い息を止めるた勇士たち誕生しました。！
+					 * 1608アンタラス：貴様の無謀さもここまでだ...！ここで終わりをマトイハラ！
+					 * 1609	クレイ：もはや貴重な勇士を失うことはオプソ。最後に残った力で今君を召喚られるでしょう。**/
 				default: 
-					break;  //클래스파일이..다업는거같은뎅?
+					break;  //クラスファイルが..すべて負うて、同じデング？
 				}
 			} catch (Exception exception) {	}
 		}
 		
-		// 자동 분배
+		// 自動分配
 		private void Mapdrop(L1NpcInstance npc){
 			L1Inventory inventory = npc.getInventory();
 			L1ItemInstance item;
@@ -234,17 +235,17 @@ public class AntarasRaidSystem {
 				if (acquisitor.getInventory().checkAddItem(item,item.getCount()) == L1Inventory.OK) {
 						targetInventory = acquisitor.getInventory();
 						player = acquisitor;
-						L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA); // 소지
+						L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA); //所持
 						if (l1iteminstance != null&& l1iteminstance.getCount() > 2000000000) {
-								targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); // 가질 수
-								player.sendPackets(new S_ServerMessage(166,"소지하고 있는 아데나","2,000,000,000을 초과하고 있습니다."));
+								targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); //持つことができ
+								player.sendPackets(new S_ServerMessage(166,"所持しているアデナ "," 20億を超えています。 "));
 						}else{
 							for(L1PcInstance temppc : acquisitorList){
 									temppc.sendPackets(new S_ServerMessage(813, npc.getName(), item.getLogName(), player.getName()));
 							}
 						}
 				} else {
-						targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); // 가질 수
+						targetInventory = L1World.getInstance().getInventory(acquisitor.getX(),acquisitor.getY(),acquisitor.getMapId()); //持つことができ
 				}
 				inventory.tradeItem(item, item.getCount(), targetInventory);
 			}
@@ -257,10 +258,10 @@ public class AntarasRaidSystem {
 		if (id != 1005) L1WorldMap.getInstance().cloneMap(1005, id);
 		AntarasRaid ar = new AntarasRaid(id);
 		AntarasRaidSpawn.getInstance().fillSpawnTable(id, 0);
-//		System.out.println("■■■■■■■■■■ 안타라스 레이드 시작 ■■■■■■■■■■ MAP - " + _map);
-		L1SpawnUtil.spawn2(pc.getX(), pc.getY(), pc.getMapId(), 900007, 0, 3600 * 1000, id); // 안타포탈 스폰
-		L1SpawnUtil.spawn2(32703, 32669, (short)id, 900008, 0, 3600 * 1000, id);//[안타라스대기방] => 안타레어
-		L1SpawnUtil.spawn2(32703, 32670, (short)id, 900008, 0, 3600 * 1000, id);//[안타라스대기방] => 안타레어
+//		System.out.println("■■■■■■■■■■ アンタラスレイド開始■■■■■■■■■■MAP  -  "+ _map）;
+		L1SpawnUtil.spawn2(pc.getX(), pc.getY(), pc.getMapId(), 900007, 0, 3600 * 1000, id); // ヒットポータル出現
+		L1SpawnUtil.spawn2(32703, 32669, (short)id, 900008, 0, 3600 * 1000, id);//[アンタラス待機部屋] =>ヒットレア
+		L1SpawnUtil.spawn2(32703, 32670, (short)id, 900008, 0, 3600 * 1000, id);//[アンタラス待機部屋] =>ヒットレア
 		L1SpawnUtil.spawn2(32623, 32725, (short)id, 810851, 0, 3600 * 1000, id);//[안타라스대기방] => 안타레어
 		_list.put(id, ar);
 		AntarasRaidTimer RaidEndTime = new AntarasRaidTimer(ar, 5, 0, 3500 * 1000);// 2시간 7200
@@ -269,14 +270,14 @@ public class AntarasRaidSystem {
 
 	public AntarasRaid getAR(int id){ return _list.get(id); }
 
-	/** 빈 맵 아이디를 가져온다 @return */
+	/** 空のマップIDを持って来る @return */
 	public int blankMapId(){
 		int mapid = 0;
 		if(_list.size() == 0) return 1005;
 		mapid = 6000 + _list.size();
 		return mapid;
 	}
-	/** 포탈 갯수 */
+	/** ポータル本数 */
 	public int countRaidPotal(){ return _list.size(); }
 
 }

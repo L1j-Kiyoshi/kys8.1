@@ -45,10 +45,10 @@ public class HadinTrap implements Runnable {
 	private boolean LAST_TRAP = false;
 
 	public boolean MonCK = false;
-	public boolean LEVEL_1_TRAP_CK = false;//첫방 발판 4개
-	public boolean LEVEL_2_TRAP_CK = false;//둘방 발판 1개
-	public boolean LEVEL_3_TRAP_CK = false;//셋방 발판 4개
-	public boolean LEVEL_4_TRAP_CK = false;//마지막방 발판
+	public boolean LEVEL_1_TRAP_CK = false;//初めての部屋足場4つ
+	public boolean LEVEL_2_TRAP_CK = false;//ヅルバン足場1個
+	public boolean LEVEL_3_TRAP_CK = false;//貸し足場4つ
+	public boolean LEVEL_4_TRAP_CK = false;//最後の部屋足場
 
 	public boolean BossRoomCK = false;
 	public boolean LAST_TRAP_CK = false;
@@ -123,22 +123,22 @@ public class HadinTrap implements Runnable {
 
 	private void TRAP_ON_CK(){
 		L1DoorInstance door = null;
-		if(LEVEL_1_TRAP_1 && LEVEL_1_TRAP_2 && LEVEL_1_TRAP_3 && LEVEL_1_TRAP_4){//첫방 4개 발판
+		if(LEVEL_1_TRAP_1 && LEVEL_1_TRAP_2 && LEVEL_1_TRAP_3 && LEVEL_1_TRAP_4){//初めての部屋の4つの足場
 			LEVEL_1_TRAP_CK = true;
-			door = doorList.get("해골문 2");
+			door = doorList.get("スケルトンドア2");
 			door.open();
 			BonginSendPacekt(7611);
-		} else if (TRAP_1){//두번째방 1개 발판
+		} else if (TRAP_1){//第二の部屋1つ足場
 			LEVEL_2_TRAP_CK = true;
-			door = doorList.get("해골문 4");
-			door = doorList.get("해골문 5");
-			door = doorList.get("해골문 6");
-			door = doorList.get("해골문 8");
+			door = doorList.get("スケルトンドア4");
+			door = doorList.get("スケルトンドア5");
+			door = doorList.get("スケルトンドア6");
+			door = doorList.get("スケルトンドア8");
 			door.open();
-		} else if(LEVEL_2_TRAP_1 && LEVEL_2_TRAP_2 && LEVEL_2_TRAP_3 && LEVEL_2_TRAP_4){//셋방 발판 4개 문 2개 오픈
+		} else if(LEVEL_2_TRAP_1 && LEVEL_2_TRAP_2 && LEVEL_2_TRAP_3 && LEVEL_2_TRAP_4){//貸し足場4つのドア2個のオープン
 			LEVEL_3_TRAP_CK = true;
-			door = doorList.get("해골문 7");
-			door = doorList.get("해골문 9");
+			door = doorList.get("スケルトンドア7");
+			door = doorList.get("スケルトンドア9");
 			BonginSendPacekt(7628);
 			door.open();			
 		} else if(LEVEL_3_TRAP_1 && LEVEL_3_TRAP_2 && LEVEL_3_TRAP_3 && LEVEL_3_TRAP_4){
@@ -176,7 +176,7 @@ public class HadinTrap implements Runnable {
 				if(ob instanceof L1PcInstance){
 					L1PcInstance pc = (L1PcInstance) ob;
 					pc.sendPackets(new S_ServerMessage(403, "$9355 (1)"));
-					pc.getInventory().storeItem(410108, 1); //비밀보따리
+					pc.getInventory().storeItem(410108, 1);//秘密包み
 				}
 			}
 			BonginSendPacekt(8719);
@@ -193,14 +193,14 @@ public class HadinTrap implements Runnable {
 		if(pc.getX() == 32666 && pc.getY() == 32817)       LEVEL_1_TRAP_1 = true;
 		else if(pc.getX() == 32668 && pc.getY() == 32817)  LEVEL_1_TRAP_2 = true;
 		else if(pc.getX() == 32666 && pc.getY() == 32819)  LEVEL_1_TRAP_3 = true;
-		else if(pc.getX() == 32668 && pc.getY() == 32819)  LEVEL_1_TRAP_4 = true;//첫방 4개 발판
+		else if(pc.getX() == 32668 && pc.getY() == 32819)  LEVEL_1_TRAP_4 = true;//初めての部屋の4つの足場
 
-		else if(pc.getX() == 32684 && pc.getY() == 32816)  TRAP_1 = true;//두번째방 1개 발판
+		else if(pc.getX() == 32684 && pc.getY() == 32816)  TRAP_1 = true;//第二の部屋1つ足場
 
 		else if(pc.getX() == 32703 && pc.getY() == 32800)  LEVEL_2_TRAP_1 = true;
 		else if(pc.getX() == 32703 && pc.getY() == 32791)  LEVEL_2_TRAP_2 = true;
 		else if(pc.getX() == 32710 && pc.getY() == 32803)  LEVEL_2_TRAP_3 = true;
-		else if(pc.getX() == 32712 && pc.getY() == 32793)  LEVEL_2_TRAP_4 = true;//셋째방 4개 발판
+		else if(pc.getX() == 32712 && pc.getY() == 32793)  LEVEL_2_TRAP_4 = true;//第三の部屋の4つの足場
 
 		else if(pc.getX() == 32807 && pc.getY() == 32837)  LEVEL_3_TRAP_1 = true;
 		else if(pc.getX() == 32809 && pc.getY() == 32837)  LEVEL_3_TRAP_2 = true;

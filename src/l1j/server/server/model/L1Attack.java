@@ -2161,11 +2161,11 @@ public class L1Attack {
             return 0;
         }
     	if (_pc instanceof L1RobotInstance) {
-			if (((L1RobotInstance) _pc).사냥봇_위치.equalsIgnoreCase("지저")
-					|| ((L1RobotInstance) _pc).사냥봇_위치.startsWith("잊섬")
-					|| ((L1RobotInstance) _pc).사냥봇_위치.equalsIgnoreCase("선박수면")
-					|| ((L1RobotInstance) _pc).사냥봇_위치.equalsIgnoreCase("상아탑4층")
-					|| ((L1RobotInstance) _pc).사냥봇_위치.equalsIgnoreCase("상아탑5층")) {
+			if (((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("지저")
+					|| ((L1RobotInstance) _pc).huntingBot_Location.startsWith("잊섬")
+					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("선박수면")
+					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("상아탑4층")
+					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("상아탑5층")) {
 				if (_pc.getCurrentWeapon() == 46 // 단검
 						|| _pc.getCurrentWeapon() == 20
 						|| _pc.getCurrentWeapon() == 24) {// 弓

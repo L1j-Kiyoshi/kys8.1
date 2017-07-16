@@ -101,7 +101,7 @@ public class Azmodan implements Runnable {
 			for (L1Object obj : L1World.getInstance().getVisibleObjects(_map).values()) {
 				if (obj instanceof L1PcInstance) {
 					L1PcInstance pc = (L1PcInstance) obj;
-					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, min+"분뒤에 던전은 종료됩니다."));
+					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, min+"分後ダンジョンは終了します。"));
 				}
 			}
 		}
@@ -127,7 +127,7 @@ public class Azmodan implements Runnable {
 				L1NpcInstance npc = _list2.get(i);
 				if (npc.getNpcId() == 14906 && npc.getCurrentHp() <= 0) {				
 					remove(npc, 2);
-					openDoor(14912); // 두번째 문 개방.
+					openDoor(14912); // 第二扉開放​​。
 					SecondLevel = false;
 					ThirdLevel = true;
 				}
@@ -215,11 +215,11 @@ public class Azmodan implements Runnable {
 								clan.setRankDate(time);
 								ClanTable.getInstance().updateRankDate(clan.getClanId(), time);
 								for (L1PcInstance member : clan.getOnlineClanMember()) {
-									member.sendPackets(new S_SystemMessage("알림: 기록을 "+min+"분 "+second+"초 로 갱신하였습니다.")); 
+									member.sendPackets(new S_SystemMessage("注意：記録を"+min+"分"+second+"超で更新しました。")); 
 								}
 							} else if (clan.getRankTime() < clantime) {
 								for (L1PcInstance member : clan.getOnlineClanMember()) {
-									member.sendPackets(new S_SystemMessage("알림: 기존의 기록을 갱신하는데 실패하였습니다.")); 	
+									member.sendPackets(new S_SystemMessage("通知：既存の記録を更新するのに失敗しました。")); 	
 								}
 							}
 							End();
@@ -235,7 +235,7 @@ public class Azmodan implements Runnable {
 			for (L1Object obj : L1World.getInstance().getVisibleObjects(_map).values()) {
 				if (obj instanceof L1PcInstance) {
 					L1PcInstance pc = (L1PcInstance) obj;					
-					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "30초후 지하통로가 닫힙니다."));					
+					pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "30秒後、地下通路が閉じられます。"));					
 				}
 			}
 			Thread.sleep(30000);
@@ -332,11 +332,11 @@ public class Azmodan implements Runnable {
 	}
 
 	private void SpawnMonster() {	
-		// 문짝 스폰
-		spawn(32869, 32936, (short) _map, 0, 14911, 1, 0); //1층문
-		spawn(32809, 33066, (short) _map, 0, 14912, 1, 0); //2층문	
+		// 扉出現
+		spawn(32869, 32936, (short) _map, 0, 14911, 1, 0); //1チュンムン
+		spawn(32809, 33066, (short) _map, 0, 14912, 1, 0); //2チュンムン	
 
-		// 지하1층
+		//地下1階
 		spawn(32933, 32874, (short) _map, 0, _MonsterList1[_random.nextInt(100) % _MonsterList1.length], 0, 1);
 		spawn(32933, 32871, (short) _map, 0, _MonsterList1[_random.nextInt(100) % _MonsterList1.length], 0, 1);
 		spawn(32934, 32879, (short) _map, 0, _MonsterList1[_random.nextInt(100) % _MonsterList1.length], 0, 1);
@@ -388,9 +388,9 @@ public class Azmodan implements Runnable {
 		spawn(32870, 32870, (short) _map, 0, _MonsterList1[_random.nextInt(100) % _MonsterList1.length], 0, 1);
 		spawn(32866, 32921, (short) _map, 0, _MonsterList1[_random.nextInt(100) % _MonsterList1.length], 0, 1);
 		
-		spawn(32868, 32925, (short) _map, 6, 14905, 0, 1); // 탐욕의 아비쉬
+		spawn(32868, 32925, (short) _map, 6, 14905, 0, 1); //貪欲のアヴィシー
 		
-		// 지하 2층
+		//地下2階
 		spawn(32866, 32982, (short) _map, 0, _MonsterList2[_random.nextInt(100) % _MonsterList2.length], 0, 2);
 		spawn(32863, 32985, (short) _map, 0, _MonsterList2[_random.nextInt(100) % _MonsterList2.length], 0, 2);
 		spawn(32872, 32985, (short) _map, 0, _MonsterList2[_random.nextInt(100) % _MonsterList2.length], 0, 2);
@@ -444,15 +444,15 @@ public class Azmodan implements Runnable {
 		spawn(32813, 33060, (short) _map, 0, _MonsterList2[_random.nextInt(100) % _MonsterList2.length], 0, 2);
 		spawn(32805, 33059, (short) _map, 0, _MonsterList2[_random.nextInt(100) % _MonsterList2.length], 0, 2);
 		spawn(32811, 33049, (short) _map, 0, _MonsterList2[_random.nextInt(100) % _MonsterList2.length], 0, 2);
-		spawn(32812, 33048, (short) _map, 5, 14903, 0, 2); //독꽃
-		spawn(32808, 33049, (short) _map, 5, 14903, 0, 2); //독꽃
-		spawn(32805, 33051, (short) _map, 5, 14903, 0, 2); //독꽃
-		spawn(32804, 33055, (short) _map, 5, 14903, 0, 2); //독꽃
-		spawn(32804, 33055, (short) _map, 5, 14903, 0, 2); //독꽃
-		spawn(32805, 33060, (short) _map, 5, 14903, 0, 2); //독꽃
-		spawn(32812, 33054, (short) _map, 5, 14906, 0, 2); // 탐욕의 삼지바
+		spawn(32812, 33048, (short) _map, 5, 14903, 0, 2); //ドクコト
+		spawn(32808, 33049, (short) _map, 5, 14903, 0, 2); //ドクコト
+		spawn(32805, 33051, (short) _map, 5, 14903, 0, 2); //ドクコト
+		spawn(32804, 33055, (short) _map, 5, 14903, 0, 2); //ドクコト
+		spawn(32804, 33055, (short) _map, 5, 14903, 0, 2); //ドクコト
+		spawn(32805, 33060, (short) _map, 5, 14903, 0, 2); //ドクコト
+		spawn(32812, 33054, (short) _map, 5, 14906, 0, 2); // 貪欲の視バー
 		
-		// 지하 3층
+		// 地下3階
 		spawn(32795, 33113, (short) _map, 0, _MonsterList3[_random.nextInt(100) % _MonsterList3.length], 0, 3);
 		spawn(32798, 33108, (short) _map, 0, _MonsterList3[_random.nextInt(100) % _MonsterList3.length], 0, 3);
 		spawn(32798, 33112, (short) _map, 0, _MonsterList3[_random.nextInt(100) % _MonsterList3.length], 0, 3);
@@ -515,7 +515,7 @@ public class Azmodan implements Runnable {
 		spawn(32836, 33109, (short) _map, 0, _MonsterList3[_random.nextInt(100) % _MonsterList3.length], 0, 3);
 		spawn(32824, 33104, (short) _map, 0, _MonsterList3[_random.nextInt(100) % _MonsterList3.length], 0, 3);
 		spawn(32817, 33101, (short) _map, 0, _MonsterList3[_random.nextInt(100) % _MonsterList3.length], 0, 3);		
-		spawn(32866, 33173, (short) _map, 5, 14907, 0, 3); // 탐욕의 아즈모단
+		spawn(32866, 33173, (short) _map, 5, 14907, 0, 3); //貪欲のアズモダン
 	}
 
 	public static L1NpcInstance spawn(int x, int y, short MapId, int Heading, int npcId, int randomRange, int roomnumber) {
