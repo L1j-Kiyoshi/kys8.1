@@ -476,9 +476,9 @@ public class CalcExp {
 		}
 		
 		// 成長の文章
-		int 성장의문장 = pc.getInventory().getEnchantCount(900020);
+		int growthEmblem = pc.getInventory().getEnchantCount(900020);
 		if (pc.getInventory().checkEquipped(900020)) {
-			beginnerBonus += (0.1 * 성장의문장);
+			beginnerBonus += (0.1 * growthEmblem);
 		}
 		
 		if (pc.hasSkillEffect(L1SkillId.레벨업보너스))
@@ -593,7 +593,7 @@ public class CalcExp {
 		/** 腥血追加経験値支給 **/
 		double BloodBonus = 0;	
 		if (clan != null && clan.getCastleId() != 0) {
-			BloodBonus += Config.성혈경험치;
+			BloodBonus += Config.EX_EXP;
 			//System.out.println("腥血 : " + BloodBonus);
 		}
 				

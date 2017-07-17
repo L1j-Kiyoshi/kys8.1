@@ -259,7 +259,7 @@ public class L1WeaponSkill {
 		int dmg = 0;
 		int dice = 9;
 		int diceCount = 5;
-		int value = Config.키링크;
+		int value = Config.KIRINGKU;
 		int KiringkuDamage = 0;
 		int charaIntelligence = 0;
 		

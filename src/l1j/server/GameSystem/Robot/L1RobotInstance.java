@@ -354,7 +354,7 @@ public class L1RobotInstance extends L1PcInstance {
 			curePoison();
 			cyanPotion--;
 			if (cyanPotion <= 0)
-				물약리셋();
+				resetPotion();
 			return true;
 		}
 		return false;
@@ -402,7 +402,7 @@ public class L1RobotInstance extends L1PcInstance {
 					return;
 				}
 
-				if (Robot.속도버프(this)) {
+				if (Robot.speedBuff(this)) {
 					setSleepTime(calcSleepTime(MAGIC_SPEED));
 					return;
 				}
@@ -439,7 +439,7 @@ public class L1RobotInstance extends L1PcInstance {
 			// 他の地域であることをチェックその位置にテル
 			if (loc == null) {
 				location_queue.clear();
-				ArrayList<Robot_Location_bean> list = Robot_Location.로케이션(this);
+				ArrayList<Robot_Location_bean> list = Robot_Location.Location(this);
 				if (list != null) {
 					for (Robot_Location_bean ro : list) {
 
@@ -564,7 +564,7 @@ public class L1RobotInstance extends L1PcInstance {
 			}
 
 			if (!isDead() && loc != null) {
-				이동();
+				moveBot();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -840,12 +840,12 @@ public class L1RobotInstance extends L1PcInstance {
 
 		setCurrentHp(getCurrentHp() + healHp);
 		if (potCount <= 0) {
-			물약리셋();
+			resetPotion();
 		}
 		return delay;
 	}
 
-	private void 물약리셋() {
+	private void resetPotion() {
 		/*
 		 *ディレイ（2000 + _random.nextInt（14000））;帰還（）;
 		 */
@@ -1494,7 +1494,7 @@ public class L1RobotInstance extends L1PcInstance {
 	}
 
 	// 狩猟ボットの移動
-	private void 이동() {
+	private void moveBot() {
 		moveBot(loc.getX(), loc.getY());
 	}
 

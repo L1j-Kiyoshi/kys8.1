@@ -928,10 +928,10 @@ public class GMCommands {
 	
 	private void 특정이벤트(L1PcInstance gm, String param){
 		if(param.equalsIgnoreCase("시작")){
-			Config.경험치 = 2;//起動すると、自動的に2にマンドゥルム
+			Config.EXP = 2;//起動すると、自動的に2にマンドゥルム
 			L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\aA■ しばらくして「ギラン監獄」で \\aG[経験値/羽]\\aA 2倍イベントが開始されます。 ■"));		
 		} else if(param.equalsIgnoreCase("종료")){
-			Config.경험치 = 0;//終了すると、自動的に0にマンドゥルム
+			Config.EXP = 0;//終了すると、自動的に0にマンドゥルム
 //			Config.load();//コンフィグで再びゼロにマンドゥルム（コンフィグで0に設定されている必要があります）
 			L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\aA■ しばらくして「ギラン監獄」で \\aG[経験値/羽]\\aA 2倍イベントが終了します。 ■"));		
 		} else {
@@ -941,14 +941,14 @@ public class GMCommands {
 	
 	private void 돌아온아놀드이벤트(L1PcInstance gm, String param){
 		if(param.equalsIgnoreCase("시작")){
-			if(Config.아놀드이벤트 == false){
+			if(Config.ARNOLD_EVENTS == false){
 				ArnoldBackEvent.getInstance().isGmOpen아놀드 = true;
 				ArnoldBackEvent.getInstance().start();
 			} else {
 				gm.sendPackets(new S_SystemMessage("現在アーノルドイベントが進行中です。"));
 			}
 		} else if(param.equalsIgnoreCase("종료")){
-			if(Config.아놀드이벤트 == true){
+			if(Config.ARNOLD_EVENTS == true){
 				AdenaHuntController.getInstance().setAdenaHuntStart(false);
 				AdenaHuntController.getInstance().isGmOpen4 = false;
 				ArnoldBackEvent.getInstance().End();

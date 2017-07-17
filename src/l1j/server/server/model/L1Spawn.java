@@ -431,7 +431,7 @@ public class L1Spawn {
 			/** 大黒長老出現時の周辺にテレポート **/
 			
 			
-			if (Config.보스스폰작동유무) {
+			if (Config.BOSS_SPAWN_OPERATION) {
 			switch (npcId) {
 			case 7310015: // 歪みのゼニスクイーン
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔1階の歪みのゼニスクイーン出現難易度:★★☆☆☆"));

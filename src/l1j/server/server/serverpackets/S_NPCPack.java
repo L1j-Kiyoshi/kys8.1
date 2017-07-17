@@ -130,7 +130,7 @@ public class S_NPCPack extends ServerBasePacket {
 		}
 
 		/**
-		 * 세팅 - 0:mob,item(atk pointer), 1:poisoned(), 2:invisable(), 4:pc,
+		 * セッティング -  0：mob、item（atk pointer）、1：poisoned（）、2：invisable（）、4：pc、
 		 * 8:cursed(), 16:brave(), 32:??, 64:??(??), 128:invisable but name
 		 */
 		int status = 0;

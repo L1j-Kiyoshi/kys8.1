@@ -31,7 +31,7 @@ public void setAdenaHuntStart(boolean AdenaHunt) {
 
   private String NowTime = "";
 
-  private static final int ADENTIME = Config.아덴사냥터시간;
+  private static final int ADENTIME = Config.ADEN_HUNTING_TIME;
 
   private static final SimpleDateFormat s = new SimpleDateFormat("HH", Locale.KOREA);
 
@@ -154,7 +154,7 @@ public void setAdenaHuntStart(boolean AdenaHunt) {
     public void End() {
     	L1World.getInstance().broadcastServerMessage("\\fSアデン狩り場が終了しました。");
 
-    	L1World.getInstance().broadcastServerMessage("\\fSアデン狩り場は ["+Config.아덴사냥터시간+"時間]間隔で行われます。");
+    	L1World.getInstance().broadcastServerMessage("\\fSアデン狩り場は ["+Config.ADEN_HUNTING_TIME+"時間]間隔で行われます。");
     	setAdenaHuntStart(false);
     }
 }

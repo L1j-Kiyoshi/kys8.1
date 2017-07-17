@@ -643,13 +643,13 @@ public class C_NPCAction2 {
 						pc.sendPackets(new S_ChatPacket(pc, "システム：用のダンジョン時間が経過しました。"));
 						return htmlid;
 					}
-					if (pc.getLevel() >= Config.용던입장레벨 & pc.getLevel() <= Config.용던제한레벨) {//そのレベル75〜85
+					if (pc.getLevel() >= Config.DVC_ENTRY_LEVEL & pc.getLevel() <= Config.DVC_LIMIT_LEVEL) {//そのレベル75〜85
 						pc.setSkillEffect(L1SkillId.ABSOLUTE_BARRIER, 5000);
 						new L1Teleport().teleport(pc, 32770, 32759, (short) 30, 5, true);
 						htmlid = "";
 					} else {
 						htmlid = "dvdgate2";
-						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\fQ地竜のダンジョン: \\f3[Lv."+ Config.용던입장레벨 +"~ "+Config.용던제한레벨+"]\\fQ まで入場可能レベルです。"));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\fQ地竜のダンジョン: \\f3[Lv."+ Config.DVC_ENTRY_LEVEL +"~ "+Config.DVC_LIMIT_LEVEL+"]\\fQ まで入場可能レベルです。"));
 						}
 					}
 				
@@ -660,13 +660,13 @@ public class C_NPCAction2 {
 						pc.sendPackets(new S_ChatPacket(pc, "用のダンジョン時間が経過しました。"));
 						return htmlid;
 					}
-					if (pc.getLevel() >= Config.수던입장레벨 & pc.getLevel() <= Config.수던제한레벨) {
+					if (pc.getLevel() >= Config.HC_ENTRY_LEVEL & pc.getLevel() <= Config.HC_LIMIT_LEVEL) {
 						pc.setSkillEffect(L1SkillId.ABSOLUTE_BARRIER, 5000);
 						new L1Teleport().teleport(pc, 32774, 32805, (short) 814, 5, true);
 						htmlid = "";
 					} else {
 						htmlid = "newbieddw2";
-						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\fQ水竜のダンジョン： \\f3[Lv."+ Config.수던입장레벨 +"~ "+ Config.수던제한레벨 +"]\\fQ まで入場可能レベルです。"));
+						pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\fQ水竜のダンジョン： \\f3[Lv."+ Config.HC_ENTRY_LEVEL +"~ "+ Config.HC_LIMIT_LEVEL +"]\\fQ まで入場可能レベルです。"));
 					}
 				}
 
@@ -1046,7 +1046,7 @@ public class C_NPCAction2 {
 						return htmlid;
 					}
 					if (s.equalsIgnoreCase("1"))
-					if (pc.getLevel() > Config.말섬입장레벨 & pc.getLevel() < Config.말섬제한레벨) {//そのレベル
+					if (pc.getLevel() > Config.TIC_ENTRY_LEVEL & pc.getLevel() < Config.TIC_LIMIT_LEVEL) {//そのレベル
 						Random random = new Random(System.nanoTime());
 						int ran = random.nextInt(3);
 					    new L1Teleport().teleport(pc, 32668 + ran, 32804 + ran, (short) 1, 5, true);
@@ -1736,8 +1736,8 @@ public class C_NPCAction2 {
 	
 				//悪魔王の領土
 			} else if (npcid == 5100017) {
-				if (pc.getLevel() < Config.악마왕입장레벨) {
-					pc.sendPackets(new S_SystemMessage("レベル" + Config.악마왕입장레벨 + "以上だけ入場することができます。"));
+				if (pc.getLevel() < Config.DEMON_KING_ENTRY_LEVEL) {
+					pc.sendPackets(new S_SystemMessage("レベル" + Config.DEMON_KING_ENTRY_LEVEL + "以上だけ入場することができます。"));
 					return htmlid;
 				}
 				if(s.equalsIgnoreCase("b")) { 

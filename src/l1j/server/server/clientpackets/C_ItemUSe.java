@@ -1034,7 +1034,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					break;
 
 				case 700000:// 経験値ポーション
-					if (Config.경험치물약만렙제한 == true) {
+					if (Config.EXP_POT_LIMIT == true) {
 						if (pc.getLevel() >= Config.LIMITLEVEL) {// 経験値
 							pc.sendPackets(new S_SystemMessage("レベル制限にもう経験値獲得が不可能です"));
 							return;
@@ -2491,12 +2491,12 @@ public class C_ItemUSe extends ClientBasePacket {
 						int ux = 32809 + rx;
 						int uy = 32727 + rx;
 						if (itemId == 3000106) {
-							if (pc.getLevel() >= Config.수련입장레벨 & pc.getLevel() <= Config.수련제한레벨) {
+							if (pc.getLevel() >= Config.SKTC_ENTRY_LEVEL & pc.getLevel() <= Config.SKTC_LIMIT_LEVEL) {
 								new L1Teleport().teleport(pc, ux, uy, (short) 25, pc.getHeading(), true);
-								pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\fQ[通知]: \\f3[Lv." + Config.수련입장레벨 + "~ " + Config.수련제한레벨 + "]\\fQ 適切狩り場です。"));
+								pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\fQ[通知]: \\f3[Lv." + Config.SKTC_ENTRY_LEVEL + "~ " + Config.SKTC_LIMIT_LEVEL + "]\\fQ 適切狩り場です。"));
 
 							}else{
-								pc.sendPackets(new S_ChatPacket(pc, "レベル"+Config.수련제한레벨+"以上から入場が不可能です。"));
+								pc.sendPackets(new S_ChatPacket(pc, "レベル"+Config.SKTC_LIMIT_LEVEL+"以上から入場が不可能です。"));
 							}
 
 						}
@@ -4232,8 +4232,8 @@ public class C_ItemUSe extends ClientBasePacket {
 					break;
 
 				case 210118:
-					if (pc.getLevel() >= Config.신규혈맹보호레벨) {
-						pc.sendPackets(new S_SystemMessage(Config.신규혈맹보호레벨 + "レベル以上は新規血盟に加入することができません。"));
+					if (pc.getLevel() >= Config.NEW_CLAN_PROTECTION_LEVEL) {
+						pc.sendPackets(new S_SystemMessage(Config.NEW_CLAN_PROTECTION_LEVEL + "レベル以上は新規血盟に加入することができません。"));
 						return;
 					}
 					if (pc.getClanid() == 0) {
@@ -4242,7 +4242,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						for (int cnt = 0; cnt < clanMember.length; cnt++) {
 							clanMember[cnt].sendPackets(new S_ServerMessage(94, pc.getName()));
 						}
-						pc.setClanid(Config.신규혈맹클랜);
+						pc.setClanid(Config.NEW_CLAN);
 						pc.setClanname("新規保護血盟");
 						pc.setTitle("\\f:新規保護血盟");
 						pc.setClanRank(L1Clan.수련);
@@ -4250,7 +4250,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						pc.save(); // DBに文字情報を記入する
 						clan.addClanMember(pc.getName(), pc.getClanRank(), pc.getLevel(), "", pc.getId(), pc.getType(), pc.getOnlineStatus(), pc);
 						pc.sendPackets(new S_SystemMessage("\\aA[メティス]:新規保護血盟に加入しました。"));
-						pc.sendPackets(new S_SystemMessage("\\aA[メティス]:レベル(" + Config.신규혈맹보호레벨 + "）になると、自動的に退会されます。"));
+						pc.sendPackets(new S_SystemMessage("\\aA[メティス]:レベル(" + Config.NEW_CLAN_PROTECTION_LEVEL + "）になると、自動的に退会されます。"));
 						pc.sendPackets(new S_SystemMessage("\\aA[メティス]:新規保護血はPKダメージが50％にのみ適用されます。"));
 						pc.getInventory().removeItem(l1iteminstance, 1);
 						new L1Teleport().teleport(pc, pc.getX(), pc.getY(), pc.getMapId(), pc.getHeading(), false);
@@ -4553,7 +4553,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						return;
 					}
 					int ran = _random.nextInt(100) + 1;
-					if (ran < Config.축복주문서) {//
+					if (ran < Config.BLESS_SCROLL) {//
 						l1iteminstance1.setBless(0);
 						l1iteminstance1.setSpecialEnchant(1);
 						pc.sendPackets(new S_ItemStatus(l1iteminstance1));
@@ -5205,7 +5205,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						boolean chance = false;
 						for (int i = 0 ; i < item.length; i++){
 							if (l1iteminstance.getItemId() == item[i]) {
-								if(_random.nextInt(99) + 1 <= Config.영생의빛) {
+								if(_random.nextInt(99) + 1 <= Config.LIGHT_OF_ETERNAL_LIFE) {
 									chance = true;
 									// 支払い処理。
 									createNewItem2(pc, temp[i], 1, l1iteminstance1.getEnchantLevel());
@@ -5468,18 +5468,18 @@ public class C_ItemUSe extends ClientBasePacket {
 					/** 属性エンチャント **/
 					int enchant_level = l1iteminstance1.getEnchantLevel();
 
-					if (enchant_level >= Config.무기인첸트 && (!(itemId >= 210064 && itemId <= 210067 || itemId >= 560030 && itemId <= 560033))) { // 인챈트 제한
-						pc.sendPackets(new S_SystemMessage("武器は+" + Config.무기인첸트 + "以上強化することができません。"));
+					if (enchant_level >= Config.WEAPON_ENCHANT && (!(itemId >= 210064 && itemId <= 210067 || itemId >= 560030 && itemId <= 560033))) { // 인챈트 제한
+						pc.sendPackets(new S_SystemMessage("武器は+" + Config.WEAPON_ENCHANT + "以上強化することができません。"));
 						return;
 					}
 
 					if (safe_enchant == 0) {
-						if (enchant_level >= Config.무기고급인첸트 && (!(itemId >= 210064 && itemId <= 210067 || itemId >= 560030 && itemId <= 560033))) {
+						if (enchant_level >= Config.WEAPON_PREMIUM_ENCHANT && (!(itemId >= 210064 && itemId <= 210067 || itemId >= 560030 && itemId <= 560033))) {
 							if (itemId == L1ItemId.C_SCROLL_OF_ENCHANT_WEAPON) { // c-dai
 								pc.getInventory().removeItem(l1iteminstance, 1);
 								SuccessEnchant(pc, l1iteminstance1, client, -1);
 							} else {
-								pc.sendPackets(new S_SystemMessage("高級アイテムは+" + Config.무기고급인첸트 + "以上強化することができません。"));
+								pc.sendPackets(new S_SystemMessage("高級アイテムは+" + Config.WEAPON_PREMIUM_ENCHANT + "以上強化することができません。"));
 							}
 							return;
 						}
@@ -5543,7 +5543,7 @@ public class C_ItemUSe extends ClientBasePacket {
 							 * if (k3 <= 15) { // -1 される確率15％SuccessEnchant（pc、l1iteminstance1、client、-1）; pc.sendPackets（new S_SystemMessage（
 							 *「アイテムのエンチャント数値が-1降りました。 "））; pc.getInventory（）removeItem（l1iteminstance、1）; }
 							 */
-							if (k3 <= Config.고대무기){ // +1になる確率5％
+							if (k3 <= Config.ANCIENT_WEAPON){ // +1になる確率5％
 								SuccessEnchant(pc, l1iteminstance1, client, +1);
 								pc.sendPackets(new S_SystemMessage("\\aA[祝福]: \\aG武器のエンチャントが+1しました。"));
 								pc.getInventory().removeItem(l1iteminstance, 1);
@@ -5561,7 +5561,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						if (!(l1iteminstance1.getItem().getMaterial() == 9 || l1iteminstance1.getItem().getMaterial() == 18)) {
 							if (enchant_level == 9) {
 								int rnd = _random.nextInt(100);
-								if (rnd <= Config.장인무기마법주문서) {
+								if (rnd <= Config.CRAFTSMAN_WEAPON_SCROLL) {
 									SuccessEnchant(pc, l1iteminstance1, client, 1);
 									/** エンチャント全体の通知リニューアル **/
 									if (enchant_level >= 9) { // 武器+10成功したときに通知
@@ -5599,7 +5599,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						}
 						if (weaponId >= 307 && weaponId <= 314){
 							enchant_chance_wepon = 90 / ((enchant_level - safe_enchant + 1) * 2) / (enchant_level / 9 != 0 ? 1 * 2 : 1)
-									+ Config.아놀드무기확률;
+									+ Config.ARNOLD_WEAPON_CHANCE;
 						} else if (enchant_level >= 10) {
 							enchant_chance_wepon = 90 / ((enchant_level - safe_enchant + 1) * 2) / (enchant_level / 9 != 0 ? 1 * 2 : 1)
 									+ Config.ENCHANT_CHANCE_WEAPON + chance;
@@ -5929,37 +5929,37 @@ public class C_ItemUSe extends ClientBasePacket {
 
 					// ルームティスのイヤリング+8まで。
 					if (armorId >= 22229 && armorId <= 22231 || armorId >= 222337 && armorId <= 222339 || armorId == 222340 || armorId == 222341) {
-						if (enchant_level >= Config.룸티스) {
-							pc.sendPackets(new S_SystemMessage("ルームティスイヤリングは+" + Config.룸티스 + "以上はエンチャントできません。"));
+						if (enchant_level >= Config.ROOMTIS) {
+							pc.sendPackets(new S_SystemMessage("ルームティスイヤリングは+" + Config.ROOMTIS + "以上はエンチャントできません。"));
 							return;
 						}
 					}
 					// スナップファーリングエンチャン制​​限+8まで。
 					if (armorId >= 22224 && armorId <= 22228 || armorId == 222290 || armorId == 222291 || armorId >= 222330 && armorId <= 222336) {
-						if (enchant_level >= Config.스냅퍼) {
-							pc.sendPackets(new S_SystemMessage("スナップファーリングは+" + Config.스냅퍼 + "以上はエンチャントできません。"));
+						if (enchant_level >= Config.SNAPPER) {
+							pc.sendPackets(new S_SystemMessage("スナップファーリングは+" + Config.SNAPPER + "以上はエンチャントできません。"));
 							return;
 						}
 					}
 
 					if (armortype >= 8 && armortype <= 12) {
-						if (enchant_level >= Config.악세사리) {
-							pc.sendPackets(new S_SystemMessage("アクセサリーは+" + Config.악세사리 + "以上はエンチャントできません。"));
+						if (enchant_level >= Config.ACCESSORIES) {
+							pc.sendPackets(new S_SystemMessage("アクセサリーは+" + Config.ACCESSORIES + "以上はエンチャントできません。"));
 							return;
 						}
 					}
 
-					if (enchant_level >= Config.방어구인첸트) { //エンチャント制限
-						pc.sendPackets(new S_SystemMessage("防具は+" + Config.방어구인첸트 + "以上強化することができません。"));
+					if (enchant_level >= Config.ARMOR_ENCHANT) { //エンチャント制限
+						pc.sendPackets(new S_SystemMessage("防具は+" + Config.ARMOR_ENCHANT + "以上強化することができません。"));
 						return;
 					}
 					if (!(armortype >= 8 && armortype <= 12) && safe_enchant == 0 && armortype != 17) {
-						if (enchant_level >= Config.방어구고급인첸트) {
+						if (enchant_level >= Config.ARMOR_PREMIUM_ENCHANT) {
 							if (itemId == L1ItemId.C_SCROLL_OF_ENCHANT_ARMOR) { // c-dai
 								pc.getInventory().removeItem(l1iteminstance, 1);
 								SuccessEnchant(pc, l1iteminstance1, client, -1);
 							} else {
-								pc.sendPackets(new S_SystemMessage("高級アイテムは+" + Config.무기고급인첸트 + "以上強化することができません。"));
+								pc.sendPackets(new S_SystemMessage("高級アイテムは+" + Config.WEAPON_PREMIUM_ENCHANT + "以上強化することができません。"));
 							}
 							return;
 						}
@@ -6020,7 +6020,7 @@ public class C_ItemUSe extends ClientBasePacket {
 							 * if (k3 <= 100）{// -1される確率15％SuccessEnchant（pc、l1iteminstance1、client、-1）; pc.sendPackets（new S_SystemMessage（
 							 * "アイテムのエンチャント数値が-1降りました。 "））; pc.getInventory（）removeItem（l1iteminstance、1）;}
 							 */
-							if (k3 <= Config.고대방어구){ // +1になる確率10％
+							if (k3 <= Config.ANCIENT_ARMOR){ // +1になる確率10％
 								SuccessEnchant(pc, l1iteminstance1, client, +1);
 								pc.sendPackets(new S_SystemMessage("\\aA[祝福]: \\aG防具のエンチャントが+1しました。"));
 								pc.getInventory().removeItem(l1iteminstance, 1);
@@ -6050,7 +6050,7 @@ public class C_ItemUSe extends ClientBasePacket {
 							}
 							Random random = new Random();
 							int k3 = random.nextInt(100);
-							if (k3 <= Config.문장강화확률) { // +1になる確率5％
+							if (k3 <= Config.CREST_ENCHANT_CHANCE) { // +1になる確率5％
 								SuccessEnchant(pc, l1iteminstance1, client, +1);
 								pc.sendPackets(new S_SystemMessage("\\aA[祝福]: \\aG防具のエンチャントが+1しました。"));
 								pc.getInventory().removeItem(l1iteminstance, 1);
@@ -6147,7 +6147,7 @@ public class C_ItemUSe extends ClientBasePacket {
 							} else {
 								if (l1iteminstance1.getItem().get_safeenchant() == 0) {
 								if (armorId == 900020 || armorId == 900021) {
-									enchant_chance_armor = Config.문장강화확률;
+									enchant_chance_armor = Config.CREST_ENCHANT_CHANCE;
 
 								}else if (l1iteminstance1.getMr() > 0) {
 										enchant_chance_armor = 80 / ((enchant_level - safe_enchant + 1) * 2) / (enchant_level / 7 != 0 ? 1 * 2 : 1)
@@ -6544,7 +6544,7 @@ public class C_ItemUSe extends ClientBasePacket {
 	private void normalBuff(L1PcInstance pc, L1ItemInstance useItem) {
 		Calendar currentDate = Calendar.getInstance();
 		Timestamp lastUsed = useItem.getLastUsed();
-		if (lastUsed == null || currentDate.getTimeInMillis() > lastUsed.getTime() + (1000 * Config.정상의가호 * 1)) {
+		if (lastUsed == null || currentDate.getTimeInMillis() > lastUsed.getTime() + (1000 * Config.NORMAL_PROTECTION * 1)) {
 			pc.sendPackets(new S_SkillSound(pc.getId(), 12536));
 			pc.broadcastPacket(new S_SkillSound(pc.getId(), 12536));
 			if(pc.hasSkillEffect(L1SkillId.RANK_BUFF_5)) {
@@ -6554,7 +6554,7 @@ public class C_ItemUSe extends ClientBasePacket {
 			}
 			useItem.setLastUsed(new Timestamp(currentDate.getTimeInMillis()));
 		} else {
-			long i = (lastUsed.getTime() + (1000 * Config.정상의가호 * 1)) - currentDate.getTimeInMillis();
+			long i = (lastUsed.getTime() + (1000 * Config.NORMAL_PROTECTION * 1)) - currentDate.getTimeInMillis();
 			Calendar cal = (Calendar) currentDate.clone();
 			cal.setTimeInMillis(cal.getTimeInMillis() + i);
 			pc.sendPackets(new S_SystemMessage(i / 60000 + "分の間（" + cal.getTime().getHours() + ":" + cal.getTime().getMinutes() + "まで）は使用できません。"), true);
@@ -6614,7 +6614,7 @@ public class C_ItemUSe extends ClientBasePacket {
 			pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
 			// %0を手に入れました。
 
-			if (Config.순백의티){
+			if (Config.PURE_WHITE_T){
 				Timestamp deleteTime = null;
 				deleteTime = new Timestamp(System.currentTimeMillis() + (1000 * 60 * 4320));// 1日
 				item.setEndTime(deleteTime);
@@ -7084,11 +7084,11 @@ public class C_ItemUSe extends ClientBasePacket {
 				// manager.LogEnchantAppend（「[ゴインチェン]成功：武器 "、pc.getName（）、oldEnchantLvl +"  - > "+ newEnchantLvl、item.getName（）、item.getId（））;
 				LinAllManager.getInstance().EnchantAppend(item.getName(), oldEnchantLvl, newEnchantLvl, pc.getName(), 0);
 			}
-			if (newEnchantLvl >= Config.무기인첸트) {
+			if (newEnchantLvl >= Config.WEAPON_ENCHANT) {
 				// manager.LogEnchantAppend（ "[最高エンチャン]成功：武器"、pc.getName（）、oldEnchantLvl + " - >" + newEnchantLvl、item.getName（）、item.getId（））;
 				LinAllManager.getInstance().EnchantAppend(item.getName(), oldEnchantLvl, newEnchantLvl, pc.getName(), 0);
 			}
-			if (newEnchantLvl >= Config.무기고급인첸트) {
+			if (newEnchantLvl >= Config.WEAPON_PREMIUM_ENCHANT) {
 				// manager.LogEnchantAppend（ "[執行級最高エンチャン]成功：武器"、pc.getName（）、oldEnchantLvl + " - >" + newEnchantLvl、item.getName（）、item.getId（））;
 				LinAllManager.getInstance().EnchantAppend(item.getName(), oldEnchantLvl, newEnchantLvl, pc.getName(), 0);
 			}
@@ -7099,7 +7099,7 @@ public class C_ItemUSe extends ClientBasePacket {
 				// manager.LogEnchantAppend（「[ゴインチェン]成功：防具 "、pc.getName（）、oldEnchantLvl +"  - > "+ newEnchantLvl、item.getName（）、item.getId（））;
 				LinAllManager.getInstance().EnchantAppend(item.getName(), oldEnchantLvl, newEnchantLvl, pc.getName(), 0);
 			}
-			if (newEnchantLvl >= Config.방어구인첸트) {
+			if (newEnchantLvl >= Config.ARMOR_ENCHANT) {
 				// manager.LogEnchantAppend（ "[最高エンチャン]成功：防具"、pc.getName（）、oldEnchantLvl + " - >" + newEnchantLvl、item.getName（）、item.getId（））;
 				LinAllManager.getInstance().EnchantAppend(item.getName(), oldEnchantLvl, newEnchantLvl, pc.getName(), 0);
 			}
@@ -10606,8 +10606,8 @@ public class C_ItemUSe extends ClientBasePacket {
 			pc.sendPackets(new S_ServerMessage(337, "$4")); // \f1%0が不足します。
 			return;
 		}
-		if (pc.getLevel() >= Config.쫄법사) {
-			pc.sendPackets(new S_ChatPacket(pc, " "+Config.쫄법사+"レベルまで使用出来ます。"));
+		if (pc.getLevel() >= Config.TSUTSUKUGEN) {
+			pc.sendPackets(new S_ChatPacket(pc, " "+Config.TSUTSUKUGEN+"レベルまで使用出来ます。"));
 			return;
 		}
 		boolean isAppear = true;
@@ -11039,15 +11039,15 @@ public class C_ItemUSe extends ClientBasePacket {
 		Timestamp deleteTime_Point = null;
 //						pc.sendPackets(new S_OwnCharStatus2(pc));
 		//pc.sendPackets(new S_CharVisualUpdate(pc)); // キャラ情報アップデッドエ
-		deleteTime_Vigor = new Timestamp(sysTime + (86400000 * (long) Config.강화버프활력시간) + 10000);// 7日
-		deleteTime_Attack = new Timestamp(sysTime + (86400000 * (long) Config.강화버프공격시간) + 10000);// 7日
-		deleteTime_Defense = new Timestamp(sysTime + (86400000 * (long) Config.강화버프방어시간) + 10000);// 7日
-		deleteTime_Magic = new Timestamp(sysTime + (86400000 * (long) Config.강화버프마법시간) + 10000);// 7日
-		deleteTime_Stun = new Timestamp(sysTime + (86400000 * (long) Config.강화버프스턴시간) + 10000);//7日
-		deleteTime_Hold = new Timestamp(sysTime + (86400000 * (long) Config.강화버프홀드시간) + 10000);// 7日
-		deleteTime_Power = new Timestamp(sysTime + (86400000 * (long) Config.강화버프힘시간) + 10000);//7日
-		deleteTime_Dex = new Timestamp(sysTime + (86400000 * (long) Config.강화버프덱스시간) + 10000);// 7日
-		deleteTime_Point = new Timestamp(sysTime + (86400000 * (long) Config.강화버프인트시간) + 10000);// 7日
+		deleteTime_Vigor = new Timestamp(sysTime + (86400000 * (long) Config.ENCHANT_BUFF_TIME_VITALITY) + 10000);// 7日
+		deleteTime_Attack = new Timestamp(sysTime + (86400000 * (long) Config.ENCHANT_BUFF_TIME_ATTACK) + 10000);// 7日
+		deleteTime_Defense = new Timestamp(sysTime + (86400000 * (long) Config.ENCHANT_BUFF_TIME_DEFENCE) + 10000);// 7日
+		deleteTime_Magic = new Timestamp(sysTime + (86400000 * (long) Config.ENCHANT_BUFF_TIME_MAGIC) + 10000);// 7日
+		deleteTime_Stun = new Timestamp(sysTime + (86400000 * (long) Config.ENCHANT_BUFF_TIME_STUN) + 10000);//7日
+		deleteTime_Hold = new Timestamp(sysTime + (86400000 * (long) Config.ENCHANT_BUFF_TIME_HOLD) + 10000);// 7日
+		deleteTime_Power = new Timestamp(sysTime + (86400000 * (long) Config.ENCHANT_BUFF_TIME_STR) + 10000);//7日
+		deleteTime_Dex = new Timestamp(sysTime + (86400000 * (long) Config.ENCHANT_BUFF_TIME_DEX) + 10000);// 7日
+		deleteTime_Point = new Timestamp(sysTime + (86400000 * (long) Config.ENCHANT_BUFF_TIME_INT) + 10000);// 7日
 
 		try {
 			if (itemId == 600212) {
@@ -11061,9 +11061,9 @@ public class C_ItemUSe extends ClientBasePacket {
 					pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
 				}
 				pc.removeSkillEffect(L1SkillId.강화버프_활력);
-				pc.setSkillEffect(L1SkillId.강화버프_활력, (int) 86400000 * Config.강화버프활력시간);
+				pc.setSkillEffect(L1SkillId.강화버프_활력, (int) 86400000 * Config.ENCHANT_BUFF_TIME_VITALITY);
 				pc.getNetConnection().getAccount().setBuff_HPMP(deleteTime_Vigor);
-				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.강화버프활력시간), true);
+				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_VITALITY), true);
 				pc.addMaxHp(50);
 				pc.addMaxMp(50);
 				pc.addWeightReduction(3);
@@ -11078,9 +11078,9 @@ public class C_ItemUSe extends ClientBasePacket {
 					pc.addBowDmgup(-1);
 				}
 				pc.removeSkillEffect(L1SkillId.강화버프_공격);
-				pc.setSkillEffect(L1SkillId.강화버프_공격, (int) 86400000 * Config.강화버프공격시간);
+				pc.setSkillEffect(L1SkillId.강화버프_공격, (int) 86400000 * Config.ENCHANT_BUFF_TIME_ATTACK);
 				pc.getNetConnection().getAccount().setBuff_DMG(deleteTime_Attack);
-				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.강화버프공격시간), true);
+				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_ATTACK), true);
 				pc.addDmgup(1);
 				pc.addBowDmgup(1);
 			} else if (itemId == 600214) {
@@ -11090,9 +11090,9 @@ public class C_ItemUSe extends ClientBasePacket {
 					pc.addDamageReductionByArmor(-1);
 				}
 				pc.removeSkillEffect(L1SkillId.강화버프_방어);
-				pc.setSkillEffect(L1SkillId.강화버프_방어, (int) 86400000 * Config.강화버프방어시간);
+				pc.setSkillEffect(L1SkillId.강화버프_방어, (int) 86400000 * Config.ENCHANT_BUFF_TIME_DEFENCE);
 				pc.getNetConnection().getAccount().setBuff_REDUC(deleteTime_Defense);
-				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.강화버프방어시간), true);
+				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_DEFENCE), true);
 				pc.addDamageReductionByArmor(1); // ダメージイパイ上げテスト
 			} else if (itemId == 600215) {
 				n = "魔法";
@@ -11102,9 +11102,9 @@ public class C_ItemUSe extends ClientBasePacket {
 					pc.sendPackets(new S_SPMR(pc)); //自分のmrを変更
 				}
 				pc.removeSkillEffect(L1SkillId.강화버프_마법);
-				pc.setSkillEffect(L1SkillId.강화버프_마법, (int) 86400000 * Config.강화버프마법시간);
+				pc.setSkillEffect(L1SkillId.강화버프_마법, (int) 86400000 * Config.ENCHANT_BUFF_TIME_MAGIC);
 				pc.getNetConnection().getAccount().setBuff_MAGIC(deleteTime_Magic);
-				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.강화버프마법시간), true);
+				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_MAGIC), true);
 				pc.getAbility().addSp(1); //オプション
 				pc.sendPackets(new S_SPMR(pc)); // 自分のmrを変更
 			} else if (itemId == 600216) {
@@ -11114,9 +11114,9 @@ public class C_ItemUSe extends ClientBasePacket {
 					pc.getResistance().addStun(-2);
 				}
 				pc.removeSkillEffect(L1SkillId.강화버프_스턴);
-				pc.setSkillEffect(L1SkillId.강화버프_스턴, (int) 86400000 * Config.강화버프스턴시간);
+				pc.setSkillEffect(L1SkillId.강화버프_스턴, (int) 86400000 * Config.ENCHANT_BUFF_TIME_STUN);
 				pc.getNetConnection().getAccount().setBuff_STUN(deleteTime_Stun);
-				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.강화버프스턴시간), true);
+				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_STUN), true);
 				pc.getResistance().addStun(2); // オプション
 			} else if (itemId == 600217) {
 				n = "ホールド";
@@ -11125,9 +11125,9 @@ public class C_ItemUSe extends ClientBasePacket {
 					pc.getResistance().addHold(-2);
 				}
 				pc.removeSkillEffect(L1SkillId.강화버프_홀드);
-				pc.setSkillEffect(L1SkillId.강화버프_홀드, (int) 86400000 * Config.강화버프홀드시간);
+				pc.setSkillEffect(L1SkillId.강화버프_홀드, (int) 86400000 * Config.ENCHANT_BUFF_TIME_HOLD);
 				pc.getNetConnection().getAccount().setBuff_HOLD(deleteTime_Hold);
-				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.강화버프홀드시간), true);
+				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_HOLD), true);
 				pc.getResistance().addHold(2); // オプション
 			}else if (itemId == 600259) { //力
 				n = "力 ";
@@ -11141,9 +11141,9 @@ public class C_ItemUSe extends ClientBasePacket {
 					pc.sendPackets(new S_OwnCharStatus2(pc), true);
 				}
 				pc.removeSkillEffect(L1SkillId.강화버프_힘);
-				pc.setSkillEffect(L1SkillId.강화버프_힘, (int) 86400000 * Config.강화버프힘시간);
+				pc.setSkillEffect(L1SkillId.강화버프_힘, (int) 86400000 * Config.ENCHANT_BUFF_TIME_STR);
 				pc.getNetConnection().getAccount().setBuff_STR(deleteTime_Power);
-				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.강화버프힘시간), true);
+				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_STR), true);
 				pc.getAbility().addAddedStr((byte)1);
 				pc.sendPackets(new S_OwnCharStatus2(pc), true);
 			} else if (itemId == 600260) {//デックス
@@ -11159,9 +11159,9 @@ public class C_ItemUSe extends ClientBasePacket {
 					pc.sendPackets(new S_OwnCharStatus2(pc), true);
 				}
 				pc.removeSkillEffect(L1SkillId.강화버프_덱스);
-				pc.setSkillEffect(L1SkillId.강화버프_덱스, (int) 86400000 * Config.강화버프덱스시간);
+				pc.setSkillEffect(L1SkillId.강화버프_덱스, (int) 86400000 * Config.ENCHANT_BUFF_TIME_DEX);
 				pc.getNetConnection().getAccount().setBuff_DEX(deleteTime_Dex);
-				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.강화버프덱스시간), true);
+				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_DEX), true);
 				//pc.getAbility().addDex(1);
 				pc.getAbility().addAddedDex((byte)1);
 				pc.sendPackets(new S_OwnCharStatus2(pc), true);
@@ -11178,9 +11178,9 @@ public class C_ItemUSe extends ClientBasePacket {
 					pc.sendPackets(new S_OwnCharStatus2(pc), true);
 				}
 				pc.removeSkillEffect(L1SkillId.강화버프_인트);
-				pc.setSkillEffect(L1SkillId.강화버프_인트, (int) 86400000 * Config.강화버프인트시간);
+				pc.setSkillEffect(L1SkillId.강화버프_인트, (int) 86400000 * Config.ENCHANT_BUFF_TIME_INT);
 				pc.getNetConnection().getAccount().setBuff_INT(deleteTime_Point);
-				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.강화버프인트시간), true);
+				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_INT), true);
 				//pc.getAbility().addInt(1);
 				pc.getAbility().addAddedInt((byte)1);
 				pc.sendPackets(new S_OwnCharStatus2(pc), true);

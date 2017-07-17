@@ -3,9 +3,9 @@ package l1j.server.server.serverpackets;
 import l1j.server.server.Opcodes;
 //by.lins
 public class S_CreateCharacter extends ServerBasePacket {
-	public static final String S_케릭터생성 = "[S] S_LoginResult";
-	public static final int 케릭비번표시 = 51;
-	public static final int 케릭비번성공 = 22;
+	public static final String S_CREATE_CHARACTER = "[S] S_LoginResult";
+	public static final int CHARACTER_OFF_DISPLAY = 51;
+	public static final int CHARACTER_OFF_DISPLAY_SUCCESS = 22;
 
 	private byte[] _byte = null;
 

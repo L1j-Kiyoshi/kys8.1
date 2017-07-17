@@ -633,15 +633,15 @@ public class UserCommands {
 					pc.sendPackets(new S_SystemMessage("既に手配されています"));
 					return;
 				}
-				if (price != Config.수배1단 && price != Config.수배2단 && price != Config.수배3단) {
+				if (price != Config.STAGE_1 && price != Config.STAGE_2 && price != Config.STAGE_3) {
 					pc.sendPackets(new S_SystemMessage(
-							"単位量は、" + Config.수배1단 + "/" + Config.수배2단 + "/" + Config.수배3단 + "万アデナです"));
+							"単位量は、" + Config.STAGE_1 + "/" + Config.STAGE_2 + "/" + Config.STAGE_3 + "万アデナです"));
 					pc.sendPackets(new S_SystemMessage(
-							"例) " + Config.수배1단 + ", " + Config.수배2단 + ", " + Config.수배3단 + "までです"));
+							"例) " + Config.STAGE_1 + ", " + Config.STAGE_2 + ", " + Config.STAGE_3 + "までです"));
 					return;
 				}
-				if (price > Config.수배3단) {
-					pc.sendPackets(new S_SystemMessage("最大量は" + Config.수배3단 + "万アデナです"));
+				if (price > Config.STAGE_3) {
+					pc.sendPackets(new S_SystemMessage("最大量は" + Config.STAGE_3 + "万アデナです"));
 					return;
 				}
 				if (!(pc.getInventory().checkItem(40308, price))) {
@@ -652,8 +652,8 @@ public class UserCommands {
 					pc.sendPackets(new S_SystemMessage("理由は短く、20文字で入力してください"));
 					return;
 				}
-				if (target.getHuntPrice() > Config.수배3단) {
-					pc.sendPackets(new S_SystemMessage("手配最大量" + Config.수배3단 + "のみです。"));
+				if (target.getHuntPrice() > Config.STAGE_3) {
+					pc.sendPackets(new S_SystemMessage("手配最大量" + Config.STAGE_3 + "のみです。"));
 					return;
 				}
 				target.setHuntCount(1);
@@ -672,28 +672,28 @@ public class UserCommands {
 		} catch (Exception e) {
 			pc.sendPackets(new S_SystemMessage("。手配[キャラクター名] [金額] [理由]"));
 			pc.sendPackets(new S_SystemMessage("====== 追加打撃範囲 ======"));
-			pc.sendPackets(new S_SystemMessage("====== " + Config.수배1단 + "만 추타 1 ======"));
-			pc.sendPackets(new S_SystemMessage("====== " + Config.수배2단 + "만 추타 2 ======"));
-			pc.sendPackets(new S_SystemMessage("====== " + Config.수배3단 + "만 추타 3 ======"));
+			pc.sendPackets(new S_SystemMessage("====== " + Config.STAGE_1 + "만 추타 1 ======"));
+			pc.sendPackets(new S_SystemMessage("====== " + Config.STAGE_2 + "만 추타 2 ======"));
+			pc.sendPackets(new S_SystemMessage("====== " + Config.STAGE_3 + "만 추타 3 ======"));
 		}
 	}
 
 	private void huntoption(L1PcInstance pc) { // このマップエフェクト示す
 		if (pc.getHuntCount() != 0) {
 			if (pc.isWizard() || pc.isBlackwizard()) {
-				if (pc.getHuntPrice() == Config.수배1단) {
+				if (pc.getHuntPrice() == Config.STAGE_1) {
 					pc.addSp(1);
 					pc.sendPackets(new S_SPMR(pc));
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
 					pc.sendPackets(new S_OwnCharStatus2(pc));
 					pc.sendPackets(new S_OwnCharStatus(pc));
-				} else if (pc.getHuntPrice() == Config.수배2단) {
+				} else if (pc.getHuntPrice() == Config.STAGE_2) {
 					pc.addSp(2);
 					pc.sendPackets(new S_SPMR(pc));
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
 					pc.sendPackets(new S_OwnCharStatus2(pc));
 					pc.sendPackets(new S_OwnCharStatus(pc));
-				} else if (pc.getHuntPrice() == Config.수배3단) {
+				} else if (pc.getHuntPrice() == Config.STAGE_3) {
 					pc.addSp(3);
 					pc.sendPackets(new S_SPMR(pc));
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
@@ -701,19 +701,19 @@ public class UserCommands {
 					pc.sendPackets(new S_OwnCharStatus(pc));
 				}
 			} else if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.isWarrior()) {
-				if (pc.getHuntPrice() == Config.수배1단) {
+				if (pc.getHuntPrice() == Config.STAGE_1) {
 					pc.addDmgup(1);
 					pc.addBowDmgup(1);
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
 					pc.sendPackets(new S_OwnCharStatus2(pc));
 					pc.sendPackets(new S_OwnCharStatus(pc));
-				} else if (pc.getHuntPrice() == Config.수배2단) {
+				} else if (pc.getHuntPrice() == Config.STAGE_2) {
 					pc.addDmgup(2);
 					pc.addBowDmgup(2);
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
 					pc.sendPackets(new S_OwnCharStatus2(pc));
 					pc.sendPackets(new S_OwnCharStatus(pc));
-				} else if (pc.getHuntPrice() == Config.수배3단) {
+				} else if (pc.getHuntPrice() == Config.STAGE_3) {
 					pc.addDmgup(3);
 					pc.addBowDmgup(3);
 					pc.sendPackets(new S_OwnCharAttrDef(pc));

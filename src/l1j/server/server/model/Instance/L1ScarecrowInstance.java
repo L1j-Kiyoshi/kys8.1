@@ -42,7 +42,7 @@ public class L1ScarecrowInstance extends L1NpcInstance {
 					CalcExp.calcExp(player, getId(), targetList, hateList, getExp());//経験値支給
 				}
 				
-				if (Config.허수아비탐지급여부) {
+				if (Config.SUPPLY_SCARECROW_TAM) {
 					player.sendPackets(new S_NewCreateItem(S_NewCreateItem.TAM_POINT, player.getNetConnection()), true);// 탐지급
 					player.getNetConnection().getAccount().tam_point += 10;// 乗車支給本数
 					player.getNetConnection().getAccount().updateTam();// 乗車アップデッドエ

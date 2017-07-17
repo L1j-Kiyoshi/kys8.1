@@ -69,26 +69,26 @@ public class C_MoveChar extends ClientBasePacket {
 
 
 		if (pc.getMapId() == 777 || pc.getMapId() == 778) {
-			if (pc.getLevel() > Config.버땅제한레벨 && !pc.isGm()) {
+			if (pc.getLevel() > Config.DISCARDED_LAND_ENTRY_LEVEL && !pc.isGm()) {
 				new L1Teleport().teleport(pc, 33443, 32799, (short) 4, 5, true);
-				pc.sendPackets(new S_SystemMessage("レベル" + Config.버땅제한레벨 + "以下のみ出入りが可能です。"));
+				pc.sendPackets(new S_SystemMessage("レベル" + Config.DISCARDED_LAND_ENTRY_LEVEL + "以下のみ出入りが可能です。"));
 			}
 		}
 		/** 用のダンジョン、水竜ダンジョン **/
 		if (pc.getMapId() >= 30 && pc.getMapId() <= 37 || pc.getMapId() == 814) {
-			if (pc.getLevel() > Config.용던제한레벨 && !pc.isGm()) {
+			if (pc.getLevel() > Config.DVC_LIMIT_LEVEL && !pc.isGm()) {
 				new L1Teleport().teleport(pc, 33443, 32799, (short) 4, 5, true);
 			}
 		}
 		/** 用のダンジョン、水竜ダンジョン **/
 		if (pc.getMapId() == 814) {
-			if (pc.getLevel() > Config.수던제한레벨 && !pc.isGm()) {
+			if (pc.getLevel() > Config.HC_LIMIT_LEVEL && !pc.isGm()) {
 				new L1Teleport().teleport(pc, 33443, 32799, (short) 4, 5, true);
 			}
 		}
 		/** 話せる島 **/
 		if (pc.getMapId() >= 1 && pc.getMapId() <= 2 ) {
-			if (pc.getLevel() > Config.말섬제한레벨 && !pc.isGm()) {
+			if (pc.getLevel() > Config.TIC_LIMIT_LEVEL && !pc.isGm()) {
 				new L1Teleport().teleport(pc, 33443, 32799, (short) 4, 5, true);
 			}
 		}

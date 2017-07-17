@@ -51,7 +51,7 @@ public class ValaRaidSystem {
 	}
 	public void startValakas(L1PcInstance pc){
 		if(countVala() >= 6){
-			pc.sendPackets(new S_ChatPacket(pc,"인스턴스 던전을 더 이상 생성할수 없습니다."));
+			pc.sendPackets(new S_ChatPacket(pc,"インスタンスダンジョンをこれ以上作成できません。"));
 			return;
 		}
 		int id = blankMapId();
@@ -61,13 +61,13 @@ public class ValaRaidSystem {
 		pc.valakasMapId = id;
 
 		int fire_delay = 3200;
-		L1SpawnUtil.spawn2(pc.getX(), pc.getY(), pc.getMapId(), 910008, 0, 3600 * 1000, id); // 포탈
-		L1SpawnUtil.spawn2(32731, 32922, (short) id, 3310015, 0, fire_delay * 1000, id); // 데스나이트 이펙트
-		L1SpawnUtil.spawn2(32732, 32922, (short) id, 3310018, 0, fire_delay * 1000, id); // 데스나이트 버프
-		L1SpawnUtil.spawn2(32733, 32937, (short) id, 60032, 0, fire_delay * 1000, id); // 창고지기
-		L1SpawnUtil.spawn2(32727, 32937, (short) id, 3310016, 0, fire_delay * 1000, id); // 잡화상인
-		L1SpawnUtil.spawn2(32751, 32928, (short) id, 3310017, 0, fire_delay * 1000, id); // 레어 입구
-		L1SpawnUtil.spawn2(32738, 32925, (short) id, 170017, 0, fire_delay * 1000, id); // 오림
+		L1SpawnUtil.spawn2(pc.getX(), pc.getY(), pc.getMapId(), 910008, 0, 3600 * 1000, id); //ポータル
+		L1SpawnUtil.spawn2(32731, 32922, (short) id, 3310015, 0, fire_delay * 1000, id); // デスナイトエフェクト
+		L1SpawnUtil.spawn2(32732, 32922, (short) id, 3310018, 0, fire_delay * 1000, id); // デスナイトバフ
+		L1SpawnUtil.spawn2(32733, 32937, (short) id, 60032, 0, fire_delay * 1000, id); // 倉庫番
+		L1SpawnUtil.spawn2(32727, 32937, (short) id, 3310016, 0, fire_delay * 1000, id); // 雑貨商人
+		L1SpawnUtil.spawn2(32751, 32928, (short) id, 3310017, 0, fire_delay * 1000, id); // レア入口
+		L1SpawnUtil.spawn2(32738, 32925, (short) id, 170017, 0, fire_delay * 1000, id); //クリップボード
 		spawn_fire(id);
 		
 		_list.put(id, vala);

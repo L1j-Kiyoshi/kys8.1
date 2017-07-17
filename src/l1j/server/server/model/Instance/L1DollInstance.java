@@ -779,7 +779,7 @@ public class L1DollInstance extends L1NpcInstance {
 			int chance2 = _random.nextInt(30) + 1;
 			int chance3 = _random.nextInt(10) + 1;
 			int TotalInt = cha.getAbility().getTotalInt();
-			if (chance <= Config.데스나이트헬파이어) {
+			if (chance <= Config.DEATH_KNIGHT_HELLFIRE) {
 				if (cha.hasSkillEffect(ERASE_MAGIC)) {
 					cha.killSkillEffectTimer(ERASE_MAGIC);
 				}

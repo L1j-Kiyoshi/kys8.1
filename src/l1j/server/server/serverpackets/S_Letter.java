@@ -35,7 +35,7 @@ public class S_Letter extends ServerBasePacket {
 				writeC(Opcodes. S_MAIL_INFO);
 				writeD(item.getId());
 				if (item.get_gfxid() == 465) { // オープン前
-					writeH(466); // 열기 후
+					writeH(466); // オープン後
 				} else if (item.get_gfxid() == 606) {
 					writeH(605);
 				} else if (item.get_gfxid() == 616) {

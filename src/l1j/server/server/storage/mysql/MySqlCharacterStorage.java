@@ -150,7 +150,7 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			pc.setHuntCount(rs.getInt("HuntCount"));
 			pc.setReasonToHunt(rs.getString("HuntText"));
 			/** ロボットシステム **/
-			if (rs.getString("account_name").equals("인공지능")) {
+			if (rs.getString("account_name").equals("人工知能")) {
 				pc.setRobotAi(new L1RobotAI(pc));
 			}
 			pc.setClanJoinDate(rs.getTimestamp("Clan_Join_Date"));

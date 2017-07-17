@@ -112,7 +112,7 @@ public class S_ChatPacket extends ServerBasePacket {
 			break;
         case 3:
             writeC(type);
-        	if (pc.getName().equalsIgnoreCase("메티스")&& !pc.getName().equalsIgnoreCase("미소피아")&& !pc.getName().equalsIgnoreCase("카시오페아")) {
+        	if (pc.getName().equalsIgnoreCase("メティス")&& !pc.getName().equalsIgnoreCase("ほほ笑み彼我")&& !pc.getName().equalsIgnoreCase("カシオペア")) {
 				writeS("[******] " + chat);
             }
         	if(pc.is9Militia() && !pc.isGm()){ writeS("[9等兵]["+pc.getName()+"] " + chat); }

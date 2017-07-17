@@ -290,7 +290,7 @@ public class LeafItem {
 				boolean chance = false;
 				for (int i = 0 ; i < item.length; i++){
 					if (l1iteminstance.getItemId() == item[i]) {
-						if(_random.nextInt(99) + 1 <= Config.생명의나뭇잎) {
+						if(_random.nextInt(99) + 1 <= Config.LEAVES_OF_LIFE) {
 							chance = true;
 							// 支払い処理。
 							createNewItem2(pc, temp[i], 1, l1iteminstance1.getEnchantLevel());
@@ -298,7 +298,7 @@ public class LeafItem {
 							break;
 						}
 						if (pc.isGm()){
-							pc.sendPackets(new S_SystemMessage("葉の確率 >> " + Config.생명의나뭇잎));
+							pc.sendPackets(new S_SystemMessage("葉の確率 >> " + Config.LEAVES_OF_LIFE));
 						}
 					}
 				}

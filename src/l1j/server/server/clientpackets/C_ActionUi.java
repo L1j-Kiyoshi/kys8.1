@@ -2730,14 +2730,14 @@ public class C_ActionUi extends ClientBasePacket {
 					player.sendPackets(sm, true);
 					return;
 				}
-				if (enemyClan.getCastleId() != 0 && player.getLevel() < Config.선포레벨) {
-					player.sendPackets(new S_SystemMessage("レベル" + Config.선포레벨 + "から宣言することができます。"));
+				if (enemyClan.getCastleId() != 0 && player.getLevel() < Config.DECLARATION_LEVEL) {
+					player.sendPackets(new S_SystemMessage("レベル" + Config.DECLARATION_LEVEL + "から宣言することができます。"));
 					return;
 				}
 
 
-				if (clan.getOnlineClanMember().length <= Config.혈맹접속인원) {   
-					player.sendPackets(new S_SystemMessage("接続した血盟員が"+Config.혈맹접속인원+"人以上であれば宣言が可能です。"));
+				if (clan.getOnlineClanMember().length <= Config.CLAN_CONNECT_COUNT) {   
+					player.sendPackets(new S_SystemMessage("接続した血盟員が"+Config.CLAN_CONNECT_COUNT+"人以上であれば宣言が可能です。"));
 					return;
 				}
 

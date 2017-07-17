@@ -70,7 +70,7 @@ public class DungeonTimer implements Runnable {
 						if (use.getMapId() == 1 || use.getMapId() == 2) { //巻い
 							islanddungeonTimeCheck(use);
 						}
-						초기화();
+						init();
 						
 					} catch (Exception a){
 						//not
@@ -82,7 +82,7 @@ public class DungeonTimer implements Runnable {
 		}
 	}
 	
-	private void 초기화(){
+	private void init(){
 		try {
 			Calendar cal = Calendar.getInstance();
 			int hour = Calendar.HOUR;

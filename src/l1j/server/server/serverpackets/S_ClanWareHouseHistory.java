@@ -67,13 +67,13 @@ public class S_ClanWareHouseHistory extends ServerBasePacket {
 				itemCount = rs.getInt("item_count");
 				itemIndex = rs.getString("item_getorput");
 				writeS(charName); // 名前
-				if (itemIndex.equalsIgnoreCase("맡겼습니다.")) {
+				if (itemIndex.equalsIgnoreCase("任せた。")) {
 					writeC(0); // 1：見つかりました、0：任せた。
 				} else {
 					writeC(1);
 				}
 				writeS(itemName); //アイテム名
-				writeD(itemCount); // 아이템 갯수
+				writeD(itemCount); // アイテムの数
 				writeD(time); // 経過時間
 			}
 		} catch (SQLException e) {

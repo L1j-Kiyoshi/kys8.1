@@ -277,7 +277,7 @@ public class L1Magic {
 		/** 新規血盟攻撃途方もなく **/
 		if (_calcType == PC_PC) {
 			  boolean isAliveBoss = BossAlive.getInstance().isBossAlive(_targetPc.getMapId());
-			if ((_pc.getClanid() == Config.신규혈맹클랜 || _targetPc.getClanid() == Config.신규혈맹클랜 )&& !isAliveBoss ) {
+			if ((_pc.getClanid() == Config.NEW_CLAN || _targetPc.getClanid() == Config.NEW_CLAN )&& !isAliveBoss ) {
 				if (skillId != EXTRA_HEAL && skillId != HEAL && skillId != GREATER_HEAL && skillId != HEAL_ALL && skillId != FULL_HEAL
 						&& skillId != NATURES_BLESSING) { // バフ系
 					_pc.sendPackets(new S_SystemMessage("\\aG[!] 新規血盟保護で相手の魔法を保護されています"));
@@ -489,9 +489,9 @@ public class L1Magic {
 			/** イレースマジックエレメンタルフォールダウン **/
 			/** 同レベルの場合、40％レベルの下あたり2％の成功確率アップレベル高いとき2％成功確率の減少 **/
 			if (attackLevel >= defenseLevel)
-				probability = (attackLevel - defenseLevel) * 2 + Config.이레이즈매직;
+				probability = (attackLevel - defenseLevel) * 2 + Config.ERASE_MAGIC;
 			else if (attackLevel < defenseLevel) {
-				probability = (attackLevel - defenseLevel) * 3 + Config.이레이즈매직;
+				probability = (attackLevel - defenseLevel) * 3 + Config.ERASE_MAGIC;
 			}
 			if (probability > 70) {
 				probability = 70;
@@ -503,9 +503,9 @@ public class L1Magic {
 			/** アースバインドストライカーゲイル **/
 			/** 同レベルの場合、35％レベルの下あたり2％の確率の増加、レベル高いとき3％成功確率の減少 **/
 			if (attackLevel >= defenseLevel)
-				probability = (attackLevel - defenseLevel) * 2 + Config.어스바인드;
+				probability = (attackLevel - defenseLevel) * 2 + Config.EARTH_BIND;
 			else if (attackLevel < defenseLevel) {
-				probability = (attackLevel - defenseLevel) * 3 + Config.어스바인드;
+				probability = (attackLevel - defenseLevel) * 3 + Config.EARTH_BIND;
 			}
 			if (probability > 70) {
 				probability = 70;
@@ -517,9 +517,9 @@ public class L1Magic {
 			/** ウィンドセクルポールルートウォーター **/
 			/** 同レベルの場合、30％レベルの下あたり2％の確率の増加、レベル高いとき3％成功確率の減少 **/
 			if (attackLevel >= defenseLevel)
-				probability = (attackLevel - defenseLevel) * 2 + Config.윈드세클;
+				probability = (attackLevel - defenseLevel) * 2 + Config.WIND_SHACKLE;
 			else if (attackLevel < defenseLevel) {
-				probability = (attackLevel - defenseLevel) * 3 + Config.윈드세클;
+				probability = (attackLevel - defenseLevel) * 3 + Config.WIND_SHACKLE;
 			}
 			if (probability > 70) {
 				probability = 70;
@@ -527,7 +527,7 @@ public class L1Magic {
 		}
 			break;
 		case DEATH_HEAL:
-			probability = Config.데스힐;
+			probability = Config.DEATH_HEAL;
 			break;
 		case SHAPE_CHANGE: // シェイプ本サーバー魔140に60％ - 魔あたり-1％
 		case CANCELLATION:// キャンセ本サーバー魔100に46％ - 魔あたり-1％
@@ -584,21 +584,21 @@ public class L1Magic {
 			}
 			break;
 		case COUNTER_BARRIER: // テスト
-			probability = Config.카운터배리어; // 19
+			probability = Config.COUNTER_BARRIER; // 19
 			break;
 		case GUARD_BREAK:
 			probability = 45;
 			break;
 		/** 戦士スキルパワーグリップ、デスペラード確率本サーバー化 **/
 		case DESPERADO:
-			probability = (int) Config.데스페라도 + ((attackLevel - defenseLevel) * 5);
+			probability = (int) Config.DESPERADO + ((attackLevel - defenseLevel) * 5);
 		    if(probability < 15){
 			probability = 15;}
 		    if(probability > 80){
 			probability = 80;}
 			break;
 		case POWERRIP:
-			probability = (int) Config.파워그립 + ((attackLevel - defenseLevel) * 5);
+			probability = (int) Config.POWER_GRIP + ((attackLevel - defenseLevel) * 5);
 			if (probability < 15) {
 				probability = 15;
 			}
@@ -653,7 +653,7 @@ public class L1Magic {
 					}
 				}
 			}
-			probability = (int) Config.본브레이크 + (attackLevel - defenseLevel);
+			probability = (int) Config.BONE_BREAK + (attackLevel - defenseLevel);
 			if (probability < 30) {
 				probability = 30;
 			}
@@ -735,7 +735,7 @@ public class L1Magic {
 				}
 			}
 			/**バランカスターンレベルの上昇に伴うアーマーブレイク確率増加 **/
-			probability = (int) (Config.아머브레이크 + ((attackLevel - defenseLevel) * 3));
+			probability = (int) (Config.ARMOR_BREAK + ((attackLevel - defenseLevel) * 3));
 			probability += _pc.getImpactUp();
 			if (probability < 10) {
 				probability = 10;
@@ -1047,13 +1047,13 @@ public class L1Magic {
 		/** ウィザードの場合、ダメージ外部化さ */
 		if (_calcType == PC_PC) {
 			if (_pc.getType() == 3) {
-				dmg *= Config.마법사마법대미지;
+				dmg *= Config.WIZARD_MAGIC_DAMAGE;
 			}
 		}
 		/** ウィザードの場合、ダメージ外部化さ */
 		if (_calcType == PC_NPC) {
 			if (_pc.getType() == 3) {
-				dmg *= Config.마법사몬스터대미지;
+				dmg *= Config.WIZARD_MONSTER_DAMAGE;
 			}
 		}
 		/** ウィザードの場合、追加ダメージ適用 */
@@ -1141,8 +1141,8 @@ public class L1Magic {
 			 boolean isAliveBoss = BossAlive.getInstance().isBossAlive(_targetPc.getMapId());
 			int castle_id = L1CastleLocation.getCastleIdByArea(_pc);
 			if (castle_id == 0 && !isAliveBoss) {
-				if (_pc.getClanid() == Config.신규혈맹클랜 || _targetPc.getClanid() == Config.신규혈맹클랜) {
-					if (Config.신규혈맹보호처리) {
+				if (_pc.getClanid() == Config.NEW_CLAN || _targetPc.getClanid() == Config.NEW_CLAN) {
+					if (Config.NEW_CLAN_PROTECTION_PROCESS) {
 						dmg = 0;
 						_pc.sendPackets(new S_SystemMessage("新規保護血盟は相互に攻撃されていません"));
 						_targetPc.sendPackets(new S_SystemMessage("新規保護血盟は相互に攻撃されていません"));

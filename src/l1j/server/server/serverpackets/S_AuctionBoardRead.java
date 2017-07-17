@@ -68,7 +68,7 @@ public class S_AuctionBoardRead extends ServerBasePacket {
 				writeS(String.valueOf(rs.getString(3))); // アジトの広さ
 				writeS(rs.getString(7)); // 以前の所有者
 				writeS(rs.getString(9)); // 現在の入札者
-				writeS(String.valueOf(rs.getInt(5))); // 현재의 입찰 가격
+				writeS(String.valueOf(rs.getInt(5))); // 現在の入札価格
 				cal = timestampToCalendar((Timestamp) rs.
 						getObject(4));
 				int month = cal.get(Calendar.MONTH) + 1;

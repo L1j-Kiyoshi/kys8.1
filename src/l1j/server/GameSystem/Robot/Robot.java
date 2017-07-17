@@ -35,7 +35,7 @@ import l1j.server.server.utils.SQLUtil;
 public class Robot {
 
 	private static Random _random = new Random(System.currentTimeMillis());
-	public static boolean 인형 = false;
+	public static boolean useDoll = false;
 
 	public static void poly(L1RobotInstance bot) {
 		int rr = 0;
@@ -191,7 +191,7 @@ private static void polyNormal80(L1RobotInstance bot) { // ロボットに変身
 	}
 }
 
-	public static boolean 속도버프(L1RobotInstance bot) {
+	public static boolean speedBuff(L1RobotInstance bot) {
 
 		// ディケイないとき
 		if (bot.getMap().isUnderwater()) {
@@ -329,7 +329,7 @@ private static void polyNormal80(L1RobotInstance bot) { // ロボットに変身
 		return false;
 	}
 
-	public static boolean 클래스버프(L1RobotInstance bot) {
+	public static boolean classBuff(L1RobotInstance bot) {
 
 		if (bot.hasSkillEffect(L1SkillId.SILENCE))
 			return false;
@@ -612,7 +612,7 @@ private static void polyNormal80(L1RobotInstance bot) { // ロボットに変身
 
 	public static void Doll_Spawn(L1RobotInstance bot) {
 
-		if (!인형)
+		if (!useDoll)
 			return;
 		if (bot.spawnDoll)
 			return;
@@ -702,7 +702,7 @@ private static void polyNormal80(L1RobotInstance bot) { // ロボットに変身
 		}
 	}
 
-	public static void 로봇종료(L1RobotInstance bot) {
+	public static void endRobot(L1RobotInstance bot) {
 	}
 
 }

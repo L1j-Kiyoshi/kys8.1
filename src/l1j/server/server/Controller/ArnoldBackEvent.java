@@ -65,19 +65,19 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
 			  
 			  isGmOpen아놀드 = false;
 			  
-			  Config.아놀드이벤트 = true;
-			  L1SpawnUtil.spawn2(33433, 32798, (short) 4, 6, 0, (Config.아놀드이벤트시간 * 3600000), 0);//テレポーター 
-			  L1SpawnUtil.spawn2(33431, 32798, (short) 4, 7, 0, (Config.아놀드이벤트시간 * 3600000), 0);//テレポーター 
-			  L1SpawnUtil.spawn2(33429, 32798, (short) 4, 8, 0, (Config.아놀드이벤트시간 * 3600000), 0);//テレポーター 
+			  Config.ARNOLD_EVENTS = true;
+			  L1SpawnUtil.spawn2(33433, 32798, (short) 4, 6, 0, (Config.ARNOLD_EVENT_TIME * 3600000), 0);//テレポーター 
+			  L1SpawnUtil.spawn2(33431, 32798, (short) 4, 7, 0, (Config.ARNOLD_EVENT_TIME * 3600000), 0);//テレポーター 
+			  L1SpawnUtil.spawn2(33429, 32798, (short) 4, 8, 0, (Config.ARNOLD_EVENT_TIME * 3600000), 0);//テレポーター 
 			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"運営者様がアーノルドイベントをオープンします。"));
 			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"ギラン旅館前エンピシをご利用ください。"));
-			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"アーノルドイベントは" + Config.아놀드이벤트시간 + "時間維持されます。"));
+			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"アーノルドイベントは" + Config.ARNOLD_EVENT_TIME + "時間維持されます。"));
 			  
 			  set돌아온아놀드이벤트(true);
 			  
-			  Thread.sleep(Config.아놀드이벤트시간*3600000); //60分程度
+			  Thread.sleep(Config.ARNOLD_EVENT_TIME*3600000); //60分程度
 			  
-			  Config.아놀드이벤트 = false;
+			  Config.ARNOLD_EVENTS = false;
 			  /** 終了 **/
 			  End();
 		  }
@@ -257,7 +257,7 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
 	
 	/** 終了 **/
   public void End() {
-	  Config.아놀드이벤트 = false;
+	  Config.ARNOLD_EVENTS = false;
 	  delenpc(6);
 	  delenpc(7);
 	  delenpc(8);

@@ -1910,8 +1910,8 @@ public class L1Attack {
             int castle_id = L1CastleLocation.getCastleIdByArea(_pc);
             boolean isAliveBoss = BossAlive.getInstance().isBossAlive(_targetPc.getMapId());
             if (castle_id == 0 && !isAliveBoss ) {
-                if (_pc.getClanid() == Config.신규혈맹클랜 || _targetPc.getClanid() == Config.신규혈맹클랜) {
-                    if (Config.신규혈맹보호처리) {
+                if (_pc.getClanid() == Config.NEW_CLAN || _targetPc.getClanid() == Config.NEW_CLAN) {
+                    if (Config.NEW_CLAN_PROTECTION_PROCESS) {
                         _isHit = false;
                         _pc.sendPackets(new S_SystemMessage("新規保護血盟は相互に攻撃されていません。"));
                         _targetPc.sendPackets(new S_SystemMessage("新規保護血盟は相互に攻撃されていません。"));

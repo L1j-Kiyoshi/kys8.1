@@ -174,8 +174,8 @@ public class C_Result extends ClientBasePacket {
 					return;
 				}
 			}
-			if (pc.getClan() == null && pc.getLevel() >= Config.상점이용레벨) {
-				pc.sendPackets(new S_SystemMessage(Config.상점이용레벨 + "レベル以上は血盟がなければ店を利用することができません。"));
+			if (pc.getClan() == null && pc.getLevel() >= Config.STORE_USAGE_LEVEL) {
+				pc.sendPackets(new S_SystemMessage(Config.STORE_USAGE_LEVEL + "レベル以上は血盟がなければ店を利用することができません。"));
 				if (pc.isGm()) {
 				} else {
 					return;

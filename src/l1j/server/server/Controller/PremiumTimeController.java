@@ -131,7 +131,7 @@ public class PremiumTimeController implements Runnable {
 				L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 				/** 全ユーザーにプレゼントを支給する **/
 				
-				if (Config.전체선물작동유무) {
+				if (Config.ALL_GIFT_OPERATION) {
 				pc.getInventory().storeItem(FN2, FN3);
 				pc.sendPackets(new S_SystemMessage("\\aA通知：ギフトボックス (\\aG" + FN3 + "\\aA) 獲得されました。"));
 				}

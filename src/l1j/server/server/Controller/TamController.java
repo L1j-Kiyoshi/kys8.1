@@ -45,7 +45,7 @@ public class TamController implements Runnable {
 				File dir = new File(savedir);
 						int tamcount = pc.tamcount();
 						if (tamcount > 0) {
-							int addtam = Config.탐갯수 * tamcount;
+							int addtam = Config.TAM_COUNT * tamcount;
 							pc.getNetConnection().getAccount().tam_point += addtam;
 							try {
 								pc.getNetConnection().getAccount().updateTam();

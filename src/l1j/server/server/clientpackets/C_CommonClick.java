@@ -33,7 +33,7 @@ public class C_CommonClick {
 
 		deleteCharacter(client);
 		
-		client.getAccount().탐포인트업데이트(client.getAccount());
+		client.getAccount().updateTamPoint(client.getAccount());
 		client.sendPacket(new S_NewCreateItem(S_NewCreateItem.TAM_POINT, client));
 			
 		int amountOfChars = client.getAccount().countCharacters();

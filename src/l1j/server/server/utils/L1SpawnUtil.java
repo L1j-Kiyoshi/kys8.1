@@ -104,7 +104,7 @@ public class L1SpawnUtil {
 			npc.setHomeY(npc.getY());
 			npc.setHeading(5);
 
-			if(npcId == 900007 || npcId == 900008 || npcId == 900036 || npcId == 900037 || npcId == 900219 || npcId == 5101 || npcId == 5102){ // 이동할 맵 셋팅
+			if(npcId == 900007 || npcId == 900008 || npcId == 900036 || npcId == 900037 || npcId == 900219 || npcId == 5101 || npcId == 5102){ // 移動マップの設定
 				L1FieldObjectInstance fobj = (L1FieldObjectInstance)npc;
 				fobj.setMoveMapId(movemap);
 			}

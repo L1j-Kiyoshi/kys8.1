@@ -3604,7 +3604,7 @@ public class L1PcInstance extends L1Character {
                 return;
             }
 
-            if (Config.아놀드이벤트) {
+            if (Config.ARNOLD_EVENTS) {
                 if (lastAttacker instanceof L1PcInstance) {
                     if (getInventory().checkEquipped(21095)) { //着用したアイテム
                         drop();
@@ -4006,7 +4006,7 @@ public class L1PcInstance extends L1Character {
         	ratio = 0.025 - (oldLevel - 73) * 0.0005;
         else
             /* if (oldLevel >= 79) */
-        	ratio = Config.경험치복구; // 79レップから4.9％の回復0.049
+        	ratio = Config.RECOVERY_EXP; // 79レップから4.9％の回復0.049
 
         exp = (int) (needExp * ratio);
         if (exp == 0)
@@ -4680,7 +4680,7 @@ public class L1PcInstance extends L1Character {
 
         /** 特定のレップ以上の初心者血盟自動脱退 **/
         String BloodName = getClanname();
-        if (getLevel() >= Config.신규혈맹보호레벨 && BloodName.equalsIgnoreCase("신규보호혈맹")) {
+        if (getLevel() >= Config.NEW_CLAN_PROTECTION_LEVEL && BloodName.equalsIgnoreCase("신규보호혈맹")) {
             try {
                 L1Clan clan = L1World.getInstance().getClan("新規保護血盟");
                 L1PcInstance clanMember[] = clan.getOnlineClanMember();
@@ -4769,7 +4769,7 @@ public class L1PcInstance extends L1Character {
         if (getLevel() == 59 && lv59_step != L1Quest.QUEST_END) {
             sendPackets(new S_SystemMessage("\\aA通知:あなたは [59]レベルイヤリング開放が可能となりました。"));
             this.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "お祝い：あなたは[59]レベル達成にスナップ広がりにピアス開放が可能です。"));
-            this.sendPackets(new S_NewCreateItem(S_NewCreateItem.신규패킷10, 0));
+            this.sendPackets(new S_NewCreateItem(S_NewCreateItem.NEW_PACKET_10, 0));
         }
         int lv76_step = quest.get_step(L1Quest.QUEST_SLOT76);
         if (getLevel() == 76 && lv76_step != L1Quest.QUEST_END) {
@@ -4804,7 +4804,7 @@ public class L1PcInstance extends L1Character {
 
             }
         }
-        if (getLevel() >= Config.버땅제한레벨) { // 本サーバーは、52レップまで可能である。
+        if (getLevel() >= Config.DISCARDED_LAND_ENTRY_LEVEL) { // 本サーバーは、52レップまで可能である。
             if (getMapId() == 777) { // 捨てられた人々の地（影の神殿）
             	new L1Teleport().teleport(this, 34043, 32184, (short) 4, 5, true);
             } else if (getMapId() == 778 || getMapId() == 779) {
@@ -6632,24 +6632,24 @@ public class L1PcInstance extends L1Character {
 	private void huntoption(L1PcInstance pc) { //このマップエフェクト示す
 		if(pc.getHuntCount() != 0){
 			if(pc.isWizard() || pc.isBlackwizard()){
-				if(pc.getHuntPrice() == Config.수배1단){
+				if(pc.getHuntPrice() == Config.STAGE_1){
 					pc.addSp(-1);
 					pc.sendPackets(new S_SPMR(pc));
-				} else if(pc.getHuntPrice() == Config.수배2단){
+				} else if(pc.getHuntPrice() == Config.STAGE_2){
 					pc.addSp(-2);
 					pc.sendPackets(new S_SPMR(pc));
-				} else if(pc.getHuntPrice() == Config.수배3단){
+				} else if(pc.getHuntPrice() == Config.STAGE_3){
 					pc.addSp(-3);
 					pc.sendPackets(new S_SPMR(pc));
 				}
 			} else if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.isElf() || pc.isWarrior()){
-				if(pc.getHuntPrice() == Config.수배1단){
+				if(pc.getHuntPrice() == Config.STAGE_1){
 					pc.addDmgup(-1);
 					pc.addBowDmgup(-1);
-				} else if(pc.getHuntPrice() == Config.수배2단){
+				} else if(pc.getHuntPrice() == Config.STAGE_2){
 					pc.addDmgup(-2);
 					pc.addBowDmgup(-2);
-				} else if(pc.getHuntPrice() == Config.수배3단){
+				} else if(pc.getHuntPrice() == Config.STAGE_3){
 					pc.addDmgup(-3);
 					pc.addBowDmgup(-3);
 				}

@@ -230,25 +230,25 @@ public class BattleZone implements Runnable {
 							 if(c2[i].get_DuelLine() == winLine){
 						    	 String[] itemIds = null;
 							 		try{
-							 			int idx = Config.배틀존아이템.indexOf(",");
+							 			int idx = Config.BATTLE_ZONE_ITEM.indexOf(",");
 							 			//、である場合
 							 			if(idx > -1){
-							 				itemIds = Config.배틀존아이템.split(",");
+							 				itemIds = Config.BATTLE_ZONE_ITEM.split(",");
 							 			}else{
 							 				itemIds = new String[1];
-							 				itemIds[0] = Config.배틀존아이템;
+							 				itemIds[0] = Config.BATTLE_ZONE_ITEM;
 							 			}
 							 		}catch(Exception e){}
 							 		//支給するアイテムの数
 							 		String[] counts = null;
 							 		try{
-							 			int idx = Config.배틀존아이템갯수.indexOf(",");
+							 			int idx = Config.BATTLE_ZONE_ITEM_COUNT.indexOf(",");
 							 			// 、である場合
 							 			if(idx > -1){
-							 				counts = Config.배틀존아이템갯수.split(",");
+							 				counts = Config.BATTLE_ZONE_ITEM_COUNT.split(",");
 							 			}else{
 							 				counts = new String[1];
-							 				counts[0] = Config.배틀존아이템갯수;
+							 				counts[0] = Config.BATTLE_ZONE_ITEM_COUNT;
 							 			}
 							 		}catch(Exception e){}
 							 		// アイテム名やカウントがない場合

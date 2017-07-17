@@ -96,7 +96,7 @@ public class NpcChatTimeController implements Runnable {
 				System.out.println("忘れられた島オープン：" + 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分");
 			}
 		}
-		if(Config.배틀존작동유무){ 
+		if(Config.BATTLE_ZONE_OPERATION){ 
 			if (BattleZone.getInstance().getDuelStart() == false) {
 				if ((   
 						//午前午後.equals（ "午前"）&& cal.get（時間）== 5 && cal.get（分）== 0）

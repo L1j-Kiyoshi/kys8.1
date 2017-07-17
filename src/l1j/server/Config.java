@@ -30,33 +30,33 @@ public final class Config {
 	public static int CRAFT_TABLE_NINE;
 	public static int CRAFT_TABLE_TEN;
 	public static int CRAFT_TABLE;
-	public static int 구라던오픈주기;
+	public static int GLUDIN_DUNGEON_OPEN_CYCLE;
 	
 	public static String EVENTITEM_ITEMID;
 	public static String EVENTITEM_NUMBER;
 
 	public static int SHOCK_STUN;
-	public static int 아머브레이크;
-	public static int 카운터배리어;
-	public static int 데스페라도;
-	public static int 파워그립;
+	public static int ARMOR_BREAK;
+	public static int COUNTER_BARRIER;
+	public static int DESPERADO;
+	public static int POWER_GRIP;
 
-	public static int 이레이즈매직;
+	public static int ERASE_MAGIC;
 
-	public static int 어스바인드;
-	public static int 윈드세클;
-	public static int 본브레이크;
-	public static int 데스힐;
-	public static int 장인무기마법주문서;
-	public static int 축복주문서;
-	public static int 오림주문서;
-	public static int 문장강화확률;
+	public static int EARTH_BIND;
+	public static int WIND_SHACKLE;
+	public static int BONE_BREAK;
+	public static int DEATH_HEAL;
+	public static int CRAFTSMAN_WEAPON_SCROLL;
+	public static int BLESS_SCROLL;
+	public static int ORIM_SCROLL;
+	public static int CREST_ENCHANT_CHANCE;
 
 	// アーノルドイベント
-	public static int 아놀드이벤트시간;
-	public static boolean 아놀드이벤트;
-	public static boolean 허수아비탐지급여부;
-	public static boolean 순백의티;
+	public static int ARNOLD_EVENT_TIME;
+	public static boolean ARNOLD_EVENTS;
+	public static boolean SUPPLY_SCARECROW_TAM;
+	public static boolean PURE_WHITE_T;
 
 	// ルームティス黒い光のイヤリングダメージ追加追加確率
 	public static int ROOMTIECE_CHANCE; // 黒い光ピアス追加ダメージ確率
@@ -68,21 +68,21 @@ public final class Config {
 
 	// 強化バフ（活力、攻撃、魔法、ホールド、スタン、防御）時間外部化
 	// 強化バフ_活力、強化バフ_攻撃、強化バフ_防御、強化バフ_魔法、強化バフ_スターン、強化バフ_ホールド
-	public static int 강화버프활력시간;
-	public static int 강화버프공격시간;
-	public static int 강화버프방어시간;
-	public static int 강화버프마법시간;
-	public static int 강화버프스턴시간;
-	public static int 강화버프홀드시간;
-	public static int 강화버프힘시간;	
-	public static int 강화버프덱스시간;
-	public static int 강화버프인트시간;
+	public static int ENCHANT_BUFF_TIME_VITALITY;
+	public static int ENCHANT_BUFF_TIME_ATTACK;
+	public static int ENCHANT_BUFF_TIME_DEFENCE;
+	public static int ENCHANT_BUFF_TIME_MAGIC;
+	public static int ENCHANT_BUFF_TIME_STUN;
+	public static int ENCHANT_BUFF_TIME_HOLD;
+	public static int ENCHANT_BUFF_TIME_STR;	
+	public static int ENCHANT_BUFF_TIME_DEX;
+	public static int ENCHANT_BUFF_TIME_INT;
 	
-	public static int 레이드시간;
+	public static int RAID_TIME;
 	
-	public static int 수배1단;
-	public static int 수배2단;
-	public static int 수배3단;
+	public static int STAGE_1;
+	public static int STAGE_2;
+	public static int STAGE_3;
 
 	/** NPC 物理ダメージ/魔法ダメージ **/
 	public static int npcdmg;
@@ -95,9 +95,9 @@ public final class Config {
 	public static int mapid3;
 	public static int mapid4;
 	public static int mapid5;
-	public static int 경험치;
-	public static int 이벤트아이템;
-	public static int 이벤트갯수;
+	public static int EXP;
+	public static int EVENT_ITEMS;
+	public static int EVENT_NUMBERS;
 
 	// 血盟経験値
 	public static int CLAN_EXP_ONE;
@@ -115,7 +115,7 @@ public final class Config {
 	/** 階級別アビスポイントの外部化 **/
 	public static int ABYSS_POINT; // ギラン監獄1〜4階狩りの時得るポイントの幅（ランダム）
 	public static int CLASS_START_LEVEL; // 階級算定開始レベル
-	public static int SUPREMECOMMANDER; // 총사령관
+	public static int SUPREMECOMMANDER; // 総司令官
 	public static int COMMANDER; // 司令官
 	public static int IMPERATOR; // 大将軍
 	public static int GENERAL; // 将軍
@@ -198,7 +198,7 @@ public final class Config {
 	public static double ACCEL_ALLOW;
 
 	public static String PRIVATE_SHOP_CHAT;
-	public static int 상점이용레벨;
+	public static int STORE_USAGE_LEVEL;
 
 	public static int HAJA;
 
@@ -228,7 +228,7 @@ public final class Config {
 	public static int ENCHANT_CHANCE_WEAPON;
 	public static int ENCHANT_CHANCE_ARMOR;
 	public static int ENCHANT_CHANCE_ACCESSORY;
-	public static int 아놀드무기확률;
+	public static int ARNOLD_WEAPON_CHANCE;
 	public static double RATE_WEIGHT_LIMIT;
 	public static double RATE_WEIGHT_LIMIT_PET;
 	public static double RATE_SHOP_SELLING_PRICE;
@@ -248,44 +248,44 @@ public final class Config {
 	public static int FEATHER_NUM2;
 	public static int FEATHER_NUM3;
 
-	public static int 탐갯수;
-	public static int 탐혈맹갯수;
-	public static int 탐성혈갯수;
-	public static int 탐홍보갯수;
+	public static int TAM_COUNT;
+	public static int TAM_CLAN_COUNT;
+	public static int TAM_EX_COUNT;
+	public static int TAM_EX2_COUNT;
 
-	public static boolean 배틀존작동유무;
+	public static boolean BATTLE_ZONE_OPERATION;
 
-	public static boolean 말섬던전깃털;
-	public static boolean 글루디오던전깃털;
-	public static boolean 수련던전깃털;
-	public static boolean 잊혀진섬깃털;
+	public static boolean TI_DUNGEON_FEATHER;
+	public static boolean GLUDIO_DUNGEON_FEATHER;
+	public static boolean SKT_DUNGEON_FEATHER;
+	public static boolean FI_FEATHER;
 
-	public static int 배틀존입장레벨;
-	public static String 배틀존아이템;
-	public static String 배틀존아이템갯수;
+	public static int BATTLE_ZONE_ENTRY_LEVEL;
+	public static String BATTLE_ZONE_ITEM;
+	public static String BATTLE_ZONE_ITEM_COUNT;
 
-	public static String 도감1단아이템;
-	public static String 도감1단아이템갯수;
+	public static String PIC_BOOK_1_ITEM;
+	public static String PIC_BOOK_1_ITEM_COUNT;
 
-	public static String 도감2단아이템;
-	public static String 도감2단아이템갯수;
+	public static String PIC_BOOK_2_ITEM;
+	public static String PIC_BOOK_2_ITEM_COUNT;
 
-	public static String 도감3단아이템;
-	public static String 도감3단아이템갯수;
+	public static String PIC_BOOK_3_ITEM;
+	public static String PIC_BOOK_3_ITEM_COUNT;
 
-	public static boolean 악마왕작동유무;
-	public static boolean 보스스폰작동유무;
-	public static boolean 전체선물작동유무;
-	public static int 악마왕입장레벨;
-	public static int 악마왕시간;
+	public static boolean DEMON_KING_OPERATION;
+	public static boolean BOSS_SPAWN_OPERATION;
+	public static boolean ALL_GIFT_OPERATION;
+	public static int DEMON_KING_ENTRY_LEVEL;
+	public static int DEMON_KING_TIME;
 
-	public static boolean 아덴사냥터작동유무;
-	public static int 아덴사냥터입장레벨;
-	public static int 아덴사냥터시간;
+	public static boolean ADEN_HUNTING_OPERATION;
+	public static int ADEN_HUNTING_ENTRY_LEVEL;
+	public static int ADEN_HUNTING_TIME;
 
-	/** 이벤트양말 지급 **/
-	public static boolean 양말작동유무;
-	public static boolean 버경작동유무;
+	/** イベント靴下支給 **/
+	public static boolean SOCKS_OPERATION;
+	public static boolean EVENT_A_OPERATION;
 	public static int EVENT_TIME;
 	public static int EVENT_NUMBER;
 	public static int EVENT_ITEM;
@@ -383,58 +383,60 @@ public final class Config {
 	public static int WHOIS_CONTER;
 	public static boolean ALT_BEGINNER_BONUS;
 	public static int NOTIS_TIME; // お知らせ
-	public static int CLAN_COUNT; // 혈맹버프 인원
-	public static double 성혈경험치;
+	public static int CLAN_COUNT; // 血盟バフ人員
+	public static double EX_EXP;
 	public static int AUTO_REMOVELEVEL;
 	public static int BUFFLEVEL; // バフレベル以下
-	public static int 쫄법사;
+	//とりあえずわかんないから和訳まんまえローマ字に
+	//「つつく玄」
+	public static int TSUTSUKUGEN;
 
-	public static int 정상의가호;
+	public static int NORMAL_PROTECTION;
 
-	public static int 라던입장레벨; // ラバー入場レベル
-	public static double 마법사마법대미지; // ウィザードツタ
-	public static double 마법사몬스터대미지; // ウィザードツタ
+	public static int LASTAVARD_ENTRY_LEVEL; // ラバー入場レベル
+	public static double WIZARD_MAGIC_DAMAGE; // ウィザードツタ
+	public static double WIZARD_MONSTER_DAMAGE; // ウィザードツタ
 
-	/** 새로추가 **/
+	/** 新たに追加 **/
 	public static int useritem;
 	public static int usercount;
 
-	public static int 키링크;
-	public static int 데스나이트헬파이어;
-	public static int 인형확률;
-	public static int 영생의빛;
-	public static int 생명의나뭇잎;
-	public static double 기사;
-	public static double 용기사;
-	public static double 요정;
-	public static double 군주;
-	public static double 법사;
-	public static double 다엘;
-	public static double 환술사;
-	public static double 전사;
-	public static double 경험치복구;
-	public static boolean 경험치물약만렙제한;
+	public static int KIRINGKU;
+	public static int DEATH_KNIGHT_HELLFIRE;
+	public static int DOLL_CHANCE;
+	public static int LIGHT_OF_ETERNAL_LIFE;
+	public static int LEAVES_OF_LIFE;
+	public static double KNIGHT;
+	public static double DRAGON_KNIGHT;
+	public static double ELF;
+	public static double CROWN;
+	public static double WIZARD;
+	public static double DARK_ELF;
+	public static double ILLUSIONIST;
+	public static double WARRIOR;
+	public static double RECOVERY_EXP;
+	public static boolean EXP_POT_LIMIT;
 
-	public static int 신규혈맹보호레벨;
-	public static int 신규혈맹클랜;
-	public static boolean 신규혈맹보호처리;
+	public static int NEW_CLAN_PROTECTION_LEVEL;
+	public static int NEW_CLAN;
+	public static boolean NEW_CLAN_PROTECTION_PROCESS;
 
-	public static int 무기인첸트;
-	public static int 무기고급인첸트;
-	public static int 방어구인첸트;
-	public static int 방어구고급인첸트;
-	public static int 룸티스;
-	public static int 스냅퍼;
-	public static int 악세사리;
+	public static int WEAPON_ENCHANT;
+	public static int WEAPON_PREMIUM_ENCHANT;
+	public static int ARMOR_ENCHANT;
+	public static int ARMOR_PREMIUM_ENCHANT;
+	public static int ROOMTIS;
+	public static int SNAPPER;
+	public static int ACCESSORIES;
 
 	/** [幻想イベント本サーバー化] **/
 	public static boolean ALT_FANTASYEVENT;
 	public static boolean ALT_RABBITEVENT; // 神妙イベント（2011）
 	public static boolean ALT_FISHEVENT;
 
-	public static int 경험치지급단; // 経験値支給団
-	public static int 선포레벨; // 宣言レベル
-	public static int 혈맹접속인원; // 血盟接続人数
+	public static int EXP_PAYMENT_TEAM; // 経験値支給団
+	public static int DECLARATION_LEVEL; // 宣言レベル
+	public static int CLAN_CONNECT_COUNT; // 血盟接続人数
 
 	public static boolean ALT_JPPRIVILEGED;
 	public static boolean ALT_WHO_COMMAND;
@@ -462,19 +464,19 @@ public final class Config {
 	public static int NEW_PLAYER;
 	public static int ALT_DROPLEVELLIMIT;
 
-	public static int 용던입장레벨;
-	public static int 용던제한레벨;
-	public static int 수던입장레벨;
-	public static int 수던제한레벨;
+	public static int DVC_ENTRY_LEVEL;
+	public static int DVC_LIMIT_LEVEL;
+	public static int HC_ENTRY_LEVEL;
+	public static int HC_LIMIT_LEVEL;
 
-	public static int 말섬입장레벨;
-	public static int 말섬제한레벨;
-	public static int 수련입장레벨;
-	public static int 수련제한레벨;
-	public static int 버땅제한레벨;
+	public static int TIC_ENTRY_LEVEL;
+	public static int TIC_LIMIT_LEVEL;
+	public static int SKTC_ENTRY_LEVEL;
+	public static int SKTC_LIMIT_LEVEL;
+	public static int DISCARDED_LAND_ENTRY_LEVEL;
 
-	public static int 고대무기;
-	public static int 고대방어구;
+	public static int ANCIENT_WEAPON;
+	public static int ANCIENT_ARMOR;
 
 	public static boolean Use_Show_Announcecycle; // 追加
 	public static int Show_Announcecycle_Time; // 追加
@@ -498,8 +500,8 @@ public final class Config {
 	public static int BLACKWIZARD_MAX_HP;
 	public static int BLACKWIZARD_MAX_MP;
 
-	public static int 전사_MAX_HP;
-	public static int 전사_MAX_MP;
+	public static int WARRIOR_MAX_HP;
+	public static int WARRIOR_MAX_MP;
 
 	public static int PRINCE_ADD_DAMAGEPC;
 	public static int KNIGHT_ADD_DAMAGEPC;
@@ -508,7 +510,7 @@ public final class Config {
 	public static int DARKELF_ADD_DAMAGEPC;
 	public static int DRAGONKNIGHT_ADD_DAMAGEPC;
 	public static int BLACKWIZARD_ADD_DAMAGEPC;
-	public static int 전사_ADD_DAMAGEPC;
+	public static int WARRIOR_ADD_DAMAGEPC;
 
 	public static int LIMITLEVEL;
 	public static int LV50_EXP;
@@ -682,7 +684,7 @@ public final class Config {
 			sys15 = rateSettings.getProperty("sys15", "");
 			sys16 = rateSettings.getProperty("sys16", "");
 			RATE_XP = Double.parseDouble(rateSettings.getProperty("RateXp", "1.0"));
-			성혈경험치 = Double.parseDouble(rateSettings.getProperty("BloodBonus", "1.0"));
+			EX_EXP = Double.parseDouble(rateSettings.getProperty("BloodBonus", "1.0"));
 			RATE_LAWFUL = Double.parseDouble(rateSettings.getProperty("RateLawful", "1.0"));
 			RATE_KARMA = Double.parseDouble(rateSettings.getProperty("RateKarma", "1.0"));
 			RATE_DROP_ADENA = Double.parseDouble(rateSettings.getProperty("RateDropAdena", "1.0"));
@@ -691,8 +693,8 @@ public final class Config {
 			ENCHANT_CHANCE_WEAPON = Integer.parseInt(rateSettings.getProperty("EnchantChanceWeapon", "68"));
 			ENCHANT_CHANCE_ARMOR = Integer.parseInt(rateSettings.getProperty("EnchantChanceArmor", "52"));
 			ENCHANT_CHANCE_ACCESSORY = Integer.parseInt(rateSettings.getProperty("EnchantChanceAccessory", "5"));
-			아놀드무기확률 = Integer.parseInt(rateSettings.getProperty("ArnoldWeapon", "5"));
-			문장강화확률 = Integer.parseInt(rateSettings.getProperty("文章強化確率", "30"));
+			ARNOLD_WEAPON_CHANCE = Integer.parseInt(rateSettings.getProperty("ArnoldWeapon", "5"));
+			CREST_ENCHANT_CHANCE = Integer.parseInt(rateSettings.getProperty("文章強化確率", "30"));
 			FG_ISVAL = Integer.parseInt(rateSettings.getProperty("EnterLevel", "0"));
 			
 			WeekLevel1 = Integer.parseInt(rateSettings.getProperty("ジュクウェレベル1", "65"));
@@ -751,49 +753,49 @@ public final class Config {
 			DISCHARGE6 = Integer.parseInt(rateSettings.getProperty("Discharge6", "6"));
 			DISCHARGE7 = Integer.parseInt(rateSettings.getProperty("Discharge7", "7"));
 
-			// 지옥
+			// 地獄
 			HELL_TIME = Integer.parseInt(rateSettings.getProperty("HellTime", "6"));
 			HELL_LEVEL = Integer.parseInt(rateSettings.getProperty("HellLevel", "70"));
 
-			탐갯수 = Integer.parseInt(rateSettings.getProperty("TamNum", "6"));
-			탐혈맹갯수 = Integer.parseInt(rateSettings.getProperty("TamNum1", "6"));
-			탐성혈갯수 = Integer.parseInt(rateSettings.getProperty("TamNum2", "6"));
-			탐홍보갯수 = Integer.parseInt(rateSettings.getProperty("TamNum3", "6"));
+			TAM_COUNT = Integer.parseInt(rateSettings.getProperty("TamNum", "6"));
+			TAM_CLAN_COUNT = Integer.parseInt(rateSettings.getProperty("TamNum1", "6"));
+			TAM_EX_COUNT = Integer.parseInt(rateSettings.getProperty("TamNum2", "6"));
+			TAM_EX2_COUNT = Integer.parseInt(rateSettings.getProperty("TamNum3", "6"));
 
-			양말작동유무 = Boolean.parseBoolean(rateSettings.getProperty("Eventof", "false"));
-			버경작동유무 = Boolean.parseBoolean(rateSettings.getProperty("BugRace", "false"));
+			SOCKS_OPERATION = Boolean.parseBoolean(rateSettings.getProperty("Eventof", "false"));
+			EVENT_A_OPERATION = Boolean.parseBoolean(rateSettings.getProperty("BugRace", "false"));
 			EVENT_TIME = Integer.parseInt(rateSettings.getProperty("EventTime", "1"));
 			EVENT_NUMBER = Integer.parseInt(rateSettings.getProperty("EventNumber", "1"));
 			EVENT_ITEM = Integer.parseInt(rateSettings.getProperty("EventItem", "1"));
-			배틀존입장레벨 = Integer.parseInt(rateSettings.getProperty("BattleLevel", "55"));
-			배틀존작동유무 = Boolean.parseBoolean(rateSettings.getProperty("BattleZone", "true"));
-			악마왕작동유무 = Boolean.parseBoolean(rateSettings.getProperty("DevilZone", "true"));
-			보스스폰작동유무 = Boolean.parseBoolean(rateSettings.getProperty("BossZone", "true"));
-			악마왕시간 = Integer.parseInt(rateSettings.getProperty("DevilTime", "3"));
-			악마왕입장레벨 = Integer.parseInt(rateSettings.getProperty("DevilLevel", "55"));
+			BATTLE_ZONE_ENTRY_LEVEL = Integer.parseInt(rateSettings.getProperty("BattleLevel", "55"));
+			BATTLE_ZONE_OPERATION = Boolean.parseBoolean(rateSettings.getProperty("BattleZone", "true"));
+			DEMON_KING_OPERATION = Boolean.parseBoolean(rateSettings.getProperty("DevilZone", "true"));
+			BOSS_SPAWN_OPERATION = Boolean.parseBoolean(rateSettings.getProperty("BossZone", "true"));
+			DEMON_KING_TIME = Integer.parseInt(rateSettings.getProperty("DevilTime", "3"));
+			DEMON_KING_ENTRY_LEVEL = Integer.parseInt(rateSettings.getProperty("DevilLevel", "55"));
 
-			말섬던전깃털 = Boolean.parseBoolean(rateSettings.getProperty("マルソムダンジョン羽", "true"));
-			글루디오던전깃털 = Boolean.parseBoolean(rateSettings.getProperty("メインランドのダンジョン羽", "true"));
+			TI_DUNGEON_FEATHER = Boolean.parseBoolean(rateSettings.getProperty("マルソムダンジョン羽", "true"));
+			GLUDIO_DUNGEON_FEATHER = Boolean.parseBoolean(rateSettings.getProperty("メインランドのダンジョン羽", "true"));
 
-			수련던전깃털 = Boolean.parseBoolean(rateSettings.getProperty("修練ケイブ羽", "true"));
-			잊혀진섬깃털 = Boolean.parseBoolean(rateSettings.getProperty("忘れられた島羽", "true"));
+			SKT_DUNGEON_FEATHER = Boolean.parseBoolean(rateSettings.getProperty("修練ケイブ羽", "true"));
+			FI_FEATHER = Boolean.parseBoolean(rateSettings.getProperty("忘れられた島羽", "true"));
 
-			배틀존아이템 = rateSettings.getProperty("BattleItem", "");
-			배틀존아이템갯수 = rateSettings.getProperty("BattleCount", "");
+			BATTLE_ZONE_ITEM = rateSettings.getProperty("BattleItem", "");
+			BATTLE_ZONE_ITEM_COUNT = rateSettings.getProperty("BattleCount", "");
 
-			도감1단아이템 = rateSettings.getProperty("Dogamone", "");
-			도감1단아이템갯수 = rateSettings.getProperty("DogamoneCount", "");
+			PIC_BOOK_1_ITEM = rateSettings.getProperty("Dogamone", "");
+			PIC_BOOK_1_ITEM_COUNT = rateSettings.getProperty("DogamoneCount", "");
 
-			도감2단아이템 = rateSettings.getProperty("Dogamto", "");
-			도감2단아이템갯수 = rateSettings.getProperty("DogamtoCount", "");
+			PIC_BOOK_2_ITEM = rateSettings.getProperty("Dogamto", "");
+			PIC_BOOK_2_ITEM_COUNT = rateSettings.getProperty("DogamtoCount", "");
 
-			도감3단아이템 = rateSettings.getProperty("Dogamthr", "");
-			도감3단아이템갯수 = rateSettings.getProperty("DogamthrCount", "");
+			PIC_BOOK_3_ITEM = rateSettings.getProperty("Dogamthr", "");
+			PIC_BOOK_3_ITEM_COUNT = rateSettings.getProperty("DogamthrCount", "");
 
 			EVENTITEM_ITEMID = rateSettings.getProperty("Eventitemid", "");
 			EVENTITEM_NUMBER = rateSettings.getProperty("Eventitemcount", "");
 			
-			레이드시간 = Integer.parseInt(rateSettings.getProperty("Raidtime", "1"));
+			RAID_TIME = Integer.parseInt(rateSettings.getProperty("Raidtime", "1"));
 			
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
@@ -843,49 +845,49 @@ public final class Config {
 			ALT_FISHEVENT = Boolean.parseBoolean(altSettings.getProperty("FishEvent", "true"));
 			ALT_DROPLEVELLIMIT = Integer.parseInt(altSettings.getProperty("DropLevelLimit", "90"));
 
-			용던입장레벨 = Integer.parseInt(altSettings.getProperty("dvdgate1", "75"));
-			용던제한레벨 = Integer.parseInt(altSettings.getProperty("dvdgate2", "80"));
-			수던입장레벨 = Integer.parseInt(altSettings.getProperty("dvdgate3", "75"));
-			수던제한레벨 = Integer.parseInt(altSettings.getProperty("dvdgate4", "80"));
-			상점이용레벨 = Integer.parseInt(altSettings.getProperty("ShopLevel", "99"));
+			DVC_ENTRY_LEVEL = Integer.parseInt(altSettings.getProperty("dvdgate1", "75"));
+			DVC_LIMIT_LEVEL = Integer.parseInt(altSettings.getProperty("dvdgate2", "80"));
+			HC_ENTRY_LEVEL = Integer.parseInt(altSettings.getProperty("dvdgate3", "75"));
+			HC_LIMIT_LEVEL = Integer.parseInt(altSettings.getProperty("dvdgate4", "80"));
+			STORE_USAGE_LEVEL = Integer.parseInt(altSettings.getProperty("ShopLevel", "99"));
 
-			말섬입장레벨 = Integer.parseInt(altSettings.getProperty("dvdgate5", "55"));
-			말섬제한레벨 = Integer.parseInt(altSettings.getProperty("dvdgate6", "70"));
-			수련입장레벨 = Integer.parseInt(altSettings.getProperty("dvdgate7", "70"));
-			수련제한레벨 = Integer.parseInt(altSettings.getProperty("dvdgate8", "70"));
+			TIC_ENTRY_LEVEL = Integer.parseInt(altSettings.getProperty("dvdgate5", "55"));
+			TIC_LIMIT_LEVEL = Integer.parseInt(altSettings.getProperty("dvdgate6", "70"));
+			SKTC_ENTRY_LEVEL = Integer.parseInt(altSettings.getProperty("dvdgate7", "70"));
+			SKTC_LIMIT_LEVEL = Integer.parseInt(altSettings.getProperty("dvdgate8", "70"));
 
-			버땅제한레벨 = Integer.parseInt(altSettings.getProperty("dvdgate9", "70"));
+			DISCARDED_LAND_ENTRY_LEVEL = Integer.parseInt(altSettings.getProperty("dvdgate9", "70"));
 
-			고대무기 = Integer.parseInt(altSettings.getProperty("PopWeapon", "100"));
-			고대방어구 = Integer.parseInt(altSettings.getProperty("PopArmor", "100"));
+			ANCIENT_WEAPON = Integer.parseInt(altSettings.getProperty("PopWeapon", "100"));
+			ANCIENT_ARMOR = Integer.parseInt(altSettings.getProperty("PopArmor", "100"));
 
 			AUTO_REMOVELEVEL = Integer.parseInt(altSettings.getProperty("AutoRemoveLevel", "75"));
 			BUFFLEVEL = Integer.parseInt(altSettings.getProperty("BuffLevel", "75"));
 
-			쫄법사 = Integer.parseInt(altSettings.getProperty("BuffLevel1", "79"));
+			TSUTSUKUGEN = Integer.parseInt(altSettings.getProperty("BuffLevel1", "79"));
 
-			정상의가호 = Integer.parseInt(altSettings.getProperty("TopGrace", "60"));
+			NORMAL_PROTECTION = Integer.parseInt(altSettings.getProperty("TopGrace", "60"));
 
-			라던입장레벨 = Integer.parseInt(altSettings.getProperty("LarvaLevel", "70"));
+			LASTAVARD_ENTRY_LEVEL = Integer.parseInt(altSettings.getProperty("LarvaLevel", "70"));
 
-			마법사마법대미지 = Double.parseDouble(altSettings.getProperty("Wizdmg", "1.0"));
+			WIZARD_MAGIC_DAMAGE = Double.parseDouble(altSettings.getProperty("Wizdmg", "1.0"));
 
-			마법사몬스터대미지 = Double.parseDouble(altSettings.getProperty("Wizdmg1", "1.0"));
+			WIZARD_MONSTER_DAMAGE = Double.parseDouble(altSettings.getProperty("Wizdmg1", "1.0"));
 
-			신규혈맹보호레벨 = Integer.parseInt(altSettings.getProperty("NewClanLevel", "60"));
-			신규혈맹클랜 = Integer.parseInt(altSettings.getProperty("NewClanid", "1"));
-			신규혈맹보호처리 = Boolean.parseBoolean(altSettings.getProperty("NewClanPvP", "true"));
+			NEW_CLAN_PROTECTION_LEVEL = Integer.parseInt(altSettings.getProperty("NewClanLevel", "60"));
+			NEW_CLAN = Integer.parseInt(altSettings.getProperty("NewClanid", "1"));
+			NEW_CLAN_PROTECTION_PROCESS = Boolean.parseBoolean(altSettings.getProperty("NewClanPvP", "true"));
 
-			무기인첸트 = Integer.parseInt(altSettings.getProperty("LimitWeapon", "13")); // 一般武器
-			무기고급인첸트 = Integer.parseInt(altSettings.getProperty("LimitWeapon2", "5")); // 特殊武器
-			방어구인첸트 = Integer.parseInt(altSettings.getProperty("LimitArmor", "11")); // 一般鎧
-			방어구고급인첸트 = Integer.parseInt(altSettings.getProperty("LimitArmor2", "7")); // 特殊アーマー
-			룸티스 = Integer.parseInt(altSettings.getProperty("RoomT", "8"));
-			스냅퍼 = Integer.parseInt(altSettings.getProperty("Snapper", "8"));
-			악세사리 = Integer.parseInt(altSettings.getProperty("Accessory", "9"));
-			장인무기마법주문서 = Integer.parseInt(altSettings.getProperty("職人武器強化スクロール", "10"));
-			축복주문서 = Integer.parseInt(altSettings.getProperty("祝福書", "15"));
-			오림주문서 = Integer.parseInt(altSettings.getProperty("クリップボード書", "70"));
+			WEAPON_ENCHANT = Integer.parseInt(altSettings.getProperty("LimitWeapon", "13")); // 一般武器
+			WEAPON_PREMIUM_ENCHANT = Integer.parseInt(altSettings.getProperty("LimitWeapon2", "5")); // 特殊武器
+			ARMOR_ENCHANT = Integer.parseInt(altSettings.getProperty("LimitArmor", "11")); // 一般鎧
+			ARMOR_PREMIUM_ENCHANT = Integer.parseInt(altSettings.getProperty("LimitArmor2", "7")); // 特殊アーマー
+			ROOMTIS = Integer.parseInt(altSettings.getProperty("RoomT", "8"));
+			SNAPPER = Integer.parseInt(altSettings.getProperty("Snapper", "8"));
+			ACCESSORIES = Integer.parseInt(altSettings.getProperty("Accessory", "9"));
+			CRAFTSMAN_WEAPON_SCROLL = Integer.parseInt(altSettings.getProperty("職人武器強化スクロール", "10"));
+			BLESS_SCROLL = Integer.parseInt(altSettings.getProperty("祝福書", "15"));
+			ORIM_SCROLL = Integer.parseInt(altSettings.getProperty("クリップボード書", "70"));
 
 			String strWar;
 			strWar = altSettings.getProperty("WarTime", "1h");
@@ -928,11 +930,11 @@ public final class Config {
 					.parseBoolean(altSettings.getProperty("DeleteCharacterAfter7Days", "True"));
 			GMCODE = Integer.parseInt(altSettings.getProperty("GMCODE", "9999"));
 
-			경험치지급단 = Integer.parseInt(altSettings.getProperty("Expreturn", "75"));
+			EXP_PAYMENT_TEAM = Integer.parseInt(altSettings.getProperty("Expreturn", "75"));
 
-			선포레벨 = Integer.parseInt(altSettings.getProperty("WarLevel", "60"));
+			DECLARATION_LEVEL = Integer.parseInt(altSettings.getProperty("WarLevel", "60"));
 
-			혈맹접속인원 = Integer.parseInt(altSettings.getProperty("WarPlayer", "60"));
+			CLAN_CONNECT_COUNT = Integer.parseInt(altSettings.getProperty("WarPlayer", "60"));
 
 			NEW_PLAYER = Integer.parseInt(altSettings.getProperty("NewPlayer", "0"));
 
@@ -964,8 +966,8 @@ public final class Config {
 			DRAGONKNIGHT_MAX_MP = Integer.parseInt(charSettings.getProperty("DragonknightMaxMP", "900"));
 			BLACKWIZARD_MAX_HP = Integer.parseInt(charSettings.getProperty("BlackwizardMaxHP", "900"));
 			BLACKWIZARD_MAX_MP = Integer.parseInt(charSettings.getProperty("BlackwizardMaxMP", "1100"));
-			전사_MAX_HP = Integer.parseInt(charSettings.getProperty("WarriorMaxHP", "1400"));
-			전사_MAX_MP = Integer.parseInt(charSettings.getProperty("WarriorMaxMP", "600"));
+			WARRIOR_MAX_HP = Integer.parseInt(charSettings.getProperty("WarriorMaxHP", "1400"));
+			WARRIOR_MAX_MP = Integer.parseInt(charSettings.getProperty("WarriorMaxMP", "600"));
 			LIMITLEVEL = Integer.parseInt(charSettings.getProperty("LimitLevel", "99"));
 
 			PRINCE_ADD_DAMAGEPC = Integer.parseInt(charSettings.getProperty("PrinceAddDamagePc", "0"));
@@ -975,7 +977,7 @@ public final class Config {
 			DARKELF_ADD_DAMAGEPC = Integer.parseInt(charSettings.getProperty("DarkelfAddDamagePc", "0"));
 			DRAGONKNIGHT_ADD_DAMAGEPC = Integer.parseInt(charSettings.getProperty("DragonknightAddDamagePc", "0"));
 			BLACKWIZARD_ADD_DAMAGEPC = Integer.parseInt(charSettings.getProperty("BlackwizardAddDamagePc", "0"));
-			전사_ADD_DAMAGEPC = Integer.parseInt(charSettings.getProperty("WarriorAddDamagePc", "0"));
+			WARRIOR_ADD_DAMAGEPC = Integer.parseInt(charSettings.getProperty("WarriorAddDamagePc", "0"));
 
 			LV50_EXP = Integer.parseInt(charSettings.getProperty("Lv50Exp", "1"));
 			LV51_EXP = Integer.parseInt(charSettings.getProperty("Lv51Exp", "1"));
@@ -1084,22 +1086,22 @@ public final class Config {
 			FISH_TIME = Integer.parseInt(Eventlink.getProperty("FishTime", "80"));
 			FISH_COM = Boolean.parseBoolean(Eventlink.getProperty("FishCom", "false"));
 
-			아덴사냥터작동유무 = Boolean.parseBoolean(Eventlink.getProperty("AdenZone", "true"));
-			아덴사냥터시간 = Integer.parseInt(Eventlink.getProperty("AdenTime", "3"));
-			아덴사냥터입장레벨 = Integer.parseInt(Eventlink.getProperty("AdenLevel", "55"));
-			강화버프활력시간 = Integer.parseInt(Eventlink.getProperty("強化バフ活力時間", "3"));
-			강화버프공격시간 = Integer.parseInt(Eventlink.getProperty("強化バフ攻撃時間", "3"));
-			강화버프방어시간 = Integer.parseInt(Eventlink.getProperty("強化バフ防御時間", "3"));
-			강화버프마법시간 = Integer.parseInt(Eventlink.getProperty("強化バフ魔法の時間", "3"));
-			강화버프스턴시간 = Integer.parseInt(Eventlink.getProperty("強化バフスタン時間", "3"));
-			강화버프홀드시간 = Integer.parseInt(Eventlink.getProperty("強化バフホールド時間", "3"));
-			강화버프힘시간 = Integer.parseInt(Eventlink.getProperty("強化バフ力時間", "3"));
-			강화버프덱스시간 = Integer.parseInt(Eventlink.getProperty("強化バフデックス時間", "3"));
-			강화버프인트시간 = Integer.parseInt(Eventlink.getProperty("強化バフポイント時間", "3"));
+			ADEN_HUNTING_OPERATION = Boolean.parseBoolean(Eventlink.getProperty("AdenZone", "true"));
+			ADEN_HUNTING_TIME = Integer.parseInt(Eventlink.getProperty("AdenTime", "3"));
+			ADEN_HUNTING_ENTRY_LEVEL = Integer.parseInt(Eventlink.getProperty("AdenLevel", "55"));
+			ENCHANT_BUFF_TIME_VITALITY = Integer.parseInt(Eventlink.getProperty("強化バフ活力時間", "3"));
+			ENCHANT_BUFF_TIME_ATTACK = Integer.parseInt(Eventlink.getProperty("強化バフ攻撃時間", "3"));
+			ENCHANT_BUFF_TIME_DEFENCE = Integer.parseInt(Eventlink.getProperty("強化バフ防御時間", "3"));
+			ENCHANT_BUFF_TIME_MAGIC = Integer.parseInt(Eventlink.getProperty("強化バフ魔法の時間", "3"));
+			ENCHANT_BUFF_TIME_STUN = Integer.parseInt(Eventlink.getProperty("強化バフスタン時間", "3"));
+			ENCHANT_BUFF_TIME_HOLD = Integer.parseInt(Eventlink.getProperty("強化バフホールド時間", "3"));
+			ENCHANT_BUFF_TIME_STR = Integer.parseInt(Eventlink.getProperty("強化バフ力時間", "3"));
+			ENCHANT_BUFF_TIME_DEX = Integer.parseInt(Eventlink.getProperty("強化バフデックス時間", "3"));
+			ENCHANT_BUFF_TIME_INT = Integer.parseInt(Eventlink.getProperty("強化バフポイント時間", "3"));
 
-			수배1단 = Integer.parseInt(Eventlink.getProperty("WantedONE", "20000000"));
-			수배2단 = Integer.parseInt(Eventlink.getProperty("WantedToo", "40000000"));
-			수배3단 = Integer.parseInt(Eventlink.getProperty("WantedThree", "60000000"));
+			STAGE_1 = Integer.parseInt(Eventlink.getProperty("WantedONE", "20000000"));
+			STAGE_2 = Integer.parseInt(Eventlink.getProperty("WantedToo", "40000000"));
+			STAGE_3 = Integer.parseInt(Eventlink.getProperty("WantedThree", "60000000"));
 
 			/** NPC物理ダメージ/魔法ダメージ修正 **/
 			npcdmg = Integer.parseInt(Eventlink.getProperty("npcdmg", "14"));
@@ -1111,10 +1113,10 @@ public final class Config {
 			mapid3 = Integer.parseInt(Eventlink.getProperty("mapid3", "1"));
 			mapid4 = Integer.parseInt(Eventlink.getProperty("mapid4", "1"));
 			mapid5 = Integer.parseInt(Eventlink.getProperty("mapid5", "1"));
-			경험치 = Integer.parseInt(Eventlink.getProperty("経験値", "1"));
-			이벤트갯수 = Integer.parseInt(Eventlink.getProperty("イベント本数", "1"));
-			이벤트아이템 = Integer.parseInt(Eventlink.getProperty("イベントアイテム", "1"));
-			구라던오픈주기  = Integer.parseInt(Eventlink.getProperty("OldLastavard", "4"));
+			EXP = Integer.parseInt(Eventlink.getProperty("経験値", "1"));
+			EVENT_NUMBERS = Integer.parseInt(Eventlink.getProperty("イベント本数", "1"));
+			EVENT_ITEMS = Integer.parseInt(Eventlink.getProperty("イベントアイテム", "1"));
+			GLUDIN_DUNGEON_OPEN_CYCLE  = Integer.parseInt(Eventlink.getProperty("OldLastavard", "4"));
 			CRAFT_TABLE_ONE = Integer.parseInt(Eventlink.getProperty("one", "0")); // 将軍;
 			CRAFT_TABLE_TWO = Integer.parseInt(Eventlink.getProperty("two", "0")); // 将軍;;
 			CRAFT_TABLE_THREE = Integer.parseInt(Eventlink.getProperty("three", "0")); // 将軍;;
@@ -1126,49 +1128,49 @@ public final class Config {
 			CRAFT_TABLE_NINE = Integer.parseInt(Eventlink.getProperty("nine", "0")); // 将軍;
 			CRAFT_TABLE_TEN = Integer.parseInt(Eventlink.getProperty("ten", "0")); // 将軍;;
 			CRAFT_TABLE = Integer.parseInt(Eventlink.getProperty("zero", "1")); // 将軍;;
-			아놀드이벤트시간 = Integer.parseInt(Eventlink.getProperty("AnoldeEventTime", "1")); // 将軍;;
-			아놀드이벤트 = Boolean.parseBoolean(Eventlink.getProperty("アーノルドイベント", "false"));
-			허수아비탐지급여부 = Boolean.parseBoolean(Eventlink.getProperty("かかし乗車支給するかどうか", "false"));
+			ARNOLD_EVENT_TIME = Integer.parseInt(Eventlink.getProperty("AnoldeEventTime", "1")); // 将軍;;
+			ARNOLD_EVENTS = Boolean.parseBoolean(Eventlink.getProperty("アーノルドイベント", "false"));
+			SUPPLY_SCARECROW_TAM = Boolean.parseBoolean(Eventlink.getProperty("かかし乗車支給するかどうか", "false"));
 
-			순백의티 = Boolean.parseBoolean(Eventlink.getProperty("TWhite", "false"));
+			PURE_WHITE_T = Boolean.parseBoolean(Eventlink.getProperty("TWhite", "false"));
 			SHOCK_STUN = Integer.parseInt(Eventlink.getProperty("ShockStun", "60"));
 
-			아머브레이크 = Integer.parseInt(Eventlink.getProperty("ARMOR_BRAKE", "38"));
+			ARMOR_BREAK = Integer.parseInt(Eventlink.getProperty("ARMOR_BRAKE", "38"));
 
-			카운터배리어 = Integer.parseInt(Eventlink.getProperty("COUNTER_BARRIER", "20"));
+			COUNTER_BARRIER = Integer.parseInt(Eventlink.getProperty("COUNTER_BARRIER", "20"));
 
-			데스페라도 = Integer.parseInt(Eventlink.getProperty("DESPERADO", "40"));
+			DESPERADO = Integer.parseInt(Eventlink.getProperty("DESPERADO", "40"));
 
-			파워그립 = Integer.parseInt(Eventlink.getProperty("POWERRIP", "40"));
+			POWER_GRIP = Integer.parseInt(Eventlink.getProperty("POWERRIP", "40"));
 
-			이레이즈매직 = Integer.parseInt(Eventlink.getProperty("ERASE_MAGIC", "40"));
+			ERASE_MAGIC = Integer.parseInt(Eventlink.getProperty("ERASE_MAGIC", "40"));
 
-			어스바인드 = Integer.parseInt(Eventlink.getProperty("EARTH_BIND", "40"));
+			EARTH_BIND = Integer.parseInt(Eventlink.getProperty("EARTH_BIND", "40"));
 
-			윈드세클 = Integer.parseInt(Eventlink.getProperty("WIND_SHACKLE", "30"));
+			WIND_SHACKLE = Integer.parseInt(Eventlink.getProperty("WIND_SHACKLE", "30"));
 
-			본브레이크 = Integer.parseInt(Eventlink.getProperty("BONE_BREAK", "40"));
+			BONE_BREAK = Integer.parseInt(Eventlink.getProperty("BONE_BREAK", "40"));
 
-			데스힐 = Integer.parseInt(Eventlink.getProperty("DEATH_HEAL", "30"));
-			/** 새로추가 **/
+			DEATH_HEAL = Integer.parseInt(Eventlink.getProperty("DEATH_HEAL", "30"));
+			/** 新たに追加 **/
 			useritem = Integer.parseInt(Eventlink.getProperty("useritem", "1"));
 			usercount = Integer.parseInt(Eventlink.getProperty("usercount", "1"));
-			키링크 = Integer.parseInt(Eventlink.getProperty("KingD", "12"));// キーリンク
-			데스나이트헬파이어 = Integer.parseInt(Eventlink.getProperty("dethshellpa", "1"));
-			인형확률 = Integer.parseInt(Eventlink.getProperty("dollchance", "1"));
-			영생의빛 = Integer.parseInt(Eventlink.getProperty("yungsang", "1"));
-			생명의나뭇잎 = Integer.parseInt(Eventlink.getProperty("Leafitem", "100"));
-			기사 = Double.parseDouble(Eventlink.getProperty("KK", "1.5"));
-			용기사 = Double.parseDouble(Eventlink.getProperty("DK", "1.5"));
-			요정 = Double.parseDouble(Eventlink.getProperty("EF", "1.5"));
-			군주 = Double.parseDouble(Eventlink.getProperty("KC", "1.5"));
-			법사 = Double.parseDouble(Eventlink.getProperty("MM", "1.5"));
-			다엘 = Double.parseDouble(Eventlink.getProperty("DE", "1.5"));
-			환술사 = Double.parseDouble(Eventlink.getProperty("MB", "1.5"));
-			전사 = Double.parseDouble(Eventlink.getProperty("WR", "1.5"));
-			경험치복구 = Double.parseDouble(Eventlink.getProperty("経験値復旧", "0.049"));
-			경험치물약만렙제한 = Boolean.parseBoolean(Eventlink.getProperty("ExpMax", "true"));
-			전체선물작동유무 = Boolean.parseBoolean(Eventlink.getProperty("GiftItem", "true"));
+			KIRINGKU = Integer.parseInt(Eventlink.getProperty("KingD", "12"));// キーリンク
+			DEATH_KNIGHT_HELLFIRE = Integer.parseInt(Eventlink.getProperty("dethshellpa", "1"));
+			DOLL_CHANCE = Integer.parseInt(Eventlink.getProperty("dollchance", "1"));
+			LIGHT_OF_ETERNAL_LIFE = Integer.parseInt(Eventlink.getProperty("yungsang", "1"));
+			LEAVES_OF_LIFE = Integer.parseInt(Eventlink.getProperty("Leafitem", "100"));
+			KNIGHT = Double.parseDouble(Eventlink.getProperty("KK", "1.5"));
+			DRAGON_KNIGHT = Double.parseDouble(Eventlink.getProperty("DK", "1.5"));
+			ELF = Double.parseDouble(Eventlink.getProperty("EF", "1.5"));
+			CROWN = Double.parseDouble(Eventlink.getProperty("KC", "1.5"));
+			WIZARD = Double.parseDouble(Eventlink.getProperty("MM", "1.5"));
+			DARK_ELF = Double.parseDouble(Eventlink.getProperty("DE", "1.5"));
+			ILLUSIONIST = Double.parseDouble(Eventlink.getProperty("MB", "1.5"));
+			WARRIOR = Double.parseDouble(Eventlink.getProperty("WR", "1.5"));
+			RECOVERY_EXP = Double.parseDouble(Eventlink.getProperty("経験値復旧", "0.049"));
+			EXP_POT_LIMIT = Boolean.parseBoolean(Eventlink.getProperty("ExpMax", "true"));
+			ALL_GIFT_OPERATION = Boolean.parseBoolean(Eventlink.getProperty("GiftItem", "true"));
 			
 			Tower = Integer.parseInt(Eventlink.getProperty("タワー1段階補償","40308"));
 			MTower = Integer.parseInt(Eventlink.getProperty("タワー2段階補償","40308"));
@@ -1233,7 +1235,7 @@ public final class Config {
 		else if (pName.equalsIgnoreCase("RateXp")) {
 			RATE_XP = Double.parseDouble(pValue);
 		} else if (pName.equalsIgnoreCase("BloodBonus")) {
-			성혈경험치 = Double.parseDouble(pValue);
+			EX_EXP = Double.parseDouble(pValue);
 		} else if (pName.equalsIgnoreCase("RateLawful")) {
 			RATE_LAWFUL = Double.parseDouble(pValue);
 		} else if (pName.equalsIgnoreCase("RateKarma")) {
@@ -1251,9 +1253,9 @@ public final class Config {
 		} else if (pName.equalsIgnoreCase("EnchantChanceAccessory")) {
 			ENCHANT_CHANCE_ACCESSORY = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("文章強化確率")) {
-			문장강화확률 = Integer.parseInt(pValue);
+			CREST_ENCHANT_CHANCE = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("ArnoldWeapon")) {
-			아놀드무기확률 = Integer.parseInt(pValue);
+			ARNOLD_WEAPON_CHANCE = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("FreeLevel")) {
 			FG_ISVAL = Integer.parseInt("pValue");
 
@@ -1275,17 +1277,17 @@ public final class Config {
 			HELL_LEVEL = Integer.parseInt(pValue);
 
 		} else if (pName.equalsIgnoreCase("TamNum")) {
-			탐갯수 = Integer.parseInt(pValue);
+			TAM_COUNT = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("TamNum1")) {
-			탐혈맹갯수 = Integer.parseInt(pValue);
+			TAM_CLAN_COUNT = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("TamNum2")) {
-			탐성혈갯수 = Integer.parseInt(pValue);
+			TAM_EX_COUNT = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("TamNum3")) {
-			탐홍보갯수 = Integer.parseInt(pValue);
+			TAM_EX2_COUNT = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("Eventof")) {
-			양말작동유무 = Boolean.valueOf(pValue);
+			SOCKS_OPERATION = Boolean.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("BugRace")) {
-			버경작동유무 = Boolean.valueOf(pValue);
+			EVENT_A_OPERATION = Boolean.valueOf(pValue);
 
 		} else if (pName.equalsIgnoreCase("EventTime")) {
 			EVENT_TIME = Integer.parseInt(pValue);
@@ -1294,17 +1296,17 @@ public final class Config {
 		} else if (pName.equalsIgnoreCase("EventItem")) {
 			EVENT_ITEM = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("BattleZone")) {
-			배틀존작동유무 = Boolean.valueOf(pValue);
+			BATTLE_ZONE_OPERATION = Boolean.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("BattleLevel")) {
-			배틀존입장레벨 = Integer.parseInt(pValue);
+			BATTLE_ZONE_ENTRY_LEVEL = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("DevilZone")) {
-			악마왕작동유무 = Boolean.valueOf(pValue);
+			DEMON_KING_OPERATION = Boolean.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("BossZone")) {
-			보스스폰작동유무 = Boolean.valueOf(pValue);
+			BOSS_SPAWN_OPERATION = Boolean.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("DevilTime")) {
-			악마왕시간 = Integer.parseInt(pValue);
+			DEMON_KING_TIME = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("DevilLevel")) {
-			악마왕입장레벨 = Integer.parseInt(pValue);
+			DEMON_KING_ENTRY_LEVEL = Integer.parseInt(pValue);
 
 		}
 		/** altsettings.properties **/
@@ -1387,22 +1389,22 @@ public final class Config {
 		} else if (pName.equalsIgnoreCase("BuffLevel")) {
 			BUFFLEVEL = Integer.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("BuffLevel1")) {
-			쫄법사 = Integer.valueOf(pValue);
+			TSUTSUKUGEN = Integer.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("TopGrace")) {
-			정상의가호 = Integer.valueOf(pValue);
+			NORMAL_PROTECTION = Integer.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("LarvaLevel")) {
-			라던입장레벨 = Integer.valueOf(pValue);
+			LASTAVARD_ENTRY_LEVEL = Integer.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("Wizdmg")) {
-			마법사마법대미지 = Double.parseDouble(pValue);
+			WIZARD_MAGIC_DAMAGE = Double.parseDouble(pValue);
 		} else if (pName.equalsIgnoreCase("Wizdmg1")) {
-			마법사몬스터대미지 = Double.parseDouble(pValue);
+			WIZARD_MONSTER_DAMAGE = Double.parseDouble(pValue);
 
 		} else if (pName.equalsIgnoreCase("NewClanLevel")) {
-			신규혈맹보호레벨 = Integer.valueOf(pValue);
+			NEW_CLAN_PROTECTION_LEVEL = Integer.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("NewClanid")) {
-			신규혈맹클랜 = Integer.valueOf(pValue);
+			NEW_CLAN = Integer.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("NewClanPvP")) {
-			신규혈맹보호처리 = Boolean.valueOf(pValue);
+			NEW_CLAN_PROTECTION_PROCESS = Boolean.valueOf(pValue);
 		}
 
 		/** charsettings.properties **/
@@ -1555,24 +1557,24 @@ public final class Config {
 		} else if (pName.equalsIgnoreCase("ShowAnnouncecycleTime")) {
 			Show_Announcecycle_Time = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("Raidtime")) {
-			레이드시간 = Integer.parseInt(pValue);
-		} else if(pName.equalsIgnoreCase("타워1단계보상")){
+			RAID_TIME = Integer.parseInt(pValue);
+		} else if(pName.equalsIgnoreCase("タワー1段階補償")){
 			Tower = Integer.parseInt(pValue);
-		} else if(pName.equalsIgnoreCase("타워2단계보상")){
+		} else if(pName.equalsIgnoreCase("タワー2段階補償")){
 			MTower = Integer.parseInt(pValue);
-		} else if(pName.equalsIgnoreCase("타워3단계보상")){
+		} else if(pName.equalsIgnoreCase("タワー3段階の補償")){
 			LTower = Integer.parseInt(pValue);
-		} else if(pName.equalsIgnoreCase("타워1단계보상갯수")){
+		} else if(pName.equalsIgnoreCase("タワー1段階補償本数")){
 			Tower = Integer.parseInt(pValue);
-		} else if(pName.equalsIgnoreCase("타워1단계보상갯수")){
+		} else if(pName.equalsIgnoreCase("タワー1段階補償本数")){
 			Tower = Integer.parseInt(pValue);
-		} else if(pName.equalsIgnoreCase("타워1단계보상갯수")){
+		} else if(pName.equalsIgnoreCase("タワー1段階補償本数")){
 			Tower = Integer.parseInt(pValue);
 			// Eventlink set file
 		} else if (pName.equalsIgnoreCase("AnoldeEventTime")) {
-			아놀드이벤트시간 = Integer.parseInt(pValue);
+			ARNOLD_EVENT_TIME = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("OldLastavard")) {
-			구라던오픈주기 = Integer.parseInt(pValue);
+			GLUDIN_DUNGEON_OPEN_CYCLE = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("one")) {
 			CRAFT_TABLE_ONE = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("two")) {
@@ -1679,42 +1681,42 @@ public final class Config {
 			FISH_COM = Boolean.valueOf(pValue);
 
 		} else if (pName.equalsIgnoreCase("AdenZone")) {
-			아덴사냥터작동유무 = Boolean.valueOf(pValue);
+			ADEN_HUNTING_OPERATION = Boolean.valueOf(pValue);
 
 		} else if (pName.equalsIgnoreCase("AdenLevel")) {
-			아덴사냥터입장레벨 = Integer.parseInt(pValue);
+			ADEN_HUNTING_ENTRY_LEVEL = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("AdenTime")) {
-			아덴사냥터시간 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("강화버프활력시간")) {
-			강화버프활력시간 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("강화버프공격시간")) {
-			강화버프공격시간 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("강화버프방어시간")) {
-			강화버프방어시간 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("강화버프마법시간")) {
-			강화버프마법시간 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("강화버프스턴시간")) {
-			강화버프스턴시간 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("강화버프홀드시간")) {
-			강화버프홀드시간 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("강화버프힘시간")) {
-			강화버프힘시간 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("강화버프덱스시간")) {
-			강화버프덱스시간 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("강화버프인트시간")) {
-			강화버프인트시간 = Integer.parseInt(pValue);
+			ADEN_HUNTING_TIME = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("強化バフ活力時間")) {
+			ENCHANT_BUFF_TIME_VITALITY = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("強化バフ攻撃時間")) {
+			ENCHANT_BUFF_TIME_ATTACK = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("強化バフ防御時間")) {
+			ENCHANT_BUFF_TIME_DEFENCE = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("強化バフ魔法の時間")) {
+			ENCHANT_BUFF_TIME_MAGIC = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("強化バフスタン時間")) {
+			ENCHANT_BUFF_TIME_STUN = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("強化バフホールド時間")) {
+			ENCHANT_BUFF_TIME_HOLD = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("強化バフ力時間")) {
+			ENCHANT_BUFF_TIME_STR = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("強化バフデックス時間")) {
+			ENCHANT_BUFF_TIME_DEX = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("強化バフポイント時間")) {
+			ENCHANT_BUFF_TIME_INT = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("WantedONE")) {
-			수배1단 = Integer.parseInt(pValue);
+			STAGE_1 = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("WantedToo")) {
-			수배2단 = Integer.parseInt(pValue);
+			STAGE_2 = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("WantedThree")) {
-			수배3단 = Integer.parseInt(pValue);
+			STAGE_3 = Integer.parseInt(pValue);
 
 		} else if (pName.equalsIgnoreCase("npcdmg")) {
 			npcdmg = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("npcmagicdmg")) {
 			npcmagicdmg = Integer.parseInt(pValue);
-			/** 이벤트용 **/
+			/** イベント用 **/
 		} else if (pName.equalsIgnoreCase("mapid")) {
 			mapid = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("mapid1")) {
@@ -1727,12 +1729,12 @@ public final class Config {
 			mapid4 = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("mapid5")) {
 			mapid5 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("경험치")) {
-			경험치 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("이벤트갯수")) {
-			이벤트갯수 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("이벤트아이템")) {
-			이벤트아이템 = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("経験値")) {
+			EXP = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("イベント本数")) {
+			EVENT_NUMBERS = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("イベントアイテム")) {
+			EVENT_ITEMS = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("useritem")) {
 			useritem = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("usercount")) {
@@ -1740,53 +1742,53 @@ public final class Config {
 		} else if (pName.equalsIgnoreCase("ShockStun")) {
 			SHOCK_STUN = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("TWhite")) {
-			순백의티 = Boolean.valueOf(pValue);
+			PURE_WHITE_T = Boolean.valueOf(pValue);
 
 		} else if (pName.equalsIgnoreCase("ARMOR_BRAKE")) {
-			아머브레이크 = Integer.parseInt(pValue);
+			ARMOR_BREAK = Integer.parseInt(pValue);
 
 		} else if (pName.equalsIgnoreCase("COUNTER_BARRIER")) {
-			카운터배리어 = Integer.parseInt(pValue);
+			COUNTER_BARRIER = Integer.parseInt(pValue);
 
 		} else if (pName.equalsIgnoreCase("DESPERADO")) {
-			데스페라도 = Integer.parseInt(pValue);
+			DESPERADO = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("POWERRIP")) {
-			파워그립 = Integer.parseInt(pValue);
+			POWER_GRIP = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("ERASE_MAGIC")) {
-			이레이즈매직 = Integer.parseInt(pValue);
+			ERASE_MAGIC = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("EARTH_BIND")) {
-			어스바인드 = Integer.parseInt(pValue);
+			EARTH_BIND = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("WIND_SHACKLE")) {
-			윈드세클 = Integer.parseInt(pValue);
+			WIND_SHACKLE = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("BONE_BREAK")) {
-			본브레이크 = Integer.parseInt(pValue);
+			BONE_BREAK = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("DEATH_HEAL")) {
-			데스힐 = Integer.parseInt(pValue);
+			DEATH_HEAL = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("ExpMax")) {
-			경험치물약만렙제한 = Boolean.valueOf(pValue);
+			EXP_POT_LIMIT = Boolean.valueOf(pValue);
 		} else if (pName.equalsIgnoreCase("GiftItem")) {
-			전체선물작동유무 = Boolean.valueOf(pValue);
-			/** 새로 추가 **/
+			ALL_GIFT_OPERATION = Boolean.valueOf(pValue);
+			/** 新たに追加 **/
 		} else if (pName.equalsIgnoreCase("KingD")) {
-			키링크 = Integer.parseInt(pValue);
+			KIRINGKU = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("KK")) {
-			기사 = Integer.parseInt(pValue);
+			KNIGHT = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("DK")) {
-			용기사 = Integer.parseInt(pValue);
+			DRAGON_KNIGHT = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("EF")) {
-			요정 = Integer.parseInt(pValue);
+			ELF = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("KC")) {
-			군주 = Integer.parseInt(pValue);
+			CROWN = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("MM")) {
-			법사 = Integer.parseInt(pValue);
+			WIZARD = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("DE")) {
-			다엘 = Integer.parseInt(pValue);
+			DARK_ELF = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("MB")) {
-			환술사 = Integer.parseInt(pValue);
+			ILLUSIONIST = Integer.parseInt(pValue);
 		} else if (pName.equalsIgnoreCase("WR")) {
-			전사 = Integer.parseInt(pValue);
-		} else if (pName.equalsIgnoreCase("경험치복구")) {
-			경험치복구 = Integer.parseInt(pValue);
+			WARRIOR = Integer.parseInt(pValue);
+		} else if (pName.equalsIgnoreCase("経験値復旧")) {
+			RECOVERY_EXP = Integer.parseInt(pValue);
 
 		} else {
 			return false;

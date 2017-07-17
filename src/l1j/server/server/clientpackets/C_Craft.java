@@ -214,7 +214,7 @@ public class C_Craft extends ClientBasePacket {
 					pc.getInventory().removeItem(item);
 				}
 	//			int random = CommonUtil.random(5);
-				int chance = ((total * Config.인형확률) / step); // 人形合成確率設定
+				int chance = ((total * Config.DOLL_CHANCE) / step); // 人形合成確率設定
 				//int chance = 100; //人形合成確率設定
 				if (CommonUtil.random(100) + 1 <= chance) {
 				switch (step) {
@@ -299,26 +299,26 @@ public class C_Craft extends ClientBasePacket {
 					
 					String[] itemIds = null;
 					try {
-						int idx = Config.도감1단아이템.indexOf(",");
+						int idx = Config.PIC_BOOK_1_ITEM.indexOf(",");
 						// 、である場合
 						if (idx > -1) {
-							itemIds = Config.도감1단아이템.split(",");
+							itemIds = Config.PIC_BOOK_1_ITEM.split(",");
 						} else {
 							itemIds = new String[1];
-							itemIds[0] = Config.도감1단아이템;
+							itemIds[0] = Config.PIC_BOOK_1_ITEM;
 						}
 					} catch (Exception e) {
 					}
 					// 支給するアイテムの数
 					String[] counts = null;
 					try {
-						int idx = Config.도감1단아이템갯수.indexOf(",");
+						int idx = Config.PIC_BOOK_1_ITEM_COUNT.indexOf(",");
 						// 、である場合
 						if (idx > -1) {
-							counts = Config.도감1단아이템갯수.split(",");
+							counts = Config.PIC_BOOK_1_ITEM_COUNT.split(",");
 						} else {
 							counts = new String[1];
-							counts[0] = Config.도감1단아이템갯수;
+							counts[0] = Config.PIC_BOOK_1_ITEM_COUNT;
 						}
 					} catch (Exception e) {
 					}
@@ -345,26 +345,26 @@ public class C_Craft extends ClientBasePacket {
 					pc.addExp(500000);
 					String[] itemIds1 = null;
 					try {
-						int idx = Config.도감2단아이템.indexOf(",");
+						int idx = Config.PIC_BOOK_2_ITEM.indexOf(",");
 						// 、である場合
 						if (idx > -1) {
-							itemIds1 = Config.도감2단아이템.split(",");
+							itemIds1 = Config.PIC_BOOK_2_ITEM.split(",");
 						} else {
 							itemIds1 = new String[1];
-							itemIds1[0] = Config.도감2단아이템;
+							itemIds1[0] = Config.PIC_BOOK_2_ITEM;
 						}
 					} catch (Exception e) {
 					}
 					//支給するアイテムの数
 					String[] counts1 = null;
 					try {
-						int idx = Config.도감2단아이템갯수.indexOf(",");
+						int idx = Config.PIC_BOOK_2_ITEM_COUNT.indexOf(",");
 						//、である場合
 						if (idx > -1) {
-							counts1 = Config.도감2단아이템갯수.split(",");
+							counts1 = Config.PIC_BOOK_2_ITEM_COUNT.split(",");
 						} else {
 							counts1 = new String[1];
-							counts1[0] = Config.도감2단아이템갯수;
+							counts1[0] = Config.PIC_BOOK_2_ITEM_COUNT;
 						}
 					} catch (Exception e) {
 					}
@@ -393,26 +393,26 @@ public class C_Craft extends ClientBasePacket {
 					pc.addExp(5000000);
 					String[] itemIds2 = null;
 					try {
-						int idx = Config.도감3단아이템.indexOf(",");
+						int idx = Config.PIC_BOOK_3_ITEM.indexOf(",");
 						//、である場合
 						if (idx > -1) {
-							itemIds2 = Config.도감3단아이템.split(",");
+							itemIds2 = Config.PIC_BOOK_3_ITEM.split(",");
 						} else {
 							itemIds2 = new String[1];
-							itemIds2[0] = Config.도감3단아이템;
+							itemIds2[0] = Config.PIC_BOOK_3_ITEM;
 						}
 					} catch (Exception e) {
 					}
 					//支給するアイテムの数
 					String[] counts2 = null;
 					try {
-						int idx = Config.도감3단아이템갯수.indexOf(",");
+						int idx = Config.PIC_BOOK_3_ITEM_COUNT.indexOf(",");
 						//、である場合
 						if (idx > -1) {
-							counts2 = Config.도감3단아이템갯수.split(",");
+							counts2 = Config.PIC_BOOK_3_ITEM_COUNT.split(",");
 						} else {
 							counts2 = new String[1];
-							counts2[0] = Config.도감3단아이템갯수;
+							counts2[0] = Config.PIC_BOOK_3_ITEM_COUNT;
 						}
 					} catch (Exception e) {
 					}

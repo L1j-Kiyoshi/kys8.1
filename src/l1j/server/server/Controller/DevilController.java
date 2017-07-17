@@ -36,7 +36,7 @@ public class DevilController extends Thread {
 	private String NowTime = "";
 
 	//時間間隔
-	private static final int LOOP = Config.구라던오픈주기;;
+	private static final int LOOP = Config.GLUDIN_DUNGEON_OPEN_CYCLE;;
 
 	private static final SimpleDateFormat s = new SimpleDateFormat("HH",
 			Locale.KOREA);

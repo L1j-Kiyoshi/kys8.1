@@ -42,27 +42,27 @@ public class S_NewCreateItem extends ServerBasePacket {
 	public static final int CLAN_JOIN_MESSAGE = 0x43;
 	public static final int CLAN_JOIN_SETTING = 0x4D;
 	public static final int EMOTICON = 0x40;
-	public static final int 토마호크_도트 = 0x93;
+	public static final int TOMAHAWK_DOT = 0x93;
 	
 	/**1020以降の新しいパケット **/
-	public static final int 사망패널티 = 0xCF;
-	public static final int 도감= 0x30;
-	public static final int 퀘스트대화 = 11;
-	public static final int 퀘스트 = 13;
-	public static final int 퀘스트2 = 9;
-	public static final int 퀘스트3 = 62;
-	public static final int 퀘스트4 = 6;
-	public static final int 신규패킷2 = 32;
-	public static final int 신규패킷3= 227;
-	public static final int 신규패킷4= 229;
-	public static final int 신규패킷5= 231;
-	public static final int 신규패킷6= 233;
-	public static final int 신규패킷7= 234;
-	public static final int 신규패킷8= 47;
-	public static final int 신규패킷10= 126;
-	public static final int 신규패킷11= 118;
-	public static final int 신규패킷12= 119;
-	public static final int 신규패킷13 = 0x07;
+	public static final int DEATH_PENALTY = 0xCF;
+	public static final int PIC_BOOK= 0x30;
+	public static final int QUEST_TALK = 11;
+	public static final int QUEST = 13;
+	public static final int QUEST2 = 9;
+	public static final int QUEST3 = 62;
+	public static final int QUEST4 = 6;
+	public static final int NEW_PACKET_2 = 32;
+	public static final int NEW_PACKET_3= 227;
+	public static final int NEW_PACKET_4= 229;
+	public static final int NEW_PACKET_5= 231;
+	public static final int NEW_PACKET_6= 233;
+	public static final int NEW_PACKET_7= 234;
+	public static final int NEW_PACKET_8= 47;
+	public static final int NEW_PACKET_10= 126;
+	public static final int NEW_PACKET_11= 118;
+	public static final int NEW_PACKET_12= 119;
+	public static final int NEW_PACKET_13 = 0x07;
 	/** 1020以降の新しいパケット **/
 	
 	public S_NewCreateItem(int type, boolean ck) {
@@ -73,7 +73,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
 		writeC(type);
 		switch (type) {
-		case 토마호크_도트:
+		case TOMAHAWK_DOT:
 			// 0000: 06 93 01 08 84 c7 bf 60 27 61 .......`'a
 			writeC(1);
 			writeC(8);
@@ -96,7 +96,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0x04);
 			writeH(0);
 			break;
-		case 사망패널티://
+		case DEATH_PENALTY://
 			if (ck) {
 				writeC(1);
 				writeC(8);
@@ -118,7 +118,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 				writeH(0);
 			}
 			break;
-		case 신규패킷2: // 0x20
+		case NEW_PACKET_2: // 0x20
 			writeC(2);
 			writeC(8);// わから
 			writeC(144);
@@ -136,7 +136,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0);
 			writeC(0);
 			break;
-		case 신규패킷3: // 0xe3
+		case NEW_PACKET_3: // 0xe3
 			writeC(1);
 			writeC(8);
 			writeC(2);
@@ -155,7 +155,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0);
 			break;
 
-		case 신규패킷4: // 0xe5
+		case NEW_PACKET_4: // 0xe5
 			writeC(1);
 			writeC(8);
 			writeC(0x00);
@@ -169,7 +169,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0);
 			break;
 
-		case 신규패킷5: // 0xe7
+		case NEW_PACKET_5: // 0xe7
 			writeC(1);
 			writeC(0x0a);
 			writeC(0);
@@ -181,7 +181,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0);
 			break;
 
-		case 신규패킷6: // 0xea
+		case NEW_PACKET_6: // 0xea
 			writeC(1);
 			writeC(8);
 			writeC(0x14);
@@ -199,7 +199,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0x00);
 			break;
 
-		case 신규패킷7: // 0xe9
+		case NEW_PACKET_7: // 0xe9
 			writeC(1);
 			writeC(8);
 			writeC(0);
@@ -207,7 +207,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0x00);
 
 			break;
-		case 신규패킷8: // 0x2f
+		case NEW_PACKET_8: // 0x2f
 			writeC(2);
 			writeC(8);
 			writeC(0);
@@ -217,7 +217,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0x00);
 			break;
 
-		case 신규패킷10: // 0x7e
+		case NEW_PACKET_10: // 0x7e
 			writeC(0);
 			writeC(8);
 			writeC(0);
@@ -226,7 +226,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0x00);
 			writeC(0x00);
 			break;
-		case 신규패킷11: // 0x77
+		case NEW_PACKET_11: // 0x77
 			writeC(0);
 			writeC(8);
 			writeC(0x00);
@@ -238,7 +238,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0x00);
 			writeC(0x00);
 			break;
-		case 신규패킷12: // 0x76
+		case NEW_PACKET_12: // 0x76
 			writeC(0);
 			writeC(8);
 			writeC(0x00);
@@ -251,7 +251,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0x00);
 			break;
 
-		case 퀘스트:
+		case QUEST:
 			writeC(2);
 			writeC(8);
 			writeC(0);
@@ -261,7 +261,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0);
 			writeC(0);
 			break;
-		case 퀘스트2: // 0x09
+		case QUEST2: // 0x09
 			writeC(2);
 			writeC(8);
 			writeC(0);
@@ -271,7 +271,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0);
 			writeC(0);
 			break;
-		case 퀘스트3: // 0x3e
+		case QUEST3: // 0x3e
 			writeC(1);
 			writeC(10);
 			writeC(38);
@@ -283,7 +283,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0);
 			break;
 
-		case 퀘스트4: // 0x06
+		case QUEST4: // 0x06
 			writeC(2);
 			writeC(10);
 			writeC(0);
@@ -295,7 +295,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0);
 			break;
 
-		case 퀘스트대화:
+		case QUEST_TALK:
 			writeC(2);
 			writeC(8);
 			writeC(0);
@@ -306,7 +306,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0);
 			break;
 
-		case 신규패킷13:
+		case NEW_PACKET_13:
 			writeC(2);
 			writeC(0x0a);
 			writeC(0x00);
@@ -598,7 +598,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 		}
 	}
 
-	public S_NewCreateItem(int type, long 남은시간, int 방어, boolean ck) {
+	public S_NewCreateItem(int type, long remainingTime, int defense, boolean ck) {
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
 		writeC(type);
 		switch (type) { 
@@ -610,11 +610,11 @@ public class S_NewCreateItem extends ServerBasePacket {
 			writeC(0xe0);
 			writeC(0x11);
 			writeC(0x18);
-			byteWrite(남은시간 / 1000);
+			byteWrite(remainingTime / 1000);
 			
 			String s="";
 			StringTokenizer st;
-			switch(방어){
+			switch(defense){
 				case 1:
 					s = "20 08 28 c9 40 30 00 38 10 40";
 					break;
@@ -637,7 +637,7 @@ public class S_NewCreateItem extends ServerBasePacket {
 				writeC(Integer.parseInt(st.nextToken(), 16));
 			}
 
-			switch(방어){
+			switch(defense){
 				case 1:
 					writeH(0x20d5);
 					break;

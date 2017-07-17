@@ -149,7 +149,7 @@ public class S_PacketBox extends ServerBasePacket {
 	/** 血盟情報のHTMLが表示される */
 	public static final int HTML_CLAN1 = 38;
 
-	/** H(time): 이뮤의 아이콘이 표시된다 */
+	/** H(time): イミュのアイコンが表示される */
 	public static final int ICON_I2H = 40;
 
 	/** キャラクターのゲームのオプションは、ショートカット情報などを送る */
@@ -979,7 +979,7 @@ public class S_PacketBox extends ServerBasePacket {
 				writeH(value2);
 				writeH(0x00);
 			}else{
-				writeD(value2); // time (초)
+				writeD(value2); // time (超)
 			}
 			break;
 		default:

@@ -914,7 +914,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			pc.PCRoom_Buff = false;
 		}
 
-		if (Config.아놀드이벤트) {
+		if (Config.ARNOLD_EVENTS) {
 			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[イベント進行中]帰ってきたアーノルドイベント"));
 		}
 		
@@ -1104,19 +1104,19 @@ public class C_LoginToServer extends ClientBasePacket {
 	private void huntoption(L1PcInstance pc) { // このマップエフェクト示す
 		if (pc.getHuntCount() != 0) {
 			if (pc.isWizard() || pc.isBlackwizard()) {
-				if (pc.getHuntPrice() == Config.수배1단) {
+				if (pc.getHuntPrice() == Config.STAGE_1) {
 					pc.addSp(1);
 					pc.sendPackets(new S_SPMR(pc));
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
 					pc.sendPackets(new S_OwnCharStatus2(pc));
 					pc.sendPackets(new S_OwnCharStatus(pc));
-				} else if (pc.getHuntPrice() == Config.수배2단) {
+				} else if (pc.getHuntPrice() == Config.STAGE_2) {
 					pc.addSp(2);
 					pc.sendPackets(new S_SPMR(pc));
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
 					pc.sendPackets(new S_OwnCharStatus2(pc));
 					pc.sendPackets(new S_OwnCharStatus(pc));
-				} else if (pc.getHuntPrice() == Config.수배3단) {
+				} else if (pc.getHuntPrice() == Config.STAGE_3) {
 					pc.addSp(3);
 					pc.sendPackets(new S_SPMR(pc));
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
@@ -1124,19 +1124,19 @@ public class C_LoginToServer extends ClientBasePacket {
 					pc.sendPackets(new S_OwnCharStatus(pc));
 				}
 			} else if (pc.isCrown() || pc.isKnight() || pc.isDarkelf() || pc.isDragonknight() || pc.isWarrior()) {
-				if (pc.getHuntPrice() == Config.수배1단) {
+				if (pc.getHuntPrice() == Config.STAGE_1) {
 					pc.addDmgup(1);
 					pc.addBowDmgup(1);
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
 					pc.sendPackets(new S_OwnCharStatus2(pc));
 					pc.sendPackets(new S_OwnCharStatus(pc));
-				} else if (pc.getHuntPrice() == Config.수배2단) {
+				} else if (pc.getHuntPrice() == Config.STAGE_2) {
 					pc.addDmgup(2);
 					pc.addBowDmgup(2);
 					pc.sendPackets(new S_OwnCharAttrDef(pc));
 					pc.sendPackets(new S_OwnCharStatus2(pc));
 					pc.sendPackets(new S_OwnCharStatus(pc));
-				} else if (pc.getHuntPrice() == Config.수배3단) {
+				} else if (pc.getHuntPrice() == Config.STAGE_3) {
 					pc.addDmgup(3);
 					pc.addBowDmgup(3);
 					pc.sendPackets(new S_OwnCharAttrDef(pc));

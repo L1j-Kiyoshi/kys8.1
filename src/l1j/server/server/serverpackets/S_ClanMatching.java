@@ -131,7 +131,7 @@ public class S_ClanMatching extends ServerBasePacket {
 				else writeC(0x00);
 				writeC(0x00); // 固定値。
 				writeS(text);// 紹介コメント。
-				writeD(clan.getClanId()); // 혈맹 objid
+				writeD(clan.getClanId()); // 血盟objid
 			}
 		} else if (type == 4) { // リクエストリスト
 			

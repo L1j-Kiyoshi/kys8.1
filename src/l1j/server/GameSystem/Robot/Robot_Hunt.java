@@ -26,7 +26,7 @@ import l1j.server.server.utils.SQLUtil;
 
 public class Robot_Hunt {
 
-	public static boolean 기감 = false;
+	public static boolean giranPrizon = false;
 	private static Random _random = new Random(System.nanoTime());
 	private static Queue<L1RobotInstance> _queue;
 	private static Robot_Hunt _instance;

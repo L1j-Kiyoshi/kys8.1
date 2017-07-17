@@ -392,14 +392,14 @@ public class C_NPCAction extends ClientBasePacket {
 			if (s.equalsIgnoreCase("0")) {
 				if (pc.getLevel() < 51) {
 					pc.addExp((ExpTable.getExpByLevel(51) - 1) - pc.getExp() + ((ExpTable.getExpByLevel(51) - 1) / 100));
-				} else if (pc.getLevel() >= 51 && pc.getLevel() < Config.경험치지급단) {
+				} else if (pc.getLevel() >= 51 && pc.getLevel() < Config.EXP_PAYMENT_TEAM) {
 					pc.addExp((ExpTable.getExpByLevel(pc.getLevel() + 1) - 1) - pc.getExp() + 100);
 					pc.setCurrentHp(pc.getMaxHp());
 					pc.setCurrentMp(pc.getMaxMp());
 				}
-				if (ExpTable.getLevelByExp(pc.getExp()) >= Config.경험치지급단) {
+				if (ExpTable.getLevelByExp(pc.getExp()) >= Config.EXP_PAYMENT_TEAM) {
 					htmlid = "expgive3";
-					pc.sendPackets(new S_SystemMessage("\\aA通知: 経験値支給は \\aG" + Config.경험치지급단 + "\\aA まで可能です"));
+					pc.sendPackets(new S_SystemMessage("\\aA通知: 経験値支給は \\aG" + Config.EXP_PAYMENT_TEAM + "\\aA まで可能です"));
 				} else {
 					htmlid = "expgive";
 				}

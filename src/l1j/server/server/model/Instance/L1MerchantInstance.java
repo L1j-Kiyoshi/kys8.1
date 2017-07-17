@@ -140,10 +140,10 @@ public class L1MerchantInstance extends L1NpcInstance {
 		String npcName = ((L1NpcInstance) obj).getNpcTemplate().get_name();
 
 		if (npcid == 7000096) {
-			if (player.getLevel() >= Config.배틀존입장레벨) {
+			if (player.getLevel() >= Config.BATTLE_ZONE_ENTRY_LEVEL) {
 				DuelZone(player);
 			} else {
-				player.sendPackets(new S_SystemMessage("\\aG[!] : レベル " + Config.배틀존입장레벨 + "以上だけ入場することができます。"));
+				player.sendPackets(new S_SystemMessage("\\aG[!] : レベル " + Config.BATTLE_ZONE_ENTRY_LEVEL + "以上だけ入場することができます。"));
 			}
 		}
 
@@ -178,8 +178,8 @@ public class L1MerchantInstance extends L1NpcInstance {
 			if (talking != null) {
 			switch (npcid) {
 			case 5100018: // アデン狩り場立場管理人
-				if (player.getLevel() < Config.아덴사냥터입장레벨) {
-					player.sendPackets(new S_SystemMessage("レベル" + Config.아덴사냥터입장레벨 + "以上だけ入場することができます。"));
+				if (player.getLevel() < Config.ADEN_HUNTING_ENTRY_LEVEL) {
+					player.sendPackets(new S_SystemMessage("レベル" + Config.ADEN_HUNTING_ENTRY_LEVEL + "以上だけ入場することができます。"));
 					htmlid = "";
 					return;
 				}
@@ -212,7 +212,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				} 
 				break;
 			case 7310085:
-				if (player.getLevel() > Config.말섬입장레벨 && player.getLevel() < Config.말섬제한레벨) {
+				if (player.getLevel() > Config.TIC_ENTRY_LEVEL && player.getLevel() < Config.TIC_LIMIT_LEVEL) {
 					htmlid = "talkinggate1";
 			    } else {
 					htmlid = "talkinggate2";
@@ -2420,7 +2420,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				}
 				break;
 			case 5062: //ジークフリード
-				if (player.getLevel() >= Config.라던입장레벨) {
+				if (player.getLevel() >= Config.LASTAVARD_ENTRY_LEVEL) {
 					htmlid = "zigpride1";
 				} else {
 					htmlid = "zigpride2";
@@ -2551,7 +2551,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "exitghostel";
 				}
 			case 71126: // イリス
-				if (player.getLevel() < Config.라던입장레벨) {
+				if (player.getLevel() < Config.LASTAVARD_ENTRY_LEVEL) {
 					htmlid = "eris21";
 				} else {
 					htmlid = "eris1";
@@ -2678,8 +2678,8 @@ public class L1MerchantInstance extends L1NpcInstance {
 	}
 
 	private void 경험치멘트(L1PcInstance pc) {
-		pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "通知：[経験値支給は Lv.("+ Config.경험치지급단 +") まで可能です]"));
-		pc.sendPackets(new S_SystemMessage("\\aA通知：経験値支給は \\aG[" + Config.경험치지급단 + "]\\aA まで可能です"));
+		pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "通知：[経験値支給は Lv.("+ Config.EXP_PAYMENT_TEAM +") まで可能です]"));
+		pc.sendPackets(new S_SystemMessage("\\aA通知：経験値支給は \\aG[" + Config.EXP_PAYMENT_TEAM + "]\\aA まで可能です"));
 	}
 
 	private void createRuler(L1PcInstance pc, int attr, int sealCount) {
