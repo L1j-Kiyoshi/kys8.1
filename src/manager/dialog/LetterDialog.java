@@ -74,7 +74,7 @@ public class LetterDialog extends Dialog {
 		//
 		shell = new Shell(getParent(), getStyle());
 		shell.setSize(450, 473);
-		shell.setText("\uD3B8\uC9C0\uBCF4\uAE30");
+		shell.setText("メールを読む");
 		//画面の中央に
 		display = Display.getDefault();
 		shell.setBounds((display.getBounds().width / 2) - (shell.getBounds().width / 2),
@@ -83,7 +83,7 @@ public class LetterDialog extends Dialog {
 		shell.setLayout(new GridLayout(2, false));
 		
 		Label lblNewLabel_2 = new Label(shell, SWT.NONE);
-		lblNewLabel_2.setText("\uBCF4\uB0B8\uC774");
+		lblNewLabel_2.setText("送信が");
 		
 		text_1 = new Text(shell, SWT.BORDER);
 		text_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -91,7 +91,7 @@ public class LetterDialog extends Dialog {
 		text_1.setText(letter_data[1]);
 		
 		Label lblNewLabel_3 = new Label(shell, SWT.NONE);
-		lblNewLabel_3.setText("\uBC1B\uB294\uC774");
+		lblNewLabel_3.setText("受けるが");
 		
 		text_2 = new Text(shell, SWT.BORDER);
 		text_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -99,7 +99,7 @@ public class LetterDialog extends Dialog {
 		text_2.setText(letter_data[5]);
 		
 		Label lblNewLabel = new Label(shell, SWT.NONE);
-		lblNewLabel.setText("\uC81C\uBAA9");
+		lblNewLabel.setText("タイトル");
 		
 		text = new Text(shell, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -107,7 +107,7 @@ public class LetterDialog extends Dialog {
 		text.setText(letter_data[2]);
 		
 		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
-		lblNewLabel_1.setText("\uB0B4\uC6A9");
+		lblNewLabel_1.setText("内容");
 		
 		StyledText styledText = new StyledText(shell, SWT.BORDER);
 		styledText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -133,7 +133,7 @@ public class LetterDialog extends Dialog {
 			}
 		});
 		btnNewButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		btnNewButton.setText("\uC0AD\uC81C");
+		btnNewButton.setText("削除");
 		
 		Button btnNewButton_1 = new Button(composite, SWT.NONE);
 		btnNewButton_1.addSelectionListener(new SelectionAdapter() {
@@ -143,36 +143,36 @@ public class LetterDialog extends Dialog {
 			}
 		});
 		btnNewButton_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		btnNewButton_1.setText("\uD655\uC778");
+		btnNewButton_1.setText("確認");
 		new Label(shell, SWT.NONE);
 		
 		CLabel lblBy = new CLabel(shell, SWT.NONE);
 		lblBy.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblBy.setText("\uB9B0\uC62C\uC18C\uD504\uD2B8");
+		lblBy.setText("リンオルソフト");
 		
 		Label lblNewLabel_4 = new Label(shell, SWT.NONE);
-		lblNewLabel_4.setText("\uBCF4\uB0B8\uC774");
+		lblNewLabel_4.setText("送信が");
 		
 		text_3 = new Text(shell, SWT.BORDER);
 		text_3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		text_3.setText("\uBA54\uD2F0\uC2A4");
+		text_3.setText("メティス");
 		
 		Label lblNewLabel_5 = new Label(shell, SWT.NONE);
-		lblNewLabel_5.setText("\uBC1B\uB294\uC774");
+		lblNewLabel_5.setText("受けるが");
 		
 		text_4 = new Text(shell, SWT.BORDER);
 		text_4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		text_4.setText(letter_data[1]);
 		
 		Label lblNewLabel_6 = new Label(shell, SWT.NONE);
-		lblNewLabel_6.setText("\uC81C\uBAA9");
+		lblNewLabel_6.setText("タイトル");
 		
 		txtRe = new Text(shell, SWT.BORDER);
 		txtRe.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		txtRe.setText("Re: " + letter_data[2]);
 		
 		Label lblNewLabel_7 = new Label(shell, SWT.NONE);
-		lblNewLabel_7.setText("\uB0B4\uC6A9");
+		lblNewLabel_7.setText("内容");
 		
 		final StyledText styledText2 = new StyledText(shell, SWT.BORDER);
 		styledText2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -200,7 +200,7 @@ public class LetterDialog extends Dialog {
 			    }
 			}
 		});
-		btnNewButton_2.setText("\uBCF4\uB0B4\uAE30");
+		btnNewButton_2.setText("送信");
 	}
 	
 	private void close() {

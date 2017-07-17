@@ -53,7 +53,7 @@ public class LetterComposite extends Composite {
 		gd_btnNewButton.heightHint = 35;
 		gd_btnNewButton.widthHint = 150;
 		btnNewButton.setLayoutData(gd_btnNewButton);
-		btnNewButton.setText("\uC0C8\uB85C\uACE0\uCE68");
+		btnNewButton.setText("リフレッシュ");
 		
 		table = new Table(this, SWT.BORDER | SWT.FULL_SELECTION);
 		table.addSelectionListener(new SelectionAdapter() {
@@ -78,19 +78,19 @@ public class LetterComposite extends Composite {
 		
 		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.NONE);
 		tblclmnNewColumn.setWidth(40);
-		tblclmnNewColumn.setText("\uBC88\uD638");
+		tblclmnNewColumn.setText("番号");
 		
 		TableColumn tblclmnNewColumn_1 = new TableColumn(table, SWT.NONE);
 		tblclmnNewColumn_1.setWidth(80);
-		tblclmnNewColumn_1.setText("\uBCF4\uB0B8\uC774");
+		tblclmnNewColumn_1.setText("送信が");
 		
 		TableColumn tblclmnNewColumn_2 = new TableColumn(table, SWT.NONE);
 		tblclmnNewColumn_2.setWidth(150);
-		tblclmnNewColumn_2.setText("\uC81C\uC625");
+		tblclmnNewColumn_2.setText("ジェオク");
 		
 		TableColumn tblclmnNewColumn_4 = new TableColumn(table, SWT.NONE);
 		tblclmnNewColumn_4.setWidth(80);
-		tblclmnNewColumn_4.setText("\uBCF4\uB0B8\uB0A0\uC790");
+		tblclmnNewColumn_4.setText("送信日付");
 
 		//
 		reload();

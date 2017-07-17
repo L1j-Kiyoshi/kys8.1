@@ -255,23 +255,23 @@ public class LinAllManager {
 		shlInbumserverManager.setBounds((display.getBounds().width / 2) - (shlInbumserverManager.getBounds().width / 2),
 				(display.getBounds().height / 2) - (shlInbumserverManager.getBounds().height / 2),
 				shlInbumserverManager.getBounds().width, shlInbumserverManager.getBounds().height);
-		
+
 		TabFolder tabFolder_3 = new TabFolder(shlInbumserverManager, SWT.NONE);
 		tabFolder_3.setBounds(10, 542, 414, 149);
-		
-		
-		
-	
+
+
+
+
 		tabItem_1 = new TabItem(tabFolder_3, SWT.NONE);
-		tabItem_1.setText("\uBCF4\uC2A4");
+		tabItem_1.setText("ボス");
 
 		text_9 = new Text(tabFolder_3, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		text_9.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		text_9.setEditable(false);
 		text_9.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		tabItem_1.setControl(text_9);
-		
-		
+
+
 		tbtmGm = new TabItem(tabFolder_3, SWT.NONE);
 		tbtmGm.setText("GM");
 
@@ -280,23 +280,23 @@ public class LinAllManager {
 		text_11.setEditable(false);
 		text_11.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		tbtmGm.setControl(text_11);
-		
-		
+
+
 		tabItem_2 = new TabItem(tabFolder_3, SWT.NONE);
-		tabItem_2.setText("\uB358\uC804");
+		tabItem_2.setText("ダンジョン");
 
 		text_12 = new Text(tabFolder_3, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		text_12.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		text_12.setEditable(false);
 		text_12.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		tabItem_2.setControl(text_12);
-		
+
 		Label lblNewLabel_44 = new Label(shlInbumserverManager, SWT.NONE);
 		lblNewLabel_44.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_44.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_44.setBounds(432, 573, 185, 26);
 		lblNewLabel_44.setText("サーバーの稼働時間：");
-		
+
 
 		shlInbumserverManager.open();
 		shlInbumserverManager.layout();
@@ -334,19 +334,19 @@ public class LinAllManager {
 		shlInbumserverManager.setImage(SWTResourceManager.getImage("data\\img\\apple.png"));
 		shlInbumserverManager.addShellListener(new ShellAdapter() {
 			@Override
-			public void shellClosed(ShellEvent e) { 
-				String title = "\uB9B0 \uC62C"; 
-				String message = "\uB9B0 \uC62C \uC18C \uD504 \uD2B8"; 
-				int style = SWT.OK | SWT.CANCEL | SWT.ICON_QUESTION; 
-				//MessageBox dialog = new MessageBox(shell, style); 
+			public void shellClosed(ShellEvent e) {
+				String title = "リンオール";
+				String message = "リンオールソフト";
+				int style = SWT.OK | SWT.CANCEL | SWT.ICON_QUESTION;
+				//MessageBox dialog = new MessageBox(shell, style);
 				MessageBox dialog = new MessageBox(shlInbumserverManager,SWT.OK|SWT.ICON_INFORMATION);
-				dialog.setText(title); 
-				dialog.setMessage(message); 
+				dialog.setText(title);
+				dialog.setMessage(message);
 				int flag = dialog.open();
-				if (flag == SWT.OK) { 
+				if (flag == SWT.OK) {
 					e.doit = false; // trueとすると終了
 				} else {
-					e.doit = false; 
+					e.doit = false;
 				}
 			};
 			@Override
@@ -355,7 +355,7 @@ public class LinAllManager {
 		});
 		shlInbumserverManager.setBackground(SWTResourceManager.getColor(102, 102, 102));
 		shlInbumserverManager.setSize(735, 735);
-		shlInbumserverManager.setText("\uB9B0 \uC62C \uC18C \uD504 \uD2B8");
+		shlInbumserverManager.setText("リンオールソフト");
 
 		Composite composite = new Composite(shlInbumserverManager, SWT.NONE);
 		composite.setBackground(SWTResourceManager.getColor(51, 51, 51));
@@ -363,7 +363,7 @@ public class LinAllManager {
 
 		txtInbumserverByleaf = new Text(composite, SWT.BORDER | SWT.READ_ONLY | SWT.V_SCROLL | SWT.MULTI);
 		txtInbumserverByleaf.setForeground(SWTResourceManager.getColor(240, 255, 255));
-		txtInbumserverByleaf.setText("===================================\r\n                     Lineage-World\r\n\r\n                                                                              By.LinAll\r\n===================================\r\n[S]\uC11C\uBC84\uAC00 \uC815\uC0C1\uC801\uC73C\uB85C \uAD6C\uB3D9\uB418\uC5C8\uC2B5\uB2C8\uB2E4.\r\n");
+		txtInbumserverByleaf.setText("===================================\r\n                     Lineage-World\r\n\r\n                                                                              By.LinAll\r\n===================================\r\n[S]サーバーが正常に起動しました。\r\n");
 		txtInbumserverByleaf.setBackground(SWTResourceManager.getColor(0, 0, 0));
 		txtInbumserverByleaf.setBounds(6, 10, 305, 254);
 
@@ -375,7 +375,7 @@ public class LinAllManager {
 		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 
 		CTabItem tbtmNewItem = new CTabItem(tabFolder, SWT.NONE);
-		tbtmNewItem.setText("\uC804\uCCB4");
+		tbtmNewItem.setText("全体");
 
 
 		chatText = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
@@ -386,7 +386,7 @@ public class LinAllManager {
 		tbtmNewItem.setControl(chatText);
 
 		tbtmNewItem_16 = new CTabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_16.setText("\uC77C\uBC18");
+		tbtmNewItem_16.setText("一般");
 
 		text_8 = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		text_8.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -395,7 +395,7 @@ public class LinAllManager {
 		tbtmNewItem_16.setControl(text_8);
 
 		CTabItem tbtmNewItem_1 = new CTabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_1.setText("\uADD3\uB9D0");
+		tbtmNewItem_1.setText("ウィスパー");
 
 		txtTime = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		txtTime.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -404,7 +404,7 @@ public class LinAllManager {
 		tbtmNewItem_1.setControl(txtTime);
 
 		CTabItem tbtmNewItem_2 = new CTabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_2.setText("\uD608\uB9F9");
+		tbtmNewItem_2.setText("血盟");
 
 		text_5 = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		text_5.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -413,7 +413,7 @@ public class LinAllManager {
 		tbtmNewItem_2.setControl(text_5);
 
 		CTabItem tbtmNewItem_3 = new CTabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_3.setText("\uD30C\uD2F0");
+		tbtmNewItem_3.setText("パーティー");
 
 		text_6 = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		text_6.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -422,7 +422,7 @@ public class LinAllManager {
 		tbtmNewItem_3.setControl(text_6);
 
 		CTabItem tbtmNewItem_4 = new CTabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_4.setText("\uC0C1\uC810");
+		tbtmNewItem_4.setText("店");
 
 		txtTime_1 = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		txtTime_1.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -431,7 +431,7 @@ public class LinAllManager {
 		tbtmNewItem_4.setControl(txtTime_1);
 
 		CTabItem tbtmNewItem_5 = new CTabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_5.setText("\uAC70\uB798");
+		tbtmNewItem_5.setText("取引");
 
 		txtTime_2 = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		txtTime_2.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -440,7 +440,7 @@ public class LinAllManager {
 		tbtmNewItem_5.setControl(txtTime_2);
 
 		CTabItem tabItem = new CTabItem(tabFolder, SWT.NONE);
-		tabItem.setText("\uCC3D\uACE0");
+		tabItem.setText("倉庫");
 
 		text = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		text.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -449,7 +449,7 @@ public class LinAllManager {
 		tabItem.setControl(text);
 
 		CTabItem tbtmP = new CTabItem(tabFolder, SWT.NONE);
-		tbtmP.setText("E\uCC3D\uACE0");
+		tbtmP.setText("E倉庫");
 
 		text_4 = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		text_4.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -458,7 +458,7 @@ public class LinAllManager {
 		tbtmP.setControl(text_4);
 
 		CTabItem tbtmNewItem_6 = new CTabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_6.setText("\uC778\uCCB8");
+		tbtmNewItem_6.setText("エンチャン");
 
 		txtTime_3 = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		txtTime_3.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -467,7 +467,7 @@ public class LinAllManager {
 		tbtmNewItem_6.setControl(txtTime_3);
 
 		CTabItem tbtmNewItem_7 = new CTabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_7.setText("\uC90D\uAE30");
+		tbtmNewItem_7.setText("拾い");
 
 		text_10 = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		text_10.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -476,7 +476,7 @@ public class LinAllManager {
 		tbtmNewItem_7.setControl(text_10);
 
 		CTabItem tbtmNewItem_12 = new CTabItem(tabFolder, SWT.NONE);
-		tbtmNewItem_12.setText("\uC0AC\uB9DD");
+		tbtmNewItem_12.setText("死亡");
 
 		text_7 = new Text(tabFolder, SWT.BORDER | SWT.V_SCROLL | SWT.MULTI);
 		text_7.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -514,10 +514,10 @@ public class LinAllManager {
 		tabFolder_1.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 
 		CTabItem tbtmNewItem_8 = new CTabItem(tabFolder_1, SWT.NONE);
-		tbtmNewItem_8.setText("\uCE90\uB9AD\uC815\uBCF4");
+		tbtmNewItem_8.setText("キャラクター情報");
 
 		CTabItem tbtmNewItem_9 = new CTabItem(tabFolder_1, SWT.NONE);
-		tbtmNewItem_9.setText("\uC778\uBCA4\uD1A0\uB9AC");
+		tbtmNewItem_9.setText("インベントリ");
 
 		table_2 = new Table(tabFolder_1, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		table_2.setTouchEnabled(true);
@@ -529,20 +529,20 @@ public class LinAllManager {
 
 		TableColumn tblclmnNewColumn_1 = new TableColumn(table_2, SWT.NONE);
 		tblclmnNewColumn_1.setWidth(198);
-		tblclmnNewColumn_1.setText("\uC774\uB984");
+		tblclmnNewColumn_1.setText("名前");
 
 		TableColumn tblclmnNewColumn_6 = new TableColumn(table_2, SWT.CENTER);
 		tblclmnNewColumn_6.setWidth(76);
-		tblclmnNewColumn_6.setText("\uC624\uBE0C\uC81D\uD2B8");
+		tblclmnNewColumn_6.setText("オブジェクト");
 
 		Menu menu_4 = new Menu(table_2);
 		table_2.setMenu(menu_4);
 
 		MenuItem mntmNewItem_23 = new MenuItem(menu_4, SWT.NONE);
-		mntmNewItem_23.setText("\uC0C1\uC138\uC815\uBCF4");
+		mntmNewItem_23.setText("詳細");
 
 		MenuItem mntmNewItem_21 = new MenuItem(menu_4, SWT.NONE);
-		mntmNewItem_21.setText("\uC544\uC774\uD15C \uC218\uC815");
+		mntmNewItem_21.setText("アイテムの変更");
 
 		new MenuItem(menu_4, SWT.SEPARATOR);
 
@@ -567,10 +567,10 @@ public class LinAllManager {
 				}
 			}
 		});
-		mntmNewItem_22.setText("\uC544\uC774\uD15C \uD68C\uC218");
+		mntmNewItem_22.setText("アイテム回収");
 
 		CTabItem tbtmNewItem_10 = new CTabItem(tabFolder_1, SWT.NONE);
-		tbtmNewItem_10.setText("\uCC3D\uACE0");
+		tbtmNewItem_10.setText("倉庫");
 
 		table_3 = new Table(tabFolder_1, SWT.BORDER | SWT.FULL_SELECTION);
 		table_3.setLinesVisible(true);
@@ -581,20 +581,20 @@ public class LinAllManager {
 
 		TableColumn tableColumn_4 = new TableColumn(table_3, SWT.NONE);
 		tableColumn_4.setWidth(198);
-		tableColumn_4.setText("\uC774\uB984");
+		tableColumn_4.setText("名前");
 
 		TableColumn tableColumn_5 = new TableColumn(table_3, SWT.CENTER);
 		tableColumn_5.setWidth(76);
-		tableColumn_5.setText("\uC624\uBE0C\uC81D\uD2B8");
+		tableColumn_5.setText("オブジェクト");
 
 		Menu menu_7 = new Menu(table_3);
 		table_3.setMenu(menu_7);
 
 		MenuItem menuItem_1 = new MenuItem(menu_7, SWT.NONE);
-		menuItem_1.setText("\uC0C1\uC138\uC815\uBCF4");
+		menuItem_1.setText("詳細");
 
 		MenuItem menuItem_2 = new MenuItem(menu_7, SWT.NONE);
-		menuItem_2.setText("\uC544\uC774\uD15C \uC218\uC815");
+		menuItem_2.setText("アイテムの変更");
 
 		MenuItem menuItem_3 = new MenuItem(menu_7, SWT.SEPARATOR);
 
@@ -619,10 +619,10 @@ public class LinAllManager {
 				}
 			}
 		});
-		menuItem_4.setText("\uC544\uC774\uD15C \uD68C\uC218");
+		menuItem_4.setText("アイテム回収");
 
 		CTabItem tbtmNewItem_11 = new CTabItem(tabFolder_1, SWT.NONE);
-		tbtmNewItem_11.setText("\uACC4\uC815\uC815\uBCF4");
+		tbtmNewItem_11.setText("アカウント情報");
 
 		Composite composite_3 = new Composite(tabFolder_1, SWT.NONE);
 		composite_3.setBackground(SWTResourceManager.getColor(51, 51, 51));
@@ -652,12 +652,12 @@ public class LinAllManager {
 
 		TreeColumn trclmnNewColumn = new TreeColumn(tree, SWT.CENTER);
 		trclmnNewColumn.setWidth(132);
-		trclmnNewColumn.setText("\uACC4   \uC815");
+		trclmnNewColumn.setText("アカウント");
 
 		trtmNewTreeitem = new TreeItem(tree, SWT.NONE);
 		trtmNewTreeitem.setChecked(true);
 		trtmNewTreeitem.setForeground(SWTResourceManager.getColor(255, 255, 255));
-		trtmNewTreeitem.setText("\uCE90\uB9AD\uD130 \uB9AC\uC2A4\uD2B8");
+		trtmNewTreeitem.setText("キャラクターリスト");
 		trtmNewTreeitem.setExpanded(true);
 
 		lblNewLabel_42 = new Label(composite_3, SWT.NONE);
@@ -669,7 +669,7 @@ public class LinAllManager {
 		Group group_2 = new Group(composite_3, SWT.NONE);
 		group_2.setForeground(SWTResourceManager.getColor(255, 0, 0));
 		group_2.setBackground(SWTResourceManager.getColor(51, 51, 51));
-		group_2.setText("\uCE90\uB9AD\uC815\uBCF4");
+		group_2.setText("キャラクター情報");
 		group_2.setBounds(153, 5, 133, 96);
 
 		Label lblNewLabel_43 = new Label(group_2, SWT.NONE);
@@ -704,13 +704,13 @@ public class LinAllManager {
 		label_25.setBounds(10, 78, 113, 13);
 
 		label_28 = new Label(group_2, SWT.NONE);
-		label_28.setText("0\uC77C\uC804");
+		label_28.setText("0日前");
 		label_28.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		label_28.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		label_28.setBounds(60, 59, 63, 13);
 
 		Group group_3 = new Group(composite_3, SWT.NONE);
-		group_3.setText("\uACC4\uC815\uC815\uBCF4");
+		group_3.setText("アカウント情報");
 		group_3.setForeground(SWTResourceManager.getColor(255, 0, 0));
 		group_3.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		group_3.setBounds(153, 107, 133, 66);
@@ -823,7 +823,7 @@ public class LinAllManager {
 		lblCon.setBounds(10, 122, 31, 13);
 
 		lblInt = new Label(composite_2, SWT.NONE);
-		lblInt.setText("\u3000 INT :");
+		lblInt.setText("INT :");
 		lblInt.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblInt.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblInt.setBounds(0, 141, 40, 13);
@@ -970,16 +970,16 @@ public class LinAllManager {
 		lblNewLabel_37.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_37.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_37.setBounds(192, 179, 94, 13);
-		lblNewLabel_37.setText("00\uC2DC 00\uBD84 00\uCD08");
+		lblNewLabel_37.setText("00時00分00秒");
 
 		lblNewLabel_38 = new Label(composite_2, SWT.NONE);
 		lblNewLabel_38.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_38.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_38.setBounds(163, 122, 45, 13);
-		lblNewLabel_38.setText("  \u3000P K :");
+		lblNewLabel_38.setText("P K :");
 
 		lblDethCount = new Label(composite_2, SWT.NONE);
-		lblDethCount.setText("\u3000Deth :");
+		lblDethCount.setText("Deth :");
 		lblDethCount.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblDethCount.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblDethCount.setBounds(161, 141, 45, 13);
@@ -1021,16 +1021,16 @@ public class LinAllManager {
 		lblNewLabel_41.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_41.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_41.setBounds(265, 65, 19, 13);
-		lblNewLabel_41.setText("\uBD84");
+		lblNewLabel_41.setText("分");
 
 		label_23 = new Label(composite_2, SWT.NONE);
-		label_23.setText("\uBD84");
+		label_23.setText("分");
 		label_23.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		label_23.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		label_23.setBounds(265, 84, 19, 13);
 
 		label_24 = new Label(composite_2, SWT.NONE);
-		label_24.setText("\uBD84");
+		label_24.setText("分");
 		label_24.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		label_24.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		label_24.setBounds(265, 103, 19, 13);
@@ -1042,10 +1042,10 @@ public class LinAllManager {
 		tabFolder_2.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 
 		CTabItem tbtmNewItem_13 = new CTabItem(tabFolder_2, SWT.NONE);
-		tbtmNewItem_13.setText("\uC11C\uBC84\uC815\uBCF4");
+		tbtmNewItem_13.setText("サーバー情報");
 
 		CTabItem tbtmNewItem_14 = new CTabItem(tabFolder_2, SWT.NONE);
-		tbtmNewItem_14.setText("\uD3B8\uC9C0\uD568");
+		tbtmNewItem_14.setText("トレイ");
 
 		composite_4 = new LetterComposite(tabFolder_2, SWT.NONE);
 		tbtmNewItem_14.setControl(composite_4);
@@ -1074,7 +1074,7 @@ public class LinAllManager {
 		group.setTouchEnabled(true);
 		group.setForeground(SWTResourceManager.getColor(204, 0, 0));
 		group.setBackground(SWTResourceManager.getColor(51, 51, 51));
-		group.setText("\uC11C\uBC84\uC815\uBCF4");
+		group.setText("サーバー情報");
 		group.setBounds(10, 10, 254, 170);
 
 		lblNewLabel_4 = new Label(group, SWT.NONE);
@@ -1117,43 +1117,43 @@ public class LinAllManager {
 		lblNewLabel_10.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_10.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_10.setBounds(13, 42, 119, 13);
-		lblNewLabel_10.setText("\uC77C\uC77C \uC544\uB374 \uCD1D \uC0DD\uC0B0\uB7C9 :");
+		lblNewLabel_10.setText("毎日のアデンの総生産量：");
 
 		lblNewLabel_11 = new Label(group, SWT.NONE);
 		lblNewLabel_11.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_11.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_11.setBounds(13, 61, 119, 13);
-		lblNewLabel_11.setText("\uC77C\uC77C \uC544\uB374 \uCD1D \uD68C\uC218\uB7C9 :");
+		lblNewLabel_11.setText("毎日のアデン総回収量：");
 
 		lblNewLabel_12 = new Label(group, SWT.NONE);
 		lblNewLabel_12.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_12.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_12.setBounds(13, 80, 65, 13);
-		lblNewLabel_12.setText("\uC138\uAE08 \uBC30\uC728 :");
+		lblNewLabel_12.setText("税金倍率：");
 
 		lblNewLabel_13 = new Label(group, SWT.NONE);
 		lblNewLabel_13.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_13.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_13.setBounds(13, 99, 65, 13);
-		lblNewLabel_13.setText("\uACC4\uC815 \uC0DD\uC131 :");
+		lblNewLabel_13.setText("アカウントの作成：");
 
 		lblNewLabel_14 = new Label(group, SWT.NONE);
 		lblNewLabel_14.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_14.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_14.setBounds(122, 99, 65, 13);
-		lblNewLabel_14.setText("\uCE90\uB9AD \uC0DD\uC131 :");
+		lblNewLabel_14.setText("キャラクター作成：");
 
 		lblNewLabel_15 = new Label(group, SWT.NONE);
 		lblNewLabel_15.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_15.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_15.setBounds(19, 118, 63, 13);
-		lblNewLabel_15.setText("PVP \uD69F\uC218 :");
+		lblNewLabel_15.setText("PVP回数：");
 
 		lblNewLabel_16 = new Label(group, SWT.NONE);
 		lblNewLabel_16.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_16.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_16.setBounds(13, 137, 65, 13);
-		lblNewLabel_16.setText("\uD608\uB9F9 \uCC3D\uC124 :");
+		lblNewLabel_16.setText("血盟創設：");
 
 		progressBar = new ProgressBar(group, SWT.NONE);
 		progressBar.setMaximum(60);
@@ -1164,19 +1164,19 @@ public class LinAllManager {
 		lblNewLabel_17.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_17.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_17.setBounds(122, 118, 76, 13);
-		lblNewLabel_17.setText("\uD328\uB110\uD2F0 \uD69F\uC218 :");
+		lblNewLabel_17.setText("ペナルティ回数：");
 
 		lblNewLabel_18 = new Label(group, SWT.NONE);
 		lblNewLabel_18.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_18.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_18.setBounds(122, 80, 89, 13);
-		lblNewLabel_18.setText("\uBC84\uACBD \uCD5C\uB300 \uBC30\uB2F9 :");
+		lblNewLabel_18.setText("ボギョン最大配当：");
 
 		lblNewLabel_19 = new Label(group, SWT.NONE);
 		lblNewLabel_19.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_19.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_19.setBounds(122, 137, 76, 13);
-		lblNewLabel_19.setText("\uCD5C\uACE0 \uC778\uC6D0\uC218 :");
+		lblNewLabel_19.setText("最高人数：");
 
 		lblNewLabel_20 = new Label(group, SWT.NONE);
 		lblNewLabel_20.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -1231,7 +1231,7 @@ public class LinAllManager {
 		Group group_1 = new Group(composite_1, SWT.NONE);
 		group_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
 		group_1.setBackground(SWTResourceManager.getColor(51, 51, 51));
-		group_1.setText("\uC2DC\uC2A4\uD15C");
+		group_1.setText("システム");
 		group_1.setBounds(10, 186, 254, 40);
 
 		lblNewLabel = new Label(group_1, SWT.NONE);
@@ -1267,25 +1267,25 @@ public class LinAllManager {
 
 		TableColumn tblclmnNewColumn = new TableColumn(table, SWT.CENTER);
 		tblclmnNewColumn.setWidth(84);
-		tblclmnNewColumn.setText("     \uCE90\uB9AD\uBA85");
+		tblclmnNewColumn.setText("キャラクター名");
 
 		TableColumn tblclmnNewColumn_4 = new TableColumn(table, SWT.CENTER);
 		tblclmnNewColumn_4.setResizable(false);
 		tblclmnNewColumn_4.setWidth(75);
-		tblclmnNewColumn_4.setText("\uC81C\uBAA9");
+		tblclmnNewColumn_4.setText("タイトル");
 
 		TableColumn tblclmnNewColumn_3 = new TableColumn(table, SWT.CENTER);
 		tblclmnNewColumn_3.setResizable(false);
 		tblclmnNewColumn_3.setWidth(132);
-		tblclmnNewColumn_3.setText("\uB0B4\uC6A9");
+		tblclmnNewColumn_3.setText("内容");
 
 		TableColumn tblclmnNewColumn_2 = new TableColumn(table, SWT.CENTER);
 		tblclmnNewColumn_2.setResizable(false);
 		tblclmnNewColumn_2.setWidth(87);
-		tblclmnNewColumn_2.setText("\uB0A0\uC9DC");
+		tblclmnNewColumn_2.setText("日");
 
 		CTabItem tbtmNewItem_15 = new CTabItem(tabFolder_2, SWT.NONE);
-		tbtmNewItem_15.setText("\uAC74\uC758\uAC8C\uC2DC\uD310");
+		tbtmNewItem_15.setText("件の掲示板");
 
 		table_1 = new Table(tabFolder_2, SWT.BORDER | SWT.FULL_SELECTION);
 		table_1.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -1296,21 +1296,21 @@ public class LinAllManager {
 
 		TableColumn tableColumn = new TableColumn(table_1, SWT.CENTER);
 		tableColumn.setWidth(84);
-		tableColumn.setText("     \uCE90\uB9AD\uBA85");
+		tableColumn.setText("キャラクター名");
 
 		TableColumn tableColumn_1 = new TableColumn(table_1, SWT.CENTER);
 		tableColumn_1.setWidth(75);
-		tableColumn_1.setText("\uC81C\uBAA9");
+		tableColumn_1.setText("タイトル");
 		tableColumn_1.setResizable(false);
 
 		TableColumn tableColumn_2 = new TableColumn(table_1, SWT.CENTER);
 		tableColumn_2.setWidth(132);
-		tableColumn_2.setText("\uB0B4\uC6A9");
+		tableColumn_2.setText("内容");
 		tableColumn_2.setResizable(false);
 
 		TableColumn tableColumn_3 = new TableColumn(table_1, SWT.CENTER);
 		tableColumn_3.setWidth(87);
-		tableColumn_3.setText("\uB0A0\uC9DC");
+		tableColumn_3.setText("日");
 		tableColumn_3.setResizable(false);
 
 		text_2 = new Text(composite, SWT.BORDER);
@@ -1328,7 +1328,7 @@ public class LinAllManager {
 			}
 		});
 		text_3.setBounds(83, 512, 260, 19);
-		
+
 		btnNewButton = new Button(composite, SWT.NONE);
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -1339,12 +1339,12 @@ public class LinAllManager {
 			}
 		});
 		btnNewButton.setBounds(420, 241, 50, 25);
-		btnNewButton.setText("\uC555\uB958");
-		
+		btnNewButton.setText("差し押さえ");
+
 		button = new Button(composite, SWT.NONE);
-		button.setText("\uBCC0\uC2E0");
+		button.setText("変身");
 		button.setBounds(469, 241, 50, 25);
-		
+
 		button_1 = new Button(composite, SWT.NONE);
 		button_1.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -1354,21 +1354,21 @@ public class LinAllManager {
 				messageBox.open();
 			}
 		});
-		button_1.setText("\uC120\uBB3C");
+		button_1.setText("ギフト");
 		button_1.setBounds(520, 241, 50, 25);
-		
+
 		button_2 = new Button(composite, SWT.NONE);
-		button_2.setText("\uBC84\uD504");
+		button_2.setText("バフ");
 		button_2.setBounds(571, 241, 50, 25);
-		
+
 		button_3 = new Button(composite, SWT.NONE);
-		button_3.setText("\uCC44\uAE08");
+		button_3.setText("金鉱");
 		button_3.setBounds(621, 241, 50, 25);
-		
+
 		button_4 = new Button(composite, SWT.NONE);
-		button_4.setText("\uCC44\uAE08\uD574\uC81C");
+		button_4.setText("金鉱解除");
 		button_4.setBounds(671, 241, 50, 25);
-		
+
 		button_5 = new Button(composite, SWT.NONE);
 		button_5.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -1383,7 +1383,7 @@ public class LinAllManager {
 
 			}
 		});
-		button_5.setText("\uB85C\uADF8\uC800\uC7A5");
+		button_5.setText("ログの保存");
 		button_5.setBounds(349, 512, 65, 19);
 
 		menu = new Menu(shlInbumserverManager, SWT.BAR);
@@ -1391,13 +1391,13 @@ public class LinAllManager {
 		shlInbumserverManager.setMenuBar(menu);
 
 		mntmNewSubmenu = new MenuItem(menu, SWT.CASCADE);
-		mntmNewSubmenu.setText("\uD30C\uC77C");
+		mntmNewSubmenu.setText("ファイル");
 
 		menu_1 = new Menu(mntmNewSubmenu);
 		mntmNewSubmenu.setMenu(menu_1);
 
 		MenuItem mntmNewItem = new MenuItem(menu_1, SWT.NONE);
-		mntmNewItem.setText("\uC11C\uBC84\uC124\uC815");
+		mntmNewItem.setText("サーバーの設定");
 
 		MenuItem mntmNewItem_1 = new MenuItem(menu_1, SWT.NONE);
 		mntmNewItem_1.addSelectionListener(new SelectionAdapter() {
@@ -1409,12 +1409,12 @@ public class LinAllManager {
 				messageBox.open();
 			}
 		});
-		mntmNewItem_1.setText("\uC2DC\uC2A4\uD15C\uC800\uC7A5");
-		
-		
+		mntmNewItem_1.setText("システムの保存");
+
+
 
 		new MenuItem(menu_1, SWT.SEPARATOR);
-		
+
 		MenuItem mntmNewItem_16 = new MenuItem(menu_1, SWT.NONE);
 		mntmNewItem_16.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -1429,7 +1429,7 @@ public class LinAllManager {
 				}
 			}
 		});
-		mntmNewItem_16.setText("\uBC14\uB85C\uC885\uB8CC");
+		mntmNewItem_16.setText("すぐに終了");
 
 		MenuItem menuItem = new MenuItem(menu_1, SWT.NONE);
 		menuItem.addSelectionListener(new SelectionAdapter() {
@@ -1444,19 +1444,19 @@ public class LinAllManager {
 				}
 			}
 		});
-		menuItem.setText("\uC11C\uBC84\uC885\uB8CC");
+		menuItem.setText("サーバーのシャットダウン");
 
 		mntmNewSubmenu_1 = new MenuItem(menu, SWT.CASCADE);
-		mntmNewSubmenu_1.setText("\uBAA8\uB2C8\uD130");
+		mntmNewSubmenu_1.setText("モニター");
 
 		menu_2 = new Menu(mntmNewSubmenu_1);
 		mntmNewSubmenu_1.setMenu(menu_2);
 
 		MenuItem mntmNewItem_19 = new MenuItem(menu_2, SWT.NONE);
-		mntmNewItem_19.setText("\uC900\uBE44\uC911...");
+		mntmNewItem_19.setText("準備中...");
 
 		mntmNewSubmenu_2 = new MenuItem(menu, SWT.CASCADE);
-		mntmNewSubmenu_2.setText("\uB3C4\uAD6C");
+		mntmNewSubmenu_2.setText("ツール");
 
 		menu_3 = new Menu(mntmNewSubmenu_2);
 		mntmNewSubmenu_2.setMenu(menu_3);
@@ -1471,10 +1471,10 @@ public class LinAllManager {
 				messageBox.open();
 			}
 		});
-		mntmNewItem_20.setText("\uD654\uBA74\uCCAD\uC18C");
+		mntmNewItem_20.setText("画面のクリーニング");
 
 		MenuItem mntmNewSubmenu_4 = new MenuItem(menu, SWT.CASCADE);
-		mntmNewSubmenu_4.setText("\uB9AC\uB85C\uB4DC");
+		mntmNewSubmenu_4.setText("リロード");
 
 		Menu menu_5 = new Menu(mntmNewSubmenu_4);
 		mntmNewSubmenu_4.setMenu(menu_5);
@@ -1533,7 +1533,7 @@ public class LinAllManager {
 
 		MenuItem mntmNewItem_7 = new MenuItem(menu_5, SWT.NONE);
 		mntmNewItem_7.addSelectionListener(new SelectionAdapter() {
-			@Override			
+			@Override
 			public void widgetSelected(SelectionEvent e) {
 				ItemTable.reload();
 				LogAppend("Item Update Complete.....");
@@ -1581,7 +1581,7 @@ public class LinAllManager {
 					shlInbumserverManager.setVisible(false);
 					// トレイ活性化。
 					final TrayItem item = new TrayItem(tray, SWT.NONE);
-					item.setToolTipText( String.format("\uB9B0 \uC62C"));
+					item.setToolTipText( String.format("リンオール"));
 					item.setImage( SWTResourceManager.getImage("data\\img\\apple.png") );
 					// イベントの登録。
 					item.addSelectionListener(new SelectionAdapter() {
@@ -1595,7 +1595,7 @@ public class LinAllManager {
 				}
 			}
 		});
-		mntmNewItem_10.setText("\uD2B8\uB808\uC774\uBAA8\uB4DC");
+		mntmNewItem_10.setText("トレイモード");
 
 		MenuItem mntmNewItem_11 = new MenuItem(menu_5, SWT.NONE);
 		mntmNewItem_11.addSelectionListener(new SelectionAdapter() {
@@ -1652,13 +1652,13 @@ public class LinAllManager {
 
 
 		MenuItem mntmNewSubmenu_5 = new MenuItem(menu, SWT.CASCADE);
-		mntmNewSubmenu_5.setText("\uC815\uBCF4");
+		mntmNewSubmenu_5.setText("情報");
 
 		Menu menu_6 = new Menu(mntmNewSubmenu_5);
 		mntmNewSubmenu_5.setMenu(menu_6);
 
 		MenuItem mntmNewItem_18 = new MenuItem(menu_6, SWT.NONE);
-		mntmNewItem_18.setText("\uB9B0\uC62C\uC18C\uD504\uD2B8 > 010.5629.2444");
+		mntmNewItem_18.setText("リンオルソフト> 010.5629.2444");
 
 
 	}
@@ -1915,7 +1915,7 @@ public class LinAllManager {
 		});
 	}
 	/**
-	 * 全体チャットログ 
+	 * 全体チャットログ
 	 * @param name
 	 * @param msg
 	 */
@@ -2028,7 +2028,7 @@ public class LinAllManager {
 	 * @param Aname
 	 * @param Dname
 	 */
-	public void TradeAppend(final String Itemname,final String Aname,		
+	public void TradeAppend(final String Itemname,final String Aname,
 			final String Dname) {
 
 		display.syncExec(new Runnable() {
@@ -2046,7 +2046,7 @@ public class LinAllManager {
 	/**
 	 * 倉庫のログ
 	 * 倉庫貯蔵 : type = 0,倉庫でマイナス : type = 1
-	 * 
+	 *
 	 * @param Itemname
 	 * @param count
 	 * @param name
@@ -2141,9 +2141,9 @@ public class LinAllManager {
 			public void run() {
 				try{
 					if(type == 0){//ピックアップ
-						text_10.append("ピックアップ：["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
+						text_10.append("ピックアップ：["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");
 					}else{//ドロップ
-						text_10.append("ドロップ : ["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
+						text_10.append("ドロップ : ["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");
 					}
 				}catch(Exception e){e.printStackTrace();}
 			}
@@ -2176,17 +2176,17 @@ public class LinAllManager {
 			public void run() {
 				try{
 					if(type == 0){//ドロップ
-						text_7.append("ドロップ : ["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
+						text_7.append("ドロップ : ["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");
 					}else{//蒸発
-						text_7.append("蒸発 : ["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");		    		
+						text_7.append("蒸発 : ["+name+"][アイテム : "+Itemname+"] Time : "+getLogTime()+"\n");
 					}
 				}catch(Exception e){e.printStackTrace();}
 			}
 		});
 
 	}
-	
-	
+
+
 	public void GmAppend(final String name, final String cmd, final String arg) {
 		display.syncExec(new Runnable() {
 			public void run() {
@@ -2198,9 +2198,9 @@ public class LinAllManager {
 			}
 		});
 	}
-	
-	
-	
+
+
+
 	public void BossAppend(final String name) {
 		display.syncExec(new Runnable() {
 			public void run() {
@@ -2212,7 +2212,7 @@ public class LinAllManager {
 			}
 		});
 	}
-	
+
 	public void TimeAppend(final String name) {
 		display.syncExec(new Runnable() {
 			public void run() {
@@ -2276,9 +2276,9 @@ public class LinAllManager {
 			}
 			Pcname = name;
 			int lv = rs.getInt("level");
-			exp = lv+"Lv     "+nf.format(ExpTable.getExpPercentagedouble(lv,rs.getInt("Exp")))+"%";			
+			exp = lv+"Lv     "+nf.format(ExpTable.getExpPercentagedouble(lv,rs.getInt("Exp")))+"%";
 			stasts = "Login : OFF";
-			hp = ""+rs.getShort("CurHp")+"/"+rs.getShort("MaxHp");			
+			hp = ""+rs.getShort("CurHp")+"/"+rs.getShort("MaxHp");
 			mp = ""+rs.getShort("CurMp")+"/"+rs.getShort("MaxMp");
 			str = ""+rs.getByte("Str")+"/"+rs.getByte("BaseStr");
 			dex = ""+rs.getByte("Dex")+"/"+rs.getByte("BaseDex");
@@ -2294,7 +2294,7 @@ public class LinAllManager {
 			toptime = ""+(60 - (rs.getInt("OrenTime") % 1000));
 			gitime = ""+(180 - (rs.getInt("DrageonTime") % 1000));
 			pk = ""+rs.getInt("PC_Kill");
-			deth = ""+rs.getInt("PC_Death");	
+			deth = ""+rs.getInt("PC_Death");
 			if(rs.getTimestamp("lastLogoutTime") != null){
 				SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" , Locale.KOREA );
 				String str2 = sdf.format( new Date( rs.getTimestamp("lastLogoutTime").getTime()));
@@ -2390,7 +2390,7 @@ public class LinAllManager {
 					.getTime()) / 1000 / 60 / 60 / 24);
 		} catch (Exception e) {
 			return 0;
-		} 
+		}
 	}
 
 	public static String nowDate(){
@@ -2398,12 +2398,12 @@ public class LinAllManager {
 		java.util.Date currentTime = cal.getTime();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 		String ndate = formatter.format(currentTime);
-		return ndate; 
+		return ndate;
 	}
 
 	ConcurrentHashMap<String,String[]> charlist = new ConcurrentHashMap<String,String[]>();
 	private LetterComposite composite_4;
-	
+
 	public LetterComposite getLetterComposite() {
 		return composite_4;
 	}
@@ -2440,7 +2440,7 @@ public class LinAllManager {
 				}
 
 				int lv = rs.getInt("level");
-				String exp = lv+"Lv     "+nf.format(ExpTable.getExpPercentagedouble(lv,rs.getInt("Exp")))+"%";		
+				String exp = lv+"Lv     "+nf.format(ExpTable.getExpPercentagedouble(lv,rs.getInt("Exp")))+"%";
 				String login = "0000-00-00  00:00:00";
 				String loginbefore = "0日前";
 				if(rs.getTimestamp("lastLogoutTime") != null){
@@ -2528,7 +2528,7 @@ public class LinAllManager {
 					lblNewLabel_30.setText(hp);//hp 111/111
 					label_10.setText(mp);//mp 111/111
 					lblNewLabel_31.setText(str);//力ベースを含む
-					label_13.setText(dex);//デックス 
+					label_13.setText(dex);//デックス
 					label_11.setText(con);//コーン
 					label_14.setText(wis);//ウィズ
 					label_12.setText(Int);//ポイント
@@ -2588,7 +2588,7 @@ public class LinAllManager {
 					/**インベントリ*/
 
 					/**倉庫*/
-					table_3.removeAll();		    		
+					table_3.removeAll();
 					for(L1ItemInstance item : warehouseitems.values()){
 						if(item.getItem().getItemId() == 40308){
 							TableItem tableItem = new TableItem(table_3, SWT.NONE);
@@ -2670,7 +2670,7 @@ public class LinAllManager {
 			}
 		});
 	}
-	
+
 	public static Shell getShell() {
 		return shlInbumserverManager;
 	}
