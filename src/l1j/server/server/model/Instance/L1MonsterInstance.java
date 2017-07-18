@@ -76,7 +76,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 	public void onItemUse() {
 		if (!isActived() && _target != null) {
 			if (getLevel() <= 45) {
-				useItem(USEITEM_HASTE, 40); 	
+				useItem(USEITEM_HASTE, 40);
 			}
 
 			if (getNpcTemplate().is_doppel() && _target instanceof L1PcInstance) {
@@ -88,7 +88,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				setTempCharGfx(targetPc.getClassId());
 				setGfxId(targetPc.getClassId());
 				setPassispeed(640);
-				setAtkspeed(900); 
+				setAtkspeed(900);
 				for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(this)) {
 					if(pc == null) continue;
 					pc.sendPackets(new S_RemoveObject(this));
@@ -97,7 +97,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				}
 			}
 		}
-		if (getCurrentHp() * 100 / getMaxHp() < 40) { 
+		if (getCurrentHp() * 100 / getMaxHp() < 40) {
 			useItem(USEITEM_HEAL, 50);
 		}
 	}
@@ -112,8 +112,8 @@ public class L1MonsterInstance extends L1NpcInstance {
 				perceivedFrom.sendPackets(new S_DoActionGFX(getId(), ActionCodes.ACTION_Moveup));
 			}
 			perceivedFrom.sendPackets(new S_NPCPack(this));
-			onNpcAI(); 
-			if (getBraveSpeed() == 1) { 
+			onNpcAI();
+			if (getBraveSpeed() == 1) {
 				perceivedFrom.sendPackets(new S_SkillBrave(getId(), 1, 600000));
 			}
 		}
@@ -189,14 +189,14 @@ public class L1MonsterInstance extends L1NpcInstance {
 				}
 			}
 		}
-		/** @説明文//追加 
-		 *  後にあるかもしれない1.Monster vs Monster 
+		/** @説明文//追加
+		 *  後にあるかもしれない1.Monster vs Monster
 		 *                               2.Monster vs Guard
 		 *                               3.Monster vs Guardian
 		 *                               4.Monster vs Npc
 		 *  上記のような状況のために、オブジェクトをロードするように追加、現在は1度だけのためのソースである
-		 *  簡単にオブジェクトをインスタンスofとして宣言のみくれればされるように設定 
-		 * 
+		 *  簡単にオブジェクトをインスタンスofとして宣言のみくれればされるように設定
+		 *
 		 */
 		for (L1Object obj : L1World.getInstance().getVisibleObjects(this)) {
 			if (obj instanceof L1MonsterInstance) {
@@ -205,91 +205,91 @@ public class L1MonsterInstance extends L1NpcInstance {
 					continue;
 				}
 				if(this.getNpcTemplate().get_npcId()==45570){ //敵認識するモンスター（社製）
-					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //적으로 인식될몬스터 (발록의)
+					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //的に認識されるモンスター（バルログの）
 						targetMonster = mon;
 						break;
 					}
 				}
 
 				if(this.getNpcTemplate().get_npcId()==45571){ //敵認識するモンスター（社製）
-					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //적으로 인식될몬스터 (발록의) 
+					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //的に認識されるモンスター（バルログの）
 						targetMonster = mon;
 						break;
 					}
 				}
 
 				if(this.getNpcTemplate().get_npcId()==45582){ //敵認識するモンスター（社製）
-					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //적으로 인식될몬스터 (발록의) 
+					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //的に認識されるモンスター（バルログの）
 						targetMonster = mon;
 						break;
 					}
 				}
 
 				if(this.getNpcTemplate().get_npcId()==45587){ //敵認識するモンスター（社製）
-					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //적으로 인식될몬스터 (발록의) 
+					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //的に認識されるモンスター（バルログの）
 						targetMonster = mon;
 						break;
 					}
 				}
 
 				if(this.getNpcTemplate().get_npcId()==45605){ //敵認識するモンスター（社製）
-					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //적으로 인식될몬스터 (발록의) 
+					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //的に認識されるモンスター（バルログの）
 						targetMonster = mon;
 						break;
 					}
 				}
 
 				if(this.getNpcTemplate().get_npcId()==45685){ //敵認識するモンスター（社製）
-					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //적으로 인식될몬스터 (발록의) 
+					if(mon.getNpcTemplate().get_npcId() == 45391 || mon.getNpcTemplate().get_npcId() == 45450 || mon.getNpcTemplate().get_npcId() == 45482 || mon.getNpcTemplate().get_npcId() == 45569 || mon.getNpcTemplate().get_npcId() == 45579 || mon.getNpcTemplate().get_npcId() == 45315 || mon.getNpcTemplate().get_npcId() == 45647){ //的に認識されるモンスター（バルログの）
 						targetMonster = mon;
 						break;
 					}
 				}
 
 				if(this.getNpcTemplate().get_npcId()==45391){ //敵認識するモンスター（バルログ）
-					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //적으로 인식될몬스터 (사제) 
+					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //的に認識されるモンスター（社製）
 						targetMonster = mon;
 						break;
 					}
-				} 
+				}
 
 				if(this.getNpcTemplate().get_npcId()==45450){ //敵認識するモンスター（バルログ）
-					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //적으로 인식될몬스터 (사제) 
+					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //的に認識されるモンスター（社製）
 						targetMonster = mon;
 						break;
 					}
-				}   
+				}
 
 				if(this.getNpcTemplate().get_npcId()==45482){ //敵認識するモンスター（バルログ）
-					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //적으로 인식될몬스터 (사제) 
+					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //的に認識されるモンスター（社製）
 						targetMonster = mon;
 						break;
 					}
-				}   
+				}
 
 				if(this.getNpcTemplate().get_npcId()==45569){ //敵認識するモンスター（バルログ）
-					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //적으로 인식될몬스터 (사제) 
+					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //的に認識されるモンスター（社製）
 						targetMonster = mon;
 						break;
 					}
-				}   
+				}
 
 				if(this.getNpcTemplate().get_npcId()==45579){ //敵認識するモンスター（バルログ）
-					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //적으로 인식될몬스터 (사제) 
+					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //的に認識されるモンスター（社製）
 						targetMonster = mon;
 						break;
 					}
-				}   
+				}
 
 				if(this.getNpcTemplate().get_npcId()==45315){ //敵認識するモンスター（バルログ）
-					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //적으로 인식될몬스터 (사제) 
+					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //的に認識されるモンスター（社製）
 						targetMonster = mon;
 						break;
 					}
-				}   
+				}
 
 				if(this.getNpcTemplate().get_npcId()==45647){ //敵認識するモンスター（バルログ）
-					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //적으로 인식될몬스터 (사제) 
+					if(mon.getNpcTemplate().get_npcId() == 45570 || mon.getNpcTemplate().get_npcId() == 45571 || mon.getNpcTemplate().get_npcId() == 45582 || mon.getNpcTemplate().get_npcId() == 45587 || mon.getNpcTemplate().get_npcId() == 45605){ //的に認識されるモンスター（社製）
 						targetMonster = mon;
 						break;
 					}
@@ -339,7 +339,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 			_hateList.add(targetPlayer, 0);
 			_target = targetPlayer;
 		}
-		if(targetMonster != null){ 
+		if(targetMonster != null){
 			_hateList.add(targetMonster, 0);
 			_target = targetMonster;
 		}
@@ -360,7 +360,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 	}
 	@Override
 	public void setLink(L1Character cha) {
-		if (cha != null && _hateList.isEmpty()) { 
+		if (cha != null && _hateList.isEmpty()) {
 			_hateList.add(cha, 0);
 			checkTarget();
 		}
@@ -369,7 +369,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 	public L1MonsterInstance(L1Npc template) {
 		super(template);
 		_storeDroped = false;
-		synchronized (this) { 
+		synchronized (this) {
 			if (this.getNpcTemplate().get_gfxid() == 7684 || this.getNpcTemplate().get_gfxid() == 7805
 					|| this.getNpcTemplate().get_gfxid() == 8063) {
 				_PapPearlMonster = new PapPearlMonitor(this);
@@ -383,7 +383,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 		if (isAiRunning()) {
 			return;
 		}
-		if (!_storeDroped) 
+		if (!_storeDroped)
 		{
 			DropTable.getInstance().setDrop(this, getInventory());
 			getInventory().shuffle();
@@ -462,7 +462,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 	}
 
 	@Override
-	public void receiveDamage(L1Character attacker, int damage) { 
+	public void receiveDamage(L1Character attacker, int damage) {
         if (attacker == null)
             return;
 		if (getCurrentHp() > 0 && !isDead()) {
@@ -470,7 +470,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				return;
 			}
 			if (damage >= 0) {
-				if (!(attacker instanceof L1EffectInstance)) { 
+				if (!(attacker instanceof L1EffectInstance)) {
 					setHate(attacker, damage);
 				}
 			}
@@ -478,7 +478,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				if(hasSkillEffect(L1SkillId.FOG_OF_SLEEPING)){
 					removeSkillEffect(L1SkillId.FOG_OF_SLEEPING);
 				}else if (hasSkillEffect(L1SkillId.PHANTASM)){
-					removeSkillEffect(L1SkillId.PHANTASM);	
+					removeSkillEffect(L1SkillId.PHANTASM);
 				}
 			}
 
@@ -491,25 +491,25 @@ public class L1MonsterInstance extends L1NpcInstance {
 			if (attacker instanceof L1PcInstance && damage > 0) {
 				L1PcInstance player = (L1PcInstance) attacker;
 				player.setPetTarget(this);
-				
+
 				int monster = getNpcTemplate().get_npcId();
 
-				if (monster == 45681 
-						|| monster == 45682 
-						|| monster == 45683 
+				if (monster == 45681
+						|| monster == 45682
+						|| monster == 45683
 						|| monster == 45684
 						|| monster == 45600	//カーツ
 						|| monster == 45653
-						|| monster == 900011 
-						|| monster == 900012 
+						|| monster == 900011
+						|| monster == 900012
 						|| monster == 900013 //アンタラス1次〜3次
-						|| monster == 900038 
-						|| monster == 900039	
+						|| monster == 900038
+						|| monster == 900039
 						|| monster == 900040//パプリオン1次〜3次
-						|| monster == 5096 
-						|| monster == 5097	
-						|| monster == 5098 
-						|| monster == 5099 
+						|| monster == 5096
+						|| monster == 5097
+						|| monster == 5098
+						|| monster == 5099
 						|| monster == 5100
 						|| monster ==	45529	//	ドレイク
 						|| monster ==	45546	//	ドッペルゲンガー
@@ -562,13 +562,13 @@ public class L1MonsterInstance extends L1NpcInstance {
 						|| monster ==	450803	//	恐怖のリンドビオル
 						|| monster ==	7000098	//	恐怖のアンタラス
 
-						
+
 						)//リンドビオル1次〜3次
-					
+
 				{
 					recall(player);
 				}
-				
+
 				if (getNpcTemplate().get_npcId() == 5136){ //エルジャベ
 					if (!player.isElfBrave()){
 						player.setElrzabe(true);
@@ -580,65 +580,65 @@ public class L1MonsterInstance extends L1NpcInstance {
 					}
 				}
 				if (getNpcTemplate().get_npcId() == 45529){ // ドレイク
-					if (!player.is드레이크()){
-						player.set드레이크(true);
+					if (!player.isDrake()){
+						player.setDrake(true);
 					}
 				}
 				if (getNpcTemplate().get_npcId() == 7000093){ // ゼロス
-					if (!player.is제로스()){
-						player.set제로스(true);
+					if (!player.isZeros()){
+						player.setZeros(true);
 					}
 				}
 				if (getNpcTemplate().get_npcId() == 81163){ // ギルタス
-					if (!player.is기르타스()){
-						player.set기르타스(true);
+					if (!player.isGirtas()){
+						player.setisGirtas(true);
 					}
 				}
 				if (getNpcTemplate().get_npcId() == 91200){ // 大王イカ
-					if (!player.is대왕오징어()){
-						player.set대왕오징어(true);
+					if (!player.isKingSquid()){
+						player.setKingSquid(true);
 					}
 				}
 				if (getNpcTemplate().get_npcId() == 45684){ //ヴァラカス
-					if (!player.is발라카스()){
-						player.set발라카스(true);
+					if (!player.isValakas()){
+						player.setValakas(true);
 					}
 				}
 				if (getNpcTemplate().get_npcId() == 900040){ // パプリオン
-					if (!player.is파푸리온()){
-						player.set파푸리온(true);
+					if (!player.isFafurion()){
+						player.setFafurion(true);
 					}
 				}
 				if (getNpcTemplate().get_npcId() == 5100){ //リンドビオル
-					if (!player.is린드비오르()){
-						player.set린드비오르(true);
+					if (!player.isLindvior()){
+						player.setLindvior(true);
 					}
 				}
 				if (getNpcTemplate().get_npcId() == 900013){ // アンタラス
-					if (!player.is안타라스()){
-						player.set안타라스(true);
+					if (!player.isAntaras()){
+						player.setAntaras(true);
 					}
 				}
 			}
 			int monster = getNpcTemplate().get_npcId();
 			int newHp = getCurrentHp() - damage;
 			if (newHp <= 0 && !isDead()) {
-				if (monster == 45681 
-						|| monster == 45682 
-						|| monster == 45683 
+				if (monster == 45681
+						|| monster == 45682
+						|| monster == 45683
 						|| monster == 45684
 						|| monster == 45600	//カーツ
 						|| monster == 45653
-						|| monster == 900011 
-						|| monster == 900012 
+						|| monster == 900011
+						|| monster == 900012
 						|| monster == 900013 //アンタラス1次〜3次
-						|| monster == 900038 
-						|| monster == 900039	
+						|| monster == 900038
+						|| monster == 900039
 						|| monster == 900040//パプリオン1次〜3次
-						|| monster == 5096 
-						|| monster == 5097	
-						|| monster == 5098 
-						|| monster == 5099 
+						|| monster == 5096
+						|| monster == 5097
+						|| monster == 5098
+						|| monster == 5099
 						|| monster == 5100
 						|| monster ==	45529	//	ドレイク
 						|| monster ==	45546	//	ドッペルゲンガー
@@ -689,7 +689,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 						|| monster ==	7310066	//	傲慢なオグアヌス
 						|| monster ==	7310077	//	死神グリムリーパー
 						|| monster ==	450803	//	恐怖のリンドビオル
-						|| monster ==	7000098	//恐怖のアンタラス				
+						|| monster ==	7000098	//恐怖のアンタラス
 						){
 				BossAlive.getInstance().BossDeath(getMapId()); //ボスジョンでボスが死ぬfalseに変更
 				if (attacker instanceof L1PcInstance) {
@@ -710,7 +710,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				if (attacker instanceof L1PcInstance) {
 					L1PcInstance pc = (L1PcInstance) attacker;
 					if(!pc.isRobot()){
-					int monNum = MonsterBookTable.getInstace().getMonsterList(getNpcTemplate().get_npcId());                  
+					int monNum = MonsterBookTable.getInstace().getMonsterList(getNpcTemplate().get_npcId());
                     if (monNum != 0 && !pc.noPlayerCK) {//ロボットは、図鑑に追加していない以外（エラー発生）
                         MonsterBookTable.getInstace().addMon_Counter(pc.getId(), monNum);
                         int monsterkillcount = MonsterBookTable.getInstace().getMon_Conter(pc.getId(), monNum);
@@ -719,14 +719,14 @@ public class L1MonsterInstance extends L1NpcInstance {
                         int monquest1 = MonsterBookTable.getInstace().getQuest1(monNum);
                         int monquest2 = MonsterBookTable.getInstace().getQuest2(monNum);
                         int monquest3 = MonsterBookTable.getInstace().getQuest3(monNum);
-                        if (monsterkillcount == monquest1) {      
+                        if (monsterkillcount == monquest1) {
                             pc.sendPackets(new S_MonsterBookUI(S_MonsterBookUI.MONSTER_CLEAR, (monNum * 3) - 2));
-                        } else if (monsterkillcount == monquest2) {     
+                        } else if (monsterkillcount == monquest2) {
                             pc.sendPackets(new S_MonsterBookUI(S_MonsterBookUI.MONSTER_CLEAR, (monNum * 3) - 1));
-                        } else if (monsterkillcount == monquest3) {  
+                        } else if (monsterkillcount == monquest3) {
                             pc.sendPackets(new S_MonsterBookUI(S_MonsterBookUI.MONSTER_CLEAR, monNum * 3));
                         }
-                    } 					
+                    }
              /*       switch(pc.getWeekType()){
                     	case 1:
                     		if(WeekQuestTable.getInstance().WeekList.containsKey(getNpcTemplate().get_npcId())){
@@ -741,7 +741,7 @@ public class L1MonsterInstance extends L1NpcInstance {
                     			int line=mobnum/3;
                     			int num = mobnum%3;
                     			//0,1,2
-                    			
+
                     			pc.setWcount(mobnum, value);
                     			if(pc.getWcount(mobnum) > maxcount){
                     				pc.setWcount(mobnum, maxcount);
@@ -766,7 +766,7 @@ public class L1MonsterInstance extends L1NpcInstance {
                     			}
                     			if(pc.getWcount(mobnum)!=maxcount)
                     			pc.sendPackets(new S_WeekQuest(line,num,value));
-                    			
+
                     		}
                     		break;
                     	case 2:
@@ -836,12 +836,12 @@ public class L1MonsterInstance extends L1NpcInstance {
                         	}
                     		break;
                     }*/
-					} 
-			/********************************************************************************************************		
+					}
+			/********************************************************************************************************
 			*****************************************記事初心者ゾーンクエスト ************************************************
 			*********************************************************************************************************/
 					int rnd = _random.nextInt(100);
-					int quest_num = 0, hpass_ItemId = 0, highdaily_itemId = 0;		
+					int quest_num = 0, hpass_ItemId = 0, highdaily_itemId = 0;
 					if (getNpcTemplate().get_npcId() >= 9303 && getNpcTemplate().get_npcId() <= 9310 || getNpcTemplate().get_npcId() >= 9316 && getNpcTemplate().get_npcId() <= 9319){ //モンスターの爪
 						quest_num = 1; hpass_ItemId = L1ItemId.MONSTER_TOENAIL; highdaily_itemId = L1ItemId.PUNITIVE_EXPEDITION_TOKEN;
 					} else if (getNpcTemplate().get_npcId() == 9309 || getNpcTemplate().get_npcId() >= 9311 && getNpcTemplate().get_npcId() <= 9315){ // モンスターの歯
@@ -856,23 +856,23 @@ public class L1MonsterInstance extends L1NpcInstance {
 					if (quest_num != 0){
 						if (pc.getQuest().get_step(L1Quest.QUEST_HPASS) == quest_num && rnd <= 60){
 							createNewItem(pc, hpass_ItemId, 1, 0);
-						}			
+						}
 					}
 					if ((pc.getQuest().get_step(L1Quest.QUEST_HIGHDAILY) >= 1 && pc.getQuest().get_step(L1Quest.QUEST_HIGHDAILY) >= 14) && rnd <= 60){
 						createNewItem(pc, highdaily_itemId, 1, 0);
-					}	
+					}
 					switch(pc.getQuest().get_step(L1Quest.QUEST_HIGHDAILYB)){
 					case 1:case 3:case 5:case 7:case 9:case 11:case 13:
 						if (pc.getMapId() == 2010){
 							if (rnd <= 60){
 								createNewItem(pc, L1ItemId.VARIETY_DRAGON_BONE, 1, 0); // バリアントドラゴンの骨
 							}} break; default: break;
-					}				
+					}
 				}
-			/********************************************************************************************************		
+			/********************************************************************************************************
 			***************************************** 記事初心者ゾーンクエスト ************************************************
-			*********************************************************************************************************/									
-				
+			*********************************************************************************************************/
+
 				 /** ボンドンリニューアルスパルトイの魂 **/
 				if (getNpcTemplate().get_npcId() == 7000075) {//青同一層
                    if (attacker instanceof L1PcInstance) {
@@ -909,16 +909,16 @@ public class L1MonsterInstance extends L1NpcInstance {
 					L1PcInstance pc = (L1PcInstance) attacker;
 					if (getNpcTemplate().get_npcId() == 45955 && (pc.getMapId() >= 530 && pc.getMapId() <= 536)) { //ケイや死ぬ時
 					openDoor(4058);
-					L1SpawnUtil.spawn2(32757, 32744, (short) 531, 45956, 0, 3600 * 1000, 0);						
+					L1SpawnUtil.spawn2(32757, 32744, (short) 531, 45956, 0, 3600 * 1000, 0);
 							L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f3ビアタス執務室に最高裁判事ビアタスが表示されました。"));
 							L1World.getInstance().broadcastPacketToAll(
-									new S_SystemMessage("\\aGビアタス執務室に最高裁判事ビアタスが表示されました。"));												
+									new S_SystemMessage("\\aGビアタス執務室に最高裁判事ビアタスが表示されました。"));
 				}if (getNpcTemplate().get_npcId() == 45956 && (pc.getMapId() >= 530 && pc.getMapId() <= 536)) { //ビアタス死ぬ時
 					openDoor(4060);
 					L1SpawnUtil.spawn2(32790, 32786, (short) 531, 45957, 0, 3600 * 1000, 0);
 							L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f3まさにメス執務室に大法官すぐメスが表示されました。"));
 							L1World.getInstance().broadcastPacketToAll(
-									new S_SystemMessage("\\aGまさにメス執務室に大法官すぐメスが表示されました。"));												
+									new S_SystemMessage("\\aGまさにメス執務室に大法官すぐメスが表示されました。"));
 				}if (getNpcTemplate().get_npcId() == 45957 && (pc.getMapId() >= 530 && pc.getMapId() <= 536)) { //まさにメス死ぬ時
 					openDoor(4061);
 					L1SpawnUtil.spawn2(32845, 32857, (short) 531, 45958, 0, 3600 * 1000, 0);
@@ -933,19 +933,19 @@ public class L1MonsterInstance extends L1NpcInstance {
 									new S_SystemMessage("\\aGイデアの執務室に大法官イデアが表示されました。"));
 				}if (getNpcTemplate().get_npcId() == 45959 && (pc.getMapId() >= 530 && pc.getMapId() <= 536)) { //イデア死ぬ時
 					openDoor(4062);
-					L1SpawnUtil.spawn2(32849, 32899, (short) 533, 45960, 0, 3600 * 1000, 0);	
+					L1SpawnUtil.spawn2(32849, 32899, (short) 533, 45960, 0, 3600 * 1000, 0);
 							L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f3ティアメス執務室に最高裁判事ティアメスが表示されました。"));
 							L1World.getInstance().broadcastPacketToAll(
 									new S_SystemMessage("\\aGティアメス執務室に最高裁判事ティアメスが表示されました。"));
 				}if (getNpcTemplate().get_npcId() == 45960 && (pc.getMapId() >= 530 && pc.getMapId() <= 536)) { //ティアメス死ぬ時
 					openDoor(4063);
-					L1SpawnUtil.spawn2(32789, 32892, (short) 533, 45961, 0, 3600 * 1000, 0);	
+					L1SpawnUtil.spawn2(32789, 32892, (short) 533, 45961, 0, 3600 * 1000, 0);
 							L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f3ラミアス執務室に最高裁判事ラミアスが表示されました。"));
 							L1World.getInstance().broadcastPacketToAll(
 									new S_SystemMessage("\\aGラミアス執務室に最高裁判事ラミアスが表示されました。"));
 				}if (getNpcTemplate().get_npcId() == 45961 && (pc.getMapId() >= 530 && pc.getMapId() <= 536)) { //ラミアスは死ぬ時
 					openDoor(4064);
-					L1SpawnUtil.spawn2(32764, 32812, (short) 533, 45962, 0, 3600 * 1000, 0);	
+					L1SpawnUtil.spawn2(32764, 32812, (short) 533, 45962, 0, 3600 * 1000, 0);
 							L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f3まさにド執務室に大法官すぐドに気づいた。"));
 							L1World.getInstance().broadcastPacketToAll(
 									new S_SystemMessage("\\aGまさにド執務室に大法官すぐドに気づいた。"));
@@ -957,9 +957,9 @@ public class L1MonsterInstance extends L1NpcInstance {
 									new S_SystemMessage("\\aGカサンドラの執務室にサブタイトル社長カサンドラが表示されました。"));
 				}
 				}
-			/********************************************************************************************************		
+			/********************************************************************************************************
 			*****************************************幸運の場所 ******************************************************
-			*********************************************************************************************************/	
+			*********************************************************************************************************/
 				if (getNpcTemplate().get_npcId() >= 7000088 && getNpcTemplate().get_npcId() <= 7000090) {
 					Random random1 = new Random();
 					int chance = random1.nextInt(500) + 1;
@@ -985,51 +985,51 @@ public class L1MonsterInstance extends L1NpcInstance {
 						}
 					}else{
 					}
-				}									
-		/********************************************************************************************************		
+				}
+		/********************************************************************************************************
 		 ***************************************** ボスの魂石****************************************************
-		 *********************************************************************************************************/	
+		 *********************************************************************************************************/
 				Random random = new Random();
 				int[] lastabard = { 80453, 80454, 80455, 80456, 80457, 80458, 80459, 80460, 80461, 80462, 80463, 80452 };
 				int[] tower = { 80450, 80451, 80466, 80467 };
 				int[] glu = { 80464, 80465 };
 				int[] oman = { 80468,80469,80470,80471,80472,80473,80474,80475,80476,80477 };
-				int 드랍율 = random.nextInt(2500) + 1;
-				int 라던 = random.nextInt(lastabard.length);
-				int 상아탑 = random.nextInt(tower.length);
-				int 본던 = random.nextInt(glu.length);
-				int 오만 = random.nextInt(oman.length);
+				int dropChance = random.nextInt(2500) + 1;
+				int lastavard = random.nextInt(lastabard.length);
+				int ivory = random.nextInt(tower.length);
+				int mlc = random.nextInt(glu.length);
+				int toi = random.nextInt(oman.length);
 				switch (attacker.getMapId()) {
 				case 479:case 475:case 462:case 453:case 492:
-					if (2 >= 드랍율) {
-						attacker.getInventory().storeItem(lastabard[라던], 1);
+					if (2 >= dropChance) {
+						attacker.getInventory().storeItem(lastabard[lastavard], 1);
 						((L1PcInstance) attacker).sendPackets(new S_SystemMessage("ボスの魂石を獲得しました。"));
 					}break;
 				case 78:case 79:case 80:case 81:case 82:
-					if (2 >= 드랍율) {// 象牙の塔
-						attacker.getInventory().storeItem(tower[상아탑], 1);
-																			
+					if (2 >= dropChance) {// 象牙の塔
+						attacker.getInventory().storeItem(tower[ivory], 1);
+
 						((L1PcInstance) attacker).sendPackets(new S_SystemMessage("ボスの魂石を獲得しました。"));
 					}break;
 				case 807:case 808:case 809:case 810:case 811:case 812:case 813:
-					if (2 >= 드랍율) {// ボンドン
-						attacker.getInventory().storeItem(glu[본던], 1);
+					if (2 >= dropChance) {// ボンドン
+						attacker.getInventory().storeItem(glu[mlc], 1);
 						((L1PcInstance) attacker).sendPackets(new S_SystemMessage("ボスの魂石を獲得しました。"));
 					}break;
 				case 101:case 102:case 103:case 104:case 105:case 106:case 107:case 108:case 109:case 110:case 111:
-					if (2 >= 드랍율) {// 傲慢
-						attacker.getInventory().storeItem(oman[오만], 1);
+					if (2 >= dropChance) {// 傲慢
+						attacker.getInventory().storeItem(oman[toi], 1);
 						((L1PcInstance) attacker).sendPackets(new S_SystemMessage("ボスの魂石を獲得しました。"));
 					}break;
 				}
-				
-				
 
-				/********************************************************************************************************		
+
+
+				/********************************************************************************************************
 				 ***************************************** モンソム悪霊の種 ***********************************************
-				 *********************************************************************************************************/					
-				
-				
+				 *********************************************************************************************************/
+
+
 				if (attacker instanceof L1PcInstance) {
 					L1PcInstance pc = (L1PcInstance) attacker;
 					if (pc.getMapId() == 1931) {
@@ -1060,8 +1060,8 @@ public class L1MonsterInstance extends L1NpcInstance {
 						}
 					}
 				}
-				
-				
+
+
 
 				int transformId = getNpcTemplate().getTransformId();
 				if (transformId == -1) {
@@ -1109,7 +1109,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				if (glanceCheck(newLoc.getX(), newLoc.getY())) {
 					if (pc instanceof L1RobotInstance) {
 						L1RobotInstance rob = (L1RobotInstance) pc;
-						L1Teleport.로봇텔(rob, newLoc.getX(), newLoc.getY(),
+						L1Teleport.robotTel(rob, newLoc.getX(), newLoc.getY(),
 								getMapId(), true);
 						break;
 					}
@@ -1137,12 +1137,12 @@ public class L1MonsterInstance extends L1NpcInstance {
 			startMpRegeneration();
 		}
 	}
-	
-	
 
 
 
-//	private void Portal(L1Character lastAttacker, int Dragon){	
+
+
+//	private void Portal(L1Character lastAttacker, int Dragon){
 //		int PortalStage = 0;
 //		L1MerchantInstance Portal = null;
 //		for(L1Object object : L1World.getInstance().getObject()){
@@ -1156,13 +1156,13 @@ public class L1MonsterInstance extends L1NpcInstance {
 //		if (Dragon == 1){
 //			try { // 隠された龍らの土地
 //				if (PortalStage == 0){
-//					for(L1PcInstance pc : L1World.getInstance().getAllPlayers()){ 
+//					for(L1PcInstance pc : L1World.getInstance().getAllPlayers()){
 //						pc.sendPackets(new S_ServerMessage(1593)); }Thread.sleep(2000);
 //						for(L1PcInstance pc : L1World.getInstance().getAllPlayers()){
 //							pc.sendPackets(new S_ServerMessage(1582)); } Thread.sleep(2000);
 //							L1SpawnUtil.spawn2(33727, 32505, (short) 4, 900015, 0, 86400 * 1000, 0);
 //				} else if (PortalStage == 1){
-//					for(L1PcInstance pc : L1World.getInstance().getAllPlayers()){ 
+//					for(L1PcInstance pc : L1World.getInstance().getAllPlayers()){
 //						pc.sendPackets(new S_ServerMessage(1593)); } Thread.sleep(2000);
 //						for(L1PcInstance pc : L1World.getInstance().getAllPlayers()){
 //							pc.sendPackets(new S_ServerMessage(1583)); } Thread.sleep(2000);
@@ -1192,16 +1192,16 @@ public class L1MonsterInstance extends L1NpcInstance {
 		int DragonAntMapId = getMapId();
 		if(DragonAnt == 7539 || DragonAnt == 7557 && (DragonAntMapId == 1005 || DragonAntMapId >= 6000 && DragonAntMapId <= 6500)){
 			int AntType = 0;
-			switch(DragonAnt){ 
-			case 7539: AntType = 2; break; 
-			case 7557: AntType = 3; break;			
+			switch(DragonAnt){
+			case 7539: AntType = 2; break;
+			case 7557: AntType = 3; break;
 			default:
 				break;
 			}
 			AntarasRaid ar = AntarasRaidSystem.getInstance().getAR(DragonAntMapId);
 			AntarasRaidTimer RaidAnt = new AntarasRaidTimer(ar, AntType, 0, 1 * 1000);
-			RaidAnt.begin(); 
-		} 
+			RaidAnt.begin();
+		}
 		int DragonFafu = getNpcTemplate().get_gfxid();
 		int DragonFafuMapId = getMapId();
 		if (DragonFafu == 7864 || DragonFafu == 7869 && (DragonFafuMapId == 1011 || DragonFafuMapId >= 6501 && DragonFafuMapId <= 7000)){
@@ -1298,7 +1298,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 			if (obj instanceof L1PcInstance){
 				L1PcInstance Buff = (L1PcInstance) obj;
 				if(!(Buff.hasSkillEffect(L1SkillId.PAP_FIVEPEARLBUFF)
-						||Buff.hasSkillEffect(L1SkillId.PAP_MAGICALPEARLBUFF))) 
+						||Buff.hasSkillEffect(L1SkillId.PAP_MAGICALPEARLBUFF)))
 					PearlBuff = Buff;
 			}
 		}
@@ -1347,18 +1347,18 @@ public class L1MonsterInstance extends L1NpcInstance {
 			}
 			break;
 		case 45590:
-			if (chance < 10){ // 
-				if (getMapId() == 101){            boss = 7310015;  } 
-				else if (getMapId() == 102){       boss = 7310021;  } 
-				else if (getMapId() == 103){       boss = 7310028;  } 
-				else if (getMapId() == 104){       boss = 7310034;  } 
-				else if (getMapId() == 105){       boss = 7310041;  } 
-				else if (getMapId() == 106){       boss = 7310046;  } 
-				else if (getMapId() == 107){       boss = 7310051;  } 
-				else if (getMapId() == 108){       boss = 7310056;  }  
-				else if (getMapId() == 109){       boss = 7310061;  } 
-				else if (getMapId() == 110){       boss = 7310066;  } 
-				else if (getMapId() == 200){       boss = 7310077;  } 
+			if (chance < 10){ //
+				if (getMapId() == 101){            boss = 7310015;  }
+				else if (getMapId() == 102){       boss = 7310021;  }
+				else if (getMapId() == 103){       boss = 7310028;  }
+				else if (getMapId() == 104){       boss = 7310034;  }
+				else if (getMapId() == 105){       boss = 7310041;  }
+				else if (getMapId() == 106){       boss = 7310046;  }
+				else if (getMapId() == 107){       boss = 7310051;  }
+				else if (getMapId() == 108){       boss = 7310056;  }
+				else if (getMapId() == 109){       boss = 7310061;  }
+				else if (getMapId() == 110){       boss = 7310066;  }
+				else if (getMapId() == 200){       boss = 7310077;  }
 				L1SpawnUtil.spawn2(this.getX(),this.getY(), this.getMapId(), boss, 2, 1800 * 1000, 0);
 				broadcastPacket(new S_SkillSound(getId(), 4842));
 			}
@@ -1396,17 +1396,17 @@ public class L1MonsterInstance extends L1NpcInstance {
 			OmanRiper();
 			Elzabe(_lastAttacker);
 			SandWarm(_lastAttacker);
-			드레이크(_lastAttacker);
-			제로스(_lastAttacker);
-			기르타스(_lastAttacker);
-			대왕오징어(_lastAttacker);
-			발라카스(_lastAttacker);
-			파푸리온(_lastAttacker);
-			린드비오르(_lastAttacker);
-			안타라스(_lastAttacker);
-			대흑장로(_lastAttacker);
+			Drake(_lastAttacker);
+			Zeros(_lastAttacker);
+			Girtas(_lastAttacker);
+			KingSquid(_lastAttacker);
+			Valakas(_lastAttacker);
+			Fafurion(_lastAttacker);
+			Lindvior(_lastAttacker);
+			Antaras(_lastAttacker);
+			G_BlackElder(_lastAttacker);
 			calcCombo(_lastAttacker);
-			
+
 
 			int DragonGfx = getNpcTemplate().get_gfxid();
 			if (DragonGfx == 7558){ //ヒット3次[メッセージ/クリアテル/ポータルメッセージ]
@@ -1426,10 +1426,10 @@ public class L1MonsterInstance extends L1NpcInstance {
 				}
 			}
 
-			if(getNpcTemplate().getDoor() > 0){ 
+			if(getNpcTemplate().getDoor() > 0){
 				int doorId = getNpcTemplate().getDoor();
 				if(getNpcTemplate().getCountId() > 0){
-					int sleepTime = 2 * 60 * 60;	// 2時間ㄱㄱㅆ
+					int sleepTime = 2 * 60 * 60;	// 2時間
 					TimeMapController.getInstance().add(new L1TimeMap(getNpcTemplate().getCountId(), sleepTime, doorId));
 				}
 				L1DoorInstance door = DoorSpawnTable.getInstance().getDoor(doorId);
@@ -1550,7 +1550,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 			ArrayList<Integer> hateList = _hateList.toHateArrayList();
 			int exp = getExp();
 			CalcExp.calcExp(pc, getId(), targetList, hateList, exp);
-			
+
 			Random random = new Random();
 			int chance1 = random.nextInt(100) + 1;
 			int chance2 = random.nextInt(100) + 1;
@@ -1558,7 +1558,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 			int chance4 = random.nextInt(100) + 1;
 			int chance5 = random.nextInt(100) + 1;
 			int chance6 = random.nextInt(100) + 1;
-			            
+
 			  /** 修練ケイブ1〜4階の羽ドロップ **/
 			/*if (Config.修練ケイブ羽）{
 			if (pc.getMapId() == 25 || pc.getMapId() == 26 || pc.getMapId() == 27 || pc.getMapId() == 28) { //ここだが景色増加させるマップ番号入れてくれればされる
@@ -1576,7 +1576,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				}
 			}
 			}*/
-			
+
 			    /** クラウディア特化ピクシーの羽、経験値ドロップと付与 **/
 			/*if (pc.getMapId() == 7783 || pc.getMapId() == 12147 || pc.getMapId() == 12148 || pc.getMapId() == 12149
 					|| pc.getMapId() == 12146) { // ここだが景色増加させるマップ番号入れてくれればされる
@@ -1596,7 +1596,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 
 			 /** 忘れられた島ダンジョン羽システム**/
 			/*if (Config.忘れられた島羽）{
-			if (pc.getMapId() == 1700 || pc.getMapId() == 1703 || pc.getMapId() == 1704 || pc.getMapId() == 1705 || pc.getMapId() == 1707) {//여기다가 경치증가시킬 맵번호 넣어주면됨
+			if (pc.getMapId() == 1700 || pc.getMapId() == 1703 || pc.getMapId() == 1704 || pc.getMapId() == 1705 || pc.getMapId() == 1707) {//ここだが景色増加させるマップ番号入れてくれればされる
 //				CalcExp.calcExp(pc, getId(), targetList, hateList, exp * 2);//経験値* 2
 				if (chance1 > 80) {
 					getInventory().storeItem(41159, 1);
@@ -1617,7 +1617,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				}
 			}
 			}*/
-			
+
 			  /** 話せる島ダンジョン羽システム **/
 			/*if (Config.マルソムダンジョン羽）{
 			if (pc.getMapId() == 1 || pc.getMapId() == 2) {
@@ -1641,7 +1641,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				}
 			}
 			}*/
-			
+
 			  /** グルーディオ羽システム **/
 			/*if (Config.メインランドのダンジョン羽）{
 			if (pc.getMapId() >= 807 && pc.getMapId() <= 813) {//ここだが景色増加させるマップ番号入れてくれればされる
@@ -1665,9 +1665,9 @@ public class L1MonsterInstance extends L1NpcInstance {
 				}
 			}
 			}*/
-			
+
 			  /** ギラン監獄経験値とピクシーの羽ドロップ（週末イベント用) **/
-		/*	if (pc.getMapId() == Config.mapid || pc.getMapId() == Config.mapid1 || pc.getMapId() == Config.mapid2 || pc.getMapId() == Config.mapid3) {//여기다가 경치증가시킬 맵번호 넣어주면됨
+		/*	if (pc.getMapId() == Config.mapid || pc.getMapId() == Config.mapid1 || pc.getMapId() == Config.mapid2 || pc.getMapId() == Config.mapid3) {//ここだが景色増加させるマップ番号入れてくれればされる
 				CalcExp.calcExp(pc, getId(), targetList, hateList, exp * Config.経験値）; //経験値* 2
 				if (chance1 > 80) {
 					getInventory().storeItem(41159, 1);
@@ -1690,7 +1690,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 					CalcExp.calcExp(pc, getId(), targetList, hateList, exp);
 				}
 			}*/
-			
+
 			if (isDead()) {
 				distributeDrop(pc);
 				giveKarma(pc);
@@ -1771,12 +1771,12 @@ public class L1MonsterInstance extends L1NpcInstance {
 	public boolean is_storeDroped() {
 		return _storeDroped;
 	}
-	
+
 	public void set_storeDroped(boolean flag) {
 		_storeDroped = flag;
 	}
 
-	private int _ubSealCount = 0; 
+	private int _ubSealCount = 0;
 
 	public int getUbSealCount() {
 		return _ubSealCount;
@@ -1798,10 +1798,10 @@ public class L1MonsterInstance extends L1NpcInstance {
 
 	private void hide() {
 		int npcid = getNpcTemplate().get_npcId();
-		if (npcid == 45061 
-				|| npcid == 45161 
-				|| npcid == 45181 
-				|| npcid == 45455) { 
+		if (npcid == 45061
+				|| npcid == 45161
+				|| npcid == 45181
+				|| npcid == 45455) {
 			if (getMaxHp() / 3 > getCurrentHp()) {
 				int rnd = _random.nextInt(10);
 				if (1 > rnd) {
@@ -1813,7 +1813,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 					broadcastPacket(new S_NPCPack(this));
 				}
 			}
-		} else if (npcid == 45682) { 
+		} else if (npcid == 45682) {
 			if (getMaxHp() / 3 > getCurrentHp()) {
 				int rnd = _random.nextInt(50);
 				if (1 > rnd) {
@@ -1825,11 +1825,11 @@ public class L1MonsterInstance extends L1NpcInstance {
 					broadcastPacket(new S_NPCPack(this));
 				}
 			}
-		} else if (npcid == 45067 
-				|| npcid == 45264 
-				|| npcid == 45452 
-				|| npcid == 45090 
-				|| npcid == 45321 
+		} else if (npcid == 45067
+				|| npcid == 45264
+				|| npcid == 45452
+				|| npcid == 45090
+				|| npcid == 45321
 				|| npcid == 45445
 				|| npcid == 75000) {
 			if (getMaxHp() / 3 > getCurrentHp()) {
@@ -1843,7 +1843,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 					broadcastPacket(new S_NPCPack(this));
 				}
 			}
-		} else if (npcid == 45681) { 
+		} else if (npcid == 45681) {
 			if (getMaxHp() / 3 > getCurrentHp()) {
 				int rnd = _random.nextInt(50);
 				if (1 > rnd) {
@@ -1859,37 +1859,37 @@ public class L1MonsterInstance extends L1NpcInstance {
 
 	public void initHide() {
 		int npcid = getNpcTemplate().get_npcId();
-		if (npcid == 45061 
-				|| npcid == 45161 
-				|| npcid == 45181 
+		if (npcid == 45061
+				|| npcid == 45161
+				|| npcid == 45181
 				|| npcid == 45455
 				|| npcid == 400000
-				|| npcid == 400001) { 
+				|| npcid == 400001) {
 			int rnd = _random.nextInt(3);
 			if (1 > rnd) {
 				setHiddenStatus(L1NpcInstance.HIDDEN_STATUS_SINK);
 				setStatus(13);
 			}
-		} else if (npcid == 45045 
-				|| npcid == 45126 
-				|| npcid == 45134 
+		} else if (npcid == 45045
+				|| npcid == 45126
+				|| npcid == 45134
 				|| npcid == 45281
-				|| npcid == 75003) { 
+				|| npcid == 75003) {
 			int rnd = _random.nextInt(3);
 			if (1 > rnd) {
 				setHiddenStatus(L1NpcInstance.HIDDEN_STATUS_SINK);
 				setStatus(4);
 			}
-		} else if (npcid == 217) { 
+		} else if (npcid == 217) {
 				setHiddenStatus(L1NpcInstance.HIDDEN_STATUS_SINK);
 				setStatus(6);
-		} else if (npcid == 45067 
-				|| npcid == 45264 
-				|| npcid == 45452 
-				|| npcid == 45090 
-				|| npcid == 45321 
+		} else if (npcid == 45067
+				|| npcid == 45264
+				|| npcid == 45452
+				|| npcid == 45090
+				|| npcid == 45321
 				|| npcid == 45445
-				|| npcid == 75000) { 
+				|| npcid == 75000) {
 			setHiddenStatus(L1NpcInstance.HIDDEN_STATUS_FLY);
 			setStatus(4);
 		} else if (npcid == 45681) {
@@ -1901,31 +1901,31 @@ public class L1MonsterInstance extends L1NpcInstance {
 	public void initHideForMinion(L1NpcInstance leader) {
 		int npcid = getNpcTemplate().get_npcId();
 		if (leader.getHiddenStatus() == L1NpcInstance.HIDDEN_STATUS_SINK) {
-			if (npcid == 45061 
-					|| npcid == 45161 
-					|| npcid == 45181 
+			if (npcid == 45061
+					|| npcid == 45161
+					|| npcid == 45181
 					|| npcid == 45455
 					|| npcid == 400000
-					|| npcid == 400001) { 
+					|| npcid == 400001) {
 				setHiddenStatus(L1NpcInstance.HIDDEN_STATUS_SINK);
 				setStatus(13);
-			} else if (npcid == 45045 
+			} else if (npcid == 45045
 					|| npcid == 45126
-					|| npcid == 45134 
+					|| npcid == 45134
 					|| npcid == 45281
-					|| npcid == 75003) { 
+					|| npcid == 75003) {
 				setHiddenStatus(L1NpcInstance.HIDDEN_STATUS_SINK);
 				setStatus(4);
 			}
 		} else if (leader.getHiddenStatus() == L1NpcInstance
 				.HIDDEN_STATUS_FLY) {
-			if (npcid == 45067 
-					|| npcid == 45264 
-					|| npcid == 45452 
+			if (npcid == 45067
+					|| npcid == 45264
+					|| npcid == 45452
 					|| npcid == 45090
 					|| npcid == 45321
 					|| npcid == 45445
-					|| npcid == 75000) { 
+					|| npcid == 75000) {
 				setHiddenStatus(L1NpcInstance.HIDDEN_STATUS_FLY);
 				setStatus(4);
 			} else if (npcid == 45681) {
@@ -1954,7 +1954,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 		@Override
 		public void run() {
 			try {
-				if(_Pearl.getNpcTemplate().get_gfxid() == 7684 
+				if(_Pearl.getNpcTemplate().get_gfxid() == 7684
 						|| _Pearl.getNpcTemplate().get_gfxid() == 7805)
 					PapPearl(_Pearl);
 				else if (_Pearl.getNpcTemplate().get_gfxid() == 8063) Sahel(_Pearl);
@@ -2006,7 +2006,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 			}
 		}
 	}
-	
+
 	//サンドワーム
 	private void SandWarm(L1Character lastAttacker){
 		int npcId = getNpcTemplate().get_npcId();
@@ -2027,28 +2027,28 @@ public class L1MonsterInstance extends L1NpcInstance {
 		}
 	}
 	// ドレイク
-	private void 드레이크(L1Character lastAttacker){
+	private void Drake(L1Character lastAttacker){
 		int npcId = getNpcTemplate().get_npcId();
 		if (npcId == 45529){
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){
-				if (lastAttacker.getMapId() == pc.getMapId() && pc.is드레이크() && !pc.isDead() ){
+				if (lastAttacker.getMapId() == pc.getMapId() && pc.isDrake() && !pc.isDead() ){
 					if (getLocation().getTileLineDistance(new Point(pc.getLocation())) < 20 ){
-						createNewItem(pc, 700072, 1, 0); // ドレイクの卵 
+						createNewItem(pc, 700072, 1, 0); // ドレイクの卵
 						pc.setCurrentHp(pc.getMaxHp());
 						pc.sendPackets(new S_SkillSound(pc.getId(), 7783));
 						Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7783));
 					}
 				}
-				pc.set드레이크(false);
+				pc.setDrake(false);
 			}
 		}
 	}
 	// ゼロス
-	private void 제로스(L1Character lastAttacker){
+	private void Zeros(L1Character lastAttacker){
 		int npcId = getNpcTemplate().get_npcId();
 		if (npcId == 7000093){
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){
-				if (lastAttacker.getMapId() == pc.getMapId() && pc.is제로스() && !pc.isDead() ){
+				if (lastAttacker.getMapId() == pc.getMapId() && pc.isZeros() && !pc.isDead() ){
 					if (getLocation().getTileLineDistance(new Point(pc.getLocation())) < 20 ){
 						createNewItem(pc, 700073, 1, 0); // ゼロスのポケット。
 						pc.setCurrentHp(pc.getMaxHp());
@@ -2056,16 +2056,16 @@ public class L1MonsterInstance extends L1NpcInstance {
 						Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7783));
 					}
 				}
-				pc.set제로스(false);
+				pc.setZeros(false);
 			}
 		}
 	}
-	// 기르타스
-	private void 기르타스(L1Character lastAttacker){
+	// ギルタス
+	private void Girtas(L1Character lastAttacker){
 		int npcId = getNpcTemplate().get_npcId();
 		if (npcId == 81163){
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){
-				if (lastAttacker.getMapId() == pc.getMapId() && pc.is기르타스() && !pc.isDead() ){
+				if (lastAttacker.getMapId() == pc.getMapId() && pc.isGirtas() && !pc.isDead() ){
 					if (getLocation().getTileLineDistance(new Point(pc.getLocation())) < 20 ){
 						createNewItem(pc, 30125, 1, 0); // ギルタス邪念
 						pc.setCurrentHp(pc.getMaxHp());
@@ -2073,16 +2073,16 @@ public class L1MonsterInstance extends L1NpcInstance {
 						Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7783));
 					}
 				}
-				pc.set기르타스(false);
+				pc.setisGirtas(false);
 			}
 		}
 	}
-	//대왕오징어
-	private void 대왕오징어(L1Character lastAttacker){
+	//大王イカ
+	private void KingSquid(L1Character lastAttacker){
 		int npcId = getNpcTemplate().get_npcId();
 		if (npcId == 91200){
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){
-				if (lastAttacker.getMapId() == pc.getMapId() && pc.is대왕오징어() && !pc.isDead() ){
+				if (lastAttacker.getMapId() == pc.getMapId() && pc.isKingSquid() && !pc.isDead() ){
 					if (getLocation().getTileLineDistance(new Point(pc.getLocation())) < 30 ){
 						createNewItem(pc, 410166, 1, 0); // 海上前補償ボックス
 						pc.setCurrentHp(pc.getMaxHp());
@@ -2090,33 +2090,33 @@ public class L1MonsterInstance extends L1NpcInstance {
 						Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7783));
 					}
 				}
-				pc.set대왕오징어(false);
+				pc.setKingSquid(false);
 			}
 		}
 	}
 	//ヴァラカス
-	private void 발라카스(L1Character lastAttacker){
+	private void Valakas(L1Character lastAttacker){
 		int npcId = getNpcTemplate().get_npcId();
 		if (npcId == 45684){ //ヴァラカスレイド3次生じるモンスター番号入れるとされる
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){
-				if (lastAttacker.getMapId() == pc.getMapId() && pc.is발라카스() && !pc.isDead() ){
+				if (lastAttacker.getMapId() == pc.getMapId() && pc.isValakas() && !pc.isDead() ){
 					if (getLocation().getTileLineDistance(new Point(pc.getLocation())) < 30 ){
-						createNewItem(pc, 410164, 2, 0); // 화룡의표식
+						createNewItem(pc, 410164, 2, 0); // 火竜の標識
 						pc.setCurrentHp(pc.getMaxHp());
 						pc.sendPackets(new S_SkillSound(pc.getId(), 7783));
 						Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7783));
 					}
 				}
-				pc.set발라카스(false);
+				pc.setValakas(false);
 			}
 		}
 	}
 	//パプリオン
-	private void 파푸리온(L1Character lastAttacker){
+	private void Fafurion(L1Character lastAttacker){
 		int npcId = getNpcTemplate().get_npcId();
 		if (npcId == 900040){
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){
-				if (lastAttacker.getMapId() == pc.getMapId() && pc.is파푸리온() && !pc.isDead() ){
+				if (lastAttacker.getMapId() == pc.getMapId() && pc.isFafurion() && !pc.isDead() ){
 					if (getLocation().getTileLineDistance(new Point(pc.getLocation())) < 30 ){
 						createNewItem(pc, 410163, 2, 0); // 水竜の標識
 						pc.setCurrentHp(pc.getMaxHp());
@@ -2124,16 +2124,16 @@ public class L1MonsterInstance extends L1NpcInstance {
 						Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7783));
 					}
 				}
-				pc.set파푸리온(false);
+				pc.setFafurion(false);
 			}
 		}
 	}
-	//린드비오르
-	private void 린드비오르(L1Character lastAttacker){
+	//リンドビオル
+	private void Lindvior(L1Character lastAttacker){
 		int npcId = getNpcTemplate().get_npcId();
 		if (npcId == 5100){
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){
-				if (lastAttacker.getMapId() == pc.getMapId() && pc.is린드비오르() && !pc.isDead() ){
+				if (lastAttacker.getMapId() == pc.getMapId() && pc.isLindvior() && !pc.isDead() ){
 					if (getLocation().getTileLineDistance(new Point(pc.getLocation())) < 30 ){
 						createNewItem(pc, 410165, 2, 0); // 風鈴の標識
 						pc.setCurrentHp(pc.getMaxHp());
@@ -2141,7 +2141,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 						Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7783));
 					}
 				}
-				pc.set린드비오르(false);
+				pc.setLindvior(false);
 			}
 		}
 	}
@@ -2162,12 +2162,12 @@ public class L1MonsterInstance extends L1NpcInstance {
 	      }
 	    }
 	  }
-	//안타라스
-	private void 안타라스(L1Character lastAttacker){
+	//アンタラス
+	private void Antaras(L1Character lastAttacker){
 		int npcId = getNpcTemplate().get_npcId();
 		if (npcId == 900013){
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){
-				if (lastAttacker.getMapId() == pc.getMapId() && pc.is안타라스() && !pc.isDead() ){
+				if (lastAttacker.getMapId() == pc.getMapId() && pc.isAntaras() && !pc.isDead() ){
 					if (getLocation().getTileLineDistance(new Point(pc.getLocation())) < 30 ){
 						createNewItem(pc, 410162, 2, 0); // 地竜の標識
 						pc.setCurrentHp(pc.getMaxHp());
@@ -2175,13 +2175,13 @@ public class L1MonsterInstance extends L1NpcInstance {
 						Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7783));
 					}
 				}
-				pc.set안타라스(false);
+				pc.setAntaras(false);
 			}
 		}
 	}
 
-	/** 대흑장로 마을이동 **/
-	private void 대흑장로(L1Character lastAttacker) {
+	/** 大黒長老村に移動 **/
+	private void G_BlackElder(L1Character lastAttacker) {
 		int npcId = getNpcTemplate().get_npcId();
 		if (npcId == 7000094) {
 			if (lastAttacker instanceof L1PcInstance) {
@@ -2191,21 +2191,21 @@ public class L1MonsterInstance extends L1NpcInstance {
 			}
 		}
 	}
-	
+
 	private void Sleep(int time){
 		try{
 			Thread.sleep(time);
 		}catch(Exception e){}
 	}
-	
-	
+
+
 	//クリップボードインスタンスダンジョン関連
 	private boolean _isCurseMimic ;
 
 	public void setCurseMimic(boolean curseMimic) {
 		_isCurseMimic = curseMimic;
 	}
-	
+
 	public boolean isCurseMimic(){
 		return _isCurseMimic;
 	}
@@ -2215,11 +2215,11 @@ public class L1MonsterInstance extends L1NpcInstance {
 			synchronized(this){
 				door.setDead(false);
 				door.open();
-			}	
+			}
 		}
 	}
 	public boolean isBoss() {// モンスターダウン
-		return getNpcId() ==	7210037		//ジャイアントサイズトーカタイル					
+		return getNpcId() ==	7210037		//ジャイアントサイズトーカタイル
 				||	getNpcId() ==	45456	//ネクロマンサー
 				||	getNpcId() ==	45458	//ドレイクの魂
 				||	getNpcId() ==	45488	//カスパー
@@ -2257,7 +2257,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				||	getNpcId() ==	45734	//大王イカ
 				||	getNpcId() ==	45735	//ヘッダー皮肉な
 				||	getNpcId() ==	45752	//バルログ
-				||  getNpcId() ==   45753	
+				||  getNpcId() ==   45753
 				||	getNpcId() ==	45772	//汚れたオークウォリアー
 				||	getNpcId() ==	45795	//スピリッド
 				||	getNpcId() ==	45801	//マイノシャーマンのダイヤモンドゴーレム
@@ -2319,7 +2319,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 				||	getNpcId() == 	7310077 // グリムリーパー
 				||	getNpcId() == 	45752 //バルログ
 ;
-		
+
 	}
 
 }

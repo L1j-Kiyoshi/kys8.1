@@ -21,10 +21,10 @@ public class L1Chat implements L1CommandExecutor {
 			if (st.hasMoreTokens()) {
 				String flag = st.nextToken();
 				String msg;
-				if (flag.compareToIgnoreCase("켬") == 0) {
+				if (flag.compareToIgnoreCase("on") == 0) {
 					L1World.getInstance(). set_worldChatElabled(true);
 					msg = "ワールドチャットを有効にしました。";
-				} else if (flag.compareToIgnoreCase("끔") == 0) {
+				} else if (flag.compareToIgnoreCase("off") == 0) {
 					L1World.getInstance(). set_worldChatElabled(false);
 					msg = "ワールドチャットを停止しました。";
 				} else {
@@ -36,7 +36,7 @@ public class L1Chat implements L1CommandExecutor {
 				if (L1World.getInstance(). isWorldChatElabled()) {
 					msg = "現在ワールドチャットは有効です。チャットオフに停止することができます。";
 				} else {
-					msg = "현재 월드 채팅은 정지하고 있습니다.. 채팅 켬 로 유효하게 할 수 있습니다. ";
+					msg = "現在ワールドチャットは停止しています。チャットオンで有効にすることができます。";
 				}
 				pc.sendPackets(new S_SystemMessage(msg));
 			}

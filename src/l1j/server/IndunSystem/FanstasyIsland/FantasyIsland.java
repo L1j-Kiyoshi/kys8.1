@@ -355,24 +355,24 @@ public class FantasyIsland implements Runnable {
 	}
 	public void Start(){
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
 		/** 0 午前、1午後 * */
-		String 오전오후 = "午後";
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "午前";
+			ampm = "午前";
 		}
 		GeneralThreadPool.getInstance().schedule(this, 2000);
-		  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "   ■■■■■■ 夢幻の島開始 " +  _map+" ■■■■■■");
+		  System.out.println(""+ ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分" + "   ■■■■■■ 夢幻の島開始 " +  _map+" ■■■■■■");
 	}
 	private void endRaid(){
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
 		/** 0 午前、1午後 * */
-		String 오전오후 = "午後";
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "午前";
+			ampm = "午前";
 		}
 		if (Running) {
 			Collection<L1Object> cklist = L1World.getInstance().getVisibleObjects(_map).values();
@@ -389,7 +389,7 @@ public class FantasyIsland implements Runnable {
 			}
 			Running = false;
 			FantasyIslandSystem.getInstance().remove(_map);
-		  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "   ■■■■■■ 夢幻の島終了 " +  _map+" ■■■■■■");
+		  System.out.println(""+ ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分" + "   ■■■■■■ 夢幻の島終了 " +  _map+" ■■■■■■");
 		}
 	}
 }

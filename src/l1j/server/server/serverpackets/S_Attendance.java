@@ -15,10 +15,10 @@ public class S_Attendance extends ServerBasePacket {
 			
 	private byte[] _byte = null;	
 	
-	public static final int 출석완료 = 0x23;
-	public static final int 출석리스트 = 0x24;
-	public static final int 출석체크아이콘 = 0x20;
-	public static final int 출석체크 = 0x21;
+	public static final int attended = 0x23;
+	public static final int attendanceList = 0x24;
+	public static final int attendanceCheckIcon = 0x20;
+	public static final int attendanceCheck = 0x21;
 	
 	public S_Attendance(L1AccountAttendance acc, int location, boolean ispc) { //出席
 		buildPacket(acc, location, ispc);
@@ -33,7 +33,7 @@ public class S_Attendance extends ServerBasePacket {
 		int cctime = 3600 - acc.getTime();
 		int ccpctime = 3600 - acc.getTimepc();
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
-		writeC(출석체크);
+		writeC(attendanceCheck);
 		writeC(0x02);
 		 
 		writeC(0x0a);
@@ -159,7 +159,7 @@ public class S_Attendance extends ServerBasePacket {
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
 		writeC(type);
 		switch (type) {
-			case 출석완료:
+			case attended:
 					writeC(0x02);
 					writeC(0x08);
 					writeC(d);
@@ -169,7 +169,7 @@ public class S_Attendance extends ServerBasePacket {
 					writeC(id);//00一般的な01ピバン
 					writeH(0x00);
 					break;
-			case 출석체크아이콘:
+			case attendanceCheckIcon:
 					writeC(0x02);
 					writeC(0x08);
 					writeC(0x90);
@@ -189,7 +189,7 @@ public class S_Attendance extends ServerBasePacket {
 				//	writeC(0x5c); //
 				//	writeC(0xf9); //
 					break;
-			case 출석리스트:
+			case attendanceList:
 					if(id == 0){
 						writeC(0x02);						
 						writeC(0x08);

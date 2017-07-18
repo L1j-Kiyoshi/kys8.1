@@ -51,7 +51,7 @@ public class TamController implements Runnable {
 								pc.getNetConnection().getAccount().updateTam();
 							} catch (Exception e) {
 							}
-							pc.sendPackets(new S_SystemMessage("\\aA通知：成長("+tamcount+")段階Tamポイント\\aG("+addtam+")\\aA개 획득"));
+							pc.sendPackets(new S_SystemMessage("\\aA通知：成長("+tamcount+")段階Tamポイント\\aG("+addtam+")\\aA個獲得"));
 							try {
 								pc.sendPackets(new S_NewCreateItem(S_NewCreateItem.TAM_POINT,pc.getNetConnection()),true);
 							} catch (Exception e) {

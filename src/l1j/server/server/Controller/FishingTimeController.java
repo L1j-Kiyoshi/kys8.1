@@ -58,7 +58,7 @@ public class FishingTimeController implements Runnable {
 		_fishingList.remove(pc);
 	}
 	
-	public boolean 성장낚시 = false;
+	public boolean growingFishing = false;
 
 	private void fishing() {
 		if (_fishingList.size() > 0) {
@@ -91,7 +91,7 @@ public class FishingTimeController implements Runnable {
 										pc.getInventory().updateItem(item, L1PcInventory.COL_CHARGE_COUNT);
 										pc.setFishingTime(System.currentTimeMillis() + Config.FISH_TIME * 1000);
 										pc.sendPackets(new S_Fishing2(Config.FISH_TIME));
-										릴장착고탄력낚싯대(pc);
+										reelHighFishingRod(pc);
 									}
 								}
 							} else if(pc._fishingRod.getItemId() == 41305){ //リール装着銀色釣り竿
@@ -108,7 +108,7 @@ public class FishingTimeController implements Runnable {
 										pc.getInventory().updateItem(item, L1PcInventory.COL_CHARGE_COUNT);
 										pc.setFishingTime(System.currentTimeMillis() + Config.FISH_TIME * 1000);
 										pc.sendPackets(new S_Fishing2(Config.FISH_TIME));
-										릴장착은빛낚싯대(pc);
+										reelSilverFishingRod(pc);
 									}
 								}
 							} else if(pc._fishingRod.getItemId() == 41306){ //リール装着金色釣り竿
@@ -125,7 +125,7 @@ public class FishingTimeController implements Runnable {
 										pc.getInventory().updateItem(item, L1PcInventory.COL_CHARGE_COUNT);
 										pc.setFishingTime(System.currentTimeMillis() + Config.FISH_TIME * 1000);
 										pc.sendPackets(new S_Fishing2(Config.FISH_TIME));
-										릴장착금빛낚싯대(pc);
+										reelGoldFishingRod(pc);
 									}
 								}
 							} else if (pc._fishingRod.getItemId() == 600229){ // 成長の釣り竿
@@ -142,11 +142,11 @@ public class FishingTimeController implements Runnable {
 										pc.getInventory().updateItem(item, L1PcInventory.COL_CHARGE_COUNT);
 										pc.setFishingTime(System.currentTimeMillis() + Config.FISH_TIME * 1000);
 										pc.sendPackets(new S_Fishing2(Config.FISH_TIME));
-										성장낚시 = true;
+										growingFishing = true;
 										if (Config.FISH_COM) {
-											성장의낚시대1(pc);
+											growingFishingRod1(pc);
 										} else {
-											성장의낚시대(pc);
+											growingFishingRod(pc);
 										}
 									}
 								}
@@ -164,14 +164,14 @@ public class FishingTimeController implements Runnable {
 										pc.getInventory().updateItem(item, L1PcInventory.COL_CHARGE_COUNT);
 										pc.setFishingTime(System.currentTimeMillis() + Config.FISH_TIME * 1000);
 										pc.sendPackets(new S_Fishing2(Config.FISH_TIME));
-										황소개구리낚싯대(pc);
+										bullfrogFishingRod(pc);
 									}
 								}
 								//一般釣り竿
 							} else if (pc._fishingRod.getItemId() == 41293){
 								pc.setFishingTime(System.currentTimeMillis() + 240000);
 								pc.sendPackets(new S_Fishing2(240));
-								고탄력낚싯대(pc);
+								highFishingRod(pc);
 							} 
 						} else {
 							// 餌がなくて終了処理区間。
@@ -188,8 +188,8 @@ public class FishingTimeController implements Runnable {
 		pc.setFishingReady(false);
 		pc.setFishing(false);
 		pc._fishingRod = null;
-		if(성장낚시){
-			성장낚시 = false;
+		if(growingFishing){
+			growingFishing = false;
 		}
 		pc.sendPackets(new S_CharVisualUpdate(pc));
 		Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
@@ -197,7 +197,7 @@ public class FishingTimeController implements Runnable {
 		removeMember(pc);
 	}
 
-	private void 성장의낚시대(L1PcInstance pc){
+	private void growingFishingRod(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
 		if (chance < 6000) { //ブルーベリーアナ
 			successFishing(pc, 41297 , "$15565"); 
@@ -214,7 +214,7 @@ public class FishingTimeController implements Runnable {
 			// 釣りに失敗しました。
 		}
 	}
-	private void 성장의낚시대1(L1PcInstance pc){
+	private void growingFishingRod1(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
 		if (chance < 6000) { //ブルーベリーアナ
 			successFishing(pc, 600231 , "成長の釣りのギフトボックス"); 
@@ -232,7 +232,7 @@ public class FishingTimeController implements Runnable {
 		}
 	}
 	
-	private void 황소개구리낚싯대(L1PcInstance pc){
+	private void bullfrogFishingRod(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
 		if (chance < 6000) { //ブルーベリーアナ
 			successFishing(pc, 41297 , "$15565"); 
@@ -254,7 +254,7 @@ public class FishingTimeController implements Runnable {
 		}
 	}
 
-	private void 릴장착고탄력낚싯대(L1PcInstance pc){
+	private void reelHighFishingRod(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
 		if (chance < 6000) { //ブルーベリーアナ
 			successFishing(pc, 41297 , "$15565"); 
@@ -274,7 +274,7 @@ public class FishingTimeController implements Runnable {
 		}
 	}
 
-	private void 릴장착은빛낚싯대(L1PcInstance pc){
+	private void reelSilverFishingRod(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
 		if (chance < 4000) { //ブルーベリーアナ
 			successFishing(pc, 41297 , "$15565"); 
@@ -294,7 +294,7 @@ public class FishingTimeController implements Runnable {
 		}
 	}
 
-	private void 릴장착금빛낚싯대(L1PcInstance pc){
+	private void reelGoldFishingRod(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1;
 		if (chance < 3500) { //ブルーベリーアナ
 			successFishing(pc, 41297 , "$15565"); 
@@ -314,7 +314,7 @@ public class FishingTimeController implements Runnable {
 		}
 	}
 
-	private void 고탄력낚싯대(L1PcInstance pc){
+	private void highFishingRod(L1PcInstance pc){
 		int chance = _random.nextInt(10000) + 1; //100%
 		//ベリーアナ
 		if (chance < 4000) {
@@ -362,7 +362,7 @@ public class FishingTimeController implements Runnable {
 					player.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, chatText));
 				}
 			}
-		} else if (성장낚시) {
+		} else if (growingFishing) {
 			int exp = Config.FISH_EXP;
 			double dragon = 1;
 			int settingEXP = (int) Config.RATE_XP;

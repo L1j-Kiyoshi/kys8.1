@@ -53,12 +53,12 @@ public class Queen implements Runnable {
 	@Override
 	public void run() {
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
 		/** 0午前、1午後 * */
-		String 오전오후 = "午後";
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "午前";
+			ampm = "午前";
 		}
 		Running = true;
 		FirstRoom = true;
@@ -92,21 +92,21 @@ public class Queen implements Runnable {
 		}
 		Queen_Delete();
 		System.out.println(
-				"" + 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "   ■■■■■■ 氷の女王終了 " + _map + " ■■■■■■");
+				"" + ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分" + "   ■■■■■■ 氷の女王終了 " + _map + " ■■■■■■");
 	}
 
 	public void Start() {
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
 		/** 0 午前、1午後 * */
-		String 오전오후 = "午後";
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "午前";
+			ampm = "午前";
 		}
 		GeneralThreadPool.getInstance().schedule(this, 2000);
 		System.out.println(
-				"" + 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "   ■■■■■■ 氷の女王を開始 " + _map + " ■■■■■■");
+				"" + ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分" + "   ■■■■■■ 氷の女王を開始 " + _map + " ■■■■■■");
 	}
 
 	private void Check() {
@@ -397,7 +397,7 @@ public class Queen implements Runnable {
 		spawn(32734, 32802, (short) _map, 4, 5086, 1, 1, 0); // 象牙の塔のスパイ
 		spawn(32860, 32920, (short) _map, 6, 5087, 1, 1, 0); // スビン
 
-		// 문짝 스폰
+		// 扉出現
 		spawn(32784, 32818, (short) _map, 0, 5147, 1, 1, 0);
 		spawn(32852, 32806, (short) _map, 0, 5148, 1, 1, 0);
 		spawn(32822, 32855, (short) _map, 0, 5149, 1, 1, 0);

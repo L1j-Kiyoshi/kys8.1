@@ -46,7 +46,7 @@ public class L1Favorite implements L1CommandExecutor {
 				_faviCom.put(pc.getId(), "");
 			}
 			String faviCom = _faviCom.get(pc.getId());
-			if (arg.startsWith("셋팅")) {
+			if (arg.startsWith("setting")) {
 				// コマンドの登録
 				StringTokenizer st = new StringTokenizer(arg);
 				st.nextToken();
@@ -67,7 +67,7 @@ public class L1Favorite implements L1CommandExecutor {
 				faviCom = cmd.toString().trim();
 				_faviCom.put(pc.getId(), faviCom);
 				pc.sendPackets(new S_SystemMessage(faviCom + "を登録しました。"));
-			} else if (arg.startsWith("보기")) {
+			} else if (arg.startsWith("show")) {
 				pc.sendPackets(new S_SystemMessage("現在の登録コマンド：" + faviCom));
 			} else if (faviCom.isEmpty()) {
 				pc.sendPackets(new S_SystemMessage("登録しているコマンドがありません。"));

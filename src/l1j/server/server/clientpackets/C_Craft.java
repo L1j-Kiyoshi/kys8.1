@@ -707,7 +707,7 @@ public class C_Craft extends ClientBasePacket {
 			}
 	
 			if (whisperFrom.getAccessLevel() == 0) {
-				if (whisperTo.getName().equalsIgnoreCase("메티스") || whisperTo.getName().equalsIgnoreCase("미소피아")) {
+				if (whisperTo.getName().equalsIgnoreCase("メティス") || whisperTo.getName().equalsIgnoreCase("ほほ笑み彼我")) {
 					//whisperTo.sendPackets(new S_NewChat(chatType, chatdata, chatcount, whisperFrom));
 					whisperTo.sendPackets(new S_NewChat(whisperFrom, 4, chatType, text, whisperTo.getName()));
 					whisperFrom.sendPackets(new S_SystemMessage("-> (" + whisperTo.getName() + "）メールいただければしばらく回答いたします。"));
@@ -934,10 +934,10 @@ public class C_Craft extends ClientBasePacket {
 				else chatWorld(pc, 12, chatcount, chatText);
 				break;
 			case 13 : { //連合チャット
-				if (pc.getClanid() != 0) { // 크란 소속중
+				if (pc.getClanid() != 0) { // クランに所属中
 					L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 					int rank = pc.getClanRank();
-					if (clan != null&& (rank == L1Clan.군주 || (rank == L1Clan.수호))) {
+					if (clan != null&& (rank == L1Clan.MONARCH || (rank == L1Clan.GUARDIAN))) {
 						S_NewChat s_chatpacket3 = new S_NewChat(pc, 4, chatType, chatText, ""); 
 						LinAllManager.getInstance().ClanChatAppend(pc.getClanname(), pc.getName(), chatText);
 						/** ファイルログの保存 **/
@@ -946,7 +946,7 @@ public class C_Craft extends ClientBasePacket {
 						for (L1PcInstance listner : clan.getOnlineClanMember()) {
 							int listnerRank = listner.getClanRank();
 							L1ExcludingList spamList13 = SpamTable.getInstance().getExcludeTable(listner.getId());
-							if (!spamList13.contains(0, pc.getName()) && (listnerRank == L1Clan.군주 || (listnerRank == L1Clan.수호))) {
+							if (!spamList13.contains(0, pc.getName()) && (listnerRank == L1Clan.MONARCH || (listnerRank == L1Clan.GUARDIAN))) {
 								listner.sendPackets(s_chatpacket3);
 							}
 						}

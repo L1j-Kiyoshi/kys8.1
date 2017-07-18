@@ -54,8 +54,8 @@ public class C_AddBuddy extends ClientBasePacket {
 			if (charName.equalsIgnoreCase(cn.getName())) {
 				int objId = cn.getId();
 				String name = cn.getName();
-				if (cn.getName().equalsIgnoreCase("카시오페아") || cn.getName().equalsIgnoreCase("운영자")
-						|| cn.getName().equalsIgnoreCase("메티스") || cn.getName().equalsIgnoreCase("미소피아")) {
+				if (cn.getName().equalsIgnoreCase("カシオペア") || cn.getName().equalsIgnoreCase("オペレータ")
+						|| cn.getName().equalsIgnoreCase("メティス") || cn.getName().equalsIgnoreCase("ほほ笑み彼我")) {
 					return;
 				}
 				buddyList.add(objId, name);

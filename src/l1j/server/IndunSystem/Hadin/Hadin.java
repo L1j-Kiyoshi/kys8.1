@@ -581,7 +581,7 @@ public class Hadin implements Runnable {
 					door = BossRoomDoor.get("ボス部屋裏話ドア5");
 					door.PASS = 0;
 					door.broadcastPacket(new S_Door(door.getX(), door.getY(), 0, door.PASS));
-					//남쪽 출구를 곧 막을테니, 어서 빠져나가게!
+					//南口をすぐに停止するので、是非逃がす！
 					Npc_Hadin.broadcastPacket(new S_NpcChatPacket(Npc_Hadin, "$7838", 0));
 					Sleep(3000);
 					door = BossRoomDoor.get("ボス部屋裏話ドア16");

@@ -135,7 +135,7 @@ public class L1HauntedHouse implements Runnable {
 	public void addMember(L1PcInstance pc) {
 		if (!_members.contains(pc)) {
 			_members.add(pc);
-			// %d번째 순번으로 입장 예약되었습니다.
+			// %d第順番に入場予約しました。
 			pc.sendPackets(new S_ServerMessage(1253, Integer.toString(getMembersCount())));
 
 			// if(getMembersCount() > 0){

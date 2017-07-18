@@ -425,12 +425,12 @@ private static void polyNormal80(L1RobotInstance bot) { // ロボットに変身
 		}
 		bot.setClanid(clan.getClanId());
 		bot.setClanname(clan.getClanName());
-		bot.setClanRank(L1Clan.수련);
+		bot.setClanRank(L1Clan.TRAINING);
 		bot.setTitle("");
 		bot.setClanJoinDate(new Timestamp(System.currentTimeMillis()));
 		Broadcaster.broadcastPacket(bot, new S_CharTitle(bot.getId(), ""));
 		if(bot.isCrown()){
-		clan.addClanMember(bot.getName(),L1Clan.군주 , bot.getLevel(), "ロボット" ,bot.getId(), bot.getType(),1, bot);
+		clan.addClanMember(bot.getName(),L1Clan.MONARCH , bot.getLevel(), "ロボット" ,bot.getId(), bot.getType(),1, bot);
 		}else{
 			clan.addClanMember(bot.getName(),8 , bot.getLevel(),	bot.getClanMemberNotes(),bot.getId(), bot.getType(),1, bot);	
 		}

@@ -421,12 +421,12 @@ public class CalcExp {
 		for (L1DollInstance doll : pc.getDollList()) {
 			int dollType = doll.getDollType();
 			if (dollType == L1DollInstance.DOLLTYPE_SNOWMAN_A || dollType == L1DollInstance.DOLLTYPE_SNOWMAN_B || dollType == L1DollInstance.DOLLTYPE_SNOWMAN_C
-					|| dollType == L1DollInstance.DOLLTYPE_자이언트 || dollType == L1DollInstance.DOLL_머미로드 
+					|| dollType == L1DollInstance.DOLLTYPE_GIANT || dollType == L1DollInstance.DOLL_MUMMY_LORD 
 					) {
 				dollBonus += 0.1;
-			}else if (dollType == L1DollInstance.DOLLTYPE_데스나이트 || dollType == L1DollInstance.DOLLTYPE_DEATHNIGHT){
+			}else if (dollType == L1DollInstance.DOLLTYPE_DEATH_KNIGHT || dollType == L1DollInstance.DOLLTYPE_DEATHNIGHT){
 				dollBonus += 0.2;
-			}else if (dollType == L1DollInstance.DOLLTYPE_인어){
+			}else if (dollType == L1DollInstance.DOLLTYPE_MERMAID){
 				dollBonus += 0.03;
 			}
 		}
@@ -440,9 +440,9 @@ public class CalcExp {
 			foodBonus += 0.09;
 		} else if (pc.hasSkillEffect(L1SkillId.COOK_GROW)) {
 			foodBonus += 0.04;
-		} else if (pc.hasSkillEffect(L1SkillId.천하장사버프)) {
+		} else if (pc.hasSkillEffect(L1SkillId.TENKASOUSHI_BUFF)) {
 			foodBonus += 0.2;
-		} else if(pc.hasSkillEffect(L1SkillId.메티스스프)){
+		} else if(pc.hasSkillEffect(L1SkillId.METIS_SOUP)){
 			foodBonus +=0.1;
 		}else if(pc.hasSkillEffect(L1SkillId.Matiz_Buff1)){
 			foodBonus +=0.1;
@@ -481,7 +481,7 @@ public class CalcExp {
 			beginnerBonus += (0.1 * growthEmblem);
 		}
 		
-		if (pc.hasSkillEffect(L1SkillId.레벨업보너스))
+		if (pc.hasSkillEffect(L1SkillId.LEVEL_UP_BONUS))
 			levelupBonus += 2.23;
 
 		double einhasadBonus = 0;

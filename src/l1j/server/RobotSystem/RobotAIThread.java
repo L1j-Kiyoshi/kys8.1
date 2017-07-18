@@ -17,7 +17,7 @@ import l1j.server.server.utils.SQLUtil;
 public class RobotAIThread implements Runnable {
 
 	static private final int Scarecrow = 1; // かかし
-	static private final int Hunt = 2; // 사냥
+	static private final int Hunt = 2; // 狩猟
 
 	// 人工知能スレッドを処理してもいることを確認の。
 	// static private boolean running;
@@ -260,7 +260,7 @@ public class RobotAIThread implements Runnable {
 							if (robot == null) {
 								continue;
 							}
-							robot.getRobotAi().허수아비처리(time);
+							robot.getRobotAi().scarecrowProcess(time);
 						}
 					} catch (Exception e) {
 						// System.out.println("ロボットスレッドが異常終了していAI再起動中の重複エラー

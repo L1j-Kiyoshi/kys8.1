@@ -55,7 +55,7 @@ public class FafurionRaid {
 				Random random = new Random();
 				int Dragontel = random.nextInt(3)+ 1;
 				pc.sendPackets(new S_ChatPacket(pc,"システムメッセージ：レイドに失敗しました。"));
-//				System.out.println("■■■■■■■■■■ 파푸리온 레이드 실패 ■■■■■■■■■■ MAP - " + map);
+//				System.out.println("■■■■■■■■■■ パプリオンレイド失敗 ■■■■■■■■■■ MAP - " + map);
 				if(Dragontel == 1) new L1Teleport().teleport(pc, 33705, 32504, (short)4, 5, true); // ウェルダン 
 				else if(Dragontel == 2) new L1Teleport().teleport(pc, 33744, 32499, (short)4, 5, true); //ウェルダン 
 				else new L1Teleport().teleport(pc, 33742, 32483, (short)4, 5, true); // ウェルダン 

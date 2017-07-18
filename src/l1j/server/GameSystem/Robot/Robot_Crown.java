@@ -93,7 +93,7 @@ public class Robot_Crown {
 				newPc.set_food(39);
 				newPc.setClanid(rs.getInt("clanid"));
 				newPc.setClanname(rs.getString("clanname"));
-				newPc.setClanRank(L1Clan.군주);
+				newPc.setClanRank(L1Clan.MONARCH);
 				newPc.setElfAttr(0);
 				newPc.set_PKcount(0);
 				newPc.setExpRes(0);

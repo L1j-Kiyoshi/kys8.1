@@ -412,7 +412,7 @@ public class L1Character extends L1Object {
 	 * 指定された座標までの直線上に、障害物が存在*しない*を返す。
 	 * 
 	 * @param tx
-	 *            좌표의 X치
+	 *            座標のX値
 	 * @param ty
 	 *            座標のY値
 	 * @return 障害物がなければtrue、あるfalseを返す。
@@ -1369,7 +1369,7 @@ public class L1Character extends L1Object {
 	}
 	
 	private int _mr = 0; // ●魔法防御（0）
-	private int _trueMr = 0; // ● 정말의 마법 방어
+	private int _trueMr = 0; // ● 本当にの魔法防御
 
 	public int getMr() {
 		if (hasSkillEffect(153) == true) {
@@ -1396,21 +1396,21 @@ public class L1Character extends L1Object {
 	public int getActionStatus() { return actionStatus; }
 	public void setActionStatus(int i) { actionStatus = i;	}
 	
-	private int 락구간상승;
+	private int lockSectionUp;
 	 
-	 public int get락구간상승() {
-	     return 락구간상승;
+	 public int getLockSectionUp() {
+	     return lockSectionUp;
 	 }
-	 public void set락구간상승(int i) {
-		 락구간상승 = i;
+	 public void setLockSectionUp(int i) {
+		 lockSectionUp = i;
 	 }
-    private int 어택레벨;
+    private int attackLevel;
 	 
-	 public int get어택레벨() {
-	     return 어택레벨;
+	 public int getAttackLevel() {
+	     return attackLevel;
 	 }
-	 public void set어택레벨(int i) {
-		 어택레벨 = i;
+	 public void setAttackLevel(int i) {
+		 attackLevel = i;
 	 }
 	
 	

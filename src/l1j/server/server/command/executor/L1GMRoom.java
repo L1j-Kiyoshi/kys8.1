@@ -123,7 +123,7 @@ public class L1GMRoom implements L1CommandExecutor {
 			} else if (i == 38) {
 				new L1Teleport().teleport(pc , 32771, 32831, (short) 65, 5, false); // 波プバン
 			} else if (i == 39) {
-				new L1Teleport().teleport(pc , 32696, 32824, (short) 37, 5, false); // 버모스 (용던7층)
+				new L1Teleport().teleport(pc , 32696, 32824, (short) 37, 5, false); // バーモス（ヨンドン7階）
 			} else if (i == 40) {
 				new L1Teleport().teleport(pc , 32922, 32812, (short) 430, 5, false); // 精霊の墓
 			} else if (i == 41) {

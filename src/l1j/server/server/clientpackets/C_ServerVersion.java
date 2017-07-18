@@ -28,7 +28,7 @@ import l1j.server.server.serverpackets.S_ServerVersion;
 public class C_ServerVersion extends ClientBasePacket {
 
     private static final String C_SERVER_VERSION = "[C] C_ServerVersion";
-    private static final int 클라버전 = 820;
+    private static final int cliantVersion = 820;
 
     public C_ServerVersion(byte decrypt[], GameClient client) throws Exception {
 	super(decrypt);

@@ -35,12 +35,12 @@ public class C_CreateChar extends ClientBasePacket {
 		String name = readS();
 
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
 		/** 0時、1午後* */
-		String 오전오후 = "午後";
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "午前";
+			ampm = "午前";
 		}
 
 		for (int i = 0; i < name.length(); i++) {
@@ -133,7 +133,7 @@ public class C_CreateChar extends ClientBasePacket {
 		S_CharCreateStatus s_charcreatestatus2 = new S_CharCreateStatus(S_CharCreateStatus.REASON_OK);
 		client.sendPacket(s_charcreatestatus2);
 		initNewChar(client, pc);
-		System.out.println("" + 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "■新規キャラクター：[" + pc.getName() + "]さんの作成完了■");
+		System.out.println("" + ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分" + "■新規キャラクター：[" + pc.getName() + "]さんの作成完了■");
 		LinAllManagerInfoThread.CharCount += 1;
 	}
 

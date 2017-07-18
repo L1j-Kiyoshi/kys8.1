@@ -50,22 +50,22 @@ public class C_Report extends ClientBasePacket {
 	public static final int BOOKMARK_LOADING_SAVE = 0x28;
 	public static final int EMBLEM = 0x2e; //文章注視
 	public static final int TELPORT = 0x30; // 村テレポート
-	public static final int 케릭터생성 = 43;
+	public static final int CREATE_CHARACTER = 43;
 	//public static final int フェアリー= 0x37;
-	public static final int 파워북검색 = 0x13;
-	public static final int 상인찾기 = 0x31;
-	public static final int 상점개설횟수 = 0x39;
-	public static final int 자동신고 = 0x00;
+	public static final int SEARCH_POWER_BOOK = 0x13;
+	public static final int SEARCH_MERCHANT = 0x31;
+	public static final int STORE_OPEN_NUMBER = 0x39;
+	public static final int AUTO_REPORT = 0x00;
 	
 	public C_Report(byte abyte0[], GameClient client) throws Exception {
 		super(abyte0);
 		int type = readC();
 		L1PcInstance pc = client.getActiveChar();
-		if (type!=케릭터생성 && pc==null)
+		if (type!=CREATE_CHARACTER && pc==null)
 			return;
 
 		switch(type){
-		case 자동신고:
+		case AUTO_REPORT:
 			int targetid = readD();
 			L1Object tar = L1World.getInstance().findObject(targetid);
 
@@ -81,19 +81,19 @@ public class C_Report extends ClientBasePacket {
 
 			if (targetpc.isGm())
 				return;
-			if (pc.hasSkillEffect(L1SkillId.신고딜레이)) {
-				int time = pc.getSkillEffectTimeSec(L1SkillId.신고딜레이);
+			if (pc.hasSkillEffect(L1SkillId.REPORT_DELAY)) {
+				int time = pc.getSkillEffectTimeSec(L1SkillId.REPORT_DELAY);
 				pc.sendPackets(new S_SystemMessage("(" + time + "）秒後再び利用してください。"));
 				return;
 			}
-			pc.setSkillEffect(L1SkillId.신고딜레이,60000);
+			pc.setSkillEffect(L1SkillId.REPORT_DELAY,60000);
 
 			Timestamp date = new Timestamp(System.currentTimeMillis());
-			신고디비(targetpc, date);
+			reportDB(targetpc, date);
 
 			pc.sendPackets(new S_ServerMessage(1019));
 			break;		
-		case 상인찾기: {
+		case SEARCH_MERCHANT: {
 			if (pc.getMapId() == 800) {
 				try {
 					String name = readS();
@@ -131,13 +131,13 @@ public class C_Report extends ClientBasePacket {
 		}
 			break;
 			
-		case 상점개설횟수:
+		case STORE_OPEN_NUMBER:
 			if (pc.getNetConnection() == null || pc.getNetConnection().getAccount() == null)
 				return;
 			pc.sendPackets(new S_PacketBox(S_PacketBox.SHOP_OPEN_COUNT, pc
 					.getNetConnection().getAccount().Shop_open_count), true);
 			break;
-		case 케릭터생성:
+		case CREATE_CHARACTER:
 			client.sendPacket(new S_CreateCharacter());
 			break;
 		  case BOOKMARK_COLOR:// 39
@@ -404,7 +404,7 @@ public class C_Report extends ClientBasePacket {
 		}
 	}
 	
-	public void 신고디비(L1PcInstance pc, Timestamp date) {
+	public void reportDB(L1PcInstance pc, Timestamp date) {
 		int cnt = 1;
 		Connection con = null;
 		PreparedStatement pstm1 = null;

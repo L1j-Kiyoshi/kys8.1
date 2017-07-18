@@ -1984,8 +1984,8 @@ public class L1MerchantInstance extends L1NpcInstance {
 					htmlid = "j_html01";
 				}
 				break;
-			case 80076: // 넘어진 항해사
-				if (player.getInventory().checkItem(41058)) { // 완성한 항해 일지
+			case 80076: // 倒れた航海士
+				if (player.getInventory().checkItem(41058)) { //完成した航海日誌
 					htmlid = "voyager8";
 				} else if (player.getInventory().checkItem(49082) // 未完成の航海日誌
 						|| player.getInventory().checkItem(49083)) {
@@ -2179,10 +2179,10 @@ public class L1MerchantInstance extends L1NpcInstance {
 				break;
 
 			case 5000006:
-				멘트(player);
+				comment(player);
 				break;
 			case 4200018:// 経験値支給
-				경험치멘트(player);
+				expComment(player);
 				break;
 			case 777849: // キルトン（虎の繁殖）
 				if (player.getInventory().checkItem(87050)) {
@@ -2673,11 +2673,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 		return necessarySealCount;
 	}
 
-	private void 멘트(L1PcInstance pc) {
+	private void comment(L1PcInstance pc) {
 		pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "商人から販売している武器は、確率的に獲得することができます。"));
 	}
 
-	private void 경험치멘트(L1PcInstance pc) {
+	private void expComment(L1PcInstance pc) {
 		pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "通知：[経験値支給は Lv.("+ Config.EXP_PAYMENT_TEAM +") まで可能です]"));
 		pc.sendPackets(new S_SystemMessage("\\aA通知：経験値支給は \\aG[" + Config.EXP_PAYMENT_TEAM + "]\\aA まで可能です"));
 	}
@@ -2764,11 +2764,11 @@ public class L1MerchantInstance extends L1NpcInstance {
 	private void DuelZone(L1PcInstance pc) {
 		// バトルゾーンが開いていて、入場が可能であれば
 		if (BattleZone.getInstance().getDuelOpen()) {
-			if (pc.get_DuelLine() != 0 || BattleZone.getInstance().is배틀존유저(pc)) {
+			if (pc.get_DuelLine() != 0 || BattleZone.getInstance().isBattleZoneUser(pc)) {
 				pc.sendPackets(new S_SystemMessage("バトルゾーンから出たが、再入ることができません。"));
 				return;
 			}
-			if (BattleZone.getInstance().get배틀존유저Count() > 50) {
+			if (BattleZone.getInstance().getBattleZoneUserCount() > 50) {
 				pc.sendPackets(new S_SystemMessage("プレミアムバトルゾーンの人員がすべていっぱいです。"));
 				return;
 			}
@@ -2777,7 +2777,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				return;
 			}
 			// ラインを分けよう。
-			if (BattleZone.getInstance().get배틀존유저Count() % 2 == 0) {
+			if (BattleZone.getInstance().getBattleZoneUserCount() % 2 == 0) {
 				// 偶数ライン
 				pc.set_DuelLine(2);
 			} else {
@@ -2785,7 +2785,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				pc.set_DuelLine(1);
 			}
 			pc.sendPackets(new S_SystemMessage("プレミアムバトルゾーン控室に入場しました。"));
-			BattleZone.getInstance().add배틀존유저(pc);
+			BattleZone.getInstance().addBattleZoneUser(pc);
 			new L1Teleport().teleport(pc, 32780, 32780, (short) 5001, 0, true);
 		} else {
 			pc.sendPackets(new S_SystemMessage("現在プレミアムバトルゾーンが開かなかった。"));

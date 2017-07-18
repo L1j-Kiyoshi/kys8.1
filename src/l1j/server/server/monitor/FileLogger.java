@@ -126,7 +126,7 @@ public class FileLogger implements Logger {
 			_tradelog.add(msg);
 		}
 	}
-	public void 개인상점구매(boolean success, L1PcInstance pcfrom, L1PcInstance pcto, L1ItemInstance item, int count) {
+	public void bayPersonalStore(boolean success, L1PcInstance pcfrom, L1PcInstance pcto, L1ItemInstance item, int count) {
 		// 時間成功アカウント：キャラ[ユーザ名]システム名（本数） - >アカウント：キャラ
 		// 取引の成功時のログ記録を残す
 		String msg = String.format("%s\t%s\t%s:%s\t%s\t%s:%s\r\n", getLocalTime(), (success ? "店で購入" : "店のキャンセル"), pcfrom.getAccountName(), "["+pcfrom.getName()+"]", getFormatItemName(item, count), pcto.getAccountName(), "["+pcto.getName()+"]");

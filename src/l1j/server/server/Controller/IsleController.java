@@ -18,10 +18,10 @@ public class IsleController implements Runnable {
 
     /** ゲームの状態 **/
     public int Status = 0;//進行状況
-    private final int 대기 = 0;//進行
-    private final int 오픈 = 1;
-    private final int 진행 = 2;
-    private final int 종료 = 3;//
+    private final int status_Wait = 0;//進行
+    private final int status_Open = 1;
+    private final int status_GetOn = 2;
+    private final int status_End = 3;//
 
     public static IsleController getInstance() {
         if (_instance == null) {
@@ -35,22 +35,22 @@ public class IsleController implements Runnable {
         try {
             while (true) {
                 switch (Status) {
-                case 대기:
+                case status_Wait:
                     Thread.sleep(10000);//10秒ごとに現在オープンされた状態であるかをチェック
                     /** オープンでなければ進行 **/
                     if (isgameStart == false) {//オープンまたは再戻し送信
                         continue;//元に戻す 
                     }
-                    Status = 오픈;
+                    Status = status_Open;
                     L1World.getInstance().broadcastServerMessage("\\aH通知：しばらくして、[忘れられた島]入場が可能です。");
                     continue;
-                case 오픈:
+                case status_Open:
                 	L1World.getInstance().broadcastServerMessage("\\aH通知：忘れられた島1時間狩り可能ので、注意してください。");
     				L1World.getInstance().broadcastServerMessage("\\aH通知：時間になると、強制的に帰還されます。");
                 	System.out.println("......忘れられた島開");
-                	Status = 진행;
+                	Status = status_GetOn;
                     continue;
-                case 진행:
+                case status_GetOn:
                    
                 	/** 実行1時間開始**/
                 	Thread.sleep(3800000L);  // 3800000L 1時間10分程度
@@ -59,14 +59,14 @@ public class IsleController implements Runnable {
     				close(); //追加
     				Thread.sleep(5000L);
     				TelePort2();
-                    Status = 종료;
+                    Status = status_End;
                     continue;
-                case 종료:
+                case status_End:
                 	//L1World.getInstance（）broadcastServerMessage（ "\\\\ aG地獄狩り場は2時間狩りが可能です。"）;
                 	L1World.getInstance().broadcastServerMessage("\\aH通知：忘れられた島が終了しました。");
                 	System.out.println("......イッソム終了");
                     isgameStart = false;
-                    Status = 대기;
+                    Status = status_Wait;
             		//delenpc(1231231);
                     continue;
                 }

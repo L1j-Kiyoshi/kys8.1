@@ -278,7 +278,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			pc.sendPackets(new S_SystemMessage("攻城戦の際カタパルトを使用するときに必要な消耗性アイテム"));
 			
 			break;
-		case 800200:// 패키지 1차
+		case 800200://パッケージ1次
 			if (pc.getInventory().getSize() > 120) {
 				pc.sendPackets(new S_ChatPacket(pc, "所持しているアイテムが多すぎます。"));
 				return;
@@ -835,14 +835,14 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 			break;
 		case 9990:
-			어비스스턴스킬(pc);
+			abyssStunSkill(pc);
 			break;			
 		case 9989:
-			어비스데미지스킬(pc);
+			abyssDamageSkill(pc);
 			break;
 		case 9995:
 			L1SkillUse l1skilluse = new L1SkillUse();
-			l1skilluse.handleCommands(pc, L1SkillId.나루토감사캔디, pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
+			l1skilluse.handleCommands(pc, L1SkillId.NARUTO_THANKS_CANDY, pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			pc.getInventory().removeItem(l1iteminstance, 1);
 			break;
 		case 60256:
@@ -999,7 +999,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 	}
 	
 	
-	public static void 어비스데미지스킬(L1PcInstance pc) {
+	public static void abyssDamageSkill(L1PcInstance pc) {
 		pc.sendPackets(new S_DoActionGFX(pc.getId(), ActionCodes.ACTION_Attack));
 		 Broadcaster.broadcastPacket(pc, new S_DoActionGFX(pc.getId(), ActionCodes.ACTION_Damage));
 		 if (pc.getPeerage() < 14){
@@ -1082,7 +1082,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 	}
 	
-	public static void 어비스스턴스킬(L1PcInstance pc) {
+	public static void abyssStunSkill(L1PcInstance pc) {
 		if (pc.getAbysspoint() < Config.STAR_FIVE || pc.isGm()) {
 			if (pc.hasSkillEffect(L1SkillId.DELAY)) { // ディレイ
 				pc.sendPackets(new S_SystemMessage("まだ広域スタンを使用することができません。"));

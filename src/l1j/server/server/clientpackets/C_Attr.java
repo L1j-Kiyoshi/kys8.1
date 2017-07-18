@@ -341,7 +341,7 @@ public class C_Attr extends ClientBasePacket {
 				house.setHouseName(name);
 				HouseTable.getInstance().updateHouse(house); // DBに記入して
 			} else {
-				pc.sendPackets(new S_ServerMessage(513)); // 가의 이름이 너무 깁니다.
+				pc.sendPackets(new S_ServerMessage(513)); // 家の名前が長すぎます。
 			}
 			break;
 			/*if (c == 0) {
@@ -447,42 +447,42 @@ public class C_Attr extends ClientBasePacket {
 				/*} else if(pc.getOrim()){
 					pc.sendPackets(new S_SystemMessage("カスパー一党とクリップボード罰を拒否しました。 "））;
 					pc.setOrim(false);*/
-				} else if (pc.get그림리퍼()) {
+				} else if (pc.getGrimReaper()) {
 					pc.sendPackets(new S_SystemMessage("通知：[図リッパーレイド]懲罰を拒否しました。"));
-					pc.set그림리퍼(false);
-				} else if (pc.get제니스()) {
+					pc.setGrimReaper(false);
+				} else if (pc.getZenis()) {
 					pc.sendPackets(new S_SystemMessage("通知：[ゼニスレイド]懲罰を拒否しました。"));
-					pc.set제니스(false);
-				} else if (pc.get시어()) {
+					pc.setZenis(false);
+				} else if (pc.getSia()) {
 					pc.sendPackets(new S_SystemMessage("通知：[シレイド]懲罰を拒否しました。"));
-					pc.set시어(false);
-				} else if (pc.get뱀파이어()) {
+					pc.setSia(false);
+				} else if (pc.getVampire()) {
 					pc.sendPackets(new S_SystemMessage("通知：[ヴァンパイアレイド]懲罰を拒否しました。"));
-					pc.set뱀파이어(false);
-				} else if (pc.get좀비로드()) {
+					pc.setVampire(false);
+				} else if (pc.getZombieLoad()) {
 					pc.sendPackets(new S_SystemMessage("通知：[ゾンビロードレイド]懲罰を拒否しました。"));
-					pc.set좀비로드(false);
-				} else if (pc.get쿠거()) {
+					pc.setZombieLoad(false);
+				} else if (pc.getCougar()) {
 					pc.sendPackets(new S_SystemMessage("通知：[クーガーレイド]懲罰を拒否しました。"));
-					pc.set쿠거(false);
-				} else if (pc.get머미로드()) {
+					pc.setCougar(false);
+				} else if (pc.getMummyLord()) {
 					pc.sendPackets(new S_SystemMessage("通知：[マミーロードレイド]懲罰を拒否しました。"));
-					pc.set머미로드(false);
-				} else if (pc.get아이리스()) {
+					pc.setMummyLord(false);
+				} else if (pc.getIris()) {
 					pc.sendPackets(new S_SystemMessage("通知：[アイリスレイド]懲罰を拒否しました。"));
-					pc.set아이리스(false);
-				} else if (pc.get나이트발드()) {
+					pc.setIris(false);
+				} else if (pc.getKnightBald()) {
 					pc.sendPackets(new S_SystemMessage("通知：[ナバルレイド]懲罰を拒否しました。"));
-					pc.set나이트발드(false);
-				} else if (pc.get리치()) {
+					pc.setKnightBald(false);
+				} else if (pc.getLich()) {
 					pc.sendPackets(new S_SystemMessage("通知：[リッチレイド]懲罰を拒否しました。"));
-					pc.set리치(false);
-				} else if (pc.get우그니스()) {
+					pc.setLich(false);
+				} else if (pc.getUgnus()) {
 					pc.sendPackets(new S_SystemMessage("通知：[オグニースレイド]懲罰を拒否しました。"));
-					pc.set우그니스(false);
-				} else if (pc.get발록()) {
+					pc.setUgnus(false);
+				} else if (pc.getBalrog()) {
 					pc.sendPackets(new S_SystemMessage("通知：[バルログ]懲罰を拒否しました。"));
-					pc.set발록(false);
+					pc.setBalrog(false);
 				} else {
 					pc.sendPackets(new S_SystemMessage("\\aA通知：入力がタイムアウトしました。"));
 				}
@@ -498,7 +498,7 @@ public class C_Attr extends ClientBasePacket {
 					pc.setRaidGame(false);
 					
 					/**今からレイド参加y / nメッセージソースの追加 **/
-				} else if (pc.get제니스()) { //ゼニスレイド
+				} else if (pc.getZenis()) { //ゼニスレイド
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -507,8 +507,8 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32791 + rnd.nextInt(2);
 					int locY = 32786 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 101, pc.getHeading(), true);
-					pc.set제니스(false);
-				} else if (pc.get시어()) { // シレイド
+					pc.setZenis(false);
+				} else if (pc.getSia()) { // シレイド
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -517,8 +517,8 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32763 + rnd.nextInt(2);
 					int locY = 32801 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 102, pc.getHeading(), true);
-					pc.set시어(false);
-				} else if (pc.get뱀파이어()) { // ヴァンパイアレイド
+					pc.setSia(false);
+				} else if (pc.getVampire()) { // ヴァンパイアレイド
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -527,8 +527,8 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32769 + rnd.nextInt(2);
 					int locY = 32813 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 103, pc.getHeading(), true);
-					pc.set뱀파이어(false);
-				} else if (pc.get좀비로드()) { //ゾンビロードレイド
+					pc.setVampire(false);
+				} else if (pc.getZombieLoad()) { //ゾンビロードレイド
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -537,8 +537,8 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32666 + rnd.nextInt(2);
 					int locY = 32863 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 104, pc.getHeading(), true);
-					pc.set좀비로드(false);
-				} else if (pc.get쿠거()) { //クーガーレイド
+					pc.setZombieLoad(false);
+				} else if (pc.getCougar()) { //クーガーレイド
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -547,8 +547,8 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32629 + rnd.nextInt(2);
 					int locY = 32866 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 105, pc.getHeading(), true);
-					pc.set쿠거(false);
-				} else if (pc.get머미로드()) { // マミーロードレイド
+					pc.setCougar(false);
+				} else if (pc.getMummyLord()) { // マミーロードレイド
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -557,8 +557,8 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32650 + rnd.nextInt(2);
 					int locY = 32850 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 106, pc.getHeading(), true);
-					pc.set머미로드(false);
-				} else if (pc.get아이리스()) { // アイリス
+					pc.setMummyLord(false);
+				} else if (pc.getIris()) { // アイリス
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -567,8 +567,8 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32671 + rnd.nextInt(2);
 					int locY = 32854 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 107, pc.getHeading(), true);
-					pc.set아이리스(false);
-				} else if (pc.get나이트발드()) { // ナバル
+					pc.setIris(false);
+				} else if (pc.getKnightBald()) { // ナバル
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -577,8 +577,8 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32669 + rnd.nextInt(2);
 					int locY = 32860 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 108, pc.getHeading(), true);
-					pc.set나이트발드(false);
-				} else if (pc.get리치()) { // リッチ
+					pc.setKnightBald(false);
+				} else if (pc.getLich()) { // リッチ
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -587,8 +587,8 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32667 + rnd.nextInt(2);
 					int locY = 32863 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 109, pc.getHeading(), true);
-					pc.set리치(false);
-				} else if (pc.get우그니스()) { // オグ
+					pc.setLich(false);
+				} else if (pc.getUgnus()) { // オグ
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -597,9 +597,9 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32761 + rnd.nextInt(2);
 					int locY = 32801 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 110, pc.getHeading(), true);
-					pc.set우그니스(false);
+					pc.setUgnus(false);
 
-				} else if (pc.get그림리퍼()) { // グリムリーパーレイド
+				} else if (pc.getGrimReaper()) { // グリムリーパーレイド
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -608,10 +608,10 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32722 + rnd.nextInt(2);
 					int locY = 32903 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 111, pc.getHeading(), true);
-					pc.set그림리퍼(false);
+					pc.setGrimReaper(false);
 
 
-				} else if (pc.get발록()) { // バルログレイド
+				} else if (pc.getBalrog()) { // バルログレイド
 					pc.sendPackets(new S_SystemMessage("懲罰エリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));
 					Thread.sleep(5000);
@@ -620,7 +620,7 @@ public class C_Attr extends ClientBasePacket {
 					int locX = 32726 + rnd.nextInt(2);
 					int locY = 32832 + rnd.nextInt(2);
 					new L1Teleport().teleport(pc, locX, locY, (short) 603, pc.getHeading(), true);
-					pc.set발록(false);
+					pc.setBalrog(false);
 				} else if(pc.getMorning()){ // モチンスターレイド
 					pc.sendPackets(new S_SystemMessage("通知：このエリアに移動します。お待ちください。"));
 					pc.sendPackets(new S_PacketBox(S_PacketBox.MINIGAME_START_COUNT));

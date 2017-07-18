@@ -57,47 +57,47 @@ public class L1Status implements L1CommandExecutor {
 			}
 
 			// -- not use DB --
-			if (param.equalsIgnoreCase("방어")) {
+			if (param.equalsIgnoreCase("ac")) {
 				target.getAC().addAc((byte) (value - target.getAC().getAc()));
-			} else if (param.equalsIgnoreCase("마방")) {
+			} else if (param.equalsIgnoreCase("mr")) {
 				target.getResistance().addMr((short) (value - target.getResistance().getMr()));
-			} else if (param.equalsIgnoreCase("공성")) {
+			} else if (param.equalsIgnoreCase("hit")) {
 				target.addHitup((short) (value - target.getHitup()));
-			} else if (param.equalsIgnoreCase("대미지")) {
+			} else if (param.equalsIgnoreCase("dmg")) {
 				target.addDmgup((short) (value - target.getDmgup()));
 				// -- use DB --
 			} else {
-				if (param.equalsIgnoreCase("피")) {
+				if (param.equalsIgnoreCase("hp")) {
 					target.addBaseMaxHp((short) (value - target.getBaseMaxHp()));
 					target.setCurrentHp(target.getMaxHp());
-				} else if (param.equalsIgnoreCase("엠피")) {
+				} else if (param.equalsIgnoreCase("mp")) {
 					target.addBaseMaxMp((short)(value - target.getBaseMaxMp()));
 					target.setCurrentMp(target.getMaxMp());
-				} else if (param.equalsIgnoreCase("성향")) {
+				} else if (param.equalsIgnoreCase("lawful")) {
 					target.setLawful(value);
 					S_Lawful s_lawful = new S_Lawful(target.getId(), target.getLawful());
 					target.sendPackets(s_lawful);
 					target.broadcastPacket(s_lawful);
-				} else if (param.equalsIgnoreCase("우호도")) {
+				} else if (param.equalsIgnoreCase("karma")) {
 					target.setKarma(value);
-				} else if (param.equalsIgnoreCase("지엠")) {
+				} else if (param.equalsIgnoreCase("gm")) {
 					if(value == Config.GMCODE){
 						target.setAccessLevel((short) value);
 						target.sendPackets(new S_SystemMessage("RESTARTとGMの権限が生じます。"));
 					}else {
 						target.sendPackets(new S_SystemMessage("GM番号が一致しません。"));
 					}
-				} else if (param.equalsIgnoreCase("힘")) {
+				} else if (param.equalsIgnoreCase("str")) {
 					target.getAbility().setStr((byte)value);
-				} else if (param.equalsIgnoreCase("콘")) {
+				} else if (param.equalsIgnoreCase("con")) {
 					target.getAbility().setCon((byte)value);
-				} else if (param.equalsIgnoreCase("덱스")) {
+				} else if (param.equalsIgnoreCase("dex")) {
 					target.getAbility().setDex((byte)value);
-				} else if (param.equalsIgnoreCase("인트")) {
+				} else if (param.equalsIgnoreCase("int")) {
 					target.getAbility().setInt((byte)value);
-				} else if (param.equalsIgnoreCase("위즈")) {
+				} else if (param.equalsIgnoreCase("wis")) {
 					target.getAbility().setWis((byte)value);
-				} else if (param.equalsIgnoreCase("카리")) {
+				} else if (param.equalsIgnoreCase("cha")) {
 					target.getAbility().setCha((byte)value);
 				} else {
 					pc.sendPackets(new S_SystemMessage("ステータス" + param

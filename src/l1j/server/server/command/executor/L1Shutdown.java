@@ -38,12 +38,12 @@ public class L1Shutdown implements L1CommandExecutor {
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
-			if (arg.equalsIgnoreCase("지금")) {
+			if (arg.equalsIgnoreCase("now")) {
 				GameServer.getInstance().shutdownWithCountdown(0);
 				return;
 			}
 
-			if (arg.equalsIgnoreCase("취소")) {
+			if (arg.equalsIgnoreCase("abort")) {
 				GameServer.getInstance().abortShutdown();
 				return;
 			}

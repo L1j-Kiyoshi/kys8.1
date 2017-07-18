@@ -26,7 +26,7 @@ public class TelBook {
 			return;
 		}
 		if (!pc.getMap().isEscapable()) {
-			pc.sendPackets(new S_SystemMessage("주위의 알수없는 마력에의해 텔레포트를 할 수 없습니다."));
+			pc.sendPackets(new S_SystemMessage("周囲のわからない魔力によってテレポートすることができません。"));
 			return;
 		}
 		if ((pc.hasSkillEffect(SHOCK_STUN)) || (pc.hasSkillEffect(ICE_LANCE)) || (pc.hasSkillEffect(BONE_BREAK))
@@ -36,7 +36,7 @@ public class TelBook {
 		
 		if (itemId == 560025) {
 			try {
-				final int[][] 마을기억책 = { 
+				final int[][] memory_Village = { 
 						{ 34060, 32281, 4 }, // オレン
 						{ 33079, 33390, 4 }, // 記事
 						{ 32750, 32439, 4 }, // オークの森
@@ -49,7 +49,7 @@ public class TelBook {
 						{ 33601, 33232, 4 }, // ハイネ
 						{ 32574, 32942, 0 }, // 話せる島
 						{ 33430, 32815, 4 }, }; // ギラン
-				int[] a = 마을기억책[BookTel];
+				int[] a = memory_Village[BookTel];
 				if (a != null) {
 					new L1Teleport().teleport(pc, a[0], a[1], (short) a[2], pc.getHeading(), true);
 					pc.getInventory().removeItem(l1iteminstance, 1);
@@ -57,7 +57,7 @@ public class TelBook {
 			} catch (Exception e) {}
 		} else if (itemId == 560027) {
 			try {
-				final int[][] 던전기억 = { 
+				final int[][] memory_Dungeon = { 
 						{ 32791, 32800, 101 }, // 傲慢1
 						{ 32764, 32842, 77 }, // オーレンサンタプ3
 						{ 32676, 32859, 59 }, // ハイネ1
@@ -65,7 +65,7 @@ public class TelBook {
 						{ 32760, 33461, 4 }, // 欲望
 						{ 32841, 32695, 550 }, // 船舶
 				};
-				int[] b = 던전기억[BookTel];
+				int[] b = memory_Dungeon[BookTel];
 				if (b != null) {
 					new L1Teleport().teleport(pc, b[0], b[1], (short) b[2], pc.getHeading(), true);
 					pc.getInventory().removeItem(l1iteminstance, 1);
@@ -76,7 +76,7 @@ public class TelBook {
 
 		} else if (itemId == 560028) {
 			try {
-				final int[][] 오만기억 = { 
+				final int[][] memory_TOI = { 
 						{ 32735, 32798, 101 }, // 傲慢1
 						{ 32730, 32802, 102 }, // 傲慢2
 						{ 32726, 32803, 103 }, // 傲慢3
@@ -89,7 +89,7 @@ public class TelBook {
 						{ 32729, 32802, 110 }, // 傲慢10
 						{ 32646, 32808, 111 }, 	// 傲慢、通常の起動ポイント
 						{ 32801, 32963, 111 },};// 傲慢正常中間地点
-				int[] c = 오만기억[BookTel];
+				int[] c = memory_TOI[BookTel];
 				if (c != null) {
 					new L1Teleport().teleport(pc, c[0], c[1], (short) c[2], pc.getHeading(), true);
 
@@ -98,7 +98,7 @@ public class TelBook {
 			
 		} else if (itemId == 560029) {
 			try {
-				final int[][] 조우기억 = { 
+				final int[][] memory_Encounter = { 
 						 { 00000, 00000, 0 }, // 低レベル推奨狩り場
 					      { 32680, 32862, 0 }, //マルソム北の島
 					      { 32477, 32857, 0 }, //マルソムダンジョン入口
@@ -139,7 +139,7 @@ public class TelBook {
 			              { 33711, 32276, 4 }, //本土火竜の巣最上部
 					      { 34116, 32940, 4 }, //本土風竜の巣の入り口
 					      { 34263, 32825, 4 },}; //本土風竜の巣の入り口
-				int[] c = 조우기억[BookTel];
+				int[] c = memory_Encounter[BookTel];
 				if (c != null) {
 					new L1Teleport().teleport(pc, c[0], c[1], (short) c[2], pc.getHeading(), true);
 					pc.getInventory().removeItem(l1iteminstance, 1);

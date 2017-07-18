@@ -143,7 +143,7 @@ public class ItemTable {
 		_armorTypes.put("garder", new Integer(13));
 		_armorTypes.put("ron", new Integer(14));// ルーン1
 		_armorTypes.put("pair", new Integer(15));// ゲートル
-		_armorTypes.put("sentence", new Integer(16));// 문장		
+		_armorTypes.put("sentence", new Integer(16));//文章		
 		_armorTypes.put("badge", new Integer(17));// 記章
 		_armorTypes.put("shoulder", new Integer(18));// 肩甲
 				/** ウェポンタイプ **/
@@ -276,11 +276,11 @@ public class ItemTable {
 				item.set_delayEffect(rs.getInt("delay_effect"));
 				item.setFoodVolume(rs.getInt("food_volume"));
 				item.setToBeSavedAtOnce((rs.getInt("save_at_once") == 1) ? true : false);
-				// setAuto(item);//임시
+				// setAuto(item);//一時的
 				result.put(new Integer(item.getItemId()), item);
 			}
 		} catch (NullPointerException e) {
-			_log.log(Level.SEVERE, new StringBuilder().append(item.getName()).append("(" + item.getItemId() + ")").append("의 읽어 들이기에 실패했습니다.").toString());
+			_log.log(Level.SEVERE, new StringBuilder().append(item.getName()).append("(" + item.getItemId() + ")").append("の取り込みに失敗しました。").toString());
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		} finally {
@@ -359,7 +359,7 @@ public class ItemTable {
 				result.put(new Integer(weapon.getItemId()), weapon);
 			}
 		} catch (NullPointerException e) {
-			_log.log(Level.SEVERE, new StringBuilder().append(weapon.getName()).append("(" + weapon.getItemId() + ")").append("의 읽어 들이기에 실패했습니다.").toString());
+			_log.log(Level.SEVERE, new StringBuilder().append(weapon.getName()).append("(" + weapon.getItemId() + ")").append("の取り込みに失敗しました。").toString());
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 
@@ -458,7 +458,7 @@ public class ItemTable {
 				result.put(new Integer(armor.getItemId()), armor);
 			}
 		} catch (NullPointerException e) {
-			_log.log(Level.SEVERE, new StringBuilder().append(armor.getName()).append("(" + armor.getItemId() + ")").append("의 읽어 들이기에 실패했습니다.").toString());
+			_log.log(Level.SEVERE, new StringBuilder().append(armor.getName()).append("(" + armor.getItemId() + ")").append("の取り込みに失敗しました。").toString());
 		} catch (SQLException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		} finally {

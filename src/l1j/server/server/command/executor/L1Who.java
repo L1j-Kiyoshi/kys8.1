@@ -43,7 +43,7 @@ public class L1Who implements L1CommandExecutor {
 
 			
 			// オンラインのプレイヤーのリストを表示
-			if (arg.equalsIgnoreCase("전체")) {
+			if (arg.equalsIgnoreCase("all")) {
 				StringBuffer gmList = new StringBuffer();
 				StringBuffer playList = new StringBuffer();
 				StringBuffer shopList = new StringBuffer();

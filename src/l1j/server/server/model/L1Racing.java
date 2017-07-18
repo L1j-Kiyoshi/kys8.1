@@ -44,24 +44,24 @@ public class L1Racing implements Runnable
 
 	private static final short mapId = 5143;
 
-	public final int 일반 = 0;
-	public final int 순위00 = 1; // これ..最初の起動時
-	public final int 순위01 = 2; // 0周目1回目のチェック
-	public final int 순위02 = 3; // 0周目2回目のチェック
-	public final int 순위03 = 4; //0周目3回目のチェック
-	public final int 순위10 = 5; // 1周目にフィニッシュ（1周完走時..）
-	public final int 순위11 = 6; // 1周目1回目のチェック
-	public final int 순위12 = 7; // 1周目、2回目のチェック
-	public final int 순위13 = 8; // 1周目の3番目のチェック
-	public final int 순위20 = 9; // 2周目にフィニッシュ
-	public final int 순위21 = 10; // 2周目1回目のチェック
-	public final int 순위22 = 11; // 2周目2回目のチェック
-	public final int 순위23 = 12; // 2周目、3回目のチェック
-	public final int 순위30 = 13; // 3周目にフィニッシュ
-	public final int 순위31 = 14; // 3周目、1回目のチェック
-	public final int 순위32 = 15; //3周目、2回目のチェック
-	public final int 순위33 = 16; // 3周目、3回目のチェック
-	public final int 순위99 = 17; // これ..終了時？完走か
+	public final int normal = 0;
+	public final int rank_00 = 1; // これ..最初の起動時
+	public final int rank_01 = 2; // 0周目1回目のチェック
+	public final int rank_02 = 3; // 0周目2回目のチェック
+	public final int rank_03 = 4; //0周目3回目のチェック
+	public final int rank_10 = 5; // 1周目にフィニッシュ（1周完走時..）
+	public final int rank_11 = 6; // 1周目1回目のチェック
+	public final int rank_12 = 7; // 1周目、2回目のチェック
+	public final int rank_13 = 8; // 1周目の3番目のチェック
+	public final int rank_20 = 9; // 2周目にフィニッシュ
+	public final int rank_21 = 10; // 2周目1回目のチェック
+	public final int rank_22 = 11; // 2周目2回目のチェック
+	public final int rank_23 = 12; // 2周目、3回目のチェック
+	public final int rank_30 = 13; // 3周目にフィニッシュ
+	public final int rank_31 = 14; // 3周目、1回目のチェック
+	public final int rank_32 = 15; //3周目、2回目のチェック
+	public final int rank_33 = 16; // 3周目、3回目のチェック
+	public final int rank_99 = 17; // これ..終了時？完走か
 	
 	
 	private static L1Racing instance;
@@ -254,8 +254,8 @@ public class L1Racing implements Runnable
 	}
 
 	private boolean readyPetRacing() {
-//		if( size(일반) < 1 )
-		if( size(일반) < 2 )
+//		if( size(normal) < 1 )
+		if( size(normal) < 2 )
 		{
 			for(int i = 0; i < 18; i++)
 			{
@@ -279,7 +279,7 @@ public class L1Racing implements Runnable
 		setGameStatus(STATUS_PLAYING);
 
 		int i = 0;
-		for(L1PcInstance pc : toArray(일반)){
+		for(L1PcInstance pc : toArray(normal)){
 			L1PolyMorph.doPoly(pc, 5065, 1000,L1PolyMorph.MORPH_BY_NPC); //赤ちゃんジンドト
 			pc.sendPackets(new S_GameStart(pc));
 			pc.sendPackets(new S_GameRap(pc, 1));
@@ -463,7 +463,7 @@ public class L1Racing implements Runnable
 		if(!_List[index].contains(c)){
 			_List[index].add(c);
 
-			if(index == 일반 )
+			if(index == normal )
 			{
 				c.sendPackets(new S_ServerMessage(1253, Integer.toString(_List[index].size())));
 
@@ -474,14 +474,14 @@ public class L1Racing implements Runnable
 						setGameStatus(STATUS_READY);
 					}
 
-					for(L1PcInstance player : toArray(일반)){
+					for(L1PcInstance player : toArray(normal)){
 						// 入場しますか？ （Y / N）
 						if(player.getMap().getId() != getMapId()) player.sendPackets(new S_Message_YN(1256, ""));
 					}
 				}
 			}
 		}
-		else if(index == 일반)
+		else if(index == normal)
 		{
 			c.sendPackets(new S_ServerMessage(1254));
 		}

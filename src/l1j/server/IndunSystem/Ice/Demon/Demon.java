@@ -53,12 +53,12 @@ public class Demon implements Runnable {
 	@Override
 	public void run() {
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
 		/** 0 午前、1午後 * */
-		String 오전오후 = "午後";
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "午前";
+			ampm = "午前";
 		}
 		Running = true;
 		FirstRoom = true;
@@ -91,20 +91,20 @@ public class Demon implements Runnable {
 			}
 		}
 		Demon_Delete();
-	  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "   ■■■■■■ アイスデーモン終了 " +  _map+" ■■■■■■");
+	  System.out.println(""+ ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分" + "   ■■■■■■ アイスデーモン終了 " +  _map+" ■■■■■■");
 	}
 
 	public void Start(){
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
 		/** 0 午前、1午後 * */
-		String 오전오후 = "午後";
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "오전";
+			ampm = "午前";
 		}
 		GeneralThreadPool.getInstance().schedule(this, 2000);
-	  System.out.println(""+ 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分" + "   ■■■■■■ 아이스데몬 시작 " +  _map+" ■■■■■■");
+	  System.out.println(""+ ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分" + "   ■■■■■■ アイスデーモンの起動 " +  _map+" ■■■■■■");
 	}
 
 	private void Check() {

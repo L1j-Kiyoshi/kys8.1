@@ -46,7 +46,7 @@ public class L1CrownInstance extends L1NpcInstance {
 			return;
 		}
 
-		if (!player.isCrown()) { // 군주 이외
+		if (!player.isCrown()) { // 君主以外
 			return;
 		}
 		if (player.getGfxId() != 0 && player.getGfxId() != 1) {

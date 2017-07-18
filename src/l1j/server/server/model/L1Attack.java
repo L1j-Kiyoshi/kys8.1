@@ -98,7 +98,7 @@ public class L1Attack {
     private L1ItemInstance weapon = null;
 
     private L1ItemInstance armor = null;
-    // 전사 쌍수
+    // 戦士両手
     private L1ItemInstance Sweapon = null;// セカンドウェポン
     private int _SweaponId = 0;
     private int _SweaponType = 0;
@@ -624,9 +624,9 @@ public class L1Attack {
                 }
             } else if (_calcType == PC_NPC) {
                 /** バーポバン開け防止 **/
-                if (_pc.바포방 != true && _pc.getX() == 32758 && _pc.getY() == 32878 && _pc.getMapId() == 2) {
+                if (_pc.baphomettRoom != true && _pc.getX() == 32758 && _pc.getY() == 32878 && _pc.getMapId() == 2) {
                     return _isHit = false;
-                } else if (_pc.바포방 != true && _pc.getX() == 32794 && _pc.getY() == 32790 && _pc.getMapId() == 2) {
+                } else if (_pc.baphomettRoom != true && _pc.getX() == 32794 && _pc.getY() == 32790 && _pc.getMapId() == 2) {
                     return _isHit = false;
                 } else {
                     _isHit = calcPcNpcHit();
@@ -695,7 +695,7 @@ public class L1Attack {
         }
         int attackerDice = _random.nextInt(20) + 1 + _hitRate - 10;
 
-        /** ターゲットPCの回避スキル凧산 **/
+        /** ターゲットPCの回避スキル凧山 **/
         attackerDice += toPcSkillHit();
 
         int defenderValue = (int) (_targetPc.getAC().getAc() * 1.5) * -1;
@@ -736,7 +736,7 @@ public class L1Attack {
         if (hitRateCal(attackerDice, defenderDice, _hitRate - 9, _hitRate + 10))
             return false;
 
-        if (_pc.getLocation().getLineDistance(_targetPc.getLocation()) >= 3 && _weaponType != 20 && _weaponType != 62) { // 타겟과의 거리가 3이상이면서 활이나 스팅이
+        if (_pc.getLocation().getLineDistance(_targetPc.getLocation()) >= 3 && _weaponType != 20 && _weaponType != 62) { //ターゲットとの距離が3以上で弓やスティングが
                                                                                                                          // それとも攻撃ミス笑;
             _hitRate = 0;
         }
@@ -911,7 +911,7 @@ public class L1Attack {
         }
         _hitRate += _npc.getLevel() * 1.2;
 
-        if (_npc instanceof L1PetInstance) { // 펫은 LV1마다 추가 명중+2
+        if (_npc instanceof L1PetInstance) { // ペットはLV1に追加命中+2
             _hitRate += _npc.getLevel() * 2;
             _hitRate += ((L1PetInstance) _npc).getHitByWeapon();
         }
@@ -989,19 +989,19 @@ public class L1Attack {
             case PC_PC:
                 _damage = calcPcPcDamage();
                 // タイタンロック：HPが40％未満の場合、近接攻撃を確率的に反射。
-                if (_weaponType != 20 && _weaponType != 62 && _weaponType2 != 17 && _weaponType2 != 19) { // 활이 아니라면 락 발동.
+                if (_weaponType != 20 && _weaponType != 62 && _weaponType2 != 17 && _weaponType2 != 19) { // 弓がない場合はロック発動。
                     if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 238)) {
                         int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
                         int chance = _random.nextInt(100) + 1;
-                        int 락구간 = 0;
-                        if (_target.get락구간상승() != 0) {
-                            락구간 += _target.get락구간상승();
+                        int lockSection = 0;
+                        if (_target.getLockSectionUp() != 0) {
+                            lockSection += _target.getLockSectionUp();
                         }
                         // System.out.println("ロック区間いくら上がるか」+ロック区間);
-                        if (!_targetPc.isstop() && percent <= (40 + 락구간 + _targetPc.getRisingUp()) && chance <= 23) {
+                        if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
                             // System.out.println("ロック発動するか?");
                             if (_targetPc.getInventory().checkItem(41246, 10)) {
-                                _pc.receiveCounterBarrierDamage(_targetPc, 타이탄대미지());
+                                _pc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
                                 _damage = 0;
                                 _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12555));
                               //  _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12555));
@@ -1016,13 +1016,13 @@ public class L1Attack {
                         if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 239)) {
                             int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
                             int chance = _random.nextInt(100) + 1;
-                            int 락구간 = 0;
-                            if (_target.get락구간상승() != 0) {
-                                락구간 += _target.get락구간상승();
+                            int lockSection = 0;
+                            if (_target.getLockSectionUp() != 0) {
+                                lockSection += _target.getLockSectionUp();
                             }
-                            if (!_targetPc.isstop() && percent <= (40 + 락구간 + _targetPc.getRisingUp()) && chance <= 23) {
+                            if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
                                 if (_targetPc.getInventory().checkItem(41246, 10)) {
-                                    _pc.receiveCounterBarrierDamage(_targetPc, 타이탄대미지());
+                                    _pc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
                                     _damage = 0;
                                     _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12557));
                                   //  _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12557));
@@ -1036,16 +1036,16 @@ public class L1Attack {
                         if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 240)) {
                             int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
                             int chance = _random.nextInt(100) + 1;
-                            int 락구간 = 0;
-                            if (_target.get락구간상승() != 0) {
-                                락구간 += _target.get락구간상승();
+                            int lockSection = 0;
+                            if (_target.getLockSectionUp() != 0) {
+                                lockSection += _target.getLockSectionUp();
                             }
-                            if (!_targetPc.isstop() && percent <= (40 + 락구간 + _targetPc.getRisingUp()) && chance <= 23) {
+                            if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
                                 if (this._targetPc.getInventory().checkItem(41246, 10)) {
                                     if (this._calcType == 1)
-                                        this._pc.receiveCounterBarrierDamage(this._targetPc, 타이탄대미지());
+                                        this._pc.receiveCounterBarrierDamage(this._targetPc, calcTitanDamage());
                                     else if (this._calcType == 2)
-                                        this._npc.receiveCounterBarrierDamage(this._targetPc, 타이탄대미지());
+                                        this._npc.receiveCounterBarrierDamage(this._targetPc, calcTitanDamage());
                                     _damage = 0;
                                     this._targetPc.sendPackets(new S_SkillSound(this._targetPc.getId(), 12559));
                                    // this._targetPc.broadcastPacket(new S_SkillSound(this._targetPc.getId(), 12559));
@@ -1069,13 +1069,13 @@ public class L1Attack {
                     if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 238)) {
                         int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
                         int chance = _random.nextInt(100) + 1;
-                        int 락구간 = 0;
-                        if (_target.get락구간상승() != 0) {
-                            락구간 += _target.get락구간상승();
+                        int lockSection = 0;
+                        if (_target.getLockSectionUp() != 0) {
+                            lockSection += _target.getLockSectionUp();
                         }
-                        if (!_targetPc.isstop() && percent <= (40 + 락구간 + _targetPc.getRisingUp()) && chance <= 23) {
+                        if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
                             if (_targetPc.getInventory().checkItem(41246, 10)) {
-                                _npc.receiveCounterBarrierDamage(_targetPc, 타이탄대미지());
+                                _npc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
                                 _damage = 0;
                                 _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12555));
                                // _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12555));
@@ -1090,13 +1090,13 @@ public class L1Attack {
                     if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 239)) {
                         int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
                         int chance = _random.nextInt(100) + 1;
-                        int 락구간 = 0;
-                        if (_target.get락구간상승() != 0) {
-                            락구간 += _target.get락구간상승();
+                        int lockSection = 0;
+                        if (_target.getLockSectionUp() != 0) {
+                            lockSection += _target.getLockSectionUp();
                         }
-                        if (!_targetPc.isstop() && percent <= (40 + 락구간 + _targetPc.getRisingUp()) && chance <= 23) {
+                        if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
                             if (_targetPc.getInventory().checkItem(41246, 10)) {
-                                _npc.receiveCounterBarrierDamage(_targetPc, 타이탄대미지());
+                                _npc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
                                 _damage = 0;
                                 _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12557));
                                // _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12557));
@@ -1331,7 +1331,7 @@ public class L1Attack {
         double dmg = weaponTotalDamage + _statusDamage;
 
         if (_weaponType2 == 17) {
-            dmg = L1WeaponSkill.키링크데미지(_pc, _target);
+            dmg = L1WeaponSkill.KiringkuDamage(_pc, _target);
         }
         if (_weaponType != 20 && _weaponType != 62) {
             dmg = weaponTotalDamage + _statusDamage + _pc.getDmgup() + _pc.getDmgRate() + _pc.get_regist_PVPweaponTotalDamage();
@@ -1459,7 +1459,7 @@ public class L1Attack {
             }
         }
         if (_weaponType2 == 17) {
-            dmg = L1WeaponSkill.키링크데미지(_pc, _target);
+            dmg = L1WeaponSkill.KiringkuDamage(_pc, _target);
         }
        // dmg *= dmgRate;
         
@@ -1471,7 +1471,7 @@ public class L1Attack {
         case 311:
         case 313:
         case 314:
-            dmg = L1WeaponSkill.블레이즈쇼크(_pc, _targetPc, _weaponEnchant);
+            dmg = L1WeaponSkill.BlazeShock(_pc, _targetPc, _weaponEnchant);
             break;
         case 1010:
         case 1011:
@@ -1482,17 +1482,17 @@ public class L1Attack {
             break;
         case 2: // 悪運の短剣
         case 200002: // 軸悪運の短剣
-            dmg = L1WeaponSkill.악운의단검(_pc, _targetPc, weapon);
+            dmg = L1WeaponSkill.DiceDagger(_pc, _targetPc, weapon);
             break;
         case 12: // 風の刃短剣
         case 203020: // 生命の短剣
         case 601: // 破滅のグレートソード
-            파멸의대검(dmg);
+            ruinGreatSword(dmg);
             break;
         case 204: // 真紅のクロスボウ
         case 100204: // 軸真紅のクロスボウ
         case 86: // 赤い影のデュアルブレード
-            L1WeaponSkill.붉은그림자의이도류(_pc, _targetPc);
+            L1WeaponSkill.RedShadowDualBlade(_pc, _targetPc);
             break;
         case 1115: // 神妙ソード
         case 1117: // 神妙クロ
@@ -1516,96 +1516,96 @@ public class L1Attack {
             break;
         case 1108: // 魔族チェーン
             dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
-            L1WeaponSkill.체인소드(_pc);
+            L1WeaponSkill.ChainSword(_pc);
             break;
         case 1119: // 極限のチェーンソード
-            dmg += 극한의체인소드(_pc, _target, 3685, _weaponEnchant);
-            L1WeaponSkill.체인소드(_pc);
+            dmg += extremeChainSword(_pc, _target, 3685, _weaponEnchant);
+            L1WeaponSkill.ChainSword(_pc);
             break;
         case 1123: // ブラッドサッカー
         case 202013:
-            L1WeaponSkill.체인소드(_pc);
-            블러드서커(dmg, _weaponEnchant);
+            L1WeaponSkill.ChainSword(_pc);
+            bloodSucker(dmg, _weaponEnchant);
             break;
         case 500:// デストラクタのチェーンソード
         case 501:// 破滅者のチェーンソード
         case 1104:// エルモアチェーンソード
         case 1132:// ベビーテルランチェーンソード
-            L1WeaponSkill.체인소드(_pc);
+            L1WeaponSkill.ChainSword(_pc);
             break;
         case 203017:
-            L1WeaponSkill.섬멸자의체인소드(_pc);
+            L1WeaponSkill.ChainSword_Destroyer(_pc);
             if (weapon.getEnchantLevel() >= 10)
-            dmg += L1WeaponSkill.섬멸자(_pc, _target, 4077, _weaponEnchant);
+            dmg += L1WeaponSkill.Destroyer(_pc, _target, 4077, _weaponEnchant);
             break;
         case 203006://台風の斧
         	if (weapon.getEnchantLevel() >= 10)
-        	 dmg += L1WeaponSkill.태풍도끼(_pc, _target, 7977, _weaponEnchant);
+        	 dmg += L1WeaponSkill.StormAx(_pc, _target, 7977, _weaponEnchant);
         	break;
             
         case 1136://悪夢のロングボウ
        	 if (weapon.getEnchantLevel() >= 10)
-                dmg += L1WeaponSkill.악장(_pc, _target, 14339, _weaponEnchant);
+                dmg += L1WeaponSkill.Nightmare(_pc, _target, 14339, _weaponEnchant);
        	break;
         case 203025://ジンサ
         case 203026:
        	 if (weapon.getEnchantLevel() >= 10)
-                dmg += L1WeaponSkill.진싸(_pc, _target, 8032, _weaponEnchant);
+                dmg += L1WeaponSkill.Jinsa(_pc, _target, 8032, _weaponEnchant);
        	break;
         case 312:
-            dmg = L1WeaponSkill.체인소드블레이즈쇼크(_pc, _targetNpc, _weaponEnchant);
+            dmg = L1WeaponSkill.ChainSword_BlazeShock(_pc, _targetNpc, _weaponEnchant);
             break;
         case 202001: // 歓迎のチェーンソード
-            dmg += L1WeaponSkill.환영의체인소드(_pc, _target, _weaponEnchant);
-            L1WeaponSkill.체인소드(_pc);
+            dmg += L1WeaponSkill.ChainSword_Welcome(_pc, _target, _weaponEnchant);
+            L1WeaponSkill.ChainSword(_pc);
             break;
         case 1124: // 破壊の二刀流
         case 1125: // 破壊のクロウ
         case 11125:// 祝福破壊の二刀流
-            dmg += L1WeaponSkill.파괴의이도류크로우(_pc, _target, 9359, _weaponEnchant);
+            dmg += L1WeaponSkill.DestructionDualBlade_Crow(_pc, _target, 9359, _weaponEnchant);
             break;
         case 600: // 脳身体検査
-            dmg += L1WeaponSkill.뇌신검(_pc, _target, 3940, _weaponEnchant);
+            dmg += L1WeaponSkill.LightningEdge(_pc, _target, 3940, _weaponEnchant);
             break;
         case 604: // 酷寒のウィンドウ
-            dmg += L1WeaponSkill.혹한의창(_pc, _target, 3704, _weaponEnchant);
+            dmg += L1WeaponSkill.ExColdWind(_pc, _target, 3704, _weaponEnchant);
             break;
         case 605: //狂風の斧
         case 203015: // 疾風の斧
-            dmg += L1WeaponSkill.광풍의도끼(_pc, _target, 5524, _weaponEnchant);
+            dmg += L1WeaponSkill.InsanityWindAx(_pc, _target, 5524, _weaponEnchant);
             break;
         case 191: // サルチョンの弓
-            dmg += L1WeaponSkill.살천의활(_pc, _target, 9361, _weaponEnchant);
+            dmg += L1WeaponSkill.AngelSlayer(_pc, _target, 9361, _weaponEnchant);
             break;
         case 1135: // 共鳴のキーリンク
-            dmg += L1WeaponSkill.공명의키링크(_pc, _target, 5201, _weaponEnchant);
+            dmg += L1WeaponSkill.Kiringku_Resonance(_pc, _target, 5201, _weaponEnchant);
             break;
         case 202012: // ヒペリオンの絶望
-            dmg += L1WeaponSkill.히페리온의절망(_pc, _target, 12248, _weaponEnchant);
+            dmg += L1WeaponSkill.HypelionsDespair(_pc, _target, 12248, _weaponEnchant);
             break;
         case 1120: // 冷え性のキーリンク
-            dmg += L1WeaponSkill.냉한의키링크(_pc, _target, 6553, _weaponEnchant);
+            dmg += L1WeaponSkill.Kiringku_Cold(_pc, _target, 6553, _weaponEnchant);
             break;
         case 283: // ヴァラカスのキーリンク
             dmg += L1WeaponSkill.Redskill(_pc, _target, 10405, _weaponEnchant);
             break;
         case 294: // 君主の剣
-            dmg += L1WeaponSkill.군주의검(_pc, _target, 4842, _weaponEnchant);
+            dmg += L1WeaponSkill.LordSword(_pc, _target, 4842, _weaponEnchant);
             break;
         case 58: // デスナイトのフレイムブレード
-            dmg += L1WeaponSkill.데스나이트의불검(_pc, _target, _weaponEnchant, 7300);
+            dmg += L1WeaponSkill.DeathKnightFlameBlade(_pc, _target, _weaponEnchant, 7300);
             break;
         case 54: // カーツの剣
-            dmg += L1WeaponSkill.커츠의검(_pc, _target, _weaponEnchant, 10405);
+            dmg += L1WeaponSkill.KurtzsSword(_pc, _target, _weaponEnchant, 10405);
             break;
         case 124: // バフォメットスタッフ
-            dmg += L1WeaponSkill.바포메트의지팡이(_pc, _target, _weaponEnchant, 129);
+            dmg += L1WeaponSkill.BaphometStaff(_pc, _target, _weaponEnchant, 129);
             break;
         case 202003: // ゼロスの杖
-            dmg += L1WeaponSkill.제로스의지팡이(_pc, _target, _weaponEnchant, 11760);
+            dmg += L1WeaponSkill.ZerosWand(_pc, _target, _weaponEnchant, 11760);
             break;
         case 134: // 修正結晶棒
-            dmg += L1WeaponSkill.수정결정체지팡이(_pc, _target, _weaponEnchant, 10405);
+            dmg += L1WeaponSkill.HolyHedronStaff(_pc, _target, _weaponEnchant, 10405);
             dmg+=getEbMP(_pc, _target, 8152, _weaponEnchant);
             break;
         default:
@@ -1620,18 +1620,18 @@ public class L1Attack {
         try {
             dmg += WeaponAddDamage.getInstance().getWeaponAddDamage(_weaponId);
         } catch (Exception e) {
-            System.out.println("무기추가대미지에러");
+            System.out.println("武器追加ダメージエラー");
         }
         
         //スキル、料理などのダメージリダクション
         int damagereduction = 0;
-        if (_targetPc.hasSkillEffect(COOK_STR) || _targetPc.hasSkillEffect(COOK_DEX) || _targetPc.hasSkillEffect(COOK_INT)) { // 리뉴얼 요리
+        if (_targetPc.hasSkillEffect(COOK_STR) || _targetPc.hasSkillEffect(COOK_DEX) || _targetPc.hasSkillEffect(COOK_INT)) { // リニューアル料理
         	damagereduction += 2;
         }
         if(_targetPc.hasSkillEffect(COOK_GROW)){
         	damagereduction += 2;
         }
-        // 전사스킬 : 아머가드 - 캐릭의 AC/10의 데미지감소 효과를 얻는다.
+        // 戦士スキル：アーマーガード - キャラクターのAC / 10のダメージ減少効果を得る。
         if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 237)) {
         	if(_targetPc.getAC().getAc() < -10){
         		damagereduction += _targetPc.getAC().getAc() / -10;
@@ -1651,7 +1651,7 @@ public class L1Attack {
         	damagereduction += 2;
         }
         
-        dmg -= 룸티스붉귀데미지감소();
+        dmg -= roomtisDecreaseDamage();
 
         if (_targetPc.hasSkillEffect(DRAGON_SKIN)) {
             if (_targetPc.getLevel() >= 80) {
@@ -1744,7 +1744,7 @@ public class L1Attack {
         if (_targetPc.hasSkillEffect(IMMUNE_TO_HARM)) {
         	dmg -= (dmg * 0.3);//4
         }
-        dmg += 룸티스검귀추가데미지(); // 黒い光ピアス追加ダメージ処理
+        dmg += roomtisAddDamage(); // 黒い光ピアス追加ダメージ処理
 
 
 		for (L1DollInstance doll : _pc.getDollList()) {// マジックドールドールによる追加ダメージ
@@ -1761,7 +1761,7 @@ public class L1Attack {
         // クラッシュ：攻撃者のレベルに50％程度をダメージに反映する。
         if (SkillsTable.getInstance().spellCheck(_pc.getId(), 236)) {
             int chance = _random.nextInt(100) + 1;
-            if (13 >= chance) { // 크래쉬 : 레벨 나누기 2의 데미지
+            if (13 >= chance) { // クラッシュ：レベル分割2のダメージ
                 //
                 int alpha_dmg = _pc.getLevel() / 2;
                 if (SkillsTable.getInstance().spellCheck(_pc.getId(), 234)) {//ピュリ：クラッシュから出てきたダメージに2倍
@@ -1780,8 +1780,8 @@ public class L1Attack {
             }
         }
 
-        if (_pc.hasSkillEffect(L1SkillId.주군의버프)) {
-            if (_pc.getClanRank() >= L1Clan.수호)
+        if (_pc.hasSkillEffect(L1SkillId.LORDS_BUFF)) {
+            if (_pc.getClanRank() >= L1Clan.GUARDIAN)
                 dmg += 5;
 		}
         int dolldamagereduction = 0;
@@ -1858,8 +1858,8 @@ public class L1Attack {
         	}
         }
         
-        /** 대상 속성인첸트에따른 대미지연산 **/
-        dmg += 피시속성인첸트효과();
+        /** 対象の属性エンチャントによるダメージ演算 **/
+        dmg += fishAttrEnchantEffect();
 
         /** 対象Buffによるダメージ演算 **/
         //dmg += toPcBuffDmg(dmg);
@@ -1887,8 +1887,8 @@ public class L1Attack {
         /** アーマーブレイク */
 
         /** トゥルーターゲット **/
-        if (_targetPc.get트루타켓() > 0) {
-            dmg *= 1 + (_targetPc.get트루타켓() / 100);
+        if (_targetPc.getTrueTarget() > 0) {
+            dmg *= 1 + (_targetPc.getTrueTarget() / 100);
         }
         /** トゥルーターゲット **/
 
@@ -2161,12 +2161,12 @@ public class L1Attack {
             return 0;
         }
     	if (_pc instanceof L1RobotInstance) {
-			if (((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("지저")
-					|| ((L1RobotInstance) _pc).huntingBot_Location.startsWith("잊섬")
-					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("선박수면")
-					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("상아탑4층")
-					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("상아탑5층")) {
-				if (_pc.getCurrentWeapon() == 46 // 단검
+			if (((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("地底")
+					|| ((L1RobotInstance) _pc).huntingBot_Location.startsWith("イッソム")
+					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("船舶睡眠")
+					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("象牙の塔4階")
+					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("象牙の塔5階")) {
+				if (_pc.getCurrentWeapon() == 46 // 短剣
 						|| _pc.getCurrentWeapon() == 20
 						|| _pc.getCurrentWeapon() == 24) {// 弓
 					return _random.nextInt(50) + 100;
@@ -2309,7 +2309,7 @@ public class L1Attack {
             _weaponDoubleDmgChance += _pc.getWeapon().getEnchantLevel();
         }
 
-        if (_weaponType == 54 && (_random.nextInt(100) + 1) <= (_weaponDoubleDmgChance - weapon.get_durability()) && _pc.isDarkelf()) { // 이도류
+        if (_weaponType == 54 && (_random.nextInt(100) + 1) <= (_weaponDoubleDmgChance - weapon.get_durability()) && _pc.isDarkelf()) { // 二刀流
             weaponTotalDamage *= 2.5;
             // _attackType = 4;
             _pc.sendPackets(new S_SkillSound(_pc.getId(), 3398));
@@ -2334,7 +2334,7 @@ public class L1Attack {
         double dmg = weaponTotalDamage + _statusDamage;
 
         if (_weaponType2 == 17) {
-            dmg = L1WeaponSkill.키링크데미지(_pc, _target);
+            dmg = L1WeaponSkill.KiringkuDamage(_pc, _target);
         }
         if (_weaponType != 20 && _weaponType != 62) {
             dmg = weaponTotalDamage + _statusDamage + _pc.getDmgup() + _pc.getDmgRate();
@@ -2346,7 +2346,7 @@ public class L1Attack {
                 dmg *= 3 / 2;
             }
         }
-        dmg += 몬스터속성인첸트효과(); // 属性ダメージ
+        dmg += monsterAttrEnchantEffect(); // 属性ダメージ
 
         if (_weaponType == 20) { // 弓
             if (_arrow != null) {
@@ -2376,7 +2376,7 @@ public class L1Attack {
             if (add_dmg == 0) {
                 add_dmg = 1;
             }
-            dmg = dmg + _random.nextInt(add_dmg) + 1 + 속성화살(_arrow, _targetNpc);
+            dmg = dmg + _random.nextInt(add_dmg) + 1 + attrArrow(_arrow, _targetNpc);
         }
         
         /** 本サーバー10剣以上ツタ+1表記効果 **/
@@ -2405,7 +2405,7 @@ public class L1Attack {
             }
         }
         
-        /** 드슬 인첸별 추타2씩 **/
+        /** ドゥスルエンチャン星ツタ2ずつ **/
         if(_weaponId == 66){
         	dmg += weapon.getEnchantLevel();
         }
@@ -2451,7 +2451,7 @@ public class L1Attack {
         case 311:
         case 313:
         case 314:
-            dmg = L1WeaponSkill.블레이즈쇼크(_pc, _targetNpc, _weaponEnchant);
+            dmg = L1WeaponSkill.BlazeShock(_pc, _targetNpc, _weaponEnchant);
             break;
         case 1010:
         case 1011:
@@ -2463,12 +2463,12 @@ public class L1Attack {
         case 12: // 風の刃短剣
         case 203020: // 生命の短剣
         case 601: // 破滅のグレートソード
-            파멸의대검(dmg);
+            ruinGreatSword(dmg);
             break;
         case 204: // 真紅のクロスボウ
         case 100204: // 軸真紅のクロスボウ
         case 86: // 赤い影のデュアルブレード
-            L1WeaponSkill.붉은그림자의이도류(_pc, _targetNpc);
+            L1WeaponSkill.RedShadowDualBlade(_pc, _targetNpc);
             break;
         case 1115: // 神妙ソード
         case 1117: // 神妙クロ
@@ -2492,99 +2492,99 @@ public class L1Attack {
             break;
         case 1108: // 魔族チェーン
             dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
-            L1WeaponSkill.체인소드(_pc);
+            L1WeaponSkill.ChainSword(_pc);
             break;
         case 1119: // 極限のチェーンソード
-            dmg += 극한의체인소드(_pc, _target, 3685, _weaponEnchant);
-            L1WeaponSkill.체인소드(_pc);
+            dmg += extremeChainSword(_pc, _target, 3685, _weaponEnchant);
+            L1WeaponSkill.ChainSword(_pc);
             break;
-        case 1123: // 블러드서커
+        case 1123: // ブラッドサッカー
         case 202013:
-            L1WeaponSkill.체인소드(_pc);
-            블러드서커(dmg, _weaponEnchant);
+            L1WeaponSkill.ChainSword(_pc);
+            bloodSucker(dmg, _weaponEnchant);
             break;
         case 500:// デストラクタのチェーンソード
         case 501:// 破滅者のチェーンソード
         case 1104:// エルモアチェーンソード
         case 1132:// ベビーテルランチェーンソード
-            L1WeaponSkill.체인소드(_pc);
+            L1WeaponSkill.ChainSword(_pc);
             break;
         case 312:
-            dmg = L1WeaponSkill.체인소드블레이즈쇼크(_pc, _targetNpc, _weaponEnchant);
+            dmg = L1WeaponSkill.ChainSword_BlazeShock(_pc, _targetNpc, _weaponEnchant);
             break;
         case 203017:
-            L1WeaponSkill.섬멸자의체인소드(_pc);
+            L1WeaponSkill.ChainSword_Destroyer(_pc);
             if (weapon.getEnchantLevel() >= 10)
-            dmg += L1WeaponSkill.섬멸자(_pc, _target, 4077, _weaponEnchant);
+            dmg += L1WeaponSkill.Destroyer(_pc, _target, 4077, _weaponEnchant);
             break;
         case 203006://台風の斧
         	if (weapon.getEnchantLevel() >= 10)
-        	 dmg += L1WeaponSkill.태풍도끼(_pc, _target, 7977, _weaponEnchant);
+        	 dmg += L1WeaponSkill.StormAx(_pc, _target, 7977, _weaponEnchant);
         	break;
         case 1136://悪夢のロングボウ
         	 if (weapon.getEnchantLevel() >= 10)
-                 dmg += L1WeaponSkill.악장(_pc, _target, 14339, _weaponEnchant);
+                 dmg += L1WeaponSkill.Nightmare(_pc, _target, 14339, _weaponEnchant);
         	break;
         case 203025://ジンサ
         case 203026:
        	 if (weapon.getEnchantLevel() >= 10)
-                dmg += L1WeaponSkill.진싸(_pc, _target, 8032, _weaponEnchant);
+                dmg += L1WeaponSkill.Jinsa(_pc, _target, 8032, _weaponEnchant);
        	break;
         case 202001: // 歓迎のチェーンソード
-            dmg += L1WeaponSkill.환영의체인소드(_pc, _target, _weaponEnchant);
-            L1WeaponSkill.체인소드(_pc);
+            dmg += L1WeaponSkill.ChainSword_Welcome(_pc, _target, _weaponEnchant);
+            L1WeaponSkill.ChainSword(_pc);
             break;
         case 1124: // 破壊の二刀流
         case 1125: // 破壊のクロウ
         case 11125:// 祝福破壊の二刀流
-            dmg += L1WeaponSkill.파괴의이도류크로우(_pc, _target, 9359, _weaponEnchant);
+            dmg += L1WeaponSkill.DestructionDualBlade_Crow(_pc, _target, 9359, _weaponEnchant);
             break;
         case 600: // 脳身体検査
-            dmg += L1WeaponSkill.뇌신검(_pc, _target, 3940, _weaponEnchant);
+            dmg += L1WeaponSkill.LightningEdge(_pc, _target, 3940, _weaponEnchant);
             break;
         case 604: // 酷寒のウィンドウ
-            dmg += L1WeaponSkill.혹한의창(_pc, _target, 3704, _weaponEnchant);
+            dmg += L1WeaponSkill.ExColdWind(_pc, _target, 3704, _weaponEnchant);
             break;
         case 605: // 狂風の斧
         case 203015: // 疾風の斧
-            dmg += L1WeaponSkill.광풍의도끼(_pc, _target, 5524, _weaponEnchant);
+            dmg += L1WeaponSkill.InsanityWindAx(_pc, _target, 5524, _weaponEnchant);
             break;
         case 191: // サルチョンの弓
-            dmg += L1WeaponSkill.살천의활(_pc, _target, 9361, _weaponEnchant);
+            dmg += L1WeaponSkill.AngelSlayer(_pc, _target, 9361, _weaponEnchant);
             break;
         case 1135: // 共鳴のキーリンク
-            dmg += L1WeaponSkill.공명의키링크(_pc, _target, 5201, _weaponEnchant);
+            dmg += L1WeaponSkill.Kiringku_Resonance(_pc, _target, 5201, _weaponEnchant);
             break;
         case 1120: // 冷え性のキーリンク
-            dmg += L1WeaponSkill.냉한의키링크(_pc, _target, 6553, _weaponEnchant);
+            dmg += L1WeaponSkill.Kiringku_Cold(_pc, _target, 6553, _weaponEnchant);
             break;
         case 202012: // ヒペリオンの絶望
-            dmg += L1WeaponSkill.히페리온의절망(_pc, _target, 12248, _weaponEnchant);
+            dmg += L1WeaponSkill.HypelionsDespair(_pc, _target, 12248, _weaponEnchant);
             break;
         case 283: // ヴァラカスのキーリンク
             dmg += L1WeaponSkill.Redskill(_pc, _target, 10405, _weaponEnchant);
             break;
         case 294: // 君主の剣
-            dmg += L1WeaponSkill.군주의검(_pc, _target, 4842, _weaponEnchant);
+            dmg += L1WeaponSkill.LordSword(_pc, _target, 4842, _weaponEnchant);
             break;
         case 58: // デスナイトのフレイムブレード
-            dmg += L1WeaponSkill.데스나이트의불검(_pc, _target, _weaponEnchant, 7300);
+            dmg += L1WeaponSkill.DeathKnightFlameBlade(_pc, _target, _weaponEnchant, 7300);
             break;
         case 54: // カーツの剣
-            dmg += L1WeaponSkill.커츠의검(_pc, _target, _weaponEnchant, 10405);
+            dmg += L1WeaponSkill.KurtzsSword(_pc, _target, _weaponEnchant, 10405);
             break;
         case 124: // バフォメットスタッフ
-            dmg += L1WeaponSkill.바포메트의지팡이(_pc, _target, _weaponEnchant, 129);
+            dmg += L1WeaponSkill.BaphometStaff(_pc, _target, _weaponEnchant, 129);
             break;
         case 202003: // ゼロスの杖
-            dmg += L1WeaponSkill.제로스의지팡이(_pc, _target, _weaponEnchant, 11760);
+            dmg += L1WeaponSkill.ZerosWand(_pc, _target, _weaponEnchant, 11760);
             break;
         case 134: // 修正結晶棒
-            dmg += L1WeaponSkill.수정결정체지팡이(_pc, _target, _weaponEnchant, 10405);
+            dmg += L1WeaponSkill.HolyHedronStaff(_pc, _target, _weaponEnchant, 10405);
             dmg+=getEbMP(_pc, _target, 8152, _weaponEnchant);
             break;
         case 603: // 天使の杖
-            L1WeaponSkill.천사의지팡이(_pc, _target, _weaponEnchant);
+            L1WeaponSkill.AngelStaff(_pc, _target, _weaponEnchant);
             break;
         default:
             dmg += L1WeaponSkill.getWeaponSkillDamage(_pc, _target, _weaponId);
@@ -2601,7 +2601,7 @@ public class L1Attack {
             System.out.println("Weapon Add Damege Error");
         }
 
-        dmg += 룸티스검귀추가데미지();  // 黒い光ピアス追加ダメージ処理
+        dmg += roomtisAddDamage();  // 黒い光ピアス追加ダメージ処理
 
         if (_pc.hasSkillEffect(BURNING_SLASH)) {
             if (_weaponType != 20 && _weaponType != 62) {
@@ -2785,7 +2785,7 @@ public class L1Attack {
         //dmg += toPcBuffDmg(dmg);
       //スキル、料理などのダメージリダクション
         int damagereduction = 0;
-        if (_targetPc.hasSkillEffect(COOK_STR) || _targetPc.hasSkillEffect(COOK_DEX) || _targetPc.hasSkillEffect(COOK_INT)) { // 리뉴얼 요리
+        if (_targetPc.hasSkillEffect(COOK_STR) || _targetPc.hasSkillEffect(COOK_DEX) || _targetPc.hasSkillEffect(COOK_INT)) { // リニューアル料理
         	damagereduction += 2;
         }
         if(_targetPc.hasSkillEffect(COOK_GROW)){
@@ -2810,7 +2810,7 @@ public class L1Attack {
         	damagereduction += 2;
         }
         
-        dmg -= 룸티스붉귀데미지감소();
+        dmg -= roomtisDecreaseDamage();
 
         if (_targetPc.hasSkillEffect(DRAGON_SKIN)) {
             if (_targetPc.getLevel() >= 80) {
@@ -2897,7 +2897,7 @@ public class L1Attack {
                 if (_targetPc.getInventory().checkEquipped(22200) || // パプ腕力
                         _targetPc.getInventory().checkEquipped(22201) || // パプ先見の明
                         _targetPc.getInventory().checkEquipped(22202) || // パプ耐久
-                        _targetPc.getInventory().checkEquipped(22203)) { // 파푸 마력
+                        _targetPc.getInventory().checkEquipped(22203)) { // パプ馬力
                     if (chance5 <= 5) { // 元5である
                         L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22200);
                         L1ItemInstance item1 = _targetPc.getInventory().findEquippedItemId(22201);
@@ -3074,7 +3074,7 @@ public class L1Attack {
     }
 
     /** 武器属性エンチャントによる効果付与（PC-PC） **/
-    private double 피시속성인첸트효과() {
+    private double fishAttrEnchantEffect() {
         int Attr = _weaponAttrLevel;
         double AttrDmg = 0;
         switch (_weaponAttrLevel) {
@@ -3122,7 +3122,7 @@ public class L1Attack {
     }
 
     /**武器属性エンチャントによる効果付与（PC-NPC) **/
-    private int 몬스터속성인첸트효과() {
+    private int monsterAttrEnchantEffect() {
         int AttrDmg = 0;
         int Attr = _weaponAttrLevel;
         int NpcWeakAttr = _targetNpc.getNpcTemplate().get_weakAttr();
@@ -3233,7 +3233,7 @@ public class L1Attack {
         }
     }
 
-    public void 마력의단검() { //マナ吸収のための追加
+    public void manaBaselard() { //マナ吸収のための追加
         int MR = getTargetMr(); // 魔に基づいて成功率を適用
         if (MR >= 100)
             return;
@@ -3270,12 +3270,12 @@ public class L1Attack {
     /** ゾウのストーンゴーレム - 馬力の短剣 **/
     public void calcDrainOfMana() {
         if (_weaponId == 602) {
-            마력의단검();
+            manaBaselard();
         }
     }
 
     /** ゾウのストーンゴーレム - 破滅のグレートソード * */
-    public void 파멸의대검(double dmg) { // 21回破滅のグレートソードパワーブック参照
+    public void ruinGreatSword(double dmg) { // 21回破滅のグレートソードパワーブック参照
         int r = _random.nextInt(100);
         if (r <= 80) {
             if (dmg <= 30) {
@@ -3298,7 +3298,7 @@ public class L1Attack {
         }
     }
 
-    public void 블러드서커(double dmg, int enchant) { // 21回パワーブック参照
+    public void bloodSucker(double dmg, int enchant) { // 21回パワーブック参照
         int r = _random.nextInt(100);
         int e = enchant - 6;
         if (r <= 75) {
@@ -3327,7 +3327,7 @@ public class L1Attack {
         }
     }
 
-    public int 극한의체인소드(L1PcInstance pc, L1Character target, int effect, int enchant) {
+    public int extremeChainSword(L1PcInstance pc, L1Character target, int effect, int enchant) {
         int dmg = 0;
         int en = enchant;
         int intel = pc.getAbility().getTotalInt();
@@ -3528,7 +3528,7 @@ public class L1Attack {
         _pc.setHeading(_pc.targetDirection(_targetX, _targetY)); // 方向セット
         if (_weaponType == 20) {
             _pc.sendPackets(new S_AttackCritical(_pc, _targetId, _targetX, _targetY, _weaponType, _isHit));
-            Broadcaster.broadcastPacket(_pc, new S_AttackCritical(_pc, _targetId, _targetX, _targetY, _weaponType, _isHit));// 새로만드셔서 ㅎ
+            Broadcaster.broadcastPacket(_pc, new S_AttackCritical(_pc, _targetId, _targetX, _targetY, _weaponType, _isHit));//新たに作成しましてふ
         } else if (_weaponType == 62 && _sting != null) {
 
             _pc.sendPackets(new S_AttackCritical(_pc, _targetId, _targetX, _targetY, _weaponType, _isHit));
@@ -3688,7 +3688,7 @@ public class L1Attack {
         String msg3 = "";
         if (_calcType == PC_PC || _calcType == PC_NPC) { // アタックカーがPCの場合
             msg0 = _pc.getName();
-        } else if (_calcType == NPC_PC) { // 어텍커가 NPC의 경우
+        } else if (_calcType == NPC_PC) { // アタックカーがNPCの場合
             msg0 = _npc.getName();
         }
 
@@ -3962,7 +3962,7 @@ public class L1Attack {
     }
 
     // ●●●● 戦士タイタンダメージを算出 ●●●●
-    private int 타이탄대미지() {
+    private int calcTitanDamage() {
         double damage = 0;
         L1ItemInstance weapon = null;
         weapon = _targetPc.getWeapon();
@@ -4007,7 +4007,7 @@ public class L1Attack {
     }
 
     /** 属性矢 **/
-    private int 속성화살(L1ItemInstance arrow, L1NpcInstance npc) {
+    private int attrArrow(L1ItemInstance arrow, L1NpcInstance npc) {
         int itemId = arrow.getItem().getItemId();
         int damage = 0;
         int NpcWeakAttr = _targetNpc.getNpcTemplate().get_weakAttr();
@@ -4102,7 +4102,7 @@ public class L1Attack {
         }
     }
     
-	private double 룸티스검귀추가데미지() {
+	private double roomtisAddDamage() {
 		int dmg = 0;
 		if(_calcType == PC_PC || _calcType == PC_NPC) {
 			L1ItemInstance blackRumti = _pc.getInventory().checkEquippedItem(222340);
@@ -4129,7 +4129,7 @@ public class L1Attack {
 	}
 	
 	
-	private int 룸티스붉귀데미지감소() {
+	private int roomtisDecreaseDamage() {
 		int damage = 0;
 		if (_calcType == NPC_PC || _calcType == PC_PC) {
 			L1ItemInstance item = _targetPc.getInventory().checkEquippedItem(22229);

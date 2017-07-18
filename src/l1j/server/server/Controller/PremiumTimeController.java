@@ -43,21 +43,21 @@ public class PremiumTimeController implements Runnable {
 
 		//	checkDragonBlood();
 			pcbuffPremiumTime();
-			가입멘트();
-			인형청소();
+			registComment();
+			deleteDoll();
 		} catch (Exception e1) { }
 	}
 	
 
-	private void 인형청소() {
+	private void deleteDoll() {
 		try{
 			for (Object obj : L1World.getInstance().getObject()) {
 				if (obj instanceof L1DollInstance) {
-					L1DollInstance 인형 = (L1DollInstance) obj;
-					if (인형.getMaster() == null) {
-						인형.deleteMe();
-					} else if (((L1PcInstance) 인형.getMaster()).getNetConnection() == null) {
-						인형.deleteMe();
+					L1DollInstance doll = (L1DollInstance) obj;
+					if (doll.getMaster() == null) {
+						doll.deleteMe();
+					} else if (((L1PcInstance) doll.getMaster()).getNetConnection() == null) {
+						doll.deleteMe();
 					}
 				}
 			}
@@ -79,10 +79,10 @@ public class PremiumTimeController implements Runnable {
 			if (pc.PCRoom_Buff) {
 				if (pc.getAccount().getBuff_PCRoom() != null) {
 					if (sysTime <= pc.getAccount().getBuff_PCRoom().getTime()) {
-						long 피씨타임 = pc.getAccount().getBuff_PCRoom().getTime() - sysTime;
+						long pcTime = pc.getAccount().getBuff_PCRoom().getTime() - sysTime;
 						TimeZone seoul = TimeZone.getTimeZone(Config.TIME_ZONE);
 						Calendar calendar = Calendar.getInstance(seoul);
-						calendar.setTimeInMillis(피씨타임);
+						calendar.setTimeInMillis(pcTime);
 						int d = calendar.get(Calendar.DATE) - 1;
 						int h = calendar.get(Calendar.HOUR_OF_DAY);
 						int m = calendar.get(Calendar.MINUTE);
@@ -154,7 +154,7 @@ public class PremiumTimeController implements Runnable {
 
 		}
 	}
-	private void 가입멘트() {
+	private void registComment() {
 		try{
 			for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 				if(pc.isAutoClanjoin()){

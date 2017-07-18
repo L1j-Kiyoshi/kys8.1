@@ -115,13 +115,13 @@ public class L1NpcInstance extends L1Character {
 	private Map<Integer, Integer> _digestItems;
 	public boolean _digestItemRunning = false;
 	
-	private boolean _발묶임상태 = false;
+	private boolean _CanNotMove = false;
 	
-	public boolean 발묶임상태() {
-		return _발묶임상태;
+	public boolean isCanNotMove() {
+		return _CanNotMove;
 	}
-	public void set발묶임상태(boolean flag) {
-		_발묶임상태 = flag;
+	public void setCanNotMove(boolean flag) {
+		_CanNotMove = flag;
 	}	
 
 	private static Logger _log = Logger.getLogger(L1NpcInstance.class.getName());
@@ -313,7 +313,7 @@ public class L1NpcInstance extends L1Character {
 		}
 	}
 
-	public void 몬스터Teleport() {
+	public void monsterTeleport() {
 		int lvl = this.getLevel();
 		if (lvl > 50) {// 50レベル以上のモンスターにのみ適用
 			if (this instanceof L1MonsterInstance) {
@@ -374,7 +374,7 @@ public class L1NpcInstance extends L1Character {
 		setSleepTime(300);
 		
 		checkTarget();
-		몬스터Teleport();
+		monsterTeleport();
 		if (_target == null && _master == null) {
 			searchTarget();
 		}
@@ -515,7 +515,7 @@ public class L1NpcInstance extends L1Character {
 					int dir = moveDirection(target.getX(), target.getY());
 					if (dir == -1) {
 						tagertClear();
-					}else if (발묶임상태()) {
+					}else if (isCanNotMove()) {
 						return;
 					} else {
 						setDirectionMove(dir);
@@ -2318,7 +2318,7 @@ public class L1NpcInstance extends L1Character {
 		nodePath = pfAStar.FindPath(this, tx, ty, mapId);
 		// 現在のパスカウンタを初期化する
 		iCurrentPath = 0;
-		// 경로목록을 만든다
+		// パスのリストを作る
 		while ( nodePath != null ) {
 			iPath[iCurrentPath][0] = nodePath.x;
 			iPath[iCurrentPath][1] = nodePath.y;

@@ -52,7 +52,7 @@ public class C_MoveChar extends ClientBasePacket {
 		if ((heading < 0) || (heading > 7)) return;
 		if (pc.isTeleport()) return;
 		if (pc.isPrivateShop()){return;}
-		if (pc.텔대기()) {
+		if (pc.getTelWait()) {
 			return;
 		}
 		//pc.isNpcSell = false;
@@ -257,8 +257,8 @@ public class C_MoveChar extends ClientBasePacket {
 			if (pc.war_zone) {
 				pc.war_zone = false;
 				pc.sendPackets(new S_NewCreateItem(1, 0, ""), true);
-				if (pc.hasSkillEffect(L1SkillId.주군의버프)) {
-					pc.removeSkillEffect(L1SkillId.주군의버프);
+				if (pc.hasSkillEffect(L1SkillId.LORDS_BUFF)) {
+					pc.removeSkillEffect(L1SkillId.LORDS_BUFF);
 					pc.sendPackets(new S_PacketBox(S_PacketBox.NONE_TIME_ICON, 0, 490));
 				}
 			}

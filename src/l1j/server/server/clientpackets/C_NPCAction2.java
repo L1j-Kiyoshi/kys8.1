@@ -750,7 +750,7 @@ public class C_NPCAction2 {
 					pc.sendPackets(new S_SystemMessage("入場不可：レベルが合わない（" + Config.FG_ISVAL + "レベル以上"));
 				}
 				
-				//햄
+				//ハム
 			}else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 7000020) {//ギラン監獄マーリンリニューアル
 				if (s.equals("D_giran")) {//アクションコード
 				if (pc.getInventory().checkItem(40308, 20000)) {
@@ -1387,7 +1387,7 @@ public class C_NPCAction2 {
 							pc.getInventory().checkItem(447011, 1);// チェックする
 	                        pc.getInventory().storeItem(447011, 1);// アークフリーパスボックス
 							htmlid = "archgunter1";
-							아크프리패스(pc, 1);
+							arcFreePass(pc, 1);
 							pc.sendPackets(new S_SystemMessage("\\aAギュンター：今 [\\aG訓練教官テオン\\aA]を満たすだろう。"));
 							new L1Teleport().teleport(pc, 32646, 32865, (short) 7783, 5, true);
 					}
@@ -1451,7 +1451,7 @@ public class C_NPCAction2 {
 					locx = 33442; locy = 32797; mapid = 4;
 				} else if (s.equalsIgnoreCase("C")){//
 					locx = 34056; locy = 32279; mapid = 4;
-				} else if (s.equalsIgnoreCase("D")){//발라 둥지
+				} else if (s.equalsIgnoreCase("D")){//塗って巣
 					locx = 33705; locy = 32504; mapid = 4;
 				} else if (s.equalsIgnoreCase("E")){//
 					locx = 33614; locy = 33253; mapid = 4;
@@ -1668,7 +1668,7 @@ public class C_NPCAction2 {
 				} else if (s.equalsIgnoreCase("c")) {
 					if (pc.getInventory().checkItem(31088, 1)) {
 						pc.getInventory().consumeItem(31088, 1);
-						에킨스경험치2(pc);
+						hopkinsExp2(pc);
 						item = pc.getInventory().storeItem(810016, 5);
 						pc.sendPackets(new S_ServerMessage(143, npcName, item.getLogName()));
 					} else {
@@ -1678,7 +1678,7 @@ public class C_NPCAction2 {
 					if (pc.getInventory().checkItem(31088, 1) && pc.getInventory().checkItem(1000004, 1)) {
 						pc.getInventory().consumeItem(31088, 1);
 						pc.getInventory().consumeItem(1000004, 1);
-						에킨스경험치6(pc);
+						hopkinsExp6(pc);
 						item = pc.getInventory().storeItem(810016, 8);
 						pc.sendPackets(new S_ServerMessage(143, npcName, item.getLogName()));
 					} else {
@@ -1799,7 +1799,7 @@ public class C_NPCAction2 {
 							;
 						}
 						pc.getInventory().consumeItem(40308, 5000000);
-						인첸트지급(pc, 602, 1, 7); 
+						supplyEnchant(pc, 602, 1, 7); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -1843,7 +1843,7 @@ public class C_NPCAction2 {
 							;
 						}
 						pc.getInventory().consumeItem(40308, 10000000);
-						인첸트지급(pc, 602, 1, 8); 
+						supplyEnchant(pc, 602, 1, 8); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -1857,7 +1857,7 @@ public class C_NPCAction2 {
 							;
 						}
 						pc.getInventory().consumeItem(40308, 5000000);
-						인첸트지급(pc, 202001, 1, 7); 
+						supplyEnchant(pc, 202001, 1, 7); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -1871,7 +1871,7 @@ public class C_NPCAction2 {
 							;
 						}
 						pc.getInventory().consumeItem(40308, 10000000);
-						인첸트지급(pc, 202001, 1, 8); 
+						supplyEnchant(pc, 202001, 1, 8); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -1885,7 +1885,7 @@ public class C_NPCAction2 {
 							;
 						}
 						pc.getInventory().consumeItem(40308, 5000000);
-						인첸트지급(pc, 1135, 1, 7); 
+						supplyEnchant(pc, 1135, 1, 7); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -1899,7 +1899,7 @@ public class C_NPCAction2 {
 							;
 						}
 						pc.getInventory().consumeItem(40308, 10000000);
-						인첸트지급(pc, 1135, 1, 8); 
+						supplyEnchant(pc, 1135, 1, 8); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -1917,7 +1917,7 @@ public class C_NPCAction2 {
 							;
 						}
 						pc.getInventory().consumeItem(40308, 5000000);
-						인첸트지급(pc, 1124, 1, 7); 
+						supplyEnchant(pc, 1124, 1, 7); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -1935,7 +1935,7 @@ public class C_NPCAction2 {
 							;
 						}
 						pc.getInventory().consumeItem(40308, 10000000);
-						인첸트지급(pc, 1124, 1, 8); 
+						supplyEnchant(pc, 1124, 1, 8); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -1953,7 +1953,7 @@ public class C_NPCAction2 {
 							;
 						}
 						pc.getInventory().consumeItem(40308, 5000000);
-						인첸트지급(pc, 1125, 1, 7); 
+						supplyEnchant(pc, 1125, 1, 7); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -1971,7 +1971,7 @@ public class C_NPCAction2 {
 							;
 						}
 						pc.getInventory().consumeItem(40308, 10000000);
-						인첸트지급(pc, 1125, 1, 8); 
+						supplyEnchant(pc, 1125, 1, 8); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -1996,7 +1996,7 @@ public class C_NPCAction2 {
 						pc.getInventory().consumeEnchantItem(121, 10, 1);
 						pc.getInventory().consumeItem(700077, 1);
 						pc.getInventory().consumeItem(41246, 100000);
-						인첸트지급(pc, 202003, 1, 8); 
+						supplyEnchant(pc, 202003, 1, 8); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -2008,7 +2008,7 @@ public class C_NPCAction2 {
 						pc.getInventory().consumeEnchantItem(121, 11, 1);
 						pc.getInventory().consumeItem(700077, 1);
 						pc.getInventory().consumeItem(41246, 100000);
-						인첸트지급(pc, 202003, 1, 9); 
+						supplyEnchant(pc, 202003, 1, 9); 
 						htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -2067,18 +2067,18 @@ public class C_NPCAction2 {
 					if (pc.getInventory().consumeEnchantItem(605, 8, 1)) {;
 					}
 					pc.getInventory().consumeItem(41246, 100000);
-					인첸트지급(pc, 203015, 1, 0); 
+					supplyEnchant(pc, 203015, 1, 0); 
 					htmlid = "";
 				} else {
 					pc.sendPackets(new S_SystemMessage("+8狂風の斧、結晶（100,000）の必要があります。"));
 				}
-			}else if(s.equals("b")) {// [+8]질풍의도끼
+			}else if(s.equals("b")) {// [+8]疾風の斧
 				if ((pc.getInventory().checkEnchantItem(605,9,1))
 				 && pc.getInventory().checkItem(41246,100000))	{
 					if (pc.getInventory().consumeEnchantItem(605, 9, 1)) {;
 					}
 					pc.getInventory().consumeItem(41246, 100000);
-					인첸트지급(pc, 203015, 1, 8); 
+					supplyEnchant(pc, 203015, 1, 8); 
 					htmlid = "";
 				} else {
 					pc.sendPackets(new S_SystemMessage("+9狂風の斧、結晶（100,000）の必要があります。"));
@@ -2089,7 +2089,7 @@ public class C_NPCAction2 {
 					if (pc.getInventory().consumeEnchantItem(605, 10, 1)) {;
 					}
 					pc.getInventory().consumeItem(41246, 100000);
-					인첸트지급(pc, 203015, 1, 9); 
+					supplyEnchant(pc, 203015, 1, 9); 
 					htmlid = "";
 				} else {
 					pc.sendPackets(new S_SystemMessage("+10狂風の斧、結晶（100,000）の必要があります。"));
@@ -2100,7 +2100,7 @@ public class C_NPCAction2 {
 					if (pc.getInventory().consumeEnchantItem(151, 0, 1)) {;
 					}
 					pc.getInventory().consumeItem(41246, 200000);
-					인첸트지급(pc, 203016, 1, 0); 
+					supplyEnchant(pc, 203016, 1, 0); 
 					htmlid = "";
 				} else {
 					pc.sendPackets(new S_SystemMessage("+0デーモンアックス、結晶（100,000）の必要があります。"));
@@ -2111,7 +2111,7 @@ public class C_NPCAction2 {
 					if (pc.getInventory().consumeEnchantItem(151, 3, 1)) {;
 					}
 					pc.getInventory().consumeItem(41246, 200000);
-					인첸트지급(pc, 203016, 1, 1); 
+					supplyEnchant(pc, 203016, 1, 1); 
 					htmlid = "";
 				} else {
 					pc.sendPackets(new S_SystemMessage("+3デーモンアックス、結晶（100,000）の必要があります。"));
@@ -2122,7 +2122,7 @@ public class C_NPCAction2 {
 					if (pc.getInventory().consumeEnchantItem(151, 5, 1)) {;
 					}
 					pc.getInventory().consumeItem(41246, 200000);
-					인첸트지급(pc, 203016, 1, 3); 
+					supplyEnchant(pc, 203016, 1, 3); 
 					htmlid = "";
 					} else {
 						pc.sendPackets(new S_SystemMessage("+5デーモンアックス、結晶（100,000）の必要があります。"));
@@ -2177,14 +2177,14 @@ public class C_NPCAction2 {
 							if (random.nextInt(10) > 7) { // 30％の確率で成功
 								pc.getInventory().consumeEnchantItem(20011, 7, 1);
 								pc.getInventory().consumeEnchantItem(20011, 7, 1);
-								인첸트지급(pc, 222325, 1, 6);
+								supplyEnchant(pc, 222325, 1, 6);
 								pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 								Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
 								pc.sendPackets(new S_SystemMessage("大成功！ +6祝福された神聖なマジックヘルムを獲得しました。"));
 							} else { // 残りの確率はそのまま神投球
 								pc.getInventory().consumeEnchantItem(20011, 7, 1);
 								pc.getInventory().consumeEnchantItem(20011, 7, 1);
-								인첸트지급(pc, 222324, 1, 6);
+								supplyEnchant(pc, 222324, 1, 6);
 							}
 							htmlid = "";
 						} else {
@@ -2195,14 +2195,14 @@ public class C_NPCAction2 {
 							if (random.nextInt(10) > 7) { // 30％の確率で成功
 								pc.getInventory().consumeEnchantItem(20011, 8, 1);
 								pc.getInventory().consumeEnchantItem(20011, 8, 1);
-								인첸트지급(pc, 222325, 1, 7);
+								supplyEnchant(pc, 222325, 1, 7);
 								pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 								Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
 								pc.sendPackets(new S_SystemMessage("大成功！ +7祝福された神聖なマジックヘルムを獲得しました。"));
 							} else { // 残りの確率はそのまま神投球
 								pc.getInventory().consumeEnchantItem(20011, 8, 1);
 								pc.getInventory().consumeEnchantItem(20011, 8, 1);
-								인첸트지급(pc, 222324, 1, 7);
+								supplyEnchant(pc, 222324, 1, 7);
 							}
 							htmlid = "";
 						} else {
@@ -2213,14 +2213,14 @@ public class C_NPCAction2 {
 							if (random.nextInt(10) > 7) { // 30％の確率で成功
 								pc.getInventory().consumeEnchantItem(20011, 9, 1);
 								pc.getInventory().consumeEnchantItem(20011, 9, 1);
-								인첸트지급(pc, 222325, 1, 8);
+								supplyEnchant(pc, 222325, 1, 8);
 								pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 								Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
 								pc.sendPackets(new S_SystemMessage("大成功！ +8祝福された神聖なマジックヘルムを獲得しました。"));
 							} else { // 残りの確率はそのまま神投球
 								pc.getInventory().consumeEnchantItem(20011, 9, 1);
 								pc.getInventory().consumeEnchantItem(20011, 9, 1);
-								인첸트지급(pc, 222324, 1, 8);
+								supplyEnchant(pc, 222324, 1, 8);
 							}
 							htmlid = "";
 						} else {
@@ -2231,14 +2231,14 @@ public class C_NPCAction2 {
 							if (random.nextInt(10) > 7) { // 30％の確率で成功
 								pc.getInventory().consumeEnchantItem(20011, 10, 1);
 								pc.getInventory().consumeEnchantItem(20011, 10, 1);
-								인첸트지급(pc, 222325, 1, 9);
+								supplyEnchant(pc, 222325, 1, 9);
 								pc.sendPackets(new S_SkillSound(pc.getId(), 2047));
 								Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2047));
 								pc.sendPackets(new S_SystemMessage("大成功！ +9祝福された神聖なマジックヘルムを獲得しました。"));
 							} else { // 残りの確率はそのまま神投球
 								pc.getInventory().consumeEnchantItem(20011, 10, 1);
 								pc.getInventory().consumeEnchantItem(20011, 10, 1);
-								인첸트지급(pc, 222324, 1, 9);
+								supplyEnchant(pc, 222324, 1, 9);
 							}
 							htmlid = "";
 						} else {
@@ -2254,7 +2254,7 @@ public class C_NPCAction2 {
 						pc.getInventory().consumeItem(820010, 1);
 						pc.getInventory().consumeItem(40513, 5);
 						pc.getInventory().consumeItem(40308, 1000000);
-						인첸트지급(pc, 203006, 1, 0);
+						supplyEnchant(pc, 203006, 1, 0);
 						htmlid = "";
 					} else {
 //						+9盗賊の斧1個+封印されたオーガの斧1個+オーガの涙5個+ 100万アデナ
@@ -2264,7 +2264,7 @@ public class C_NPCAction2 {
 					if (pc.getInventory().checkEnchantItem(203015, 9, 1) && pc.getInventory().checkItem(820011)) {
 						pc.getInventory().consumeEnchantItem(203015, 9, 1);
 						pc.getInventory().consumeItem(820011, 1);
-						인첸트지급(pc, 203005, 1, 0);
+						supplyEnchant(pc, 203005, 1, 0);
 						htmlid = "";
 					} else {
 //						+9疾風の斧1個+封印された盗賊の斧
@@ -2314,7 +2314,7 @@ public class C_NPCAction2 {
 						if(pc.getInventory().checkItem(30151, 1)){
 							pc.getInventory().consumeItem(30151, 1);
 							pc.getInventory().storeItem(30149, 1);
-							레벨52기준보상경험치(pc, 1);
+							level52RewardExp(pc, 1);
 							htmlid = "anold3";
 						} else {
 							pc.sendPackets(new S_SystemMessage("訓練終了証（1）本必要です。"));
@@ -2329,7 +2329,7 @@ public class C_NPCAction2 {
 							pc.getInventory().consumeItem(30151, 1);
 							pc.getInventory().consumeItem(1000004, 1);
 							pc.getInventory().storeItem(30149, 1);
-							레벨52기준보상경험치(pc, 2);
+							level52RewardExp(pc, 2);
 							htmlid = "anold3";
 						} else {
 							pc.sendPackets(new S_SystemMessage("訓練終了証（1）、ドラゴンのダイヤモンド（1）本必要です。"));
@@ -2344,7 +2344,7 @@ public class C_NPCAction2 {
 							pc.getInventory().consumeItem(30151, 1);
 							pc.getInventory().consumeItem(1000007, 1);
 							pc.getInventory().storeItem(30149, 1);
-							레벨52기준보상경험치(pc, 3);
+							level52RewardExp(pc, 3);
 							htmlid = "anold3";
 						} else {
 							pc.sendPackets(new S_SystemMessage("訓練終了証（1）、ドラゴンの高級ダイヤモンド（1）本必要です。"));
@@ -2362,7 +2362,7 @@ public class C_NPCAction2 {
 							pc.getInventory().consumeItem(9992, 5);
 							pc.getInventory().consumeItem(9993, 1);
 							pc.getInventory().storeItem(9994, 1);
-							레벨52기준보상경험치(pc, 1);
+							level52RewardExp(pc, 1);
 							htmlid = "naruto3";
 						} else {
 							pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -2378,7 +2378,7 @@ public class C_NPCAction2 {
 							pc.getInventory().consumeItem(9993, 1);
 							pc.getInventory().consumeItem(1000004, 1);
 							pc.getInventory().storeItem(9994, 1);
-							레벨52기준보상경험치(pc, 1);
+							level52RewardExp(pc, 1);
 							htmlid = "naruto3";
 						} else {
 							pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -2394,7 +2394,7 @@ public class C_NPCAction2 {
 							pc.getInventory().consumeItem(9993, 1);
 							pc.getInventory().consumeItem(1000007, 1);
 							pc.getInventory().storeItem(9994, 1);
-							레벨52기준보상경험치(pc, 1);
+							level52RewardExp(pc, 1);
 							htmlid = "naruto3";
 						} else {
 							pc.sendPackets(new S_SystemMessage("製作アイテムが不足します。"));
@@ -2404,7 +2404,7 @@ public class C_NPCAction2 {
 						htmlid = "naruto2";
 					}
 				}
-				// 알드란	
+				//アルドラン
 			} else if (npcid == 80077) {
 				if (s.equals("a")) {
 					if (pc.getInventory().checkItem(41207, 1)) {
@@ -2553,7 +2553,7 @@ public class C_NPCAction2 {
 							castleid = 1;
 							break;
 						}
-					} else if (s.equalsIgnoreCase("0-9")) { //외성문 방향으로 발사!
+					} else if (s.equalsIgnoreCase("0-9")) { //外門方向に発射！
 						int pcCastleId = 0;
 						if (pc.getClanid() != 0) {
 							L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
@@ -2666,7 +2666,7 @@ public class C_NPCAction2 {
 		return htmlid;
 	}
 	
-	private boolean 인첸트지급(L1PcInstance pc, int item_id, int count, int EnchantLevel) {
+	private boolean supplyEnchant(L1PcInstance pc, int item_id, int count, int EnchantLevel) {
 		L1ItemInstance item = ItemTable.getInstance().createItem(item_id);
 		if (item != null) {
 			item.setCount(count);
@@ -2686,7 +2686,7 @@ public class C_NPCAction2 {
 		}
 	}
 	
-	private void 아크프리패스(L1PcInstance pc, int type) {
+	private void arcFreePass(L1PcInstance pc, int type) {
 		int needExp = ExpTable.getNeedExpNextLevel(52);
 		double exppenalty = ExpTable.getPenaltyRate(pc.getLevel());
 		int exp = 0;
@@ -2700,7 +2700,7 @@ public class C_NPCAction2 {
 		pc.sendPackets(new S_SkillSound(pc.getId(), 3944));
 	}
 	
-	private void 레벨52기준보상경험치(L1PcInstance pc, int type) {
+	private void level52RewardExp(L1PcInstance pc, int type) {
 		int needExp = ExpTable.getNeedExpNextLevel(52);
 		double exppenalty = ExpTable.getPenaltyRate(pc.getLevel());
 		int exp = 0;
@@ -2718,7 +2718,7 @@ public class C_NPCAction2 {
 		pc.sendPackets(new S_SkillSound(pc.getId(), 3944));
 	}
 	
-	private void 에킨스경험치2(L1PcInstance pc) {
+	private void hopkinsExp2(L1PcInstance pc) {
 		int needExp = ExpTable.getNeedExpNextLevel(52);
 		double exppenalty = ExpTable.getPenaltyRate(pc.getLevel());
 		int exp = 0;
@@ -2738,7 +2738,7 @@ public class C_NPCAction2 {
 		pc.sendPackets(new S_SkillSound(pc.getId(), 3944));
 	}
 
-	private void 에킨스경험치6(L1PcInstance pc) {
+	private void hopkinsExp6(L1PcInstance pc) {
 		int needExp = ExpTable.getNeedExpNextLevel(52);
 		double exppenalty = ExpTable.getPenaltyRate(pc.getLevel());
 		int exp = 0;
@@ -2815,7 +2815,7 @@ public class C_NPCAction2 {
 		}
 	}
 	
-	private void 침묵포탄(int locx, int locy) {
+	private void silenceBullets(int locx, int locy) {
 		L1PcInstance targetPc = null;
 		L1NpcInstance targetNpc = null;
 		L1EffectInstance effect = L1EffectSpawn.getInstance().spawnEffect(81154, 1 * 1000, locx, locy, (short) 4);

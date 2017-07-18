@@ -317,7 +317,7 @@ public class L1MobSkillUse {
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
 			} else if (skillid == 7057) {//ボムオスキル2
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
-			} else if (skillid == 7058) {//범우 스킬3
+			} else if (skillid == 7058) {//ボムオスキル3
 				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
 			}
 			break;

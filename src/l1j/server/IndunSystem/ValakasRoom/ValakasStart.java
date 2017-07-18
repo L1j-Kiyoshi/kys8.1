@@ -185,27 +185,27 @@ public class ValakasStart implements Runnable {
 	private void setting(){
 		for(L1NpcInstance npc : BasicNpcList){
 			if(npc != null){
-				if(npc.getName().equalsIgnoreCase("데스나이트")){
+				if(npc.getName().equalsIgnoreCase("デスナイト")){
 					death = npc;
 				}
-				if(npc.getName().equalsIgnoreCase("화룡의 레오")){
+				if(npc.getName().equalsIgnoreCase("火竜のレオ")){
 					leo1 = npc;
 				}
-				if(npc.getName().equalsIgnoreCase("화룡의 붉은 레오")){
+				if(npc.getName().equalsIgnoreCase("火竜のクリムゾン レオ")){
 					leo2 = npc;
 				}
-				if(npc.getName().equalsIgnoreCase("화룡의 불타는 레오")){
+				if(npc.getName().equalsIgnoreCase("火竜のバーニング レオ")){
 					leo3 = npc;
 				}
 				if (npc instanceof L1DoorInstance) {
 					L1DoorInstance door = (L1DoorInstance) npc;
-					if(npc.getName().equalsIgnoreCase("다리1")){
+					if(npc.getName().equalsIgnoreCase("足1")){
 						briddge1 = door;
 					}
-					if(npc.getName().equalsIgnoreCase("다리2")){
+					if(npc.getName().equalsIgnoreCase("足2")){
 						briddge2 = door;
 					}
-					if(npc.getName().equalsIgnoreCase("다리3")){
+					if(npc.getName().equalsIgnoreCase("足3")){
 						briddge3 = door;
 					}
 				}
@@ -214,13 +214,13 @@ public class ValakasStart implements Runnable {
 		
 		for(L1NpcInstance npc : BossList){
 			if(npc != null){
-				if(npc.getName().equalsIgnoreCase("이프리트")){
+				if(npc.getName().equalsIgnoreCase("イフリート")){
 					ifrit = npc;
 				}
-				if(npc.getName().equalsIgnoreCase("피닉스")){
+				if(npc.getName().equalsIgnoreCase("フェニックス")){
 					phoenix = npc;
 				}
-				if(npc.getName().equalsIgnoreCase("발라카스")){
+				if(npc.getName().equalsIgnoreCase("ヴァラカス")){
 					valakas = npc;
 				}
 			}

@@ -64,7 +64,7 @@ public class L1LevelPresent implements L1CommandExecutor {
 			}
 
 			present(minlvl, maxlvl, itemid, enchant, count);
-			pc.sendPackets(new S_SystemMessage(temp.getName() + "를 " + count
+			pc.sendPackets(new S_SystemMessage(temp.getName() + "を " + count
 					+ "個プレゼントしました。 （Lv" + minlvl + "~" + maxlvl + ")"));
 		} catch (Exception e) {
 			pc.sendPackets(new S_SystemMessage("。レプギフト[最低レベル]、[最高レベル] [アイテムID] [エンチャント] [本数]に入力してください。"));

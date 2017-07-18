@@ -229,11 +229,11 @@ public class GMCommands {
 		LoggerInstance.getInstance().addCommand(gm.getName() + ": " + cmd + " " + param);	
     	// GMに開放するコマンドはここに書く
 		switch (cmd) {
-		case "도움말":				showHelp(gm);break;
-		case "가라":					nocall(gm, param);break;
-		case "특정이벤트":				특정이벤트(gm, param);break;
-		case "혈마크":case "혈맹마크":	Mark1(gm, param);break;
-		case "배틀존":
+		case "help":				showHelp(gm);break;
+		case "nocall":					nocall(gm, param);break;
+		case "spevent":				spEvent(gm, param);break;
+		case "clanmark":case "mark1":	Mark1(gm, param);break;
+		case "battlezone":
 			if (BattleZone.getInstance().getDuelStart()) {
 				gm.sendPackets(new S_SystemMessage("バトルゾーンが実行中です。"));
 			} else {
@@ -241,109 +241,109 @@ public class GMCommands {
 				gm.sendPackets(new S_SystemMessage("バトルゾーンが実行されました。"));
 			}
 			break;
-		case "킬랭킹":				gm.sendPackets(new S_UserCommands4(gm,1));break;
-		case "데스랭킹":				gm.sendPackets(new S_UserCommands5(gm,1));break;
-		case "랭킹갱신":
+		case "rankingkill":				gm.sendPackets(new S_UserCommands4(gm,1));break;
+		case "rankingdeath":				gm.sendPackets(new S_UserCommands5(gm,1));break;
+		case "updateranking":
 			RankTable.getInstance().updateRank();
 			gm.sendPackets(new S_SystemMessage("\\aA■ サーバーランキングが更新されました ■"));
 			break;
-		case "혈맹랭킹갱신":
+		case "rankingclan":
 			L1ClanRanking.getInstance().gmcommand();
 			gm.sendPackets(new S_SystemMessage("\\aA■ 血盟レイドランキングが更新されました ■"));
 			break;
-		case "던전초기화":
-			DungeonQuitController.getInstance().초기화();
+		case "initdungeon":
+			DungeonQuitController.getInstance().init();
 			gm.sendPackets(new S_SystemMessage("\\aA■ダンジョンが初期化されました ■"));
 			break;
-		case "잊섬시작":case "잊섬오픈":
+		case "startfi":case "openfi":
 			IsleController.getInstance().isgameStart = true;
 			L1World.getInstance().broadcastServerMessage("しばらくして忘れられた島入場可能。");	
 			break;
-		case "잊섬종료":
+		case "endfi":
 			IsleController.getInstance().isgameStart = false;
 			L1World.getInstance().broadcastServerMessage("しばらくして忘れられた島入場不可");
 			break;
-		case "파티a":					party(gm, param);break;
-		case "아지트지급":				GiveHouse(gm, param);break;
-		case "공성시작":				castleWarStart(gm, param);break;
-		case "공성종료":				castleWarExit(gm, param);break;
-		case "봇소환":				봇소환(gm, param);break;
-		case "서버저장":				serversave(gm);break;
-		case "전체선물":				allpresent(gm, param);break;
-		case "압류해제":				accountdel(gm, param);break;
-		case "경치복구":				returnEXP(gm, param);break;
-		case "오토루팅":				autoloot(gm, param);break;
-		case "경험치":
+		case "party":					party(gm, param);break;
+		case "givehouse":				GiveHouse(gm, param);break;
+		case "warstart":				castleWarStart(gm, param);break;
+		case "warexit":				castleWarExit(gm, param);break;
+		case "summonbot":				summonBot(gm, param);break;
+		case "serversave":				serversave(gm);break;
+		case "allpresent":				allpresent(gm, param);break;
+		case "accountdel":				accountdel(gm, param);break;
+		case "returnexp":				returnEXP(gm, param);break;
+		case "autoloot":				autoloot(gm, param);break;
+		case "expreload":
 			ExpTable.expPenaltyReLoad();
 			gm.sendPackets(new S_SystemMessage("■ サーバー経験値リロード完了 ■"));
 			break;
-		case "퀴즈변경":				퀴즈변경(gm, param);break;
-		case "인형청소":				인형청소(gm);break;
-		case "밸런스":				CharacterBalance(gm, param);break;
-		case "무인상점":				privateShop(gm);break;
-		case "검":					chainfo(gm, param);break;
-		case "아이콘":				icon(gm, param);break;
-		case "콘":					icon1(gm, param);break;
-		case "라이트":case "맵핵":		maphack(gm, param);break;
-		case "오픈대기":				standBy(gm, param);break;
-		case "가동시간":				GameTime(gm);break;
+		case "quizchange":				changeQuiz(gm, param);break;
+		case "cleaningdoll":				cleaningDoll(gm);break;
+		case "balance":				CharacterBalance(gm, param);break;
+		case "privateshop":				privateShop(gm);break;
+		case "chainfo":					chainfo(gm, param);break;
+		case "icon":				icon(gm, param);break;
+		case "icon1":					icon1(gm, param);break;
+		case "light":case "maphack":		maphack(gm, param);break;
+		case "standby":				standBy(gm, param);break;
+		case "gametime":				GameTime(gm);break;
 		
 		
-		case "어비스포인트":
+		case "abysspoint":
 			int point = gm.getAbysspoint();
 			gm.sendPackets(new S_SystemMessage("[" + gm.getName() + "]さんのアビスポイントは"+point+"点です。"));
 			break;
-		case "상점검사":				상점검사(gm);break;
-		case "이팩트":				effect(gm, param);break;
-		case "유저인벤삭제":			targetInventoryDelete(gm, param);break;
-		case "계정추가":				addaccount(gm, param);break;
-		case "창고불가":				NoShopAndWare(gm, param);break;
-		case "드랍불가":				NoDropItem(gm, param) ;break;
-		case "교환불가":				NoTradable(gm, param) ;break;
-		case "전체소환":				allrecall(gm);break;
-		case "아놀드":				돌아온아놀드이벤트(gm, param);break;
-		case "악마왕":				CloseDevilArea(gm, param);break;
-		case "아덴사냥터":				CloseAdenHuntArea(gm, param);break;
-		case "경험치물약지급":			SpecialEventHandler.getInstance().doGiveEventStaff();break;
-		case "압류목록":				search_banned(gm);break;
-		case "암호변경":				changePassword(gm, param);break;
-		case "마을":					unprison(gm, param);break;
-		case "숨계":					unprison2(gm, param);break;
-		case "전체랭킹":				전랭(gm);break;
-		case "채금풀기":				chatx(gm, param);break;
-		case "텔렉":					tell(gm);break;
-		case "검색":					searchDatabase(gm, param);break;
-		case "피케이":				Pvp(gm, param);break;
-		case "계정":					account_Cha(gm, param);break;
-		case "렙작":					levelup2(gm, param);break;
-		case "상점추방":				ShopKick(gm, param);break;
-		case "감옥":					hold(gm, param);break;
-		case "정리":					Clear(gm);break;
-		case "통합버프":				SpecialEventHandler.getInstance().buff_ALL();break;
-		case "전체버프":				전체버프(gm, param);break;
-		case "화면버프":				화면버프(gm);break;
-		case "화면1":					SpecialEventHandler.getInstance().buff_ScreenFull(gm);break;
-		case "화면2":					SpecialEventHandler.getInstance().buff_ScreenMetis(gm);break;
-		case "화면3":					SpecialEventHandler.getInstance().buff_EvilEye(gm);break;
-		case "화면4":					SpecialEventHandler.getInstance().buff_God(gm);break;
-		case "화면5":					SpecialEventHandler.getInstance().buff_ScreenCOMA(gm);break;
-		case "화면풀업":				allBuff1(gm);break;
-		case "화면축복":				allBuff2(gm);break;
-		case "화면생마":				allBuff3(gm);break;
-		case "화면흑사":				allBuff4(gm);break;
-		case "화면코마":				allBuff5(gm);break;
-		case "메모리반환":				메모리반환(gm);break;
-		case "메모리":				mem_free(gm);break;
-		case "포트변경":				포트변경(gm, param);break;
-		case "어포지급":				GiveAbyssPoint(gm,param);break;
-		case "혈맹경험치":				GiveClanPoint(gm,param);break;
-		case "인벤삭제":				InventoryDelete(gm, param);break;
-		case "탐":case "탐주기":case "탐지급":	탐주기(gm, param);break;
-		case "엔코인":case "엔코인지급":	엔코인주기(gm, param);break;
-		case "엔코인초기화":case "엔초기화":	엔코인초기화(gm, param);break;
-		case "전체정리":				전체정리(gm);break;
-		case "데드락":				GeneralThreadPool.getInstance().execute(new DeadLockDetector(gm));break;
-		case "챗":
+		case "shopcheck":				checkShop(gm);break;
+		case "effect":				effect(gm, param);break;
+		case "userinvdelete":			targetInventoryDelete(gm, param);break;
+		case "addaccount":				addaccount(gm, param);break;
+		case "noware":				NoShopAndWare(gm, param);break;
+		case "nodrop":				NoDropItem(gm, param) ;break;
+		case "notrade":				NoTradable(gm, param) ;break;
+		case "allrecall":				allrecall(gm);break;
+		case "arnold":				cameBackArnoldEvent(gm, param);break;
+		case "devil":				CloseDevilArea(gm, param);break;
+		case "huntaden":				CloseAdenHuntArea(gm, param);break;
+		case "giveexppot":			SpecialEventHandler.getInstance().doGiveEventStaff();break;
+		case "bannnedlist":				search_banned(gm);break;
+		case "changepass":				changePassword(gm, param);break;
+		case "unprison":					unprison(gm, param);break;
+		case "unprison2":					unprison2(gm, param);break;
+		case "allranking":				allRanking(gm);break;
+		case "goldmineopen":				chatx(gm, param);break;
+		case "tellag":					tell(gm);break;
+		case "search":					searchDatabase(gm, param);break;
+		case "pk":				Pvp(gm, param);break;
+		case "account":					account_Cha(gm, param);break;
+		case "levelup2":					levelup2(gm, param);break;
+		case "shopkick":				ShopKick(gm, param);break;
+		case "prison":					hold(gm, param);break;
+		case "clear":					Clear(gm);break;
+		case "integbuff":				SpecialEventHandler.getInstance().buff_ALL();break;
+		case "allbuff":				allBuff(gm, param);break;
+		case "screenbuff":				screenBuff(gm);break;
+		case "screen1":					SpecialEventHandler.getInstance().buff_ScreenFull(gm);break;
+		case "screen2":					SpecialEventHandler.getInstance().buff_ScreenMetis(gm);break;
+		case "screen3":					SpecialEventHandler.getInstance().buff_EvilEye(gm);break;
+		case "screen4":					SpecialEventHandler.getInstance().buff_God(gm);break;
+		case "screen5":					SpecialEventHandler.getInstance().buff_ScreenCOMA(gm);break;
+		case "allbuff1":				allBuff1(gm);break;
+		case "allbuff2":				allBuff2(gm);break;
+		case "allbuff3":				allBuff3(gm);break;
+		case "allbuff4":				allBuff4(gm);break;
+		case "allbuff5":				allBuff5(gm);break;
+		case "cleanmem":				cleanupMemory(gm);break;
+		case "mem":				mem_free(gm);break;
+		case "portchange":				changePort(gm, param);break;
+		case "giveabysspoint":				GiveAbyssPoint(gm,param);break;
+		case "giveclanpoint":				GiveClanPoint(gm,param);break;
+		case "invdelet":				InventoryDelete(gm, param);break;
+		case "tam":case "tamcycle":case "givetam":	TamCycle(gm, param);break;
+		case "ncoin":case "givencoin":	NCoinCycle(gm, param);break;
+		case "initncoin":case "initn":	initNCoin(gm, param);break;
+		case "mobkillcount":				mobKillCount(gm);break;
+		case "deadlock":				GeneralThreadPool.getInstance().execute(new DeadLockDetector(gm));break;
+		case "chat":
 			try {
 				StringTokenizer st = new StringTokenizer(param);
 				String name = st.nextToken();
@@ -355,7 +355,7 @@ public class GMCommands {
 				gm.sendPackets(new S_SystemMessage("。チャット[キャラクター名] [チャット言葉]入力"));
 			}
 			break;
-		case "성혈조작":
+		case "opeclancastle":
 			try {
 				StringTokenizer st = new StringTokenizer(param);
 				String name = st.nextToken();
@@ -375,7 +375,7 @@ public class GMCommands {
 				gm.sendPackets(new S_SystemMessage("ケント1、オーク2、ウィンダ3、ギラン4、ハイ5、ウェルダン6、アデン7、ディアド8"));
 			}
 			break;
-		case "상점리로드":
+		case "reloadshop":
 			try {
 				int npcid = Integer.parseInt(param);
 				L1Npc npc = NpcTable.getInstance().getTemplate(npcid);
@@ -385,20 +385,20 @@ public class GMCommands {
 				gm.sendPackets(new S_SystemMessage("。店リロードエンピシID"));
 			}
 			break;
-		case "공속체크":
+		case "atkspeed":
 			gm.AttackSpeedCheck2 = 1;
             gm.sendPackets(new S_SystemMessage("\\fYかかしを10回攻撃してください。"));   
             break;
-		case "이속체크":
+		case "movespeed":
 			gm.MoveSpeedCheck = 1;
             gm.sendPackets(new S_SystemMessage("\\fY一方向に10回ムービングください。"));
             break;
-		case "마법체크":
+		case "magicspeed":
 			gm.magicSpeedCheck = 1;
             gm.sendPackets(new S_SystemMessage("\\fY希望魔法を10回使用してください。"));
             break;
-		case "맵인원":						맵인원(gm, param);break;
-		case "혈가입":
+		case "mapperson":						mapPerson(gm, param);break;
+		case "setclan":
 			try{
 				StringTokenizer st = new StringTokenizer(param);
 				String name = st.nextToken();
@@ -427,7 +427,7 @@ public class GMCommands {
 				}
 				pc.setClanid(clan.getClanId());
 				pc.setClanname(clanname);
-				pc.setClanRank(L1Clan.수련);
+				pc.setClanRank(L1Clan.TRAINING);
 				pc.setTitle("");
 				pc.setClanMemberNotes("");	
 				pc.sendPackets(new S_CharTitle(pc.getId(), ""));
@@ -441,7 +441,7 @@ public class GMCommands {
 				gm.sendPackets(new S_SystemMessage("。血登録[キャラクター名] [血盟名]を入力"));
 			}
 			break;
-		case "혈탈퇴":
+		case "leaveclan":
 			try{
 				StringTokenizer tokenizer = new StringTokenizer(param);
 				String pcName = tokenizer.nextToken();
@@ -496,7 +496,7 @@ public class GMCommands {
 				case 3:
 					//今年召喚(gm,Integer.parseInt(value));
 					if(!isTest){
-					 npcid = 발라스폰(gm,145684,0,0);
+					 npcid = spawnValakas(gm,145684,0,0);
 					gm.sendPackets(new S_DoActionGFX(npcid.getId(),Integer.parseInt(value)));
 					gm.sendPackets(new S_Invis(npcid.getId(),1));
 					isTest = true;
@@ -555,7 +555,7 @@ public class GMCommands {
 				gm.sendPackets(new S_SystemMessage(".test数バリュー"));
 			}
 			break;
-		case "미소버프":
+		case "matizbuff":
 			try{
 				StringTokenizer tokenizer = new StringTokenizer(param);
 				int num = Integer.parseInt((tokenizer.nextToken()));
@@ -623,7 +623,7 @@ public class GMCommands {
 				gm.sendPackets(new S_SystemMessage("。笑顔バフ[数字1：景色バフ、2：防御バフ、3：攻撃バフ"));
 			};
 		break;
-		case "로봇사냥":
+		case "bothunt":
 			huntBot = true;
 			TimerTask task = new TimerTask() {
 				
@@ -647,7 +647,7 @@ public class GMCommands {
 		return _rnd;
 	}
 
-	private void 올소환(L1PcInstance pc,int a){
+	private void summonAll(L1PcInstance pc,int a){
 		int i = 1;
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -677,7 +677,7 @@ public class GMCommands {
 			SQLUtil.close(con);
 		}
 	}
-	public static L1NpcInstance 발라스폰(L1PcInstance pc, int npcId, int randomRange, int timeMillisToDelete) {
+	public static L1NpcInstance spawnValakas(L1PcInstance pc, int npcId, int randomRange, int timeMillisToDelete) {
 		try {
 			L1NpcInstance npc = NpcTable.getInstance(). newNpcInstance(npcId);
 			npc.setId(IdFactory.getInstance().nextId());
@@ -721,7 +721,7 @@ public class GMCommands {
 		}
 		return null;
 	}
-	private void 맵인원(L1PcInstance pc, String param) {
+	private void mapPerson(L1PcInstance pc, String param) {
 		try {
 			//StringTokenizer tok = new StringTokenizer(param);
 			int mapId = pc.getMapId();
@@ -767,9 +767,9 @@ public class GMCommands {
 		try {
 			StringTokenizer tok = new StringTokenizer(cmdName);
 			String onoff = tok.nextToken();
-			if(onoff.equals("켬")){
+			if(onoff.equals("on")){
 				gm.sendPackets(new S_Ability(3, true));
-			}else if(onoff.equals("끔")){
+			}else if(onoff.equals("off")){
 				gm.sendPackets(new S_Ability(3, false));
 			}
 		} catch (Exception e) {
@@ -785,25 +785,25 @@ public class GMCommands {
 
 	private void showHelp(L1PcInstance gm) {
 		gm.sendPackets(new S_ChatPacket(gm,"\\aA-----------★[GM Commands]★-----------------"));
-		gm.sendPackets(new S_ChatPacket(gm,"[기본]:.귀환.출두.소환.위치.누구.마을.챗.감옥.가라.답장"));
-		gm.sendPackets(new S_ChatPacket(gm,"[설정]:.무인.변신.레벨.피케이.리로드.혈탈퇴.오토루팅"));
-		gm.sendPackets(new S_ChatPacket(gm,"	          .드랍불가 .창고불가 .교환불가.오토루팅.전체정리"));
-		gm.sendPackets(new S_ChatPacket(gm,"	          .오픈대기.편지삭제.인벤삭제.공성시간.공성시작"));
-		gm.sendPackets(new S_ChatPacket(gm,"			          .공성종료.성혈조작.압류해제.압류목록.아지트지급"));
-		gm.sendPackets(new S_ChatPacket(gm,"			          .밸런스.상점리로드.혈맹경험치.데드락"));
-		gm.sendPackets(new S_ChatPacket(gm,"			          .정리.메모리반환.포트변경.상점검사"));
-		gm.sendPackets(new S_ChatPacket(gm,"[계정]:.셋팅.정보.계정.레벨.암호변경.계정압류.영구추방"));
-		gm.sendPackets(new S_ChatPacket(gm,"          .아이피추방.광역추방.계정정보.계정추가.경험치"));
-		gm.sendPackets(new S_ChatPacket(gm,"          .경치복구.퀴즈변경.밴아이피.상점추방.유저인벤삭제"));
-		gm.sendPackets(new S_ChatPacket(gm,"[검사]:.이동.추방.조회.감시.검색.채금.공개채금.채금풀기"));
-		gm.sendPackets(new S_ChatPacket(gm,"[서버]:.스폰.배치.몬스터.아이템.전체선물.파티a.랭킹갱신"));
-		gm.sendPackets(new S_ChatPacket(gm,"[버프]:.버프.소생.속도.렙선물.전체버프.화면버프.통합버프"));
-		gm.sendPackets(new S_ChatPacket(gm,"	          .개인버프.인벤이미지.공속체크.이속체크.마법체크"));
-		gm.sendPackets(new S_ChatPacket(gm,"	          .이미지.서먼.아이콘.이미지.이펙트.렙작"));
-		gm.sendPackets(new S_ChatPacket(gm,"[기타]:.피바.투명.서버저장.파티소환.피바.로봇.인공지능"));
-		gm.sendPackets(new S_ChatPacket(gm,"	          .인형청소.어포지급.악마왕.아덴사냥터.영자상점"));
-		gm.sendPackets(new S_ChatPacket(gm,"	          .잊섬시작.잊섬종료.던전초기화"));
-		gm.sendPackets(new S_ChatPacket(gm,"	          .경험치물약지급(월드전체)"));
+		gm.sendPackets(new S_ChatPacket(gm,"[基本] :.帰還。出頭。召喚。位置。誰か。町。チャット。刑務所。取る。返信"));
+		gm.sendPackets(new S_ChatPacket(gm,"[設定] :.無人。変身。レベル。ピケイ。リロード。血脱退オートルーティング"));
+		gm.sendPackets(new S_ChatPacket(gm,"。ドロップ不可。倉庫不可。交換不可オートルーティング全体まとめ"));
+		gm.sendPackets(new S_ChatPacket(gm,"。オープン待っている。メールの削除。インベントリ削除します。攻城時間。攻城開始"));
+		gm.sendPackets(new S_ChatPacket(gm,"。攻城終了。聖血操作差押を解除。差し押さえのリストです。アジト支給"));
+		gm.sendPackets(new S_ChatPacket(gm,"。バランス。店リロード。血盟経験値。デッドロック"));
+		gm.sendPackets(new S_ChatPacket(gm,"。まとめメモリ返しポートを変更。店の検査"));
+		gm.sendPackets(new S_ChatPacket(gm,"[アカウント] :.設定。情報。アカウント。レベルパスワードの変更アカウント差し押さえ。永久追放"));
+		gm.sendPackets(new S_ChatPacket(gm,"。アイピー追放。広域追放アカウント情報アカウント追加します。経験値"));
+		gm.sendPackets(new S_ChatPacket(gm,"。景色回復。クイズに変更。バンアイピー。店追放。ユーザインベントリ削除"));
+		gm.sendPackets(new S_ChatPacket(gm,"[検査] :.移動します。追放。照会。監視検索します。金鉱。公開金鉱。金鉱解く"));
+		gm.sendPackets(new S_ChatPacket(gm,"[サーバー] :.出現。配置。モンスターのアイテム全体のギフト。パーティーa。ランキング更新"));
+		gm.sendPackets(new S_ChatPacket(gm,"【バフ] :.バフ。蘇生速度。レプギフト全体バフ画面バフ統合バフ"));
+		gm.sendPackets(new S_ChatPacket(gm,"個人バフ。インベントリのイメージ。攻撃速度チェック。移動速度チェック魔法チェック"));
+		gm.sendPackets(new S_ChatPacket(gm,"画像。サモンアイコン画像エフェクト。レプジャク"));
+		gm.sendPackets(new S_ChatPacket(gm,"[その他] :.ピバ透明サーバー保存します。パーティー召喚。ピバロボット人工知能"));
+		gm.sendPackets(new S_ChatPacket(gm,"人形掃除。一重支給悪魔王アデン狩り場。英字店"));
+		gm.sendPackets(new S_ChatPacket(gm,"。イッソム開始します。イッソム終了ダンジョン初期化"));
+		gm.sendPackets(new S_ChatPacket(gm,"経験値ポーション支給（ワールド全体）"));
 		gm.sendPackets(new S_ChatPacket(gm,"\\aG----------●[Gm Commands End]●-------------"));
 	}
 
@@ -823,7 +823,7 @@ public class GMCommands {
 		}
 	}
 	
-	private void 전체정리(L1PcInstance gm) {
+	private void mobKillCount(L1PcInstance gm) {
 		int cnt = 0;
 		for (L1Object obj : L1World.getInstance().getObject()) {
 			if (obj instanceof L1MonsterInstance) {
@@ -840,10 +840,10 @@ public class GMCommands {
 		try {
 			StringTokenizer tok = new StringTokenizer(param);
 			String type = tok.nextToken();
-			if (type.equalsIgnoreCase("리로드")) {
+			if (type.equalsIgnoreCase("reload")) {
 				AutoLoot.getInstance().reload();
 				gm.sendPackets(new S_SystemMessage("オートルーティングの設定がリロードされました。"));
-			} else if (type.equalsIgnoreCase("검색")) {
+			} else if (type.equalsIgnoreCase("search")) {
 				java.sql.Connection con = null;
 				PreparedStatement pstm = null;
 				ResultSet rs = null;
@@ -889,14 +889,14 @@ public class GMCommands {
 					gm.sendPackets(new S_SystemMessage("該当のアイテムが見つかりません。"));
 					return;
 				}
-				if (type.equalsIgnoreCase("추가")) {
+				if (type.equalsIgnoreCase("add")) {
 					if (AutoLoot.getInstance().isAutoLoot(itemid)) {
 						gm.sendPackets(new S_SystemMessage("すでにオートルーティングリストにあります。"));
 						return;
 					}
 					AutoLoot.getInstance().storeId(itemid);
 					gm.sendPackets(new S_SystemMessage("オートルーティングエントリに追加しました。"));
-				} else if (type.equalsIgnoreCase("삭제")) {
+				} else if (type.equalsIgnoreCase("delete")) {
 					if (!AutoLoot.getInstance().isAutoLoot(itemid)) {
 						gm.sendPackets(new S_SystemMessage("オートルーティングエントリに対応するアイテムがありません。"));
 						return;
@@ -912,7 +912,7 @@ public class GMCommands {
 		}
 	}
 	
-	private void 전랭(L1PcInstance pc) {
+	private void allRanking(L1PcInstance pc) {
 		try {
 			long curtime = System.currentTimeMillis() / 1000;
 			if (pc.getQuizTime2() + 5 > curtime) {
@@ -926,11 +926,11 @@ public class GMCommands {
 		}
 	}
 	
-	private void 특정이벤트(L1PcInstance gm, String param){
-		if(param.equalsIgnoreCase("시작")){
+	private void spEvent(L1PcInstance gm, String param){
+		if(param.equalsIgnoreCase("start")){
 			Config.EXP = 2;//起動すると、自動的に2にマンドゥルム
 			L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\aA■ しばらくして「ギラン監獄」で \\aG[経験値/羽]\\aA 2倍イベントが開始されます。 ■"));		
-		} else if(param.equalsIgnoreCase("종료")){
+		} else if(param.equalsIgnoreCase("end")){
 			Config.EXP = 0;//終了すると、自動的に0にマンドゥルム
 //			Config.load();//コンフィグで再びゼロにマンドゥルム（コンフィグで0に設定されている必要があります）
 			L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"\\aA■ しばらくして「ギラン監獄」で \\aG[経験値/羽]\\aA 2倍イベントが終了します。 ■"));		
@@ -939,15 +939,15 @@ public class GMCommands {
 		}
 	}
 	
-	private void 돌아온아놀드이벤트(L1PcInstance gm, String param){
-		if(param.equalsIgnoreCase("시작")){
+	private void cameBackArnoldEvent(L1PcInstance gm, String param){
+		if(param.equalsIgnoreCase("start")){
 			if(Config.ARNOLD_EVENTS == false){
-				ArnoldBackEvent.getInstance().isGmOpen아놀드 = true;
+				ArnoldBackEvent.getInstance().isGmOpenArnold = true;
 				ArnoldBackEvent.getInstance().start();
 			} else {
 				gm.sendPackets(new S_SystemMessage("現在アーノルドイベントが進行中です。"));
 			}
-		} else if(param.equalsIgnoreCase("종료")){
+		} else if(param.equalsIgnoreCase("end")){
 			if(Config.ARNOLD_EVENTS == true){
 				AdenaHuntController.getInstance().setAdenaHuntStart(false);
 				AdenaHuntController.getInstance().isGmOpen4 = false;
@@ -962,11 +962,11 @@ public class GMCommands {
 	}
 	
 	private void CloseDevilArea(L1PcInstance gm, String param){
-		if(param.equalsIgnoreCase("켬")){
+		if(param.equalsIgnoreCase("on")){
 			DevilController.getInstance().isGmOpen = true;
 			L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"運営者様が悪魔王の領土をオープンします。"));
 			gm.sendPackets(new S_SystemMessage("悪魔王の領土強制します。"));				
-		} else if(param.equalsIgnoreCase("끔")){
+		} else if(param.equalsIgnoreCase("off")){
 			DevilController.getInstance().setDevilStart(false);
 			DevilController.getInstance().isGmOpen = false;		
 			L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"運営者様が悪魔王の領土を閉じます。"));
@@ -978,11 +978,11 @@ public class GMCommands {
 	}
 	
 	private void CloseAdenHuntArea(L1PcInstance gm, String param){
-		if(param.equalsIgnoreCase("켬")){
+		if(param.equalsIgnoreCase("on")){
 			AdenaHuntController.getInstance().isGmOpen4 = true;
 			L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"運営者様がアデン狩り場をオープンします。"));
-			gm.sendPackets(new S_SystemMessage("아덴사냥터를 강제 실행 합니다."));				
-		} else if(param.equalsIgnoreCase("끔")){
+			gm.sendPackets(new S_SystemMessage("アデン狩り場を強制的に実行します。"));				
+		} else if(param.equalsIgnoreCase("off")){
 			AdenaHuntController.getInstance().setAdenaHuntStart(false);
 			AdenaHuntController.getInstance().isGmOpen4 = false;		
 			L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"運営者様がアデン狩り場を閉じます。"));
@@ -1006,7 +1006,7 @@ public class GMCommands {
 		for (L1PcInstance player : list) {
 			if (player == null) continue;
 			try {
-				/** 피씨저장해주고* */
+				/** PC保存してくれ* */
 				player.save();
 				/** インベントリも保存して* */
 				player.saveInventory();
@@ -1057,7 +1057,7 @@ public class GMCommands {
 					pc.sendPackets(new S_SystemMessage(target.getClanname() + " 血盟に " + pobyhouse.getHouseName()
 							+ "一度に支給しました。"));
 					for (L1PcInstance tc : TargetClan.getOnlineClanMember()) {
-						tc.sendPackets(new S_SystemMessage("게임마스터로부터 " + pobyhouse.getHouseName() + "一度に支給しました。"));
+						tc.sendPackets(new S_SystemMessage("ゲームマスターから" + pobyhouse.getHouseName() + "一度に支給しました。"));
 					}
 				} else {
 					pc.sendPackets(new S_SystemMessage(target.getName() + "様は、血盟に所属していません。"));
@@ -1082,11 +1082,11 @@ public class GMCommands {
 			return;
 		}
 		int i = 1;
-		if (gm.문장주시) {
+		if (gm.watchCrest) {
 			i = 3;
-			gm.문장주시 = false;
+			gm.watchCrest = false;
 		} else
-			gm.문장주시 = true;
+			gm.watchCrest = true;
 		for (L1Clan clan : L1World.getInstance().getAllClans()) {
 			if (clan != null) {
 				gm.sendPackets(new S_War(i, gm.getClanname(), clan.getClanName()));
@@ -1149,7 +1149,7 @@ public class GMCommands {
 		try {
 			StringTokenizer tok = new StringTokenizer(cmdName);
 			String cmd = tok.nextToken();
-			if (cmd.equals("주변")) {
+			if (cmd.equals("around")) {
 				L1Party party = new L1Party();
 				if (gm.getParty() == null) {
 					party.addMember(gm);
@@ -1171,7 +1171,7 @@ public class GMCommands {
 					gm.sendPackets(new S_SystemMessage(Targetpc.getName() + "様を私のパーティーに参加しました。"));
 				}
 				gm.sendPackets(new S_SystemMessage(range + "カーンの中のユーザを私のパーティーに参加しました。"));
-			} else if (cmd.equals("화면")) {
+			} else if (cmd.equals("screen")) {
 				L1Party party = new L1Party();
 				if (gm.getParty() == null) {
 					party.addMember(gm);
@@ -1192,7 +1192,7 @@ public class GMCommands {
 					gm.sendPackets(new S_SystemMessage(Targetpc.getName() + "様を私のパーティーに参加しました。"));
 				}
 				gm.sendPackets(new S_SystemMessage("画面の中のユーザを私のパーティーに参加しました。"));
-			} else if (cmd.equals("전체")) {
+			} else if (cmd.equals("all")) {
 				L1Party party = new L1Party();
 				if (gm.getParty() == null) {
 					party.addMember(gm);
@@ -1214,16 +1214,16 @@ public class GMCommands {
 					gm.sendPackets(new S_SystemMessage(Targetpc.getName() + "様を私のパーティーに参加しました。"));
 				}
 				gm.sendPackets(new S_SystemMessage(range + "カーンの中のユーザを私のパーティーに参加しました。"));
-			} else if (cmd.equals("참가")) {
+			} else if (cmd.equals("attend")) {
 				String TargetpcName = tok.nextToken();
 				L1PcInstance TargetPc = L1World.getInstance().getPlayer(TargetpcName);
 				if (TargetPc.getParty() != null) {
 					gm.sendPackets(new S_SystemMessage(TargetPc.getName() + "様は、パーティーがありません。"));
 				} else {
 					TargetPc.getParty().addMember(gm);
-					gm.sendPackets(new S_SystemMessage(TargetPc.getName() + "님의 파티에 참가했습니다."));
+					gm.sendPackets(new S_SystemMessage(TargetPc.getName() + "さんのパーティーに参加しました。"));
 				}
-			} else if (cmd.equals("초대")) {
+			} else if (cmd.equals("invite")) {
 				String TargetpcName = tok.nextToken();
 				L1PcInstance TargetPc = L1World.getInstance().getPlayer(TargetpcName);
 				L1Party party = new L1Party();
@@ -1237,7 +1237,7 @@ public class GMCommands {
 				}
 				party.addMember(TargetPc);
 				gm.sendPackets(new S_SystemMessage(TargetPc.getName() + "様を私のパーティーに強制参加させました。"));
-			} else if (cmd.equals("강제초대")) {
+			} else if (cmd.equals("forceinvite")) {
 				L1Party party = new L1Party();
 				if (gm.getParty() == null) {
 					party.addMember(gm);
@@ -1259,7 +1259,7 @@ public class GMCommands {
 					gm.sendPackets(new S_SystemMessage(Targetpc.getName() + "様を私のパーティーに参加しました。"));
 				}
 				gm.sendPackets(new S_SystemMessage("接続中のユーザを私のパーティーに強制参加させました。"));
-			} else if (cmd.equals("파장")) {
+			} else if (cmd.equals("pass")) {
 				if (gm.getParty() == null) {
 					gm.sendPackets(new S_SystemMessage("参加しているパーティーがありません。"));
 				} else {
@@ -1284,7 +1284,7 @@ public class GMCommands {
 		}
 	}
 	
-	private int 최소값(int itemid) {
+	private int minValue(int itemid) {
 	    try {
 	      Connection con = null;
 	      PreparedStatement pstm = null;
@@ -1318,7 +1318,7 @@ public class GMCommands {
 	    }return 0;
 	  }
 
-	  private int 최대값(int itemid) {
+	  private int maxValue(int itemid) {
 	    try {
 	      Connection con = null;
 	      PreparedStatement pstm = null;
@@ -1345,7 +1345,7 @@ public class GMCommands {
 	    }return -1;
 	  }
 	  
-		private void 포트변경(L1PcInstance gm, String param) {
+		private void changePort(L1PcInstance gm, String param) {
 			// TODO 自動生成されたメソッド・スタブ
 			try {
 				gm.sendPackets(new S_SystemMessage("ポートの変更を失敗しました。"));
@@ -1354,7 +1354,7 @@ public class GMCommands {
 			}
 		}
 	
-	private void 상점검사(L1PcInstance gm) {
+	private void checkShop(L1PcInstance gm) {
 		try {
 			ArrayList<Integer> itemids = new ArrayList<Integer>();
 			Connection con = null;
@@ -1375,10 +1375,10 @@ public class GMCommands {
 				cnt = 0;
 				for (i$ = itemids.iterator(); i$.hasNext();) {
 					int itemid = ((Integer) i$.next()).intValue();
-					int 구매최저가 = 최소값(itemid);
-					int 판매최고가 = 최대값(itemid);
-					if ((구매최저가 != 0) && (구매최저가 < 판매최고가)) {
-						gm.sendPackets(new S_ChatPacket(gm,"検出さ！ [システム" + itemid + " : [購入値 " + 구매최저가 + "] [買取値" + 판매최고가 + "]"));
+					int minSellPrice = minValue(itemid);
+					int maxSellPrice = maxValue(itemid);
+					if ((minSellPrice != 0) && (minSellPrice < maxSellPrice)) {
+						gm.sendPackets(new S_ChatPacket(gm,"検出さ！ [システム" + itemid + " : [購入値 " + minSellPrice + "] [買取値" + maxSellPrice + "]"));
 					}
 					cnt++;
 				}
@@ -1396,7 +1396,7 @@ public class GMCommands {
 		try {
 			StringTokenizer st = new StringTokenizer(param);
 			String status = st.nextToken();
-			if (status.equalsIgnoreCase("켬")) {
+			if (status.equalsIgnoreCase("on")) {
 				if (Config.STANDBY_SERVER) {
 					gm.sendPackets(new S_SystemMessage("すでに待機状態に突入しました。"));
 					return;
@@ -1405,7 +1405,7 @@ public class GMCommands {
 				Config.RATE_XP = 0;//オープン待機時の経験値を強制0作成の
 				L1World.getInstance().broadcastPacketToAll(new S_ChatPacket(
 		        "[システム]:\\aAサーバーがオープン大気に突入します。一部のパケットがブロックされた。", Opcodes.S_MESSAGE));
-			} else if (status.equalsIgnoreCase("끔")) {
+			} else if (status.equalsIgnoreCase("off")) {
 				if (!Config.STANDBY_SERVER) {
 					gm.sendPackets(new S_SystemMessage("待機状態ではない。"));
 					return;
@@ -1421,7 +1421,7 @@ public class GMCommands {
 		}
 	}
 	
-	private void 메모리반환(L1PcInstance gm) {
+	private void cleanupMemory(L1PcInstance gm) {
 		gm.sendPackets(new S_SystemMessage("\\aG警告：数分以内に、メモリを初期化します"));
 		System.out.println("強制的にガベージ処理を続行します。");
 		try {
@@ -1489,7 +1489,7 @@ public class GMCommands {
 		}
 	}
 	
-	private void 전체버프(L1PcInstance gm, String param) {
+	private void allBuff(L1PcInstance gm, String param) {
 		try {
 			StringTokenizer st = new StringTokenizer(param);
 			String status = st.nextToken();
@@ -1511,7 +1511,7 @@ public class GMCommands {
 		}
 	}
 
-	private void 화면버프(L1PcInstance pc) {
+	private void screenBuff(L1PcInstance pc) {
 		pc.sendPackets(new S_ChatPacket(pc, "---------------------------------------------------"));
 		pc.sendPackets(new S_ChatPacket(pc, "画面1〜画面4（1：プルアップ2：祝福3：センマ4：フクサ5：コマ）"));
 		pc.sendPackets(new S_ChatPacket(pc, "---------------------------------------------------"));
@@ -1699,55 +1699,55 @@ public class GMCommands {
 		}
 	}
 	
-	private void 탐주기(L1PcInstance gm, String param) {
+	private void TamCycle(L1PcInstance gm, String param) {
 		// TODO自動生成されたメソッド・スタブ
 		try {
 			StringTokenizer st = new StringTokenizer(param);
-			String 이름 = st.nextToken();
+			String name = st.nextToken();
 			int id = Integer.parseInt(st.nextToken());
-			L1PcInstance 유저 = L1World.getInstance().getPlayer(이름);
-			if (유저 != null) {
-				유저.getNetConnection().getAccount().tam_point += id;
-				유저.getNetConnection().getAccount().updateTam();
+			L1PcInstance user = L1World.getInstance().getPlayer(name);
+			if (user != null) {
+				user.getNetConnection().getAccount().tam_point += id;
+				user.getNetConnection().getAccount().updateTam();
 				try {
-				유저.sendPackets(new S_NewCreateItem(S_NewCreateItem.TAM_POINT, 유저.getNetConnection()),true);
+				user.sendPackets(new S_NewCreateItem(S_NewCreateItem.TAM_POINT, user.getNetConnection()),true);
 				} catch (Exception e) {
 				}
-				gm.sendPackets(new S_SystemMessage(유저.getName() + "に乗車" + id + "本をくれました。"), true);
+				gm.sendPackets(new S_SystemMessage(user.getName() + "に乗車" + id + "本をくれました。"), true);
 			} else
 				gm.sendPackets(new S_SystemMessage("存在しないユーザです。"), true);
 		} catch (Exception e) {
 			gm.sendPackets(new S_SystemMessage("。乗車支給名本数"));
 		}
 	}
-	private void 엔코인주기(L1PcInstance gm, String param) {
+	private void NCoinCycle(L1PcInstance gm, String param) {
 		// TODO 自動生成されたメソッド・スタブ
 		try {
 			StringTokenizer st = new StringTokenizer(param);
-			String 이름 = st.nextToken();
+			String name = st.nextToken();
 			int id = Integer.parseInt(st.nextToken());
-			L1PcInstance 유저 = L1World.getInstance().getPlayer(이름);
-			if (유저 != null) {
-				유저.getNetConnection().getAccount().Ncoin_point += id;
-				유저.getNetConnection().getAccount().updateNcoin();
-				gm.sendPackets(new S_SystemMessage(유저.getName() + "にエンコイン" + id + "本をくれました。"), true);
+			L1PcInstance user = L1World.getInstance().getPlayer(name);
+			if (user != null) {
+				user.getNetConnection().getAccount().Ncoin_point += id;
+				user.getNetConnection().getAccount().updateNcoin();
+				gm.sendPackets(new S_SystemMessage(user.getName() + "にエンコイン" + id + "本をくれました。"), true);
 			} else
 				gm.sendPackets(new S_SystemMessage("存在しないユーザです。"), true);
 		} catch (Exception e) {
 			gm.sendPackets(new S_SystemMessage("。エンコイン名本数"));
 		}
 	}
-	private void 엔코인초기화(L1PcInstance gm, String param) {
+	private void initNCoin(L1PcInstance gm, String param) {
 		// TODO 自動生成されたメソッド・スタブ
 		try {
 			StringTokenizer st = new StringTokenizer(param);
-			String 이름 = st.nextToken();
+			String name = st.nextToken();
 			int id = 0;
-			L1PcInstance 유저 = L1World.getInstance().getPlayer(이름);
-			if (유저 != null) {
-				유저.getNetConnection().getAccount().Ncoin_point = id;
-				유저.getNetConnection().getAccount().updateNcoin();
-				gm.sendPackets(new S_SystemMessage(유저.getName() + "様Nコインを初期化しました。"));
+			L1PcInstance user = L1World.getInstance().getPlayer(name);
+			if (user != null) {
+				user.getNetConnection().getAccount().Ncoin_point = id;
+				user.getNetConnection().getAccount().updateNcoin();
+				gm.sendPackets(new S_SystemMessage(user.getName() + "様Nコインを初期化しました。"));
 			} else
 				gm.sendPackets(new S_SystemMessage("存在しないユーザです。"), true);
 		} catch (Exception e) {
@@ -1767,12 +1767,12 @@ public class GMCommands {
 		}
 	}
 
-	private void 봇소환(L1PcInstance gm, String param) {
+	private void summonBot(L1PcInstance gm, String param) {
 		try{
 			StringTokenizer st = new StringTokenizer(param);
-			String 이름 = st.nextToken();
+			String name = st.nextToken();
 			
-			L1PcInstance target = L1World.getInstance().getPlayer(이름);
+			L1PcInstance target = L1World.getInstance().getPlayer(name);
 			new L1Teleport().teleport(target, gm.getX(), gm.getY(), gm.getMapId(), target.getHeading(), false);
 			gm.sendPackets(new S_SystemMessage("ゲームマスターに召喚されました。"));
 		} catch (Exception e) {
@@ -1821,7 +1821,7 @@ public class GMCommands {
         try {
             StringTokenizer st = new StringTokenizer(param);
             String type = st.nextToken();
-            if (type.equalsIgnoreCase("지속")) {
+            if (type.equalsIgnoreCase("continue")) {
                 try {
                     String select = st.nextToken();
                     int i = Integer.parseInt(st.nextToken());
@@ -1831,12 +1831,12 @@ public class GMCommands {
                     } catch (Exception exception) {
                         j = i;
                     }
-                    if (select.equalsIgnoreCase("표현")) {
+                    if (select.equalsIgnoreCase("rendering")) {
                         for (int k = i; k < j + 1; k++) {
                             pc.sendPackets(new S_SystemMessage("\\aAアイコン持続出力番号 : [\\aG" + k + "\\aA]"));
                             pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, k, true));
                         }
-                    } else if (select.equalsIgnoreCase("삭제")) {
+                    } else if (select.equalsIgnoreCase("delete")) {
                         for (int k = i; k < j + 1; k++) {
                             pc.sendPackets(new S_SystemMessage("\\aAアイコンの削除番号 : [\\aG" + k + "\\aA]"));
                             pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, k, false));
@@ -1847,7 +1847,7 @@ public class GMCommands {
                 } catch (Exception exception) {
                     pc.sendPackets(new S_SystemMessage("\\aIアイコン[持続] [表現or削除] [iまたはi〜j]"));
                 }
-            } else if (type.equalsIgnoreCase("연속")) {
+            } else if (type.equalsIgnoreCase("continuity")) {
                 try {
                     int i = Integer.parseInt(st.nextToken());
                     int j = 0;
@@ -1885,18 +1885,18 @@ public class GMCommands {
 		}
 	}
 	
-	private void 인형청소(L1PcInstance gm) {
+	private void cleaningDoll(L1PcInstance gm) {
 		int count = 0;
 		int ccount = 0;
 		for (Object obj : L1World.getInstance().getObject()) {
 			if (obj instanceof L1DollInstance) {
-				L1DollInstance 인형 = (L1DollInstance) obj;
-				if (인형.getMaster() == null) {
+				L1DollInstance doll = (L1DollInstance) obj;
+				if (doll.getMaster() == null) {
 					count++;
-					인형.deleteMe();
-				} else if (((L1PcInstance) 인형.getMaster()).getNetConnection() == null) {
+					doll.deleteMe();
+				} else if (((L1PcInstance) doll.getMaster()).getNetConnection() == null) {
 					ccount++;
-					인형.deleteMe();
+					doll.deleteMe();
 				}
 			}
 		}
@@ -1947,7 +1947,7 @@ public class GMCommands {
 	//広域追放範囲
 
 	
-			private void 퀴즈변경(L1PcInstance gm, String param) {
+			private void changeQuiz(L1PcInstance gm, String param) {
 				try {
 					StringTokenizer tok = new StringTokenizer(param);
 					String user = tok.nextToken();
@@ -1971,9 +1971,9 @@ public class GMCommands {
 					}
 					L1PcInstance target = L1World.getInstance().getPlayer(user);
 					if (target != null) {
-						퀴즈체인지(gm, target, newquiz);
+						changeQuiz(gm, target, newquiz);
 					} else {
-						if (!퀴즈체인지(gm, user, newquiz))
+						if (!changeQuiz(gm, user, newquiz))
 							gm.sendPackets(new S_SystemMessage("そのような名前を持つキャラクターはありません。"));
 					}
 				} catch (Exception e) {
@@ -2038,7 +2038,7 @@ public class GMCommands {
 		return check;
 	}
 
-	//인벤삭제
+	//インベントリ削除
 	private void InventoryDelete(L1PcInstance pc, String param) {
 		try {
 			for (L1ItemInstance item : pc.getInventory().getItems()) {
@@ -2076,7 +2076,7 @@ public class GMCommands {
 
 			if (user.length() < 4) {
 				gm.sendPackets(new S_SystemMessage("入力されたアカウント名の数字が短すぎます。"));
-				gm.sendPackets(new S_SystemMessage("최소 4자 이상 입력해 주십시오."));
+				gm.sendPackets(new S_SystemMessage("最低4文字以上入力してください。"));
 				return;
 			}
 			if (passwd.length() < 4) {
@@ -2121,10 +2121,10 @@ public class GMCommands {
 		 try {
 		  StringTokenizer tok = new StringTokenizer(param);
 		  String type = tok.nextToken();
-		  if (type.equalsIgnoreCase("리로드")) {
+		  if (type.equalsIgnoreCase("reload")) {
 		   NoShopAndWare.getInstance().reload();
 		   gm.sendPackets(new S_SystemMessage("倉庫不可の設定がリロードされました。"));
-		  } else if (type.equalsIgnoreCase("검색")) {
+		  } else if (type.equalsIgnoreCase("search")) {
 		   java.sql.Connection con = null;
 		   PreparedStatement pstm = null;
 		   ResultSet rs = null;
@@ -2163,14 +2163,14 @@ public class GMCommands {
 		    gm.sendPackets(new S_SystemMessage("該当のアイテムが見つかりません。"));
 		    return;
 		   }
-		   if (type.equalsIgnoreCase("추가")) {
+		   if (type.equalsIgnoreCase("add")) {
 		    if (NoShopAndWare.getInstance().isNoShopAndWare(itemid)) {
 		     gm.sendPackets(new S_SystemMessage("すでに倉庫不可リストにあります。"));
 		     return;
 		    }
 		    NoShopAndWare.getInstance().storeId(itemid);
 		    gm.sendPackets(new S_SystemMessage("倉庫不可項目に追加しました。"));
-		   } else if (type.equalsIgnoreCase("삭제")) {
+		   } else if (type.equalsIgnoreCase("delete")) {
 		    if (!NoShopAndWare.getInstance().isNoShopAndWare(itemid)) {
 		     gm.sendPackets(new S_SystemMessage("倉庫不可項目に該当アイテムがありません。"));
 		     return;
@@ -2190,10 +2190,10 @@ public class GMCommands {
 		 try {
 		  StringTokenizer tok = new StringTokenizer(param);
 		  String type = tok.nextToken();
-		  if (type.equalsIgnoreCase("리로드")) {
+		  if (type.equalsIgnoreCase("reload")) {
 		   NoDropItem.getInstance().reload();
 		   gm.sendPackets(new S_SystemMessage("ドロップ不可の設定がリロードされました。"));
-		  } else if (type.equalsIgnoreCase("검색")) {
+		  } else if (type.equalsIgnoreCase("search")) {
 		   java.sql.Connection con = null;
 		   PreparedStatement pstm = null;
 		   ResultSet rs = null;
@@ -2232,19 +2232,19 @@ public class GMCommands {
 		    gm.sendPackets(new S_SystemMessage("該当のアイテムが見つかりません。"));
 		    return;
 		   }
-		   if (type.equalsIgnoreCase("추가")) {
+		   if (type.equalsIgnoreCase("add")) {
 		    if (NoDropItem.getInstance().isNoDropItem(itemid)) {
 		     gm.sendPackets(new S_SystemMessage("すでにドロップ不可リストにあります。"));
 		     return;
 		    }
 		    NoDropItem.getInstance().storeId(itemid);
 		    gm.sendPackets(new S_SystemMessage("ドロップ不可アイテムに追加しました。"));
-		   } else if (type.equalsIgnoreCase("삭제")) {
+		   } else if (type.equalsIgnoreCase("delete")) {
 		    if (!NoDropItem.getInstance().isNoDropItem(itemid)) {
 		     gm.sendPackets(new S_SystemMessage("ドロップ不可アイテムに対応するアイテムがありません。"));
 		     return;
 		    }
-		    gm.sendPackets(new S_SystemMessage("드랍불가 항목에서 삭제 했습니다."));
+		    gm.sendPackets(new S_SystemMessage("ロップ不可アイテムから削除されました。"));
 		    NoDropItem.getInstance().deleteId(itemid);
 		   }
 		  }
@@ -2259,10 +2259,10 @@ public class GMCommands {
 		 try {
 		  StringTokenizer tok = new StringTokenizer(param);
 		  String type = tok.nextToken();
-		  if (type.equalsIgnoreCase("리로드")) {
+		  if (type.equalsIgnoreCase("reload")) {
 		   NoTradable.getInstance().reload();
 		   gm.sendPackets(new S_SystemMessage("ドロップ不可の設定がリロードされました。"));
-		  } else if (type.equalsIgnoreCase("검색")) {
+		  } else if (type.equalsIgnoreCase("search")) {
 		   java.sql.Connection con = null;
 		   PreparedStatement pstm = null;
 		   ResultSet rs = null;
@@ -2301,14 +2301,14 @@ public class GMCommands {
 		    gm.sendPackets(new S_SystemMessage("該当のアイテムが見つかりません。"));
 		    return;
 		   }
-		   if (type.equalsIgnoreCase("추가")) {
+		   if (type.equalsIgnoreCase("add")) {
 		    if (NoTradable.getInstance().isNoTradable(itemid)) {
 		     gm.sendPackets(new S_SystemMessage("すでに交換不可リストにあります。"));
 		     return;
 		    }
 		    NoTradable.getInstance().storeId(itemid);
 		    gm.sendPackets(new S_SystemMessage("交換不可の項目に追加しました。"));
-		   } else if (type.equalsIgnoreCase("삭제")) {
+		   } else if (type.equalsIgnoreCase("delete")) {
 		    if (!NoTradable.getInstance().isNoTradable(itemid)) {
 		     gm.sendPackets(new S_SystemMessage("交換不可の項目に該当する項目がありません。"));
 		     return;
@@ -2427,7 +2427,7 @@ public class GMCommands {
                 s_account = rs0.getString(1);
                 s_clan = rs0.getString(2);
                 gm.sendPackets(new S_SystemMessage("\\aD------------------------------------------"));
-                gm.sendPackets(new S_SystemMessage("\\aE캐릭 : " + s_name + "("+ s_account +")  クラン : " + s_clan));//+"  클래스:" + s_type
+                gm.sendPackets(new S_SystemMessage("\\aEキャラクター : " + s_name + "("+ s_account +")  クラン : " + s_clan));//+"  クラス:" + s_type
                 count0++;
             }
             java.sql.Connection con = null;
@@ -2463,19 +2463,19 @@ public class GMCommands {
         }
     }
 
-	// .계정 -----------------------------------------------------------------
+	// アカウント１ -----------------------------------------------------------------
 
 	private void Pvp(L1PcInstance gm, String param) {
 		try {
 			StringTokenizer st = new StringTokenizer(param);
 			String type = st.nextToken();
 
-			if (type.equals("켬")) {
+			if (type.equals("on")) {
 				Config.ALT_NONPVP = true;
 				Config.setParameterValue("AltNonPvP", "true");
 				L1World.getInstance().broadcastPacketToAll(
 						new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "今後のPvPが正常にできます。"));
-			} else if (type.equals("끔")) {
+			} else if (type.equals("off")) {
 				Config.ALT_NONPVP = false;
 				Config.setParameterValue("AltNonPvP", "false");
 				L1World.getInstance().broadcastPacketToAll(
@@ -2650,7 +2650,7 @@ public class GMCommands {
 				pstm = con.prepareStatement("UPDATE accounts SET password=? WHERE login Like '" + login + "'");
 				pstm.setString(1, password);
 				pstm.execute();
-				gm.sendPackets(new S_SystemMessage("암호변경 계정: [" + login + "]パスワード：[" + passwd + "]"));
+				gm.sendPackets(new S_SystemMessage("パスワードの変更アカウント：[" + login + "]パスワード：[" + passwd + "]"));
 				gm.sendPackets(new S_SystemMessage(pc.getName() + "パスワードの変更完了。"));
 			}
 		} catch (Exception e) {
@@ -2788,7 +2788,7 @@ public class GMCommands {
 			}
 		}	
 	
-	private void 퀴즈체인지(L1PcInstance gm, L1PcInstance pc, String newquiz) {
+	private void changeQuiz(L1PcInstance gm, L1PcInstance pc, String newquiz) {
 		PreparedStatement statement = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -2818,7 +2818,7 @@ public class GMCommands {
 			SQLUtil.close(con);
 		}
 	}
-	private boolean 퀴즈체인지(L1PcInstance pc, String name, String newquiz) {
+	private boolean changeQuiz(L1PcInstance pc, String name, String newquiz) {
 		PreparedStatement statement = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
@@ -2854,7 +2854,7 @@ public class GMCommands {
 	private static int delItemlist[] = { 307, 308, 309, 310, 311, 312, 313, 314, 21095, 
 										30146, 30147, 30150};
 	
-	public synchronized static void 아놀드이벤트삭제() {
+	public synchronized static void deleteArnoldEvent() {
 		try {
 			if (delItemlist.length <= 0)
 				return;

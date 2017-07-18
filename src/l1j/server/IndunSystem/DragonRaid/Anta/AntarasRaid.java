@@ -44,7 +44,7 @@ public class AntarasRaid {
 			AntarasMsgTimer Anta3Die = new AntarasMsgTimer(_id, type, stage);
 			GeneralThreadPool.getInstance().execute(Anta3Die);
 			break;
-		case 5: // 포탈 생성후 2시간후
+		case 5: // ポータルの作成後2時間後
 			EndRaid(_id);
 			break;
 		default:

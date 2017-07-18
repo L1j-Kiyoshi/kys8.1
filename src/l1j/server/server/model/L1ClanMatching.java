@@ -216,7 +216,7 @@ public class L1ClanMatching {
 				pc.addCMAList(username);
 			}
 		}catch (Exception e) {
-			_log.log(Level.SEVERE, "loadClanMatchingApcList_Crown, 오류 발생.", e);
+			_log.log(Level.SEVERE, "loadClanMatchingApcList_Crown、エラーが発生し。", e);
 		}finally{
 			SQLUtil.close(rs);
 			SQLUtil.close(pstm);

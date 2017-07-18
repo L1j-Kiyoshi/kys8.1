@@ -60,25 +60,25 @@ public class BattleZone implements Runnable {
 		_DuelOpen = duel;
 	}
 	//デュアル開始するかどうか
-	private boolean _진행;
+	private boolean _GetOn;
 
-	public boolean 배틀존진행() {
-		return _진행;
+	public boolean battleZoneGetOn() {
+		return _GetOn;
 	}
 
-	public void set배틀존진행(boolean flag) {
-		_진행 = flag;
+	public void setGetOn(boolean flag) {
+		_GetOn = flag;
 	}
 
 
-	private boolean _종료;
+	private boolean _End;
 
-	public boolean 배틀존종료() {
-		return _종료;
+	public boolean battleZoneEnd() {
+		return _End;
 	}
 
-	public void set배틀존종료(boolean flag) {
-		_종료 = flag;
+	public void setBattleZoneEnd(boolean flag) {
+		_End = flag;
 	}
 	//public int DuelCount;
 
@@ -86,21 +86,21 @@ public class BattleZone implements Runnable {
 
 	private boolean Close;
 
-	protected ArrayList<L1PcInstance> 배틀존유저 = new ArrayList<L1PcInstance>();
-	public void add배틀존유저(L1PcInstance pc) 	{
-		배틀존유저.add(pc);
+	protected ArrayList<L1PcInstance> battleZoneUser = new ArrayList<L1PcInstance>();
+	public void addBattleZoneUser(L1PcInstance pc) 	{
+		battleZoneUser.add(pc);
 	}
-	public void remove배틀존유저(L1PcInstance pc) 	{
-		배틀존유저.remove(pc); 
+	public void removeBattleZoneUser(L1PcInstance pc) 	{
+		battleZoneUser.remove(pc); 
 	}
-	public void clear배틀존유저() 					{ 
-		배틀존유저.clear();	  
+	public void clearBattleZoneUser() 					{ 
+		battleZoneUser.clear();	  
 	}
-	public boolean is배틀존유저(L1PcInstance pc) 	{ 
-		return 배틀존유저.contains(pc); 	
+	public boolean isBattleZoneUser(L1PcInstance pc) 	{ 
+		return battleZoneUser.contains(pc); 	
 	} 
-	public int get배틀존유저Count(){ 
-		return 배틀존유저.size();	
+	public int getBattleZoneUserCount(){ 
+		return battleZoneUser.size();	
 	}
 	
 	private boolean GmStart = false;
@@ -108,8 +108,8 @@ public class BattleZone implements Runnable {
 	public boolean getGmStart(){	return GmStart;	}
 	
 
-	public L1PcInstance[] toArray배틀존유저() {
-		return 배틀존유저.toArray(new L1PcInstance[배틀존유저.size()]);
+	public L1PcInstance[] toArrayBattleZoneUser() {
+		return battleZoneUser.toArray(new L1PcInstance[battleZoneUser.size()]);
 	}
 	public static BattleZone getInstance() {
 		if (_instance == null) {
@@ -124,13 +124,13 @@ public class BattleZone implements Runnable {
 		try {
 			while (true) {
 				try{
-					if(배틀존종료()== true){
+					if(battleZoneEnd()== true){
 						Thread.sleep(1000*60*60*2); //2時間の待機時間
-						set배틀존종료(false);
+						setBattleZoneEnd(false);
 					}else{
 						checkDuelTime(); // デュアル可能時間をチェック
-						if (배틀존진행() == true)	{
-							유저체크();
+						if (battleZoneGetOn() == true)	{
+							checkUser();
 						}
 						Thread.sleep(1000);
 					}
@@ -140,8 +140,8 @@ public class BattleZone implements Runnable {
 		}
 	}
 
-	private void 유저체크() {
-		L1PcInstance[] pc = toArray배틀존유저();
+	private void checkUser() {
+		L1PcInstance[] pc = toArrayBattleZoneUser();
 		for (int i = 0; i < pc.length; i++) {
 			if (pc[i] == null)
 				continue;
@@ -149,8 +149,8 @@ public class BattleZone implements Runnable {
 			if (pc[i].getMapId() == 5001 || pc[i].getMapId() == 5153) {
 				continue;
 			} else {
-				if (is배틀존유저(pc[i])) {
-					remove배틀존유저(pc[i]);
+				if (isBattleZoneUser(pc[i])) {
+					removeBattleZoneUser(pc[i]);
 				}
 				pc[i].set_DuelLine(0);
 			}
@@ -172,14 +172,14 @@ public class BattleZone implements Runnable {
 				{
 					setDuelOpen(true);
 					setDuelStart(true);
-					입장3분대기();
+					wait3MinuteEntry();
 				}
-				if (배틀존진행() == true)	{
-					L1PcInstance[] c = toArray배틀존유저();
+				if (battleZoneGetOn() == true)	{
+					L1PcInstance[] c = toArrayBattleZoneUser();
 					for (int i = 0; i < c.length; i++) {
 						if(c[i].getMapId() == 5001){
 							if(!c[i].isDead()){
-								배틀존입장(c[i]);
+								entryBattleZone(c[i]);
 							}
 						}
 					}
@@ -191,7 +191,7 @@ public class BattleZone implements Runnable {
 			}else{
 				//終了時間または強制終了であれば、
 				if(nowdueltime >= enddueltime || Close == true){
-					L1PcInstance[] c1 = toArray배틀존유저();
+					L1PcInstance[] c1 = toArrayBattleZoneUser();
 					for (int i = 0; i < c1.length; i++) {
 						if(c1[i].getMapId() == 5153){
 							if(!c1[i].isDead()){
@@ -221,7 +221,7 @@ public class BattleZone implements Runnable {
 						L1World.getInstance().broadcastServerMessage("\\fW* バトルゾーン終了！ 「ブルー」のラインと「レッド」のラインがタイです *");
 					}
 
-					L1PcInstance[] c2 = toArray배틀존유저();
+					L1PcInstance[] c2 = toArrayBattleZoneUser();
 					for (int i = 0; i < c2.length; i++) {  
 						if(c2[i] == null) continue;
 						if(c2[i].get_DuelLine() != 0){
@@ -283,19 +283,19 @@ public class BattleZone implements Runnable {
 					ment = null;
 					Announcements.getInstance().announceToAll("\\fW* プレミアムバトルゾーンに終了しました *");
 					//Announcements.getInstance().announceToAll("\\fW*バトルゾーンは3時間間隔で表示されます* "）;
-					set배틀존종료(true);
-					set배틀존진행(false);
+					setBattleZoneEnd(true);
+					setGetOn(false);
 					setDuelStart(false);
 					//	DuelCount = 0;
 					Close = false;
-					배틀존유저.clear();
+					battleZoneUser.clear();
 					setGmStart(false);
 				}else{
 					//立場が閉鎖された場合
 					if(!getDuelOpen()){
 						int count3 = 0;
 						int count4 = 0;
-						L1PcInstance[] c3 = toArray배틀존유저();
+						L1PcInstance[] c3 = toArrayBattleZoneUser();
 						for (int i = 0; i < c3.length; i++) {
 							if(c3[i] == null) continue;
 							//バトルゾーンであれば、
@@ -306,7 +306,7 @@ public class BattleZone implements Runnable {
 									}else if(c3[i].get_DuelLine() == 2){
 										count4 += 1;
 									}else{
-										remove배틀존유저(c3[i]);
+										removeBattleZoneUser(c3[i]);
 									}
 								}
 							}
@@ -326,7 +326,7 @@ public class BattleZone implements Runnable {
 
 	private void createMiniHp(L1PcInstance pc) {
 		// バトル時、お互いのHPを表示させる
-		for (L1PcInstance member : BattleZone.getInstance().toArray배틀존유저()) {
+		for (L1PcInstance member : BattleZone.getInstance().toArrayBattleZoneUser()) {
 			// 同じラインにhp表示
 			if (member != null) {
 				if (pc.get_DuelLine() == member.get_DuelLine()) {
@@ -338,7 +338,7 @@ public class BattleZone implements Runnable {
 	}
 
 	////バトルゾーン変身////////
-	private void 배틀존변신(L1PcInstance pc) {
+	private void polyBattleZone(L1PcInstance pc) {
 		if (pc == null)
 			return;
 		int DuelLine = pc.get_DuelLine();
@@ -376,9 +376,9 @@ public class BattleZone implements Runnable {
 	}
 	
 	
-	private void 배틀존입장(L1PcInstance pc) {
+	private void entryBattleZone(L1PcInstance pc) {
 		try {
-			배틀존변신(pc);
+			polyBattleZone(pc);
 			createMiniHp(pc);
 			if (pc.get_DuelLine() == 1) {
 				int ranx = 32628 + _random.nextInt(4);
@@ -390,13 +390,13 @@ public class BattleZone implements Runnable {
 				new L1Teleport().teleport(pc, ranx2, rany2, (short) 5153, 5, true);
 			}
 			
-			set배틀존진행(false);
+			setGetOn(false);
 		} catch (Exception e) {
 		}
 	}
 	
 	
-	public void 입장3분대기() {
+	public void wait3MinuteEntry() {
 		try {
 			Announcements.getInstance().announceToAll("3分後にチームプレミアムバトルゾーンを開催します。");
 			Announcements.getInstance().announceToAll("入場は先着順でギラン村ですることができます。");
@@ -423,7 +423,7 @@ public class BattleZone implements Runnable {
 				Thread.sleep(1000 * 5);
 			} catch (Exception e) {
 			}
-			set배틀존진행(true);
+			setGetOn(true);
 			setGmStart(true);
 		} catch (Exception e) {
 		}

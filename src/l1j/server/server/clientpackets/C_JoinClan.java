@@ -37,7 +37,7 @@ public class C_JoinClan extends ClientBasePacket {
 	}
 
 	private void JoinClan(L1PcInstance player, L1PcInstance target) {
-		if (!target.isCrown() && (target.getClanRank() != L1Clan.수호)) {
+		if (!target.isCrown() && (target.getClanRank() != L1Clan.GUARDIAN)) {
 			player.sendPackets(new S_SystemMessage(target.getName() + "は王子や王女守護記事がありません。"));
 			return;
 		}
@@ -54,7 +54,7 @@ public class C_JoinClan extends ClientBasePacket {
 			return;
 		}
 
-		if (target.getClanRank() != L1Clan.군주 && target.getClanRank() != L1Clan.수호) { 
+		if (target.getClanRank() != L1Clan.MONARCH && target.getClanRank() != L1Clan.GUARDIAN) { 
 			player.sendPackets(new S_SystemMessage(target.getName() + "は王子や王女守護記事がありません。"));
 			return;
 		}

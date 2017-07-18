@@ -75,9 +75,9 @@ public class C_Door extends ClientBasePacket {
 			if (door.getDoorId() >= 4100 && door.getDoorId() <= 4111) {
 				if (pc.getInventory().checkItem(40313, 1)) {
 					pc.getInventory().consumeItem(40313, 1);
-					pc.바포방 = true;
+					pc.baphomettRoom = true;
 				} else {
-					pc.바포방 = false;
+					pc.baphomettRoom = false;
 					return;
 				}
 			}

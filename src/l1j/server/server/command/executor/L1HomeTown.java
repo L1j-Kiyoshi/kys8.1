@@ -41,9 +41,9 @@ public class L1HomeTown implements L1CommandExecutor {
 		try {
 			StringTokenizer st = new StringTokenizer(arg);
 			String para1 = st.nextToken();
-			if (para1.equalsIgnoreCase("매일")) {
+			if (para1.equalsIgnoreCase("day")) {
 				HomeTownTimeController.getInstance(). dailyProc();
-			} else if (para1.equalsIgnoreCase("매달")) {
+			} else if (para1.equalsIgnoreCase("month")) {
 				HomeTownTimeController.getInstance(). monthlyProc();
 			} else {
 				throw new Exception();

@@ -701,7 +701,7 @@ public class Robot_ConnectAndRestart {
 				newPc.setClanid(rs.getInt("clanid"));
 				newPc.setClanname(rs.getString("clanname"));
 				if (newPc.getClanid() > 0)
-					newPc.setClanRank(L1Clan.수련);
+					newPc.setClanRank(L1Clan.TRAINING);
 				else
 					newPc.setClanRank(0);
 				newPc.setElfAttr(0);

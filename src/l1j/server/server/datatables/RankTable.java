@@ -30,21 +30,21 @@ public class RankTable {
 
 	private final ReentrantLock lock;
 	private Map<Integer, int[]> old_ranks;
-	private LinkedList<L1Rank> 전체, 군주, 기사, 요정, 법사, 다엘, 용기, 환술, 전사;
+	private LinkedList<L1Rank> ll_All, ll_Pri, ll_Kni, ll_Elf, ll_Wiz, ll_DE, ll_Drk, ll_Ill, ll_War;
 	private long lastUpdateTime;
 
 	private RankTable() {
 		lock = new ReentrantLock();
 		old_ranks = new HashMap<Integer, int[]>();
-		전체 = new LinkedList<L1Rank>();
-		군주 = new LinkedList<L1Rank>();
-		기사 = new LinkedList<L1Rank>();
-		요정 = new LinkedList<L1Rank>();
-		법사 = new LinkedList<L1Rank>();
-		다엘 = new LinkedList<L1Rank>();
-		용기 = new LinkedList<L1Rank>();
-		환술 = new LinkedList<L1Rank>();
-		전사 = new LinkedList<L1Rank>();
+		ll_All = new LinkedList<L1Rank>();
+		ll_Pri = new LinkedList<L1Rank>();
+		ll_Kni = new LinkedList<L1Rank>();
+		ll_Elf = new LinkedList<L1Rank>();
+		ll_Wiz = new LinkedList<L1Rank>();
+		ll_DE = new LinkedList<L1Rank>();
+		ll_Drk = new LinkedList<L1Rank>();
+		ll_Ill = new LinkedList<L1Rank>();
+		ll_War = new LinkedList<L1Rank>();
 		load();
 	}
 
@@ -75,21 +75,21 @@ public class RankTable {
 					rank.setClassRank(classes);
 					rank.setOldTotalRank(rs.getInt("old_total_rank"));
 					rank.setOldClassRank(rs.getInt("old_class_rank"));
-					rank.전체상승기회(rs.getBoolean("total_step_up"));
-					rank.전체추월위험(rs.getBoolean("total_step_down"));
-					rank.클래스상승기회(rs.getBoolean("class_step_up"));
-					rank.클래스추월위험(rs.getBoolean("class_step_down"));
+					rank.setTotalUpChance(rs.getBoolean("total_step_up"));
+					rank.setTotalOvertakingRisk(rs.getBoolean("total_step_down"));
+					rank.setClassUpChance(rs.getBoolean("class_step_up"));
+					rank.setClassOverTakingRisk(rs.getBoolean("class_step_down"));
 					switch (type) {
-					case 0: 군주.add(rank); break;
-					case 1: 기사.add(rank); break;
-					case 2: 요정.add(rank); break;
-					case 3: 법사.add(rank); break;
-					case 4: 다엘.add(rank); break;
-					case 5: 용기.add(rank); break;
-					case 6: 환술.add(rank); break;
-					case 7: 전사.add(rank); break;
+					case 0: ll_Pri.add(rank); break;
+					case 1: ll_Kni.add(rank); break;
+					case 2: ll_Elf.add(rank); break;
+					case 3: ll_Wiz.add(rank); break;
+					case 4: ll_DE.add(rank); break;
+					case 5: ll_Drk.add(rank); break;
+					case 6: ll_Ill.add(rank); break;
+					case 7: ll_War.add(rank); break;
 					}
-					전체.add(order++, rank);
+					ll_All.add(order++, rank);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -129,8 +129,8 @@ public class RankTable {
 	 */
 	private void setOldRank() {
 		old_ranks.clear();
-		for (int i = 0; i < 전체.size(); i++) {
-			L1Rank rank = 전체.get(i);
+		for (int i = 0; i < ll_All.size(); i++) {
+			L1Rank rank = ll_All.get(i);
 			if (rank == null) break;
 			old_ranks.put(rank.getId(), new int[] { rank.getTotalRank(), rank.getClassRank() });
 		}
@@ -141,7 +141,7 @@ public class RankTable {
 	 */
 	private void reLoadCurrentRank() {
 		allClear();
-		int 전체 = 0, 군주 = 0, 기사 = 0, 요정 = 0, 법사 = 0, 다엘 = 0, 용기 = 0, 환술 = 0, 전사 = 0;
+		int rank_All = 0, rank_Pri = 0, rank_Kni = 0, rank_Elf = 0, rank_Wiz = 0, rank_DE = 0, rank_Drk = 0, rank_Ill = 0, rank_War = 0;
 		try (Connection con = L1DatabaseFactory.getInstance().getConnection();
 				PreparedStatement pstm = con.prepareStatement("SELECT * FROM characters WHERE AccessLevel <> 9999 ORDER BY exp DESC LIMIT 1600");
 				ResultSet rs = pstm.executeQuery()) {
@@ -153,19 +153,19 @@ public class RankTable {
 				rank.setType(rs.getInt("Type"));
 				int exp = rs.getInt("Exp");
 				rank.setExp(exp);
-				rank.setTotalRank(전체 + 1);
+				rank.setTotalRank(rank_All + 1);
 				switch (rank.getType()) {
-				case 0: this.군주.add(rank); rank.setClassRank(++군주); break;
-				case 1: this.기사.add(rank); rank.setClassRank(++기사); break;
-				case 2: this.요정.add(rank); rank.setClassRank(++요정); break;
-				case 3: this.법사.add(rank); rank.setClassRank(++법사); break;
-				case 4: this.다엘.add(rank); rank.setClassRank(++다엘); break;
-				case 5: this.용기.add(rank); rank.setClassRank(++용기); break;
-				case 6: this.환술.add(rank); rank.setClassRank(++환술); break;
-				case 7: this.전사.add(rank); rank.setClassRank(++전사); break;
+				case 0: this.ll_Pri.add(rank); rank.setClassRank(++rank_Pri); break;
+				case 1: this.ll_Kni.add(rank); rank.setClassRank(++rank_Kni); break;
+				case 2: this.ll_Elf.add(rank); rank.setClassRank(++rank_Elf); break;
+				case 3: this.ll_Wiz.add(rank); rank.setClassRank(++rank_Wiz); break;
+				case 4: this.ll_DE.add(rank); rank.setClassRank(++rank_DE); break;
+				case 5: this.ll_Drk.add(rank); rank.setClassRank(++rank_Drk); break;
+				case 6: this.ll_Ill.add(rank); rank.setClassRank(++rank_Ill); break;
+				case 7: this.ll_War.add(rank); rank.setClassRank(++rank_War); break;
 				}
-				this.전체.add(전체, rank);
-				전체++;
+				this.ll_All.add(rank_All, rank);
+				rank_All++;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -176,8 +176,8 @@ public class RankTable {
 	 * 現在の全体ランキングと既存の全ランキングを比較分析。
 	 */
 	private void operateTotalRank() {
-		for (int i = 0; i < 전체.size(); i++) {
-			L1Rank rank = 전체.get(i);
+		for (int i = 0; i < ll_All.size(); i++) {
+			L1Rank rank = ll_All.get(i);
 			if (rank == null) break;
 			L1PcInstance pc = L1World.getInstance().getPlayer(rank.getName());
 			if (pc != null && rank.getRankLevel() == 4) {
@@ -205,21 +205,21 @@ public class RankTable {
 			int down_index = i + 1;
 
 			if (up_index >= 0) {
-				L1Rank up = 전체.get(up_index);
+				L1Rank up = ll_All.get(up_index);
 				int up_exp = up.getExp() - exp;
 				boolean totalStepUpChance = exp * 0.05 > up_exp;
-				rank.전체상승기회(totalStepUpChance);
+				rank.setTotalUpChance(totalStepUpChance);
 			} else {
-				rank.전체상승기회(false);
+				rank.setTotalUpChance(false);
 			}
 
-			if (down_index < 전체.size()) {
-				L1Rank down = 전체.get(down_index);
+			if (down_index < ll_All.size()) {
+				L1Rank down = ll_All.get(down_index);
 				int down_exp = exp - down.getExp();
 				boolean totalStepDownChance = exp * 0.05 > down_exp;
-				rank.전체추월위험(totalStepDownChance);
+				rank.setTotalOvertakingRisk(totalStepDownChance);
 			} else {
-				rank.전체추월위험(false);
+				rank.setTotalOvertakingRisk(false);
 			}
 		}
 	}
@@ -240,18 +240,18 @@ public class RankTable {
 					L1Rank up = temp_ranks.get(up_index);
 					int up_exp = up.getExp() - exp;
 					boolean totalStepUpChance = exp * 0.05 > up_exp;
-					rank.클래스상승기회(totalStepUpChance);
+					rank.setClassUpChance(totalStepUpChance);
 				} else {
-					rank.클래스상승기회(false);
+					rank.setClassUpChance(false);
 				}
 
 				if (down_index < temp_ranks.size()) {
 					L1Rank down = temp_ranks.get(down_index);
 					int down_exp = exp - down.getExp();
 					boolean totalStepDownChance = exp * 0.05 > down_exp;
-					rank.클래스추월위험(totalStepDownChance);
+					rank.setClassOverTakingRisk(totalStepDownChance);
 				} else {
-					rank.클래스추월위험(false);
+					rank.setClassOverTakingRisk(false);
 				}
 			}
 		}
@@ -264,8 +264,8 @@ public class RankTable {
 		clearDB();
 		final String ment = "INSERT INTO character_rank SET char_id=?,account_name=?,name=?,type=?,exp=?,total_rank=?,class_rank=?,old_total_rank=?,old_class_rank=?,total_step_up=?,total_step_down=?,class_step_up=?,class_step_down=?";
 		try (Connection con = L1DatabaseFactory.getInstance().getConnection()) {
-			for (int a = 0; a < 전체.size(); a++) {
-				L1Rank rank = 전체.get(a);
+			for (int a = 0; a < ll_All.size(); a++) {
+				L1Rank rank = ll_All.get(a);
 				if (rank == null) break;
 				int i = 0;
 				try (PreparedStatement pstm = con.prepareStatement(ment)) {
@@ -278,10 +278,10 @@ public class RankTable {
 					pstm.setInt(++i, rank.getClassRank());
 					pstm.setInt(++i, rank.getOldTotalRank());
 					pstm.setInt(++i, rank.getOldClassRank());
-					pstm.setBoolean(++i, rank.전체상승기회());
-					pstm.setBoolean(++i, rank.전체추월위험());
-					pstm.setBoolean(++i, rank.클래스상승기회());
-					pstm.setBoolean(++i, rank.클래스추월위험());
+					pstm.setBoolean(++i, rank.getTotalUpChance());
+					pstm.setBoolean(++i, rank.getTotalOvertakingRisk());
+					pstm.setBoolean(++i, rank.getClassUpChance());
+					pstm.setBoolean(++i, rank.getClassOverTakingRisk());
 					pstm.execute();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -316,7 +316,7 @@ public class RankTable {
 			if (rs.next()) {
 				int rank = rs.getInt("total_rank");
 				if (rank <= 100) {
-					L1Rank r = 전체.get(rank - 1);
+					L1Rank r = ll_All.get(rank - 1);
 					int exp = 0;
 					Connection conn2 = null;
 					PreparedStatement pstm2 = null;
@@ -349,7 +349,7 @@ public class RankTable {
 	}
 
 	public L1Rank getRankByName(String name) {
-		for (L1Rank rank : 전체) {
+		for (L1Rank rank : ll_All) {
 			if (rank.getName().equals(name) && rank.getRankLevel() > 0) return rank; 
 		}
 		return null;
@@ -357,28 +357,28 @@ public class RankTable {
 
 	public LinkedList<L1Rank> getMapByClass(int classType) {
 		switch (classType) {
-		case 0: return 군주;
-		case 1: return 기사;
-		case 2: return 요정;
-		case 3: return 법사;
-		case 4: return 다엘;
-		case 5: return 용기;
-		case 6: return 환술;
-		case 7: return 전사;
-		default : return 전체;
+		case 0: return ll_Pri;
+		case 1: return ll_Kni;
+		case 2: return ll_Elf;
+		case 3: return ll_Wiz;
+		case 4: return ll_DE;
+		case 5: return ll_Drk;
+		case 6: return ll_Ill;
+		case 7: return ll_War;
+		default : return ll_All;
 		}
 	}
 
 	private void allClear() {
-		전체.clear();
-		군주.clear();
-		기사.clear();
-		요정.clear();
-		법사.clear();
-		다엘.clear();
-		용기.clear();
-		환술.clear();
-		전사.clear();
+		ll_All.clear();
+		ll_Pri.clear();
+		ll_Kni.clear();
+		ll_Elf.clear();
+		ll_Wiz.clear();
+		ll_DE.clear();
+		ll_Drk.clear();
+		ll_Ill.clear();
+		ll_War.clear();
 	}
 
 	public long getLastUpdateTime() { return lastUpdateTime; }

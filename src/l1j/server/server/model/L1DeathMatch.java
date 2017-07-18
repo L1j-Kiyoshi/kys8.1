@@ -95,10 +95,10 @@ public class L1DeathMatch implements Runnable {
 					}
 				}
 
-				대미지감소(executeCount1 * 10);
-				남은사람();
+				decreaseDamage(executeCount1 * 10);
+				getRemainingMembers();
 				if (playerCount == 1) {
-					우승자종료();
+					endWinner();
 				}
 				++executeCount2;
 				GeneralThreadPool.getInstance().schedule(this, 3000L);
@@ -115,7 +115,7 @@ public class L1DeathMatch implements Runnable {
 		}
 	}
 
-	private void 남은사람() {
+	private void getRemainingMembers() {
 		playerCount = 0;
 		String str;
 		for (L1PcInstance pc : getMembersArray()) {
@@ -131,7 +131,7 @@ public class L1DeathMatch implements Runnable {
 		}
 	}
 
-	private void 대미지감소(int i) {
+	private void decreaseDamage(int i) {
 		for (L1PcInstance pc : getMembersArray()) {
 			if (pc.isDead()) {
 				return;
@@ -180,7 +180,7 @@ public class L1DeathMatch implements Runnable {
 		}
 	}
 
-	public void 우승자종료() {
+	public void endWinner() {
 		for (L1PcInstance pc : getMembersArray()) {
 			if (pc.getMapId() == 5153) {
 				if (pc.isGhost()) {

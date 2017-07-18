@@ -169,7 +169,7 @@ public class L1AccountAttendance {
 				chulcheckday.set(checkday-1, 2);
 				L1Attendance cc = AttendanceTable.getInstance().get(checkday);				
 				
-				pc.sendPackets(new S_Attendance(S_Attendance.출석완료, location, checkday));
+				pc.sendPackets(new S_Attendance(S_Attendance.attended, location, checkday));
 				pc.getInventory().storeItem(cc.getItem().getItemId(), cc.getCount());
 				pc.sendPackets(new S_SystemMessage(pc, cc.getItem().getName() + "を獲得しました。"));
 				this.setToday(today);

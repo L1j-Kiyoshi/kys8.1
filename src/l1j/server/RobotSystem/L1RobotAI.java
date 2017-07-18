@@ -337,7 +337,7 @@ public class L1RobotAI {
 		}
 	}
 
-	public void 허수아비처리(long time) {
+	public void scarecrowProcess(long time) {
 		try {
 
 			if (!isAi(time)) {

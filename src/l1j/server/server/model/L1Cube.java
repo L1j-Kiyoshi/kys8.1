@@ -163,7 +163,7 @@ public class L1Cube {
 		public void execute() {
 			try {
 				for (L1NpcInstance npc : toArray(1)) {
-					// 지속시간이 끝났다면
+					// 持続時間が終わったら
 					if (npc == null || npc.Cube()) {
 						try {
 							npc.setCubePc(null);

@@ -697,53 +697,53 @@ public class L1PcInstance extends L1Character {
         return _Reper;
     }
 
-    private boolean _그림리퍼 = false;
-    public void set그림리퍼(boolean flag) {	 _그림리퍼 = flag;  }
-    public boolean get그림리퍼() {	return _그림리퍼;}
+    private boolean _GrimReaper = false;
+    public void setGrimReaper(boolean flag) {	 _GrimReaper = flag;  }
+    public boolean getGrimReaper() {	return _GrimReaper;}
 
-    private boolean _제니스 = false;
-    public void set제니스(boolean flag) {	 _제니스 = flag;  }
-    public boolean get제니스() {	return _제니스;}
+    private boolean _Zenis = false;
+    public void setZenis(boolean flag) {	 _Zenis = flag;  }
+    public boolean getZenis() {	return _Zenis;}
 
-    private boolean _시어 = false;
-    public void set시어(boolean flag) {	 _시어 = flag;  }
-    public boolean get시어() {	return _시어;}
+    private boolean _Sia = false;
+    public void setSia(boolean flag) {	 _Sia = flag;  }
+    public boolean getSia() {	return _Sia;}
 
-    private boolean _뱀파이어 = false;
-    public void set뱀파이어(boolean flag) {	 _뱀파이어 = flag;  }
-    public boolean get뱀파이어() {	return _뱀파이어;}
+    private boolean _Vampire = false;
+    public void setVampire(boolean flag) {	 _Vampire = flag;  }
+    public boolean getVampire() {	return _Vampire;}
 
-    private boolean _좀비로드 = false;
-    public void set좀비로드(boolean flag) {	 _좀비로드 = flag;  }
-    public boolean get좀비로드() {	return _좀비로드;}
+    private boolean _ZombieLoad = false;
+    public void setZombieLoad(boolean flag) {	 _ZombieLoad = flag;  }
+    public boolean getZombieLoad() {	return _ZombieLoad;}
 
-    private boolean _쿠거 = false;
-    public void set쿠거(boolean flag) {	 _쿠거 = flag;  }
-    public boolean get쿠거() {	return _쿠거;}
+    private boolean _Cougar = false;
+    public void setCougar(boolean flag) {	 _Cougar = flag;  }
+    public boolean getCougar() {	return _Cougar;}
 
-    private boolean _머미로드 = false;
-    public void set머미로드(boolean flag) {	 _머미로드 = flag;  }
-    public boolean get머미로드() {	return _머미로드;}
+    private boolean _MummyLord = false;
+    public void setMummyLord(boolean flag) {	 _MummyLord = flag;  }
+    public boolean getMummyLord() {	return _MummyLord;}
 
-    private boolean _아이리스 = false;
-    public void set아이리스(boolean flag) {	 _아이리스 = flag;  }
-    public boolean get아이리스() {	return _아이리스;}
+    private boolean _Iris = false;
+    public void setIris(boolean flag) {	 _Iris = flag;  }
+    public boolean getIris() {	return _Iris;}
 
-    private boolean _나이트발드 = false;
-    public void set나이트발드(boolean flag) {	 _나이트발드 = flag;  }
-    public boolean get나이트발드() {	return _나이트발드;}
+    private boolean _KnightBald = false;
+    public void setKnightBald(boolean flag) {	 _KnightBald = flag;  }
+    public boolean getKnightBald() {	return _KnightBald;}
 
-    private boolean _리치 = false;
-    public void set리치(boolean flag) {	 _리치 = flag;  }
-    public boolean get리치() {	return _리치;}
+    private boolean _Lich = false;
+    public void setLich(boolean flag) {	 _Lich = flag;  }
+    public boolean getLich() {	return _Lich;}
 
-    private boolean _우그니스 = false;
-    public void set우그니스(boolean flag) {	 _우그니스 = flag;  }
-    public boolean get우그니스() {	return _우그니스;}
+    private boolean _Ugnus = false;
+    public void setUgnus(boolean flag) {	 _Ugnus = flag;  }
+    public boolean getUgnus() {	return _Ugnus;}
 
-    private boolean _발록 = false;
-    public void set발록(boolean flag) {	 _발록 = flag;  }
-    public boolean get발록() {	return _발록;}
+    private boolean _Balrog = false;
+    public void setBalrog(boolean flag) {	 _Balrog = flag;  }
+    public boolean getBalrog() {	return _Balrog;}
 
 
 
@@ -759,9 +759,9 @@ public class L1PcInstance extends L1Character {
 	public boolean TRIPLE = false;
 
     // 文章注視変数
-    public boolean 문장주시 = false;
+    public boolean watchCrest = false;
 
-    public boolean 몹다운 = false;
+    public boolean monsterDown = false;
 
     public int _x;
 
@@ -792,7 +792,7 @@ public class L1PcInstance extends L1Character {
     public int dy = 0;
     public short dm = 0;
     public int dh = 0;
-    public int 상점변신 = 0;
+    public int shopPoly = 0;
     /** キャラクター別追加ダメージ、追加リダクション、確率 **/
     private int _AddDamage = 0;
     private int _AddDamageRate = 0;
@@ -843,9 +843,9 @@ public class L1PcInstance extends L1Character {
         _ubscore = i;
     }
 
-    public byte[] 페어리정보 = new byte[512];
+    public byte[] fairyInfo = new byte[512];
 
-    public void 페어리경험치보상(int lv) {
+    public void fairyExpReward(int lv) {
         int needExp = ExpTable.getNeedExpNextLevel(lv);
         int addexp = 0;
         addexp = (int) (needExp * 0.01);
@@ -859,14 +859,14 @@ public class L1PcInstance extends L1Character {
         }
     }
 
-    public void 페어리정보저장(int id) {
+    public void saveFairyInfo(int id) {
         int count = fairlycount(getId());
-        페어리정보[id] = 1;
+        fairyInfo[id] = 1;
         if (count == 0) {
-            fairlystore(getId(), 페어리정보);
+            fairlystore(getId(), fairyInfo);
         } else {
 
-            fairlupdate(getId(), 페어리정보);
+            fairlupdate(getId(), fairyInfo);
         }
     }
 
@@ -1245,17 +1245,17 @@ public class L1PcInstance extends L1Character {
     public int[] PiersItemId = new int[19];
     public int[] PiersEnchant = new int[19];
 
-    private boolean _텔대기 = false;
+    private boolean _TelWait = false;
     private boolean _isElrzabe = false;
     private boolean _isSandWarm = false;
-    private boolean _is드레이크 = false;
-    private boolean _is제로스 = false;
-    private boolean _is기르타스 = false;
-    private boolean _is대왕오징어 = false;
-    private boolean _is발라카스 = false;
-    private boolean _is파푸리온 = false;
-    private boolean _is린드비오르 = false;
-    private boolean _is안타라스 = false;
+    private boolean _isDrake = false;
+    private boolean _isZeros = false;
+    private boolean _isGirtas = false;
+    private boolean _isKingSquid = false;
+    private boolean _isValakas = false;
+    private boolean _isFafurion = false;
+    private boolean _isLindvior = false;
+    private boolean _isAntaras = false;
 
 	public boolean setValakaseDmgDouble = false;
 
@@ -1269,8 +1269,8 @@ public class L1PcInstance extends L1Character {
     // 3.63アイテムパケット追加
     public boolean isDanteasBuff = false;
 
-    public boolean 서버다운중 = false;
-    public boolean 바포방 = false;
+    public boolean serverDown = false;
+    public boolean baphomettRoom = false;
     // ジェンドール製作関連
     public int _getCount;
 
@@ -1394,68 +1394,68 @@ public class L1PcInstance extends L1Character {
         return _isSandWarm;
     }
 
-    public void set드레이크(boolean flag) {
-        _is드레이크 = flag;
+    public void setDrake(boolean flag) {
+        _isDrake = flag;
     }
 
-    public boolean is드레이크() {
-        return _is드레이크;
+    public boolean isDrake() {
+        return _isDrake;
     }
 
-    public void set제로스(boolean flag) {
-        _is제로스 = flag;
+    public void setZeros(boolean flag) {
+        _isZeros = flag;
     }
 
-    public boolean is제로스() {
-        return _is제로스;
+    public boolean isZeros() {
+        return _isZeros;
     }
 
-    public void set기르타스(boolean flag) {
-        _is기르타스 = flag;
+    public void setisGirtas(boolean flag) {
+        _isGirtas = flag;
     }
 
-    public boolean is기르타스() {
-        return _is기르타스;
+    public boolean isGirtas() {
+        return _isGirtas;
     }
 
-    public void set대왕오징어(boolean flag) {
-        _is대왕오징어 = flag;
+    public void setKingSquid(boolean flag) {
+        _isKingSquid = flag;
     }
 
-    public boolean is대왕오징어() {
-        return _is대왕오징어;
+    public boolean isKingSquid() {
+        return _isKingSquid;
     }
 
-    public void set발라카스(boolean flag) {
-        _is발라카스 = flag;
+    public void setValakas(boolean flag) {
+        _isValakas = flag;
     }
 
-    public boolean is발라카스() {
-        return _is발라카스;
+    public boolean isValakas() {
+        return _isValakas;
     }
 
-    public void set파푸리온(boolean flag) {
-        _is파푸리온 = flag;
+    public void setFafurion(boolean flag) {
+        _isFafurion = flag;
     }
 
-    public boolean is파푸리온() {
-        return _is파푸리온;
+    public boolean isFafurion() {
+        return _isFafurion;
     }
 
-    public void set린드비오르(boolean flag) {
-        _is린드비오르 = flag;
+    public void setLindvior(boolean flag) {
+        _isLindvior = flag;
     }
 
-    public boolean is린드비오르() {
-        return _is린드비오르;
+    public boolean isLindvior() {
+        return _isLindvior;
     }
 
-    public void set안타라스(boolean flag) {
-        _is안타라스 = flag;
+    public void setAntaras(boolean flag) {
+        _isAntaras = flag;
     }
 
-    public boolean is안타라스() {
-        return _is안타라스;
+    public boolean isAntaras() {
+        return _isAntaras;
     }
 
     public long getNpcActionTime() {
@@ -1689,10 +1689,10 @@ public class L1PcInstance extends L1Character {
             int percent = ExpTable.getExpPercentage(char_level, getExp());
             if (char_level >= 60 && char_level <= 64) {
                 if (percent >= 10)
-                    removeSkillEffect(L1SkillId.레벨업보너스);
+                    removeSkillEffect(L1SkillId.LEVEL_UP_BONUS);
             } else if (char_level >= 65) {
                 if (percent >= 5) {
-                    removeSkillEffect(L1SkillId.레벨업보너스);
+                    removeSkillEffect(L1SkillId.LEVEL_UP_BONUS);
                 }
             }
             return;
@@ -1701,12 +1701,12 @@ public class L1PcInstance extends L1Character {
         if (gap > 0) {
             levelUp(gap);
             if (getLevel() >= 60) {
-                setSkillEffect(L1SkillId.레벨업보너스, 10800000);
+                setSkillEffect(L1SkillId.LEVEL_UP_BONUS, 10800000);
                 sendPackets(new S_PacketBox(10800, true, true), true);
             }
         } else if (gap < 0) {
             levelDown(gap);
-            removeSkillEffect(L1SkillId.레벨업보너스);
+            removeSkillEffect(L1SkillId.LEVEL_UP_BONUS);
         }
     }
 
@@ -1947,7 +1947,7 @@ public class L1PcInstance extends L1Character {
         }
         /** バトルゾーン **/
         if (getMapId() == 5153 && get_DuelLine() != 0) {
-            for (L1PcInstance member : BattleZone.getInstance().toArray배틀존유저()) {
+            for (L1PcInstance member : BattleZone.getInstance().toArrayBattleZoneUser()) {
                 if (member != null) {
                     if (get_DuelLine() == member.get_DuelLine()) {
                         member.sendPackets(new S_HPMeter(this));
@@ -1970,7 +1970,7 @@ public class L1PcInstance extends L1Character {
         }
         /** バトルゾーン **/
         if (getMapId() == 5153 && get_DuelLine() != 0) {
-            for (L1PcInstance member : BattleZone.getInstance().toArray배틀존유저()) {
+            for (L1PcInstance member : BattleZone.getInstance().toArrayBattleZoneUser()) {
                 if (member != null) {
                     if (get_DuelLine() == member.get_DuelLine()) {
                         member.sendPackets(new S_HPMeter(this));
@@ -2326,7 +2326,7 @@ public class L1PcInstance extends L1Character {
     }
 
     private boolean _destroyed = false;
-    public void 상점아이템매입삭제(int objid, int itemid, int type2) {// アイテム名別販売購入
+    public void removeShopItemPurchase(int objid, int itemid, int type2) {// アイテム名別販売購入
 			// 区分し、削除
 	Connection con = null;
 	PreparedStatement pstm = null;
@@ -2346,7 +2346,7 @@ public class L1PcInstance extends L1Character {
 	}
 	}
 
-	public void 상점아이템삭제(int objid, int itemid, int type2) {// アイテム名別販売購入区分した後
+	public void deleteStoreItem(int objid, int itemid, int type2) {// アイテム名別販売購入区分した後
 		// 削除
 	Connection con = null;
 	PreparedStatement pstm = null;
@@ -2366,7 +2366,7 @@ public class L1PcInstance extends L1Character {
 	}
 	}
 
-	public void 상점아이템매입업데이트(int objid, int itemid, int type2, int count1) {
+	public void updateShopItemPurchase(int objid, int itemid, int type2, int count1) {
 	Connection con = null;
 	PreparedStatement pstm = null;
 	try {
@@ -2386,7 +2386,7 @@ public class L1PcInstance extends L1Character {
 	}
 	}
 
-	public void 상점아이템업데이트(int objid, int itemid, int type2, int count1) {
+	public void updatestoreItem(int objid, int itemid, int type2, int count1) {
 	Connection con = null;
 	PreparedStatement pstm = null;
 	try {
@@ -2406,7 +2406,7 @@ public class L1PcInstance extends L1Character {
 	}
 	}
 
-	public void 상점아이템삭제(int objid) {
+	public void deleteStoreItem(int objid) {
 	Connection con = null;
 	PreparedStatement pstm = null;
 	try {
@@ -2601,12 +2601,12 @@ public class L1PcInstance extends L1Character {
             AttackController.stop(this);
     }
 
-    public boolean 텔대기() {
-        return _텔대기;
+    public boolean getTelWait() {
+        return _TelWait;
     }
 
-    public void 텔대기(boolean flag) {
-        _텔대기 = flag;
+    public void setTelWait(boolean flag) {
+        _TelWait = flag;
     }
 
     public boolean isDrink() {
@@ -3701,7 +3701,7 @@ public class L1PcInstance extends L1Character {
             	int price = getHuntPrice();
                 if (Config.BROADCAST_KILL_LOG && getLevel() >= Config.BROADCAST_KILL_LOG_LEVEL) {
                     L1World.getInstance().broadcastPacketToAll(new S_ChatPacket(
-                    "\\aH[" + player.getName() + "]\\aA 님이 \\aG[" + getName() + "]\\aA 様を殺した。", Opcodes.S_MESSAGE));
+                    "\\aH[" + player.getName() + "]\\aA 様が \\aG[" + getName() + "]\\aA 様を殺した。", Opcodes.S_MESSAGE));
                     player.setKills(player.getKills() + 1); // 勝った超えキルス+1
                     setDeaths(getDeaths() + 1); // ジンノムデス数+1
                     LinAllManagerInfoThread.PvPCount += 1;
@@ -4680,7 +4680,7 @@ public class L1PcInstance extends L1Character {
 
         /** 特定のレップ以上の初心者血盟自動脱退 **/
         String BloodName = getClanname();
-        if (getLevel() >= Config.NEW_CLAN_PROTECTION_LEVEL && BloodName.equalsIgnoreCase("신규보호혈맹")) {
+        if (getLevel() >= Config.NEW_CLAN_PROTECTION_LEVEL && BloodName.equalsIgnoreCase("新規保護血盟")) {
             try {
                 L1Clan clan = L1World.getInstance().getClan("新規保護血盟");
                 L1PcInstance clanMember[] = clan.getOnlineClanMember();
@@ -5432,10 +5432,10 @@ public class L1PcInstance extends L1Character {
             int percent = ExpTable.getExpPercentage(char_level, getExp());
             if (char_level >= 60 && char_level <= 64) {
                 if (percent >= 10)
-                    removeSkillEffect(L1SkillId.레벨업보너스);
+                    removeSkillEffect(L1SkillId.LEVEL_UP_BONUS);
             } else if (char_level >= 65) {
                 if (percent >= 5) {
-                    removeSkillEffect(L1SkillId.레벨업보너스);
+                    removeSkillEffect(L1SkillId.LEVEL_UP_BONUS);
                 }
             }
             return;
@@ -5445,12 +5445,12 @@ public class L1PcInstance extends L1Character {
         if (gap > 0) {
             levelUp(gap);
             if (getLevel() >= 60) {
-                setSkillEffect(L1SkillId.레벨업보너스, 10800000);
+                setSkillEffect(L1SkillId.LEVEL_UP_BONUS, 10800000);
                 sendPackets(new S_PacketBox(10800, true, true), true);
             }
         } else if (gap < 0) {
             levelDown(gap);
-            removeSkillEffect(L1SkillId.레벨업보너스);
+            removeSkillEffect(L1SkillId.LEVEL_UP_BONUS);
         }
     }
 
@@ -5548,7 +5548,7 @@ public class L1PcInstance extends L1Character {
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
             pstm = con.prepareStatement(
-                    "SELECT `TamEndTime` FROM `characters` WHERE account_name = ? ORDER BY `TamEndTime` ASC"); // 케릭터
+                    "SELECT `TamEndTime` FROM `characters` WHERE account_name = ? ORDER BY `TamEndTime` ASC"); // キャラクター
             pstm.setString(1, getAccountName());
             rs = pstm.executeQuery();
             while (rs.next()) {
@@ -5617,7 +5617,7 @@ public class L1PcInstance extends L1Character {
                                 }
                                 con2 = L1DatabaseFactory.getInstance().getConnection();
                                 pstm2 = con2.prepareStatement(
-                                        "UPDATE `characters` SET TamEndTime=? WHERE account_name = ? AND objid = ?"); // 케릭터 테이블에서 군주만 골라와서
+                                        "UPDATE `characters` SET TamEndTime=? WHERE account_name = ? AND objid = ?"); // キャラクターテーブルで君主だけ上がってきて
                                 pstm2.setTimestamp(1, deleteTime);
                                 pstm2.setString(2, getAccountName());
                                 pstm2.setInt(3, char_objid);
@@ -6330,14 +6330,14 @@ public class L1PcInstance extends L1Character {
         _accessoryHeal += 1;
     }
 
-    public int _트루타켓 = 0;
+    public int _TrueTarget = 0;
 
-    public int get트루타켓() {
-        return _트루타켓;
+    public int getTrueTarget() {
+        return _TrueTarget;
     }
 
-    public void set트루타켓(int i) {
-        _트루타켓 = i;
+    public void setTrueTarget(int i) {
+        _TrueTarget = i;
     }
 
     public void setLastEnchantItemid(int i, L1ItemInstance item) {

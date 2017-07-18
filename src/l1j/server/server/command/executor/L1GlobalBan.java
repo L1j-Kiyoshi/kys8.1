@@ -31,7 +31,7 @@ public class L1GlobalBan implements L1CommandExecutor {
 				GameClient client = target.getNetConnection();
 
 				if (client == null) {
-					pc.sendPackets(new S_SystemMessage("접속중이지 않은 캐릭터에 대해 조회할 수 없습니다."));
+					pc.sendPackets(new S_SystemMessage("接続中でないキャラクターに対して照会することができません。"));
 					return;
 				}
 
@@ -47,7 +47,7 @@ public class L1GlobalBan implements L1CommandExecutor {
 
 						if (cClass.equals(getCClass(otherPcIp))) {
 							otherPc.sendPackets(new S_Disconnect());
-							pc.sendPackets(new S_SystemMessage("접속 중인 캐릭터 [" + otherPc.getName() + "]를 추방했습니다."));
+							pc.sendPackets(new S_SystemMessage("接続中のキャラクター[" + otherPc.getName() + "]を追放しました。"));
 						}
 					}
 				}
@@ -56,11 +56,11 @@ public class L1GlobalBan implements L1CommandExecutor {
 				banGlobalAccounts(targetIp);
 
 			} else {
-				pc.sendPackets(new S_SystemMessage("그러한 이름의 캐릭터는 월드내에는 존재하지 않습니다. "));
+				pc.sendPackets(new S_SystemMessage("そのような名前のキャラクターは、ワールド内には存在しません。"));
 			}
 
 		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + " [캐릭터명] 으로 입력해 주세요. "));
+			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
 		}
 	}
 

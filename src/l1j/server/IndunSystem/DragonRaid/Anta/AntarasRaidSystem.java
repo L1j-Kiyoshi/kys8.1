@@ -262,9 +262,9 @@ public class AntarasRaidSystem {
 		L1SpawnUtil.spawn2(pc.getX(), pc.getY(), pc.getMapId(), 900007, 0, 3600 * 1000, id); // ヒットポータル出現
 		L1SpawnUtil.spawn2(32703, 32669, (short)id, 900008, 0, 3600 * 1000, id);//[アンタラス待機部屋] =>ヒットレア
 		L1SpawnUtil.spawn2(32703, 32670, (short)id, 900008, 0, 3600 * 1000, id);//[アンタラス待機部屋] =>ヒットレア
-		L1SpawnUtil.spawn2(32623, 32725, (short)id, 810851, 0, 3600 * 1000, id);//[안타라스대기방] => 안타레어
+		L1SpawnUtil.spawn2(32623, 32725, (short)id, 810851, 0, 3600 * 1000, id);//[アンタラス待機部屋] =>ヒットレア
 		_list.put(id, ar);
-		AntarasRaidTimer RaidEndTime = new AntarasRaidTimer(ar, 5, 0, 3500 * 1000);// 2시간 7200
+		AntarasRaidTimer RaidEndTime = new AntarasRaidTimer(ar, 5, 0, 3500 * 1000);// 2時間7200
 		RaidEndTime.begin();
 	}
 

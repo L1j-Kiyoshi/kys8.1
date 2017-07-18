@@ -23,12 +23,12 @@ public class L1NpcDown1 implements L1CommandExecutor {
 			StringTokenizer token = new StringTokenizer(st);
 			String type = token.nextToken();
 
-			if (type.equals("배치")) {
+			if (type.equals("set")) {
 				NpcTable.reload();
 				NpcSpawnTable.getInstance().reload1();
 				
 				pc.sendPackets(new S_SystemMessage("すべてのエンピシが配置されました。"));
-			} else if (type.equals("삭제")) {
+			} else if (type.equals("delete")) {
 				for (L1Object l1object : L1World.getInstance().getObject()) {
 					if (l1object instanceof L1NpcInstance) {
 						L1NpcInstance npc = (L1NpcInstance) l1object;

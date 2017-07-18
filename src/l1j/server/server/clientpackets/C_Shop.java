@@ -274,7 +274,7 @@ public class C_Shop extends ClientBasePacket {
 				poly = 11484;
 			}
 			test = null;
-			pc.상점변신 = poly;
+			pc.shopPoly = poly;
 			pc.sendPackets(new S_ChangeShape(pc.getId(), poly, 70));
 			Broadcaster.broadcastPacket(pc, new S_ChangeShape(pc.getId(), poly, 70));
 			pc.sendPackets(new S_CharVisualUpdate(pc));
@@ -285,7 +285,7 @@ public class C_Shop extends ClientBasePacket {
 			sellList.clear();
 			buyList.clear();
 			pc.setPrivateShop(false);
-			pc.상점변신 = 0;
+			pc.shopPoly = 0;
 			pc.sendPackets(new S_DoActionGFX(pc.getId(), ActionCodes.ACTION_Idle));
 			pc.broadcastPacket(new S_DoActionGFX(pc.getId(), ActionCodes.ACTION_Idle));
 			L1PolyMorph.undoPolyPrivateShop(pc);
@@ -293,25 +293,25 @@ public class C_Shop extends ClientBasePacket {
 		
 	}
 
-	private static HashMap<String, Integer> 상점개설_계정횟수 = new HashMap<String, Integer>();
+	private static HashMap<String, Integer> openStore_AccountNum = new HashMap<String, Integer>();
 
-	public static boolean get상점개설계정횟수(String account) {
-		synchronized (상점개설_계정횟수) {
+	public static boolean getOpenStore_AccountNum(String account) {
+		synchronized (openStore_AccountNum) {
 			int time = 0;
 			try {
-				time = 상점개설_계정횟수.get(account);
+				time = openStore_AccountNum.get(account);
 			} catch (Exception e) {
 			}
 			if (time >= 50)
 				return false;
-			상점개설_계정횟수.put(account, time++);
+			openStore_AccountNum.put(account, time++);
 			return true;
 		}
 	}
 
-	public static void reset상점개설계정횟수() {
-		synchronized (상점개설_계정횟수) {
-			상점개설_계정횟수.clear();
+	public static void resetOpenStore_AccountNum() {
+		synchronized (openStore_AccountNum) {
+			openStore_AccountNum.clear();
 		}
 	}
 	

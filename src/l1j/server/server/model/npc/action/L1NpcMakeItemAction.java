@@ -91,7 +91,7 @@ public class L1NpcMakeItemAction extends L1NpcXmlAction {
 		boolean isEnoughMaterials = true;
 		L1Item temp = null;
 		for (L1ObjectAmount<Integer> material : _materials) {
-			if(!pc.getInventory().제작리스트(material.getObject(), material.getEnchant(), material.getAmount() * amount)) {
+			if(!pc.getInventory().productionList(material.getObject(), material.getEnchant(), material.getAmount() * amount)) {
 				temp = ItemTable.getInstance().getTemplate(material.getObject());
 				if(material.getEnchant() != 0)
 					pc.sendPackets(new S_ServerMessage(337, (material.getEnchant()<0 ? material.getEnchant() : "+"+material.getEnchant()) + " " + temp.getName() + "("
@@ -136,7 +136,7 @@ public class L1NpcMakeItemAction extends L1NpcXmlAction {
 
 		for (L1ObjectAmount<Integer> material : _materials) {
 			if(material.getEnchant() != 0)
-			pc.getInventory().제작리스트1(material.getObject(), material.getAmount() * amount, material.getEnchant());
+			pc.getInventory().isProductionList(material.getObject(), material.getAmount() * amount, material.getEnchant());
 			else
 			pc.getInventory().consumeItem(material.getObject(), material.getAmount() * amount);
 		}

@@ -540,7 +540,7 @@ public class GameServer {
 		for (L1PcInstance pc : pcList) {
 			if (pc == null || pc.noPlayerck2)
 				continue;
-			pc.서버다운중 = true;
+			pc.serverDown = true;
 		}
 	}
 

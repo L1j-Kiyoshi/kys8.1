@@ -182,7 +182,7 @@ public class C_Result extends ClientBasePacket {
 				}
 			}
 			
-			if(pc.서버다운중 == true){
+			if(pc.serverDown == true){
 				if (npcId == 70035 || npcId == 70041 || npcId == 70042) {
 					pc.sendPackets(new S_SystemMessage("サーバーダウン進行中には、購入ができません。"));
 					return;
@@ -190,7 +190,7 @@ public class C_Result extends ClientBasePacket {
 			}
 			
 			if (shop.getSellingItems().size() < size) {
-				System.out.println("店が販売しているアイテム数（" + shop.getSellingItems().size() + "）よりも多く購入すること。（" + size + ")개");
+				System.out.println("店が販売しているアイテム数（" + shop.getSellingItems().size() + "）よりも多く購入すること。（" + size + "）の");
 				pc.getNetConnection().kick();
 				pc.getNetConnection().close();
 				return;
@@ -737,7 +737,7 @@ public class C_Result extends ClientBasePacket {
 					pc.getInventory().tradeItem(objectId, count, elfwarehouse);
 					pc.getLight().turnOnOffLight();
 					
-					//manager.LogWareHouseAppend("요정:맡", pc.getName(), "", item, count, objectId);
+					//manager.LogWareHouseAppend("妖精：引き受け "、pc.getName(), "", item, count, objectId);
 					LinAllManager.getInstance().EPWarehouseAppend(item.getLogName(), count, item.getName(), 0);
 					/** ログファイルの保存**/
 					LoggerInstance.getInstance().addWarehouse(WarehouseType.Elf, true, pc, item, count);	
@@ -809,7 +809,7 @@ public class C_Result extends ClientBasePacket {
 			}
 		
 			/********************************************************************************************************		
-			 *************************************** 패키지 창고 찾기  *************************************************
+			 *************************************** パッケージ倉庫検索  *************************************************
 			 *********************************************************************************************************/
 		} else if (resultType == 12 && size != 0 && npcImpl.equalsIgnoreCase("L1Dwarf") || pc.isPackegeWarehouse()) {
 			int objectId, count;
@@ -1292,7 +1292,7 @@ public class C_Result extends ClientBasePacket {
 							break;
 						}
 					} else {
-						pc.sendPackets(new S_ServerMessage(271)); // \f1상대가 물건을 너무 가지고 있어 거래할 수 없습니다.
+						pc.sendPackets(new S_ServerMessage(271)); // \f1相手がものをも持っており、取引することはできません。
 						break;
 					}
 				}
@@ -1314,10 +1314,10 @@ public class C_Result extends ClientBasePacket {
 	private void writeLogbuyPrivateShop(L1PcInstance pc, L1PcInstance targetPc,
 			L1ItemInstance item, int count, int price) {
 		String itemadena = item.getName() + "(" + price + ")";
-		//manager.LogShopAppend("개인상점구매", pc.getName(), targetPc.getName(), item.getEnchantLevel(), itemadena, item.getBless(), count, item.getId());
+		//manager.LogShopAppend("個人商店で購入 "、pc.getName(), targetPc.getName(), item.getEnchantLevel(), itemadena, item.getBless(), count, item.getId());
 		LinAllManager.getInstance().ShopAppend(item.getLogName(), count, price, targetPc.getName(), pc.getName());
 		/** ログファイルの保存 **/
-		LoggerInstance.getInstance().개인상점구매(true, pc, targetPc, item, item.getCount());
+		LoggerInstance.getInstance().bayPersonalStore(true, pc, targetPc, item, item.getCount());
 	}
 	
 	private void history(L1PcInstance pc, L1ItemInstance item, int count, int i) {

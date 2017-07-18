@@ -415,7 +415,7 @@ public class L1Spawn {
 			 || mob.getNpcId() ==7310051|| mob.getNpcId() ==7310056|| mob.getNpcId() ==7310061
 			 || mob.getNpcId() ==7310066|| mob.getNpcId() ==7310077
 					) {
-				// 보스몹 멘트
+				// ボスモンスターコメント
 				L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("今リネージュワールドに「" +mob.getName()+ "」登場しました。"));
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "今リネージュワールドに「" +mob.getName()+ "」登場しました。"));
 				//ボスモンスターコメント
@@ -436,7 +436,7 @@ public class L1Spawn {
 			case 7310015: // 歪みのゼニスクイーン
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔1階の歪みのゼニスクイーン出現難易度:★★☆☆☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set제니스(true);
+					player.setZenis(true);
 					player.sendPackets(new S_Message_YN(622, "ゼニスクイーンを懲罰しに行くか？難易度:★★☆☆☆"));
 				}
 				break;
@@ -445,7 +445,7 @@ public class L1Spawn {
 			case 7310021: // 不信のシアー
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔2階不信のシアー出現難易度:★★☆☆☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set시어(true);
+					player.setSia(true);
 					player.sendPackets(new S_Message_YN(622, "シアバターを懲罰しに行くか？難易度：★★☆☆☆"));
 				}
 				break;
@@ -454,7 +454,7 @@ public class L1Spawn {
 			case 7310028: // 恐怖の吸血鬼
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔3階の恐怖の吸血鬼出現難易度：★★★☆☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set뱀파이어(true);
+					player.setVampire(true);
 					player.sendPackets(new S_Message_YN(622, "吸血鬼を懲罰しに行くか？難易度：★★★☆☆"));
 				}
 				break;
@@ -463,7 +463,7 @@ public class L1Spawn {
 			case 7310034: // 死のゾンビロード
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔4階死のゾンビロード出現難易度:★★★☆☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set좀비로드(true);
+					player.setZombieLoad(true);
 					player.sendPackets(new S_Message_YN(622, "ゾンビにドール懲罰に行く行くか？難易度：★★★☆☆"));
 				}
 				break;
@@ -471,7 +471,7 @@ public class L1Spawn {
 			case 7310041: // 地獄のクーガー
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔5階地獄のクーガー出現難易度:★★★☆☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set쿠거(true);
+					player.setCougar(true);
 					player.sendPackets(new S_Message_YN(622, "クーガーを懲罰しに行くか？難易度：★★★☆☆"));
 				}
 				break;
@@ -480,7 +480,7 @@ public class L1Spawn {
 			case 7310046: // 不死のマミーロード
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔6階不死のマミーロード出現難易度:★★★☆☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set머미로드(true);
+					player.setMummyLord(true);
 					player.sendPackets(new S_Message_YN(622, "マミーロードを懲罰しに行くか？難易度：★★★☆☆"));
 				}
 				break;
@@ -489,7 +489,7 @@ public class L1Spawn {
 			case 7310051: // 残酷なアイリス
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔7階残酷アイリス出現難易度:★★★☆☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set아이리스(true);
+					player.setIris(true);
 					player.sendPackets(new S_Message_YN(622, "アイリスを懲罰しに行くか？難易度：★★★☆☆"));
 				}
 				break;
@@ -497,21 +497,21 @@ public class L1Spawn {
 			case 7310056: // 闇のナイトバルド
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔8階闇のナイトバルド出現難易度:★★★☆☆ "));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set나이트발드(true);
+					player.setKnightBald(true);
 					player.sendPackets(new S_Message_YN(622, "ナイトバルドの懲罰に来可視か？難易度：★★★☆☆"));
 				}
 				break;
 			case 7310061: // 不滅のリッチ
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔9階不滅のリッチ出現難易度：★★★☆☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set리치(true);
+					player.setLich(true);
 					player.sendPackets(new S_Message_YN(622, "リッチを懲罰しに行くか？難易度：★★★☆☆"));
 				}
 				break;
 			case 7310066: // 傲慢なオグヌス
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔10階、傲慢なオグヌス出現難易度:★★★☆☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set우그니스(true);
+					player.setUgnus(true);
 					player.sendPackets(new S_Message_YN(622, "傲慢なオグヌスを懲罰しに行くか？難易度：★★★☆☆"));
 				}
 				break;
@@ -519,14 +519,14 @@ public class L1Spawn {
 			case 7310077: // グリムリーパー
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：傲慢の塔の上図のリッパー出現難易度:★★★★☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set그림리퍼(true);
+					player.setGrimReaper(true);
 					player.sendPackets(new S_Message_YN(622, "図リポウル懲罰に行っ可視か？難易度：★★★★☆"));
 				}
 				break;
 			case 45752: //バルログ
 				L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "\\f=ボス通知：バルログが出現しました。：★★★★☆"));
 				for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-					player.set발록(true);
+					player.setBalrog(true);
 					player.sendPackets(new S_Message_YN(622, "バルログを懲罰しに行くか？難易度：★★★★★"));
 				}
 				break;

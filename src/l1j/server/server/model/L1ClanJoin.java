@@ -93,7 +93,7 @@ public class L1ClanJoin {
 
 				joinPc.setClanid(clan_id);
 				joinPc.setClanname(clanName);
-				joinPc.setClanRank(L1Clan.수련);
+				joinPc.setClanRank(L1Clan.TRAINING);
 				joinPc.setClanMemberNotes("");					
 				joinPc.setTitle("");
 				joinPc.sendPackets(new S_CharTitle(joinPc.getId(), ""));
@@ -103,7 +103,7 @@ public class L1ClanJoin {
 					joinPc.save(); // DBに文字情報を記入する
 				} catch(Exception e) {}
 				clan.addClanMember(joinPc.getName(), joinPc.getClanRank(), joinPc.getLevel(), "", joinPc.getId(), joinPc.getType(), joinPc.getOnlineStatus(), joinPc);
-				joinPc.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.수련, joinPc.getName()));
+				joinPc.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.TRAINING, joinPc.getName()));
 				joinPc.sendPackets(new S_ServerMessage(95, clanName)); // \f1%0z				
 				joinPc.sendPackets(new S_ClanName(joinPc, clan.getEmblemId(), joinPc.getClanRank()));	
 				joinPc.sendPackets(new S_ReturnedStat(joinPc.getId(), clan.getClanId()));
@@ -163,9 +163,9 @@ public class L1ClanJoin {
 					oldClanMember.setClanid(clanId);
 					oldClanMember.setClanname(clanName);
 					if (oldClanMember.getId() == joinPc.getId()) {
-						oldClanMember.setClanRank(L1Clan.수호);
+						oldClanMember.setClanRank(L1Clan.GUARDIAN);
 					} else
-						oldClanMember.setClanRank(L1Clan.수련);
+						oldClanMember.setClanRank(L1Clan.TRAINING);
 					try {
 						// DBに文字情報を記入する
 						oldClanMember.save();
@@ -196,7 +196,7 @@ public class L1ClanJoin {
 								oldClan.getClanMemberList().get(i).name);
 						offClanMember.setClanid(clanId);
 						offClanMember.setClanname(clanName);
-						offClanMember.setClanRank(L1Clan.수련);
+						offClanMember.setClanRank(L1Clan.TRAINING);
 						offClanMember.save();
 						clan.addClanMember(offClanMember.getName(), offClanMember.getClanRank(), offClanMember.getLevel(), 
 								offClanMember.getClanMemberNotes(), offClanMember.getId(), offClanMember.getType(), offClanMember.getOnlineStatus(), offClanMember);

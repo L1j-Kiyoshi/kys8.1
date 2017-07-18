@@ -138,12 +138,12 @@ public class C_LoginToServer extends ClientBasePacket {
 		super(abyte0);
 
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
 		/**0時、1午後 * */
-		String 오전오후 = "午後";
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "午前";
+			ampm = "午前";
 		}
 
 		String login = client.getAccountName();
@@ -228,7 +228,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			}
 		}
 
-		System.out.println("[" + 오전오후 + "] [" + cal.get(시간) + "時] [" + cal.get(분) + "分] [" + "" + charName + "]  [" + login + "]  [" + client.getIp()
+		System.out.println("[" + ampm + "] [" + cal.get(hour) + "時] [" + cal.get(minute) + "分] [" + "" + charName + "]  [" + login + "]  [" + client.getIp()
 				+ "]メモリ：[" + SystemUtil.getUsedMemoryMB() + "]");
 
 		/** ログファイルの保存 **/
@@ -336,7 +336,7 @@ public class C_LoginToServer extends ClientBasePacket {
 		if (account.getphone() == null || (account.getphone().equalsIgnoreCase(""))) {
 			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[コマンド]固定申し込み設定時のセキュリティバフ発動。"));
 		} else {
-			보안버프(pc);
+			securityBuff(pc);
 		}
 
 		pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.UI4));
@@ -498,7 +498,7 @@ public class C_LoginToServer extends ClientBasePacket {
 					for (L1PcInstance clanMember : clan.getOnlineClanMember()) {
 						if (clanMember.getId() != pc.getId()) {
 							clanMember.sendPackets(new S_ServerMessage(843, pc.getName())); 
-							// 지금, 혈맹원의%0%s가게임에접속했습니다.
+							// 今、血盟員の％0％s店であるに接続しました。
 						}
 					}
 
@@ -606,9 +606,9 @@ public class C_LoginToServer extends ClientBasePacket {
 		if (pc.getAccount().getBuff_HPMP() != null) {
 			if (sysTime <= pc.getAccount().getBuff_HPMP().getTime()) {
 				long bufftime = pc.getAccount().getBuff_HPMP().getTime() - sysTime;
-				pc.removeSkillEffect(L1SkillId.강화버프_활력);
-				pc.setSkillEffect(L1SkillId.강화버프_활력, (int) bufftime);
-				pc.sendPackets(new S_ACTION_UI2("활력", (long) bufftime), true);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_VITAL);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_VITAL, (int) bufftime);
+				pc.sendPackets(new S_ACTION_UI2("活力", (long) bufftime), true);
 				pc.addMaxHp(50);
 				pc.addMaxMp(50);
 				pc.addWeightReduction(3);
@@ -620,9 +620,9 @@ public class C_LoginToServer extends ClientBasePacket {
 		if (pc.getAccount().getBuff_DMG() != null) {
 			if (sysTime <= pc.getAccount().getBuff_DMG().getTime()) {
 				long bufftime = pc.getAccount().getBuff_DMG().getTime() - sysTime;
-				pc.removeSkillEffect(L1SkillId.강화버프_공격);
-				pc.setSkillEffect(L1SkillId.강화버프_공격, (int) bufftime);
-				pc.sendPackets(new S_ACTION_UI2("공격", (long) bufftime), true);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_ATTACK);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_ATTACK, (int) bufftime);
+				pc.sendPackets(new S_ACTION_UI2("Attack", (long) bufftime), true);
 				pc.addDmgup(1);
 				pc.addBowDmgup(1);
 			}
@@ -631,9 +631,9 @@ public class C_LoginToServer extends ClientBasePacket {
 		if (pc.getAccount().getBuff_REDUC() != null) {
 			if (sysTime <= pc.getAccount().getBuff_REDUC().getTime()) {
 				long bufftime = pc.getAccount().getBuff_REDUC().getTime() - sysTime;
-				pc.removeSkillEffect(L1SkillId.강화버프_방어);
-				pc.setSkillEffect(L1SkillId.강화버프_방어, (int) bufftime);
-				pc.sendPackets(new S_ACTION_UI2("방어", (long) bufftime), true);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_DEFENSE);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_DEFENSE, (int) bufftime);
+				pc.sendPackets(new S_ACTION_UI2("Defense", (long) bufftime), true);
 				pc.addDamageReductionByArmor(1);
 			}
 		}
@@ -641,9 +641,9 @@ public class C_LoginToServer extends ClientBasePacket {
 		if (pc.getAccount().getBuff_MAGIC() != null) {
 			if (sysTime <= pc.getAccount().getBuff_MAGIC().getTime()) {
 				long bufftime = pc.getAccount().getBuff_MAGIC().getTime() - sysTime;
-				pc.removeSkillEffect(L1SkillId.강화버프_마법);
-				pc.setSkillEffect(L1SkillId.강화버프_마법, (int) bufftime);
-				pc.sendPackets(new S_ACTION_UI2("마법", (long) bufftime), true);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_MAGIC);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_MAGIC, (int) bufftime);
+				pc.sendPackets(new S_ACTION_UI2("Magic", (long) bufftime), true);
 				pc.getAbility().addSp(1);
 				pc.sendPackets(new S_SPMR(pc));
 			}
@@ -652,9 +652,9 @@ public class C_LoginToServer extends ClientBasePacket {
 		if (pc.getAccount().getBuff_STUN() != null) {
 			if (sysTime <= pc.getAccount().getBuff_STUN().getTime()) {
 				long bufftime = pc.getAccount().getBuff_STUN().getTime() - sysTime;
-				pc.removeSkillEffect(L1SkillId.강화버프_스턴);
-				pc.setSkillEffect(L1SkillId.강화버프_스턴, (int) bufftime);
-				pc.sendPackets(new S_ACTION_UI2("스턴", (long) bufftime), true);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_STUN);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_STUN, (int) bufftime);
+				pc.sendPackets(new S_ACTION_UI2("STUN", (long) bufftime), true);
 				pc.getResistance().addStun(2);
 			}
 		}
@@ -662,18 +662,18 @@ public class C_LoginToServer extends ClientBasePacket {
 		if (pc.getAccount().getBuff_HOLD() != null) {
 			if (sysTime <= pc.getAccount().getBuff_HOLD().getTime()) {
 				long bufftime = pc.getAccount().getBuff_HOLD().getTime() - sysTime;
-				pc.removeSkillEffect(L1SkillId.강화버프_홀드);
-				pc.setSkillEffect(L1SkillId.강화버프_홀드, (int) bufftime);
-				pc.sendPackets(new S_ACTION_UI2("홀드", (long) bufftime), true);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_HOLD);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_HOLD, (int) bufftime);
+				pc.sendPackets(new S_ACTION_UI2("ホールド", (long) bufftime), true);
 				pc.getResistance().addHold(2);
 			}
 		}
 		if (pc.getAccount().getBuff_STR() != null) {
 			if (sysTime <= pc.getAccount().getBuff_STR().getTime()) {
 				long bufftime = pc.getAccount().getBuff_STR().getTime() - sysTime;
-				pc.removeSkillEffect(L1SkillId.강화버프_힘);
-				pc.setSkillEffect(L1SkillId.강화버프_힘, (int) bufftime);
-				pc.sendPackets(new S_ACTION_UI2("힘", (long) bufftime), true);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_STR);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_STR, (int) bufftime);
+				pc.sendPackets(new S_ACTION_UI2("STR", (long) bufftime), true);
 				pc.getAbility().addAddedStr(1);
 				pc.sendPackets(new S_OwnCharStatus2(pc), true);
 			}
@@ -681,9 +681,9 @@ public class C_LoginToServer extends ClientBasePacket {
 		if (pc.getAccount().getBuff_DEX() != null) {
 			if (sysTime <= pc.getAccount().getBuff_DEX().getTime()) {
 				long bufftime = pc.getAccount().getBuff_DEX().getTime() - sysTime;
-				pc.removeSkillEffect(L1SkillId.강화버프_덱스);
-				pc.setSkillEffect(L1SkillId.강화버프_덱스, (int) bufftime);
-				pc.sendPackets(new S_ACTION_UI2("덱스", (long) bufftime), true);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_DEX);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_DEX, (int) bufftime);
+				pc.sendPackets(new S_ACTION_UI2("DEX", (long) bufftime), true);
 				pc.getAbility().addAddedDex(1);
 				pc.sendPackets(new S_OwnCharStatus2(pc), true);
 			}
@@ -691,9 +691,9 @@ public class C_LoginToServer extends ClientBasePacket {
 		if (pc.getAccount().getBuff_INT() != null) {
 			if (sysTime <= pc.getAccount().getBuff_INT().getTime()) {
 				long bufftime = pc.getAccount().getBuff_INT().getTime() - sysTime;
-				pc.removeSkillEffect(L1SkillId.강화버프_인트);
-				pc.setSkillEffect(L1SkillId.강화버프_인트, (int) bufftime);
-				pc.sendPackets(new S_ACTION_UI2("인트", (long) bufftime), true);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_INT);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_INT, (int) bufftime);
+				pc.sendPackets(new S_ACTION_UI2("INT", (long) bufftime), true);
 				pc.getAbility().addAddedInt(1);
 				pc.sendPackets(new S_OwnCharStatus2(pc), true);
 			}
@@ -717,7 +717,7 @@ public class C_LoginToServer extends ClientBasePacket {
 			// 輝くビーズ
 			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "クエスト開始：ナイトタウン討伐隊員に会っ開始"));
 		} else if (pc.getInventory().checkItem(30046, 1) && (pc.getLevel() > 45 && pc.getLevel() < 52)) {
-			// 영롱한 구슬
+			// きらめくビーズ
 			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "クエスト開始：シルバーナイトタウンのドラゴンの骨を収集屋に会っ開始"));
 		}
 		if (Config.STANDBY_SERVER) {
@@ -737,11 +737,11 @@ public class C_LoginToServer extends ClientBasePacket {
 		
 
 
-		// manager.LogServerAppend("접속", pc, client.getIp(), 1);
+		// manager.LogServerAppend("接続 "、pc, client.getIp(), 1);
 		LinAllManager.getInstance().LogConnectAppend(pc.getName(), client.getHostname());
 		
 
-		// 서버 접속 알림 운영자만 보임
+		// サーバー接続の通知オペレータのみ見える
 		for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
 			if (player.isGm()) {
 				 player.sendPackets(new S_SystemMessage("\\aD" + pc.getName() + "様接続\\aLIP:" + client.getIp() + " \\aFアカウント:"+ client.getAccountName()));
@@ -825,7 +825,7 @@ public class C_LoginToServer extends ClientBasePacket {
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 154, true));
 				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]血盟1レベルバフ適用"));
 			}
-			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_TWO && pc.getClan().getClanExp() < Config.CLAN_EXP_THREE) { // 혈맹2레벨
+			if (pc.getClan().getClanExp() >= Config.CLAN_EXP_TWO && pc.getClan().getClanExp() < Config.CLAN_EXP_THREE) { // 血盟2レベル
 				pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 155, true));
 				pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[" + pc.getClan().getClanName() + "]血盟2レベルバフ適用"));
 				pc.addDmgup(1);
@@ -889,10 +889,10 @@ public class C_LoginToServer extends ClientBasePacket {
 		// インターネットカフェバフ
 		if (pc.getAccount().getBuff_PCRoom() != null) {
 			if (sysTime <= pc.getAccount().getBuff_PCRoom().getTime()) {
-				long 피씨타임 = pc.getAccount().getBuff_PCRoom().getTime() - sysTime;
+				long pcTime = pc.getAccount().getBuff_PCRoom().getTime() - sysTime;
 				TimeZone seoul = TimeZone.getTimeZone("UTC");
 				Calendar calendar = Calendar.getInstance(seoul);
-				calendar.setTimeInMillis(피씨타임);
+				calendar.setTimeInMillis(pcTime);
 				int d = calendar.get(Calendar.DATE) - 1;
 				int h = calendar.get(Calendar.HOUR_OF_DAY);
 				int m = calendar.get(Calendar.MINUTE);
@@ -903,7 +903,7 @@ public class C_LoginToServer extends ClientBasePacket {
 				} else if (h > 0) {
 					pc.sendPackets(new S_SystemMessage("【PC部屋利用時間】" + h + "時間" + m + "分" + sc + "秒残りました。"));
 				} else if (m > 0) {
-					pc.sendPackets(new S_SystemMessage("【PC部屋利用時間】" + m + "分" + sc + "초 남았습니다."));
+					pc.sendPackets(new S_SystemMessage("【PC部屋利用時間】" + m + "分" + sc + "秒残りました。"));
 				} else {
 					pc.sendPackets(new S_SystemMessage("【PC部屋利用時間】" + sc + "秒残りました。"));
 				}
@@ -918,9 +918,9 @@ public class C_LoginToServer extends ClientBasePacket {
 			pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[イベント進行中]帰ってきたアーノルドイベント"));
 		}
 		
-		pc.sendPackets(new S_Attendance(S_Attendance.출석체크아이콘, 0, 0));
-		pc.sendPackets(new S_Attendance(S_Attendance.출석리스트, 0, 0));// 一般
-		pc.sendPackets(new S_Attendance(S_Attendance.출석리스트, 1, 0));// pc部屋
+		pc.sendPackets(new S_Attendance(S_Attendance.attendanceCheckIcon, 0, 0));
+		pc.sendPackets(new S_Attendance(S_Attendance.attendanceList, 0, 0));// 一般
+		pc.sendPackets(new S_Attendance(S_Attendance.attendanceList, 1, 0));// pc部屋
 		
 		L1AccountAttendance acc = AttendanceController.findacc(pc.getAccountName());
 		if (acc == null) {
@@ -931,7 +931,7 @@ public class C_LoginToServer extends ClientBasePacket {
 		/*if(AttendanceController.findacc(pc.getAccountName()).checktype()==1)
 			acc.getPc().sendPackets(new S_Attendance(acc, 0 , acc.getPc（）.PC部屋_バフ））;
 		if(AttendanceController.findacc(pc.getAccountName()).checktypepc()==1)
-			acc.getPc().sendPackets(new S_Attendance(acc, 1 , acc.getPc().PC방_버프));*/
+			acc.getPc().sendPackets(new S_Attendance(acc, 1 , acc.getPc().PC部屋_バフ））;*/
 		//pc.sendPackets(new S_EventNotice()); // イベントアラーム
 		
 		HashMap<Integer, Integer> mbq = MonsterBookTable.getInstace().getMonQuest(pc.getId());
@@ -1235,7 +1235,7 @@ public class C_LoginToServer extends ClientBasePacket {
 				skillList[26], skillList[27], skillList[28], skillList[29], pc.getElfAttr()));
 	}
 
-	private void 보안버프(L1PcInstance pc) {
+	private void securityBuff(L1PcInstance pc) {
 		pc.getAC().addAc(-1);
 		pc.sendPackets(new S_PacketBox(pc, S_PacketBox.ICON_SECURITY_SERVICES));
 	}
@@ -1734,7 +1734,7 @@ public class C_LoginToServer extends ClientBasePacket {
 				pc.sendPackets(new S_Liquor(pc.getId(), 8));
 				pc.setPearl(1);
 				break;
-			case 레벨업보너스:
+			case LEVEL_UP_BONUS:
 				pc.sendPackets(new S_PacketBox(remaining_time, true, true));
 				break;
 			case DRAGON_TOPAZ:

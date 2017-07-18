@@ -42,9 +42,9 @@ public class L1HpBar implements L1CommandExecutor {
 
 	@Override
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		if (arg.equalsIgnoreCase("켬")) {
+		if (arg.equalsIgnoreCase("on")) {
 			pc.setSkillEffect(L1SkillId.GMSTATUS_HPBAR, 0);
-		} else if (arg.equalsIgnoreCase("끔")) {
+		} else if (arg.equalsIgnoreCase("off")) {
 			pc.removeSkillEffect(L1SkillId.GMSTATUS_HPBAR);
 
 			for (L1Object obj : pc.getKnownObjects()) {

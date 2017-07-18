@@ -72,7 +72,7 @@ public class HpMpRegenController implements Runnable {
 							DanteasBuff(pc);
 							clanbuff(pc);
 						}
-						주퀘검사();
+						checkWeekQuest();
 					}
 				}
 			} catch (Exception e) {
@@ -88,7 +88,7 @@ public class HpMpRegenController implements Runnable {
 
 	}
 
-	private void 주퀘검사(){
+	private void checkWeekQuest(){
 		try{
 			Collection<L1PcInstance> _list;
 			_list = L1World.getInstance().getAllPlayers();

@@ -128,7 +128,7 @@ public class C_UseSkill extends ClientBasePacket {
 		}
 		skillRange += 4.5D; // KKKの直線距離に有効範囲を追加
 		if(target2 instanceof L1Character){
-			if(target2.getMapId() != pc.getMapId() || pc.getLocation().getLineDistance(target2.getLocation()) > skillRange){ // 타겟이 이상한 장소에 있으면 종료
+			if(target2.getMapId() != pc.getMapId() || pc.getLocation().getLineDistance(target2.getLocation()) > skillRange){ // ターゲットが奇妙な場所にある場合終了
 				return;
 			}
 		}

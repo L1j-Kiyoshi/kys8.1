@@ -80,7 +80,7 @@ public class L1Present implements L1CommandExecutor {
 						target.getInventory().storeItem(item);
 						target.sendPackets(new S_SkillSound(pc.getId(), 4856));
 						target.sendPackets(new S_SystemMessage("\\aD[ギフト] " + item.getLogName() + " 獲得"));
-                        pc.sendPackets(new S_SystemMessage("\\aD["+target.getName()+"] "+ item.getLogName() + " (ID:" + itemid + ") 보냄"));
+                        pc.sendPackets(new S_SystemMessage("\\aD["+target.getName()+"] "+ item.getLogName() + " (ID:" + itemid + "）送信"));
 					}
 				} else {
 					L1ItemInstance item = null;
@@ -106,7 +106,7 @@ public class L1Present implements L1CommandExecutor {
 					if (createCount > 0) {
 						target.sendPackets(new S_SkillSound(pc.getId(), 4856));
 						target.sendPackets(new S_SystemMessage("\\aD[ギフト] +" + enchant + " " + item.getLogName() + " (" + count + "本）獲得"));
-        				pc.sendPackets(new S_SystemMessage("\\aD["+target.getName()+"] +" + enchant + " "+ temp.getNameId()+"(ID:" + itemid + ") "+ count +"개 보냄", true));
+        				pc.sendPackets(new S_SystemMessage("\\aD["+target.getName()+"] +" + enchant + " "+ temp.getNameId()+"(ID:" + itemid + ") "+ count +"本送信", true));
 					}
 				}
 			} else {

@@ -1,7 +1,7 @@
 package l1j.server.server.model.item;
 
 public class L1ItemId {
-	public static final int 마력을잃은아놀드장갑 = 30145;
+	public static final int FORCE_LOST_ARNOLD_GLOVE = 30145;
 	
 	public static final int POTION_OF_HEALING = 40010;
 
@@ -127,14 +127,14 @@ public class L1ItemId {
 	public static final int PSY_BIRD                            = 447013;
 	public static final int PSY_GANGNAM_STYLE                   = 447014;
 	
-	// 펫배송
+	// ペット配送
 
 	public static final int KILLTON_CONTRACT                    = 87050;
 	public static final int MERIN_CONTRACT                      = 87051;
 	public static final int KILLTON_PIPE                        = 87052;
 	public static final int MERIN_PIPE                          = 87053;
 	
-	// 숨겨진 계곡 리뉴얼 아이템.
+	// 隠された渓谷リニューアルアイテム。
 	public static final int IVORYTOWER_ARMOR_SCROLL = 30027; // 象牙の塔の防具強化スクロール
 	public static final int IVORYTOWER_WEAPON_SCROLL = 30028; // 象牙の塔の武器強化スクロール
 	

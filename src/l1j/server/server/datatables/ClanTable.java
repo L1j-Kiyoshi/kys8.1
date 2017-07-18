@@ -133,7 +133,7 @@ public class ClanTable {
 					int level;
 					int type;
 					name = rs.getString("name");
-					rank = L1Clan.일반;
+					rank = L1Clan.NORMAL;
 					level = 65;
 					int memberId = 0;
 					int clas = rs.getInt("class");
@@ -175,7 +175,7 @@ public class ClanTable {
 					int type;
 					int memberId = 0;
 					name = rs.getString("name");
-					rank = L1Clan.군주;
+					rank = L1Clan.MONARCH;
 					level = 65;
 					type = 0;
 					Memo = rs.getString("clan_memo");
@@ -265,7 +265,7 @@ public class ClanTable {
 //			player.setClanRank(L1Clan.CLAN_RANK_LEAGUE_PRINCE);
 //			player.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.CLAN_RANK_LEAGUE_PRINCE, player.getName()));
 //		} else {
-			player.setClanRank(L1Clan.군주);
+			player.setClanRank(L1Clan.MONARCH);
 		//	player.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.君主、player.getName（）））;
 		//}
 		clan.addClanMember(player.getName(), player.getClanRank(), player.getLevel(), "", player.getId(), player.getType(), player.getOnlineStatus(), player);
@@ -346,7 +346,7 @@ public class ClanTable {
 //			player.setClanRank(L1Clan.CLAN_RANK_LEAGUE_PRINCE);
 //			player.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.CLAN_RANK_LEAGUE_PRINCE, player.getName()));
 //		} else {
-			player.setClanRank(L1Clan.군주);
+			player.setClanRank(L1Clan.MONARCH);
 		//	player.sendPackets(new S_PacketBox(S_PacketBox.MSG_RANK_CHANGED, L1Clan.君主、player.getName（）））;
 		//}
 		clan.addClanMember(player.getName(), player.getClanRank(), player.getLevel(), "", player.getId(), player.getType(), player.getOnlineStatus(), player);

@@ -23,14 +23,14 @@ public class L1NpcShopSwitch implements L1CommandExecutor {
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
 			boolean power = NpcShopSystem.getInstance().isPower();
-			if (arg.equalsIgnoreCase("켬")) {
+			if (arg.equalsIgnoreCase("on")) {
 				if (power) {
 					pc.sendPackets(new S_SystemMessage("既に実行中です。"));
 					return;
 				} else {
 					NpcShopSystem.getInstance().npcShopStart();
 				}
-			} else if (arg.equalsIgnoreCase("끔")) {
+			} else if (arg.equalsIgnoreCase("off")) {
 				if (!power) {
 					pc.sendPackets(new S_SystemMessage("実行されていない。"));
 					return;

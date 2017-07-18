@@ -43,7 +43,7 @@ public class L1Teleport {
 	public void teleport(L1PcInstance pc, int x, int y, short mapid, int head, boolean effectable) {
 		teleport(pc, x, y, mapid, head, effectable, TELEPORT);
 	}
-	public static void 로봇텔(L1RobotInstance rob, int x, int y, short m,
+	public static void robotTel(L1RobotInstance rob, int x, int y, short m,
 			boolean swich) {
 		rob.telBot(x, y, m);
 		/*
@@ -299,7 +299,7 @@ public class L1Teleport {
 		}
 	}
 	
-	public static L1Location 소환텔레포트(L1Character target, int distance) {
+	public static L1Location summonTeleport(L1Character target, int distance) {
 		L1Location loc = new L1Location();
 
 		int locX = target.getX();

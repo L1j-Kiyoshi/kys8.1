@@ -25,7 +25,7 @@ public class L1Recall implements L1CommandExecutor {
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
 		try {
 			Collection<L1PcInstance> targets = null;
-			if (arg.equalsIgnoreCase("소환")) {
+			if (arg.equalsIgnoreCase("summon")) {
 				targets = L1World.getInstance().getAllPlayers();
 			} else {
 				targets = new ArrayList<L1PcInstance>();
@@ -39,15 +39,15 @@ public class L1Recall implements L1CommandExecutor {
 
 			for (L1PcInstance target : targets) {
 				if (target.isPrivateShop()) {
-					pc.sendPackets(new S_SystemMessage(target.getName() + " 님은 상점모드 입니다."));
+					pc.sendPackets(new S_SystemMessage(target.getName() + "様は店モードです。"));
 					return;
 				}
 				if (target.isAutoClanjoin()) {
-					pc.sendPackets(new S_SystemMessage(target.getName() + " 님은 자동가입중 입니다."));
+					pc.sendPackets(new S_SystemMessage(target.getName() + "様は、自動登録中です。"));
 					return;
 				}
 
-				L1Location loc = L1Teleport.소환텔레포트(pc,1);
+				L1Location loc = L1Teleport.summonTeleport(pc,1);
 				target.dx = loc.getX();
 				target.dy = loc.getY();
 				target.dm = (short) loc.getMapId();

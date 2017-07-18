@@ -190,16 +190,16 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 				writeByte(pc.getClanname().getBytes());
 				writeC(0x10);
 				switch (pc.getClanRank()) {
-				case L1Clan.일반:
+				case L1Clan.NORMAL:
 					writeC(L1Clan.CLAN_RANK_LEAGUE_PROBATION);
 					break;
-				case L1Clan.수련:
+				case L1Clan.TRAINING:
 					writeC(L1Clan.CLAN_RANK_LEAGUE_PUBLIC);
 					break;
-				case L1Clan.수호:
+				case L1Clan.GUARDIAN:
 					writeC(L1Clan.CLAN_RANK_LEAGUE_GUARDIAN);
 					break;
-				case L1Clan.군주:
+				case L1Clan.MONARCH:
 					writeC(L1Clan.CLAN_RANK_LEAGUE_PRINCE);
 					break;
 				default:
@@ -338,101 +338,101 @@ public class S_ACTION_UI2 extends ServerBasePacket {
 	}
 	
 
-	private static final String 활력_활력버프1 = "00 08 02 10 " + "f2 "// バフの種類
+	private static final String vital_VitalBuff1 = "00 08 02 10 " + "f2 "// バフの種類
 											+ "12 18";
-	private static final String 활력_활력버프2 = "20 09 28 97 34 30 00 38 00 40 "
+	private static final String vital_VitalBuff2 = "20 09 28 97 34 30 00 38 00 40 "
 											+ "fb 21 "// バフの種類
 											+ "48 " + "00 50 00 58 01 60 01 68 e8 21 70 01 45 63";
 
-	private static final String 활력_공격버프1 = "00 08 02 10 f3 12 18";
-	private static final String 활력_공격버프2 = "20 09 28 97 34 30 00 38 00 40 fc 21 48 "
+	private static final String vital_AttackBuff1 = "00 08 02 10 f3 12 18";
+	private static final String vital_AttackBuff2 = "20 09 28 97 34 30 00 38 00 40 fc 21 48 "
 											+ "00 50 00 58 01 60 01 68 e8 21 70 01 6d 23";
 
-	private static final String 활력_방어버프1 = "00 08 02 10 f4 12 18";
-	private static final String 활력_방어버프2 = "20 09 28 97 34 30 00 38 00 40 fd 21 48 "//
+	private static final String vital_DefenseBuff1 = "00 08 02 10 f4 12 18";
+	private static final String vital_DefenseBuff2 = "20 09 28 97 34 30 00 38 00 40 fd 21 48 "//
 											+ "00 50 00 58 01 60 01 68 e8 21 70 01 d4 4c";
 
-	private static final String 활력_마법버프1 = "00 08 02 10 f5 12 18";
-	private static final String 활력_마법버프2 = "20 09 28 97 34 30 00 38 00 40 fe 21 48 "//
+	private static final String vital_MagicBuff1 = "00 08 02 10 f5 12 18";
+	private static final String vital_MagicBuff2 = "20 09 28 97 34 30 00 38 00 40 fe 21 48 "//
 											+ "00 50 00 58 01 60 01 68 e8 21 70 01 d4 4c";
 
-	private static final String 활력_스턴버프1 = "00 08 02 10 f6 12 18";
-	private static final String 활력_스턴버프2 = "20 09 28 97 34 30 00 38 00 40 ff 21 48 "//
+	private static final String vital_StunBuff1 = "00 08 02 10 f6 12 18";
+	private static final String vital_StunBuff2 = "20 09 28 97 34 30 00 38 00 40 ff 21 48 "//
 											+ "00 50 00 58 01 60 01 68 e8 21 70 01 d4 4c";
 
-	private static final String 활력_홀드버프1 = "00 08 02 10 f7 12 18";
-	private static final String 활력_홀드버프2 = "20 09 28 97 34 30 00 38 00 40 80 22 48 "//
+	private static final String vital_HoldBuff1 = "00 08 02 10 f7 12 18";
+	private static final String vital_HoldBuff2 = "20 09 28 97 34 30 00 38 00 40 80 22 48 "//
 											+ "00 50 00 58 01 60 01 68 e8 21 70 01 d4 4c";
 	
-	private static final String 활력_덱스버프1 = "00 08 02 10 ea 12 18";
-	private static final String 활력_덱스버프2 = "20 09 28 97 34 30 00 38 00 40 f3 21 48 "//
+	private static final String vital_DexBuff1 = "00 08 02 10 ea 12 18";
+	private static final String vital_DexBuff2 = "20 09 28 97 34 30 00 38 00 40 f3 21 48 "//
 											+ "00 50 00 58 01 60 01 68 e8 21 70 01 d4 4c";
 
-	private static final String 활력_힘버프1 = "00 08 02 10 e9 12 18";
-	private static final String 활력_힘버프2 = "20 09 28 97 34 30 00 38 00 40 f2 21 48 "//
+	private static final String vital_StrBuff1 = "00 08 02 10 e9 12 18";
+	private static final String vital_StrBuff2 = "20 09 28 97 34 30 00 38 00 40 f2 21 48 "//
 											+ "00 50 00 58 01 60 01 68 e8 21 70 01 d4 4c";
 
-	private static final String 활력_인트버프1 = "00 08 02 10 eb 12 18";
-	private static final String 활력_인트버프2 = "20 09 28 97 34 30 00 38 00 40 f4 21 48 "//
+	private static final String vital_IntBuff1 = "00 08 02 10 eb 12 18";
+	private static final String vital_IntBuff2 = "20 09 28 97 34 30 00 38 00 40 f4 21 48 "//
 											+ "00 50 00 58 01 60 01 68 e8 21 70 01 d4 4c";
 //s=00 08 02 10 eb 12 18 
 	//80 e9 0f 
 	//20 09 28 97 34 30 00 38 00 40 f4 21 48 
 	//00 50 00 58 01 60 01 68 e8 21 70 01 d4 4c";
 
-	public S_ACTION_UI2(String 활력코드, long 시간) {
+	public S_ACTION_UI2(String vitalCode, long time) {
 		writeC(Opcodes.S_EXTENDED_PROTOBUF);
 //		writeC(活力バフ);
 		writeC(ICON_BUFF);
 
-		String 활력버프패킷 = "";
-		if (활력코드.equals("활력")) {
-			활력버프패킷 = 활력_활력버프1;
-		} else if (활력코드.equals("공격")) {
-			활력버프패킷 = 활력_공격버프1;
-		} else if (활력코드.equals("방어")) {
-			활력버프패킷 = 활력_방어버프1;
-		} else if (활력코드.equals("마법")) {
-			활력버프패킷 = 활력_마법버프1;
-		} else if (활력코드.equals("스턴")) {
-			활력버프패킷 = 활력_스턴버프1;
-		} else if (활력코드.equals("홀드")) {
-			활력버프패킷 = 활력_홀드버프1;
-		} else if (활력코드.equals("힘")) {
-			활력버프패킷 = 활력_힘버프1;
-		} else if (활력코드.equals("덱스")) {
-			활력버프패킷 = 활력_덱스버프1;
-		} else if (활력코드.equals("인트")) {
-			활력버프패킷 = 활력_인트버프1;
+		String vitalBuffPacket = "";
+		if (vitalCode.equals("Vital")) {
+			vitalBuffPacket = vital_VitalBuff1;
+		} else if (vitalCode.equals("Attack")) {
+			vitalBuffPacket = vital_AttackBuff1;
+		} else if (vitalCode.equals("Defense")) {
+			vitalBuffPacket = vital_DefenseBuff1;
+		} else if (vitalCode.equals("Magic")) {
+			vitalBuffPacket = vital_MagicBuff1;
+		} else if (vitalCode.equals("Stun")) {
+			vitalBuffPacket = vital_StunBuff1;
+		} else if (vitalCode.equals("Hold")) {
+			vitalBuffPacket = vital_HoldBuff1;
+		} else if (vitalCode.equals("STR")) {
+			vitalBuffPacket = vital_StrBuff1;
+		} else if (vitalCode.equals("DEX")) {
+			vitalBuffPacket = vital_DexBuff1;
+		} else if (vitalCode.equals("INT")) {
+			vitalBuffPacket = vital_IntBuff1;
 		} 
 
-		StringTokenizer st = new StringTokenizer(활력버프패킷.toString());
+		StringTokenizer st = new StringTokenizer(vitalBuffPacket.toString());
 		while (st.hasMoreTokens()) {
 			writeC(Integer.parseInt(st.nextToken(), 16));
 		}
 
-		byteWrite(시간 / 1000);
+		byteWrite(time / 1000);
 
-		if (활력코드.equals("활력")) {
-			활력버프패킷 = 활력_활력버프2;
-		} else if (활력코드.equals("공격")) {
-			활력버프패킷 = 활력_공격버프2;
-		} else if (활력코드.equals("방어")) {
-			활력버프패킷 = 활력_방어버프2;
-		} else if (활력코드.equals("마법")) {
-			활력버프패킷 = 활력_마법버프2;
-		} else if (활력코드.equals("스턴")) {
-			활력버프패킷 = 활력_스턴버프2;
-		} else if (활력코드.equals("홀드")) {
-			활력버프패킷 = 활력_홀드버프2;
-		}else if (활력코드.equals("힘")) {
-			활력버프패킷 = 활력_힘버프2;
-		}else if (활력코드.equals("덱스")) {
-			활력버프패킷 = 활력_덱스버프2;
-		}else if (활력코드.equals("인트")) {
-			활력버프패킷 = 활력_인트버프2;
+		if (vitalCode.equals("Vital")) {
+			vitalBuffPacket = vital_VitalBuff2;
+		} else if (vitalCode.equals("Attack")) {
+			vitalBuffPacket = vital_AttackBuff2;
+		} else if (vitalCode.equals("Defense")) {
+			vitalBuffPacket = vital_DefenseBuff2;
+		} else if (vitalCode.equals("Magic")) {
+			vitalBuffPacket = vital_MagicBuff2;
+		} else if (vitalCode.equals("Stun")) {
+			vitalBuffPacket = vital_StunBuff2;
+		} else if (vitalCode.equals("Hold")) {
+			vitalBuffPacket = vital_HoldBuff2;
+		}else if (vitalCode.equals("STR")) {
+			vitalBuffPacket = vital_StrBuff2;
+		}else if (vitalCode.equals("DEX")) {
+			vitalBuffPacket = vital_DexBuff2;
+		}else if (vitalCode.equals("INT")) {
+			vitalBuffPacket = vital_IntBuff2;
 		}
-		st = new StringTokenizer(활력버프패킷.toString());
+		st = new StringTokenizer(vitalBuffPacket.toString());
 		while (st.hasMoreTokens()) {
 			writeC(Integer.parseInt(st.nextToken(), 16));
 		}

@@ -84,7 +84,7 @@ public class L1EquipmentSlot {
 
 		if (itemId == 10000) { // 会社員
 			L1PolyMorph.doPoly(_owner, 11498, 0, L1PolyMorph.MORPH_BY_ITEMMAGIC);
-		} else if (itemId == 203003) { // 데스나이트의 불검:진
+		} else if (itemId == 203003) { // デスナイトのフレイムブレード：ジン
 			L1PolyMorph.doPoly(_owner, 12232, 0, L1PolyMorph.MORPH_BY_ITEMMAGIC);
 		}
 
@@ -515,7 +515,7 @@ public class L1EquipmentSlot {
 				_owner.addWeightReduction(5);
 				_owner.addMaxHp(50);
 				break;
-			// 전사
+			// 戦士
 			case 7:
 				_owner.getResistance().addMr(5);
 				_owner.addMaxHp(50);
@@ -754,7 +754,7 @@ public class L1EquipmentSlot {
 		}
 		/** タイタンの怒り技術発動HP区間5％増加した。**/
 		if (itemId == 202014){
-			_owner.set락구간상승(5);
+			_owner.setLockSectionUp(5);
 		}
 	
 		
@@ -1772,7 +1772,7 @@ public class L1EquipmentSlot {
 				}
 			}
 		}
-		/** 용의 티셔츠 **/
+		/**用のTシャツ **/
 		if(itemId == 900023){
 			switch(itemlvl){
 			case 5:_owner.getResistance().addMr(4);break;
@@ -2345,7 +2345,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
-			// 법사
+			// 玄
 			case 3:
 				_owner.addMpr(-3);
 				break;
@@ -2605,7 +2605,7 @@ public class L1EquipmentSlot {
 				_owner.addWeightReduction(-5);
 				_owner.addMaxHp(-50);
 				break;
-			// 전사
+			// 戦士
 			case 7:
 				_owner.getResistance().addMr(-5);
 				_owner.addMaxHp(-50);
@@ -2709,7 +2709,7 @@ public class L1EquipmentSlot {
 		}
 		/** タイタンの怒り技術発動HP区間5％増加した。**/
 		if (itemId == 202014){
-			_owner.set락구간상승(-5);
+			_owner.setLockSectionUp(-5);
 		}
 		
 		/** 真冥王の執行剣スタンレベル+2**/

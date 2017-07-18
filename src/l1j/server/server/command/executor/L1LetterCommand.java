@@ -100,13 +100,6 @@ public class L1LetterCommand implements L1CommandExecutor {
 			LetterTable.getInstance().writeLetter(949, dTime, sender.getName(), receiverName, 0, subject, content);
 			sendMessageToReceiver(target, sender, 0, 50);
 
-			
-//			if (target != null){
-//				sender.sendPackets(new S_SystemMessage(receiverName + "様の手紙を送りました。 "））;
-//				return;
-//			} else if(target == null){
-//				sender.sendPackets(new S_SystemMessage(receiverName + " 님은 존재하지 않는 캐릭입니다."));
-//			}
 			if (target == null){
 				sender.sendPackets(new S_SystemMessage(receiverName + "様は存在しないキャラクターです。"));
 				return;

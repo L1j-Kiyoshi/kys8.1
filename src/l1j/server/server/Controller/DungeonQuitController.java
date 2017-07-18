@@ -19,10 +19,10 @@ public class DungeonQuitController implements Runnable {
 
 	/** ゲームの状態 **/
 	public int Status = 0;// 進行状況
-	private final int 대기 = 0;// 進行
-	private final int 오픈 = 1;
-	private final int 진행 = 2;
-	private final int 종료 = 3;//
+	private final int status_Wait = 0;// 進行
+	private final int status_Open = 1;
+	private final int status_GetOn = 2;
+	private final int status_End = 3;//
 
 	public static DungeonQuitController getInstance() {
 		if (_instance == null) {
@@ -36,28 +36,28 @@ public class DungeonQuitController implements Runnable {
 		try {
 			while (true) {
 				switch (Status) {
-				case 대기:
+				case status_Wait:
 					Thread.sleep(10000);
 					/** オープンでなければ進行 **/
 					if (isgameStart == false) {
 						continue;
 					}
-					Status = 오픈;
+					Status = status_Open;
 					continue;
-				case 오픈:
+				case status_Open:
 					L1World.getInstance().broadcastServerMessage("通知：しばらくして、すべてのインスタンスダンジョンの時間が初期化されます。");
 					Thread.sleep(3000L);
-					Status = 진행;
+					Status = status_GetOn;
 					continue;
-				case 진행:
+				case status_GetOn:
 					Thread.sleep(5000L);
-					초기화();
-					Status = 종료;
+					init();
+					Status = status_End;
 					continue;
-				case 종료:
+				case status_End:
 					L1World.getInstance().broadcastServerMessage("通知：すべてのインスタンスダンジョンの時間が初期化されました。");
 					isgameStart = false;
-					Status = 대기;
+					Status = status_Wait;
 					continue;
 				}
 			}
@@ -66,7 +66,7 @@ public class DungeonQuitController implements Runnable {
 		}
 	}
 				/** ダンジョン初期化 **/
-	 public void 초기화() {
+	 public void init() {
 		for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
 			if (pc == null || pc.getNetConnection() == null || pc.noPlayerCK || pc.noPlayerck2) {
 				continue;
@@ -81,14 +81,14 @@ public class DungeonQuitController implements Runnable {
 				pc.seticedungeonTime(0);//オルドン
 				pc.setislandTime(0);//巻い
 				pc.setnewdodungeonTime(0);//象牙の塔バルログ
-				던전초기화(pc);
+				initDungeon(pc);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	private void 던전초기화(L1PcInstance pc) throws SQLException {
+	private void initDungeon(L1PcInstance pc) throws SQLException {
 		Connection cc = null;
 		PreparedStatement p = null;
 		try {

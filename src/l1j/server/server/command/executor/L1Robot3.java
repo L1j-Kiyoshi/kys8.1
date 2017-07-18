@@ -82,7 +82,7 @@ public class L1Robot3 implements L1CommandExecutor {
 					newPc.setClanid(1);
 					newPc.setClanname("新規保護血盟");
 					newPc.setTitle("\\f:新規保護血盟");
-					newPc.setClanRank(L1Clan.수련);
+					newPc.setClanRank(L1Clan.TRAINING);
 					int typeCount = 0;
 					for (L1PcInstance tempPc : L1World.getInstance().getAllPlayers()) {
 						if (tempPc.noPlayerCK && tempPc.getLevel() == 5) {

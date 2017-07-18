@@ -147,7 +147,7 @@ public class CrockController implements Runnable{
 
 	/**
 	 * CrockController オブジェクトリターン
-	 * @return	(CrockController)	단일객체
+	 * @return	(CrockController）単一のオブジェクト
 	*/
 	public static CrockController getInstance(){
 		if(instance == null) instance = new CrockController();
@@ -292,14 +292,14 @@ public class CrockController implements Runnable{
 	*/
 	private boolean isOpen(){
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
 		/** 0 午前、1午後 * */
-		String 오전오후 = "午後";
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "午前";
+			ampm = "午前";
 		}
-		if ((오전오후.equals("午後") && cal.get(시간) == 6 && cal.get(분) == 59) || isGmOpen()) {
+		if ((ampm.equals("午後") && cal.get(hour) == 6 && cal.get(minute) == 59) || isGmOpen()) {
 //			System.out.println（「テーベオープン：「+午前午後+ "" + cal.get（時間）+ "時" + cal.get（分）+ "分"）;
 	    	 return true;
 	      } 
@@ -308,7 +308,7 @@ public class CrockController implements Runnable{
 
 	/**
 	 * 時間の割れ目移動状態
-	 * @return	(boolean)	move	이동 여부
+	 * @return	(boolean)	move移動するかどうか
 	*/
 	public boolean isMove(){
 		return move;

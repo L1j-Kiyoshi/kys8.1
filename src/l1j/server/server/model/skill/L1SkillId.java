@@ -7,15 +7,15 @@ public class L1SkillId {
 	public static final int RANK_BUFF_3 = 40003;
 	public static final int RANK_BUFF_4 = 40004;
 	public static final int RANK_BUFF_5 = 40005;
-	public static final int 나루토감사캔디 = 80005;
+	public static final int NARUTO_THANKS_CANDY = 80005;
 	public static final int ABYSS_LIGHTNING_TIME = 80006;
-	public static final int 레벨업보너스 = 80007;
+	public static final int LEVEL_UP_BONUS = 80007;
 	public static final int DRAGON_PUPLE = 80008;
 	public static final int DRAGON_TOPAZ = 80009;
-	public static final int 신고딜레이 = 80010;
+	public static final int REPORT_DELAY = 80010;
 	
-	public static final int 천하장사버프 = 1541;
-	public static final int STATUS_안전모드 = 1032;
+	public static final int TENKASOUSHI_BUFF = 1541;
+	public static final int STATUS_SAFE_MODE = 1032;
 	public static final int SKILLS_BEGIN = 1;
 
 	public static final int CLANBUFF_YES = 7789; // 血盟バフ
@@ -31,19 +31,19 @@ public class L1SkillId {
 	public static final int BRAVE_AVATAR_1ST = 7100;
 	public static final int BRAVE_AVATAR_2ND = 7101;
 	public static final int BRAVE_AVATAR_3RD = 7102;
-	public static final int 주군의버프 = 10534;
+	public static final int LORDS_BUFF = 10534;
 
-	public static final int 피씨방_버프 = 777888;
+	public static final int INTERNET_CAFE_BUFF = 777888;
 
-	public static final int 강화버프_활력 = 56000;
-	public static final int 강화버프_공격 = 56001;
-	public static final int 강화버프_방어 = 56002;
-	public static final int 강화버프_마법 = 56003;
-	public static final int 강화버프_스턴 = 56004;
-	public static final int 강화버프_홀드 = 56005;
-	public static final int 강화버프_힘 = 56006;
-	public static final int 강화버프_덱스 = 56007;
-	public static final int 강화버프_인트 = 56008;
+	public static final int ENCHANT_BUFF_VITAL = 56000;
+	public static final int ENCHANT_BUFF_ATTACK = 56001;
+	public static final int ENCHANT_BUFF_DEFENSE = 56002;
+	public static final int ENCHANT_BUFF_MAGIC = 56003;
+	public static final int ENCHANT_BUFF_STUN = 56004;
+	public static final int ENCHANT_BUFF_HOLD = 56005;
+	public static final int ENCHANT_BUFF_STR = 56006;
+	public static final int ENCHANT_BUFF_DEX = 56007;
+	public static final int ENCHANT_BUFF_INT = 56008;
 	
 	
 	public static final int CLAN_BUFF1 = 505; //血盟バフ
@@ -51,7 +51,7 @@ public class L1SkillId {
 	public static final int CLAN_BUFF3 = 507;
 	public static final int CLAN_BUFF4 = 508;
 	
-	// 탐
+	//TAM
 	public static final int Tam_Fruit1 = 7791;
 	public static final int Tam_Fruit2 = 7792;
 	public static final int Tam_Fruit3 = 7793;
@@ -331,7 +331,7 @@ public class L1SkillId {
 	/** 戦士スキル */
 	public static final int HOWL = 225;
 	public static final int GIGANTIC = 226;
-	public static final int POWERRIP = 228;
+	public static final int POWEGRRIP = 228;
 	public static final int TOMAHAWK = 229;
 	public static final int DESPERADO = 230;
 	public static final int TITANL_RISING = 231;
@@ -450,9 +450,9 @@ public class L1SkillId {
 	
 	public static final int COOKING_END = 3080;
 	
-	public static final int 나루터감사캔디 = 3078;
-	public static final int 메티스요리 = 3079;
-	public static final int 메티스스프 = 3080;
+	public static final int BETTERSWEET_CANDY = 3078;
+	public static final int METIS_COOKING = 3079;
+	public static final int METIS_SOUP = 3080;
 	
 	public static final int STATUS_FREEZE = 10071;
 	public static final int CURSE_PARALYZE2 = 10101;

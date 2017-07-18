@@ -197,27 +197,27 @@ public class DropTable {
 		int[] tower = { 80450, 80451, 80466, 80467 };
 		int[] glu = { 80464, 80465 };
 		int[] oman = { 80468,80469,80470,80471,80472,80473,80474,80475,80476,80477 };
-		int 드랍율 = random.nextInt(2000) + 1;
-		int 라던 = random.nextInt(lastabard.length);
-		int 상아탑 = random.nextInt(tower.length);
-		int 본던 = random.nextInt(glu.length);
-		int 오만 = random.nextInt(oman.length);
+		int dropChance = random.nextInt(2000) + 1;
+		int lastavard = random.nextInt(lastabard.length);
+		int ivory = random.nextInt(tower.length);
+		int mlc = random.nextInt(glu.length);
+		int toi = random.nextInt(oman.length);
 		switch (npc.getMapId()) {
 		case 479:case 475:case 462:case 453:case 492:
-			if (2 >= 드랍율) {
-				inventory.storeItem(lastabard[라던], 1);
+			if (2 >= dropChance) {
+				inventory.storeItem(lastabard[lastavard], 1);
 			}break;
 		case 78:case 79:case 80:case 81:case 82:
-			if (2 >= 드랍율) {// 象牙の塔
-				inventory.storeItem(tower[상아탑], 1);
+			if (2 >= dropChance) {// 象牙の塔
+				inventory.storeItem(tower[ivory], 1);
 			}break;
 		case 807:case 808:case 809:case 810:case 811:case 812:case 813:
-			if (2 >= 드랍율) {// ボンドン
-				inventory.storeItem(glu[본던], 1);
+			if (2 >= dropChance) {// MLC
+				inventory.storeItem(glu[mlc], 1);
 			}break;
 		case 101:case 102:case 103:case 104:case 105:case 106:case 107:case 108:case 109:case 110:case 111:
-			if (3 >= 드랍율) {// 傲慢
-				inventory.storeItem(oman[오만], 1);
+			if (3 >= dropChance) {// 傲慢
+				inventory.storeItem(oman[toi], 1);
 			}break;
 		}
 
@@ -362,12 +362,12 @@ public class DropTable {
 										L1PcInstance pc1 = partyMember[Who];
 										if (player.getLocation().getTileLineDistance(pc1.getLocation()) < 14) {
 											if (item != null && item.getItem().getItemId() != L1ItemId.ADENA) {
-												String 이름 = pc1.getName();
-												String 아이템이름 = item.getName();
+												String name = pc1.getName();
+												String itemName = item.getName();
 												targetInventory = pc1.getInventory();
 												for (int p = 0; p < partyMember.length; p++) {
 													if (player.RootMent) {
-														partyMember[p].sendPackets(new S_SystemMessage("" + 아이템이름 + "獲得：" + 이름 + " (" + npc.getName() + ") "));
+														partyMember[p].sendPackets(new S_SystemMessage("" + itemName + "獲得：" + name + " (" + npc.getName() + ") "));
 													}
 												}
 											}
@@ -468,12 +468,12 @@ public class DropTable {
 					temp.add(partymember);
 				}
 				//
-				int 아데나 = item.getCount() / temp.size();
+				int adena = item.getCount() / temp.size();
 				for (L1PcInstance user : temp) {
-					inventory.tradeItem(item, 아데나, user.getInventory());
+					inventory.tradeItem(item, adena, user.getInventory());
 					for (L1PcInstance partymember : pc.getParty().getMembers()) {
 						if (pc.RootMent) {
-							partymember.sendPackets(new S_SystemMessage("アデナ（" + 아데나 + "）獲得：" + user.getName() + " (" + npc.getName() + ") "));
+							partymember.sendPackets(new S_SystemMessage("アデナ（" + adena + "）獲得：" + user.getName() + " (" + npc.getName() + ") "));
 						}
 					}
 				}
@@ -513,7 +513,7 @@ public class DropTable {
 				L1ItemInstance l1iteminstance = player.getInventory().findItemId(L1ItemId.ADENA); //所持
 				if (l1iteminstance != null && l1iteminstance.getCount() > 2000000000) {
 					targetInventory = L1World.getInstance().getInventory(acquisitor.getX(), acquisitor.getY(),
-							acquisitor.getMapId()); // 가질 수
+							acquisitor.getMapId()); // 持つことができ
 					player.sendPackets(new S_ServerMessage(166, "所持しているアデナ", "20億を超えています。"));
 				} else {
 					for (L1PcInstance temppc : acquisitorList) {

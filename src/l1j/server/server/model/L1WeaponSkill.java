@@ -255,7 +255,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, damage, weaponSkill.getAttr());
 	}
 
-	public static int 키링크데미지(L1PcInstance pc, L1Character cha) { 
+	public static int KiringkuDamage(L1PcInstance pc, L1Character cha) { 
 		int dmg = 0;
 		int dice = 9;
 		int diceCount = 5;
@@ -317,7 +317,7 @@ public class L1WeaponSkill {
 		return dmg;
 	}
 
-	public static double 악운의단검(L1PcInstance pc,
+	public static double DiceDagger(L1PcInstance pc,
 			L1PcInstance targetPc, L1ItemInstance weapon) {
 		double dmg = 0;
 		int chance = _random.nextInt(100) + 1;
@@ -334,7 +334,7 @@ public class L1WeaponSkill {
 		return dmg;
 		}
 	
-	public static void 붉은그림자의이도류(L1PcInstance pc, L1Character cha) {
+	public static void RedShadowDualBlade(L1PcInstance pc, L1Character cha) {
 		int fettersTime = 8000;
 		if (isFreeze(cha)) {
 			return;
@@ -351,12 +351,12 @@ public class L1WeaponSkill {
 				L1NpcInstance npc = (L1NpcInstance) cha;
 				npc.setSkillEffect(STATUS_FREEZE, fettersTime);
 				npc.broadcastPacket(new S_SkillSound(npc.getId(), 4184));
-				npc.set발묶임상태(true);
+				npc.setCanNotMove(true);
 			}
 		}
 	}
 	
-	public static void 체인소드( L1PcInstance pc ) { //チェーンソードダメージ。
+	public static void ChainSword( L1PcInstance pc ) { //チェーンソードダメージ。
 		if(_random.nextInt(100) < 15){
 			if (pc.hasSkillEffect(L1SkillId.CHAINSWORD1)) {
 				pc.killSkillEffectTimer(L1SkillId.CHAINSWORD1);
@@ -373,7 +373,7 @@ public class L1WeaponSkill {
 			}
 		}
 	}
-	public static void 섬멸자의체인소드( L1PcInstance pc ) { //チェーンソードダメージ。
+	public static void ChainSword_Destroyer( L1PcInstance pc ) { //チェーンソードダメージ。
 		if(_random.nextInt(100) < 18){
 			if (pc.hasSkillEffect(L1SkillId.CHAINSWORD1)) {
 				pc.killSkillEffectTimer(L1SkillId.CHAINSWORD1);
@@ -413,7 +413,7 @@ public class L1WeaponSkill {
 		}
 	}
 	
-	public static double 블레이즈쇼크(L1PcInstance pc, L1Character cha, int enchant) {
+	public static double BlazeShock(L1PcInstance pc, L1Character cha, int enchant) {
 		double dmg = 0;
 		int chance = _random.nextInt(100) + 1;
 		int val = enchant * 1;
@@ -435,7 +435,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_FIRE);
 	}
 	
-	public static double 체인소드블레이즈쇼크(L1PcInstance pc, L1Character cha, int enchant) {
+	public static double ChainSword_BlazeShock(L1PcInstance pc, L1Character cha, int enchant) {
 		double dmg = 0;
 		int chance = _random.nextInt(100) + 1;
 		int val = enchant * 1;
@@ -473,7 +473,7 @@ public class L1WeaponSkill {
 	}
 
 	
-	public static double 환영의체인소드(L1PcInstance pc, L1Character cha, int enchant){
+	public static double ChainSword_Welcome(L1PcInstance pc, L1Character cha, int enchant){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -490,7 +490,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WATER);
 	}
 	
-	public static double 군주의검(L1PcInstance pc, L1Character cha, int effect, int enchant){
+	public static double LordSword(L1PcInstance pc, L1Character cha, int effect, int enchant){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -507,7 +507,7 @@ public class L1WeaponSkill {
 		}
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
-	public static double 섬멸자(L1PcInstance pc, L1Character cha, int effect, int enchant){
+	public static double Destroyer(L1PcInstance pc, L1Character cha, int effect, int enchant){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -524,7 +524,7 @@ public class L1WeaponSkill {
 		}
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
-	public static double 악장(L1PcInstance pc, L1Character cha, int effect, int enchant){
+	public static double Nightmare(L1PcInstance pc, L1Character cha, int effect, int enchant){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -541,7 +541,7 @@ public class L1WeaponSkill {
 		}
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
-	public static double 진싸(L1PcInstance pc, L1Character cha, int effect, int enchant){
+	public static double Jinsa(L1PcInstance pc, L1Character cha, int effect, int enchant){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -558,7 +558,7 @@ public class L1WeaponSkill {
 		}
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
-	public static double 태풍도끼(L1PcInstance pc, L1Character cha, int effect, int enchant){
+	public static double StormAx(L1PcInstance pc, L1Character cha, int effect, int enchant){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -576,7 +576,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
 	
-	public static double 파괴의이도류크로우(L1PcInstance pc, L1Character cha, int effect, int enchant){
+	public static double DestructionDualBlade_Crow(L1PcInstance pc, L1Character cha, int effect, int enchant){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -594,7 +594,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_EARTH);
 	}
 	
-	public static double 광풍의도끼(L1PcInstance pc, L1Character cha, int effect, int enchant){
+	public static double InsanityWindAx(L1PcInstance pc, L1Character cha, int effect, int enchant){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -612,7 +612,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
 	
-	public static double 혹한의창(L1PcInstance pc, L1Character cha, int effect, int enchant) {
+	public static double ExColdWind(L1PcInstance pc, L1Character cha, int effect, int enchant) {
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -630,7 +630,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
 	
-	public static double 살천의활(L1PcInstance pc, L1Character cha, int effect, int enchant) {
+	public static double AngelSlayer(L1PcInstance pc, L1Character cha, int effect, int enchant) {
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -648,7 +648,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
 	
-	public static double 뇌신검(L1PcInstance pc, L1Character cha, int effect, int enchant) {
+	public static double LightningEdge(L1PcInstance pc, L1Character cha, int effect, int enchant) {
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -666,7 +666,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
 	
-	public static double 공명의키링크(L1PcInstance pc, L1Character cha, int effect, int enchant) {
+	public static double Kiringku_Resonance(L1PcInstance pc, L1Character cha, int effect, int enchant) {
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -684,7 +684,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
 	
-	public static double 냉한의키링크(L1PcInstance pc, L1Character cha, int effect, int enchant) {
+	public static double Kiringku_Cold(L1PcInstance pc, L1Character cha, int effect, int enchant) {
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -705,7 +705,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WATER);
 	}
 	
-	public static double 히페리온의절망(L1PcInstance pc, L1Character cha, int effect, int enchant) {
+	public static double HypelionsDespair(L1PcInstance pc, L1Character cha, int effect, int enchant) {
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -744,7 +744,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WATER);
 	}
 
-	public static double 커츠의검(L1PcInstance pc, L1Character cha, int enchant, int effect){
+	public static double KurtzsSword(L1PcInstance pc, L1Character cha, int enchant, int effect){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -762,7 +762,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
 	
-	public static double 데스나이트의불검(L1PcInstance pc, L1Character cha, int enchant, int effect){
+	public static double DeathKnightFlameBlade(L1PcInstance pc, L1Character cha, int enchant, int effect){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -780,7 +780,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_FIRE);
 	}
 	
-	public static double 바포메트의지팡이(L1PcInstance pc, L1Character cha, int enchant, int effect){
+	public static double BaphometStaff(L1PcInstance pc, L1Character cha, int enchant, int effect){
 		double dmg = 0;
 			int locx = cha.getX();
 			int locy = cha.getY();
@@ -799,7 +799,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_EARTH);
 	}
 	
-	public static double 제로스의지팡이(L1PcInstance pc, L1Character cha, int enchant, int effect){
+	public static double ZerosWand(L1PcInstance pc, L1Character cha, int enchant, int effect){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -821,7 +821,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_FIRE);
 	}
 
-	public static double 수정결정체지팡이(L1PcInstance pc, L1Character cha, int enchant, int effect){
+	public static double HolyHedronStaff(L1PcInstance pc, L1Character cha, int enchant, int effect){
 		double dmg = 0;
 		int locx = cha.getX();
 		int locy = cha.getY();
@@ -840,7 +840,7 @@ public class L1WeaponSkill {
 		return calcDamageReduction(cha, dmg, L1Skills.ATTR_WIND);
 	}
 	
-	public static void 천사의지팡이(L1PcInstance pc, L1Character cha, int enchant) {
+	public static void AngelStaff(L1PcInstance pc, L1Character cha, int enchant) {
 		int chance = _random.nextInt(100) + 1;
 		int undeadType = ((L1MonsterInstance) cha).getNpcTemplate().get_undead();
 		if (undeadType == 1 || undeadType == 3){

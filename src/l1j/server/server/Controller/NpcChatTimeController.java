@@ -50,7 +50,7 @@ public class NpcChatTimeController implements Runnable {
 	public void run() {
 		try {
 			checkNpcChatTime(); // チャット開始時間をチェック
-			던전체크();
+			cheackDungeon();
 			
 		} catch (Exception e1) {
 			_log.warning(e1.getMessage());
@@ -74,26 +74,26 @@ public class NpcChatTimeController implements Runnable {
 		}
 	}
 	
-	private void 던전체크() {
+	private void cheackDungeon() {
 		Calendar cal = Calendar.getInstance();
-		int 시간 = Calendar.HOUR;
-		int 분 = Calendar.MINUTE;
+		int hour = Calendar.HOUR;
+		int minute = Calendar.MINUTE;
 		/** 0 午前、1午後 * */
-		String 오전오후 = "午後";
+		String ampm = "午後";
 		if (cal.get(Calendar.AM_PM) == 0) {
-			오전오후 = "午前";
+			ampm = "午前";
 		}
 		
 		if (IsleController.getInstance().isgameStart == false) {
-			if ((       cal.get(시간) == 1 && cal.get(분) == 59)
-					|| (cal.get(시간) == 5 && cal.get(분) == 59)
-					|| (cal.get(시간) == 9 && cal.get(분) == 59)
+			if ((       cal.get(hour) == 1 && cal.get(minute) == 59)
+					|| (cal.get(hour) == 5 && cal.get(minute) == 59)
+					|| (cal.get(hour) == 9 && cal.get(minute) == 59)
 //					||午前午後.equals（ "午前"）&& cal.get（時間）== 10 && cal.get（分）== 0
 					
 				
 					) {
 				IsleController.getInstance().isgameStart = true;
-				System.out.println("忘れられた島オープン：" + 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分");
+				System.out.println("忘れられた島オープン：" + ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分");
 			}
 		}
 		if(Config.BATTLE_ZONE_OPERATION){ 
@@ -102,11 +102,11 @@ public class NpcChatTimeController implements Runnable {
 						//午前午後.equals（ "午前"）&& cal.get（時間）== 5 && cal.get（分）== 0）
 						// ||午前午後.equals（ "午前"）&& cal.get（時間）== 10 && cal.get（分）== 0
 						// ||午前午後.equals（ "午後"）&& cal.get（時間）== 5 && cal.get（分）== 1
-					 오전오후.equals("오후") && cal.get(시간) == 10 && cal.get(분) == 1)
+					 ampm.equals("午後") && cal.get(hour) == 10 && cal.get(minute) == 1)
 //					||午前午後.equals（ "午前"）&& cal.get（時間）== 10 && cal.get（分）== 0
 						) {
 					BattleZone.getInstance().setGmStart(true);
-				System.out.println("バトルゾーンオープン：" + 오전오후 + " " + cal.get(시간) + "時" + cal.get(분) + "分");
+				System.out.println("バトルゾーンオープン：" + ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分");
 					}
 				}
 			}

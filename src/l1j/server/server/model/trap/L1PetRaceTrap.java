@@ -78,8 +78,8 @@ public class L1PetRaceTrap extends L1Trap {
 
 	public synchronized void ListChange(L1PcInstance pc, int i){
 		L1Racing racing = L1Racing.getInstance();
-		racing.arrayList(racing.일반).remove(pc); // 一度引いた後に
-		racing.arrayList(racing.일반).add(i, pc); // この後に。
+		racing.arrayList(racing.normal).remove(pc); // 一度引いた後に
+		racing.arrayList(racing.normal).add(i, pc); // この後に。
 		ListUpdate(); // アップデートしてくれ。
 	}
 
@@ -113,39 +113,39 @@ public class L1PetRaceTrap extends L1Trap {
 
 		if(_type.equals("a")){
 			L1Racing racing = L1Racing.getInstance();
-			if(refreshList(c, racing.일반, racing.순위01)){
-			}else if(refreshList(c, racing.순위10, racing.순위11)){
-			}else if(refreshList(c, racing.순위20, racing.순위21)){
-			}else if(refreshList(c, racing.순위30, racing.순위31)){
+			if(refreshList(c, racing.normal, racing.rank_01)){
+			}else if(refreshList(c, racing.rank_10, racing.rank_11)){
+			}else if(refreshList(c, racing.rank_20, racing.rank_21)){
+			}else if(refreshList(c, racing.rank_30, racing.rank_31)){
 			}
 		}else if(_type.equals("b")){
 			L1Racing racing = L1Racing.getInstance();
-			if(refreshList(c, racing.순위01, racing.순위02)){
-			}else if(refreshList(c, racing.순위11, racing.순위12)){
-			}else if(refreshList(c, racing.순위21, racing.순위22)){
-			}else if(refreshList(c, racing.순위31, racing.순위32)){
+			if(refreshList(c, racing.rank_01, racing.rank_02)){
+			}else if(refreshList(c, racing.rank_11, racing.rank_12)){
+			}else if(refreshList(c, racing.rank_21, racing.rank_22)){
+			}else if(refreshList(c, racing.rank_31, racing.rank_32)){
 			}
 		}else if(_type.equals("c")){
 			L1Racing racing = L1Racing.getInstance();
-			if(refreshList(c, racing.순위02, racing.순위03)){
-			}else if(refreshList(c, racing.순위12, racing.순위13)){
-			}else if(refreshList(c, racing.순위22, racing.순위23)){
-			}else if(refreshList(c, racing.순위32, racing.순위33)){
+			if(refreshList(c, racing.rank_02, racing.rank_03)){
+			}else if(refreshList(c, racing.rank_12, racing.rank_13)){
+			}else if(refreshList(c, racing.rank_22, racing.rank_23)){
+			}else if(refreshList(c, racing.rank_32, racing.rank_33)){
 			}
 		}else if(_type.equals("f")) { //フィニッシュライン
 			L1Racing racing = L1Racing.getInstance();
-			if(refreshList(c, racing.순위03, racing.순위10)){
+			if(refreshList(c, racing.rank_03, racing.rank_10)){
 				c.sendPackets(new S_GameRap(c, 2));
-			}else if(refreshList(c, racing.순위13, racing.순위20)){
+			}else if(refreshList(c, racing.rank_13, racing.rank_20)){
 				c.sendPackets(new S_GameRap(c, 3));
-			}else if(refreshList(c, racing.순위23, racing.순위30)){
+			}else if(refreshList(c, racing.rank_23, racing.rank_30)){
 				c.sendPackets(new S_GameRap(c, 4));
-			}else if(refreshList(c, racing.순위33, racing.순위99)){
-				if(racing.size(racing.순위99) == 1){
+			}else if(refreshList(c, racing.rank_33, racing.rank_99)){
+				if(racing.size(racing.rank_99) == 1){
 					c.sendPackets(new S_SystemMessage("1等ました。"));
 					c.sendPackets(new S_GameRanking(c));
 				}else{
-					c.sendPackets(new S_SystemMessage(racing.size(racing.순위99) + "などでした。"));
+					c.sendPackets(new S_SystemMessage(racing.size(racing.rank_99) + "などでした。"));
 				}
 				c.getInventory().storeItem(41308, 1);
 

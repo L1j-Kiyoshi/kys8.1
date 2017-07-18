@@ -163,9 +163,9 @@ public class C_MailBox extends ClientBasePacket {
 		}
 		int id = LetterTable.getInstance().writeLetter(paper, dTime, sender.getName(), receiverName, TYPE_PRIVATE_MAIL, subject, content);
 		if (target != null && target.getOnlineStatus() != 0) {
-			target.sendPackets(new S_LetterList(S_LetterList.WRITE_TYPE_PRIVATE_MAIL, id, S_LetterList.TYPE_RECEIVE, sender.getName(), subject)); // 받는사람
+			target.sendPackets(new S_LetterList(S_LetterList.WRITE_TYPE_PRIVATE_MAIL, id, S_LetterList.TYPE_RECEIVE, sender.getName(), subject)); // 受信者
 		}
-		// sender.sendPackets(new S_LetterList(S_LetterList.WRITE_TYPE_PRIVATE_MAIL, id, S_LetterList.TYPE_SEND, receiverName, subject)); //보내는 사람
+		// sender.sendPackets(new S_LetterList(S_LetterList.WRITE_TYPE_PRIVATE_MAIL, id, S_LetterList.TYPE_SEND, receiverName, subject)); //送信者
 	}
 
 	private void WriteBloodPledgeMail(L1PcInstance sender) {
@@ -200,7 +200,7 @@ public class C_MailBox extends ClientBasePacket {
 				int id = LetterTable.getInstance().writeLetter(paper, dTime, sender.getName(), name, TYPE_BLOODPLEDGE_MAIL, subject, content);
 			
 				if (target != null && target.getOnlineStatus() != 0) {
-					target.sendPackets(new S_LetterList(S_LetterList.WRITE_TYPE_BLOODPLEDGE_MAIL, id, S_LetterList.TYPE_RECEIVE, sender.getName(), subject)); // 받는사람
+					target.sendPackets(new S_LetterList(S_LetterList.WRITE_TYPE_BLOODPLEDGE_MAIL, id, S_LetterList.TYPE_RECEIVE, sender.getName(), subject)); // 受信者
 				}
 
 			}

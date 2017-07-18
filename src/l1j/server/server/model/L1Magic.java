@@ -229,7 +229,7 @@ public class L1Magic {
 				}
 				if (_pc.isInParty()) {
 					if (_pc.getParty().isMember(_targetPc)) {
-						_targetPc.sendPackets(new S_SystemMessage("파티원 " + _pc.getName() + "様がキャンセレーション魔法を詠唱しました。"));
+						_targetPc.sendPackets(new S_SystemMessage("パーティーメンバー" + _pc.getName() + "様がキャンセレーション魔法を詠唱しました。"));
 						return true;
 					}
 				}
@@ -312,7 +312,7 @@ public class L1Magic {
 				if (skillId != WEAPON_BREAK && skillId != CANCELLATION // 確率系
 						&& skillId != EXTRA_HEAL && skillId != HEAL && skillId != GREATER_HEAL && skillId != HEAL_ALL && skillId != FULL_HEAL
 						&& skillId != NATURES_BLESSING && skillId == MANA_DRAIN || skillId == CURSE_PARALYZE || skillId == THUNDER_GRAB
-						|| skillId == ERASE_MAGIC || skillId == SHOCK_STUN || skillId == EARTH_BIND || skillId == BONE_BREAK) { // 버프계
+						|| skillId == ERASE_MAGIC || skillId == SHOCK_STUN || skillId == EARTH_BIND || skillId == BONE_BREAK) { //バフ系
 					return false;
 				}
 			}
@@ -445,7 +445,7 @@ public class L1Magic {
 						|| skillId == ENTANGLE || skillId == ERASE_MAGIC || skillId == EARTH_BIND || skillId == AREA_OF_SILENCE
 						|| skillId == WIND_SHACKLE || skillId == POLLUTE_WATER || skillId == STRIKER_GALE || skillId == GUARD_BREAK || skillId == FEAR
 						|| skillId == HORROR_OF_DEATH || skillId == ICE_LANCE || skillId == ELEMENTAL_FALL_DOWN || skillId == RETURN_TO_NATURE
-						|| skillId == PHANTASM || skillId == CONFUSION || skillId == DESPERADO || skillId == POWERRIP) {
+						|| skillId == PHANTASM || skillId == CONFUSION || skillId == DESPERADO || skillId == POWEGRRIP) {
 					return false;
 				}
 			}
@@ -597,7 +597,7 @@ public class L1Magic {
 		    if(probability > 80){
 			probability = 80;}
 			break;
-		case POWERRIP:
+		case POWEGRRIP:
 			probability = (int) Config.POWER_GRIP + ((attackLevel - defenseLevel) * 5);
 			if (probability < 15) {
 				probability = 15;
@@ -645,8 +645,8 @@ public class L1Magic {
 					L1PcInstance pc = (L1PcInstance) _pc;
 					L1ItemInstance weapon = _pc.getWeapon();
 					int itemId = weapon.getItem().getItemId();
-					if (pc.get어택레벨() != 0) {
-						attackLevel += pc.get어택레벨();
+					if (pc.getAttackLevel() != 0) {
+						attackLevel += pc.getAttackLevel();
 					}
 					if (itemId == 1512) {
 						attackLevel += 2;
@@ -669,8 +669,8 @@ public class L1Magic {
 						L1PcInstance pc = (L1PcInstance) _pc;
 						L1ItemInstance weapon = _pc.getWeapon();
 						int itemId = weapon.getItem().getItemId();
-						if (pc.get어택레벨() != 0) {
-							attackLevel += pc.get어택레벨();
+						if (pc.getAttackLevel() != 0) {
+							attackLevel += pc.getAttackLevel();
 						}
 						if (itemId == 61) {
 							attackLevel += 2;
@@ -727,8 +727,8 @@ public class L1Magic {
 					if (_calcType == PC_PC) {
 						if (_pc instanceof L1PcInstance) {
 							L1PcInstance pc = (L1PcInstance) _pc;
-							if (pc.get어택레벨() != 0) {
-								attackLevel += pc.get어택레벨();
+							if (pc.getAttackLevel() != 0) {
+								attackLevel += pc.getAttackLevel();
 							}
 						}
 					}
@@ -886,9 +886,9 @@ public class L1Magic {
 				if (!_targetPc.isstop() && (percent + _targetPc.getRisingUp())<= 40 && chance <= 30) {
 					if (_targetPc.getInventory().checkItem(41246, 10)) {
 						if (_calcType == PC_PC)
-							_pc.receiveCounterBarrierDamage(_targetPc, 타이탄대미지());
+							_pc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
 						else if (_calcType == PC_NPC)
-							_npc.receiveCounterBarrierDamage(_targetPc, 타이탄대미지());
+							_npc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
 						damage = 0;
 						_targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12559));
 						_targetPc.getInventory().consumeItem(41246, 10);
@@ -1697,7 +1697,7 @@ public class L1Magic {
 	}
 
 	// ●●●● 戦士タイタンダメージを算出 ●●●●
-	private int 타이탄대미지() {
+	private int calcTitanDamage() {
 		double damage = 0;
 		L1ItemInstance weapon = null;
 		weapon = _targetPc.getWeapon();

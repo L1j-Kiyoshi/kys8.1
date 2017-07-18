@@ -558,7 +558,7 @@ public synchronized L1ItemInstance storeItem(int id, int count, int enchant) {
 		insertItem(item);
 		return item;
 	}
-	public boolean 제작리스트1(int itemid, int count, int en) {
+	public boolean isProductionList(int itemid, int count, int en) {
 		if (count <= 0) {
 			return false;
 		}
@@ -984,7 +984,7 @@ public boolean checkEnchantItem(int id, int enchant, int count) {
 		return false;
 	}
 	
-	public boolean 제작리스트(int id, int enchant, int count) {
+	public boolean productionList(int id, int enchant, int count) {
 		int num = 0;
 		for (L1ItemInstance item : _items) {
 			if (item.isEquipped()) {

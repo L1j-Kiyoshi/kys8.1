@@ -88,7 +88,7 @@ public class HouseTaxTimeController implements Runnable {
 			board.setBidderId(0);
 			boardTable.insertAuctionBoard(board);
 			house.setOnSale(true); // オークション中の設定
-			house.setPurchaseBasement(true); // 지하 아지트미구입으로 설정
+			house.setPurchaseBasement(true); // 地下アジト未購入に設定
 			cal.add(Calendar.DATE, Config.HOUSE_TAX_INTERVAL);
 			house.setTaxDeadline(cal);
 			HouseTable.getInstance().updateHouse(house); // DBに記入して

@@ -74,119 +74,119 @@ public class L1Reload implements L1CommandExecutor {
 
 	@Override
 	public void execute(L1PcInstance gm, String cmdName, String arg) {		
-		if (arg.equalsIgnoreCase("몹드랍")) {
+		if (arg.equalsIgnoreCase("droplist")) {
 			DropTable.reload();
 			gm.sendPackets(new S_SystemMessage("droplistテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("엔피씨액션")) { 
+		} else if (arg.equalsIgnoreCase("npctalkdata")) { 
 			NPCTalkDataTable.reload();
-			gm.sendPackets(new S_SystemMessage("NpcActionテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("엔피씨")) {
+			gm.sendPackets(new S_SystemMessage("NPCTalkDataテーブルがリロードされました。"));
+		} else if (arg.equalsIgnoreCase("npc")) {
 			NpcTable.reload();
 			gm.sendPackets(new S_SystemMessage("NpcTableテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("템드랍아이템")) {
+		} else if (arg.equalsIgnoreCase("drop_item")) {
 			DropItemTable.reload();
 			gm.sendPackets(new S_SystemMessage("drop_itemテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("용해제아덴")) {
+		} else if (arg.equalsIgnoreCase("resolvent1")) {
 			ResolventTable1.reload();
 			gm.sendPackets(new S_SystemMessage("resolvent1テーブルがリロード最新化された。"));
-		} else if (arg.equalsIgnoreCase("변신")) {
+		} else if (arg.equalsIgnoreCase("polymorphs")) {
 			PolyTable.reload();
 			gm.sendPackets(new S_SystemMessage("polymorphsテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("용해제")) {
+		} else if (arg.equalsIgnoreCase("resolvent")) {
 			ResolventTable.reload();
 			gm.sendPackets(new S_SystemMessage("resolventテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("박스")) {
+		} else if (arg.equalsIgnoreCase("tresurebox")) {
 			L1TreasureBox.load();
 			gm.sendPackets(new S_SystemMessage("TreasureBox.xmlファイルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("물약회복")) {
+		} else if (arg.equalsIgnoreCase("healingdpotion")) {
 			L1HealingPotion.load();
 			gm.sendPackets(new S_SystemMessage("HealingPotion.xmlファイルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("컨피그") || arg.equalsIgnoreCase("서버설정")) {
+		} else if (arg.equalsIgnoreCase("config") || arg.equalsIgnoreCase("serverconfig")) {
 			Config.load();
 			gm.sendPackets(new S_SystemMessage("configフォルダにファイルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("스킬")) {
+		} else if (arg.equalsIgnoreCase("skills")) {
 			SkillsTable.reload();
 			gm.sendPackets(new S_SystemMessage("Skillテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("몹스킬")) {
+		} else if (arg.equalsIgnoreCase("mobskill")) {
 			MobSkillTable.reload();
 			gm.sendPackets(new S_SystemMessage("mobskillテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("엔피씨액션")) { 
+		} else if (arg.equalsIgnoreCase("npctalkdata")) { 
 			NPCTalkDataTable.reload();
-			gm.sendPackets(new S_SystemMessage("NpcActionテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("영자상점")) {
+			gm.sendPackets(new S_SystemMessage("NPCTalkDataテーブルがリロードされました。"));
+		} else if (arg.equalsIgnoreCase("npcshop")) {
 			NpcShopTable.reloding();
 			gm.sendPackets(new S_SystemMessage("NpcShopTableテーブルがリロードされました。"));	
-		} else if (arg.equalsIgnoreCase("무기스킬")) {
+		} else if (arg.equalsIgnoreCase("weaponskill")) {
 			WeaponSkillTable.reload();
 			gm.sendPackets(new S_SystemMessage("WeaponSkillテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("ㅇㅊ")) {
+		} else if (arg.equalsIgnoreCase("npcshopspawn")) {
 			NpcShopSpawnTable.reloding();
 			gm.sendPackets(new S_SystemMessage("NpcShopSpawnTableテーブルがリロードされました。"));	
-		}else if (arg.equalsIgnoreCase("레벨퀘스트")) {
+		}else if (arg.equalsIgnoreCase("characterslevelupitem")) {
 			CharactersGiftItemTable.reload();
 			gm.sendPackets(new S_SystemMessage("characters_levelup_itemテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("밴아이피")) {
+		} else if (arg.equalsIgnoreCase("banip")) {
 			IpTable.getInstance();
 			IpTable.reload();
 			gm.sendPackets(new S_SystemMessage("banIpテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("아이템")){
+		} else if (arg.equalsIgnoreCase("item")){
 			ItemTable.reload();
 			gm.sendPackets(new S_SystemMessage("アイテム情報がリロードされました。"));
 			for (int i = 8000000; i < 9000000; i++) {
 				ItemTable.getInstance().getAllTemplates()[i] = BugRaceController.getInstance().getAllTemplates()[i];
 			}
-		} else if (arg.equalsIgnoreCase("상점")){
+		} else if (arg.equalsIgnoreCase("shop")){
 			ShopTable.reload();
 			gm.sendPackets(new S_SystemMessage("shopテーブルがリロードされました。"));
 			BugRaceController.getInstance().reLoadNpcShopList();
 			for (int i = 8000000; i < 9000000; i++) {
 				ItemTable.getInstance().getAllTemplates()[i] = BugRaceController.getInstance().getAllTemplates()[i];
 			}
-		} else if (arg.equalsIgnoreCase("무기대미지")){
+		} else if (arg.equalsIgnoreCase("weapondamage")){
 			WeaponAddDamage.reload();
 			gm.sendPackets(new S_SystemMessage("weapon_damegeテーブルがリロードされました。"));		
-		} else if (arg.equalsIgnoreCase("클랜데이터")){
+		} else if (arg.equalsIgnoreCase("clandata")){
 			ClanTable.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：clan_dataテーブルがリロードされました。"));		
-		} else if (arg.equalsIgnoreCase("공성")){
+		} else if (arg.equalsIgnoreCase("castle")){
 			CastleTable.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：castleテーブルがリロードされました。"));	
-		} else if (arg.equalsIgnoreCase("몬스터북")){
+		} else if (arg.equalsIgnoreCase("monsterbook")){
 			MonsterBookTable.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：monster_bookテーブルがリロードされました。"));	
-		} else if (arg.equalsIgnoreCase("스폰리스트")){
+		} else if (arg.equalsIgnoreCase("spawnlist")){
 			SpawnTable.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：spawnlistテーブルがリロードされました。"));	
-		} else if (arg.equalsIgnoreCase("엔스폰리스트")){
+		} else if (arg.equalsIgnoreCase("spawnlistnpc")){
 			NpcSpawnTable.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：spawnlist_npcテーブルリロードされました。"));	
-		} else if (arg.equalsIgnoreCase("엔캐샵스폰리스트")){
+		} else if (arg.equalsIgnoreCase("spawnlistnpccashshop")){
 			NpcCashShopSpawnTable.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：spawnlist_npc_cash_shopテーブルがリロードされました。"));	
-		} else if (arg.equalsIgnoreCase("엔피씨채팅")){
+		} else if (arg.equalsIgnoreCase("npcchat")){
 			NpcChatTable.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：npcchatテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("던전")){
+		} else if (arg.equalsIgnoreCase("dungeon")){
 			Dungeon.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：dungeonテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("맵")){
+		} else if (arg.equalsIgnoreCase("mapids")){
 			MapsTable.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：mapidsテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("밸런스")){
+		} else if (arg.equalsIgnoreCase("characterbalance")){
 			CharacterBalance.reload();
 			CharacterHitRate.reload();
 			CharacterReduc.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：character_balanceテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("신규지급템")){
+		} else if (arg.equalsIgnoreCase("beginner")){
 			Beginner.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：beginnerテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("보스")){
+		} else if (arg.equalsIgnoreCase("newbossspawn")){
 			NewBossSpawnTable.reload();
 			gm.sendPackets(new S_SystemMessage("リロード：NewBossSpawnTableテーブルがリロードされました。"));
-		} else if (arg.equalsIgnoreCase("아덴상점")) {
+		} else if (arg.equalsIgnoreCase("adenshop")) {
 			AdenShopTable.reload();
 			gm.sendPackets(new S_SystemMessage("AdenShopTable Reload Complete..."));
-		} else if (arg.equalsIgnoreCase("로봇")) {
+		} else if (arg.equalsIgnoreCase("robot")) {
 			RobotAIThread.reload();
 			gm.sendPackets(new S_SystemMessage("RobotAIThread Reload Complete..."));
 		} else {		

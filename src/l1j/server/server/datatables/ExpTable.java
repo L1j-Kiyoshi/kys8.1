@@ -48,7 +48,7 @@ public final class ExpTable {
 	 * 
 	 * @param level
 	 *            現在のレベル
-	 * @return 필요한 경험치
+	 * @return 必要な経験値
 	 */
 	public static int getNeedExpNextLevel(int level) {
 		return getExpByLevel(level + 1) - getExpByLevel(level);

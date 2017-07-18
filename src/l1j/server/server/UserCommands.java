@@ -107,7 +107,7 @@ public class UserCommands {
 				check(pc);
 				break;
 			case "스텟초기화":
-				스초진행(pc);
+				statusInitialization(pc);
 				break;
 			case "좌표복구":
 				location(pc);
@@ -266,11 +266,11 @@ public class UserCommands {
 	}
 
 	private void Ment(L1PcInstance pc, String param) {
-		if (param.equalsIgnoreCase("끔")) {
+		if (param.equalsIgnoreCase("off")) {
 			pc.sendPackets(new S_ChatPacket(pc, "アイテム獲得メント -  OFF  - "));
 			pc.RootMent = false;
-		} else if (param.equalsIgnoreCase("켬")) {
-			pc.sendPackets(new S_ChatPacket(pc, "아이템 획득 멘트 - ON -"));
+		} else if (param.equalsIgnoreCase("on")) {
+			pc.sendPackets(new S_ChatPacket(pc, "アイテム獲得メント -  ON  - "));
 			pc.RootMent = true;
 		} else {
 			pc.sendPackets(new S_ChatPacket(pc, ".드랍멘트 [オン/オフ]中に入力（アイテム獲得コメント設定）"));
@@ -342,9 +342,9 @@ public class UserCommands {
 	}
 
 	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		if (arg.equalsIgnoreCase("켬")) {
+		if (arg.equalsIgnoreCase("on")) {
 			pc.setSkillEffect(L1SkillId.GMSTATUS_HPBAR, 0);
-		} else if (arg.equalsIgnoreCase("끔")) {
+		} else if (arg.equalsIgnoreCase("off")) {
 			pc.removeSkillEffect(L1SkillId.GMSTATUS_HPBAR);
 
 			for (L1Object obj : pc.getKnownObjects()) {
@@ -427,7 +427,7 @@ public class UserCommands {
 		}
 	}
 
-	private void 스초진행(L1PcInstance pc) {
+	private void statusInitialization(L1PcInstance pc) {
 		try {
 			long curtime = System.currentTimeMillis() / 1000;
 			if (pc.getQuizTime() + 10 > curtime) {
@@ -484,10 +484,10 @@ public class UserCommands {
 		try {
 			StringTokenizer st = new StringTokenizer(param);
 			String on = st.nextToken();
-			if (on.equalsIgnoreCase("켬")) {
+			if (on.equalsIgnoreCase("on")) {
 				pc.sendPackets(new S_Ability(3, true));
 				pc.sendPackets(new S_SystemMessage("\\aAコマンド：ライトを \\aG[開始]\\aA しました。"));
-			} else if (on.equals("끔")) {
+			} else if (on.equals("off")) {
 				pc.sendPackets(new S_Ability(3, false));
 				pc.sendPackets(new S_SystemMessage("\\aAコマンド：ライトを \\aG[終了]\\aA しました。"));
 			}
@@ -507,8 +507,8 @@ public class UserCommands {
 			Connection connection = null;
 			connection = L1DatabaseFactory.getInstance().getConnection();
 			PreparedStatement preparedstatement = connection.prepareStatement(
-					"UPDATE characters SET LocX=33432,LocY=32807,MapID=4 WHERE account_name=? and MapID not in (5001,99,997,5166,39,34,701,2000)"); // 운영자의방,감옥,배틀존대기실
-																																					// 제외
+					"UPDATE characters SET LocX=33432,LocY=32807,MapID=4 WHERE account_name=? and MapID not in (5001,99,997,5166,39,34,701,2000)"); //オペレータの部屋、刑務所、バトルゾーン控室
+																																					// を除く
 			preparedstatement.setString(1, pc.getAccountName());
 			preparedstatement.execute();
 			preparedstatement.close();
@@ -560,11 +560,11 @@ public class UserCommands {
 			return;
 		}
 		int i = 1;
-		if (pc.문장주시) {
+		if (pc.watchCrest) {
 			i = 3;
-			pc.문장주시 = false;
+			pc.watchCrest = false;
 		} else
-			pc.문장주시 = true;
+			pc.watchCrest = true;
 		for (L1Clan clan : L1World.getInstance().getAllClans()) {
 			if (clan != null) {
 				pc.sendPackets(new S_War(i, pc.getClanname(), clan.getClanName()));
@@ -580,12 +580,12 @@ public class UserCommands {
 			return;
 		}
 		int ClanId = pc.getClanid();
-		if (ClanId != 0 && pc.getClanRank() == L1Clan.군주 || pc.getClanRank() == L1Clan.수호
-				|| pc.getClanRank() == L1Clan.부군주) {
+		if (ClanId != 0 && pc.getClanRank() == L1Clan.MONARCH || pc.getClanRank() == L1Clan.GUARDIAN
+				|| pc.getClanRank() == L1Clan.SUB_MONARCH) {
 			for (L1PcInstance SearchBlood : L1World.getInstance().getAllPlayers()) {
 				if (SearchBlood.getClanid() != ClanId || SearchBlood.isPrivateShop() || SearchBlood.isAutoClanjoin()
-						|| SearchBlood.isInParty()) { // 클랜이 같지않다면[X],
-														// 이미파티중이면[X], 상점중[X]
+						|| SearchBlood.isInParty()) { // クランが同じ場合は、[X]、
+														// すでにパーティー中であれば[X]、お店の中で[X]
 					continue; // 砲門脱出
 				} else if (SearchBlood.getName() != pc.getName()) {
 					pc.setPartyType(1); // パーティータイプの設定
@@ -672,9 +672,9 @@ public class UserCommands {
 		} catch (Exception e) {
 			pc.sendPackets(new S_SystemMessage("。手配[キャラクター名] [金額] [理由]"));
 			pc.sendPackets(new S_SystemMessage("====== 追加打撃範囲 ======"));
-			pc.sendPackets(new S_SystemMessage("====== " + Config.STAGE_1 + "만 추타 1 ======"));
-			pc.sendPackets(new S_SystemMessage("====== " + Config.STAGE_2 + "만 추타 2 ======"));
-			pc.sendPackets(new S_SystemMessage("====== " + Config.STAGE_3 + "만 추타 3 ======"));
+			pc.sendPackets(new S_SystemMessage("====== " + Config.STAGE_1 + "万ツタ1 ======"));
+			pc.sendPackets(new S_SystemMessage("====== " + Config.STAGE_2 + "万ツタ2 ======"));
+			pc.sendPackets(new S_SystemMessage("====== " + Config.STAGE_3 + "万ツタ3 ======"));
 		}
 	}
 
@@ -932,7 +932,7 @@ public class UserCommands {
 		}
 	}
 
-	// 패스워드 맞는지 여부 리턴
+	//パスワード正しいかどうかリターン
 	public static boolean isPasswordTrue(String Password, String oldPassword) {
 		String _rtnPwd = null;
 		Connection con = null;
@@ -990,7 +990,7 @@ public class UserCommands {
 			if (pc.getLevel() >= 60) {
 				for (int i = 0; i < name.length(); i++) {
 					if (name.charAt(i) == 'ㄱ' || name.charAt(i) == 'ㄲ' || name.charAt(i) == 'ㄴ' || name.charAt(i) == 'ㄷ'
-							|| // 한문자(char)단위로 비교.
+							|| // 一文字（char）単位で比較。
 							name.charAt(i) == 'ㄸ' || name.charAt(i) == 'ㄹ' || name.charAt(i) == 'ㅁ'
 							|| name.charAt(i) == 'ㅂ' || // 한문자(char)단위로 비교
 							name.charAt(i) == 'ㅃ' || name.charAt(i) == 'ㅅ' || name.charAt(i) == 'ㅆ'

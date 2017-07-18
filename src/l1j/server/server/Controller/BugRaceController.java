@@ -335,7 +335,7 @@ public class BugRaceController implements Runnable {
 	}
     }
 
-    public void 우승자멘트(String msg) {
+    public void winnerComment(String msg) {
 	for (int i = 0; i < 1; ++i) {
 	    if (_npc[i] != null) {
 		_npc[i].broadcastPacket(new S_NpcChatPacket(_npc[i], msg, 2));
@@ -581,12 +581,11 @@ public class BugRaceController implements Runnable {
     public void goalIn(int i) {
 	synchronized (this) {
 	    _ranking = _ranking + 1;
-	    // broadcastNpc(_ranking + "위 - " + _littleBugBear[i].getNameId());
 	    if (_ranking == 1) {
 		_first = _littleBugBear[i].getName();
 		SetWinRaceTicketPrice(ticket[i], _ration[i]);
 		AddWinCount(i);
-		우승자멘트("第" + _raceCount + "会の勝者は、" + _littleBugBear[i].getNameId() + "です。");
+		winnerComment("第" + _raceCount + "会の勝者は、" + _littleBugBear[i].getNameId() + "です。");
 	    } else {
 		SetLoseRaceTicketPrice(ticket[i], _ration[i]);
 		AddLoseCount(i);
@@ -744,7 +743,7 @@ public class BugRaceController implements Runnable {
 			// (int)(_winRate[_bugId]) * 5);
 			GeneralThreadPool.getInstance().schedule(this, 2000 - (int) (_winRate[_bugId]) * 5);
 		    } else if (_bugId == 4
-			    && (_littleBugBear[_bugId].getX() == 33496 || _littleBugBear[_bugId].getX() == 33512)) { // 4번
+			    && (_littleBugBear[_bugId].getX() == 33496 || _littleBugBear[_bugId].getX() == 33512)) { // 4回
 			_littleBugBear[_bugId].setDirectionMove(1);
 			--_remainRacingCount;
 

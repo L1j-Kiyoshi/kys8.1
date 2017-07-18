@@ -85,7 +85,7 @@ public class L1CreateItem implements L1CommandExecutor {
 						//}
 					}
 					if (createCount > 0) {
-                        pc.sendPackets(new S_SystemMessage("\\aA▶[+" + enchant + "] \\aG[" + item.getLogName() + "]\\aA(ID:"+ itemid + ") [생성]◀"));
+                        pc.sendPackets(new S_SystemMessage("\\aA▶[+" + enchant + "] \\aG[" + item.getLogName() + "]\\aA(ID:"+ itemid + ") [生成]◀"));
 					}
 				}
 			} else {

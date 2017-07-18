@@ -137,14 +137,14 @@ public class L1PetMatch {
 	}
 
 	private int decidePetMatchNo() {
-		// 상대가 대기중의 시합을 찾는다
+		// 相手が待機中の試合を探す
 		for (int i = 0; i < MAX_PET_MATCH; i++) {
 			int status = getPetMatchStatus(i);
 			if (status == STATUS_READY1 || status == STATUS_READY2) {
 				return i;
 			}
 		}
-		// 대기중의 시합이 없으면 비어 있는 시합을 찾는다
+		// 大気中の試合がない空の試合を探す
 		for (int i = 0; i < MAX_PET_MATCH; i++) {
 			int status = getPetMatchStatus(i);
 			if (status == STATUS_NONE) {
@@ -246,7 +246,7 @@ public class L1PetMatch {
 					_pet2[petMatchNo].setCurrentPetStatus(3);
 					giveMedal(pc1, petMatchNo, false);
 					giveMedal(pc2, petMatchNo, true);
-				} else if (winNo == 3) { // 무승부
+				} else if (winNo == 3) { // 引き分け
 					_pet1[petMatchNo].setCurrentPetStatus(3);
 					_pet2[petMatchNo].setCurrentPetStatus(3);
 					giveMedal(pc1, petMatchNo, false);
@@ -268,7 +268,7 @@ public class L1PetMatch {
 			return;
 		}
 		if (isWin) {
-			pc.sendPackets(new S_ServerMessage(1166, pc.getName()));  // %0%s펫 매치로 승리를 거두었습니다.
+			pc.sendPackets(new S_ServerMessage(1166, pc.getName()));  // ％0％sペットマッチで勝利を収めました。
 			L1ItemInstance item = ItemTable.getInstance().createItem(41309);
 			int count = 3;
 			if (item != null) {
@@ -279,7 +279,7 @@ public class L1PetMatch {
 					pc.sendPackets(new S_ServerMessage(403, item.getLogName()));
 				}
 			}
-			Random random = new Random(System.nanoTime()); // 펫레이싱
+			Random random = new Random(System.nanoTime()); //ペットレーシング
 
 			if(random.nextInt() < 33)
 			{
@@ -433,7 +433,7 @@ public class L1PetMatchTimer extends RepeatTask {
 				return;
 			}
 
-			if (_counter == 100) { // 5분 지나도 끝나지 않는 경우는 무승부
+			if (_counter == 100) { //5分経っても終わらない場合は、引き分け
 				L1PetMatch.getInstance().endPetMatch(_petMatchNo, 3);
 				cancel();
 				return;

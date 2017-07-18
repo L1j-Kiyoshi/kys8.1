@@ -64,8 +64,8 @@ public class S_OwnCharPack extends ServerBasePacket {
 		if (pc.isDead()) {
 			writeH(pc.getTempCharGfxAtDead());
 		} else if (pc.isPrivateShop()) {
-			if (pc.상점변신 != 0)
-				writeH(pc.상점변신);
+			if (pc.shopPoly != 0)
+				writeH(pc.shopPoly);
 		} else {
 			writeH(pc.getTempCharGfx());
 		}

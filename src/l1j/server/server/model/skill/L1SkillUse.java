@@ -176,7 +176,7 @@ public class L1SkillUse {
 			IllUSION_LICH, IllUSION_AVATAR, INSIGHT, SHAPE_CHANGE, 10026, 10027, 10028, 10029, 30060, 30000, 30078, 30079, 30011, 30081, 30082, 30083,
 			30080, 30084, 30010, 30002, 30086, OMAN_CANCELLATION, ANTA_MESSAGE_2, ANTA_MESSAGE_3, ANTA_MESSAGE_4, ANTA_MESSAGE_5, ANTA_MESSAGE_6,
 			ANTA_MESSAGE_7, ANTA_MESSAGE_8, ANTA_MESSAGE_10, 22034, OMAN_STUN, PAP_PREDICATE1, PAP_PREDICATE3, PAP_PREDICATE5, PAP_PREDICATE6,
-			PAP_PREDICATE7, PAP_PREDICATE8, PAP_PREDICATE9, PAP_PREDICATE11, PAP_PREDICATE12, DESPERADO, POWERRIP };
+			PAP_PREDICATE7, PAP_PREDICATE8, PAP_PREDICATE9, PAP_PREDICATE11, PAP_PREDICATE12, DESPERADO, POWEGRRIP };
 
 	public L1SkillUse() {
 	}
@@ -730,7 +730,7 @@ public class L1SkillUse {
 				|| _skillId == WEAPON_BREAK || _skillId == SLOW || _skillId == CURSE_PARALYZE || _skillId == MANA_DRAIN || _skillId == DARKNESS
 				|| _skillId == FOG_OF_SLEEPING || _skillId == ARMOR_BRAKE || _skillId == EARTH_BIND || _skillId == WIND_SHACKLE
 				|| _skillId == POLLUTE_WATER || _skillId == STRIKER_GALE || _skillId == GUARD_BREAK || _skillId == FEAR || _skillId == HORROR_OF_DEATH
-				|| _skillId == PANIC || _skillId == IllUSION_AVATAR || _skillId == DESPERADO || _skillId == POWERRIP)) {
+				|| _skillId == PANIC || _skillId == IllUSION_AVATAR || _skillId == DESPERADO || _skillId == POWEGRRIP)) {
 			return false;
 		}
 
@@ -1450,7 +1450,7 @@ public class L1SkillUse {
 
 		if (_skillId == SHOCK_STUN || _skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7 || _skillId == ANTA_MESSAGE_8
 				|| _skillId == OMAN_STUN
-				|| _skillId == POWERRIP
+				|| _skillId == POWEGRRIP
 				|| _skillId == EARTH_BIND
 				|| _skillId == DESPERADO
 				) {
@@ -1546,7 +1546,7 @@ public class L1SkillUse {
 		case PHYSICAL_ENCHANT_DEX:
 			pc.sendPackets(new S_Dexup(pc, 5, _getBuffIconDuration));
 			break;
-		case 나루토감사캔디:
+		case NARUTO_THANKS_CANDY:
 			if (pc.getLevel() >= 1 && pc.getLevel() <= 60) {
 				pc.sendPackets(new S_Dexup(pc, 7, _getBuffIconDuration));
 				pc.sendPackets(new S_Strup(pc, 7, _getBuffIconDuration));
@@ -1878,7 +1878,7 @@ public class L1SkillUse {
 				// { HOLY_WEAPON, ENCHANT_WEAPON, BLESS_WEAPON, SHADOW_FANG },
 				{ FIRE_WEAPON, WIND_SHOT, STORM_EYE, BURNING_WEAPON, STORM_SHOT }, { SHIELD, EARTH_SKIN, IRON_SKIN },
 				{ HOLY_WALK, BLOOD_LUST, MOVING_ACCELERATION, WIND_WALK, STATUS_BRAVE, STATUS_ELFBRAVE }, { HASTE, GREATER_HASTE, STATUS_HASTE },
-				{ PHYSICAL_ENCHANT_DEX, 나루토감사캔디, DRESS_DEXTERITY }, { PHYSICAL_ENCHANT_STR, DRESS_MIGHTY },
+				{ PHYSICAL_ENCHANT_DEX, NARUTO_THANKS_CANDY, DRESS_DEXTERITY }, { PHYSICAL_ENCHANT_STR, DRESS_MIGHTY },
 				// { GLOWING_AURA, SHINING_AURA },
 				{ FAFU_MAAN, ANTA_MAAN, LIND_MAAN, VALA_MAAN, LIFE_MAAN, BIRTH_MAAN, SHAPE_MAAN},
 				{ SCALES_EARTH_DRAGON, SCALES_WATER_DRAGON, SCALES_FIRE_DRAGON }, { PAP_FIVEPEARLBUFF, PAP_MAGICALPEARLBUFF } };
@@ -2650,7 +2650,7 @@ public class L1SkillUse {
 							int step = pri.getLevel() / 15;
 							L1PcInstance target = (L1PcInstance) _target;
 							if (step > 0) {
-								target.set트루타켓(step);
+								target.setTrueTarget(step);
 							}
 						}
 						for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(_target)) {
@@ -3477,7 +3477,7 @@ public class L1SkillUse {
 					break;
 				case ANTA_MESSAGE_1: // ヒット[用言1 /キャンセル - >オブモク！ケインドネシア]
 				case ANTA_MESSAGE_2: // ヒット[用言2 /ブレス+毒/オブモク！ケンロー]
-				case ANTA_MESSAGE_3: // 안타[용언3 / 왼손+오른펀치+고함 / 오브 모크! 티기르]
+				case ANTA_MESSAGE_3: // ヒット[用言3 /左手+右パンチ+叫ん/オブモク！ティー育て]
 				case ANTA_MESSAGE_4: // ヒット[用言4 /パンチ+ブレス/オブモク！ケンティ育て]
 				case ANTA_MESSAGE_5: // ヒット[用言5 /叫び声+ブレス/オブモク！ルーミス]
 				case ANTA_MESSAGE_6: // ヒット[用言6 /スタン+ジャンプ/オブモク！ミューズ三]
@@ -3559,7 +3559,7 @@ public class L1SkillUse {
 							}
 						}
 
-						if (_skillId == ANTA_MESSAGE_2 || _skillId == ANTA_MESSAGE_5 || _skillId == ANTA_MESSAGE_9) { // 대미지독
+						if (_skillId == ANTA_MESSAGE_2 || _skillId == ANTA_MESSAGE_5 || _skillId == ANTA_MESSAGE_9) { //対米ひどく
 							Random random = new Random();
 							int PoisonDmg = random.nextInt(50) + 1;
 							int PoisonTime = random.nextInt(15) + 1;
@@ -3569,7 +3569,7 @@ public class L1SkillUse {
 									L1DamagePoison.doInfection(pc, _target, PoisonTime * 1000, PoisonDmg, _skillId == TOMAHAWK);
 							}
 						}
-						if (_skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7 || _skillId == ANTA_MESSAGE_8 || _skillId == ANTA_SHOCKSTUN) {// 스턴
+						if (_skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7 || _skillId == ANTA_MESSAGE_8 || _skillId == ANTA_SHOCKSTUN) {//スターン
 							int[] stunTimeArray = { 4500, 5000, 5500 };
 							int rnd = random.nextInt(stunTimeArray.length);
 							_shockStunDuration = stunTimeArray[rnd];
@@ -3583,7 +3583,7 @@ public class L1SkillUse {
 								npc.setParalysisTime(_shockStunDuration);
 							}
 						}
-						if (_skillId == ANTA_MESSAGE_9 || _skillId == ANTA_MESSAGE_10 || _skillId == ANTA_WEAPON_BREAK) { // 웨폰
+						if (_skillId == ANTA_MESSAGE_9 || _skillId == ANTA_MESSAGE_10 || _skillId == ANTA_WEAPON_BREAK) { //ウェポン
 							if (cha instanceof L1PcInstance) {
 								L1PcInstance pc = (L1PcInstance) cha;
 								L1ItemInstance weapon = pc.getWeapon();
@@ -3631,7 +3631,7 @@ public class L1SkillUse {
 							}
 						}
 
-						if (_skillId == PAP_PREDICATE7 || _skillId == PAP_PREDICATE11 || _skillId == PAP_PREDICATE12) { // 캔슬
+						if (_skillId == PAP_PREDICATE7 || _skillId == PAP_PREDICATE11 || _skillId == PAP_PREDICATE12) { // キャンセル
 							if (cha instanceof L1PcInstance) {
 								L1PcInstance pc = (L1PcInstance) cha;
 								for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
@@ -4268,7 +4268,7 @@ public class L1SkillUse {
 						pc.sendPackets(new S_Dexup(pc, 5, _getBuffIconDuration));
 					}
 						break;
-					case 나루토감사캔디: {
+					case NARUTO_THANKS_CANDY: {
 						L1PcInstance pc = (L1PcInstance) cha;
 						if (pc.getLevel() >= 1 && pc.getLevel() <= 60) {
 							pc.getAbility().addAddedDex((byte) 7);
@@ -4386,7 +4386,7 @@ public class L1SkillUse {
 						pc.addDmgup(10);
 					}
 						break;
-					case INSIGHT: { // 인사이트
+					case INSIGHT: { // インサイト
 						L1PcInstance pc = (L1PcInstance) cha;
 						pc.getAbility().addAddedStr((byte) 1);
 						pc.getAbility().addAddedDex((byte) 1);
@@ -4396,14 +4396,14 @@ public class L1SkillUse {
 						pc.resetBaseMr();
 					}
 						break;
-					case 천하장사버프: {
+					case TENKASOUSHI_BUFF: {
                         L1PcInstance pc = (L1PcInstance) cha;
-                        if (pc.hasSkillEffect(천하장사버프))
-                            pc.removeSkillEffect(천하장사버프);
+                        if (pc.hasSkillEffect(TENKASOUSHI_BUFF))
+                            pc.removeSkillEffect(TENKASOUSHI_BUFF);
                         pc.addDamageReductionByArmor(5);
                         //pc.sendPackets(new S_SkillIconNEW(2730, 7200, 5, 7244, 1426));
                         pc.sendPackets(new S_PacketBox(S_PacketBox.ICON_COOKING, pc, 187, 1800));
-                        pc.setDessertId(천하장사버프);
+                        pc.setDessertId(TENKASOUSHI_BUFF);
                         pc.sendPackets(new S_ServerMessage(1426));
                     }
                         break; 
@@ -4477,7 +4477,7 @@ public class L1SkillUse {
 					}
 						break;
 					/** パワーグリップ詠唱時間本サーバー化 **/
-					case POWERRIP: {
+					case POWEGRRIP: {
 	
 						int[] PowerRipTimeArray = { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000 };
 						int rnd = random.nextInt(PowerRipTimeArray.length);
@@ -4491,7 +4491,7 @@ public class L1SkillUse {
 						} else if (_target instanceof L1MonsterInstance || _target instanceof L1SummonInstance || _target instanceof L1PetInstance) {
 							L1NpcInstance npc = (L1NpcInstance) _target;
 							//npc.setSkillEffect(L1SkillId.POWERRIP, _shockStunDuration);
-							npc.set발묶임상태(true);
+							npc.setCanNotMove(true);
 						}
 					}
 						break;
@@ -4508,7 +4508,7 @@ public class L1SkillUse {
 						} else if (_target instanceof L1MonsterInstance || _target instanceof L1SummonInstance || _target instanceof L1PetInstance) {
 							L1NpcInstance npc = (L1NpcInstance) _target;
 							//npc.setSkillEffect(L1SkillId.DESPERADO, _shockStunDuration);
-							npc.set발묶임상태(true);
+							npc.setCanNotMove(true);
 						}
 					}
 						break;
@@ -5360,7 +5360,7 @@ public class L1SkillUse {
 						}
 					}
 						break;
-					case DESERT_SKILL10: { // 에르자베 모래 폭풍
+					case DESERT_SKILL10: { // エルジャベ砂嵐
 						for (int i = 0; i < random.nextInt(3) + 1; i++) {
 							L1SpawnUtil.spawn(_npc, 5095, 6, 3 * 1000); // 砂嵐
 						}
@@ -5453,7 +5453,7 @@ public class L1SkillUse {
 				}
 
 				if (dmg != 0 || drainMana != 0) {
-					/** 디스 중첩불가 **/
+					/** ディスネストさ不可 **/
 					if (_skillId == DISINTEGRATE && dmg > 0) {
 						if (dmg > 1000)
 							dmg = 1200;
@@ -5491,7 +5491,7 @@ public class L1SkillUse {
 				}
 			}
 
-			if (_skillId == DETECTION || _skillId == IZE_BREAK || _skillId == EYE_OF_DRAGON || _skillId == COUNTER_DETECTION) {// 캔슬
+			if (_skillId == DETECTION || _skillId == IZE_BREAK || _skillId == EYE_OF_DRAGON || _skillId == COUNTER_DETECTION) {//キャンセル
 				detection(_player, true);
 			}
 

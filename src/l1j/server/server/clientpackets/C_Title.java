@@ -73,7 +73,7 @@ public class C_Title extends ClientBasePacket {
 		}
 
 		if (isClanLeader(pc)||(pc.getClanid()==target.getClanid()&&
-			(pc.getClanRank()==L1Clan.수호)||(pc.getClanRank()==L1Clan.부군주))) { // 血盟主
+			(pc.getClanRank()==L1Clan.GUARDIAN)||(pc.getClanRank()==L1Clan.SUB_MONARCH))) { // 血盟主
 			if (pc.getId() == target.getId()) { // 自分
 				if (pc.getLevel() < 10) {
 					// \f1血盟員の場合には、呼称を持つためにはレベル10以上でなければなりません。
@@ -164,7 +164,7 @@ public class C_Title extends ClientBasePacket {
 		pc.sendPackets(new S_CharTitle(objectId, title));
 		Broadcaster.broadcastPacket(pc, new S_CharTitle(objectId, title));
 		try {
-			pc.save(); // DB에 캐릭터 정보를 써 우
+			pc.save(); // DBに文字情報を書いて右
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 		}

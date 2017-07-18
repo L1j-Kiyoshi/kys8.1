@@ -44,7 +44,7 @@ public class WarTimeController implements Runnable {
 
 	private long[] end_time = new long[8]; //冠取得後15分間維持
 	
-	private boolean[] 강제종료 = new boolean[8];
+	private boolean[] terminate = new boolean[8];
 
 	private WarTimer[] _war_timer = new WarTimer[8];
 	private boolean[] _war_end = new boolean[8];
@@ -119,7 +119,7 @@ public class WarTimeController implements Runnable {
 		for (int i = 0; i < _l1castle.length; i++) {
 			L1Castle castle = _l1castle[i];
 			if (castle.getName().startsWith(name)) {
-				강제종료[castle.getId() - 1] = true;
+				terminate[castle.getId() - 1] = true;
 				pc.sendPackets(new S_SystemMessage(castle.getName()
 						+ "攻城強制終了"), true);
 			}
@@ -150,7 +150,7 @@ public class WarTimeController implements Runnable {
 	// 午後9時、日曜日、水曜日それぞれ攻城時間設定
 	int ccc = 60;
 
-	private void 고정시간셋팅() {
+	private void setFixedTime() {
 		// TODO 自動生成されたメソッド・スタブ
 		if (ccc-- < 0)
 			ccc = 60;
@@ -311,7 +311,7 @@ public class WarTimeController implements Runnable {
 		}
 	}
 
-	private void 모의전종료() {
+	private void endMockWar() {
 		for (L1War war : L1World.getInstance().getWarList()) {
 			war.CeaseWar(war.GetDefenceClanName(),
 					war.GetEnemyClanName(war.GetDefenceClanName()));
@@ -359,16 +359,16 @@ public class WarTimeController implements Runnable {
 			if ( (_war_start_time[i] <= System.currentTimeMillis() && _war_end_time[i] >= System.currentTimeMillis()) && end_time[i] >= System.currentTimeMillis() ) {
 				if((_war_end_time[i]-60000 <= System.currentTimeMillis() && _war_end_time[i]-59000 >= System.currentTimeMillis() )  || end_time[i]-60000 <= System.currentTimeMillis() && end_time[i]-59000 >= System.currentTimeMillis()){
 					L1World.getInstance().broadcastPacketToAll(
-							new S_SystemMessage("攻城：" + _l1castle[i].getName() + "攻城戦が終了まで1分残って！"), true); // %s의
+							new S_SystemMessage("攻城：" + _l1castle[i].getName() + "攻城戦が終了まで1分残って！"), true); // %sの
 				}
 				if((_war_end_time[i]-300000 <= System.currentTimeMillis() && _war_end_time[i]-299000 >= System.currentTimeMillis() )  || end_time[i]-300000 <= System.currentTimeMillis() && end_time[i]-299000 >= System.currentTimeMillis()){
 					L1World.getInstance().broadcastPacketToAll(
-							new S_SystemMessage("공성: " + _l1castle[i].getName() + "攻城戦が終了まで5分残っ！"), true); // %s의
+							new S_SystemMessage("攻城：" + _l1castle[i].getName() + "攻城戦が終了まで5分残っ！"), true); // %sの
 				}
-				if (강제종료[i] == true) {
+				if (terminate[i] == true) {
 					try {
 						L1World.getInstance().broadcastPacketToAll(
-								new S_SystemMessage("攻城：" + _l1castle[i].getName() + "攻城戦が終了しました！"), true); // %s의
+								new S_SystemMessage("攻城：" + _l1castle[i].getName() + "攻城戦が終了しました！"), true); // %sの
 																												//攻城戦が開始されました。
 						// L1World.getInstance().broadcastPacketToAll(new
 						// S_PacketBox(S_PacketBox.MSG_WAR_END, i + 1), true);
@@ -498,7 +498,7 @@ public class WarTimeController implements Runnable {
 
 				}
 
-				강제종료[i] = false;
+				terminate[i] = false;
 
 				if (_war_end[i] == true) { //攻城あらかじめ終了する場合
 					_war_end[i] = false;
@@ -563,8 +563,8 @@ public class WarTimeController implements Runnable {
 								tp.war_zone = false;
 							//	tp.sendPackets(new S_NewCreateItem(1, 0, ""), true);
 							}
-							if (tp.hasSkillEffect(L1SkillId.주군의버프)) {
-								tp.removeSkillEffect(L1SkillId.주군의버프);
+							if (tp.hasSkillEffect(L1SkillId.LORDS_BUFF)) {
+								tp.removeSkillEffect(L1SkillId.LORDS_BUFF);
 								tp.sendPackets(new S_PacketBox(S_PacketBox.NONE_TIME_ICON, 0, 490),true);
 							}
 							int castleid = L1CastleLocation.getCastleIdByArea(tp);
@@ -615,7 +615,7 @@ public class WarTimeController implements Runnable {
 							}
 						}
 
-						모의전종료();
+						endMockWar();
 
 						if (_l1castle[i].getCastleSecurity() == 1)
 						securityStart(_l1castle[i]);// 治安管理
@@ -682,7 +682,7 @@ public class WarTimeController implements Runnable {
 					}
 				}
 			} else { // 戦争終了//前のコード[else if（_war_end_time [i] .before（Rtime））]
-				if (강제종료[i] == true) {
+				if (terminate[i] == true) {
 					try {
 						L1World.getInstance().broadcastPacketToAll(
 						new S_SystemMessage("攻城：" + _l1castle[i].getName() + "攻城戦が終了しました！"), true);
@@ -809,7 +809,7 @@ public class WarTimeController implements Runnable {
 						e.printStackTrace();
 					}
 				}
-				강제종료[i] = false;
+				terminate[i] = false;
 
 				if (_is_now_war[i] == true) {
 					try {
@@ -952,8 +952,8 @@ public class WarTimeController implements Runnable {
 								tp.war_zone = false;
 							//	tp.sendPackets(new S_NewCreateItem(1, 0, ""), true);
 							}
-							if (tp.hasSkillEffect(L1SkillId.주군의버프)) {
-								tp.removeSkillEffect(L1SkillId.주군의버프);
+							if (tp.hasSkillEffect(L1SkillId.LORDS_BUFF)) {
+								tp.removeSkillEffect(L1SkillId.LORDS_BUFF);
 								tp.sendPackets(new S_PacketBox(S_PacketBox.NONE_TIME_ICON, 0, 490),true);
 							}
 							int castleid = L1CastleLocation.getCastleIdByArea(tp);
@@ -1029,19 +1029,19 @@ public class WarTimeController implements Runnable {
 				name = _war_attack_clan[castleid];
 		//	pc.sendPackets(new S_NewCreateItem(warType,_war_time[castleid - 1], name), true);
 
-			if (pc.getClanRank() >= L1Clan.수호
-				&& !pc.hasSkillEffect(L1SkillId.주군의버프)) {
-				pc.setSkillEffect(L1SkillId.주군의버프,3600000);
+			if (pc.getClanRank() >= L1Clan.GUARDIAN
+				&& !pc.hasSkillEffect(L1SkillId.LORDS_BUFF)) {
+				pc.setSkillEffect(L1SkillId.LORDS_BUFF,3600000);
 				pc.sendPackets(new S_PacketBox(S_PacketBox.NONE_TIME_ICON, 1,490), true);
-			} else if (pc.getClanRank() < L1Clan.수호
-				&& pc.hasSkillEffect(L1SkillId.주군의버프)) {
-				pc.removeSkillEffect(L1SkillId.주군의버프);
+			} else if (pc.getClanRank() < L1Clan.GUARDIAN
+				&& pc.hasSkillEffect(L1SkillId.LORDS_BUFF)) {
+				pc.removeSkillEffect(L1SkillId.LORDS_BUFF);
 				pc.sendPackets(new S_PacketBox(S_PacketBox.NONE_TIME_ICON, 0,490), true);
 			}
 		} else {
 			pc.war_zone = false;
-			if (pc.hasSkillEffect(L1SkillId.주군의버프)) {
-				pc.removeSkillEffect(L1SkillId.주군의버프);
+			if (pc.hasSkillEffect(L1SkillId.LORDS_BUFF)) {
+				pc.removeSkillEffect(L1SkillId.LORDS_BUFF);
 				pc.sendPackets(new S_PacketBox(S_PacketBox.NONE_TIME_ICON, 0, 490), true);
 			}
 		}

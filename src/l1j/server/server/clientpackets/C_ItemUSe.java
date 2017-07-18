@@ -3017,7 +3017,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						createNewItem2(pc, 800014, 1, 0); //ゲートルコイン
 						createNewItem2(pc, 40308, 50000000, 0); // アデナ
 						createNewItem2(pc, 3000119, 1, 0); //パッケージの移動お守り
-						if (pc.is전사()) {
+						if (pc.is転写（））{
 							createNewItem2(pc, 203006, 1, 9); // 台風の斧
 						}
 					}
@@ -3672,7 +3672,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					break;
 
 				case 40615:// 影の神殿2階の鍵
-					if ((pc.getX() >= 32701 && pc.getX() <= 32705) && (pc.getY() >= 32894 && pc.getY() <= 32898) && pc.getMapId() == 522) { // 그림자의 신전
+					if ((pc.getX() >= 32701 && pc.getX() <= 32705) && (pc.getY() >= 32894 && pc.getY() <= 32898) && pc.getMapId() == 522) { // 影の神殿
 						// 1F
 						new L1Teleport().teleport(pc, ((L1EtcItem) l1iteminstance.getItem()).get_locx(), ((L1EtcItem) l1iteminstance.getItem()).get_locy(),
 								((L1EtcItem) l1iteminstance.getItem()).get_mapid(), 5, true);
@@ -3777,11 +3777,11 @@ public class C_ItemUSe extends ClientBasePacket {
 						return;
 					}
 					int i = 1;
-					if (pc.문장주시) {
+					if (pc.watchCrest) {
 						i = 3;
-						pc.문장주시 = false;
+						pc.watchCrest = false;
 					} else
-						pc.문장주시 = true;
+						pc.watchCrest = true;
 					pc.sendPackets(new S_SystemMessage("すべての血盟のマークを表示したり、終了しました。"));
 					pc.setQuizTime(curtime);
 				}
@@ -4245,7 +4245,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						pc.setClanid(Config.NEW_CLAN);
 						pc.setClanname("新規保護血盟");
 						pc.setTitle("\\f:新規保護血盟");
-						pc.setClanRank(L1Clan.수련);
+						pc.setClanRank(L1Clan.TRAINING);
 						pc.setClanJoinDate(new Timestamp(System.currentTimeMillis()));
 						pc.save(); // DBに文字情報を記入する
 						clan.addClanMember(pc.getName(), pc.getClanRank(), pc.getLevel(), "", pc.getId(), pc.getType(), pc.getOnlineStatus(), pc);
@@ -4813,7 +4813,7 @@ public class C_ItemUSe extends ClientBasePacket {
 									}
 									pc.setClanid(rs2.getInt("ClanID"));
 									pc.setClanname(rs2.getString("Clanname"));
-									pc.setClanRank(L1Clan.수련);
+									pc.setClanRank(L1Clan.TRAINING);
 									pc.save(); // DBに文字情報を記入する
 									clan.addClanMember(pc.getName(), pc.getClanRank(), pc.getLevel(), "", pc.getId(), pc.getType(),
 											pc.getOnlineStatus(), pc);
@@ -5435,7 +5435,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						}
 					}
 					if (l1iteminstance1.getBless() >= 128
-							&& (!(itemId >= 210064 && itemId <= 210067 || itemId >= 560030 && itemId <= 560033 || itemId == 810003))) { // 봉인템
+							&& (!(itemId >= 210064 && itemId <= 210067 || itemId >= 560030 && itemId <= 560033 || itemId == 810003))) { // 封印システム
 						pc.sendPackets(new S_ServerMessage(79)); // \f1何も起こらなかった。
 						return;
 					}
@@ -5468,7 +5468,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					/** 属性エンチャント **/
 					int enchant_level = l1iteminstance1.getEnchantLevel();
 
-					if (enchant_level >= Config.WEAPON_ENCHANT && (!(itemId >= 210064 && itemId <= 210067 || itemId >= 560030 && itemId <= 560033))) { // 인챈트 제한
+					if (enchant_level >= Config.WEAPON_ENCHANT && (!(itemId >= 210064 && itemId <= 210067 || itemId >= 560030 && itemId <= 560033))) { //エンチャント制限
 						pc.sendPackets(new S_SystemMessage("武器は+" + Config.WEAPON_ENCHANT + "以上強化することができません。"));
 						return;
 					}
@@ -5965,7 +5965,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						}
 					}
 
-					if (itemId == L1ItemId.C_SCROLL_OF_ENCHANT_ARMOR || itemId == L1ItemId.Inadril_T_ScrollC || itemId == 3000125 || itemId == 3000132) { // 저주 갑옷 마법 주문서류
+					if (itemId == L1ItemId.C_SCROLL_OF_ENCHANT_ARMOR || itemId == L1ItemId.Inadril_T_ScrollC || itemId == 3000125 || itemId == 3000132) { // 呪いの鎧魔法の呪文書類
 						if (l1iteminstance1.isEquipped()) {
 							pc.sendPackets(new S_SystemMessage("着用を解除した後、強化することができます。"));
 							return;
@@ -10088,7 +10088,7 @@ public class C_ItemUSe extends ClientBasePacket {
 		}
 
 		int[] polyArray = { 29, 979, 1037, 1039, 3860, 3861, 3862, 3863, 3864, 3865, 3904, 3906, 95, 146, 2374, 2376, 2377, 2378, 3866, 3867, 3868,
-				3869, 3870, 3871, 3872, 3873, 3874, 3875, 3876, 3882, 3883, 3884, 3885, 11358, 11396, 11397, 12225, 12226, 11399, 11398, 12227 }; // 단풍막대
+				3869, 3870, 3871, 3872, 3873, 3874, 3875, 3876, 3882, 3883, 3884, 3885, 11358, 11396, 11397, 12225, 12226, 11399, 11398, 12227 }; // 紅葉バー
 		// リニューアルで
 		// 追加
 
@@ -10501,52 +10501,52 @@ public class C_ItemUSe extends ClientBasePacket {
 				break;
 			case 510219:
 				npcId = 900229;
-				dollType = L1DollInstance.DOLLTYPE_자이언트;
+				dollType = L1DollInstance.DOLLTYPE_GIANT;
 				pc.sendPackets(new S_ChatPacket(pc, "経験値10％追加獲得、ダメージリダクション+1"));
 				break;
 			case 510220:
 				npcId = 900230;
-				dollType = L1DollInstance.DOLLTYPE_사이클롭스;
+				dollType = L1DollInstance.DOLLTYPE_CYCLOPS;
 				pc.sendPackets(new S_ChatPacket(pc, "スタン耐性+12、近距離ダメージ+2、近距離命中+2"));
 				break;
 			case 510221:
 				npcId = 900231;
-				dollType = L1DollInstance.DOLLTYPE_흑장로;
+				dollType = L1DollInstance.DOLLTYPE_BLACK_ELDER;
 				pc.sendPackets(new S_ChatPacket(pc, "64秒ごとにMP回復+15、一定確率でコールライトニング発動"));
 				break;
 			case 510222:
 				npcId = 900232;
-				dollType = L1DollInstance.DOLLTYPE_서큐버스;
+				dollType = L1DollInstance.DOLLTYPE_SUCCUBUS_2;
 				pc.sendPackets(new S_ChatPacket(pc, "SP + 1、64秒ごとにMP回復+15"));
 				break;
 			case 410171://ジンテン
 				npcId = 513;
-				dollType = L1DollInstance.DOLLTYPE_데스나이트;
+				dollType = L1DollInstance.DOLLTYPE_DEATH_KNIGHT;
 				pc.sendPackets(new S_ChatPacket(pc, "ダメージリダクション+5、経験値20％追加獲得、魔法発動（ヘルファイア）"));
 				break;
 			case 3000150://バポ
 				npcId = 7310200;
-				dollType = L1DollInstance.DOLLTYPE_바포메트;
+				dollType = L1DollInstance.DOLLTYPE_BAPHOMET;
 				pc.sendPackets(new S_ChatPacket(pc, "積極的なの+5、スタン耐性+10"));
 				break;
 			case 3000151://オルニョ
 				npcId = 7310201;
-				dollType = L1DollInstance.DOLLTYPE_얼음여왕;
+				dollType = L1DollInstance.DOLLTYPE_ICE_QUEEN;
 				pc.sendPackets(new S_ChatPacket(pc, "遠距離ダメージ+5、遠距離命中+5、スタン耐性+10"));
 				break;
 			case 3000152://カーツ
 				npcId = 7310202;
-				dollType = L1DollInstance.DOLLTYPE_커츠;
+				dollType = L1DollInstance.DOLLTYPE_KURTS;
 				pc.sendPackets(new S_ChatPacket(pc, "AC-2、ポースレイヤーステップダメージ+10、ダメージリダクション+3、スタン耐性+10"));
 				break;
 			case 410172:
 				npcId = 81212;
-				dollType = L1DollInstance.DOLLTYPE_인어;
+				dollType = L1DollInstance.DOLLTYPE_MERMAID;
 				pc.sendPackets(new S_ChatPacket(pc, "経験値3％追加獲得"));
 				break;
 			case 410173:
 				npcId = 81213;
-				dollType = L1DollInstance.DOLLTYPE_킹버그베어;
+				dollType = L1DollInstance.DOLLTYPE_KBB;
 				pc.sendPackets(new S_ChatPacket(pc, "スタン耐性+8、64秒ごとにMP回復+10"));
 				break;
 			case 3000086:
@@ -10566,12 +10566,12 @@ public class C_ItemUSe extends ClientBasePacket {
 				break;
 			case 751:
 				npcId = 514;
-				dollType = L1DollInstance.DOLL_머미로드;// マミーロード
+				dollType = L1DollInstance.DOLL_MUMMY_LORD;// マミーロード
 				pc.sendPackets(new S_ChatPacket(pc, "ダメージ減少+ 2、経験値ボーナス+ 10％、64秒ごとにMP 15回復"));
 				break;
 			case 752:
 				npcId = 515;
-				dollType = L1DollInstance.DOLL_타락;// 堕落
+				dollType = L1DollInstance.DOLL_CURRUPTION;// 堕落
 				pc.sendPackets(new S_ChatPacket(pc, "スタン耐性+10、SP + 3、魔法命中+5"));
 				break;
 			}
@@ -11052,16 +11052,16 @@ public class C_ItemUSe extends ClientBasePacket {
 		try {
 			if (itemId == 600212) {
 				n = "活力";
-				if (pc.hasSkillEffect(L1SkillId.강화버프_활력)) {
-					pc.killSkillEffectTimer(L1SkillId.강화버프_활력);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_VITAL)) {
+					pc.killSkillEffectTimer(L1SkillId.ENCHANT_BUFF_VITAL);
 					pc.addMaxHp(-50);
 					pc.addMaxMp(-50);
 					pc.addWeightReduction(-3);
 					pc.sendPackets(new S_HPUpdate(pc));
 					pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
 				}
-				pc.removeSkillEffect(L1SkillId.강화버프_활력);
-				pc.setSkillEffect(L1SkillId.강화버프_활력, (int) 86400000 * Config.ENCHANT_BUFF_TIME_VITALITY);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_VITAL);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_VITAL, (int) 86400000 * Config.ENCHANT_BUFF_TIME_VITALITY);
 				pc.getNetConnection().getAccount().setBuff_HPMP(deleteTime_Vigor);
 				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_VITALITY), true);
 				pc.addMaxHp(50);
@@ -11072,94 +11072,94 @@ public class C_ItemUSe extends ClientBasePacket {
 
 			} else if (itemId == 600213) {
 				n = "攻撃";
-				if (pc.hasSkillEffect(L1SkillId.강화버프_공격)) {
-					pc.killSkillEffectTimer(L1SkillId.강화버프_공격);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_ATTACK)) {
+					pc.killSkillEffectTimer(L1SkillId.ENCHANT_BUFF_ATTACK);
 					pc.addDmgup(-1);
 					pc.addBowDmgup(-1);
 				}
-				pc.removeSkillEffect(L1SkillId.강화버프_공격);
-				pc.setSkillEffect(L1SkillId.강화버프_공격, (int) 86400000 * Config.ENCHANT_BUFF_TIME_ATTACK);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_ATTACK);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_ATTACK, (int) 86400000 * Config.ENCHANT_BUFF_TIME_ATTACK);
 				pc.getNetConnection().getAccount().setBuff_DMG(deleteTime_Attack);
 				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_ATTACK), true);
 				pc.addDmgup(1);
 				pc.addBowDmgup(1);
 			} else if (itemId == 600214) {
 				n = "防御";
-				if (pc.hasSkillEffect(L1SkillId.강화버프_방어)) {
-					pc.killSkillEffectTimer(L1SkillId.강화버프_방어);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_DEFENSE)) {
+					pc.killSkillEffectTimer(L1SkillId.ENCHANT_BUFF_DEFENSE);
 					pc.addDamageReductionByArmor(-1);
 				}
-				pc.removeSkillEffect(L1SkillId.강화버프_방어);
-				pc.setSkillEffect(L1SkillId.강화버프_방어, (int) 86400000 * Config.ENCHANT_BUFF_TIME_DEFENCE);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_DEFENSE);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_DEFENSE, (int) 86400000 * Config.ENCHANT_BUFF_TIME_DEFENCE);
 				pc.getNetConnection().getAccount().setBuff_REDUC(deleteTime_Defense);
 				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_DEFENCE), true);
 				pc.addDamageReductionByArmor(1); // ダメージイパイ上げテスト
 			} else if (itemId == 600215) {
 				n = "魔法";
-				if (pc.hasSkillEffect(L1SkillId.강화버프_마법)) {
-					pc.killSkillEffectTimer(L1SkillId.강화버프_마법);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_MAGIC)) {
+					pc.killSkillEffectTimer(L1SkillId.ENCHANT_BUFF_MAGIC);
 					pc.getAbility().addSp(-1); // オプション
 					pc.sendPackets(new S_SPMR(pc)); //自分のmrを変更
 				}
-				pc.removeSkillEffect(L1SkillId.강화버프_마법);
-				pc.setSkillEffect(L1SkillId.강화버프_마법, (int) 86400000 * Config.ENCHANT_BUFF_TIME_MAGIC);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_MAGIC);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_MAGIC, (int) 86400000 * Config.ENCHANT_BUFF_TIME_MAGIC);
 				pc.getNetConnection().getAccount().setBuff_MAGIC(deleteTime_Magic);
 				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_MAGIC), true);
 				pc.getAbility().addSp(1); //オプション
 				pc.sendPackets(new S_SPMR(pc)); // 自分のmrを変更
 			} else if (itemId == 600216) {
 				n = "スターン";
-				if (pc.hasSkillEffect(L1SkillId.강화버프_스턴)) {
-					pc.killSkillEffectTimer(L1SkillId.강화버프_스턴);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_STUN)) {
+					pc.killSkillEffectTimer(L1SkillId.ENCHANT_BUFF_STUN);
 					pc.getResistance().addStun(-2);
 				}
-				pc.removeSkillEffect(L1SkillId.강화버프_스턴);
-				pc.setSkillEffect(L1SkillId.강화버프_스턴, (int) 86400000 * Config.ENCHANT_BUFF_TIME_STUN);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_STUN);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_STUN, (int) 86400000 * Config.ENCHANT_BUFF_TIME_STUN);
 				pc.getNetConnection().getAccount().setBuff_STUN(deleteTime_Stun);
 				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_STUN), true);
 				pc.getResistance().addStun(2); // オプション
 			} else if (itemId == 600217) {
 				n = "ホールド";
-				if (pc.hasSkillEffect(L1SkillId.강화버프_홀드)) {
-					pc.killSkillEffectTimer(L1SkillId.강화버프_홀드);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_HOLD)) {
+					pc.killSkillEffectTimer(L1SkillId.ENCHANT_BUFF_HOLD);
 					pc.getResistance().addHold(-2);
 				}
-				pc.removeSkillEffect(L1SkillId.강화버프_홀드);
-				pc.setSkillEffect(L1SkillId.강화버프_홀드, (int) 86400000 * Config.ENCHANT_BUFF_TIME_HOLD);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_HOLD);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_HOLD, (int) 86400000 * Config.ENCHANT_BUFF_TIME_HOLD);
 				pc.getNetConnection().getAccount().setBuff_HOLD(deleteTime_Hold);
 				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_HOLD), true);
 				pc.getResistance().addHold(2); // オプション
 			}else if (itemId == 600259) { //力
 				n = "力 ";
-				if(pc.hasSkillEffect(L1SkillId.강화버프_덱스) || pc.hasSkillEffect(L1SkillId.강화버프_인트)){
+				if(pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_DEX) || pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_INT)){
 					pc.sendPackets(new S_SystemMessage("ステップバフは、ネストして使用することができません"));
 						return;
 				}
-				if (pc.hasSkillEffect(L1SkillId.강화버프_힘)) {
-					pc.killSkillEffectTimer(L1SkillId.강화버프_힘);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_STR)) {
+					pc.killSkillEffectTimer(L1SkillId.ENCHANT_BUFF_STR);
 					pc.getAbility().addAddedStr((byte)-1);
 					pc.sendPackets(new S_OwnCharStatus2(pc), true);
 				}
-				pc.removeSkillEffect(L1SkillId.강화버프_힘);
-				pc.setSkillEffect(L1SkillId.강화버프_힘, (int) 86400000 * Config.ENCHANT_BUFF_TIME_STR);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_STR);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_STR, (int) 86400000 * Config.ENCHANT_BUFF_TIME_STR);
 				pc.getNetConnection().getAccount().setBuff_STR(deleteTime_Power);
 				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_STR), true);
 				pc.getAbility().addAddedStr((byte)1);
 				pc.sendPackets(new S_OwnCharStatus2(pc), true);
 			} else if (itemId == 600260) {//デックス
 				n = "デックス";
-				if(pc.hasSkillEffect(L1SkillId.강화버프_힘) || pc.hasSkillEffect(L1SkillId.강화버프_인트)){
+				if(pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_STR) || pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_INT)){
 					pc.sendPackets(new S_SystemMessage("ステップバフは、ネストして使用することができません"));
 					return;
 				}
-				if (pc.hasSkillEffect(L1SkillId.강화버프_덱스)) {
-					pc.killSkillEffectTimer(L1SkillId.강화버프_덱스);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_DEX)) {
+					pc.killSkillEffectTimer(L1SkillId.ENCHANT_BUFF_DEX);
 					//pc.getAbility().addDex(-1);
 					pc.getAbility().addAddedDex((byte)-1);
 					pc.sendPackets(new S_OwnCharStatus2(pc), true);
 				}
-				pc.removeSkillEffect(L1SkillId.강화버프_덱스);
-				pc.setSkillEffect(L1SkillId.강화버프_덱스, (int) 86400000 * Config.ENCHANT_BUFF_TIME_DEX);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_DEX);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_DEX, (int) 86400000 * Config.ENCHANT_BUFF_TIME_DEX);
 				pc.getNetConnection().getAccount().setBuff_DEX(deleteTime_Dex);
 				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_DEX), true);
 				//pc.getAbility().addDex(1);
@@ -11167,18 +11167,18 @@ public class C_ItemUSe extends ClientBasePacket {
 				pc.sendPackets(new S_OwnCharStatus2(pc), true);
 			} else if (itemId == 600261) { //ポイント
 				n = "ポイント";
-				if(pc.hasSkillEffect(L1SkillId.강화버프_덱스) || pc.hasSkillEffect(L1SkillId.강화버프_힘)){
+				if(pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_DEX) || pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_STR)){
 					pc.sendPackets(new S_SystemMessage("ステップバフは、ネストして使用することができません"));
 					return;
 				}
-				if (pc.hasSkillEffect(L1SkillId.강화버프_인트)) {
-					pc.killSkillEffectTimer(L1SkillId.강화버프_인트);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_INT)) {
+					pc.killSkillEffectTimer(L1SkillId.ENCHANT_BUFF_INT);
 					//pc.getAbility().addInt(-1);
 					pc.getAbility().addAddedInt((byte)-1);
 					pc.sendPackets(new S_OwnCharStatus2(pc), true);
 				}
-				pc.removeSkillEffect(L1SkillId.강화버프_인트);
-				pc.setSkillEffect(L1SkillId.강화버프_인트, (int) 86400000 * Config.ENCHANT_BUFF_TIME_INT);
+				pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_INT);
+				pc.setSkillEffect(L1SkillId.ENCHANT_BUFF_INT, (int) 86400000 * Config.ENCHANT_BUFF_TIME_INT);
 				pc.getNetConnection().getAccount().setBuff_INT(deleteTime_Point);
 				pc.sendPackets(new S_ACTION_UI2(n, (long) 86400000 * Config.ENCHANT_BUFF_TIME_INT), true);
 				//pc.getAbility().addInt(1);
@@ -11198,49 +11198,49 @@ public class C_ItemUSe extends ClientBasePacket {
 		deleteTime = new Timestamp(sysTime + 1);// 7日
 		try {
 
-			if (pc.hasSkillEffect(L1SkillId.강화버프_활력)) {
-					pc.removeSkillEffect(L1SkillId.강화버프_활력);
+			if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_VITAL)) {
+					pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_VITAL);
 					pc.getNetConnection().getAccount().setBuff_HPMP(deleteTime);
 					pc.sendPackets(new S_ACTION_UI2("活力", (long) 100 * 10), true);
 				}
 
-				if (pc.hasSkillEffect(L1SkillId.강화버프_공격)) {
-					pc.removeSkillEffect(L1SkillId.강화버프_공격);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_ATTACK)) {
+					pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_ATTACK);
 					pc.getNetConnection().getAccount().setBuff_DMG(deleteTime);
 					pc.sendPackets(new S_ACTION_UI2("攻撃", (long) 100 * 10), true);
 				}
-				if (pc.hasSkillEffect(L1SkillId.강화버프_방어)) {
-					pc.removeSkillEffect(L1SkillId.강화버프_방어);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_DEFENSE)) {
+					pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_DEFENSE);
 					pc.getNetConnection().getAccount().setBuff_REDUC(deleteTime);
 					pc.sendPackets(new S_ACTION_UI2("防御", (long) 100 * 10), true);
 				}
-				if (pc.hasSkillEffect(L1SkillId.강화버프_마법)) {
-					pc.removeSkillEffect(L1SkillId.강화버프_마법);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_MAGIC)) {
+					pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_MAGIC);
 					pc.getNetConnection().getAccount().setBuff_MAGIC(deleteTime);
 					pc.sendPackets(new S_ACTION_UI2("魔法", (long) 100 * 10), true);
 				}
-				if (pc.hasSkillEffect(L1SkillId.강화버프_스턴)) {
-					pc.removeSkillEffect(L1SkillId.강화버프_스턴);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_STUN)) {
+					pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_STUN);
 					pc.getNetConnection().getAccount().setBuff_STUN(deleteTime);
 					pc.sendPackets(new S_ACTION_UI2("スターン", (long) 100 * 10), true);
 				}
-				if (pc.hasSkillEffect(L1SkillId.강화버프_홀드)) {
-					pc.removeSkillEffect(L1SkillId.강화버프_홀드);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_HOLD)) {
+					pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_HOLD);
 					pc.getNetConnection().getAccount().setBuff_HOLD(deleteTime);
 					pc.sendPackets(new S_ACTION_UI2("ホールド", (long) 100 * 10), true);
 				}
-				if (pc.hasSkillEffect(L1SkillId.강화버프_힘)) {
-					pc.removeSkillEffect(L1SkillId.강화버프_힘);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_STR)) {
+					pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_STR);
 					pc.getNetConnection().getAccount().setBuff_STR(deleteTime);
 					pc.sendPackets(new S_ACTION_UI2("力", (long) 100 * 10), true);
 				}
-				if (pc.hasSkillEffect(L1SkillId.강화버프_덱스)) {
-					pc.removeSkillEffect(L1SkillId.강화버프_덱스);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_DEX)) {
+					pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_DEX);
 					pc.getNetConnection().getAccount().setBuff_DEX(deleteTime);
 					pc.sendPackets(new S_ACTION_UI2("デックス", (long) 100 * 10), true);
 				}
-				if (pc.hasSkillEffect(L1SkillId.강화버프_인트)) {
-					pc.removeSkillEffect(L1SkillId.강화버프_인트);
+				if (pc.hasSkillEffect(L1SkillId.ENCHANT_BUFF_INT)) {
+					pc.removeSkillEffect(L1SkillId.ENCHANT_BUFF_INT);
 					pc.getNetConnection().getAccount().setBuff_INT(deleteTime);
 					pc.sendPackets(new S_ACTION_UI2("ポイント", (long) 100 * 10), true);
 				}

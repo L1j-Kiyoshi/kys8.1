@@ -101,7 +101,7 @@ public class L1Robot4 implements L1CommandExecutor {
 					robot.setExp(0); // 経験値
 					robot.addBaseMaxHp((short) 200); // 最大HP
 					robot.setCurrentHp(init_hp); //現在、HP
-					robot.addBaseMaxMp((short) 50); // 최대 MP
+					robot.addBaseMaxMp((short) 50); // 最大 MP
 				} else {
 					robot.setLevel(55); // レベル
 					robot.setHighLevel(55); //最高レベル

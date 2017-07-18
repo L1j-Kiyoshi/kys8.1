@@ -43,7 +43,7 @@ public class L1Cooking {
 	public static void useCookingItem(L1PcInstance pc, L1ItemInstance item) {
 		int itemId = item.getItem().getItemId();
 		if (itemId == 41284 // キノコのスープ
-				|| itemId == 49056 // 크랩살 스프
+				|| itemId == 49056 // クラブ肉スープ
 				|| itemId == 49064 // 幻想のクラブ肉スープ
 				|| itemId == 41292 // 幻のキノコのスープ
 				|| itemId == 210055 // バシリスク卵スープ
@@ -314,10 +314,10 @@ public class L1Cooking {
 			eatCooking(pc, COOK_GROW, 1800);
 			break;
 		case 3000159:// メティススープ
-			eatCooking(pc, 메티스스프, 1800);
+			eatCooking(pc, METIS_SOUP, 1800);
 			break;
 		case 3000160:// メティス料理
-			eatCooking(pc, 메티스요리, 1800);
+			eatCooking(pc, METIS_COOKING, 1800);
 			break;
 		default:
 			break;
@@ -339,7 +339,7 @@ public class L1Cooking {
 			pc.getResistance().addAllNaturalResistance(10);
 			pc.sendPackets(new S_OwnCharAttrDef(pc));
 			break;
-		case 나루터감사캔디:
+		case BETTERSWEET_CANDY:
 			if (pc.getLevel() >= 1 && pc.getLevel() <= 60) {
 				pc.getAbility().addStr(7);
 				pc.getAbility().addDex(7);
@@ -528,11 +528,11 @@ public class L1Cooking {
 		case COOK_GROW:
 			cookingType = 160;
 			break;
-		case 천하장사버프:
+		case TENKASOUSHI_BUFF:
 			cookingType = 187;
 			pc.addDamageReductionByArmor(5);
 			break;
-		case 메티스스프:
+		case METIS_SOUP:
 			cookingType = 162;
 			pc.getResistance().addStun(1);
 			pc.getResistance().addMr(10);
@@ -540,7 +540,7 @@ public class L1Cooking {
 			time = 3600;
 			pc.sendPackets(new S_SPMR(pc));
 			break;
-		case 메티스요리:
+		case METIS_COOKING:
 			cookingType = 161;
 			pc.addDmgCritical(3);
 			pc.addBowDmgCritical(3);
@@ -579,7 +579,7 @@ public class L1Cooking {
 				|| cookingId >= COOKING_1_16_S && cookingId <= COOKING_1_22_S
 				|| cookingId >= COOK_STR && cookingId <= COOK_INT) {
 			pc.setCookingId(cookingId);
-		} else if (cookingId == COOKING_1_23_N || cookingId == COOKING_1_23_S || cookingId == COOK_GROW) { // 바실리스크
+		} else if (cookingId == COOKING_1_23_N || cookingId == COOKING_1_23_S || cookingId == COOK_GROW) { // バシリスク
 																											// アル
 																											// スープ
 			pc.setDessertId(cookingId);

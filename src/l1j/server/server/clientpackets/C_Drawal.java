@@ -36,7 +36,7 @@ public class C_Drawal extends ClientBasePacket {
 						pc.sendPackets(sm, true);
 						return;
 					}
-					if (pc.getClanRank() != L1Clan.군주 || !pc.isCrown() || pc.getId() != pc.getClan().getLeaderId())
+					if (pc.getClanRank() != L1Clan.MONARCH || !pc.isCrown() || pc.getId() != pc.getClan().getLeaderId())
 						return;
 
 					L1Castle l1castle = CastleTable.getInstance().getCastleTable(castle_id);

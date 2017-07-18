@@ -65,7 +65,7 @@ public class L1Userinc implements L1CommandExecutor {
 			StringTokenizer st = new StringTokenizer(arg);
 			String inc = st.nextToken();
 
-			if (inc.equalsIgnoreCase("초기화")) {
+			if (inc.equalsIgnoreCase("reset")) {
 				if (_UserCountBuffTimer != null) {
 					_UserCountBuffTimer.cancel();
 					_UserCountBuffTimer = null;

@@ -25,10 +25,10 @@ public class ArnoldBackEvent extends Thread {
  
 private static ArnoldBackEvent _instance;
 
-private boolean _돌아온아놀드이벤트;
+private boolean _CameBackArnoldEvent;
   
-public boolean get돌아온아놀드이벤트() {
-	return _돌아온아놀드이벤트;
+public boolean getCameBackArnoldEvent() {
+	return _CameBackArnoldEvent;
 	}
 
 private static long sTime = 0;
@@ -39,11 +39,11 @@ private static final SimpleDateFormat s = new SimpleDateFormat("HH", Locale.KORE
 
 private static final SimpleDateFormat ss = new SimpleDateFormat("MM-dd HH:mm", Locale.KOREA);
   
-public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) {
-	_돌아온아놀드이벤트 = 돌아온아놀드이벤트;
+public void setCameBackArnoldEvent(boolean cameBackArnoldEvent) {
+	_CameBackArnoldEvent = cameBackArnoldEvent;
 	}
   
-  public boolean isGmOpen아놀드 = false;
+  public boolean isGmOpenArnold = false;
   
   public static ArnoldBackEvent getInstance() {
 	  if(_instance == null) {
@@ -58,12 +58,12 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
 		  while (true) {
 			  Thread.sleep(1000); 
 			  /** オープン **/
-			  if(!isOpen6() && !isGmOpen아놀드)
+			  if(!isOpen6() && !isGmOpenArnold)
 				  continue;
 			  if(L1World.getInstance().getAllPlayers().size() <= 0)
 				  continue;
 			  
-			  isGmOpen아놀드 = false;
+			  isGmOpenArnold = false;
 			  
 			  Config.ARNOLD_EVENTS = true;
 			  L1SpawnUtil.spawn2(33433, 32798, (short) 4, 6, 0, (Config.ARNOLD_EVENT_TIME * 3600000), 0);//テレポーター 
@@ -73,7 +73,7 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
 			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"ギラン旅館前エンピシをご利用ください。"));
 			  L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"アーノルドイベントは" + Config.ARNOLD_EVENT_TIME + "時間維持されます。"));
 			  
-			  set돌아온아놀드이벤트(true);
+			  setCameBackArnoldEvent(true);
 			  
 			  Thread.sleep(Config.ARNOLD_EVENT_TIME*3600000); //60分程度
 			  
@@ -105,7 +105,7 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
    *
    *@return (Strind) オープン時刻（MM-dd HH：mm）
    */
-  public String 아놀드Open() {
+  public String arnoldOpen() {
 	  Calendar c = Calendar.getInstance();
 	  c.setTimeInMillis(sTime);
 	  return ss.format(c.getTime());
@@ -145,7 +145,7 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
   private static int delItemlist[] = { 307, 308, 309, 310, 311, 312, 313, 314, 21095, 
 		  30146, 30147, 30150};
 
-  public synchronized static void 아놀드이벤트삭제() {
+  public synchronized static void deleteArnoldEvent() {
 	  try {
 		  if (delItemlist.length <= 0)
 			  return;
@@ -261,9 +261,9 @@ public void set돌아온아놀드이벤트(boolean 돌아온아놀드이벤트) 
 	  delenpc(6);
 	  delenpc(7);
 	  delenpc(8);
-	  아놀드이벤트삭제();
+	  deleteArnoldEvent();
 	  L1World.getInstance().broadcastServerMessage("\\fSアーノルドイベントが終了しました。");
-	  set돌아온아놀드이벤트(false);
+	  setCameBackArnoldEvent(false);
   }
   
 }

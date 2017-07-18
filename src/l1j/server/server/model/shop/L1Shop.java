@@ -287,10 +287,10 @@ public class L1Shop {
 		}
 		// 乗車（TAM）の商人
 		if (getNpcId() == 7200002) {
-			if (!탐상인1(pc, orderList)) {
+			if (!TamMerchant1(pc, orderList)) {
 				return;
 			}
-			탐상인2(pc, pc.getInventory(), orderList);
+			TamMerchant2(pc, pc.getInventory(), orderList);
 			return;
 		}
 
@@ -305,10 +305,10 @@ public class L1Shop {
 		}
 		// 小切手店
 		if (getNpcId() >= 7210061 && getNpcId() <= 7210070) { //
-			if (!수표상점1(pc, orderList)) {
+			if (!chequeShop1(pc, orderList)) {
 				return;
 			}
-			수표상점2(pc.getInventory(), orderList);
+			chequeShop2(pc.getInventory(), orderList);
 			return;
 		}
 		// エンコイン店
@@ -321,10 +321,10 @@ public class L1Shop {
 		} 
 		// 金色の羽店
 		if (getNpcId() == 6000002) { //
-			if (!금빛상점1(pc, orderList)) {
+			if (!goldenFeatherShop1(pc, orderList)) {
 				return;
 			}
-			금빛상점2(pc.getInventory(), orderList);
+			goldenFeatherShop2(pc.getInventory(), orderList);
 			return;
 		}
 		
@@ -499,7 +499,7 @@ public class L1Shop {
 		}
 	}
 	
-	private boolean 수표상점1(L1PcInstance pc, L1ShopBuyOrderList orderList) {
+	private boolean chequeShop1(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		// 行ベリー
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 10000000)) {
@@ -539,7 +539,7 @@ public class L1Shop {
 		return true;
 	}
 
-	private void 수표상점2(L1PcInventory inv, L1ShopBuyOrderList orderList) {
+	private void chequeShop2(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(400254, orderList.getTotalPrice())) {
 			throw new IllegalStateException("購入に必要なチェックを消費することはできません。");
 		}
@@ -554,7 +554,7 @@ public class L1Shop {
 		}
 	}
 	
-	private boolean 금빛상점1(L1PcInstance pc, L1ShopBuyOrderList orderList) {
+	private boolean goldenFeatherShop1(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		// 行ベリー
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 90000000)) {
@@ -594,7 +594,7 @@ public class L1Shop {
 		return true;
 	}
 
-	private void 금빛상점2(L1PcInventory inv, L1ShopBuyOrderList orderList) {
+	private void goldenFeatherShop2(L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (!inv.consumeItem(41921, orderList.getTotalPrice())) {
 			throw new IllegalStateException("購入に必要なピクシーの金色の羽を消費することはできません。");
 		}
@@ -642,7 +642,7 @@ public class L1Shop {
 
 			PackageWarehouse.itemshop(pc.getAccountName(), itemId,enchant,count);
 			pc.saveInventory();
-//			System.out.println("アカウント名 : "+ pc.getAccountName() + " 商品番号 : "+ itemId + " エンチャント : " + enchant + " 카운터 " + count);
+//			System.out.println("アカウント名 : "+ pc.getAccountName() + " 商品番号 : "+ itemId + " エンチャント : " + enchant + " カウンター " + count);
 		}
 		pc.sendPackets(new S_SystemMessage("\\fY アデン店で購入したアイテムはTABキーを押して "));
 		pc.sendPackets(new S_SystemMessage("\\fY 付加アイテム倉庫から検索できます。"));
@@ -797,7 +797,7 @@ public class L1Shop {
 		}
 	}
 
-	private boolean 탐상인1(L1PcInstance pc, L1ShopBuyOrderList orderList) {
+	private boolean TamMerchant1(L1PcInstance pc, L1ShopBuyOrderList orderList) {
 		int price = orderList.getTotalPrice();
 		if (!IntRange.includes(price, 0, 9000000)) {
 //			pc.sendPackets(new S_SystemMessage("システム: TAMは一度900万個以上使用することができません。"));
@@ -837,7 +837,7 @@ public class L1Shop {
 		return true;
 	}
 
-	private void 탐상인2(L1PcInstance pc, L1PcInventory inv, L1ShopBuyOrderList orderList) {
+	private void TamMerchant2(L1PcInstance pc, L1PcInventory inv, L1ShopBuyOrderList orderList) {
 		if (inv.getOwner().getNetConnection().getAccount().tam_point < orderList.getTotalPrice()) {
 			throw new IllegalStateException("購入に必要な乗車が不足します。");
 		}

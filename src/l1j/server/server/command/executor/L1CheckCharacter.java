@@ -52,7 +52,7 @@ public class L1CheckCharacter implements L1CommandExecutor {
 			
 			String itemname;
 			int searchCount = 0;
-			if (type.equalsIgnoreCase("인벤")){	
+			if (type.equalsIgnoreCase("inventory")){	
 				try {
 
 					// キャラクターオブジェクトIDを検索1 = objid 2 = charname
@@ -76,7 +76,7 @@ public class L1CheckCharacter implements L1CommandExecutor {
 				} catch (Exception e) {
 					pc.sendPackets(new S_SystemMessage("\\fW** [" + charname + "]キャラクター検索エラー**"));
 				}
-			} else if (type.equalsIgnoreCase("창고")){
+			} else if (type.equalsIgnoreCase("warehouse")){
 				try {
 					p = c.prepareStatement("SELECT account_name, char_name FROM characters WHERE char_name = '" + charname + "'");
 					r = p.executeQuery();
@@ -96,7 +96,7 @@ public class L1CheckCharacter implements L1CommandExecutor {
 				} catch (Exception e) {
 					pc.sendPackets(new S_SystemMessage("\\fW** [" + charname + "]キャラクター検索エラー**"));
 				}
-			} else if (type.equalsIgnoreCase("요정창고")){				
+			} else if (type.equalsIgnoreCase("elfwarehouse")){				
 				try {
 					p = c.prepareStatement("SELECT account_name, char_name FROM characters WHERE char_name = '" + charname + "'");
 					r = p.executeQuery();

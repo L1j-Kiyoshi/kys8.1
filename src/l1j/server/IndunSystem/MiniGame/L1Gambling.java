@@ -85,7 +85,7 @@ public class L1Gambling {
 					if (Npc.getNpcTemplate().get_npcId() == pc.gembleNpc.getNpcId()) {
 						L1NpcInstance dealer = Npc;
 						//String chat9 = pc.getName() + "様合わせシャットた。" + pc.getGamblingMoney（）* 2 + "ワン入金しました。";
-						//String chat10 = pc.getName() + "님 맞추셧습니다." + pc.getGamblingMoney() * 3 + "원 입금했습니다.";
+						//String chat10 = pc.getName() + "様合わせシャットた。 "+ pc.getGamblingMoney（）* 3 +"ワン入金しました。 ";
 						String chat9 = "おめでとうございます〜";
 						String chat10 ="おめでとうございます〜";
 						String chat11 = pc.getName() + "様間違っシャットたポケット蒸すません楽しん。";

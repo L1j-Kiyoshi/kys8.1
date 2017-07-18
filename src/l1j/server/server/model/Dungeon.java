@@ -83,17 +83,17 @@ public class Dungeon {
 				int newMapId = rs.getInt("new_mapid");
 				int heading = rs.getInt("new_heading");
 				DungeonType dungeonType = DungeonType.NONE;
-				if ((srcX == 33423 || srcX == 33424 || srcX == 33425 || srcX == 33426) && srcY == 33502 && srcMapId == 4 // Heine선착장->FI행의 배
-						|| (srcX == 32733 || srcX == 32734 || srcX == 32735 || srcX == 32736) && srcY == 32794 && srcMapId == 83) { // FI행의 배->Heine선착장
+				if ((srcX == 33423 || srcX == 33424 || srcX == 33425 || srcX == 33426) && srcY == 33502 && srcMapId == 4 // Heine船着場 - > FI行の倍
+						|| (srcX == 32733 || srcX == 32734 || srcX == 32735 || srcX == 32736) && srcY == 32794 && srcMapId == 83) { // FI行の倍 - > Heine船着場
 					dungeonType = DungeonType.SHIP_FOR_FI;
-				} else if ((srcX == 32935 || srcX == 32936 || srcX == 32937) && srcY == 33058 && srcMapId == 70 // FI선착장->Heine행의 배
-						|| (srcX == 32732 || srcX == 32733 || srcX == 32734 || srcX == 32735) && srcY == 32796 && srcMapId == 84) { // Heine행의 배->FI선착장
+				} else if ((srcX == 32935 || srcX == 32936 || srcX == 32937) && srcY == 33058 && srcMapId == 70 // FI船着場 - > Heine行の倍
+						|| (srcX == 32732 || srcX == 32733 || srcX == 32734 || srcX == 32735) && srcY == 32796 && srcMapId == 84) { //Heine行の倍 - > FI船着場
 					dungeonType = DungeonType.SHIP_FOR_HEINE;
-				} else if ((srcX == 32750 || srcX == 32751 || srcX == 32752) && srcY == 32874 && srcMapId == 445 // 숨겨진 선착장->해적섬행의 배
-						|| (srcX == 32731 || srcX == 32732 || srcX == 32733) && srcY == 32796 && srcMapId == 447) { // 해적섬행의 배->숨겨진 선착장
+				} else if ((srcX == 32750 || srcX == 32751 || srcX == 32752) && srcY == 32874 && srcMapId == 445 // 隠された船着場 - >海賊島の倍
+						|| (srcX == 32731 || srcX == 32732 || srcX == 32733) && srcY == 32796 && srcMapId == 447) { // 海賊島の倍 - >隠された船着場
 					dungeonType = DungeonType.SHIP_FOR_PI;
-				} else if ((srcX == 32296 || srcX == 32297 || srcX == 32298) && srcY == 33087 && srcMapId == 440 // 해적도선착장->숨겨진 선착장행의 배
-						|| (srcX == 32735 || srcX == 32736 || srcX == 32737) && srcY == 32794 && srcMapId == 446) { // 숨겨진 선착장행의 배->해적도선착장
+				} else if ((srcX == 32296 || srcX == 32297 || srcX == 32298) && srcY == 33087 && srcMapId == 440 // 海賊も船着場 - >隠された船着場行きの船
+						|| (srcX == 32735 || srcX == 32736 || srcX == 32737) && srcY == 32794 && srcMapId == 446) { // 隠された船着場行きの船 - >海賊も船着場
 					dungeonType = DungeonType.SHIP_FOR_HIDDENDOCK;
 				} else if ((srcX == 32630 || srcX == 32631 || srcX == 32632) && srcY == 32983 && srcMapId == 0 // TalkingIsland->TalkingIslandShiptoAdenMainland
 						|| (srcX == 32733 || srcX == 32734 || srcX == 32735) && srcY == 32796 && srcMapId == 5) { // TalkingIslandShiptoAdenMainland->TalkingIsland

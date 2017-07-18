@@ -63,18 +63,18 @@ public class L1DollInstance extends L1NpcInstance {
 	public static final int DOLLTYPE_SNOWMAN_A = 25; //雪だるま（A）
 	public static final int DOLLTYPE_SNOWMAN_B = 26; //雪だるま（B）
 	public static final int DOLLTYPE_SNOWMAN_C = 27; // 雪だるま（C）
-	public static final int DOLLTYPE_자이언트 = 28; // 
-	public static final int DOLLTYPE_사이클롭스 = 29;
-	public static final int DOLLTYPE_흑장로 = 30;
-	public static final int DOLLTYPE_서큐버스 = 31;
-	public static final int DOLLTYPE_데스나이트 = 32; //ジンテン
-	public static final int DOLLTYPE_바포메트 = 80; //ジンテン
-	public static final int DOLLTYPE_얼음여왕 = 81; //ジンテン
-	public static final int DOLLTYPE_커츠 = 82; //ジンテン
-	public static final int DOLLTYPE_인어 = 33;
-	public static final int DOLLTYPE_킹버그베어 = 34;
-	public static final int DOLLTYPE_나이트발드 = 35;
-	public static final int DOLLTYPE_데몬 = 36;
+	public static final int DOLLTYPE_GIANT = 28; // 
+	public static final int DOLLTYPE_CYCLOPS = 29;
+	public static final int DOLLTYPE_BLACK_ELDER = 30;
+	public static final int DOLLTYPE_SUCCUBUS_2 = 31;
+	public static final int DOLLTYPE_DEATH_KNIGHT = 32; //ジンテン
+	public static final int DOLLTYPE_BAPHOMET = 80; //ジンテン
+	public static final int DOLLTYPE_ICE_QUEEN = 81; //ジンテン
+	public static final int DOLLTYPE_KURTS = 82; //ジンテン
+	public static final int DOLLTYPE_MERMAID = 33;
+	public static final int DOLLTYPE_KBB = 34;
+	public static final int DOLLTYPE_KNIGHT_BALD = 35;
+	public static final int DOLLTYPE_DAEMON = 36;
 	public static final int DOLLTYPE_MOKAK = 71;
 	public static final int DOLLTYPE_LAVAGOLREM = 72;
 	public static final int DOLLTYPE_DIAMONDGOLREM = 73;
@@ -87,8 +87,8 @@ public class L1DollInstance extends L1NpcInstance {
 	public static final int DOLL_Iris = 3000086;//マジックドール：アイリス
 	public static final int DOLL_vampire = 3000087;//マジックドール：ヴァンパイア
 	public static final int DOLL_barranca = 3000088;//マジックドール：バランカ
-	public static final int DOLL_머미로드 = 3000089;//マジックドール：マミーロード
-	public static final int DOLL_타락 = 3000090;//マジックドール：堕落
+	public static final int DOLL_MUMMY_LORD = 3000089;//マジックドール：マミーロード
+	public static final int DOLL_CURRUPTION = 3000090;//マジックドール：堕落
 	
 	private static Random _random = new Random(System.nanoTime());
 	private int _dollType;
@@ -207,7 +207,7 @@ public class L1DollInstance extends L1NpcInstance {
 			_master.addMaxMp(50);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
 			break;
-		case DOLL_타락:
+		case DOLL_CURRUPTION:
 			_master.getResistance().addStun(10);//スタン耐性
 			_master.getAbility().addSp(3);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
@@ -220,11 +220,11 @@ public class L1DollInstance extends L1NpcInstance {
 		case DOLL_vampire://ヴァンパイア
 			_master.addDmgup(1);//近距離ダメージ
 			_master.addHitup(2);// 近距離命中
-			_master.set락구간상승(5);
+			_master.setLockSectionUp(5);
 			break;
 		case DOLL_barranca://バランカ
 			_master.getResistance().addStun(12);//スタン耐性
-			_master.set어택레벨(2);
+			_master.setAttackLevel(2);
 			break;
 		case DOLLTYPE_SNOWMAN_NEW:
 			_master.addDmgup(1);
@@ -245,26 +245,26 @@ public class L1DollInstance extends L1NpcInstance {
 			break;
 		case DOLLTYPE_DEMON:
 			_master.getResistance().addStun(12);// スタン耐性
-			_master.set어택레벨(2);
+			_master.setAttackLevel(2);
 			break;
-		case DOLLTYPE_바포메트:
+		case DOLLTYPE_BAPHOMET:
 			_master.getResistance().addStun(10);// スタン耐性
 			break;
-		case DOLLTYPE_얼음여왕:
+		case DOLLTYPE_ICE_QUEEN:
 			_master.addBowDmgup(5); // 弓ツタ
 			_master.addBowHitup(5);
 			_master.getResistance().addStun(10);// スタン耐性
 			break;
-		case DOLLTYPE_커츠:
+		case DOLLTYPE_KURTS:
 			_master.getAC().addAc(-2);
 			_master.getResistance().addStun(10);// スタン耐性
 			break;
-		case DOLLTYPE_사이클롭스:
+		case DOLLTYPE_CYCLOPS:
 			_master.addDmgup(2);
 			_master.addHitup(2);
 			_master.getResistance().addStun(12);
 			break;
-		case DOLLTYPE_서큐버스:
+		case DOLLTYPE_SUCCUBUS_2:
 //			_master.addSp(1);
 			_master.getAbility().addSp(1);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
@@ -347,17 +347,17 @@ public class L1DollInstance extends L1NpcInstance {
 			_master.addBowDmgup(2);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
 			break;
-		case DOLLTYPE_킹버그베어:
+		case DOLLTYPE_KBB:
 			_master.getResistance().addStun(8);
 			break;
-		case DOLLTYPE_데몬:
+		case DOLLTYPE_DAEMON:
 			_master.getResistance().addStun(12);
-			_master.set어택레벨(2);
+			_master.setAttackLevel(2);
 			break;
-		case DOLLTYPE_나이트발드:
+		case DOLLTYPE_KNIGHT_BALD:
 			_master.addDmgup(2);
 			_master.addHitup(2);
-			_master.set어택레벨(1);
+			_master.setAttackLevel(1);
 			break;
 		case DOLLTYPE_BUGBEAR:
 			((L1PcInstance) _master).sendPackets(new S_Weight(((L1PcInstance) _master)));
@@ -388,7 +388,7 @@ public class L1DollInstance extends L1NpcInstance {
 			_master.addMaxMp(-50);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
 			break;
-		case DOLL_타락:
+		case DOLL_CURRUPTION:
 			_master.getResistance().addStun(-10);//スタン耐性
 			_master.getAbility().addSp(-3);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
@@ -401,7 +401,7 @@ public class L1DollInstance extends L1NpcInstance {
 		case DOLL_vampire://ヴァンパイア
 			_master.addDmgup(-1);//近距離ダメージ
 			_master.addHitup(-2);// 近距離命中
-			_master.set락구간상승(-5);
+			_master.setLockSectionUp(-5);
 			break;
 		case DOLL_barranca://バランカ
 			_master.getResistance().addStun(-12);//スタン耐性
@@ -426,26 +426,26 @@ public class L1DollInstance extends L1NpcInstance {
 			break;
 		case DOLLTYPE_DEMON:
 			_master.getResistance().addStun(-12);// スタン耐性
-			_master.set어택레벨(-2);
+			_master.setAttackLevel(-2);
 			break;
-		case DOLLTYPE_바포메트:
+		case DOLLTYPE_BAPHOMET:
 			_master.getResistance().addStun(-10);// スタン耐性
 			break;
-		case DOLLTYPE_얼음여왕:
+		case DOLLTYPE_ICE_QUEEN:
 			_master.addBowDmgup(-5); // 弓ツタ
 			_master.addBowHitup(-5);
 			_master.getResistance().addStun(-10);// スタン耐性
 			break;
-		case DOLLTYPE_커츠:
+		case DOLLTYPE_KURTS:
 			_master.getAC().addAc(2);
 			_master.getResistance().addStun(-10);// スタン耐性
 			break;
-		case DOLLTYPE_사이클롭스:
+		case DOLLTYPE_CYCLOPS:
 			_master.addDmgup(-2);
 			_master.addHitup(-2);
 			_master.getResistance().addStun(-12);
 			break;
-		case DOLLTYPE_서큐버스:
+		case DOLLTYPE_SUCCUBUS_2:
 //			_master.addSp(-1);
 			_master.getAbility().addSp(-1);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
@@ -525,17 +525,17 @@ public class L1DollInstance extends L1NpcInstance {
 			_master.addBowDmgup(-2);
 			((L1PcInstance) _master).sendPackets(new S_SPMR(((L1PcInstance) _master)));
 			break;
-		case DOLLTYPE_킹버그베어:
+		case DOLLTYPE_KBB:
 			_master.getResistance().addStun(-8);
 			break;
-		case DOLLTYPE_데몬:
+		case DOLLTYPE_DAEMON:
 			_master.getResistance().addStun(-12);
-			_master.set어택레벨(-2);
+			_master.setAttackLevel(-2);
 			break;
-		case DOLLTYPE_나이트발드:
+		case DOLLTYPE_KNIGHT_BALD:
 			_master.addDmgup(-2);
 			_master.addHitup(-2);
-			_master.set어택레벨(-1);
+			_master.setAttackLevel(-1);
 			break;
 		
 		default:
@@ -642,9 +642,9 @@ public class L1DollInstance extends L1NpcInstance {
 	
 	public int getStunLevelAdd() {
 		int addStun = 0;
-		if (getDollType() == DOLLTYPE_나이트발드) {
+		if (getDollType() == DOLLTYPE_KNIGHT_BALD) {
 			addStun = 3;
-		} else if (getDollType() == DOLLTYPE_데몬) {
+		} else if (getDollType() == DOLLTYPE_DAEMON) {
 			addStun = 6;
 		}
 		return addStun;
@@ -652,13 +652,13 @@ public class L1DollInstance extends L1NpcInstance {
 
 	public int getDamageReductionByDoll() {
 		int DamageReduction = 0;
-		if (getDollType() == DOLLTYPE_데스나이트) {
+		if (getDollType() == DOLLTYPE_DEATH_KNIGHT) {
 			DamageReduction = 5;
-		} else if (getDollType() == DOLLTYPE_커츠) {
+		} else if (getDollType() == DOLLTYPE_KURTS) {
 			DamageReduction = 3;
-		} else if (getDollType() == DOLLTYPE_DIAMONDGOLREM || getDollType() == DOLL_머미로드) {
+		} else if (getDollType() == DOLLTYPE_DIAMONDGOLREM || getDollType() == DOLL_MUMMY_LORD) {
 			DamageReduction = 2;
-		} else if (getDollType() == DOLLTYPE_자이언트 || getDollType() == DOLLTYPE_LAVAGOLREM || getDollType() == DOLLTYPE_STONEGOLEM) {
+		} else if (getDollType() == DOLLTYPE_GIANT || getDollType() == DOLLTYPE_LAVAGOLREM || getDollType() == DOLLTYPE_STONEGOLEM) {
 			DamageReduction = 1;
 		}
 		
@@ -669,7 +669,7 @@ public class L1DollInstance extends L1NpcInstance {
 		int fou = 0;
 		switch (getDollType()) {
 		case DOLL_Iris:
-		case DOLLTYPE_커츠:
+		case DOLLTYPE_KURTS:
 			fou = 10;
 			break;
 		}
@@ -681,18 +681,18 @@ public class L1DollInstance extends L1NpcInstance {
 				|| getDollType() == DOLLTYPE_PSY_CHAMPION || getDollType() == DOLLTYPE_PSY_BIRD
 				|| getDollType() == DOLLTYPE_PSY_GANGNAM_STYLE 
 				|| getDollType() == DOLLTYPE_GREMLIN || getDollType() == DOLLTYPE_SNOWMAN_B
-				|| getDollType() == DOLLTYPE_흑장로 || getDollType() == DOLLTYPE_서큐버스 || getDollType() == DOLL_머미로드
+				|| getDollType() == DOLLTYPE_BLACK_ELDER || getDollType() == DOLLTYPE_SUCCUBUS_2 || getDollType() == DOLL_MUMMY_LORD
 				);
 	}
 
 	public int getMpRegenAmount() {
 		if (getDollType() == DOLLTYPE_SUCCUBUS || getDollType() == DOLLTYPE_ELDER
 				|| getDollType() == DOLLTYPE_PSY_CHAMPION || getDollType() == DOLLTYPE_PSY_BIRD
-				|| getDollType() == DOLLTYPE_PSY_GANGNAM_STYLE || getDollType() == DOLL_머미로드
-				|| getDollType() == DOLLTYPE_흑장로 || getDollType() == DOLLTYPE_서큐버스
+				|| getDollType() == DOLLTYPE_PSY_GANGNAM_STYLE || getDollType() == DOLL_MUMMY_LORD
+				|| getDollType() == DOLLTYPE_BLACK_ELDER || getDollType() == DOLLTYPE_SUCCUBUS_2
 				) {
 			return 15;
-		} else if (getDollType() == DOLLTYPE_GREMLIN || getDollType() == DOLLTYPE_킹버그베어) {
+		} else if (getDollType() == DOLLTYPE_GREMLIN || getDollType() == DOLLTYPE_KBB) {
 			return 10;
 		} else if (getDollType() == DOLLTYPE_HATCHLING) {
 			return 5;
@@ -742,10 +742,10 @@ public class L1DollInstance extends L1NpcInstance {
 		case DOLLTYPE_PIXIE_ELREGEU:
 			effect = 7331; //竜巻
 			break;
-		case DOLLTYPE_흑장로:
+		case DOLLTYPE_BLACK_ELDER:
 			effect = 7004; // コールライトニング
 			break;
-		case DOLLTYPE_데스나이트:
+		case DOLLTYPE_DEATH_KNIGHT:
 			effect = 11660; // ヘルファイア
 			break;
 		case DOLLTYPE_DEATHNIGHT:
@@ -764,7 +764,7 @@ public class L1DollInstance extends L1NpcInstance {
 				Broadcaster.broadcastPacket(pc, packet);
 			}
 		}
-		if (type == DOLLTYPE_흑장로) {
+		if (type == DOLLTYPE_BLACK_ELDER) {
 			int chance = _random.nextInt(100) + 1;
 			if (10 >= chance) {
 				dmg = 40;
@@ -773,7 +773,7 @@ public class L1DollInstance extends L1NpcInstance {
 				Broadcaster.broadcastPacket(pc, packet);
 			}
 		}
-		if (type == DOLLTYPE_데스나이트 || type == DOLLTYPE_DEATHNIGHT) {
+		if (type == DOLLTYPE_DEATH_KNIGHT || type == DOLLTYPE_DEATHNIGHT) {
 			int damage = 0;
 			int chance = _random.nextInt(100) + 1;
 			int chance2 = _random.nextInt(30) + 1;

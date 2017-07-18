@@ -37,12 +37,12 @@ public class L1Clan {
     public static final int CLAN_RANK_LEAGUE_PROBATION = 5;
     public static final int CLAN_RANK_LEAGUE_GUARDIAN = 6;
     
-	public static final int 부군주 = 3;
-	public static final int 수련 = 7;
-	public static final int 일반 = 8;
-	public static final int 수호 = 9;
-	public static final int 군주 = 10;
-	public static final int 정예 = 13;
+	public static final int SUB_MONARCH = 3;
+	public static final int TRAINING = 7;
+	public static final int NORMAL = 8;
+	public static final int GUARDIAN = 9;
+	public static final int MONARCH = 10;
+	public static final int ELITE = 13;
 	//private int _WarPoint;
 
 	@SuppressWarnings("unused")
@@ -367,7 +367,7 @@ public class L1Clan {
 		return GazeList;
 	}
 
-	public L1PcInstance getonline간부() {
+	public L1PcInstance getOnlineLeaders() {
 		L1PcInstance pc = null;
 		L1PcInstance no1pc = null;
 		int oldrank = 0;
@@ -377,7 +377,7 @@ public class L1Clan {
 			if (!clanMemberList.get(i).online || clanMemberList.get(i).player == null)
 				continue;
 			pc = clanMemberList.get(i).player;
-			if (pc.getClanRank() >= L1Clan.수호) {
+			if (pc.getClanRank() >= L1Clan.GUARDIAN) {
 				if (oldrank < pc.getClanRank()) {
 					oldrank = pc.getClanRank();
 					no1pc = pc;

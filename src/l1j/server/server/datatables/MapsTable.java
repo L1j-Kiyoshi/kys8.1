@@ -57,12 +57,12 @@ public final class MapsTable {
 	private static MapsTable _instance;
 
 	/**
-	 * Key에 MAP ID, Value에 텔레포트 가부 플래그가 격납되는 HashMap
+	 * KeyのMAP ID、Valueにテレポート可否フラグが格納されるHashMap
 	 */
 	private final Map<Integer, MapData> _maps = new HashMap<Integer, MapData>();
 
 	/**
-	 * 새롭고 MapsTable 오브젝트를 생성해, MAP의 텔레포트 가부 플래그를 읽어들인다.
+	 * 新しくMapsTableオブジェクトを生成し、MAPのテレポート可否フラグを読み込む。
 	 */
 	private MapsTable() {
 		loadMapsFromDatabase();
@@ -75,7 +75,7 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP의 텔레포트 가부 플래그를 데이타베이스로부터 읽어들여, HashMap _maps에 격납한다.
+	 * MAPのテレポート可否フラグをデータベースから読み込み、HashMap _mapsに格納する。
 	 */
 	private void loadMapsFromDatabase() {
 		Connection con = null;
@@ -121,9 +121,9 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MapsTable의 인스턴스를 돌려준다.
+	 * MapsTableのインスタンスを返す。
 	 * 
-	 * @return MapsTable의 인스턴스
+	 * @return MapsTableのインスタンス
 	 */
 	public static MapsTable getInstance() {
 		if (_instance == null) {
@@ -133,11 +133,11 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가의 X개시 좌표를 돌려준다.
+	 * MAP沿いX開始座標を返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
-	 * @return X개시 좌표
+	 *            調査するMAPのMAP ID
+	 * @return X開始座標
 	 */
 	public int getStartX(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -148,11 +148,11 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가의 X종료 좌표를 돌려준다.
+	 * MAP沿いX終了座標を返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
-	 * @return X종료 좌표
+	 *            調査するMAPのMAP ID
+	 * @return X終了座標
 	 */
 	public int getEndX(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -163,11 +163,11 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가의 Y개시 좌표를 돌려준다.
+	 * MAP沿いY開始座標を返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
-	 * @return Y개시 좌표
+	 *            調査するMAPのMAP ID
+	 * @return Y開始座標
 	 */
 	public int getStartY(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -178,11 +178,11 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가의 Y종료 좌표를 돌려준다.
+	 * MAP沿いY終了座標を返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
-	 * @return Y종료 좌표
+	 *            調査するMAPのMAP ID
+	 * @return Y終了座標
 	 */
 	public int getEndY(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -193,11 +193,11 @@ public final class MapsTable {
 	}
 
 	/**
-	 * 맵의 monster량 배율을 돌려준다
+	 * マップのmonster量倍率を返す
 	 * 
 	 * @param mapId
-	 *            조사하는 맵의 맵 ID
-	 * @return monster량의 배율
+	 *            調査するマップのマップID
+	 * @return monster量の倍率
 	 */
 	public double getMonsterAmount(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -208,11 +208,11 @@ public final class MapsTable {
 	}
 
 	/**
-	 * 맵의 드롭 배율을 돌려준다
+	 * マップのドロップ倍率を返す
 	 * 
 	 * @param mapId
-	 *            조사하는 맵의 맵 ID
-	 * @return 드롭 배율
+	 *            調査するマップのマップID
+	 * @return ドロップ倍率
 	 */
 	public double getDropRate(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -223,12 +223,12 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가, 수중일까를 돌려준다.
+	 * MAPが、水中であるかを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
+	 *            調査するMAPのMAP ID
 	 * 
-	 * @return 수중이면 true
+	 * @return 水中であればtrue
 	 */
 	public boolean isUnderwater(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -239,11 +239,11 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가, 북마크 가능한가를 돌려준다.
+	 * MAPが、ブックマーク可能かを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
-	 * @return 북마크 가능하면 true
+	 *            調査するMAPのMAP ID
+	 * @return ブックマーク可能な場合true
 	 */
 	public boolean isMarkable(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -254,11 +254,11 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가, 랜덤 텔레포트 가능한가를 돌려준다.
+	 * MAPが、ランダムテレポート可能かを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
-	 * @return 가능하면 true
+	 *            調査するMAPのMAP ID
+	 * @return 可能な場合はtrue
 	 */
 	public boolean isTeleportable(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -269,11 +269,11 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가, MAP를 넘은 텔레포트 가능한가를 돌려준다.
+	 * MAPが、MAPを超えたテレポート可能かを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
-	 * @return 가능하면 true
+	 *            調査するMAPのMAP ID
+	 * @return 可能な場合はtrue
 	 */
 	public boolean isEscapable(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -284,12 +284,12 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가, restore 가능한가를 돌려준다.
+	 * MAPが、restore可能かを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
+	 *            調査するMAPのMAP ID
 	 * 
-	 * @return restore 가능하면 true
+	 * @return restore 可能な場合はtrue
 	 */
 	public boolean isUseResurrection(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -300,12 +300,12 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가, 파인쥬스 wand 사용 가능한가를 돌려준다.
+	 * MAPが、パインwand使用可能かを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
+	 *            調査するMAPのMAP ID
 	 * 
-	 * @return 파인쥬스 wand 사용 가능하면 true
+	 * @return パインwand使用可能な場合、true
 	 */
 	public boolean isUsePainwand(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -316,12 +316,12 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가, 데스페나르티가 있을까를 돌려준다.
+	 * MAPが、デスペナルティーがあるかを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
+	 *            調査するMAPのMAP ID
 	 * 
-	 * @return 데스페나르티이면 true
+	 * @return デスペナルティーであればtrue
 	 */
 	public boolean isEnabledDeathPenalty(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -332,12 +332,12 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가, 애완동물·사몬을 데리고 갈 수 있을까를 돌려준다.
+	 * MAPが、ペット・サーモンを連れて行くことができるかを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
+	 *           調査するMAPのMAP ID
 	 * 
-	 * @return 펫·사몬을 데리고 갈 수 있다면 true
+	 * @return ペット・サーモンを連れて行くことができればtrue
 	 */
 	public boolean isTakePets(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -348,12 +348,12 @@ public final class MapsTable {
 	}
 
 	/**
-	 * MAP가, 애완동물·사몬을 호출할 수 있을까를 돌려준다.
+	 * MAPが、ペット・サーモンを呼び出すことができるかを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 MAP의 MAP ID
+	 *            調査するMAPのMAP ID
 	 * 
-	 * @return 펫·사몬을 호출할 수 있다면 true
+	 * @return ペット・サーモンを呼び出すことができている場合true
 	 */
 	public boolean isRecallPets(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -364,12 +364,12 @@ public final class MapsTable {
 	}
 	
 	/**
-	 * 맵이, 아이템을 사용할 수 있을까를 돌려준다.
+	 * マップが、アイテムを使用できるかを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 맵의 맵 ID
+	 *            調査するマップのマップID
 	 * 
-	 * @return 아이템을 사용할 수 있다면 true
+	 * @return アイテムを使用することができている場合true
 	 */
 	public boolean isUsableItem(int mapId) {
 		MapData map = _maps.get(mapId);
@@ -380,12 +380,12 @@ public final class MapsTable {
 	}
 
 	/**
-	 * 맵이, 스킬을 사용할 수 있을까를 돌려준다.
+	 * マップが、スキルを使用できるかを返す。
 	 * 
 	 * @param mapId
-	 *            조사하는 맵의 맵 ID
+	 *           調査するマップのマップID
 	 * 
-	 * @return 스킬을 사용할 수 있다면 true
+	 * @return スキルを使用することができている場合true
 	 */
 	public boolean isUsableSkill(int mapId) {
 		MapData map = _maps.get(mapId);

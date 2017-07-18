@@ -81,7 +81,7 @@ public void setAdenaHuntStart(boolean AdenaHunt) {
    /**
     *オープン時刻を持って来る
     *
-    *@return (Strind) 오픈 시각(MM-dd HH:mm)
+    *@return (Strind) オープン時刻(MM-dd HH:mm)
     */
     public String AdenOpen() {
      Calendar c = Calendar.getInstance();

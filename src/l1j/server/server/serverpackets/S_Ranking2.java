@@ -97,13 +97,13 @@ public class S_Ranking2 extends ServerBasePacket {
 				}
 			}
 			writeC(0x18);
-			writeC(rank.전체상승기회() ? 1 : 0);
+			writeC(rank.getTotalUpChance() ? 1 : 0);
 			writeC(0x20);
-			writeC(rank.전체추월위험() ? 1 : 0);
+			writeC(rank.getTotalOvertakingRisk() ? 1 : 0);
 			writeC(0x28);
-			writeC(rank.클래스상승기회() ? 1 : 0);
+			writeC(rank.getClassUpChance() ? 1 : 0);
 			writeC(0x30);
-			writeC(rank.클래스추월위험() ? 1 : 0);
+			writeC(rank.getClassOverTakingRisk() ? 1 : 0);
 			writeH(0x00);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -58,7 +58,7 @@ public class L1Kick implements L1CommandExecutor {
 			if (target != null) {
 				pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(target.getName()).append("を追放しました。").toString()));
 				target.getNetConnection().kick();	//万一の場合に備え
-				target.getNetConnection().close();	//만일의 경우를 대비
+				target.getNetConnection().close();	//万一の場合に備え
 				target.sendPackets(new S_Disconnect());
 			} else {
 				pc.sendPackets(new S_SystemMessage(

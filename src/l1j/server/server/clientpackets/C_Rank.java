@@ -43,14 +43,14 @@ public class C_Rank extends ClientBasePacket {
 		case 1:// 階級
 			String name = readS();
 			L1PcInstance targetPc = L1World.getInstance().getPlayer(name);
-			if ((!pc.isCrown()) && (pc.getClanRank() != L1Clan.수호) && (pc.getClanRank() != L1Clan.부군주)) {
+			if ((!pc.isCrown()) && (pc.getClanRank() != L1Clan.GUARDIAN) && (pc.getClanRank() != L1Clan.SUB_MONARCH)) {
 				pc.sendPackets(new S_SystemMessage("階級付与失敗：ランク付与権限がありません。"));		
 				return;
 			}
 			if (targetPc != null) {
 				if (pc.getClanid() == targetPc.getClanid()) {
 					try {
-						if ((pc.getClanRank() != L1Clan.군주) && (pc.getClanRank() != L1Clan.수호) && (pc.getClanRank() != L1Clan.부군주)) {
+						if ((pc.getClanRank() != L1Clan.MONARCH) && (pc.getClanRank() != L1Clan.GUARDIAN) && (pc.getClanRank() != L1Clan.SUB_MONARCH)) {
 							pc.sendPackets(new S_SystemMessage("階級付与失敗：ランク付与権限がありません。"));		
 							return;
 						}
@@ -58,17 +58,17 @@ public class C_Rank extends ClientBasePacket {
 							pc.sendPackets(new S_SystemMessage("階級付与失敗：対象が血盟の君主"));			
 							return;
 						}
-						if ((pc.getClanRank() == L1Clan.부군주) && (rank == 3)) {
+						if ((pc.getClanRank() == L1Clan.SUB_MONARCH) && (rank == 3)) {
 							pc.sendPackets(new S_SystemMessage("階級付与失敗：付与階級が自分より高いか同じランク"));		
 							return;
 						}
-						if ((pc.getClanRank() == L1Clan.수호) && (rank == 9)) {
+						if ((pc.getClanRank() == L1Clan.GUARDIAN) && (rank == 9)) {
 							pc.sendPackets(new S_SystemMessage("階級付与失敗：付与階級が自分より高いか同じランク"));		
 
 							return;
 						}
-						if ((pc.getClanRank() == L1Clan.수호)
-								&& ((targetPc.getClanRank() == L1Clan.군주) || (targetPc.getClanRank() == L1Clan.수호) || (targetPc.getClanRank() == L1Clan.부군주))) {
+						if ((pc.getClanRank() == L1Clan.GUARDIAN)
+								&& ((targetPc.getClanRank() == L1Clan.MONARCH) || (targetPc.getClanRank() == L1Clan.GUARDIAN) || (targetPc.getClanRank() == L1Clan.SUB_MONARCH))) {
 							pc.sendPackets(new S_SystemMessage("階級付与失敗：対象が現在自分より高いか同じランク"));			
 							return;
 						}
@@ -99,20 +99,20 @@ public class C_Rank extends ClientBasePacket {
 							pc.sendPackets(new S_SystemMessage("階級付与失敗：対象が血盟の君主。"));	
 							return;
 						}
-						if ((pc.getClanRank() != L1Clan.군주) && (pc.getClanRank() != L1Clan.수호) && (pc.getClanRank() != L1Clan.부군주)) {
+						if ((pc.getClanRank() != L1Clan.MONARCH) && (pc.getClanRank() != L1Clan.GUARDIAN) && (pc.getClanRank() != L1Clan.SUB_MONARCH)) {
 							pc.sendPackets(new S_SystemMessage("階級付与失敗：ランク付与権限がありません。"));	
 							return;
 						}
-						if ((pc.getClanRank() == L1Clan.부군주) && (rank == 3)) {
+						if ((pc.getClanRank() == L1Clan.SUB_MONARCH) && (rank == 3)) {
 							pc.sendPackets(new S_SystemMessage("階級付与失敗：付与階級が自分より高いか同じランク"));		
 							return;
 						}
-						if ((pc.getClanRank() == L1Clan.수호) && (rank == 9)) {
+						if ((pc.getClanRank() == L1Clan.GUARDIAN) && (rank == 9)) {
 							pc.sendPackets(new S_SystemMessage("階級付与失敗：付与階級が自分より高いか同じランク"));		
 							return;
 						}
-						if ((pc.getClanRank() == L1Clan.수호)
-								&& ((restorePc.getClanRank() == L1Clan.군주) || (restorePc.getClanRank() == L1Clan.수호) || (restorePc.getClanRank() == L1Clan.부군주))) {
+						if ((pc.getClanRank() == L1Clan.GUARDIAN)
+								&& ((restorePc.getClanRank() == L1Clan.MONARCH) || (restorePc.getClanRank() == L1Clan.GUARDIAN) || (restorePc.getClanRank() == L1Clan.SUB_MONARCH))) {
 							pc.sendPackets(new S_SystemMessage("階級付与失敗：対象が現在自分より高いか同じランク"));			
 							return;
 						}
@@ -154,7 +154,7 @@ public class C_Rank extends ClientBasePacket {
 			L1PcInstance allianceLeader = FaceToFace.faceToFace(pc);
 			if ( allianceLeader == null) return;
 			if (pc.getLevel() < 25 || !pc.isCrown()) {
-				pc.sendPackets(new S_ServerMessage(1206));// 25레벨이상 혈맹 군주만 동맹신청을 할 수 있습니다. 또한 연합 군주는 동맹을 맺을 수 없습니다.
+				pc.sendPackets(new S_ServerMessage(1206));// 25レベル以上の血盟君主だけ同盟申請をすることができます。また、連合君主は同盟を結ぶことができません。
 				return;
 			}
 			/*if (pc.getClan().getAlliance() != 0) {

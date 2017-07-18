@@ -37,11 +37,11 @@ public class L1BanIp implements L1CommandExecutor {
 				}
 			}
 
-			if ("추가". equals(s2) && ! isBanned) {
+			if ("add". equals(s2) && ! isBanned) {
 				iptable.banIp(s1); // BANリストにIPアドレスを加える
 				String msg = new StringBuilder(). append("IP : ").append(s1).append("をBAN IPに登録しました。").toString();
 				pc.sendPackets(new S_SystemMessage(msg));
-			} else if ("삭제". equals(s2) && isBanned) {
+			} else if ("delete". equals(s2) && isBanned) {
 				if (iptable.liftBanIp(s1)) { // BANリストからIPアドレスを削除する
 					String msg = new StringBuilder().append("IP : ").append(s1).append("をBAN IPから削除しました。").toString();
 					pc.sendPackets(new S_SystemMessage(msg));

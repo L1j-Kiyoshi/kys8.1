@@ -46,21 +46,21 @@ public class L1Rank {
 	public int getOldClassRank() { return oldClassRank; }
 	public void setOldClassRank(int a) { oldClassRank = a; }
 
-	private boolean 전체상승기회;
-	public boolean 전체상승기회() { return 전체상승기회; }
-	public void 전체상승기회(boolean f) { 전체상승기회 = f; }
+	private boolean totalUpChance;
+	public boolean getTotalUpChance() { return totalUpChance; }
+	public void setTotalUpChance(boolean f) { totalUpChance = f; }
 
-	private boolean 전체추월위험;
-	public boolean 전체추월위험() { return 전체추월위험; }
-	public void 전체추월위험(boolean f) { 전체추월위험 = f; }
+	private boolean totalOvertakingRisk;
+	public boolean getTotalOvertakingRisk() { return totalOvertakingRisk; }
+	public void setTotalOvertakingRisk(boolean f) { totalOvertakingRisk = f; }
 
-	private boolean 클래스상승기회;
-	public boolean 클래스상승기회() { return 클래스상승기회; }
-	public void 클래스상승기회(boolean f) { 클래스상승기회 = f; }
+	private boolean classUpChance;
+	public boolean getClassUpChance() { return classUpChance; }
+	public void setClassUpChance(boolean f) { classUpChance = f; }
 
-	private boolean 클래스추월위험;
-	public boolean 클래스추월위험() { return 클래스추월위험; }
-	public void 클래스추월위험(boolean f) { 클래스추월위험 = f; }
+	private boolean classOverTakingRisk;
+	public boolean getClassOverTakingRisk() { return classOverTakingRisk; }
+	public void setClassOverTakingRisk(boolean f) { classOverTakingRisk = f; }
 
 	private int rankLevel = -1;
 

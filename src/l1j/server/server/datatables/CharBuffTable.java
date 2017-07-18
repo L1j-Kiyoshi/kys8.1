@@ -27,7 +27,7 @@ public class CharBuffTable {
 			149, 156, 166, // ウィンドウショート、ストームアイ、ストームショート
 			1002, // ブルーいくつかは、チャット禁止
 			STATUS_CHAT_PROHIBITED, //金鉱バフ
-			4914, 천하장사버프, //フクサバフ
+			4914, TENKASOUSHI_BUFF, //フクサバフ
 			BLOOD_LUST,
 			/**バフ保存パケット回*/
 			DECREASE_WEIGHT, DECAY_POTION, SILENCE, VENOM_RESIST, WEAKNESS, DISEASE,
@@ -67,16 +67,16 @@ public class CharBuffTable {
 			COOKING_1_20_N, COOKING_1_20_S, COOKING_1_21_N, COOKING_1_21_S,
 			COOKING_1_22_N, COOKING_1_22_S,
 			
-			COMA_A, COMA_B, SetBuff, 나루토감사캔디, 
+			COMA_A, COMA_B, SetBuff, NARUTO_THANKS_CANDY, 
 			
 			/**  リニューアル料理*/
-			COOK_STR, COOK_DEX, COOK_INT, COOK_GROW,메티스요리,메티스스프,
+			COOK_STR, COOK_DEX, COOK_INT, COOK_GROW,METIS_COOKING,METIS_SOUP,
 			
 			/** 追加バフ **/
-			레벨업보너스,
+			LEVEL_UP_BONUS,
 
 			/** Nショップバフ **/
-			강화버프_활력, 강화버프_공격, 강화버프_방어, 강화버프_마법, 강화버프_스턴, 강화버프_홀드,강화버프_힘,강화버프_덱스,강화버프_인트,
+			ENCHANT_BUFF_VITAL, ENCHANT_BUFF_ATTACK, ENCHANT_BUFF_DEFENSE, ENCHANT_BUFF_MAGIC, ENCHANT_BUFF_STUN, ENCHANT_BUFF_HOLD,ENCHANT_BUFF_STR,ENCHANT_BUFF_DEX,ENCHANT_BUFF_INT,
 			
 			/** ドラゴンのエメラルド */
 			EMERALD_NO, EMERALD_YES, DRAGON_TOPAZ, DRAGON_PUPLE, RANK_BUFF_5,

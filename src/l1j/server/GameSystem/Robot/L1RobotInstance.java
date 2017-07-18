@@ -1799,7 +1799,7 @@ public class L1RobotInstance extends L1PcInstance {
 			int ny = 0;
 			if (hasSkillEffect(L1SkillId.THUNDER_GRAB)
 					|| hasSkillEffect(L1SkillId.DESPERADO)
-					|| hasSkillEffect(L1SkillId.POWERRIP)) {
+					|| hasSkillEffect(L1SkillId.POWEGRRIP)) {
 				return;
 			}
 			// Broadcaster.broadcastPacket(this, new S_ChatPacket(this,

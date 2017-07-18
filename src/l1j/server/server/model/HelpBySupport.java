@@ -299,7 +299,7 @@ public class HelpBySupport extends RepeatTask {
     	chat = "よエムOリングである、ゆっくり狩り笑";
     	_support.broadcastPacket(new S_NpcChatPacket(_support, chat, 0));
 		}else if(i == 1){
-	    	chat = "エム半残っゆっくり狩りㅜ";
+	    	chat = "エム半残っゆっくり狩り";
 	    	_support.broadcastPacket(new S_NpcChatPacket(_support, chat, 0));
 		}
 		}

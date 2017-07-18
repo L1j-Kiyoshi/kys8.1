@@ -201,7 +201,7 @@ class L1SkillStop {
 			pc.sendPackets(new S_ServerMessage(4619, "$22506"));		
 		}
 			break;
-		case L1SkillId.레벨업보너스:
+		case L1SkillId.LEVEL_UP_BONUS:
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.sendPackets(new S_PacketBox(0, true, true));
@@ -219,7 +219,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_PacketBox(0, 2, true, true));
 			}
 			break;
-		case 나루토감사캔디:
+		case NARUTO_THANKS_CANDY:
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				if(pc.getLevel() >= 1 && pc.getLevel() <= 60){
@@ -288,7 +288,7 @@ class L1SkillStop {
 		case TRUE_TARGET:
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
-				pc.set트루타켓(0);
+				pc.setTrueTarget(0);
 			}
 			Broadcaster.broadcastPacket(cha, new S_TrueTargetNew(cha.getId(), false));
 			synchronized (L1SkillUse._truetarget_list) {
@@ -897,7 +897,7 @@ class L1SkillStop {
 		case SHAPE_CHANGE:
 			L1PolyMorph.undoPoly(cha);
 			break;
-		case 천하장사버프: {
+		case TENKASOUSHI_BUFF: {
 			L1PcInstance pc = (L1PcInstance) cha;
 			pc.addDamageReductionByArmor(-5);
 			pc.sendPackets(new S_PacketBox(S_PacketBox.ICON_COOKING, pc, 187, 0));
@@ -914,13 +914,13 @@ class L1SkillStop {
 				pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
 			}
 			break;
-		case POWERRIP:
+		case POWEGRRIP:
 			if (cha instanceof L1PcInstance) {
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_RIP, false));
 			} else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
 				L1NpcInstance npc = (L1NpcInstance) cha;
-				npc.set발묶임상태(false);
+				npc.setCanNotMove(false);
 			}
 			break;
 		case DESPERADO:
@@ -929,7 +929,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_PERADO, false));
 			} else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
 				L1NpcInstance npc = (L1NpcInstance) cha;
-				npc.set발묶임상태(false);
+				npc.setCanNotMove(false);
 			}
 			break;
 		case ADVANCE_SPIRIT:
@@ -1719,7 +1719,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_SkillIconWindShackle(pc.getId(), 0));
 			}
 			break;
-		case 강화버프_활력:
+		case ENCHANT_BUFF_VITAL:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 			pc.addMaxHp(-50);
@@ -1730,7 +1730,7 @@ class L1SkillStop {
 			}
 			break;
 			
-		case 강화버프_공격:
+		case ENCHANT_BUFF_ATTACK:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.addDmgup(-1);
@@ -1738,14 +1738,14 @@ class L1SkillStop {
 			}
 			break;
 			
-		case 강화버프_방어:
+		case ENCHANT_BUFF_DEFENSE:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.addDamageReductionByArmor(-1);
 			}
 			break;
 			
-		case 강화버프_마법:
+		case ENCHANT_BUFF_MAGIC:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getAbility().addSp(-1);
@@ -1753,21 +1753,21 @@ class L1SkillStop {
 			}
 			break;
 			
-		case 강화버프_스턴:
+		case ENCHANT_BUFF_STUN:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getResistance().addStun(-2);
 			}
 			break;
 			
-		case 강화버프_홀드:
+		case ENCHANT_BUFF_HOLD:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getResistance().addHold(-2);
 			}
 			break;
 			
-		case 강화버프_힘:
+		case ENCHANT_BUFF_STR:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getAbility().addAddedStr(-1);
@@ -1775,21 +1775,21 @@ class L1SkillStop {
 				
 			}
 			break;
-		case 강화버프_덱스:
+		case ENCHANT_BUFF_DEX:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getAbility().addAddedDex((byte)-1);
 				pc.sendPackets(new S_OwnCharStatus2(pc), true);
 			}
 			break;
-		case 강화버프_인트:
+		case ENCHANT_BUFF_INT:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getAbility().addAddedInt((byte)-1);
 				pc.sendPackets(new S_OwnCharStatus2(pc), true);
 			}
 			break;
-		case 메티스스프:
+		case METIS_SOUP:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.getResistance().addStun(-1);
@@ -1798,7 +1798,7 @@ class L1SkillStop {
 				pc.sendPackets(new S_SPMR(pc));
 			}
 			break;
-		case 메티스요리:
+		case METIS_COOKING:
 			if(cha instanceof L1PcInstance){
 				L1PcInstance pc = (L1PcInstance) cha;
 				pc.addDmgCritical(-3);

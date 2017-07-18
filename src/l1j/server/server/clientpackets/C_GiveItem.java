@@ -296,7 +296,7 @@ public class C_GiveItem extends ClientBasePacket {
 				pc.sendPackets(new S_SystemMessage(npcname + "の進化に成功しました。"));
 			}
 		} else {
-			pc.sendPackets(new S_SystemMessage(npcname + "의 진화조건이 충족돼지 않았습니다."));
+			pc.sendPackets(new S_SystemMessage(npcname + "の進化の条件が満たさ豚でした。"));
 		}
 	}
 

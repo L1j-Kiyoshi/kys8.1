@@ -191,7 +191,7 @@ public class C_War extends ClientBasePacket {
 		} else { // 相手クランが城主ではない
 			boolean enemyInWar = false;
 			for (L1War war : warList) {
-				if (war.CheckClanInWar(enemyClanName)) { // 상대 크란이 이미 전쟁중
+				if (war.CheckClanInWar(enemyClanName)) { // 相手クランが既に戦争中
 					if (type == 0) { // 宣戦布告
 						player.sendPackets(new S_ServerMessage(236,
 								enemyClanName)); // %0血盟があなたの血盟との戦争を拒否しました。
@@ -219,7 +219,7 @@ public class C_War extends ClientBasePacket {
 			}
 
 			if (type == 0) { // 宣戦布告
-				enemyLeader.setTempID(player.getId()); // 상대의 오브젝트 ID를 보존해 둔다
+				enemyLeader.setTempID(player.getId()); // 相手のオブジェクトIDを保存しておく
 				enemyLeader.sendPackets(new S_Message_YN(217, clanName,
 						playerName)); // %0血盟の％1があなたの血盟との戦争を望んでいます。戦争に応じますか？ （Y / N）
 			} else if (type == 2) { //降伏
