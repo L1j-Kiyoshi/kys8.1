@@ -83,7 +83,7 @@ public class BinaryOutputStream extends OutputStream {
 	public void writeS(String text) {
 		try {
 			if (text != null) {
-				_bao.write(text.getBytes("MS949"));
+				_bao.write(text.getBytes("SJIS"));
 			}
 		} catch (Exception e) {
 		}

@@ -34,7 +34,7 @@ public class S_Pledge extends ServerBasePacket {
             byte[] text = new byte[478];
             Arrays.fill(text, (byte) 0);
             int i = 0;
-            for (byte b : clan.getAnnouncement().getBytes("MS949")) {
+            for (byte b : clan.getAnnouncement().getBytes("SJIS")) {
                 text[i++] = b;
             }
             writeByte(text);
@@ -65,7 +65,7 @@ public class S_Pledge extends ServerBasePacket {
 
                 if (clanMember.getClanMemberNotes().length() != 0) {
                     int i = 0;
-                    for (byte b : clanMember.getClanMemberNotes().getBytes("MS949")) {
+                    for (byte b : clanMember.getClanMemberNotes().getBytes("SJIS")) {
                         text[i++] = b;
                     }
                 }
@@ -90,7 +90,7 @@ public class S_Pledge extends ServerBasePacket {
 
                 if (robot.getClanMemberNotes().length() != 0) {
                     int i = 0;
-                    for (byte b : robot.getClanMemberNotes().getBytes("MS949")) {
+                    for (byte b : robot.getClanMemberNotes().getBytes("SJIS")) {
                         text[i++] = b;
                     }
                 }
@@ -130,7 +130,7 @@ public class S_Pledge extends ServerBasePacket {
         if (notes.length() != 0) {
             int i = 0;
             try {
-                for (byte b : notes.getBytes("MS949")) {
+                for (byte b : notes.getBytes("SJIS")) {
                     text[i++] = b;
                 }
             } catch (UnsupportedEncodingException e) {

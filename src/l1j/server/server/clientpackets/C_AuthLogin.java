@@ -4,6 +4,7 @@ package l1j.server.server.clientpackets;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import l1j.server.server.Account;
 import l1j.server.server.GameClient;
 
 public class C_AuthLogin extends ClientBasePacket {
@@ -21,8 +22,8 @@ public class C_AuthLogin extends ClientBasePacket {
 	    /*
 	     * accountName = "matis"; password = "apxlwm2";
 	     */
-	    accountName = "aaaa";
-	    password = "aaaa";
+	    accountName = Account.getIptoAccountName(ip);
+	    password = Account.getAccountNametoPassword(accountName);
 	    Authorization.getInstance().auth(client, accountName, password, ip, host);
 	} catch (Exception e) {
 	}

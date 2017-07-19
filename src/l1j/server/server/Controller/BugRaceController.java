@@ -471,7 +471,7 @@ public class BugRaceController implements Runnable {
 	try {
 	    con = L1DatabaseFactory.getInstance().getConnection();
 	    statement = con
-		    .prepareStatement("UPDATE util_racer SET victoryNumber= ?,loseNumber=？ WHERE racerNumber=" + num);
+		    .prepareStatement("UPDATE util_racer SET victoryNumber=?,loseNumber=? WHERE racerNumber=" + num);
 	    statement.setInt(1, racer.getWinCount());
 	    statement.setInt(2, racer.getLoseCount());
 	    statement.execute();

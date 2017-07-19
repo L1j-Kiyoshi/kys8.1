@@ -67,7 +67,7 @@ public class C_CreateClan extends ClientBasePacket {
 
 		int numOfNameBytes = 0;
 		try {
-			numOfNameBytes = name.getBytes("MS949").length;
+			numOfNameBytes = name.getBytes("SJIS").length;
 		} catch (UnsupportedEncodingException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 			return false;

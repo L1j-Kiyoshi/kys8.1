@@ -57,16 +57,16 @@ public class S_NewChat extends ServerBasePacket {
 			writeC(0x2a);
 			try {
 				if (pc.isGm() && chat_type == 3) {
-					byte[] name = "******".getBytes("MS949");
+					byte[] name = "******".getBytes("SJIS");
 					writeC(name.length);
 					writeByte(name);
 				} else if (pc.getAge() != 0 && chat_type == 4) {
 					String names = pc.getName() + "(" + pc.getAge() + ")";
-					byte[] name = names.getBytes("MS949");
+					byte[] name = names.getBytes("SJIS");
 					writeC(name.length);
 					writeByte(name);
 				} else {
-					byte[] name = pc.getName().getBytes("MS949");
+					byte[] name = pc.getName().getBytes("SJIS");
 					writeC(name.length);
 					writeByte(name);
 				}

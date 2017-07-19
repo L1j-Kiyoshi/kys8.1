@@ -1,5 +1,6 @@
 package l1j.server.server.serverpackets;
 
+import l1j.server.Config;
 import l1j.server.server.Opcodes;
 
 public class S_ServerVersion extends ServerBasePacket {
@@ -60,7 +61,7 @@ public class S_ServerVersion extends ServerBasePacket {
 	writeD(0x0);// server start time
 	writeC(0x00);// 未知封包
 	writeC(0x00);// 未知封包
-	writeC(0x04);
+	writeC(Config.CLIENT_LANGUAGE);
 	writeD(2097118658);
 	// writeD(Opcodes.UPTIME);
 	writeD((int) (System.currentTimeMillis() / 1000L));

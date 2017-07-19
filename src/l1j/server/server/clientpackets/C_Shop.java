@@ -240,7 +240,7 @@ public class C_Shop extends ClientBasePacket {
 			int poly;
 			test = null;
 			try {
-				test = new String(chat, 0, chat.length, "MS949");
+				test = new String(chat, 0, chat.length, "SJIS");
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}

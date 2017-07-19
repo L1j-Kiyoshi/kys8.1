@@ -567,7 +567,7 @@ public class C_ActionUi extends ClientBasePacket {
 					return;
 				}
 				
-				String clanname = new String(BYTE2, 0, length, "MS949");
+				String clanname = new String(BYTE2, 0, length, "SJIS");
 				
 				L1Clan clan = L1World.getInstance().getClan(clanname);
 				if (clan == null) {
@@ -2571,7 +2571,7 @@ public class C_ActionUi extends ClientBasePacket {
 
 			//  君主に会って登録してください。
 			try {
-				String clanname = new String(BYTE, 0, length, "MS949");
+				String clanname = new String(BYTE, 0, length, "SJIS");
 				L1Clan clan = L1World.getInstance().getClan(clanname);
 				//
 				if (clan == null) {
