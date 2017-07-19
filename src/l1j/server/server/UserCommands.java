@@ -72,6 +72,10 @@ public class UserCommands {
 		return _instance;
 	}
 
+	/**
+	 * @param pc
+	 * @param cmdLine
+	 */
 	public void handleCommands(L1PcInstance pc, String cmdLine) {
 		if (pc == null) {
 			return;
@@ -93,83 +97,78 @@ public class UserCommands {
 		param = param.trim();
 		try {
 			switch (cmd) {
-			case "도움말":
+			case "help":
 				showHelp(pc);
 				break;
-			case "텔렉풀기":
-			case "텔렉":
+			case "tellag":
 			case ".":
 				tell(pc);
-			case "무인가입":
+			case "autoclanjoin":
 				autoclanjoin(pc);
 				break;
-			case "정보":
+			case "info":
 				check(pc);
 				break;
-			case "스텟초기화":
+			case "statusreset":
 				statusInitialization(pc);
 				break;
-			case "좌표복구":
+			case "location":
 				location(pc);
 				break;
-			case "나이":
+			case "age":
 				age(pc, param);
 				break;
-			case "수배":
+			case "hunt":
 				Hunt(pc, param);
 				break;
-			case "혈맹파티":
+			case "clanpt":
 				BloodParty(pc);
 				break;
-			case "보안설정":
+			case "secure":
 				changequiz(pc, param);
 				break;
-			case "보안해제":
+			case "unsecure":
 				validateQuiz(pc, param);
 				break;
-			case "암호변경":
-			case "비번변경":
+			case "changepass":
 				changepassword(pc, param);
 				break;
-			case "드랍멘트":
-			case "멘트":
+			case "dropcomment":
+			case "comment":
 				Ment(pc, param);
 				break;
-			case "무인상점":
+			case "privateshop":
 				privateShop(pc);
 				break;
-			case "무인상점11":
+			case "privateshop1":
 				privateShop1(pc);
 				break;
-			case "캐릭명변경":
-			case "케릭명변경":
-			case "이름변경":
+			case "namechange":
+			case "changename":
 				changename(pc, param);
-			case "라이트":
-			case "맵핵":
+			case "light":
+			case "maphack":
 				maphack(pc, param);
 				break;
-			case "고정":
-			case "고정신청":
+			case "phone":
 				phone(pc, param);
 				break;
-			case "혈마크":
+			case "mark1":
 				Mark1(pc, param);
 				break;
-			case "인형":
-			case "인형정보":
+			case "doll":
 				POPall(pc);
 				break;
-			case "킬랭킹":
+			case "killranking":
 				pc.sendPackets(new S_UserCommands4(pc, 1));
 				break;
-			case "데스랭킹":
+			case "deathranking":
 				pc.sendPackets(new S_UserCommands5(pc, 1));
 				break;
-			case "피바":
+			case "piva":
 				execute(pc, param, param);
 				break;
-			case "어비스포인트":
+			case "abysspoint":
 				String grade = "";
 
 				switch (pc.getPeerage()) {
@@ -258,10 +257,10 @@ public class UserCommands {
 
 	private void showHelp(L1PcInstance pc) {
 		pc.sendPackets(new S_SystemMessage("\\aH===========< User Commands >==========="));
-		pc.sendPackets(new S_SystemMessage("\\aA    .정보 .텔렉 .고정신청 .좌표복구 .혈맹파티 "));
-		pc.sendPackets(new S_SystemMessage("\\aA    .암호변경 .보안설정 .보안해제 .데스랭킹 .킬랭킹 "));
-		pc.sendPackets(new S_SystemMessage("\\aA    .무인가입 .이름변경 .무인상점 .라이트 .나이"));
-		pc.sendPackets(new S_SystemMessage("\\aA    .혈마크 .드랍멘트(멘트) .수배  .인형정보"));
+		pc.sendPackets(new S_SystemMessage("\\aA    .情報。テルレク固定適用。座標復元。血盟パーティー "));
+		pc.sendPackets(new S_SystemMessage("\\aA    .パスワードの変更セキュリティ設定セキュリティを解除。デスランキング。キールランキング "));
+		pc.sendPackets(new S_SystemMessage("\\aA    .無人登録名前変更します。無人店。ライト。年齢"));
+		pc.sendPackets(new S_SystemMessage("\\aA    .ヒョルマク。ドロップメント（コメント）。手配人形情報"));
 		pc.sendPackets(new S_SystemMessage("\\aH=========< Have a Good Time >================"));
 	}
 
@@ -273,7 +272,7 @@ public class UserCommands {
 			pc.sendPackets(new S_ChatPacket(pc, "アイテム獲得メント -  ON  - "));
 			pc.RootMent = true;
 		} else {
-			pc.sendPackets(new S_ChatPacket(pc, ".드랍멘트 [オン/オフ]中に入力（アイテム獲得コメント設定）"));
+			pc.sendPackets(new S_ChatPacket(pc, ".ドロップコメント [オン/オフ]中に入力（アイテム獲得コメント設定）"));
 		}
 	}
 
@@ -392,7 +391,7 @@ public class UserCommands {
 			pc.sendPackets(new S_ChatPacket(pc, "セキュリティバフ（AC-1）は、リースと適用されます"));
 			pc.setQuizTime(curtime);
 		} catch (Exception e) {
-			pc.sendPackets(new S_ChatPacket(pc, ".고정신청 コンタクトの形式で入力（初期化する場合にのみ文字の転送）"));
+			pc.sendPackets(new S_ChatPacket(pc, ".固定申し込み コンタクトの形式で入力（初期化する場合にのみ文字の転送）"));
 		}
 	}
 
@@ -989,33 +988,6 @@ public class UserCommands {
 		try {
 			if (pc.getLevel() >= 60) {
 				for (int i = 0; i < name.length(); i++) {
-					if (name.charAt(i) == 'ㄱ' || name.charAt(i) == 'ㄲ' || name.charAt(i) == 'ㄴ' || name.charAt(i) == 'ㄷ'
-							|| // 一文字（char）単位で比較。
-							name.charAt(i) == 'ㄸ' || name.charAt(i) == 'ㄹ' || name.charAt(i) == 'ㅁ'
-							|| name.charAt(i) == 'ㅂ' || // 한문자(char)단위로 비교
-							name.charAt(i) == 'ㅃ' || name.charAt(i) == 'ㅅ' || name.charAt(i) == 'ㅆ'
-							|| name.charAt(i) == 'ㅇ' || // 한문자(char)단위로 비교
-							name.charAt(i) == 'ㅈ' || name.charAt(i) == 'ㅉ' || name.charAt(i) == 'ㅊ'
-							|| name.charAt(i) == 'ㅋ' || // 한문자(char)단위로 비교.
-							name.charAt(i) == 'ㅌ' || name.charAt(i) == 'ㅍ' || name.charAt(i) == 'ㅎ'
-							|| name.charAt(i) == 'ㅛ' || // 한문자(char)단위로 비교.
-							name.charAt(i) == 'ㅕ' || name.charAt(i) == 'ㅑ' || name.charAt(i) == 'ㅐ'
-							|| name.charAt(i) == 'ㅔ' || // 한문자(char)단위로 비교.
-							name.charAt(i) == 'ㅗ' || name.charAt(i) == 'ㅓ' || name.charAt(i) == 'ㅏ'
-							|| name.charAt(i) == 'ㅣ' || // 한문자(char)단위로 비교.
-							name.charAt(i) == 'ㅠ' || name.charAt(i) == 'ㅜ' || name.charAt(i) == 'ㅡ'
-							|| name.charAt(i) == 'ㅒ' || // 한문자(char)단위로 비교.
-							name.charAt(i) == 'ㅖ' || name.charAt(i) == 'ㅢ' || name.charAt(i) == 'ㅟ'
-							|| name.charAt(i) == 'ㅝ' || // 한문자(char)단위로 비교.
-							name.charAt(i) == 'ㅞ' || name.charAt(i) == 'ㅙ' || name.charAt(i) == 'ㅚ'
-							|| name.charAt(i) == 'ㅘ' || // 한문자(char)단위로 비교.
-							name.charAt(i) == '씹' || name.charAt(i) == '좃' || name.charAt(i) == '좆'
-							|| name.charAt(i) == 'ㅤ') {
-						pc.sendPackets(new S_SystemMessage("キャラクター名が正しくありません。"));
-						return;
-					}
-				}
-				for (int i = 0; i < name.length(); i++) {
 					if (!Character.isLetterOrDigit(name.charAt(i))) {
 						pc.sendPackets(new S_SystemMessage("キャラクター名が正しくありません。"));
 						return;
@@ -1079,7 +1051,7 @@ public class UserCommands {
 					String str = "";
 					str = new String("[" + stryyyy + "-" + strmmmm + "-" + strDate + " " + strhour + ":" + strmin
 							+ "]  " + pc.getName() + "  --->  " + name);
-					StringBuffer FileName = new StringBuffer("LogDB/캐릭명변경.txt");
+					StringBuffer FileName = new StringBuffer("LogDB/ChangeCharacterName.txt");
 					PrintWriter out = null;
 					try {
 						out = new PrintWriter(new FileWriter(FileName.toString(), true));
