@@ -566,7 +566,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 		}
 		break;  
-		case 600232: {// イッソム脱出書
+		case 600232: {// 忘れられた島脱出書
 			if (pc.get_DuelLine() != 0) {
 				pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 				return;

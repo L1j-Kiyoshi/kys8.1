@@ -2162,7 +2162,7 @@ public class L1Attack {
         }
     	if (_pc instanceof L1RobotInstance) {
 			if (((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("地底")
-					|| ((L1RobotInstance) _pc).huntingBot_Location.startsWith("イッソム")
+					|| ((L1RobotInstance) _pc).huntingBot_Location.startsWith("忘れられた島")
 					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("船舶睡眠")
 					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("象牙の塔4階")
 					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("象牙の塔5階")) {
@@ -2759,7 +2759,7 @@ public class L1Attack {
             // dmg *= 1.1;
             dmg *= 1.2;
         }
-        if (_npc.getMapId() == 1700 /*|| _npc.getMapId()== ???*/) {// イッソムなら
+        if (_npc.getMapId() == 1700 /*|| _npc.getMapId()== ???*/) {// 忘れられた島なら
         	dmg *= 1.4; //ダメージ倍増
         }
        /* *//** 特定のマップのモンスターセゲ **//*

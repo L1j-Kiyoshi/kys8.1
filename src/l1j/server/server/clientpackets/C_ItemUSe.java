@@ -5638,7 +5638,7 @@ public class C_ItemUSe extends ClientBasePacket {
 //								weaponId == 123
 								) {
 								randomEnchantLevel = 1;
-								//** イッソム執行級武器無条件1ずつ浮遊するよう **//*
+								//** 忘れられた島執行級武器無条件1ずつ浮遊するよう **//*
 							} else if (weaponId >= 202011 && weaponId <= 202015) {
 								randomEnchantLevel = 1;
 							} else {

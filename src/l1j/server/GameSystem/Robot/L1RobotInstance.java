@@ -267,13 +267,13 @@ public class L1RobotInstance extends L1PcInstance {
 
 				int percent = (int) Math.round((double) getCurrentHp()
 						/ (double) getMaxHp() * 100);
-				if (percent < 10 && huntingBot_Type == HUNT && !huntingBot_Location.startsWith("イッソム")) {
+				if (percent < 10 && huntingBot_Type == HUNT && !huntingBot_Location.startsWith("忘れられた島")) {
 					setCurrentHp(getCurrentHp() + 500);
 					returnBot();
 					GeneralThreadPool.getInstance().schedule(this, 2000);
 					return;
 				} else if (percent < 30 && huntingBot_Type == HUNT
-						&& !huntingBot_Location.startsWith("イッソム")) {
+						&& !huntingBot_Location.startsWith("忘れられた島")) {
 					setCurrentHp(getCurrentHp() + 500);
 					randomTel();
 					GeneralThreadPool.getInstance().schedule(this, 2000);
@@ -909,7 +909,7 @@ public class L1RobotInstance extends L1PcInstance {
 	private void searchTarget() {
 
 		int MaxRange = 2;
-		// if （狩猟ボット_位置.startsWith（ "イッソム"））
+		// if （狩猟ボット_位置.startsWith（ "忘れられた島"））
 		// MaxRange = 3;
 
 		ArrayList<L1Object> list = L1World.getInstance()

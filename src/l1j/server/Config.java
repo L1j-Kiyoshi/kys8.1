@@ -216,7 +216,7 @@ public final class Config {
 
 	/** Rate control */
 	
-	public static int FG_ISVAL; //イッソムレプジェ
+	public static int FG_ISVAL; //忘れられた島レプジェ
 	
 	
 	public static double RATE_XP;

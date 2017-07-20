@@ -76,7 +76,7 @@ public class Robot_Location {
 	private static ArrayList<Robot_Location_bean> GiranPrison3F = new ArrayList<Robot_Location_bean>();
 	private static ArrayList<Robot_Location_bean> GiranPrison4F = new ArrayList<Robot_Location_bean>();
 
-	//ヨンドン=DVC,ボンドン=MLC,技監=ギラン監獄？,イッソム=忘れられた島,オマン=傲慢の塔
+	//ヨンドン=DVC,ボンドン=MLC,技監=ギラン監獄？,忘れられた島=忘れられた島,オマン=傲慢の塔
 
 	public static void registLocation(int x, int y, int m) {
 
@@ -158,9 +158,9 @@ public class Robot_Location {
 					|| bot.huntingBot_Location.equalsIgnoreCase("リニューアル傲慢8階")
 					|| bot.huntingBot_Location.equalsIgnoreCase("リニューアル傲慢9階")
 					|| bot.huntingBot_Location.equalsIgnoreCase("リニューアル傲慢10階")
-					|| bot.huntingBot_Location.startsWith("イッソム")
+					|| bot.huntingBot_Location.startsWith("忘れられた島")
 					|| bot.huntingBot_Location.startsWith("支配者1階")
-					|| bot.huntingBot_Location.startsWith("支配者2階")) { //イッソム
+					|| bot.huntingBot_Location.startsWith("支配者2階")) { //忘れられた島
 
 				return Teleporter; // 元null
 			} else if (bot.huntingBot_Location.startsWith("傲慢")
@@ -189,7 +189,7 @@ public class Robot_Location {
 				default:
 					break;
 				}
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("イッソム")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("忘れられた島")) {
 				// bot.テル狩り= false;
 				switch (_random.nextInt(5)) {
 				case 0:

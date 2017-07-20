@@ -64,7 +64,7 @@ public class IsleController implements Runnable {
                 case status_End:
                 	//L1World.getInstance（）broadcastServerMessage（ "\\\\ aG地獄狩り場は2時間狩りが可能です。"）;
                 	L1World.getInstance().broadcastServerMessage("\\aH通知：忘れられた島が終了しました。");
-                	System.out.println("......イッソム終了");
+                	System.out.println("......忘れられた島終了");
                     isgameStart = false;
                     Status = status_Wait;
             		//delenpc(1231231);
