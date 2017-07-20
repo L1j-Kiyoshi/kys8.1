@@ -1435,7 +1435,7 @@ public class C_NPCAction2 {
 				if (s.equalsIgnoreCase("teleport tamshop")) {
 					new L1Teleport().teleport(pc, 33964, 32953, (short) 4,pc.getHeading(), true);
 				}
-			} else if (((L1NpcInstance)obj).getNpcTemplate().get_npcId() == 50015) {//マルソムテレポート
+			} else if (((L1NpcInstance)obj).getNpcTemplate().get_npcId() == 50015) {//TIテレポート
 				if (s.equalsIgnoreCase("teleport island-silver")){//
 					if(pc.getInventory().checkItem(40308, 1500)){
 						pc.getInventory().consumeItem(40308, 1500);
@@ -1512,13 +1512,13 @@ public class C_NPCAction2 {
 					if (pc.getLevel() >= 10 & pc.getLevel() <= 29) {
 						new L1Teleport().teleport(pc, 33184, 33449, (short) 4, pc.getHeading(), true);
 					} else {
-						pc.sendPackets(new S_ChatPacket(pc,"記事のフィールドに移動可能レベル10〜29"));
+						pc.sendPackets(new S_ChatPacket(pc,"ナイトのフィールドに移動可能レベル10〜29"));
 					}
 				} else if (s.equalsIgnoreCase("d")) {// カオティック神殿
 					if (pc.getLevel() >= 10 & pc.getLevel() <= 29) {
 					new L1Teleport().teleport(pc, 33066, 33218, (short) 4, pc.getHeading(), true);
 					} else {
-						pc.sendPackets(new S_ChatPacket(pc,"記事のフィールドに移動可能レベル10〜29"));
+						pc.sendPackets(new S_ChatPacket(pc,"ナイトのフィールドに移動可能レベル10〜29"));
 					}
 				} else if (s.equalsIgnoreCase("f")) {// 修練ケイブ
 					if (pc.getLevel() >= 10 & pc.getLevel() < 20) {

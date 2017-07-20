@@ -1681,14 +1681,14 @@ public class GMCommands {
 	    }
 	} catch (Exception e) {
 	    gm.sendPackets(new S_ChatPacket(gm, "----------------------------------------------------"));
-	    gm.sendPackets(new S_ChatPacket(gm, "1：プルアップ2：祝福3：センマ4：フクサ5：コマ"));
+	    gm.sendPackets(new S_ChatPacket(gm, "1：プルアップ2：祝福3：センマ4：黒砂の5：コマ"));
 	    gm.sendPackets(new S_ChatPacket(gm, "----------------------------------------------------"));
 	}
     }
 
     private void screenBuff(L1PcInstance pc) {
 	pc.sendPackets(new S_ChatPacket(pc, "---------------------------------------------------"));
-	pc.sendPackets(new S_ChatPacket(pc, "画面1〜画面4（1：プルアップ2：祝福3：センマ4：フクサ5：コマ）"));
+	pc.sendPackets(new S_ChatPacket(pc, "画面1〜画面4（1：プルアップ2：祝福3：センマ4：黒砂の5：コマ）"));
 	pc.sendPackets(new S_ChatPacket(pc, "---------------------------------------------------"));
     }
 
@@ -2667,7 +2667,7 @@ public class GMCommands {
 	    rs.close();
 	    statement.close();
 	    con.close();
-	    gm.sendPackets(new S_SystemMessage("\\aF0君主1記事2妖精3玄4エルフ5の記事6幻術"));
+	    gm.sendPackets(new S_SystemMessage("\\aF0君主1ナイト2妖精3ウィザード4エルフ5のナイト6幻術"));
 	    gm.sendPackets(new S_SystemMessage("\\aD------------------------------------------"));
 	} catch (Exception e) {
 	}
@@ -2981,7 +2981,7 @@ public class GMCommands {
 			    l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0,
 				    L1SkillUse.TYPE_GMBUFF);
 			}
-			pc.sendPackets(new S_SystemMessage("\\aDオペレータの周りに「フクサバフ」が詠唱されました。"));
+			pc.sendPackets(new S_SystemMessage("\\aDオペレータの周りに「黒砂のバフ」が詠唱されました。"));
 		    }
 		}
 	    }

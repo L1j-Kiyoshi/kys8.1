@@ -5364,7 +5364,7 @@ public class L1PcInstance extends L1Character {
         }
     }
 
-    //範囲外になった認識済みオブジェクトを削除（ボギョン）
+    //範囲外になった認識済みオブジェクトを削除（バグベアーレース）
     private void removeOutOfRangeObjects(int distance) {
         try {
             List<L1Object> known = getKnownObjects();
@@ -5386,7 +5386,7 @@ public class L1PcInstance extends L1Character {
         }
     }
 
-    // オブジェクト認識処理（ボギョン）
+    // オブジェクト認識処理（バグベアーレース）
     public void UpdateObject() {
         try {
             try {

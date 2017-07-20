@@ -39,7 +39,7 @@ public class S_Board extends ServerBasePacket {
 		case 900006:// ドラゴンキー通知掲示板
 			buildPacketKey(board, 0);
 			break;
-		case 999999:// ボギョン掲示板
+		case 999999:// バグベアーレース掲示板
 			buildPacket1(board, 0);
 			break;
 		case 500001:// 全体ランキング
@@ -74,7 +74,7 @@ public class S_Board extends ServerBasePacket {
 		case 900006://ドラゴンキー通知掲示板
 			buildPacketKey(board, number);
 			break;
-		case 999999:// ボギョン掲示板
+		case 999999:// バグベアーレース掲示板
 			buildPacket1(board, number);
 			break;
 		case 500001:// 全体ランキング
@@ -89,7 +89,7 @@ public class S_Board extends ServerBasePacket {
 		}
 	}
 
-	private void buildPacket1(L1NpcInstance board, int number) {	// ボギョン出場選手の状態
+	private void buildPacket1(L1NpcInstance board, int number) {	// バグベアーレース出場選手の状態
 		writeC(Opcodes.S_HYPERTEXT);
 		writeD(board.getId());
 		writeS("maeno4");

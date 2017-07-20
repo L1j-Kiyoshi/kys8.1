@@ -59,13 +59,13 @@ public class L1GMRoom implements L1CommandExecutor {
 			} else if (i == 6) {
 				new L1Teleport().teleport(pc , 32614, 32788, (short) 4, 5, false); // グルーディン
 			} else if (i == 7) {
-				new L1Teleport().teleport(pc , 34055, 32281, (short) 4, 5, false); // オレン
+				new L1Teleport().teleport(pc , 34055, 32281, (short) 4, 5, false); // オーレン
 			} else if (i == 8) {
 				new L1Teleport().teleport(pc , 33515, 32858, (short) 4, 5, false); // バー軽装
 			} else if (i == 9) {
 				new L1Teleport().teleport(pc , 32763, 32817, (short) 622, 5, false); // 羽村
 			} else if (i == 10) {
-				new L1Teleport().teleport(pc , 32572, 32944, (short) 0, 5, false); // マルソム
+				new L1Teleport().teleport(pc , 32572, 32944, (short) 0, 5, false); // TI
 			} else if (i == 11) {
 				new L1Teleport().teleport(pc , 33723, 32495, (short) 4, 5, false); // ウェルダン
 			} else if (i == 12) {
@@ -137,9 +137,9 @@ public class L1GMRoom implements L1CommandExecutor {
 			} else if (i == 45) {
 				new L1Teleport().teleport(pc , 32811, 32819, (short) 460, 5, false); // ラバー2階
 			} else if (i == 46) {
-				new L1Teleport().teleport(pc , 32724, 32792, (short) 536, 5, false); // といってい3階
+				new L1Teleport().teleport(pc , 32724, 32792, (short) 536, 5, false); // ラスタバド3階
 			} else if (i == 47) {
-				new L1Teleport().teleport(pc , 32847, 32793, (short) 532, 5, false); // といってい4階
+				new L1Teleport().teleport(pc , 32847, 32793, (short) 532, 5, false); // ラスタバド4階
 			} else if (i == 48) {
 				new L1Teleport().teleport(pc , 32843, 32693, (short) 550, 5, false); // 船の墓
 			} else if (i == 49) {
@@ -180,15 +180,15 @@ public class L1GMRoom implements L1CommandExecutor {
 				L1Location loc = GMCommandsConfig.ROOMS.get(arg.toLowerCase());
 				if (loc == null) {
 					pc.sendPackets(new S_SystemMessage("==================<帰還場所>==================="));
-					pc.sendPackets(new S_SystemMessage("\\aD1.GM1 2.GM2 3.パンドラ 4.ギラン 5.アデン耐性 6.グルーディン 7.オレン"));
-					pc.sendPackets(new S_SystemMessage("\\aD8.バー軽装 9.羽言葉 10.マルソム 11.ウェルダン 12.桜 13.釣り"));
+					pc.sendPackets(new S_SystemMessage("\\aD1.GM1 2.GM2 3.パンドラ 4.ギラン 5.アデン耐性 6.グルーディン 7.オーレン"));
+					pc.sendPackets(new S_SystemMessage("\\aD8.バー軽装 9.羽言葉 10.TI 11.ウェルダン 12.桜 13.釣り"));
 					pc.sendPackets(new S_SystemMessage("\\aL14.ケント城 15.ウィン和音 16.ギラン城 17.ハイ性 18.アデン城"));
 					pc.sendPackets(new S_SystemMessage("\\aL19.守護塔 20.守護塔 21.守護塔 22.守護塔 23.守護塔"));
 					pc.sendPackets(new S_SystemMessage("\\aH24.ヘソム 25.ベヒ某 26.シルベリア 27.テーベ 28.ピラミッド"));
 					pc.sendPackets(new S_SystemMessage("\\aH29.ピラミッド 30.フェニックス 31.デーモン 32.技監4層 33.魔族の部屋"));
 					pc.sendPackets(new S_SystemMessage("\\aD34.ヒット 35.パプ 36.リンド 37.塗って 38.旧派フー 39.バーモス"));
 					pc.sendPackets(new S_SystemMessage("\\aL40.政務 41.高ラス 42.ソムドン2層 43.古代の墓 44.オタン"));
-					pc.sendPackets(new S_SystemMessage("\\aL45.といってい2層 46.といってい3層 47.といってい4層 48.船舶 49.深海"));
+					pc.sendPackets(new S_SystemMessage("\\aL45.ラスタバド2層 46.ラスタバド3層 47.ラスタバド4層 48.船舶 49.深海"));
 					pc.sendPackets(new S_SystemMessage("\\aL50.第ブレキ 51~59.亀裂 60.悪魔の領土 61.ギルタス"));
 					pc.sendPackets(new S_SystemMessage("\\aL62.火田村 63.オーク性 64.エルフの森 65.サーバーられるアジト"));
 					return;

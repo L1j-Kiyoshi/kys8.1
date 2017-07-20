@@ -52,7 +52,7 @@ public class ValakasReady implements Runnable {
 						pc.sendPackets(new S_NpcChatPacket(pc, "$18862"));
 					}
 					Thread.sleep(3000);
-					//私？私は..誰？記事..そう..私の記事であった。しかし、私はなぜここにいる？
+					//私？私は..誰？ナイト..そう..私のナイトであった。しかし、私はなぜここにいる？
 					Broadcaster.broadcastPacket(death, new S_NpcChatPacket(death, "$18863"));
 					Thread.sleep(3000);
 					//期...社？
@@ -60,7 +60,7 @@ public class ValakasReady implements Runnable {
 						pc.sendPackets(new S_NpcChatPacket(pc, "$18864"));
 					}
 					Thread.sleep(3000);
-					//はい。私は記事だ...自分の小さな芸だけを信じてヴァラカスに挑戦した愚かな記事。
+					//はい。私はナイトだ...自分の小さな芸だけを信じてヴァラカスに挑戦した愚かなナイト。
 					Broadcaster.broadcastPacket(death, new S_NpcChatPacket(death, "$18865"));
 					Thread.sleep(3000);
 					//ヴァラカスに負けたのですか？

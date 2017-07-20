@@ -68,19 +68,19 @@ public class S_Ranking extends ServerBasePacket {
 			title = "君主ランキング";
 			break;
 		case 3:
-			title = "記事ランキング";
+			title = "ナイトランキング";
 			break;
 		case 4:
 			title = "妖精ランキング";
 			break;
 		case 5:
-			title = "玄ランキング";
+			title = "ウィザードランキング";
 			break;
 		case 6:
 			title = "すべてへランキング";
 			break;
 		case 7:
-			title = "用記事ランキング";
+			title = "用ナイトランキング";
 			break;
 		case 8:
 			title = "イリュージョニストランキング";
@@ -93,7 +93,7 @@ public class S_Ranking extends ServerBasePacket {
 			type = "君主";
 			break;
 		case 1:
-			type = "記事";
+			type = "ナイト";
 			break;
 		case 2:
 			type = "妖精";

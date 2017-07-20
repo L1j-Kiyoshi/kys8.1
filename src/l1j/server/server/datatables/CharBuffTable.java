@@ -27,7 +27,7 @@ public class CharBuffTable {
 			149, 156, 166, // ウィンドウショート、ストームアイ、ストームショート
 			1002, // ブルーいくつかは、チャット禁止
 			STATUS_CHAT_PROHIBITED, //金鉱バフ
-			4914, TENKASOUSHI_BUFF, //フクサバフ
+			4914, TENKASOUSHI_BUFF, //黒砂のバフ
 			BLOOD_LUST,
 			/**バフ保存パケット回*/
 			DECREASE_WEIGHT, DECAY_POTION, SILENCE, VENOM_RESIST, WEAKNESS, DISEASE,

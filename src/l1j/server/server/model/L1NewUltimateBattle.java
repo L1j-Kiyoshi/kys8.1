@@ -422,7 +422,7 @@ public class L1NewUltimateBattle {
 		case 2: L1World.getInstance().broadcastServerMessage("しばらくしてウェルダン村の無限大戦が開始されます。"); break;
 		case 3: L1World.getInstance().broadcastServerMessage("しばらくしてグルーディン村の無限大戦が開始されます。"); break;
 		case 4: L1World.getInstance().broadcastServerMessage("しばらくして話せる島の無限大戦が開始されます。"); break;
-		case 5: L1World.getInstance().broadcastServerMessage("しばらくしては記事の村の無限大戦が開始されます。"); break;
+		case 5: L1World.getInstance().broadcastServerMessage("しばらくしてはナイトの村の無限大戦が開始されます。"); break;
 		default: break;				
 		}
 		// int patternsMax = UBSpawnTable.getInstance().getMaxPattern(_ubId);

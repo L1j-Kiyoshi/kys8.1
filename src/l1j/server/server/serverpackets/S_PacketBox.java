@@ -676,7 +676,7 @@ public class S_PacketBox extends ServerBasePacket {
 		case NONE_TIME_ICON:
 			writeC(type);// on/off
 			writeD(time);// 166 exp30% 228 クール氷286 exp40％343ギルタス地域死亡ペナルティ
-							// 409アーマーブレイク497赤の記事の証イベント攻城ゾーン// 477〜479
+							// 409アーマーブレイク497赤のナイトの証イベント攻城ゾーン// 477〜479
 			writeD(0x00000D67);
 			writeH(0x00);
 			break;

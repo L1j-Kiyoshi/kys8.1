@@ -181,7 +181,7 @@ public class Robot_Hunt {
 			bot.setX(33436 + _random.nextInt(20));
 			bot.setY(32799 + _random.nextInt(20));
 			break;
-		    case 1:// オレン
+		    case 1:// オーレン
 			bot.setX(34055 + _random.nextInt(30));
 			bot.setY(32278 + _random.nextInt(30));
 			break;

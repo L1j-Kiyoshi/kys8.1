@@ -388,7 +388,7 @@ public final class Config {
 	public static int AUTO_REMOVELEVEL;
 	public static int BUFFLEVEL; // バフレベル以下
 	//とりあえずわかんないから和訳まんまえローマ字に
-	//「つつく玄」
+	//「つつくウィザード」
 	public static int TSUTSUKUGEN;
 
 	public static int NORMAL_PROTECTION;
@@ -774,7 +774,7 @@ public final class Config {
 			DEMON_KING_TIME = Integer.parseInt(rateSettings.getProperty("DevilTime", "3"));
 			DEMON_KING_ENTRY_LEVEL = Integer.parseInt(rateSettings.getProperty("DevilLevel", "55"));
 
-			TI_DUNGEON_FEATHER = Boolean.parseBoolean(rateSettings.getProperty("マルソムダンジョン羽", "true"));
+			TI_DUNGEON_FEATHER = Boolean.parseBoolean(rateSettings.getProperty("TIダンジョン羽", "true"));
 			GLUDIO_DUNGEON_FEATHER = Boolean.parseBoolean(rateSettings.getProperty("メインランドのダンジョン羽", "true"));
 
 			SKT_DUNGEON_FEATHER = Boolean.parseBoolean(rateSettings.getProperty("修練ケイブ羽", "true"));

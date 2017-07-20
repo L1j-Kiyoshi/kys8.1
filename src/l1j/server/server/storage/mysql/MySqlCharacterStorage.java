@@ -460,7 +460,7 @@ public class MySqlCharacterStorage implements CharacterStorage {
 			pstm.setInt(++i, pc.getSoulTime());
 			pstm.setInt(++i, pc.getnewdodungeonTime());//バルログ陣営
 			pstm.setInt(++i, pc.geticedungeonTime());//オルドンPC
-			pstm.setInt(++i, pc.getislandTime());//マルソム
+			pstm.setInt(++i, pc.getislandTime());//TI
 			pstm.setInt(++i, pc.getMark_count());
 			pstm.setInt(++i, pc.getAge()); //年齢設定
 			/** キャラクター別追加ダメージ、追加リダクション、確率 **/

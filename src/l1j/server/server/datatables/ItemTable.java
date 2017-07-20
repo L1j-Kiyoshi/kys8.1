@@ -53,7 +53,7 @@ public class ItemTable {
 
 	public final Map<Integer, L1Weapon> _weapons;
 
-	/** ボギョン追加 **/
+	/** バグベアーレース追加 **/
 	private final Map<Integer, L1RaceTicket> _race = new HashMap<Integer, L1RaceTicket>();
 	static {
 
@@ -470,7 +470,7 @@ public class ItemTable {
 		return result;
 	}
 
-	/* ボギョン追加 */
+	/* バグベアーレース追加 */
 	public void initRace() {
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -592,7 +592,7 @@ public class ItemTable {
 		return itemid;
 	}
 
-	/* ボギョン追加 */
+	/* バグベアーレース追加 */
 	public void AddTicket(L1RaceTicket race) {
 		_race.put(new Integer(race.getItemId()), race);
 		_allTemplates[race.getItemId()] = race;

@@ -20,7 +20,7 @@ public final class World {
 	static private Map<Integer, l1j.server.GameSystem.AStar.bean.Map> list;
 
 	static public void init() {
-		TimeLine.start("ワールドマップの読み込み....妻");
+		TimeLine.start("ワールドマップの読み込み....No.");
 
 		list = new HashMap<Integer, l1j.server.GameSystem.AStar.bean.Map>();
 

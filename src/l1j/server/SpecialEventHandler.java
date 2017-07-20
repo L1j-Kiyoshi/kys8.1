@@ -171,7 +171,7 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc,"\\aA通知：ゲームマスターの周りに「フクサのバフ」を提供していました。"));
+			pc.sendPackets(new S_ChatPacket(pc,"\\aA通知：ゲームマスターの周りに「黒砂ののバフ」を提供していました。"));
 		}
 	}
 	public void buff_ScreenCOMA(L1PcInstance gm) {
@@ -309,7 +309,7 @@ public class SpecialEventHandler {
 				l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
 			}
 			pc.sendPackets(new S_SkillSound(pc.getId(), 4856));
-			pc.sendPackets(new S_ChatPacket(pc, "\\aA通知：ゲームマスターが「フクサのバフ」を提供していました。"));
+			pc.sendPackets(new S_ChatPacket(pc, "\\aA通知：ゲームマスターが「黒砂ののバフ」を提供していました。"));
 		}
 	}
 	public void buff_ALLCOMA() {

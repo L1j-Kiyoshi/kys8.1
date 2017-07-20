@@ -191,7 +191,7 @@ public class C_SkillBuyOK extends ClientBasePacket {
 			}
 			break;
 
-		case 1: // 記事
+		case 1: // ナイト
 			if (pc.getLevel() < 50) {
 				level1 = 0;
 				level1_cost = 0;

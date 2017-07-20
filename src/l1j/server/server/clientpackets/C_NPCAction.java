@@ -544,7 +544,7 @@ public class C_NPCAction extends ClientBasePacket {
 				short map = pc.getMapId();
 				if (pc.getInventory().checkItem(40312)) {
 					if (map == 0)
-						new L1Teleport().teleport(pc, 32746, 32803, (short) 16384, 5, false); // マルソム
+						new L1Teleport().teleport(pc, 32746, 32803, (short) 16384, 5, false); // TI
 					else if (map > 0)
 						if (nowX < 32641 && nowX > 32621 && nowY < 32760 && nowY > 32740)
 							new L1Teleport().teleport(pc, 32744, 32803, (short) 17408, 5, false); // グルーディオ
@@ -559,11 +559,11 @@ public class C_NPCAction extends ClientBasePacket {
 							// (short) 20480, 5, false); //ウィンダウッド
 									(short) 18432, 5, false); // ギラン
 						else if (nowX < 33615 && nowX > 33595 && nowY < 33285 && nowY > 33265)
-							new L1Teleport().teleport(pc, 32745, 32803, (short) 22528, 5, false); // 記事
+							new L1Teleport().teleport(pc, 32745, 32803, (short) 22528, 5, false); // ナイト
 						else if (nowX < 33126 && nowX > 33106 && nowY < 33389 && nowY > 33369)
 							new L1Teleport().teleport(pc, 32745, 32803, (short) 21504, 5, false);// ハイネ
 						else if (nowX < 34078 && nowX > 34058 && nowY < 32264 && nowY > 32244)
-							new L1Teleport().teleport(pc, 32745, 32803, (short) 19456, 5, false); // オレン
+							new L1Teleport().teleport(pc, 32745, 32803, (short) 19456, 5, false); // オーレン
 
 				} else if (pc.getInventory().checkItem(40312)) {
 					if (map == 0)
@@ -592,7 +592,7 @@ public class C_NPCAction extends ClientBasePacket {
 
 		} else if (s.equalsIgnoreCase("return")) {
 
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900136) {// マルソムインスタンスダンジョンゆき
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900136) {// TIインスタンスダンジョンゆき
 			if (s.equalsIgnoreCase("enter")) {
 				if (pc.isInParty()) {
 					if (pc.getParty().isLeader(pc)) {
@@ -4243,12 +4243,12 @@ public class C_NPCAction extends ClientBasePacket {
 				}
 			}
 
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900143) { // マルソムインスタンスダンジョンリーガル
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900143) { // TIインスタンスダンジョンリーガル
 			if (s.equalsIgnoreCase("a")) {
 				new L1Teleport().teleport(pc, 32583, 32924, (short) 0, 5, true);
 				htmlid = "";
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900146) { // マルソムインスタンスダンジョンヒューグリント
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900146) { // TIインスタンスダンジョンヒューグリント
 			if (s.equalsIgnoreCase("0")) {
 				if (!pc.getInventory().checkItem(L1ItemId.MAGIC_BREATH, 1)) {
 					if (pc.getInventory().checkItem(40308, 1000)) {
@@ -4262,7 +4262,7 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "hugrint4"; // 息はすでに持っている
 				}
 			}
-		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900170) {// マルソム2階の魔法の文字
+		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 900170) {// TI2階の魔法の文字
 			int storeitem = 0;
 			if (s.equalsIgnoreCase("a")) { // 隠された魔族の武器さ[剣]
 				storeitem = 410127;
@@ -4678,7 +4678,7 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "highdaily9";
 				}
 			}
-			// ボギョン勝率処理start
+			// バグベアーレース勝率処理start
 		} else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70035 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70041
 				|| ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 70042) {
 			if (s.equals("status")) {
@@ -4755,7 +4755,7 @@ public class C_NPCAction extends ClientBasePacket {
 					x = 32734;
 					y = 32852;
 					mapid = 274;
-					// 記事
+					// ナイト
 				} else if (pc.isKnight() || pc.isWarrior()) {
 					x = 32737;
 					y = 32810;
@@ -6867,7 +6867,7 @@ public class C_NPCAction extends ClientBasePacket {
 				} else {
 					pc.sendPackets(new S_ChatPacket(pc, "アデナが不足します。"));
 				}
-			} else if (s.equals("z")) { // フクサのオーラを受ける
+			} else if (s.equals("z")) { // 黒砂ののオーラを受ける
 				if (pc.getInventory().checkItem(65648, 1)) {
 					pc.getInventory().consumeItem(65648, 1);
 					if (pc.getLevel() >= 5) {
@@ -6879,7 +6879,7 @@ public class C_NPCAction extends ClientBasePacket {
 					htmlid = "";
 				} else {
 					htmlid = "bs_01z";
-					pc.sendPackets(new S_ChatPacket(pc, "フクサのコインが不足します。"));
+					pc.sendPackets(new S_ChatPacket(pc, "黒砂ののコインが不足します。"));
 				}
 			}
 		} else {

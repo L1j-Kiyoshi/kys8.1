@@ -50,8 +50,7 @@ public class Robot_Crown {
 				int level = _random.nextInt(9) + 62;
 				newPc.setHighLevel(level);
 				newPc.setLevel(level);
-				newPc.setExp(ExpTable.getExpByLevel(level)
-						+ _random.nextInt(ExpTable.getNeedExpNextLevel(level)));
+				newPc.setExp(ExpTable.getExpByLevel(level) + _random.nextInt(ExpTable.getNeedExpNextLevel(level)));
 				// newPc.setHighLevel(65);newPc.setLevel(65);
 				// newPc.setExp(ExpTable.getExpByLevel(65));
 				newPc.getAC().setAc(-75);
@@ -120,8 +119,7 @@ public class Robot_Crown {
 				newPc.setNetConnection(null);
 				newPc._userTitle = rs.getString("user_title");
 				newPc.clan = true;
-				GeneralThreadPool.getInstance().schedule(new on(newPc),
-						_random.nextInt(60000));
+				GeneralThreadPool.getInstance().schedule(new on(newPc), _random.nextInt(60000));
 				// GeneralThreadPool.getInstance().schedule(new on(newPc),
 				// _random.nextInt(600*5));
 			}
@@ -146,35 +144,29 @@ public class Robot_Crown {
 		public void run() {
 			// TODO 自動生成されたメソッド・スタブ
 			try {
-				L1Clan clan = L1World.getInstance()
-						.getClan(newPc.getClanname());
+				L1Clan clan = L1World.getInstance().getClan(newPc.getClanname());
 				if (clan != null) {
-					if (newPc.getClanid() == clan.getClanId() && // クランを解散し、再度、
-																	// 同名のクランが
-																	// 創設されたときの
-																	// 対策
-							newPc.getClanname().toLowerCase()
-									.equals(clan.getClanName().toLowerCase())) {
+					if (newPc.getClanid() == clan.getClanId() && // クランを解散し、再度同名のクランが創設されたときの対策
+							newPc.getClanname().toLowerCase().equals(clan.getClanName().toLowerCase())) {
 						clan.updateClanMemberOnline(newPc);
-						S_ServerMessage sm = new S_ServerMessage(843,
-								newPc.getName());
-						for (L1PcInstance clanMember : clan
-								.getOnlineClanMember()) {
+						S_ServerMessage sm = new S_ServerMessage(843, newPc.getName());
+						for (L1PcInstance clanMember : clan.getOnlineClanMember()) {
 							if (clanMember.getId() != newPc.getId()) {
 								clanMember.sendPackets(sm);
 							}
 						}
 					}
 				} else {
-					ClanTable.getInstance().createClan(newPc,
-							newPc.getClanname(), newPc.getClanid());
+					ClanTable.getInstance().createClan(newPc, newPc.getClanname(), newPc.getClanid());
 					clan = L1World.getInstance().getClan(newPc.getClanname());
 				}
-				//String[] str = clan.getCreateDate().split("/");
-				/*Calendar ca = (Calendar) Calendar.getInstance().clone();
-				ca.set(Integer.parseInt(str[0]), Integer.parseInt(str[1]) - 1,
-						Integer.parseInt(str[2]));*/
-				//newPc.setClanJoinDate(new Timestamp(ca.getTimeInMillis()));
+				// String[] str = clan.getCreateDate().split("/");
+				/*
+				 * Calendar ca = (Calendar) Calendar.getInstance().clone();
+				 * ca.set(Integer.parseInt(str[0]), Integer.parseInt(str[1]) -
+				 * 1, Integer.parseInt(str[2]));
+				 */
+				// newPc.setClanJoinDate(new Timestamp(ca.getTimeInMillis()));
 				newPc.setClanJoinDate(new Timestamp(System.currentTimeMillis()));
 				clan.updateClanMemberOnline(newPc);
 

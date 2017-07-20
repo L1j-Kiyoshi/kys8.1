@@ -116,7 +116,7 @@ public abstract class L1Map {
 		return false;
 	}
 	
-	public static boolean isTeleportable(int x, int y, int mapId){//ボギョン座標
+	public static boolean isTeleportable(int x, int y, int mapId){//バグベアーレース座標
 		if( mapId == 4 && x >= 33469 && x <= 33528 && y >= 32839 && y <= 32869 ){
 			return false;
 		}

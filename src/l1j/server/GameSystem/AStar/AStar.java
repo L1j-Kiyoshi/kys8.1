@@ -23,7 +23,7 @@ public class AStar {
 		_npc = npc;
 	}
 
-	// 最大屋根回収
+	// 最大ループ数
 	static final int LIMIT_LOOP = 200;
 	// private List<Node> pool;
 	// private List<Node> sabu;
@@ -290,7 +290,7 @@ public class AStar {
 
 	// *************************************************************************
 	// Name : FindPath()
-	// Desc : 近接した位置検索。ファックドゥェルリョナ
+	// Desc : 近接した位置検索。
 	// *************************************************************************
 	// モンスターの座標 sx, xy
 	// 移動座標 tx, ty
@@ -359,7 +359,7 @@ public class AStar {
 
 			// 現在のノードと隣接ノードに拡張して開かれたノードに追加
 			if (make_Child(o, best, tx, ty, obj) == 0 && count == 0) {
-				// System.out.println("詰まっていて。");
+				// System.out.println("ブロックされています。");
 				return null;
 			}
 
@@ -415,7 +415,7 @@ public class AStar {
 				int nx = x + getXY(i, true);
 				int ny = y + getXY(i, false);
 				boolean ck = true;
-				// ゴール地点の座標は、リトリーブ必要なし。
+				// ゴール地点の座標は検索する必要なし。
 				if (tx != nx || ty != ny) {
 					if (obj) {
 						if (o instanceof L1DollInstance) {
@@ -469,8 +469,8 @@ public class AStar {
 
 	// *************************************************************************
 	// Name : MakeChildSub()
-	// Desc : ノードを生成します。開かれたノードまたは閉じたノードに既にあるノードであれば、
-	// 以前の値と比較して、fがより小さければ情報の修正
+	// Desc : ノードを生成します。
+	// 開かれたノードまたは閉じたノードに既にあるノードであれば以前の値と比較し、fがより小さければ情報の修正
 	// 閉じたノードにある場合は、それに接続されたすべてのノードの情報も一緒に修正
 	// *************************************************************************
 	void MakeChildSub(Node node, int x, int y, int m, int tx, int ty) {
@@ -597,7 +597,8 @@ public class AStar {
 	}
 
 	/**
-	 * プールに追加してもいることを確認してくれる関数です。 ：あまりにも多くの登録されると、問題になるメインの適当な線でカバー。：
+	 * プールに追加してもいることを確認してくれる関数です。 
+	 * あまりにも多くの登録されると、問題になるメインの適当な線でカバー。：
 	 * java.lang.OutOfMemoryError: Java heap space
 	 *
 	 * @param c

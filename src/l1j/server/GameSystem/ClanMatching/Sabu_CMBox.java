@@ -15,8 +15,7 @@ import l1j.server.server.utils.SQLUtil;
 public class Sabu_CMBox {
 	private static Sabu_CMBox _instance;
 	private static ArrayList<Sabu_cm> cmlist;// mapに実装するのが正しいかもしれない。
-	private static ArrayList<Sabu_um> umlist;// ユーザが申請リストを閲覧した時にすべての登録血盟を検索してい
-												//ないために、追加
+	private static ArrayList<Sabu_um> umlist;// ユーザが申請リストを閲覧した時にすべての登録血盟を検索していないために追加
 
 	public static Sabu_CMBox getInstance() {
 		if (_instance == null) {
@@ -134,8 +133,7 @@ public class Sabu_CMBox {
 		ResultSet rs = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("SELECT * FROM clanmatching_clan order by num desc");
+			pstm = con.prepareStatement("SELECT * FROM clanmatching_clan order by num desc");
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				Sabu_cm cm = new Sabu_cm();
@@ -145,8 +143,7 @@ public class Sabu_CMBox {
 				cm.settype(rs.getInt("type"));
 				cmlist.add(cm);
 			}
-			Sabu_cm[] scm = (Sabu_cm[]) cmlist.toArray(new Sabu_cm[cmlist
-					.size()]);
+			Sabu_cm[] scm = (Sabu_cm[]) cmlist.toArray(new Sabu_cm[cmlist.size()]);
 			int clanid = 0;
 			String charname = null;
 			pstm = con.prepareStatement("SELECT * FROM clanmatching_user");
@@ -201,8 +198,7 @@ public class Sabu_CMBox {
 				for (Sabu_cm cm : l) {
 					if (cm.getnum() == num) {
 						cm.add(charname);
-						joinApply(charname, cm.getClanId(), cm.getInfo(), num,
-								cm.gettype());
+						joinApply(charname, cm.getClanId(), cm.getInfo(), num, cm.gettype());
 						applyUserRegist(charname, cm.getClanId(), num);
 					}
 				}
@@ -266,14 +262,11 @@ public class Sabu_CMBox {
 		try {
 			synchronized (umlist) {
 				for (Sabu_um um : umlist) {
-					if (um.getcharname().equalsIgnoreCase(charname)
-							&& um.getnum() == num) {
-						L1Clan c = L1World.getInstance()
-								.getClan(um.getClanId());
+					if (um.getcharname().equalsIgnoreCase(charname) && um.getnum() == num) {
+						L1Clan c = L1World.getInstance().getClan(um.getClanId());
 						if (c == null)
 							return null;
-						return L1World.getInstance().getPlayer(
-								c.getLeaderName());
+						return L1World.getInstance().getPlayer(c.getLeaderName());
 					}
 				}
 			}
@@ -293,8 +286,7 @@ public class Sabu_CMBox {
 		ResultSet rs = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("SELECT * FROM clanmatching_clan order by num desc limit 1");
+			pstm = con.prepareStatement("SELECT * FROM clanmatching_clan order by num desc limit 1");
 			rs = pstm.executeQuery();
 			while (rs.next()) {
 				return rs.getInt("num");
@@ -314,8 +306,7 @@ public class Sabu_CMBox {
 		PreparedStatement pstm = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("INSERT INTO clanmatching_user SET char_name=?, clan_id=?, num=?, info=?");
+			pstm = con.prepareStatement("INSERT INTO clanmatching_user SET char_name=?, clan_id=?, num=?, info=?");
 			pstm.setString(1, charname);
 			pstm.setInt(2, clanid);
 			pstm.setInt(3, num);
@@ -334,8 +325,7 @@ public class Sabu_CMBox {
 		PreparedStatement pstm = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("DELETE FROM clanmatching_user WHERE clan_id=? AND char_name=?");
+			pstm = con.prepareStatement("DELETE FROM clanmatching_user WHERE clan_id=? AND char_name=?");
 			pstm.setInt(1, clanid);
 			pstm.setString(2, charname);
 			pstm.executeUpdate();
@@ -352,8 +342,7 @@ public class Sabu_CMBox {
 		PreparedStatement pstm = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("INSERT INTO clanmatching_clan SET clan_id=?, info=?, type=?");
+			pstm = con.prepareStatement("INSERT INTO clanmatching_clan SET clan_id=?, info=?, type=?");
 			pstm.setInt(1, clanid);
 			pstm.setString(2, info);
 			pstm.setInt(3, type);
@@ -371,8 +360,7 @@ public class Sabu_CMBox {
 		PreparedStatement pstm = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("UPDATE clanmatching_clan SET info=?, type=? WHERE clan_id=?");
+			pstm = con.prepareStatement("UPDATE clanmatching_clan SET info=?, type=? WHERE clan_id=?");
 			pstm.setString(1, info);
 			pstm.setInt(2, type);
 			pstm.setInt(3, clanid);
@@ -390,8 +378,7 @@ public class Sabu_CMBox {
 		PreparedStatement pstm = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("DELETE FROM clanmatching_clan WHERE clan_id=?");
+			pstm = con.prepareStatement("DELETE FROM clanmatching_clan WHERE clan_id=?");
 			pstm.setInt(1, clanid);
 			pstm.executeUpdate();
 		} catch (SQLException e) {

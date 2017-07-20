@@ -63,22 +63,22 @@ public class HellController extends Thread {
 						isGmOpen3 = false;
 
 						/** オープンメッセージ **/
-						L1World.getInstance().broadcastServerMessage("地獄入場券抽選が開始されました。すべての参加してください。");
-						L1World.getInstance().broadcastServerMessage("例）[地獄参加]チャットウィンドウにチシミョンされます。");
-						L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"地獄が開かれました。オープン後から1時間の間に入場可能です。"));
+						L1World.getInstance().broadcastServerMessage("地獄への入場券の抽選が開始されました。どうぞご参加下さい。");
+						L1World.getInstance().broadcastServerMessage("例）[.joinHell] とチャットウィンドウに打ち込みます。");
+						L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE,"地獄が開かれました。オープンから1時間の間に入場可能です。"));
 
 						/** 地獄の領土を開始**/
 						setHellStart(true);
 
 						/** 実行1時間開始**/
 						L1World.getInstance().broadcastServerMessage("2分後、抽選が終了します。");
-						L1World.getInstance().broadcastServerMessage("地獄の入場券に参加してください。例）[地獄参加]");
+						L1World.getInstance().broadcastServerMessage("地獄の入場券に参加してください。例）[.joinHell]");
 						Thread.sleep(60000L); // 2分間待機
 						L1World.getInstance().broadcastServerMessage("1分後、抽選が終了します。");
-						L1World.getInstance().broadcastServerMessage("地獄の入場券に参加してください。例）[地獄参加]");
+						L1World.getInstance().broadcastServerMessage("地獄の入場券の抽選に参加してください。例）[.joinHell]");
 						Thread.sleep(60000L); // 2分間待機
 						 if(_Members.size() <= 4){
-							 L1World.getInstance().broadcastServerMessage("入場券抽選が人員が少なくキャンセルされました。");
+							 L1World.getInstance().broadcastServerMessage("入場券の抽選が参加者が少なくキャンセルされました。");
 							 setRaidJoin(false); // 参加可能時間終了
 							 _Members.clear();
 						 } else {
@@ -126,11 +126,11 @@ public class HellController extends Thread {
 			 int Cmem2 = rnd2.nextInt(getMemberCount());
 			 int Cmem3 = rnd3.nextInt(getMemberCount());
 			 RaidList = getMemberArray();
-			 RaidList[Cmem1].sendPackets(new S_SystemMessage("地獄入場券抽選に当たるました。"));
+			 RaidList[Cmem1].sendPackets(new S_SystemMessage("地獄の入場券の抽選に当選しました。"));
 			 RaidList[Cmem1].getInventory().storeItem(42050, 1);
-			 RaidList[Cmem2].sendPackets(new S_SystemMessage("地獄入場券抽選に当たるました。"));
+			 RaidList[Cmem2].sendPackets(new S_SystemMessage("地獄の入場券の抽選に当選しました。"));
 			 RaidList[Cmem2].getInventory().storeItem(42050, 1);
-			 RaidList[Cmem3].sendPackets(new S_SystemMessage("地獄入場券抽選に当たるました。"));
+			 RaidList[Cmem3].sendPackets(new S_SystemMessage("地獄の入場券の抽選に当選しました。"));
 			 RaidList[Cmem3].getInventory().storeItem(42050, 1);
 			 }
 		 
@@ -139,7 +139,7 @@ public class HellController extends Thread {
 			public void AddMember(L1PcInstance pc) {
 				if (!_Members.contains(pc)) {
 					_Members.add(pc);
-					pc.sendPackets(new S_SystemMessage("\\aD申し込みされた。しばらくして抽選が開始されます。"));
+					pc.sendPackets(new S_SystemMessage("\\aD申し込みました。暫くして抽選が開始されます。"));
 				}
 			}
 			public void removeMember(L1PcInstance pc) {
@@ -175,9 +175,9 @@ public class HellController extends Thread {
 			 
 			 private void Boss(){
 				 	L1SpawnUtil.spawn2(32807, 32731, (short) 666, 40173, 0, 600*1000, 0);
-					L1World.getInstance().broadcastServerMessage("\\aD地獄を支配する禁断のが地獄に気づいた。");
+					L1World.getInstance().broadcastServerMessage("\\aD地獄を支配する九尾の狐が目覚めた。");
 					L1World.getInstance().broadcastPacketToAll(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, 
-							"地獄を支配する禁断のが地獄に気づいた。"));
+							"地獄を支配する九尾の狐が目覚めた。"));
 				 }
 			 /**
 			 *領土が開いていることを確認
@@ -254,7 +254,7 @@ public class HellController extends Thread {
 				 }
 			 }
 			 
-			 /**アデン村にティンギが**/
+			 /**アデン村**/
 			 private void TelePort6() {
 				 for(L1PcInstance c : L1World.getInstance().getAllPlayers()) {
 					 switch(c.getMap().getId()) {

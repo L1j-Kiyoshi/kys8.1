@@ -111,7 +111,7 @@ public class C_NPCTalk extends ClientBasePacket {
 		case 50054:// ウッドベック村（トレイ）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_woodbec, mapvalue));
 			break;
-		case 50056: // は記事の村（メタ）
+		case 50056: // はナイトの村（メタ）
 			pc.sendPackets(new S_TelePortUi(objid, action, T_silver_knight, mapvalue));
 			break;
 		case 50020:// ケント城の村（スタンレー）

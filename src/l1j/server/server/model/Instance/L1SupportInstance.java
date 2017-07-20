@@ -218,7 +218,7 @@ public class L1SupportInstance extends L1NpcInstance {
 				setCurrentHp(newHp);
 			}
 		} else if (!isDead()) { 
-			System.out.println("つつく玄のHP減少処理が正しく行われていない箇所があります。※あるいは最初からHP0");
+			System.out.println("つつくウィザードのHP減少処理が正しく行われていない箇所があります。※あるいは最初からHP0");
 			death(attacker);
 		}
 	}
@@ -263,7 +263,7 @@ public class L1SupportInstance extends L1NpcInstance {
 				setCurrentHp(newHp);
 			}
 		} else if (!isDead()) { 
-			System.out.println("警告：つつく玄のHP減少処理が正しく行われていない箇所があります。※あるいは最初からHP0");
+			System.out.println("警告：つつくウィザードのHP減少処理が正しく行われていない箇所があります。※あるいは最初からHP0");
 			death(attacker);
 		}
 	}

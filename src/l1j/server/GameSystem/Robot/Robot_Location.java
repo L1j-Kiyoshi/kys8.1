@@ -21,7 +21,6 @@ public class Robot_Location {
 	private static ArrayList<Robot_Location_bean> GiranPrizon_Entrance = new ArrayList<Robot_Location_bean>();
 	private static ArrayList<Robot_Location_bean> IT4F = new ArrayList<Robot_Location_bean>();
 	private static ArrayList<Robot_Location_bean> IT5F = new ArrayList<Robot_Location_bean>();
-	
 
 	private static ArrayList<Robot_Location_bean> Underground = new ArrayList<Robot_Location_bean>();
 	private static ArrayList<Robot_Location_bean> DVC1F = new ArrayList<Robot_Location_bean>();
@@ -76,8 +75,6 @@ public class Robot_Location {
 	private static ArrayList<Robot_Location_bean> GiranPrison3F = new ArrayList<Robot_Location_bean>();
 	private static ArrayList<Robot_Location_bean> GiranPrison4F = new ArrayList<Robot_Location_bean>();
 
-	//ヨンドン=DVC,ボンドン=MLC,技監=ギラン監獄？,忘れられた島=忘れられた島,オマン=傲慢の塔
-
 	public static void registLocation(int x, int y, int m) {
 
 	}
@@ -85,13 +82,12 @@ public class Robot_Location {
 	public static ArrayList<Robot_Location_bean> Location(L1RobotInstance bot) {
 		_random.setSeed(System.currentTimeMillis());
 		if (bot.huntingBot_Type == L1RobotInstance.SETTING) {
-			if (bot.huntingBot_Location.equalsIgnoreCase("ヨンドン1階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン2階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン3階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン4階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン5階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン6階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン7階")) {
+			if (bot.huntingBot_Location.equalsIgnoreCase("DVC1階") || bot.huntingBot_Location.equalsIgnoreCase("DVC2階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("DVC3階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("DVC4階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("DVC5階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("DVC6階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("DVC7階")) {
 				return _random.nextInt(1000) > 500 ? conf_Giran : conf_Giran2;
 			}
 			int rr = _random.nextInt(16);
@@ -122,32 +118,29 @@ public class Robot_Location {
 			case 5:
 			case 2:
 				return _random.nextInt(1000) >= 500 ? conf_Giran : conf_Giran3;
-				// returnグルマル設定; //元のグルマル設定
 			case 14:
 			case 6:
 			case 3:
 				return conf_Gludin;
-				// return ウェルダン設定;
 			default:
 				break;
 			}
 			return conf_Giran;
 		} else if (bot.huntingBot_Type == L1RobotInstance.TEL_NPC_MOVE) {
-			if (bot.huntingBot_Location.equalsIgnoreCase("ヨンドン1階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン2階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン3階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン4階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン5階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン6階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ヨンドン7階")) {
+			if (bot.huntingBot_Location.equalsIgnoreCase("DVC1階") || bot.huntingBot_Location.equalsIgnoreCase("DVC2階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("DVC3階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("DVC4階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("DVC5階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("DVC6階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("DVC7階")) {
 				return DVC_Entrance;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ボンドン1階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ボンドン2階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ボンドン3階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ボンドン4階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ボンドン5階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ボンドン6階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("ボンドン7階")
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("MLC1階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("MLC2階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("MLC3階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("MLC4階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("MLC5階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("MLC6階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("MLC7階")
 					|| bot.huntingBot_Location.equalsIgnoreCase("リニューアル傲慢1階")// 160316
 					|| bot.huntingBot_Location.equalsIgnoreCase("リニューアル傲慢2階")
 					|| bot.huntingBot_Location.equalsIgnoreCase("リニューアル傲慢3階")
@@ -158,22 +151,19 @@ public class Robot_Location {
 					|| bot.huntingBot_Location.equalsIgnoreCase("リニューアル傲慢8階")
 					|| bot.huntingBot_Location.equalsIgnoreCase("リニューアル傲慢9階")
 					|| bot.huntingBot_Location.equalsIgnoreCase("リニューアル傲慢10階")
-					|| bot.huntingBot_Location.startsWith("忘れられた島")
-					|| bot.huntingBot_Location.startsWith("支配者1階")
-					|| bot.huntingBot_Location.startsWith("支配者2階")) { //忘れられた島
+					|| bot.huntingBot_Location.startsWith("忘れられた島") || bot.huntingBot_Location.startsWith("支配者1階")
+					|| bot.huntingBot_Location.startsWith("支配者2階")) { // 忘れられた島
 
 				return Teleporter; // 元null
-			} else if (bot.huntingBot_Location.startsWith("傲慢")
-					|| bot.huntingBot_Location.startsWith("アリの巣")) {
+			} else if (bot.huntingBot_Location.startsWith("傲慢") || bot.huntingBot_Location.startsWith("アリの巣")) {
 				return null;
 			} else if (bot.huntingBot_Location.equalsIgnoreCase("技監1階")
 					|| bot.huntingBot_Location.equalsIgnoreCase("技監2階")
 					|| bot.huntingBot_Location.equalsIgnoreCase("技監3階")
 					|| bot.huntingBot_Location.equalsIgnoreCase("技監4階"))
 				return GiranPrizon_Entrance;
-			if (bot.getX() >= 33410 && bot.getX() <= 33461
-					&& bot.getY() >= 32788 && bot.getY() <= 32838
-					&& bot.getMapId() == 4)//ギラン
+			if (bot.getX() >= 33410 && bot.getX() <= 33461 && bot.getY() >= 32788 && bot.getY() <= 32838
+					&& bot.getMapId() == 4)// ギラン
 				return Teleporter;
 		} else if (bot.huntingBot_Type == L1RobotInstance.HUNT_MOVE) {
 			bot.tel_Hunting = false;
@@ -264,58 +254,58 @@ public class Robot_Location {
 				bot.tel_Hunting = true;
 				return Re_TOI10F;
 				// 160316
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ヨンドン1階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("DVC1階")) {
 				bot.tel_Hunting = true;
 				return DVC1F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ヨンドン2階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("DVC2階")) {
 				bot.tel_Hunting = true;
 				return DVC2F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ヨンドン3階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("DVC3階")) {
 				bot.tel_Hunting = true;
 				return DVC3F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ヨンドン4階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("DVC4階")) {
 				bot.tel_Hunting = true;
 				return DVC4F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ヨンドン5階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("DVC5階")) {
 				bot.tel_Hunting = true;
 				return DVC5F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ヨンドン6階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("DVC6階")) {
 				bot.tel_Hunting = true;
 				return DVC6F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ヨンドン7階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("DVC7階")) {
 				bot.tel_Hunting = true;
 				return DVC7F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ボンドン1階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("MLC1階")) {
 				bot.tel_Hunting = true;
 				return MLC1F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ボンドン2階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("MLC2階")) {
 				bot.tel_Hunting = true;
 				return MLC2F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ボンドン3階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("MLC3階")) {
 				bot.tel_Hunting = true;
 				return MLC3F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ボンドン4階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("MLC4階")) {
 				bot.tel_Hunting = true;
 				return MLC4F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ボンドン5階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("MLC5階")) {
 				bot.tel_Hunting = true;
 				return MLC5F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ボンドン6階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("MLC6階")) {
 				bot.tel_Hunting = true;
 				return MLC6F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("ボンドン7階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("MLC7階")) {
 				bot.tel_Hunting = true;
 				return MLC7F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("技監1階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("ギラン監獄1階")) {
 				bot.tel_Hunting = true;
 				return GiranPrison1F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("技監2階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("ギラン監獄2階")) {
 				bot.tel_Hunting = true;
 				return GiranPrison2F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("技監3階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("ギラン監獄3階")) {
 				bot.tel_Hunting = true;
 				return GiranPrison3F;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("技監4階")) {
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("ギラン監獄4階")) {
 				bot.tel_Hunting = true;
 				return GiranPrison4F;
 			} else if (bot.huntingBot_Location.equalsIgnoreCase("支配者1階")) {
@@ -330,7 +320,7 @@ public class Robot_Location {
 	}
 
 	public static void setRLOC() {
-		//ポーション、倉庫、バフ
+		// ポーション、倉庫、バフ
 		conf_Giran.add(new Robot_Location_bean(33457, 32819, 4));
 		conf_Giran.add(new Robot_Location_bean(33431, 32816, 4));
 		conf_Giran.add(new Robot_Location_bean(33437, 32804, 4));
@@ -352,26 +342,25 @@ public class Robot_Location {
 		conf_Werldern.add(new Robot_Location_bean(33738, 32494, 4));
 		conf_Werldern.add(new Robot_Location_bean(33723, 32488, 4));
 		conf_Werldern.add(new Robot_Location_bean(33714, 32498, 4));
-		//ギランテルニョ移動
+		// ギランテレポーター移動
 		Teleporter.add(new Robot_Location_bean(33437, 32795, 4));
-		// ヨンドン入口
+		// DVC入口
 		DVC_Entrance.add(new Robot_Location_bean(33446, 32828, 4));
-		// 技監入口
+		// ギラン監獄入口
 		GiranPrizon_Entrance.add(new Robot_Location_bean(33428, 32820, 4));
-		// ボンドン入口
+		// MLC入口
 		MLC_Entrance.add(new Robot_Location_bean(32727, 32929, 4));
-		
 
 		Underground.add(new Robot_Location_bean(32800, 33051, 420));
 
-		FI.add(new Robot_Location_bean(32645, 33009, 1700)); //口繊細プチジョン入口
-		FI2.add(new Robot_Location_bean(32754, 32942, 1700)); //南ゴーレム研究所の入口
-		FI3.add(new Robot_Location_bean(32694, 32716, 1700)); //西ゴーレムの入口
-		FI4.add(new Robot_Location_bean(32926, 32890, 1700)); //東ゴーレム入口
-		FI5.add(new Robot_Location_bean(32955, 32800, 1700)); //ヒドゥン店
+		FI.add(new Robot_Location_bean(32645, 33009, 1700)); // 口繊細プチジョン入口
+		FI2.add(new Robot_Location_bean(32754, 32942, 1700)); // 南ゴーレム研究所の入口
+		FI3.add(new Robot_Location_bean(32694, 32716, 1700)); // 西ゴーレムの入口
+		FI4.add(new Robot_Location_bean(32926, 32890, 1700)); // 東ゴーレム入口
+		FI5.add(new Robot_Location_bean(32955, 32800, 1700)); // ヒドゥン店
 
-		DesireCave1F.add(new Robot_Location_bean(32794, 32853, 15403)); //支配者の結界1階
-		DesireCave2F.add(new Robot_Location_bean(32678, 32860, 15404)); //支配者の結界2階
+		DesireCave1F.add(new Robot_Location_bean(32794, 32853, 15403)); // 支配者の結界1階
+		DesireCave2F.add(new Robot_Location_bean(32678, 32860, 15404)); // 支配者の結界2階
 
 		GraveyardShip_Seafloor.add(new Robot_Location_bean(33011, 33011, 558));
 		GraveyardShip_Seafloor2.add(new Robot_Location_bean(33011, 33012, 558));
@@ -420,7 +409,5 @@ public class Robot_Location {
 		GiranPrison2F.add(new Robot_Location_bean(32808, 32796, 54));
 		GiranPrison3F.add(new Robot_Location_bean(32736, 32729, 55));
 		GiranPrison4F.add(new Robot_Location_bean(32768, 32820, 56));
-
 	}
-
 }

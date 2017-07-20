@@ -87,7 +87,7 @@ public class C_BoardWrite extends ClientBasePacket {
 				if (pc.getInventory().checkItem(L1ItemId.ADENA, 300)) {
 					pc.getInventory().consumeItem(L1ItemId.ADENA, 300);
 					L1BoardPost.createPhone(pc.getName(), " - 非公開文 - ", content);
-					pc.sendPackets(new S_SystemMessage("\\aH登録完了：記事のタイトルは、運営者もいない見て参照してください。"));
+					pc.sendPackets(new S_SystemMessage("\\aH登録完了：ナイトのタイトルは、運営者もいない見て参照してください。"));
 				} else {
 					pc.sendPackets(new S_SystemMessage("アデナが不足します。"));
 				}

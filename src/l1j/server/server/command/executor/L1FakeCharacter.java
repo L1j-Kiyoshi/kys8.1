@@ -61,7 +61,7 @@ public class L1FakeCharacter implements L1CommandExecutor {
 			newPc.getAbility().setBaseWis(11);
 			newPc.getAbility().setWis(11);
 			int ran = _random.nextInt(120);			
-			if (ran >= 0 && ran < 15) { // 15南記事が15プロ
+			if (ran >= 0 && ran < 15) { // 15南ナイトが15プロ
 				newPc.setClassId(61);
 				newPc.setTempCharGfx(61);
 				newPc.setGfxId(61);
@@ -175,7 +175,7 @@ public class L1FakeCharacter implements L1CommandExecutor {
 			L1ItemInstance item3 = ItemTable.getInstance().createItem(73);// 修練者の二刀流
 			L1ItemInstance item4 = ItemTable.getInstance().createItem(203012);// 修練者の斧
 
-			if (newPc.isKnight() || newPc.isCrown() || newPc.isDragonknight()) {// 記事。君主。の記事
+			if (newPc.isKnight() || newPc.isCrown() || newPc.isDragonknight()) {// ナイト。君主。のナイト
 				newPc.getInventory().storeItem(item);
 				newPc.getInventory().setEquipped(item, true);
 			} else if (newPc.isElf()){ //妖精

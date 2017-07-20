@@ -107,7 +107,7 @@ public class L1NpcInstance extends L1Character {
 	private int CubeTime; //キューブの時間
 	private L1PcInstance CubePc; //キューブユーザー
 	private int Cube = 20;
-	private int num;	/*ボギョン関連*/
+	private int num;	/*バグベアーレース関連*/
 	
 	private DeleteTimer _deleteTask;
 	private ScheduledFuture<?> _future = null;

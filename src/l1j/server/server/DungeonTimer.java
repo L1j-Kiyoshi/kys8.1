@@ -34,7 +34,7 @@ public class DungeonTimer implements Runnable {
 								|| use.getMapId() >= 15403 && use.getMapId() <= 15404) { // ギラン
 							GiranTimeCheck(use);
 						}
-						if (use.getMapId() >= 78 && use.getMapId() <= 82){ //オレン
+						if (use.getMapId() >= 78 && use.getMapId() <= 82){ //オーレン
 							OrenTimeCheck(use);
 						}
 						if (use.getMapId() >= 30 && use.getMapId() <= 33

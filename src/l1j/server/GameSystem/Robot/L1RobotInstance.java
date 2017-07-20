@@ -82,12 +82,11 @@ public class L1RobotInstance extends L1PcInstance {
 
 	public String huntingBot_Location;
 	public int huntingBot_Type = 0;
-	// private shortアカ= 900;
-	// private short朱が= 10;
+
 	private short potCount = 1000;
 	private short cyanPotion = 10;
 
-	private AStar aStar; //ルート変数
+	private AStar aStar; // ルート変数
 	private int[][] iPath; // ルート変数
 	private Node tail; // ルート変数
 	private int iCurrentPath; // ルート変数
@@ -133,22 +132,13 @@ public class L1RobotInstance extends L1PcInstance {
 	private static final int[] stunTimeArray = { 2000, 3000, 4000, 5000 };
 
 	private String _himent;
-	private static final String[] himentArray = { "ああ", "入って来て！", "口径ないで",
-			"ハイ？", "様？", "すぐ近くに行け", "戦って添付が気に？" };
+	private static final String[] himentArray = { "Hi", "どうぞ！", "攻撃しないで", "ハイ？", "じょうじ...", "どっかいって", "戦う？" };
 
 	private String _townment;
 
-
-	/*
-	 * private String _disment; private static final String[] dismentArray = {
-	 *「様」、「様睡眠待って "、"様？」 、 "様ジャムマンで見"、 "様少々〜"、 "様"};
-	 */
-
 	private String _glment;
 
-
-	private static final int[] LisBotBuffSkill4 = {
-			L1SkillId.PHYSICAL_ENCHANT_STR, L1SkillId.PHYSICAL_ENCHANT_DEX,
+	private static final int[] LisBotBuffSkill4 = { L1SkillId.PHYSICAL_ENCHANT_STR, L1SkillId.PHYSICAL_ENCHANT_DEX,
 			L1SkillId.BLESS_WEAPON, L1SkillId.REMOVE_CURSE };
 
 	public L1RobotInstance() {
@@ -265,15 +255,13 @@ public class L1RobotInstance extends L1PcInstance {
 					return;
 				}
 
-				int percent = (int) Math.round((double) getCurrentHp()
-						/ (double) getMaxHp() * 100);
+				int percent = (int) Math.round((double) getCurrentHp() / (double) getMaxHp() * 100);
 				if (percent < 10 && huntingBot_Type == HUNT && !huntingBot_Location.startsWith("忘れられた島")) {
 					setCurrentHp(getCurrentHp() + 500);
 					returnBot();
 					GeneralThreadPool.getInstance().schedule(this, 2000);
 					return;
-				} else if (percent < 30 && huntingBot_Type == HUNT
-						&& !huntingBot_Location.startsWith("忘れられた島")) {
+				} else if (percent < 30 && huntingBot_Type == HUNT && !huntingBot_Location.startsWith("忘れられた島")) {
 					setCurrentHp(getCurrentHp() + 500);
 					randomTel();
 					GeneralThreadPool.getInstance().schedule(this, 2000);
@@ -321,22 +309,19 @@ public class L1RobotInstance extends L1PcInstance {
 	private int Debuff() {
 		// TODO 自動生成されたメソッド・スタブ
 		// カース待機
-		if (hasSkillEffect(
-				L1SkillId.STATUS_CURSE_PARALYZING)) {
+		if (hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZING)) {
 			returnBot();
 			delay = 8000;
 			return 8000;
 		}
 		if (hasSkillEffect(L1SkillId.DECAY_POTION)) {
 			returnBot();
-			int time = getSkillEffectTimeSec(
-					L1SkillId.DECAY_POTION) * 1000;
+			int time = getSkillEffectTimeSec(L1SkillId.DECAY_POTION) * 1000;
 			return (int) (delay = time);
 		}
 		if (hasSkillEffect(L1SkillId.SILENCE)) {
 			returnBot();
-			int time = getSkillEffectTimeSec(
-					L1SkillId.SILENCE) * 1000;
+			int time = getSkillEffectTimeSec(L1SkillId.SILENCE) * 1000;
 			return (int) (delay = time);
 		}
 		return 0;
@@ -348,9 +333,8 @@ public class L1RobotInstance extends L1PcInstance {
 			return false;
 		}
 		if (getPoison() != null) {
-			cancelAbsoluteBarrier(); // アブ小ガルトバリアの解除
-			Broadcaster.broadcastPacket(this, new S_SkillSound(getId(), 192),
-					true);
+			cancelAbsoluteBarrier(); // アブソルートバリアの解除
+			Broadcaster.broadcastPacket(this, new S_SkillSound(getId(), 192), true);
 			curePoison();
 			cyanPotion--;
 			if (cyanPotion <= 0)
@@ -359,9 +343,6 @@ public class L1RobotInstance extends L1PcInstance {
 		}
 		return false;
 	}
-
-
-
 
 	public static final int SETTING = 0;
 	public static final int TEL_NPC_MOVE = 1;
@@ -386,19 +367,16 @@ public class L1RobotInstance extends L1PcInstance {
 			}
 			if (!isDead() && !isTeleport()) {
 
-
 				if (!hasSkillEffect(L1SkillId.SHAPE_CHANGE)) {
-					setSkillEffect(	L1SkillId.SHAPE_CHANGE, 1800 * 1000);
+					setSkillEffect(L1SkillId.SHAPE_CHANGE, 1800 * 1000);
 					int time = getSkillEffectTimeSec(L1SkillId.SHAPE_CHANGE);
 					if (time == -1) {
 						endBot();
 						return;
 					}
 					Robot.poly(this);
-					Broadcaster.broadcastPacket(this, new S_ChangeShape(
-							getId(), getTempCharGfx()));
-					Broadcaster.broadcastPacket(this, new S_CharVisualUpdate(
-							this, getCurrentWeapon()));
+					Broadcaster.broadcastPacket(this, new S_ChangeShape(getId(), getTempCharGfx()));
+					Broadcaster.broadcastPacket(this, new S_CharVisualUpdate(this, getCurrentWeapon()));
 					return;
 				}
 
@@ -412,18 +390,19 @@ public class L1RobotInstance extends L1PcInstance {
 					if (isElf()) {
 
 						if (actionStatus == MOVE) {
-							int percent = (int) Math
-									.round((double) getCurrentMp()
-											/ (double) getMaxMp() * 100);
+							int percent = (int) Math.round((double) getCurrentMp() / (double) getMaxMp() * 100);
 							if (percent < 55) {
-								//new L1SkillUse()	.handleCommands(this,L1SkillId.BLOODY_SOUL, getId(),	getX(), getY(), null, 0,L1SkillUse.TYPE_NORMAL);
+								// new L1SkillUse()
+								// .handleCommands(this,L1SkillId.BLOODY_SOUL,
+								// getId(), getX(), getY(), null,
+								// 0,L1SkillUse.TYPE_NORMAL);
 								S_DoActionGFX gfx = new S_DoActionGFX(getId(), 19);
 								broadcastPacket(gfx);
 								broadcastPacket(new S_SkillSound(getId(), 2178));
-								if(getCurrentMp()+19>getMaxMp())
+								if (getCurrentMp() + 19 > getMaxMp())
 									setCurrentMp(getMaxMp());
 								else
-								setCurrentMp(getCurrentMp()+19);
+									setCurrentMp(getCurrentMp() + 19);
 								setSleepTime(calcSleepTime(MAGIC_SPEED));
 								return;
 							}
@@ -432,11 +411,11 @@ public class L1RobotInstance extends L1PcInstance {
 
 				}
 
-				//Robot.Doll_Spawn(this);
+				// Robot.Doll_Spawn(this);
 
 			}
 
-			// 他の地域であることをチェックその位置にテル
+			// 他の地域であることをチェックその位置にテレポート
 			if (loc == null) {
 				location_queue.clear();
 				ArrayList<Robot_Location_bean> list = Robot_Location.Location(this);
@@ -453,15 +432,14 @@ public class L1RobotInstance extends L1PcInstance {
 
 			switch (huntingBot_Type) {
 			case SETTING:// 店舗、倉庫、バフ
-			case TEL_NPC_MOVE:// テルニョ移動
+			case TEL_NPC_MOVE:// テレポーター移動
 				/** 村でのチャット **/
 				int townrandom = _random.nextInt(1000) + 1;
 				if (townrandom > 980) {
 					try {
 						Delay(350);
 						_townment = Robot_Hunt.getInstance().getMessage2();
-						Broadcaster.broadcastPacket(this, new S_ChatPacket(
-								this, _townment, Opcodes.S_SAY, 0));
+						Broadcaster.broadcastPacket(this, new S_ChatPacket(this, _townment, Opcodes.S_SAY, 0));
 						setTownsaid(true);
 						_townment = null;
 					} catch (Exception e) {
@@ -473,13 +451,13 @@ public class L1RobotInstance extends L1PcInstance {
 					huntingBot_Type++;
 					return;
 				}
-				if (isDistance(getX(), getY(), getMapId(), loc.getX(),	loc.getY(), loc.getMapId(), 1 + _random.nextInt(10))) {
+				if (isDistance(getX(), getY(), getMapId(), loc.getX(), loc.getY(), loc.getMapId(),
+						1 + _random.nextInt(10))) {
 					loc = location_queue.poll();
 					delayBot(5000 + _random.nextInt(15000));
 					if (loc != null && etc_Village_Move) {
 						setHeading(5);
-						telBot(loc.getX(), loc.getY(), loc.getMapId(),
-								3000 + _random.nextInt(3000));
+						telBot(loc.getX(), loc.getY(), loc.getMapId(), 3000 + _random.nextInt(3000));
 						loc = location_queue.poll();
 						etc_Village_Move = false;
 					}
@@ -491,14 +469,14 @@ public class L1RobotInstance extends L1PcInstance {
 					return;
 				}
 				break;
-			case HUNT_MOVE: //狩り場に移動
+			case HUNT_MOVE: // 狩り場に移動
 				delayBot(500 + _random.nextInt(1000));
 				telBot(loc.getX(), loc.getY(), loc.getMapId());
 				location_queue.offer(loc);
 				loc = location_queue.poll();
 				huntingBot_Type++;
 				return;
-			case HUNT: //狩猟
+			case HUNT: // 狩猟
 				if (checkTarget() || checkTarget2()) {
 					return;
 				}
@@ -520,8 +498,7 @@ public class L1RobotInstance extends L1PcInstance {
 
 				int range = _random.nextInt(5) + 1;
 
-				if (isDistance(getX(), getY(), getMapId(), loc.getX(),
-						loc.getY(), getMapId(), range)) {
+				if (isDistance(getX(), getY(), getMapId(), loc.getX(), loc.getY(), getMapId(), range)) {
 					location_queue.offer(loc);
 					loc = location_queue.poll();
 					cnt2++;
@@ -533,25 +510,22 @@ public class L1RobotInstance extends L1PcInstance {
 					}
 				}
 				break;
-			case DEATH: //死
+			case DEATH: // 死
 				int[] loc = Getback.GetBack_Restart(this);
-				Broadcaster.broadcastPacket(this, new S_RemoveObject(this),
-						true);
+				Broadcaster.broadcastPacket(this, new S_RemoveObject(this), true);
 				setCurrentHp(getLevel());
 				set_food(225); // 死んだときに100％
 				setDead(false);
-				L1World.getInstance().moveVisibleObject(this, loc[0], loc[1],
-						loc[2]);
+				L1World.getInstance().moveVisibleObject(this, loc[0], loc[1], loc[2]);
 				setX(loc[0]);
 				setY(loc[1]);
 				setMap((short) loc[2]);
-				for (L1PcInstance pc2 : L1World.getInstance().getVisiblePlayer(
-						this)) {
+				for (L1PcInstance pc2 : L1World.getInstance().getVisiblePlayer(this)) {
 					pc2.sendPackets(new S_OtherCharPacks(this, pc2));
 				}
-				_target = null; // 漏水防止
-				_targetItem = null; //漏水防止
-				_target2 = null; // 漏水防止
+				_target = null; // リーク防止
+				_targetItem = null; // リーク防止
+				_target2 = null; // リーク防止
 				delayBot(3000 + _random.nextInt(6000));
 				returnBot(1000 + _random.nextInt(2000));
 				setTownsaid(false);
@@ -574,115 +548,82 @@ public class L1RobotInstance extends L1PcInstance {
 
 	private void add_SETTING_Loc(Robot_Location_bean ro) {
 		// TODO 自動生成されたメソッド・スタブ
-		if (ro.getX() == 33457 && ro.getY() == 32819 && ro.getMapId() == 4) {//ギラン
+		if (ro.getX() == 33457 && ro.getY() == 32819 && ro.getMapId() == 4) {// ギラン
 																				// ポーション店
-			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {// オレン
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テルニョ
-																				// 位置
-				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));//テル
-																				// する
-																				// 位置
-			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 記事
+			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273 && getY() <= 32297 && getMapId() == 4) {// オーレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テレポーターの位置
+				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));// テレポートする位置
+			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385 && getY() <= 33411 && getMapId() == 4) {// ナイト
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));
 			}
 			if (location_queue.size() > 0)
 				etc_Village_Move = true;
-		} else if (ro.getX() == 33432 && ro.getY() == 32815
-				&& ro.getMapId() == 4) {//ギラン2ポーション店
-			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {//オレン
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));//テルニョ
-																				//位置
-				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));// テル
-																				// する
-																				// 位置
-			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 記事
+		} else if (ro.getX() == 33432 && ro.getY() == 32815 && ro.getMapId() == 4) {// ギラン2ポーション店
+			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273 && getY() <= 32297 && getMapId() == 4) {// オーレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テレポーターの位置
+				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));// テレポートする位置
+			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385 && getY() <= 33411 && getMapId() == 4) {// ナイト
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));
 			}
 			if (location_queue.size() > 0)
 				etc_Village_Move = true;
-		} else if (ro.getX() == 33428 && ro.getY() == 32806
-				&& ro.getMapId() == 4) {//ギラン3,5アデン上段
-			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {// オレン
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テルニョ
-																				//位置
-				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));//テル
-																				//する
-																				// 位置
-			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {//記事
+		} else if (ro.getX() == 33428 && ro.getY() == 32806 && ro.getMapId() == 4) {// ギラン3,5アデン上段
+			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273 && getY() <= 32297 && getMapId() == 4) {// オーレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テレポーター位置
+				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));// テレポートする位置
+			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385 && getY() <= 33411 && getMapId() == 4) {// ナイト
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));
 			}
 			if (location_queue.size() > 0)
 				etc_Village_Move = true;
-		} else if (ro.getX() == 33437 && ro.getY() == 32803
-				&& ro.getMapId() == 4) {//ギラン4ジェンドール
-			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {//オレン
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));//テルニョ
-																				// 位置
-				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));//テル
-																				// する
-																				// 位置
-			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 記事
+		} else if (ro.getX() == 33437 && ro.getY() == 32803 && ro.getMapId() == 4) {// ギラン4
+																					// ジェンドール
+			if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273 && getY() <= 32297 && getMapId() == 4) {// オーレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テレポーター位置
+				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));// テレポートする位置
+			} else if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385 && getY() <= 33411 && getMapId() == 4) {// ナイト
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(33438, 32796, 4));
 			}
 			if (location_queue.size() > 0)
 				etc_Village_Move = true;
-		} else if (ro.getX() == 34065 && ro.getY() == 32287
-				&& ro.getMapId() == 4) {// オーレンポーション店
-			if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 記事
+		} else if (ro.getX() == 34065 && ro.getY() == 32287 && ro.getMapId() == 4) {// オーレンポーション店
+			if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385 && getY() <= 33411 && getMapId() == 4) {// ナイト
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(34062, 32278, 4));
-			} else if (getX() >= 33410 && getX() <= 33461 && getY() >= 32788
-					&& getY() <= 32838 && getMapId() == 4) {// ギラン
+			} else if (getX() >= 33410 && getX() <= 33461 && getY() >= 32788 && getY() <= 32838 && getMapId() == 4) {// ギラン
 				location_queue.offer(new Robot_Location_bean(33437, 32794, 4));
 				location_queue.offer(new Robot_Location_bean(34062, 32278, 4));
 			}
 			if (location_queue.size() > 0)
 				etc_Village_Move = true;
-		} else if (ro.getX() == 32596 && ro.getY() == 32741
-				&& ro.getMapId() == 4) {// グルマルポーション店
-			if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {// 記事
+		} else if (ro.getX() == 32596 && ro.getY() == 32741 && ro.getMapId() == 4) {// グルーディン
+																					// ポーション店
+			if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385 && getY() <= 33411 && getMapId() == 4) {// ナイト
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(32608, 32734, 4));
-			} else if (getX() >= 33410 && getX() <= 33461 && getY() >= 32788
-					&& getY() <= 32838 && getMapId() == 4) {// ギラン
+			} else if (getX() >= 33410 && getX() <= 33461 && getY() >= 32788 && getY() <= 32838 && getMapId() == 4) {// ギラン
 				location_queue.offer(new Robot_Location_bean(33437, 32794, 4));
 				location_queue.offer(new Robot_Location_bean(32608, 32734, 4));
-			} else if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {// オレン
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テルニョ
-																				// 位置
+			} else if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273 && getY() <= 32297 && getMapId() == 4) {// オーレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テレポーター位置
 				location_queue.offer(new Robot_Location_bean(32608, 32734, 4));
 			}
 			if (location_queue.size() > 0)
 				etc_Village_Move = true;
-		} else if (ro.getX() == 33738 && ro.getY() == 32494
-				&& ro.getMapId() == 4) {// ウェルダンポーション店
-			if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385
-					&& getY() <= 33411 && getMapId() == 4) {//記事
+		} else if (ro.getX() == 33738 && ro.getY() == 32494 && ro.getMapId() == 4) {// ウェルダン
+																					// ポーション店
+			if (getX() >= 33065 && getX() <= 33093 && getY() >= 33385 && getY() <= 33411 && getMapId() == 4) {// ナイト
 				location_queue.offer(new Robot_Location_bean(33080, 33384, 4));
 				location_queue.offer(new Robot_Location_bean(33709, 32500, 4));
-			} else if (getX() >= 33410 && getX() <= 33461 && getY() >= 32788
-					&& getY() <= 32838 && getMapId() == 4) {//ギラン
+			} else if (getX() >= 33410 && getX() <= 33461 && getY() >= 32788 && getY() <= 32838 && getMapId() == 4) {// ギラン
 				location_queue.offer(new Robot_Location_bean(33437, 32794, 4));
 				location_queue.offer(new Robot_Location_bean(33709, 32500, 4));
-			} else if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273
-					&& getY() <= 32297 && getMapId() == 4) {// オレン
-				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));//テルニョ
-																				//位置
+			} else if (getX() >= 34047 && getX() <= 34064 && getY() >= 32273 && getY() <= 32297 && getMapId() == 4) {// オーレン
+				location_queue.offer(new Robot_Location_bean(34064, 32278, 4));// テレポーター位置
 				location_queue.offer(new Robot_Location_bean(33709, 32500, 4));
 			}
 			if (location_queue.size() > 0)
@@ -701,10 +642,8 @@ public class L1RobotInstance extends L1PcInstance {
 			public void run() {
 				// TODO自動生成されたメソッド・スタブ
 				_EndThread = true;
-				for (L1PcInstance pc : L1World.getInstance()
-						.getRecognizePlayer(L1RobotInstance.this)) {
-					pc.sendPackets(new S_RemoveObject(L1RobotInstance.this),
-							true);
+				for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(L1RobotInstance.this)) {
+					pc.sendPackets(new S_RemoveObject(L1RobotInstance.this), true);
 					pc.removeKnownObject(L1RobotInstance.this);
 				}
 				L1World world = L1World.getInstance();
@@ -813,8 +752,7 @@ public class L1RobotInstance extends L1PcInstance {
 		if (hasSkillEffect(71) == true) { // ディケイポーションの状態
 			return 0;
 		}
-		int percent = (int) Math.round((double) getCurrentHp()
-				/ (double) getMaxHp() * 100);
+		int percent = (int) Math.round((double) getCurrentHp() / (double) getMaxHp() * 100);
 		int gfxid = 0;
 		int healHp = 0;
 		int delay = 0;
@@ -830,11 +768,8 @@ public class L1RobotInstance extends L1PcInstance {
 			return 0;
 		// アブソリュートバリアの解除
 		cancelAbsoluteBarrier();
-		Broadcaster.broadcastPacket(this, new S_SkillSound(getId(), gfxid),
-				true);
-		if (hasSkillEffect(POLLUTE_WATER)
-				|| hasSkillEffect(10517)) { // ポルトウォーター中は
-																		// 回復量1/2倍
+		Broadcaster.broadcastPacket(this, new S_SkillSound(getId(), gfxid), true);
+		if (hasSkillEffect(POLLUTE_WATER) || hasSkillEffect(10517)) { // ポルートウォーター中は回復量1/2倍
 			healHp /= 2;
 		}
 
@@ -847,7 +782,7 @@ public class L1RobotInstance extends L1PcInstance {
 
 	private void resetPotion() {
 		/*
-		 *ディレイ（2000 + _random.nextInt（14000））;帰還（）;
+		 * ディレイ（2000 + _random.nextInt（14000））;帰還（）;
 		 */
 
 		potCount = (short) (800 + _random.nextInt(1000));
@@ -859,10 +794,8 @@ public class L1RobotInstance extends L1PcInstance {
 			searchTarget();
 		}
 		if (_target != null && _target instanceof L1MonsterInstance) {
-			if (((L1MonsterInstance) _target).getHiddenStatus() != L1NpcInstance.HIDDEN_STATUS_NONE
-					|| _target.isDead()
-					|| ((L1MonsterInstance) _target)._destroyed
-					|| ((L1MonsterInstance) _target).getTarget() != this
+			if (((L1MonsterInstance) _target).getHiddenStatus() != L1NpcInstance.HIDDEN_STATUS_NONE || _target.isDead()
+					|| ((L1MonsterInstance) _target)._destroyed || ((L1MonsterInstance) _target).getTarget() != this
 					|| _target.isInvisble()) {
 				_target = null;
 				searchTarget();
@@ -870,18 +803,17 @@ public class L1RobotInstance extends L1PcInstance {
 			}
 		}
 		if (_targetItem != null) {
-			L1Inventory groundInventory = L1World.getInstance().getInventory(
-					_targetItem.getX(), _targetItem.getY(),
+			L1Inventory groundInventory = L1World.getInstance().getInventory(_targetItem.getX(), _targetItem.getY(),
 					_targetItem.getMapId());
 			if (!groundInventory.checkItem(_targetItem.getItemId())) {
 				_targetItem = null;
-				searchTarget(); //人工知能
+				searchTarget(); // 人工知能
 				setSleepTime(100);
 			} else {
 				onTargetItem();
 				return true;
 			}
-		} else if (_target != null && _target2 == null) { //殴る奴いないとき
+		} else if (_target != null && _target2 == null) { // 殴る奴いないとき
 			return onTarget();
 		}
 		return false;
@@ -909,18 +841,14 @@ public class L1RobotInstance extends L1PcInstance {
 	private void searchTarget() {
 
 		int MaxRange = 2;
-		// if （狩猟ボット_位置.startsWith（ "忘れられた島"））
-		// MaxRange = 3;
 
-		ArrayList<L1Object> list = L1World.getInstance()
-				.getVisibleObjects(this);
-		ArrayList<L1PcInstance> list2 = L1World.getInstance().getVisiblePlayer(
-				this);
+		ArrayList<L1Object> list = L1World.getInstance().getVisibleObjects(this);
+		ArrayList<L1PcInstance> list2 = L1World.getInstance().getVisiblePlayer(this);
 
 		if (list2.contains(_target2)) {
 			return;
 		}
-		// 殴っ奴ない殴らせ？人工知能
+		// 殴ってない奴を殴らせAI
 
 		if (list.size() > 1)
 			Collections.shuffle(list);
@@ -930,34 +858,22 @@ public class L1RobotInstance extends L1PcInstance {
 			if (obj instanceof L1GroundInventory) {
 				L1GroundInventory inv = (L1GroundInventory) obj;
 				for (L1ItemInstance item : inv.getItems()) {
-					// if (item.getItemOwner() != null && item.getItemOwner() ==
-					// this) { //すべてのシステム食べ
-					if (item != null
-							&& !isDistance(getX(), getY(), mapid, item.getX(),
-									item.getY(), mapid, 20)) {
+					if (item != null && !isDistance(getX(), getY(), mapid, item.getX(), item.getY(), mapid, 20)) {
 						continue;
 					}
-					if (item != null
-							&& isDistance(getX(), getY(), mapid, item.getX(),
-									item.getY(), mapid, 10)
-							&& !isDistance(getX(), getY(), mapid, item.getX(),
-									item.getY(), mapid, -1)) {
+					if (item != null && isDistance(getX(), getY(), mapid, item.getX(), item.getY(), mapid, 10)
+							&& !isDistance(getX(), getY(), mapid, item.getX(), item.getY(), mapid, -1)) {
 						if (_serchCource(item.getX(), item.getY()) == -1) {
 							continue;
 						}
 						if (item_queue.contains(item)) {
 							continue;
 						}
-
-						// } //すべてのシステム食べ
-
 						item_queue.offer(item);
-						list = null; // 漏水防止2015.11.26
-						obj = null; // 漏水防止2015.11.26
-						item = null; // 漏水防止
-
+						list = null; // リーク防止 2015.11.26
+						obj = null; // リーク防止 2015.11.26
+						item = null; // リーク防止
 					}
-
 				}
 			}
 		}
@@ -968,10 +884,8 @@ public class L1RobotInstance extends L1PcInstance {
 
 		for (int i = 0; i <= MaxRange; i++) {
 
-			list = L1World.getInstance().getVisibleObjects(this,
-					i == 0 ? 1 : 4 * i);
-			list2 = L1World.getInstance().getVisiblePlayer(this,
-					i == 0 ? 1 : 4 * i);
+			list = L1World.getInstance().getVisibleObjects(this, i == 0 ? 1 : 4 * i);
+			list2 = L1World.getInstance().getVisiblePlayer(this, i == 0 ? 1 : 4 * i);
 
 			if (list2.size() > 1)
 				Collections.shuffle(list2);
@@ -993,24 +907,18 @@ public class L1RobotInstance extends L1PcInstance {
 					if (saram.isInvisble()) {
 						continue;
 					}
-					if (saram.getMap().isSafetyZone(saram.getX(),
-							saram.getY())) {
+					if (saram.getMap().isSafetyZone(saram.getX(), saram.getY())) {
 						continue;
 					}
 					if (getClanid() == saram.getClanid()) {
 						continue;
 					}
 
-					if (obj2 != null
-							&& !isDistance(getX(), getY(), mapid,
-									obj2.getX(), obj2.getY(), mapid, 20)) {
+					if (obj2 != null && !isDistance(getX(), getY(), mapid, obj2.getX(), obj2.getY(), mapid, 20)) {
 						continue;
 					}
-					if (obj2 != null
-							&& isDistance(getX(), getY(), mapid,
-									obj2.getX(), obj2.getY(), mapid, 10)
-							&& !isDistance(getX(), getY(), mapid,
-									obj2.getX(), obj2.getY(), mapid, -1)) {
+					if (obj2 != null && isDistance(getX(), getY(), mapid, obj2.getX(), obj2.getY(), mapid, 10)
+							&& !isDistance(getX(), getY(), mapid, obj2.getX(), obj2.getY(), mapid, -1)) {
 						if (_serchCource(obj2.getX(), obj2.getY()) == -1) {
 							passTargetList2.add(obj2);
 							continue;
@@ -1021,8 +929,8 @@ public class L1RobotInstance extends L1PcInstance {
 					FirstSkill = false;
 					// setRsaid(false); //ロボットチャット
 					// setDissaid(false); //距離チャット
-					list2 = null;// 漏水防止2015.11.26
-					obj2 = null; // 漏水防止2015.11.26
+					list2 = null;// リーク防止 2015.11.26
+					obj2 = null; // リーク防止 2015.11.26
 					saram = null;
 					return;
 				}
@@ -1038,13 +946,11 @@ public class L1RobotInstance extends L1PcInstance {
 					if (mon.getCurrentHp() <= 0 || mon.isDead()) {
 						continue;
 					}
-					if (mon.getHiddenStatus() != L1NpcInstance.HIDDEN_STATUS_NONE
-							|| mon._destroyed || mon.isInvisble()) {
+					if (mon.getHiddenStatus() != L1NpcInstance.HIDDEN_STATUS_NONE || mon._destroyed
+							|| mon.isInvisble()) {
 						continue;
 					}
-					if (mon.getNpcId() == 100623
-							|| mon.getNpcId() == 100624
-							|| mon.getNpcId() == 45941
+					if (mon.getNpcId() == 100623 || mon.getNpcId() == 100624 || mon.getNpcId() == 45941
 							|| (mon.getNpcId() >= 46048 && mon.getNpcId() <= 46052)) {
 						continue;
 					}
@@ -1054,21 +960,18 @@ public class L1RobotInstance extends L1PcInstance {
 					if (mon.getTarget() != null && mon.getTarget() != this) {
 						continue;
 					}
-					if (obj != null
-							&& !isDistance(getX(), getY(), mapid, obj.getX(),
-									obj.getY(), mapid, 20)) {
+					if (obj != null && !isDistance(getX(), getY(), mapid, obj.getX(), obj.getY(), mapid, 20)) {
 						continue;
 					}
-					if (obj != null
-							&& _serchCource(obj.getX(), obj.getY()) == -1) {
+					if (obj != null && _serchCource(obj.getX(), obj.getY()) == -1) {
 						passTargetList.add(obj);
 						continue;
 					}
 
 					_target = mon;
 					FirstSkill = false;
-					list = null; //漏水防止2015.11.26
-					obj = null; // 漏水防止2015.11.26
+					list = null; // リーク防止2015.11.26
+					obj = null; // リーク防止2015.11.26
 					mon = null;
 					return;
 				}
@@ -1086,14 +989,15 @@ public class L1RobotInstance extends L1PcInstance {
 			setSleepTime(800 + _random.nextInt(400));
 
 		} else {
-	/*		int dir = moveDirection(_targetItem.getX(), _targetItem.getY(),
-					_targetItem.getMapId());*/
+			/*
+			 * int dir = moveDirection(_targetItem.getX(), _targetItem.getY(),
+			 * _targetItem.getMapId());
+			 */
 			int dir = moveDirectionMatiz(_targetItem.getX(), _targetItem.getY(), _targetItem.getMapId());
 			if (dir == -1) {
 				_targetItem = null;
 			} else {
-				boolean tail = World.isThroughObject(getX(), getY(),
-						getMapId(), dir);
+				boolean tail = World.isThroughObject(getX(), getY(), getMapId(), dir);
 				int tmpx = aStar.getXY(dir, true) + getX();
 				int tmpy = aStar.getXY(dir, false) + getY();
 				boolean obj = World.isMapdynamic(tmpx, tmpy, getMapId());
@@ -1112,13 +1016,11 @@ public class L1RobotInstance extends L1PcInstance {
 			setHeading(chdir);
 			Broadcaster.broadcastPacket(this, new S_ChangeHeading(this), true);
 		}
-		Broadcaster.broadcastPacket(this,
-				new S_AttackPacket(this, _targetItem.getId(),
-						ActionCodes.ACTION_Pickup), true);
-		L1Inventory groundInventory = L1World.getInstance().getInventory(
-				_targetItem.getX(), _targetItem.getY(), _targetItem.getMapId());
-		groundInventory.tradeItem(_targetItem, _targetItem.getCount(),
-				getInventory());
+		Broadcaster.broadcastPacket(this, new S_AttackPacket(this, _targetItem.getId(), ActionCodes.ACTION_Pickup),
+				true);
+		L1Inventory groundInventory = L1World.getInstance().getInventory(_targetItem.getX(), _targetItem.getY(),
+				_targetItem.getMapId());
+		groundInventory.tradeItem(_targetItem, _targetItem.getCount(), getInventory());
 		_targetItem = null;
 	}
 
@@ -1130,11 +1032,10 @@ public class L1RobotInstance extends L1PcInstance {
 		_targetItem = null;
 		L1Character target = _target;
 
-		int percent = (int) Math.round((double) getCurrentHp()
-				/ (double) getMaxHp() * 100);
+		int percent = (int) Math.round((double) getCurrentHp() / (double) getMaxHp() * 100);
 		if (_target2 != null && percent < 85) {
 			_target = null;
-			return checkTarget2(); //人工知能
+			return checkTarget2(); // 人工知能
 
 		}
 
@@ -1150,32 +1051,27 @@ public class L1RobotInstance extends L1PcInstance {
 		/** ウェチャン **/
 
 		int escapeDistance = 15;
-		if (hasSkillEffect(L1SkillId.DARKNESS)
-				|| hasSkillEffect(
-						L1SkillId.CURSE_BLIND))
+		if (hasSkillEffect(L1SkillId.DARKNESS) || hasSkillEffect(L1SkillId.CURSE_BLIND))
 			escapeDistance = 1;
 		int calcx = (int) getLocation().getX() - target.getLocation().getX();
 		int calcy = (int) getLocation().getY() - target.getLocation().getY();
 
-		if (Math.abs(calcx) > escapeDistance
-				|| Math.abs(calcy) > escapeDistance) {
+		if (Math.abs(calcx) > escapeDistance || Math.abs(calcy) > escapeDistance) {
 			_target = null;
 			return false;
 		}
 		boolean tail = World.isThroughAttack(getX(), getY(), getMapId(),
 				calcheading(this, target.getX(), target.getY()));
 
-		if (getX() == _target.getX() && getY() == _target.getY()
-				&& getMapId() == _target.getMapId())
+		if (getX() == _target.getX() && getY() == _target.getY() && getMapId() == _target.getMapId())
 			tail = true;
 
-		boolean door = World.moveDoor(getX(), getY(), getMapId(),
-				calcheading(this, target.getX(), target.getY()));
+		boolean door = World.moveDoor(getX(), getY(), getMapId(), calcheading(this, target.getX(), target.getY()));
 
 		int range = 1;
 		if (isElf() && getCurrentWeapon() == 20)
 			range = 11;
-		// 初段ポーまたはトリプルまたは魔法？
+		// 初段がフォースレイヤー、またはトリプルアロー、または魔法？
 		if (!FirstSkill && !isSkillDelay() && getCurrentMp() > 30) {
 			int skillId = 0;
 			int skill_range = 11;
@@ -1186,9 +1082,11 @@ public class L1RobotInstance extends L1PcInstance {
 				skill_range = 1;
 			}
 			if (skillId > 0) {
-				if (isAttackPosition(this, target.getX(), target.getY(), target.getMapId(), skill_range) == true 	&& isAttackPosition(target, getX(), getY(),	getMapId(), skill_range) == true) {
+				if (isAttackPosition(this, target.getX(), target.getY(), target.getMapId(), skill_range) == true
+						&& isAttackPosition(target, getX(), getY(), getMapId(), skill_range) == true) {
 					FirstSkill = true;
-					new L1SkillUse().handleCommands(this, skillId,	_target.getId(), _target.getX(), _target.getY(),	null, 0, L1SkillUse.TYPE_NORMAL);
+					new L1SkillUse().handleCommands(this, skillId, _target.getId(), _target.getX(), _target.getY(),
+							null, 0, L1SkillUse.TYPE_NORMAL);
 					setSleepTime(calcSleepTime(MAGIC_SPEED));
 					actionStatus = ATTACK;
 					return true;
@@ -1196,10 +1094,8 @@ public class L1RobotInstance extends L1PcInstance {
 			}
 		}
 
-		if (isAttackPosition(this, target.getX(), target.getY(),
-				target.getMapId(), range) == true
-				&& isAttackPosition(target, getX(), getY(),
-						getMapId(), range) == true
+		if (isAttackPosition(this, target.getX(), target.getY(), target.getMapId(), range) == true
+				&& isAttackPosition(target, getX(), getY(), getMapId(), range) == true
 
 		) {// 基本攻撃範囲
 			if (door || !tail) {
@@ -1210,23 +1106,23 @@ public class L1RobotInstance extends L1PcInstance {
 				}
 				return false;
 			}
-			setHeading(
-					targetDirection(target.getX(),
-							target.getY()));
+			setHeading(targetDirection(target.getX(), target.getY()));
 			attackTarget(target);
 			actionStatus = ATTACK;
 			return true;
 
 		} else {
-			/*int dir = moveDirection(target.getX(), target.getY(),	target.getMapId());*/
-			int dir = moveDirectionMatiz(target.getX(), target.getY(),	target.getMapId());
+			/*
+			 * int dir = moveDirection(target.getX(), target.getY(),
+			 * target.getMapId());
+			 */
+			int dir = moveDirectionMatiz(target.getX(), target.getY(), target.getMapId());
 			if (dir == -1) {
 				passTargetList.add(_target);
 				_target = null;
 				return false;
 			} else {
-				boolean tail2 = World.isThroughObject(getX(), getY(),
-						getMapId(), dir);
+				boolean tail2 = World.isThroughObject(getX(), getY(), getMapId(), dir);
 				if (door || !tail2) {
 					cnt++;
 					if (cnt > 5) {
@@ -1263,8 +1159,7 @@ public class L1RobotInstance extends L1PcInstance {
 			_himent = himentArray[_random.nextInt(himentArray.length)];
 			try {
 				Delay(1500);
-				Broadcaster.broadcastPacket(this, new S_ChatPacket(this,
-						_himent, Opcodes.S_SAY, 0));
+				Broadcaster.broadcastPacket(this, new S_ChatPacket(this, _himent, Opcodes.S_SAY, 0));
 				setGlsaid(true);
 				_himent = null;
 			} catch (Exception e) {
@@ -1273,20 +1168,17 @@ public class L1RobotInstance extends L1PcInstance {
 		/** 遭遇時のチャット **/
 
 		int escapeDistance = 15;
-		if (hasSkillEffect(L1SkillId.DARKNESS)
-				|| hasSkillEffect(
-						L1SkillId.CURSE_BLIND))
+		if (hasSkillEffect(L1SkillId.DARKNESS) || hasSkillEffect(L1SkillId.CURSE_BLIND))
 			escapeDistance = 1;
 		int calcx = (int) getLocation().getX() - target2.getLocation().getX();
 		int calcy = (int) getLocation().getY() - target2.getLocation().getY();
 
-		if (Math.abs(calcx) > escapeDistance
-				|| Math.abs(calcy) > escapeDistance) {
+		if (Math.abs(calcx) > escapeDistance || Math.abs(calcy) > escapeDistance) {
 			_target2 = null;
 			return false;
 		}
 
-		/** 逃げる時のチャット**/
+		/** 逃げる時のチャット **/
 		/*
 		 * int disrandom= _random.nextInt(100)+1; if(disrandom > 50 && !isElf()
 		 * && Rsaid() && !target2.isRobot() && Math.abs(calcx) > 6 && !Dissaid()
@@ -1303,12 +1195,10 @@ public class L1RobotInstance extends L1PcInstance {
 		boolean tail = World.isThroughAttack(getX(), getY(), getMapId(),
 				calcheading(this, target2.getX(), target2.getY()));
 
-		if (getX() == _target2.getX() && getY() == _target2.getY()
-				&& getMapId() == _target2.getMapId())
+		if (getX() == _target2.getX() && getY() == _target2.getY() && getMapId() == _target2.getMapId())
 			tail = true;
 
-		boolean door = World.moveDoor(getX(), getY(), getMapId(),
-				calcheading(this, target2.getX(), target2.getY()));
+		boolean door = World.moveDoor(getX(), getY(), getMapId(), calcheading(this, target2.getX(), target2.getY()));
 
 		int range = 1;
 		if (isElf() && getCurrentWeapon() == 20)
@@ -1320,7 +1210,7 @@ public class L1RobotInstance extends L1PcInstance {
 			int skill_range = 11;
 			if (isElf() && getCurrentWeapon() == 20) {
 				skillId = L1SkillId.TRIPLE_ARROW;
-			} else if (isWizard()) { // 玄ボットディス
+			} else if (isWizard()) { // ウィザードBOT DIG
 				skillId = L1SkillId.DISINTEGRATE;
 			} else if (isDragonknight()) {
 				skillId = L1SkillId.FOU_SLAYER;
@@ -1331,41 +1221,32 @@ public class L1RobotInstance extends L1PcInstance {
 			}
 
 			if (skillId > 0) {
-				if (isAttackPosition(this, target2.getX(),
-						target2.getY(), target2.getMapId(), skill_range) == true
-						&& isAttackPosition(target2, getX(),
-								getY(), getMapId(), skill_range) == true) {
+				if (isAttackPosition(this, target2.getX(), target2.getY(), target2.getMapId(), skill_range) == true
+						&& isAttackPosition(target2, getX(), getY(), getMapId(), skill_range) == true) {
 
 					FirstSkill = true;
 
-					if (isKnight()
-							&& skillId == L1SkillId.SHOCK_STUN
+					if (isKnight() && skillId == L1SkillId.SHOCK_STUN
 							&& !target2.hasSkillEffect(L1SkillId.SHOCK_STUN)) {
 
 						int STrnd = _random.nextInt(10) + 1;
 						if (STrnd >= 7) {
-							_shockStunDuration = stunTimeArray[_random
-									.nextInt(stunTimeArray.length)];
-							S_SkillSound ss1 = new S_SkillSound(
-									target2.getId(), 4434);
+							_shockStunDuration = stunTimeArray[_random.nextInt(stunTimeArray.length)];
+							S_SkillSound ss1 = new S_SkillSound(target2.getId(), 4434);
 							target2.sendPackets(ss1);
 							Broadcaster.broadcastPacket(target2, ss1);
 							ss1 = null;
-							target2.setSkillEffect(
-									L1SkillId.SHOCK_STUN, _shockStunDuration);
-							L1EffectSpawn.getInstance().spawnEffect(81162,
-									_shockStunDuration, target2.getX(),
+							target2.setSkillEffect(L1SkillId.SHOCK_STUN, _shockStunDuration);
+							L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, target2.getX(),
 									target2.getY(), target2.getMapId());
-							S_Paralysis par = new S_Paralysis(
-									S_Paralysis.TYPE_STUN, true);
+							S_Paralysis par = new S_Paralysis(S_Paralysis.TYPE_STUN, true);
 							target2.sendPackets(par);
 							par = null;
 
 							L1SkillDelay.onSkillUse(this, 8000);
 
 						} else {
-							S_SkillSound ss1 = new S_SkillSound(
-									target2.getId(), 4434);
+							S_SkillSound ss1 = new S_SkillSound(target2.getId(), 4434);
 							target2.sendPackets(ss1);
 							Broadcaster.broadcastPacket(target2, ss1);
 							ss1 = null;
@@ -1373,17 +1254,13 @@ public class L1RobotInstance extends L1PcInstance {
 						}
 					} else if (!isKnight()) {
 
-						new L1SkillUse().handleCommands(this, skillId,
-								_target2.getId(), _target2.getX(),
-								_target2.getY(), null, 0,
-								L1SkillUse.TYPE_NORMAL);
+						new L1SkillUse().handleCommands(this, skillId, _target2.getId(), _target2.getX(),
+								_target2.getY(), null, 0, L1SkillUse.TYPE_NORMAL);
 					}
 					int drandom = _random.nextInt(10) + 1;
-					if (drandom > 6 && isDarkelf()) { // すべてへボットダブル
-						Broadcaster.broadcastPacket(_target2, new S_SkillSound(
-								_target2.getId(), 3398));
-						_target2.sendPackets(new S_SkillSound(_target2.getId(),
-								3398));
+					if (drandom > 6 && isDarkelf()) { // ダークエルフ ダブル
+						Broadcaster.broadcastPacket(_target2, new S_SkillSound(_target2.getId(), 3398));
+						_target2.sendPackets(new S_SkillSound(_target2.getId(), 3398));
 						_target2.receiveDamage(this, 100);
 					}
 					setSleepTime(calcSleepTime(MAGIC_SPEED));
@@ -1392,10 +1269,8 @@ public class L1RobotInstance extends L1PcInstance {
 				}
 			}
 		}
-		if (isAttackPosition(this, target2.getX(), target2.getY(),
-				target2.getMapId(), range) == true
-				&& isAttackPosition(target2, getX(), getY(),
-						getMapId(), range) == true) {// 基本攻撃範囲
+		if (isAttackPosition(this, target2.getX(), target2.getY(), target2.getMapId(), range) == true
+				&& isAttackPosition(target2, getX(), getY(), getMapId(), range) == true) {// 基本攻撃範囲
 			if (door || !tail) {
 				cnt++;
 				if (cnt > 5) {
@@ -1405,23 +1280,21 @@ public class L1RobotInstance extends L1PcInstance {
 				return false;
 			}
 
-			setHeading(
-					targetDirection(target2.getX(),
-							target2.getY()));
+			setHeading(targetDirection(target2.getX(), target2.getY()));
 			attackTarget(target2);
 			actionStatus = ATTACK;
 			return true;
 
 		} else {
-			//int dir = moveDirection(target2.getX(), target2.getY(),	target2.getMapId());
-			int dir = moveDirectionMatiz(target2.getX(), target2.getY(),	target2.getMapId());
+			// int dir = moveDirection(target2.getX(), target2.getY(),
+			// target2.getMapId());
+			int dir = moveDirectionMatiz(target2.getX(), target2.getY(), target2.getMapId());
 			if (dir == -1) {
 				passTargetList2.add(_target2);
 				_target2 = null;
 				return false;
 			} else {
-				boolean tail2 = World.isThroughObject(getX(), getY(),
-						getMapId(), dir);
+				boolean tail2 = World.isThroughObject(getX(), getY(), getMapId(), dir);
 				if (door || !tail2) {
 					cnt++;
 					if (cnt > 5) {
@@ -1451,8 +1324,7 @@ public class L1RobotInstance extends L1PcInstance {
 		boolean isLindArmor = false;
 		L1Attack attack = new L1Attack(this, target);
 		if (attack.calcHit()) {
-			if (target.hasSkillEffect(
-					L1SkillId.COUNTER_BARRIER)) {
+			if (target.hasSkillEffect(L1SkillId.COUNTER_BARRIER)) {
 				int chan = random.nextInt(100) + 1;
 				boolean isProbability = false;
 				if (20 > chan) {
@@ -1462,8 +1334,7 @@ public class L1RobotInstance extends L1PcInstance {
 				if (isProbability && isShortDistance) {
 					isCounterBarrier = true;
 				}
-			} else if (target.hasSkillEffect(
-					L1SkillId.MORTAL_BODY)) {
+			} else if (target.hasSkillEffect(L1SkillId.MORTAL_BODY)) {
 				int chan = random.nextInt(100) + 1;
 				boolean isProbability = false;
 				if (15 > chan) {
@@ -1504,8 +1375,8 @@ public class L1RobotInstance extends L1PcInstance {
 	private boolean BackRR = false;
 
 	private void moveBot(int x, int y) {
-		//int dir = moveDirection(x, y, getMapId());
-		int dir = moveDirectionMatiz(x,y,getMapId());
+		// int dir = moveDirection(x, y, getMapId());
+		int dir = moveDirectionMatiz(x, y, getMapId());
 		if (dir == -1) {
 			dir = new Random().nextInt(8);
 			cnt++;
@@ -1518,10 +1389,8 @@ public class L1RobotInstance extends L1PcInstance {
 			}
 			setSleepTime(1000 + _random.nextInt(1000));
 		} else {
-			boolean tail2 = World.isThroughObject(getX(), getY(), getMapId(),
-					dir);
-			boolean door = World.moveDoor(getX(), getY(), getMapId(),
-					calcheading(this, x, y));
+			boolean tail2 = World.isThroughObject(getX(), getY(), getMapId(), dir);
+			boolean door = World.moveDoor(getX(), getY(), getMapId(), calcheading(this, x, y));
 			if (door || !tail2) {
 				cnt++;
 				if (cnt > 20) {
@@ -1535,12 +1404,8 @@ public class L1RobotInstance extends L1PcInstance {
 			setDirectionMove(dir);
 			setSleepTime(calcSleepTime(MOVE_SPEED));
 
-
-
-			if ((BackLoc_1th != null && getLocation().getTileDistance(
-					BackLoc_1th) == 0)
-					|| (BackLoc_2th != null && getLocation().getTileDistance(
-							BackLoc_2th) == 0))
+			if ((BackLoc_1th != null && getLocation().getTileDistance(BackLoc_1th) == 0)
+					|| (BackLoc_2th != null && getLocation().getTileDistance(BackLoc_2th) == 0))
 				cnt3++;
 			else
 				cnt3 = 0;
@@ -1570,8 +1435,7 @@ public class L1RobotInstance extends L1PcInstance {
 		telBot(x, y, mapid, time, true);
 	}
 
-	public void telBot(final int x, final int y, final int mapid, int time,
-			final boolean effect) {
+	public void telBot(final int x, final int y, final int mapid, int time, final boolean effect) {
 		if (huntingBot)
 			item_queue.clear();
 		GeneralThreadPool.getInstance().schedule(new Runnable() {
@@ -1579,32 +1443,26 @@ public class L1RobotInstance extends L1PcInstance {
 			public void run() {
 				// TODO 自動生成されたメソッド・スタブ
 				try {
-					if (L1RobotInstance.this.isDead()
-							|| L1RobotInstance.this.isTeleport()
-							|| L1RobotInstance.this.isParalyzed()
-							|| L1RobotInstance.this.isSleeped()
+					if (L1RobotInstance.this.isDead() || L1RobotInstance.this.isTeleport()
+							|| L1RobotInstance.this.isParalyzed() || L1RobotInstance.this.isSleeped()
 							|| L1RobotInstance.this.hasSkillEffect(L1SkillId.DESPERADO))
 						return;
 
 					setTeleport(true);
 					S_SkillSound ss = new S_SkillSound(getId(), 169);
 					S_RemoveObject ro = new S_RemoveObject(L1RobotInstance.this);
-					for (L1PcInstance pc : L1World.getInstance()
-							.getRecognizePlayer(L1RobotInstance.this)) {
+					for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(L1RobotInstance.this)) {
 						if (effect)
 							pc.sendPackets(ss);
 						pc.sendPackets(ro);
 					}
 					Thread.sleep(280);
-					for (L1PcInstance pc : L1World.getInstance()
-							.getRecognizePlayer(L1RobotInstance.this)) {
-						pc.removeKnownObject(
-								L1RobotInstance.this);
-						pc.sendPackets(ro); // テル虚像ないまま？
+					for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(L1RobotInstance.this)) {
+						pc.removeKnownObject(L1RobotInstance.this);
+						pc.sendPackets(ro); // テレポート虚像ないまま？
 
 					}
-					L1World.getInstance().moveVisibleObject(
-							L1RobotInstance.this, x, y, mapid);
+					L1World.getInstance().moveVisibleObject(L1RobotInstance.this, x, y, mapid);
 					setX(x);
 					setY(y);
 					setMap((short) mapid);
@@ -1614,94 +1472,97 @@ public class L1RobotInstance extends L1PcInstance {
 			}
 		}, time);
 	}
-/*
- * 	private static final byte HEADING_TABLE_X[] = { 0,   1, 1, 1, 0, -1, -1, -1 };
-	private static final byte HEADING_TABLE_Y[] = { -1, -1, 0, 1, 1,  1,  0, -1 };
- */
-	private int moveDirectionMatiz(int x,int y,int m){
-		int dir = 0 ;
-		//dir : 0 : -1
-		//現在の位置よりも大きく、目的地の位置よりも小さく移動可能な場所
-		int mX = x-getX();
-		int mY = y-getY();
+
+	/*
+	 * private static final byte HEADING_TABLE_X[] = { 0, 1, 1, 1, 0, -1, -1, -1
+	 * }; private static final byte HEADING_TABLE_Y[] = { -1, -1, 0, 1, 1, 1, 0,
+	 * -1 };
+	 */
+	private int moveDirectionMatiz(int x, int y, int m) {
+		int dir = 0;
+		// dir : 0 : -1
+		// 現在の位置よりも大きく、目的地の位置よりも小さく移動可能な場所
+		int mX = x - getX();
+		int mY = y - getY();
 
 		int dCase = 9;
-		if(mX > 0 && mY >0){
+		if (mX > 0 && mY > 0) {
 			dCase = 1;
-		}else if(mX ==0 && mY >0){
+		} else if (mX == 0 && mY > 0) {
 			dCase = 2;
-		}else if(mX < 0 && mY>0){
+		} else if (mX < 0 && mY > 0) {
 			dCase = 3;
-		}else if(mX < 0 && mY==0){
+		} else if (mX < 0 && mY == 0) {
 			dCase = 4;
-		}else if(mX < 0 && mY<0){
+		} else if (mX < 0 && mY < 0) {
 			dCase = 5;
-		}else if(mX == 0 && mY<0){
-			dCase =6;
-		}else if(mX > 0 && mY<0){
+		} else if (mX == 0 && mY < 0) {
+			dCase = 6;
+		} else if (mX > 0 && mY < 0) {
 			dCase = 7;
-		}else if(mX >0 && mY ==0){
+		} else if (mX > 0 && mY == 0) {
 			dCase = 8;
-		}else if(mX==0 && mY==0){
+		} else if (mX == 0 && mY == 0) {
 			dCase = 9;
 		}
 		int direction[] = new int[3];
 		int count = 0;
-		while(true){
-			switch(dCase){
-				case 1:
-					direction[0] = 2;
-					direction[1] = 4;
-					direction[2] = 3;
-					break;
-				case 2:
-					direction[0] = 4;
-					direction[1] = 4;
-					direction[2] = 4;
-					break;
-				case 3:
-					direction[0] = 6;
-					direction[1] = 4;
-					direction[2] =5;
-					break;
-				case 4:
-					direction[0] = 6;
-					direction[1] = 6;
-					direction[2] = 6;
-					break;
-				case 5:
-					direction[0] = 6;
-					direction[1] = 0;
-					direction[2] =7;
-					break;
-				case 6:
-					direction[0] = 0;
-					direction[1] = 0;
-					direction[2] =0;
-					break;
-				case 7:
-					direction[0] = 2;
-					direction[1] = 0;
-					direction[2] =1;
-					break;
-				case 8:
-					direction[0] = 2;
-					direction[1] = 2;
-					direction[2] =2;
-					break;
-				case 9:
-					direction[0] = -1;
-					direction[1] = -1;
-					direction[2] =-1;
-					break;
+		while (true) {
+			switch (dCase) {
+			case 1:
+				direction[0] = 2;
+				direction[1] = 4;
+				direction[2] = 3;
+				break;
+			case 2:
+				direction[0] = 4;
+				direction[1] = 4;
+				direction[2] = 4;
+				break;
+			case 3:
+				direction[0] = 6;
+				direction[1] = 4;
+				direction[2] = 5;
+				break;
+			case 4:
+				direction[0] = 6;
+				direction[1] = 6;
+				direction[2] = 6;
+				break;
+			case 5:
+				direction[0] = 6;
+				direction[1] = 0;
+				direction[2] = 7;
+				break;
+			case 6:
+				direction[0] = 0;
+				direction[1] = 0;
+				direction[2] = 0;
+				break;
+			case 7:
+				direction[0] = 2;
+				direction[1] = 0;
+				direction[2] = 1;
+				break;
+			case 8:
+				direction[0] = 2;
+				direction[1] = 2;
+				direction[2] = 2;
+				break;
+			case 9:
+				direction[0] = -1;
+				direction[1] = -1;
+				direction[2] = -1;
+				break;
 			}
 			int rnd = new Random().nextInt(3);
-			if(getMap().isPassable(getX()+HEADING_TABLE_X[direction[rnd]],getY()+HEADING_TABLE_Y[direction[rnd]])){
+			if (getMap().isPassable(getX() + HEADING_TABLE_X[direction[rnd]],
+					getY() + HEADING_TABLE_Y[direction[rnd]])) {
 				dir = direction[rnd];
 				break;
-			}else{
+			} else {
 				count++;
-				if(count > 6){
+				if (count > 6) {
 					dir = -1;
 					break;
 				}
@@ -1710,6 +1571,7 @@ public class L1RobotInstance extends L1PcInstance {
 		}
 		return dir;
 	}
+
 	private int moveDirection(int x, int y, int m) {
 		int dir = 0;
 		try {
@@ -1722,7 +1584,7 @@ public class L1RobotInstance extends L1PcInstance {
 			iCurrentPath = -1;
 			while (!_EndThread && tail != null) {
 				if (tail.x == getX() && tail.y == getY()) {
-					//現在の位置であれば、終了
+					// 現在の位置であれば、終了
 					break;
 				}
 				if (iCurrentPath >= 299 || isDead()) {
@@ -1734,8 +1596,7 @@ public class L1RobotInstance extends L1PcInstance {
 
 			}
 			if (iCurrentPath != -1) {
-				return aStar.calcheading(getX(), getY(),
-						iPath[iCurrentPath][0], iPath[iCurrentPath][1]);
+				return aStar.calcheading(getX(), getY(), iPath[iCurrentPath][0], iPath[iCurrentPath][1]);
 			} else {
 				return -1;
 			}
@@ -1745,8 +1606,7 @@ public class L1RobotInstance extends L1PcInstance {
 				aStar.cleanTail();
 				int calcx = (int) getLocation().getX() - loc.getX();
 				int calcy = (int) getLocation().getY() - loc.getY();
-				if ((Math.abs(calcx) <= 15 && Math.abs(calcy) <= 15)
-						&& loc != null) {
+				if ((Math.abs(calcx) <= 15 && Math.abs(calcy) <= 15) && loc != null) {
 					tail = aStar.searchNearTile(this, x, y, m, false);
 				} else {
 					tail = aStar.searchNearTile(this, x, y, m, true);
@@ -1769,8 +1629,7 @@ public class L1RobotInstance extends L1PcInstance {
 					tail = tail.prev;
 				}
 				if (iCurrentPath != -1) {
-					return aStar.calcheading(getX(), getY(),
-							iPath[iCurrentPath][0], iPath[iCurrentPath][1]);
+					return aStar.calcheading(getX(), getY(), iPath[iCurrentPath][0], iPath[iCurrentPath][1]);
 				} else {
 					dir = -1;
 				}
@@ -1780,8 +1639,7 @@ public class L1RobotInstance extends L1PcInstance {
 					int chdir = calcheading(this, x, y);
 					if (getHeading() != chdir) {
 						this.setHeading(calcheading(this, x, y));
-						Broadcaster.broadcastPacket(this, new S_ChangeHeading(
-								this), true);
+						Broadcaster.broadcastPacket(this, new S_ChangeHeading(this), true);
 					}
 				}
 			}
@@ -1797,13 +1655,10 @@ public class L1RobotInstance extends L1PcInstance {
 		if (dir >= 0) {
 			int nx = 0;
 			int ny = 0;
-			if (hasSkillEffect(L1SkillId.THUNDER_GRAB)
-					|| hasSkillEffect(L1SkillId.DESPERADO)
+			if (hasSkillEffect(L1SkillId.THUNDER_GRAB) || hasSkillEffect(L1SkillId.DESPERADO)
 					|| hasSkillEffect(L1SkillId.POWEGRRIP)) {
 				return;
 			}
-			// Broadcaster.broadcastPacket(this, new S_ChatPacket(this,
-			// ""+狩りマップ.getId（）、Opcodes.S_OPCODE_NORMALCHAT、0））;
 			int heading = 0;
 			nx = HEADING_TABLE_X[dir];
 			ny = HEADING_TABLE_Y[dir];
@@ -1836,8 +1691,7 @@ public class L1RobotInstance extends L1PcInstance {
 		try {
 			int gfxid = this.getTempCharGfx();
 			int weapon = this.getCurrentWeapon();
-			if (gfxid == 3784 || gfxid == 6137 || gfxid == 6142
-					|| gfxid == 6147 || gfxid == 6152 || gfxid == 6157
+			if (gfxid == 3784 || gfxid == 6137 || gfxid == 6142 || gfxid == 6147 || gfxid == 6152 || gfxid == 6157
 					|| gfxid == 9205 || gfxid == 9206) {
 
 				if (weapon == 24)
@@ -1876,39 +1730,27 @@ public class L1RobotInstance extends L1PcInstance {
 				break;
 			}
 
-			if (gfxid == 13719 || gfxid == 13725 || gfxid == 13735) {//ロボット攻撃速度修正
+			if (gfxid == 13719 || gfxid == 13725 || gfxid == 13735) {// ロボット攻撃速度修正
 				interval += 90; // ランカー変身速度遅い
 
 			}
 
-			/*
-			 * if (type != MOVE_SPEED) { if (gfxid >= 11328 && gfxid <= 13635)
-			 * {// ロボット攻撃速度の変更if（getLevel（）> = 15）interval  -  = 43; if（getLevel（）
-			 * >= 30) interval -= 43; if (getLevel() >= 45) interval -= 34; if
-			 * (getLevel() >= 50) interval -= 34; if (getLevel() >= 52) interval
-			 * -= 25; if (getLevel() >= 55) interval -= 24; if (getLevel() >=
-			 * 60) interval -= 22; if (getLevel() >= 65) interval -= 21; if
-			 * (getLevel() >= 70) interval -= 16; if (getLevel() >= 75) interval
-			 * -= 16; if (getLevel() >= 80) interval -= 16; } }
-			 */
 			if (this.isHaste() || getMoveSpeed() == 1) {
 				interval *= HASTE_RATE;
 			}
 			if (type == MOVE_SPEED && this.isFastMovable()) {
 				interval *= HASTE_RATE;
 			}
-			if (type == MOVE_SPEED && this.isBlackwizard()
-					&& this.isUgdraFruit()) {
+			if (type == MOVE_SPEED && this.isBlackwizard() && this.isUgdraFruit()) {
 				interval *= HASTE_RATE;
 			}
-			if (this.isBlood_lust()) { //ブラッドラスト
+			if (this.isBlood_lust()) { // ブラッドラスト
 				interval *= HASTE_RATE;
 			}
 			if (this.isBrave()) {
 				interval *= HASTE_RATE;
 			}
-			if (this.hasSkillEffect(
-					L1SkillId.DANCING_BLADES)) {
+			if (this.hasSkillEffect(L1SkillId.DANCING_BLADES)) {
 				interval *= HASTE_RATE;
 			}
 			if (this.isElfBrave()) {
@@ -1949,7 +1791,6 @@ public class L1RobotInstance extends L1PcInstance {
 
 	public void delayBot(int i) {
 		delay = i;
-		// ディレイ = System.currentTimeMillis() + i;
 	}
 
 	private int cnt = 0;
@@ -1962,18 +1803,13 @@ public class L1RobotInstance extends L1PcInstance {
 					loc = new Robot_Location_bean(33437, 32804, 4);
 				else if (LisBot_SpawnLocation == 6 || LisBot_SpawnLocation == 7) // ハイネ
 					loc = new Robot_Location_bean(33613, 33248, 4);
-				/*
-				 * else if（リースボット_出現位置== 8）//といってい正門loc = new
-				 * Robot_Location_bean（32693、32794、450）; else if（リースボット_出現位置==
-				 * 9) // ウズベクloc = new Robot_Location_bean（32640、33183、4）;
-				 */
-				else if (LisBot_SpawnLocation == 10 || LisBot_SpawnLocation == 11) //グルーディン
+				else if (LisBot_SpawnLocation == 10 || LisBot_SpawnLocation == 11) // グルーディン
 					loc = new Robot_Location_bean(32609, 32738, 4);
-				else if (LisBot_SpawnLocation == 12) //マルソム
+				else if (LisBot_SpawnLocation == 12) // TI
 					loc = new Robot_Location_bean(32587, 32929, 0);
-				else if (LisBot_SpawnLocation == 13) // 記事
+				else if (LisBot_SpawnLocation == 13) // ナイト
 					loc = new Robot_Location_bean(33089, 33393, 4);
-				else if (LisBot_SpawnLocation == 14) // オレン
+				else if (LisBot_SpawnLocation == 14) // オーレン
 					loc = new Robot_Location_bean(34065, 32280, 4);
 				else if (LisBot_SpawnLocation == 15) // アデン
 					loc = new Robot_Location_bean(33938, 33358, 4);
@@ -1981,22 +1817,17 @@ public class L1RobotInstance extends L1PcInstance {
 		} else if (LisBot_Move == 2) {
 			if (loc == null) {
 				if (LisBot_SpawnLocation == 2 || LisBot_SpawnLocation == 4 || LisBot_SpawnLocation == 5
-						|| LisBot_SpawnLocation == 9 || LisBot_SpawnLocation == 8) //ギラン
+						|| LisBot_SpawnLocation == 9 || LisBot_SpawnLocation == 8) // ギラン
 					loc = new Robot_Location_bean(33437, 32795, 4);
 				else if (LisBot_SpawnLocation == 6 || LisBot_SpawnLocation == 7) // ハイネ
 					loc = new Robot_Location_bean(33613, 33257, 4);
-				/*
-				 * else if（リースボット_出現位置== 8）//といってい正門loc = new
-				 * Robot_Location_bean（32685、32795、450）; else if（リースボット_出現位置==
-				 * 9) //ウズベクloc = new Robot_Location_bean（32640、33189、4）;
-				 */
-				else if (LisBot_SpawnLocation == 10 || LisBot_SpawnLocation == 11) //グルーディン
+				else if (LisBot_SpawnLocation == 10 || LisBot_SpawnLocation == 11) // グルーディン
 					loc = new Robot_Location_bean(32611, 32732, 4);
-				else if (LisBot_SpawnLocation == 12) //マルソム
+				else if (LisBot_SpawnLocation == 12) // TI
 					loc = new Robot_Location_bean(32583, 32922, 0);
-				else if (LisBot_SpawnLocation == 13) //記事
+				else if (LisBot_SpawnLocation == 13) // ナイト
 					loc = new Robot_Location_bean(33089, 33396, 4);
-				else if (LisBot_SpawnLocation == 14) //オレン
+				else if (LisBot_SpawnLocation == 14) // オーレン
 					loc = new Robot_Location_bean(34063, 32278, 4);
 				else if (LisBot_SpawnLocation == 15) // アデン
 					loc = new Robot_Location_bean(33934, 33351, 4);
@@ -2005,8 +1836,7 @@ public class L1RobotInstance extends L1PcInstance {
 		if (loc == null)
 			return;
 
-		if (isDistance(getX(), getY(), getMapId(), loc.getX(), loc.getY(),
-				getMapId(), 1 + _random.nextInt(3))) {
+		if (isDistance(getX(), getY(), getMapId(), loc.getX(), loc.getY(), getMapId(), 1 + _random.nextInt(3))) {
 			loc = null;
 			if (LisBot_Move == 1) {
 				LisBot_Move = 2;
@@ -2030,15 +1860,13 @@ public class L1RobotInstance extends L1PcInstance {
 		if (loc == null)
 			return;
 		if (!isParalyzed()) {
-			//int dir = moveDirection(loc.getX(), loc.getY(), loc.getMapId());
+			// int dir = moveDirection(loc.getX(), loc.getY(), loc.getMapId());
 			int dir = moveDirectionMatiz(loc.getX(), loc.getY(), loc.getMapId());
 			if (dir == -1) {
 				cnt++;
 			} else {
-				boolean tail2 = World.isThroughObject(getX(), getY(),
-						getMapId(), dir);
-				boolean door = World.moveDoor(getX(), getY(), getMapId(),
-						calcheading(this, loc.getX(), loc.getY()));
+				boolean tail2 = World.isThroughObject(getX(), getY(), getMapId(), dir);
+				boolean door = World.moveDoor(getX(), getY(), getMapId(), calcheading(this, loc.getX(), loc.getY()));
 				if (door || !tail2) {
 					cnt++;
 				}
@@ -2048,22 +1876,15 @@ public class L1RobotInstance extends L1PcInstance {
 		}
 	}
 
-	/*
-	 * private static final int []レスボットBuffSkill4 = {
-	 * L1SkillId.PHYSICAL_ENCHANT_STR, L1SkillId.PHYSICAL_ENCHANT_DEX,
-	 * L1SkillId.BLESS_WEAPON, L1SkillId.REMOVE_CURSE };
-	 */
-
 	private void etcWindow() {
 		try {
 			_glment = Robot_Hunt.getInstance().getMessage();
 			Delay(30);
 			for (L1PcInstance listner : L1World.getInstance().getAllPlayers()) {
-				S_ChatPacket cp = new S_ChatPacket(this, _glment,
-						Opcodes.S_MESSAGE, 3);
+				S_ChatPacket cp = new S_ChatPacket(this, _glment, Opcodes.S_MESSAGE, 3);
 				listner.sendPackets(cp, true);
 				setGlsaid(true);
-				listner = null; //漏れ防止
+				listner = null; // リーク防止
 				cp = null;
 			}
 		} catch (Exception e) {
@@ -2080,47 +1901,35 @@ public class L1RobotInstance extends L1PcInstance {
 					int[] skillt = LisBotBuffSkill4;
 					if (_random.nextInt(2) == 0) {
 						for (Integer i : skillt) {
-							L1Skills skill = SkillsTable.getInstance()
-									.getTemplate(i);
+							L1Skills skill = SkillsTable.getInstance().getTemplate(i);
 							if (i == L1SkillId.HASTE)
-								new L1SkillUse().handleCommands(
-										L1RobotInstance.this, i,
-										L1RobotInstance.this.getId(),
-										L1RobotInstance.this.getX(),
-										L1RobotInstance.this.getY(), null, 0,
+								new L1SkillUse().handleCommands(L1RobotInstance.this, i, L1RobotInstance.this.getId(),
+										L1RobotInstance.this.getX(), L1RobotInstance.this.getY(), null, 0,
 										L1SkillUse.TYPE_GMBUFF);
 							else
-								Broadcaster.broadcastPacket(
-										L1RobotInstance.this, new S_SkillSound(
-												L1RobotInstance.this.getId(),
-												skill.getCastGfx()), true);
+								Broadcaster.broadcastPacket(L1RobotInstance.this,
+										new S_SkillSound(L1RobotInstance.this.getId(), skill.getCastGfx()), true);
 						}
 						Thread.sleep(1000 + _random.nextInt(1000));
-						// フクサコイン
+						// 黒砂のコイン
 						// Broadcaster.broadcastPacket(L1RobotInstance.this, new
 						// S_SkillSound(L1RobotInstance.this.getId(), 4914),
 						// true);
 					} else {
-						// フクサコイン
+						// 黒砂のコイン
 						// Broadcaster.broadcastPacket(L1RobotInstance.this, new
 						// S_SkillSound(L1RobotInstance.this.getId(), 4914),
 						// true);
 						Thread.sleep(1000 + _random.nextInt(1000));
 						for (Integer i : skillt) {
-							L1Skills skill = SkillsTable.getInstance()
-									.getTemplate(i);
+							L1Skills skill = SkillsTable.getInstance().getTemplate(i);
 							if (i == L1SkillId.HASTE)
-								new L1SkillUse().handleCommands(
-										L1RobotInstance.this, i,
-										L1RobotInstance.this.getId(),
-										L1RobotInstance.this.getX(),
-										L1RobotInstance.this.getY(), null, 0,
+								new L1SkillUse().handleCommands(L1RobotInstance.this, i, L1RobotInstance.this.getId(),
+										L1RobotInstance.this.getX(), L1RobotInstance.this.getY(), null, 0,
 										L1SkillUse.TYPE_GMBUFF);
 							else
-								Broadcaster.broadcastPacket(
-										L1RobotInstance.this, new S_SkillSound(
-												L1RobotInstance.this.getId(),
-												skill.getCastGfx()), true);
+								Broadcaster.broadcastPacket(L1RobotInstance.this,
+										new S_SkillSound(L1RobotInstance.this.getId(), skill.getCastGfx()), true);
 						}
 					}
 				} catch (Exception e) {
@@ -2131,7 +1940,7 @@ public class L1RobotInstance extends L1PcInstance {
 	}
 
 	/**
-	 *距離の値を抽出する。
+	 * 距離の値を抽出する。
 	 *
 	 * @param o
 	 * @param oo
@@ -2146,8 +1955,7 @@ public class L1RobotInstance extends L1PcInstance {
 	/**
 	 * 距離内にある場合は真
 	 */
-	public boolean isDistance(int x, int y, int m, int tx, int ty, int tm,
-			int loc) {
+	public boolean isDistance(int x, int y, int m, int tx, int ty, int tm, int loc) {
 		int distance = getDistance(x, y, tx, ty);
 		if (loc < distance)
 			return false;
@@ -2156,15 +1964,12 @@ public class L1RobotInstance extends L1PcInstance {
 		return true;
 	}
 
-
-
 	public void updateban(boolean swich) {
 		Connection con = null;
 		PreparedStatement pstm = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("UPDATE robots SET ban = ? WHERE name = ?");
+			pstm = con.prepareStatement("UPDATE robots SET ban = ? WHERE name = ?");
 			if (swich) {
 				pstm.setInt(1, 1);
 			} else {
@@ -2186,8 +1991,7 @@ public class L1RobotInstance extends L1PcInstance {
 		PreparedStatement pstm = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("UPDATE robots SET connect = ?,step = ?,map = ? WHERE name = ?");
+			pstm = con.prepareStatement("UPDATE robots SET connect = ?,step = ?,map = ? WHERE name = ?");
 			if (swich) {
 				pstm.setInt(1, 1);
 				pstm.setInt(2, _step);
@@ -2211,8 +2015,7 @@ public class L1RobotInstance extends L1PcInstance {
 		PreparedStatement pstm = null;
 		try {
 			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("UPDATE robots SET clanname = ?,clanid = ?,title = ? WHERE name = ?");
+			pstm = con.prepareStatement("UPDATE robots SET clanname = ?,clanid = ?,title = ? WHERE name = ?");
 			if (swich) {
 				pstm.setString(1, clanName);
 				pstm.setInt(2, clanid);
@@ -2256,11 +2059,6 @@ public class L1RobotInstance extends L1PcInstance {
 				serchMap[j][locCenter - i] = true;
 			}
 		}
-		// 32666 32820 32647 32795 19 25
-		// locbase =現在の座標 - （ターゲット座標-25）
-		// locNextにコピー
-		// locNextに一間移動
-		// locCenter = 26;
 		int[] firstCource = { 2, 4, 6, 0, 1, 3, 5, 7 };
 		for (i = 0; i < 8; i++) {
 			System.arraycopy(locBace, 0, locNext, 0, 4);
@@ -2268,8 +2066,7 @@ public class L1RobotInstance extends L1PcInstance {
 			if (locNext[0] - locCenter == 0 && locNext[1] - locCenter == 0)
 				return firstCource[i];
 			if (serchMap[locNext[0]][locNext[1]]) {
-				if (World.isMapdynamic(locNext[0] + diff_x,
-						locNext[1] + diff_y, mapId) == false) {
+				if (World.isMapdynamic(locNext[0] + diff_x, locNext[1] + diff_y, mapId) == false) {
 					locCopy = new int[4];
 					System.arraycopy(locNext, 0, locCopy, 0, 4);
 					locCopy[2] = firstCource[i];
@@ -2289,8 +2086,7 @@ public class L1RobotInstance extends L1PcInstance {
 				if (locNext[0] - locCenter == 0 && locNext[1] - locCenter == 0)
 					return locNext[3];
 				if (serchMap[locNext[0]][locNext[1]]) {
-					if (World.isMapdynamic(locNext[0] + diff_x, locNext[1]
-							+ diff_y, mapId) == false) {
+					if (World.isMapdynamic(locNext[0] + diff_x, locNext[1] + diff_y, mapId) == false) {
 						locCopy = new int[4];
 						System.arraycopy(locNext, 0, locCopy, 0, 4);
 						locCopy[2] = dirFront[i];

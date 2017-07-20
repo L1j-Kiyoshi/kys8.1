@@ -625,7 +625,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			}
 			cancelAbsoluteBarrier(pc);
 			break;
-		case 40117: // は記事の村
+		case 40117: // はナイトの村
 			if (pc.get_DuelLine() != 0) {
 				pc.sendPackets(new S_SystemMessage("バトルゾーン地域で使用することができません。"));
 				return;
@@ -877,8 +877,8 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			} else if (itemId == 51093 && pc.getType() == 0) { // あなた君主？
 				pc.sendPackets(new S_ChatPacket(pc,"あなたは既に君主クラスです。"));
 				return;
-			} else if (itemId == 51094 && pc.getType() == 1) { // あなたの記事？
-				pc.sendPackets(new S_ChatPacket(pc,"あなたは既に記事クラスです。"));
+			} else if (itemId == 51094 && pc.getType() == 1) { // あなたのナイト？
+				pc.sendPackets(new S_ChatPacket(pc,"あなたは既にナイトクラスです。"));
 				return;
 			} else if (itemId == 51095 && pc.getType() == 2) { // あなたの妖精？
 				pc.sendPackets(new S_ChatPacket(pc,"あなたは既にエルフクラスです。"));
@@ -889,8 +889,8 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			} else if (itemId == 51097 && pc.getType() == 4) { // あなたダークエルフ？
 				pc.sendPackets(new S_ChatPacket(pc,"あなたは既にダークエルフクラスです。"));
 				return;
-			} else if (itemId == 51098 && pc.getType() == 5) { // あなたの記事？
-				pc.sendPackets(new S_ChatPacket(pc,"あなたは既に用の記事のクラスです。"));
+			} else if (itemId == 51098 && pc.getType() == 5) { // あなたのナイト？
+				pc.sendPackets(new S_ChatPacket(pc,"あなたは既に用のナイトのクラスです。"));
 				return;
 			} else if (itemId == 51099 && pc.getType() == 6) { // あなたイリュージョニスト？
 				pc.sendPackets(new S_ChatPacket(pc,"あなたは既にイリュージョニストクラスです。"));
@@ -907,7 +907,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 			} else if (itemId == 51093 && pc.getType() != 0 && pc.get_sex() == 1) {//君主
 				pc.setType(0);
 				pc.setClassId(Wclass[pc.getType()]);
-			} else if (itemId == 51094 && pc.getType() != 1 && pc.get_sex() == 0) { // 変更：記事
+			} else if (itemId == 51094 && pc.getType() != 1 && pc.get_sex() == 0) { // 変更：ナイト
 				pc.setType(1);
 				pc.setClassId(Mclass[pc.getType()]);
 			} else if (itemId == 51094 && pc.getType() != 1 && pc.get_sex() == 1) {

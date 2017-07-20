@@ -33,7 +33,7 @@ import l1j.server.server.templates.L1ShopItem;
 public class BugRaceController implements Runnable {
     private static BugRaceController _instance;
 
-    private static int RACE_INTERVAL = 3 * 60 * 1000; // ボギョン開始時刻ゲルの前の数字1であれば1分
+    private static int RACE_INTERVAL = 3 * 60 * 1000; // バグベアーレース開始時刻ゲルの前の数字1であれば1分
 
     public static final int EXECUTE_STATUS_NONE = 0;
     public static final int EXECUTE_STATUS_PREPARE = 1;
@@ -68,7 +68,7 @@ public class BugRaceController implements Runnable {
     int Lucky = 0;
     private static Random rnd = new Random(System.nanoTime());
 
-    /** ボギョン追加 **/
+    /** バグベアーレース追加 **/
     private final Map<Integer, L1RaceTicket> _race = new HashMap<Integer, L1RaceTicket>();
     private L1Item _allTemplates[] = new L1Item[9000000];
 
@@ -790,7 +790,7 @@ public class BugRaceController implements Runnable {
 	this._raceCount = cnt;
     }
 
-    /* ボギョン追加 */
+    /* バグベアーレース追加 */
     public void AddTicket(L1RaceTicket race) {
 	_race.put(new Integer(race.getItemId()), race);
 	ItemTable.getInstance().getAllTemplates()[race.getItemId()] = race;

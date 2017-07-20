@@ -1439,7 +1439,7 @@ public class L1Attack {
         	dmg += weapon.getEnchantLevel();
         }
         
-        /** 赤の記事の大剣リニューアル **/
+        /** 赤のナイトの大剣リニューアル **/
         if (_pc.getInventory().checkEquipped(202002) || _pc.getInventory().checkEquipped(203002) || _pc.getInventory().checkEquipped(1136)
                 || _pc.getInventory().checkEquipped(1137)) {
             if (_pc.getLawful() < -32760) {

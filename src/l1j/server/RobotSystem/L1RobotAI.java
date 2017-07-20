@@ -992,7 +992,7 @@ public class L1RobotAI {
 							toWizardMagic(target);
 							return;
 						}
-						//記事
+						//ナイト
 					} else if (robot.isKnight() && robot.getCurrentMp() >= 50 && isDistance(robot.getX(), robot.getY(), robot.getMapId(), target.getX(), target.getY(), target.getMapId(), robot.isKnight() ? 2 : 1)) {
 						if (target.hasSkillEffect(L1SkillId.SILENCE) || 
 								target.hasSkillEffect(L1SkillId.DECAY_POTION) || 

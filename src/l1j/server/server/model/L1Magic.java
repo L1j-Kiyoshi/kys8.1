@@ -849,7 +849,7 @@ public class L1Magic {
 
 			if (skillId == ENERGY_BOLT || skillId == CALL_LIGHTNING || skillId == DISINTEGRATE) {
 				for (L1ItemInstance armor : _targetPc.getEquipSlot().getArmors()) {
-					// レッド記事の盾
+					// レッドナイトの盾
 					if (armor.getItemId() == 20230) {
 						int probability = 1;
 

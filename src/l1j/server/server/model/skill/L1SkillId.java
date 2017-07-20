@@ -20,7 +20,7 @@ public class L1SkillId {
 
 	public static final int CLANBUFF_YES = 7789; // 血盟バフ
 
-	public static final int God_buff = 4914; // フクサバフ
+	public static final int God_buff = 4914; // 黒砂のバフ
 
 	public static final int STATUS_PET_FOOD = 1019;
 

@@ -3099,7 +3099,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					}
 					break;
 				/*case 30135:// LV10フェアリーのお祝いの贈り物
-					// createNewItem2（pc、40117、1、0）; //は記事の村帰還スクロール
+					// createNewItem2（pc、40117、1、0）; //はナイトの村帰還スクロール
 					if (pc.isElf()) {
 						createNewItem2（pc、40233、1、0）; //ボディトゥマインド
 						createNewItem2（pc、40234、1、0）; //テレポートトゥマザー
@@ -4602,7 +4602,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					pc.save();
 
 					break;
-				case 65648: {// フクサのコイン
+				case 65648: {// 黒砂ののコイン
 					int[] allBuffSkill = { 4914 };
 					L1SkillUse l1skilluse = new L1SkillUse();
 					if (pc.hasSkillEffect(L1SkillId.God_buff))
@@ -4746,7 +4746,7 @@ public class C_ItemUSe extends ClientBasePacket {
 						pc.sendPackets(new S_ChatPacket(pc, "祝福された防具強化スクロールを獲得しました。"));
 					} else if (rand1 >= 111 && rand1 <= 112) {
 						pc.getInventory().storeItem(202002, 1);
-						pc.sendPackets(new S_ChatPacket(pc, "赤い記事の大剣を獲得しました。"));
+						pc.sendPackets(new S_ChatPacket(pc, "赤いナイトの大剣を獲得しました。"));
 					} else if (rand1 >= 113 && rand1 <= 114) {
 						pc.getInventory().storeItem(504, 1);
 						pc.sendPackets(new S_ChatPacket(pc, "黒曜石キーリンクを獲得しました。"));
@@ -4942,7 +4942,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					// 各種魔法人形たち
 					useMagicDoll(pc, itemId, itemObjid);
 					break;
-				case 210095:// つつく玄
+				case 210095:// つつくウィザード
 					useSupport(pc, itemId, itemObjid);
 					break;
 
@@ -6382,10 +6382,10 @@ public class C_ItemUSe extends ClientBasePacket {
 						}
 					} else if (itemId >= 210020 && itemId <= 210034 || itemId == 3000093) {
 						if (pc.isDragonknight() || pc.isGm()) {
-							if (itemId >= 210020 && itemId <= 210023 // 用記事の書板
+							if (itemId >= 210020 && itemId <= 210023 // 用ナイトの書板
 									&& pc.getLevel() >= 15) {
 								SpellBook5(pc, l1iteminstance, client);
-							} else if (itemId >= 210024 && itemId <= 210031 //用記事の書板
+							} else if (itemId >= 210024 && itemId <= 210031 //用ナイトの書板
 									&& pc.getLevel() >= 30) {
 								SpellBook5(pc, l1iteminstance, client);
 							} else if (itemId >= 210032 && itemId <= 210034 && pc.getLevel() >= 45) {
@@ -7835,7 +7835,7 @@ public class C_ItemUSe extends ClientBasePacket {
 			polyId = 12237;
 		} else if (itemId == 8002) { // 82進デスナイト - 完全高速
 			polyId = 12015;
-		} else if (itemId == 3000066) {// 記事。の記事。戦士。君主
+		} else if (itemId == 3000066) {// ナイト。のナイト。戦士。君主
 			polyId = 12283;
 		} else if (itemId == 3000067) {// ダークエルフ
 			polyId = 12280;
@@ -9248,7 +9248,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					i6 = i7;
 					break;
 
-				case 25: // の記事3段階の魔法
+				case 25: // のナイト3段階の魔法
 					dk3 = i7;
 					break;
 
@@ -9418,7 +9418,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					i6 = i7;
 					break;
 
-				case 25: // の記事3段階の魔法
+				case 25: // のナイト3段階の魔法
 					dk3 = i7;
 					break;
 
@@ -9588,7 +9588,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					i6 = i7;
 					break;
 
-				case 25: // の記事3段階の魔法
+				case 25: // のナイト3段階の魔法
 					dk3 = i7;
 					break;
 
@@ -9655,7 +9655,7 @@ public class C_ItemUSe extends ClientBasePacket {
 		L1Skills l1skills = null;
 		for (int j6 = 181; j6 < 200; j6++) {
 			l1skills = SkillsTable.getInstance().getTemplate(j6);
-			String s1 = "用の記事の書板（" + l1skills.getName() + ")";
+			String s1 = "用のナイトの書板（" + l1skills.getName() + ")";
 			if (l1iteminstance.getItem().getName().equalsIgnoreCase(s1)) {
 				int l6 = l1skills.getSkillLevel();
 				int i7 = l1skills.getId();
@@ -9758,7 +9758,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					i6 = i7;
 					break;
 
-				case 25: // の記事3段階の魔法
+				case 25: // のナイト3段階の魔法
 					dk3 = i7;
 					break;
 
@@ -9927,7 +9927,7 @@ public class C_ItemUSe extends ClientBasePacket {
 					i6 = i7;
 					break;
 
-				case 25: // の記事3段階の魔法
+				case 25: // のナイト3段階の魔法
 					dk3 = i7;
 					break;
 
@@ -10586,7 +10586,7 @@ public class C_ItemUSe extends ClientBasePacket {
 		}
 	}
 
-	private void useSupport(L1PcInstance pc, int itemId, int itemObjectId) { // つつく玄
+	private void useSupport(L1PcInstance pc, int itemId, int itemObjectId) { // つつくウィザード
 		if (!pc.getMap().isTakePets()) {
 			pc.sendPackets(new S_ServerMessage(563)); // \f1ここでは、使用することができません。
 			return;

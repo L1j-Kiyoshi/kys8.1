@@ -346,7 +346,7 @@ public class BattleZone implements Runnable {
 		int time = 1800;
 		if (pc != null) {
 			if (pc.isKnight() || pc.isCrown() || pc.isDarkelf() || pc.isDragonknight() || pc.isWarrior()) {
-				// 記事君主ダークエルフの記事
+				// ナイト君主ダークエルフのナイト
 				if (DuelLine == 1) {
 					polyid = 11232;// <<1行目に変身ダーク>
 				} else {
@@ -354,7 +354,7 @@ public class BattleZone implements Runnable {
 				}
 				L1PolyMorph.doPoly(pc, polyid, time, 2);
 			}
-			// 玄イリュージョニスト
+			// ウィザードイリュージョニスト
 			if (pc.isWizard() || pc.isBlackwizard()) {
 				if (DuelLine == 1) {
 					polyid = 11232;

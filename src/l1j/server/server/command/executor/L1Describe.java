@@ -63,7 +63,7 @@ public class L1Describe implements L1CommandExecutor {
 				break;
 
 			case 1:
-				typeName = "記事";
+				typeName = "ナイト";
 				break;
 
 			case 2:

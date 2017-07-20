@@ -1381,7 +1381,7 @@ public class C_LoginToServer extends ClientBasePacket {
 				continue;
 			}
 			switch (skillid) {
-			case God_buff: // フクサバフ
+			case God_buff: // 黒砂のバフ
 				pc.getAC().addAc(-2);
 				pc.getResistance().addHold(10);
 				pc.addMaxHp(20);

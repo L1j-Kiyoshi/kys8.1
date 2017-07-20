@@ -71,8 +71,7 @@ public class Sabu_um {
 	public Integer[] getList() {
 		Integer[] l = null;
 		synchronized (join_clannum) {
-			l = (Integer[]) join_clannum.toArray(new Integer[join_clannum
-					.size()]);
+			l = (Integer[]) join_clannum.toArray(new Integer[join_clannum.size()]);
 		}
 		return l;
 	}

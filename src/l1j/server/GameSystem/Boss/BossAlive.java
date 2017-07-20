@@ -10,7 +10,7 @@ public class BossAlive {
 			ins = new BossAlive();
 		return ins;
 	}
-	//MapID , 1生存2死
+	//MapID 1:生存 2:死
 	HashMap<Integer,Integer> isAlive = new HashMap<Integer,Integer>();
 	
 	public boolean isBossAlive(int mapid){

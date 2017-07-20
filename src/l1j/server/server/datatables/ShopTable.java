@@ -157,12 +157,12 @@ public class ShopTable {
 	public L1Shop get(int npcId) {
 		return _allShops.get(npcId);
 	}
-	/*ボギョン関連*/
+	/*バグベアーレース関連*/
 	public void addShop(int npcId, L1Shop shop){		
 		_allShops.put(npcId, shop);
 	}
 
-	/*ボギョン関連*/
+	/*バグベアーレース関連*/
 	public void delShop(int npcId) {
 	_allShops.remove(npcId);	
 	}

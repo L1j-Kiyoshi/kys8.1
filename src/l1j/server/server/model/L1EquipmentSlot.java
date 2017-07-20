@@ -312,7 +312,7 @@ public class L1EquipmentSlot {
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				break;
-			// 記事//戦士
+			// ナイト//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(50);
@@ -321,7 +321,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(50);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(3);
 				break;
@@ -346,7 +346,7 @@ public class L1EquipmentSlot {
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				break;
-			// 記事//戦士
+			// ナイト//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(50);
@@ -355,7 +355,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(50);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(3);
 				break;
@@ -380,7 +380,7 @@ public class L1EquipmentSlot {
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				break;
-			// 記事//戦士
+			// ナイト//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(50);
@@ -389,7 +389,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(50);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(3);
 				break;
@@ -414,7 +414,7 @@ public class L1EquipmentSlot {
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				break;
-			// 記事//戦士
+			// ナイト//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(50);
@@ -423,7 +423,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(50);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(3);
 				break;
@@ -448,7 +448,7 @@ public class L1EquipmentSlot {
 			case 0:
 				_owner.addDamageReductionByArmor(3);
 				break;
-			// 記事//戦士
+			// ナイト//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(50);
@@ -457,7 +457,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(50);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(3);
 				break;
@@ -485,7 +485,7 @@ public class L1EquipmentSlot {
 				_owner.addDamageReductionByArmor(3);
 				_owner.addDmgup(2);
 				break;
-			// 記事
+			// ナイト
 			case 1:
 				_owner.addMaxHp(50);
 				_owner.addDmgup(1);
@@ -495,7 +495,7 @@ public class L1EquipmentSlot {
 				_owner.addMaxMp(50);
 				_owner.addBowDmgup(1);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(3);
 				_owner.getAbility().addSp(1);
@@ -530,7 +530,7 @@ public class L1EquipmentSlot {
 				_owner.addDamageReductionByArmor(3);
 				_owner.addDmgup(2);
 				break;
-			// 記事
+			// ナイト
 			case 1:
 				_owner.addMaxHp(50);
 				_owner.addDmgup(1);
@@ -540,7 +540,7 @@ public class L1EquipmentSlot {
 				_owner.addMaxMp(50);
 				_owner.addBowDmgup(1);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(3);
 				_owner.getAbility().addSp(1);
@@ -575,7 +575,7 @@ public class L1EquipmentSlot {
 				_owner.addDamageReductionByArmor(3);
 				_owner.addDmgup(2);
 				break;
-			// 記事
+			// ナイト
 			case 1:
 				_owner.addMaxHp(50);
 				_owner.addDmgup(1);
@@ -585,7 +585,7 @@ public class L1EquipmentSlot {
 				_owner.addMaxMp(50);
 				_owner.addBowDmgup(1);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(3);
 				_owner.getAbility().addSp(1);
@@ -620,7 +620,7 @@ public class L1EquipmentSlot {
 				_owner.addDamageReductionByArmor(3);
 				_owner.addDmgup(2);
 				break;
-			// 記事
+			// ナイト
 			case 1:
 				_owner.addMaxHp(50);
 				_owner.addDmgup(1);
@@ -630,7 +630,7 @@ public class L1EquipmentSlot {
 				_owner.addMaxMp(50);
 				_owner.addBowDmgup(1);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(3);
 				_owner.getAbility().addSp(1);
@@ -665,7 +665,7 @@ public class L1EquipmentSlot {
 				_owner.addDamageReductionByArmor(3);
 				_owner.addDmgup(2);
 				break;
-			// 記事
+			// ナイト
 			case 1:
 				_owner.addMaxHp(50);
 				_owner.addDmgup(1);
@@ -675,7 +675,7 @@ public class L1EquipmentSlot {
 				_owner.addMaxMp(50);
 				_owner.addBowDmgup(1);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(3);
 				_owner.getAbility().addSp(1);
@@ -2268,7 +2268,7 @@ public class L1EquipmentSlot {
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				break;
-			// 記事//戦士
+			// ナイト//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(-50);
@@ -2277,7 +2277,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(-3);
 				break;
@@ -2302,7 +2302,7 @@ public class L1EquipmentSlot {
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				break;
-			// 記事//戦士
+			// ナイト//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(-50);
@@ -2311,7 +2311,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(-3);
 				break;
@@ -2336,7 +2336,7 @@ public class L1EquipmentSlot {
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				break;
-			// 記事//戦士
+			// ナイト//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(-50);
@@ -2345,7 +2345,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(-3);
 				break;
@@ -2370,7 +2370,7 @@ public class L1EquipmentSlot {
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				break;
-			//記事//戦士
+			//ナイト//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(-50);
@@ -2379,7 +2379,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(-3);
 				break;
@@ -2404,7 +2404,7 @@ public class L1EquipmentSlot {
 			case 0:
 				_owner.addDamageReductionByArmor(-3);
 				break;
-			// 記事//戦士
+			// ナイト//戦士
 			case 7:
 			case 1:
 				_owner.addMaxHp(-50);
@@ -2413,7 +2413,7 @@ public class L1EquipmentSlot {
 			case 2:
 				_owner.addMaxMp(-50);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(-3);
 				break;
@@ -2440,7 +2440,7 @@ public class L1EquipmentSlot {
 				_owner.addDamageReductionByArmor(-3);
 				_owner.addDmgup(-2);
 				break;
-			// 記事
+			// ナイト
 			case 1:
 				_owner.addMaxHp(-50);
 				_owner.addDmgup(-1);
@@ -2450,7 +2450,7 @@ public class L1EquipmentSlot {
 				_owner.addMaxMp(-50);
 				_owner.addBowDmgup(-1);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(-3);
 				_owner.getAbility().addSp(-1);
@@ -2485,7 +2485,7 @@ public class L1EquipmentSlot {
 				_owner.addDamageReductionByArmor(-3);
 				_owner.addDmgup(-2);
 				break;
-			// 記事
+			// ナイト
 			case 1:
 				_owner.addMaxHp(-50);
 				_owner.addDmgup(-1);
@@ -2495,7 +2495,7 @@ public class L1EquipmentSlot {
 				_owner.addMaxMp(-50);
 				_owner.addBowDmgup(-1);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(-3);
 				_owner.getAbility().addSp(-1);
@@ -2530,7 +2530,7 @@ public class L1EquipmentSlot {
 				_owner.addDamageReductionByArmor(-3);
 				_owner.addDmgup(-2);
 				break;
-			// 記事
+			// ナイト
 			case 1:
 				_owner.addMaxHp(-50);
 				_owner.addDmgup(-1);
@@ -2540,7 +2540,7 @@ public class L1EquipmentSlot {
 				_owner.addMaxMp(-50);
 				_owner.addBowDmgup(-1);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(-3);
 				_owner.getAbility().addSp(-1);
@@ -2575,7 +2575,7 @@ public class L1EquipmentSlot {
 				_owner.addDamageReductionByArmor(-3);
 				_owner.addDmgup(-2);
 				break;
-			// 記事
+			// ナイト
 			case 1:
 				_owner.addMaxHp(-50);
 				_owner.addDmgup(-1);
@@ -2585,7 +2585,7 @@ public class L1EquipmentSlot {
 				_owner.addMaxMp(-50);
 				_owner.addBowDmgup(-1);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(-3);
 				_owner.getAbility().addSp(-1);
@@ -2620,7 +2620,7 @@ public class L1EquipmentSlot {
 				_owner.addDamageReductionByArmor(-3);
 				_owner.addDmgup(-2);
 				break;
-			// 記事
+			// ナイト
 			case 1:
 				_owner.addMaxHp(-50);
 				_owner.addDmgup(-1);
@@ -2630,7 +2630,7 @@ public class L1EquipmentSlot {
 				_owner.addMaxMp(-50);
 				_owner.addBowDmgup(-1);
 				break;
-			// 玄
+			// ウィザード
 			case 3:
 				_owner.addMpr(-3);
 				_owner.getAbility().addSp(-1);

@@ -258,7 +258,7 @@ public class L1TownLocation {
 			loc[1] = GETBACK_LOC_WERLDAN[rnd].getY();
 			loc[2] = GETBACK_MAP_WERLDAN;}
 			break;
-		case TOWNID_OREN:{ // オレン
+		case TOWNID_OREN:{ // オーレン
 			int rnd = random.nextInt(GETBACK_LOC_OREN.length);
 			loc[0] = GETBACK_LOC_OREN[rnd].getX();
 			loc[1] = GETBACK_LOC_OREN[rnd].getY();
@@ -276,7 +276,7 @@ public class L1TownLocation {
 			loc[1] = GETBACK_LOC_ADEN[rnd].getY();
 			loc[2] = GETBACK_MAP_ADEN;}
 			break;
-		case TOWNID_SILENT_CAVERN:{ // 記事
+		case TOWNID_SILENT_CAVERN:{ // ナイト
 			int rnd = random.nextInt(GETBACK_LOC_SILENT_CAVERN.length);
 			loc[0] = GETBACK_LOC_SILENT_CAVERN[rnd].getX();
 			loc[1] = GETBACK_LOC_SILENT_CAVERN[rnd].getY();
@@ -312,7 +312,7 @@ public class L1TownLocation {
 			loc[1] = GETBACK_LOC_HIDDEN_VALLEY[rnd].getY();
 			loc[2] = GETBACK_MAP_HIDDEN_VALLEY;}
 			break;
-		default:{ // 記事
+		default:{ // ナイト
 			int rnd = random.nextInt(GETBACK_LOC_SILVER_KNIGHT_TOWN.length);
 			loc[0] = GETBACK_LOC_SILVER_KNIGHT_TOWN[rnd].getX();
 			loc[1] = GETBACK_LOC_SILVER_KNIGHT_TOWN[rnd].getY();

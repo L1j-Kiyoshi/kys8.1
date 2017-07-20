@@ -858,7 +858,7 @@ public class L1Character extends L1Object {
 	}
 
 	/**
-	 * キャラクターのつつく玄リストを返す。
+	 * キャラクターのつつくウィザードリストを返す。
 	 * 
 	 * @return キャラクターのマジックドールのリストを示す、HashMapオブジェクト。このオブジェクトのKeyはオブジェクトID、Valueは
 	 *         L1DollInstance.

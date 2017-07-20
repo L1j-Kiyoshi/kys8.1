@@ -144,7 +144,7 @@ public class BossTimeController implements Runnable {
 			L1Npc template = NpcTable.getInstance().getTemplate(npcid);
 			if (template == null) {
 				_log.warning("Boss mob data for id:" + npcid + " missing in npc table");
-				System.out.println("ボス出現コントローラボスnpcid" + npcid + "が存在しません。");
+				System.out.println("ボス出現コントローラ: ボスnpcid" + npcid + "が存在しません。");
 				return;
 			}
 			L1NpcInstance npc = NpcTable.getInstance().newNpcInstance(npcid);
@@ -177,18 +177,6 @@ public class BossTimeController implements Runnable {
 			}
 
 			if (isYN) {
-//				switch (npcid) {
-//				case 7310046:
-//					for (L1PcInstance player : L1World.getInstance().getAllPlayers()) {
-//						player.setマミーロード(true);
-//						player.sendPackets(new S_Message_YN(622, "マミーロードを懲罰しに行くか？"));
-//					}
-//					break;
-//				case 2:
-//					break;
-//				
-//				}
-
 			}
 
 			if (0 < deleteTime) {

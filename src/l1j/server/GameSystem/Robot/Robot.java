@@ -77,7 +77,7 @@ private static void polyNormal51(L1RobotInstance bot) { // ロボットに変身
 			else if (f1 == 1 && bot.getCurrentWeapon() != 20)
 				bot.setTempCharGfx(11329); // スケルトン
 			
-			else if (f1 == 2 && bot.isDragonknight()) //竜騎士
+			else if (f1 == 2 && bot.isDragonknight()) //ドラゴンナイト
 				bot.setTempCharGfx(11447); // ナイトウォッチ
 			
 			else if (f1 == 3 && bot.getCurrentWeapon() != 20)
@@ -86,28 +86,7 @@ private static void polyNormal51(L1RobotInstance bot) { // ロボットに変身
 				bot.setTempCharGfx(11392); //
 		}
 	} else {
-		// int f = _random.nextInt(100);
-		// ボギョンボトドゥル
-		/*
-		 * if(bot.リースボット&&（bot。リースボット_出現位置== 0 || bot。リースボット_出現位置== 3 ||
-		 * (bot。リースボット_出現位置> = 16 && bot。リースボット_出現位置<= 19）））f =
-		 * _random.nextInt(100);
-		 */
 		bot.setTempCharGfx(bot.getGfxId());
-
-		/*
-		 * if(f < 15){
-		 * bot.getGfxId().setTempCharGfx(bot.getGfxId().getGfxId());
-		 * if(bot。バーギョンボト&& bot.isCrown（））{if（_random.nextInt（2）== 0）{
-		 * if(bot.get_sex() == 0) bot.getGfxId().setTempCharGfx(6094); else
-		 * bot.getGfxId().setTempCharGfx(6080); } } }else if(f < 50){
-		 * bot.getGfxId().setTempCharGfx(11375); }else if(f < 75){
-		 * bot.getGfxId().setTempCharGfx(11328+_random.nextInt(3)); //else
-		 * if(f == 3) // bot.getGfxId().setTempCharGfx(11341); }else{
-		 * bot.getGfxId().setTempCharGfx(11370); } if(bot.isElf() && f != 0
-		 * && bot.getCurrentWeapon() == 20)
-		 * bot.getGfxId().setTempCharGfx(bot.getGfxId().getGfxId());
-		 */
 	}
 }
 
@@ -166,28 +145,7 @@ private static void polyNormal80(L1RobotInstance bot) { // ロボットに変身
 				bot.setTempCharGfx(12681); // 80ジンデス
 		}
 	} else {
-		// int f = _random.nextInt(100);
-		// ボギョンボトドゥル
-		/*
-		 * if(bot。リースボット&&（bot。リースボット_出現位置== 0 || bot。リースボット_出現位置== 3 ||
-		 * (bot.リースボット_出現位置> = 16 && bot。リースボット_出現位置<= 19）））f =
-		 * _random.nextInt(100);
-		 */
 		bot.setTempCharGfx(bot.getGfxId());
-
-		/*
-		 * if(f < 15){
-		 * bot.getGfxId().setTempCharGfx(bot.getGfxId().getGfxId());
-		 * if(bot。バーギョンボト&& bot.isCrown（））{if（_random.nextInt（2）== 0）{
-		 * if(bot.get_sex() == 0) bot.getGfxId().setTempCharGfx(6094); else
-		 * bot.getGfxId().setTempCharGfx(6080); } } }else if(f < 50){
-		 * bot.getGfxId().setTempCharGfx(11375); }else if(f < 75){
-		 * bot.getGfxId().setTempCharGfx(11328+_random.nextInt(3)); //else
-		 * if(f == 3) // bot.getGfxId().setTempCharGfx(11341); }else{
-		 * bot.getGfxId().setTempCharGfx(11370); } if(bot.isElf() && f != 0
-		 * && bot.getCurrentWeapon() == 20)
-		 * bot.getGfxId().setTempCharGfx(bot.getGfxId().getGfxId());
-		 */
 	}
 }
 
@@ -292,17 +250,6 @@ private static void polyNormal80(L1RobotInstance bot) { // ロボットに変身
 				new L1SkillUse().handleCommands(bot,
 						L1SkillId.MOVING_ACCELERATION, bot.getId(), bot.getX(),
 						bot.getY(), null, 0, L1SkillUse.TYPE_NORMAL);
-				/*
-				 * bot.setSkillEffect(L1SkillId.
-				 * MOVING_ACCELERATION, (_random.nextInt(600)+400) *1000);
-				 * bot.getMoveState().setBraveSpeed(4);
-				 * Broadcaster.broadcastPacket(bot, new
-				 * S_DoActionGFX(bot.getId(), 19));
-				 * Broadcaster.broadcastPacket(bot, new
-				 * S_SkillBrave(bot.getId(), 4, 0), true);
-				 * Broadcaster.broadcastPacket(bot, new
-				 * S_SkillSound(bot.getId(), 2945), true);
-				 */
 				return true;
 			}
 		} else if (bot.isWizard()) {

@@ -1170,7 +1170,7 @@ public class LinAllManager {
 		lblNewLabel_18.setForeground(SWTResourceManager.getColor(255, 255, 255));
 		lblNewLabel_18.setBackground(SWTResourceManager.getColor(51, 51, 51));
 		lblNewLabel_18.setBounds(122, 80, 89, 13);
-		lblNewLabel_18.setText("ボギョン最大配当：");
+		lblNewLabel_18.setText("バグベアーレース最大配当：");
 
 		lblNewLabel_19 = new Label(group, SWT.NONE);
 		lblNewLabel_19.setForeground(SWTResourceManager.getColor(255, 255, 255));
@@ -2641,7 +2641,7 @@ public class LinAllManager {
 					lblNewLabel_20.setText(AdenMake);//アデンの総生産量
 					label.setText(AdenConsume);//アデン総回収量
 					lblNewLabel_21.setText(AdenTax+"%");//税金倍率
-					lblNewLabel_22.setText(Bugdividend);//ボギョン最大配当
+					lblNewLabel_22.setText(Bugdividend);//バグベアーレース最大配当
 					label_1.setText(AccountCount);//アカウントの作成
 					lblNewLabel_23.setText(CharCount);//キャラクター作成
 					label_2.setText(PvPCount);//pvp 回数

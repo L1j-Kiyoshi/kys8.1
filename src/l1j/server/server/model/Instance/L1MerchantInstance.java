@@ -1557,7 +1557,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 			/*
 			 * } else if (npcid == 70512) { if (player.getLevel() >= 25) { htmlid = "jpe0102"; } } else if (npcid == 70514) { if (player.getLevel() >= 25) { htmlid = "jpe0092"; }
 			 * 
-			 * case 70035: case 70041: // ボギョン商人case 70042：if（BugRaceController.getInstance（）getBugState（）== 1）{htmlid = "maeno3"; } else
+			 * case 70035: case 70041: // バグベアーレース商人case 70042：if（BugRaceController.getInstance（）getBugState（）== 1）{htmlid = "maeno3"; } else
 			 * if(BugRaceController.getInstance().getBugState() == 2){ htmlid = "maeno5"; }else{ htmlid = "pandora"; } break;
 			 */
 			case 70035:
@@ -2279,7 +2279,7 @@ public class L1MerchantInstance extends L1NpcInstance {
 				break;
 			case 900185: // 最終的な訓練審査官
 				if (player.getLevel() < 52) {
-					htmlid = "highpass42"; // は記事の村にいる「基礎訓練教官」に訓練をすべて終えたならば、52レベルになった後、再び見つけるようにすること。
+					htmlid = "highpass42"; // はナイトの村にいる「基礎訓練教官」に訓練をすべて終えたならば、52レベルになった後、再び見つけるようにすること。
 				} else {
 					if (player.getQuest().isEnd(L1Quest.QUEST_HIGHPASS)) {
 						htmlid = "highpass43";

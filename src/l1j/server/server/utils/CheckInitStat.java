@@ -50,7 +50,7 @@ public class CheckInitStat {
 			basecha = 13;
 			baseint = 9;
 			break;
-		case 1: // 記事
+		case 1: // ナイト
 			basestr = 16;
 			basedex = 12;
 			basecon = 16;
@@ -66,7 +66,7 @@ public class CheckInitStat {
 			basecha = 9;
 			baseint = 12;
 			break;
-		case 3: // 玄
+		case 3: // ウィザード
 			basestr = 8;
 			basedex = 7;
 			basecon = 12;

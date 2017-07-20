@@ -309,7 +309,7 @@ public class L1BossCycle {
 			// spawnlist_bossから読み込み配置
 			// BossSpawnTable.fillSpawnTable();
 		} catch (Exception e) {
-			_log.log(Level.SEVERE, "BossCycleを読み込むことができませんでした", e);
+			_log.log(Level.SEVERE, "BossCycleを読み込むことが出来ませんでした", e);
 			System.exit(0);
 		}
 	}
