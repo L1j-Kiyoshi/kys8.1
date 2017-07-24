@@ -157,10 +157,10 @@ public class Robot_Location {
 				return Teleporter; // 元null
 			} else if (bot.huntingBot_Location.startsWith("傲慢") || bot.huntingBot_Location.startsWith("アリの巣")) {
 				return null;
-			} else if (bot.huntingBot_Location.equalsIgnoreCase("技監1階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("技監2階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("技監3階")
-					|| bot.huntingBot_Location.equalsIgnoreCase("技監4階"))
+			} else if (bot.huntingBot_Location.equalsIgnoreCase("ギラン監獄1階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("ギラン監獄2階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("ギラン監獄3階")
+					|| bot.huntingBot_Location.equalsIgnoreCase("ギラン監獄4階"))
 				return GiranPrizon_Entrance;
 			if (bot.getX() >= 33410 && bot.getX() <= 33461 && bot.getY() >= 32788 && bot.getY() <= 32838
 					&& bot.getMapId() == 4)// ギラン

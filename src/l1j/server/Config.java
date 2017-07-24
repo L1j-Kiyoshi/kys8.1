@@ -88,7 +88,7 @@ public final class Config {
 	public static int npcdmg;
 	public static int npcmagicdmg;
 
-	/** 技監週末イベント用 **/
+	/** ギラン監獄週末イベント用 **/
 	public static int mapid;
 	public static int mapid1;
 	public static int mapid2;

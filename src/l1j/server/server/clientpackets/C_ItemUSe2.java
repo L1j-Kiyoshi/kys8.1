@@ -383,9 +383,9 @@ public class C_ItemUSe2 extends ClientBasePacket {
 				pc.getInventory().removeItem(l1iteminstance, 1);
 				pc.setGirandungeonTime(0);
 				pc.save();
-				pc.sendPackets(new S_ChatPacket(pc, "技監、支配者の結界ダンジョン滞留時間が2時間の充電された。"));
+				pc.sendPackets(new S_ChatPacket(pc, "ギラン監獄、支配者の結界ダンジョン滞留時間が2時間の充電された。"));
 			} else {
-				pc.sendPackets(new S_ChatPacket(pc, "技監、支配者の結界滞留時間がまだ残っています。"));
+				pc.sendPackets(new S_ChatPacket(pc, "ギラン監獄、支配者の結界滞留時間がまだ残っています。"));
 			}
 			break;
 		case 410062://象牙の塔のダンジョン充電コイン

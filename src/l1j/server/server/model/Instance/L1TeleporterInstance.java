@@ -552,7 +552,7 @@ public class L1TeleporterInstance extends L1NpcInstance {
 					TeleportDelyTimer timer = new TeleportDelyTimer();
 					GeneralThreadPool.getInstance().execute(timer);
 
-				} else if (action.equalsIgnoreCase("teleport kentc-girdun")){ //ケント城 - 技監2階
+				} else if (action.equalsIgnoreCase("teleport kentc-girdun")){ //ケント城 - ギラン監獄2階
 					if (player.getGirandungeonTime() >= 120){
 						player.sendPackets(new S_ChatPacket(player, "ギラン監獄時間が経過しました。"));//ケント城 - ギラン監獄2階
 						return;

@@ -873,7 +873,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 			***************************************** ナイト初心者ゾーンクエスト ************************************************
 			*********************************************************************************************************/
 
-				 /** ボンドンリニューアルスパルトイの魂 **/
+				 /** MLCリニューアルスパルトイの魂 **/
 				if (getNpcTemplate().get_npcId() == 7000075) {//青同一層
                    if (attacker instanceof L1PcInstance) {
                        L1PcInstance pc = (L1PcInstance) attacker;
@@ -1012,7 +1012,7 @@ public class L1MonsterInstance extends L1NpcInstance {
 						((L1PcInstance) attacker).sendPackets(new S_SystemMessage("ボスの魂石を獲得しました。"));
 					}break;
 				case 807:case 808:case 809:case 810:case 811:case 812:case 813:
-					if (2 >= dropChance) {// ボンドン
+					if (2 >= dropChance) {// MLC
 						attacker.getInventory().storeItem(glu[mlc], 1);
 						((L1PcInstance) attacker).sendPackets(new S_SystemMessage("ボスの魂石を獲得しました。"));
 					}break;

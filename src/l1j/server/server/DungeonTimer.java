@@ -39,7 +39,7 @@ public class DungeonTimer implements Runnable {
 						}
 						if (use.getMapId() >= 30 && use.getMapId() <= 33
 						 || use.getMapId() >= 35 && use.getMapId() <= 37
-						 || use.getMapId() == 814){ //ヨンドン
+						 || use.getMapId() == 814){ //DVC
 							DrageonTimeCheck(use);
 						}
 						/*if (use.getMapId() >= 451 && use.getMapId() <= 456
@@ -106,7 +106,7 @@ public class DungeonTimer implements Runnable {
 	private void GiranTimeCheck(L1PcInstance pc) {
 		if (pc.getGirandungeonTime() == 119){
 			new L1Teleport().teleport(pc, 33419, 32810, (short) 4, 0, true);
-			pc.sendPackets(new S_SystemMessage("技監ダンジョン時間が経過しました。"));
+			pc.sendPackets(new S_SystemMessage("ギラン監獄ダンジョン時間が経過しました。"));
 		}
 		pc.setGirandungeonTime(pc.getGirandungeonTime() + 1);
 	}

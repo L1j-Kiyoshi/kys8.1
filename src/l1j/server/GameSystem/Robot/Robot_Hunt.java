@@ -86,8 +86,8 @@ public class Robot_Hunt {
 	    /*
 	     * "ジャイアント畑 "、"華東 "、"ハイネジャプバト "、
 	     */
-	    "ヨンドン1階", "ヨンドン2階", "ヨンドン3階", "ヨンドン4階", "ヨンドン5階", "ヨンドン6階", "ヨンドン7階", "ボンドン1階", "ボンドン2階", "ボンドン3階",
-	    "ボンドン4階", "ボンドン5階", "ボンドン6階", "ボンドン7階", "技監1階", "技監2階", "技監3階", "技監4階", "リニューアル傲慢1階", "リニューアル傲慢2階",
+	    "DVC1階", "DVC2階", "DVC3階", "DVC4階", "DVC5階", "DVC6階", "DVC7階", "MLC1階", "MLC2階", "MLC3階",
+	    "MLC4階", "MLC5階", "MLC6階", "MLC7階", "ギラン監獄1階", "ギラン監獄2階", "ギラン監獄3階", "ギラン監獄4階", "リニューアル傲慢1階", "リニューアル傲慢2階",
 	    "リニューアル傲慢3階", "リニューアル傲慢4階", "リニューアル傲慢5階", "リニューアル傲慢6階", "リニューアル傲慢7階", "リニューアル傲慢8階", "リニューアル傲慢9階",
 	    "リニューアル傲慢10階",
 	    /* "象牙の塔4階」、「象牙の塔5階" */ };
@@ -99,9 +99,9 @@ public class Robot_Hunt {
 	    0, // 船舶深海
 	    0, // 忘れられた島
 	    30, 30, // 支配者
-	    10, 10, 10, 0, 0, 0, 0, // ヨンドン1 -7
-	    40, 30, 0, 0, 30, 0, 0, // ボンドン
-	    30, 10, 0, 30, // 技監
+	    10, 10, 10, 0, 0, 0, 0, // DVC1 -7
+	    40, 30, 0, 0, 30, 0, 0, // MLC
+	    30, 10, 0, 30, // ギラン監獄
 	    20, 20, 20, 20, 20, 20, 20, 20, 20, 20 // リニューアル傲慢（1階から10階）20匹ずつ配布
     };
 
@@ -222,7 +222,7 @@ public class Robot_Hunt {
 			bot.addDmgup(50);
 		    }
 		    bot.addDamageReductionByArmor(50);
-		} else if (huntLoc.startsWith("ボンドン")) {
+		} else if (huntLoc.startsWith("MLC")) {
 		    bot.getAC().setAc(-80);
 		    if (bot.getCurrentWeapon() == 20) {
 			bot.addHitup(30);
@@ -232,7 +232,7 @@ public class Robot_Hunt {
 			bot.addDmgup(30);
 		    }
 		    bot.addDamageReductionByArmor(30);
-		} else if (huntLoc.startsWith("技監")) {
+		} else if (huntLoc.startsWith("ギラン監獄")) {
 		    bot.getAC().setAc(-70);
 		    if (bot.getCurrentWeapon() == 20) {
 			bot.addHitup(10);

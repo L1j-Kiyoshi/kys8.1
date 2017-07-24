@@ -430,7 +430,7 @@ public class S_PacketBox extends ServerBasePacket {
 		case DungeonTime:// 12月14日に変更
 			writeD(7);
 			writeD(1);
-			writeS("$12125");// 技監
+			writeS("$12125");// ギラン監獄
 			writeD(time1);
 			writeD(2);
 			writeS("$6081");// 象牙の塔

@@ -330,9 +330,9 @@ public class C_CreateChar extends ClientBasePacket {
 		pc.setBanned(false);
 		pc.setKarma(0);
 		pc.setReturnStat(0);
-		pc.setGirandungeonTime(0);//技監
+		pc.setGirandungeonTime(0);//ギラン監獄
 		pc.setOrendungeonTime(0);//ヤヒ
-		pc.setDrageonTime(0);//ヨンドン
+		pc.setDrageonTime(0);//DVC
 		//pc.setRadungeonTime(0);//ラバー
 		pc.setSomeTime(0);//モンソム
 		pc.setSoulTime(0);//ゴム

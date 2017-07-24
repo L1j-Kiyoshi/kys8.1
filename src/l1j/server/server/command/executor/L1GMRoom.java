@@ -109,7 +109,7 @@ public class L1GMRoom implements L1CommandExecutor {
 			} else if (i == 31) {
 				new L1Teleport().teleport(pc , 32699, 32819, (short) 82, 5, false); // デーモン
 			} else if (i == 32) {
-				new L1Teleport().teleport(pc , 32769, 32770, (short) 56, 5, false); //技監4階
+				new L1Teleport().teleport(pc , 32769, 32770, (short) 56, 5, false); //ギラン監獄4階
 			} else if (i == 33) {
 				new L1Teleport().teleport(pc , 32929, 32995, (short) 410, 5, false); // 魔族の神殿				
 			} else if (i == 34) {
@@ -123,7 +123,7 @@ public class L1GMRoom implements L1CommandExecutor {
 			} else if (i == 38) {
 				new L1Teleport().teleport(pc , 32771, 32831, (short) 65, 5, false); // 波プバン
 			} else if (i == 39) {
-				new L1Teleport().teleport(pc , 32696, 32824, (short) 37, 5, false); // バーモス（ヨンドン7階）
+				new L1Teleport().teleport(pc , 32696, 32824, (short) 37, 5, false); // バーモス（DVC7階）
 			} else if (i == 40) {
 				new L1Teleport().teleport(pc , 32922, 32812, (short) 430, 5, false); // 精霊の墓
 			} else if (i == 41) {
@@ -185,7 +185,7 @@ public class L1GMRoom implements L1CommandExecutor {
 					pc.sendPackets(new S_SystemMessage("\\aL14.ケント城 15.ウィン和音 16.ギラン城 17.ハイ性 18.アデン城"));
 					pc.sendPackets(new S_SystemMessage("\\aL19.守護塔 20.守護塔 21.守護塔 22.守護塔 23.守護塔"));
 					pc.sendPackets(new S_SystemMessage("\\aH24.ヘソム 25.ベヒ某 26.シルベリア 27.テーベ 28.ピラミッド"));
-					pc.sendPackets(new S_SystemMessage("\\aH29.ピラミッド 30.フェニックス 31.デーモン 32.技監4層 33.魔族の部屋"));
+					pc.sendPackets(new S_SystemMessage("\\aH29.ピラミッド 30.フェニックス 31.デーモン 32.ギラン監獄4層 33.魔族の部屋"));
 					pc.sendPackets(new S_SystemMessage("\\aD34.ヒット 35.パプ 36.リンド 37.塗って 38.旧派フー 39.バーモス"));
 					pc.sendPackets(new S_SystemMessage("\\aL40.政務 41.高ラス 42.ソムドン2層 43.古代の墓 44.オタン"));
 					pc.sendPackets(new S_SystemMessage("\\aL45.ラスタバド2層 46.ラスタバド3層 47.ラスタバド4層 48.船舶 49.深海"));

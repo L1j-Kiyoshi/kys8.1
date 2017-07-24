@@ -72,7 +72,7 @@ public class DungeonQuitController implements Runnable {
 				continue;
 			}
 			try {
-				pc.setGirandungeonTime(0);//技監
+				pc.setGirandungeonTime(0);//ギラン監獄
 				pc.setOrendungeonTime(0);//象牙の塔ヤヒ
 				pc.setDrageonTime(0);//龍界
 				//pc.setRadungeonTime(0);//ラバー

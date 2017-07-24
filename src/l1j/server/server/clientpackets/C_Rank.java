@@ -294,7 +294,7 @@ public class C_Rank extends ClientBasePacket {
 			pc.sendPackets(new S_ServerMessage(2535, "話せる島ダンジョン",  getTimer9 +"")); // 話せる島ダンジョン
 			break;
 		case 9:				/** リースウィンドウ表記 **/
-			int setTimer1 = 180 - pc.getGirandungeonTime();//技監
+			int setTimer1 = 180 - pc.getGirandungeonTime();//ギラン監獄
 			int setTimer2 = 60 - pc.getnewdodungeonTime();//バルログ陣営
 			int setTimer3 = 60 - pc.getOrendungeonTime();//ヤヒ陣営
 			int setTimer4 = 30 - pc.getSoulTime();//古代精霊の墓
