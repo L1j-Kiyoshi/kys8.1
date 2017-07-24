@@ -102,8 +102,9 @@ public final class ProtocolHandler extends SimpleChannelUpstreamHandler {
 	    if (!Config.shutdownCheck && e.getChannel().isConnected()) {
 		// long seed = 0x7479623E; //0913
 		// long seed = 0x7795647E; // 170314
-		// long seed = 0x1f84a45dL; // 170620
-		long seed = 0x010d3a73L;
+		// long seed = 0x1f84a45dL; // 170620 8.xc?
+		// long seed = 0x010d3a73L; //7.6c
+		long seed = 0x54bcf5d9L; // 8.1c
 
 		KeyPacket key = new KeyPacket();
 		GameClient lc = new GameClient(e.getChannel(), seed);
