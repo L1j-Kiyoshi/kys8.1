@@ -110,8 +110,8 @@ public class PacketHandler {
 
     public void handlePacket(byte abyte0[], L1PcInstance object) throws Exception {
 	int i = abyte0[0] & 0xff;
-	// System.out.println("c opcode : " + i);
-	// // System.out.println("addDmg= " + addDmg);
+
+	// System.out.println("addDmg= " + addDmg);
 	// System.out.println("[C opocde] = " + i + "[Length] = " +
 	// abyte0.length);// 本サーバーオプコ抽出
 	// System.out.println(DataToPacket(abyte0, abyte0.length));
