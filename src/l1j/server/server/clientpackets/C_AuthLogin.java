@@ -13,7 +13,7 @@ public class C_AuthLogin extends ClientBasePacket {
     public C_AuthLogin(byte[] decrypt, GameClient client) throws IOException {
 	super(decrypt);
 	try {
-	    readCH();
+
 	    String accountName = readS().toLowerCase();
 	    String password = readS();
 	    String ip = client.getIp();
