@@ -3,6 +3,7 @@ package l1j.server.server;
 
 import static l1j.server.server.Opcodes.*;
 
+import l1j.server.Config;
 import l1j.server.server.clientpackets.C_ActionUi;
 import l1j.server.server.clientpackets.C_AddBookmark;
 import l1j.server.server.clientpackets.C_AddBuddy;
@@ -111,10 +112,10 @@ public class PacketHandler {
     public void handlePacket(byte abyte0[], L1PcInstance object) throws Exception {
 	int i = abyte0[0] & 0xff;
 
-	// System.out.println("addDmg= " + addDmg);
-	// System.out.println("[C opocde] = " + i + "[Length] = " +
-	// abyte0.length);// 本サーバーオプコ抽出
-	// System.out.println(DataToPacket(abyte0, abyte0.length));
+	if (Config.SHOW_CLIENT_PACKET) {
+	    System.out.println("[C opocde] = " + i + "[Length] = " + abyte0.length);// 本サーバーオプコ抽出
+	    System.out.println(DataToPacket(abyte0, abyte0.length));
+	}
 	switch (i) {
 	case C_PLEDGE_WATCH:
 	    new C_ClanAttention(abyte0, _client);
