@@ -156,9 +156,9 @@ public abstract class ClientBasePacket {
 	public String readS() {
 		String s = null;
 		try {
-			s = new String(_decrypt, _off, _decrypt.length - _off, "SJIS");//SJIS
+			s = new String(_decrypt, _off, _decrypt.length - _off, "MS932");//MS932
 			s = s.substring(0, s.indexOf('\0'));
-			_off += s.getBytes("SJIS").length + 1;
+			_off += s.getBytes("MS932").length + 1;
 		} catch (StringIndexOutOfBoundsException e) {
 		} catch (Exception e) {
 		//	_log.log(Level.SEVERE, "OpCode=" + (_decrypt[0] & 0xff), e);
@@ -169,9 +169,9 @@ public abstract class ClientBasePacket {
 	public String readS2(int length) {
 		String s = null;
 		try {
-			s = new String(_decrypt, _off, length, "SJIS");
+			s = new String(_decrypt, _off, length, "MS932");
 			s = s.substring(0, s.indexOf('\0'));
-			_off += s.getBytes("SJIS").length + 1;
+			_off += s.getBytes("MS932").length + 1;
 		} catch (StringIndexOutOfBoundsException e) {
 		} catch (Exception e) {
 		//	_log.log(Level.SEVERE, "OpCode=" + (_decrypt[0] & 0xff), e);
@@ -182,8 +182,8 @@ public abstract class ClientBasePacket {
 //    public String readS1(int length) {
 //        String s = null;
 //        try {
-//            s = new String(_decrypt, _off, length, "SJIS");
-//            _off += s.getBytes("SJIS").length;
+//            s = new String(_decrypt, _off, length, "MS932");
+//            _off += s.getBytes("MS932").length;
 //        } catch (Exception e) {
 //            return null;
 //        }
@@ -207,10 +207,10 @@ public abstract class ClientBasePacket {
 					byte[] t = new byte[2]; 
 					t[0] = _decrypt[start+1]; 
 					t[1] = _decrypt[start]; 
-					test.append(new String(t, 0, 2, "SJIS")); 
+					test.append(new String(t, 0, 2, "MS932")); 
 				}else{ 
 					/** 英語＆数字 **/ 
-					test.append(new String(_decrypt, start, 1, "SJIS")); 
+					test.append(new String(_decrypt, start, 1, "MS932")); 
 				} 
 				start+=2; 
 				loc-=2; 
@@ -228,7 +228,7 @@ public abstract class ClientBasePacket {
         String s = null;
         try {
             int size = this._decrypt[this._off++] & 0xFF;
-            s = new String(this._decrypt, this._off, size, "SJIS");
+            s = new String(this._decrypt, this._off, size, "MS932");
             this._off += size;
         } catch (Exception e) {
         }

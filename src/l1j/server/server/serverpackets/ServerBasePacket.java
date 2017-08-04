@@ -206,7 +206,7 @@ public abstract class ServerBasePacket {
 	protected void writeLS(String text) {
 		try {
 			if (text != null && !text.isEmpty()) {
-				byte[] name = text.getBytes("SJIS");
+				byte[] name = text.getBytes("MS932");
 				this._bao.write(name.length & 255);
 				if (name.length > 0) {
 					this._bao.write(name);
@@ -286,7 +286,7 @@ public abstract class ServerBasePacket {
 	protected void writeS(String text) {
 		try {
 			if (text != null) {
-				_bao.write(text.getBytes("SJIS"));
+				_bao.write(text.getBytes("MS932"));
 			}
 		} catch (Exception e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
@@ -298,7 +298,7 @@ public abstract class ServerBasePacket {
 	protected void writeSS(String text) {
 		try {
 			if (text != null) {
-				byte[] test = text.getBytes("SJIS");
+				byte[] test = text.getBytes("MS932");
 				for (int i = 0; i < test.length;) {
 					if ((test[i] & 0xff) >= 0x7F) {
 						/** ハングルの **/
@@ -341,7 +341,7 @@ public abstract class ServerBasePacket {
 	protected void writeS2(String text) {
 		try {
 			if (text != null && !text.isEmpty()) {
-				byte[] name = text.getBytes("SJIS");
+				byte[] name = text.getBytes("MS932");
 				_bao.write(name.length & 0xff);
 				if (name.length > 0) {
 					_bao.write(name);

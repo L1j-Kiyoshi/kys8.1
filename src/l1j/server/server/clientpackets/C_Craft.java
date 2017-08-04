@@ -636,7 +636,7 @@ public class C_Craft extends ClientBasePacket {
 					os.writeC(readC());
 				}
 				
-				String chat2 = new String(os.getBytes(), "SJIS");
+				String chat2 = new String(os.getBytes(), "MS932");
 				os.close();
 				if (chatType == 1) {
 					readC();
@@ -645,7 +645,7 @@ public class C_Craft extends ClientBasePacket {
 					for (int i = 0; i < chatlength; i++) {
 						os.writeC(readC());
 					}
-					String name = new String(os.getBytes(), "SJIS");
+					String name = new String(os.getBytes(), "MS932");
 					ChatWhisper(pc, chatType, chatcount, chat2, name);
 				} else { // 一般ジョンチェトなど
 					Chat(pc, chatType, chatcount, chat2);

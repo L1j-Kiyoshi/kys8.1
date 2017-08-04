@@ -413,7 +413,7 @@ public class C_CreateChar extends ClientBasePacket {
 	private static boolean isInvalidName(String name) {
 		int numOfNameBytes = 0;
 		try {
-			numOfNameBytes = name.getBytes("SJIS").length;
+			numOfNameBytes = name.getBytes("MS932").length;
 		} catch (UnsupportedEncodingException e) {
 			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
 			return false;

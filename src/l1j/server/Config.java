@@ -637,7 +637,7 @@ public final class Config {
 	    ACCEL_ALLOW = ((double) (Integer.parseInt(serverSettings.getProperty("AccelAllow", "10")))) / 100.f;
 
 	    PRIVATE_SHOP_CHAT = new String(serverSettings.getProperty("PrivateShopChat").getBytes("ISO-8859-1"),
-		    "SJIS");
+		    "MS932");
 
 	    HAJA = Integer.parseInt(serverSettings.getProperty("Haja", "2"));
 	    CHARACTER_CONFIG_IN_SERVER_SIDE = Boolean

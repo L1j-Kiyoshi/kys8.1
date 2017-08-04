@@ -994,7 +994,7 @@ public class UserCommands {
 					}
 				}
 				int numOfNameBytes = 0;
-				numOfNameBytes = name.getBytes("SJIS").length;
+				numOfNameBytes = name.getBytes("MS932").length;
 				if (numOfNameBytes == 0) {
 					pc.sendPackets(new S_SystemMessage("名前変更変更キャラクター名< - の形式で入力"));
 					return;

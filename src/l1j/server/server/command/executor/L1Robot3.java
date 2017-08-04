@@ -162,7 +162,7 @@ public class L1Robot3 implements L1CommandExecutor {
 	private static boolean isInvalidName(String name) {
 		int numOfNameBytes = 0;
 		try {
-			numOfNameBytes = name.getBytes("SJIS").length;
+			numOfNameBytes = name.getBytes("MS932").length;
 		} catch (UnsupportedEncodingException e) {
 			return false;
 		}
