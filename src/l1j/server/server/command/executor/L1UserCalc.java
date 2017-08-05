@@ -24,47 +24,47 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1UserCalc implements L1CommandExecutor {
-	private L1UserCalc() {
-	}
+    private L1UserCalc() {
+    }
 
-	private static int calcUser = 0;
+    private static int calcUser = 0;
 
-	public static L1CommandExecutor getInstance() {
-		return new L1UserCalc();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1UserCalc();
+    }
 
-	public static int getClacUser() {
-		return calcUser;
-	}
+    public static int getClacUser() {
+        return calcUser;
+    }
 
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		String msg = null;
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        String msg = null;
 
-		try {
-			StringTokenizer tok = new StringTokenizer(arg);
-			String type = tok.nextToken();
-			int count = Integer.parseInt(tok.nextToken());
+        try {
+            StringTokenizer tok = new StringTokenizer(arg);
+            String type = tok.nextToken();
+            int count = Integer.parseInt(tok.nextToken());
 
-			if (type.equalsIgnoreCase("+")) {
-				calcUser += count;
-				msg = new StringBuilder().append("あら：" + count + "人の追加/現在のあら：" + calcUser + "人").toString();
-			} else if (type.equalsIgnoreCase("-")) {
-				int temp = calcUser - count;
-				if (temp < 0) {
-					pc.sendPackets(new S_SystemMessage("あらが - があってはなりません。現在あら：" + calcUser));
-					return;
-				} else {
-					calcUser = temp;
-					msg = new StringBuilder().append("あら：" + count + "人減少/現在のあら：" + calcUser + "人").toString();
-				}
-			}
-		} catch (Exception e) {
-			// _log.log(Level.SEVERE, "", e);
-			msg = new StringBuilder().append(cmdName).append(" [+,-] [COUNT] 入力").toString();
-		} finally {
-			if (msg != null) {
-				pc.sendPackets(new S_SystemMessage(msg));
-			}
-		}
-	}
+            if (type.equalsIgnoreCase("+")) {
+                calcUser += count;
+                msg = new StringBuilder().append("あら：" + count + "人の追加/現在のあら：" + calcUser + "人").toString();
+            } else if (type.equalsIgnoreCase("-")) {
+                int temp = calcUser - count;
+                if (temp < 0) {
+                    pc.sendPackets(new S_SystemMessage("あらが - があってはなりません。現在あら：" + calcUser));
+                    return;
+                } else {
+                    calcUser = temp;
+                    msg = new StringBuilder().append("あら：" + count + "人減少/現在のあら：" + calcUser + "人").toString();
+                }
+            }
+        } catch (Exception e) {
+            // _log.log(Level.SEVERE, "", e);
+            msg = new StringBuilder().append(cmdName).append(" [+,-] [COUNT] 入力").toString();
+        } finally {
+            if (msg != null) {
+                pc.sendPackets(new S_SystemMessage(msg));
+            }
+        }
+    }
 }

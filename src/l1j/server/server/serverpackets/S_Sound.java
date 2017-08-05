@@ -26,33 +26,35 @@ import l1j.server.server.Opcodes;
 
 public class S_Sound extends ServerBasePacket {
 
-	private static final String S_SOUND = "[S] S_Sound";
+    private static final String S_SOUND = "[S] S_Sound";
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	/**
-	 * 効果音を鳴らす（soundフォルダのwavファイル）。
-	 * @param sound
-	 */
-	public S_Sound(int sound) {
-		buildPacket(sound);
-	}
+    /**
+     * 効果音を鳴らす（soundフォルダのwavファイル）。
+     *
+     * @param sound
+     */
+    public S_Sound(int sound) {
+        buildPacket(sound);
+    }
 
-	private void buildPacket(int sound) {
-		writeC(Opcodes.S_SOUND_EFFECT);
-		writeC(0); // repeat
-		writeH(sound);
-	}
+    private void buildPacket(int sound) {
+        writeC(Opcodes.S_SOUND_EFFECT);
+        writeC(0); // repeat
+        writeH(sound);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return S_SOUND;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_SOUND;
+    }
 }

@@ -27,53 +27,53 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class C_LoginToServerOK extends ClientBasePacket {
 
-	private static final String C_LOGIN_TO_SERVER_OK = "[C] C_LoginToServerOK";
+    private static final String C_LOGIN_TO_SERVER_OK = "[C] C_LoginToServerOK";
 
-	public C_LoginToServerOK(byte[] decrypt, GameClient client) {
-		super(decrypt);
-		int type = readC();
-		int button = readC();
+    public C_LoginToServerOK(byte[] decrypt, GameClient client) {
+        super(decrypt);
+        int type = readC();
+        int button = readC();
 
-		L1PcInstance pc = client.getActiveChar();
-		if ( pc == null)return;
+        L1PcInstance pc = client.getActiveChar();
+        if (pc == null) return;
 
-		if (type == 255) { 
-			if (button == 95 || button == 127) {
-				pc.setShowWorldChat(true); // open
-				pc.setCanWhisper(true); // open
-			} else if (button == 91 || button == 123) {
-				pc.setShowWorldChat(true); // open
-				pc.setCanWhisper(false); // close
-			} else if (button == 94 || button == 126) {
-				pc.setShowWorldChat(false); // close
-				pc.setCanWhisper(true); // open
-			} else if (button == 90 || button == 122) {
-				pc.setShowWorldChat(false); // close
-				pc.setCanWhisper(false); // close
-			}
-		} else if (type == 0) { 
-			if (button == 0) { // close
-				pc.setShowWorldChat(false);
-			} else if (button == 1) { // open
-				pc.setShowWorldChat(true);
-			}
-		} else if (type == 2) { // Whisper
-			if (button == 0) { // close
-				pc.setCanWhisper(false);
-			} else if (button == 1) { // open
-				pc.setCanWhisper(true);
-			}
-		} else if (type == 6) {
-			if (button == 0) { // close
-				pc.setShowTradeChat(false);
-			} else if (button == 1) { // open
-				pc.setShowTradeChat(true);
-			}
-		}
-	}
+        if (type == 255) {
+            if (button == 95 || button == 127) {
+                pc.setShowWorldChat(true); // open
+                pc.setCanWhisper(true); // open
+            } else if (button == 91 || button == 123) {
+                pc.setShowWorldChat(true); // open
+                pc.setCanWhisper(false); // close
+            } else if (button == 94 || button == 126) {
+                pc.setShowWorldChat(false); // close
+                pc.setCanWhisper(true); // open
+            } else if (button == 90 || button == 122) {
+                pc.setShowWorldChat(false); // close
+                pc.setCanWhisper(false); // close
+            }
+        } else if (type == 0) {
+            if (button == 0) { // close
+                pc.setShowWorldChat(false);
+            } else if (button == 1) { // open
+                pc.setShowWorldChat(true);
+            }
+        } else if (type == 2) { // Whisper
+            if (button == 0) { // close
+                pc.setCanWhisper(false);
+            } else if (button == 1) { // open
+                pc.setCanWhisper(true);
+            }
+        } else if (type == 6) {
+            if (button == 0) { // close
+                pc.setShowTradeChat(false);
+            } else if (button == 1) { // open
+                pc.setShowTradeChat(true);
+            }
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_LOGIN_TO_SERVER_OK;
-	}
+    @Override
+    public String getType() {
+        return C_LOGIN_TO_SERVER_OK;
+    }
 }

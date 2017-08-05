@@ -19,99 +19,99 @@
 package l1j.server.server.templates;
 
 public class L1EtcItem extends L1Item {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	public L1EtcItem() {
-	}
+    public L1EtcItem() {
+    }
 
-	private boolean _stackable;
+    private boolean _stackable;
 
-	private int _locx;
+    private int _locx;
 
-	private int _locy;
+    private int _locy;
 
-	private short _mapid;
+    private short _mapid;
 
-	private int _delay_id;
+    private int _delay_id;
 
-	private int _delay_time;
+    private int _delay_time;
 
-	private int _delay_effect;
+    private int _delay_effect;
 
-	private int _maxChargeCount;
+    private int _maxChargeCount;
 
-	@Override
-	public boolean isStackable() {
-		return _stackable;
-	}
+    @Override
+    public boolean isStackable() {
+        return _stackable;
+    }
 
-	public void set_stackable(boolean stackable) {
-		_stackable = stackable;
-	}
+    public void set_stackable(boolean stackable) {
+        _stackable = stackable;
+    }
 
-	public void set_locx(int locx) {
-		_locx = locx;
-	}
+    public void set_locx(int locx) {
+        _locx = locx;
+    }
 
-	@Override
-	public int get_locx() {
-		return _locx;
-	}
+    @Override
+    public int get_locx() {
+        return _locx;
+    }
 
-	public void set_locy(int locy) {
-		_locy = locy;
-	}
+    public void set_locy(int locy) {
+        _locy = locy;
+    }
 
-	@Override
-	public int get_locy() {
-		return _locy;
-	}
+    @Override
+    public int get_locy() {
+        return _locy;
+    }
 
-	public void set_mapid(short mapid) {
-		_mapid = mapid;
-	}
+    public void set_mapid(short mapid) {
+        _mapid = mapid;
+    }
 
-	@Override
-	public short get_mapid() {
-		return _mapid;
-	}
+    @Override
+    public short get_mapid() {
+        return _mapid;
+    }
 
-	public void set_delayid(int delay_id) {
-		_delay_id = delay_id;
-	}
+    public void set_delayid(int delay_id) {
+        _delay_id = delay_id;
+    }
 
-	@Override
-	public int get_delayid() {
-		return _delay_id;
-	}
+    @Override
+    public int get_delayid() {
+        return _delay_id;
+    }
 
-	public void set_delaytime(int delay_time) {
-		_delay_time = delay_time;
-	}
+    public void set_delaytime(int delay_time) {
+        _delay_time = delay_time;
+    }
 
-	@Override
-	public int get_delaytime() {
-		return _delay_time;
-	}
+    @Override
+    public int get_delaytime() {
+        return _delay_time;
+    }
 
-	public void set_delayEffect(int delay_effect) {
-		_delay_effect = delay_effect;
-	}
+    public void set_delayEffect(int delay_effect) {
+        _delay_effect = delay_effect;
+    }
 
-	public int get_delayEffect() {
-		return _delay_effect;
-	}
+    public int get_delayEffect() {
+        return _delay_effect;
+    }
 
-	public void setMaxChargeCount(int i) {
-		_maxChargeCount = i;
-	}
+    public void setMaxChargeCount(int i) {
+        _maxChargeCount = i;
+    }
 
-	@Override
-	public int getMaxChargeCount() {
-		return _maxChargeCount;
-	}
+    @Override
+    public int getMaxChargeCount() {
+        return _maxChargeCount;
+    }
 
 }

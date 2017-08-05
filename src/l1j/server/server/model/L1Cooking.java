@@ -37,556 +37,558 @@ import l1j.server.server.serverpackets.S_ServerMessage;
 
 public class L1Cooking {
 
-	private L1Cooking() {
-	}
+    private L1Cooking() {
+    }
 
-	public static void useCookingItem(L1PcInstance pc, L1ItemInstance item) {
-		int itemId = item.getItem().getItemId();
-		if (itemId == 41284 // キノコのスープ
-				|| itemId == 49056 // クラブ肉スープ
-				|| itemId == 49064 // 幻想のクラブ肉スープ
-				|| itemId == 41292 // 幻のキノコのスープ
-				|| itemId == 210055 // バシリスク卵スープ
-				|| itemId == 210063) { // 幻のバシリスク卵スープ
-			if (pc.get_food() != 225) { // 100%
-				pc.sendPackets(new S_ServerMessage(74, item.getNumberedName(1)));
-				return;
-			}
-		}
+    public static void useCookingItem(L1PcInstance pc, L1ItemInstance item) {
+        int itemId = item.getItem().getItemId();
+        if (itemId == 41284 // キノコのスープ
+                || itemId == 49056 // クラブ肉スープ
+                || itemId == 49064 // 幻想のクラブ肉スープ
+                || itemId == 41292 // 幻のキノコのスープ
+                || itemId == 210055 // バシリスク卵スープ
+                || itemId == 210063) { // 幻のバシリスク卵スープ
+            if (pc.get_food() != 225) { // 100%
+                pc.sendPackets(new S_ServerMessage(74, item.getNumberedName(1)));
+                return;
+            }
+        }
 
-		if (itemId >= 41277 && itemId <= 41283 // 1次料理
-				|| itemId >= 49049 && itemId <= 49056// 2次料理
-				|| itemId >= 210048 && itemId <= 210055// 3次の料理
-				|| itemId >= 41285 && itemId <= 41291// 1次幻想の料理
-				|| itemId >= 49057 && itemId <= 49064// 2次幻想の料理
-				|| itemId >= 210056 && itemId <= 210062 // 3次幻想の料理
-				|| itemId >= 30051 && itemId <= 30053 // リニューアル料理
-		) { // メティス料理
-			int cookingId = pc.getCookingId();
-			if (cookingId != 0) {
-				pc.removeSkillEffect(cookingId);
-			}
-		}
+        if (itemId >= 41277 && itemId <= 41283 // 1次料理
+                || itemId >= 49049 && itemId <= 49056// 2次料理
+                || itemId >= 210048 && itemId <= 210055// 3次の料理
+                || itemId >= 41285 && itemId <= 41291// 1次幻想の料理
+                || itemId >= 49057 && itemId <= 49064// 2次幻想の料理
+                || itemId >= 210056 && itemId <= 210062 // 3次幻想の料理
+                || itemId >= 30051 && itemId <= 30053 // リニューアル料理
+                ) { // メティス料理
+            int cookingId = pc.getCookingId();
+            if (cookingId != 0) {
+                pc.removeSkillEffect(cookingId);
+            }
+        }
 
-		if (itemId == 41284 // キノコのスープ
-				|| itemId == 49056// クラブ肉スープ
-				|| itemId == 49064// 幻想のクラブ肉スープ
-				|| itemId == 41292// 幻のキノコのスープ
-				|| itemId == 200021 // バシリスク卵スープ
-				|| itemId == 200029 // 幻のバシリスク卵スープ
-				|| itemId == 30054 // 修練の鶏肉スープ
-		) {
-			int dessertId = pc.getDessertId();
-			if (dessertId != 0) {
-				pc.removeSkillEffect(dessertId);
-			}
-		}
-		/** 1次料理の効果 */
-		int cookingId;
-		int time = 900;
-		switch (itemId) {
-		case 41277:
-		case 41285:
-			if (itemId == 41277) {
-				cookingId = COOKING_1_0_N;
-			} else {
-				cookingId = COOKING_1_0_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 41278:
-		case 41286:
-			if (itemId == 41278) {
-				cookingId = COOKING_1_1_N;
-			} else {
-				cookingId = COOKING_1_1_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 41279:
-		case 41287:
-			if (itemId == 41279) {
-				cookingId = COOKING_1_2_N;
-			} else {
-				cookingId = COOKING_1_2_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 41280:
-		case 41288:
-			if (itemId == 41280) {
-				cookingId = COOKING_1_3_N;
-			} else {
-				cookingId = COOKING_1_3_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 41281:
-		case 41289:
-			if (itemId == 41281) {
-				cookingId = COOKING_1_4_N;
-			} else {
-				cookingId = COOKING_1_4_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 41282:
-		case 41290:
-			if (itemId == 41282) {
-				cookingId = COOKING_1_5_N;
-			} else {
-				cookingId = COOKING_1_5_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 41283:
-		case 41291:
-			if (itemId == 41283) {
-				cookingId = COOKING_1_6_N;
-			} else {
-				cookingId = COOKING_1_6_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 41284:
-		case 41292:
-			if (itemId == 41284) {
-				cookingId = COOKING_1_7_N;
-			} else {
-				cookingId = COOKING_1_7_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 49049:
-		case 49057:
-			if (itemId == 49049) {
-				cookingId = COOKING_1_8_N;
-			} else {
-				cookingId = COOKING_1_8_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 49050:
-		case 49058:
-			if (itemId == 49050) {
-				cookingId = COOKING_1_9_N;
-			} else {
-				cookingId = COOKING_1_9_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 49051:
-		case 49059:
-			if (itemId == 49051) {
-				cookingId = COOKING_1_10_N;
-			} else {
-				cookingId = COOKING_1_10_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 49052:
-		case 49060:
-			if (itemId == 49052) {
-				cookingId = COOKING_1_11_N;
-			} else {
-				cookingId = COOKING_1_11_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 49053:
-		case 49061:
-			if (itemId == 49053) {
-				cookingId = COOKING_1_12_N;
-			} else {
-				cookingId = COOKING_1_12_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 49054:
-		case 49062:
-			if (itemId == 49054) {
-				cookingId = COOKING_1_13_N;
-			} else {
-				cookingId = COOKING_1_13_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 49055:
-		case 49063:
-			if (itemId == 49055) {
-				cookingId = COOKING_1_14_N;
-			} else {
-				cookingId = COOKING_1_14_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 49056:
-		case 49064:
-			if (itemId == 49056) {
-				cookingId = COOKING_1_15_N;
-			} else {
-				cookingId = COOKING_1_15_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 210048:
-		case 210056:
-			if (itemId == 210048) {
-				cookingId = COOKING_1_16_N;
-			} else {
-				cookingId = COOKING_1_16_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 210049:
-		case 210057:
-			if (itemId == 210049) {
-				cookingId = COOKING_1_17_N;
-			} else {
-				cookingId = COOKING_1_17_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 210050:
-		case 210058:
-			if (itemId == 210050) {
-				cookingId = COOKING_1_18_N;
-			} else {
-				cookingId = COOKING_1_18_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 210051:
-		case 210059:
-			if (itemId == 210051) {
-				cookingId = COOKING_1_19_N;
-			} else {
-				cookingId = COOKING_1_19_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 210052:
-		case 210060:
-			if (itemId == 210052) {
-				cookingId = COOKING_1_20_N;
-			} else {
-				cookingId = COOKING_1_20_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 210053:
-		case 210061:
-			if (itemId == 210053) {
-				cookingId = COOKING_1_21_N;
-			} else {
-				cookingId = COOKING_1_21_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 210054:
-		case 210062:
-			if (itemId == 210054) {
-				cookingId = COOKING_1_22_N;
-			} else {
-				cookingId = COOKING_1_22_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 210055:
-		case 210063:
-			if (itemId == 210055) {
-				cookingId = COOKING_1_23_N;
-			} else {
-				cookingId = COOKING_1_23_S;
-			}
-			eatCooking(pc, cookingId, time);
-			break;
-		case 30051: // 力強い韓牛ステーキ
-			eatCooking(pc, COOK_STR, 1800);
-			break;
-		case 30052: // ナルセンサーモン蒸し
-			eatCooking(pc, COOK_DEX, 1800);
-			break;
-		case 30053: // 賢いローストターキー
-			eatCooking(pc, COOK_INT, 1800);
-			break;
-		case 30054: // 修練の鶏肉スープ
-			eatCooking(pc, COOK_GROW, 1800);
-			break;
-		case 3000159:// メティススープ
-			eatCooking(pc, METIS_SOUP, 1800);
-			break;
-		case 3000160:// メティス料理
-			eatCooking(pc, METIS_COOKING, 1800);
-			break;
-		default:
-			break;
-		}
-		// pc.sendPackets(new S_SkillSound(pc.getId(), 751));
-		pc.sendPackets(new S_EffectLocation(pc.getX(), pc.getY(), 6392));
-		pc.sendPackets(new S_ServerMessage(76, item.getNumberedName(1)));
-		pc.getInventory().removeItem(item, 1);
-	}
+        if (itemId == 41284 // キノコのスープ
+                || itemId == 49056// クラブ肉スープ
+                || itemId == 49064// 幻想のクラブ肉スープ
+                || itemId == 41292// 幻のキノコのスープ
+                || itemId == 200021 // バシリスク卵スープ
+                || itemId == 200029 // 幻のバシリスク卵スープ
+                || itemId == 30054 // 修練の鶏肉スープ
+                ) {
+            int dessertId = pc.getDessertId();
+            if (dessertId != 0) {
+                pc.removeSkillEffect(dessertId);
+            }
+        }
+        /** 1次料理の効果 */
+        int cookingId;
+        int time = 900;
+        switch (itemId) {
+            case 41277:
+            case 41285:
+                if (itemId == 41277) {
+                    cookingId = COOKING_1_0_N;
+                } else {
+                    cookingId = COOKING_1_0_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 41278:
+            case 41286:
+                if (itemId == 41278) {
+                    cookingId = COOKING_1_1_N;
+                } else {
+                    cookingId = COOKING_1_1_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 41279:
+            case 41287:
+                if (itemId == 41279) {
+                    cookingId = COOKING_1_2_N;
+                } else {
+                    cookingId = COOKING_1_2_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 41280:
+            case 41288:
+                if (itemId == 41280) {
+                    cookingId = COOKING_1_3_N;
+                } else {
+                    cookingId = COOKING_1_3_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 41281:
+            case 41289:
+                if (itemId == 41281) {
+                    cookingId = COOKING_1_4_N;
+                } else {
+                    cookingId = COOKING_1_4_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 41282:
+            case 41290:
+                if (itemId == 41282) {
+                    cookingId = COOKING_1_5_N;
+                } else {
+                    cookingId = COOKING_1_5_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 41283:
+            case 41291:
+                if (itemId == 41283) {
+                    cookingId = COOKING_1_6_N;
+                } else {
+                    cookingId = COOKING_1_6_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 41284:
+            case 41292:
+                if (itemId == 41284) {
+                    cookingId = COOKING_1_7_N;
+                } else {
+                    cookingId = COOKING_1_7_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 49049:
+            case 49057:
+                if (itemId == 49049) {
+                    cookingId = COOKING_1_8_N;
+                } else {
+                    cookingId = COOKING_1_8_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 49050:
+            case 49058:
+                if (itemId == 49050) {
+                    cookingId = COOKING_1_9_N;
+                } else {
+                    cookingId = COOKING_1_9_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 49051:
+            case 49059:
+                if (itemId == 49051) {
+                    cookingId = COOKING_1_10_N;
+                } else {
+                    cookingId = COOKING_1_10_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 49052:
+            case 49060:
+                if (itemId == 49052) {
+                    cookingId = COOKING_1_11_N;
+                } else {
+                    cookingId = COOKING_1_11_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 49053:
+            case 49061:
+                if (itemId == 49053) {
+                    cookingId = COOKING_1_12_N;
+                } else {
+                    cookingId = COOKING_1_12_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 49054:
+            case 49062:
+                if (itemId == 49054) {
+                    cookingId = COOKING_1_13_N;
+                } else {
+                    cookingId = COOKING_1_13_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 49055:
+            case 49063:
+                if (itemId == 49055) {
+                    cookingId = COOKING_1_14_N;
+                } else {
+                    cookingId = COOKING_1_14_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 49056:
+            case 49064:
+                if (itemId == 49056) {
+                    cookingId = COOKING_1_15_N;
+                } else {
+                    cookingId = COOKING_1_15_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 210048:
+            case 210056:
+                if (itemId == 210048) {
+                    cookingId = COOKING_1_16_N;
+                } else {
+                    cookingId = COOKING_1_16_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 210049:
+            case 210057:
+                if (itemId == 210049) {
+                    cookingId = COOKING_1_17_N;
+                } else {
+                    cookingId = COOKING_1_17_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 210050:
+            case 210058:
+                if (itemId == 210050) {
+                    cookingId = COOKING_1_18_N;
+                } else {
+                    cookingId = COOKING_1_18_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 210051:
+            case 210059:
+                if (itemId == 210051) {
+                    cookingId = COOKING_1_19_N;
+                } else {
+                    cookingId = COOKING_1_19_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 210052:
+            case 210060:
+                if (itemId == 210052) {
+                    cookingId = COOKING_1_20_N;
+                } else {
+                    cookingId = COOKING_1_20_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 210053:
+            case 210061:
+                if (itemId == 210053) {
+                    cookingId = COOKING_1_21_N;
+                } else {
+                    cookingId = COOKING_1_21_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 210054:
+            case 210062:
+                if (itemId == 210054) {
+                    cookingId = COOKING_1_22_N;
+                } else {
+                    cookingId = COOKING_1_22_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 210055:
+            case 210063:
+                if (itemId == 210055) {
+                    cookingId = COOKING_1_23_N;
+                } else {
+                    cookingId = COOKING_1_23_S;
+                }
+                eatCooking(pc, cookingId, time);
+                break;
+            case 30051: // 力強い韓牛ステーキ
+                eatCooking(pc, COOK_STR, 1800);
+                break;
+            case 30052: // ナルセンサーモン蒸し
+                eatCooking(pc, COOK_DEX, 1800);
+                break;
+            case 30053: // 賢いローストターキー
+                eatCooking(pc, COOK_INT, 1800);
+                break;
+            case 30054: // 修練の鶏肉スープ
+                eatCooking(pc, COOK_GROW, 1800);
+                break;
+            case 3000159:// メティススープ
+                eatCooking(pc, METIS_SOUP, 1800);
+                break;
+            case 3000160:// メティス料理
+                eatCooking(pc, METIS_COOKING, 1800);
+                break;
+            default:
+                break;
+        }
+        // pc.sendPackets(new S_SkillSound(pc.getId(), 751));
+        pc.sendPackets(new S_EffectLocation(pc.getX(), pc.getY(), 6392));
+        pc.sendPackets(new S_ServerMessage(76, item.getNumberedName(1)));
+        pc.getInventory().removeItem(item, 1);
+    }
 
-	/** 1次料理の効果 */
-	public static void eatCooking(L1PcInstance pc, int cookingId, int time) {
-		int cookingType = 0;
+    /**
+     * 1次料理の効果
+     */
+    public static void eatCooking(L1PcInstance pc, int cookingId, int time) {
+        int cookingType = 0;
 
-		switch (cookingId) {
-		case COOKING_1_0_N:
-		case COOKING_1_0_S:
-			cookingType = 0;
-			pc.getResistance().addAllNaturalResistance(10);
-			pc.sendPackets(new S_OwnCharAttrDef(pc));
-			break;
-		case BETTERSWEET_CANDY:
-			if (pc.getLevel() >= 1 && pc.getLevel() <= 60) {
-				pc.getAbility().addStr(7);
-				pc.getAbility().addDex(7);
-			} else {
-				pc.getAbility().addStr(6);
-				pc.getAbility().addDex(6);
-			}
-			pc.sendPackets(new S_OwnCharStatus(pc));
-			break;
-		case COOKING_1_1_N:
-		case COOKING_1_1_S:
-			cookingType = 1;
-			pc.addMaxHp(30);
-			pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
-			if (pc.isInParty()) {
-				pc.getParty().updateMiniHP(pc);
-			}
-			break;
-		case COOKING_1_2_N:
-		case COOKING_1_2_S:
-			cookingType = 2;
-			break;
-		case COOKING_1_3_N:
-		case COOKING_1_3_S:
-			cookingType = 3;
-			pc.getAC().addAc(-1);
-			pc.sendPackets(new S_OwnCharStatus(pc));
-			break;
-		case COOKING_1_4_N:
-		case COOKING_1_4_S:
-			cookingType = 4;
-			pc.addMaxMp(20);
-			pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
-			break;
-		case COOKING_1_5_N:
-		case COOKING_1_5_S:
-			cookingType = 5;
-			break;
-		case COOKING_1_6_N:
-		case COOKING_1_6_S:
-			cookingType = 6;
-			pc.getResistance().addMr(5);
-			pc.sendPackets(new S_SPMR(pc));
-			break;
-		case COOKING_1_7_N:
-		case COOKING_1_7_S:
-			cookingType = 7;
-			break;
-		/** 1次料理の効果端 */
-		case COOKING_1_8_N:
-		case COOKING_1_8_S:
-			cookingType = 16;
-			pc.addBowHitRate(2);
-			pc.addBowDmgup(1);
-			break;
-		case COOKING_1_9_N:
-		case COOKING_1_9_S:
-			cookingType = 17;
-			pc.addMaxHp(30);
-			pc.addMaxMp(30);
+        switch (cookingId) {
+            case COOKING_1_0_N:
+            case COOKING_1_0_S:
+                cookingType = 0;
+                pc.getResistance().addAllNaturalResistance(10);
+                pc.sendPackets(new S_OwnCharAttrDef(pc));
+                break;
+            case BETTERSWEET_CANDY:
+                if (pc.getLevel() >= 1 && pc.getLevel() <= 60) {
+                    pc.getAbility().addStr(7);
+                    pc.getAbility().addDex(7);
+                } else {
+                    pc.getAbility().addStr(6);
+                    pc.getAbility().addDex(6);
+                }
+                pc.sendPackets(new S_OwnCharStatus(pc));
+                break;
+            case COOKING_1_1_N:
+            case COOKING_1_1_S:
+                cookingType = 1;
+                pc.addMaxHp(30);
+                pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
+                if (pc.isInParty()) {
+                    pc.getParty().updateMiniHP(pc);
+                }
+                break;
+            case COOKING_1_2_N:
+            case COOKING_1_2_S:
+                cookingType = 2;
+                break;
+            case COOKING_1_3_N:
+            case COOKING_1_3_S:
+                cookingType = 3;
+                pc.getAC().addAc(-1);
+                pc.sendPackets(new S_OwnCharStatus(pc));
+                break;
+            case COOKING_1_4_N:
+            case COOKING_1_4_S:
+                cookingType = 4;
+                pc.addMaxMp(20);
+                pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
+                break;
+            case COOKING_1_5_N:
+            case COOKING_1_5_S:
+                cookingType = 5;
+                break;
+            case COOKING_1_6_N:
+            case COOKING_1_6_S:
+                cookingType = 6;
+                pc.getResistance().addMr(5);
+                pc.sendPackets(new S_SPMR(pc));
+                break;
+            case COOKING_1_7_N:
+            case COOKING_1_7_S:
+                cookingType = 7;
+                break;
+            /** 1次料理の効果端 */
+            case COOKING_1_8_N:
+            case COOKING_1_8_S:
+                cookingType = 16;
+                pc.addBowHitRate(2);
+                pc.addBowDmgup(1);
+                break;
+            case COOKING_1_9_N:
+            case COOKING_1_9_S:
+                cookingType = 17;
+                pc.addMaxHp(30);
+                pc.addMaxMp(30);
 
-			pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
-			if (pc.isInParty()) {
-				pc.getParty().updateMiniHP(pc);
-			}
-			pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
-			break;
-		case COOKING_1_10_N:
-		case COOKING_1_10_S:
-			cookingType = 18;
-			pc.getAC().addAc(-2);
-			pc.sendPackets(new S_OwnCharStatus2(pc));
-			break;
-		case COOKING_1_11_N:
-		case COOKING_1_11_S:
-			cookingType = 19;
-			break;
-		case COOKING_1_12_N:
-		case COOKING_1_12_S:
-			cookingType = 20;
-			break;
-		case COOKING_1_13_N:
-		case COOKING_1_13_S:
-			cookingType = 21;
-			pc.getResistance().addMr(10);
-			pc.sendPackets(new S_SPMR(pc));
-			break;
-		case COOKING_1_14_N:
-		case COOKING_1_14_S:
-			cookingType = 22;
-			// pc.addSp(1);
-			pc.getAbility().addSp(1);
-			pc.sendPackets(new S_SPMR(pc));
-			break;
-		case COOKING_1_15_N:
-		case COOKING_1_15_S:
-			cookingType = 23;
-			break;
-		/** 2次料理の効果端 */
-		case COOKING_1_16_N:
-		case COOKING_1_16_S:
-			cookingType = 45;
-			pc.addBowHitRate(2);
-			pc.addBowDmgup(1);
-			break;
-		case COOKING_1_17_N:
-		case COOKING_1_17_S:
-			cookingType = 46;
-			pc.addMaxHp(50);
-			pc.addMaxMp(50);
-			pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
-			if (pc.isInParty()) {
-				pc.getParty().updateMiniHP(pc);
-			}
-			pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
-			break;
-		case COOKING_1_18_N:
-		case COOKING_1_18_S:
-			cookingType = 47;
-			pc.addHitup(2);
-			pc.addDmgup(1);
-			break;
-		case COOKING_1_19_N:
-		case COOKING_1_19_S:
-			cookingType = 48;
-			pc.getAC().addAc(-3);
-			pc.sendPackets(new S_OwnCharStatus2(pc));
-			break;
-		case COOKING_1_20_N:
-		case COOKING_1_20_S:
-			cookingType = 49;
-			pc.getResistance().addAllNaturalResistance(10);
-			pc.getResistance().addMr(15);
-			pc.sendPackets(new S_SPMR(pc));
-			pc.sendPackets(new S_OwnCharAttrDef(pc));
-			break;
-		case COOKING_1_21_N:
-		case COOKING_1_21_S:
-			cookingType = 50;
-			// pc.addSp(2);
-			pc.getAbility().addSp(2);
-			pc.sendPackets(new S_SPMR(pc));
-			break;
-		case COOKING_1_22_N:
-		case COOKING_1_22_S:
-			cookingType = 51;
-			pc.addMaxHp(30);
-			pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
-			if (pc.isInParty()) {
-				pc.getParty().updateMiniHP(pc);
-			}
-			break;
-		case COOKING_1_23_N:
-		case COOKING_1_23_S:
-			cookingType = 52;
-			break;
-		case COOK_STR:
-			cookingType = 157;
-			pc.addDmgup(2);
-			pc.addHitup(1);
-			pc.addHpr(2);
-			pc.addMpr(2);
-			pc.getResistance().addMr(10);
-			pc.getResistance().addAllNaturalResistance(10);
-			pc.sendPackets(new S_SPMR(pc));
-			break;
-		case COOK_DEX:
-			cookingType = 158;
-			pc.addBowDmgup(2);
-			pc.addBowHitup(1);
-			pc.addHpr(2);
-			pc.addMpr(2);
-			pc.getResistance().addMr(10);
-			pc.getResistance().addAllNaturalResistance(10);
-			pc.sendPackets(new S_SPMR(pc));
-			break;
-		case COOK_INT:
-			cookingType = 159;
-			pc.getAbility().addSp(2);
-			pc.addHpr(2);
-			pc.addMpr(3);
-			pc.getResistance().addMr(10);
-			pc.getResistance().addAllNaturalResistance(10);
-			pc.sendPackets(new S_SPMR(pc));
-			break;
-		case COOK_GROW:
-			cookingType = 160;
-			break;
-		case TENKASOUSHI_BUFF:
-			cookingType = 187;
-			pc.addDamageReductionByArmor(5);
-			break;
-		case METIS_SOUP:
-			cookingType = 162;
-			pc.getResistance().addStun(1);
-			pc.getResistance().addMr(10);
-			pc.getResistance().addHold(1);
-			time = 3600;
-			pc.sendPackets(new S_SPMR(pc));
-			break;
-		case METIS_COOKING:
-			cookingType = 161;
-			pc.addDmgCritical(3);
-			pc.addBowDmgCritical(3);
-			pc.addHitup(3);
-			pc.addBowHitup(3);
-			pc.addDmgup(3);
-			pc.addBowDmgCritical(3);
-			pc.getAbility().addSp(3);
-			time = 3600;
-			pc.sendPackets(new S_SPMR(pc));
-			break;
-		default:
-			break;
-		}
+                pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
+                if (pc.isInParty()) {
+                    pc.getParty().updateMiniHP(pc);
+                }
+                pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
+                break;
+            case COOKING_1_10_N:
+            case COOKING_1_10_S:
+                cookingType = 18;
+                pc.getAC().addAc(-2);
+                pc.sendPackets(new S_OwnCharStatus2(pc));
+                break;
+            case COOKING_1_11_N:
+            case COOKING_1_11_S:
+                cookingType = 19;
+                break;
+            case COOKING_1_12_N:
+            case COOKING_1_12_S:
+                cookingType = 20;
+                break;
+            case COOKING_1_13_N:
+            case COOKING_1_13_S:
+                cookingType = 21;
+                pc.getResistance().addMr(10);
+                pc.sendPackets(new S_SPMR(pc));
+                break;
+            case COOKING_1_14_N:
+            case COOKING_1_14_S:
+                cookingType = 22;
+                // pc.addSp(1);
+                pc.getAbility().addSp(1);
+                pc.sendPackets(new S_SPMR(pc));
+                break;
+            case COOKING_1_15_N:
+            case COOKING_1_15_S:
+                cookingType = 23;
+                break;
+            /** 2次料理の効果端 */
+            case COOKING_1_16_N:
+            case COOKING_1_16_S:
+                cookingType = 45;
+                pc.addBowHitRate(2);
+                pc.addBowDmgup(1);
+                break;
+            case COOKING_1_17_N:
+            case COOKING_1_17_S:
+                cookingType = 46;
+                pc.addMaxHp(50);
+                pc.addMaxMp(50);
+                pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
+                if (pc.isInParty()) {
+                    pc.getParty().updateMiniHP(pc);
+                }
+                pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
+                break;
+            case COOKING_1_18_N:
+            case COOKING_1_18_S:
+                cookingType = 47;
+                pc.addHitup(2);
+                pc.addDmgup(1);
+                break;
+            case COOKING_1_19_N:
+            case COOKING_1_19_S:
+                cookingType = 48;
+                pc.getAC().addAc(-3);
+                pc.sendPackets(new S_OwnCharStatus2(pc));
+                break;
+            case COOKING_1_20_N:
+            case COOKING_1_20_S:
+                cookingType = 49;
+                pc.getResistance().addAllNaturalResistance(10);
+                pc.getResistance().addMr(15);
+                pc.sendPackets(new S_SPMR(pc));
+                pc.sendPackets(new S_OwnCharAttrDef(pc));
+                break;
+            case COOKING_1_21_N:
+            case COOKING_1_21_S:
+                cookingType = 50;
+                // pc.addSp(2);
+                pc.getAbility().addSp(2);
+                pc.sendPackets(new S_SPMR(pc));
+                break;
+            case COOKING_1_22_N:
+            case COOKING_1_22_S:
+                cookingType = 51;
+                pc.addMaxHp(30);
+                pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
+                if (pc.isInParty()) {
+                    pc.getParty().updateMiniHP(pc);
+                }
+                break;
+            case COOKING_1_23_N:
+            case COOKING_1_23_S:
+                cookingType = 52;
+                break;
+            case COOK_STR:
+                cookingType = 157;
+                pc.addDmgup(2);
+                pc.addHitup(1);
+                pc.addHpr(2);
+                pc.addMpr(2);
+                pc.getResistance().addMr(10);
+                pc.getResistance().addAllNaturalResistance(10);
+                pc.sendPackets(new S_SPMR(pc));
+                break;
+            case COOK_DEX:
+                cookingType = 158;
+                pc.addBowDmgup(2);
+                pc.addBowHitup(1);
+                pc.addHpr(2);
+                pc.addMpr(2);
+                pc.getResistance().addMr(10);
+                pc.getResistance().addAllNaturalResistance(10);
+                pc.sendPackets(new S_SPMR(pc));
+                break;
+            case COOK_INT:
+                cookingType = 159;
+                pc.getAbility().addSp(2);
+                pc.addHpr(2);
+                pc.addMpr(3);
+                pc.getResistance().addMr(10);
+                pc.getResistance().addAllNaturalResistance(10);
+                pc.sendPackets(new S_SPMR(pc));
+                break;
+            case COOK_GROW:
+                cookingType = 160;
+                break;
+            case TENKASOUSHI_BUFF:
+                cookingType = 187;
+                pc.addDamageReductionByArmor(5);
+                break;
+            case METIS_SOUP:
+                cookingType = 162;
+                pc.getResistance().addStun(1);
+                pc.getResistance().addMr(10);
+                pc.getResistance().addHold(1);
+                time = 3600;
+                pc.sendPackets(new S_SPMR(pc));
+                break;
+            case METIS_COOKING:
+                cookingType = 161;
+                pc.addDmgCritical(3);
+                pc.addBowDmgCritical(3);
+                pc.addHitup(3);
+                pc.addBowHitup(3);
+                pc.addDmgup(3);
+                pc.addBowDmgCritical(3);
+                pc.getAbility().addSp(3);
+                time = 3600;
+                pc.sendPackets(new S_SPMR(pc));
+                break;
+            default:
+                break;
+        }
 
-		pc.sendPackets(new S_PacketBox(53, cookingType, time));
-		pc.setSkillEffect(cookingId, time * 1000);
+        pc.sendPackets(new S_PacketBox(53, cookingType, time));
+        pc.setSkillEffect(cookingId, time * 1000);
 
-		if (cookingId >= COOKING_1_0_N && cookingId <= COOKING_1_6_N
-				|| cookingId >= COOKING_1_0_S && cookingId <= COOKING_1_6_S) {
-			pc.setCookingId(cookingId);
-		} else if (cookingId == COOKING_1_7_N || cookingId == COOKING_1_7_S) {
-			pc.setDessertId(cookingId);
-		}
-		/** 2次料理の効果付与 */
-		else if (cookingId >= COOKING_1_8_N && cookingId <= COOKING_1_14_N // キャビアカナッペ//ワニのステーキ//タートルドラゴンお菓子//キウィパロット焼き//スコーピオン焼き//イレッカドムシチュー
-				|| cookingId >= COOKING_1_8_S && cookingId <= COOKING_1_14_S) { // 料理2段階
-			pc.setCookingId(cookingId);
-		} else if (cookingId == COOKING_1_15_N || cookingId == COOKING_1_15_S) { // クラブ肉スープ
-			pc.setDessertId(cookingId);
-		}
-		/** 2次料理の効果付与 */
+        if (cookingId >= COOKING_1_0_N && cookingId <= COOKING_1_6_N
+                || cookingId >= COOKING_1_0_S && cookingId <= COOKING_1_6_S) {
+            pc.setCookingId(cookingId);
+        } else if (cookingId == COOKING_1_7_N || cookingId == COOKING_1_7_S) {
+            pc.setDessertId(cookingId);
+        }
+        /** 2次料理の効果付与 */
+        else if (cookingId >= COOKING_1_8_N && cookingId <= COOKING_1_14_N // キャビアカナッペ//ワニのステーキ//タートルドラゴンお菓子//キウィパロット焼き//スコーピオン焼き//イレッカドムシチュー
+                || cookingId >= COOKING_1_8_S && cookingId <= COOKING_1_14_S) { // 料理2段階
+            pc.setCookingId(cookingId);
+        } else if (cookingId == COOKING_1_15_N || cookingId == COOKING_1_15_S) { // クラブ肉スープ
+            pc.setDessertId(cookingId);
+        }
+        /** 2次料理の効果付与 */
 
-		/** 3次の料理の効果付与 */
-		else if (cookingId >= COOKING_1_16_N && cookingId <= COOKING_1_22_N // 料理3段階
-				|| cookingId >= COOKING_1_16_S && cookingId <= COOKING_1_22_S
-				|| cookingId >= COOK_STR && cookingId <= COOK_INT) {
-			pc.setCookingId(cookingId);
-		} else if (cookingId == COOKING_1_23_N || cookingId == COOKING_1_23_S || cookingId == COOK_GROW) { // バシリスク
-																											// アル
-																											// スープ
-			pc.setDessertId(cookingId);
-		}
-		/** 3次の料理の効果部以上 */
+        /** 3次の料理の効果付与 */
+        else if (cookingId >= COOKING_1_16_N && cookingId <= COOKING_1_22_N // 料理3段階
+                || cookingId >= COOKING_1_16_S && cookingId <= COOKING_1_22_S
+                || cookingId >= COOK_STR && cookingId <= COOK_INT) {
+            pc.setCookingId(cookingId);
+        } else if (cookingId == COOKING_1_23_N || cookingId == COOKING_1_23_S || cookingId == COOK_GROW) { // バシリスク
+            // アル
+            // スープ
+            pc.setDessertId(cookingId);
+        }
+        /** 3次の料理の効果部以上 */
 
-		pc.sendPackets(new S_OwnCharStatus(pc));
-	}
+        pc.sendPackets(new S_OwnCharStatus(pc));
+    }
 
 }

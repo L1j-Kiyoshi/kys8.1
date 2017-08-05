@@ -28,125 +28,119 @@ import l1j.server.server.serverpackets.S_Paralysis;
 import l1j.server.server.serverpackets.S_ServerMessage;
 
 public class L1CurseParalysis extends L1Paralysis {
-	private final L1Character _target;
-	private final int _delay;
-	private final int _time;
+    private final L1Character _target;
+    private final int _delay;
+    private final int _time;
 
-	private SingleTask _timer;
+    private SingleTask _timer;
 
-	private class ParalysisDelayTimer extends SingleTask {
-		@Override
-		public void execute() {
+    private class ParalysisDelayTimer extends SingleTask {
+        @Override
+        public void execute() {
 
-			if( isActive() )
-			{
-				_target.killSkillEffectTimer(L1SkillId.STATUS_CURSE_PARALYZING);
+            if (isActive()) {
+                _target.killSkillEffectTimer(L1SkillId.STATUS_CURSE_PARALYZING);
 
-				if (_target instanceof L1PcInstance) {
-					L1PcInstance player = (L1PcInstance) _target;
+                if (_target instanceof L1PcInstance) {
+                    L1PcInstance player = (L1PcInstance) _target;
 
-					if (player.isDead() == false)
-					{
-						player.sendPackets(new S_Paralysis(1, true));
-						player.sendPackets(new S_PacketBox(
-								S_PacketBox.POSION_ICON,player, 2, _time / 1000), true);
-					}
-					_timer = new ParalysisTimer();
-					_target.setSkillEffect(L1SkillId.STATUS_CURSE_PARALYZED, 0);
-					_target.setParalyzed(true);
+                    if (player.isDead() == false) {
+                        player.sendPackets(new S_Paralysis(1, true));
+                        player.sendPackets(new S_PacketBox(
+                                S_PacketBox.POSION_ICON, player, 2, _time / 1000), true);
+                    }
+                    _timer = new ParalysisTimer();
+                    _target.setSkillEffect(L1SkillId.STATUS_CURSE_PARALYZED, 0);
+                    _target.setParalyzed(true);
 
-					GeneralThreadPool.getInstance().schedule(_timer, _time);
-				}
-			}
-		}
-	}
+                    GeneralThreadPool.getInstance().schedule(_timer, _time);
+                }
+            }
+        }
+    }
 
-	private class ParalysisTimer extends SingleTask {
-		@Override
-		public void execute() {
+    private class ParalysisTimer extends SingleTask {
+        @Override
+        public void execute() {
 
-			_target.killSkillEffectTimer(L1SkillId.STATUS_CURSE_PARALYZED);
+            _target.killSkillEffectTimer(L1SkillId.STATUS_CURSE_PARALYZED);
 
-			if (_target instanceof L1PcInstance) {
-				L1PcInstance player = (L1PcInstance) _target;
-				if (!player.isDead()) {
-					player.sendPackets(new S_PacketBox(
-							S_PacketBox.POSION_ICON,player, 2, 0), true);
-					player.sendPackets(new S_Paralysis(1, false)); 
-					
-				}
-			}
-			_timer = null;
-			_target.setParalyzed(false);
-			cure(); 
-		}
-	}
+            if (_target instanceof L1PcInstance) {
+                L1PcInstance player = (L1PcInstance) _target;
+                if (!player.isDead()) {
+                    player.sendPackets(new S_PacketBox(
+                            S_PacketBox.POSION_ICON, player, 2, 0), true);
+                    player.sendPackets(new S_Paralysis(1, false));
 
-	private L1CurseParalysis(L1Character cha, int delay, int time) {
-		_target = cha;
-		_delay = delay;
-		_time = time;
+                }
+            }
+            _timer = null;
+            _target.setParalyzed(false);
+            cure();
+        }
+    }
 
-		curse();
-	}
+    private L1CurseParalysis(L1Character cha, int delay, int time) {
+        _target = cha;
+        _delay = delay;
+        _time = time;
 
-	private void curse() {
-		if (_target instanceof L1PcInstance) {
-			L1PcInstance player = (L1PcInstance) _target;
-			player.sendPackets(new S_ServerMessage(212));
-		}
+        curse();
+    }
 
-		_target.setPoisonEffect(2);
+    private void curse() {
+        if (_target instanceof L1PcInstance) {
+            L1PcInstance player = (L1PcInstance) _target;
+            player.sendPackets(new S_ServerMessage(212));
+        }
 
-		_timer = new ParalysisDelayTimer();
-		_target.setSkillEffect(L1SkillId.STATUS_CURSE_PARALYZING, 0);
+        _target.setPoisonEffect(2);
 
-		GeneralThreadPool.getInstance().schedule(_timer, _delay);
-	}
+        _timer = new ParalysisDelayTimer();
+        _target.setSkillEffect(L1SkillId.STATUS_CURSE_PARALYZING, 0);
 
-	public static boolean curse(L1Character cha, int delay, int time) {
-		if (!(cha instanceof L1PcInstance || cha instanceof L1MonsterInstance)) {
-			return false;
-		}
-		if (cha.hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZING)
-				|| cha.hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZED)) {
-			return false;
-		}
+        GeneralThreadPool.getInstance().schedule(_timer, _delay);
+    }
 
-		cha.setParalaysis(new L1CurseParalysis(cha, delay, time));
-		return true;
-	}
+    public static boolean curse(L1Character cha, int delay, int time) {
+        if (!(cha instanceof L1PcInstance || cha instanceof L1MonsterInstance)) {
+            return false;
+        }
+        if (cha.hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZING)
+                || cha.hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZED)) {
+            return false;
+        }
 
-	@Override
-	public int getEffectId() {
-		return 2;
-	}
+        cha.setParalaysis(new L1CurseParalysis(cha, delay, time));
+        return true;
+    }
 
-	@Override
-	public void cure() {
-		if (_timer != null) {
-			_timer.cancel();
+    @Override
+    public int getEffectId() {
+        return 2;
+    }
 
-			if( _timer instanceof ParalysisTimer)
-			{
-				if( !_timer.isExecuted())
-				{
-					_timer.execute();
-				}
-			}
-			else
-			{
-				_target.killSkillEffectTimer(L1SkillId.STATUS_POISON_PARALYZING);
-			}
+    @Override
+    public void cure() {
+        if (_timer != null) {
+            _timer.cancel();
 
-			_timer = null;
-		}
-		if (_target instanceof L1PcInstance) {
-			L1PcInstance player = (L1PcInstance) _target;
-			player.sendPackets(new S_PacketBox(
-					S_PacketBox.POSION_ICON, player, 0, 0), true);
-		}
-		_target.setPoisonEffect(0);
-		_target.setParalaysis(null);
-	}
+            if (_timer instanceof ParalysisTimer) {
+                if (!_timer.isExecuted()) {
+                    _timer.execute();
+                }
+            } else {
+                _target.killSkillEffectTimer(L1SkillId.STATUS_POISON_PARALYZING);
+            }
+
+            _timer = null;
+        }
+        if (_target instanceof L1PcInstance) {
+            L1PcInstance player = (L1PcInstance) _target;
+            player.sendPackets(new S_PacketBox(
+                    S_PacketBox.POSION_ICON, player, 0, 0), true);
+        }
+        _target.setPoisonEffect(0);
+        _target.setParalaysis(null);
+    }
 }

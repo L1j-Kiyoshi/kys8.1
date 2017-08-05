@@ -21,49 +21,49 @@ package l1j.server.server.templates;
 import l1j.server.server.datatables.ItemTable;
 
 public class L1Attendance {
-	
-	private final int _day;
 
-	private final L1Item _item;
+    private final int _day;
 
-	private int _count;
-	
-	private final L1Item _itempc;
+    private final L1Item _item;
 
-	private int _countpc;
+    private int _count;
 
+    private final L1Item _itempc;
 
-	public L1Attendance(int day , int itemId, int Count, int itemIdpc, int Countpc) {
-		_day = day;
-		_item = ItemTable.getInstance().getTemplate(itemId);
-		_count = Count;
-
-		_itempc = ItemTable.getInstance().getTemplate(itemIdpc);
-		_countpc = Countpc;
-	}
-	
-	public int getDay() {
-		return _day;
-	}
-	
-
-	public L1Item getItem() {
-		return _item;
-	}
+    private int _countpc;
 
 
-	public int getCount() {
-		return _count;
-	}
+    public L1Attendance(int day, int itemId, int Count, int itemIdpc, int Countpc) {
+        _day = day;
+        _item = ItemTable.getInstance().getTemplate(itemId);
+        _count = Count;
 
-	
-	public L1Item getItempc() {
-		return _itempc;
-	}
+        _itempc = ItemTable.getInstance().getTemplate(itemIdpc);
+        _countpc = Countpc;
+    }
+
+    public int getDay() {
+        return _day;
+    }
 
 
-	public int getCountpc() {
-		return _countpc;
-	}
+    public L1Item getItem() {
+        return _item;
+    }
+
+
+    public int getCount() {
+        return _count;
+    }
+
+
+    public L1Item getItempc() {
+        return _itempc;
+    }
+
+
+    public int getCountpc() {
+        return _countpc;
+    }
 
 }

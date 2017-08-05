@@ -24,43 +24,43 @@ import l1j.server.server.model.gametime.L1GameTimeClock;
 import l1j.server.server.serverpackets.S_GameTime;
 
 public class L1GameTimeCarrier implements Runnable {// extends TimerTask {
-	// private static final Timer _timer = new Timer();
-	private L1PcInstance _pc;
-	private boolean on = true;
+    // private static final Timer _timer = new Timer();
+    private L1PcInstance _pc;
+    private boolean on = true;
 
-	public L1GameTimeCarrier(L1PcInstance pc) {
-		_pc = pc;
-	}
+    public L1GameTimeCarrier(L1PcInstance pc) {
+        _pc = pc;
+    }
 
-	@Override
-	public void run() {
-		try {
-			if (!on || _pc == null || _pc.getNetConnection() == null) {
-				// cancel();
-				return;
-			}
+    @Override
+    public void run() {
+        try {
+            if (!on || _pc == null || _pc.getNetConnection() == null) {
+                // cancel();
+                return;
+            }
 
-			long serverTime = L1GameTimeClock.getInstance().getGameTime()
-					.getSeconds();
+            long serverTime = L1GameTimeClock.getInstance().getGameTime()
+                    .getSeconds();
 
-			if (serverTime % 300 == 0) {
-				_pc.sendPackets(new S_GameTime(serverTime));
-			}
+            if (serverTime % 300 == 0) {
+                _pc.sendPackets(new S_GameTime(serverTime));
+            }
 
-			GeneralThreadPool.getInstance().schedule(this, 500);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// ignore
-		}
-	}
+            GeneralThreadPool.getInstance().schedule(this, 500);
+        } catch (Exception e) {
+            e.printStackTrace();
+            // ignore
+        }
+    }
 
-	public void start() {
-		GeneralThreadPool.getInstance().execute(this);
-		// _timer.scheduleAtFixedRate(this, 0, 500);
-	}
+    public void start() {
+        GeneralThreadPool.getInstance().execute(this);
+        // _timer.scheduleAtFixedRate(this, 0, 500);
+    }
 
-	public void stop() {
-		// cancel();
-		on = false;
-	}
+    public void stop() {
+        // cancel();
+        on = false;
+    }
 }

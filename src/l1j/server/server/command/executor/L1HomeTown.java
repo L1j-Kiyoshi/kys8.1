@@ -26,31 +26,31 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1HomeTown implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1HomeTown.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1HomeTown.class.getName());
 
-	private L1HomeTown() {
-	}
+    private L1HomeTown() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1HomeTown();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1HomeTown();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			StringTokenizer st = new StringTokenizer(arg);
-			String para1 = st.nextToken();
-			if (para1.equalsIgnoreCase("day")) {
-				HomeTownTimeController.getInstance(). dailyProc();
-			} else if (para1.equalsIgnoreCase("month")) {
-				HomeTownTimeController.getInstance(). monthlyProc();
-			} else {
-				throw new Exception();
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(
-					"。ホームタウン[毎日、毎月]と入力してください。"));
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            StringTokenizer st = new StringTokenizer(arg);
+            String para1 = st.nextToken();
+            if (para1.equalsIgnoreCase("day")) {
+                HomeTownTimeController.getInstance().dailyProc();
+            } else if (para1.equalsIgnoreCase("month")) {
+                HomeTownTimeController.getInstance().monthlyProc();
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(
+                    "。ホームタウン[毎日、毎月]と入力してください。"));
+        }
+    }
 }

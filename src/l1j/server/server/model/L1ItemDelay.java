@@ -28,56 +28,56 @@ import l1j.server.server.templates.L1EtcItem;
 
 public class L1ItemDelay {
 
-	private L1ItemDelay() {
-	}
+    private L1ItemDelay() {
+    }
 
-	static class ItemDelayTimer implements Runnable {
-		private int _delayId;
-		private L1Character _cha;
+    static class ItemDelayTimer implements Runnable {
+        private int _delayId;
+        private L1Character _cha;
 
-		public ItemDelayTimer(L1Character cha, int id, int time) {
-			_cha = cha;
-			_delayId = id;
-		}
+        public ItemDelayTimer(L1Character cha, int id, int time) {
+            _cha = cha;
+            _delayId = id;
+        }
 
-		@Override
-		public void run() {
-			stopDelayTimer(_delayId);
-		}
+        @Override
+        public void run() {
+            stopDelayTimer(_delayId);
+        }
 
-		public void stopDelayTimer(int delayId) {
-			_cha.removeItemDelay(delayId);
-		}
-	}
+        public void stopDelayTimer(int delayId) {
+            _cha.removeItemDelay(delayId);
+        }
+    }
 
-	public static void onItemUse(L1PcInstance pc, L1ItemInstance item) {
-		int delayId = 0;
-		int delayTime = 0;
+    public static void onItemUse(L1PcInstance pc, L1ItemInstance item) {
+        int delayId = 0;
+        int delayTime = 0;
 
-		//L1PcInstance pc = client.getActiveChar();
+        //L1PcInstance pc = client.getActiveChar();
 
-		if (item.getItem().getType2() == 0) {
-			delayId = ((L1EtcItem) item.getItem()).get_delayid();
-			delayTime = ((L1EtcItem) item.getItem()).get_delaytime();
-		} else if (item.getItem().getType2() == 1) {
-			return;
-		} else if (item.getItem().getType2() == 2) {
+        if (item.getItem().getType2() == 0) {
+            delayId = ((L1EtcItem) item.getItem()).get_delayid();
+            delayTime = ((L1EtcItem) item.getItem()).get_delaytime();
+        } else if (item.getItem().getType2() == 1) {
+            return;
+        } else if (item.getItem().getType2() == 2) {
 
-			if (item.getItem().getItemId() == 20077
-					|| item.getItem().getItemId() == 20062
-					|| item.getItem().getItemId() == 120077) {
-				if (item.isEquipped() && !pc.isInvisble()) {
-					pc.beginInvisTimer();
-				}
-			} else {
-				return;
-			}
-		}
+            if (item.getItem().getItemId() == 20077
+                    || item.getItem().getItemId() == 20062
+                    || item.getItem().getItemId() == 120077) {
+                if (item.isEquipped() && !pc.isInvisble()) {
+                    pc.beginInvisTimer();
+                }
+            } else {
+                return;
+            }
+        }
 
-		ItemDelayTimer timer = new ItemDelayTimer(pc, delayId, delayTime);
+        ItemDelayTimer timer = new ItemDelayTimer(pc, delayId, delayTime);
 
-		pc.addItemDelay(delayId, timer);
-		GeneralThreadPool.getInstance().schedule(timer, delayTime);
-	}
+        pc.addItemDelay(delayId, timer);
+        GeneralThreadPool.getInstance().schedule(timer, delayTime);
+    }
 
 }

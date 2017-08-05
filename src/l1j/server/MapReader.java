@@ -25,36 +25,35 @@ import java.util.Map;
 import l1j.server.server.model.map.L1Map;
 
 public abstract class MapReader {
-	/**
-	 *すべてのテキストマップを読み込む（抽象クラ​​ス）
-	 *
-	 * @return Map
-	 * @throws IOException
-	 */
-	public abstract Map<Integer, L1Map> read() throws IOException;
+    /**
+     * すべてのテキストマップを読み込む（抽象クラ​​ス）
+     *
+     * @return Map
+     * @throws IOException
+     */
+    public abstract Map<Integer, L1Map> read() throws IOException;
 
-	/**
-	 * 指定のマップ番号のテキストマップを読み込む。
-	 *
-	 * @param id
-	 *            マップ ID
-	 * @return L1Map
-	 * @throws IOException
-	 */
-	public abstract L1Map read(int id) throws IOException;
+    /**
+     * 指定のマップ番号のテキストマップを読み込む。
+     *
+     * @param id マップ ID
+     * @return L1Map
+     * @throws IOException
+     */
+    public abstract L1Map read(int id) throws IOException;
 
-	/**
-	 *読み込むマップファイルを判断する（テキストマップorキャッシュマップor V2テキストマップ）。
-	 *
-	 * @return MapReader
-	 */
-	public static MapReader getDefaultReader() {
-		if (Config.LOAD_V2_MAP_FILES) {
-			return new V2MapReader();
-		}
-		if (Config.CACHE_MAP_FILES) {
-			return new CachedMapReader();
-		}
-		return new TextMapReader();
-	}
+    /**
+     * 読み込むマップファイルを判断する（テキストマップorキャッシュマップor V2テキストマップ）。
+     *
+     * @return MapReader
+     */
+    public static MapReader getDefaultReader() {
+        if (Config.LOAD_V2_MAP_FILES) {
+            return new V2MapReader();
+        }
+        if (Config.CACHE_MAP_FILES) {
+            return new CachedMapReader();
+        }
+        return new TextMapReader();
+    }
 }

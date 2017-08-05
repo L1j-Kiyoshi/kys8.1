@@ -25,19 +25,19 @@ import l1j.server.server.model.trap.L1WorldTraps;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1ResetTrap implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1ResetTrap.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1ResetTrap.class.getName());
 
-	private L1ResetTrap() {
-	}
+    private L1ResetTrap() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1ResetTrap();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1ResetTrap();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		L1WorldTraps.getInstance(). resetAllTraps();
-		pc.sendPackets(new S_SystemMessage("トラップを再配置しました"));
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        L1WorldTraps.getInstance().resetAllTraps();
+        pc.sendPackets(new S_SystemMessage("トラップを再配置しました"));
+    }
 }

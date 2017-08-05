@@ -34,134 +34,139 @@ import l1j.server.server.model.item.L1ItemId;
 import l1j.server.server.serverpackets.S_ChatPacket;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SystemMessage;
-/** ログを残す **/
+
+/**
+ * ログを残す
+ **/
 //Referenced classes of package l1j.server.server.clientpackets:
 //ClientBasePacket
 
 public class C_TradeAddItem extends ClientBasePacket {
-	private static final String C_TRADE_ADD_ITEM = "[C] C_TradeAddItem";
+    private static final String C_TRADE_ADD_ITEM = "[C] C_TradeAddItem";
 
-	/** 日付、時刻の記録 **/
-	Calendar rightNow = Calendar.getInstance();
-	int day = rightNow.get(Calendar.DATE);
-	int hour = rightNow.get(Calendar.HOUR);
-	int min = rightNow.get(Calendar.MINUTE);
-	int year = rightNow.get(Calendar.YEAR);
-	int month =  rightNow.get(Calendar.MONTH)+1;
-	String totime = "[" + year + ":" + month + ":" + day + ":" + hour +":"+min+"]";	
-	
-	public C_TradeAddItem(byte abyte0[], GameClient client)
-	throws Exception {
-		super(abyte0);
+    /**
+     * 日付、時刻の記録
+     **/
+    Calendar rightNow = Calendar.getInstance();
+    int day = rightNow.get(Calendar.DATE);
+    int hour = rightNow.get(Calendar.HOUR);
+    int min = rightNow.get(Calendar.MINUTE);
+    int year = rightNow.get(Calendar.YEAR);
+    int month = rightNow.get(Calendar.MONTH) + 1;
+    String totime = "[" + year + ":" + month + ":" + day + ":" + hour + ":" + min + "]";
 
-		int itemid = readD();
-		int itemcount = readD();
-		L1PcInstance pc = client.getActiveChar();
-		if ( pc == null)return;
-		L1Trade trade = new L1Trade();	
-		L1ItemInstance item = pc.getInventory().getItem(itemid);
-		if ( item == null) return; 
-			
-		System.out.println("ITEMID  "+itemid+"itemcount : "+itemcount);
-		/** バグ防止 **/
-		if (itemid != item.getId()) {
-			return;
-		}
-		if (!item.isStackable() && itemcount != 1) {
-			return;
-		}
-		if (itemcount <= 0 || item.getCount() <= 0) {
-			return;
-		}
-		if (itemcount > item.getCount()) {
-			itemcount = item.getCount();
-		}
-		if (itemcount > 2000000000)  {  // コピーのバグを防ぐ
-			return;
-		}
-		/** バグ防止 **/
-		
-		if (item.getItemId() == L1ItemId.HIGH_CHARACTER_TRADE || item.getItemId() == L1ItemId.LOW_CHARACTER_TRADE) {
-			if (!pc.isQuizValidated()) {
-				pc.sendPackets(new S_ChatPacket(pc, "クイズの認証をしていません。"));
-				pc.sendPackets(new S_ChatPacket(pc, "まず[。クイズ認証]で、クイズの認証後、取引をしようとしてください。"));
-				return;
-			}
-			if (pc.getLevel() >= 70 && item.getItemId() == L1ItemId.LOW_CHARACTER_TRADE) {
-				pc.sendPackets(new S_ChatPacket(pc, "70レベル以上は上級のキャラクターの交換スクロールを使用する必要があります。"));
-				return;
-			} else if (pc.getLevel() < 70 && item.getItemId() == L1ItemId.HIGH_CHARACTER_TRADE) {
-				pc.sendPackets(new S_ChatPacket(pc, "70レベル未満は下級キャラクター交換スクロールを使用する必要があります。"));
-				return;
-			}
-		}
-		
-		//交換不可アイテムディビ連動NoTradable
-		int itemId = item.getItem().getItemId();
-		if (!pc.isGm() && NoTradable.getInstance().isNoTradable(itemId))  {// 
-			pc.sendPackets(new S_SystemMessage("\\aG[!] : このアイテムは交換できません。"));
-			return;
-		}
+    public C_TradeAddItem(byte abyte0[], GameClient client)
+            throws Exception {
+        super(abyte0);
 
-		if (!item.getItem().isTradable()) {
-			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0はしまったり、または他人に両日をすることができません。
-			return;
-		}
-		if(item.getBless() >= 128){
-			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1％0はたりまたは他人に両日をすることができません。
-			return;
-		}
-		if(item.isEquipped()){
-			pc.sendPackets(new S_ServerMessage(906)); // 
-			return;
-		}
-		
-		Object[] petlist = pc.getPetList().values().toArray();
-		L1PetInstance pet = null;
-		for (Object petObject : petlist) {
-			if (petObject instanceof L1PetInstance) {
-				pet = (L1PetInstance) petObject;
-				if (item.getId() == pet.getItemObjId()) {
-					// \f1%0はしまったり、または他人に両日をすることができません。
-					pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
-					return;
-				}
-			}
-		}
-		
-		for (Object dollObject : pc.getDollList()) {	
-			if (dollObject instanceof L1DollInstance) {
-				L1DollInstance doll = (L1DollInstance) dollObject;
-				if (item.getId() == doll.getItemObjId()) {
-					pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
-					return;
-				}
-			}
-		}
-		L1PcInstance tradingPartner = (L1PcInstance) L1World.getInstance().findObject(pc.getTradeID());
-		if (tradingPartner == null) {
-			if(pc.isGambleReady()){
-				trade.TradeAddItem(pc, itemid, itemcount);
-			}else if(pc.isNpcSell){
-				trade.TradeAddItem(pc, itemid, itemcount);
-			}
-			return;
-		}
-		if (pc.getTradeOk() || tradingPartner.getTradeOk()) { 
-			pc.sendPackets(new S_SystemMessage("上げる不可能：一方が完了を押したまま"));
-			tradingPartner.sendPackets(new S_SystemMessage("上げる不可能：一方が完了を押したまま"));
-			return;
-		}
-		if (tradingPartner.getInventory().checkAddItem(item, itemcount) != L1Inventory.OK) {
-			tradingPartner.sendPackets(new S_ServerMessage(270));
-			pc.sendPackets(new S_ServerMessage(271));
-			return;
-		}
-		trade.TradeAddItem(pc, itemid, itemcount);
-	}
+        int itemid = readD();
+        int itemcount = readD();
+        L1PcInstance pc = client.getActiveChar();
+        if (pc == null) return;
+        L1Trade trade = new L1Trade();
+        L1ItemInstance item = pc.getInventory().getItem(itemid);
+        if (item == null) return;
 
-	@Override
-	public String getType() {
-		return C_TRADE_ADD_ITEM;
-	}
+        System.out.println("ITEMID  " + itemid + "itemcount : " + itemcount);
+        /** バグ防止 **/
+        if (itemid != item.getId()) {
+            return;
+        }
+        if (!item.isStackable() && itemcount != 1) {
+            return;
+        }
+        if (itemcount <= 0 || item.getCount() <= 0) {
+            return;
+        }
+        if (itemcount > item.getCount()) {
+            itemcount = item.getCount();
+        }
+        if (itemcount > 2000000000) {  // コピーのバグを防ぐ
+            return;
+        }
+        /** バグ防止 **/
+
+        if (item.getItemId() == L1ItemId.HIGH_CHARACTER_TRADE || item.getItemId() == L1ItemId.LOW_CHARACTER_TRADE) {
+            if (!pc.isQuizValidated()) {
+                pc.sendPackets(new S_ChatPacket(pc, "クイズの認証をしていません。"));
+                pc.sendPackets(new S_ChatPacket(pc, "まず[。クイズ認証]で、クイズの認証後、取引をしようとしてください。"));
+                return;
+            }
+            if (pc.getLevel() >= 70 && item.getItemId() == L1ItemId.LOW_CHARACTER_TRADE) {
+                pc.sendPackets(new S_ChatPacket(pc, "70レベル以上は上級のキャラクターの交換スクロールを使用する必要があります。"));
+                return;
+            } else if (pc.getLevel() < 70 && item.getItemId() == L1ItemId.HIGH_CHARACTER_TRADE) {
+                pc.sendPackets(new S_ChatPacket(pc, "70レベル未満は下級キャラクター交換スクロールを使用する必要があります。"));
+                return;
+            }
+        }
+
+        //交換不可アイテムディビ連動NoTradable
+        int itemId = item.getItem().getItemId();
+        if (!pc.isGm() && NoTradable.getInstance().isNoTradable(itemId)) {//
+            pc.sendPackets(new S_SystemMessage("\\aG[!] : このアイテムは交換できません。"));
+            return;
+        }
+
+        if (!item.getItem().isTradable()) {
+            pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0はしまったり、または他人に両日をすることができません。
+            return;
+        }
+        if (item.getBless() >= 128) {
+            pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1％0はたりまたは他人に両日をすることができません。
+            return;
+        }
+        if (item.isEquipped()) {
+            pc.sendPackets(new S_ServerMessage(906)); //
+            return;
+        }
+
+        Object[] petlist = pc.getPetList().values().toArray();
+        L1PetInstance pet = null;
+        for (Object petObject : petlist) {
+            if (petObject instanceof L1PetInstance) {
+                pet = (L1PetInstance) petObject;
+                if (item.getId() == pet.getItemObjId()) {
+                    // \f1%0はしまったり、または他人に両日をすることができません。
+                    pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
+                    return;
+                }
+            }
+        }
+
+        for (Object dollObject : pc.getDollList()) {
+            if (dollObject instanceof L1DollInstance) {
+                L1DollInstance doll = (L1DollInstance) dollObject;
+                if (item.getId() == doll.getItemObjId()) {
+                    pc.sendPackets(new S_ServerMessage(210, item.getItem().getName()));
+                    return;
+                }
+            }
+        }
+        L1PcInstance tradingPartner = (L1PcInstance) L1World.getInstance().findObject(pc.getTradeID());
+        if (tradingPartner == null) {
+            if (pc.isGambleReady()) {
+                trade.TradeAddItem(pc, itemid, itemcount);
+            } else if (pc.isNpcSell) {
+                trade.TradeAddItem(pc, itemid, itemcount);
+            }
+            return;
+        }
+        if (pc.getTradeOk() || tradingPartner.getTradeOk()) {
+            pc.sendPackets(new S_SystemMessage("上げる不可能：一方が完了を押したまま"));
+            tradingPartner.sendPackets(new S_SystemMessage("上げる不可能：一方が完了を押したまま"));
+            return;
+        }
+        if (tradingPartner.getInventory().checkAddItem(item, itemcount) != L1Inventory.OK) {
+            tradingPartner.sendPackets(new S_ServerMessage(270));
+            pc.sendPackets(new S_ServerMessage(271));
+            return;
+        }
+        trade.TradeAddItem(pc, itemid, itemcount);
+    }
+
+    @Override
+    public String getType() {
+        return C_TRADE_ADD_ITEM;
+    }
 }

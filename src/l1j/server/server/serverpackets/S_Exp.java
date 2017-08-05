@@ -27,30 +27,29 @@ public class S_Exp extends ServerBasePacket {
 
     /**
      * レベルと経験値のデータを送る。
-     * 
-     * @param pc
-     *            - PC
+     *
+     * @param pc - PC
      */
     public S_Exp(L1PcInstance pc) {
-	writeC(Opcodes.S_EXP);
-	writeC(pc.getLevel());
-	writeD(pc.getExp());
+        writeC(Opcodes.S_EXP);
+        writeC(pc.getLevel());
+        writeD(pc.getExp());
 
-	// writeC(Opcodes.S_EXP);
-	// writeC(0x39);// level
-	// writeD(_objid);// ??
-	// writeC(0x0A);// ??
-	// writeH(getexp);// min exp
-	// writeH(getexpreward);// max exp
+        // writeC(Opcodes.S_EXP);
+        // writeC(0x39);// level
+        // writeD(_objid);// ??
+        // writeC(0x0A);// ??
+        // writeH(getexp);// min exp
+        // writeH(getexpreward);// max exp
     }
 
     @Override
     public byte[] getContent() {
-	return getBytes();
+        return getBytes();
     }
 
     @Override
     public String getType() {
-	return S_EXP;
+        return S_EXP;
     }
 }

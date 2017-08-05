@@ -24,40 +24,41 @@ import l1j.server.server.templates.L1Npc;
 
 public class L1FurnitureInstance extends L1NpcInstance {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private int _itemObjId;
+    private int _itemObjId;
 
-	public L1FurnitureInstance(L1Npc template) {
-		super(template);
-	}
+    public L1FurnitureInstance(L1Npc template) {
+        super(template);
+    }
 
-	@Override
-	public void onAction(L1PcInstance player) {}
+    @Override
+    public void onAction(L1PcInstance player) {
+    }
 
-	@Override
-	public void deleteMe() {
-		_destroyed = true;
-		if (getInventory() != null) {
-			getInventory().clearItems();
-		}
-		L1World.getInstance().removeVisibleObject(this);
-		L1World.getInstance().removeObject(this);
-		for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(this)) {
-			if (pc == null)
-				continue;
-			pc.removeKnownObject(this);
-			pc.sendPackets(new S_RemoveObject(this));
-		}
-		removeAllKnownObjects();
-	}
+    @Override
+    public void deleteMe() {
+        _destroyed = true;
+        if (getInventory() != null) {
+            getInventory().clearItems();
+        }
+        L1World.getInstance().removeVisibleObject(this);
+        L1World.getInstance().removeObject(this);
+        for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(this)) {
+            if (pc == null)
+                continue;
+            pc.removeKnownObject(this);
+            pc.sendPackets(new S_RemoveObject(this));
+        }
+        removeAllKnownObjects();
+    }
 
-	public int getItemObjId() {
-		return _itemObjId;
-	}
+    public int getItemObjId() {
+        return _itemObjId;
+    }
 
-	public void setItemObjId(int i) {
-		_itemObjId = i;
-	}
+    public void setItemObjId(int i) {
+        _itemObjId = i;
+    }
 
 }

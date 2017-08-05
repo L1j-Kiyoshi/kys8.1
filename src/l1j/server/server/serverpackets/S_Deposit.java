@@ -26,20 +26,20 @@ import l1j.server.server.Opcodes;
 
 public class S_Deposit extends ServerBasePacket {
 
-	public S_Deposit(int objecId) {
-		writeC(Opcodes.S_DEPOSIT);
-		writeD(objecId);
-	}
+    public S_Deposit(int objecId) {
+        writeC(Opcodes.S_DEPOSIT);
+        writeD(objecId);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	
-	@Override
-	public String getType() {
-		return _S__53_DEPOSIT;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	private static final String _S__53_DEPOSIT = "[S] S_Deposit";
+    @Override
+    public String getType() {
+        return _S__53_DEPOSIT;
+    }
+
+    private static final String _S__53_DEPOSIT = "[S] S_Deposit";
 }

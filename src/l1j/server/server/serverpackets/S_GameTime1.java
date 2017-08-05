@@ -6,26 +6,26 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class S_GameTime1 extends ServerBasePacket {
 
-	private static final String S_GameTime1 = "[S] S_GameTime1";
+    private static final String S_GameTime1 = "[S] S_GameTime1";
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_GameTime1(L1PcInstance pc){
-		buildPacket(pc);
-	}
+    public S_GameTime1(L1PcInstance pc) {
+        buildPacket(pc);
+    }
 
-	//0000 : 7e 41 14 fa 7f 50 80 f9                            ~A..P..
+    //0000 : 7e 41 14 fa 7f 50 80 f9                            ~A..P..
 
     /*00:00 時間流れるパケット*/
-	private void buildPacket(L1PcInstance pc) {
-		writeC(Opcodes.S_EVENT);
-    writeC(0x41);
-    writeC(0); 
-    writeC(0); 
-    writeC(0); 
-    writeC(0); 
-    writeC(0); 
-    writeC(0); 
+    private void buildPacket(L1PcInstance pc) {
+        writeC(Opcodes.S_EVENT);
+        writeC(0x41);
+        writeC(0);
+        writeC(0);
+        writeC(0);
+        writeC(0);
+        writeC(0);
+        writeC(0);
 
  /*  writeC(0x8e); 
     writeC(0xe9); 
@@ -35,17 +35,17 @@ public class S_GameTime1 extends ServerBasePacket {
     writeC(0xd4); */
 
 
-	 }
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
 
-	public String getType() {
-		return S_GameTime1;
-	}
+    public String getType() {
+        return S_GameTime1;
+    }
 }

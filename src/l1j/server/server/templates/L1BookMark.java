@@ -30,20 +30,25 @@ public class L1BookMark {
     private int _speed_id;
 
     public int getSpeed_id() {
-       return _speed_id;
+        return _speed_id;
     }
+
     public void setSpeed_id(int i) {
         _speed_id = i;
     }
+
     public int getId() {
         return _id;
     }
+
     public void setId(int i) {
         _id = i;
     }
+
     public int getCharId() {
         return _charId;
     }
+
     private int _NumId;
 
     public int getNumId() {
@@ -120,7 +125,7 @@ public class L1BookMark {
     }
 
     @SuppressWarnings("resource")
-	public static void bookmarkDB(L1PcInstance pc) {
+    public static void bookmarkDB(L1PcInstance pc) {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -129,7 +134,7 @@ public class L1BookMark {
             con = L1DatabaseFactory.getInstance().getConnection();
             pstm = con.prepareStatement("SELECT * FROM character_teleport WHERE char_id='" + pc.getId() + "' ORDER BY num_id ASC");
             rs = pstm.executeQuery();
-           int i = 0;
+            int i = 0;
             while (rs.next()) {
                 bookmark = new L1BookMark();
                 bookmark.setCharId(rs.getInt("char_id"));
@@ -153,38 +158,38 @@ public class L1BookMark {
             }
 
         } catch (SQLException e) {
-           // _log.log(Level.WARNING, "bookmarks 例外が発生。", e);
+            // _log.log(Level.WARNING, "bookmarks 例外が発生。", e);
         } finally {
             SQLUtil.close(rs, pstm, con);
-       }
+        }
     }
 
-	public static void insertBookmark(L1BookMark bookmark) {
-		Connection con = null;
-		PreparedStatement pstm = null;
+    public static void insertBookmark(L1BookMark bookmark) {
+        Connection con = null;
+        PreparedStatement pstm = null;
 
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con
-					.prepareStatement("INSERT INTO character_teleport SET id = ?, char_id = ?, name = ?, locx = ?, locy = ?, mapid = ?, randomX = ?, randomY = ?");
-			pstm.setInt(1, bookmark.getId());
-			pstm.setInt(2, bookmark.getCharId());
-			pstm.setString(3, bookmark.getName());
-			pstm.setInt(4, bookmark.getLocX());
-			pstm.setInt(5, bookmark.getLocY());
-			pstm.setInt(6, bookmark.getMapId());
-			pstm.setInt(7, 0);
-			pstm.setInt(8, 0);
-			pstm.executeUpdate();
-		} catch (SQLException e) {
-			//_log.log(Level.SEVERE, "ブックマークの追加でエラーが発生しました。", e);
-		} finally {
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con
+                    .prepareStatement("INSERT INTO character_teleport SET id = ?, char_id = ?, name = ?, locx = ?, locy = ?, mapid = ?, randomX = ?, randomY = ?");
+            pstm.setInt(1, bookmark.getId());
+            pstm.setInt(2, bookmark.getCharId());
+            pstm.setString(3, bookmark.getName());
+            pstm.setInt(4, bookmark.getLocX());
+            pstm.setInt(5, bookmark.getLocY());
+            pstm.setInt(6, bookmark.getMapId());
+            pstm.setInt(7, 0);
+            pstm.setInt(8, 0);
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            //_log.log(Level.SEVERE, "ブックマークの追加でエラーが発生しました。", e);
+        } finally {
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-    
+
     public static void deleteBookmark(L1PcInstance pc, String s) {
         Connection con = null;
         PreparedStatement pstm = null;
@@ -222,7 +227,7 @@ public class L1BookMark {
                 pc._bookmarks.clear();
                 pc._speedbookmarks.clear();
                 bookmarkDB(pc);
-           }
+            }
         } catch (SQLException e) {
             //_log.log(Level.SEVERE, "ブックマークの削除でエラーが発生しました。", e);
         } finally {
@@ -232,7 +237,7 @@ public class L1BookMark {
     }
 
     @SuppressWarnings("resource")
-	public static synchronized void addBookmark(L1PcInstance pc, String s) {
+    public static synchronized void addBookmark(L1PcInstance pc, String s) {
         if (!pc.getMap().isMarkable() && !pc.isGm()) {
             pc.sendPackets(new S_ServerMessage(214));
             return;
@@ -262,7 +267,7 @@ public class L1BookMark {
                 pstm.setInt(1, pc.getId());
                 rs = pstm.executeQuery();
                 rs.next();
-                int Numid = rs.getInt("newid");                
+                int Numid = rs.getInt("newid");
                 bookmark.setNumId(Numid);
                 bookmark.setTemp_id(Numid);
                 bookmark.setSpeed_id(-1);
@@ -292,7 +297,7 @@ public class L1BookMark {
 
         } else {
             pc.sendPackets(new S_ServerMessage(1655));// 同じ記憶人で保存することができません。
-       }
+        }
     }
 
     public static void WriteBookmark(L1PcInstance pc) {
@@ -308,8 +313,8 @@ public class L1BookMark {
                         pstm = con.prepareStatement("UPDATE character_teleport SET num_id=?, speed_id=?  WHERE id=?");
                         pstm.setInt(1, pc._bookmarks.get(i).getTemp_id());
                         if (pc._speedbookmarks.contains(pc._bookmarks.get(i))) {
-                           pstm.setInt(2, pc._bookmarks.get(i).getSpeed_id());
-                       } else {
+                            pstm.setInt(2, pc._bookmarks.get(i).getSpeed_id());
+                        } else {
                             pstm.setInt(2, -1);
                         }
                         pstm.setInt(3, pc._bookmarks.get(i).getId());
@@ -318,14 +323,14 @@ public class L1BookMark {
                 }
             }
         } catch (SQLException e) {
-           // _log.log(Level.WARNING, "WriteBookmark 例外が発生。", e);
+            // _log.log(Level.WARNING, "WriteBookmark 例外が発生。", e);
         } finally {
             SQLUtil.close(rs, pstm, con);
-       }
+        }
     }
 
     @SuppressWarnings("resource")
-	public synchronized static void Bookmarkitem(L1PcInstance pc, L1ItemInstance useItem , int obj_id, boolean isChange) {
+    public synchronized static void Bookmarkitem(L1PcInstance pc, L1ItemInstance useItem, int obj_id, boolean isChange) {
         Connection con = null;
         PreparedStatement pstm = null;
         ResultSet rs = null;
@@ -377,7 +382,7 @@ public class L1BookMark {
                     pstm.setInt(i++, bookmark.getRandomY());
                     pstm.execute();
                 } else {
-                    pstm = con .prepareStatement("UPDATE character_teleport SET num_id=?,speed_id=?, char_id=?, name=?, locx=?, locy=?, mapid=?,randomX=?,randomY=?,item_obj_id=? WHERE  id=?");
+                    pstm = con.prepareStatement("UPDATE character_teleport SET num_id=?,speed_id=?, char_id=?, name=?, locx=?, locy=?, mapid=?,randomX=?,randomY=?,item_obj_id=? WHERE  id=?");
                     pstm.setInt(i++, bookmark.getNumId());
                     pstm.setInt(i++, bookmark.getSpeed_id());
                     pstm.setInt(i++, bookmark.getCharId());
@@ -394,21 +399,21 @@ public class L1BookMark {
                 pc.addBookMark(bookmark);
                 pc.sendPackets(new S_Bookmarks(bookmark.getName(), bookmark.getMapId(), bookmark.getLocX(), bookmark.getLocY(), bookmark.getNumId()));
             }
-            pc.sendPackets(new S_SystemMessage("[ " + count2  + " ]つの記憶が登録"));
+            pc.sendPackets(new S_SystemMessage("[ " + count2 + " ]つの記憶が登録"));
             if (count != 0) {
                 pc.sendPackets(new S_SystemMessage("[ " + count + " ]つの記憶は保存されません。[拡張が必要]"));
             }
             pc.sendPackets(new S_BookMarkLoad(pc));
             pc.getInventory().removeItem(useItem, 1);
         } catch (SQLException e) {
-           // _log.log(Level.WARNING, "WriteBookmark 例外が発生。", e);
+            // _log.log(Level.WARNING, "WriteBookmark 例外が発生。", e);
         } finally {
             bookmark = null;
-          SQLUtil.close(rs, pstm, con);
+            SQLUtil.close(rs, pstm, con);
         }
     }
 
-   public static void deleteBookmarkItem(int obj_id) {
+    public static void deleteBookmarkItem(int obj_id) {
         Connection con = null;
         PreparedStatement pstm = null;
         try {
@@ -417,7 +422,7 @@ public class L1BookMark {
             pstm.setInt(1, obj_id);
             pstm.execute();
         } catch (SQLException e) {
-           // _log.log(Level.SEVERE, "ブックマークの削除でエラーが発生しました。", e);
+            // _log.log(Level.SEVERE, "ブックマークの削除でエラーが発生しました。", e);
         } finally {
             SQLUtil.close(pstm);
             SQLUtil.close(con);
@@ -451,7 +456,7 @@ public class L1BookMark {
                 pstm.execute();
             }
         } catch (SQLException e) {
-           // _log.log(Level.WARNING, "WriteBookmark 例外が発生。", e);
+            // _log.log(Level.WARNING, "WriteBookmark 例外が発生。", e);
         } finally {
             SQLUtil.close(rs, pstm, con);
         }

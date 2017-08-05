@@ -21,14 +21,14 @@ package l1j.server.server.serverpackets;
 import l1j.server.server.Opcodes;
 
 public class S_CloseList extends ServerBasePacket {
-	public S_CloseList(int objid) {
-		writeC(Opcodes.S_HYPERTEXT);
-		writeD(objid);
-		writeS("");
-	}
+    public S_CloseList(int objid) {
+        writeC(Opcodes.S_HYPERTEXT);
+        writeD(objid);
+        writeS("");
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 }

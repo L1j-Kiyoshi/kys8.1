@@ -23,27 +23,28 @@ import l1j.server.server.model.L1Character;
 
 public class S_ChangeHeading extends ServerBasePacket {
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_ChangeHeading(L1Character cha) {
-		buildPacket(cha);
-	}
+    public S_ChangeHeading(L1Character cha) {
+        buildPacket(cha);
+    }
 
-	private void buildPacket(L1Character cha) {
-		writeC(Opcodes.S_CHANGE_DIRECTION);
-		writeD(cha.getId());
-		writeC(cha.getHeading());
-	}
+    private void buildPacket(L1Character cha) {
+        writeC(Opcodes.S_CHANGE_DIRECTION);
+        writeD(cha.getId());
+        writeC(cha.getHeading());
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return "[S] S_ChangeHeading";
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return "[S] S_ChangeHeading";
+    }
 }

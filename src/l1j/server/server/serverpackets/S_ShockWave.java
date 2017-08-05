@@ -21,28 +21,28 @@ import l1j.server.server.Opcodes;
 
 public class S_ShockWave extends ServerBasePacket {
 
-	private static Logger _log = Logger.getLogger(S_ShockWave.class.getName());
+    private static Logger _log = Logger.getLogger(S_ShockWave.class.getName());
 
-	private static final String S_ShockWave = "[S] S_ShockWave";
+    private static final String S_ShockWave = "[S] S_ShockWave";
 
-	public S_ShockWave() {
-		writeC(Opcodes.S_PUT_OBJECT);
-		writeC(0x53);
-		writeC(0x02);
-		writeC(0x00);
-		writeC(0x00);
-		writeC(0x00);
-		writeC(0x01);
-		writeC(0x1d);
-	}
+    public S_ShockWave() {
+        writeC(Opcodes.S_PUT_OBJECT);
+        writeC(0x53);
+        writeC(0x02);
+        writeC(0x00);
+        writeC(0x00);
+        writeC(0x00);
+        writeC(0x01);
+        writeC(0x1d);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	@Override
-	public String getType() {
-		return S_ShockWave;
-	}
+    @Override
+    public String getType() {
+        return S_ShockWave;
+    }
 }

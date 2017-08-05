@@ -26,28 +26,28 @@ import l1j.server.server.model.map.L1WorldMap;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1Loc implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1Loc.class.getName());
+    private static Logger _log = Logger.getLogger(L1Loc.class.getName());
 
-	private L1Loc() {
-	}
+    private L1Loc() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Loc();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Loc();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			int locx = pc.getX();
-			int locy = pc.getY();
-			short mapid = pc.getMapId();
-			int gab = L1WorldMap.getInstance(). getMap(mapid).getOriginalTile(
-					locx, locy);
-			String msg = String.format("座標 (%d, %d, %d) %d", locx, locy, mapid,
-					gab);
-			pc.sendPackets(new S_SystemMessage(msg));
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            int locx = pc.getX();
+            int locy = pc.getY();
+            short mapid = pc.getMapId();
+            int gab = L1WorldMap.getInstance().getMap(mapid).getOriginalTile(
+                    locx, locy);
+            String msg = String.format("座標 (%d, %d, %d) %d", locx, locy, mapid,
+                    gab);
+            pc.sendPackets(new S_SystemMessage(msg));
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        }
+    }
 }

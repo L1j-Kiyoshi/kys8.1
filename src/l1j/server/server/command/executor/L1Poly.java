@@ -28,36 +28,36 @@ import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1Poly implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1Poly.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1Poly.class.getName());
 
-	private L1Poly() {
-	}
+    private L1Poly() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Poly();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Poly();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			StringTokenizer st = new StringTokenizer(arg);
-			String name = st.nextToken();
-			int polyid = Integer.parseInt(st.nextToken());
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            StringTokenizer st = new StringTokenizer(arg);
+            String name = st.nextToken();
+            int polyid = Integer.parseInt(st.nextToken());
 
-			L1PcInstance tg = L1World.getInstance(). getPlayer(name);
+            L1PcInstance tg = L1World.getInstance().getPlayer(name);
 
-			if (tg == null) {
-				pc.sendPackets(new S_ServerMessage(73, name)); // \f1%0は、ゲームをしていません。
-			} else {
-				try {
-					L1PolyMorph.doPoly(tg, polyid, 604800, L1PolyMorph.MORPH_BY_GM);
-				} catch (Exception exception) {
-					pc.sendPackets(new S_SystemMessage("。変身[キャラクター名] [グラフィックID]と入力してください。"));
-				}
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名] [グラフィックID]と入力してください。"));
-		}
-	}
+            if (tg == null) {
+                pc.sendPackets(new S_ServerMessage(73, name)); // \f1%0は、ゲームをしていません。
+            } else {
+                try {
+                    L1PolyMorph.doPoly(tg, polyid, 604800, L1PolyMorph.MORPH_BY_GM);
+                } catch (Exception exception) {
+                    pc.sendPackets(new S_SystemMessage("。変身[キャラクター名] [グラフィックID]と入力してください。"));
+                }
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名] [グラフィックID]と入力してください。"));
+        }
+    }
 }

@@ -28,76 +28,76 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class S_ItemStatus extends ServerBasePacket {
 
-	private static final String S_ITEM_STATUS = "[S] S_ItemStatus";
+    private static final String S_ITEM_STATUS = "[S] S_ItemStatus";
 
-	/**
-	 * アイテムの名前、状態、特性、重量などの表示を変更する
-	 */
-	public S_ItemStatus(L1ItemInstance item) {
-		if (item.getItem().getSetId() != 0) {
-			if (item.getItem().getMainId() == item.getItem().getItemId()) {
-				if (item.isEquipped()) {
-					build(item, null, true, true);
-				} else {
-					build(item, null, true, false);
-				}
-			} else {
-				build(item, null, false, false);
-			}
-		} else {
-			build(item, null, false, false);
-		}
-	}
+    /**
+     * アイテムの名前、状態、特性、重量などの表示を変更する
+     */
+    public S_ItemStatus(L1ItemInstance item) {
+        if (item.getItem().getSetId() != 0) {
+            if (item.getItem().getMainId() == item.getItem().getItemId()) {
+                if (item.isEquipped()) {
+                    build(item, null, true, true);
+                } else {
+                    build(item, null, true, false);
+                }
+            } else {
+                build(item, null, false, false);
+            }
+        } else {
+            build(item, null, false, false);
+        }
+    }
 
-	public S_ItemStatus(L1ItemInstance item, L1PcInstance pc) {
-		if (item.getItem().getSetId() != 0) {
-			if (item.getItem().getMainId() == item.getItem().getItemId()) {
-				if (item.isEquipped()) {
-					build(item, pc, true, true);
-				} else {
-					build(item, pc, true, false);
-				}
-			} else {
-				build(item, pc, false, false);
-			}
-		} else {
-			build(item, pc, false, false);
-		}
-	}
+    public S_ItemStatus(L1ItemInstance item, L1PcInstance pc) {
+        if (item.getItem().getSetId() != 0) {
+            if (item.getItem().getMainId() == item.getItem().getItemId()) {
+                if (item.isEquipped()) {
+                    build(item, pc, true, true);
+                } else {
+                    build(item, pc, true, false);
+                }
+            } else {
+                build(item, pc, false, false);
+            }
+        } else {
+            build(item, pc, false, false);
+        }
+    }
 
-	public S_ItemStatus(L1ItemInstance item, L1PcInstance pc, boolean dd,boolean check) {
-		build(item, pc, dd, check);
-	}
+    public S_ItemStatus(L1ItemInstance item, L1PcInstance pc, boolean dd, boolean check) {
+        build(item, pc, dd, check);
+    }
 
-	public void build(L1ItemInstance item, L1PcInstance pc, boolean dd,boolean check) {
-		writeC(Opcodes.S_CHANGE_ITEM_DESC_EX);
-		writeD(item.getId());
-		writeS(item.getViewName());
-		writeD(item.getCount());
-		if (!item.isIdentified()) {
-			// 米感情の場合ステータスを送信する必要はない
-			writeC(0);
-		} else {
-			byte[] status = null;
-			if (dd) {
-				status = item.getStatusBytes(pc, check);
-			} else {
-				status = item.getStatusBytes(pc);
-			}
-			writeC(status.length);
-			for (byte b : status) {
-				writeC(b);
-			}
-		}
-	}
+    public void build(L1ItemInstance item, L1PcInstance pc, boolean dd, boolean check) {
+        writeC(Opcodes.S_CHANGE_ITEM_DESC_EX);
+        writeD(item.getId());
+        writeS(item.getViewName());
+        writeD(item.getCount());
+        if (!item.isIdentified()) {
+            // 米感情の場合ステータスを送信する必要はない
+            writeC(0);
+        } else {
+            byte[] status = null;
+            if (dd) {
+                status = item.getStatusBytes(pc, check);
+            } else {
+                status = item.getStatusBytes(pc);
+            }
+            writeC(status.length);
+            for (byte b : status) {
+                writeC(b);
+            }
+        }
+    }
 
-	@Override
-	public byte[] getContent() {
-		return _bao.toByteArray();
-	}
+    @Override
+    public byte[] getContent() {
+        return _bao.toByteArray();
+    }
 
-	@Override
-	public String getType() {
-		return S_ITEM_STATUS;
-	}
+    @Override
+    public String getType() {
+        return S_ITEM_STATUS;
+    }
 }

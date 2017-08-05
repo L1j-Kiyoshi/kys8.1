@@ -30,46 +30,46 @@ import l1j.server.server.serverpackets.S_HPMeter;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1HpBar implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1HpBar.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1HpBar.class.getName());
 
-	private L1HpBar() {
-	}
+    private L1HpBar() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1HpBar();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1HpBar();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		if (arg.equalsIgnoreCase("on")) {
-			pc.setSkillEffect(L1SkillId.GMSTATUS_HPBAR, 0);
-		} else if (arg.equalsIgnoreCase("off")) {
-			pc.removeSkillEffect(L1SkillId.GMSTATUS_HPBAR);
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        if (arg.equalsIgnoreCase("on")) {
+            pc.setSkillEffect(L1SkillId.GMSTATUS_HPBAR, 0);
+        } else if (arg.equalsIgnoreCase("off")) {
+            pc.removeSkillEffect(L1SkillId.GMSTATUS_HPBAR);
 
-			for (L1Object obj : pc.getKnownObjects()) {
-				if (isHpBarTarget(obj)) {
-					pc.sendPackets(new S_HPMeter(obj.getId(), 0xFF, 0xff));
-				}
-			}
-		} else {
-			pc.sendPackets(new S_SystemMessage(cmdName + "[入、切]と入力してください。"));
-		}
-	}
+            for (L1Object obj : pc.getKnownObjects()) {
+                if (isHpBarTarget(obj)) {
+                    pc.sendPackets(new S_HPMeter(obj.getId(), 0xFF, 0xff));
+                }
+            }
+        } else {
+            pc.sendPackets(new S_SystemMessage(cmdName + "[入、切]と入力してください。"));
+        }
+    }
 
-	public static boolean isHpBarTarget(L1Object obj) {
-		if (obj instanceof L1MonsterInstance) {
-			return true;
-		}
-		if (obj instanceof L1PcInstance) {
-			return true;
-		}
-		if (obj instanceof L1SummonInstance) {
-			return true;
-		}
-		if (obj instanceof L1PetInstance) {
-			return true;
-		}
-		return false;
-	}
+    public static boolean isHpBarTarget(L1Object obj) {
+        if (obj instanceof L1MonsterInstance) {
+            return true;
+        }
+        if (obj instanceof L1PcInstance) {
+            return true;
+        }
+        if (obj instanceof L1SummonInstance) {
+            return true;
+        }
+        if (obj instanceof L1PetInstance) {
+            return true;
+        }
+        return false;
+    }
 }

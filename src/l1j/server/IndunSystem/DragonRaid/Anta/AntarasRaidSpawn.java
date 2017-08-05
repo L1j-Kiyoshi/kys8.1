@@ -16,54 +16,60 @@ import l1j.server.server.templates.L1Npc;
 import l1j.server.server.utils.SQLUtil;
 
 public class AntarasRaidSpawn {
-	private static Logger _log = Logger.getLogger(AntarasRaidSpawn.class.getName());
-	private static AntarasRaidSpawn _instance;
-	public static AntarasRaidSpawn getInstance() {
-		if (_instance == null) { _instance = new AntarasRaidSpawn(); }
-		return _instance;
-	}
-	private AntarasRaidSpawn() { }
-	public void fillSpawnTable(int mapid, int type) {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM spawnlist_raid");
-			rs = pstm.executeQuery();
-			while(rs.next()){
-				if (type != rs.getInt("type")) continue;
-				L1Npc l1npc = NpcTable.getInstance().getTemplate(rs.getInt("npc_id"));
-				if (l1npc != null) {
-					L1NpcInstance field;
-					try {
-						field = NpcTable.getInstance().newNpcInstance(rs.getInt("npc_id"));
-						field.setId(IdFactory.getInstance().nextId());
-						field.setX(rs.getInt("locx"));
-						field.setY(rs.getInt("locy"));
-						field.setMap((short) mapid);
-						field.setHomeX(field.getX());
-						field.setHomeY(field.getY());
-						field.setHeading(rs.getInt("heading"));
-						field.setLightSize(l1npc.getLightSize());
-						field.getLight().turnOnOffLight();
-						L1World.getInstance().storeObject(field);
-						L1World.getInstance().addVisibleObject(field);
-					} catch (Exception e) {
-						_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-					}
-				}
-			}
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (SecurityException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (IllegalArgumentException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+    private static Logger _log = Logger.getLogger(AntarasRaidSpawn.class.getName());
+    private static AntarasRaidSpawn _instance;
+
+    public static AntarasRaidSpawn getInstance() {
+        if (_instance == null) {
+            _instance = new AntarasRaidSpawn();
+        }
+        return _instance;
+    }
+
+    private AntarasRaidSpawn() {
+    }
+
+    public void fillSpawnTable(int mapid, int type) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM spawnlist_raid");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                if (type != rs.getInt("type")) continue;
+                L1Npc l1npc = NpcTable.getInstance().getTemplate(rs.getInt("npc_id"));
+                if (l1npc != null) {
+                    L1NpcInstance field;
+                    try {
+                        field = NpcTable.getInstance().newNpcInstance(rs.getInt("npc_id"));
+                        field.setId(IdFactory.getInstance().nextId());
+                        field.setX(rs.getInt("locx"));
+                        field.setY(rs.getInt("locy"));
+                        field.setMap((short) mapid);
+                        field.setHomeX(field.getX());
+                        field.setHomeY(field.getY());
+                        field.setHeading(rs.getInt("heading"));
+                        field.setLightSize(l1npc.getLightSize());
+                        field.getLight().turnOnOffLight();
+                        L1World.getInstance().storeObject(field);
+                        L1World.getInstance().addVisibleObject(field);
+                    } catch (Exception e) {
+                        _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (SecurityException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (IllegalArgumentException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 }

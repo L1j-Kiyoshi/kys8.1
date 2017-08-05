@@ -39,164 +39,160 @@ import l1j.server.server.templates.L1AuctionBoard;
 import l1j.server.server.templates.L1House;
 
 public class AuctionTimeController implements Runnable {
-	public static final int SLEEP_TIME = 60000;
-	private static Logger _log = Logger.getLogger(AuctionTimeController.class
-			.getName());
+    public static final int SLEEP_TIME = 60000;
+    private static Logger _log = Logger.getLogger(AuctionTimeController.class
+            .getName());
 
-	private static AuctionTimeController _instance;
+    private static AuctionTimeController _instance;
 
-	public static AuctionTimeController getInstance() {
-		if (_instance == null) {
-			_instance = new AuctionTimeController();
-		}
-		return _instance;
-	}
+    public static AuctionTimeController getInstance() {
+        if (_instance == null) {
+            _instance = new AuctionTimeController();
+        }
+        return _instance;
+    }
 
-	@Override
-	public void run() {
-		try {
-			checkAuctionDeadline();
-		} catch (Exception e1) {
-		}
-	}
+    @Override
+    public void run() {
+        try {
+            checkAuctionDeadline();
+        } catch (Exception e1) {
+        }
+    }
 
-	public Calendar getRealTime() {
-		TimeZone tz = TimeZone.getTimeZone(Config.TIME_ZONE);
-		Calendar cal = Calendar.getInstance(tz);
-		return cal;
-	}
+    public Calendar getRealTime() {
+        TimeZone tz = TimeZone.getTimeZone(Config.TIME_ZONE);
+        Calendar cal = Calendar.getInstance(tz);
+        return cal;
+    }
 
-	private void checkAuctionDeadline() {
-		AuctionBoardTable boardTable = new AuctionBoardTable();
-		for (L1AuctionBoard board : boardTable.getAuctionBoardTableList()) {
-			if (board.getDeadline().before(getRealTime())) {
-				endAuction(board);
-			}
-		}
-	}
+    private void checkAuctionDeadline() {
+        AuctionBoardTable boardTable = new AuctionBoardTable();
+        for (L1AuctionBoard board : boardTable.getAuctionBoardTableList()) {
+            if (board.getDeadline().before(getRealTime())) {
+                endAuction(board);
+            }
+        }
+    }
 
-	private void endAuction(L1AuctionBoard board) {
-		int houseId = board.getHouseId();
-		int price = board.getPrice();
-		int oldOwnerId = board.getOldOwnerId();
-		String bidder = board.getBidder();
-		int bidderId = board.getBidderId();
+    private void endAuction(L1AuctionBoard board) {
+        int houseId = board.getHouseId();
+        int price = board.getPrice();
+        int oldOwnerId = board.getOldOwnerId();
+        String bidder = board.getBidder();
+        int bidderId = board.getBidderId();
 
-		if (oldOwnerId != 0 && bidderId != 0) { // 以前の所有者あり・落札者あり
-			L1PcInstance oldOwnerPc = (L1PcInstance) L1World.getInstance()
-					.findObject(oldOwnerId);
-			int payPrice = (int) (price * 0.9);
-			if (oldOwnerPc != null) { // 以前の所有者がオンライン中
-				oldOwnerPc.getInventory().storeItem(L1ItemId.ADENA, payPrice);
-				// あなたが所有していた家が最終価格％1アデナで落札された。％n
-				// 手数料10 %%を除いた残りの金額％0アデナをいたします。％nありがとうございます。％n％n
-				oldOwnerPc.sendPackets(new S_ServerMessage(527, String.valueOf(payPrice)));
-			} else { // 以前の所有者がオフライン中
-				L1ItemInstance item = ItemTable.getInstance().createItem(L1ItemId.ADENA);
-				item.setCount(payPrice);
-				try {
-					CharactersItemStorage storage = CharactersItemStorage.create();
-					storage.storeItem(oldOwnerId, item);
-				} catch (Exception e) {
-					_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-				}
-			}
+        if (oldOwnerId != 0 && bidderId != 0) { // 以前の所有者あり・落札者あり
+            L1PcInstance oldOwnerPc = (L1PcInstance) L1World.getInstance()
+                    .findObject(oldOwnerId);
+            int payPrice = (int) (price * 0.9);
+            if (oldOwnerPc != null) { // 以前の所有者がオンライン中
+                oldOwnerPc.getInventory().storeItem(L1ItemId.ADENA, payPrice);
+                // あなたが所有していた家が最終価格％1アデナで落札された。％n
+                // 手数料10 %%を除いた残りの金額％0アデナをいたします。％nありがとうございます。％n％n
+                oldOwnerPc.sendPackets(new S_ServerMessage(527, String.valueOf(payPrice)));
+            } else { // 以前の所有者がオフライン中
+                L1ItemInstance item = ItemTable.getInstance().createItem(L1ItemId.ADENA);
+                item.setCount(payPrice);
+                try {
+                    CharactersItemStorage storage = CharactersItemStorage.create();
+                    storage.storeItem(oldOwnerId, item);
+                } catch (Exception e) {
+                    _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+                }
+            }
 
-			L1PcInstance bidderPc = (L1PcInstance) L1World.getInstance().findObject(bidderId);
-			if (bidderPc != null) { // 落札者がオンライン中
-				// おめでとうございます。％nあなたが参加したオークションは、最終的な価格％0アデナの価格で落札された。％n
-				// 形が購入した家はすぐにご利用いただけます。％nありがとうございます。％n％n
-				bidderPc.sendPackets(new S_ServerMessage(524, String.valueOf(price), bidder));
-			}
-			deleteHouseInfo(houseId);
-			setHouseInfo(houseId, bidderId);
-			deleteNote(houseId);
-		} else if (oldOwnerId == 0 && bidderId != 0) { // 以前の所有者なし・落札者あり
-			L1PcInstance bidderPc = (L1PcInstance) L1World.getInstance().findObject(bidderId);
-			if (bidderPc != null) { // 落札者がオンライン中
-				// おめでとうございます。％nあなたが参加したオークションは、最終的な価格％0アデナの価格で落札された。％n
-				// 形が購入した家はすぐにご利用いただけます。％nありがとうございます。％n％n
-				bidderPc.sendPackets(new S_ServerMessage(524, String
-						.valueOf(price), bidder));
-			}
-			setHouseInfo(houseId, bidderId);
-			deleteNote(houseId);
-		} else if (oldOwnerId != 0 && bidderId == 0) { // 以前の所有者あり・落札者なし
-			L1PcInstance oldOwnerPc = (L1PcInstance) L1World.getInstance()
-					.findObject(oldOwnerId);
-			if (oldOwnerPc != null) { //以前の所有者がオンライン中
-				// あなたが適用されたオークションは、オークション期間内に提示した金額以上でのお支払いを表明することが表示されていなかったため、最終的には削除されました。％n
-				// したがって、所有権があなたに戻されたことをお知らせします。％nありがとうございます。％n％n
-				oldOwnerPc.sendPackets(new S_ServerMessage(528));
-			}
-			deleteNote(houseId);
-		} else if (oldOwnerId == 0 && bidderId == 0) { // 以前の所有者なし・落札者なし
-			// 締め切りを5日後に設定して再度オークションに付ける
-			Calendar cal = getRealTime();
-			cal.add(Calendar.DATE, 1); 
-			cal.set(Calendar.MINUTE, 0); 
-			cal.set(Calendar.SECOND, 0);
-			board.setDeadline(cal);
-			AuctionBoardTable boardTable = new AuctionBoardTable();
-			boardTable.updateAuctionBoard(board);
-		}
-	}
+            L1PcInstance bidderPc = (L1PcInstance) L1World.getInstance().findObject(bidderId);
+            if (bidderPc != null) { // 落札者がオンライン中
+                // おめでとうございます。％nあなたが参加したオークションは、最終的な価格％0アデナの価格で落札された。％n
+                // 形が購入した家はすぐにご利用いただけます。％nありがとうございます。％n％n
+                bidderPc.sendPackets(new S_ServerMessage(524, String.valueOf(price), bidder));
+            }
+            deleteHouseInfo(houseId);
+            setHouseInfo(houseId, bidderId);
+            deleteNote(houseId);
+        } else if (oldOwnerId == 0 && bidderId != 0) { // 以前の所有者なし・落札者あり
+            L1PcInstance bidderPc = (L1PcInstance) L1World.getInstance().findObject(bidderId);
+            if (bidderPc != null) { // 落札者がオンライン中
+                // おめでとうございます。％nあなたが参加したオークションは、最終的な価格％0アデナの価格で落札された。％n
+                // 形が購入した家はすぐにご利用いただけます。％nありがとうございます。％n％n
+                bidderPc.sendPackets(new S_ServerMessage(524, String
+                        .valueOf(price), bidder));
+            }
+            setHouseInfo(houseId, bidderId);
+            deleteNote(houseId);
+        } else if (oldOwnerId != 0 && bidderId == 0) { // 以前の所有者あり・落札者なし
+            L1PcInstance oldOwnerPc = (L1PcInstance) L1World.getInstance()
+                    .findObject(oldOwnerId);
+            if (oldOwnerPc != null) { //以前の所有者がオンライン中
+                // あなたが適用されたオークションは、オークション期間内に提示した金額以上でのお支払いを表明することが表示されていなかったため、最終的には削除されました。％n
+                // したがって、所有権があなたに戻されたことをお知らせします。％nありがとうございます。％n％n
+                oldOwnerPc.sendPackets(new S_ServerMessage(528));
+            }
+            deleteNote(houseId);
+        } else if (oldOwnerId == 0 && bidderId == 0) { // 以前の所有者なし・落札者なし
+            // 締め切りを5日後に設定して再度オークションに付ける
+            Calendar cal = getRealTime();
+            cal.add(Calendar.DATE, 1);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            board.setDeadline(cal);
+            AuctionBoardTable boardTable = new AuctionBoardTable();
+            boardTable.updateAuctionBoard(board);
+        }
+    }
 
-	/**
-	 * 以前の所有者のアジトを消す
-	 * 
-	 * @param houseId
-	 * 
-	 * @return
-	 */
-	private void deleteHouseInfo(int houseId) {
-		for (L1Clan clan : L1World.getInstance().getAllClans()) {
-			if (clan.getHouseId() == houseId) {
-				clan.setHouseId(0);
-				ClanTable.getInstance().updateClan(clan);
-			}
-		}
-	}
+    /**
+     * 以前の所有者のアジトを消す
+     *
+     * @param houseId
+     * @return
+     */
+    private void deleteHouseInfo(int houseId) {
+        for (L1Clan clan : L1World.getInstance().getAllClans()) {
+            if (clan.getHouseId() == houseId) {
+                clan.setHouseId(0);
+                ClanTable.getInstance().updateClan(clan);
+            }
+        }
+    }
 
-	/**
-	 * 落札者のアジトを設定する
-	 * 
-	 * @param houseId
-	 *            bidderId
-	 * 
-	 * @return
-	 */
-	private void setHouseInfo(int houseId, int bidderId) {
-		for (L1Clan clan : L1World.getInstance().getAllClans()) {
-			if (clan.getLeaderId() == bidderId) {
-				clan.setHouseId(houseId);
-				ClanTable.getInstance().updateClan(clan);
-				break;
-			}
-		}
-	}
+    /**
+     * 落札者のアジトを設定する
+     *
+     * @param houseId bidderId
+     * @return
+     */
+    private void setHouseInfo(int houseId, int bidderId) {
+        for (L1Clan clan : L1World.getInstance().getAllClans()) {
+            if (clan.getLeaderId() == bidderId) {
+                clan.setHouseId(houseId);
+                ClanTable.getInstance().updateClan(clan);
+                break;
+            }
+        }
+    }
 
-	/**
-	 * アジトの競売状態をOFFに設定し、オークション掲示板から消す
-	 * 
-	 * @param houseId
-	 * 
-	 * @return
-	 */
-	private void deleteNote(int houseId) {
-		// アジトの競売状態をOFFに設定する
-		L1House house = HouseTable.getInstance().getHouseTable(houseId);
-		house.setOnSale(false);
-		Calendar cal = getRealTime();
-		cal.add(Calendar.DATE, Config.HOUSE_TAX_INTERVAL);
-		cal.set(Calendar.MINUTE, 0); // 分、秒は切り捨て
-		cal.set(Calendar.SECOND, 0);
-		house.setTaxDeadline(cal);
-		HouseTable.getInstance().updateHouse(house);
-		
-		// オークション掲示板から消す
-		AuctionBoardTable boardTable = new AuctionBoardTable();
-		boardTable.deleteAuctionBoard(houseId);
-	}
+    /**
+     * アジトの競売状態をOFFに設定し、オークション掲示板から消す
+     *
+     * @param houseId
+     * @return
+     */
+    private void deleteNote(int houseId) {
+        // アジトの競売状態をOFFに設定する
+        L1House house = HouseTable.getInstance().getHouseTable(houseId);
+        house.setOnSale(false);
+        Calendar cal = getRealTime();
+        cal.add(Calendar.DATE, Config.HOUSE_TAX_INTERVAL);
+        cal.set(Calendar.MINUTE, 0); // 分、秒は切り捨て
+        cal.set(Calendar.SECOND, 0);
+        house.setTaxDeadline(cal);
+        HouseTable.getInstance().updateHouse(house);
+
+        // オークション掲示板から消す
+        AuctionBoardTable boardTable = new AuctionBoardTable();
+        boardTable.deleteAuctionBoard(houseId);
+    }
 
 }

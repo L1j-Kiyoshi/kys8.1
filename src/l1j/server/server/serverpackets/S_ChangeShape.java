@@ -26,43 +26,44 @@ import l1j.server.server.Opcodes;
 
 public class S_ChangeShape extends ServerBasePacket {
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_ChangeShape(int objId, int polyId) {
-		buildPacket(objId, polyId, false);
-	}
+    public S_ChangeShape(int objId, int polyId) {
+        buildPacket(objId, polyId, false);
+    }
 
-	public S_ChangeShape(int objId, int polyId, boolean weaponTakeoff) {
-		buildPacket(objId, polyId, weaponTakeoff);
-	}
+    public S_ChangeShape(int objId, int polyId, boolean weaponTakeoff) {
+        buildPacket(objId, polyId, weaponTakeoff);
+    }
 
-	private void buildPacket(int objId, int polyId, boolean weaponTakeoff) {
-		writeC(Opcodes.S_POLYMORPH);
-		writeD(objId);
-		writeH(polyId);
-		// なぜ29か不明
-		writeC(weaponTakeoff ? 0 : 29);
-		writeC(0xff);
-		writeC(0xff);
-		writeC(0x00);
-		writeS("abcd");
-	}
-	public S_ChangeShape(int objId, int polyId, int currentWeapon) {
-		writeC(Opcodes.S_POLYMORPH);
-		writeD(objId);
-		writeH(polyId);
-		writeC(currentWeapon);
-		writeC(0xff);
-		writeC(0xff);
-		writeC(0x00);
-		writeS("abcd");
-	}
+    private void buildPacket(int objId, int polyId, boolean weaponTakeoff) {
+        writeC(Opcodes.S_POLYMORPH);
+        writeD(objId);
+        writeH(polyId);
+        // なぜ29か不明
+        writeC(weaponTakeoff ? 0 : 29);
+        writeC(0xff);
+        writeC(0xff);
+        writeC(0x00);
+        writeS("abcd");
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
+    public S_ChangeShape(int objId, int polyId, int currentWeapon) {
+        writeC(Opcodes.S_POLYMORPH);
+        writeD(objId);
+        writeH(polyId);
+        writeC(currentWeapon);
+        writeC(0xff);
+        writeC(0xff);
+        writeC(0x00);
+        writeS("abcd");
+    }
+
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
 }

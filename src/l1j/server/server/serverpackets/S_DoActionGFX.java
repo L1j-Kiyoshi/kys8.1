@@ -21,29 +21,29 @@ package l1j.server.server.serverpackets;
 import l1j.server.server.Opcodes;
 
 public class S_DoActionGFX extends ServerBasePacket {
-	private static final String S_DOACTIONGFX = "[S] S_SkillGFX";
+    private static final String S_DOACTIONGFX = "[S] S_SkillGFX";
 
-	public static int ACTION_MAGIC = 0x16;
+    public static int ACTION_MAGIC = 0x16;
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_DoActionGFX(int objectId, int actionId) {
-		writeC(Opcodes.S_ACTION);
-		writeD(objectId);
-		writeC(actionId);
-		writeH(0);
-	}
+    public S_DoActionGFX(int objectId, int actionId) {
+        writeC(Opcodes.S_ACTION);
+        writeD(objectId);
+        writeC(actionId);
+        writeH(0);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
-	
-	@Override
-	public String getType() {
-		return S_DOACTIONGFX;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_DOACTIONGFX;
+    }
 }

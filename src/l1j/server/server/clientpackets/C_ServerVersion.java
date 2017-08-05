@@ -31,21 +31,21 @@ public class C_ServerVersion extends ClientBasePacket {
     private static final int cliantVersion = 820;
 
     public C_ServerVersion(byte decrypt[], GameClient client) throws Exception {
-	super(decrypt);
-	client.sendPacket(new S_ServerVersion());
-	// int type = readH(); //
-	// // System.out.println("クラフト> "+ type）;
-	// switch (type) {
-	// case クライアントのバージョン：{// by feel。
-	// client.sendPacket(new S_ServerVersion());
-	// break;
-	// }
-	// }
+        super(decrypt);
+        client.sendPacket(new S_ServerVersion());
+        // int type = readH(); //
+        // // System.out.println("クラフト> "+ type）;
+        // switch (type) {
+        // case クライアントのバージョン：{// by feel。
+        // client.sendPacket(new S_ServerVersion());
+        // break;
+        // }
+        // }
     }
 
     @Override
     public String getType() {
-	return C_SERVER_VERSION;
+        return C_SERVER_VERSION;
     }
 
 }

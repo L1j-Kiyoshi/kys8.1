@@ -20,24 +20,24 @@ import java.util.logging.Logger;
 import l1j.server.server.Opcodes;
 
 public class S_RedMessage extends ServerBasePacket {
-	private static Logger _log = Logger.getLogger(S_RedMessage.class.getName());
+    private static Logger _log = Logger.getLogger(S_RedMessage.class.getName());
 
-	private static final String S_RedMessage = "[S] S_RedMessage";
+    private static final String S_RedMessage = "[S] S_RedMessage";
 
-	public S_RedMessage(String s) {
-		writeC(Opcodes.S_PUT_OBJECT);
-		writeC(0x54);
-		writeC(0x02);
-		writeS("\\f3"+s);
-	}
+    public S_RedMessage(String s) {
+        writeC(Opcodes.S_PUT_OBJECT);
+        writeC(0x54);
+        writeC(0x02);
+        writeS("\\f3" + s);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	@Override
-	public String getType() {
-		return S_RedMessage;
-	}
+    @Override
+    public String getType() {
+        return S_RedMessage;
+    }
 }

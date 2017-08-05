@@ -30,103 +30,103 @@ import l1j.server.server.templates.L1House;
 import l1j.server.server.templates.L1Npc;
 
 public class L1HousekeeperInstance extends L1NpcInstance {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @param template
-	 */
-	public L1HousekeeperInstance(L1Npc template) {
-		super(template);
-	}
+    /**
+     * @param template
+     */
+    public L1HousekeeperInstance(L1Npc template) {
+        super(template);
+    }
 
-	@Override
-	public void onAction(L1PcInstance pc) {
-		L1Attack attack = new L1Attack(pc, this);
-		attack.calcHit();
-		attack.action();
-	}
+    @Override
+    public void onAction(L1PcInstance pc) {
+        L1Attack attack = new L1Attack(pc, this);
+        attack.calcHit();
+        attack.action();
+    }
 
-	@Override
-	public void onTalkAction(L1PcInstance pc) {
-		int objid = getId();
-		L1NpcTalkData talking = NPCTalkDataTable.getInstance().getTemplate(getNpcTemplate().get_npcId());
-		int npcid = getNpcTemplate().get_npcId();
-		String htmlid = null;
-		String[] htmldata = null;
-		boolean isOwner = false;
+    @Override
+    public void onTalkAction(L1PcInstance pc) {
+        int objid = getId();
+        L1NpcTalkData talking = NPCTalkDataTable.getInstance().getTemplate(getNpcTemplate().get_npcId());
+        int npcid = getNpcTemplate().get_npcId();
+        String htmlid = null;
+        String[] htmldata = null;
+        boolean isOwner = false;
 
-		if (talking != null) {
-			L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
-			if (clan != null) {
-				int houseId = clan.getHouseId();
-				if (houseId != 0) {
-					L1House house = HouseTable.getInstance().getHouseTable(houseId);
-					if (npcid == house.getKeeperId()) {
-						isOwner = true;
-					}
-				}
-			}
+        if (talking != null) {
+            L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
+            if (clan != null) {
+                int houseId = clan.getHouseId();
+                if (houseId != 0) {
+                    L1House house = HouseTable.getInstance().getHouseTable(houseId);
+                    if (npcid == house.getKeeperId()) {
+                        isOwner = true;
+                    }
+                }
+            }
 
-			if (!isOwner) {
-				L1House targetHouse = null;
-				for (L1House house : HouseTable.getInstance().getHouseTableList()) {
-					if (npcid == house.getKeeperId()) {
-						targetHouse = house;
-						break;
-					}
-				}
-				if (targetHouse == null) {
-					pc.sendPackets(new S_ChatPacket(pc,"現在アジトは使用されません"));
-					return;
-				}
+            if (!isOwner) {
+                L1House targetHouse = null;
+                for (L1House house : HouseTable.getInstance().getHouseTableList()) {
+                    if (npcid == house.getKeeperId()) {
+                        targetHouse = house;
+                        break;
+                    }
+                }
+                if (targetHouse == null) {
+                    pc.sendPackets(new S_ChatPacket(pc, "現在アジトは使用されません"));
+                    return;
+                }
 
-				boolean isOccupy = false;
-				String clanName = null;
-				String leaderName = null;
-				for (L1Clan targetClan : L1World.getInstance().getAllClans()) {
-					try {
-						if (targetHouse.getHouseId() == targetClan.getHouseId()) {
-							isOccupy = true;
-							clanName = targetClan.getClanName();
-							leaderName = targetClan.getLeaderName();
-							break;
-						}
-					} catch (Exception e) {
-					}
-				}
-				if (isOccupy) {
-					htmlid = "agname";
-					htmldata = new String[] { clanName, leaderName, targetHouse.getHouseName() };
-				} else {
-					htmlid = "agnoname";
-					htmldata = new String[] { targetHouse.getHouseName() };
-				}
-			}
+                boolean isOccupy = false;
+                String clanName = null;
+                String leaderName = null;
+                for (L1Clan targetClan : L1World.getInstance().getAllClans()) {
+                    try {
+                        if (targetHouse.getHouseId() == targetClan.getHouseId()) {
+                            isOccupy = true;
+                            clanName = targetClan.getClanName();
+                            leaderName = targetClan.getLeaderName();
+                            break;
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+                if (isOccupy) {
+                    htmlid = "agname";
+                    htmldata = new String[]{clanName, leaderName, targetHouse.getHouseName()};
+                } else {
+                    htmlid = "agnoname";
+                    htmldata = new String[]{targetHouse.getHouseName()};
+                }
+            }
 
-			if (htmlid != null) {
-				if (htmldata != null) {
-					pc.sendPackets(new S_NPCTalkReturn(objid, htmlid, htmldata));
-				} else {
-					pc.sendPackets(new S_NPCTalkReturn(objid, htmlid));
-				}
-			} else {
-				if (pc.getLawful() < -1000) {
-					pc.sendPackets(new S_NPCTalkReturn(talking, objid, 2));
-				} else {
-					pc.sendPackets(new S_NPCTalkReturn(talking, objid, 1));
-				}
-			}
-		}
-	}
+            if (htmlid != null) {
+                if (htmldata != null) {
+                    pc.sendPackets(new S_NPCTalkReturn(objid, htmlid, htmldata));
+                } else {
+                    pc.sendPackets(new S_NPCTalkReturn(objid, htmlid));
+                }
+            } else {
+                if (pc.getLawful() < -1000) {
+                    pc.sendPackets(new S_NPCTalkReturn(talking, objid, 2));
+                } else {
+                    pc.sendPackets(new S_NPCTalkReturn(talking, objid, 1));
+                }
+            }
+        }
+    }
 
-	@Override
-	public void onFinalAction(L1PcInstance pc, String action) {
-	}
+    @Override
+    public void onFinalAction(L1PcInstance pc, String action) {
+    }
 
-	public void doFinalAction(L1PcInstance pc) {
-	}
+    public void doFinalAction(L1PcInstance pc) {
+    }
 
 }

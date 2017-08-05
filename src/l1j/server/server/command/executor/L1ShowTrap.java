@@ -28,31 +28,31 @@ import l1j.server.server.serverpackets.S_RemoveObject;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1ShowTrap implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1ShowTrap.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1ShowTrap.class.getName());
 
-	private L1ShowTrap() {
-	}
+    private L1ShowTrap() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1ShowTrap();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1ShowTrap();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		if (arg.equalsIgnoreCase("on")) {
-			pc.setSkillEffect(L1SkillId.GMSTATUS_SHOWTRAPS, 0);
-		} else if (arg.equalsIgnoreCase("off")) {
-			pc.removeSkillEffect(L1SkillId.GMSTATUS_SHOWTRAPS);
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        if (arg.equalsIgnoreCase("on")) {
+            pc.setSkillEffect(L1SkillId.GMSTATUS_SHOWTRAPS, 0);
+        } else if (arg.equalsIgnoreCase("off")) {
+            pc.removeSkillEffect(L1SkillId.GMSTATUS_SHOWTRAPS);
 
-			for (L1Object obj : pc.getKnownObjects()) {
-				if (obj instanceof L1TrapInstance) {
-					pc.removeKnownObject(obj);
-					pc.sendPackets(new S_RemoveObject(obj));
-				}
-			}
-		} else {
-			pc.sendPackets(new S_SystemMessage(cmdName + "[入、切]と入力してください。"));
-		}
-	}
+            for (L1Object obj : pc.getKnownObjects()) {
+                if (obj instanceof L1TrapInstance) {
+                    pc.removeKnownObject(obj);
+                    pc.sendPackets(new S_RemoveObject(obj));
+                }
+            }
+        } else {
+            pc.sendPackets(new S_SystemMessage(cmdName + "[入、切]と入力してください。"));
+        }
+    }
 }

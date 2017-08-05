@@ -26,24 +26,25 @@ import l1j.server.server.Opcodes;
 
 public class S_ChangeName extends ServerBasePacket {
 
-	private static final String S_CHANGE_NAME = "[S] S_ChangeName";
-	private byte[] _byte = null;
+    private static final String S_CHANGE_NAME = "[S] S_ChangeName";
+    private byte[] _byte = null;
 
-	public S_ChangeName(int objectId, String name) {
-		writeC(Opcodes.S_CHANGE_DESC);
-		writeD(objectId);
-		writeS(name);
-	}
+    public S_ChangeName(int objectId, String name) {
+        writeC(Opcodes.S_CHANGE_DESC);
+        writeD(objectId);
+        writeS(name);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return S_CHANGE_NAME;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_CHANGE_NAME;
+    }
 }

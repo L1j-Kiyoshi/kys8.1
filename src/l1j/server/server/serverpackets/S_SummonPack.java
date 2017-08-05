@@ -28,88 +28,89 @@ import l1j.server.server.model.Instance.L1SummonInstance;
 
 public class S_SummonPack extends ServerBasePacket {
 
-	private static final String _S__1F_SUMMONPACK = "[S] S_SummonPack";
-	private static final int STATUS_POISON = 1;
+    private static final String _S__1F_SUMMONPACK = "[S] S_SummonPack";
+    private static final int STATUS_POISON = 1;
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_SummonPack(L1SummonInstance pet, L1PcInstance pc) {
-		buildPacket(pet, pc, true);
-	}
+    public S_SummonPack(L1SummonInstance pet, L1PcInstance pc) {
+        buildPacket(pet, pc, true);
+    }
 
-	public S_SummonPack(L1SummonInstance pet, L1PcInstance pc,
-			boolean isCheckMaster) {
-		buildPacket(pet, pc, isCheckMaster);
-	}
+    public S_SummonPack(L1SummonInstance pet, L1PcInstance pc,
+                        boolean isCheckMaster) {
+        buildPacket(pet, pc, isCheckMaster);
+    }
 
-	private void buildPacket(L1SummonInstance pet, L1PcInstance pc,
-			boolean isCheckMaster) {
-		writeC(Opcodes.S_PUT_OBJECT);
-		writeH(pet.getX());
-		writeH(pet.getY());
-		writeD(pet.getId());
-		writeH(pet.getGfxId()); // SpriteID in List.spr
-		writeC(pet.getStatus()); // Modes in List.spr
-		writeC(pet.getHeading());
-		writeC(pet.getLight().getChaLightSize()); // (Bright) - 0~15
-		writeC(pet.getMoveSpeed()); // スピード - 0:normal, 1:fast, 2:slow
-		writeD(0);
-		writeH(0);
-		writeS(pet.getNameId());
-		writeS(pet.getTitle());
-		int status = 0;
-		if (pet.getPoison() != null) {
-			if (pet.getPoison().getEffectId() == 1) {
-				status |= STATUS_POISON;
-			}
-		}
-		writeC(status);
-		writeD(0);
-		writeS(null);
-		if (isCheckMaster && pet.isExsistMaster()) {
-			writeS(pet.getMaster().getName());
-		} else {
-			writeS("");
-		}
-		writeC(0); // ??
-		// HPのパーセント
-		if (pet.getMaster() != null
-				&& pet.getMaster().getId() == pc.getId()) {
-			int percent = pet.getMaxHp() != 0 ? 100 * pet.getCurrentHp()
-					/ pet.getMaxHp() : 100;
-			writeC(percent);
-		} else {
-			writeC(0xFF);
-		}
-		writeC(0);
-		writeC(pet.getLevel()); // PC = 0, Mon = Lv
-		writeC(0);
-		writeC(0xFF);
-		writeC(0xFF);
-		writeC(0);
-		writeC(0);
-		if (pet.getMaster() != null
-				&& pet.getMaster().getId() == pc.getId()) {
-			int percent = pet.getMaxMp() != 0 ? 100 * pet.getCurrentMp()
-					/ pet.getMaxMp() : 100;
-			writeC(percent);
-		} else {
-			writeC(0xFF);
-		}
-		writeH(0);
-	}
+    private void buildPacket(L1SummonInstance pet, L1PcInstance pc,
+                             boolean isCheckMaster) {
+        writeC(Opcodes.S_PUT_OBJECT);
+        writeH(pet.getX());
+        writeH(pet.getY());
+        writeD(pet.getId());
+        writeH(pet.getGfxId()); // SpriteID in List.spr
+        writeC(pet.getStatus()); // Modes in List.spr
+        writeC(pet.getHeading());
+        writeC(pet.getLight().getChaLightSize()); // (Bright) - 0~15
+        writeC(pet.getMoveSpeed()); // スピード - 0:normal, 1:fast, 2:slow
+        writeD(0);
+        writeH(0);
+        writeS(pet.getNameId());
+        writeS(pet.getTitle());
+        int status = 0;
+        if (pet.getPoison() != null) {
+            if (pet.getPoison().getEffectId() == 1) {
+                status |= STATUS_POISON;
+            }
+        }
+        writeC(status);
+        writeD(0);
+        writeS(null);
+        if (isCheckMaster && pet.isExsistMaster()) {
+            writeS(pet.getMaster().getName());
+        } else {
+            writeS("");
+        }
+        writeC(0); // ??
+        // HPのパーセント
+        if (pet.getMaster() != null
+                && pet.getMaster().getId() == pc.getId()) {
+            int percent = pet.getMaxHp() != 0 ? 100 * pet.getCurrentHp()
+                    / pet.getMaxHp() : 100;
+            writeC(percent);
+        } else {
+            writeC(0xFF);
+        }
+        writeC(0);
+        writeC(pet.getLevel()); // PC = 0, Mon = Lv
+        writeC(0);
+        writeC(0xFF);
+        writeC(0xFF);
+        writeC(0);
+        writeC(0);
+        if (pet.getMaster() != null
+                && pet.getMaster().getId() == pc.getId()) {
+            int percent = pet.getMaxMp() != 0 ? 100 * pet.getCurrentMp()
+                    / pet.getMaxMp() : 100;
+            writeC(percent);
+        } else {
+            writeC(0xFF);
+        }
+        writeH(0);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = _bao.toByteArray();
-		}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = _bao.toByteArray();
+        }
 
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return _S__1F_SUMMONPACK;
-	}
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return _S__1F_SUMMONPACK;
+    }
 
 }

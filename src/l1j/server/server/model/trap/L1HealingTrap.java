@@ -24,24 +24,24 @@ import l1j.server.server.storage.TrapStorage;
 import l1j.server.server.utils.Dice;
 
 public class L1HealingTrap extends L1Trap {
-	private final Dice _dice;
-	private final int _base;
-	private final int _diceCount;
+    private final Dice _dice;
+    private final int _base;
+    private final int _diceCount;
 
-	public L1HealingTrap(TrapStorage storage) {
-		super(storage);
+    public L1HealingTrap(TrapStorage storage) {
+        super(storage);
 
-		_dice = new Dice(storage.getInt("dice"));
-		_base = storage.getInt("base");
-		_diceCount = storage.getInt("diceCount");
-	}
+        _dice = new Dice(storage.getInt("dice"));
+        _base = storage.getInt("base");
+        _diceCount = storage.getInt("diceCount");
+    }
 
-	@Override
-	public void onTrod(L1PcInstance trodFrom, L1Object trapObj) {
-		sendEffect(trapObj);
+    @Override
+    public void onTrod(L1PcInstance trodFrom, L1Object trapObj) {
+        sendEffect(trapObj);
 
-		int pt = _dice.roll(_diceCount) + _base;
+        int pt = _dice.roll(_diceCount) + _base;
 
-		trodFrom.healHp(pt);
-	}
+        trodFrom.healHp(pt);
+    }
 }

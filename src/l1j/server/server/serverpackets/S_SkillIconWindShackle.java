@@ -26,16 +26,16 @@ import l1j.server.server.Opcodes;
 
 public class S_SkillIconWindShackle extends ServerBasePacket {
 
-	public S_SkillIconWindShackle(int objectId, int time) {
-		int buffTime = (time / 4);
-		writeC(Opcodes.S_EVENT);
-		writeC(0x2c);
-		writeD(objectId);
-		writeH(buffTime);
-	}
+    public S_SkillIconWindShackle(int objectId, int time) {
+        int buffTime = (time / 4);
+        writeC(Opcodes.S_EVENT);
+        writeC(0x2c);
+        writeD(objectId);
+        writeH(buffTime);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 }

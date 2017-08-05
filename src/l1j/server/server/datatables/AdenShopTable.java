@@ -34,105 +34,105 @@ import l1j.server.server.utils.SQLUtil;
 
 public class AdenShopTable {
 
-	private static Logger _log = Logger
-			.getLogger(AdenShopTable.class.getName());
+    private static Logger _log = Logger
+            .getLogger(AdenShopTable.class.getName());
 
-	private static AdenShopTable _instance;
+    private static AdenShopTable _instance;
 
-	private final FastMap<Integer, L1AdenShopItem> _allShops = new FastMap<Integer, L1AdenShopItem>();
+    private final FastMap<Integer, L1AdenShopItem> _allShops = new FastMap<Integer, L1AdenShopItem>();
 
-	public static int data_length = 0;
+    public static int data_length = 0;
 
-	public static AdenShopTable getInstance() {
-		if (_instance == null) {
-			_instance = new AdenShopTable();
-		}
-		return _instance;
-	}
+    public static AdenShopTable getInstance() {
+        if (_instance == null) {
+            _instance = new AdenShopTable();
+        }
+        return _instance;
+    }
 
-	public static void reload() {
-		AdenShopTable oldInstance = _instance;
-		_instance = new AdenShopTable();
-		oldInstance._allShops.clear();
-	}
+    public static void reload() {
+        AdenShopTable oldInstance = _instance;
+        _instance = new AdenShopTable();
+        oldInstance._allShops.clear();
+    }
 
-	private AdenShopTable() {
-		loadShops();
-	}
+    private AdenShopTable() {
+        loadShops();
+    }
 
-	private void loadShops() {
-		data_length = 0;
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM shop_aden");
-			rs = pstm.executeQuery();
-			while (rs.next()) {
-				int itemid = rs.getInt("itemid");
-				// String itemname = rs.getString("itemname");
-				int price = rs.getInt("price");
-				int type = rs.getInt("type");
-				int status = rs.getInt("status");
-				String html = rs.getString("html");
-				int pack = rs.getInt("pack");
-				if (type < 2 || type > 5)
-					type = 5;
-				_allShops.put(itemid, new L1AdenShopItem(itemid, price, pack,
-						html, status, type));
+    private void loadShops() {
+        data_length = 0;
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM shop_aden");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                int itemid = rs.getInt("itemid");
+                // String itemname = rs.getString("itemname");
+                int price = rs.getInt("price");
+                int type = rs.getInt("type");
+                int status = rs.getInt("status");
+                String html = rs.getString("html");
+                int pack = rs.getInt("pack");
+                if (type < 2 || type > 5)
+                    type = 5;
+                _allShops.put(itemid, new L1AdenShopItem(itemid, price, pack,
+                        html, status, type));
 
-				L1Item item = ItemTable.getInstance().getTemplate(itemid);
-				String itemname = item.getName();
-				if (pack > 1)
-					itemname = itemname + "(" + pack + ")";
-				if (item.getMaxUseTime() > 0)
-					itemname = itemname + " [" + item.getMaxUseTime() + "]";
-				else if (item.getItemId() == 60233 || item.getItemId() == 41915
-						|| item.getItemId() == 430506
-						|| item.getItemId() == 5000034
-						|| item.getItemId() == 430003
-						|| item.getItemId() == 430505)
-					itemname = itemname + "[7日]";
-				else if (item.getItemId() >= 60173 && item.getItemId() <= 60176)
-					itemname = itemname + " [18000]";
-				else if (item.getItemId() >= 21113 && item.getItemId() <= 21120)
-					itemname = itemname + "[3時間]";
-				data_length += 30;
-				data_length += itemname.getBytes("UTF-16LE").length + 2; // 名前
-																			// 文字
-																			// サイズ
-				if (!html.equalsIgnoreCase("")) {
-					byte[] test = html.getBytes("EUC-KR");
-					for (int i = 0; i < test.length;) {
-						if ((test[i] & 0xff) >= 0x7F)
-							i += 2;
-						else
-							i += 1;
-						data_length += 2;
-					}
-				}
-			}
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (Exception e) {
+                L1Item item = ItemTable.getInstance().getTemplate(itemid);
+                String itemname = item.getName();
+                if (pack > 1)
+                    itemname = itemname + "(" + pack + ")";
+                if (item.getMaxUseTime() > 0)
+                    itemname = itemname + " [" + item.getMaxUseTime() + "]";
+                else if (item.getItemId() == 60233 || item.getItemId() == 41915
+                        || item.getItemId() == 430506
+                        || item.getItemId() == 5000034
+                        || item.getItemId() == 430003
+                        || item.getItemId() == 430505)
+                    itemname = itemname + "[7日]";
+                else if (item.getItemId() >= 60173 && item.getItemId() <= 60176)
+                    itemname = itemname + " [18000]";
+                else if (item.getItemId() >= 21113 && item.getItemId() <= 21120)
+                    itemname = itemname + "[3時間]";
+                data_length += 30;
+                data_length += itemname.getBytes("UTF-16LE").length + 2; // 名前
+                // 文字
+                // サイズ
+                if (!html.equalsIgnoreCase("")) {
+                    byte[] test = html.getBytes("EUC-KR");
+                    for (int i = 0; i < test.length; ) {
+                        if ((test[i] & 0xff) >= 0x7F)
+                            i += 2;
+                        else
+                            i += 1;
+                        data_length += 2;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (Exception e) {
 
-		} finally {
-			SQLUtil.close(rs, pstm, con);
-		}
-	}
+        } finally {
+            SQLUtil.close(rs, pstm, con);
+        }
+    }
 
-	public L1AdenShopItem get(int itemid) {
-		return _allShops.get(itemid);
-	}
+    public L1AdenShopItem get(int itemid) {
+        return _allShops.get(itemid);
+    }
 
-	public int Size() {
-		return _allShops.size();
-	}
+    public int Size() {
+        return _allShops.size();
+    }
 
-	public Collection<L1AdenShopItem> toArray() {
-		return _allShops.values();
-	}
+    public Collection<L1AdenShopItem> toArray() {
+        return _allShops.values();
+    }
 
 
 }

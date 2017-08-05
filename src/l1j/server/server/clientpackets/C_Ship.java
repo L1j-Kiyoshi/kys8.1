@@ -28,36 +28,48 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class C_Ship extends ClientBasePacket {
 
-	private static final String C_SHIP = "[C] C_Ship";
+    private static final String C_SHIP = "[C] C_Ship";
 
-	public C_Ship(byte abyte0[], GameClient client) {
-		super(abyte0);
+    public C_Ship(byte abyte0[], GameClient client) {
+        super(abyte0);
 
-		int shipMapId = readH();
-		int locX = readH();
-		int locY = readH();
+        int shipMapId = readH();
+        int locX = readH();
+        int locY = readH();
 
-		L1PcInstance pc = client.getActiveChar();
-		if ( pc == null)return;
-		int mapId = pc.getMapId();
+        L1PcInstance pc = client.getActiveChar();
+        if (pc == null) return;
+        int mapId = pc.getMapId();
 
-		switch(mapId){
-		case 5: pc.getInventory().consumeItem(40299, 1); break;
-		case 6: pc.getInventory().consumeItem(40298, 1); break;
-		case 83: pc.getInventory().consumeItem(40300, 1); break;
-		case 84: pc.getInventory().consumeItem(40301, 1); break;
-		case 446: pc.getInventory().consumeItem(40303, 1); break;
-		case 447: pc.getInventory().consumeItem(40302, 1); break;
-		default: 
-		 System.out.println("特定の座標移動中継器のバグ>" + pc.getName() + "移動時にもマップ>" + mapId);
-		break;
-		}
-		
-		new L1Teleport().teleport(pc, locX, locY, (short) shipMapId, 0, false);
-	}
+        switch (mapId) {
+            case 5:
+                pc.getInventory().consumeItem(40299, 1);
+                break;
+            case 6:
+                pc.getInventory().consumeItem(40298, 1);
+                break;
+            case 83:
+                pc.getInventory().consumeItem(40300, 1);
+                break;
+            case 84:
+                pc.getInventory().consumeItem(40301, 1);
+                break;
+            case 446:
+                pc.getInventory().consumeItem(40303, 1);
+                break;
+            case 447:
+                pc.getInventory().consumeItem(40302, 1);
+                break;
+            default:
+                System.out.println("特定の座標移動中継器のバグ>" + pc.getName() + "移動時にもマップ>" + mapId);
+                break;
+        }
 
-	@Override
-	public String getType() {
-		return C_SHIP;
-	}
+        new L1Teleport().teleport(pc, locX, locY, (short) shipMapId, 0, false);
+    }
+
+    @Override
+    public String getType() {
+        return C_SHIP;
+    }
 }

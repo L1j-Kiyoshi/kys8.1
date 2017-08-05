@@ -14,7 +14,9 @@ public class S_AttackCritical extends ServerBasePacket {
 
     private static AtomicInteger _sequentialNumber = new AtomicInteger(0);
 
-    /** 弓ではない場合 **/
+    /**
+     * 弓ではない場合
+     **/
     public S_AttackCritical(L1PcInstance pc, int objid, int type) {
         int gfxid = 0;
         writeC(Opcodes.S_ATTACK);
@@ -27,49 +29,51 @@ public class S_AttackCritical extends ServerBasePacket {
         writeH(0x0000);
 
         switch (type) {
-        case 4: //片手剣
-            gfxid = 13411;
-            break;
-        case 11: // 鈍器
-            gfxid = 13414;
-            break;
-        case 24: // チェーンソード
-            gfxid = 13402;
-            break;
-        case 40: //杖
-            gfxid = 13413;
-            break;
-        case 46: //短剣
-            gfxid = 13412;
-            break;
-        case 50:
-            gfxid = 13410;
-            break;
-        case 54:
-            gfxid = 13417;
-            break;
-        case 58:
-            gfxid = 13416;
-            break;
-        case 90:
-            gfxid = 13409;
-            break;
-        case 91:
-            gfxid = 13396;
-            break;
-        case 92:      
-            gfxid = 13398;
-            break;
-        case 99:
-            gfxid = 13415;
-            break;            
+            case 4: //片手剣
+                gfxid = 13411;
+                break;
+            case 11: // 鈍器
+                gfxid = 13414;
+                break;
+            case 24: // チェーンソード
+                gfxid = 13402;
+                break;
+            case 40: //杖
+                gfxid = 13413;
+                break;
+            case 46: //短剣
+                gfxid = 13412;
+                break;
+            case 50:
+                gfxid = 13410;
+                break;
+            case 54:
+                gfxid = 13417;
+                break;
+            case 58:
+                gfxid = 13416;
+                break;
+            case 90:
+                gfxid = 13409;
+                break;
+            case 91:
+                gfxid = 13396;
+                break;
+            case 92:
+                gfxid = 13398;
+                break;
+            case 99:
+                gfxid = 13415;
+                break;
         }
         writeC(2);
         writeD(gfxid);
         writeH(0);
     }
 
-    /** 弓モーション **/
+    /**
+     * 弓モーション
+     **/
     public S_AttackCritical(L1Character cha, int targetobj, int x, int y, int type, boolean isHit) {
         int gfxid = 0;
         int aid = 1;
@@ -91,7 +95,7 @@ public class S_AttackCritical extends ServerBasePacket {
             gfxid = 13398;
         }
         writeH(gfxid);
-        writeC(127); 
+        writeC(127);
         writeH(x);
         writeH(y);
         writeH(cha.getX());

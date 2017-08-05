@@ -36,107 +36,108 @@ import l1j.server.server.utils.SQLUtil;
 
 public class RestoreItemTable {
 
-	private static Logger _log = Logger.getLogger(RestoreItemTable.class.getName());
+    private static Logger _log = Logger.getLogger(RestoreItemTable.class.getName());
 
-	public HashMap<Integer,L1RestoreItemInstance> restoreItemList = new HashMap<Integer,L1RestoreItemInstance>();
-	public ArrayList<Integer> objlist = new ArrayList<Integer>();
-	private static RestoreItemTable _instance;
+    public HashMap<Integer, L1RestoreItemInstance> restoreItemList = new HashMap<Integer, L1RestoreItemInstance>();
+    public ArrayList<Integer> objlist = new ArrayList<Integer>();
+    private static RestoreItemTable _instance;
 
-	public static RestoreItemTable getInstance() {
-		if (_instance == null) {
-			_instance = new RestoreItemTable();
-		}
-		return _instance;
-	}
-	
+    public static RestoreItemTable getInstance() {
+        if (_instance == null) {
+            _instance = new RestoreItemTable();
+        }
+        return _instance;
+    }
+
 /*		public void AddRestoreItem(int objid,L1RestoreItemInstance item ){
-			if(restoreItemList.containsKey(objid)){
+            if(restoreItemList.containsKey(objid)){
 				restoreItemList.replace(objid, item);
 			}else{
 				restoreItemList.put(objid, item);
 				objlist.add(objid);
 			}
 		} */
-		
-	
-	
-	public void RemoveRestoreItem(int objid){
-		restoreItemList.remove(objid);
-		objlist.remove((Object)objid);
-	}
-	
-	public void LoadRestoreItemTable(){
-		
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-	
-			try {
-				con = L1DatabaseFactory.getInstance().getConnection();
-				pstm = con
-						.prepareStatement("SELECT * FROM character_restoreItem");
-				rs = pstm.executeQuery();
-				L1RestoreItemInstance item = null;
-				while (rs.next()) {
-					item = new L1RestoreItemInstance(rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5));
-					restoreItemList.put(rs.getInt(1), item);
-				}
-			} catch (SQLException e) {
-				_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-			} finally {
-				SQLUtil.close(rs);
-				SQLUtil.close(pstm);
-				SQLUtil.close(con);
-			}
-	}
-	public L1RestoreItemInstance getRestoreItemInstance(int objid){
-		return restoreItemList.get(objid);
-	}
-	public void DeleteReStoreItem(int id){ //スクロールを使えば作成の
-		Connection con = null;
-		PreparedStatement pstm = null;
-		try{
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("DELETE FROM character_restoreItem where objid=?");
-			pstm.setInt(1, id);
-			pstm.execute();
-			
-			RemoveRestoreItem(id);
-		} catch(SQLException e){
-			
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-}
 
-	public void SaveReStoreItem(){
-		Connection con = null;
-		PreparedStatement pstm = null;
-		PreparedStatement pstm2 = null;
-		int id=0;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
 
-			pstm = con.prepareStatement("DELETE FROM character_restoreItem");
-				pstm.execute();
-			for(int i = 0; i <objlist.size();i++){
-			id = objlist.get(i);
-			pstm2 = con	.prepareStatement("INSERT INTO character_restoreItem SET objid=?, itemid=?, enchantLevel=?,attrenchantLevel=?,bless=?");
-			pstm2.setInt(1, id);
-			pstm2.setInt(2,restoreItemList.get(id).getItemId());
-			pstm2.setInt(3,restoreItemList.get(id).getEnchantLevel());
-			pstm2.setInt(4,restoreItemList.get(id).getAttrEnchantLevel());
-			pstm2.setInt(5,restoreItemList.get(id).getBless());
-			
-			pstm2.execute();
-			}
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(pstm2);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+    public void RemoveRestoreItem(int objid) {
+        restoreItemList.remove(objid);
+        objlist.remove((Object) objid);
+    }
+
+    public void LoadRestoreItemTable() {
+
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con
+                    .prepareStatement("SELECT * FROM character_restoreItem");
+            rs = pstm.executeQuery();
+            L1RestoreItemInstance item = null;
+            while (rs.next()) {
+                item = new L1RestoreItemInstance(rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+                restoreItemList.put(rs.getInt(1), item);
+            }
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
+
+    public L1RestoreItemInstance getRestoreItemInstance(int objid) {
+        return restoreItemList.get(objid);
+    }
+
+    public void DeleteReStoreItem(int id) { //スクロールを使えば作成の
+        Connection con = null;
+        PreparedStatement pstm = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("DELETE FROM character_restoreItem where objid=?");
+            pstm.setInt(1, id);
+            pstm.execute();
+
+            RemoveRestoreItem(id);
+        } catch (SQLException e) {
+
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
+
+    public void SaveReStoreItem() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        PreparedStatement pstm2 = null;
+        int id = 0;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+
+            pstm = con.prepareStatement("DELETE FROM character_restoreItem");
+            pstm.execute();
+            for (int i = 0; i < objlist.size(); i++) {
+                id = objlist.get(i);
+                pstm2 = con.prepareStatement("INSERT INTO character_restoreItem SET objid=?, itemid=?, enchantLevel=?,attrenchantLevel=?,bless=?");
+                pstm2.setInt(1, id);
+                pstm2.setInt(2, restoreItemList.get(id).getItemId());
+                pstm2.setInt(3, restoreItemList.get(id).getEnchantLevel());
+                pstm2.setInt(4, restoreItemList.get(id).getAttrEnchantLevel());
+                pstm2.setInt(5, restoreItemList.get(id).getBless());
+
+                pstm2.execute();
+            }
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(pstm2);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
 }

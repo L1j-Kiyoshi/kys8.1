@@ -28,48 +28,48 @@ import l1j.server.server.Opcodes;
 // ServerBasePacket
 
 public class S_WarTime extends ServerBasePacket {
-	private static final String S_WAR_TIME = "[S] S_WarTime";	
+    private static final String S_WAR_TIME = "[S] S_WarTime";
 
-	public S_WarTime(Calendar cal) {
-		// 1997/01/01 17:00を起点としている
-		Calendar base_cal = Calendar.getInstance();
-		base_cal.set(1997, 0, 1, 17, 0);
-		long base_millis = base_cal.getTimeInMillis();
-		long millis = cal.getTimeInMillis();
-		long diff = millis - base_millis;
-		diff -= 1200 * 60 * 1000; // 誤差修正
-		diff = diff / 60000; // 分以下切捨て
-		// timeは1加算すると3:02（182分）行われる
-		int time = (int) (diff / 182);
+    public S_WarTime(Calendar cal) {
+        // 1997/01/01 17:00を起点としている
+        Calendar base_cal = Calendar.getInstance();
+        base_cal.set(1997, 0, 1, 17, 0);
+        long base_millis = base_cal.getTimeInMillis();
+        long millis = cal.getTimeInMillis();
+        long diff = millis - base_millis;
+        diff -= 1200 * 60 * 1000; // 誤差修正
+        diff = diff / 60000; // 分以下切捨て
+        // timeは1加算すると3:02（182分）行われる
+        int time = (int) (diff / 182);
 
-		// writeDの直前のwriteCで時間の調節をすることができる
-		// 0.7倍になった時間だけ減少しますが
-		// 1つの調整すると、次の時間が広がって？
-		writeC(Opcodes.S_SELECTABLE_TIME_LIST);
-		writeH(6); // リストの数（6以上は無効）
-		writeS(Config.TIME_ZONE); // 時間の後（）中に表示される文字列
-		writeH(1);// 順番
-		writeC(136);
-		writeH(time);// 6:00
-		writeH(2);// 順番
-		writeC(178);
-		writeH(time);// 6:30
-		writeH(3);// 順番
-		writeC(220);
-		writeH(time);// 7:00
-		writeH(4);// 順番
-		writeC(218);
-		writeH(time + 1);// 10:00
-		writeH(5);// 順番
-		writeC(4);
-		writeH(time + 2);// 10:30
-		writeH(6);// 順番
-		writeC(46);// 11:00
-		writeD(time + 2);
-		writeC(0);
-		
+        // writeDの直前のwriteCで時間の調節をすることができる
+        // 0.7倍になった時間だけ減少しますが
+        // 1つの調整すると、次の時間が広がって？
+        writeC(Opcodes.S_SELECTABLE_TIME_LIST);
+        writeH(6); // リストの数（6以上は無効）
+        writeS(Config.TIME_ZONE); // 時間の後（）中に表示される文字列
+        writeH(1);// 順番
+        writeC(136);
+        writeH(time);// 6:00
+        writeH(2);// 順番
+        writeC(178);
+        writeH(time);// 6:30
+        writeH(3);// 順番
+        writeC(220);
+        writeH(time);// 7:00
+        writeH(4);// 順番
+        writeC(218);
+        writeH(time + 1);// 10:00
+        writeH(5);// 順番
+        writeC(4);
+        writeH(time + 2);// 10:30
+        writeH(6);// 順番
+        writeC(46);// 11:00
+        writeD(time + 2);
+        writeC(0);
+
 		/*writeC(Opcodes.S_SELECTABLE_TIME_LIST);
-		writeH(6); // リストの数（6以上は無効）
+        writeH(6); // リストの数（6以上は無効）
 		writeS(Config.TIME_ZONE); // 時間の後（）中に表示される文字列
 		writeC(0); // ?
 		writeC(0); // ?
@@ -86,14 +86,15 @@ public class S_WarTime extends ServerBasePacket {
 		writeC(0);
 		writeD(time - 5);
 		writeC(0);*/
-	}
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return S_WAR_TIME;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
+
+    @Override
+    public String getType() {
+        return S_WAR_TIME;
+    }
 }

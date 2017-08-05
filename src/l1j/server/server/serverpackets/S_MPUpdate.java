@@ -21,33 +21,33 @@ package l1j.server.server.serverpackets;
 import l1j.server.server.Opcodes;
 
 public class S_MPUpdate extends ServerBasePacket {
-	public S_MPUpdate(int currentmp, int maxmp) {
-		writeC(Opcodes.S_MANA_POINT);
+    public S_MPUpdate(int currentmp, int maxmp) {
+        writeC(Opcodes.S_MANA_POINT);
 
-		if (currentmp < 1) {
-			writeH(1);
-		} else if (currentmp > 32767) {
-			writeH(32767);
-		} else {
-			writeH(currentmp);
-		}
+        if (currentmp < 1) {
+            writeH(1);
+        } else if (currentmp > 32767) {
+            writeH(32767);
+        } else {
+            writeH(currentmp);
+        }
 
-		if (maxmp < 1) {
-			writeH(1);
-		} else if (maxmp > 32767) {
-			writeH(32767);
-		} else {
-			writeH(maxmp);
-		}
+        if (maxmp < 1) {
+            writeH(1);
+        } else if (maxmp > 32767) {
+            writeH(32767);
+        } else {
+            writeH(maxmp);
+        }
 
-		// writeH(currentmp);
-		// writeH(maxmp);
-		// writeC(0);
-		// writeD(GameTimeController.getInstance().getGameTime());
-	}
+        // writeH(currentmp);
+        // writeH(maxmp);
+        // writeC(0);
+        // writeD(GameTimeController.getInstance().getGameTime());
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 }

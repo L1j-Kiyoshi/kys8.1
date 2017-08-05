@@ -36,37 +36,34 @@ public class NoDropItem {
 
     private static NoDropItem _instance;
 
-	private static ArrayList<Integer> _idlist = new ArrayList<Integer>();
+    private static ArrayList<Integer> _idlist = new ArrayList<Integer>();
 
-    public static NoDropItem getInstance()
-    {
+    public static NoDropItem getInstance() {
         if (_instance == null) {
             _instance = new NoDropItem();
         }
         return _instance;
     }
 
-    private NoDropItem()
-    {
+    private NoDropItem() {
         _idlist = allIdList();
     }
 
-	private ArrayList<Integer> allIdList()
-	{
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		
-		ArrayList<Integer> idlist = new ArrayList<Integer>();
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("select * from NoDropItem");
-			rs = pstm.executeQuery();
-			while (rs.next()) {
-				idlist.add(rs.getInt("item_id"));
-			}
+    private ArrayList<Integer> allIdList() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
 
-		} catch (SQLException e) {
+        ArrayList<Integer> idlist = new ArrayList<Integer>();
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("select * from NoDropItem");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                idlist.add(rs.getInt("item_id"));
+            }
+
+        } catch (SQLException e) {
             _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
         } finally {
             SQLUtil.close(rs);
@@ -74,14 +71,13 @@ public class NoDropItem {
             SQLUtil.close(con);
         }
 
-		return idlist;
-	}
-	
-	public void storeId(int itemid)
-	{
-		int index = _idlist.indexOf(itemid);
-		if (index != -1)
-			return;
+        return idlist;
+    }
+
+    public void storeId(int itemid) {
+        int index = _idlist.indexOf(itemid);
+        if (index != -1)
+            return;
 
         Connection con = null;
         PreparedStatement pstm = null;
@@ -91,54 +87,50 @@ public class NoDropItem {
             pstm = con.prepareStatement("INSERT INTO NoDropItem SET item_id=?");
             pstm.setInt(1, itemid);
             pstm.execute();
-			_idlist.add(itemid);
+            _idlist.add(itemid);
         } catch (Exception e) {
             NpcTable._log.log(Level.SEVERE, e.getLocalizedMessage(), e);
         } finally {
             SQLUtil.close(pstm);
             SQLUtil.close(con);
         }
-	}
+    }
 
-	public void deleteId(int itemid)
-	{
-		Connection con = null;
-		PreparedStatement pstm = null;
-		int index = _idlist.indexOf(itemid);
-		if (index == -1)
-			return;
-	
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("DELETE FROM NoDropItem WHERE item_id=?");
-			pstm.setInt(1, itemid);
-			pstm.execute();
-			_idlist.remove(index);
-		} catch (Exception e) {
-		} finally {
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+    public void deleteId(int itemid) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        int index = _idlist.indexOf(itemid);
+        if (index == -1)
+            return;
 
-	public void reload()
-	{
-		_idlist.clear();
-		_idlist = allIdList();
-	}
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("DELETE FROM NoDropItem WHERE item_id=?");
+            pstm.setInt(1, itemid);
+            pstm.execute();
+            _idlist.remove(index);
+        } catch (Exception e) {
+        } finally {
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public ArrayList<Integer> getIdList()
-	{
-		return _idlist;
-	}
+    public void reload() {
+        _idlist.clear();
+        _idlist = allIdList();
+    }
 
-	public boolean isNoDropItem(int itemId)
-	{
-		for (int id : _idlist) {
-			if (itemId == id) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public ArrayList<Integer> getIdList() {
+        return _idlist;
+    }
+
+    public boolean isNoDropItem(int itemId) {
+        for (int id : _idlist) {
+            if (itemId == id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

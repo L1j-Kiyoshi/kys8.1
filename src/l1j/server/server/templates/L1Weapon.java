@@ -19,98 +19,100 @@
 package l1j.server.server.templates;
 
 public class L1Weapon extends L1Item {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	public L1Weapon() {
-	}
+    public L1Weapon() {
+    }
 
-	private int _hitModifier = 0; 
+    private int _hitModifier = 0;
 
-	@Override
-	public int getHitModifier() {
-		return _hitModifier;
-	}
+    @Override
+    public int getHitModifier() {
+        return _hitModifier;
+    }
 
-	public void setHitModifier(int i) {
-		_hitModifier = i;
-	}
+    public void setHitModifier(int i) {
+        _hitModifier = i;
+    }
 
-	private int _dmgModifier = 0;
+    private int _dmgModifier = 0;
 
-	@Override
-	public int getDmgModifier() {
-		return _dmgModifier;
-	}
+    @Override
+    public int getDmgModifier() {
+        return _dmgModifier;
+    }
 
-	public void setDmgModifier(int i) {
-		_dmgModifier = i;
-	}
+    public void setDmgModifier(int i) {
+        _dmgModifier = i;
+    }
 
-	private int _ignorereductionbyweapon;
-	@Override
-	public int getIgnoreReductionByWeapon() {
-		return _ignorereductionbyweapon;
-	}
+    private int _ignorereductionbyweapon;
 
-	public void setIgnoreReductionByWeapon(int i) {
-		_ignorereductionbyweapon = i;
-	}
+    @Override
+    public int getIgnoreReductionByWeapon() {
+        return _ignorereductionbyweapon;
+    }
 
-	private int _doubleDmgChance;
-	@Override
-	public int getDoubleDmgChance() {
-		return _doubleDmgChance;
-	}
+    public void setIgnoreReductionByWeapon(int i) {
+        _ignorereductionbyweapon = i;
+    }
 
-	public void setDoubleDmgChance(int i) {
-		_doubleDmgChance = i;
-	}
-	
-	private int _magicDmgModifier = 0;
+    private int _doubleDmgChance;
 
-	@Override
-	public int getMagicDmgModifier() {
-		return _magicDmgModifier;
-	}
+    @Override
+    public int getDoubleDmgChance() {
+        return _doubleDmgChance;
+    }
 
-	public void setMagicDmgModifier(int i) {
-		_magicDmgModifier = i;
-	}
+    public void setDoubleDmgChance(int i) {
+        _doubleDmgChance = i;
+    }
 
-	private int _canbedmg = 0;
+    private int _magicDmgModifier = 0;
 
-	@Override
-	public int get_canbedmg() {
-		return _canbedmg;
-	}
+    @Override
+    public int getMagicDmgModifier() {
+        return _magicDmgModifier;
+    }
 
-	public void set_canbedmg(int i) {
-		_canbedmg = i;
-	}
-	
-	private int _penetration = 0;
+    public void setMagicDmgModifier(int i) {
+        _magicDmgModifier = i;
+    }
 
-	@Override
-	public int get_penetration() {
-		return _penetration;
-	}
+    private int _canbedmg = 0;
 
-	public void set_penetration(int i) {
-		_penetration = i;
-	}
-	
-	@Override
-	public boolean isTwohandedWeapon() {
-		int weapon_type = getType();
-		
-		boolean bool = (weapon_type == 3 || weapon_type == 4
-				|| weapon_type == 5 || weapon_type == 11
-				|| weapon_type == 12 || weapon_type == 15
-				|| weapon_type == 16 || weapon_type == 18);
+    @Override
+    public int get_canbedmg() {
+        return _canbedmg;
+    }
 
-		return bool;
-	}
+    public void set_canbedmg(int i) {
+        _canbedmg = i;
+    }
+
+    private int _penetration = 0;
+
+    @Override
+    public int get_penetration() {
+        return _penetration;
+    }
+
+    public void set_penetration(int i) {
+        _penetration = i;
+    }
+
+    @Override
+    public boolean isTwohandedWeapon() {
+        int weapon_type = getType();
+
+        boolean bool = (weapon_type == 3 || weapon_type == 4
+                || weapon_type == 5 || weapon_type == 11
+                || weapon_type == 12 || weapon_type == 15
+                || weapon_type == 16 || weapon_type == 18);
+
+        return bool;
+    }
 }

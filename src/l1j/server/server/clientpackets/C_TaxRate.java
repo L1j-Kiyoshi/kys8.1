@@ -31,34 +31,35 @@ import l1j.server.server.templates.L1Castle;
 
 public class C_TaxRate extends ClientBasePacket {
 
-	private static final String C_TAX_RATE = "[C] C_TaxRate";
-	public C_TaxRate(byte abyte0[], GameClient clientthread)
-			throws Exception {
-		super(abyte0);
-		int i = readD();
-		int j = readC();
+    private static final String C_TAX_RATE = "[C] C_TaxRate";
 
-		L1PcInstance player = clientthread.getActiveChar();
-		if ( player == null)return;
-		if (i == player.getId()) {
-			L1Clan clan = L1World.getInstance().getClan(player.getClanname());
-			if (clan != null) {
-				int castle_id = clan.getCastleId();
-				if (castle_id != 0) {
-					L1Castle l1castle = CastleTable.getInstance()
-							.getCastleTable(castle_id);
-					if (j >= 10 && j <= 50) {
-						l1castle.setTaxRate(j);
-						CastleTable.getInstance().updateCastle(l1castle);
-					}
-				}
-			}
-		}
-	}
+    public C_TaxRate(byte abyte0[], GameClient clientthread)
+            throws Exception {
+        super(abyte0);
+        int i = readD();
+        int j = readC();
 
-	@Override
-	public String getType() {
-		return C_TAX_RATE;
-	}
+        L1PcInstance player = clientthread.getActiveChar();
+        if (player == null) return;
+        if (i == player.getId()) {
+            L1Clan clan = L1World.getInstance().getClan(player.getClanname());
+            if (clan != null) {
+                int castle_id = clan.getCastleId();
+                if (castle_id != 0) {
+                    L1Castle l1castle = CastleTable.getInstance()
+                            .getCastleTable(castle_id);
+                    if (j >= 10 && j <= 50) {
+                        l1castle.setTaxRate(j);
+                        CastleTable.getInstance().updateCastle(l1castle);
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public String getType() {
+        return C_TAX_RATE;
+    }
 
 }

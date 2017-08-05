@@ -26,31 +26,33 @@ import l1j.server.server.Opcodes;
 
 public class S_SkillIconGFX extends ServerBasePacket {
 
-	public S_SkillIconGFX(int i, int j) {
-		writeC(Opcodes.S_EVENT);
-		writeC(i);
-		writeH(j);
-	}
-	public S_SkillIconGFX(int i) {
-		writeC(Opcodes.S_EVENT);
-		writeC(0xa0);
-		writeC(1);
-		writeH(0);
-		writeC(2);
-		writeH(i);
-	}
-	public S_SkillIconGFX(int i, int j, boolean on) {
-		writeC(Opcodes.S_EVENT);
-		writeC(i);
-		writeH(j);
-		if (on)
-			writeC(1);
-		else
-			writeC(0);
-	}
+    public S_SkillIconGFX(int i, int j) {
+        writeC(Opcodes.S_EVENT);
+        writeC(i);
+        writeH(j);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    public S_SkillIconGFX(int i) {
+        writeC(Opcodes.S_EVENT);
+        writeC(0xa0);
+        writeC(1);
+        writeH(0);
+        writeC(2);
+        writeH(i);
+    }
+
+    public S_SkillIconGFX(int i, int j, boolean on) {
+        writeC(Opcodes.S_EVENT);
+        writeC(i);
+        writeH(j);
+        if (on)
+            writeC(1);
+        else
+            writeC(0);
+    }
+
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 }

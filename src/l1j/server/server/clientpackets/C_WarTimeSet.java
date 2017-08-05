@@ -26,13 +26,13 @@ import l1j.server.server.GameClient;
 
 public class C_WarTimeSet extends ClientBasePacket {
 
-	private static final String C_WAR_TIME_SET = "[C] C_WarTimeSet";
+    private static final String C_WAR_TIME_SET = "[C] C_WarTimeSet";
 
-	public C_WarTimeSet(byte abyte0[], GameClient clientthread)
-			throws Exception {
-		super(abyte0);
-		/*
-		 * int listNo = readC();
+    public C_WarTimeSet(byte abyte0[], GameClient clientthread)
+            throws Exception {
+        super(abyte0);
+        /*
+         * int listNo = readC();
 		 * 
 		 * L1PcInstance pc = clientthread.getActiveChar();
 		 * 
@@ -61,12 +61,12 @@ public class C_WarTimeSet extends ClientBasePacket {
 		 * pc.sendPackets（new S_ServerMessage（304、msg））; //次の攻城戦の時間が％0で
 		 * 決定された。 }}
 		 */
-		clear();
-	}
+        clear();
+    }
 
-	@Override
-	public String getType() {
-		return C_WAR_TIME_SET;
-	}
+    @Override
+    public String getType() {
+        return C_WAR_TIME_SET;
+    }
 
 }

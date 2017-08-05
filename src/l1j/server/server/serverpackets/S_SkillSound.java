@@ -21,54 +21,55 @@ package l1j.server.server.serverpackets;
 import l1j.server.server.Opcodes;
 
 public class S_SkillSound extends ServerBasePacket {
-	private static final String S_SKILL_SOUND = "[S] S_SkillSound";
+    private static final String S_SKILL_SOUND = "[S] S_SkillSound";
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_SkillSound(int objid, int gfxid, int aid) {
+    public S_SkillSound(int objid, int gfxid, int aid) {
 
-		buildPacket(objid, gfxid, aid);
-	}
+        buildPacket(objid, gfxid, aid);
+    }
 
-	public S_SkillSound(int objid, int gfxid, int aid, int x, int y) {
+    public S_SkillSound(int objid, int gfxid, int aid, int x, int y) {
 
-		buildPacket(objid, gfxid, aid, x, y);
-	}
+        buildPacket(objid, gfxid, aid, x, y);
+    }
 
-	public S_SkillSound(int objid, int gfxid) {
-		buildPacket(objid, gfxid, 0);
-	}
+    public S_SkillSound(int objid, int gfxid) {
+        buildPacket(objid, gfxid, 0);
+    }
 
-	private void buildPacket(int objid, int gfxid, int aid) {
-		//aidは使用されなかった
-		writeC(Opcodes.S_EFFECT);
-		writeD(objid);
-		writeH(gfxid);
-		writeH(0);
-		writeD(0x00000000);
-	}
+    private void buildPacket(int objid, int gfxid, int aid) {
+        //aidは使用されなかった
+        writeC(Opcodes.S_EFFECT);
+        writeD(objid);
+        writeH(gfxid);
+        writeH(0);
+        writeD(0x00000000);
+    }
 
-	private void buildPacket(int objid, int gfxid, int aid, int x, int y) {
-		// aidは使用されなかった
-		writeC(Opcodes.S_EFFECT);
-		writeD(objid);
-		writeH(gfxid);
-		writeH(0);
-		writeD(0x00000000);
-		writeH(x);
-		writeH(y);
-	}
+    private void buildPacket(int objid, int gfxid, int aid, int x, int y) {
+        // aidは使用されなかった
+        writeC(Opcodes.S_EFFECT);
+        writeD(objid);
+        writeH(gfxid);
+        writeH(0);
+        writeD(0x00000000);
+        writeH(x);
+        writeH(y);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
 
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return S_SKILL_SOUND;
-	}
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_SKILL_SOUND;
+    }
 }

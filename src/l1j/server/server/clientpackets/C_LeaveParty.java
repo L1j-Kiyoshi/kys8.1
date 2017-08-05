@@ -27,21 +27,21 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class C_LeaveParty extends ClientBasePacket {
 
-	private static final String C_LEAVE_PARTY = "[C] C_LeaveParty";
+    private static final String C_LEAVE_PARTY = "[C] C_LeaveParty";
 
-	public C_LeaveParty(byte decrypt[], GameClient client)
-			throws Exception {
-		super(decrypt);
-		L1PcInstance player = client.getActiveChar();
-		if ( player == null)return;
-		if (player.isInParty()) { // パーティー中
-			player.getParty().leaveMember(player);
-		}
-	}
+    public C_LeaveParty(byte decrypt[], GameClient client)
+            throws Exception {
+        super(decrypt);
+        L1PcInstance player = client.getActiveChar();
+        if (player == null) return;
+        if (player.isInParty()) { // パーティー中
+            player.getParty().leaveMember(player);
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_LEAVE_PARTY;
-	}
+    @Override
+    public String getType() {
+        return C_LEAVE_PARTY;
+    }
 
 }

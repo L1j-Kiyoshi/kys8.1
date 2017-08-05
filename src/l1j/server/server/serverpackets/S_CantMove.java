@@ -20,27 +20,28 @@ package l1j.server.server.serverpackets;
 
 public class S_CantMove extends ServerBasePacket {
 
-	private static final String S_CANT_MOVE = "[S] S_CantMove";
+    private static final String S_CANT_MOVE = "[S] S_CantMove";
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_CantMove() {
+    public S_CantMove() {
 /*
-		writeC(Opcodes.S_CANTMOVEBEFORETELE);
+        writeC(Opcodes.S_CANTMOVEBEFORETELE);
 //		writeC(Opcodes.S_CANTMOVE);
 */
-	}
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
 
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return S_CANT_MOVE;
-	}
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_CANT_MOVE;
+    }
 }

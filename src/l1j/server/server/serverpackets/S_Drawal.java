@@ -26,20 +26,21 @@ import l1j.server.server.Opcodes;
 
 public class S_Drawal extends ServerBasePacket {
 
-	public S_Drawal(int objectId, int count) {
-		writeC(Opcodes.S_WITHDRAW);
-		writeD(objectId);
-		writeD(count);
-	}
+    public S_Drawal(int objectId, int count) {
+        writeC(Opcodes.S_WITHDRAW);
+        writeD(objectId);
+        writeD(count);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return _S__37_DRAWAL;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	private static final String _S__37_DRAWAL = "[S] S_Drawal";
+    @Override
+    public String getType() {
+        return _S__37_DRAWAL;
+    }
+
+    private static final String _S__37_DRAWAL = "[S] S_Drawal";
 }

@@ -27,22 +27,23 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class S_Resurrection extends ServerBasePacket {
 
-	public S_Resurrection(L1PcInstance target, L1PcInstance use, int type) {
-		writeC(Opcodes.S_RESURRECT);
-		writeD(target.getId());
-		writeC(type);
-		writeD(use.getId());
-		writeD(target.getClassId());
-	}
+    public S_Resurrection(L1PcInstance target, L1PcInstance use, int type) {
+        writeC(Opcodes.S_RESURRECT);
+        writeD(target.getId());
+        writeC(type);
+        writeD(use.getId());
+        writeD(target.getClassId());
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return _S__FF_RESURRECTION;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	private static final String _S__FF_RESURRECTION = "[S] S_Resurrection";
+    @Override
+    public String getType() {
+        return _S__FF_RESURRECTION;
+    }
+
+    private static final String _S__FF_RESURRECTION = "[S] S_Resurrection";
 }

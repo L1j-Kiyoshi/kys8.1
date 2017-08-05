@@ -27,31 +27,31 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1InvGfxId implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1InvGfxId.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1InvGfxId.class.getName());
 
-	private L1InvGfxId() {
-	}
+    private L1InvGfxId() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1InvGfxId();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1InvGfxId();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			StringTokenizer st = new StringTokenizer(arg);
-			int gfxid = Integer.parseInt(st.nextToken(), 10);
-			int count = Integer.parseInt(st.nextToken(), 10);
-			L1ItemInstance item = null;
-			for (int i = 0; i < count; i++) {
-				item = ItemTable.getInstance().createItem(40005);
-				item.getItem().setGfxId(gfxid + i);
-				item.getItem().setName(String.valueOf(gfxid + i));
-				pc.getInventory().storeItem(item);
-			}
-		} catch (Exception exception) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "[id] [出現させることができ】で入力してください。"));
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            StringTokenizer st = new StringTokenizer(arg);
+            int gfxid = Integer.parseInt(st.nextToken(), 10);
+            int count = Integer.parseInt(st.nextToken(), 10);
+            L1ItemInstance item = null;
+            for (int i = 0; i < count; i++) {
+                item = ItemTable.getInstance().createItem(40005);
+                item.getItem().setGfxId(gfxid + i);
+                item.getItem().setName(String.valueOf(gfxid + i));
+                pc.getInventory().storeItem(item);
+            }
+        } catch (Exception exception) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "[id] [出現させることができ】で入力してください。"));
+        }
+    }
 }

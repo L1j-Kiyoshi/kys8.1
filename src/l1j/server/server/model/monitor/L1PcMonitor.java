@@ -25,23 +25,23 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public abstract class L1PcMonitor implements Runnable {
 
-	protected int _id;
+    protected int _id;
 
-	public L1PcMonitor(int oId) {
-		_id = oId;
-	}
+    public L1PcMonitor(int oId) {
+        _id = oId;
+    }
 
-	@Override
-	public final void run() {
-		L1PcInstance pc = (L1PcInstance) L1World.getInstance().findObject(_id);
-		if (pc == null || pc.getNetConnection() == null) {
-			return;
-		}
-		if (pc instanceof L1RobotInstance) {
-			return;
-		}
-		execTask(pc);
-	}
+    @Override
+    public final void run() {
+        L1PcInstance pc = (L1PcInstance) L1World.getInstance().findObject(_id);
+        if (pc == null || pc.getNetConnection() == null) {
+            return;
+        }
+        if (pc instanceof L1RobotInstance) {
+            return;
+        }
+        execTask(pc);
+    }
 
-	public abstract void execTask(L1PcInstance pc);
+    public abstract void execTask(L1PcInstance pc);
 }

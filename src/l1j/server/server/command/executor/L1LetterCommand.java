@@ -38,96 +38,99 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.utils.SQLUtil;
 
 
-
 public class L1LetterCommand implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1LetterCommand.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1LetterCommand.class.getName());
 
-	private L1LetterCommand() {}
+    private L1LetterCommand() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1LetterCommand();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1LetterCommand();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try{
-			StringTokenizer st = new StringTokenizer(arg);
-			String name = st.nextToken();
-			int letter_id = Integer.parseInt(st.nextToken());
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            StringTokenizer st = new StringTokenizer(arg);
+            String name = st.nextToken();
+            int letter_id = Integer.parseInt(st.nextToken());
 
-			if(name != null){
-				WritePrivateMail(pc, name, letter_id);
-			}
-		}catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名] [番号]を入力してください。"));
-		}
-	}
-	/** 個人メールを自動的に送信する **/
-	private void WritePrivateMail(L1PcInstance sender, String receiverName, int letter_id) {
+            if (name != null) {
+                WritePrivateMail(pc, name, letter_id);
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名] [番号]を入力してください。"));
+        }
+    }
 
-		Connection con = null;
-		PreparedStatement pstm = null;  
-		ResultSet rs = null;
+    /**
+     * 個人メールを自動的に送信する
+     **/
+    private void WritePrivateMail(L1PcInstance sender, String receiverName, int letter_id) {
 
-		try{
-			//SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd", Locale.KOREA);
-			Timestamp dTime = new Timestamp(System.currentTimeMillis());
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
 
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT subject, content FROM letter_command WHERE id = ?");
-			pstm.setInt(1, letter_id);
-			rs = pstm.executeQuery();
-			if (!rs.next()) {
-				sender.sendPackets(new S_SystemMessage("そんな番号が付いている内容がありません。"));
-				return;
-			}
-			String subject = rs.getString("subject");
-			String content = rs.getString("content");
+        try {
+            //SimpleDateFormat formatter = new SimpleDateFormat("yy/MM/dd", Locale.KOREA);
+            Timestamp dTime = new Timestamp(System.currentTimeMillis());
 
-			pstm.close();
-			rs.close();
-			
-			if(subject == null || content == null){
-				sender.sendPackets(new S_SystemMessage("番号のタイトルや内容が登録されていません。"));
-				return;
-			}
-			
-			L1PcInstance target = L1World.getInstance().getPlayer(receiverName);
-			if (target == null) {
-				target = CharacterTable.getInstance().restoreCharacter(receiverName);
-			}
-			LetterTable.getInstance().writeLetter(949, dTime, sender.getName(), receiverName, 0, subject, content);
-			sendMessageToReceiver(target, sender, 0, 50);
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT subject, content FROM letter_command WHERE id = ?");
+            pstm.setInt(1, letter_id);
+            rs = pstm.executeQuery();
+            if (!rs.next()) {
+                sender.sendPackets(new S_SystemMessage("そんな番号が付いている内容がありません。"));
+                return;
+            }
+            String subject = rs.getString("subject");
+            String content = rs.getString("content");
 
-			if (target == null){
-				sender.sendPackets(new S_SystemMessage(receiverName + "様は存在しないキャラクターです。"));
-				return;
-			}
-			sender.sendPackets(new S_SystemMessage(receiverName + "様の手紙を送った。"));
-			
-			
-		}catch (Exception e){
-			sender.sendPackets(new S_SystemMessage("。返信エラー"));
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+            pstm.close();
+            rs.close();
 
-	private void LetterList(L1PcInstance pc, int type, int count) {
-		pc.sendPackets(new S_LetterList(pc, type, count));
-	}
+            if (subject == null || content == null) {
+                sender.sendPackets(new S_SystemMessage("番号のタイトルや内容が登録されていません。"));
+                return;
+            }
 
-	private void sendMessageToReceiver(L1PcInstance receiver, L1PcInstance sender, final int type, final int MAILBOX_SIZE) {
-		if (receiver != null && receiver.getOnlineStatus() != 0) {
-			LetterList(receiver, type, MAILBOX_SIZE);
-			receiver.sendPackets(new S_SkillSound(receiver.getId(), 1091));
-			receiver.sendPackets(new S_ServerMessage(428)); // メールが届きました。
-			sender.sendPackets(new S_LetterList(sender, type, MAILBOX_SIZE));
-			return;
-		}
-	}
+            L1PcInstance target = L1World.getInstance().getPlayer(receiverName);
+            if (target == null) {
+                target = CharacterTable.getInstance().restoreCharacter(receiverName);
+            }
+            LetterTable.getInstance().writeLetter(949, dTime, sender.getName(), receiverName, 0, subject, content);
+            sendMessageToReceiver(target, sender, 0, 50);
+
+            if (target == null) {
+                sender.sendPackets(new S_SystemMessage(receiverName + "様は存在しないキャラクターです。"));
+                return;
+            }
+            sender.sendPackets(new S_SystemMessage(receiverName + "様の手紙を送った。"));
+
+
+        } catch (Exception e) {
+            sender.sendPackets(new S_SystemMessage("。返信エラー"));
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
+
+    private void LetterList(L1PcInstance pc, int type, int count) {
+        pc.sendPackets(new S_LetterList(pc, type, count));
+    }
+
+    private void sendMessageToReceiver(L1PcInstance receiver, L1PcInstance sender, final int type, final int MAILBOX_SIZE) {
+        if (receiver != null && receiver.getOnlineStatus() != 0) {
+            LetterList(receiver, type, MAILBOX_SIZE);
+            receiver.sendPackets(new S_SkillSound(receiver.getId(), 1091));
+            receiver.sendPackets(new S_ServerMessage(428)); // メールが届きました。
+            sender.sendPackets(new S_LetterList(sender, type, MAILBOX_SIZE));
+            return;
+        }
+    }
 
 }

@@ -29,32 +29,34 @@ import l1j.server.server.templates.L1Item;
 
 public class L1PackagePresent implements L1CommandExecutor {
 
-	private L1PackagePresent() {
-	}
-	public static L1CommandExecutor getInstance() {
-		return new L1PackagePresent();
-	}
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			StringTokenizer st = new StringTokenizer(arg);
-			if (pc.isGm()) { // オペレータのリングを着用したときのオペレータコマンドを使用可能
-				String account = st.nextToken();
-				int itemid = Integer.parseInt(st.nextToken(), 10);
-				int enchant = Integer.parseInt(st.nextToken(), 10);
-				int count = Integer.parseInt(st.nextToken(), 10);
-				L1Item temp = ItemTable.getInstance().getTemplate(itemid);
-				if (temp == null) {
-					pc.sendPackets(new S_SystemMessage("存在しないアイテムのIDです。"));
-					return;
-				}
-				PackageWarehouse.present(account, itemid, enchant, count);
-				pc.sendPackets(new S_SystemMessage(temp.getNameId() + "を" + count+ "個プレゼントしました。", true));
-			} else {
-				pc.sendPackets(new S_SystemMessage("あなたは、オペレータになる条件ではありません。"));
-				return;
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage("パッケージ[アカウント名] [アイテムID] [エンチャント数] [アイテム数]を入力してください。（アカウント名を*にすると、全体の支払い）"));
-		}
-	}
+    private L1PackagePresent() {
+    }
+
+    public static L1CommandExecutor getInstance() {
+        return new L1PackagePresent();
+    }
+
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            StringTokenizer st = new StringTokenizer(arg);
+            if (pc.isGm()) { // オペレータのリングを着用したときのオペレータコマンドを使用可能
+                String account = st.nextToken();
+                int itemid = Integer.parseInt(st.nextToken(), 10);
+                int enchant = Integer.parseInt(st.nextToken(), 10);
+                int count = Integer.parseInt(st.nextToken(), 10);
+                L1Item temp = ItemTable.getInstance().getTemplate(itemid);
+                if (temp == null) {
+                    pc.sendPackets(new S_SystemMessage("存在しないアイテムのIDです。"));
+                    return;
+                }
+                PackageWarehouse.present(account, itemid, enchant, count);
+                pc.sendPackets(new S_SystemMessage(temp.getNameId() + "を" + count + "個プレゼントしました。", true));
+            } else {
+                pc.sendPackets(new S_SystemMessage("あなたは、オペレータになる条件ではありません。"));
+                return;
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage("パッケージ[アカウント名] [アイテムID] [エンチャント数] [アイテム数]を入力してください。（アカウント名を*にすると、全体の支払い）"));
+        }
+    }
 }

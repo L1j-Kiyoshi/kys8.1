@@ -26,15 +26,15 @@ import l1j.server.server.Opcodes;
 
 public class S_SkillIconShield extends ServerBasePacket {
 
-	public S_SkillIconShield(int type, int time) {
-		writeC(Opcodes.S_MAGE_SHIELD);
-		writeH(time);
-		writeC(type);
-		writeD(0);
-	}
+    public S_SkillIconShield(int type, int time) {
+        writeC(Opcodes.S_MAGE_SHIELD);
+        writeH(time);
+        writeC(type);
+        writeD(0);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 }

@@ -24,17 +24,17 @@ import l1j.server.server.GameClient;
 
 public class C_KeepALIVE extends ClientBasePacket {
 
-	private static final String C_KEEP_ALIVE = "[C] C_KeepALIVE";
+    private static final String C_KEEP_ALIVE = "[C] C_KeepALIVE";
 
-	public C_KeepALIVE(byte decrypt[], GameClient client) {
-		super(decrypt);
-		// XXX:GameTimeを送信（3バイトのデータを送信するとありますので、それを何かに利用しなければならないかもしれない）
-		// L1PcInstance pc = client.getActiveChar();
-		// pc.sendPackets(new S_GameTime());
-	}
+    public C_KeepALIVE(byte decrypt[], GameClient client) {
+        super(decrypt);
+        // XXX:GameTimeを送信（3バイトのデータを送信するとありますので、それを何かに利用しなければならないかもしれない）
+        // L1PcInstance pc = client.getActiveChar();
+        // pc.sendPackets(new S_GameTime());
+    }
 
-	@Override
-	public String getType() {
-		return C_KEEP_ALIVE;
-	}
+    @Override
+    public String getType() {
+        return C_KEEP_ALIVE;
+    }
 }

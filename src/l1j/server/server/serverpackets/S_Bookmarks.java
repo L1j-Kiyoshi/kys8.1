@@ -3,35 +3,36 @@ package l1j.server.server.serverpackets;
 import l1j.server.server.Opcodes;
 
 public class S_Bookmarks extends ServerBasePacket {
-	
-	private static final String _S__1F_S_Bookmarks = "[S] S_Bookmarks";
 
-	private byte[] _byte = null;
+    private static final String _S__1F_S_Bookmarks = "[S] S_Bookmarks";
 
-	public S_Bookmarks(String name, int map, int x, int y, int bookid) {
-		buildPacket(name, map, x, y, bookid);
-	}
+    private byte[] _byte = null;
 
-	private void buildPacket(String name, int map, int x, int y, int bookid) {
-		writeC(Opcodes.S_ADD_BOOKMARK);
-		writeS(name);
-		writeH(map);
-		writeH(x);
-		writeH(y);
-		writeD(bookid);
-		writeH(0);
-	}
+    public S_Bookmarks(String name, int map, int x, int y, int bookid) {
+        buildPacket(name, map, x, y, bookid);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
+    private void buildPacket(String name, int map, int x, int y, int bookid) {
+        writeC(Opcodes.S_ADD_BOOKMARK);
+        writeS(name);
+        writeH(map);
+        writeH(x);
+        writeH(y);
+        writeD(bookid);
+        writeH(0);
+    }
 
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return _S__1F_S_Bookmarks;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return _S__1F_S_Bookmarks;
+    }
 }

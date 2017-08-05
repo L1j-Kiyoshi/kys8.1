@@ -32,30 +32,30 @@ import l1j.server.server.templates.L1Castle;
 
 public class C_ChangeWarTime extends ClientBasePacket {
 
-	private static final String C_CHANGE_WAR_TIME = "[C] C_ChangeWarTime";
+    private static final String C_CHANGE_WAR_TIME = "[C] C_ChangeWarTime";
 
-	public C_ChangeWarTime(byte abyte0[], GameClient clientthread)
-			throws Exception {
-		super(abyte0);
+    public C_ChangeWarTime(byte abyte0[], GameClient clientthread)
+            throws Exception {
+        super(abyte0);
 
-		L1PcInstance player = clientthread.getActiveChar();
-		if ( player == null)return;
+        L1PcInstance player = clientthread.getActiveChar();
+        if (player == null) return;
 
-		L1Clan clan = L1World.getInstance().getClan(player.getClanname());
-		if (clan != null) {
-			int castle_id = clan.getCastleId();
-			if (castle_id != 0) { // 城主クラン
-				L1Castle l1castle = CastleTable.getInstance().getCastleTable(castle_id);
-				player.sendPackets(new S_ServerMessage(305)); // 追加
-				//Calendar cal = l1castle.getWarTime(); // コメントアウト
-				//player.sendPackets(new S_WarTime(cal)); // コメントアウト
-			}
-		}
-	}
+        L1Clan clan = L1World.getInstance().getClan(player.getClanname());
+        if (clan != null) {
+            int castle_id = clan.getCastleId();
+            if (castle_id != 0) { // 城主クラン
+                L1Castle l1castle = CastleTable.getInstance().getCastleTable(castle_id);
+                player.sendPackets(new S_ServerMessage(305)); // 追加
+                //Calendar cal = l1castle.getWarTime(); // コメントアウト
+                //player.sendPackets(new S_WarTime(cal)); // コメントアウト
+            }
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_CHANGE_WAR_TIME;
-	}
+    @Override
+    public String getType() {
+        return C_CHANGE_WAR_TIME;
+    }
 
 }

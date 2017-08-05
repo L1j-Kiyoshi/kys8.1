@@ -22,31 +22,32 @@ import l1j.server.server.Opcodes;
 
 public class S_Lawful extends ServerBasePacket {
 
-	private static final String S_LAWFUL = "[S] S_Lawful";
+    private static final String S_LAWFUL = "[S] S_Lawful";
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_Lawful(int objid, int lawful) {
-		buildPacket(objid, lawful);
-	}
+    public S_Lawful(int objid, int lawful) {
+        buildPacket(objid, lawful);
+    }
 
-	private void buildPacket(int objid, int lawful) {
-		writeC(Opcodes.S_CHANGE_ALIGNMENT);
-		writeD(objid);
-		writeH(lawful);
-		//writeD(0);
-	}
+    private void buildPacket(int objid, int lawful) {
+        writeC(Opcodes.S_CHANGE_ALIGNMENT);
+        writeD(objid);
+        writeH(lawful);
+        //writeD(0);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return S_LAWFUL;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_LAWFUL;
+    }
 
 }

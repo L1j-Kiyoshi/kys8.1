@@ -25,19 +25,20 @@ import l1j.server.server.Opcodes;
 // ServerBasePacket
 
 public class S_Trade extends ServerBasePacket {
-	public S_Trade(String name) {
-		writeC(Opcodes.S_XCHG_START);
-		writeS(name);
-	}
+    public S_Trade(String name) {
+        writeC(Opcodes.S_XCHG_START);
+        writeS(name);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return _S__77_TRADE;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	private static final String _S__77_TRADE = "[S] S_Trade";
+    @Override
+    public String getType() {
+        return _S__77_TRADE;
+    }
+
+    private static final String _S__77_TRADE = "[S] S_Trade";
 }

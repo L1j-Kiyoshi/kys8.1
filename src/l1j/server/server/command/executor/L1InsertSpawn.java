@@ -31,50 +31,50 @@ import l1j.server.server.templates.L1Npc;
 import l1j.server.server.utils.L1SpawnUtil;
 
 public class L1InsertSpawn implements L1CommandExecutor {
-	private static Logger _log = Logger
-			.getLogger(L1InsertSpawn.class.getName());
+    private static Logger _log = Logger
+            .getLogger(L1InsertSpawn.class.getName());
 
-	private L1InsertSpawn() {
-	}
+    private L1InsertSpawn() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1InsertSpawn();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1InsertSpawn();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		String msg = null;
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        String msg = null;
 
-		try {
-			StringTokenizer tok = new StringTokenizer(arg);
-			String type = tok.nextToken();
-			int npcId = Integer.parseInt(tok.nextToken().trim());
-			L1Npc template = NpcTable.getInstance().getTemplate(npcId);
+        try {
+            StringTokenizer tok = new StringTokenizer(arg);
+            String type = tok.nextToken();
+            int npcId = Integer.parseInt(tok.nextToken().trim());
+            L1Npc template = NpcTable.getInstance().getTemplate(npcId);
 
-			if (template == null) {
-				msg = "該当のNPCが見つかりません。";
-				return;
-			}
-			if (type.equalsIgnoreCase("m")) {
-				if (!template.getImpl().equals("L1Monster")) {
-					msg = "指定されたNPCはL1Monsterがありません。";
-					return;
-				}
-				SpawnTable.storeSpawn(pc, template);
-			} else if (type.equalsIgnoreCase("n")) {
-				NpcSpawnTable.getInstance().storeSpawn(pc, template);
-			}
-			L1SpawnUtil.spawn(pc, npcId, 0, 0);
-			msg = new StringBuilder().append(template.get_name())
-					.append(" (" + npcId + ") ").append("を追加しました。")
-					.toString();
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, "", e);
-			msg = cmdName + "[m、n] [NPCID]と入力してください。";
-		} finally {
-			if (msg != null) {
-				pc.sendPackets(new S_SystemMessage(msg), true);
-			}
-		}
-	}
+            if (template == null) {
+                msg = "該当のNPCが見つかりません。";
+                return;
+            }
+            if (type.equalsIgnoreCase("m")) {
+                if (!template.getImpl().equals("L1Monster")) {
+                    msg = "指定されたNPCはL1Monsterがありません。";
+                    return;
+                }
+                SpawnTable.storeSpawn(pc, template);
+            } else if (type.equalsIgnoreCase("n")) {
+                NpcSpawnTable.getInstance().storeSpawn(pc, template);
+            }
+            L1SpawnUtil.spawn(pc, npcId, 0, 0);
+            msg = new StringBuilder().append(template.get_name())
+                    .append(" (" + npcId + ") ").append("を追加しました。")
+                    .toString();
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, "", e);
+            msg = cmdName + "[m、n] [NPCID]と入力してください。";
+        } finally {
+            if (msg != null) {
+                pc.sendPackets(new S_SystemMessage(msg), true);
+            }
+        }
+    }
 }

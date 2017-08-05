@@ -29,31 +29,31 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class C_CharcterConfig extends ClientBasePacket {
 
-	private static final String C_CHARCTER_CONFIG = "[C] C_CharcterConfig";
+    private static final String C_CHARCTER_CONFIG = "[C] C_CharcterConfig";
 
-	public C_CharcterConfig(byte abyte0[], GameClient client) throws Exception {
-		super(abyte0);
-		if (client == null){
-			return;
-		}
-		if (Config.CHARACTER_CONFIG_IN_SERVER_SIDE) {
-			L1PcInstance pc = client.getActiveChar();
-			if (pc == null)return;
-			int length = readD();
-			byte data[] = readByte(length);
+    public C_CharcterConfig(byte abyte0[], GameClient client) throws Exception {
+        super(abyte0);
+        if (client == null) {
+            return;
+        }
+        if (Config.CHARACTER_CONFIG_IN_SERVER_SIDE) {
+            L1PcInstance pc = client.getActiveChar();
+            if (pc == null) return;
+            int length = readD();
+            byte data[] = readByte(length);
 
-			int count = CharacterConfigTable.getInstance().countCharacterConfig(pc.getId());
-			if (count == 0) {
-				CharacterConfigTable.getInstance().storeCharacterConfig(pc.getId(), length, data);
-			} else {
-				CharacterConfigTable.getInstance().updateCharacterConfig(pc.getId(), length, data);
-		//		WeekQuestTable.getInstance().SaveQuestData(pc);
-			}
-		}
-	}
+            int count = CharacterConfigTable.getInstance().countCharacterConfig(pc.getId());
+            if (count == 0) {
+                CharacterConfigTable.getInstance().storeCharacterConfig(pc.getId(), length, data);
+            } else {
+                CharacterConfigTable.getInstance().updateCharacterConfig(pc.getId(), length, data);
+                //		WeekQuestTable.getInstance().SaveQuestData(pc);
+            }
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_CHARCTER_CONFIG;
-	}
+    @Override
+    public String getType() {
+        return C_CHARCTER_CONFIG;
+    }
 }

@@ -5,26 +5,26 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class S_Teleport extends ServerBasePacket {
 
-	private static final String S_TELEPORT = "[S] S_Teleport";
-	private byte[] _byte = null;
+    private static final String S_TELEPORT = "[S] S_Teleport";
+    private byte[] _byte = null;
 
-	public S_Teleport(L1PcInstance pc) {
-		writeC(Opcodes.S_REQUEST_SUMMON);
-		writeC(0x00);
-		writeC(0x40);
-		writeD(pc.getId());
-	}
+    public S_Teleport(L1PcInstance pc) {
+        writeC(Opcodes.S_REQUEST_SUMMON);
+        writeC(0x00);
+        writeC(0x40);
+        writeD(pc.getId());
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
 
-	@Override
-	public String getType() {
-		return S_TELEPORT;
-	}
+    @Override
+    public String getType() {
+        return S_TELEPORT;
+    }
 }

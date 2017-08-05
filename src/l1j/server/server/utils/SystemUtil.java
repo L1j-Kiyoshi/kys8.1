@@ -19,14 +19,14 @@
 package l1j.server.server.utils;
 
 public class SystemUtil {
-	/**
-	 * システムが利用中のheapサイズをメガバイト単位で返す。<br>
-	 * この値にスタックのサイズは含まれない。
-	 * 
-	 * @return ご利用中のheapサイズ
-	 */
-	public static long getUsedMemoryMB() {
-		return (Runtime.getRuntime().totalMemory() - Runtime.getRuntime()
-				.freeMemory()) / 1024L / 1024L;
-	}
+    /**
+     * システムが利用中のheapサイズをメガバイト単位で返す。<br>
+     * この値にスタックのサイズは含まれない。
+     *
+     * @return ご利用中のheapサイズ
+     */
+    public static long getUsedMemoryMB() {
+        return (Runtime.getRuntime().totalMemory() - Runtime.getRuntime()
+                .freeMemory()) / 1024L / 1024L;
+    }
 }

@@ -26,21 +26,22 @@ import l1j.server.server.Opcodes;
 
 public class S_TaxRate extends ServerBasePacket {
 
-	public S_TaxRate(int objecId) {
-		writeC(Opcodes.S_TAX);
-		writeD(objecId);
-		writeC(10); // 10%~50%
-		writeC(50);
-	}
+    public S_TaxRate(int objecId) {
+        writeC(Opcodes.S_TAX);
+        writeD(objecId);
+        writeC(10); // 10%~50%
+        writeC(50);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return _S__66_TAXRATE;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	private static final String _S__66_TAXRATE = "[S] S_TaxRate";
+    @Override
+    public String getType() {
+        return _S__66_TAXRATE;
+    }
+
+    private static final String _S__66_TAXRATE = "[S] S_TaxRate";
 }

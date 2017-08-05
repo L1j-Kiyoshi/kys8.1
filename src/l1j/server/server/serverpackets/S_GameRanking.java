@@ -6,9 +6,9 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class S_GameRanking extends ServerBasePacket {
 
-	private static final String S_GameRanking = "[S] S_GameRanking";
+    private static final String S_GameRanking = "[S] S_GameRanking";
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
 
 //0000 : 7e 44 [c8 a3 b9 da 30 30 32] 00 [ac c0 01] 00 00 23    ~D....002......#
@@ -17,30 +17,30 @@ public class S_GameRanking extends ServerBasePacket {
 //0000 : 7e 44 [b0 dd c6 c4] 00 [d4 fd 01] 00 [69 63 6f 6d] 00    ~D.........icom.
 
 
-	public S_GameRanking(L1PcInstance pc){
-		buildPacket1(pc);
-	}
+    public S_GameRanking(L1PcInstance pc) {
+        buildPacket1(pc);
+    }
 
-	private void buildPacket1(L1PcInstance pc) {
-		writeC(Opcodes.S_EVENT);
-		writeC(0x44);
+    private void buildPacket1(L1PcInstance pc) {
+        writeC(Opcodes.S_EVENT);
+        writeC(0x44);
         writeS(pc.getName());
         writeC(154);
         writeC(247);
         writeC(1);
         writeC(0);
-	 }
+    }
 
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
 
-	public String getType() {
-		return S_GameRanking;
-	}
+    public String getType() {
+        return S_GameRanking;
+    }
 }

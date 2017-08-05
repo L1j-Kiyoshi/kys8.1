@@ -27,40 +27,40 @@ import l1j.server.server.serverpackets.S_SkillSound;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1Ress implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1Ress.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1Ress.class.getName());
 
-	private L1Ress() {
-	}
+    private L1Ress() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Ress();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Ress();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			int objid = pc.getId();
-			//pc.sendPackets(new S_SkillSound(objid, 759));
-			//pc.broadcastPacket(new S_SkillSound(objid, 759));
-			for (L1PcInstance tg : L1World.getInstance(). getVisiblePlayer(pc)) {
-				if (tg.getCurrentHp() == 0 && tg.isDead()) {
-					//tg.sendPackets(new S_SystemMessage("GMが復活をくれました。 "））;
-					tg.broadcastPacket(new S_SkillSound(tg.getId(), 3944));
-					tg.sendPackets(new S_SkillSound(tg.getId(), 3944));
-					// 祝福された復活スクロールのような効果
-					tg.setTempID(objid);
-					tg.sendPackets(new S_Message_YN(322, "")); // また、復活したいですか？ （Y / N）
-				} else {
-					//tg.sendPackets(new S_SystemMessage("GMこのHP、MPを回復してくれました。 "））;
-					tg.broadcastPacket(new S_SkillSound(tg.getId(), 832));
-					tg.sendPackets(new S_SkillSound(tg.getId(), 832));
-					tg.setCurrentHp(tg.getMaxHp());
-					tg.setCurrentMp(tg.getMaxMp());
-				}
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "コマンドエラー"));
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            int objid = pc.getId();
+            //pc.sendPackets(new S_SkillSound(objid, 759));
+            //pc.broadcastPacket(new S_SkillSound(objid, 759));
+            for (L1PcInstance tg : L1World.getInstance().getVisiblePlayer(pc)) {
+                if (tg.getCurrentHp() == 0 && tg.isDead()) {
+                    //tg.sendPackets(new S_SystemMessage("GMが復活をくれました。 "））;
+                    tg.broadcastPacket(new S_SkillSound(tg.getId(), 3944));
+                    tg.sendPackets(new S_SkillSound(tg.getId(), 3944));
+                    // 祝福された復活スクロールのような効果
+                    tg.setTempID(objid);
+                    tg.sendPackets(new S_Message_YN(322, "")); // また、復活したいですか？ （Y / N）
+                } else {
+                    //tg.sendPackets(new S_SystemMessage("GMこのHP、MPを回復してくれました。 "））;
+                    tg.broadcastPacket(new S_SkillSound(tg.getId(), 832));
+                    tg.sendPackets(new S_SkillSound(tg.getId(), 832));
+                    tg.setCurrentHp(tg.getMaxHp());
+                    tg.setCurrentMp(tg.getMaxMp());
+                }
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "コマンドエラー"));
+        }
+    }
 }

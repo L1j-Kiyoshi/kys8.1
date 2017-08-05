@@ -20,29 +20,29 @@ import java.util.logging.Logger;
 import l1j.server.server.Opcodes;
 
 public class S_BlackWindow extends ServerBasePacket {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(S_BlackWindow.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(S_BlackWindow.class.getName());
 
-	private static final String S_BlackWindow = "[S] S_BlackWindow";
+    private static final String S_BlackWindow = "[S] S_BlackWindow";
 
-	public S_BlackWindow() {
-		writeC(Opcodes.S_PUT_OBJECT);
-		writeC(0x53);
-		writeC(0x04);
-		writeC(0x00);
-		writeC(0x00);
-		writeC(0x00);
-		writeC(0x01);
-		writeC(0x1d);
-	}
+    public S_BlackWindow() {
+        writeC(Opcodes.S_PUT_OBJECT);
+        writeC(0x53);
+        writeC(0x04);
+        writeC(0x00);
+        writeC(0x00);
+        writeC(0x00);
+        writeC(0x01);
+        writeC(0x1d);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	@Override
-	public String getType() {
-		return S_BlackWindow;
-	}
+    @Override
+    public String getType() {
+        return S_BlackWindow;
+    }
 }

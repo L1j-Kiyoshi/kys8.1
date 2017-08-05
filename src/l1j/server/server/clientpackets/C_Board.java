@@ -10,26 +10,26 @@ import l1j.server.server.model.Instance.L1BoardInstance;
 
 public class C_Board extends ClientBasePacket {
 
-	private static final String C_BOARD = "[C] C_Board";
+    private static final String C_BOARD = "[C] C_Board";
 
-	private boolean isBoardInstance(L1Object obj) {
-		return (obj instanceof L1BoardInstance || obj instanceof L1AuctionBoardInstance);
-	}
+    private boolean isBoardInstance(L1Object obj) {
+        return (obj instanceof L1BoardInstance || obj instanceof L1AuctionBoardInstance);
+    }
 
-	public C_Board(byte abyte0[], GameClient clientthread) {
-		super(abyte0);
-		int objectId = readD();
-		L1Object obj = L1World.getInstance().findObject(objectId);
-		if (!isBoardInstance(obj)) {
-			return; // 不正クライアントでなければすることができないだろうが···
-		}
-		
-		obj.onAction(clientthread.getActiveChar());
-	}
+    public C_Board(byte abyte0[], GameClient clientthread) {
+        super(abyte0);
+        int objectId = readD();
+        L1Object obj = L1World.getInstance().findObject(objectId);
+        if (!isBoardInstance(obj)) {
+            return; // 不正クライアントでなければすることができないだろうが···
+        }
 
-	@Override
-	public String getType() {
-		return C_BOARD;
-	}
+        obj.onAction(clientthread.getActiveChar());
+    }
+
+    @Override
+    public String getType() {
+        return C_BOARD;
+    }
 
 }

@@ -32,71 +32,71 @@ import l1j.server.L1DatabaseFactory;
 import l1j.server.server.utils.SQLUtil;
 
 public class CharacterBalance {
-	public class Balance {
-		int Damage = 0;
-	}
+    public class Balance {
+        int Damage = 0;
+    }
 
-	private static Logger _log = Logger.getLogger(CharacterBalance.class.getName());
+    private static Logger _log = Logger.getLogger(CharacterBalance.class.getName());
 
-	private static CharacterBalance _instance;
+    private static CharacterBalance _instance;
 
-	private final Map<Integer, Balance> _idlist = new HashMap<Integer, Balance>();
+    private final Map<Integer, Balance> _idlist = new HashMap<Integer, Balance>();
 
-	public static CharacterBalance getInstance() {
-		if (_instance == null) {
-			_instance = new CharacterBalance();
-		}
-		return _instance;
-	}
+    public static CharacterBalance getInstance() {
+        if (_instance == null) {
+            _instance = new CharacterBalance();
+        }
+        return _instance;
+    }
 
-	private CharacterBalance() {
+    private CharacterBalance() {
 //		System.out.print("■ クラスツタデータ.......................... "）;		
-		characterBalance();
+        characterBalance();
 //		System.out.println("■ ロード正常終了 "）;				
-	}
+    }
 
-	public void characterBalance() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
+    public void characterBalance() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
 
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("select id, addDmg from character_balance");
-			rs = pstm.executeQuery();
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("select id, addDmg from character_balance");
+            rs = pstm.executeQuery();
 
-			Balance characterdamage = null;
-			while (rs.next()) {
-				characterdamage = new Balance();
+            Balance characterdamage = null;
+            while (rs.next()) {
+                characterdamage = new Balance();
 
-				characterdamage.Damage = rs.getInt("addDmg");
+                characterdamage.Damage = rs.getInt("addDmg");
 
-				_idlist.put(rs.getInt("id"), characterdamage);
-			}
+                _idlist.put(rs.getInt("id"), characterdamage);
+            }
 
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public static void reload() {
-		CharacterBalance oldInstance = _instance;
-		_instance = new CharacterBalance();
-		if (oldInstance != null)
-			oldInstance._idlist.clear();
-	}
+    public static void reload() {
+        CharacterBalance oldInstance = _instance;
+        _instance = new CharacterBalance();
+        if (oldInstance != null)
+            oldInstance._idlist.clear();
+    }
 
-	public double getCharacterBalance(int Id) {
-		Balance characterdamage = _idlist.get(Id);
+    public double getCharacterBalance(int Id) {
+        Balance characterdamage = _idlist.get(Id);
 
-		if (characterdamage == null) {
-			return 0;
-		}
+        if (characterdamage == null) {
+            return 0;
+        }
 
-		return characterdamage.Damage;
-	}
+        return characterdamage.Damage;
+    }
 }

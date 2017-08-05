@@ -22,31 +22,31 @@ import l1j.server.server.Opcodes;
 import l1j.server.server.model.gametime.L1GameTimeClock;
 
 public class S_GameTime extends ServerBasePacket {
-	public S_GameTime(int time) {
-		buildPacket(time);
-	}
-	
-	public S_GameTime(long time) {
-		buildPacket(time);
-	}
+    public S_GameTime(int time) {
+        buildPacket(time);
+    }
 
-	private void buildPacket(long time) {
-		writeC(Opcodes.S_TIME);
-		writeD((int) time);
-	}
-	
-	public S_GameTime() {
-		int time = L1GameTimeClock.getInstance().getGameTime().getSeconds();
-		buildPacket(time);
-	}
+    public S_GameTime(long time) {
+        buildPacket(time);
+    }
 
-	private void buildPacket(int time) {
-		writeC(Opcodes.S_TIME);
-		writeD(time);
-	}
+    private void buildPacket(long time) {
+        writeC(Opcodes.S_TIME);
+        writeD((int) time);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    public S_GameTime() {
+        int time = L1GameTimeClock.getInstance().getGameTime().getSeconds();
+        buildPacket(time);
+    }
+
+    private void buildPacket(int time) {
+        writeC(Opcodes.S_TIME);
+        writeD(time);
+    }
+
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 }

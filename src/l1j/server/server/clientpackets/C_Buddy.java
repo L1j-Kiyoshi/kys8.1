@@ -8,24 +8,24 @@ import l1j.server.server.serverpackets.S_Buddy;
 
 public class C_Buddy extends ClientBasePacket {
 
-	private static final String C_BUDDY = "[C] C_Buddy";
+    private static final String C_BUDDY = "[C] C_Buddy";
 
-	public C_Buddy(byte abyte0[], GameClient clientthread) {
-		super(abyte0);
-		if (clientthread == null) {
-			return;
+    public C_Buddy(byte abyte0[], GameClient clientthread) {
+        super(abyte0);
+        if (clientthread == null) {
+            return;
 
-		}
-		L1PcInstance pc = clientthread.getActiveChar();
-		if (pc == null)
-			return;
-		L1Buddy buddy = BuddyTable.getInstance().getBuddyTable(pc.getId());
-		pc.sendPackets(new S_Buddy(buddy));
-	}
+        }
+        L1PcInstance pc = clientthread.getActiveChar();
+        if (pc == null)
+            return;
+        L1Buddy buddy = BuddyTable.getInstance().getBuddyTable(pc.getId());
+        pc.sendPackets(new S_Buddy(buddy));
+    }
 
-	@Override
-	public String getType() {
-		return C_BUDDY;
-	}
+    @Override
+    public String getType() {
+        return C_BUDDY;
+    }
 
 }

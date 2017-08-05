@@ -30,7 +30,9 @@ import l1j.server.server.templates.L1Item;
 
 public class L1PcInventory extends L1Inventory {
 
-    /** 日付と時刻の記録 **/
+    /**
+     * 日付と時刻の記録
+     **/
     Calendar rightNow = Calendar.getInstance();
     int day = rightNow.get(Calendar.DATE);
     int hour = rightNow.get(Calendar.HOUR);
@@ -71,18 +73,18 @@ public class L1PcInventory extends L1Inventory {
     }
 
     public int calcWeight100(int weight) {
-    	if (Config.RATE_WEIGHT_LIMIT != 0) {
-			int WeightRatio = 0;
-			int maxWeight = _owner.getMaxWeight();
-			WeightRatio = 100 * getWeight() / maxWeight;
-			if (getSize() > 175) {
-				return 100;
-			}
-			return WeightRatio;
-		} else { // ウェイトレートが0であれば、重量は常に0
-			return 0;
-		}
-	}
+        if (Config.RATE_WEIGHT_LIMIT != 0) {
+            int WeightRatio = 0;
+            int maxWeight = _owner.getMaxWeight();
+            WeightRatio = 100 * getWeight() / maxWeight;
+            if (getSize() > 175) {
+                return 100;
+            }
+            return WeightRatio;
+        } else { // ウェイトレートが0であれば、重量は常に0
+            return 0;
+        }
+    }
 
     @Override
     public int checkAddItem(L1ItemInstance item, int count) {
@@ -226,11 +228,11 @@ public class L1PcInventory extends L1Inventory {
 
     @Override
     public void insertItem(L1ItemInstance item) {
-		if (_owner instanceof L1RobotInstance) {
-			L1World.getInstance().removeObject(item);
-			_items.remove(item);
-			return;
-		}
+        if (_owner instanceof L1RobotInstance) {
+            L1World.getInstance().removeObject(item);
+            _items.remove(item);
+            return;
+        }
         _owner.sendPackets(new S_AddItem(item));
         if (item.getItem().getWeight() != 0) {
             _owner.sendPackets(new S_Weight(_owner));
@@ -267,11 +269,11 @@ public class L1PcInventory extends L1Inventory {
 
     /**
      * リスト内のアイテムの状態を更新する。
-     * 
-     * @param item -
-     *            更新対象のアイテム
+     *
+     * @param item   -
+     *               更新対象のアイテム
      * @param column -
-     *            更新するステータスの種類
+     *               更新するステータスの種類
      */
     @Override
     public void updateItem(L1ItemInstance item, int column) {
@@ -344,7 +346,8 @@ public class L1PcInventory extends L1Inventory {
 
     /**
      * リスト内のアイテムの状態をDBに保存する。
-     * @param item - 更新対象のアイテム
+     *
+     * @param item   - 更新対象のアイテム
      * @param column - 更新するステータスの種類
      */
     public void saveItem(L1ItemInstance item, int column) {
@@ -470,7 +473,7 @@ public class L1PcInventory extends L1Inventory {
                     if (System.currentTimeMillis() - timeVisible < timeVisibleDelay) {
                         return;
                     }
-               }
+                }
                 int range = 1;
                 int poly = _owner.getTempCharGfx();
                 if (item.getItem().getType2() == 1) {
@@ -479,18 +482,18 @@ public class L1PcInventory extends L1Inventory {
                     } else if ((item.getItem().getType() == 10) || (item.getItem().getType() == 13)) {
                         range = 14;
                     } else if (item.getItem().getType() == 5 || item.getItem().getType() == 14 || item.getItem().getType() == 18) {
-                    	if (poly == 11330||poly == 11344|| poly == 11351||poly == 11368||poly == 11376||poly == 11447|| 
-        						poly == 12237||poly == 0 ||poly == 61|| poly == 138||poly == 734||poly == 2786|| poly == 6658||
-        						poly == 6671||poly == 12490||poly == 1||poly == 48||poly == 37||poly == 1186||poly == 2796||poly == 6661||
-        						poly == 6650||poly == 12494||poly == 13389||
-        						poly == 11408||poly == 11409||poly == 11410||poly == 11411||poly == 11412||poly == 11413||
-        						poly == 11414||poly == 11415||poly == 11416||poly == 11417||poly == 11418||poly == 11419||
-        						poly == 11420||poly == 11421||poly == 12542||poly == 12541 || poly == 13735 || poly == 13737
-        						|| poly == 14928 //82経費ウィンドウ
-        						|| poly == 13389 //85経費ウィンドウ
-        						) {
-                    		range = 2;
-        					}
+                        if (poly == 11330 || poly == 11344 || poly == 11351 || poly == 11368 || poly == 11376 || poly == 11447 ||
+                                poly == 12237 || poly == 0 || poly == 61 || poly == 138 || poly == 734 || poly == 2786 || poly == 6658 ||
+                                poly == 6671 || poly == 12490 || poly == 1 || poly == 48 || poly == 37 || poly == 1186 || poly == 2796 || poly == 6661 ||
+                                poly == 6650 || poly == 12494 || poly == 13389 ||
+                                poly == 11408 || poly == 11409 || poly == 11410 || poly == 11411 || poly == 11412 || poly == 11413 ||
+                                poly == 11414 || poly == 11415 || poly == 11416 || poly == 11417 || poly == 11418 || poly == 11419 ||
+                                poly == 11420 || poly == 11421 || poly == 12542 || poly == 12541 || poly == 13735 || poly == 13737
+                                || poly == 14928 //82経費ウィンドウ
+                                || poly == 13389 //85経費ウィンドウ
+                                ) {
+                            range = 2;
+                        }
                     } else {
                         range = 1;
                     }
@@ -689,7 +692,9 @@ public class L1PcInventory extends L1Inventory {
         }
     }
 
-    /** ロボットシステム **/
+    /**
+     * ロボットシステム
+     **/
     private L1ItemInstance _arrow;
 
     public L1ItemInstance getArrow() {
@@ -704,7 +709,9 @@ public class L1PcInventory extends L1Inventory {
         }
     }
 
-    /** ロボットシステム **/
+    /**
+     * ロボットシステム
+     **/
 
     public L1ItemInstance getSting() {
         return getBullet(15);
@@ -783,46 +790,48 @@ public class L1PcInventory extends L1Inventory {
     //該当のアイテムはドロップ不可
     public L1ItemInstance CaoPenalty() {
         Random random = new Random(System.nanoTime());
-        int rnd=0;
-        if(_items.size()>0){
-         rnd = random.nextInt(_items.size());
+        int rnd = 0;
+        if (_items.size() > 0) {
+            rnd = random.nextInt(_items.size());
 
-        L1ItemInstance penaltyItem = _items.get(rnd);
-        if (penaltyItem.getItem().getItemId() == L1ItemId.ADENA || penaltyItem.getItem().getItemId() == 80500
-        		|| penaltyItem.getItem().getItemId() >= 1000014 && penaltyItem.getItem().getItemId() <= 1000023
-                || !penaltyItem.getItem().isTradable()) {
-            return null;
-        }
-        Object[] petlist = _owner.getPetList().values().toArray();
-        L1PetInstance pet = null;
-        for (Object petObject : petlist) {
-            if (petObject instanceof L1PetInstance) {
-                pet = (L1PetInstance) petObject;
-                if (penaltyItem.getId() == pet.getItemObjId()) {
-                    return null;
+            L1ItemInstance penaltyItem = _items.get(rnd);
+            if (penaltyItem.getItem().getItemId() == L1ItemId.ADENA || penaltyItem.getItem().getItemId() == 80500
+                    || penaltyItem.getItem().getItemId() >= 1000014 && penaltyItem.getItem().getItemId() <= 1000023
+                    || !penaltyItem.getItem().isTradable()) {
+                return null;
+            }
+            Object[] petlist = _owner.getPetList().values().toArray();
+            L1PetInstance pet = null;
+            for (Object petObject : petlist) {
+                if (petObject instanceof L1PetInstance) {
+                    pet = (L1PetInstance) petObject;
+                    if (penaltyItem.getId() == pet.getItemObjId()) {
+                        return null;
+                    }
                 }
             }
-        }
-		L1DollInstance doll = null;
-		for (Object dollObject : _owner.getDollList()) {
-			if (dollObject instanceof L1DollInstance) {
-				doll = (L1DollInstance) dollObject;
-				if (penaltyItem.getId() == doll.getItemObjId()) {
-					return null;
-				}
-			}
-		}
+            L1DollInstance doll = null;
+            for (Object dollObject : _owner.getDollList()) {
+                if (dollObject instanceof L1DollInstance) {
+                    doll = (L1DollInstance) dollObject;
+                    if (penaltyItem.getId() == doll.getItemObjId()) {
+                        return null;
+                    }
+                }
+            }
 
-        setEquipped(penaltyItem, false);
-        
-        return penaltyItem;
+            setEquipped(penaltyItem, false);
+
+            return penaltyItem;
         }
         return null;
     }
 
-    /** ゾウのストーンゴーレム（エンチャントアイテムの削除）
-     * @param itemid 	- 製錬に必要な武器番号
-     * @param enchantLevel 	- 製錬時に必要な武器のエンチャントレベル
+    /**
+     * ゾウのストーンゴーレム（エンチャントアイテムの削除）
+     *
+     * @param itemid       - 製錬に必要な武器番号
+     * @param enchantLevel - 製錬時に必要な武器のエンチャントレベル
      */
     public boolean MakeDeleteEnchant(int itemid, int enchantLevel) {
         L1ItemInstance[] items = findItemsId(itemid);
@@ -836,11 +845,11 @@ public class L1PcInventory extends L1Inventory {
         return false;
     }
 
-    /** ゾウのストーンゴーレム（エンチャントアイテムの検査）
-     * @param id - 製錬に必要な武器番号
-     * 	  
+    /**
+     * ゾウのストーンゴーレム（エンチャントアイテムの検査）
+     *
+     * @param id           - 製錬に必要な武器番号
      * @param enchantLevel - 製錬時に必要な武器のエンチャントレベル
-     *	 
      */
     public boolean MakeCheckEnchant(int id, int enchantLevel) {
         L1ItemInstance[] items = findItemsId(id);
@@ -888,27 +897,27 @@ public class L1PcInventory extends L1Inventory {
         }
         return cnt;
     }
-    
-	public L1ItemInstance findItemObjId(int id) {
-		for (L1ItemInstance item : this._items) {
-			if (item == null)
-				continue;
-			if (item.getId() == id) {
-				return item;
-			}
-		}
-		return null;
-	}
 
-	public L1ItemInstance checkEquippedItem(int id) {
-		L1ItemInstance item = null;
-		for (Object itemObject : _items) {
-			item = (L1ItemInstance) itemObject;
-			if (item.getItem().getItemId() == id && item.isEquipped()) {
-				return item;
-			}
-		}
-		return null;
-	}
+    public L1ItemInstance findItemObjId(int id) {
+        for (L1ItemInstance item : this._items) {
+            if (item == null)
+                continue;
+            if (item.getId() == id) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public L1ItemInstance checkEquippedItem(int id) {
+        L1ItemInstance item = null;
+        for (Object itemObject : _items) {
+            item = (L1ItemInstance) itemObject;
+            if (item.getItem().getItemId() == id && item.isEquipped()) {
+                return item;
+            }
+        }
+        return null;
+    }
 
 }

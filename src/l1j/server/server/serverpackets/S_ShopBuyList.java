@@ -35,43 +35,44 @@ import l1j.server.server.model.shop.L1Shop;
 
 public class S_ShopBuyList extends ServerBasePacket {
 
-	private static final String S_SHOP_BUY_LIST = "[S] S_ShopBuyList";
+    private static final String S_SHOP_BUY_LIST = "[S] S_ShopBuyList";
 
-	public S_ShopBuyList(int objid, L1PcInstance pc) {
-		L1Object object = L1World.getInstance().findObject(objid);
-		if (!(object instanceof L1NpcInstance)) {
-			return;
-		}
-		L1NpcInstance npc = (L1NpcInstance) object;
-		int npcId = npc.getNpcTemplate().get_npcId();
-		L1Shop shop = ShopTable.getInstance().get(npcId);
-		if (shop == null) {
-			pc.sendPackets(new S_NoSell(npc));
-			return;
-		}
+    public S_ShopBuyList(int objid, L1PcInstance pc) {
+        L1Object object = L1World.getInstance().findObject(objid);
+        if (!(object instanceof L1NpcInstance)) {
+            return;
+        }
+        L1NpcInstance npc = (L1NpcInstance) object;
+        int npcId = npc.getNpcTemplate().get_npcId();
+        L1Shop shop = ShopTable.getInstance().get(npcId);
+        if (shop == null) {
+            pc.sendPackets(new S_NoSell(npc));
+            return;
+        }
 
-		List<L1AssessedItem> assessedItems = shop.assessItems(pc.getInventory());
+        List<L1AssessedItem> assessedItems = shop.assessItems(pc.getInventory());
 //		if (assessedItems.isEmpty()) {
 //			pc.sendPackets(new S_NoSell(npc));
 //			return;
 //		}
-		writeC(Opcodes.S_SELL_LIST);
-		writeD(objid);
-		writeH(assessedItems.size());
+        writeC(Opcodes.S_SELL_LIST);
+        writeD(objid);
+        writeH(assessedItems.size());
 
-		for (L1AssessedItem item : assessedItems) {
-			writeD(item.getTargetId());
-			writeD(item.getAssessedPrice());
-		}
-		writeH(0x07);//店販売リスト
-	}
+        for (L1AssessedItem item : assessedItems) {
+            writeD(item.getTargetId());
+            writeD(item.getAssessedPrice());
+        }
+        writeH(0x07);//店販売リスト
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return S_SHOP_BUY_LIST;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
+
+    @Override
+    public String getType() {
+        return S_SHOP_BUY_LIST;
+    }
 }

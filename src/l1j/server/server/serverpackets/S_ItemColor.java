@@ -23,45 +23,46 @@ import l1j.server.server.model.Instance.L1ItemInstance;
 
 public class S_ItemColor extends ServerBasePacket {
 
-	private static final String S_ITEM_COLOR = "[S] S_ItemColor";
+    private static final String S_ITEM_COLOR = "[S] S_ItemColor";
 
-	/**
-	 * アイテムの色を変更する。祝福・呪いの状態が変化したときなどに送る
-	 */
-	public S_ItemColor(L1ItemInstance item) {
-		if (item == null) {
-			return;
-		}
-		buildPacket(item);
-	}
-	
-	public S_ItemColor(L1ItemInstance item, int color) {
-		if (item == null) {
-			return;
-		}
-		buildPacket(item, color);
-	}
+    /**
+     * アイテムの色を変更する。祝福・呪いの状態が変化したときなどに送る
+     */
+    public S_ItemColor(L1ItemInstance item) {
+        if (item == null) {
+            return;
+        }
+        buildPacket(item);
+    }
 
-	private void buildPacket(L1ItemInstance item) {
-		writeC(Opcodes.S_CHANGE_ITEM_BLESS);
-		writeD(item.getId());
-		writeC(item.getBless()); // 0:b 1:n 2:c  - の値：アイテムが封印されて？
-	}
-	
-	private void buildPacket(L1ItemInstance item, int color) {
-		writeC(Opcodes.S_CHANGE_ITEM_BLESS);
-		writeD(item.getId());
-		// 0：祝福1：普通2：呪い3：未確認128：軸シール129：封印130：呪い封印131：未確認封印
-		writeC(color);
-	}
+    public S_ItemColor(L1ItemInstance item, int color) {
+        if (item == null) {
+            return;
+        }
+        buildPacket(item, color);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return S_ITEM_COLOR;
-	}
+    private void buildPacket(L1ItemInstance item) {
+        writeC(Opcodes.S_CHANGE_ITEM_BLESS);
+        writeD(item.getId());
+        writeC(item.getBless()); // 0:b 1:n 2:c  - の値：アイテムが封印されて？
+    }
+
+    private void buildPacket(L1ItemInstance item, int color) {
+        writeC(Opcodes.S_CHANGE_ITEM_BLESS);
+        writeD(item.getId());
+        // 0：祝福1：普通2：呪い3：未確認128：軸シール129：封印130：呪い封印131：未確認封印
+        writeC(color);
+    }
+
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
+
+    @Override
+    public String getType() {
+        return S_ITEM_COLOR;
+    }
 
 }

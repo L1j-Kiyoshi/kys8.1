@@ -19,13 +19,13 @@ public class S_LetterList extends ServerBasePacket {
     private static final String S_LETTERLIST = "[S] S_LetterList";
 
     private byte[] _byte = null;
-    
+
     public static final int WRITE_TYPE_PRIVATE_MAIL = 80;
     public static final int WRITE_TYPE_BLOODPLEDGE_MAIL = 81;
 
     public static final int TYPE_RECEIVE = 0;
     public static final int TYPE_SEND = 1;
-    
+
     public S_LetterList(L1PcInstance pc, int type, int count) {
         buildPacket(pc, type, count);
     }
@@ -55,7 +55,7 @@ public class S_LetterList extends ServerBasePacket {
             if (rs1.next()) {
                 cnt = rs1.getInt(1);
             }
-            writeC(Opcodes. S_MAIL_INFO);
+            writeC(Opcodes.S_MAIL_INFO);
             writeC(type);
             writeH(cnt);
 
@@ -77,7 +77,7 @@ public class S_LetterList extends ServerBasePacket {
     }
 
     public S_LetterList(int writeType, int id, int type, String name, String title) {
-        writeC(Opcodes. S_MAIL_INFO);
+        writeC(Opcodes.S_MAIL_INFO);
         writeC(writeType);
         writeD(id);
         writeC(type); // 0：受信、1：発信
@@ -94,7 +94,7 @@ public class S_LetterList extends ServerBasePacket {
             pstm = con.prepareStatement("SELECT * FROM letter WHERE item_object_id=? ");
             pstm.setInt(1, id);
             rs = pstm.executeQuery();
-            writeC(Opcodes. S_MAIL_INFO);
+            writeC(Opcodes.S_MAIL_INFO);
             writeC(type);
             if (rs.next()) {
                 writeD(rs.getInt("item_object_id"));
@@ -108,14 +108,14 @@ public class S_LetterList extends ServerBasePacket {
             SQLUtil.close(con);
         }
     }
-  
+
     public S_LetterList(L1PcInstance pc, int type, int id, boolean value) {
-        writeC(Opcodes. S_MAIL_INFO);
-        writeC(type); 
-        writeD(id); 
+        writeC(Opcodes.S_MAIL_INFO);
+        writeC(type);
+        writeD(id);
         writeC(value ? 1 : 0);
     }
-    
+
     @Override
     public byte[] getContent() {
         if (_byte == null) {

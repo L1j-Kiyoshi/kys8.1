@@ -19,84 +19,85 @@
 package l1j.server.server.model.Instance;
 
 import java.util.Random;
+
 import l1j.server.server.ActionCodes;
 import l1j.server.server.serverpackets.S_AttackPacket;
 import l1j.server.server.serverpackets.S_SkillSound;
 
 public class L1MagicInstance {
-	public void UseMagicAttacke(L1PcInstance player, L1MonsterInstance npc) {
-		int targetobjid = npc.getId();
-		int magicMob = npc.getAbility().getTotalInt();
-		int rangeMonster = npc.getNpcTemplate().get_ranged();
-		int mobDmg = npc.getLevel() + 6;
-		int randomMobDmg = 0;
-		int useMagic = 0;
-		Random random = new Random(System.nanoTime());
-		
-		if (rangeMonster == 1) {
-			// npc.sendPackets(new S_AttackPacket(player, targetobjid,
-			// ActionCodes.ACTION_SkillAttack));
-			npc.broadcastPacket(new S_AttackPacket(player, targetobjid,
-					ActionCodes.ACTION_SkillAttack), player);
-		} else {
-			if (magicMob == 99) {
+    public void UseMagicAttacke(L1PcInstance player, L1MonsterInstance npc) {
+        int targetobjid = npc.getId();
+        int magicMob = npc.getAbility().getTotalInt();
+        int rangeMonster = npc.getNpcTemplate().get_ranged();
+        int mobDmg = npc.getLevel() + 6;
+        int randomMobDmg = 0;
+        int useMagic = 0;
+        Random random = new Random(System.nanoTime());
 
-				useMagic = random.nextInt(100) + 1;
-			}
-		}
+        if (rangeMonster == 1) {
+            // npc.sendPackets(new S_AttackPacket(player, targetobjid,
+            // ActionCodes.ACTION_SkillAttack));
+            npc.broadcastPacket(new S_AttackPacket(player, targetobjid,
+                    ActionCodes.ACTION_SkillAttack), player);
+        } else {
+            if (magicMob == 99) {
 
-		if (useMagic > 80) {
-			int useMagicA = random.nextInt(100) + 1;
-			if (useMagicA < 25) {
-				// npc.sendPackets(new S_AttackPacket(player, targetobjid,
-				// ActionCodes.ACTION_SkillAttack));
-				npc.broadcastPacket(new S_AttackPacket(player, targetobjid,
-						ActionCodes.ACTION_SkillAttack), player);
-					randomMobDmg = (random.nextInt(mobDmg) + 1) * 2;
-				// CalcHpPlayer (player, npc, randomMobDmg);
-				player.receiveDamage(npc, randomMobDmg, 0);
-			} else if (useMagicA >= 25 && useMagicA < 50) {
-				// npc.sendPackets(new S_AttackPacket(player, targetobjid,
-				// ActionCodes.ACTION_SkillBuff));
-				npc.broadcastPacket(new S_AttackPacket(player, targetobjid,
-						ActionCodes.ACTION_SkillBuff), player);
-				randomMobDmg = (random.nextInt(mobDmg) + 1) * 3;
-				// CalcHpPlayer (player, npc, randomMobDmg);
-				player.receiveDamage(npc, randomMobDmg, 0);
-			} else {
-				int bDmg = 5;
-				int mortalBlow = 0;
+                useMagic = random.nextInt(100) + 1;
+            }
+        }
 
-				if (mortalBlow != 0) {
-					// npc.sendPackets(new S_SkillSound(player.get_objectId(),
-					// mortalBlow));
-					npc.broadcastPacket(new S_SkillSound(player.getId(),
-							mortalBlow));
-					randomMobDmg = (random.nextInt(mobDmg) + 1) * bDmg;
-					// CalcHpPlayer (player, npc, randomMobDmg);
-					player.receiveDamage(npc, randomMobDmg, 0);
-				} else {
-					// npc.sendPackets(new S_AttackPacket(player, targetobjid,
-					// ActionCodes.ACTION_AltAttack));
-					npc.broadcastPacket(new S_AttackPacket(player, targetobjid,
-							ActionCodes.ACTION_AltAttack), player);
-					randomMobDmg = (random.nextInt(mobDmg) + 1) * 2;
-					// CalcHpPlayer (player, npc, randomMobDmg);
-					player.receiveDamage(npc, randomMobDmg, 0);
-				}
-			}
-		} else {
-			// npc.sendPackets(new S_AttackPacket(player, targetobjid,
-			// ActionCodes.ACTION_Attack));
-			npc.broadcastPacket(new S_AttackPacket(player, targetobjid,
-					ActionCodes.ACTION_Attack), player);
-			randomMobDmg = random.nextInt(mobDmg) + 1;
-			// CalcHpPlayer (player, npc, randomMobDmg);
-			player.receiveDamage(npc, randomMobDmg, 0);
-		}
-	}
-	/*
-	 * private void CalcHpPlayer (L1PcInstance player, L1MonsterInstance npc,
+        if (useMagic > 80) {
+            int useMagicA = random.nextInt(100) + 1;
+            if (useMagicA < 25) {
+                // npc.sendPackets(new S_AttackPacket(player, targetobjid,
+                // ActionCodes.ACTION_SkillAttack));
+                npc.broadcastPacket(new S_AttackPacket(player, targetobjid,
+                        ActionCodes.ACTION_SkillAttack), player);
+                randomMobDmg = (random.nextInt(mobDmg) + 1) * 2;
+                // CalcHpPlayer (player, npc, randomMobDmg);
+                player.receiveDamage(npc, randomMobDmg, 0);
+            } else if (useMagicA >= 25 && useMagicA < 50) {
+                // npc.sendPackets(new S_AttackPacket(player, targetobjid,
+                // ActionCodes.ACTION_SkillBuff));
+                npc.broadcastPacket(new S_AttackPacket(player, targetobjid,
+                        ActionCodes.ACTION_SkillBuff), player);
+                randomMobDmg = (random.nextInt(mobDmg) + 1) * 3;
+                // CalcHpPlayer (player, npc, randomMobDmg);
+                player.receiveDamage(npc, randomMobDmg, 0);
+            } else {
+                int bDmg = 5;
+                int mortalBlow = 0;
+
+                if (mortalBlow != 0) {
+                    // npc.sendPackets(new S_SkillSound(player.get_objectId(),
+                    // mortalBlow));
+                    npc.broadcastPacket(new S_SkillSound(player.getId(),
+                            mortalBlow));
+                    randomMobDmg = (random.nextInt(mobDmg) + 1) * bDmg;
+                    // CalcHpPlayer (player, npc, randomMobDmg);
+                    player.receiveDamage(npc, randomMobDmg, 0);
+                } else {
+                    // npc.sendPackets(new S_AttackPacket(player, targetobjid,
+                    // ActionCodes.ACTION_AltAttack));
+                    npc.broadcastPacket(new S_AttackPacket(player, targetobjid,
+                            ActionCodes.ACTION_AltAttack), player);
+                    randomMobDmg = (random.nextInt(mobDmg) + 1) * 2;
+                    // CalcHpPlayer (player, npc, randomMobDmg);
+                    player.receiveDamage(npc, randomMobDmg, 0);
+                }
+            }
+        } else {
+            // npc.sendPackets(new S_AttackPacket(player, targetobjid,
+            // ActionCodes.ACTION_Attack));
+            npc.broadcastPacket(new S_AttackPacket(player, targetobjid,
+                    ActionCodes.ACTION_Attack), player);
+            randomMobDmg = random.nextInt(mobDmg) + 1;
+            // CalcHpPlayer (player, npc, randomMobDmg);
+            player.receiveDamage(npc, randomMobDmg, 0);
+        }
+    }
+    /*
+     * private void CalcHpPlayer (L1PcInstance player, L1MonsterInstance npc,
 	 * int dmg) { if (player.get_currentHp() > 0 && !player.is_isdead()) { int
 	 * hp = player.get_currentHp() - dmg; if (hp <= 0) { if (player.is_isGm())
 	 * player.gmhp(player); if (player.is_isGm() == false)

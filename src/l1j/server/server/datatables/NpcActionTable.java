@@ -39,83 +39,83 @@ import l1j.server.server.model.npc.action.L1NpcXmlParser;
 import l1j.server.server.utils.FileUtil;
 
 public class NpcActionTable {
-	private static Logger _log = Logger.getLogger(NpcActionTable.class
-			.getName());
-	private static NpcActionTable _instance;
-	private final List<L1NpcAction> _actions = new ArrayList<L1NpcAction>();
-	private final List<L1NpcAction> _talkActions = new ArrayList<L1NpcAction>();
+    private static Logger _log = Logger.getLogger(NpcActionTable.class
+            .getName());
+    private static NpcActionTable _instance;
+    private final List<L1NpcAction> _actions = new ArrayList<L1NpcAction>();
+    private final List<L1NpcAction> _talkActions = new ArrayList<L1NpcAction>();
 
-	private List<L1NpcAction> loadAction(File file, String nodeName)
+    private List<L1NpcAction> loadAction(File file, String nodeName)
 
-	throws ParserConfigurationException, SAXException, IOException {
-		DocumentBuilder builder = DocumentBuilderFactory.newInstance()
-				.newDocumentBuilder();
-		Document doc = builder.parse(file);
+            throws ParserConfigurationException, SAXException, IOException {
+        DocumentBuilder builder = DocumentBuilderFactory.newInstance()
+                .newDocumentBuilder();
+        Document doc = builder.parse(file);
 
-		if (!doc.getDocumentElement().getNodeName().equalsIgnoreCase(nodeName)) {
-			return new ArrayList<L1NpcAction>();
-		}
-		return L1NpcXmlParser.listActions(doc.getDocumentElement());
-	}
+        if (!doc.getDocumentElement().getNodeName().equalsIgnoreCase(nodeName)) {
+            return new ArrayList<L1NpcAction>();
+        }
+        return L1NpcXmlParser.listActions(doc.getDocumentElement());
+    }
 
-	private void loadAction(File file) throws Exception {
-		_actions.addAll(loadAction(file, "NpcActionList"));
-	}
+    private void loadAction(File file) throws Exception {
+        _actions.addAll(loadAction(file, "NpcActionList"));
+    }
 
-	private void loadTalkAction(File file) throws Exception {
-		_talkActions.addAll(loadAction(file, "NpcTalkActionList"));
-	}
+    private void loadTalkAction(File file) throws Exception {
+        _talkActions.addAll(loadAction(file, "NpcTalkActionList"));
+    }
 
-	private void loadDirectoryActions(File dir) throws Exception {
-		File f = null;
-		for (String file : dir.list()) {
-			f = new File(dir, file);
-			if (FileUtil.getExtension(f).equalsIgnoreCase("xml")) {
-				loadAction(f);
-				loadTalkAction(f);
-			}
-		}
-	}
+    private void loadDirectoryActions(File dir) throws Exception {
+        File f = null;
+        for (String file : dir.list()) {
+            f = new File(dir, file);
+            if (FileUtil.getExtension(f).equalsIgnoreCase("xml")) {
+                loadAction(f);
+                loadTalkAction(f);
+            }
+        }
+    }
 
-	private NpcActionTable() throws Exception {
-		File usersDir = new File("./data/xml/NpcActions/users/");
-		if (usersDir.exists()) {
-			loadDirectoryActions(usersDir);
-		}
-		loadDirectoryActions(new File("./data/xml/NpcActions/"));
-	}
+    private NpcActionTable() throws Exception {
+        File usersDir = new File("./data/xml/NpcActions/users/");
+        if (usersDir.exists()) {
+            loadDirectoryActions(usersDir);
+        }
+        loadDirectoryActions(new File("./data/xml/NpcActions/"));
+    }
 
-	public static void load() {
-		try {
+    public static void load() {
+        try {
 //			PerformanceTimer timer = new PerformanceTimer();
 //			System.out.print("■ エンピシアクションデータ.......................... "）;
-			_instance = new NpcActionTable();
+            _instance = new NpcActionTable();
 //			System.out.println("■ ロード正常終了」+ timer.get（）+ "ms"）;
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, "NpcActionを読み込むことができませんでした", e);
-			System.exit(0);
-		}
-	}
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, "NpcActionを読み込むことができませんでした", e);
+            System.exit(0);
+        }
+    }
 
-	public static NpcActionTable getInstance() {
-		return _instance;
-	}
+    public static NpcActionTable getInstance() {
+        return _instance;
+    }
 
-	public L1NpcAction get(String actionName, L1PcInstance pc, L1Object obj) {
-		for (L1NpcAction action : _actions) {
-			if (action.acceptsRequest(actionName, pc, obj)) {
-				return action;
-			}
-		}
-		return null;
-	}
+    public L1NpcAction get(String actionName, L1PcInstance pc, L1Object obj) {
+        for (L1NpcAction action : _actions) {
+            if (action.acceptsRequest(actionName, pc, obj)) {
+                return action;
+            }
+        }
+        return null;
+    }
 
-	public L1NpcAction get(L1PcInstance pc, L1Object obj) {
-		for (L1NpcAction action : _talkActions) {
-			if (action.acceptsRequest("", pc, obj)) {
-				return action;
-			}
-		}
-		return null;
-	}
+    public L1NpcAction get(L1PcInstance pc, L1Object obj) {
+        for (L1NpcAction action : _talkActions) {
+            if (action.acceptsRequest("", pc, obj)) {
+                return action;
+            }
+        }
+        return null;
+    }
 }

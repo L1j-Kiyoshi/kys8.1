@@ -5,30 +5,29 @@ public class L1Racer {
     private int _winCount;
     private int _loseCount;
 
-	public int getNum(){
-		return _num;
-	}
+    public int getNum() {
+        return _num;
+    }
 
-	public void setNum(int num) {
-		_num = num;
-	}
+    public void setNum(int num) {
+        _num = num;
+    }
 
-	public int getWinCount() {
-		return _winCount;
-	}
+    public int getWinCount() {
+        return _winCount;
+    }
 
-	public void setWinCount(int winCount) {
-		_winCount = winCount;
-	}
+    public void setWinCount(int winCount) {
+        _winCount = winCount;
+    }
 
-	public int getLoseCount()
-	{
-		return _loseCount;
-	}
+    public int getLoseCount() {
+        return _loseCount;
+    }
 
-	public void setLoseCount(int loseCount) {
-		_loseCount = loseCount;
-	}
+    public void setLoseCount(int loseCount) {
+        _loseCount = loseCount;
+    }
 }
 
 

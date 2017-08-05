@@ -29,70 +29,70 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1Favorite implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1Favorite.class.getName());
-	private static final Map<Integer, String> _faviCom = new HashMap<Integer, String>();
+    private static Logger _log = Logger.getLogger(L1Favorite.class.getName());
+    private static final Map<Integer, String> _faviCom = new HashMap<Integer, String>();
 
-	private L1Favorite() {
-	}
+    private L1Favorite() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Favorite();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Favorite();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			if (!_faviCom.containsKey(pc.getId())) {
-				_faviCom.put(pc.getId(), "");
-			}
-			String faviCom = _faviCom.get(pc.getId());
-			if (arg.startsWith("setting")) {
-				// コマンドの登録
-				StringTokenizer st = new StringTokenizer(arg);
-				st.nextToken();
-				if (!st.hasMoreTokens()) {
-					pc.sendPackets(new S_SystemMessage("コマンドがありません。"));
-					return;
-				}
-				StringBuilder cmd = new StringBuilder();
-				String temp = st.nextToken(); // コマンドタイプ
-				if (temp.equalsIgnoreCase(cmdName)) {
-					pc.sendPackets(new S_SystemMessage(cmdName + "自分は登録できません。"));
-					return;
-				}
-				cmd.append(temp + " ");
-				while (st.hasMoreTokens()) {
-					cmd.append(st.nextToken() + " ");
-				}
-				faviCom = cmd.toString().trim();
-				_faviCom.put(pc.getId(), faviCom);
-				pc.sendPackets(new S_SystemMessage(faviCom + "を登録しました。"));
-			} else if (arg.startsWith("show")) {
-				pc.sendPackets(new S_SystemMessage("現在の登録コマンド：" + faviCom));
-			} else if (faviCom.isEmpty()) {
-				pc.sendPackets(new S_SystemMessage("登録しているコマンドがありません。"));
-			} else {
-				StringBuilder cmd = new StringBuilder();
-				StringTokenizer st = new StringTokenizer(arg);
-				StringTokenizer st2 = new StringTokenizer(faviCom);
-				while (st2.hasMoreTokens()) {
-					String temp = st2.nextToken();
-					if (temp.startsWith("%")) {
-						cmd.append(st.nextToken() + " ");
-					} else {
-						cmd.append(temp + " ");
-					}
-				}
-				while (st.hasMoreTokens()) {
-					cmd.append(st.nextToken() + " ");
-				}
-				pc.sendPackets(new S_SystemMessage(cmd + "を実行します。"));
-				GMCommands.getInstance().handleCommands(pc, cmd.toString());
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "セッティング[コマンド名]" + "| " + cmdName + "表示|" + cmdName
-					+ "[引数]と入力してください。"));
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (!_faviCom.containsKey(pc.getId())) {
+                _faviCom.put(pc.getId(), "");
+            }
+            String faviCom = _faviCom.get(pc.getId());
+            if (arg.startsWith("setting")) {
+                // コマンドの登録
+                StringTokenizer st = new StringTokenizer(arg);
+                st.nextToken();
+                if (!st.hasMoreTokens()) {
+                    pc.sendPackets(new S_SystemMessage("コマンドがありません。"));
+                    return;
+                }
+                StringBuilder cmd = new StringBuilder();
+                String temp = st.nextToken(); // コマンドタイプ
+                if (temp.equalsIgnoreCase(cmdName)) {
+                    pc.sendPackets(new S_SystemMessage(cmdName + "自分は登録できません。"));
+                    return;
+                }
+                cmd.append(temp + " ");
+                while (st.hasMoreTokens()) {
+                    cmd.append(st.nextToken() + " ");
+                }
+                faviCom = cmd.toString().trim();
+                _faviCom.put(pc.getId(), faviCom);
+                pc.sendPackets(new S_SystemMessage(faviCom + "を登録しました。"));
+            } else if (arg.startsWith("show")) {
+                pc.sendPackets(new S_SystemMessage("現在の登録コマンド：" + faviCom));
+            } else if (faviCom.isEmpty()) {
+                pc.sendPackets(new S_SystemMessage("登録しているコマンドがありません。"));
+            } else {
+                StringBuilder cmd = new StringBuilder();
+                StringTokenizer st = new StringTokenizer(arg);
+                StringTokenizer st2 = new StringTokenizer(faviCom);
+                while (st2.hasMoreTokens()) {
+                    String temp = st2.nextToken();
+                    if (temp.startsWith("%")) {
+                        cmd.append(st.nextToken() + " ");
+                    } else {
+                        cmd.append(temp + " ");
+                    }
+                }
+                while (st.hasMoreTokens()) {
+                    cmd.append(st.nextToken() + " ");
+                }
+                pc.sendPackets(new S_SystemMessage(cmd + "を実行します。"));
+                GMCommands.getInstance().handleCommands(pc, cmd.toString());
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "セッティング[コマンド名]" + "| " + cmdName + "表示|" + cmdName
+                    + "[引数]と入力してください。"));
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        }
+    }
 }

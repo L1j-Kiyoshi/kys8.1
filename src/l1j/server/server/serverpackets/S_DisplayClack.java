@@ -20,29 +20,29 @@ import java.util.logging.Logger;
 import l1j.server.server.Opcodes;
 
 public class S_DisplayClack extends ServerBasePacket {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(S_DisplayClack.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(S_DisplayClack.class.getName());
 
-	private static final String S_DisplayClack = "[S] S_DisplayClack";
+    private static final String S_DisplayClack = "[S] S_DisplayClack";
 
-	public S_DisplayClack() {
-		writeC(Opcodes.S_PUT_OBJECT);
-		writeC(0x53);
-		writeC(0x01);
-		writeC(0x00);
-		writeC(0x00);
-		writeC(0x00);
-		writeC(0x01);
-		writeC(0x1d);
-	}
+    public S_DisplayClack() {
+        writeC(Opcodes.S_PUT_OBJECT);
+        writeC(0x53);
+        writeC(0x01);
+        writeC(0x00);
+        writeC(0x00);
+        writeC(0x00);
+        writeC(0x01);
+        writeC(0x1d);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	@Override
-	public String getType() {
-		return S_DisplayClack;
-	}
+    @Override
+    public String getType() {
+        return S_DisplayClack;
+    }
 }

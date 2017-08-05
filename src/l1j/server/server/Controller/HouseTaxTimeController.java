@@ -31,75 +31,75 @@ import l1j.server.server.templates.L1AuctionBoard;
 import l1j.server.server.templates.L1House;
 
 public class HouseTaxTimeController implements Runnable {
-	public static final int SLEEP_TIME = 600000;
-	private static HouseTaxTimeController _instance;
+    public static final int SLEEP_TIME = 600000;
+    private static HouseTaxTimeController _instance;
 
-	public static HouseTaxTimeController getInstance() {
-		if (_instance == null) {
-			_instance = new HouseTaxTimeController();
-		}
-		return _instance;
-	}
+    public static HouseTaxTimeController getInstance() {
+        if (_instance == null) {
+            _instance = new HouseTaxTimeController();
+        }
+        return _instance;
+    }
 
-	@Override
-	public void run() {
-		try {
-			checkTaxDeadline();
-		} catch (Exception e1) {
-		}
-	}
+    @Override
+    public void run() {
+        try {
+            checkTaxDeadline();
+        } catch (Exception e1) {
+        }
+    }
 
-	public Calendar getRealTime() {
-		TimeZone tz = TimeZone.getTimeZone(Config.TIME_ZONE);
-		Calendar cal = Calendar.getInstance(tz);
-		return cal;
-	}
+    public Calendar getRealTime() {
+        TimeZone tz = TimeZone.getTimeZone(Config.TIME_ZONE);
+        Calendar cal = Calendar.getInstance(tz);
+        return cal;
+    }
 
-	private void checkTaxDeadline() {
-		for (L1House house : HouseTable.getInstance().getHouseTableList()) {
-			if (!house.isOnSale()) { // オークション中のアジトはチェックしない
-				if (house.getTaxDeadline().before(getRealTime())) {
-					sellHouse(house);
-				}
-			}
-		}
-	}
+    private void checkTaxDeadline() {
+        for (L1House house : HouseTable.getInstance().getHouseTableList()) {
+            if (!house.isOnSale()) { // オークション中のアジトはチェックしない
+                if (house.getTaxDeadline().before(getRealTime())) {
+                    sellHouse(house);
+                }
+            }
+        }
+    }
 
-	private void sellHouse(L1House house) {
-		AuctionBoardTable boardTable = new AuctionBoardTable();
-		L1AuctionBoard board = new L1AuctionBoard();
-		if (board != null) {
-			// オークション掲示板に新規書き込み
-			int houseId = house.getHouseId();
-			board.setHouseId(houseId);
-			board.setHouseName(house.getHouseName());
-			board.setHouseArea(house.getHouseArea());
-			TimeZone tz = TimeZone.getTimeZone(Config.TIME_ZONE);
-			Calendar cal = Calendar.getInstance(tz);
-			cal.add(Calendar.DATE, 5); // 5日後
-			cal.set(Calendar.MINUTE, 0); // 分、秒は切り捨て
-			cal.set(Calendar.SECOND, 0);
-			board.setDeadline(cal);
-			board.setPrice(100000);
-			board.setLocation(house.getLocation());
-			board.setOldOwner("");
-			board.setOldOwnerId(0);
-			board.setBidder("");
-			board.setBidderId(0);
-			boardTable.insertAuctionBoard(board);
-			house.setOnSale(true); // オークション中の設定
-			house.setPurchaseBasement(true); // 地下アジト未購入に設定
-			cal.add(Calendar.DATE, Config.HOUSE_TAX_INTERVAL);
-			house.setTaxDeadline(cal);
-			HouseTable.getInstance().updateHouse(house); // DBに記入して
-			// 以前の所有者のアジトを消す
-			for (L1Clan clan : L1World.getInstance().getAllClans()) {
-				if (clan.getHouseId() == houseId) {
-					clan.setHouseId(0);
-					ClanTable.getInstance().updateClan(clan);
-				}
-			}
-		}
-	}
+    private void sellHouse(L1House house) {
+        AuctionBoardTable boardTable = new AuctionBoardTable();
+        L1AuctionBoard board = new L1AuctionBoard();
+        if (board != null) {
+            // オークション掲示板に新規書き込み
+            int houseId = house.getHouseId();
+            board.setHouseId(houseId);
+            board.setHouseName(house.getHouseName());
+            board.setHouseArea(house.getHouseArea());
+            TimeZone tz = TimeZone.getTimeZone(Config.TIME_ZONE);
+            Calendar cal = Calendar.getInstance(tz);
+            cal.add(Calendar.DATE, 5); // 5日後
+            cal.set(Calendar.MINUTE, 0); // 分、秒は切り捨て
+            cal.set(Calendar.SECOND, 0);
+            board.setDeadline(cal);
+            board.setPrice(100000);
+            board.setLocation(house.getLocation());
+            board.setOldOwner("");
+            board.setOldOwnerId(0);
+            board.setBidder("");
+            board.setBidderId(0);
+            boardTable.insertAuctionBoard(board);
+            house.setOnSale(true); // オークション中の設定
+            house.setPurchaseBasement(true); // 地下アジト未購入に設定
+            cal.add(Calendar.DATE, Config.HOUSE_TAX_INTERVAL);
+            house.setTaxDeadline(cal);
+            HouseTable.getInstance().updateHouse(house); // DBに記入して
+            // 以前の所有者のアジトを消す
+            for (L1Clan clan : L1World.getInstance().getAllClans()) {
+                if (clan.getHouseId() == houseId) {
+                    clan.setHouseId(0);
+                    ClanTable.getInstance().updateClan(clan);
+                }
+            }
+        }
+    }
 
 }

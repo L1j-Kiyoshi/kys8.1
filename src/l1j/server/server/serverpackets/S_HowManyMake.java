@@ -23,20 +23,20 @@ import java.io.IOException;
 import l1j.server.server.Opcodes;
 
 public class S_HowManyMake extends ServerBasePacket {
-	public S_HowManyMake(int objId, int max, String htmlId) {
-		writeC(Opcodes.S_HYPERTEXT_INPUT);
-		writeD(objId);
-		writeD(0); // ?
-		writeD(0); // スピンコントロールの初期価格
-		writeD(0); //価格の下限
-		writeD(max); // 価格の上限
-		writeH(0); // ?
-		writeS("request");
-		writeS(htmlId);
-	}
+    public S_HowManyMake(int objId, int max, String htmlId) {
+        writeC(Opcodes.S_HYPERTEXT_INPUT);
+        writeD(objId);
+        writeD(0); // ?
+        writeD(0); // スピンコントロールの初期価格
+        writeD(0); //価格の下限
+        writeD(max); // 価格の上限
+        writeH(0); // ?
+        writeS("request");
+        writeS(htmlId);
+    }
 
-	@Override
-	public byte[] getContent() throws IOException {
-		return getBytes();
-	}
+    @Override
+    public byte[] getContent() throws IOException {
+        return getBytes();
+    }
 }

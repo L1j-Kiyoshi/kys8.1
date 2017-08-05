@@ -28,24 +28,24 @@ import l1j.server.server.serverpackets.S_SkillBuy;
 
 public class C_SkillBuy extends ClientBasePacket {
 
-	private static final String C_SKILL_BUY = "[C] C_SkillBuy";
+    private static final String C_SKILL_BUY = "[C] C_SkillBuy";
 
-	public C_SkillBuy(byte abyte0[], GameClient clientthread)
-			throws Exception {
-		super(abyte0);
+    public C_SkillBuy(byte abyte0[], GameClient clientthread)
+            throws Exception {
+        super(abyte0);
 
-		int i = readD();
+        int i = readD();
 
-		L1PcInstance pc = clientthread.getActiveChar();
-		if (pc == null || pc.isGhost() ) {
-			return;
-		}
-		pc.sendPackets(new S_SkillBuy(i, pc));
-	}
+        L1PcInstance pc = clientthread.getActiveChar();
+        if (pc == null || pc.isGhost()) {
+            return;
+        }
+        pc.sendPackets(new S_SkillBuy(i, pc));
+    }
 
-	@Override
-	public String getType() {
-		return C_SKILL_BUY;
-	}
+    @Override
+    public String getType() {
+        return C_SKILL_BUY;
+    }
 
 }

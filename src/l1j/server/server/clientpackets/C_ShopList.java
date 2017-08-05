@@ -33,47 +33,47 @@ import l1j.server.server.serverpackets.S_PrivateShopforNpc;
 
 public class C_ShopList extends ClientBasePacket {
 
-	private static final String C_SHOP_LIST = "[C] C_ShopList";
+    private static final String C_SHOP_LIST = "[C] C_ShopList";
 
-	public C_ShopList(byte abyte0[], GameClient clientthread) {
-		super(abyte0);
+    public C_ShopList(byte abyte0[], GameClient clientthread) {
+        super(abyte0);
 
-		int type = readC();
-		int objectId = readD();
+        int type = readC();
+        int objectId = readD();
 
-		L1PcInstance pc = clientthread.getActiveChar();
-		if (pc == null || pc.isGhost()) {
-			return;
-		}
+        L1PcInstance pc = clientthread.getActiveChar();
+        if (pc == null || pc.isGhost()) {
+            return;
+        }
 
-		//L1PcInstance shopPc = (L1PcInstance) L1World.getInstance().findObject(objectId);
-		L1Object shopPc = L1World.getInstance().findObject(objectId);
-		
-		
-		// pc private shop click
-		if(shopPc instanceof L1PcInstance){
-			
-			L1PcInstance cha = (L1PcInstance) shopPc;
-			
-			if (pc.getAccountName().equalsIgnoreCase(cha.getAccountName())) {
-				pc.sendPackets(new S_ChatPacket(pc,"自分の店は利用できません。"));
-				return;
-			}
-			
-			pc.sendPackets(new S_PrivateShop(pc, objectId, type));
-			
-		}else if(shopPc instanceof L1NpcShopInstance){
-			pc.sendPackets(new S_PrivateShopforNpc(pc, objectId, type));
-			
-		}else{
-			pc.sendPackets(new S_ChatPacket(pc,"店オブジェクトがありません。"));
-			return;
-		}
-	}
+        //L1PcInstance shopPc = (L1PcInstance) L1World.getInstance().findObject(objectId);
+        L1Object shopPc = L1World.getInstance().findObject(objectId);
 
-	@Override
-	public String getType() {
-		return C_SHOP_LIST;
-	}
+
+        // pc private shop click
+        if (shopPc instanceof L1PcInstance) {
+
+            L1PcInstance cha = (L1PcInstance) shopPc;
+
+            if (pc.getAccountName().equalsIgnoreCase(cha.getAccountName())) {
+                pc.sendPackets(new S_ChatPacket(pc, "自分の店は利用できません。"));
+                return;
+            }
+
+            pc.sendPackets(new S_PrivateShop(pc, objectId, type));
+
+        } else if (shopPc instanceof L1NpcShopInstance) {
+            pc.sendPackets(new S_PrivateShopforNpc(pc, objectId, type));
+
+        } else {
+            pc.sendPackets(new S_ChatPacket(pc, "店オブジェクトがありません。"));
+            return;
+        }
+    }
+
+    @Override
+    public String getType() {
+        return C_SHOP_LIST;
+    }
 
 }

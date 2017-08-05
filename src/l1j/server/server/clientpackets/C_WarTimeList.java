@@ -32,25 +32,25 @@ import l1j.server.server.templates.L1Castle;
 
 public class C_WarTimeList extends ClientBasePacket {
 
-	private static final String C_WAR_TIME_LIST = "[C] C_WarTimeList";
+    private static final String C_WAR_TIME_LIST = "[C] C_WarTimeList";
 
-	public C_WarTimeList(byte abyte0[], GameClient clientthread)
-			throws Exception {
-		super(abyte0);
-		try {
-			L1PcInstance pc = clientthread.getActiveChar();
-			L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
+    public C_WarTimeList(byte abyte0[], GameClient clientthread)
+            throws Exception {
+        super(abyte0);
+        try {
+            L1PcInstance pc = clientthread.getActiveChar();
+            L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
 
-			if (clan != null) {
-				int castle_id = clan.getCastleId();
-				if (castle_id != 0) { // 城主クラン名
-					L1Castle l1castle = CastleTable.getInstance()
-							.getCastleTable(castle_id);
-					S_ServerMessage sm = new S_ServerMessage(305);
-					pc.sendPackets(sm, true);// \f1今は戦争の時間を変更することができません。
-					return;
-					/*
-					 * if (l1castle.getWarBaseTime() == 0) { S_ServerMessage sm
+            if (clan != null) {
+                int castle_id = clan.getCastleId();
+                if (castle_id != 0) { // 城主クラン名
+                    L1Castle l1castle = CastleTable.getInstance()
+                            .getCastleTable(castle_id);
+                    S_ServerMessage sm = new S_ServerMessage(305);
+                    pc.sendPackets(sm, true);// \f1今は戦争の時間を変更することができません。
+                    return;
+                    /*
+                     * if (l1castle.getWarBaseTime() == 0) { S_ServerMessage sm
 					 * = new S_ServerMessage(305); pc.sendPackets(sm, true);//
 					 * \f1今は戦争の時間を変更することができません。 return; }
 					 * 
@@ -73,18 +73,18 @@ public class C_WarTimeList extends ClientBasePacket {
 					 * true); S_ServerMessage sm = new S_ServerMessage(300);
 					 * pc.sendPackets（sm、true）; //次の攻城戦の時間を指定してください。
 					 */
-				}
-			}
-		} catch (Exception e) {
+                }
+            }
+        } catch (Exception e) {
 
-		} finally {
-			clear();
-		}
-	}
+        } finally {
+            clear();
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_WAR_TIME_LIST;
-	}
+    @Override
+    public String getType() {
+        return C_WAR_TIME_LIST;
+    }
 
 }

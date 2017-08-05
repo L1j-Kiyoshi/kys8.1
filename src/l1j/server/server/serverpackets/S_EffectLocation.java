@@ -24,49 +24,49 @@ import l1j.server.server.types.Point;
 
 public class S_EffectLocation extends ServerBasePacket {
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	/**
-	 * 指定された位置に効果を表示するパケットを構築する。
-	 * 
-	 * @param pt - 効果を表示する位置を格納したPointオブジェクト
-	 * @param gfxId - 表示する効果のID
-	 */
-	public S_EffectLocation(Point pt, int gfxId) {
-		this(pt.getX(), pt.getY(), gfxId);
-	}
+    /**
+     * 指定された位置に効果を表示するパケットを構築する。
+     *
+     * @param pt    - 効果を表示する位置を格納したPointオブジェクト
+     * @param gfxId - 表示する効果のID
+     */
+    public S_EffectLocation(Point pt, int gfxId) {
+        this(pt.getX(), pt.getY(), gfxId);
+    }
 
-	/**
-	 * 指定された位置に効果を表示するパケットを構築する。
-	 * 
-	 * @param loc - 効果を表示する位置を格納したL1Locationオブジェクト
-	 * @param gfxId - 表示する効果のID
-	 */
-	public S_EffectLocation(L1Location loc, int gfxId) {
-		this(loc.getX(), loc.getY(), gfxId);
-	}
+    /**
+     * 指定された位置に効果を表示するパケットを構築する。
+     *
+     * @param loc   - 効果を表示する位置を格納したL1Locationオブジェクト
+     * @param gfxId - 表示する効果のID
+     */
+    public S_EffectLocation(L1Location loc, int gfxId) {
+        this(loc.getX(), loc.getY(), gfxId);
+    }
 
-	/**
-	 * 指定された位置に効果を表示するパケットを構築する。
-	 * 
-	 * @param x - 効果を表示する位置のX座標
-	 * @param y - 効果を表示する位置のY座標
-	 * @param gfxId - 表示する効果のID
-	 */
-	public S_EffectLocation(int x, int y, int gfxId) {
-		writeC(Opcodes.S_EFFECT_LOC);
-		writeH(x);
-		writeH(y);
-		writeH(gfxId);
-		writeH(0);
-	}
+    /**
+     * 指定された位置に効果を表示するパケットを構築する。
+     *
+     * @param x     - 効果を表示する位置のX座標
+     * @param y     - 効果を表示する位置のY座標
+     * @param gfxId - 表示する効果のID
+     */
+    public S_EffectLocation(int x, int y, int gfxId) {
+        writeC(Opcodes.S_EFFECT_LOC);
+        writeH(x);
+        writeH(y);
+        writeH(gfxId);
+        writeH(0);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
 
-		return _byte;
-	}
+        return _byte;
+    }
 }

@@ -27,61 +27,62 @@ import l1j.server.server.model.gametime.L1GameTimeClock;
 // ServerBasePacket
 
 public class S_OwnCharStatus extends ServerBasePacket {
-	private static final String S_OWB_CHAR_STATUS = "[S] S_OwnCharStatus";
+    private static final String S_OWB_CHAR_STATUS = "[S] S_OwnCharStatus";
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_OwnCharStatus(L1PcInstance pc) {
-		int time = L1GameTimeClock.getInstance().getGameTime().getSeconds();
-		time = time - (time % 300);
-		// _log.warning((new
-		// StringBuilder()).append("送信時間：").append(i).toString());
-		writeC(Opcodes.S_STATUS);
-		//writeC(Opcodes.S_ACTION_UI);
-		writeD(pc.getId());
+    public S_OwnCharStatus(L1PcInstance pc) {
+        int time = L1GameTimeClock.getInstance().getGameTime().getSeconds();
+        time = time - (time % 300);
+        // _log.warning((new
+        // StringBuilder()).append("送信時間：").append(i).toString());
+        writeC(Opcodes.S_STATUS);
+        //writeC(Opcodes.S_ACTION_UI);
+        writeD(pc.getId());
 
-		if (pc.getLevel() < 1) {
-			writeC(1);
-		} else if (pc.getLevel() > 127) {
-			writeC(127);
-		} else {
-			writeC(pc.getLevel());
-		}
-		writeD(pc.getExp());
-		writeC(pc.getAbility().getTotalStr());
-		writeC(pc.getAbility().getTotalInt());
-		writeC(pc.getAbility().getTotalWis());
-		writeC(pc.getAbility().getTotalDex());
-		writeC(pc.getAbility().getTotalCon());
-		writeC(pc.getAbility().getTotalCha());
-		writeH(pc.getCurrentHp());
-		writeH(pc.getMaxHp());
-		writeH(pc.getCurrentMp());
-		writeH(pc.getMaxMp());
-		writeD(pc.getAC().getAc());
-		writeD(time);
-		writeC(pc.get_food());
-		writeC(pc.getInventory().getWeight100());
-		writeH(pc.getLawful());
-		/** 3.80 属性防御更新 **/
-		writeH(pc.getResistance().getFire());
-		writeH(pc.getResistance().getWater());
-		writeH(pc.getResistance().getWind());
-		writeH(pc.getResistance().getEarth());
-		/** 3.80 属性防御更新 **/
-		writeD(pc.getMonsterkill());
-		writeH(0);
-	}
+        if (pc.getLevel() < 1) {
+            writeC(1);
+        } else if (pc.getLevel() > 127) {
+            writeC(127);
+        } else {
+            writeC(pc.getLevel());
+        }
+        writeD(pc.getExp());
+        writeC(pc.getAbility().getTotalStr());
+        writeC(pc.getAbility().getTotalInt());
+        writeC(pc.getAbility().getTotalWis());
+        writeC(pc.getAbility().getTotalDex());
+        writeC(pc.getAbility().getTotalCon());
+        writeC(pc.getAbility().getTotalCha());
+        writeH(pc.getCurrentHp());
+        writeH(pc.getMaxHp());
+        writeH(pc.getCurrentMp());
+        writeH(pc.getMaxMp());
+        writeD(pc.getAC().getAc());
+        writeD(time);
+        writeC(pc.get_food());
+        writeC(pc.getInventory().getWeight100());
+        writeH(pc.getLawful());
+        /** 3.80 属性防御更新 **/
+        writeH(pc.getResistance().getFire());
+        writeH(pc.getResistance().getWater());
+        writeH(pc.getResistance().getWind());
+        writeH(pc.getResistance().getEarth());
+        /** 3.80 属性防御更新 **/
+        writeD(pc.getMonsterkill());
+        writeH(0);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = _bao.toByteArray();
-		}
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return S_OWB_CHAR_STATUS;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = _bao.toByteArray();
+        }
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_OWB_CHAR_STATUS;
+    }
 }

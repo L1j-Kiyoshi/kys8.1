@@ -35,132 +35,130 @@ import l1j.server.server.utils.SQLUtil;
 
 public class AccountAttendanceTable {
 
-	private static Logger _log = Logger
-			.getLogger(AccountAttendanceTable.class.getName());
+    private static Logger _log = Logger
+            .getLogger(AccountAttendanceTable.class.getName());
 
-	private static AccountAttendanceTable _instance;
+    private static AccountAttendanceTable _instance;
 
-	public static AccountAttendanceTable getInstance() {
-		if (_instance == null) {
-			_instance = new AccountAttendanceTable();
-		}
-		return _instance;
-	}
+    public static AccountAttendanceTable getInstance() {
+        if (_instance == null) {
+            _instance = new AccountAttendanceTable();
+        }
+        return _instance;
+    }
 
-	private AccountAttendanceTable() {
-		load();
-	}
-	
-	public void load_account(L1PcInstance pc)
-	{
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		L1AccountAttendance acc = new L1AccountAttendance(pc.getAccountName());
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM AttendanceAccount WHERE account_name=? ");
-			pstm.setString(1, pc.getAccountName());
-			rs = pstm.executeQuery();
+    private AccountAttendanceTable() {
+        load();
+    }
 
-			while (rs.next()) {
-				acc.setDay(rs.getInt("day"));
-				acc.setTime(rs.getInt("time"));
-				StringTokenizer stt = new StringTokenizer(rs.getString("clear"), ",");
-				acc.toArray().clear();
-				while (stt.hasMoreTokens()) {
-					String check = stt.nextToken();
-					acc.toArray().add(Integer.valueOf(check));
-				}
+    public void load_account(L1PcInstance pc) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        L1AccountAttendance acc = new L1AccountAttendance(pc.getAccountName());
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM AttendanceAccount WHERE account_name=? ");
+            pstm.setString(1, pc.getAccountName());
+            rs = pstm.executeQuery();
 
-				acc.setDaypc(rs.getInt("day_pc"));
-				acc.setTimepc(rs.getInt("time_pc"));
-				stt = new StringTokenizer(rs.getString("clear_pc"), ",");
-				acc.toArraypc().clear();
-				while (stt.hasMoreTokens()) {
-					String check = stt.nextToken();
-					acc.toArraypc().add(Integer.valueOf(check));
-				}
-				
-				acc.setToday(rs.getInt("laste_check_day"));
-				acc.setYear(rs.getInt("laste_check_year"));
-				if(acc.getDay()==42){
-					if(acc.checktype()==2){
-						//初期化
-						acc.clearday();
-						//acc.setDay(1);
-					}
-				}
-				
-				if(acc.getDaypc()==42){
-					if(acc.checktypepc()==2){
-						//初期化
-						acc.cleardaypc();
-						//acc.setDaypc(1);
-					}
-				}
-			}
-			
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (Exception e) {
+            while (rs.next()) {
+                acc.setDay(rs.getInt("day"));
+                acc.setTime(rs.getInt("time"));
+                StringTokenizer stt = new StringTokenizer(rs.getString("clear"), ",");
+                acc.toArray().clear();
+                while (stt.hasMoreTokens()) {
+                    String check = stt.nextToken();
+                    acc.toArray().add(Integer.valueOf(check));
+                }
 
-		} finally {
-			SQLUtil.close(rs, pstm, con);
-		}
-		AttendanceController.addaccountlist(acc);
-	}
+                acc.setDaypc(rs.getInt("day_pc"));
+                acc.setTimepc(rs.getInt("time_pc"));
+                stt = new StringTokenizer(rs.getString("clear_pc"), ",");
+                acc.toArraypc().clear();
+                while (stt.hasMoreTokens()) {
+                    String check = stt.nextToken();
+                    acc.toArraypc().add(Integer.valueOf(check));
+                }
 
-	private void load() {
-			return;
-	}
-	
-	public void save_account(L1PcInstance pc)
-	{
-		Connection con = null;
-		PreparedStatement st = null;
-		Calendar cal = Calendar.getInstance();
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			st = con.prepareStatement("DELETE FROM AttendanceAccount WHERE account_name=?");
-			st.setString(1, pc.getAccountName());
-			st.executeUpdate();
-			
-			L1AccountAttendance acc = AttendanceController.findacc(pc.getAccountName());
-			st = con.prepareStatement("INSERT INTO AttendanceAccount SET account_name=?, day=?, time=?, clear=?, day_pc=?, time_pc=?, clear_pc=?, laste_check_day=?, laste_check_year=?");
-			st.setString(1, acc.getAccounts());
-			st.setInt(2, acc.getDay());
-			st.setInt(3, acc.getTime());
-			StringBuffer result = new StringBuffer();
-			for(int i :acc.toArray()){
-				result.append(String.valueOf(i));
-				result.append(",");
-			}
-			st.setString(4, result.toString());
-			
-			st.setInt(5, acc.getDaypc());
-			st.setInt(6, acc.getTimepc());
-			result = new StringBuffer();
-			for(int i :acc.toArraypc()){
-				result.append(String.valueOf(i));
-				result.append(",");
-			}
-			st.setString(7, result.toString());
-			
-			st.setInt(8, acc.getToday());
-			st.setInt(9, acc.getYear());
-			st.executeUpdate();
-			st.close();			
+                acc.setToday(rs.getInt("laste_check_day"));
+                acc.setYear(rs.getInt("laste_check_year"));
+                if (acc.getDay() == 42) {
+                    if (acc.checktype() == 2) {
+                        //初期化
+                        acc.clearday();
+                        //acc.setDay(1);
+                    }
+                }
 
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (Exception e) {
+                if (acc.getDaypc() == 42) {
+                    if (acc.checktypepc() == 2) {
+                        //初期化
+                        acc.cleardaypc();
+                        //acc.setDaypc(1);
+                    }
+                }
+            }
 
-		} finally {
-			SQLUtil.close(st);
-			SQLUtil.close(con);
-		}
-	}
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (Exception e) {
+
+        } finally {
+            SQLUtil.close(rs, pstm, con);
+        }
+        AttendanceController.addaccountlist(acc);
+    }
+
+    private void load() {
+        return;
+    }
+
+    public void save_account(L1PcInstance pc) {
+        Connection con = null;
+        PreparedStatement st = null;
+        Calendar cal = Calendar.getInstance();
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            st = con.prepareStatement("DELETE FROM AttendanceAccount WHERE account_name=?");
+            st.setString(1, pc.getAccountName());
+            st.executeUpdate();
+
+            L1AccountAttendance acc = AttendanceController.findacc(pc.getAccountName());
+            st = con.prepareStatement("INSERT INTO AttendanceAccount SET account_name=?, day=?, time=?, clear=?, day_pc=?, time_pc=?, clear_pc=?, laste_check_day=?, laste_check_year=?");
+            st.setString(1, acc.getAccounts());
+            st.setInt(2, acc.getDay());
+            st.setInt(3, acc.getTime());
+            StringBuffer result = new StringBuffer();
+            for (int i : acc.toArray()) {
+                result.append(String.valueOf(i));
+                result.append(",");
+            }
+            st.setString(4, result.toString());
+
+            st.setInt(5, acc.getDaypc());
+            st.setInt(6, acc.getTimepc());
+            result = new StringBuffer();
+            for (int i : acc.toArraypc()) {
+                result.append(String.valueOf(i));
+                result.append(",");
+            }
+            st.setString(7, result.toString());
+
+            st.setInt(8, acc.getToday());
+            st.setInt(9, acc.getYear());
+            st.executeUpdate();
+            st.close();
+
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (Exception e) {
+
+        } finally {
+            SQLUtil.close(st);
+            SQLUtil.close(con);
+        }
+    }
 
 
 }

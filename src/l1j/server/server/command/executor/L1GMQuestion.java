@@ -19,30 +19,31 @@
 package l1j.server.server.command.executor;
 
 //import java.util.logging.Logger;
+
 import l1j.server.server.model.L1Question;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1GMQuestion implements L1CommandExecutor {
-	//private static Logger _log = Logger.getLogger(L1GMQuestion.class.getName());
+    //private static Logger _log = Logger.getLogger(L1GMQuestion.class.getName());
 
-	private L1GMQuestion() {
-	}
+    private L1GMQuestion() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1GMQuestion();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1GMQuestion();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try{
-			if(L1Question.mainstart){
-				pc.sendPackets(new S_SystemMessage("現在調査が進行中です。"));
-				pc.sendPackets(new S_SystemMessage("進行中のアンケート内容：" + L1Question.maintext));
-			}
-			L1Question.getInstance(arg);
-		}catch(Exception e){
-			pc.sendPackets(new S_SystemMessage("。アンケート[アンケートの内容]を入力してください"));
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (L1Question.mainstart) {
+                pc.sendPackets(new S_SystemMessage("現在調査が進行中です。"));
+                pc.sendPackets(new S_SystemMessage("進行中のアンケート内容：" + L1Question.maintext));
+            }
+            L1Question.getInstance(arg);
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage("。アンケート[アンケートの内容]を入力してください"));
+        }
+    }
 }

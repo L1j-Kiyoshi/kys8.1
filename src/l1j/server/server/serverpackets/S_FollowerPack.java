@@ -28,56 +28,57 @@ import l1j.server.server.model.Instance.L1FollowerInstance;
 
 public class S_FollowerPack extends ServerBasePacket {
 
-	private static final String S_FOLLOWER_PACK = "[S] S_FollowerPack";
-	
-	private static final int STATUS_POISON = 1;
+    private static final String S_FOLLOWER_PACK = "[S] S_FollowerPack";
 
-	private byte[] _byte = null;
+    private static final int STATUS_POISON = 1;
 
-	public S_FollowerPack(L1FollowerInstance follower, L1PcInstance pc) {
-		writeC(Opcodes.S_PUT_OBJECT);
-		writeH(follower.getX());
-		writeH(follower.getY());
-		writeD(follower.getId());
-		writeH(follower.getGfxId());
-		writeC(follower.getStatus());
-		writeC(follower.getHeading());
-		writeC(follower.getLight().getChaLightSize());
-		writeC(follower.getMoveSpeed());
-		writeD(0);
-		writeH(0);
-		writeS(follower.getNameId());
-		writeS(follower.getTitle());
-		int status = 0;
-		if (follower.getPoison() != null) {
-			if (follower.getPoison().getEffectId() == 1) {
-				status |= STATUS_POISON;
-			}
-		}
-		writeC(status);
-		writeD(0);
-		writeS(null);
-		writeS(null);
-		writeC(0);
-		writeC(0xFF);
-		writeC(0);
-		writeC(follower.getLevel());
-		writeC(0);
-		writeC(0xFF);
-		writeC(0xFF);
-	}
+    private byte[] _byte = null;
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = _bao.toByteArray();
-		}
+    public S_FollowerPack(L1FollowerInstance follower, L1PcInstance pc) {
+        writeC(Opcodes.S_PUT_OBJECT);
+        writeH(follower.getX());
+        writeH(follower.getY());
+        writeD(follower.getId());
+        writeH(follower.getGfxId());
+        writeC(follower.getStatus());
+        writeC(follower.getHeading());
+        writeC(follower.getLight().getChaLightSize());
+        writeC(follower.getMoveSpeed());
+        writeD(0);
+        writeH(0);
+        writeS(follower.getNameId());
+        writeS(follower.getTitle());
+        int status = 0;
+        if (follower.getPoison() != null) {
+            if (follower.getPoison().getEffectId() == 1) {
+                status |= STATUS_POISON;
+            }
+        }
+        writeC(status);
+        writeD(0);
+        writeS(null);
+        writeS(null);
+        writeC(0);
+        writeC(0xFF);
+        writeC(0);
+        writeC(follower.getLevel());
+        writeC(0);
+        writeC(0xFF);
+        writeC(0xFF);
+    }
 
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return S_FOLLOWER_PACK;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = _bao.toByteArray();
+        }
+
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_FOLLOWER_PACK;
+    }
 
 }

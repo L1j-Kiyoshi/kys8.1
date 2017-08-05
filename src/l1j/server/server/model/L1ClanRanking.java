@@ -15,188 +15,188 @@ import l1j.server.server.model.gametime.RealTimeClock;
 import l1j.server.server.utils.SQLUtil;
 
 public class L1ClanRanking implements Runnable {
-	
-	private static final Logger _log = Logger.getLogger(L1ClanRanking.class.getName());
 
-	private static L1ClanRanking _instance = new L1ClanRanking();
+    private static final Logger _log = Logger.getLogger(L1ClanRanking.class.getName());
 
-	public static L1ClanRanking getInstance() {
-		return _instance;
-	}
+    private static L1ClanRanking _instance = new L1ClanRanking();
 
-	private boolean _isStart;
-	
-	private int _currentTime;
-	private int _clanRank = 0;
-	
-	private HashMap<Integer, RankData> _curankData = new HashMap<Integer, RankData>();
-	private HashMap<String, Integer> _parankData = new HashMap<String, Integer>();	
-		
-	public void start() {
-		if (!_isStart) {
-			_isStart = true;
-			GeneralThreadPool.getInstance().execute(this);
-		}
-	}
+    public static L1ClanRanking getInstance() {
+        return _instance;
+    }
 
-	@Override
-	public void run() {
-		try {		
-			_parankData.putAll(new HashMap<String, Integer>());
-			_curankData.putAll(new HashMap<Integer, RankData>());		
+    private boolean _isStart;
 
-			while (_isStart) {
-				if (isChangeTime()) {
-					clanchange();	
-					_currentTime = (int) (System.currentTimeMillis() / 1000);
-				}
-				Thread.sleep(1000 * 60);
-			}
-		} catch (Exception e) {
-			_log.log(Level.WARNING, "", e);
-		}
-	}
+    private int _currentTime;
+    private int _clanRank = 0;
 
+    private HashMap<Integer, RankData> _curankData = new HashMap<Integer, RankData>();
+    private HashMap<String, Integer> _parankData = new HashMap<String, Integer>();
 
-	private boolean isChangeTime() {
-		if (_currentTime == 0) {
-			return true;
-		}
-		return RealTimeClock.getInstance().getRealTime().get(Calendar.MINUTE) == 0;
-	}
+    public void start() {
+        if (!_isStart) {
+            _isStart = true;
+            GeneralThreadPool.getInstance().execute(this);
+        }
+    }
 
-	public void gmcommand() {
-		try {
-			clanchange();	
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void clanchange() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
-			clearAllDatas();
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT clan_id, clan_name, ranktime, rankdate FROM clan_data WHERE ranktime > 0 ORDER BY ranktime");
-			rs = pstm.executeQuery();
+    @Override
+    public void run() {
+        try {
+            _parankData.putAll(new HashMap<String, Integer>());
+            _curankData.putAll(new HashMap<Integer, RankData>());
 
-			while (rs.next()) {
-				int claniD = rs.getInt("clan_id");
-				String clannamE =rs.getString("clan_name");
-				int timE = rs.getInt("ranktime");
-				Timestamp datA = rs.getTimestamp("rankdate");
-				addRankerData(claniD, clannamE, timE, datA);
-			}
-		} catch (Exception e) {
-			_log.log(Level.WARNING, "", e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
-
-	private int getCurrentRank() {
-		return _clanRank;
-	}
-	
-	private int getNextRank() {
-		return ++_clanRank;
-	}
-	
-	private int getMaxRank() {
-		return 200;
-	}
-	
-	private int getOldRank(String name) {
-		if (_parankData.containsKey(name)) {
-			return _parankData.get(name);
-		}
-		return 0;
-	}
+            while (_isStart) {
+                if (isChangeTime()) {
+                    clanchange();
+                    _currentTime = (int) (System.currentTimeMillis() / 1000);
+                }
+                Thread.sleep(1000 * 60);
+            }
+        } catch (Exception e) {
+            _log.log(Level.WARNING, "", e);
+        }
+    }
 
 
-	private void addRankerData(int clanId, String name, int time, Timestamp data) {
-		int currentRank = getCurrentRank();
-		int maxRank = getMaxRank();
-		if (currentRank < maxRank) {
-			int oldRank = getOldRank(name);
-			int nextRank = getNextRank();
-			_curankData.put(nextRank, new RankData(nextRank, oldRank, clanId, name, time, data));
-		}
-	}
-	
+    private boolean isChangeTime() {
+        if (_currentTime == 0) {
+            return true;
+        }
+        return RealTimeClock.getInstance().getRealTime().get(Calendar.MINUTE) == 0;
+    }
 
-	public RankData[] getRankerDatas() {		
-		return _curankData.values().toArray(new RankData[_curankData.values().size()]);		
-	}
+    public void gmcommand() {
+        try {
+            clanchange();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void clanchange() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            clearAllDatas();
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT clan_id, clan_name, ranktime, rankdate FROM clan_data WHERE ranktime > 0 ORDER BY ranktime");
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                int claniD = rs.getInt("clan_id");
+                String clannamE = rs.getString("clan_name");
+                int timE = rs.getInt("ranktime");
+                Timestamp datA = rs.getTimestamp("rankdate");
+                addRankerData(claniD, clannamE, timE, datA);
+            }
+        } catch (Exception e) {
+            _log.log(Level.WARNING, "", e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
+
+    private int getCurrentRank() {
+        return _clanRank;
+    }
+
+    private int getNextRank() {
+        return ++_clanRank;
+    }
+
+    private int getMaxRank() {
+        return 200;
+    }
+
+    private int getOldRank(String name) {
+        if (_parankData.containsKey(name)) {
+            return _parankData.get(name);
+        }
+        return 0;
+    }
 
 
-	private void clearAllDatas() {
-		_parankData.clear();	
-		_parankData.putAll(new HashMap<String, Integer>());
-		for (RankData data : getRankerDatas()) {
-			_parankData.put(data.getClanName(), data.getCurrentR());
-		}	
-		_curankData.clear();	
-		_curankData.putAll(new HashMap<Integer, RankData>());
-		_clanRank = 0;		
-	}
-	
-	public RankData getClanRankerData(String name) {
-		RankData[] datas = getRankerDatas();
-		if (datas != null) {
-			for (RankData data : datas) {
-				if (data.getClanName().equals(name)) {
-					return data;
-				}
-			}
-		}
-		return null;
-	}
-	
-	public class RankData {
-		private int _currentR;
-		private int _pastR;
-		private int _clanid;
-		private String _clanname;
-		private int _comtime;
-		private Timestamp _date;
+    private void addRankerData(int clanId, String name, int time, Timestamp data) {
+        int currentRank = getCurrentRank();
+        int maxRank = getMaxRank();
+        if (currentRank < maxRank) {
+            int oldRank = getOldRank(name);
+            int nextRank = getNextRank();
+            _curankData.put(nextRank, new RankData(nextRank, oldRank, clanId, name, time, data));
+        }
+    }
 
-		public int getCurrentR() {
-			return _currentR;
-		}
 
-		public int getPastR() {
-			return _pastR;
-		}
+    public RankData[] getRankerDatas() {
+        return _curankData.values().toArray(new RankData[_curankData.values().size()]);
+    }
 
-		public int getClanid() {
-			return _clanid;
-		}
 
-		public String getClanName() {
-			return _clanname;
-		}
+    private void clearAllDatas() {
+        _parankData.clear();
+        _parankData.putAll(new HashMap<String, Integer>());
+        for (RankData data : getRankerDatas()) {
+            _parankData.put(data.getClanName(), data.getCurrentR());
+        }
+        _curankData.clear();
+        _curankData.putAll(new HashMap<Integer, RankData>());
+        _clanRank = 0;
+    }
 
-		public int getComTime() {
-			return _comtime;
-		}
+    public RankData getClanRankerData(String name) {
+        RankData[] datas = getRankerDatas();
+        if (datas != null) {
+            for (RankData data : datas) {
+                if (data.getClanName().equals(name)) {
+                    return data;
+                }
+            }
+        }
+        return null;
+    }
 
-		public Timestamp getDate() {
-			return _date;
-		}
-		
-		public RankData(int currentRank, int pastRank, int clanId, String clanName, int tiMe, Timestamp daTa) {
-			_currentR = currentRank;
-			_pastR = pastRank == 0 ? currentRank : pastRank;
-			_clanid = clanId;
-			_clanname = clanName;
-			_comtime = tiMe;
-			_date = daTa;		
-		}
-	}
+    public class RankData {
+        private int _currentR;
+        private int _pastR;
+        private int _clanid;
+        private String _clanname;
+        private int _comtime;
+        private Timestamp _date;
+
+        public int getCurrentR() {
+            return _currentR;
+        }
+
+        public int getPastR() {
+            return _pastR;
+        }
+
+        public int getClanid() {
+            return _clanid;
+        }
+
+        public String getClanName() {
+            return _clanname;
+        }
+
+        public int getComTime() {
+            return _comtime;
+        }
+
+        public Timestamp getDate() {
+            return _date;
+        }
+
+        public RankData(int currentRank, int pastRank, int clanId, String clanName, int tiMe, Timestamp daTa) {
+            _currentR = currentRank;
+            _pastR = pastRank == 0 ? currentRank : pastRank;
+            _clanid = clanId;
+            _clanname = clanName;
+            _comtime = tiMe;
+            _date = daTa;
+        }
+    }
 }

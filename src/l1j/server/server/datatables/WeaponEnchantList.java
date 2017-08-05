@@ -32,72 +32,72 @@ import l1j.server.L1DatabaseFactory;
 import l1j.server.server.utils.SQLUtil;
 
 public class WeaponEnchantList {
-	public class WeaponEnchant {
-		int Chance = 0;
-	}
+    public class WeaponEnchant {
+        int Chance = 0;
+    }
 
-	private static Logger _log = Logger.getLogger(WeaponEnchantList.class.getName());
+    private static Logger _log = Logger.getLogger(WeaponEnchantList.class.getName());
 
-	private static WeaponEnchantList _instance;
+    private static WeaponEnchantList _instance;
 
-	private final Map<Integer, WeaponEnchant> _idlist = new HashMap<Integer, WeaponEnchant>();
+    private final Map<Integer, WeaponEnchant> _idlist = new HashMap<Integer, WeaponEnchant>();
 
-	public static WeaponEnchantList getInstance() {
-		if (_instance == null) {
-			_instance = new WeaponEnchantList();
-		}
-		return _instance;
-	}
+    public static WeaponEnchantList getInstance() {
+        if (_instance == null) {
+            _instance = new WeaponEnchantList();
+        }
+        return _instance;
+    }
 
 	/*private WeaponEnchantList() {
-		PerformanceTimer timer = new PerformanceTimer();
+        PerformanceTimer timer = new PerformanceTimer();
 		System.out.print("■ 武器エンチャントデータ.......................... "）;
 		weaponEnchantList();
 		System.out.println("■ ロード正常終了」+ timer.get（）+ "ms"）;
 	}*/
 
-	public void weaponEnchantList() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
+    public void weaponEnchantList() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
 
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("select item_id, chance from weapon_enchant_list");
-			rs = pstm.executeQuery();
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("select item_id, chance from weapon_enchant_list");
+            rs = pstm.executeQuery();
 
-			WeaponEnchant weaponenchant = null;
-			while (rs.next()) {
-				weaponenchant = new WeaponEnchant();
+            WeaponEnchant weaponenchant = null;
+            while (rs.next()) {
+                weaponenchant = new WeaponEnchant();
 
-				weaponenchant.Chance = rs.getInt("chance");
+                weaponenchant.Chance = rs.getInt("chance");
 
-				_idlist.put(rs.getInt("item_id"), weaponenchant);
-			}
+                _idlist.put(rs.getInt("item_id"), weaponenchant);
+            }
 
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public static void reload() {
-		WeaponEnchantList oldInstance = _instance;
-		_instance = new WeaponEnchantList();
-		if (oldInstance != null)
-			oldInstance._idlist.clear();
-	}
+    public static void reload() {
+        WeaponEnchantList oldInstance = _instance;
+        _instance = new WeaponEnchantList();
+        if (oldInstance != null)
+            oldInstance._idlist.clear();
+    }
 
-	public int getWeaponEnchant(int itemId) {
-		WeaponEnchant weaponenchant = _idlist.get(itemId);
+    public int getWeaponEnchant(int itemId) {
+        WeaponEnchant weaponenchant = _idlist.get(itemId);
 
-		if (weaponenchant == null) {
-			return 0;
-		}
+        if (weaponenchant == null) {
+            return 0;
+        }
 
-		return weaponenchant.Chance;
-	}
+        return weaponenchant.Chance;
+    }
 }

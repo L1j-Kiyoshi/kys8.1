@@ -31,45 +31,45 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1ToSpawn implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1ToSpawn.class.getName());
-	private static final Map<Integer, Integer> _spawnId = new HashMap<Integer, Integer>();
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1ToSpawn.class.getName());
+    private static final Map<Integer, Integer> _spawnId = new HashMap<Integer, Integer>();
 
-	private L1ToSpawn() {
-	}
+    private L1ToSpawn() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1ToSpawn();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1ToSpawn();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			if (!_spawnId.containsKey(pc.getId())) {
-				_spawnId.put(pc.getId(), 0);
-			}
-			int id = _spawnId.get(pc.getId());
-			if (arg.isEmpty() || arg.equals("+")) {
-				id++;
-			} else if (arg.equals("-")) {
-				id--;
-			} else {
-				StringTokenizer st = new StringTokenizer(arg);
-				id = Integer.parseInt(st.nextToken());
-			}
-			L1Spawn spawn = NpcSpawnTable.getInstance().getTemplate(id);
-			if (spawn == null) {
-				spawn = SpawnTable.getInstance().getTemplate(id);
-			}
-			if (spawn != null) {
-				new L1Teleport().teleport(pc, spawn.getLocX(), spawn.getLocY(), spawn.getMapId(), 5, false);
-				pc.sendPackets(new S_SystemMessage("spawnid(" + id + "）の元にされます"));
-			} else {
-				pc.sendPackets(new S_SystemMessage("spawnid(" + id + "）は検出されません"));
-			}
-			_spawnId.put(pc.getId(), id);
-		} catch (Exception exception) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "[出現名] [+、 - ]"));
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            if (!_spawnId.containsKey(pc.getId())) {
+                _spawnId.put(pc.getId(), 0);
+            }
+            int id = _spawnId.get(pc.getId());
+            if (arg.isEmpty() || arg.equals("+")) {
+                id++;
+            } else if (arg.equals("-")) {
+                id--;
+            } else {
+                StringTokenizer st = new StringTokenizer(arg);
+                id = Integer.parseInt(st.nextToken());
+            }
+            L1Spawn spawn = NpcSpawnTable.getInstance().getTemplate(id);
+            if (spawn == null) {
+                spawn = SpawnTable.getInstance().getTemplate(id);
+            }
+            if (spawn != null) {
+                new L1Teleport().teleport(pc, spawn.getLocX(), spawn.getLocY(), spawn.getMapId(), 5, false);
+                pc.sendPackets(new S_SystemMessage("spawnid(" + id + "）の元にされます"));
+            } else {
+                pc.sendPackets(new S_SystemMessage("spawnid(" + id + "）は検出されません"));
+            }
+            _spawnId.put(pc.getId(), id);
+        } catch (Exception exception) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "[出現名] [+、 - ]"));
+        }
+    }
 }

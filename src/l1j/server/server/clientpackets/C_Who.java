@@ -12,44 +12,44 @@ import l1j.server.server.serverpackets.S_WhoCharinfo;
 
 public class C_Who extends ClientBasePacket {
 
-	private static final String C_WHO = "[C] C_Who";
+    private static final String C_WHO = "[C] C_Who";
 
-	public C_Who(byte[] decrypt, GameClient client) {
-		super(decrypt);
-		String s = readS();
-		L1PcInstance find = L1World.getInstance().getPlayer(s);
-		L1NpcShopInstance find1 = L1World.getInstance().getShopNpc(s);
-		L1PcInstance pc = client.getActiveChar();
-		
-		//リアルタイムプレイヤー数をチェックするため。
-		int playercount = 0; 
-		Collection<L1PcInstance> players = L1World.getInstance().getAllPlayers();
-		for (L1PcInstance each : players) {
-			if(each.noPlayerCK || each.noPlayerck2)
-				playercount++;
-		}
-		//リアルタイムプレイヤー数をチェックするため。失敗です..
-		
-		if (pc == null) return;
+    public C_Who(byte[] decrypt, GameClient client) {
+        super(decrypt);
+        String s = readS();
+        L1PcInstance find = L1World.getInstance().getPlayer(s);
+        L1NpcShopInstance find1 = L1World.getInstance().getShopNpc(s);
+        L1PcInstance pc = client.getActiveChar();
 
-		if (find != null) {
-			S_WhoCharinfo s_whocharinfo = new S_WhoCharinfo(find);
-			pc.sendPackets(s_whocharinfo);
-		} else if (find1 != null) {
-			S_WhoCharinfo s_whocharinfo = new S_WhoCharinfo(find1);
-			pc.sendPackets(s_whocharinfo);
-		} else {
-			int AddUser = (int) (L1World.getInstance().getAllPlayers().size() * 1.5);
-			int CalcUser = L1UserCalc.getClacUser();
-			AddUser += CalcUser;
-			String amount = String.valueOf(AddUser);
-			S_WhoAmount s_whoamount = new S_WhoAmount(amount);
-			pc.sendPackets(s_whoamount);
-		}
-	}
+        //リアルタイムプレイヤー数をチェックするため。
+        int playercount = 0;
+        Collection<L1PcInstance> players = L1World.getInstance().getAllPlayers();
+        for (L1PcInstance each : players) {
+            if (each.noPlayerCK || each.noPlayerck2)
+                playercount++;
+        }
+        //リアルタイムプレイヤー数をチェックするため。失敗です..
 
-	@Override
-	public String getType() {
-		return C_WHO;
-	}
+        if (pc == null) return;
+
+        if (find != null) {
+            S_WhoCharinfo s_whocharinfo = new S_WhoCharinfo(find);
+            pc.sendPackets(s_whocharinfo);
+        } else if (find1 != null) {
+            S_WhoCharinfo s_whocharinfo = new S_WhoCharinfo(find1);
+            pc.sendPackets(s_whocharinfo);
+        } else {
+            int AddUser = (int) (L1World.getInstance().getAllPlayers().size() * 1.5);
+            int CalcUser = L1UserCalc.getClacUser();
+            AddUser += CalcUser;
+            String amount = String.valueOf(AddUser);
+            S_WhoAmount s_whoamount = new S_WhoAmount(amount);
+            pc.sendPackets(s_whoamount);
+        }
+    }
+
+    @Override
+    public String getType() {
+        return C_WHO;
+    }
 }

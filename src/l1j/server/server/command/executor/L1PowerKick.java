@@ -33,64 +33,64 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.utils.SQLUtil;
 
 public class L1PowerKick implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1PowerKick.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1PowerKick.class.getName());
 
-	private L1PowerKick() {
-	}
+    private L1PowerKick() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1PowerKick();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1PowerKick();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			L1PcInstance target = L1World.getInstance().getPlayer(arg);
-			IpTable iptable = IpTable.getInstance();
-			if (target != null) {
-				Account.ban(target.getAccountName()); // アカウントをBANさせる。
-				iptable.banIp(target.getNetConnection().getIp()); // BANリストにIPアドレスを追加します。
-				pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(target.getName()).append("を永久追放しました。")
-						.toString()));
-				target.sendPackets(new S_Disconnect());
-			} else {
-				String name = loadCharacter(arg);
-				if (name != null) {
-					Account.ban(name);
-					String nc = Account.checkIP(name);
-					if (nc != null)
-						iptable.banIp(nc);
-					pc.sendPackets(new S_SystemMessage(name + "アカウント差し押さえました。"));
-				}
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            L1PcInstance target = L1World.getInstance().getPlayer(arg);
+            IpTable iptable = IpTable.getInstance();
+            if (target != null) {
+                Account.ban(target.getAccountName()); // アカウントをBANさせる。
+                iptable.banIp(target.getNetConnection().getIp()); // BANリストにIPアドレスを追加します。
+                pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(target.getName()).append("を永久追放しました。")
+                        .toString()));
+                target.sendPackets(new S_Disconnect());
+            } else {
+                String name = loadCharacter(arg);
+                if (name != null) {
+                    Account.ban(name);
+                    String nc = Account.checkIP(name);
+                    if (nc != null)
+                        iptable.banIp(nc);
+                    pc.sendPackets(new S_SystemMessage(name + "アカウント差し押さえました。"));
+                }
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
+        }
+    }
 
-	private String loadCharacter(String charName) {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		String name = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM characters WHERE char_name=?");
-			pstm.setString(1, charName);
+    private String loadCharacter(String charName) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String name = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM characters WHERE char_name=?");
+            pstm.setString(1, charName);
 
-			rs = pstm.executeQuery();
+            rs = pstm.executeQuery();
 
-			if (rs.next()) {
-				name = rs.getString("account_name");
-			}
+            if (rs.next()) {
+                name = rs.getString("account_name");
+            }
 
-		} catch (Exception e) {
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-		return name;
-	}
+        } catch (Exception e) {
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+        return name;
+    }
 }

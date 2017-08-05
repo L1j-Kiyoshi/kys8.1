@@ -35,148 +35,148 @@ import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.templates.L1Npc;
 
 public class L1CataInstance extends L1NpcInstance {
-	public L1CataInstance(L1Npc template) {
-		super(template);
-		// TODO Auto-generated constructor stub
-	}
+    public L1CataInstance(L1Npc template) {
+        super(template);
+        // TODO Auto-generated constructor stub
+    }
 
-	private static final long serialVersionUID = 1L;
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1CataInstance.class.getName());
+    private static final long serialVersionUID = 1L;
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1CataInstance.class.getName());
 
-	@Override
-	public void onPerceive(L1PcInstance perceivedFrom) {
-		perceivedFrom.addKnownObject(this);
-		if (0 < getCurrentHp()) {
-			onNpcAI();
-		}
-		perceivedFrom.sendPackets(new S_NPCPack(this));
-	}
+    @Override
+    public void onPerceive(L1PcInstance perceivedFrom) {
+        perceivedFrom.addKnownObject(this);
+        if (0 < getCurrentHp()) {
+            onNpcAI();
+        }
+        perceivedFrom.sendPackets(new S_NPCPack(this));
+    }
 
-	@SuppressWarnings("unused")
-	@Override
-	public void onTalkAction(L1PcInstance pc) {
-		if (pc == null)
-			return;
-		int objid = getId();
-		L1NpcTalkData talking = NPCTalkDataTable.getInstance().getTemplate(getNpcTemplate().get_npcId());
-		String htmlid = null;
-		String[] htmldata = null;
+    @SuppressWarnings("unused")
+    @Override
+    public void onTalkAction(L1PcInstance pc) {
+        if (pc == null)
+            return;
+        int objid = getId();
+        L1NpcTalkData talking = NPCTalkDataTable.getInstance().getTemplate(getNpcTemplate().get_npcId());
+        String htmlid = null;
+        String[] htmldata = null;
 
-		if (talking != null) {
-			if (!pc.isCrown()) {
-				pc.sendPackets(new S_ServerMessage(2498)); //カタパルトを使用：失敗（血盟君主のみ使用可能）
-				return;
-			}
-		}
-		// html表示パケットの送信
-		if (htmlid != null) { // htmlidが指定されている場合、
-			if (htmldata != null) { // html指定がある場合は、表示さ
-				pc.sendPackets(new S_NPCTalkReturn(objid, htmlid, htmldata));
-			} else {
-				pc.sendPackets(new S_NPCTalkReturn(objid, htmlid));
-			}
-		} else {
-			if (pc.getLawful() < -1000) { // プレイヤーがカオティック
-				pc.sendPackets(new S_NPCTalkReturn(talking, objid, 2));
-			} else {
-				pc.sendPackets(new S_NPCTalkReturn(talking, objid, 1));
-			}
-		}
-	}
+        if (talking != null) {
+            if (!pc.isCrown()) {
+                pc.sendPackets(new S_ServerMessage(2498)); //カタパルトを使用：失敗（血盟君主のみ使用可能）
+                return;
+            }
+        }
+        // html表示パケットの送信
+        if (htmlid != null) { // htmlidが指定されている場合、
+            if (htmldata != null) { // html指定がある場合は、表示さ
+                pc.sendPackets(new S_NPCTalkReturn(objid, htmlid, htmldata));
+            } else {
+                pc.sendPackets(new S_NPCTalkReturn(objid, htmlid));
+            }
+        } else {
+            if (pc.getLawful() < -1000) { // プレイヤーがカオティック
+                pc.sendPackets(new S_NPCTalkReturn(talking, objid, 2));
+            } else {
+                pc.sendPackets(new S_NPCTalkReturn(talking, objid, 1));
+            }
+        }
+    }
 
-	@Override
-	public void onAction(L1PcInstance pc) {
-		if (pc == null)
-			return;
-		if (getCurrentHp() > 0 && !isDead()) {
-			L1Attack attack = new L1Attack(pc, this);
-			if (attack.calcHit()) {
-				attack.calcDamage();
-				attack.addPcPoisonAttack(pc, this);
-			}
-			attack.action();
-			attack.commit();
-		}
-	}
+    @Override
+    public void onAction(L1PcInstance pc) {
+        if (pc == null)
+            return;
+        if (getCurrentHp() > 0 && !isDead()) {
+            L1Attack attack = new L1Attack(pc, this);
+            if (attack.calcHit()) {
+                attack.calcDamage();
+                attack.addPcPoisonAttack(pc, this);
+            }
+            attack.action();
+            attack.commit();
+        }
+    }
 
-	@Override
-	public void ReceiveManaDamage(L1Character attacker, int mpDamage) {
-		if (attacker == null) return;
-		if (mpDamage > 0 && !isDead()) {
-			onNpcAI();
-			int newMp = getCurrentMp() - mpDamage;
-			if (newMp < 0) {
-				newMp = 0;
-			}
-			setCurrentMp(newMp);
-		}
-	}
+    @Override
+    public void ReceiveManaDamage(L1Character attacker, int mpDamage) {
+        if (attacker == null) return;
+        if (mpDamage > 0 && !isDead()) {
+            onNpcAI();
+            int newMp = getCurrentMp() - mpDamage;
+            if (newMp < 0) {
+                newMp = 0;
+            }
+            setCurrentMp(newMp);
+        }
+    }
 
-	@Override
-	public void receiveDamage(L1Character attacker, int damage) {
-		if (attacker == null)
-			return;
+    @Override
+    public void receiveDamage(L1Character attacker, int damage) {
+        if (attacker == null)
+            return;
 
-		int castleid = 0;
-		if (getNpcId() == 7000084 || getNpcId() == 7000085) { //ケント
-			castleid = 1;
-		} else if (getNpcId() == 7000086 || getNpcId() == 7000087) { //オソン
-			castleid = 2;
-		} else if (getNpcId() == 7000082 || getNpcId() == 7000083) { //ギラン
-			castleid = 4;
-		}
+        int castleid = 0;
+        if (getNpcId() == 7000084 || getNpcId() == 7000085) { //ケント
+            castleid = 1;
+        } else if (getNpcId() == 7000086 || getNpcId() == 7000087) { //オソン
+            castleid = 2;
+        } else if (getNpcId() == 7000082 || getNpcId() == 7000083) { //ギラン
+            castleid = 4;
+        }
 
-		boolean isNowWar = false;
-		isNowWar = WarTimeController.getInstance().isNowWar(castleid);
-		if (!isNowWar) {
-			return;
-		}
+        boolean isNowWar = false;
+        isNowWar = WarTimeController.getInstance().isNowWar(castleid);
+        if (!isNowWar) {
+            return;
+        }
 
-		if (getCurrentHp() > 0 && !isDead()) {
-			if (damage > 0) {
-				if (hasSkillEffect(L1SkillId.FOG_OF_SLEEPING)) {
-					removeSkillEffect(L1SkillId.FOG_OF_SLEEPING);
-				} else if (hasSkillEffect(L1SkillId.PHANTASM)) {
-					removeSkillEffect(L1SkillId.PHANTASM);
-				}
-			}
-			int newHp = getCurrentHp() - damage;
-			if (newHp <= 0 && !isDead()) {
-				int transformId = getNpcTemplate().getTransformId();
-				if (transformId == -1) {
-					setCurrentHp(0);
-					setDead(true);
-					setActionStatus(ActionCodes.ACTION_Die);
-					die(this);
-				}
-			}
-		} else if (!isDead()) {
-			setDead(true);
-			setActionStatus(ActionCodes.ACTION_Die);
-			die(this);
-		}
-	}
+        if (getCurrentHp() > 0 && !isDead()) {
+            if (damage > 0) {
+                if (hasSkillEffect(L1SkillId.FOG_OF_SLEEPING)) {
+                    removeSkillEffect(L1SkillId.FOG_OF_SLEEPING);
+                } else if (hasSkillEffect(L1SkillId.PHANTASM)) {
+                    removeSkillEffect(L1SkillId.PHANTASM);
+                }
+            }
+            int newHp = getCurrentHp() - damage;
+            if (newHp <= 0 && !isDead()) {
+                int transformId = getNpcTemplate().getTransformId();
+                if (transformId == -1) {
+                    setCurrentHp(0);
+                    setDead(true);
+                    setActionStatus(ActionCodes.ACTION_Die);
+                    die(this);
+                }
+            }
+        } else if (!isDead()) {
+            setDead(true);
+            setActionStatus(ActionCodes.ACTION_Die);
+            die(this);
+        }
+    }
 
-	@Override
-	public void setCurrentHp(int i) {
-		super.setCurrentHp(i);
-	}
+    @Override
+    public void setCurrentHp(int i) {
+        super.setCurrentHp(i);
+    }
 
-	@Override
-	public void setCurrentMp(int i) {
-		super.setCurrentMp(i);
-	}
+    @Override
+    public void setCurrentMp(int i) {
+        super.setCurrentMp(i);
+    }
 
-	public void die(L1Character lastAttacker) {
-		try {
-			setDeathProcessing(true);
-			setCurrentHp(0);
-			setDead(true);
-			setActionStatus(ActionCodes.ACTION_Die);
-			Broadcaster.broadcastPacket(this, new S_DoActionGFX(getId(), ActionCodes.ACTION_Die));
-			setDeathProcessing(false);
-		} catch (Exception e) {
-		}
-	}
+    public void die(L1Character lastAttacker) {
+        try {
+            setDeathProcessing(true);
+            setCurrentHp(0);
+            setDead(true);
+            setActionStatus(ActionCodes.ACTION_Die);
+            Broadcaster.broadcastPacket(this, new S_DoActionGFX(getId(), ActionCodes.ACTION_Die));
+            setDeathProcessing(false);
+        } catch (Exception e) {
+        }
+    }
 }

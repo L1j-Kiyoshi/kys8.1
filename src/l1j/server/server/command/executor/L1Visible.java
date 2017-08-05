@@ -28,28 +28,28 @@ import l1j.server.server.serverpackets.S_OtherCharPacks;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1Visible implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1Visible.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1Visible.class.getName());
 
-	private L1Visible() {
-	}
+    private L1Visible() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Visible();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Visible();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			pc.setGmInvis(false);
-			pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
-			pc.sendPackets(new S_Invis(pc.getId(), 0));
-			for (L1PcInstance pc2 : L1World.getInstance().getVisiblePlayer(pc)) {
-				pc2.sendPackets(new S_OtherCharPacks(pc, pc2));
-			}
-			pc.sendPackets(new S_SystemMessage("透明状態を解除しました。"));
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "コマンドエラー"));
-		}
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            pc.setGmInvis(false);
+            pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
+            pc.sendPackets(new S_Invis(pc.getId(), 0));
+            for (L1PcInstance pc2 : L1World.getInstance().getVisiblePlayer(pc)) {
+                pc2.sendPackets(new S_OtherCharPacks(pc, pc2));
+            }
+            pc.sendPackets(new S_SystemMessage("透明状態を解除しました。"));
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "コマンドエラー"));
+        }
+    }
 }

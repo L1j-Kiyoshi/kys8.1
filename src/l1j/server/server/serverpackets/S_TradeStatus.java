@@ -25,19 +25,20 @@ import l1j.server.server.Opcodes;
 // ServerBasePacket
 
 public class S_TradeStatus extends ServerBasePacket {
-	public S_TradeStatus(int type) {
-		writeC(Opcodes.S_XCHG_RESULT);
-		writeC(type); // 0:取引完了1：取引キャンセル
-	}
+    public S_TradeStatus(int type) {
+        writeC(Opcodes.S_XCHG_RESULT);
+        writeC(type); // 0:取引完了1：取引キャンセル
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return _S__2A_TRADESTATUS;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	private static final String _S__2A_TRADESTATUS = "[S] S_TradeStatus";
+    @Override
+    public String getType() {
+        return _S__2A_TRADESTATUS;
+    }
+
+    private static final String _S__2A_TRADESTATUS = "[S] S_TradeStatus";
 }

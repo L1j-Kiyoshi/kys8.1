@@ -31,15 +31,15 @@ public class OneTimeController implements TimeListener {
 
     @Override
     public void onHourChanged(BaseTime time) {
-        int h = time.get(Calendar.HOUR_OF_DAY);     
+        int h = time.get(Calendar.HOUR_OF_DAY);
         if (h == 0) {
             UnderReset();
             L1World.getInstance().broadcastPacketToAll(new S_SystemMessage("通知：すべてのクランの地下通路がリセットされました。"));
-        } 
+        }
     }
 
     @Override
-    public void onMinuteChanged(BaseTime time) {       
+    public void onMinuteChanged(BaseTime time) {
     }
 
     @Override

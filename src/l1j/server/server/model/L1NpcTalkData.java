@@ -20,106 +20,100 @@ package l1j.server.server.model;
 
 public class L1NpcTalkData {
 
-	int ID;
+    int ID;
 
-	int NpcID;
+    int NpcID;
 
-	String normalAction;
+    String normalAction;
 
-	String caoticAction;
+    String caoticAction;
 
-	String teleportURL;
+    String teleportURL;
 
-	String teleportURLA;
+    String teleportURLA;
 
-	/**
-	 * @return Returns the normalAction.
-	 */
-	public String getNormalAction() {
-		return normalAction;
-	}
+    /**
+     * @return Returns the normalAction.
+     */
+    public String getNormalAction() {
+        return normalAction;
+    }
 
-	/**
-	 * @param normalAction
-	 *            The normalAction to set.
-	 */
-	public void setNormalAction(String normalAction) {
-		this.normalAction = normalAction;
-	}
+    /**
+     * @param normalAction The normalAction to set.
+     */
+    public void setNormalAction(String normalAction) {
+        this.normalAction = normalAction;
+    }
 
-	/**
-	 * @return Returns the caoticAction.
-	 */
-	public String getCaoticAction() {
-		return caoticAction;
-	}
+    /**
+     * @return Returns the caoticAction.
+     */
+    public String getCaoticAction() {
+        return caoticAction;
+    }
 
-	/**
-	 * @param caoticAction
-	 *            The caoticAction to set.
-	 */
-	public void setCaoticAction(String caoticAction) {
-		this.caoticAction = caoticAction;
-	}
+    /**
+     * @param caoticAction The caoticAction to set.
+     */
+    public void setCaoticAction(String caoticAction) {
+        this.caoticAction = caoticAction;
+    }
 
-	/**
-	 * @return Returns the teleportURL.
-	 */
-	public String getTeleportURL() {
-		return teleportURL;
-	}
+    /**
+     * @return Returns the teleportURL.
+     */
+    public String getTeleportURL() {
+        return teleportURL;
+    }
 
-	/**
-	 * @param teleportURL
-	 *            The teleportURL to set.
-	 */
-	public void setTeleportURL(String teleportURL) {
-		this.teleportURL = teleportURL;
-	}
+    /**
+     * @param teleportURL The teleportURL to set.
+     */
+    public void setTeleportURL(String teleportURL) {
+        this.teleportURL = teleportURL;
+    }
 
-	/**
-	 * @return Returns the teleportURLA.
-	 */
-	public String getTeleportURLA() {
-		return teleportURLA;
-	}
+    /**
+     * @return Returns the teleportURLA.
+     */
+    public String getTeleportURLA() {
+        return teleportURLA;
+    }
 
-	/**
-	 * @param teleportURLA
-	 *            The teleportURLA to set.
-	 */
-	public void setTeleportURLA(String teleportURLA) {
-		this.teleportURLA = teleportURLA;
-	}
+    /**
+     * @param teleportURLA The teleportURLA to set.
+     */
+    public void setTeleportURLA(String teleportURLA) {
+        this.teleportURLA = teleportURLA;
+    }
 
-	/**
-	 * @return Returns the iD.
-	 */
-	public int getID() {
-		return ID;
-	}
+    /**
+     * @return Returns the iD.
+     */
+    public int getID() {
+        return ID;
+    }
 
-	/**
-	 * @param id
-	 *            The iD to set.
-	 */
-	public void setID(int id) {
-		ID = id;
-	}
+    /**
+     * @param id The iD to set.
+     */
+    public void setID(int id) {
+        ID = id;
+    }
 
-	/**
-	 * @return Returns the npcID.
-	 */
-	public int getNpcID() {
-		return NpcID;
-	}
+    /**
+     * @return Returns the npcID.
+     */
+    public int getNpcID() {
+        return NpcID;
+    }
 
-	/**
-	 * @param npcID
-	 *            The npcID to set.
-	 */
-	public void setNpcID(int npcID) {
-		NpcID = npcID;
-	}
+    /**
+     * @param npcID The npcID to set.
+     */
+    public void setNpcID(int npcID) {
+        NpcID = npcID;
+    }
 
 }

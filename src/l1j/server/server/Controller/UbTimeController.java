@@ -24,34 +24,34 @@ import l1j.server.server.datatables.UBTable;
 import l1j.server.server.model.L1UltimateBattle;
 
 public class UbTimeController implements Runnable {
-	public static final int SLEEP_TIME = 15000;
+    public static final int SLEEP_TIME = 15000;
 
-	private static Logger _log = Logger.getLogger(UbTimeController.class
-			.getName());
+    private static Logger _log = Logger.getLogger(UbTimeController.class
+            .getName());
 
-	private static UbTimeController _instance;
+    private static UbTimeController _instance;
 
-	public static UbTimeController getInstance() {
-		if (_instance == null) {
-			_instance = new UbTimeController();
-		}
-		return _instance;
-	}
+    public static UbTimeController getInstance() {
+        if (_instance == null) {
+            _instance = new UbTimeController();
+        }
+        return _instance;
+    }
 
-	@Override
-	public void run() {
-		try {
-			checkUbTime(); // UB開始時間をチェック
-		} catch (Exception e1) {
-			_log.warning(e1.getMessage());
-		}
-	}
+    @Override
+    public void run() {
+        try {
+            checkUbTime(); // UB開始時間をチェック
+        } catch (Exception e1) {
+            _log.warning(e1.getMessage());
+        }
+    }
 
-	private void checkUbTime() {
-		for (L1UltimateBattle ub : UBTable.getInstance().getAllUb()) {
-			if (ub.checkUbTime() && !ub.isActive()) {
-				ub.start();
-			}
-		}
-	}
+    private void checkUbTime() {
+        for (L1UltimateBattle ub : UBTable.getInstance().getAllUb()) {
+            if (ub.checkUbTime() && !ub.isActive()) {
+                ub.start();
+            }
+        }
+    }
 }

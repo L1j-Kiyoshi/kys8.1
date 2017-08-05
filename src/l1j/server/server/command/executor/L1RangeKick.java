@@ -30,42 +30,43 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 
 
 public class L1RangeKick implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1RangeKick.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1RangeKick.class.getName());
 
-	private L1RangeKick() {}
+    private L1RangeKick() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1RangeKick();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1RangeKick();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			L1PcInstance target = L1World.getInstance().getPlayer(arg);
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            L1PcInstance target = L1World.getInstance().getPlayer(arg);
 //			if (target == null) {
 //				target = CharacterTable.getInstance().restoreCharacter(arg);
 //			}
 
-			if (target != null) {
-				IpTable ip = IpTable.getInstance();
+            if (target != null) {
+                IpTable ip = IpTable.getInstance();
 
-				Account.ban(target.getAccountName()); // アカウントをBANさせる。
-				ip.rangeBanIp(target.getNetConnection().getHostname());
-				pc.sendPackets(new S_SystemMessage(target.getName() + "[" + pc.getNetConnection() + "]を広域追放しました。"));						
-				L1World.getInstance().removeObject(target);
-				target.getNetConnection().kick();
-				target.getNetConnection().close();
-				target.logout();	
-				target.sendPackets(new S_Disconnect());
+                Account.ban(target.getAccountName()); // アカウントをBANさせる。
+                ip.rangeBanIp(target.getNetConnection().getHostname());
+                pc.sendPackets(new S_SystemMessage(target.getName() + "[" + pc.getNetConnection() + "]を広域追放しました。"));
+                L1World.getInstance().removeObject(target);
+                target.getNetConnection().kick();
+                target.getNetConnection().close();
+                target.logout();
+                target.sendPackets(new S_Disconnect());
 //				if (target.getOnlineStatus() == 1) {
 //					target.sendPackets(new S_Disconnect());
 //				}
-			} else {
-				pc.sendPackets(new S_SystemMessage("そのような名前のキャラクターは、ワールド内には存在しません。"));
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
-		}
-	}
+            } else {
+                pc.sendPackets(new S_SystemMessage("そのような名前のキャラクターは、ワールド内には存在しません。"));
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
+        }
+    }
 }

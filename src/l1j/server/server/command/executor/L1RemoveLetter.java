@@ -31,36 +31,39 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.utils.SQLUtil;
 
 public class L1RemoveLetter implements L1CommandExecutor {
-	private static Logger _log = Logger.getLogger(L1RemoveLetter.class.getName());
-	private L1RemoveLetter() {}
-	public static L1CommandExecutor getInstance() {	
-		return new L1RemoveLetter();
-	}
+    private static Logger _log = Logger.getLogger(L1RemoveLetter.class.getName());
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {				
-			checkLetter(pc.getName());	
-			pc.sendPackets(new S_LetterList(pc, 0, 200));
-			pc.sendPackets(new S_SystemMessage("メールを削除しました。"));
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage("。メール削除を入力してください。"));
-		}
-	}
+    private L1RemoveLetter() {
+    }
 
-	public void checkLetter(String name) {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();			
-			pstm = con.prepareStatement("DELETE FROM letter WHERE receiver = ?");
-			pstm.setString(1, name);
-			pstm.execute();	
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1RemoveLetter();
+    }
+
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            checkLetter(pc.getName());
+            pc.sendPackets(new S_LetterList(pc, 0, 200));
+            pc.sendPackets(new S_SystemMessage("メールを削除しました。"));
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage("。メール削除を入力してください。"));
+        }
+    }
+
+    public void checkLetter(String name) {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("DELETE FROM letter WHERE receiver = ?");
+            pstm.setString(1, name);
+            pstm.execute();
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 }

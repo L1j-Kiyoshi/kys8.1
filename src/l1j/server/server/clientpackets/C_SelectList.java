@@ -39,77 +39,77 @@ import l1j.server.server.templates.L1Pet;
 
 public class C_SelectList extends ClientBasePacket {
 
-	private static final String C_SELECT_LIST = "[C] C_SelectList";
+    private static final String C_SELECT_LIST = "[C] C_SelectList";
 
-	public C_SelectList(byte abyte0[], GameClient clientthread) {
-		super(abyte0);
-		// アイテムごとにリクエストが来る。
-		int itemObjectId = readD();
-		int npcObjectId = readD();
-		L1PcInstance pc = clientthread.getActiveChar();
-		if ( pc == null)return;
+    public C_SelectList(byte abyte0[], GameClient clientthread) {
+        super(abyte0);
+        // アイテムごとにリクエストが来る。
+        int itemObjectId = readD();
+        int npcObjectId = readD();
+        L1PcInstance pc = clientthread.getActiveChar();
+        if (pc == null) return;
 
-		if (npcObjectId != 0) { // 武器の修理
-			L1Object obj = L1World.getInstance().findObject(npcObjectId);
-			if (obj != null) {
-				if (obj instanceof L1NpcInstance) {
-					L1NpcInstance npc = (L1NpcInstance) obj;
-					int difflocx = Math.abs(pc.getX() - npc.getX());
-					int difflocy = Math.abs(pc.getY() - npc.getY());
-					// 3マス以上落ちた場合のアクション無効
-					if (difflocx > 3 || difflocy > 3) {
-						return;
-					}
-				}
-			}
+        if (npcObjectId != 0) { // 武器の修理
+            L1Object obj = L1World.getInstance().findObject(npcObjectId);
+            if (obj != null) {
+                if (obj instanceof L1NpcInstance) {
+                    L1NpcInstance npc = (L1NpcInstance) obj;
+                    int difflocx = Math.abs(pc.getX() - npc.getX());
+                    int difflocy = Math.abs(pc.getY() - npc.getY());
+                    // 3マス以上落ちた場合のアクション無効
+                    if (difflocx > 3 || difflocy > 3) {
+                        return;
+                    }
+                }
+            }
 
-			L1PcInventory pcInventory = pc.getInventory();
-			L1ItemInstance item = pcInventory.getItem(itemObjectId);
-			int cost = item.get_durability() * 200;
-			if (!pc.getInventory().consumeItem(L1ItemId.ADENA, cost)) {
-				return;
-			}
-			item.set_durability(0);
-			pcInventory.updateItem(item, L1PcInventory.COL_DURABILITY);
-		} else { //ペットの引き出し
-			int petCost = 0;
-			Object[] petList = pc.getPetList().values().toArray();
-			for (Object pet : petList) {
-				petCost += ((L1NpcInstance) pet).getPetcost();
-			}
-			int charisma = pc.getAbility().getTotalCha();
-			if (pc.isCrown()) { // CROWN
-				charisma += 6;
-			} else if (pc.isElf()) { // ELF
-				charisma += 12;
-			} else if (pc.isWizard()) { // WIZ
-				charisma += 6;
-			} else if (pc.isDarkelf()) { // DE
-				charisma += 6;
-			} else if (pc.isDragonknight()) { // 竜騎士
-				charisma += 6;
-			} else if (pc.isBlackwizard()) { // イリュージョニスト
-				charisma += 6;
-			}
-			charisma -= petCost;
-			int petCount = charisma / 6;
-			if (petCount <= 0) {
-				pc.sendPackets(new S_ServerMessage(489)); // 退いていこうとするペットが多すぎます。
-				return;
-			}
+            L1PcInventory pcInventory = pc.getInventory();
+            L1ItemInstance item = pcInventory.getItem(itemObjectId);
+            int cost = item.get_durability() * 200;
+            if (!pc.getInventory().consumeItem(L1ItemId.ADENA, cost)) {
+                return;
+            }
+            item.set_durability(0);
+            pcInventory.updateItem(item, L1PcInventory.COL_DURABILITY);
+        } else { //ペットの引き出し
+            int petCost = 0;
+            Object[] petList = pc.getPetList().values().toArray();
+            for (Object pet : petList) {
+                petCost += ((L1NpcInstance) pet).getPetcost();
+            }
+            int charisma = pc.getAbility().getTotalCha();
+            if (pc.isCrown()) { // CROWN
+                charisma += 6;
+            } else if (pc.isElf()) { // ELF
+                charisma += 12;
+            } else if (pc.isWizard()) { // WIZ
+                charisma += 6;
+            } else if (pc.isDarkelf()) { // DE
+                charisma += 6;
+            } else if (pc.isDragonknight()) { // 竜騎士
+                charisma += 6;
+            } else if (pc.isBlackwizard()) { // イリュージョニスト
+                charisma += 6;
+            }
+            charisma -= petCost;
+            int petCount = charisma / 6;
+            if (petCount <= 0) {
+                pc.sendPackets(new S_ServerMessage(489)); // 退いていこうとするペットが多すぎます。
+                return;
+            }
 
-			L1Pet l1pet = PetTable.getInstance().getTemplate(itemObjectId);
-			if (l1pet != null) {
-				L1Npc npcTemp = NpcTable.getInstance().getTemplate(
-						l1pet.get_npcid());
-				L1PetInstance pet = new L1PetInstance(npcTemp, pc, l1pet);
-				pet.setPetcost(6);
-			}
-		}
-	}
+            L1Pet l1pet = PetTable.getInstance().getTemplate(itemObjectId);
+            if (l1pet != null) {
+                L1Npc npcTemp = NpcTable.getInstance().getTemplate(
+                        l1pet.get_npcid());
+                L1PetInstance pet = new L1PetInstance(npcTemp, pc, l1pet);
+                pet.setPetcost(6);
+            }
+        }
+    }
 
-	@Override
-	public String getType() {
-		return C_SELECT_LIST;
-	}
+    @Override
+    public String getType() {
+        return C_SELECT_LIST;
+    }
 }

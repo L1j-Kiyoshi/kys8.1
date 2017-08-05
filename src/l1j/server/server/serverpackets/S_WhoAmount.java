@@ -21,24 +21,26 @@ package l1j.server.server.serverpackets;
 import l1j.server.server.Opcodes;
 
 public class S_WhoAmount extends ServerBasePacket {
-	
-	private static final String S_WHO_AMOUNT = "[S] S_WhoAmount";
-	public S_WhoAmount(String amount) {
-		writeC(Opcodes.S_MESSAGE_CODE);
-		writeH(0x0051);
-		writeC(0x01);
-		writeS(amount);		
-		//by.lins
-		writeD(0);	// 山に入れないチンギム
-		//by.lins
-	}
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return S_WHO_AMOUNT;
-	}
+    private static final String S_WHO_AMOUNT = "[S] S_WhoAmount";
+
+    public S_WhoAmount(String amount) {
+        writeC(Opcodes.S_MESSAGE_CODE);
+        writeH(0x0051);
+        writeC(0x01);
+        writeS(amount);
+        //by.lins
+        writeD(0);    // 山に入れないチンギム
+        //by.lins
+    }
+
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
+
+    @Override
+    public String getType() {
+        return S_WHO_AMOUNT;
+    }
 }

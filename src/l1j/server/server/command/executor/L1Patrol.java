@@ -24,18 +24,18 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_PacketBox;
 
 public class L1Patrol implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1Patrol.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1Patrol.class.getName());
 
-	private L1Patrol() {
-	}
+    private L1Patrol() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Patrol();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Patrol();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		pc.sendPackets(new S_PacketBox(S_PacketBox.CALL_SOMETHING));
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        pc.sendPackets(new S_PacketBox(S_PacketBox.CALL_SOMETHING));
+    }
 }

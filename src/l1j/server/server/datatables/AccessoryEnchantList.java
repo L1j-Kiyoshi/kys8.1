@@ -32,73 +32,73 @@ import l1j.server.L1DatabaseFactory;
 import l1j.server.server.utils.SQLUtil;
 
 public class AccessoryEnchantList {
-	public class AccessoryEnchant {
-		int Chance = 0;
-	}
+    public class AccessoryEnchant {
+        int Chance = 0;
+    }
 
-	private static Logger _log = Logger.getLogger(AccessoryEnchantList.class.getName());
+    private static Logger _log = Logger.getLogger(AccessoryEnchantList.class.getName());
 
-	private static AccessoryEnchantList _instance;
+    private static AccessoryEnchantList _instance;
 
-	private final Map<Integer, AccessoryEnchant> _idlist = new HashMap<Integer, AccessoryEnchant>();
+    private final Map<Integer, AccessoryEnchant> _idlist = new HashMap<Integer, AccessoryEnchant>();
 
-	public static AccessoryEnchantList getInstance() {
-		if (_instance == null) {
-			_instance = new AccessoryEnchantList();
-		}
-		return _instance;
-	}
+    public static AccessoryEnchantList getInstance() {
+        if (_instance == null) {
+            _instance = new AccessoryEnchantList();
+        }
+        return _instance;
+    }
 
 /*	private AccessoryEnchantList() {
-		PerformanceTimer timer = new PerformanceTimer();
+        PerformanceTimer timer = new PerformanceTimer();
 		System.out.print("【アクセエンチャント】 "）;		
 		weaponEnchantList();
 		//遭遇サーバCMDウィンドウ変形
 		System.out.println("インポート成功」+ timer.get（）+ "ms"）;				
 	}*/
 
-	public void weaponEnchantList() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
+    public void weaponEnchantList() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
 
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("select item_id, chance from accessory_enchant_list");
-			rs = pstm.executeQuery();
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("select item_id, chance from accessory_enchant_list");
+            rs = pstm.executeQuery();
 
-			AccessoryEnchant accessoryenchant = null;
-			while (rs.next()) {
-				accessoryenchant = new AccessoryEnchant();
+            AccessoryEnchant accessoryenchant = null;
+            while (rs.next()) {
+                accessoryenchant = new AccessoryEnchant();
 
-				accessoryenchant.Chance = rs.getInt("chance");
+                accessoryenchant.Chance = rs.getInt("chance");
 
-				_idlist.put(rs.getInt("item_id"), accessoryenchant);
-			}
+                _idlist.put(rs.getInt("item_id"), accessoryenchant);
+            }
 
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, "AccessoryEnchantList[]Error", e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, "AccessoryEnchantList[]Error", e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public static void reload() {
-		AccessoryEnchantList oldInstance = _instance;
-		_instance = new AccessoryEnchantList();
-		if (oldInstance != null)
-			oldInstance._idlist.clear();
-	}
+    public static void reload() {
+        AccessoryEnchantList oldInstance = _instance;
+        _instance = new AccessoryEnchantList();
+        if (oldInstance != null)
+            oldInstance._idlist.clear();
+    }
 
-	public int getAccessoryEnchant(int itemId) {
-		AccessoryEnchant accessoryenchant = _idlist.get(itemId);
+    public int getAccessoryEnchant(int itemId) {
+        AccessoryEnchant accessoryenchant = _idlist.get(itemId);
 
-		if (accessoryenchant == null) {
-			return 0;
-		}
+        if (accessoryenchant == null) {
+            return 0;
+        }
 
-		return accessoryenchant.Chance;
-	}
+        return accessoryenchant.Chance;
+    }
 }

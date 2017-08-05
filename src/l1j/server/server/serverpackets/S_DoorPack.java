@@ -30,99 +30,99 @@ import l1j.server.server.model.Instance.L1DoorInstance;
 
 public class S_DoorPack extends ServerBasePacket {
 
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(S_DoorPack.class.getName());
-	private static final String S_DOOR_PACK = "[S] S_DoorPack";
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(S_DoorPack.class.getName());
+    private static final String S_DOOR_PACK = "[S] S_DoorPack";
 
-	private static final int STATUS_POISON = 1;
-	private static final int STATUS_INVISIBLE = 2;
-	private static final int STATUS_PC = 4;
-	private static final int STATUS_FREEZE = 8;
-	private static final int STATUS_BRAVE = 16;
-	private static final int STATUS_ELFBRAVE = 32;
-	private static final int STATUS_FASTMOVABLE = 64;
-	private static final int STATUS_GHOST = 128;
+    private static final int STATUS_POISON = 1;
+    private static final int STATUS_INVISIBLE = 2;
+    private static final int STATUS_PC = 4;
+    private static final int STATUS_FREEZE = 8;
+    private static final int STATUS_BRAVE = 16;
+    private static final int STATUS_ELFBRAVE = 32;
+    private static final int STATUS_FASTMOVABLE = 64;
+    private static final int STATUS_GHOST = 128;
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_DoorPack(L1DoorInstance door) {
-		buildPacket(door);
-	}
+    public S_DoorPack(L1DoorInstance door) {
+        buildPacket(door);
+    }
 
-	private void buildPacket(L1DoorInstance door) {
-		writeC(Opcodes.S_PUT_OBJECT);
-		writeH(door.getX());
-		writeH(door.getY());
-		writeD(door.getId());
-		writeH(door.getGfxId());
-		int doorStatus = door.getStatus();
-		int openStatus = door.getOpenStatus();
-		if (door.isDead()) {
-			writeC(doorStatus);
-		} else if (openStatus == ActionCodes.ACTION_Open) {
-			writeC(openStatus);
-		} else if (door.getMaxHp() > 1 && doorStatus != 0) {
-			writeC(doorStatus);
-		} else {
-			writeC(openStatus);
-		}
-		writeC(0);
-		writeC(0);
-		writeC(0);
-		writeD(1);
-		writeH(0);
-		if (door.getGfxId() == 12164 
-				|| door.getGfxId() == 12167 
-				|| door.getGfxId() == 12170 //64〜70オーク要塞外城門
-				|| door.getGfxId() == 12987
-				|| door.getGfxId() == 12989
-				|| door.getGfxId() == 12991 //87〜91ケント城外の門
-				|| door.getGfxId() == 12127
-				|| door.getGfxId() == 12129
-				|| door.getGfxId() == 12131
-				|| door.getGfxId() == 12133 //29〜33ギラン城外の門
-		) { 
-			writeS("$440");
-		} else if (door.getGfxId() == 339 //ケント城内の門
-				|| door.getGfxId() == 1336 //ギラン城内の門
-				|| door.getGfxId() == 12163  //オーク要塞内城門
-		) {
-			writeS("$441");
-		} else {
-			writeS(null);
-		}
-		writeS(null);
-		int status = 0;
-		if (door.getPoison() != null) {
-			if (door.getPoison().getEffectId() == 1) {
-				status |= STATUS_POISON;
-			}
-		}
-		writeC(status);
-		writeD(0);
-		writeS(null);
-		writeS(null);
-		writeC(0);
-		writeC(0xFF);
-		writeC(0);
-		writeC(0);
-		writeC(0);
-		writeC(0xFF);
-		writeC(0xFF);
-	}
-	
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = _bao.toByteArray();
-		}
+    private void buildPacket(L1DoorInstance door) {
+        writeC(Opcodes.S_PUT_OBJECT);
+        writeH(door.getX());
+        writeH(door.getY());
+        writeD(door.getId());
+        writeH(door.getGfxId());
+        int doorStatus = door.getStatus();
+        int openStatus = door.getOpenStatus();
+        if (door.isDead()) {
+            writeC(doorStatus);
+        } else if (openStatus == ActionCodes.ACTION_Open) {
+            writeC(openStatus);
+        } else if (door.getMaxHp() > 1 && doorStatus != 0) {
+            writeC(doorStatus);
+        } else {
+            writeC(openStatus);
+        }
+        writeC(0);
+        writeC(0);
+        writeC(0);
+        writeD(1);
+        writeH(0);
+        if (door.getGfxId() == 12164
+                || door.getGfxId() == 12167
+                || door.getGfxId() == 12170 //64〜70オーク要塞外城門
+                || door.getGfxId() == 12987
+                || door.getGfxId() == 12989
+                || door.getGfxId() == 12991 //87〜91ケント城外の門
+                || door.getGfxId() == 12127
+                || door.getGfxId() == 12129
+                || door.getGfxId() == 12131
+                || door.getGfxId() == 12133 //29〜33ギラン城外の門
+                ) {
+            writeS("$440");
+        } else if (door.getGfxId() == 339 //ケント城内の門
+                || door.getGfxId() == 1336 //ギラン城内の門
+                || door.getGfxId() == 12163  //オーク要塞内城門
+                ) {
+            writeS("$441");
+        } else {
+            writeS(null);
+        }
+        writeS(null);
+        int status = 0;
+        if (door.getPoison() != null) {
+            if (door.getPoison().getEffectId() == 1) {
+                status |= STATUS_POISON;
+            }
+        }
+        writeC(status);
+        writeD(0);
+        writeS(null);
+        writeS(null);
+        writeC(0);
+        writeC(0xFF);
+        writeC(0);
+        writeC(0);
+        writeC(0);
+        writeC(0xFF);
+        writeC(0xFF);
+    }
 
-		return _byte;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = _bao.toByteArray();
+        }
 
-	@Override
-	public String getType() {
-		return S_DOOR_PACK;
-	}
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_DOOR_PACK;
+    }
 
 }

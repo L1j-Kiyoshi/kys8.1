@@ -16,113 +16,113 @@ import l1j.server.server.templates.L1NpcShop;
 import l1j.server.server.utils.SQLUtil;
 
 public class NpcCashShopSpawnTable {
-	private static Logger _log = Logger.getLogger(NpcCashShopSpawnTable.class.getName());
+    private static Logger _log = Logger.getLogger(NpcCashShopSpawnTable.class.getName());
 
-	private static NpcCashShopSpawnTable _instance;
+    private static NpcCashShopSpawnTable _instance;
 
-	private ArrayList<L1NpcShop> npcShoplist = new ArrayList<L1NpcShop>();
+    private ArrayList<L1NpcShop> npcShoplist = new ArrayList<L1NpcShop>();
 
-	public static NpcCashShopSpawnTable getInstance() {
-		if (_instance == null) {
-			_instance = new NpcCashShopSpawnTable();
-		}
-		return _instance;
-	}
+    public static NpcCashShopSpawnTable getInstance() {
+        if (_instance == null) {
+            _instance = new NpcCashShopSpawnTable();
+        }
+        return _instance;
+    }
 
-	private NpcCashShopSpawnTable() {
-		lode();
-	}
+    private NpcCashShopSpawnTable() {
+        lode();
+    }
 
-	public static void reload() {
-		NpcCashShopSpawnTable oldInstance = _instance;
-		_instance = new NpcCashShopSpawnTable();
-		oldInstance.npcShoplist.clear();
-	}
-	
-	public void lode() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM spawnlist_npc_cash_shop");
-			rs = pstm.executeQuery();
-			do {
-				if (!rs.next()) {
-					break;
-				}
+    public static void reload() {
+        NpcCashShopSpawnTable oldInstance = _instance;
+        _instance = new NpcCashShopSpawnTable();
+        oldInstance.npcShoplist.clear();
+    }
 
-				L1NpcShop shop = new L1NpcShop();
+    public void lode() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM spawnlist_npc_cash_shop");
+            rs = pstm.executeQuery();
+            do {
+                if (!rs.next()) {
+                    break;
+                }
 
-				shop.setNpcId(rs.getInt("npc_id"));
-				shop.setName(rs.getString("name"));
-				shop.setX(rs.getInt("locx"));
-				shop.setY(rs.getInt("locy"));
-				shop.setMapId(rs.getShort("mapid"));
-				shop.setHeading(rs.getInt("heading"));
-				shop.setTitle(rs.getString("title"));
-				shop.setShopName(rs.getString("shop_name"));
+                L1NpcShop shop = new L1NpcShop();
 
-				npcShoplist.add(shop);
-				shop = null;
+                shop.setNpcId(rs.getInt("npc_id"));
+                shop.setName(rs.getString("name"));
+                shop.setX(rs.getInt("locx"));
+                shop.setY(rs.getInt("locy"));
+                shop.setMapId(rs.getShort("mapid"));
+                shop.setHeading(rs.getInt("heading"));
+                shop.setTitle(rs.getString("title"));
+                shop.setShopName(rs.getString("shop_name"));
 
-			} while (true);
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (SecurityException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (IllegalArgumentException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+                npcShoplist.add(shop);
+                shop = null;
 
-	public ArrayList<L1NpcShop> getList() {
-		return npcShoplist;
-	}
+            } while (true);
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (SecurityException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (IllegalArgumentException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public void Start() {
-		try {
-			ArrayList<L1NpcShop> list = getList();
-			for (int i = 0; i < list.size(); i++) {
+    public ArrayList<L1NpcShop> getList() {
+        return npcShoplist;
+    }
 
-				L1NpcShop shop = list.get(i);
+    public void Start() {
+        try {
+            ArrayList<L1NpcShop> list = getList();
+            for (int i = 0; i < list.size(); i++) {
 
-				L1NpcInstance npc = NpcTable.getInstance().newNpcInstance(shop.getNpcId());
-				npc.setId(IdFactory.getInstance().nextId());
-				npc.setMap(shop.getMapId());
+                L1NpcShop shop = list.get(i);
 
-				npc.getLocation().set(shop.getX(), shop.getY(), shop.getMapId());
-				npc.getLocation().forward(5);
+                L1NpcInstance npc = NpcTable.getInstance().newNpcInstance(shop.getNpcId());
+                npc.setId(IdFactory.getInstance().nextId());
+                npc.setMap(shop.getMapId());
 
-				npc.setHomeX(npc.getX());
-				npc.setHomeY(npc.getY());
-				npc.setHeading(shop.getHeading());
+                npc.getLocation().set(shop.getX(), shop.getY(), shop.getMapId());
+                npc.getLocation().forward(5);
 
-				npc.setName(shop.getName());
-				npc.setTitle(shop.getTitle());
+                npc.setHomeX(npc.getX());
+                npc.setHomeY(npc.getY());
+                npc.setHeading(shop.getHeading());
 
-				// L1NpcCashShopInstance obj = (L1NpcCashShopInstance)npc;
+                npc.setName(shop.getName());
+                npc.setTitle(shop.getTitle());
 
-				// obj.setShopName(shop.getShopName());
+                // L1NpcCashShopInstance obj = (L1NpcCashShopInstance)npc;
 
-				L1World.getInstance().storeObject(npc);
-				L1World.getInstance().addVisibleObject(npc);
+                // obj.setShopName(shop.getShopName());
 
-				npc.getLight().turnOnOffLight();
+                L1World.getInstance().storeObject(npc);
+                L1World.getInstance().addVisibleObject(npc);
 
-				// obj.setState(1);
-				// Broadcaster.broadcastPacket(npc, new
-				// S_DoActionShop(npc.getId(), ActionCodes.ACTION_Shop,
-				// shop.getShopName().getBytes()));
-			}
-			list.clear();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+                npc.getLight().turnOnOffLight();
+
+                // obj.setState(1);
+                // Broadcaster.broadcastPacket(npc, new
+                // S_DoActionShop(npc.getId(), ActionCodes.ACTION_Shop,
+                // shop.getShopName().getBytes()));
+            }
+            list.clear();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

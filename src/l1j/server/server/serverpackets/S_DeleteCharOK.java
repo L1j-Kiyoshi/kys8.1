@@ -21,22 +21,23 @@ package l1j.server.server.serverpackets;
 import l1j.server.server.Opcodes;
 
 public class S_DeleteCharOK extends ServerBasePacket {
-	private static final String S_DELETE_CHAR_OK = "[S] S_DeleteCharOK";
+    private static final String S_DELETE_CHAR_OK = "[S] S_DeleteCharOK";
 
-	public static final int DELETE_CHAR_NOW = 0x05;
-	public static final int DELETE_CHAR_AFTER_7DAYS = 0x51;
+    public static final int DELETE_CHAR_NOW = 0x05;
+    public static final int DELETE_CHAR_AFTER_7DAYS = 0x51;
 
-	public S_DeleteCharOK(int type) {
-		writeC(Opcodes.S_DELETE_CHARACTER_CHECK);
-		writeC(type);
-	}
+    public S_DeleteCharOK(int type) {
+        writeC(Opcodes.S_DELETE_CHARACTER_CHECK);
+        writeC(type);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return S_DELETE_CHAR_OK;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
+
+    @Override
+    public String getType() {
+        return S_DELETE_CHAR_OK;
+    }
 }

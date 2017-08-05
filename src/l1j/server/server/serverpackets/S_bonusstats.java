@@ -26,28 +26,29 @@ import l1j.server.server.Opcodes;
 
 public class S_bonusstats extends ServerBasePacket {
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_bonusstats(int i, int j) {
-		buildPacket(i, j);
-	}
+    public S_bonusstats(int i, int j) {
+        buildPacket(i, j);
+    }
 
-	private void buildPacket(int i, int j) {
-		writeC(Opcodes.S_HYPERTEXT);
-		writeD(i);
-		writeS("RaiseAttr");
-	}
+    private void buildPacket(int i, int j) {
+        writeC(Opcodes.S_HYPERTEXT);
+        writeD(i);
+        writeS("RaiseAttr");
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
 
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return "[S] S_bonusstats";
-	}
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return "[S] S_bonusstats";
+    }
 }

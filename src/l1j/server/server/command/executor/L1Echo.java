@@ -25,15 +25,15 @@ import l1j.server.server.serverpackets.S_SystemMessage;
  * 入力された引数をそのまま返すコマンド。テスト、デバッグ、およびコマンド実装サンプル用。
  */
 public class L1Echo implements L1CommandExecutor {
-	private L1Echo() {
-	}
+    private L1Echo() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Echo();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Echo();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		pc.sendPackets(new S_SystemMessage(arg));
-	}
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        pc.sendPackets(new S_SystemMessage(arg));
+    }
 }

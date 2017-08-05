@@ -26,28 +26,29 @@ import l1j.server.server.Opcodes;
 
 public class S_CurseBlind extends ServerBasePacket {
 
-	private static final String S_CurseBlind = "[S] S_CurseBlind";
-	private byte[] _byte = null;
+    private static final String S_CurseBlind = "[S] S_CurseBlind";
+    private byte[] _byte = null;
 
-	public S_CurseBlind(int type) {
-		// type 0:OFF 1：自分以外見えない2：周囲のキャラクターが見える
-		buildPacket(type);
-	}
+    public S_CurseBlind(int type) {
+        // type 0:OFF 1：自分以外見えない2：周囲のキャラクターが見える
+        buildPacket(type);
+    }
 
-	private void buildPacket(int type) {
-		writeC(Opcodes.S_BLIND);
-		writeH(type);
-	}
+    private void buildPacket(int type) {
+        writeC(Opcodes.S_BLIND);
+        writeH(type);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return S_CurseBlind;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_CurseBlind;
+    }
 }

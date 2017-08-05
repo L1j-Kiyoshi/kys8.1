@@ -25,101 +25,101 @@ import l1j.server.server.model.Instance.L1SummonInstance;
 
 public class S_PetMenuPacket extends ServerBasePacket {
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_PetMenuPacket(L1NpcInstance npc, int exppercet) {
-		buildpacket(npc, exppercet);
-	}
+    public S_PetMenuPacket(L1NpcInstance npc, int exppercet) {
+        buildpacket(npc, exppercet);
+    }
 
-	private void buildpacket(L1NpcInstance npc, int exppercet) {
-		writeC(Opcodes.S_HYPERTEXT);
+    private void buildpacket(L1NpcInstance npc, int exppercet) {
+        writeC(Opcodes.S_HYPERTEXT);
 
-		if (npc instanceof L1PetInstance) { // ペット
-			L1PetInstance pet = (L1PetInstance) npc;
-			writeD(pet.getId());
-			writeS("anicom");
-			writeC(0x00);
-			writeH(10);
-			switch (pet.getCurrentPetStatus()) {
-			case 1:
-				writeS("$469"); // 攻撃態勢
-				break;
-			case 2:
-				writeS("$470"); // 防御態勢
-				break;
-			case 3:
-				writeS("$471"); // 休憩
-				break;
-			case 5:
-				writeS("$472");  // 境界
-				break;
-			case 8:
-				writeS("$613");	//収集
-				break;
-			default:
-				writeS("$471"); // 休憩
-				break;
-			}
-			writeS(Integer.toString(pet.getCurrentHp())); // 現在のHP
-			writeS(Integer.toString(pet.getMaxHp())); // 最大HP
-			writeS(Integer.toString(pet.getCurrentMp())); // 現在のMP
-			writeS(Integer.toString(pet.getMaxMp())); // 最大MP
-			writeS(Integer.toString(pet.getLevel())); // レベル
+        if (npc instanceof L1PetInstance) { // ペット
+            L1PetInstance pet = (L1PetInstance) npc;
+            writeD(pet.getId());
+            writeS("anicom");
+            writeC(0x00);
+            writeH(10);
+            switch (pet.getCurrentPetStatus()) {
+                case 1:
+                    writeS("$469"); // 攻撃態勢
+                    break;
+                case 2:
+                    writeS("$470"); // 防御態勢
+                    break;
+                case 3:
+                    writeS("$471"); // 休憩
+                    break;
+                case 5:
+                    writeS("$472");  // 境界
+                    break;
+                case 8:
+                    writeS("$613");    //収集
+                    break;
+                default:
+                    writeS("$471"); // 休憩
+                    break;
+            }
+            writeS(Integer.toString(pet.getCurrentHp())); // 現在のHP
+            writeS(Integer.toString(pet.getMaxHp())); // 最大HP
+            writeS(Integer.toString(pet.getCurrentMp())); // 現在のMP
+            writeS(Integer.toString(pet.getMaxMp())); // 最大MP
+            writeS(Integer.toString(pet.getLevel())); // レベル
 
-			// 名前の文字数が8を超えると落ちる
-			// なぜか「セントバーナード "、"ブレイブラビット "はOK
-			// String pet_name = pet.get_name();
-			// if (pet_name.equalsIgnoreCase("ハイドフェル")) {
-			// pet_name = "ハイドフェルマー";
-			// }
-			// else if (pet_name.equalsIgnoreCase("ハイセントバーナード")) {
-			// pet_name = "ハイセントバー";
-			// }
-			// writeS(pet_name);
-			writeS(""); // ペットの名前を表示させると不安定になるので、非表示にする
-			writeS("$612"); // お腹いっぱい
-			writeS(Integer.toString(exppercet)); // 経験値
-			writeS(Integer.toString(pet.getLawful())); // アライメント
-		} else if (npc instanceof L1SummonInstance) { // サーモンモンスター
-			L1SummonInstance summon = (L1SummonInstance) npc;
-			writeD(summon.getId());
-			writeS("moncom");
-			writeC(0x00);
-			writeH(6); // 渡す引数文字の数の形
-			switch (summon.get_currentPetStatus()) {
-			case 1:
-				writeS("$469"); // 攻撃態勢
-				break;
-			case 2:
-				writeS("$470"); // 防御態勢
-				break;
-			case 3:
-				writeS("$471"); // 休憩
-				break;
-			case 5:
-				writeS("$472"); // 境界
-				break;
-			default:
-				writeS("$471"); // 休憩
-				break;
-			}
-			writeS(Integer.toString(summon.getCurrentHp())); // 現在のHP
-			writeS(Integer.toString(summon.getMaxHp())); // 最大HP
-			writeS(Integer.toString(summon.getCurrentMp())); // 現在のMP
-			writeS(Integer.toString(summon.getMaxMp())); // 最大MP
-			writeS(Integer.toString(summon.getLevel())); // レベル
-			// writeS(summon.getNpcTemplate().get_nameid());
-			// writeS(Integer.toString(0));
-			// writeS(Integer.toString(790));
-		}
-	}
+            // 名前の文字数が8を超えると落ちる
+            // なぜか「セントバーナード "、"ブレイブラビット "はOK
+            // String pet_name = pet.get_name();
+            // if (pet_name.equalsIgnoreCase("ハイドフェル")) {
+            // pet_name = "ハイドフェルマー";
+            // }
+            // else if (pet_name.equalsIgnoreCase("ハイセントバーナード")) {
+            // pet_name = "ハイセントバー";
+            // }
+            // writeS(pet_name);
+            writeS(""); // ペットの名前を表示させると不安定になるので、非表示にする
+            writeS("$612"); // お腹いっぱい
+            writeS(Integer.toString(exppercet)); // 経験値
+            writeS(Integer.toString(pet.getLawful())); // アライメント
+        } else if (npc instanceof L1SummonInstance) { // サーモンモンスター
+            L1SummonInstance summon = (L1SummonInstance) npc;
+            writeD(summon.getId());
+            writeS("moncom");
+            writeC(0x00);
+            writeH(6); // 渡す引数文字の数の形
+            switch (summon.get_currentPetStatus()) {
+                case 1:
+                    writeS("$469"); // 攻撃態勢
+                    break;
+                case 2:
+                    writeS("$470"); // 防御態勢
+                    break;
+                case 3:
+                    writeS("$471"); // 休憩
+                    break;
+                case 5:
+                    writeS("$472"); // 境界
+                    break;
+                default:
+                    writeS("$471"); // 休憩
+                    break;
+            }
+            writeS(Integer.toString(summon.getCurrentHp())); // 現在のHP
+            writeS(Integer.toString(summon.getMaxHp())); // 最大HP
+            writeS(Integer.toString(summon.getCurrentMp())); // 現在のMP
+            writeS(Integer.toString(summon.getMaxMp())); // 最大MP
+            writeS(Integer.toString(summon.getLevel())); // レベル
+            // writeS(summon.getNpcTemplate().get_nameid());
+            // writeS(Integer.toString(0));
+            // writeS(Integer.toString(790));
+        }
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = _bao.toByteArray();
-		}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = _bao.toByteArray();
+        }
 
-		return _byte;
-	}
+        return _byte;
+    }
 }

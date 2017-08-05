@@ -22,143 +22,143 @@ import l1j.server.server.serverpackets.S_Unknown2;
 import l1j.server.server.utils.SQLUtil;
 
 public class C_CommonClick {
-	private static final String C_COMMON_CLICK = "[C] C_CommonClick";
-	private static Logger _log = Logger.getLogger(C_CommonClick.class.getName());
-	//private static final int LIMIT_MIN = 1;
-	//private static final int LIMIT_MAX = 32767;
+    private static final String C_COMMON_CLICK = "[C] C_CommonClick";
+    private static Logger _log = Logger.getLogger(C_CommonClick.class.getName());
+    //private static final int LIMIT_MIN = 1;
+    //private static final int LIMIT_MAX = 32767;
 
-	public C_CommonClick(GameClient client) {
-		if (client == null || client.getAccount() == null)
-			return;
+    public C_CommonClick(GameClient client) {
+        if (client == null || client.getAccount() == null)
+            return;
 
-		deleteCharacter(client);
-		
-		client.getAccount().updateTamPoint(client.getAccount());
-		client.sendPacket(new S_NewCreateItem(S_NewCreateItem.TAM_POINT, client));
-			
-		int amountOfChars = client.getAccount().countCharacters();
-		int slot = client.getAccount().getCharSlot();
-		client.sendPacket(new S_CharAmount(amountOfChars, slot));
-		if (amountOfChars > 0) {
-			sendCharPacks(client);
-		}
-		client.sendPacket(new S_Unknown2(0)); // ログイン時オンノ処理
-	}
+        deleteCharacter(client);
 
-	public static void sendCharPacks(GameClient client) {
-		Connection conn = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
+        client.getAccount().updateTamPoint(client.getAccount());
+        client.sendPacket(new S_NewCreateItem(S_NewCreateItem.TAM_POINT, client));
 
-			conn = L1DatabaseFactory.getInstance().getConnection();
-			pstm = conn.prepareStatement("SELECT * FROM characters WHERE account_name=? ORDER BY objid");
-			pstm.setString(1, client.getAccountName());
-			rs = pstm.executeQuery();
-			S_CharPacks cpk = null;
-			while (rs.next()) {
-				String name = rs.getString("char_name");
-				String clanname = rs.getString("Clanname");
-				int type = rs.getInt("Type");
-				byte sex = rs.getByte("Sex");
-				int lawful = rs.getInt("Lawful");
+        int amountOfChars = client.getAccount().countCharacters();
+        int slot = client.getAccount().getCharSlot();
+        client.sendPacket(new S_CharAmount(amountOfChars, slot));
+        if (amountOfChars > 0) {
+            sendCharPacks(client);
+        }
+        client.sendPacket(new S_Unknown2(0)); // ログイン時オンノ処理
+    }
 
-				int currenthp = rs.getInt("CurHp");
-				if (currenthp < 1) {
-					currenthp = 1;
-				} else if (currenthp > 32767) {
-					currenthp = 32767;
-				}
+    public static void sendCharPacks(GameClient client) {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
 
-				int currentmp = rs.getInt("CurMp");
-				if (currentmp < 1) {
-					currentmp = 1;
-				} else if (currentmp > 32767) {
-					currentmp = 32767;
-				}
+            conn = L1DatabaseFactory.getInstance().getConnection();
+            pstm = conn.prepareStatement("SELECT * FROM characters WHERE account_name=? ORDER BY objid");
+            pstm.setString(1, client.getAccountName());
+            rs = pstm.executeQuery();
+            S_CharPacks cpk = null;
+            while (rs.next()) {
+                String name = rs.getString("char_name");
+                String clanname = rs.getString("Clanname");
+                int type = rs.getInt("Type");
+                byte sex = rs.getByte("Sex");
+                int lawful = rs.getInt("Lawful");
 
-				int lvl;
-				if (Config.CHARACTER_CONFIG_IN_SERVER_SIDE) {
-					lvl = rs.getInt("level");
-					if (lvl < 1) {
-						lvl = 1;
-					} else if (lvl > 127) {
-						lvl = 127;
-					}
-				} else {
-					lvl = 1;
-				}
+                int currenthp = rs.getInt("CurHp");
+                if (currenthp < 1) {
+                    currenthp = 1;
+                } else if (currenthp > 32767) {
+                    currenthp = 32767;
+                }
 
-				int ac;// = rs.getByte("Ac");
-				if (rs.getInt("Ac") < -128) {
-					ac = (byte) -128;
-				} else {
-					ac = rs.getByte("Ac");
-				}
-				int str = rs.getByte("Str");
-				int dex = rs.getByte("Dex");
-				int con = rs.getByte("Con");
-				int wis = rs.getByte("Wis");
-				int cha = rs.getByte("Cha");
-				int intel = rs.getByte("Intel");
-				int accessLevel = rs.getShort("AccessLevel");
-				int birth = rs.getInt("BirthDay");
+                int currentmp = rs.getInt("CurMp");
+                if (currentmp < 1) {
+                    currentmp = 1;
+                } else if (currentmp > 32767) {
+                    currentmp = 32767;
+                }
+
+                int lvl;
+                if (Config.CHARACTER_CONFIG_IN_SERVER_SIDE) {
+                    lvl = rs.getInt("level");
+                    if (lvl < 1) {
+                        lvl = 1;
+                    } else if (lvl > 127) {
+                        lvl = 127;
+                    }
+                } else {
+                    lvl = 1;
+                }
+
+                int ac;// = rs.getByte("Ac");
+                if (rs.getInt("Ac") < -128) {
+                    ac = (byte) -128;
+                } else {
+                    ac = rs.getByte("Ac");
+                }
+                int str = rs.getByte("Str");
+                int dex = rs.getByte("Dex");
+                int con = rs.getByte("Con");
+                int wis = rs.getByte("Wis");
+                int cha = rs.getByte("Cha");
+                int intel = rs.getByte("Intel");
+                int accessLevel = rs.getShort("AccessLevel");
+                int birth = rs.getInt("BirthDay");
 //				System.out.println("名前は？ "+ name）;
-				RankTable.getInstance().sendRankStatusPacks(client, name);//ランキング
-			    cpk = new S_CharPacks(name, clanname, type, sex, lawful, currenthp, currentmp, ac, lvl, str, dex, con,
-				wis, cha, intel, accessLevel, birth);
+                RankTable.getInstance().sendRankStatusPacks(client, name);//ランキング
+                cpk = new S_CharPacks(name, clanname, type, sex, lawful, currenthp, currentmp, ac, lvl, str, dex, con,
+                        wis, cha, intel, accessLevel, birth);
 
-				client.sendPacket(cpk);
-			}
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(conn);
-		}
-	}
-	
-	private void deleteCharacter(GameClient client) {
-		Connection conn = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
+                client.sendPacket(cpk);
+            }
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(conn);
+        }
+    }
 
-			conn = L1DatabaseFactory.getInstance().getConnection();
-			pstm = conn.prepareStatement("SELECT * FROM characters WHERE account_name=? ORDER BY objid");
-			pstm.setString(1, client.getAccountName());
-			rs = pstm.executeQuery();
-			Timestamp deleteTime = null;
-			Calendar cal = null;
-			L1Clan clan = null;
-			while (rs.next()) {
-				String name = rs.getString("char_name");
-				String clanname = rs.getString("Clanname");
+    private void deleteCharacter(GameClient client) {
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
 
-				deleteTime = rs.getTimestamp("DeleteTime");
-				if (deleteTime != null) {
-					cal = Calendar.getInstance();
-					long checkDeleteTime = ((cal.getTimeInMillis() - deleteTime.getTime()) / 1000) / 3600;
-					if (checkDeleteTime >= 0) {
-						clan = L1World.getInstance().getClan(clanname);
-						if (clan != null) {
-							clan.removeClanMember(name);
-						}
-						CharacterTable.getInstance().deleteCharacter(client.getAccountName(), name);
-					}
-				}
-			}
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(conn);
-		}
-	}
-	
-	public String getType() {
-		return C_COMMON_CLICK;
-	}
+            conn = L1DatabaseFactory.getInstance().getConnection();
+            pstm = conn.prepareStatement("SELECT * FROM characters WHERE account_name=? ORDER BY objid");
+            pstm.setString(1, client.getAccountName());
+            rs = pstm.executeQuery();
+            Timestamp deleteTime = null;
+            Calendar cal = null;
+            L1Clan clan = null;
+            while (rs.next()) {
+                String name = rs.getString("char_name");
+                String clanname = rs.getString("Clanname");
+
+                deleteTime = rs.getTimestamp("DeleteTime");
+                if (deleteTime != null) {
+                    cal = Calendar.getInstance();
+                    long checkDeleteTime = ((cal.getTimeInMillis() - deleteTime.getTime()) / 1000) / 3600;
+                    if (checkDeleteTime >= 0) {
+                        clan = L1World.getInstance().getClan(clanname);
+                        if (clan != null) {
+                            clan.removeClanMember(name);
+                        }
+                        CharacterTable.getInstance().deleteCharacter(client.getAccountName(), name);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(conn);
+        }
+    }
+
+    public String getType() {
+        return C_COMMON_CLICK;
+    }
 }

@@ -30,77 +30,78 @@ import l1j.server.server.model.Warehouse.ClanWarehouse;
 import l1j.server.server.model.Warehouse.WarehouseManager;
 
 public class S_RetrievePledgeList extends ServerBasePacket {
-	public boolean NonValue = false;
-	public boolean InUse = false;
-	public S_RetrievePledgeList(int objid, L1PcInstance pc) {
-		L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
-		if (clan == null) {
-			return;
-		}
+    public boolean NonValue = false;
+    public boolean InUse = false;
 
-		ClanWarehouse clanWarehouse = WarehouseManager.getInstance().getClanWarehouse(clan.getClanName());
+    public S_RetrievePledgeList(int objid, L1PcInstance pc) {
+        L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
+        if (clan == null) {
+            return;
+        }
 
-		if (!clanWarehouse.setWarehouseUsingChar(pc.getId(), 0)) {
-			int id = clanWarehouse.getWarehouseUsingChar();
+        ClanWarehouse clanWarehouse = WarehouseManager.getInstance().getClanWarehouse(clan.getClanName());
 
-			L1Object prevUser = L1World.getInstance().findObject(id);
+        if (!clanWarehouse.setWarehouseUsingChar(pc.getId(), 0)) {
+            int id = clanWarehouse.getWarehouseUsingChar();
 
-			if (prevUser instanceof L1PcInstance) {
-				L1PcInstance usingPc = (L1PcInstance) prevUser;
+            L1Object prevUser = L1World.getInstance().findObject(id);
 
-				
-				if (usingPc.getClan() == clan) {
-					// \f1 血盟員が倉庫を使用中です。しばらく経ってから利用してください。
-					pc.sendPackets(new S_ChatPacket(pc,"" + usingPc.getName() + "が現在の血盟倉庫を使用中です。"));
-					InUse = true;
-					return;
-				}
-			}
-			if (!clanWarehouse.setWarehouseUsingChar(pc.getId(), id)) {
-				// その間に誰挟まっ入った場合
-				// \f1 血盟員が倉庫を使用中です。しばらく経ってから利用してください。
-				pc.sendPackets(new S_ChatPacket(pc,"" + clanWarehouse.getName() + "が現在の血盟倉庫を使用中です。"));
-				InUse = true;
-				return;
-			}
-		}
+            if (prevUser instanceof L1PcInstance) {
+                L1PcInstance usingPc = (L1PcInstance) prevUser;
 
-		if (pc.getInventory().getSize() < 180) {
-			int size = clanWarehouse.getSize();
-			if (size > 0) {
-				writeC(Opcodes.S_RETRIEVE_LIST);
-				writeD(objid);
-				writeH(size);
-				writeC(5); // 血盟倉庫
-				L1ItemInstance item = null;
-				for (Object itemObject : clanWarehouse.getItems()) {
-					item = (L1ItemInstance) itemObject;
-					writeD(item.getId());
-					writeC(item.getItem().getType2());
-					writeH(item.get_gfxid());
-					writeC(item.getItem().getBless());
-					writeD(item.getCount());
-					writeC(item.isIdentified() ? 1 : 0);
-					writeS(item.getViewName());
-					// by.lins
-					writeC(0);
-					// by.lins
-				}
-				writeD(30);
-				writeD(0x00000000);
-				writeH(0x00);
-			} else {
-				this.NonValue = true;
-			}
-		} else {
-			clanWarehouse.setWarehouseUsingChar(0, 0);
-			pc.sendPackets(new S_ServerMessage(263)); // \f1一人のキャラクターが持って歩くことができ
-														// アイテムは、最大180個までです。
-		}
-	}
 
-	@Override
-	public byte[] getContent() throws IOException {
-		return getBytes();
-	}
+                if (usingPc.getClan() == clan) {
+                    // \f1 血盟員が倉庫を使用中です。しばらく経ってから利用してください。
+                    pc.sendPackets(new S_ChatPacket(pc, "" + usingPc.getName() + "が現在の血盟倉庫を使用中です。"));
+                    InUse = true;
+                    return;
+                }
+            }
+            if (!clanWarehouse.setWarehouseUsingChar(pc.getId(), id)) {
+                // その間に誰挟まっ入った場合
+                // \f1 血盟員が倉庫を使用中です。しばらく経ってから利用してください。
+                pc.sendPackets(new S_ChatPacket(pc, "" + clanWarehouse.getName() + "が現在の血盟倉庫を使用中です。"));
+                InUse = true;
+                return;
+            }
+        }
+
+        if (pc.getInventory().getSize() < 180) {
+            int size = clanWarehouse.getSize();
+            if (size > 0) {
+                writeC(Opcodes.S_RETRIEVE_LIST);
+                writeD(objid);
+                writeH(size);
+                writeC(5); // 血盟倉庫
+                L1ItemInstance item = null;
+                for (Object itemObject : clanWarehouse.getItems()) {
+                    item = (L1ItemInstance) itemObject;
+                    writeD(item.getId());
+                    writeC(item.getItem().getType2());
+                    writeH(item.get_gfxid());
+                    writeC(item.getItem().getBless());
+                    writeD(item.getCount());
+                    writeC(item.isIdentified() ? 1 : 0);
+                    writeS(item.getViewName());
+                    // by.lins
+                    writeC(0);
+                    // by.lins
+                }
+                writeD(30);
+                writeD(0x00000000);
+                writeH(0x00);
+            } else {
+                this.NonValue = true;
+            }
+        } else {
+            clanWarehouse.setWarehouseUsingChar(0, 0);
+            pc.sendPackets(new S_ServerMessage(263)); // \f1一人のキャラクターが持って歩くことができ
+            // アイテムは、最大180個までです。
+        }
+    }
+
+    @Override
+    public byte[] getContent() throws IOException {
+        return getBytes();
+    }
 }

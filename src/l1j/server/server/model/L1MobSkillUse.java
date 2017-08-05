@@ -32,645 +32,648 @@ import l1j.server.server.templates.L1Npc;
 import l1j.server.server.templates.L1Skills;
 
 public class L1MobSkillUse {
-	private static Logger _log = Logger.getLogger(L1MobSkillUse.class.getName());
-
-	private L1MobSkill _mobSkillTemplate = null;
-
-	private L1NpcInstance _attacker = null;
-
-	private L1Character _target = null;
-
-	private Random _rnd = new Random(System.nanoTime());
-
-	private int _sleepTime = 0;
-
-	private int _skillUseCount[];
-
-	public L1MobSkillUse(L1NpcInstance npc) {
-		try {
-			if (npc == null)
-				return;
-			_sleepTime = 0;
-			_mobSkillTemplate = MobSkillTable.getInstance().getTemplate(npc.getNpcTemplate().get_npcId());
-			if (_mobSkillTemplate == null) {
-				return;
-			}
-			_attacker = npc;
-			_skillUseCount = new int[getMobSkillTemplate().getSkillSize()];
-		} catch (Exception e) {
-		}
-	}
-
-
-	private int getSkillUseCount(int idx) {
-		return _skillUseCount[idx];
-	}
-
-	private void skillUseCountUp(int idx) {
-		_skillUseCount[idx]++;
-	}
-
-	public void resetAllSkillUseCount() {
-		if (getMobSkillTemplate() == null) {
-			return;
-		}
-
-		for (int i = 0; i < getMobSkillTemplate().getSkillSize(); i++) {
-			_skillUseCount[i] = 0;
-		}
-	}
-
-	public int getSleepTime() {
-		return _sleepTime;
-	}
-
-	public void setSleepTime(int i) {
-		_sleepTime = i;
-	}
-
-	public L1MobSkill getMobSkillTemplate() {
-		return _mobSkillTemplate;
-	}
-
-	public boolean skillUse(L1Character tg) {
-		try {
-			if (tg == null || _mobSkillTemplate == null) {
-				return false;
-			}
-			_target = tg;
-
-			int type;
-			type = getMobSkillTemplate().getType(0);
-
-			if (type == L1MobSkill.TYPE_NONE) {
-				return false;
-			}
-
-			int i = 0;
-
-			for (i = 0; i < getMobSkillTemplate().getSkillSize()
-					&& getMobSkillTemplate().getType(i) != L1MobSkill.TYPE_NONE; i++) {
-				int changeType = getMobSkillTemplate().getChangeTarget(i);
-				if (changeType > 0) {
-					_target = changeTarget(changeType, i);
-				} else {
-					_target = tg;
-				}
-
-				if (isSkillUseble(i) == false) {
-					continue;
-				}
-				
-				type = getMobSkillTemplate().getType(i);
-				if (type == L1MobSkill.TYPE_PHYSICAL_ATTACK) {
-					if (physicalAttack(i) == true) {
-						skillUseCountUp(i);
-						return true;
-					}
-				} else if (type == L1MobSkill.TYPE_MAGIC_ATTACK) {
-					if (magicAttack(i) == true) {
-						skillUseCountUp(i);
-						return true;
-					}
-				} else if (type == L1MobSkill.TYPE_SUMMON) {
-					if (summon(i) == true) {
-						skillUseCountUp(i);
-						return true;
-					}
-				} else if (type == L1MobSkill.TYPE_POLY) {
-					if (poly(i) == true) {
-						skillUseCountUp(i);
-						return true;
-					}
-				}
-			}
-		} catch (Exception e) {
-		}
-		return false;
-	}
-
-	private boolean summon(int idx) {
-		int summonId = getMobSkillTemplate().getSummon(idx);
-		int min = getMobSkillTemplate().getSummonMin(idx);
-		int max = getMobSkillTemplate().getSummonMax(idx);
-		int count = 0;
-
-		if (summonId == 0) {
-			return false;
-		}
-
-		count = _rnd.nextInt(max) + min;
-		mobspawn(summonId, count);
-
-		_attacker.broadcastPacket(new S_SkillSound(_attacker.getId(), 761));
-
-		S_DoActionGFX gfx = new S_DoActionGFX(_attacker.getId(),
-				ActionCodes.ACTION_SkillBuff);
-		_attacker.broadcastPacket(gfx);
-
-		_sleepTime = _attacker.getNpcTemplate().getSubMagicSpeed();
-		return true;
-	}
-
-	private boolean poly(int idx) {
-		int polyId = getMobSkillTemplate().getPolyId(idx);
-		boolean usePoly = false;
-
-		if (polyId == 0) {
-			return false;
-		}
-
-		for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(_attacker)) {
-			if (pc == null || pc.isDead()) {
-				continue;
-			}
-			if (pc.isGhost()) {
-				continue;
-			}
-			if (pc.isGmInvis()) {
-				continue;
-			}
-			if (_attacker.glanceCheck(pc.getX(), pc.getY()) == false) {
-				continue;
-			}
-
-			int npcId = _attacker.getNpcTemplate().get_npcId();
-			switch (npcId) {
-			case 81082: pc.getInventory().takeoffEquip(945); break;
-			default: break;
-			}
-			L1PolyMorph.doPoly(pc, polyId, 1800, L1PolyMorph.MORPH_BY_NPC);
-
-			usePoly = true;
-		}
-		if (usePoly) {
-			for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(_attacker)) {
-				if (pc == null)
-					continue;
-				pc.sendPackets(new S_SkillSound(pc.getId(), 230));
-				pc.broadcastPacket(new S_SkillSound(pc.getId(), 230));
-				break;
-			}
-			S_DoActionGFX gfx = new S_DoActionGFX(_attacker.getId(),
-					ActionCodes.ACTION_SkillBuff);
-			_attacker.broadcastPacket(gfx);
-
-			_sleepTime = _attacker.getNpcTemplate().getSubMagicSpeed();
-		}
-
-		return usePoly;
-	}
-
-	private boolean magicAttack(int idx) {
-		L1SkillUse skillUse = new L1SkillUse();
-		int skillid = getMobSkillTemplate().getSkillId(idx);
-		boolean canUseSkill = false;		
-		if (_attacker.hasSkillEffect(L1SkillId.SILENCE)){
-			return false;
-		}
-
-		if ((skillid >= 22020 && skillid <= 22029 || skillid >= 22041 && skillid <= 22052) || (skillid >= 7001 && skillid <= 7050)){
-			if(_attacker.hasSkillEffect(L1SkillId.PREDICATEDELAY)){//用言ディレイ開始します。
-				return false;
-			} else {
-				_attacker.setSkillEffect(L1SkillId.PREDICATEDELAY, 10 * 1000);
-			}
-		}
-		
-		int npcId = _attacker.getNpcTemplate().get_npcId();
-		switch(npcId){
-		case 45545: // ブラックエルダー
-			if (skillid == 7031){
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$2966", 0));
-			} else if (skillid == 7030){
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$3717", 0));
-			}
-			break;
-		case 5096: // リンドビオル
-		case 5097:
-		case 5098:
-		case 5099:
-		case 5100:
-			if (skillid == 7018 || skillid == 7023){ // 鉱物ゴーレム召喚
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10158", 0));
-			} else if (skillid == 7001){ // ウィンドシャックル
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10152", 0));
-				if (_target instanceof L1PcInstance){
-					L1PcInstance pc = (L1PcInstance) _target;
-					pc.sendPackets(new S_PacketBox(S_PacketBox.HADIN_DISPLAY, 6));
-				}
-			} else if (skillid == 7013){ // サイレンス
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10152", 0));
-				if (_target instanceof L1PcInstance){
-					L1PcInstance pc = (L1PcInstance) _target;
-					pc.sendPackets(new S_PacketBox(S_PacketBox.HADIN_DISPLAY, 8));
-				}
-			} else if (skillid == 7002 || skillid == 7004){ // リコールキャンセレーション、ウェポンブレーカー
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10162", 0));
-			} else if (skillid == 7003){ // 竜巻の4つの
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10150", 0));
-			} else if (skillid == 7022){ // 発作
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10165", 0));
-			} else if (skillid == 7023){ // グルムデ精霊
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10158", 0));
-			} else if (skillid == 7009){ // 広域魔法[電気]
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10162", 0));
-			} else if (skillid == 7007){ // ウィンドセクル
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10152", 0));
-			//} else if (skillid == 7010 || skillid == 7008){ //キャンセレーション、ウェポンブレーカー
-			//	Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10162", 0));
-			}
-			break;
-			// エルジャベ
-			case 5136:
-				if (skillid == 7048){ // トルネード
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14234", 0));
-				} else if (skillid == 7044){ // 毒雲
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14233", 0));
-				} else if (skillid == 7049){ // サモン
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14236", 0));
-				} else if (skillid == 7042){ // アースバインド
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14237", 0));
-				} else if (skillid == 7041){ // カーズパラライズ
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14238", 0));
-				} else if (skillid == 7050){ // 砂嵐召喚
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14235", 0));
-				}
-				break;
-		// サンドワーム
-		case 5135:
-			if (skillid == 7045) {
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14055", 0));
-			} else if (skillid == 7046) {
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14056", 0));
-			} else if (skillid == 7047) {
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14057", 0));
-			} else if (skillid == 7044) {
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14058", 0));
-			} else if (skillid == 7004) {
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
-			} else if (skillid == 7004) {
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
-			} else if (skillid == 7055) {//イロプ
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
-			} else if (skillid == 7056) {//ボムオスキル1
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
-			} else if (skillid == 7057) {//ボムオスキル2
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
-			} else if (skillid == 7058) {//ボムオスキル3
-				Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
-			}
-			break;
-		case 145684:
-				if(skillid == 90009){
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"クおおアン",0));
-				}else if(skillid==90010){
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"クールドゥームテーションクラスハルパウム",0));
-				}else if(skillid==90011){
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"ジェルセキュオ三ケロ押し。",0));
-					for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(_attacker)) {
-						if (pc == null)
-							continue;
-						pc.sendPackets(new S_SkillSound(pc.getId(), 15930));
-						pc.broadcastPacket(new S_SkillSound(pc.getId(), 15930));
-						pc.sendPackets(new S_DoActionGFX(_attacker.getId(),33));
-						break;
-					}
-				}else if(skillid==90013){
-					Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker,"クールヅムうスクムヌ。",0));
-				}
-			break;
-		default:
-			break;
-		}
-		
-		if (skillid > 0) {
-			canUseSkill = skillUse.checkUseSkill(null, skillid, _target.getId(), _target.getX(), _target.getY(), null,
-					0, L1SkillUse.TYPE_NORMAL, _attacker);
-		}
-		if (canUseSkill == true) {
-			if (getMobSkillTemplate().getLeverage(idx) > 0) {
-				skillUse.setLeverage(getMobSkillTemplate().getLeverage(idx));
-			}
-			skillUse.handleCommands(null, skillid, _target.getId(), _target.getX(), _target.getY(), null, 0,
-					L1SkillUse.TYPE_NORMAL, _attacker);
-			L1Skills skill = SkillsTable.getInstance().getTemplate(skillid);
-			if (skill.getTarget().equals("attack") && skillid != 18) {
-				_sleepTime = _attacker.getNpcTemplate().getAtkMagicSpeed();
-			} else {
-				_sleepTime = _attacker.getNpcTemplate().getSubMagicSpeed();
-			}
-
-			return true;
-		}
-		return false;
-	}
-
-	private boolean physicalAttack(int idx) {
-		Map<Integer, Integer> targetList = new ConcurrentHashMap<Integer, Integer>();
-		int areaWidth = getMobSkillTemplate().getAreaWidth(idx);
-		int areaHeight = getMobSkillTemplate().getAreaHeight(idx);
-		int range = getMobSkillTemplate().getRange(idx);
-		int actId = getMobSkillTemplate().getActid(idx);
-		int gfxId = getMobSkillTemplate().getGfxid(idx);
-
-		if (_attacker.getLocation().getTileLineDistance(_target.getLocation()) > range) {
-			return false;
-		}
-
-		if (!_attacker.glanceCheck(_target.getX(), _target.getY())) {
-			return false;
-		}
-
-		_attacker.setHeading(_attacker.targetDirection(_target.getX(), _target.getY()));
-		if (areaHeight > 0) {
-			L1Character cha = null;
-			for (L1Object obj : L1World.getInstance().getVisibleBoxObjects(_attacker, _attacker.getHeading(),
-					areaWidth, areaHeight)) {
-				if (obj == null)
-					continue;
-				if (!(obj instanceof L1Character)) {
-					continue;
-				}
-
-				cha = (L1Character) obj;
-				if (cha.isDead()) {
-					continue;
-				}
-
-				if (cha instanceof L1PcInstance) {
-					if (((L1PcInstance) cha).isGhost()) {
-						continue;
-					}
-				}
-
-				if (cha instanceof L1PcInstance && _attacker instanceof L1SummonInstance
-						|| _attacker instanceof L1PetInstance) {
-					if (cha.getId() == _attacker.getMaster().getId()) {
-						continue;
-					}
-					if (cha.getZoneType() == 1) {
-						continue;
-					}
-				}
-
-				if (!_attacker.glanceCheck(cha.getX(), cha.getY())) {
-					continue;
-				}
-
-				if (_target instanceof L1PcInstance || _target instanceof L1SummonInstance
-						|| _target instanceof L1PetInstance) {
-					if (obj instanceof L1PcInstance && !((L1PcInstance) obj).isGhost()
-							&& !((L1PcInstance) obj).isGmInvis() || obj instanceof L1SummonInstance
-							|| obj instanceof L1PetInstance) {
-						targetList.put(obj.getId(), 0);
-					}
-				} else {
-					if (obj instanceof L1MonsterInstance) {
-						targetList.put(obj.getId(), 0);
-					}
-				}
-			}
-		} else {
-			targetList.put(_target.getId(), 0);
-		}
-
-		if (targetList.size() == 0) {
-			return false;
-		}
-
-		Iterator<Integer> ite = targetList.keySet().iterator();
-		L1Attack attack = null;
-		while (ite.hasNext()) {
-			int targetId = ite.next();
-			attack = new L1Attack(_attacker, (L1Character) L1World.getInstance().findObject(targetId));
-			if (attack.calcHit()) {
-				if (getMobSkillTemplate().getLeverage(idx) > 0) {
-					attack.setLeverage(getMobSkillTemplate().getLeverage(idx));
-				}
-				attack.calcDamage();
-			}
-			if (actId > 0) {
-				attack.setActId(actId);
-			}
-			if (targetId == _target.getId()) {
-				if (gfxId > 0) {
-					_attacker.broadcastPacket(new S_SkillSound(_attacker.getId(), gfxId));
-				}
-				attack.action();
-			}
-			attack.commit();
-		}
-
-		_sleepTime = _attacker.getAtkspeed();
-		return true;
-	}
-
-	private boolean isSkillUseble(int skillIdx) {
-		boolean useble = false;
-
-		if (getMobSkillTemplate().getTriggerRandom(skillIdx) > 0) {
-			int chance = _rnd.nextInt(100) + 1;
-			if (chance < getMobSkillTemplate().getTriggerRandom(skillIdx)) {
-				useble = true;
-			} else {
-				return false;
-			}
-		}
-
-		if (getMobSkillTemplate().getTriggerHp(skillIdx) > 0) {
-			int hpRatio = (_attacker.getCurrentHp() * 100)
-					/ _attacker.getMaxHp();
-			if (hpRatio <= getMobSkillTemplate().getTriggerHp(skillIdx)) {
-				useble = true;
-			} else {
-				return false;
-			}
-		}
-
-		if (getMobSkillTemplate().getTriggerCompanionHp(skillIdx) > 0) {
-			L1NpcInstance companionNpc = searchMinCompanionHp();
-			if (companionNpc == null) {
-				return false;
-			}
-
-			int hpRatio = (companionNpc.getCurrentHp() * 100)
-					/ companionNpc.getMaxHp();
-			if (hpRatio <= getMobSkillTemplate()
-					.getTriggerCompanionHp(skillIdx)) {
-				useble = true;
-				_target = companionNpc;
-			} else {
-				return false;
-			}
-		}
-
-		if (getMobSkillTemplate().getTriggerRange(skillIdx) != 0) {
-			int distance = _attacker.getLocation().getTileLineDistance(
-					_target.getLocation());
-
-			if (getMobSkillTemplate().isTriggerDistance(skillIdx, distance)) {
-				useble = true;
-			} else {
-				return false;
-			}
-		}
-
-		if (getMobSkillTemplate().getTriggerCount(skillIdx) > 0) {
-			if (getSkillUseCount(skillIdx) < getMobSkillTemplate()
-					.getTriggerCount(skillIdx)) {
-				useble = true;
-			} else {
-				return false;
-			}
-		}
-		return useble;
-	}
-
-	private L1NpcInstance searchMinCompanionHp() {
-		L1NpcInstance npc;
-		L1NpcInstance minHpNpc = null;
-		int hpRatio = 100;
-		int companionHpRatio;
-		int family = _attacker.getNpcTemplate().get_family();
-
-		for (L1Object object : L1World.getInstance().getVisibleObjects(_attacker)) {
-			if (object == null)
-				continue;
-			if (object instanceof L1NpcInstance) {
-				npc = (L1NpcInstance) object;
-				if (npc.getNpcTemplate().get_family() == family) {
-					companionHpRatio = (npc.getCurrentHp() * 100) / npc.getMaxHp();
-					if (companionHpRatio < hpRatio) {
-						hpRatio = companionHpRatio;
-						minHpNpc = npc;
-					}
-				}
-			}
-		}
-		return minHpNpc;
-	}
-
-	private void mobspawn(int summonId, int count) {
-		int i;
-
-		for (i = 0; i < count; i++) {
-			mobspawn(summonId);
-		}
-	}
-
-	private void mobspawn(int summonId) {
-		try {
-			L1Npc spawnmonster = NpcTable.getInstance().getTemplate(summonId);
-			if (spawnmonster != null) {
-				L1NpcInstance mob = null;
-				try {
-					String implementationName = spawnmonster.getImpl();
-					Constructor<?> _constructor = Class.forName(
-							(new StringBuilder()).append(
-									"l1j.server.server.model.Instance.")
-									.append(implementationName).append(
-											"Instance").toString())
-											.getConstructors()[0];
-					mob = (L1NpcInstance) _constructor
-							.newInstance(new Object[] { spawnmonster });
-					mob.setId(IdFactory.getInstance().nextId());
-					L1Location loc = _attacker.getLocation().randomLocation(8,
-							false);
-					int heading = _rnd.nextInt(8);
-					mob.setX(loc.getX());
-					mob.setY(loc.getY());
-					mob.setHomeX(loc.getX());
-					mob.setHomeY(loc.getY());
-					short mapid = _attacker.getMapId();
-					mob.setMap(mapid);
-					mob.setHeading(heading);
-					L1World.getInstance().storeObject(mob);
-					L1World.getInstance().addVisibleObject(mob);
-					L1Object object = L1World.getInstance().findObject(
-							mob.getId());
-					L1MonsterInstance newnpc = (L1MonsterInstance) object;
-					newnpc.set_storeDroped(true); 
-					if (summonId == 45061 
-							|| summonId == 45161 
-							|| summonId == 45181 
-							|| summonId == 45455) {
-						newnpc.broadcastPacket(new S_DoActionGFX(
-								newnpc.getId(), ActionCodes.ACTION_Hide));
-						newnpc.setStatus(13);
-						newnpc.broadcastPacket(new S_NPCPack(newnpc));
-						newnpc.broadcastPacket(new S_DoActionGFX(
-								newnpc.getId(), ActionCodes.ACTION_Appear));
-						newnpc.setStatus(0);
-						newnpc.broadcastPacket(new S_NPCPack(newnpc));
-					}
-					newnpc.onNpcAI();
-					newnpc.getLight().turnOnOffLight();
-					newnpc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE);
-				} catch (Exception e) {
-					_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-				}
-			}
-		} catch (Exception e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		}
-	}
-
-	private L1Character changeTarget(int type, int idx) {
-		L1Character target;
-
-		switch (type) {
-		case L1MobSkill.CHANGE_TARGET_ME:
-			target = _attacker;
-			break;
-		case L1MobSkill.CHANGE_TARGET_RANDOM:
-			List<L1Character> targetList = new ArrayList<L1Character>();
-			L1Character cha = null;
-			for (L1Object obj : L1World.getInstance().getVisibleObjects(_attacker)) {
-				if (obj == null)
-					continue;
-				if (obj instanceof L1PcInstance || obj instanceof L1PetInstance || obj instanceof L1SummonInstance) {
-					cha = (L1Character) obj;
-					int distance = _attacker.getLocation().getTileLineDistance(cha.getLocation());
-
-					if (!getMobSkillTemplate().isTriggerDistance(idx, distance)) {
-						continue;
-					}
-
-					if (!_attacker.glanceCheck(cha.getX(), cha.getY())) {
-						continue;
-					}
-
-					if (!_attacker.getHateList().containsKey(cha)) {
-						continue;
-					}
-
-					if (cha.isDead()) {
-						continue;
-					}
-
-					if (cha instanceof L1PcInstance) {
-						if (((L1PcInstance) cha).isGhost()) {
-							continue;
-						}
-					}
-					targetList.add((L1Character) obj);
-				}
-			}
-
-			if (targetList.size() == 0) {
-				target = _target;
-			} else {
-				int randomSize = targetList.size() * 100;
-				int targetIndex = _rnd.nextInt(randomSize) / 100;
-				target = targetList.get(targetIndex);
-			}
-			break;
-
-		default:
-			target = _target;
-			break;
-		}
-		return target;
-	}
+    private static Logger _log = Logger.getLogger(L1MobSkillUse.class.getName());
+
+    private L1MobSkill _mobSkillTemplate = null;
+
+    private L1NpcInstance _attacker = null;
+
+    private L1Character _target = null;
+
+    private Random _rnd = new Random(System.nanoTime());
+
+    private int _sleepTime = 0;
+
+    private int _skillUseCount[];
+
+    public L1MobSkillUse(L1NpcInstance npc) {
+        try {
+            if (npc == null)
+                return;
+            _sleepTime = 0;
+            _mobSkillTemplate = MobSkillTable.getInstance().getTemplate(npc.getNpcTemplate().get_npcId());
+            if (_mobSkillTemplate == null) {
+                return;
+            }
+            _attacker = npc;
+            _skillUseCount = new int[getMobSkillTemplate().getSkillSize()];
+        } catch (Exception e) {
+        }
+    }
+
+
+    private int getSkillUseCount(int idx) {
+        return _skillUseCount[idx];
+    }
+
+    private void skillUseCountUp(int idx) {
+        _skillUseCount[idx]++;
+    }
+
+    public void resetAllSkillUseCount() {
+        if (getMobSkillTemplate() == null) {
+            return;
+        }
+
+        for (int i = 0; i < getMobSkillTemplate().getSkillSize(); i++) {
+            _skillUseCount[i] = 0;
+        }
+    }
+
+    public int getSleepTime() {
+        return _sleepTime;
+    }
+
+    public void setSleepTime(int i) {
+        _sleepTime = i;
+    }
+
+    public L1MobSkill getMobSkillTemplate() {
+        return _mobSkillTemplate;
+    }
+
+    public boolean skillUse(L1Character tg) {
+        try {
+            if (tg == null || _mobSkillTemplate == null) {
+                return false;
+            }
+            _target = tg;
+
+            int type;
+            type = getMobSkillTemplate().getType(0);
+
+            if (type == L1MobSkill.TYPE_NONE) {
+                return false;
+            }
+
+            int i = 0;
+
+            for (i = 0; i < getMobSkillTemplate().getSkillSize()
+                    && getMobSkillTemplate().getType(i) != L1MobSkill.TYPE_NONE; i++) {
+                int changeType = getMobSkillTemplate().getChangeTarget(i);
+                if (changeType > 0) {
+                    _target = changeTarget(changeType, i);
+                } else {
+                    _target = tg;
+                }
+
+                if (isSkillUseble(i) == false) {
+                    continue;
+                }
+
+                type = getMobSkillTemplate().getType(i);
+                if (type == L1MobSkill.TYPE_PHYSICAL_ATTACK) {
+                    if (physicalAttack(i) == true) {
+                        skillUseCountUp(i);
+                        return true;
+                    }
+                } else if (type == L1MobSkill.TYPE_MAGIC_ATTACK) {
+                    if (magicAttack(i) == true) {
+                        skillUseCountUp(i);
+                        return true;
+                    }
+                } else if (type == L1MobSkill.TYPE_SUMMON) {
+                    if (summon(i) == true) {
+                        skillUseCountUp(i);
+                        return true;
+                    }
+                } else if (type == L1MobSkill.TYPE_POLY) {
+                    if (poly(i) == true) {
+                        skillUseCountUp(i);
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+
+    private boolean summon(int idx) {
+        int summonId = getMobSkillTemplate().getSummon(idx);
+        int min = getMobSkillTemplate().getSummonMin(idx);
+        int max = getMobSkillTemplate().getSummonMax(idx);
+        int count = 0;
+
+        if (summonId == 0) {
+            return false;
+        }
+
+        count = _rnd.nextInt(max) + min;
+        mobspawn(summonId, count);
+
+        _attacker.broadcastPacket(new S_SkillSound(_attacker.getId(), 761));
+
+        S_DoActionGFX gfx = new S_DoActionGFX(_attacker.getId(),
+                ActionCodes.ACTION_SkillBuff);
+        _attacker.broadcastPacket(gfx);
+
+        _sleepTime = _attacker.getNpcTemplate().getSubMagicSpeed();
+        return true;
+    }
+
+    private boolean poly(int idx) {
+        int polyId = getMobSkillTemplate().getPolyId(idx);
+        boolean usePoly = false;
+
+        if (polyId == 0) {
+            return false;
+        }
+
+        for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(_attacker)) {
+            if (pc == null || pc.isDead()) {
+                continue;
+            }
+            if (pc.isGhost()) {
+                continue;
+            }
+            if (pc.isGmInvis()) {
+                continue;
+            }
+            if (_attacker.glanceCheck(pc.getX(), pc.getY()) == false) {
+                continue;
+            }
+
+            int npcId = _attacker.getNpcTemplate().get_npcId();
+            switch (npcId) {
+                case 81082:
+                    pc.getInventory().takeoffEquip(945);
+                    break;
+                default:
+                    break;
+            }
+            L1PolyMorph.doPoly(pc, polyId, 1800, L1PolyMorph.MORPH_BY_NPC);
+
+            usePoly = true;
+        }
+        if (usePoly) {
+            for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(_attacker)) {
+                if (pc == null)
+                    continue;
+                pc.sendPackets(new S_SkillSound(pc.getId(), 230));
+                pc.broadcastPacket(new S_SkillSound(pc.getId(), 230));
+                break;
+            }
+            S_DoActionGFX gfx = new S_DoActionGFX(_attacker.getId(),
+                    ActionCodes.ACTION_SkillBuff);
+            _attacker.broadcastPacket(gfx);
+
+            _sleepTime = _attacker.getNpcTemplate().getSubMagicSpeed();
+        }
+
+        return usePoly;
+    }
+
+    private boolean magicAttack(int idx) {
+        L1SkillUse skillUse = new L1SkillUse();
+        int skillid = getMobSkillTemplate().getSkillId(idx);
+        boolean canUseSkill = false;
+        if (_attacker.hasSkillEffect(L1SkillId.SILENCE)) {
+            return false;
+        }
+
+        if ((skillid >= 22020 && skillid <= 22029 || skillid >= 22041 && skillid <= 22052) || (skillid >= 7001 && skillid <= 7050)) {
+            if (_attacker.hasSkillEffect(L1SkillId.PREDICATEDELAY)) {//用言ディレイ開始します。
+                return false;
+            } else {
+                _attacker.setSkillEffect(L1SkillId.PREDICATEDELAY, 10 * 1000);
+            }
+        }
+
+        int npcId = _attacker.getNpcTemplate().get_npcId();
+        switch (npcId) {
+            case 45545: // ブラックエルダー
+                if (skillid == 7031) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$2966", 0));
+                } else if (skillid == 7030) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$3717", 0));
+                }
+                break;
+            case 5096: // リンドビオル
+            case 5097:
+            case 5098:
+            case 5099:
+            case 5100:
+                if (skillid == 7018 || skillid == 7023) { // 鉱物ゴーレム召喚
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10158", 0));
+                } else if (skillid == 7001) { // ウィンドシャックル
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10152", 0));
+                    if (_target instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) _target;
+                        pc.sendPackets(new S_PacketBox(S_PacketBox.HADIN_DISPLAY, 6));
+                    }
+                } else if (skillid == 7013) { // サイレンス
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10152", 0));
+                    if (_target instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) _target;
+                        pc.sendPackets(new S_PacketBox(S_PacketBox.HADIN_DISPLAY, 8));
+                    }
+                } else if (skillid == 7002 || skillid == 7004) { // リコールキャンセレーション、ウェポンブレーカー
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10162", 0));
+                } else if (skillid == 7003) { // 竜巻の4つの
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10150", 0));
+                } else if (skillid == 7022) { // 発作
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10165", 0));
+                } else if (skillid == 7023) { // グルムデ精霊
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10158", 0));
+                } else if (skillid == 7009) { // 広域魔法[電気]
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10162", 0));
+                } else if (skillid == 7007) { // ウィンドセクル
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10152", 0));
+                    //} else if (skillid == 7010 || skillid == 7008){ //キャンセレーション、ウェポンブレーカー
+                    //	Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$10162", 0));
+                }
+                break;
+            // エルジャベ
+            case 5136:
+                if (skillid == 7048) { // トルネード
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14234", 0));
+                } else if (skillid == 7044) { // 毒雲
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14233", 0));
+                } else if (skillid == 7049) { // サモン
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14236", 0));
+                } else if (skillid == 7042) { // アースバインド
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14237", 0));
+                } else if (skillid == 7041) { // カーズパラライズ
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14238", 0));
+                } else if (skillid == 7050) { // 砂嵐召喚
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14235", 0));
+                }
+                break;
+            // サンドワーム
+            case 5135:
+                if (skillid == 7045) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14055", 0));
+                } else if (skillid == 7046) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14056", 0));
+                } else if (skillid == 7047) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14057", 0));
+                } else if (skillid == 7044) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14058", 0));
+                } else if (skillid == 7004) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
+                } else if (skillid == 7004) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
+                } else if (skillid == 7055) {//イロプ
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
+                } else if (skillid == 7056) {//ボムオスキル1
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
+                } else if (skillid == 7057) {//ボムオスキル2
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
+                } else if (skillid == 7058) {//ボムオスキル3
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "$14059", 0));
+                }
+                break;
+            case 145684:
+                if (skillid == 90009) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "クおおアン", 0));
+                } else if (skillid == 90010) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "クールドゥームテーションクラスハルパウム", 0));
+                } else if (skillid == 90011) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "ジェルセキュオ三ケロ押し。", 0));
+                    for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(_attacker)) {
+                        if (pc == null)
+                            continue;
+                        pc.sendPackets(new S_SkillSound(pc.getId(), 15930));
+                        pc.broadcastPacket(new S_SkillSound(pc.getId(), 15930));
+                        pc.sendPackets(new S_DoActionGFX(_attacker.getId(), 33));
+                        break;
+                    }
+                } else if (skillid == 90013) {
+                    Broadcaster.broadcastPacket(_attacker, new S_NpcChatPacket(_attacker, "クールヅムうスクムヌ。", 0));
+                }
+                break;
+            default:
+                break;
+        }
+
+        if (skillid > 0) {
+            canUseSkill = skillUse.checkUseSkill(null, skillid, _target.getId(), _target.getX(), _target.getY(), null,
+                    0, L1SkillUse.TYPE_NORMAL, _attacker);
+        }
+        if (canUseSkill == true) {
+            if (getMobSkillTemplate().getLeverage(idx) > 0) {
+                skillUse.setLeverage(getMobSkillTemplate().getLeverage(idx));
+            }
+            skillUse.handleCommands(null, skillid, _target.getId(), _target.getX(), _target.getY(), null, 0,
+                    L1SkillUse.TYPE_NORMAL, _attacker);
+            L1Skills skill = SkillsTable.getInstance().getTemplate(skillid);
+            if (skill.getTarget().equals("attack") && skillid != 18) {
+                _sleepTime = _attacker.getNpcTemplate().getAtkMagicSpeed();
+            } else {
+                _sleepTime = _attacker.getNpcTemplate().getSubMagicSpeed();
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    private boolean physicalAttack(int idx) {
+        Map<Integer, Integer> targetList = new ConcurrentHashMap<Integer, Integer>();
+        int areaWidth = getMobSkillTemplate().getAreaWidth(idx);
+        int areaHeight = getMobSkillTemplate().getAreaHeight(idx);
+        int range = getMobSkillTemplate().getRange(idx);
+        int actId = getMobSkillTemplate().getActid(idx);
+        int gfxId = getMobSkillTemplate().getGfxid(idx);
+
+        if (_attacker.getLocation().getTileLineDistance(_target.getLocation()) > range) {
+            return false;
+        }
+
+        if (!_attacker.glanceCheck(_target.getX(), _target.getY())) {
+            return false;
+        }
+
+        _attacker.setHeading(_attacker.targetDirection(_target.getX(), _target.getY()));
+        if (areaHeight > 0) {
+            L1Character cha = null;
+            for (L1Object obj : L1World.getInstance().getVisibleBoxObjects(_attacker, _attacker.getHeading(),
+                    areaWidth, areaHeight)) {
+                if (obj == null)
+                    continue;
+                if (!(obj instanceof L1Character)) {
+                    continue;
+                }
+
+                cha = (L1Character) obj;
+                if (cha.isDead()) {
+                    continue;
+                }
+
+                if (cha instanceof L1PcInstance) {
+                    if (((L1PcInstance) cha).isGhost()) {
+                        continue;
+                    }
+                }
+
+                if (cha instanceof L1PcInstance && _attacker instanceof L1SummonInstance
+                        || _attacker instanceof L1PetInstance) {
+                    if (cha.getId() == _attacker.getMaster().getId()) {
+                        continue;
+                    }
+                    if (cha.getZoneType() == 1) {
+                        continue;
+                    }
+                }
+
+                if (!_attacker.glanceCheck(cha.getX(), cha.getY())) {
+                    continue;
+                }
+
+                if (_target instanceof L1PcInstance || _target instanceof L1SummonInstance
+                        || _target instanceof L1PetInstance) {
+                    if (obj instanceof L1PcInstance && !((L1PcInstance) obj).isGhost()
+                            && !((L1PcInstance) obj).isGmInvis() || obj instanceof L1SummonInstance
+                            || obj instanceof L1PetInstance) {
+                        targetList.put(obj.getId(), 0);
+                    }
+                } else {
+                    if (obj instanceof L1MonsterInstance) {
+                        targetList.put(obj.getId(), 0);
+                    }
+                }
+            }
+        } else {
+            targetList.put(_target.getId(), 0);
+        }
+
+        if (targetList.size() == 0) {
+            return false;
+        }
+
+        Iterator<Integer> ite = targetList.keySet().iterator();
+        L1Attack attack = null;
+        while (ite.hasNext()) {
+            int targetId = ite.next();
+            attack = new L1Attack(_attacker, (L1Character) L1World.getInstance().findObject(targetId));
+            if (attack.calcHit()) {
+                if (getMobSkillTemplate().getLeverage(idx) > 0) {
+                    attack.setLeverage(getMobSkillTemplate().getLeverage(idx));
+                }
+                attack.calcDamage();
+            }
+            if (actId > 0) {
+                attack.setActId(actId);
+            }
+            if (targetId == _target.getId()) {
+                if (gfxId > 0) {
+                    _attacker.broadcastPacket(new S_SkillSound(_attacker.getId(), gfxId));
+                }
+                attack.action();
+            }
+            attack.commit();
+        }
+
+        _sleepTime = _attacker.getAtkspeed();
+        return true;
+    }
+
+    private boolean isSkillUseble(int skillIdx) {
+        boolean useble = false;
+
+        if (getMobSkillTemplate().getTriggerRandom(skillIdx) > 0) {
+            int chance = _rnd.nextInt(100) + 1;
+            if (chance < getMobSkillTemplate().getTriggerRandom(skillIdx)) {
+                useble = true;
+            } else {
+                return false;
+            }
+        }
+
+        if (getMobSkillTemplate().getTriggerHp(skillIdx) > 0) {
+            int hpRatio = (_attacker.getCurrentHp() * 100)
+                    / _attacker.getMaxHp();
+            if (hpRatio <= getMobSkillTemplate().getTriggerHp(skillIdx)) {
+                useble = true;
+            } else {
+                return false;
+            }
+        }
+
+        if (getMobSkillTemplate().getTriggerCompanionHp(skillIdx) > 0) {
+            L1NpcInstance companionNpc = searchMinCompanionHp();
+            if (companionNpc == null) {
+                return false;
+            }
+
+            int hpRatio = (companionNpc.getCurrentHp() * 100)
+                    / companionNpc.getMaxHp();
+            if (hpRatio <= getMobSkillTemplate()
+                    .getTriggerCompanionHp(skillIdx)) {
+                useble = true;
+                _target = companionNpc;
+            } else {
+                return false;
+            }
+        }
+
+        if (getMobSkillTemplate().getTriggerRange(skillIdx) != 0) {
+            int distance = _attacker.getLocation().getTileLineDistance(
+                    _target.getLocation());
+
+            if (getMobSkillTemplate().isTriggerDistance(skillIdx, distance)) {
+                useble = true;
+            } else {
+                return false;
+            }
+        }
+
+        if (getMobSkillTemplate().getTriggerCount(skillIdx) > 0) {
+            if (getSkillUseCount(skillIdx) < getMobSkillTemplate()
+                    .getTriggerCount(skillIdx)) {
+                useble = true;
+            } else {
+                return false;
+            }
+        }
+        return useble;
+    }
+
+    private L1NpcInstance searchMinCompanionHp() {
+        L1NpcInstance npc;
+        L1NpcInstance minHpNpc = null;
+        int hpRatio = 100;
+        int companionHpRatio;
+        int family = _attacker.getNpcTemplate().get_family();
+
+        for (L1Object object : L1World.getInstance().getVisibleObjects(_attacker)) {
+            if (object == null)
+                continue;
+            if (object instanceof L1NpcInstance) {
+                npc = (L1NpcInstance) object;
+                if (npc.getNpcTemplate().get_family() == family) {
+                    companionHpRatio = (npc.getCurrentHp() * 100) / npc.getMaxHp();
+                    if (companionHpRatio < hpRatio) {
+                        hpRatio = companionHpRatio;
+                        minHpNpc = npc;
+                    }
+                }
+            }
+        }
+        return minHpNpc;
+    }
+
+    private void mobspawn(int summonId, int count) {
+        int i;
+
+        for (i = 0; i < count; i++) {
+            mobspawn(summonId);
+        }
+    }
+
+    private void mobspawn(int summonId) {
+        try {
+            L1Npc spawnmonster = NpcTable.getInstance().getTemplate(summonId);
+            if (spawnmonster != null) {
+                L1NpcInstance mob = null;
+                try {
+                    String implementationName = spawnmonster.getImpl();
+                    Constructor<?> _constructor = Class.forName(
+                            (new StringBuilder()).append(
+                                    "l1j.server.server.model.Instance.")
+                                    .append(implementationName).append(
+                                    "Instance").toString())
+                            .getConstructors()[0];
+                    mob = (L1NpcInstance) _constructor
+                            .newInstance(new Object[]{spawnmonster});
+                    mob.setId(IdFactory.getInstance().nextId());
+                    L1Location loc = _attacker.getLocation().randomLocation(8,
+                            false);
+                    int heading = _rnd.nextInt(8);
+                    mob.setX(loc.getX());
+                    mob.setY(loc.getY());
+                    mob.setHomeX(loc.getX());
+                    mob.setHomeY(loc.getY());
+                    short mapid = _attacker.getMapId();
+                    mob.setMap(mapid);
+                    mob.setHeading(heading);
+                    L1World.getInstance().storeObject(mob);
+                    L1World.getInstance().addVisibleObject(mob);
+                    L1Object object = L1World.getInstance().findObject(
+                            mob.getId());
+                    L1MonsterInstance newnpc = (L1MonsterInstance) object;
+                    newnpc.set_storeDroped(true);
+                    if (summonId == 45061
+                            || summonId == 45161
+                            || summonId == 45181
+                            || summonId == 45455) {
+                        newnpc.broadcastPacket(new S_DoActionGFX(
+                                newnpc.getId(), ActionCodes.ACTION_Hide));
+                        newnpc.setStatus(13);
+                        newnpc.broadcastPacket(new S_NPCPack(newnpc));
+                        newnpc.broadcastPacket(new S_DoActionGFX(
+                                newnpc.getId(), ActionCodes.ACTION_Appear));
+                        newnpc.setStatus(0);
+                        newnpc.broadcastPacket(new S_NPCPack(newnpc));
+                    }
+                    newnpc.onNpcAI();
+                    newnpc.getLight().turnOnOffLight();
+                    newnpc.startChat(L1NpcInstance.CHAT_TIMING_APPEARANCE);
+                } catch (Exception e) {
+                    _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+                }
+            }
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        }
+    }
+
+    private L1Character changeTarget(int type, int idx) {
+        L1Character target;
+
+        switch (type) {
+            case L1MobSkill.CHANGE_TARGET_ME:
+                target = _attacker;
+                break;
+            case L1MobSkill.CHANGE_TARGET_RANDOM:
+                List<L1Character> targetList = new ArrayList<L1Character>();
+                L1Character cha = null;
+                for (L1Object obj : L1World.getInstance().getVisibleObjects(_attacker)) {
+                    if (obj == null)
+                        continue;
+                    if (obj instanceof L1PcInstance || obj instanceof L1PetInstance || obj instanceof L1SummonInstance) {
+                        cha = (L1Character) obj;
+                        int distance = _attacker.getLocation().getTileLineDistance(cha.getLocation());
+
+                        if (!getMobSkillTemplate().isTriggerDistance(idx, distance)) {
+                            continue;
+                        }
+
+                        if (!_attacker.glanceCheck(cha.getX(), cha.getY())) {
+                            continue;
+                        }
+
+                        if (!_attacker.getHateList().containsKey(cha)) {
+                            continue;
+                        }
+
+                        if (cha.isDead()) {
+                            continue;
+                        }
+
+                        if (cha instanceof L1PcInstance) {
+                            if (((L1PcInstance) cha).isGhost()) {
+                                continue;
+                            }
+                        }
+                        targetList.add((L1Character) obj);
+                    }
+                }
+
+                if (targetList.size() == 0) {
+                    target = _target;
+                } else {
+                    int randomSize = targetList.size() * 100;
+                    int targetIndex = _rnd.nextInt(randomSize) / 100;
+                    target = targetList.get(targetIndex);
+                }
+                break;
+
+            default:
+                target = _target;
+                break;
+        }
+        return target;
+    }
 }

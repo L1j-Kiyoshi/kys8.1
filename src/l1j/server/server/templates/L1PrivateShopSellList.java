@@ -22,65 +22,66 @@ package l1j.server.server.templates;
 // L1PrivateShopSellList
 
 public class L1PrivateShopSellList {
-	public L1PrivateShopSellList() {
-	}
-	private String _UserName;
-	public void setUserName(String name)
-	  {
-	    _UserName = name;
-	  }
+    public L1PrivateShopSellList() {
+    }
 
-	  public String getUserName()
-	  {
-	    return _UserName;
-	  }
-	
-	  private int _itemId;
-	  public void setItemId(int i)
-	  {
-	    _itemId = i;
-	  }
+    private String _UserName;
 
-	  public int getItemId() {
-	    return _itemId;
-	  }
-	private int _itemObjectId;
+    public void setUserName(String name) {
+        _UserName = name;
+    }
 
-	public void setItemObjectId(int i) {
-		_itemObjectId = i;
-	}
+    public String getUserName() {
+        return _UserName;
+    }
 
-	public int getItemObjectId() {
-		return _itemObjectId;
-	}
+    private int _itemId;
 
-	private int _sellTotalCount;
+    public void setItemId(int i) {
+        _itemId = i;
+    }
 
-	public void setSellTotalCount(int i) {
-		_sellTotalCount = i;
-	}
+    public int getItemId() {
+        return _itemId;
+    }
 
-	public int getSellTotalCount() {
-		return _sellTotalCount;
-	}
+    private int _itemObjectId;
 
-	private int _sellPrice;
+    public void setItemObjectId(int i) {
+        _itemObjectId = i;
+    }
 
-	public void setSellPrice(int i) {
-		_sellPrice = i;
-	}
+    public int getItemObjectId() {
+        return _itemObjectId;
+    }
 
-	public int getSellPrice() {
-		return _sellPrice;
-	}
+    private int _sellTotalCount;
 
-	private int _sellCount; 
+    public void setSellTotalCount(int i) {
+        _sellTotalCount = i;
+    }
 
-	public void setSellCount(int i) {
-		_sellCount = i;
-	}
+    public int getSellTotalCount() {
+        return _sellTotalCount;
+    }
 
-	public int getSellCount() {
-		return _sellCount;
-	}
+    private int _sellPrice;
+
+    public void setSellPrice(int i) {
+        _sellPrice = i;
+    }
+
+    public int getSellPrice() {
+        return _sellPrice;
+    }
+
+    private int _sellCount;
+
+    public void setSellCount(int i) {
+        _sellCount = i;
+    }
+
+    public int getSellCount() {
+        return _sellCount;
+    }
 }

@@ -29,113 +29,113 @@ import l1j.server.server.serverpackets.S_DoActionGFX;
 
 public class L1DamagePoison extends L1Poison {
 
-	private RepeatTask _timer;
-	private final L1Character _attacker;
-	private final L1Character _target;
-	private final int _damageSpan;
-	private final int _damage;
-	private boolean _tomahawk;
+    private RepeatTask _timer;
+    private final L1Character _attacker;
+    private final L1Character _target;
+    private final int _damageSpan;
+    private final int _damage;
+    private boolean _tomahawk;
 
-	private L1DamagePoison(L1Character attacker, L1Character cha, int damageSpan, int damage, boolean tomahawk) {
-		_attacker = attacker;
-		_target = cha;
-		_damageSpan = damageSpan;
-		_damage = damage;
-		_tomahawk = tomahawk;
+    private L1DamagePoison(L1Character attacker, L1Character cha, int damageSpan, int damage, boolean tomahawk) {
+        _attacker = attacker;
+        _target = cha;
+        _damageSpan = damageSpan;
+        _damage = damage;
+        _tomahawk = tomahawk;
 
-		doInfection();
-	}
+        doInfection();
+    }
 
-	private class NormalPoisonTimer extends RepeatTask {
+    private class NormalPoisonTimer extends RepeatTask {
 
-		NormalPoisonTimer() {
-			super(_damageSpan);
-		}
+        NormalPoisonTimer() {
+            super(_damageSpan);
+        }
 
-		@Override
-		public void execute() {
-			L1PcInstance player = null;
-			L1MonsterInstance mob = null;
-			do {
-				if (!_target.hasSkillEffect(L1SkillId.STATUS_POISON) && !_target.hasSkillEffect(L1SkillId.STATUS_TOMAHAWK)) {
-					cure();
-					break;
-				}
+        @Override
+        public void execute() {
+            L1PcInstance player = null;
+            L1MonsterInstance mob = null;
+            do {
+                if (!_target.hasSkillEffect(L1SkillId.STATUS_POISON) && !_target.hasSkillEffect(L1SkillId.STATUS_TOMAHAWK)) {
+                    cure();
+                    break;
+                }
 
-				if (_target.hasSkillEffect(L1SkillId.ICE_LANCE) || _target.hasSkillEffect(L1SkillId.MOB_COCA)
-						|| _target.hasSkillEffect(L1SkillId.MOB_BASILL) || _target.hasSkillEffect(L1SkillId.EARTH_BIND)) {
-					cure();
-					break;
-				}
+                if (_target.hasSkillEffect(L1SkillId.ICE_LANCE) || _target.hasSkillEffect(L1SkillId.MOB_COCA)
+                        || _target.hasSkillEffect(L1SkillId.MOB_BASILL) || _target.hasSkillEffect(L1SkillId.EARTH_BIND)) {
+                    cure();
+                    break;
+                }
 
-				if (_target instanceof L1PcInstance) {
-					player = (L1PcInstance) _target;
-					player.receiveDamage(_attacker, _damage);
-					if (_target.hasSkillEffect(L1SkillId.STATUS_TOMAHAWK)) {
-						player.sendPackets(new S_DoActionGFX(player.getId(), ActionCodes.ACTION_Damage));
-						player.broadcastPacket(new S_DoActionGFX(player.getId(), ActionCodes.ACTION_Damage));
-					}
-					if (player.isDead()) {
-						cure();
-						break;
-					}
-				} else if (_target instanceof L1MonsterInstance) {
-					mob = (L1MonsterInstance) _target;
-					mob.receiveDamage(_attacker, _damage);
-					if (mob.hasSkillEffect(L1SkillId.STATUS_TOMAHAWK)) {
-						mob.broadcastPacket(new S_DoActionGFX(mob.getId(), ActionCodes.ACTION_Damage));
-					}
-					if (mob.isDead()) {
-						cancel();
-						return;
-					}
-				}
-			} while (false);
-		}
-	}
+                if (_target instanceof L1PcInstance) {
+                    player = (L1PcInstance) _target;
+                    player.receiveDamage(_attacker, _damage);
+                    if (_target.hasSkillEffect(L1SkillId.STATUS_TOMAHAWK)) {
+                        player.sendPackets(new S_DoActionGFX(player.getId(), ActionCodes.ACTION_Damage));
+                        player.broadcastPacket(new S_DoActionGFX(player.getId(), ActionCodes.ACTION_Damage));
+                    }
+                    if (player.isDead()) {
+                        cure();
+                        break;
+                    }
+                } else if (_target instanceof L1MonsterInstance) {
+                    mob = (L1MonsterInstance) _target;
+                    mob.receiveDamage(_attacker, _damage);
+                    if (mob.hasSkillEffect(L1SkillId.STATUS_TOMAHAWK)) {
+                        mob.broadcastPacket(new S_DoActionGFX(mob.getId(), ActionCodes.ACTION_Damage));
+                    }
+                    if (mob.isDead()) {
+                        cancel();
+                        return;
+                    }
+                }
+            } while (false);
+        }
+    }
 
-	boolean isDamageTarget(L1Character cha) {
-		return (cha instanceof L1PcInstance) || (cha instanceof L1MonsterInstance);
-	}
+    boolean isDamageTarget(L1Character cha) {
+        return (cha instanceof L1PcInstance) || (cha instanceof L1MonsterInstance);
+    }
 
-	private void doInfection() {
-		if(_tomahawk) {
-			_target.setSkillEffect(L1SkillId.STATUS_TOMAHAWK, 7000);
-		} else {
-			_target.setSkillEffect(L1SkillId.STATUS_POISON, 30000);
-			_target.setPoisonEffect(1);
-		}
-		if (isDamageTarget(_target)) {
-			_timer = new NormalPoisonTimer();
-			GeneralThreadPool.getInstance().execute(_timer);
-		}
-	}
+    private void doInfection() {
+        if (_tomahawk) {
+            _target.setSkillEffect(L1SkillId.STATUS_TOMAHAWK, 7000);
+        } else {
+            _target.setSkillEffect(L1SkillId.STATUS_POISON, 30000);
+            _target.setPoisonEffect(1);
+        }
+        if (isDamageTarget(_target)) {
+            _timer = new NormalPoisonTimer();
+            GeneralThreadPool.getInstance().execute(_timer);
+        }
+    }
 
-	public static boolean doInfection(L1Character attacker, L1Character cha, int damageSpan, int damage, boolean tomahawk) {
-		if (!isValidTarget(cha)) {
-			return false;
-		}
+    public static boolean doInfection(L1Character attacker, L1Character cha, int damageSpan, int damage, boolean tomahawk) {
+        if (!isValidTarget(cha)) {
+            return false;
+        }
 
-		cha.setPoison(new L1DamagePoison(attacker, cha, damageSpan, damage, tomahawk));
-		return true;
-	}
+        cha.setPoison(new L1DamagePoison(attacker, cha, damageSpan, damage, tomahawk));
+        return true;
+    }
 
-	@Override
-	public int getEffectId() {
-		return 1;
-	}
+    @Override
+    public int getEffectId() {
+        return 1;
+    }
 
-	@Override
-	public void cure() {
-		if (_timer != null) {
-			_timer.cancel();
-		}
-		if(_tomahawk) {
-			_target.killSkillEffectTimer(L1SkillId.STATUS_TOMAHAWK);
-		} else {
-			_target.setPoisonEffect(0);
-			_target.killSkillEffectTimer(L1SkillId.STATUS_POISON);
-		}
-		_target.setPoison(null);
-	}
+    @Override
+    public void cure() {
+        if (_timer != null) {
+            _timer.cancel();
+        }
+        if (_tomahawk) {
+            _target.killSkillEffectTimer(L1SkillId.STATUS_TOMAHAWK);
+        } else {
+            _target.setPoisonEffect(0);
+            _target.killSkillEffectTimer(L1SkillId.STATUS_POISON);
+        }
+        _target.setPoison(null);
+    }
 }

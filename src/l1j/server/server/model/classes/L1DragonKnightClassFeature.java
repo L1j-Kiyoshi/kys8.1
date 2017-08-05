@@ -19,13 +19,13 @@
 package l1j.server.server.model.classes;
 
 class L1DragonKnightClassFeature extends L1ClassFeature {
-	@Override
-	public int getAcDefenseMax(int ac) {
-		return ac / 4;
-	}
+    @Override
+    public int getAcDefenseMax(int ac) {
+        return ac / 4;
+    }
 
-	@Override
-	public int getMagicLevel(int playerLevel) {
-		return Math.min(4, playerLevel / 9);
-	}
+    @Override
+    public int getMagicLevel(int playerLevel) {
+        return Math.min(4, playerLevel / 9);
+    }
 }

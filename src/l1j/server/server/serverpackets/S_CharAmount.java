@@ -22,23 +22,23 @@ import l1j.server.server.Opcodes;
 
 public class S_CharAmount extends ServerBasePacket {
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_CharAmount(int value, int i) {
-		buildPacket(value, i);
-	}
+    public S_CharAmount(int value, int i) {
+        buildPacket(value, i);
+    }
 
-	private void buildPacket(int value, int slot) {
-		writeC(Opcodes.S_NUM_CHARACTER);
-		writeC(value);
-		writeC(slot);
-	}
+    private void buildPacket(int value, int slot) {
+        writeC(Opcodes.S_NUM_CHARACTER);
+        writeC(value);
+        writeC(slot);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
 }

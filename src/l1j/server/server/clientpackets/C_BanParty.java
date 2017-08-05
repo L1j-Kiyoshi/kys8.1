@@ -28,33 +28,33 @@ import l1j.server.server.serverpackets.S_ServerMessage;
 
 public class C_BanParty extends ClientBasePacket {
 
-	private static final String C_BAN_PARTY = "[C] C_BanParty";
+    private static final String C_BAN_PARTY = "[C] C_BanParty";
 
-	public C_BanParty(byte decrypt[], GameClient client) throws Exception {
-		super(decrypt);
-		String s = readS();
+    public C_BanParty(byte decrypt[], GameClient client) throws Exception {
+        super(decrypt);
+        String s = readS();
 
-		L1PcInstance player = client.getActiveChar();
-		if ( player == null)return;
-		if (!player.getParty().isLeader(player)) {
-			// パーティーリーダーがない場合
-			player.sendPackets(new S_ServerMessage(427)); //パーティーのリーダーだけ追放することができます。
-			return;
-		}
+        L1PcInstance player = client.getActiveChar();
+        if (player == null) return;
+        if (!player.getParty().isLeader(player)) {
+            // パーティーリーダーがない場合
+            player.sendPackets(new S_ServerMessage(427)); //パーティーのリーダーだけ追放することができます。
+            return;
+        }
 
-		for (L1PcInstance member : player.getParty().getMembers()) {
-			if (member.getName().toLowerCase().equals(s.toLowerCase())) {
-				player.getParty().kickMember(member);
-				return;
-			}
-		}
-		// 発見されなかった
-		player.sendPackets(new S_ServerMessage(426, s)); // %0はパーティーメンバーがありません。
-	}
+        for (L1PcInstance member : player.getParty().getMembers()) {
+            if (member.getName().toLowerCase().equals(s.toLowerCase())) {
+                player.getParty().kickMember(member);
+                return;
+            }
+        }
+        // 発見されなかった
+        player.sendPackets(new S_ServerMessage(426, s)); // %0はパーティーメンバーがありません。
+    }
 
-	@Override
-	public String getType() {
-		return C_BAN_PARTY;
-	}
+    @Override
+    public String getType() {
+        return C_BAN_PARTY;
+    }
 
 }

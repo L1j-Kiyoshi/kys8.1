@@ -28,30 +28,30 @@ import l1j.server.server.utils.IntRange;
 
 public class L1Level implements L1CommandExecutor {
 
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1Level.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1Level.class.getName());
 
-	private L1Level() {
-	}
+    private L1Level() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Level();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Level();
+    }
 
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			StringTokenizer tok = new StringTokenizer(arg);
-				int level = Integer.parseInt(tok.nextToken());
-				if (level == pc.getLevel()) {
-					return;
-				}
-				if (!IntRange.includes(level, 1, 99)) {
-					pc.sendPackets(new S_SystemMessage("1-99の範囲で指定してください"));
-					return;
-				}
-				pc.setExp(ExpTable.getExpByLevel(level));
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "lvと入力してください"));
-		}
-	}
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            StringTokenizer tok = new StringTokenizer(arg);
+            int level = Integer.parseInt(tok.nextToken());
+            if (level == pc.getLevel()) {
+                return;
+            }
+            if (!IntRange.includes(level, 1, 99)) {
+                pc.sendPackets(new S_SystemMessage("1-99の範囲で指定してください"));
+                return;
+            }
+            pc.setExp(ExpTable.getExpByLevel(level));
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "lvと入力してください"));
+        }
+    }
 }

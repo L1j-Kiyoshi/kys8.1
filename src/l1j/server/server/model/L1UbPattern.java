@@ -24,45 +24,45 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class L1UbPattern {
-	private boolean _isFrozen = false;
-	private Map<Integer, ArrayList<L1UbSpawn>> _groups = new HashMap<Integer, ArrayList<L1UbSpawn>>();
+    private boolean _isFrozen = false;
+    private Map<Integer, ArrayList<L1UbSpawn>> _groups = new HashMap<Integer, ArrayList<L1UbSpawn>>();
 
-	public void addSpawn(int groupNumber, L1UbSpawn spawn) {
-		if (_isFrozen) {
-			return;
-		}
+    public void addSpawn(int groupNumber, L1UbSpawn spawn) {
+        if (_isFrozen) {
+            return;
+        }
 
-		ArrayList<L1UbSpawn> spawnList = _groups.get(groupNumber);
-		if (spawnList == null) {
-			spawnList = new ArrayList<L1UbSpawn>();
-			_groups.put(groupNumber, spawnList);
-		}
+        ArrayList<L1UbSpawn> spawnList = _groups.get(groupNumber);
+        if (spawnList == null) {
+            spawnList = new ArrayList<L1UbSpawn>();
+            _groups.put(groupNumber, spawnList);
+        }
 
-		spawnList.add(spawn);
-	}
+        spawnList.add(spawn);
+    }
 
-	public void freeze() {
-		if (_isFrozen) {
-			return;
-		}
+    public void freeze() {
+        if (_isFrozen) {
+            return;
+        }
 
-		
-		for (ArrayList<L1UbSpawn> spawnList : _groups.values()) {
-			Collections.sort(spawnList);
-		}
 
-		_isFrozen = true;
-	}
+        for (ArrayList<L1UbSpawn> spawnList : _groups.values()) {
+            Collections.sort(spawnList);
+        }
 
-	public boolean isFrozen() {
-		return _isFrozen;
-	}
+        _isFrozen = true;
+    }
 
-	public ArrayList<L1UbSpawn> getSpawnList(int groupNumber) {
-		if (!_isFrozen) {
-			return null;
-		}
+    public boolean isFrozen() {
+        return _isFrozen;
+    }
 
-		return _groups.get(groupNumber);
-	}
+    public ArrayList<L1UbSpawn> getSpawnList(int groupNumber) {
+        if (!_isFrozen) {
+            return null;
+        }
+
+        return _groups.get(groupNumber);
+    }
 }

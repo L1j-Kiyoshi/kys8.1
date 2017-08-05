@@ -22,22 +22,19 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 /**
  * コマンド実行処理のインタフェース
- * 
+ * <p>
  * コマンド処理クラスは、このインタフェースのメソッドに加えて、<br>
  * public static L1CommandExecutor getInstance()<br>
  * （を）を実装しなければならない。
  * 通常、文字クラスをインスタンス化して返しますが、必要に応じてキャッシュされたインスタンスを返したり、別のクラスをインスタンス化して返すことができる。
  */
 public interface L1CommandExecutor {
-	/**
-	 *このコマンドを実行する。
-	 * 
-	 * @param pc
-	 *           エグゼキュータ
-	 * @param cmdName
-	 *            実行されたコマンド名
-	 * @param arg
-	 *            引数
-	 */
-	public void execute(L1PcInstance pc, String cmdName, String arg);
+    /**
+     * このコマンドを実行する。
+     *
+     * @param pc      エグゼキュータ
+     * @param cmdName 実行されたコマンド名
+     * @param arg     引数
+     */
+    public void execute(L1PcInstance pc, String cmdName, String arg);
 }

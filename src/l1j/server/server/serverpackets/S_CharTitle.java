@@ -25,20 +25,21 @@ import l1j.server.server.Opcodes;
 
 public class S_CharTitle extends ServerBasePacket {
 
-	public S_CharTitle(int objid, String title) {
-		writeC(Opcodes.S_TITLE);
-		writeD(objid);
-		writeS(title);
-	}
+    public S_CharTitle(int objid, String title) {
+        writeC(Opcodes.S_TITLE);
+        writeD(objid);
+        writeS(title);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return _S__0B_CHARTITLE;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	private static final String _S__0B_CHARTITLE = "[S] S_CharTitle";
+    @Override
+    public String getType() {
+        return _S__0B_CHARTITLE;
+    }
+
+    private static final String _S__0B_CHARTITLE = "[S] S_CharTitle";
 }

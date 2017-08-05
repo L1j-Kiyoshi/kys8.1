@@ -25,55 +25,55 @@ import java.util.TimeZone;
 import l1j.server.server.utils.IntRange;
 
 public class L1GameTime {
-	// 2003年7月3日12:00（UTC）が1月1日00:00
-	private static final long BASE_TIME_IN_MILLIS_REAL = 1057233600000L;
-	private final int _time;
-	private final Calendar _calendar;
+    // 2003年7月3日12:00（UTC）が1月1日00:00
+    private static final long BASE_TIME_IN_MILLIS_REAL = 1057233600000L;
+    private final int _time;
+    private final Calendar _calendar;
 
-	private Calendar makeCalendar(int time) {
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-		cal.setTimeInMillis(0);
-		cal.add(Calendar.SECOND, _time);
-		return cal;
-	}
+    private Calendar makeCalendar(int time) {
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        cal.setTimeInMillis(0);
+        cal.add(Calendar.SECOND, _time);
+        return cal;
+    }
 
-	public L1GameTime(long timeMillis) {
-		long t1 = timeMillis - BASE_TIME_IN_MILLIS_REAL;
-		if (t1 < 0) {
-			throw new IllegalArgumentException();
-		}
-		int t2 = (int) ((t1 * 6) / 1000L);
-		int t3 = t2 % 3; // 時間が3の倍数になるように調整
-		_time = t2 - t3;
+    public L1GameTime(long timeMillis) {
+        long t1 = timeMillis - BASE_TIME_IN_MILLIS_REAL;
+        if (t1 < 0) {
+            throw new IllegalArgumentException();
+        }
+        int t2 = (int) ((t1 * 6) / 1000L);
+        int t3 = t2 % 3; // 時間が3の倍数になるように調整
+        _time = t2 - t3;
 
-		_calendar = makeCalendar(_time);
-	}
+        _calendar = makeCalendar(_time);
+    }
 
-	public L1GameTime() {
-		this(System.currentTimeMillis());
-	}
+    public L1GameTime() {
+        this(System.currentTimeMillis());
+    }
 
-	public int get(int field) {
-		return _calendar.get(field);
-	}
+    public int get(int field) {
+        return _calendar.get(field);
+    }
 
-	public int getSeconds() {
-		return _time;
-	}
+    public int getSeconds() {
+        return _time;
+    }
 
-	public Calendar getCalendar() {
-		return (Calendar) _calendar.clone();
-	}
+    public Calendar getCalendar() {
+        return (Calendar) _calendar.clone();
+    }
 
-	public boolean isNight() {
-		int hour = _calendar.get(Calendar.HOUR_OF_DAY);
-		return !IntRange.includes(hour, 6, 17); // 6:00-17:59（昼）でなければtrue
-	}
+    public boolean isNight() {
+        int hour = _calendar.get(Calendar.HOUR_OF_DAY);
+        return !IntRange.includes(hour, 6, 17); // 6:00-17:59（昼）でなければtrue
+    }
 
-	@Override
-	public String toString() {
-		SimpleDateFormat f = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
-		f.setTimeZone(_calendar.getTimeZone());
-		return f.format(_calendar.getTime()) + "(" + getSeconds() + ")";
-	}
+    @Override
+    public String toString() {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
+        f.setTimeZone(_calendar.getTimeZone());
+        return f.format(_calendar.getTime()) + "(" + getSeconds() + ")";
+    }
 }

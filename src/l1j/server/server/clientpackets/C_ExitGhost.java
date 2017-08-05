@@ -25,24 +25,24 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class C_ExitGhost extends ClientBasePacket {
 
-	private static final String C_EXIT_GHOST = "[C] C_ExitGhost";
+    private static final String C_EXIT_GHOST = "[C] C_ExitGhost";
 
-	// 移動
-	public C_ExitGhost(byte decrypt[], GameClient client)
-			throws Exception {
-		super(decrypt);
+    // 移動
+    public C_ExitGhost(byte decrypt[], GameClient client)
+            throws Exception {
+        super(decrypt);
 
-		L1PcInstance pc = client.getActiveChar();
-		
-		if (pc == null || !pc.isGhost() ) {
-			return;
-		}
+        L1PcInstance pc = client.getActiveChar();
 
-		pc.makeReadyEndGhost();
-	}
+        if (pc == null || !pc.isGhost()) {
+            return;
+        }
 
-	@Override
-	public String getType() {
-		return C_EXIT_GHOST;
-	}
+        pc.makeReadyEndGhost();
+    }
+
+    @Override
+    public String getType() {
+        return C_EXIT_GHOST;
+    }
 }

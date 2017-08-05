@@ -7,12 +7,12 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class S_GameList2 extends ServerBasePacket {
 
-	private static final String S_GameList = "[S] S_GameList2";
+    private static final String S_GameList = "[S] S_GameList2";
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
 	/*
-	0000 : 7e 42 0a 00 04 00 [b8 c5 b4 cf c1 ae] 00 [c5 a9 b7    ~B..............
+    0000 : 7e 42 0a 00 04 00 [b8 c5 b4 cf c1 ae] 00 [c5 a9 b7    ~B..............
 	0010 : af bf ec] 00 [bb e7 c4 ab c0 cc] 00 [b0 dd c6 c4] 00    ................
 	0020 : [be c6 bf f4 bc d2 bd cc] 00 [4f 6f 6f 30 30 30] 00    .........Ooo000.
 	0030 : [b3 c7 76 76] 00 [c8 a3 b9 da 30 30 32] 00 [b3 eb ba    ..vv.....002....
@@ -65,31 +65,31 @@ public class S_GameList2 extends ServerBasePacket {
 
 */
 
-	public S_GameList2(L1PcInstance pc, int i){
-		buildPacket(pc, i);
-	}
+    public S_GameList2(L1PcInstance pc, int i) {
+        buildPacket(pc, i);
+    }
 
     /*スタート*/
-	private void buildPacket(L1PcInstance pc, int i) {
-		writeC(Opcodes.S_EVENT);
-		writeC(0x42);
+    private void buildPacket(L1PcInstance pc, int i) {
+        writeC(Opcodes.S_EVENT);
+        writeC(0x42);
         writeH(L1Racing.getInstance().size(0)); // 参加者数
         writeH(i); // 等数
-		for(int j = 0; j < L1Racing.getInstance().size(0) ; j++){
-			writeS(L1Racing.getInstance().arrayList(0).get(j).getName());
-		}
-	 }
+        for (int j = 0; j < L1Racing.getInstance().size(0); j++) {
+            writeS(L1Racing.getInstance().arrayList(0).get(j).getName());
+        }
+    }
 
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
 
-	public String getType() {
-		return S_GameList;
-	}
+    public String getType() {
+        return S_GameList;
+    }
 }

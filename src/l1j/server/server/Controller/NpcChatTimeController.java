@@ -32,100 +32,98 @@ import l1j.server.server.model.Instance.L1NpcInstance;
 import l1j.server.server.templates.L1NpcChat;
 
 public class NpcChatTimeController implements Runnable {
-	public static final int SLEEP_TIME = 60000;
+    public static final int SLEEP_TIME = 60000;
 
-	private static Logger _log = Logger.getLogger(NpcChatTimeController.class
-			. getName());
+    private static Logger _log = Logger.getLogger(NpcChatTimeController.class
+            .getName());
 
-	private static NpcChatTimeController _instance;
+    private static NpcChatTimeController _instance;
 
-	public static NpcChatTimeController getInstance() {
-		if (_instance == null) {
-			_instance = new NpcChatTimeController();
-		}
-		return _instance;
-	}
+    public static NpcChatTimeController getInstance() {
+        if (_instance == null) {
+            _instance = new NpcChatTimeController();
+        }
+        return _instance;
+    }
 
-	@Override
-	public void run() {
-		try {
-			checkNpcChatTime(); // チャット開始時間をチェック
-			cheackDungeon();
-			
-		} catch (Exception e1) {
-			_log.warning(e1.getMessage());
-		}
-	}
+    @Override
+    public void run() {
+        try {
+            checkNpcChatTime(); // チャット開始時間をチェック
+            cheackDungeon();
 
-	private void checkNpcChatTime() {
-		for (L1NpcChat npcChat : NpcChatTable.getInstance(). getAllGameTime()) {
-			if (isChatTime(npcChat.getGameTime())) {
-				int npcId = npcChat.getNpcId();
-				for (L1Object obj : L1World.getInstance(). getObject()) {
-					if (! (obj instanceof L1NpcInstance)) {
-						continue;
-					}
-					L1NpcInstance npc = (L1NpcInstance) obj;
-					if (npc.getNpcTemplate(). get_npcId() == npcId) {
-						npc.startChat(L1NpcInstance.CHAT_TIMING_GAME_TIME);
-					}
-				}
-			}
-		}
-	}
-	
-	private void cheackDungeon() {
-		Calendar cal = Calendar.getInstance();
-		int hour = Calendar.HOUR;
-		int minute = Calendar.MINUTE;
-		/** 0 午前、1午後 * */
-		String ampm = "午後";
-		if (cal.get(Calendar.AM_PM) == 0) {
-			ampm = "午前";
-		}
-		
-		if (IsleController.getInstance().isgameStart == false) {
-			if ((       cal.get(hour) == 1 && cal.get(minute) == 59)
-					|| (cal.get(hour) == 5 && cal.get(minute) == 59)
-					|| (cal.get(hour) == 9 && cal.get(minute) == 59)
+        } catch (Exception e1) {
+            _log.warning(e1.getMessage());
+        }
+    }
+
+    private void checkNpcChatTime() {
+        for (L1NpcChat npcChat : NpcChatTable.getInstance().getAllGameTime()) {
+            if (isChatTime(npcChat.getGameTime())) {
+                int npcId = npcChat.getNpcId();
+                for (L1Object obj : L1World.getInstance().getObject()) {
+                    if (!(obj instanceof L1NpcInstance)) {
+                        continue;
+                    }
+                    L1NpcInstance npc = (L1NpcInstance) obj;
+                    if (npc.getNpcTemplate().get_npcId() == npcId) {
+                        npc.startChat(L1NpcInstance.CHAT_TIMING_GAME_TIME);
+                    }
+                }
+            }
+        }
+    }
+
+    private void cheackDungeon() {
+        Calendar cal = Calendar.getInstance();
+        int hour = Calendar.HOUR;
+        int minute = Calendar.MINUTE;
+        /** 0 午前、1午後 * */
+        String ampm = "午後";
+        if (cal.get(Calendar.AM_PM) == 0) {
+            ampm = "午前";
+        }
+
+        if (IsleController.getInstance().isgameStart == false) {
+            if ((cal.get(hour) == 1 && cal.get(minute) == 59)
+                    || (cal.get(hour) == 5 && cal.get(minute) == 59)
+                    || (cal.get(hour) == 9 && cal.get(minute) == 59)
 //					||午前午後.equals（ "午前"）&& cal.get（時間）== 10 && cal.get（分）== 0
-					
-				
-					) {
-				IsleController.getInstance().isgameStart = true;
-				System.out.println("忘れられた島オープン：" + ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分");
-			}
-		}
-		if(Config.BATTLE_ZONE_OPERATION){ 
-			if (BattleZone.getInstance().getDuelStart() == false) {
-				if ((   
-						//午前午後.equals（ "午前"）&& cal.get（時間）== 5 && cal.get（分）== 0）
-						// ||午前午後.equals（ "午前"）&& cal.get（時間）== 10 && cal.get（分）== 0
-						// ||午前午後.equals（ "午後"）&& cal.get（時間）== 5 && cal.get（分）== 1
-					 ampm.equals("午後") && cal.get(hour) == 10 && cal.get(minute) == 1)
+
+
+                    ) {
+                IsleController.getInstance().isgameStart = true;
+                System.out.println("忘れられた島オープン：" + ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分");
+            }
+        }
+        if (Config.BATTLE_ZONE_OPERATION) {
+            if (BattleZone.getInstance().getDuelStart() == false) {
+                if ((
+                        //午前午後.equals（ "午前"）&& cal.get（時間）== 5 && cal.get（分）== 0）
+                        // ||午前午後.equals（ "午前"）&& cal.get（時間）== 10 && cal.get（分）== 0
+                        // ||午前午後.equals（ "午後"）&& cal.get（時間）== 5 && cal.get（分）== 1
+                        ampm.equals("午後") && cal.get(hour) == 10 && cal.get(minute) == 1)
 //					||午前午後.equals（ "午前"）&& cal.get（時間）== 10 && cal.get（分）== 0
-						) {
-					BattleZone.getInstance().setGmStart(true);
-				System.out.println("バトルゾーンオープン：" + ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分");
-					}
-				}
-			}
-	}
-	
+                        ) {
+                    BattleZone.getInstance().setGmStart(true);
+                    System.out.println("バトルゾーンオープン：" + ampm + " " + cal.get(hour) + "時" + cal.get(minute) + "分");
+                }
+            }
+        }
+    }
 
 
+    private boolean isChatTime(int chatTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
+        Calendar realTime = getRealTime();
+        int nowTime = Integer.valueOf(sdf.format(realTime.getTime()));
+        return (nowTime == chatTime);
+    }
 
-	private boolean isChatTime(int chatTime) {
-		SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
-		Calendar realTime = getRealTime();
-		int nowTime = Integer.valueOf(sdf.format(realTime.getTime()));
-		return (nowTime == chatTime);
-	}
-
-	private static Calendar getRealTime() {
-		TimeZone _tz = TimeZone.getTimeZone(Config.TIME_ZONE);
-		Calendar cal = Calendar.getInstance(_tz);
-		return cal;
-	}
+    private static Calendar getRealTime() {
+        TimeZone _tz = TimeZone.getTimeZone(Config.TIME_ZONE);
+        Calendar cal = Calendar.getInstance(_tz);
+        return cal;
+    }
 
 }

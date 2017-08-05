@@ -22,167 +22,167 @@ package l1j.server.server.templates;
 import java.util.Calendar;
 
 public class L1CubeAuctionBoard {
-	public L1CubeAuctionBoard() {
-	}
+    public L1CubeAuctionBoard() {
+    }
 
-	private int _Id;
+    private int _Id;
 
-	public int getId() {
-		return _Id;
-	}
+    public int getId() {
+        return _Id;
+    }
 
-	public void setId(int i) {
-		_Id = i;
-	}
+    public void setId(int i) {
+        _Id = i;
+    }
 
-	private int _objectid;
+    private int _objectid;
 
-	public int getObjectId() {
-		return _objectid;
-	}
+    public int getObjectId() {
+        return _objectid;
+    }
 
-	public void setObjectId(int i) {
-		_objectid = i;
-	}
-	
-	private int _itemid;
+    public void setObjectId(int i) {
+        _objectid = i;
+    }
 
-	public int getItemId() {
-		return _itemid;
-	}
+    private int _itemid;
 
-	public void setItemId(int i) {
-		_itemid = i;
-	}
-	
-	private String _itemName;
+    public int getItemId() {
+        return _itemid;
+    }
 
-	public String getItemName() {
-		return _itemName;
-	}
+    public void setItemId(int i) {
+        _itemid = i;
+    }
 
-	public void setItemName(String s) {
-		_itemName = s;
-	}
+    private String _itemName;
 
-	private int _itemType;
+    public String getItemName() {
+        return _itemName;
+    }
 
-	public int getItemType() {
-		return _itemType;
-	}
+    public void setItemName(String s) {
+        _itemName = s;
+    }
 
-	public void setItemType(int s) {
-		_itemType = s;
-	}
-	
-	private int _itemCount;
+    private int _itemType;
 
-	public int getItemCount() {
-		return _itemCount;
-	}
+    public int getItemType() {
+        return _itemType;
+    }
 
-	public void setItemCount(int i) {
-		_itemCount = i;
-	}
-	
-	private int _itemEnchant;
+    public void setItemType(int s) {
+        _itemType = s;
+    }
 
-	public int getItemEnchant() {
-		return _itemEnchant;
-	}
+    private int _itemCount;
 
-	public void setItemEnchant(int i) {
-		_itemEnchant = i;
-	}
-	
-	private int _itemAttrEnchant;
+    public int getItemCount() {
+        return _itemCount;
+    }
 
-	public int getItemAttrEnchant() {
-		return _itemAttrEnchant;
-	}
+    public void setItemCount(int i) {
+        _itemCount = i;
+    }
 
-	public void setItemAttrEnchant(int i) {
-		_itemAttrEnchant = i;
-	}
-	
-	private int _itemIdentity;
+    private int _itemEnchant;
 
-	public int getItemIdentity() {
-		return _itemIdentity;
-	}
+    public int getItemEnchant() {
+        return _itemEnchant;
+    }
 
-	public void setItemIdentity(int i) {
-		_itemIdentity = i;
-	}
+    public void setItemEnchant(int i) {
+        _itemEnchant = i;
+    }
 
-	private int _itemBless;
+    private int _itemAttrEnchant;
 
-	public int getItemBless() {
-		return _itemBless;
-	}
+    public int getItemAttrEnchant() {
+        return _itemAttrEnchant;
+    }
 
-	public void setItemBless(int i) {
-		_itemBless = i;
-	}
+    public void setItemAttrEnchant(int i) {
+        _itemAttrEnchant = i;
+    }
 
-	private int _itemprice;
+    private int _itemIdentity;
 
-	public int getItemPrice() {
-		return _itemprice;
-	}
+    public int getItemIdentity() {
+        return _itemIdentity;
+    }
 
-	public void setItemPrice(int i) {
-		_itemprice = i;
-	}
+    public void setItemIdentity(int i) {
+        _itemIdentity = i;
+    }
 
-	private String _oldOwner;
+    private int _itemBless;
 
-	public String getOldOwner() {
-		return _oldOwner;
-	}
+    public int getItemBless() {
+        return _itemBless;
+    }
 
-	public void setOldOwner(String s) {
-		_oldOwner = s;
-	}
+    public void setItemBless(int i) {
+        _itemBless = i;
+    }
 
-	private int _oldOwnerId;
+    private int _itemprice;
 
-	public int getOldOwnerId() {
-		return _oldOwnerId;
-	}
+    public int getItemPrice() {
+        return _itemprice;
+    }
 
-	public void setOldOwnerId(int i) {
-		_oldOwnerId = i;
-	}
+    public void setItemPrice(int i) {
+        _itemprice = i;
+    }
 
-	private String _newOwner;
+    private String _oldOwner;
 
-	public String getNewOwner() {
-		return _newOwner;
-	}
+    public String getOldOwner() {
+        return _oldOwner;
+    }
 
-	public void setNewOwner(String s) {
-		_newOwner = s;
-	}
+    public void setOldOwner(String s) {
+        _oldOwner = s;
+    }
 
-	private int _newOwnerId;
+    private int _oldOwnerId;
 
-	public int getNewOwnerId() {
-		return _newOwnerId;
-	}
+    public int getOldOwnerId() {
+        return _oldOwnerId;
+    }
 
-	public void setNewOwnerId(int i) {
-		_newOwnerId = i;
-	}
-	
-	private Calendar _deadline;
+    public void setOldOwnerId(int i) {
+        _oldOwnerId = i;
+    }
 
-	public Calendar getDeadline() {
-		return _deadline;
-	}
+    private String _newOwner;
 
-	public void setDeadline(Calendar i) {
-		_deadline = i;
-	}
+    public String getNewOwner() {
+        return _newOwner;
+    }
+
+    public void setNewOwner(String s) {
+        _newOwner = s;
+    }
+
+    private int _newOwnerId;
+
+    public int getNewOwnerId() {
+        return _newOwnerId;
+    }
+
+    public void setNewOwnerId(int i) {
+        _newOwnerId = i;
+    }
+
+    private Calendar _deadline;
+
+    public Calendar getDeadline() {
+        return _deadline;
+    }
+
+    public void setDeadline(Calendar i) {
+        _deadline = i;
+    }
 
 }

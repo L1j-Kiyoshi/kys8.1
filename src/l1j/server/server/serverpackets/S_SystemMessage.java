@@ -22,50 +22,53 @@ import l1j.server.server.Opcodes;
 import l1j.server.server.model.Instance.L1PcInstance;
 
 public class S_SystemMessage extends ServerBasePacket {
-	private static final String S_SYSTEM_MESSAGE = "[S] S_SystemMessage";
+    private static final String S_SYSTEM_MESSAGE = "[S] S_SystemMessage";
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	/**
-	 * クライアントにデータの存在しないオリジナルのメッセージを表示する。
-	 *メッセージにnameid（$ xxx）が含まれている場合は、overloadされたもう一方を使用する。
-	 * 
-	 * @param msg - 表示する文字列
-	 */
-	public S_SystemMessage(String msg) {
-		writeC(Opcodes.S_MESSAGE);
-		writeC(0x09);
-		writeS(msg);
-	}
-	public S_SystemMessage(L1PcInstance pc, String msg) {
-		writeC(Opcodes.S_SAY);
-		writeC(15);
-		writeD(pc.getId());
-		writeS(msg);
-	}
-	/**
-	 *クライアントにデータの存在しないオリジナルのメッセージを表示する。
-	 * 
-	 * @param msg - 表示する文字列
-	 * @param nameid - 文字列にnameid（$ xxx）が含まれている場合、trueにする。
-	 */
-	public S_SystemMessage(String msg, boolean nameid) {
-		writeC(Opcodes.S_SAY_CODE);
-		writeC(2);
-		writeD(0);
-		writeS(msg);
-		// NPC チャットパケットであればnameidが解釈されるため、これを利用する
-	}
+    /**
+     * クライアントにデータの存在しないオリジナルのメッセージを表示する。
+     * メッセージにnameid（$ xxx）が含まれている場合は、overloadされたもう一方を使用する。
+     *
+     * @param msg - 表示する文字列
+     */
+    public S_SystemMessage(String msg) {
+        writeC(Opcodes.S_MESSAGE);
+        writeC(0x09);
+        writeS(msg);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return S_SYSTEM_MESSAGE;
-	}
+    public S_SystemMessage(L1PcInstance pc, String msg) {
+        writeC(Opcodes.S_SAY);
+        writeC(15);
+        writeD(pc.getId());
+        writeS(msg);
+    }
+
+    /**
+     * クライアントにデータの存在しないオリジナルのメッセージを表示する。
+     *
+     * @param msg    - 表示する文字列
+     * @param nameid - 文字列にnameid（$ xxx）が含まれている場合、trueにする。
+     */
+    public S_SystemMessage(String msg, boolean nameid) {
+        writeC(Opcodes.S_SAY_CODE);
+        writeC(2);
+        writeD(0);
+        writeS(msg);
+        // NPC チャットパケットであればnameidが解釈されるため、これを利用する
+    }
+
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return S_SYSTEM_MESSAGE;
+    }
 }

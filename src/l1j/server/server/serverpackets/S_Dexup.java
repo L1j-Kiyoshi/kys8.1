@@ -27,23 +27,23 @@ import l1j.server.server.model.Instance.L1PcInstance;
 
 public class S_Dexup extends ServerBasePacket {
 
-	public S_Dexup(L1PcInstance pc, int type, int time) {
-		writeC(Opcodes.S_MAGE_DEXTERITY);
-		writeH(time);
-		writeC(pc.getAbility().getTotalDex());
-		writeC(type);
-		writeD(0);
-	}
+    public S_Dexup(L1PcInstance pc, int type, int time) {
+        writeC(Opcodes.S_MAGE_DEXTERITY);
+        writeH(time);
+        writeC(pc.getAbility().getTotalDex());
+        writeC(type);
+        writeD(0);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	
-	@Override
-	public String getType() {
-		return _S__25_S_Dexup;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	private static final String _S__25_S_Dexup = "[S] S_Dexup";
+    @Override
+    public String getType() {
+        return _S__25_S_Dexup;
+    }
+
+    private static final String _S__25_S_Dexup = "[S] S_Dexup";
 }

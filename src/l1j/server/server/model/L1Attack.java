@@ -50,7 +50,7 @@ public class L1Attack {
 
     private L1PcInstance _targetPc = null;
 
-    private L1NpcInstance _npc = null; 
+    private L1NpcInstance _npc = null;
 
     private L1NpcInstance _targetNpc = null;
 
@@ -84,11 +84,15 @@ public class L1Attack {
 
     private int _drainMana = 0;
 
-    /** ゾウのストーンゴーレム **/
+    /**
+     * ゾウのストーンゴーレム
+     **/
 
     private int _drainHp = 0;
 
-    /** ゾウのストーンゴーレム **/
+    /**
+     * ゾウのストーンゴーレム
+     **/
 
     private int _attckGrfxId = 0;
 
@@ -136,9 +140,9 @@ public class L1Attack {
     private int _weaponMaterial = 0;
 
     private int _weaponDoubleDmgChance = 0;
-    
+
     private int _ignorereductionbyweapon = 0;
-    
+
     private int _ignorereductionbyarmor = 0;
 
     private int _weaponAttrLevel = 0; //属性レベル
@@ -309,146 +313,146 @@ public class L1Attack {
     private static final int[] strDmg = new int[128];
 
     static {
-		 strDmg[ 7 ] = 2 ;
-		 strDmg[ 8 ] = 2 ;
-		 strDmg[ 9 ] = 2 ;
-		 strDmg[ 10 ] = 3 ;
-		 strDmg[ 11 ] = 3 ;
-		 strDmg[ 12 ] = 4 ;
-		 strDmg[ 13 ] = 4 ;
-		 strDmg[ 14 ] = 5 ;
-		 strDmg[ 15 ] = 5 ;
-		 strDmg[ 16 ] = 6 ;
-		 strDmg[ 17 ] = 6 ;
-		 strDmg[ 18 ] = 7 ;
-		 strDmg[ 19 ] = 7 ;
-		 strDmg[ 20 ] = 8 ;
-		 strDmg[ 21 ] = 8 ;
-		 strDmg[ 22 ] = 9 ;
-		 strDmg[ 23 ] = 9 ;
-		 strDmg[ 24 ] = 10 ;
-		 strDmg[ 25 ] = 10 ;
-		 strDmg[ 26 ] = 11 ;
-		 strDmg[ 27 ] = 11 ;
-		 strDmg[ 28 ] = 12 ;
-		 strDmg[ 29 ] = 12 ;
-		 strDmg[ 30 ] = 13 ;
-		 strDmg[ 31 ] = 13 ;
-		 strDmg[ 32 ] = 14 ;
-		 strDmg[ 33 ] = 14 ;
-		 strDmg[ 34 ] = 15 ;
-		 strDmg[ 35 ] = 15 ;
-		 strDmg[ 36 ] = 16 ;
-		 strDmg[ 37 ] = 16 ;
-		 strDmg[ 38 ] = 17 ;
-		 strDmg[ 39 ] = 17 ;
-		 strDmg[ 40 ] = 18 ;
-		 strDmg[ 41 ] = 18 ;
-		 strDmg[ 42 ] = 19 ;
-		 strDmg[ 43 ] = 19 ;
-		 strDmg[ 44 ] = 20 ;
-		 strDmg[ 45 ] = 20 ;
-		 strDmg[ 46 ] = 21 ;
-		 strDmg[ 47 ] = 21 ;
-		 strDmg[ 48 ] = 22 ;
-		 strDmg[ 49 ] = 22 ;
-		 strDmg[ 50 ] = 23 ;
-		 strDmg[ 51 ] = 23 ;
-		 strDmg[ 52 ] = 24 ;
-		 strDmg[ 53 ] = 24 ;
-		 strDmg[ 54 ] = 25 ;
-		 strDmg[ 55 ] = 25 ;
-		 strDmg[ 56 ] = 26 ;
-		 strDmg[ 57 ] = 26 ;
-		 strDmg[ 58 ] = 27 ;
-		 strDmg[ 59 ] = 27 ;
-		 strDmg[ 60 ] = 28 ;
-		 strDmg[ 61 ] = 28 ;
-		 strDmg[ 62 ] = 29 ;
-		 strDmg[ 63 ] = 29 ;
-		 strDmg[ 64 ] = 30 ;
-		 strDmg[ 65 ] = 30 ;
-		 strDmg[ 66 ] = 31 ;
-		 strDmg[ 67 ] = 31 ;
-		 strDmg[ 68 ] = 32 ;
-		 strDmg[ 69 ] = 32 ;
-		 strDmg[ 70 ] = 33 ;
-		 strDmg[ 71 ] = 33 ;
-		 strDmg[ 72 ] = 34 ;
+        strDmg[7] = 2;
+        strDmg[8] = 2;
+        strDmg[9] = 2;
+        strDmg[10] = 3;
+        strDmg[11] = 3;
+        strDmg[12] = 4;
+        strDmg[13] = 4;
+        strDmg[14] = 5;
+        strDmg[15] = 5;
+        strDmg[16] = 6;
+        strDmg[17] = 6;
+        strDmg[18] = 7;
+        strDmg[19] = 7;
+        strDmg[20] = 8;
+        strDmg[21] = 8;
+        strDmg[22] = 9;
+        strDmg[23] = 9;
+        strDmg[24] = 10;
+        strDmg[25] = 10;
+        strDmg[26] = 11;
+        strDmg[27] = 11;
+        strDmg[28] = 12;
+        strDmg[29] = 12;
+        strDmg[30] = 13;
+        strDmg[31] = 13;
+        strDmg[32] = 14;
+        strDmg[33] = 14;
+        strDmg[34] = 15;
+        strDmg[35] = 15;
+        strDmg[36] = 16;
+        strDmg[37] = 16;
+        strDmg[38] = 17;
+        strDmg[39] = 17;
+        strDmg[40] = 18;
+        strDmg[41] = 18;
+        strDmg[42] = 19;
+        strDmg[43] = 19;
+        strDmg[44] = 20;
+        strDmg[45] = 20;
+        strDmg[46] = 21;
+        strDmg[47] = 21;
+        strDmg[48] = 22;
+        strDmg[49] = 22;
+        strDmg[50] = 23;
+        strDmg[51] = 23;
+        strDmg[52] = 24;
+        strDmg[53] = 24;
+        strDmg[54] = 25;
+        strDmg[55] = 25;
+        strDmg[56] = 26;
+        strDmg[57] = 26;
+        strDmg[58] = 27;
+        strDmg[59] = 27;
+        strDmg[60] = 28;
+        strDmg[61] = 28;
+        strDmg[62] = 29;
+        strDmg[63] = 29;
+        strDmg[64] = 30;
+        strDmg[65] = 30;
+        strDmg[66] = 31;
+        strDmg[67] = 31;
+        strDmg[68] = 32;
+        strDmg[69] = 32;
+        strDmg[70] = 33;
+        strDmg[71] = 33;
+        strDmg[72] = 34;
 
-	}
+    }
 
     private static final int[] dexDmg = new int[128];
 
     static {
-		// DEXダメージ補正
-		dexDmg[ 7 ] = 2 ;
-		dexDmg[ 8 ] = 2 ;
-		dexDmg[ 9 ] = 3 ;
-		dexDmg[ 10 ] = 3 ;
-		dexDmg[ 11 ] = 3 ;
-		dexDmg[ 12 ] = 4 ;
-		dexDmg[ 13 ] = 4 ;
-		dexDmg[ 14 ] = 4 ;
-		dexDmg[ 15 ] = 5 ;
-		dexDmg[ 16 ] = 5 ;
-		dexDmg[ 17 ] = 5 ;
-		dexDmg[ 18 ] = 6 ;
-		dexDmg[ 19 ] = 6 ;
-		dexDmg[ 20 ] = 6 ;
-		dexDmg[ 21 ] = 7 ;
-		dexDmg[ 22 ] = 7 ;
-		dexDmg[ 23 ] = 7 ;
-		dexDmg[ 24 ] = 8 ;
-		dexDmg[ 25 ] = 8 ;
-		dexDmg[ 26 ] = 8 ;
-		dexDmg[ 27 ] = 9 ;
-		dexDmg[ 28 ] = 9 ;
-		dexDmg[ 29 ] = 9 ;
-		dexDmg[ 30 ] = 10 ;
-		dexDmg[ 31 ] = 10 ;
-		dexDmg[ 32 ] = 10 ;
-		dexDmg[ 33 ] = 11 ;
-		dexDmg[ 34 ] = 11 ;
-		dexDmg[ 35 ] = 11 ;
-		dexDmg[ 36 ] = 12 ;
-		dexDmg[ 37 ] = 12 ;
-		dexDmg[ 38 ] = 12 ;
-		dexDmg[ 39 ] = 13 ;
-		dexDmg[ 40 ] = 13 ;
-		dexDmg[ 41 ] = 13 ;
-		dexDmg[ 42 ] = 14 ;
-		dexDmg[ 43 ] = 14 ;
-		dexDmg[ 44 ] = 14 ;
-		dexDmg[ 45 ] = 15 ;
-		dexDmg[ 46 ] = 15 ;
-		dexDmg[ 47 ] = 15 ;
-		dexDmg[ 48 ] = 16 ;
-		dexDmg[ 49 ] = 16 ;
-		dexDmg[ 50 ] = 16 ;
-		dexDmg[ 51 ] = 17 ;
-		dexDmg[ 52 ] = 17 ;
-		dexDmg[ 53 ] = 17 ;
-		dexDmg[ 54 ] = 18 ;
-		dexDmg[ 55 ] = 18 ;
-		dexDmg[ 56 ] = 18 ;
-		dexDmg[ 57 ] = 19 ;
-		dexDmg[ 58 ] = 19 ;
-		dexDmg[ 59 ] = 19 ;
-		dexDmg[ 60 ] = 20 ;
-		dexDmg[ 61 ] = 20 ;
-		dexDmg[ 62 ] = 20 ;
-		dexDmg[ 63 ] = 21 ;
-		dexDmg[ 64 ] = 21 ;
-		dexDmg[ 65 ] = 21 ;
-		dexDmg[ 66 ] = 22 ;
-		dexDmg[ 67 ] = 22 ;
-		dexDmg[ 68 ] = 22 ;
-		dexDmg[ 69 ] = 23 ;
-		dexDmg[ 70 ] = 23 ;
-		dexDmg[ 71 ] = 23 ;
-		dexDmg[ 72 ] = 24 ;    								
-	}
+        // DEXダメージ補正
+        dexDmg[7] = 2;
+        dexDmg[8] = 2;
+        dexDmg[9] = 3;
+        dexDmg[10] = 3;
+        dexDmg[11] = 3;
+        dexDmg[12] = 4;
+        dexDmg[13] = 4;
+        dexDmg[14] = 4;
+        dexDmg[15] = 5;
+        dexDmg[16] = 5;
+        dexDmg[17] = 5;
+        dexDmg[18] = 6;
+        dexDmg[19] = 6;
+        dexDmg[20] = 6;
+        dexDmg[21] = 7;
+        dexDmg[22] = 7;
+        dexDmg[23] = 7;
+        dexDmg[24] = 8;
+        dexDmg[25] = 8;
+        dexDmg[26] = 8;
+        dexDmg[27] = 9;
+        dexDmg[28] = 9;
+        dexDmg[29] = 9;
+        dexDmg[30] = 10;
+        dexDmg[31] = 10;
+        dexDmg[32] = 10;
+        dexDmg[33] = 11;
+        dexDmg[34] = 11;
+        dexDmg[35] = 11;
+        dexDmg[36] = 12;
+        dexDmg[37] = 12;
+        dexDmg[38] = 12;
+        dexDmg[39] = 13;
+        dexDmg[40] = 13;
+        dexDmg[41] = 13;
+        dexDmg[42] = 14;
+        dexDmg[43] = 14;
+        dexDmg[44] = 14;
+        dexDmg[45] = 15;
+        dexDmg[46] = 15;
+        dexDmg[47] = 15;
+        dexDmg[48] = 16;
+        dexDmg[49] = 16;
+        dexDmg[50] = 16;
+        dexDmg[51] = 17;
+        dexDmg[52] = 17;
+        dexDmg[53] = 17;
+        dexDmg[54] = 18;
+        dexDmg[55] = 18;
+        dexDmg[56] = 18;
+        dexDmg[57] = 19;
+        dexDmg[58] = 19;
+        dexDmg[59] = 19;
+        dexDmg[60] = 20;
+        dexDmg[61] = 20;
+        dexDmg[62] = 20;
+        dexDmg[63] = 21;
+        dexDmg[64] = 21;
+        dexDmg[65] = 21;
+        dexDmg[66] = 22;
+        dexDmg[67] = 22;
+        dexDmg[68] = 22;
+        dexDmg[69] = 23;
+        dexDmg[70] = 23;
+        dexDmg[71] = 23;
+        dexDmg[72] = 24;
+    }
 
     private static final int[] intDmg = new int[128];
 
@@ -600,12 +604,12 @@ public class L1Attack {
                 }
                 return _isHit;
             }
-    		if (_pc instanceof L1RobotInstance && _pc.isElf()) {
-				if (!_pc.getLocation().isInScreen(_target.getLocation())) {
-					_isHit = false;
-					return _isHit;
-				}
-			}
+            if (_pc instanceof L1RobotInstance && _pc.isElf()) {
+                if (!_pc.getLocation().isInScreen(_target.getLocation())) {
+                    _isHit = false;
+                    return _isHit;
+                }
+            }
             if (!(_pc instanceof L1RobotInstance) && _weaponType == 20 && _weaponId != 190 && _weaponId != 10000 && _weaponId != 202011 && _arrow == null) {
                 _isHit = false; // 矢がない場合は、ミス
             } else if (_weaponType == 62 && _sting == null) {
@@ -615,7 +619,7 @@ public class L1Attack {
             } else if (_weaponId == 247 || _weaponId == 248 || _weaponId == 249) {
                 _isHit = false; // 試練の剣B〜Cの攻撃無効
             } else if (_pc.getMapId() == 631 || _pc.getMapId() == 514) {
-            	_isHit = false;
+                _isHit = false;
             } else if (_calcType == PC_PC) {
                 _isHit = calcPcPcHit();
                 if (_isHit == false) {
@@ -725,8 +729,8 @@ public class L1Attack {
             } else if (_pc.isDragonknight()) {
                 _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(6);
             } else if (_pc.isWarrior()) {
-            	 _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(7);
-                
+                _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(7);
+
             }
         } catch (Exception e) {
             System.out.println("Character Add Damege Error");
@@ -737,7 +741,7 @@ public class L1Attack {
             return false;
 
         if (_pc.getLocation().getLineDistance(_targetPc.getLocation()) >= 3 && _weaponType != 20 && _weaponType != 62) { //ターゲットとの距離が3以上で弓やスティングが
-                                                                                                                         // それとも攻撃ミス笑;
+            // それとも攻撃ミス笑;
             _hitRate = 0;
         }
         int rnd = _random.nextInt(100) + 1;
@@ -797,27 +801,27 @@ public class L1Attack {
 
 
         try {
-        	if(_pc.isCrown()){
-        		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(0);
-        	} else if(_pc.isKnight()){
-        		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(1);
-        	} else if(_pc.isElf()){
-        		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(2);
-        	} else if(_pc.isWizard()){
-        		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(3);
-        	} else if(_pc.isDarkelf()){
-        		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(4);
-        	} else if(_pc.isBlackwizard()){
-        		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(5);
-        	} else if(_pc.isDragonknight()){
-        		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(6);
-        	} else if(_pc.isWarrior()){
-        		_hitRate += CharacterHitRate.getInstance().getCharacterHitRate(7);
-        	}
-        } catch (Exception e){
-        	System.out.println("Character Add Damege Error");
+            if (_pc.isCrown()) {
+                _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(0);
+            } else if (_pc.isKnight()) {
+                _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(1);
+            } else if (_pc.isElf()) {
+                _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(2);
+            } else if (_pc.isWizard()) {
+                _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(3);
+            } else if (_pc.isDarkelf()) {
+                _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(4);
+            } else if (_pc.isBlackwizard()) {
+                _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(5);
+            } else if (_pc.isDragonknight()) {
+                _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(6);
+            } else if (_pc.isWarrior()) {
+                _hitRate += CharacterHitRate.getInstance().getCharacterHitRate(7);
+            }
+        } catch (Exception e) {
+            System.out.println("Character Add Damege Error");
         }
-  
+
         // NPCへの命中率=（PCのLv +クラス補正+ STR補正+ DEX補正+武器補正+ DAIの枚数/ 2 +魔法の補正）×5 {NPCのAC×（-5）}
         _hitRate = _pc.getLevel();
 
@@ -855,7 +859,7 @@ public class L1Attack {
                 _hitRate = 0;
             }
         }
-        
+
         int npcId = _targetNpc.getNpcTemplate().get_npcId(); // シェムリディエラー出
         if (npcId >= 45912 && npcId <= 45915 && !_pc.hasSkillEffect(STATUS_HOLY_WATER)) {
             _hitRate = 0;
@@ -986,33 +990,107 @@ public class L1Attack {
     public int calcDamage() {
         try {
             switch (_calcType) {
-            case PC_PC:
-                _damage = calcPcPcDamage();
-                // タイタンロック：HPが40％未満の場合、近接攻撃を確率的に反射。
-                if (_weaponType != 20 && _weaponType != 62 && _weaponType2 != 17 && _weaponType2 != 19) { // 弓がない場合はロック発動。
-                    if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 238)) {
-                        int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
-                        int chance = _random.nextInt(100) + 1;
-                        int lockSection = 0;
-                        if (_target.getLockSectionUp() != 0) {
-                            lockSection += _target.getLockSectionUp();
+                case PC_PC:
+                    _damage = calcPcPcDamage();
+                    // タイタンロック：HPが40％未満の場合、近接攻撃を確率的に反射。
+                    if (_weaponType != 20 && _weaponType != 62 && _weaponType2 != 17 && _weaponType2 != 19) { // 弓がない場合はロック発動。
+                        if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 238)) {
+                            int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
+                            int chance = _random.nextInt(100) + 1;
+                            int lockSection = 0;
+                            if (_target.getLockSectionUp() != 0) {
+                                lockSection += _target.getLockSectionUp();
+                            }
+                            // System.out.println("ロック区間いくら上がるか」+ロック区間);
+                            if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
+                                // System.out.println("ロック発動するか?");
+                                if (_targetPc.getInventory().checkItem(41246, 10)) {
+                                    _pc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
+                                    _damage = 0;
+                                    _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12555));
+                                    //  _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12555));
+                                    _targetPc.getInventory().consumeItem(41246, 10);
+                                } else {
+                                    _targetPc.sendPackets(new S_SystemMessage("タイタンロック：触媒が不足します。"));
+                                }
+                            }
                         }
-                        // System.out.println("ロック区間いくら上がるか」+ロック区間);
-                        if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
-                            // System.out.println("ロック発動するか?");
-                            if (_targetPc.getInventory().checkItem(41246, 10)) {
-                                _pc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
-                                _damage = 0;
-                                _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12555));
-                              //  _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12555));
-                                _targetPc.getInventory().consumeItem(41246, 10);
-                            } else {
-                                _targetPc.sendPackets(new S_SystemMessage("タイタンロック：触媒が不足します。"));
+                    } else { // そうでない場合のウェーブレット発動
+                        if (_weaponType2 != 17 && _weaponType2 != 19) {
+                            if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 239)) {
+                                int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
+                                int chance = _random.nextInt(100) + 1;
+                                int lockSection = 0;
+                                if (_target.getLockSectionUp() != 0) {
+                                    lockSection += _target.getLockSectionUp();
+                                }
+                                if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
+                                    if (_targetPc.getInventory().checkItem(41246, 10)) {
+                                        _pc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
+                                        _damage = 0;
+                                        _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12557));
+                                        //  _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12557));
+                                        _targetPc.getInventory().consumeItem(41246, 10);
+                                    } else {
+                                        _targetPc.sendPackets(new S_SystemMessage("タイタンウェーブレット：触媒が不足します。"));
+                                    }
+                                }
+                            }
+                        } else { // そうでない場合マジック発動
+                            if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 240)) {
+                                int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
+                                int chance = _random.nextInt(100) + 1;
+                                int lockSection = 0;
+                                if (_target.getLockSectionUp() != 0) {
+                                    lockSection += _target.getLockSectionUp();
+                                }
+                                if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
+                                    if (this._targetPc.getInventory().checkItem(41246, 10)) {
+                                        if (this._calcType == 1)
+                                            this._pc.receiveCounterBarrierDamage(this._targetPc, calcTitanDamage());
+                                        else if (this._calcType == 2)
+                                            this._npc.receiveCounterBarrierDamage(this._targetPc, calcTitanDamage());
+                                        _damage = 0;
+                                        this._targetPc.sendPackets(new S_SkillSound(this._targetPc.getId(), 12559));
+                                        // this._targetPc.broadcastPacket(new S_SkillSound(this._targetPc.getId(), 12559));
+                                        this._targetPc.getInventory().consumeItem(41246, 10);
+                                    } else {
+                                        this._targetPc.sendPackets(new S_SystemMessage("タイタンマジック：触媒が不足します。"));
+                                    }
+                                }
                             }
                         }
                     }
-                } else { // そうでない場合のウェーブレット発動
-                    if (_weaponType2 != 17 && _weaponType2 != 19) {
+                    break;
+                case PC_NPC:
+                    _damage = calcPcNpcDamage();
+                    break;
+                case NPC_PC:
+                    _damage = calcNpcPcDamage();
+                    // タイタンロック：HPが40％未満の場合、近接攻撃を確率的に反射。
+                    int bowactid = _npc.getNpcTemplate().getBowActId();
+                    if (bowactid != 66) {
+                        if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 238)) {
+                            int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
+                            int chance = _random.nextInt(100) + 1;
+                            int lockSection = 0;
+                            if (_target.getLockSectionUp() != 0) {
+                                lockSection += _target.getLockSectionUp();
+                            }
+                            if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
+                                if (_targetPc.getInventory().checkItem(41246, 10)) {
+                                    _npc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
+                                    _damage = 0;
+                                    _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12555));
+                                    // _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12555));
+                                    _targetPc.getInventory().consumeItem(41246, 10);
+                                } else {
+                                    _targetPc.sendPackets(new S_SystemMessage("タイタンロック：触媒が不足します。"));
+                                }
+                            }
+                        }
+                    } else {
+                        // タイタンウェーブレット：HPが40％未満の場合、遠距離攻撃を確率的に反射。
                         if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 239)) {
                             int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
                             int chance = _random.nextInt(100) + 1;
@@ -1022,97 +1100,23 @@ public class L1Attack {
                             }
                             if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
                                 if (_targetPc.getInventory().checkItem(41246, 10)) {
-                                    _pc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
+                                    _npc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
                                     _damage = 0;
                                     _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12557));
-                                  //  _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12557));
+                                    // _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12557));
                                     _targetPc.getInventory().consumeItem(41246, 10);
                                 } else {
                                     _targetPc.sendPackets(new S_SystemMessage("タイタンウェーブレット：触媒が不足します。"));
                                 }
                             }
                         }
-                    } else { // そうでない場合マジック発動
-                        if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 240)) {
-                            int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
-                            int chance = _random.nextInt(100) + 1;
-                            int lockSection = 0;
-                            if (_target.getLockSectionUp() != 0) {
-                                lockSection += _target.getLockSectionUp();
-                            }
-                            if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
-                                if (this._targetPc.getInventory().checkItem(41246, 10)) {
-                                    if (this._calcType == 1)
-                                        this._pc.receiveCounterBarrierDamage(this._targetPc, calcTitanDamage());
-                                    else if (this._calcType == 2)
-                                        this._npc.receiveCounterBarrierDamage(this._targetPc, calcTitanDamage());
-                                    _damage = 0;
-                                    this._targetPc.sendPackets(new S_SkillSound(this._targetPc.getId(), 12559));
-                                   // this._targetPc.broadcastPacket(new S_SkillSound(this._targetPc.getId(), 12559));
-                                    this._targetPc.getInventory().consumeItem(41246, 10);
-                                } else {
-                                    this._targetPc.sendPackets(new S_SystemMessage("タイタンマジック：触媒が不足します。"));
-                                }
-                            }
-                        }
                     }
-                }
-                break;
-            case PC_NPC:
-                _damage = calcPcNpcDamage();
-                break;
-            case NPC_PC:
-                _damage = calcNpcPcDamage();
-                // タイタンロック：HPが40％未満の場合、近接攻撃を確率的に反射。
-                int bowactid = _npc.getNpcTemplate().getBowActId();
-                if (bowactid != 66) {
-                    if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 238)) {
-                        int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
-                        int chance = _random.nextInt(100) + 1;
-                        int lockSection = 0;
-                        if (_target.getLockSectionUp() != 0) {
-                            lockSection += _target.getLockSectionUp();
-                        }
-                        if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
-                            if (_targetPc.getInventory().checkItem(41246, 10)) {
-                                _npc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
-                                _damage = 0;
-                                _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12555));
-                               // _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12555));
-                                _targetPc.getInventory().consumeItem(41246, 10);
-                            } else {
-                                _targetPc.sendPackets(new S_SystemMessage("タイタンロック：触媒が不足します。"));
-                            }
-                        }
-                    }
-                } else {
-                    // タイタンウェーブレット：HPが40％未満の場合、遠距離攻撃を確率的に反射。
-                    if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 239)) {
-                        int percent = (int) Math.round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
-                        int chance = _random.nextInt(100) + 1;
-                        int lockSection = 0;
-                        if (_target.getLockSectionUp() != 0) {
-                            lockSection += _target.getLockSectionUp();
-                        }
-                        if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp()) && chance <= 23) {
-                            if (_targetPc.getInventory().checkItem(41246, 10)) {
-                                _npc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
-                                _damage = 0;
-                                _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12557));
-                               // _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 12557));
-                                _targetPc.getInventory().consumeItem(41246, 10);
-                            } else {
-                                _targetPc.sendPackets(new S_SystemMessage("タイタンウェーブレット：触媒が不足します。"));
-                            }
-                        }
-                    }
-                }
-                break;
-            case NPC_NPC:
-                _damage = calcNpcNpcDamage();
-                break;
-            default:
-                break;
+                    break;
+                case NPC_NPC:
+                    _damage = calcNpcNpcDamage();
+                    break;
+                default:
+                    break;
             }
         } catch (Exception e) {
         }
@@ -1121,18 +1125,18 @@ public class L1Attack {
 
     // ●●●● プレイヤーからプレイヤーへのダメージ算出 ●●●●
     public int calcPcPcDamage() {
-		if (_pc instanceof L1RobotInstance) {
-			if (!_targetPc.isRobot()) {
-				if (_pc.getCurrentWeapon() == 20) { // 弓
-					return _random.nextInt(70) + 40;
-				} else {
-					return _random.nextInt(80) + 30;
-				}
-			} else {
-				return 50;
-			}
+        if (_pc instanceof L1RobotInstance) {
+            if (!_targetPc.isRobot()) {
+                if (_pc.getCurrentWeapon() == 20) { // 弓
+                    return _random.nextInt(70) + 40;
+                } else {
+                    return _random.nextInt(80) + 30;
+                }
+            } else {
+                return 50;
+            }
 
-		}
+        }
         int weaponMaxDamage = _weaponSmall; // + _weaponAddDmg;
 
         int weaponDamage = 0;
@@ -1147,16 +1151,16 @@ public class L1Attack {
             _weaponDoubleDmgChance += _pc.getWeapon().getEnchantLevel();
         }
         if (_weaponType == 58) { // クロウ
-        	int crowchance = _random.nextInt(100) + 1;
-        	if(crowchance <= _weaponDoubleDmgChance){
-        		weaponDamage = weaponMaxDamage + _weaponAddDmg;
+            int crowchance = _random.nextInt(100) + 1;
+            if (crowchance <= _weaponDoubleDmgChance) {
+                weaponDamage = weaponMaxDamage + _weaponAddDmg;
                 // _attackType = 2;
                 _pc.sendPackets(new S_SkillSound(_pc.getId(), 3671));
                 _pc.broadcastPacket(new S_SkillSound(_pc.getId(), 3671));
-        	}else{
-        		weaponDamage = _random.nextInt(weaponMaxDamage) + _weaponAddDmg + 1;
-        	}
-        }else if (_weaponType == 0) { // 素手
+            } else {
+                weaponDamage = _random.nextInt(weaponMaxDamage) + _weaponAddDmg + 1;
+            }
+        } else if (_weaponType == 0) { // 素手
             weaponDamage = 0;
         } else {
             weaponDamage = _random.nextInt(weaponMaxDamage) + _weaponAddDmg + 1;
@@ -1168,26 +1172,26 @@ public class L1Attack {
                 weaponDamage = weaponMaxDamage + _weaponAddDmg;
             }
         }
-		/** 祝福書武器ツタ関連 **/
-		/*if (_weaponType != 0) {
-			if (weapon.getBless() == 0 || weapon.getBless() == 128) {
+        /** 祝福書武器ツタ関連 **/
+        /*if (_weaponType != 0) {
+            if (weapon.getBless() == 0 || weapon.getBless() == 128) {
 				weaponDamage += 3;
 			}
 		}*/
-        if(_weaponType != 0 ){
+        if (_weaponType != 0) {
             if (_weaponType != 20 && _weaponType != 62) { // 近距離
-                int Dmgcritical = CalcStat.calcDmgCritical(_pc.getAbility().getTotalStr())+_pc.getDmgCritical();
+                int Dmgcritical = CalcStat.calcDmgCritical(_pc.getAbility().getTotalStr()) + _pc.getDmgCritical();
                 int chance = _random.nextInt(100) + 1;
                 //記章クリティカル
-                if (_pc.getInventory().checkEquipped(900032)){
-                	L1ItemInstance item = _pc.getInventory().findEquippedItemId(900032);
-                	if(item.getEnchantLevel() == 6){
-                		Dmgcritical += 1;
-                	}else if(item.getEnchantLevel() == 7){
-                		Dmgcritical += 3;
-                	}else if(item.getEnchantLevel() >= 8){
-                		Dmgcritical += 5;
-                	}
+                if (_pc.getInventory().checkEquipped(900032)) {
+                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900032);
+                    if (item.getEnchantLevel() == 6) {
+                        Dmgcritical += 1;
+                    } else if (item.getEnchantLevel() == 7) {
+                        Dmgcritical += 3;
+                    } else if (item.getEnchantLevel() >= 8) {
+                        Dmgcritical += 5;
+                    }
                 }/*if (_pc.getInventory().checkEquipped(22208)){ // 塗って腕力
                 	L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
                 	if(item.getEnchantLevel() == 7){
@@ -1208,34 +1212,34 @@ public class L1Attack {
                 	}
                 }*/
                 /** ヴァラカスの一撃 **/
-         		if (_pc.getInventory().checkEquipped(22208) || _pc.getInventory().checkEquipped(22209)
-         				|| _pc.getInventory().checkEquipped(22210) || _pc.getInventory().checkEquipped(22211)) {
-         			int chancess = _random.nextInt(100);
-         			if (chancess <= 8) {
-         				weaponDamage *= 1.3;
-         				S_UseAttackSkill packet = new S_UseAttackSkill(_target, _target.getId(), 15841, _targetX, _targetY,
-         						ActionCodes.ACTION_Attack, false);
-         				_pc.sendPackets(packet);
-         				Broadcaster.broadcastPacket(_pc, packet);
-         			}
-         		}
+                if (_pc.getInventory().checkEquipped(22208) || _pc.getInventory().checkEquipped(22209)
+                        || _pc.getInventory().checkEquipped(22210) || _pc.getInventory().checkEquipped(22211)) {
+                    int chancess = _random.nextInt(100);
+                    if (chancess <= 8) {
+                        weaponDamage *= 1.3;
+                        S_UseAttackSkill packet = new S_UseAttackSkill(_target, _target.getId(), 15841, _targetX, _targetY,
+                                ActionCodes.ACTION_Attack, false);
+                        _pc.sendPackets(packet);
+                        Broadcaster.broadcastPacket(_pc, packet);
+                    }
+                }
                 if (chance <= Dmgcritical) {
                     weaponDamage = weaponMaxDamage + _weaponAddDmg;
                     _isCritical = true;
                 }
             } else {
-                int Bowcritical = CalcStat.calcBowCritical(_pc.getAbility().getTotalDex())+_pc.getBowDmgCritical();
+                int Bowcritical = CalcStat.calcBowCritical(_pc.getAbility().getTotalDex()) + _pc.getBowDmgCritical();
                 int chance = _random.nextInt(100) + 1;
-              //記章クリティカル
-                if (_pc.getInventory().checkEquipped(900033)){
-                	L1ItemInstance item = _pc.getInventory().findEquippedItemId(900033);
-                	if(item.getEnchantLevel() == 6){
-                		Bowcritical += 1;
-                	}else if(item.getEnchantLevel() == 7){
-                		Bowcritical += 3;
-                	}else if(item.getEnchantLevel() >= 8){
-                		Bowcritical += 5;
-                	}
+                //記章クリティカル
+                if (_pc.getInventory().checkEquipped(900033)) {
+                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900033);
+                    if (item.getEnchantLevel() == 6) {
+                        Bowcritical += 1;
+                    } else if (item.getEnchantLevel() == 7) {
+                        Bowcritical += 3;
+                    } else if (item.getEnchantLevel() >= 8) {
+                        Bowcritical += 5;
+                    }
                 }/*if (_pc.getInventory().checkEquipped(22210)){
                 	L1ItemInstance item = _pc.getInventory().findEquippedItemId(22210);
                 	if(item.getEnchantLevel() == 7){
@@ -1247,23 +1251,23 @@ public class L1Attack {
                 	}
                 }*/
                 /** ヴァラカスの一撃 **/
-        		if (_pc.getInventory().checkEquipped(22208) || _pc.getInventory().checkEquipped(22209)
-        				|| _pc.getInventory().checkEquipped(22210) || _pc.getInventory().checkEquipped(22211)) {
-        			int chancess = _random.nextInt(100);
-        			if (chancess <= 8) {
-        				weaponDamage *= 1.3;
-        				S_UseAttackSkill packet = new S_UseAttackSkill(_target, _target.getId(), 15841, _targetX, _targetY,
-        						ActionCodes.ACTION_Attack, false);
-        				_pc.sendPackets(packet);
-        				Broadcaster.broadcastPacket(_pc, packet);
-        			}
-        		}
+                if (_pc.getInventory().checkEquipped(22208) || _pc.getInventory().checkEquipped(22209)
+                        || _pc.getInventory().checkEquipped(22210) || _pc.getInventory().checkEquipped(22211)) {
+                    int chancess = _random.nextInt(100);
+                    if (chancess <= 8) {
+                        weaponDamage *= 1.3;
+                        S_UseAttackSkill packet = new S_UseAttackSkill(_target, _target.getId(), 15841, _targetX, _targetY,
+                                ActionCodes.ACTION_Attack, false);
+                        _pc.sendPackets(packet);
+                        Broadcaster.broadcastPacket(_pc, packet);
+                    }
+                }
                 if (chance <= Bowcritical) {
                     weaponDamage = weaponMaxDamage + _weaponAddDmg;
                     _isCritical = true;
                 }
-    	        }
             }
+        }
         int weaponTotalDamage = weaponDamage + _weaponEnchant;
         boolean secondw = false;
         if (_pc.isWarrior() && _pc.hasSkillEffect(L1SkillId.SLAYER) && _pc.getSecondWeapon() != null) {
@@ -1289,7 +1293,7 @@ public class L1Attack {
                         _pc.setSkillEffect(L1SkillId.BLAZING_SPIRITS, time * 1000);
                         _pc.sendPackets(new S_NewSkillIcon(L1SkillId.BLAZING_SPIRITS, true, time));
                     }
-                    
+
                 }
             } else {
                 _pc.sendPackets(new S_SystemMessage("現在、透明状態では、このスキル発動無効。"));
@@ -1298,17 +1302,17 @@ public class L1Attack {
         }
 
         if (_weaponType == 54 && _pc.isDarkelf()) {
-        	if (_pc.hasSkillEffect(L1SkillId.BLAZING_SPIRITS)) {
-        		weaponTotalDamage *= 2.5;
-        		_targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 14547));
-        		_targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 14547));
-        		_pc.sendPackets(new S_AttackCritical(_pc, _targetId, 54));
-        		Broadcaster.broadcastPacket(_pc, new S_AttackCritical(_pc, _targetId, 54));
-        	} else if ((_random.nextInt(100) + 1) <= (_weaponDoubleDmgChance - weapon.get_durability())) {
-        		weaponTotalDamage *= 2.5;
-        		_pc.sendPackets(new S_SkillSound(_pc.getId(), 3398));
-        		_pc.broadcastPacket(new S_SkillSound(_pc.getId(), 3398));
-        	}
+            if (_pc.hasSkillEffect(L1SkillId.BLAZING_SPIRITS)) {
+                weaponTotalDamage *= 2.5;
+                _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 14547));
+                _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 14547));
+                _pc.sendPackets(new S_AttackCritical(_pc, _targetId, 54));
+                Broadcaster.broadcastPacket(_pc, new S_AttackCritical(_pc, _targetId, 54));
+            } else if ((_random.nextInt(100) + 1) <= (_weaponDoubleDmgChance - weapon.get_durability())) {
+                weaponTotalDamage *= 2.5;
+                _pc.sendPackets(new S_SkillSound(_pc.getId(), 3398));
+                _pc.broadcastPacket(new S_SkillSound(_pc.getId(), 3398));
+            }
         }
 
 
@@ -1326,7 +1330,7 @@ public class L1Attack {
                 }
             }
         }
-       
+
 
         double dmg = weaponTotalDamage + _statusDamage;
 
@@ -1343,7 +1347,7 @@ public class L1Attack {
                 dmg *= 3 / 2;
             }
         }
-        
+
         if (_weaponType == 20) { // 弓
             if (_arrow != null) {
                 int add_dmg = _arrow.getItem().getDmgSmall();
@@ -1368,77 +1372,77 @@ public class L1Attack {
             dmg = dmg + _random.nextInt(add_dmg) + 1;
         }
         dmg = calcBuffDamage(dmg);
-    
 
-		//double dmgRate = 1;
-        
+
+        //double dmgRate = 1;
+
         /** 本サーバー10剣以上ツタ+1表記効果 **/
         if (_weaponType != 0 && _weaponType != 20) {
-			if(_weaponId != 66){
-            switch (weapon.getEnchantLevel()) {
-            case 10:
-                dmg += 1;
-                break;
-            case 11:
-                dmg += 2;
-                break;
-            case 12:
-                dmg += 3;
-                break;
-            case 13:
-                dmg += 4;
-                break;
-            case 14:
-                dmg += 5;
-                break;
-            case 15:
-                dmg += 6;
-                break;
-            default:
-                break;
+            if (_weaponId != 66) {
+                switch (weapon.getEnchantLevel()) {
+                    case 10:
+                        dmg += 1;
+                        break;
+                    case 11:
+                        dmg += 2;
+                        break;
+                    case 12:
+                        dmg += 3;
+                        break;
+                    case 13:
+                        dmg += 4;
+                        break;
+                    case 14:
+                        dmg += 5;
+                        break;
+                    case 15:
+                        dmg += 6;
+                        break;
+                    default:
+                        break;
+                }
             }
-			}
         }
-        
+
         /** エンチャントによるツタ関連**/
         if (_weaponType != 0 && _weaponType != 20) {
             switch (weapon.getEnchantLevel()) {
-            case 7:
-                dmg += 1;
-                break;
-            case 8:
-                dmg += 2;
-                break;
-            case 9:
-                dmg += 3;
-                break;
-            case 10:
-                dmg += 4;
-                break;
-            case 11:
-                dmg += 5;
-                break;
-            case 12:
-                dmg += 6;
-                break;
-            case 13:
-                dmg += 7;
-                break;
-            case 14:
-                dmg += 8;
-                break;
-            case 15:
-                dmg += 9;
-                break;
-            default:
-                break;
+                case 7:
+                    dmg += 1;
+                    break;
+                case 8:
+                    dmg += 2;
+                    break;
+                case 9:
+                    dmg += 3;
+                    break;
+                case 10:
+                    dmg += 4;
+                    break;
+                case 11:
+                    dmg += 5;
+                    break;
+                case 12:
+                    dmg += 6;
+                    break;
+                case 13:
+                    dmg += 7;
+                    break;
+                case 14:
+                    dmg += 8;
+                    break;
+                case 15:
+                    dmg += 9;
+                    break;
+                default:
+                    break;
             }
         }
         /** ドゥスルエンチャン星ツタ2ずつ **/
-        if(_weaponId == 66){
-        	dmg += weapon.getEnchantLevel();
+        if (_weaponId == 66) {
+            dmg += weapon.getEnchantLevel();
         }
-        
+
         /** 赤のナイトの大剣リニューアル **/
         if (_pc.getInventory().checkEquipped(202002) || _pc.getInventory().checkEquipped(203002) || _pc.getInventory().checkEquipped(1136)
                 || _pc.getInventory().checkEquipped(1137)) {
@@ -1461,156 +1465,156 @@ public class L1Attack {
         if (_weaponType2 == 17) {
             dmg = L1WeaponSkill.KiringkuDamage(_pc, _target);
         }
-       // dmg *= dmgRate;
-        
+        // dmg *= dmgRate;
+
         switch (_weaponId) {
-        case 307:
-        case 308:
-        case 309:
-        case 310:
-        case 311:
-        case 313:
-        case 314:
-            dmg = L1WeaponSkill.BlazeShock(_pc, _targetPc, _weaponEnchant);
-            break;
-        case 1010:
-        case 1011:
-        case 1012:
-        case 1013:
-        case 1014:
-            L1WeaponSkill.getDiseaseWeapon(_pc, _targetPc, _weaponId);
-            break;
-        case 2: // 悪運の短剣
-        case 200002: // 軸悪運の短剣
-            dmg = L1WeaponSkill.DiceDagger(_pc, _targetPc, weapon);
-            break;
-        case 12: // 風の刃短剣
-        case 203020: // 生命の短剣
-        case 601: // 破滅のグレートソード
-            ruinGreatSword(dmg);
-            break;
-        case 204: // 真紅のクロスボウ
-        case 100204: // 軸真紅のクロスボウ
-        case 86: // 赤い影のデュアルブレード
-            L1WeaponSkill.RedShadowDualBlade(_pc, _targetPc);
-            break;
-        case 1115: // 神妙ソード
-        case 1117: // 神妙クロ
-            dmg += getEbHP(_pc, _target, 8981, _weaponEnchant);
-            break;
-        case 1116: // 神妙杖
-        case 1118: // 神妙ロングボウ
-        case 202011: // がよの激怒
-            dmg += getEbMP1(_pc, _target, 8981, _weaponEnchant);
-            break;
-        case 1109: // 魔族クロウ
-        case 1113: // 魔族の剣
-        case 1114: // 魔族両手剣
-        case 203011: // 魔族斧
-            dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
-            break;
-        case 1110: // 魔族の杖
-        case 1112: // 魔族のキーリンク
-        case 1111: // 魔族の弓
-            dmg += getEbMP(_pc, _target, 8152, _weaponEnchant);
-            break;
-        case 1108: // 魔族チェーン
-            dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
-            break;
-        case 1119: // 極限のチェーンソード
-            dmg += extremeChainSword(_pc, _target, 3685, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
-            break;
-        case 1123: // ブラッドサッカー
-        case 202013:
-            L1WeaponSkill.ChainSword(_pc);
-            bloodSucker(dmg, _weaponEnchant);
-            break;
-        case 500:// デストラクタのチェーンソード
-        case 501:// 破滅者のチェーンソード
-        case 1104:// エルモアチェーンソード
-        case 1132:// ベビーテルランチェーンソード
-            L1WeaponSkill.ChainSword(_pc);
-            break;
-        case 203017:
-            L1WeaponSkill.ChainSword_Destroyer(_pc);
-            if (weapon.getEnchantLevel() >= 10)
-            dmg += L1WeaponSkill.Destroyer(_pc, _target, 4077, _weaponEnchant);
-            break;
-        case 203006://台風の斧
-        	if (weapon.getEnchantLevel() >= 10)
-        	 dmg += L1WeaponSkill.StormAx(_pc, _target, 7977, _weaponEnchant);
-        	break;
-            
-        case 1136://悪夢のロングボウ
-       	 if (weapon.getEnchantLevel() >= 10)
-                dmg += L1WeaponSkill.Nightmare(_pc, _target, 14339, _weaponEnchant);
-       	break;
-        case 203025://ジンサ
-        case 203026:
-       	 if (weapon.getEnchantLevel() >= 10)
-                dmg += L1WeaponSkill.Jinsa(_pc, _target, 8032, _weaponEnchant);
-       	break;
-        case 312:
-            dmg = L1WeaponSkill.ChainSword_BlazeShock(_pc, _targetNpc, _weaponEnchant);
-            break;
-        case 202001: // 歓迎のチェーンソード
-            dmg += L1WeaponSkill.ChainSword_Welcome(_pc, _target, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
-            break;
-        case 1124: // 破壊の二刀流
-        case 1125: // 破壊のクロウ
-        case 11125:// 祝福破壊の二刀流
-            dmg += L1WeaponSkill.DestructionDualBlade_Crow(_pc, _target, 9359, _weaponEnchant);
-            break;
-        case 600: // 脳身体検査
-            dmg += L1WeaponSkill.LightningEdge(_pc, _target, 3940, _weaponEnchant);
-            break;
-        case 604: // 酷寒のウィンドウ
-            dmg += L1WeaponSkill.ExColdWind(_pc, _target, 3704, _weaponEnchant);
-            break;
-        case 605: //狂風の斧
-        case 203015: // 疾風の斧
-            dmg += L1WeaponSkill.InsanityWindAx(_pc, _target, 5524, _weaponEnchant);
-            break;
-        case 191: // サルチョンの弓
-            dmg += L1WeaponSkill.AngelSlayer(_pc, _target, 9361, _weaponEnchant);
-            break;
-        case 1135: // 共鳴のキーリンク
-            dmg += L1WeaponSkill.Kiringku_Resonance(_pc, _target, 5201, _weaponEnchant);
-            break;
-        case 202012: // ヒペリオンの絶望
-            dmg += L1WeaponSkill.HypelionsDespair(_pc, _target, 12248, _weaponEnchant);
-            break;
-        case 1120: // 冷え性のキーリンク
-            dmg += L1WeaponSkill.Kiringku_Cold(_pc, _target, 6553, _weaponEnchant);
-            break;
-        case 283: // ヴァラカスのキーリンク
-            dmg += L1WeaponSkill.Redskill(_pc, _target, 10405, _weaponEnchant);
-            break;
-        case 294: // 君主の剣
-            dmg += L1WeaponSkill.LordSword(_pc, _target, 4842, _weaponEnchant);
-            break;
-        case 58: // デスナイトのフレイムブレード
-            dmg += L1WeaponSkill.DeathKnightFlameBlade(_pc, _target, _weaponEnchant, 7300);
-            break;
-        case 54: // カーツの剣
-            dmg += L1WeaponSkill.KurtzsSword(_pc, _target, _weaponEnchant, 10405);
-            break;
-        case 124: // バフォメットスタッフ
-            dmg += L1WeaponSkill.BaphometStaff(_pc, _target, _weaponEnchant, 129);
-            break;
-        case 202003: // ゼロスの杖
-            dmg += L1WeaponSkill.ZerosWand(_pc, _target, _weaponEnchant, 11760);
-            break;
-        case 134: // 修正結晶棒
-            dmg += L1WeaponSkill.HolyHedronStaff(_pc, _target, _weaponEnchant, 10405);
-            dmg+=getEbMP(_pc, _target, 8152, _weaponEnchant);
-            break;
-        default:
-            dmg += L1WeaponSkill.getWeaponSkillDamage(_pc, _target, _weaponId);
-            break;
+            case 307:
+            case 308:
+            case 309:
+            case 310:
+            case 311:
+            case 313:
+            case 314:
+                dmg = L1WeaponSkill.BlazeShock(_pc, _targetPc, _weaponEnchant);
+                break;
+            case 1010:
+            case 1011:
+            case 1012:
+            case 1013:
+            case 1014:
+                L1WeaponSkill.getDiseaseWeapon(_pc, _targetPc, _weaponId);
+                break;
+            case 2: // 悪運の短剣
+            case 200002: // 軸悪運の短剣
+                dmg = L1WeaponSkill.DiceDagger(_pc, _targetPc, weapon);
+                break;
+            case 12: // 風の刃短剣
+            case 203020: // 生命の短剣
+            case 601: // 破滅のグレートソード
+                ruinGreatSword(dmg);
+                break;
+            case 204: // 真紅のクロスボウ
+            case 100204: // 軸真紅のクロスボウ
+            case 86: // 赤い影のデュアルブレード
+                L1WeaponSkill.RedShadowDualBlade(_pc, _targetPc);
+                break;
+            case 1115: // 神妙ソード
+            case 1117: // 神妙クロ
+                dmg += getEbHP(_pc, _target, 8981, _weaponEnchant);
+                break;
+            case 1116: // 神妙杖
+            case 1118: // 神妙ロングボウ
+            case 202011: // がよの激怒
+                dmg += getEbMP1(_pc, _target, 8981, _weaponEnchant);
+                break;
+            case 1109: // 魔族クロウ
+            case 1113: // 魔族の剣
+            case 1114: // 魔族両手剣
+            case 203011: // 魔族斧
+                dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
+                break;
+            case 1110: // 魔族の杖
+            case 1112: // 魔族のキーリンク
+            case 1111: // 魔族の弓
+                dmg += getEbMP(_pc, _target, 8152, _weaponEnchant);
+                break;
+            case 1108: // 魔族チェーン
+                dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
+                L1WeaponSkill.ChainSword(_pc);
+                break;
+            case 1119: // 極限のチェーンソード
+                dmg += extremeChainSword(_pc, _target, 3685, _weaponEnchant);
+                L1WeaponSkill.ChainSword(_pc);
+                break;
+            case 1123: // ブラッドサッカー
+            case 202013:
+                L1WeaponSkill.ChainSword(_pc);
+                bloodSucker(dmg, _weaponEnchant);
+                break;
+            case 500:// デストラクタのチェーンソード
+            case 501:// 破滅者のチェーンソード
+            case 1104:// エルモアチェーンソード
+            case 1132:// ベビーテルランチェーンソード
+                L1WeaponSkill.ChainSword(_pc);
+                break;
+            case 203017:
+                L1WeaponSkill.ChainSword_Destroyer(_pc);
+                if (weapon.getEnchantLevel() >= 10)
+                    dmg += L1WeaponSkill.Destroyer(_pc, _target, 4077, _weaponEnchant);
+                break;
+            case 203006://台風の斧
+                if (weapon.getEnchantLevel() >= 10)
+                    dmg += L1WeaponSkill.StormAx(_pc, _target, 7977, _weaponEnchant);
+                break;
+
+            case 1136://悪夢のロングボウ
+                if (weapon.getEnchantLevel() >= 10)
+                    dmg += L1WeaponSkill.Nightmare(_pc, _target, 14339, _weaponEnchant);
+                break;
+            case 203025://ジンサ
+            case 203026:
+                if (weapon.getEnchantLevel() >= 10)
+                    dmg += L1WeaponSkill.Jinsa(_pc, _target, 8032, _weaponEnchant);
+                break;
+            case 312:
+                dmg = L1WeaponSkill.ChainSword_BlazeShock(_pc, _targetNpc, _weaponEnchant);
+                break;
+            case 202001: // 歓迎のチェーンソード
+                dmg += L1WeaponSkill.ChainSword_Welcome(_pc, _target, _weaponEnchant);
+                L1WeaponSkill.ChainSword(_pc);
+                break;
+            case 1124: // 破壊の二刀流
+            case 1125: // 破壊のクロウ
+            case 11125:// 祝福破壊の二刀流
+                dmg += L1WeaponSkill.DestructionDualBlade_Crow(_pc, _target, 9359, _weaponEnchant);
+                break;
+            case 600: // 脳身体検査
+                dmg += L1WeaponSkill.LightningEdge(_pc, _target, 3940, _weaponEnchant);
+                break;
+            case 604: // 酷寒のウィンドウ
+                dmg += L1WeaponSkill.ExColdWind(_pc, _target, 3704, _weaponEnchant);
+                break;
+            case 605: //狂風の斧
+            case 203015: // 疾風の斧
+                dmg += L1WeaponSkill.InsanityWindAx(_pc, _target, 5524, _weaponEnchant);
+                break;
+            case 191: // サルチョンの弓
+                dmg += L1WeaponSkill.AngelSlayer(_pc, _target, 9361, _weaponEnchant);
+                break;
+            case 1135: // 共鳴のキーリンク
+                dmg += L1WeaponSkill.Kiringku_Resonance(_pc, _target, 5201, _weaponEnchant);
+                break;
+            case 202012: // ヒペリオンの絶望
+                dmg += L1WeaponSkill.HypelionsDespair(_pc, _target, 12248, _weaponEnchant);
+                break;
+            case 1120: // 冷え性のキーリンク
+                dmg += L1WeaponSkill.Kiringku_Cold(_pc, _target, 6553, _weaponEnchant);
+                break;
+            case 283: // ヴァラカスのキーリンク
+                dmg += L1WeaponSkill.Redskill(_pc, _target, 10405, _weaponEnchant);
+                break;
+            case 294: // 君主の剣
+                dmg += L1WeaponSkill.LordSword(_pc, _target, 4842, _weaponEnchant);
+                break;
+            case 58: // デスナイトのフレイムブレード
+                dmg += L1WeaponSkill.DeathKnightFlameBlade(_pc, _target, _weaponEnchant, 7300);
+                break;
+            case 54: // カーツの剣
+                dmg += L1WeaponSkill.KurtzsSword(_pc, _target, _weaponEnchant, 10405);
+                break;
+            case 124: // バフォメットスタッフ
+                dmg += L1WeaponSkill.BaphometStaff(_pc, _target, _weaponEnchant, 129);
+                break;
+            case 202003: // ゼロスの杖
+                dmg += L1WeaponSkill.ZerosWand(_pc, _target, _weaponEnchant, 11760);
+                break;
+            case 134: // 修正結晶棒
+                dmg += L1WeaponSkill.HolyHedronStaff(_pc, _target, _weaponEnchant, 10405);
+                dmg += getEbMP(_pc, _target, 8152, _weaponEnchant);
+                break;
+            default:
+                dmg += L1WeaponSkill.getWeaponSkillDamage(_pc, _target, _weaponId);
+                break;
         }
 
         if (_weaponType == 0) { // 素手
@@ -1622,22 +1626,22 @@ public class L1Attack {
         } catch (Exception e) {
             System.out.println("武器追加ダメージエラー");
         }
-        
+
         //スキル、料理などのダメージリダクション
         int damagereduction = 0;
         if (_targetPc.hasSkillEffect(COOK_STR) || _targetPc.hasSkillEffect(COOK_DEX) || _targetPc.hasSkillEffect(COOK_INT)) { // リニューアル料理
-        	damagereduction += 2;
+            damagereduction += 2;
         }
-        if(_targetPc.hasSkillEffect(COOK_GROW)){
-        	damagereduction += 2;
+        if (_targetPc.hasSkillEffect(COOK_GROW)) {
+            damagereduction += 2;
         }
         // 戦士スキル：アーマーガード - キャラクターのAC / 10のダメージ減少効果を得る。
         if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 237)) {
-        	if(_targetPc.getAC().getAc() < -10){
-        		damagereduction += _targetPc.getAC().getAc() / -10;
-        	}
+            if (_targetPc.getAC().getAc() < -10) {
+                damagereduction += _targetPc.getAC().getAc() / -10;
+            }
         }
-        
+
 
         if (_targetPc.hasSkillEffect(REDUCTION_ARMOR)) {
             int targetPcLvl = _targetPc.getLevel();
@@ -1648,37 +1652,37 @@ public class L1Attack {
         }
 
         if (_targetPc.hasSkillEffect(EARTH_GUARDIAN)) {
-        	damagereduction += 2;
+            damagereduction += 2;
         }
-        
+
         dmg -= roomtisDecreaseDamage();
 
         if (_targetPc.hasSkillEffect(DRAGON_SKIN)) {
             if (_targetPc.getLevel() >= 80) {
-            	damagereduction += 5 + ((_targetPc.getLevel() - 78) / 2);
+                damagereduction += 5 + ((_targetPc.getLevel() - 78) / 2);
             } else {
-            	damagereduction += 5;
+                damagereduction += 5;
             }
         }
         if (_targetPc.hasSkillEffect(PATIENCE)) {
-        	damagereduction += 2;
-        }        
+            damagereduction += 2;
+        }
         if (_targetPc.hasSkillEffect(FEATHER_BUFF_A)) {
-        	damagereduction += 3;
+            damagereduction += 3;
         }
         if (_targetPc.hasSkillEffect(FEATHER_BUFF_B)) {
-        	damagereduction += 2;
+            damagereduction += 2;
         }
         if (_targetPc.hasSkillEffect(RANK_BUFF_2) || _targetPc.hasSkillEffect(RANK_BUFF_3)
-            || _targetPc.hasSkillEffect(RANK_BUFF_4)) {
-        
-        	damagereduction += 2;
+                || _targetPc.hasSkillEffect(RANK_BUFF_4)) {
+
+            damagereduction += 2;
         }
-        if (_targetPc.hasSkillEffect(RANK_BUFF_5)){ //通常のが号
-        	damagereduction += 8;
+        if (_targetPc.hasSkillEffect(RANK_BUFF_5)) { //通常のが号
+            damagereduction += 8;
         }
         if (_targetPc.hasSkillEffect(CLAN_BUFF4)) {
-        	damagereduction += 1;
+            damagereduction += 1;
         }
      /*   for (L1DollInstance doll : _targetPc.getDollList()) {// マジックドールによるダメージ減少。ドルゴールレム人形
 			dmg -= doll.getDamageReductionByDoll();
@@ -1703,28 +1707,28 @@ public class L1Attack {
         	}
         }*/
         dmg -= damagereduction;
-        
+
         //スキル、料理などのダメージリダクション
-        
-        
+
+
         if (_pc.hasSkillEffect(L1SkillId.RANK_BUFF_3) || _pc.hasSkillEffect(L1SkillId.RANK_BUFF_4)) {
-        	dmg += 2;
-        }
-       
-       
-        // クランバフpvp 
-        if (_pc.hasSkillEffect(L1SkillId.RANK_BUFF_3)){
             dmg += 2;
         }
-        if (_pc.hasSkillEffect(L1SkillId.RANK_BUFF_4)){
-        	dmg += 2;
+
+
+        // クランバフpvp 
+        if (_pc.hasSkillEffect(L1SkillId.RANK_BUFF_3)) {
+            dmg += 2;
         }
-        
-        
+        if (_pc.hasSkillEffect(L1SkillId.RANK_BUFF_4)) {
+            dmg += 2;
+        }
+
+
         if (_pc.hasSkillEffect(L1SkillId.DESTROY)) {
             if (_pc.getWeapon().getItem().getType() == 18)
                 ArmorDestory();
-        } 
+        }
         if (_targetPc.hasSkillEffect(ABSOLUTE_BARRIER)) {
             dmg = 0;
         }
@@ -1739,23 +1743,23 @@ public class L1Attack {
             _targetPc.removeSkillEffect(PHANTASM);
         }
         if (_targetPc.hasSkillEffect(IllUSION_AVATAR)) {
-        	dmg += (dmg / 5);
+            dmg += (dmg / 5);
         }
         if (_targetPc.hasSkillEffect(IMMUNE_TO_HARM)) {
-        	dmg -= (dmg * 0.3);//4
+            dmg -= (dmg * 0.3);//4
         }
         dmg += roomtisAddDamage(); // 黒い光ピアス追加ダメージ処理
 
 
-		for (L1DollInstance doll : _pc.getDollList()) {// マジックドールドールによる追加ダメージ
-			if (doll == null)
-				continue;
-			if (_weaponType != 20 && _weaponType != 62) {
-				dmg += doll.getDamageByDoll();
-			}
-			dmg += doll.attackPixieDamage(_pc, _targetPc);
-			doll.getPixieGreg(_pc, _targetPc);
-		}
+        for (L1DollInstance doll : _pc.getDollList()) {// マジックドールドールによる追加ダメージ
+            if (doll == null)
+                continue;
+            if (_weaponType != 20 && _weaponType != 62) {
+                dmg += doll.getDamageByDoll();
+            }
+            dmg += doll.attackPixieDamage(_pc, _targetPc);
+            doll.getPixieGreg(_pc, _targetPc);
+        }
 
         // 戦士スキルPC  -  PC
         // クラッシュ：攻撃者のレベルに50％程度をダメージに反映する。
@@ -1783,81 +1787,84 @@ public class L1Attack {
         if (_pc.hasSkillEffect(L1SkillId.LORDS_BUFF)) {
             if (_pc.getClanRank() >= L1Clan.GUARDIAN)
                 dmg += 5;
-		}
+        }
         int dolldamagereduction = 0;
         for (L1DollInstance doll : _targetPc.getDollList()) {// マジックドールによるダメージ減少。ドルゴールレム人形
-        	dolldamagereduction = doll.getDamageReductionByDoll();
-		}
+            dolldamagereduction = doll.getDamageReductionByDoll();
+        }
         dmg -= dolldamagereduction;
-        int itemamagereduction= _targetPc.getDamageReductionByArmor(); // 防具によるダメージ減少
-        
+        int itemamagereduction = _targetPc.getDamageReductionByArmor(); // 防具によるダメージ減少
+
         dmg -= itemamagereduction;
         int totaldamagereduction = 0;
-        totaldamagereduction = dolldamagereduction + itemamagereduction + damagereduction;	
-        if(_pc.getInventory().checkEquipped(202011)){
-        	if(_pc.getInventory().checkEquipped(22209)
-        		|| _pc.getInventory().checkEquipped(22210)){
-        		if(totaldamagereduction > 0 && totaldamagereduction <= 15){
-            		dmg += totaldamagereduction;
-            	}else{
-            		dmg += 15;
-            	}	
-        	}else{
-        		if(totaldamagereduction > 0 && totaldamagereduction <= 12){
-        		dmg += totaldamagereduction;
-        	}else{
-        		dmg += 12;
-        	}
-        	}
-        	
+        totaldamagereduction = dolldamagereduction + itemamagereduction + damagereduction;
+        if (_pc.getInventory().checkEquipped(202011)) {
+            if (_pc.getInventory().checkEquipped(22209)
+                    || _pc.getInventory().checkEquipped(22210)) {
+                if (totaldamagereduction > 0 && totaldamagereduction <= 15) {
+                    dmg += totaldamagereduction;
+                } else {
+                    dmg += 15;
+                }
+            } else {
+                if (totaldamagereduction > 0 && totaldamagereduction <= 12) {
+                    dmg += totaldamagereduction;
+                } else {
+                    dmg += 12;
+                }
+            }
+
         }
-        if((_pc.getInventory().checkEquipped(22208) || _pc.getInventory().checkEquipped(22209)
-        		|| _pc.getInventory().checkEquipped(22210) || _pc.getInventory().checkEquipped(22211))
-        		&& !_pc.getInventory().checkEquipped(202011)){
-        	if(_pc.getInventory().checkEquipped(22208)){
-        		L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
-        		if(item.getEnchantLevel() == 7){
-        			dmg += 1;
-        		}else if(item.getEnchantLevel() == 8){
-        			dmg += 2;
-        		}else if(item.getEnchantLevel() == 9){
-        			dmg += 3;
-        		}
-        	}if(_pc.getInventory().checkEquipped(22209)){
-        		L1ItemInstance item = _pc.getInventory().findEquippedItemId(22209);
-        		if(item.getEnchantLevel() == 7){
-        			dmg += 1;
-        		}else if(item.getEnchantLevel() == 8){
-        			dmg += 2;
-        		}else if(item.getEnchantLevel() == 9){
-        			dmg += 3;
-        		}
-        	}if(_pc.getInventory().checkEquipped(22210)){
-        		L1ItemInstance item = _pc.getInventory().findEquippedItemId(22210);
-        		if(item.getEnchantLevel() == 7){
-        			dmg += 1;
-        		}else if(item.getEnchantLevel() == 8){
-        			dmg += 2;
-        		}else if(item.getEnchantLevel() == 9){
-        			dmg += 3;
-        		}
-        	}if(_pc.getInventory().checkEquipped(22211)){
-        		L1ItemInstance item = _pc.getInventory().findEquippedItemId(22211);
-        		if(item.getEnchantLevel() == 7){
-        			dmg += 1;
-        		}else if(item.getEnchantLevel() == 8){
-        			dmg += 2;
-        		}else if(item.getEnchantLevel() == 9){
-        			dmg += 3;
-        		}
-        	}
-        	if(totaldamagereduction > 0 && totaldamagereduction <= 3){
-        		dmg += totaldamagereduction;
-        	}else{
-        		dmg += 3;
-        	}
+        if ((_pc.getInventory().checkEquipped(22208) || _pc.getInventory().checkEquipped(22209)
+                || _pc.getInventory().checkEquipped(22210) || _pc.getInventory().checkEquipped(22211))
+                && !_pc.getInventory().checkEquipped(202011)) {
+            if (_pc.getInventory().checkEquipped(22208)) {
+                L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
+                if (item.getEnchantLevel() == 7) {
+                    dmg += 1;
+                } else if (item.getEnchantLevel() == 8) {
+                    dmg += 2;
+                } else if (item.getEnchantLevel() == 9) {
+                    dmg += 3;
+                }
+            }
+            if (_pc.getInventory().checkEquipped(22209)) {
+                L1ItemInstance item = _pc.getInventory().findEquippedItemId(22209);
+                if (item.getEnchantLevel() == 7) {
+                    dmg += 1;
+                } else if (item.getEnchantLevel() == 8) {
+                    dmg += 2;
+                } else if (item.getEnchantLevel() == 9) {
+                    dmg += 3;
+                }
+            }
+            if (_pc.getInventory().checkEquipped(22210)) {
+                L1ItemInstance item = _pc.getInventory().findEquippedItemId(22210);
+                if (item.getEnchantLevel() == 7) {
+                    dmg += 1;
+                } else if (item.getEnchantLevel() == 8) {
+                    dmg += 2;
+                } else if (item.getEnchantLevel() == 9) {
+                    dmg += 3;
+                }
+            }
+            if (_pc.getInventory().checkEquipped(22211)) {
+                L1ItemInstance item = _pc.getInventory().findEquippedItemId(22211);
+                if (item.getEnchantLevel() == 7) {
+                    dmg += 1;
+                } else if (item.getEnchantLevel() == 8) {
+                    dmg += 2;
+                } else if (item.getEnchantLevel() == 9) {
+                    dmg += 3;
+                }
+            }
+            if (totaldamagereduction > 0 && totaldamagereduction <= 3) {
+                dmg += totaldamagereduction;
+            } else {
+                dmg += 3;
+            }
         }
-        
+
         /** 対象の属性エンチャントによるダメージ演算 **/
         dmg += fishAttrEnchantEffect();
 
@@ -1876,7 +1883,7 @@ public class L1Attack {
         /** キャラクター別追加ダメージ、追加リダクション、確率 **/
 
         /** 70レベルから追加打撃+ 1 **/
-       // dmg += Math.max(0, _pc.getLevel() - 70) * 1;
+        // dmg += Math.max(0, _pc.getLevel() - 70) * 1;
 
         /** アーマーブレイク */
         if (_targetPc.hasSkillEffect(ARMOR_BRAKE)) { // アーマーブレイク
@@ -1906,10 +1913,10 @@ public class L1Attack {
         /*** 新規レベルの保護 ***/
 
         /** 新規血盟攻撃途方もなく **/
-       if (_calcType == PC_PC) {
+        if (_calcType == PC_PC) {
             int castle_id = L1CastleLocation.getCastleIdByArea(_pc);
             boolean isAliveBoss = BossAlive.getInstance().isBossAlive(_targetPc.getMapId());
-            if (castle_id == 0 && !isAliveBoss ) {
+            if (castle_id == 0 && !isAliveBoss) {
                 if (_pc.getClanid() == Config.NEW_CLAN || _targetPc.getClanid() == Config.NEW_CLAN) {
                     if (Config.NEW_CLAN_PROTECTION_PROCESS) {
                         _isHit = false;
@@ -1986,64 +1993,64 @@ public class L1Attack {
 
         // パプリオンの加護
         int chance5 = _random.nextInt(100) + 1;
-            if (_target != null) {
-                int dmg2 = 0;
-                int plus = 0;
-                if (_targetPc.getInventory().checkEquipped(22200) || // パプ腕力
-                        _targetPc.getInventory().checkEquipped(22201) || // パプ先見の明
-                        _targetPc.getInventory().checkEquipped(22202) || // パプ耐久
-                        _targetPc.getInventory().checkEquipped(22203)) { // パプ馬力
-                    if (chance5 <= 6) { // 元5である
-                        L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22200);
-                        L1ItemInstance item1 = _targetPc.getInventory().findEquippedItemId(22201);
-                        L1ItemInstance item2 = _targetPc.getInventory().findEquippedItemId(22202);
-                        L1ItemInstance item3 = _targetPc.getInventory().findEquippedItemId(22203);
-                        if (item.getEnchantLevel() >= 7 && item.getEnchantLevel() <= 9) {
-                            plus = item.getEnchantLevel() - 6;
-                        } else if (item1.getEnchantLevel() >= 7 && item1.getEnchantLevel() <= 9) {
-                            plus = item.getEnchantLevel() - 6;
-                        } else if (item2.getEnchantLevel() >= 7 && item2.getEnchantLevel() <= 9) {
-                            plus = item.getEnchantLevel() - 6;
-                        } else if (item3.getEnchantLevel() >= 7 && item3.getEnchantLevel() <= 9) {
-                            plus = item.getEnchantLevel() - 6;
-                        } else if (item.getEnchantLevel() > 9 || item1.getEnchantLevel() > 9 || item2.getEnchantLevel() > 9
-                                || item3.getEnchantLevel() > 9) {
-                            plus = 3;
-                        }
-                        if (_targetPc.hasSkillEffect(L1SkillId.POLLUTE_WATER)) {
-                            dmg2 += (40 + _random.nextInt(15) + (plus * 10)) / 2; // フルートウォーター場合の半分//元のランダム数値30である
-                        }
-                        if (_targetPc.hasSkillEffect(L1SkillId.WATER_LIFE)) {
-                            dmg2 += (40 + _random.nextInt(15) + (plus * 10)) * 2; // ウォーターライフ場合倍増//元のランダム数値30である
-                        }
-                        dmg2 += 40 + _random.nextInt(15) + (plus * 10); // 回復率=基本50回復+ランダム（1〜30）//元のランダム数値30である
-                        _targetPc.setCurrentHp(_targetPc.getCurrentHp() + dmg2);
-                        _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2187));
-                        _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2187));
+        if (_target != null) {
+            int dmg2 = 0;
+            int plus = 0;
+            if (_targetPc.getInventory().checkEquipped(22200) || // パプ腕力
+                    _targetPc.getInventory().checkEquipped(22201) || // パプ先見の明
+                    _targetPc.getInventory().checkEquipped(22202) || // パプ耐久
+                    _targetPc.getInventory().checkEquipped(22203)) { // パプ馬力
+                if (chance5 <= 6) { // 元5である
+                    L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22200);
+                    L1ItemInstance item1 = _targetPc.getInventory().findEquippedItemId(22201);
+                    L1ItemInstance item2 = _targetPc.getInventory().findEquippedItemId(22202);
+                    L1ItemInstance item3 = _targetPc.getInventory().findEquippedItemId(22203);
+                    if (item.getEnchantLevel() >= 7 && item.getEnchantLevel() <= 9) {
+                        plus = item.getEnchantLevel() - 6;
+                    } else if (item1.getEnchantLevel() >= 7 && item1.getEnchantLevel() <= 9) {
+                        plus = item.getEnchantLevel() - 6;
+                    } else if (item2.getEnchantLevel() >= 7 && item2.getEnchantLevel() <= 9) {
+                        plus = item.getEnchantLevel() - 6;
+                    } else if (item3.getEnchantLevel() >= 7 && item3.getEnchantLevel() <= 9) {
+                        plus = item.getEnchantLevel() - 6;
+                    } else if (item.getEnchantLevel() > 9 || item1.getEnchantLevel() > 9 || item2.getEnchantLevel() > 9
+                            || item3.getEnchantLevel() > 9) {
+                        plus = 3;
                     }
+                    if (_targetPc.hasSkillEffect(L1SkillId.POLLUTE_WATER)) {
+                        dmg2 += (40 + _random.nextInt(15) + (plus * 10)) / 2; // フルートウォーター場合の半分//元のランダム数値30である
+                    }
+                    if (_targetPc.hasSkillEffect(L1SkillId.WATER_LIFE)) {
+                        dmg2 += (40 + _random.nextInt(15) + (plus * 10)) * 2; // ウォーターライフ場合倍増//元のランダム数値30である
+                    }
+                    dmg2 += 40 + _random.nextInt(15) + (plus * 10); // 回復率=基本50回復+ランダム（1〜30）//元のランダム数値30である
+                    _targetPc.setCurrentHp(_targetPc.getCurrentHp() + dmg2);
+                    _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2187));
+                    _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2187));
                 }
             }
-          
-		// 神聖なエルヴンプレートメイル
-		int chance66 = _random.nextInt(100) + 1;
-		if (_target != null) {
-			int dmg2 = 0;
-			int plus = 0;
-			if (_targetPc.getInventory().checkEquipped(222351)) {
-				if (chance66 <= 5) { // 元5である
-					if (_targetPc.hasSkillEffect(L1SkillId.POLLUTE_WATER)) {
-						dmg2 += (25 + _random.nextInt(15) + (plus * 10)) / 2; //
-					}
-					if (_targetPc.hasSkillEffect(L1SkillId.WATER_LIFE)) {
-						dmg2 += (25 + _random.nextInt(15) + (plus * 10)) * 2; //
-					}
-					dmg2 += 25 + _random.nextInt(15) + (plus * 10); //
-					_targetPc.setCurrentHp(_targetPc.getCurrentHp() + dmg2);
-					_targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 15355));
-					_targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 15355));
-				}
-			}
-		}
+        }
+
+        // 神聖なエルヴンプレートメイル
+        int chance66 = _random.nextInt(100) + 1;
+        if (_target != null) {
+            int dmg2 = 0;
+            int plus = 0;
+            if (_targetPc.getInventory().checkEquipped(222351)) {
+                if (chance66 <= 5) { // 元5である
+                    if (_targetPc.hasSkillEffect(L1SkillId.POLLUTE_WATER)) {
+                        dmg2 += (25 + _random.nextInt(15) + (plus * 10)) / 2; //
+                    }
+                    if (_targetPc.hasSkillEffect(L1SkillId.WATER_LIFE)) {
+                        dmg2 += (25 + _random.nextInt(15) + (plus * 10)) * 2; //
+                    }
+                    dmg2 += 25 + _random.nextInt(15) + (plus * 10); //
+                    _targetPc.setCurrentHp(_targetPc.getCurrentHp() + dmg2);
+                    _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 15355));
+                    _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 15355));
+                }
+            }
+        }
         try {
             if (_targetPc.isCrown()) {
                 dmg -= CharacterReduc.getInstance().getCharacterReduc(0);
@@ -2082,7 +2089,7 @@ public class L1Attack {
             } else if (_pc.isDragonknight()) {
                 dmg += CharacterBalance.getInstance().getCharacterBalance(6);
             } else if (_pc.isWarrior()) {
-            	dmg += CharacterBalance.getInstance().getCharacterBalance(7);
+                dmg += CharacterBalance.getInstance().getCharacterBalance(7);
             }
         } catch (Exception e) {
             System.out.println("Character Add Damege Error");
@@ -2130,26 +2137,44 @@ public class L1Attack {
             _isHit = false;
         }
 /**アビスポイントによるリドク	 */
-		
-		if (_targetPc.getPeerage() == 1){ dmg -=0.5;
-		} else if (_targetPc.getPeerage() == 2){ dmg -= 1;
-		} else if (_targetPc.getPeerage() == 3){ dmg -= 1.5;
-		} else if (_targetPc.getPeerage() == 4){ dmg -= 2;
-		} else if (_targetPc.getPeerage() == 5){ dmg -= 2.5;
-		} else if (_targetPc.getPeerage() == 6){ dmg -= 3;
-		} else if (_targetPc.getPeerage() == 7){ dmg -= 3.5;
-		} else if (_targetPc.getPeerage() == 8){ dmg -= 4;
-		} else if (_targetPc.getPeerage() == 9){ dmg -= 4.5;
-		} else if (_targetPc.getPeerage() == 10){ dmg -= 5;
-		} else if (_targetPc.getPeerage() == 11){ dmg -= 5.5;
-		} else if (_targetPc.getPeerage() == 12){ dmg -= 6;
-		} else if (_targetPc.getPeerage() == 13){ dmg -= 6.5;
-		} else if (_targetPc.getPeerage() == 14){ dmg -= 7;
-		} else if (_targetPc.getPeerage() == 15){ dmg -= 7.5;
-		} else if (_targetPc.getPeerage() == 16){ dmg -= 8;
-		} else if (_targetPc.getPeerage() == 17){ dmg -= 8.5;
-		} else if (_targetPc.getPeerage() == 18){ dmg -= 9; 
-		}
+
+        if (_targetPc.getPeerage() == 1) {
+            dmg -= 0.5;
+        } else if (_targetPc.getPeerage() == 2) {
+            dmg -= 1;
+        } else if (_targetPc.getPeerage() == 3) {
+            dmg -= 1.5;
+        } else if (_targetPc.getPeerage() == 4) {
+            dmg -= 2;
+        } else if (_targetPc.getPeerage() == 5) {
+            dmg -= 2.5;
+        } else if (_targetPc.getPeerage() == 6) {
+            dmg -= 3;
+        } else if (_targetPc.getPeerage() == 7) {
+            dmg -= 3.5;
+        } else if (_targetPc.getPeerage() == 8) {
+            dmg -= 4;
+        } else if (_targetPc.getPeerage() == 9) {
+            dmg -= 4.5;
+        } else if (_targetPc.getPeerage() == 10) {
+            dmg -= 5;
+        } else if (_targetPc.getPeerage() == 11) {
+            dmg -= 5.5;
+        } else if (_targetPc.getPeerage() == 12) {
+            dmg -= 6;
+        } else if (_targetPc.getPeerage() == 13) {
+            dmg -= 6.5;
+        } else if (_targetPc.getPeerage() == 14) {
+            dmg -= 7;
+        } else if (_targetPc.getPeerage() == 15) {
+            dmg -= 7.5;
+        } else if (_targetPc.getPeerage() == 16) {
+            dmg -= 8;
+        } else if (_targetPc.getPeerage() == 17) {
+            dmg -= 8.5;
+        } else if (_targetPc.getPeerage() == 18) {
+            dmg -= 9;
+        }
         return (int) dmg;
     }
 
@@ -2160,29 +2185,29 @@ public class L1Attack {
             _drainHp = 0;
             return 0;
         }
-    	if (_pc instanceof L1RobotInstance) {
-			if (((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("地底")
-					|| ((L1RobotInstance) _pc).huntingBot_Location.startsWith("忘れられた島")
-					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("船舶睡眠")
-					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("象牙の塔4階")
-					|| ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("象牙の塔5階")) {
-				if (_pc.getCurrentWeapon() == 46 // 短剣
-						|| _pc.getCurrentWeapon() == 20
-						|| _pc.getCurrentWeapon() == 24) {// 弓
-					return _random.nextInt(50) + 100;
-				} else {
-					return _random.nextInt(50) + 50;
-				}
-			} else {
-				if (_pc.getCurrentWeapon() == 46 // 短剣
-						|| _pc.getCurrentWeapon() == 20
-						|| _pc.getCurrentWeapon() == 24) {// 弓
-					return _random.nextInt(30) + 70;
-				} else {
-					return _random.nextInt(40) + 40;
-				}
-			}
-		}
+        if (_pc instanceof L1RobotInstance) {
+            if (((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("地底")
+                    || ((L1RobotInstance) _pc).huntingBot_Location.startsWith("忘れられた島")
+                    || ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("船舶睡眠")
+                    || ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("象牙の塔4階")
+                    || ((L1RobotInstance) _pc).huntingBot_Location.equalsIgnoreCase("象牙の塔5階")) {
+                if (_pc.getCurrentWeapon() == 46 // 短剣
+                        || _pc.getCurrentWeapon() == 20
+                        || _pc.getCurrentWeapon() == 24) {// 弓
+                    return _random.nextInt(50) + 100;
+                } else {
+                    return _random.nextInt(50) + 50;
+                }
+            } else {
+                if (_pc.getCurrentWeapon() == 46 // 短剣
+                        || _pc.getCurrentWeapon() == 20
+                        || _pc.getCurrentWeapon() == 24) {// 弓
+                    return _random.nextInt(30) + 70;
+                } else {
+                    return _random.nextInt(40) + 40;
+                }
+            }
+        }
         int weaponMaxDamage = 0;
         boolean secondw = false;
 
@@ -2197,18 +2222,16 @@ public class L1Attack {
         int weaponDamage = 0;
 
         if (_weaponType == 58) { // クロウ
-        	int crowchance = _random.nextInt(100) + 1;
-        	if(crowchance <= _weaponDoubleDmgChance){
-        		weaponDamage = weaponMaxDamage + _weaponAddDmg;
+            int crowchance = _random.nextInt(100) + 1;
+            if (crowchance <= _weaponDoubleDmgChance) {
+                weaponDamage = weaponMaxDamage + _weaponAddDmg;
                 // _attackType = 2;
                 _pc.sendPackets(new S_SkillSound(_pc.getId(), 3671));
                 _pc.broadcastPacket(new S_SkillSound(_pc.getId(), 3671));
-        	}else{
-        		weaponDamage = _random.nextInt(weaponMaxDamage) + _weaponAddDmg + 1;
-        	}
-        }
-
-        else if (_weaponType == 0) { // 素手、弓、癌トートレッド_weaponType == 0 ||
+            } else {
+                weaponDamage = _random.nextInt(weaponMaxDamage) + _weaponAddDmg + 1;
+            }
+        } else if (_weaponType == 0) { // 素手、弓、癌トートレッド_weaponType == 0 ||
             weaponDamage = 0;
         } else {
             // weaponDamage = _random.nextInt(weaponMaxDamage) + 1;
@@ -2221,72 +2244,75 @@ public class L1Attack {
                 weaponDamage = weaponMaxDamage + _weaponAddDmg;
             }
         }
-        if(_weaponType != 0 ){
+        if (_weaponType != 0) {
             if (_weaponType != 20 && _weaponType != 62) { // 近距離
-                int Dmgcritical = CalcStat.calcDmgCritical(_pc.getAbility().getTotalStr())+_pc.getDmgCritical();
+                int Dmgcritical = CalcStat.calcDmgCritical(_pc.getAbility().getTotalStr()) + _pc.getDmgCritical();
                 int chance = _random.nextInt(100) + 1;
                 //記章クリティカル
-                if (_pc.getInventory().checkEquipped(900032)){
-                	L1ItemInstance item = _pc.getInventory().findEquippedItemId(900032);
-                	if(item.getEnchantLevel() == 6){
-                		Dmgcritical += 1;
-                	}else if(item.getEnchantLevel() == 7){
-                		Dmgcritical += 3;
-                	}else if(item.getEnchantLevel() >= 8){
-                		Dmgcritical += 5;
-                	}
-                }if (_pc.getInventory().checkEquipped(22208)){ // 塗って腕力
-                	L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
-                	if(item.getEnchantLevel() == 7){
-                		Dmgcritical += 1;
-                	}else if(item.getEnchantLevel() == 8){
-                		Dmgcritical += 2;
-                	}else if(item.getEnchantLevel() >= 9){
-                		Dmgcritical += 3;
-                	}
-                }if (_pc.getInventory().checkEquipped(22209)){ //塗って忍耐
-                	L1ItemInstance item = _pc.getInventory().findEquippedItemId(22209);
-                	if(item.getEnchantLevel() == 7){
-                		Dmgcritical += 1;
-                	}else if(item.getEnchantLevel() == 8){
-                		Dmgcritical += 2;
-                	}else if(item.getEnchantLevel() >= 9){
-                		Dmgcritical += 3;
-                	}
+                if (_pc.getInventory().checkEquipped(900032)) {
+                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900032);
+                    if (item.getEnchantLevel() == 6) {
+                        Dmgcritical += 1;
+                    } else if (item.getEnchantLevel() == 7) {
+                        Dmgcritical += 3;
+                    } else if (item.getEnchantLevel() >= 8) {
+                        Dmgcritical += 5;
+                    }
+                }
+                if (_pc.getInventory().checkEquipped(22208)) { // 塗って腕力
+                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
+                    if (item.getEnchantLevel() == 7) {
+                        Dmgcritical += 1;
+                    } else if (item.getEnchantLevel() == 8) {
+                        Dmgcritical += 2;
+                    } else if (item.getEnchantLevel() >= 9) {
+                        Dmgcritical += 3;
+                    }
+                }
+                if (_pc.getInventory().checkEquipped(22209)) { //塗って忍耐
+                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(22209);
+                    if (item.getEnchantLevel() == 7) {
+                        Dmgcritical += 1;
+                    } else if (item.getEnchantLevel() == 8) {
+                        Dmgcritical += 2;
+                    } else if (item.getEnchantLevel() >= 9) {
+                        Dmgcritical += 3;
+                    }
                 }
                 if (chance <= Dmgcritical) {
                     weaponDamage = weaponMaxDamage + _weaponAddDmg;
                     _isCritical = true;
                 }
             } else {
-                int Bowcritical = CalcStat.calcBowCritical(_pc.getAbility().getTotalDex())+_pc.getBowDmgCritical();
+                int Bowcritical = CalcStat.calcBowCritical(_pc.getAbility().getTotalDex()) + _pc.getBowDmgCritical();
                 int chance = _random.nextInt(100) + 1;
-              //記章クリティカル
-                if (_pc.getInventory().checkEquipped(900033)){
-                	L1ItemInstance item = _pc.getInventory().findEquippedItemId(900033);
-                	if(item.getEnchantLevel() == 6){
-                		Bowcritical += 1;
-                	}else if(item.getEnchantLevel() == 7){
-                		Bowcritical += 3;
-                	}else if(item.getEnchantLevel() >= 8){
-                		Bowcritical += 5;
-                	}
-                }if (_pc.getInventory().checkEquipped(22210)){
-                	L1ItemInstance item = _pc.getInventory().findEquippedItemId(22210);
-                	if(item.getEnchantLevel() == 7){
-                		Bowcritical += 1;
-                	}else if(item.getEnchantLevel() == 8){
-                		Bowcritical += 2;
-                	}else if(item.getEnchantLevel() >= 9){
-                		Bowcritical += 3;
-                	}
+                //記章クリティカル
+                if (_pc.getInventory().checkEquipped(900033)) {
+                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900033);
+                    if (item.getEnchantLevel() == 6) {
+                        Bowcritical += 1;
+                    } else if (item.getEnchantLevel() == 7) {
+                        Bowcritical += 3;
+                    } else if (item.getEnchantLevel() >= 8) {
+                        Bowcritical += 5;
+                    }
+                }
+                if (_pc.getInventory().checkEquipped(22210)) {
+                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(22210);
+                    if (item.getEnchantLevel() == 7) {
+                        Bowcritical += 1;
+                    } else if (item.getEnchantLevel() == 8) {
+                        Bowcritical += 2;
+                    } else if (item.getEnchantLevel() >= 9) {
+                        Bowcritical += 3;
+                    }
                 }
                 if (chance <= Bowcritical) {
                     weaponDamage = weaponMaxDamage + _weaponAddDmg;
                     _isCritical = true;
                 }
-    	        }
             }
+        }
         int weaponTotalDamage = weaponDamage + _weaponEnchant;
 
         if (_pc.isWarrior() && _pc.hasSkillEffect(L1SkillId.SLAYER) && _pc.getSecondWeapon() != null) {
@@ -2329,7 +2355,7 @@ public class L1Attack {
                 }
             }
         }
-      
+
 
         double dmg = weaponTotalDamage + _statusDamage;
 
@@ -2360,8 +2386,8 @@ public class L1Attack {
                     add_dmg = 1;
                 }
                 if (_targetNpc.getNpcTemplate().is_hard() && weapon.getItem().get_penetration() != 1) {
-					add_dmg /= 2;
-				}
+                    add_dmg /= 2;
+                }
             } else if (_weaponId == 190 || _weaponId == 10000 || _weaponId == 202011) { // サイハの弓
                 dmg = dmg + _random.nextInt(15) + 4;
             }
@@ -2378,36 +2404,36 @@ public class L1Attack {
             }
             dmg = dmg + _random.nextInt(add_dmg) + 1 + attrArrow(_arrow, _targetNpc);
         }
-        
+
         /** 本サーバー10剣以上ツタ+1表記効果 **/
         if (_weaponType != 0 && _weaponType != 20) {
             switch (weapon.getEnchantLevel()) {
-            case 10:
-                dmg += 1;
-                break;
-            case 11:
-                dmg += 2;
-                break;
-            case 12:
-                dmg += 3;
-                break;
-            case 13:
-                dmg += 4;
-                break;
-            case 14:
-                dmg += 5;
-                break;
-            case 15:
-                dmg += 6;
-                break;
-            default:
-                break;
+                case 10:
+                    dmg += 1;
+                    break;
+                case 11:
+                    dmg += 2;
+                    break;
+                case 12:
+                    dmg += 3;
+                    break;
+                case 13:
+                    dmg += 4;
+                    break;
+                case 14:
+                    dmg += 5;
+                    break;
+                case 15:
+                    dmg += 6;
+                    break;
+                default:
+                    break;
             }
         }
-        
+
         /** ドゥスルエンチャン星ツタ2ずつ **/
-        if(_weaponId == 66){
-        	dmg += weapon.getEnchantLevel();
+        if (_weaponId == 66) {
+            dmg += weapon.getEnchantLevel();
         }
         /** エンチャントによるツタ関連 **/
         /*if (_weaponType != 0 && _weaponType != 20) {
@@ -2444,151 +2470,151 @@ public class L1Attack {
             }
         }*/
         switch (_weaponId) {
-        case 307:
-        case 308:
-        case 309:
-        case 310:
-        case 311:
-        case 313:
-        case 314:
-            dmg = L1WeaponSkill.BlazeShock(_pc, _targetNpc, _weaponEnchant);
-            break;
-        case 1010:
-        case 1011:
-        case 1012:
-        case 1013:
-        case 1014:
-            L1WeaponSkill.getDiseaseWeapon(_pc, _targetNpc, _weaponId);
-            break;
-        case 12: // 風の刃短剣
-        case 203020: // 生命の短剣
-        case 601: // 破滅のグレートソード
-            ruinGreatSword(dmg);
-            break;
-        case 204: // 真紅のクロスボウ
-        case 100204: // 軸真紅のクロスボウ
-        case 86: // 赤い影のデュアルブレード
-            L1WeaponSkill.RedShadowDualBlade(_pc, _targetNpc);
-            break;
-        case 1115: // 神妙ソード
-        case 1117: // 神妙クロ
-            dmg += getEbHP(_pc, _target, 8981, _weaponEnchant);
-            break;
-        case 1116: // 神妙杖
-        case 1118: // 神妙ロングボウ
-        case 202011: // がよの激怒
-            dmg += getEbMP1(_pc, _target, 8981, _weaponEnchant);
-            break;
-        case 1109: // 魔族クロウ
-        case 1113: // 魔族の剣
-        case 1114: // 魔族両手剣
-        case 203011: // 魔族両手剣
-            dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
-            break;
-        case 1110: // 魔族の杖
-        case 1112: // 魔族のキーリンク
-        case 1111: // 魔族の弓
-            dmg += getEbMP(_pc, _target, 8152, _weaponEnchant);
-            break;
-        case 1108: // 魔族チェーン
-            dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
-            break;
-        case 1119: // 極限のチェーンソード
-            dmg += extremeChainSword(_pc, _target, 3685, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
-            break;
-        case 1123: // ブラッドサッカー
-        case 202013:
-            L1WeaponSkill.ChainSword(_pc);
-            bloodSucker(dmg, _weaponEnchant);
-            break;
-        case 500:// デストラクタのチェーンソード
-        case 501:// 破滅者のチェーンソード
-        case 1104:// エルモアチェーンソード
-        case 1132:// ベビーテルランチェーンソード
-            L1WeaponSkill.ChainSword(_pc);
-            break;
-        case 312:
-            dmg = L1WeaponSkill.ChainSword_BlazeShock(_pc, _targetNpc, _weaponEnchant);
-            break;
-        case 203017:
-            L1WeaponSkill.ChainSword_Destroyer(_pc);
-            if (weapon.getEnchantLevel() >= 10)
-            dmg += L1WeaponSkill.Destroyer(_pc, _target, 4077, _weaponEnchant);
-            break;
-        case 203006://台風の斧
-        	if (weapon.getEnchantLevel() >= 10)
-        	 dmg += L1WeaponSkill.StormAx(_pc, _target, 7977, _weaponEnchant);
-        	break;
-        case 1136://悪夢のロングボウ
-        	 if (weapon.getEnchantLevel() >= 10)
-                 dmg += L1WeaponSkill.Nightmare(_pc, _target, 14339, _weaponEnchant);
-        	break;
-        case 203025://ジンサ
-        case 203026:
-       	 if (weapon.getEnchantLevel() >= 10)
-                dmg += L1WeaponSkill.Jinsa(_pc, _target, 8032, _weaponEnchant);
-       	break;
-        case 202001: // 歓迎のチェーンソード
-            dmg += L1WeaponSkill.ChainSword_Welcome(_pc, _target, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
-            break;
-        case 1124: // 破壊の二刀流
-        case 1125: // 破壊のクロウ
-        case 11125:// 祝福破壊の二刀流
-            dmg += L1WeaponSkill.DestructionDualBlade_Crow(_pc, _target, 9359, _weaponEnchant);
-            break;
-        case 600: // 脳身体検査
-            dmg += L1WeaponSkill.LightningEdge(_pc, _target, 3940, _weaponEnchant);
-            break;
-        case 604: // 酷寒のウィンドウ
-            dmg += L1WeaponSkill.ExColdWind(_pc, _target, 3704, _weaponEnchant);
-            break;
-        case 605: // 狂風の斧
-        case 203015: // 疾風の斧
-            dmg += L1WeaponSkill.InsanityWindAx(_pc, _target, 5524, _weaponEnchant);
-            break;
-        case 191: // サルチョンの弓
-            dmg += L1WeaponSkill.AngelSlayer(_pc, _target, 9361, _weaponEnchant);
-            break;
-        case 1135: // 共鳴のキーリンク
-            dmg += L1WeaponSkill.Kiringku_Resonance(_pc, _target, 5201, _weaponEnchant);
-            break;
-        case 1120: // 冷え性のキーリンク
-            dmg += L1WeaponSkill.Kiringku_Cold(_pc, _target, 6553, _weaponEnchant);
-            break;
-        case 202012: // ヒペリオンの絶望
-            dmg += L1WeaponSkill.HypelionsDespair(_pc, _target, 12248, _weaponEnchant);
-            break;
-        case 283: // ヴァラカスのキーリンク
-            dmg += L1WeaponSkill.Redskill(_pc, _target, 10405, _weaponEnchant);
-            break;
-        case 294: // 君主の剣
-            dmg += L1WeaponSkill.LordSword(_pc, _target, 4842, _weaponEnchant);
-            break;
-        case 58: // デスナイトのフレイムブレード
-            dmg += L1WeaponSkill.DeathKnightFlameBlade(_pc, _target, _weaponEnchant, 7300);
-            break;
-        case 54: // カーツの剣
-            dmg += L1WeaponSkill.KurtzsSword(_pc, _target, _weaponEnchant, 10405);
-            break;
-        case 124: // バフォメットスタッフ
-            dmg += L1WeaponSkill.BaphometStaff(_pc, _target, _weaponEnchant, 129);
-            break;
-        case 202003: // ゼロスの杖
-            dmg += L1WeaponSkill.ZerosWand(_pc, _target, _weaponEnchant, 11760);
-            break;
-        case 134: // 修正結晶棒
-            dmg += L1WeaponSkill.HolyHedronStaff(_pc, _target, _weaponEnchant, 10405);
-            dmg+=getEbMP(_pc, _target, 8152, _weaponEnchant);
-            break;
-        case 603: // 天使の杖
-            L1WeaponSkill.AngelStaff(_pc, _target, _weaponEnchant);
-            break;
-        default:
-            dmg += L1WeaponSkill.getWeaponSkillDamage(_pc, _target, _weaponId);
-            break;
+            case 307:
+            case 308:
+            case 309:
+            case 310:
+            case 311:
+            case 313:
+            case 314:
+                dmg = L1WeaponSkill.BlazeShock(_pc, _targetNpc, _weaponEnchant);
+                break;
+            case 1010:
+            case 1011:
+            case 1012:
+            case 1013:
+            case 1014:
+                L1WeaponSkill.getDiseaseWeapon(_pc, _targetNpc, _weaponId);
+                break;
+            case 12: // 風の刃短剣
+            case 203020: // 生命の短剣
+            case 601: // 破滅のグレートソード
+                ruinGreatSword(dmg);
+                break;
+            case 204: // 真紅のクロスボウ
+            case 100204: // 軸真紅のクロスボウ
+            case 86: // 赤い影のデュアルブレード
+                L1WeaponSkill.RedShadowDualBlade(_pc, _targetNpc);
+                break;
+            case 1115: // 神妙ソード
+            case 1117: // 神妙クロ
+                dmg += getEbHP(_pc, _target, 8981, _weaponEnchant);
+                break;
+            case 1116: // 神妙杖
+            case 1118: // 神妙ロングボウ
+            case 202011: // がよの激怒
+                dmg += getEbMP1(_pc, _target, 8981, _weaponEnchant);
+                break;
+            case 1109: // 魔族クロウ
+            case 1113: // 魔族の剣
+            case 1114: // 魔族両手剣
+            case 203011: // 魔族両手剣
+                dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
+                break;
+            case 1110: // 魔族の杖
+            case 1112: // 魔族のキーリンク
+            case 1111: // 魔族の弓
+                dmg += getEbMP(_pc, _target, 8152, _weaponEnchant);
+                break;
+            case 1108: // 魔族チェーン
+                dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
+                L1WeaponSkill.ChainSword(_pc);
+                break;
+            case 1119: // 極限のチェーンソード
+                dmg += extremeChainSword(_pc, _target, 3685, _weaponEnchant);
+                L1WeaponSkill.ChainSword(_pc);
+                break;
+            case 1123: // ブラッドサッカー
+            case 202013:
+                L1WeaponSkill.ChainSword(_pc);
+                bloodSucker(dmg, _weaponEnchant);
+                break;
+            case 500:// デストラクタのチェーンソード
+            case 501:// 破滅者のチェーンソード
+            case 1104:// エルモアチェーンソード
+            case 1132:// ベビーテルランチェーンソード
+                L1WeaponSkill.ChainSword(_pc);
+                break;
+            case 312:
+                dmg = L1WeaponSkill.ChainSword_BlazeShock(_pc, _targetNpc, _weaponEnchant);
+                break;
+            case 203017:
+                L1WeaponSkill.ChainSword_Destroyer(_pc);
+                if (weapon.getEnchantLevel() >= 10)
+                    dmg += L1WeaponSkill.Destroyer(_pc, _target, 4077, _weaponEnchant);
+                break;
+            case 203006://台風の斧
+                if (weapon.getEnchantLevel() >= 10)
+                    dmg += L1WeaponSkill.StormAx(_pc, _target, 7977, _weaponEnchant);
+                break;
+            case 1136://悪夢のロングボウ
+                if (weapon.getEnchantLevel() >= 10)
+                    dmg += L1WeaponSkill.Nightmare(_pc, _target, 14339, _weaponEnchant);
+                break;
+            case 203025://ジンサ
+            case 203026:
+                if (weapon.getEnchantLevel() >= 10)
+                    dmg += L1WeaponSkill.Jinsa(_pc, _target, 8032, _weaponEnchant);
+                break;
+            case 202001: // 歓迎のチェーンソード
+                dmg += L1WeaponSkill.ChainSword_Welcome(_pc, _target, _weaponEnchant);
+                L1WeaponSkill.ChainSword(_pc);
+                break;
+            case 1124: // 破壊の二刀流
+            case 1125: // 破壊のクロウ
+            case 11125:// 祝福破壊の二刀流
+                dmg += L1WeaponSkill.DestructionDualBlade_Crow(_pc, _target, 9359, _weaponEnchant);
+                break;
+            case 600: // 脳身体検査
+                dmg += L1WeaponSkill.LightningEdge(_pc, _target, 3940, _weaponEnchant);
+                break;
+            case 604: // 酷寒のウィンドウ
+                dmg += L1WeaponSkill.ExColdWind(_pc, _target, 3704, _weaponEnchant);
+                break;
+            case 605: // 狂風の斧
+            case 203015: // 疾風の斧
+                dmg += L1WeaponSkill.InsanityWindAx(_pc, _target, 5524, _weaponEnchant);
+                break;
+            case 191: // サルチョンの弓
+                dmg += L1WeaponSkill.AngelSlayer(_pc, _target, 9361, _weaponEnchant);
+                break;
+            case 1135: // 共鳴のキーリンク
+                dmg += L1WeaponSkill.Kiringku_Resonance(_pc, _target, 5201, _weaponEnchant);
+                break;
+            case 1120: // 冷え性のキーリンク
+                dmg += L1WeaponSkill.Kiringku_Cold(_pc, _target, 6553, _weaponEnchant);
+                break;
+            case 202012: // ヒペリオンの絶望
+                dmg += L1WeaponSkill.HypelionsDespair(_pc, _target, 12248, _weaponEnchant);
+                break;
+            case 283: // ヴァラカスのキーリンク
+                dmg += L1WeaponSkill.Redskill(_pc, _target, 10405, _weaponEnchant);
+                break;
+            case 294: // 君主の剣
+                dmg += L1WeaponSkill.LordSword(_pc, _target, 4842, _weaponEnchant);
+                break;
+            case 58: // デスナイトのフレイムブレード
+                dmg += L1WeaponSkill.DeathKnightFlameBlade(_pc, _target, _weaponEnchant, 7300);
+                break;
+            case 54: // カーツの剣
+                dmg += L1WeaponSkill.KurtzsSword(_pc, _target, _weaponEnchant, 10405);
+                break;
+            case 124: // バフォメットスタッフ
+                dmg += L1WeaponSkill.BaphometStaff(_pc, _target, _weaponEnchant, 129);
+                break;
+            case 202003: // ゼロスの杖
+                dmg += L1WeaponSkill.ZerosWand(_pc, _target, _weaponEnchant, 11760);
+                break;
+            case 134: // 修正結晶棒
+                dmg += L1WeaponSkill.HolyHedronStaff(_pc, _target, _weaponEnchant, 10405);
+                dmg += getEbMP(_pc, _target, 8152, _weaponEnchant);
+                break;
+            case 603: // 天使の杖
+                L1WeaponSkill.AngelStaff(_pc, _target, _weaponEnchant);
+                break;
+            default:
+                dmg += L1WeaponSkill.getWeaponSkillDamage(_pc, _target, _weaponId);
+                break;
         }
 
         if (_weaponType == 0) { // 素手
@@ -2612,13 +2638,13 @@ public class L1Attack {
             }
         }
         for (L1DollInstance doll : _pc.getDollList()) {// マジックドールドールによる追加ダメージ
-        	if (doll == null)
-        		continue;
-        	if (_weaponType != 20 && _weaponType != 62) {
-        		dmg += doll.getDamageByDoll();
-        	}
-        	dmg += doll.attackPixieDamage(_pc, _targetNpc);
-        	doll.getPixieGreg(_pc, _targetNpc);
+            if (doll == null)
+                continue;
+            if (_weaponType != 20 && _weaponType != 62) {
+                dmg += doll.getDamageByDoll();
+            }
+            dmg += doll.attackPixieDamage(_pc, _targetNpc);
+            doll.getPixieGreg(_pc, _targetNpc);
         }
 
         // 戦士スキルPC  -  NPC
@@ -2675,7 +2701,7 @@ public class L1Attack {
             } else if (_pc.isDragonknight()) {
                 dmg += CharacterBalance.getInstance().getCharacterBalance(6);
             } else if (_pc.isWarrior()) {
-            	dmg += CharacterBalance.getInstance().getCharacterBalance(7);
+                dmg += CharacterBalance.getInstance().getCharacterBalance(7);
             }
         } catch (Exception e) {
             System.out.println("Character Add Damege Error");
@@ -2720,34 +2746,34 @@ public class L1Attack {
         if (_npc == null || _targetPc == null)
             return 0;
 
-        
-        int lvl = _npc.getLevel();
-		double dmg = 0D;
-		if (_targetPc instanceof L1RobotInstance) {
-			dmg = 20;
 
-		} // ロボットデムガム
-		if (lvl < 10) // モプレプが10未満
-			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
-		else if (lvl >= 10 && lvl < 20) // モプレプが10〜49
-			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
-		else if (lvl >= 20 && lvl < 30) // モプレプが50〜69
-			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
-		else if (lvl >= 30 && lvl < 40) // モプレプが50〜69
-			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
-		else if (lvl >= 40 && lvl < 50) // モプレプが50〜69
-			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 3;
-		else if (lvl >= 50 && lvl < 60) // モプレプが70〜79
-			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 5;
-		else if (lvl >= 60 && lvl < 70) // モプレプが80〜86
-			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 10;
-		else if (lvl >= 70 && lvl < 80) //モプレプが50〜69
-			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 15;
-		else if (lvl >= 80 && lvl < 87) // モプレプが50〜69
-			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 20;
-		else if (lvl >= 87) // モプレプが87以上
-			dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 100;
-	
+        int lvl = _npc.getLevel();
+        double dmg = 0D;
+        if (_targetPc instanceof L1RobotInstance) {
+            dmg = 20;
+
+        } // ロボットデムガム
+        if (lvl < 10) // モプレプが10未満
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
+        else if (lvl >= 10 && lvl < 20) // モプレプが10〜49
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
+        else if (lvl >= 20 && lvl < 30) // モプレプが50〜69
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
+        else if (lvl >= 30 && lvl < 40) // モプレプが50〜69
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
+        else if (lvl >= 40 && lvl < 50) // モプレプが50〜69
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 3;
+        else if (lvl >= 50 && lvl < 60) // モプレプが70〜79
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 5;
+        else if (lvl >= 60 && lvl < 70) // モプレプが80〜86
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 10;
+        else if (lvl >= 70 && lvl < 80) //モプレプが50〜69
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 15;
+        else if (lvl >= 80 && lvl < 87) // モプレプが50〜69
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 20;
+        else if (lvl >= 87) // モプレプが87以上
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 100;
+
 
         if (_npc instanceof L1PetInstance) {
             dmg += (lvl / 16); // ペットはLV16に追加打撃
@@ -2760,7 +2786,7 @@ public class L1Attack {
             dmg *= 1.2;
         }
         if (_npc.getMapId() == 1700 /*|| _npc.getMapId()== ???*/) {// 忘れられた島なら
-        	dmg *= 1.4; //ダメージ倍増
+            dmg *= 1.4; //ダメージ倍増
         }
        /* *//** 特定のマップのモンスターセゲ **//*
         if (_npc.getMapId() == 30) {
@@ -2776,26 +2802,26 @@ public class L1Attack {
         }
 
         for (L1DollInstance doll : _targetPc.getDollList()) {// マジックドールによるダメージ減少。ストーンゴーレム
-        	dmg -= doll.getDamageReductionByDoll();
+            dmg -= doll.getDamageReductionByDoll();
         }
 
         dmg -= _targetPc.getDamageReductionByArmor(); // 防具によるダメージ減少
 
         /** 対象Buffによるダメージ演算 **/
         //dmg += toPcBuffDmg(dmg);
-      //スキル、料理などのダメージリダクション
+        //スキル、料理などのダメージリダクション
         int damagereduction = 0;
         if (_targetPc.hasSkillEffect(COOK_STR) || _targetPc.hasSkillEffect(COOK_DEX) || _targetPc.hasSkillEffect(COOK_INT)) { // リニューアル料理
-        	damagereduction += 2;
+            damagereduction += 2;
         }
-        if(_targetPc.hasSkillEffect(COOK_GROW)){
-        	damagereduction += 2;
+        if (_targetPc.hasSkillEffect(COOK_GROW)) {
+            damagereduction += 2;
         }
         // 戦士スキル：アーマーガード - キャラクターのAC / 10のダメージ減少効果を得る。
         if (SkillsTable.getInstance().spellCheck(_targetPc.getId(), 237)) {
-        	if(_targetPc.getAC().getAc() < -10){
-        		damagereduction += _targetPc.getAC().getAc() / -10;
-        	}
+            if (_targetPc.getAC().getAc() < -10) {
+                damagereduction += _targetPc.getAC().getAc() / -10;
+            }
         }
 
         if (_targetPc.hasSkillEffect(REDUCTION_ARMOR)) {
@@ -2807,37 +2833,37 @@ public class L1Attack {
         }
 
         if (_targetPc.hasSkillEffect(EARTH_GUARDIAN)) {
-        	damagereduction += 2;
+            damagereduction += 2;
         }
-        
+
         dmg -= roomtisDecreaseDamage();
 
         if (_targetPc.hasSkillEffect(DRAGON_SKIN)) {
             if (_targetPc.getLevel() >= 80) {
-            	damagereduction += 5 + ((_targetPc.getLevel() - 78) / 2);
+                damagereduction += 5 + ((_targetPc.getLevel() - 78) / 2);
             } else {
-            	damagereduction += 5;
+                damagereduction += 5;
             }
         }
         if (_targetPc.hasSkillEffect(PATIENCE)) {
-        	damagereduction += 2;
-        }        
+            damagereduction += 2;
+        }
         if (_targetPc.hasSkillEffect(FEATHER_BUFF_A)) {
-        	damagereduction += 3;
+            damagereduction += 3;
         }
         if (_targetPc.hasSkillEffect(FEATHER_BUFF_B)) {
-        	damagereduction += 2;
+            damagereduction += 2;
         }
         if (_targetPc.hasSkillEffect(CLAN_BUFF4)) {
-        	damagereduction += 1;
-        }     
+            damagereduction += 1;
+        }
         dmg -= damagereduction;
-        
+
         if (_targetPc.hasSkillEffect(IMMUNE_TO_HARM)) {
-        	dmg -= (dmg * 0.3);//4
+            dmg -= (dmg * 0.3);//4
         }
         //スキル、料理などのダメージリダクション
-        
+
 
         // 反逆者の盾確率的ダメージ減少処理
         if (_targetPc.getInventory().checkEquipped(22263)) {// 反逆者の盾
@@ -2929,26 +2955,26 @@ public class L1Attack {
                 }
             }
         }
-		// 神聖なエルヴンプレートメイル
-		int chance66 = _random.nextInt(100) + 1;
-		if (_target != null) {
-			int dmg2 = 0;
-			int plus = 0;
-			if (_targetPc.getInventory().checkEquipped(222351)) {
-				if (chance66 <= 6) { // 元5である
-					if (_targetPc.hasSkillEffect(L1SkillId.POLLUTE_WATER)) {
-						dmg2 += (25 + _random.nextInt(15) + (plus * 10)) / 2; //
-					}
-					if (_targetPc.hasSkillEffect(L1SkillId.WATER_LIFE)) {
-						dmg2 += (25 + _random.nextInt(15) + (plus * 10)) * 2; //
-					}
-					dmg2 += 25 + _random.nextInt(15) + (plus * 10); //
-					_targetPc.setCurrentHp(_targetPc.getCurrentHp() + dmg2);
-					_targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 15355));
-					_targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 15355));
-				}
-			}
-		}
+        // 神聖なエルヴンプレートメイル
+        int chance66 = _random.nextInt(100) + 1;
+        if (_target != null) {
+            int dmg2 = 0;
+            int plus = 0;
+            if (_targetPc.getInventory().checkEquipped(222351)) {
+                if (chance66 <= 6) { // 元5である
+                    if (_targetPc.hasSkillEffect(L1SkillId.POLLUTE_WATER)) {
+                        dmg2 += (25 + _random.nextInt(15) + (plus * 10)) / 2; //
+                    }
+                    if (_targetPc.hasSkillEffect(L1SkillId.WATER_LIFE)) {
+                        dmg2 += (25 + _random.nextInt(15) + (plus * 10)) * 2; //
+                    }
+                    dmg2 += 25 + _random.nextInt(15) + (plus * 10); //
+                    _targetPc.setCurrentHp(_targetPc.getCurrentHp() + dmg2);
+                    _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 15355));
+                    _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 15355));
+                }
+            }
+        }
 
         try {
             if (_targetPc.isCrown()) {
@@ -2966,7 +2992,7 @@ public class L1Attack {
             } else if (_targetPc.isDragonknight()) {
                 dmg -= CharacterReduc.getInstance().getCharacterReduc(6);
             } else if (_targetPc.isWarrior()) {
-            	dmg -= CharacterReduc.getInstance().getCharacterReduc(7);
+                dmg -= CharacterReduc.getInstance().getCharacterReduc(7);
             }
         } catch (Exception e) {
             System.out.println("Character Add Reduction Error");
@@ -3073,87 +3099,91 @@ public class L1Attack {
         return dmg;
     }
 
-    /** 武器属性エンチャントによる効果付与（PC-PC） **/
+    /**
+     * 武器属性エンチャントによる効果付与（PC-PC）
+     **/
     private double fishAttrEnchantEffect() {
         int Attr = _weaponAttrLevel;
         double AttrDmg = 0;
         switch (_weaponAttrLevel) {
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-            // AttrDmg += (Attr - 1) * 2+1;
-            AttrDmg += (Attr - 1) + 1;
-            AttrDmg -= AttrDmg * _targetPc.getResistance().getFire() / 100;
-            break;
-        case 6:
-        case 7:
-        case 8:
-        case 9:
-        case 10:
-            // AttrDmg += (Attr - 6) * 2+1;
-            AttrDmg += (Attr - 6) + 1;
-            AttrDmg -= AttrDmg * _targetPc.getResistance().getWater() / 100;
-            break;
-        case 11:
-        case 12:
-        case 13:
-        case 14:
-        case 15:
-            // AttrDmg += (Attr - 11) * 2+1;
-            AttrDmg += (Attr - 11) + 1;
-            AttrDmg -= AttrDmg * _targetPc.getResistance().getWind() / 100;
-            break;
-        case 16:
-        case 17:
-        case 18:
-        case 19:
-        case 20:
-            // AttrDmg += (Attr - 16) * 2+1;
-            AttrDmg += (Attr - 16) + 1;
-            AttrDmg -= AttrDmg * _targetPc.getResistance().getEarth() / 100;
-            break;
-        default:
-            AttrDmg = 0;
-            break;
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                // AttrDmg += (Attr - 1) * 2+1;
+                AttrDmg += (Attr - 1) + 1;
+                AttrDmg -= AttrDmg * _targetPc.getResistance().getFire() / 100;
+                break;
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                // AttrDmg += (Attr - 6) * 2+1;
+                AttrDmg += (Attr - 6) + 1;
+                AttrDmg -= AttrDmg * _targetPc.getResistance().getWater() / 100;
+                break;
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+                // AttrDmg += (Attr - 11) * 2+1;
+                AttrDmg += (Attr - 11) + 1;
+                AttrDmg -= AttrDmg * _targetPc.getResistance().getWind() / 100;
+                break;
+            case 16:
+            case 17:
+            case 18:
+            case 19:
+            case 20:
+                // AttrDmg += (Attr - 16) * 2+1;
+                AttrDmg += (Attr - 16) + 1;
+                AttrDmg -= AttrDmg * _targetPc.getResistance().getEarth() / 100;
+                break;
+            default:
+                AttrDmg = 0;
+                break;
         }
         return AttrDmg;
     }
 
-    /**武器属性エンチャントによる効果付与（PC-NPC) **/
+    /**
+     * 武器属性エンチャントによる効果付与（PC-NPC)
+     **/
     private int monsterAttrEnchantEffect() {
         int AttrDmg = 0;
         int Attr = _weaponAttrLevel;
         int NpcWeakAttr = _targetNpc.getNpcTemplate().get_weakAttr();
         switch (NpcWeakAttr) {
-        case 1: // 土地脆弱モンスター
-            if (Attr >= 15 && Attr <= 20) {
-                // AttrDmg += 1 + (Attr - 15) * 2;
-                AttrDmg += 1 + (Attr - 15);
-            }
-            break;
-        case 2: // 水脆弱モンスター
-            if (Attr >= 6 && Attr <= 10) {
-                // AttrDmg += 1 + (Attr - 6) * 2;
-                AttrDmg += 1 + (Attr - 6);
-            }
-            break;
-        case 4: // 火脆弱モンスター
-            if (Attr >= 1 && Attr <= 5) {
-                // AttrDmg += (Attr - 1) * 2 + 1;
-                AttrDmg += 1 + (Attr - 1);
-            }
-            break;
-        case 8: //風脆弱モンスター
-            if (Attr >= 11 && Attr <= 15) {
-                // AttrDmg += 1 + (Attr - 11) * 2;
-                AttrDmg += 1 + (Attr - 11);
-            }
-            break;
-        default:
-            AttrDmg = 0;
-            break;
+            case 1: // 土地脆弱モンスター
+                if (Attr >= 15 && Attr <= 20) {
+                    // AttrDmg += 1 + (Attr - 15) * 2;
+                    AttrDmg += 1 + (Attr - 15);
+                }
+                break;
+            case 2: // 水脆弱モンスター
+                if (Attr >= 6 && Attr <= 10) {
+                    // AttrDmg += 1 + (Attr - 6) * 2;
+                    AttrDmg += 1 + (Attr - 6);
+                }
+                break;
+            case 4: // 火脆弱モンスター
+                if (Attr >= 1 && Attr <= 5) {
+                    // AttrDmg += (Attr - 1) * 2 + 1;
+                    AttrDmg += 1 + (Attr - 1);
+                }
+                break;
+            case 8: //風脆弱モンスター
+                if (Attr >= 11 && Attr <= 15) {
+                    // AttrDmg += 1 + (Attr - 11) * 2;
+                    AttrDmg += 1 + (Attr - 11);
+                }
+                break;
+            default:
+                AttrDmg = 0;
+                break;
         }
         return AttrDmg;
     }
@@ -3175,7 +3205,7 @@ public class L1Attack {
         int damage = 0;
         int undead = _targetNpc.getNpcTemplate().get_undead();
         if ((_weaponMaterial == 14 || _weaponMaterial == 17 || _weaponMaterial == 22) && (undead == 1 || undead == 3)) { // は・ミスリル・オリハルコン、かつ、アンデッド系・アン
-                                                                                                                         // デッド系ボス
+            // デッド系ボス
             damage += _random.nextInt(20) + 1;
         }
         if (_weaponBless == 0 && (undead == 1 || undead == 2 || undead == 3)) { // 祝福武器、かつ、アンデッド系・悪魔系・アンデッド系ボス
@@ -3267,14 +3297,18 @@ public class L1Attack {
         }
     }
 
-    /** ゾウのストーンゴーレム - 馬力の短剣 **/
+    /**
+     * ゾウのストーンゴーレム - 馬力の短剣
+     **/
     public void calcDrainOfMana() {
         if (_weaponId == 602) {
             manaBaselard();
         }
     }
 
-    /** ゾウのストーンゴーレム - 破滅のグレートソード * */
+    /**
+     * ゾウのストーンゴーレム - 破滅のグレートソード *
+     */
     public void ruinGreatSword(double dmg) { // 21回破滅のグレートソードパワーブック参照
         int r = _random.nextInt(100);
         if (r <= 80) {
@@ -3355,7 +3389,9 @@ public class L1Attack {
         return dmg;
     }
 
-    /** ●●●●悪リバース ●●●● **/
+    /**
+     * ●●●●悪リバース ●●●●
+     **/
     // 剣チェーンソードクロウ斧
     public int getEbHP(L1PcInstance pc, L1Character target, int effect, int enchant) {
         int dmg = 0;
@@ -3376,7 +3412,9 @@ public class L1Attack {
         Broadcaster.broadcastPacket(pc, new S_SkillSound(target.getId(), 13418));
     }
 
-    /** ●●●● 悪のトリック ●●●● **/
+    /**
+     * ●●●● 悪のトリック ●●●●
+     **/
     // 杖弓キーリンク
     public int getEbMP(L1PcInstance pc, L1Character target, int effect, int enchant) {
         int dmg = 0;
@@ -3425,16 +3463,16 @@ public class L1Attack {
     // ●●●● プレイヤーの攻撃モーション送信 ●●●●
     private void actionPc() {
         _pc.setHeading(_pc.targetDirection(_targetX, _targetY)); // 方向セット
-        if(_target instanceof L1NpcInstance){
-        	if(((L1NpcInstance)_target).getNpcId() >=400067 && ((L1NpcInstance)_target).getNpcId() <=400080){
-        		_isHit = false;
-        	}
+        if (_target instanceof L1NpcInstance) {
+            if (((L1NpcInstance) _target).getNpcId() >= 400067 && ((L1NpcInstance) _target).getNpcId() <= 400080) {
+                _isHit = false;
+            }
         }
         if (_weaponType == 20) {
             if (_pc instanceof L1RobotInstance || _arrow != null) {
                 if (!_pc.noPlayerCK)
                     _pc.getInventory().removeItem(_arrow, 1);
-                 if (_pc.getTempCharGfx() == 7967) {
+                if (_pc.getTempCharGfx() == 7967) {
                     _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 7972, _targetX, _targetY, _isHit));
                     Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 7972, _targetX, _targetY, _isHit));
                 } else if (_pc.getTempCharGfx() == 11402 || _pc.getTempCharGfx() == 8900) { // 75レプ変身
@@ -3481,7 +3519,7 @@ public class L1Attack {
             }
         } else if (_weaponType == 62 && _sting != null) {
             _pc.getInventory().removeItem(_sting, 1);
-             if (_pc.getTempCharGfx() == 7967) {
+            if (_pc.getTempCharGfx() == 7967) {
                 _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 7972, _targetX, _targetY, _isHit));
                 Broadcaster.broadcastPacket(_pc, new S_UseArrowSkill(_pc, _targetId, 7972, _targetX, _targetY, _isHit));
             } else if (_pc.getTempCharGfx() == 11402 || _pc.getTempCharGfx() == 8900) {// 75レプ変身
@@ -3510,7 +3548,7 @@ public class L1Attack {
         } else {
             if (_isHit) {
                 _pc.sendPackets(new S_AttackPacket(_pc, _targetId, ActionCodes.ACTION_Attack, _attackType));
-               Broadcaster.broadcastPacket(_pc, new S_AttackPacket(_pc, _targetId, ActionCodes.ACTION_Attack, _attackType));
+                Broadcaster.broadcastPacket(_pc, new S_AttackPacket(_pc, _targetId, ActionCodes.ACTION_Attack, _attackType));
                 Broadcaster.broadcastPacketExceptTargetSight(_target, new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
             } else {
                 if (_targetId > 0) {
@@ -3600,40 +3638,40 @@ public class L1Attack {
         float avg_y = 0;
         if (dis == 0) { // 目標と同じ位置であれば、向いている方向に真っ直ぐ
             switch (head) {
-            case 1:
-                avg_x = 1;
-                avg_y = -1;
-                break;
-            case 2:
-                avg_x = 1;
-                avg_y = 0;
-                break;
-            case 3:
-                avg_x = 1;
-                avg_y = 1;
-                break;
-            case 4:
-                avg_x = 0;
-                avg_y = 1;
-                break;
-            case 5:
-                avg_x = -1;
-                avg_y = 1;
-                break;
-            case 6:
-                avg_x = -1;
-                avg_y = 0;
-                break;
-            case 7:
-                avg_x = -1;
-                avg_y = -1;
-                break;
-            case 0:
-                avg_x = 0;
-                avg_y = -1;
-                break;
-            default:
-                break;
+                case 1:
+                    avg_x = 1;
+                    avg_y = -1;
+                    break;
+                case 2:
+                    avg_x = 1;
+                    avg_y = 0;
+                    break;
+                case 3:
+                    avg_x = 1;
+                    avg_y = 1;
+                    break;
+                case 4:
+                    avg_x = 0;
+                    avg_y = 1;
+                    break;
+                case 5:
+                    avg_x = -1;
+                    avg_y = 1;
+                    break;
+                case 6:
+                    avg_x = -1;
+                    avg_y = 0;
+                    break;
+                case 7:
+                    avg_x = -1;
+                    avg_y = -1;
+                    break;
+                case 0:
+                    avg_x = 0;
+                    avg_y = -1;
+                    break;
+                default:
+                    break;
             }
         } else {
             avg_x = dis_x / dis;
@@ -3673,7 +3711,7 @@ public class L1Attack {
             return;
         }
         if (_target == null)
-			return;
+            return;
         if (Config.ALT_ATKMSG) {
             if ((_calcType == PC_PC || _calcType == PC_NPC) && !_pc.isGm()) {
                 return;
@@ -3955,7 +3993,7 @@ public class L1Attack {
         if (weapon != null) {
             if (weapon.getItem().getType() == 3) {
                 damage = Math.round((weapon.getItem().getDmgLarge() + weapon.getEnchantLevel() + weapon.getItem().getDmgModifier()) * 2);
-                
+
             }
         }
         return (int) damage;
@@ -4006,7 +4044,9 @@ public class L1Attack {
         }
     }
 
-    /** 属性矢 **/
+    /**
+     * 属性矢
+     **/
     private int attrArrow(L1ItemInstance arrow, L1NpcInstance npc) {
         int itemId = arrow.getItem().getItemId();
         int damage = 0;
@@ -4031,11 +4071,13 @@ public class L1Attack {
         return damage;
     }
 
-    /** ステータス+武器による攻城 **/
+    /**
+     * ステータス+武器による攻城
+     **/
     private int PchitAdd() {
         int value = 0;
-        if(_pc instanceof L1RobotInstance){
-        	return 10;
+        if (_pc instanceof L1RobotInstance) {
+            return 10;
         }
         if (_pc.getAbility().getTotalStr() > 59) {
             value += (strHit[58]);
@@ -4054,13 +4096,15 @@ public class L1Attack {
         } else {
             value += _weaponAddHit + _pc.getBowHitup() + _pc.getBowHitRate() + (_weaponEnchant / 2);
         }
-		if (Sweapon != null){ // 戦士両手攻城追加
-			value += _SweaponAddHit + (_SweaponEnchant /2);
-		}
+        if (Sweapon != null) { // 戦士両手攻城追加
+            value += _SweaponAddHit + (_SweaponEnchant / 2);
+        }
         return value;
     }
 
-    /** ターゲットPC回避スキルの演算 **/
+    /**
+     * ターゲットPC回避スキルの演算
+     **/
     private int toPcSkillHit() {
         int value = 0;
         if (_targetPc.hasSkillEffect(UNCANNY_DODGE)) {
@@ -4075,7 +4119,9 @@ public class L1Attack {
         return value;
     }
 
-    /** Hit最終演算 **/
+    /**
+     * Hit最終演算
+     **/
     private boolean hitRateCal(int AD, int DD, int fumble, int critical) {
         if (AD <= fumble) {
             _hitRate = 0;
@@ -4093,7 +4139,9 @@ public class L1Attack {
         return false;
     }
 
-    /** ターゲットPC DD演算 **/
+    /**
+     * ターゲットPC DD演算
+     **/
     private int toPcDD(int dv) {
         if (_targetPc.getAC().getAc() >= 0) {
             return 10 - _targetPc.getAC().getAc();
@@ -4101,55 +4149,54 @@ public class L1Attack {
             return 10 + _random.nextInt(dv) + 1;
         }
     }
-    
-	private double roomtisAddDamage() {
-		int dmg = 0;
-		if(_calcType == PC_PC || _calcType == PC_NPC) {
-			L1ItemInstance blackRumti = _pc.getInventory().checkEquippedItem(222340);
-			if(blackRumti == null)
-				blackRumti = _pc.getInventory().checkEquippedItem(222341);
-			if(blackRumti != null) {
-				int chance = 0;
-				if(blackRumti.getBless() == 0 && blackRumti.getEnchantLevel() >= 4) {
-					chance = 2 + blackRumti.getEnchantLevel() - 4;
-				}
-				else if(blackRumti.getEnchantLevel() >= 5) {
-					chance = 2 + blackRumti.getEnchantLevel() - 5;
-				}
-				if(chance != 0) {
-					if(_random.nextInt(100) < Config.ROOMTIECE_CHANCE) {
-						dmg += 20;
-						_pc.sendPackets(new S_SkillSound(_pc.getId(), 13931));
-						_pc.broadcastPacket(new S_SkillSound(_pc.getId(), 13931));
-					}
-				}
-			}
-		}
-		return dmg;
-	}
-	
-	
-	private int roomtisDecreaseDamage() {
-		int damage = 0;
-		if (_calcType == NPC_PC || _calcType == PC_PC) {
-			L1ItemInstance item = _targetPc.getInventory().checkEquippedItem(22229);
-			if (item != null && item.getEnchantLevel() >= 5) {
-				if (_random.nextInt(100) < 2 + item.getEnchantLevel() - 5) {
-					damage = 20;
-					_targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12118), true);
-				}
-			}
 
-			L1ItemInstance item2 = _targetPc.getInventory().checkEquippedItem(222337);
-			if (item2 != null && item2.getEnchantLevel() >= 5) {
-				if (_random.nextInt(100) < Config.ROOMTIECE_CHANCE) {
-					damage = 20;
-					_targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12118), true);
-				}
-			}
-		}
-		return damage;
-	}
+    private double roomtisAddDamage() {
+        int dmg = 0;
+        if (_calcType == PC_PC || _calcType == PC_NPC) {
+            L1ItemInstance blackRumti = _pc.getInventory().checkEquippedItem(222340);
+            if (blackRumti == null)
+                blackRumti = _pc.getInventory().checkEquippedItem(222341);
+            if (blackRumti != null) {
+                int chance = 0;
+                if (blackRumti.getBless() == 0 && blackRumti.getEnchantLevel() >= 4) {
+                    chance = 2 + blackRumti.getEnchantLevel() - 4;
+                } else if (blackRumti.getEnchantLevel() >= 5) {
+                    chance = 2 + blackRumti.getEnchantLevel() - 5;
+                }
+                if (chance != 0) {
+                    if (_random.nextInt(100) < Config.ROOMTIECE_CHANCE) {
+                        dmg += 20;
+                        _pc.sendPackets(new S_SkillSound(_pc.getId(), 13931));
+                        _pc.broadcastPacket(new S_SkillSound(_pc.getId(), 13931));
+                    }
+                }
+            }
+        }
+        return dmg;
+    }
+
+
+    private int roomtisDecreaseDamage() {
+        int damage = 0;
+        if (_calcType == NPC_PC || _calcType == PC_PC) {
+            L1ItemInstance item = _targetPc.getInventory().checkEquippedItem(22229);
+            if (item != null && item.getEnchantLevel() >= 5) {
+                if (_random.nextInt(100) < 2 + item.getEnchantLevel() - 5) {
+                    damage = 20;
+                    _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12118), true);
+                }
+            }
+
+            L1ItemInstance item2 = _targetPc.getInventory().checkEquippedItem(222337);
+            if (item2 != null && item2.getEnchantLevel() >= 5) {
+                if (_random.nextInt(100) < Config.ROOMTIECE_CHANCE) {
+                    damage = 20;
+                    _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12118), true);
+                }
+            }
+        }
+        return damage;
+    }
 
 
     public void ArmorDestory() {

@@ -32,71 +32,71 @@ import l1j.server.L1DatabaseFactory;
 import l1j.server.server.utils.SQLUtil;
 
 public class CharacterReduc {
-	public class Reduc {
-		int reduc = 0;
-	}
+    public class Reduc {
+        int reduc = 0;
+    }
 
-	private static Logger _log = Logger.getLogger(CharacterReduc.class.getName());
+    private static Logger _log = Logger.getLogger(CharacterReduc.class.getName());
 
-	private static CharacterReduc _instance;
+    private static CharacterReduc _instance;
 
-	private final Map<Integer, Reduc> _idlist = new HashMap<Integer, Reduc>();
+    private final Map<Integer, Reduc> _idlist = new HashMap<Integer, Reduc>();
 
-	public static CharacterReduc getInstance() {
-		if (_instance == null) {
-			_instance = new CharacterReduc();
-		}
-		return _instance;
-	}
+    public static CharacterReduc getInstance() {
+        if (_instance == null) {
+            _instance = new CharacterReduc();
+        }
+        return _instance;
+    }
 
 /*	private CharacterReduc() {
-		System.out.print("■クラスリドクデータ.......................... "）;		
+        System.out.print("■クラスリドクデータ.......................... "）;
 		characterReduc();
 		System.out.println("■ ロード正常終了 "）;				
 	}*/
 
-	public void characterReduc() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
+    public void characterReduc() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
 
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("select id, addReduction from character_balance");
-			rs = pstm.executeQuery();
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("select id, addReduction from character_balance");
+            rs = pstm.executeQuery();
 
-			Reduc characterreduc = null;
-			while (rs.next()) {
-				characterreduc = new Reduc();
+            Reduc characterreduc = null;
+            while (rs.next()) {
+                characterreduc = new Reduc();
 
-				characterreduc.reduc = rs.getInt("addReduction");
+                characterreduc.reduc = rs.getInt("addReduction");
 
-				_idlist.put(rs.getInt("id"), characterreduc);
-			}
+                _idlist.put(rs.getInt("id"), characterreduc);
+            }
 
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public static void reload() {
-		CharacterReduc oldInstance = _instance;
-		_instance = new CharacterReduc();
-		if (oldInstance != null)
-			oldInstance._idlist.clear();
-	}
+    public static void reload() {
+        CharacterReduc oldInstance = _instance;
+        _instance = new CharacterReduc();
+        if (oldInstance != null)
+            oldInstance._idlist.clear();
+    }
 
-	public double getCharacterReduc(int Id) {
-		Reduc characterreduc = _idlist.get(Id);
+    public double getCharacterReduc(int Id) {
+        Reduc characterreduc = _idlist.get(Id);
 
-		if (characterreduc == null) {
-			return 0;
-		}
+        if (characterreduc == null) {
+            return 0;
+        }
 
-		return characterreduc.reduc;
-	}
+        return characterreduc.reduc;
+    }
 }

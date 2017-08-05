@@ -19,13 +19,13 @@
 package l1j.server.server.model.classes;
 
 class L1DarkElfClassFeature extends L1ClassFeature {
-	@Override
-	public int getAcDefenseMax(int ac) {
-		return ac / 4;
-	}
+    @Override
+    public int getAcDefenseMax(int ac) {
+        return ac / 4;
+    }
 
-	@Override
-	public int getMagicLevel(int playerLevel) {
-		return Math.min(2, playerLevel / 12);
-	}
+    @Override
+    public int getMagicLevel(int playerLevel) {
+        return Math.min(2, playerLevel / 12);
+    }
 }

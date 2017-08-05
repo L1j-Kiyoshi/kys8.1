@@ -2,57 +2,53 @@ package l1j.server.server.serverpackets;
 
 import l1j.server.server.Opcodes;
 
-public class S_EventNotice extends ServerBasePacket
-{
-  @SuppressWarnings("unused")
-private static final String S_EventNotice = "[S] S_EventNotice";
-  
-  private byte[] _byte = null;
- 
+public class S_EventNotice extends ServerBasePacket {
+    @SuppressWarnings("unused")
+    private static final String S_EventNotice = "[S] S_EventNotice";
 
-public S_EventNotice(){
-	  
-	  String event = "               イベント終了";
+    private byte[] _byte = null;
+
+
+    public S_EventNotice() {
+
+        String event = "               イベント終了";
 //	  String date = "3日前";
-	  
-	  int length = event.getBytes().length + 19;
+
+        int length = event.getBytes().length + 19;
 //	  int length2 = date.getBytes().length + 19;
-	  writeC(Opcodes.S_EXTENDED_PROTOBUF);
-      writeC(141);
-      writeC(0);
-      writeH(264);
-      writeC(16);
-      writeC(1); 
-      writeC(26);
-      writeC(length);
-      writeC(16);
-      writeD(110139902); 
-      writeC(34);
-      writeS2(event);
-      writeC(40);
-      writeC(129);
-      writeD(95470807);
-      writeC(48);  
-      writeC(129); 
-      writeD(95470807);
-      writeH(0);
-   
-  }
+        writeC(Opcodes.S_EXTENDED_PROTOBUF);
+        writeC(141);
+        writeC(0);
+        writeH(264);
+        writeC(16);
+        writeC(1);
+        writeC(26);
+        writeC(length);
+        writeC(16);
+        writeD(110139902);
+        writeC(34);
+        writeS2(event);
+        writeC(40);
+        writeC(129);
+        writeD(95470807);
+        writeC(48);
+        writeC(129);
+        writeD(95470807);
+        writeH(0);
 
-  public byte[] getContent()
-  {
-    if (this._byte == null) {
-      this._byte = this._bao.toByteArray();
     }
-    return this._byte;
-  }
 
-  public String getType()
-  {
-    return "[S] S_EventNotice";
-  }
+    public byte[] getContent() {
+        if (this._byte == null) {
+            this._byte = this._bao.toByteArray();
+        }
+        return this._byte;
+    }
+
+    public String getType() {
+        return "[S] S_EventNotice";
+    }
 }
-
 
 
 //ソース

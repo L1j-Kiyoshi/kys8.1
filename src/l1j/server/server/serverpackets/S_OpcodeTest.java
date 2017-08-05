@@ -21,33 +21,34 @@ package l1j.server.server.serverpackets;
 import l1j.server.server.model.Instance.L1PcInstance;
 
 public class S_OpcodeTest extends ServerBasePacket {
-	private static final String S_OpcodeTest = "[C]  S_OpcodeTest";
-	private final L1PcInstance _char;
-	private final int _opcode;
-	private final int _type;
+    private static final String S_OpcodeTest = "[C]  S_OpcodeTest";
+    private final L1PcInstance _char;
+    private final int _opcode;
+    private final int _type;
 
-	public S_OpcodeTest(L1PcInstance character, int oCODE, int type) {
-		_char = character;
-		_opcode = oCODE;
-		_type = type;
+    public S_OpcodeTest(L1PcInstance character, int oCODE, int type) {
+        _char = character;
+        _opcode = oCODE;
+        _type = type;
 
-		writeC(_opcode);
+        writeC(_opcode);
 
-		if (_type == 0) {
-			writeD(_char.getId());
-		} else {
-			writeD(1);
-		}
+        if (_type == 0) {
+            writeD(_char.getId());
+        } else {
+            writeD(1);
+        }
 
-		// writeC(1);
-	}
+        // writeC(1);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return S_OpcodeTest;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
+
+    @Override
+    public String getType() {
+        return S_OpcodeTest;
+    }
 }

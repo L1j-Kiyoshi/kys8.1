@@ -27,65 +27,66 @@ import l1j.server.server.model.L1Character;
 
 public class S_AttackMissPacket extends ServerBasePacket {
 
-	private static final String _S__OB_ATTACKMISSPACKET = "[S] S_AttackMissPacket";
+    private static final String _S__OB_ATTACKMISSPACKET = "[S] S_AttackMissPacket";
 
-	private byte[] _byte = null;
+    private byte[] _byte = null;
 
-	public S_AttackMissPacket(L1Character attacker, int targetId) {
-		writeC(Opcodes.S_ATTACK);
-		writeC(1);
-		writeD(attacker.getId());
-		writeD(targetId);
-		writeC(0);
-		writeC(0);
-		writeC(attacker.getHeading());
-		writeD(0);
-		writeC(0);
-	}
+    public S_AttackMissPacket(L1Character attacker, int targetId) {
+        writeC(Opcodes.S_ATTACK);
+        writeC(1);
+        writeD(attacker.getId());
+        writeD(targetId);
+        writeC(0);
+        writeC(0);
+        writeC(attacker.getHeading());
+        writeD(0);
+        writeC(0);
+    }
 
-	public S_AttackMissPacket(L1Character attacker, int targetId, int actId) {
-		writeC(Opcodes.S_ATTACK);
-		writeC(actId);
-		writeD(attacker.getId());
-		writeD(targetId);
-		writeC(0);
-		writeC(0);
-		writeC(attacker.getHeading());
-		writeD(0);
-		writeC(0);
-	}
+    public S_AttackMissPacket(L1Character attacker, int targetId, int actId) {
+        writeC(Opcodes.S_ATTACK);
+        writeC(actId);
+        writeD(attacker.getId());
+        writeD(targetId);
+        writeC(0);
+        writeC(0);
+        writeC(attacker.getHeading());
+        writeD(0);
+        writeC(0);
+    }
 
-	public S_AttackMissPacket(int attackId, int targetId) {
-		writeC(Opcodes.S_ATTACK);
-		writeC(1);
-		writeD(attackId);
-		writeD(targetId);
-		writeC(0);
-		writeC(0);
-		writeC(0);
-		writeD(0);
-	}
+    public S_AttackMissPacket(int attackId, int targetId) {
+        writeC(Opcodes.S_ATTACK);
+        writeC(1);
+        writeD(attackId);
+        writeD(targetId);
+        writeC(0);
+        writeC(0);
+        writeC(0);
+        writeD(0);
+    }
 
-	public S_AttackMissPacket(int attackId, int targetId, int actId) {
-		writeC(Opcodes.S_ATTACK);
-		writeC(actId);
-		writeD(attackId);
-		writeD(targetId);
-		writeC(0);
-		writeC(0);
-		writeC(0);
-		writeD(0);
-	}
+    public S_AttackMissPacket(int attackId, int targetId, int actId) {
+        writeC(Opcodes.S_ATTACK);
+        writeC(actId);
+        writeD(attackId);
+        writeD(targetId);
+        writeC(0);
+        writeC(0);
+        writeC(0);
+        writeD(0);
+    }
 
-	@Override
-	public byte[] getContent() {
-		if (_byte == null) {
-			_byte = getBytes();
-		}
-		return _byte;
-	}
-	@Override
-	public String getType() {
-		return _S__OB_ATTACKMISSPACKET;
-	}
+    @Override
+    public byte[] getContent() {
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
+    }
+
+    @Override
+    public String getType() {
+        return _S__OB_ATTACKMISSPACKET;
+    }
 }

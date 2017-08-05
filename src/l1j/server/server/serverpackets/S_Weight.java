@@ -8,7 +8,7 @@ public class S_Weight extends ServerBasePacket {
     public S_Weight(L1PcInstance pc) {
         writeC(Opcodes.S_EXTENDED_PROTOBUF);
         writeC(0xe5);
-        writeC(0x01);      
+        writeC(0x01);
         writeC(0x08);// パーセント
         writeC(pc.getInventory().getWeight100());
         writeC(0x10);// 所持重量

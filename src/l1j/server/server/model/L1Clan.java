@@ -10,442 +10,481 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.utils.IntRange;
 
 public class L1Clan {
-	static public class ClanMember {
-		public String name;
-		public int rank;
-		public int level;
-		public String notes;
-		public int memberId;
-		public int type;
-		public boolean online;
-		public L1PcInstance player;
+    static public class ClanMember {
+        public String name;
+        public int rank;
+        public int level;
+        public String notes;
+        public int memberId;
+        public int type;
+        public boolean online;
+        public L1PcInstance player;
 
-		public ClanMember(String name, int rank, int level, String notes, int memberId, int type, boolean online, L1PcInstance pc) {
-			this.name = name;
-			this.rank = rank;
-			this.level = level;
-			this.notes = notes;
-			this.memberId = memberId;
-			this.type = type;
-			this.online = online;
-			this.player = pc;
-		}
-	}
-    	
-	public static final int CLAN_RANK_LEAGUE_PUBLIC = 2;
+        public ClanMember(String name, int rank, int level, String notes, int memberId, int type, boolean online, L1PcInstance pc) {
+            this.name = name;
+            this.rank = rank;
+            this.level = level;
+            this.notes = notes;
+            this.memberId = memberId;
+            this.type = type;
+            this.online = online;
+            this.player = pc;
+        }
+    }
+
+    public static final int CLAN_RANK_LEAGUE_PUBLIC = 2;
     public static final int CLAN_RANK_LEAGUE_PRINCE = 4;
     public static final int CLAN_RANK_LEAGUE_PROBATION = 5;
     public static final int CLAN_RANK_LEAGUE_GUARDIAN = 6;
-    
-	public static final int SUB_MONARCH = 3;
-	public static final int TRAINING = 7;
-	public static final int NORMAL = 8;
-	public static final int GUARDIAN = 9;
-	public static final int MONARCH = 10;
-	public static final int ELITE = 13;
-	//private int _WarPoint;
 
-	@SuppressWarnings("unused")
-	private static final Logger _log = Logger.getLogger(L1Clan.class.getName());
+    public static final int SUB_MONARCH = 3;
+    public static final int TRAINING = 7;
+    public static final int NORMAL = 8;
+    public static final int GUARDIAN = 9;
+    public static final int MONARCH = 10;
+    public static final int ELITE = 13;
+    //private int _WarPoint;
 
-	private int _clanId;
+    @SuppressWarnings("unused")
+    private static final Logger _log = Logger.getLogger(L1Clan.class.getName());
 
-	private String _clanName;
+    private int _clanId;
 
-	private int _leaderId;
+    private String _clanName;
 
-	private String _leaderName;
+    private int _leaderId;
 
-	private int _castleId;
+    private String _leaderName;
 
-	private int _houseId;
+    private int _castleId;
 
-	private int _alliance;
+    private int _houseId;
 
-	private Timestamp _clanBirthday;
+    private int _alliance;
 
-	private int _maxuser;
+    private Timestamp _clanBirthday;
 
-	private int _emblemId = 0;
+    private int _maxuser;
 
-	private int _emblemStatus = 0;
-	
-	private int _clan_exp; // クラン経験値
-	
-	// 血盟加入の設定
-	private int _join_setting;
-	private int _join_type;
-	
-	public int getClanExp() {	return _clan_exp;	} // クラン経験値
-	public synchronized void setClanExp(int clanexp) {	_clan_exp = clanexp;	} // クラン経験値
-	public synchronized void addClanExp(int clanexp) { 	_clan_exp += clanexp; 	} // クラン経験値
+    private int _emblemId = 0;
 
-	public String getAnnouncement() {
-		return _announcement;
-	}
+    private int _emblemStatus = 0;
 
-	public void setAnnouncement(String announcement) {
-		this._announcement = announcement;
-	}
-	
-	
+    private int _clan_exp; // クラン経験値
 
-	private String _announcement;
+    // 血盟加入の設定
+    private int _join_setting;
+    private int _join_type;
 
-	public int getEmblemId() {
-		return _emblemId;
-	}
+    public int getClanExp() {
+        return _clan_exp;
+    } // クラン経験値
 
-	public void setEmblemId(int emblemId) {
-		this._emblemId = emblemId;
-	}
+    public synchronized void setClanExp(int clanexp) {
+        _clan_exp = clanexp;
+    } // クラン経験値
 
-	public int getEmblemStatus() {
-		return _emblemStatus;
-	}
+    public synchronized void addClanExp(int clanexp) {
+        _clan_exp += clanexp;
+    } // クラン経験値
 
-	public void setEmblemStatus(int emblemStatus) {
-		this._emblemStatus = emblemStatus;
-	}
+    public String getAnnouncement() {
+        return _announcement;
+    }
 
-	/**血盟自動登録*/
-	private boolean _bot; 
-	private int _bot_style; 
-	private int _bot_level; 
-	/**血盟自動登録*/
-	private ArrayList<ClanMember> clanMemberList = new ArrayList<ClanMember>();
+    public void setAnnouncement(String announcement) {
+        this._announcement = announcement;
+    }
 
-	public ArrayList<ClanMember> getClanMemberList() {
-		return clanMemberList;
-	}
 
-	public void addClanMember(String name, int rank, int level, String notes, int memberid, int type, int online, L1PcInstance pc) {
-		clanMemberList.add(new ClanMember(name, rank, level, notes, memberid, type, online == 1, online == 1 ? pc : null));
-	}
+    private String _announcement;
 
-	public void removeClanMember(String name) {
-		for (int i = 0; i < clanMemberList.size(); i++) {
-			if (clanMemberList.get(i).name.equals(name)) {
-				clanMemberList.remove(i);
-				break;
-			}
-		}
-	}
-	///////////血盟リニューアル//////////////
-	public void setClanRank(String name, int data){
-		for (int i = 0; i < clanMemberList.size(); i++) {
-			if (clanMemberList.get(i).name.equals(name)) {
-				clanMemberList.get(i).rank = data;
-				break;
-			}
-		}
-	}
-	///////////血盟リニューアル//////////////
-	public int getOnlineMaxUser() { return _maxuser; }
-	public void setOnlineMaxUser(int i) { _maxuser = i; }
+    public int getEmblemId() {
+        return _emblemId;
+    }
 
-	//リアルタイム変更
-	public void UpdataClanMember(String name, int rank) {
-		for(int i = 0 ; i < clanMemberList.size() ; i++) {
-			if(clanMemberList.get(i).name.equals(name)) {
-				clanMemberList.get(i).rank = rank;
-				break;
-			}
-		}
-	}
-	public void updateClanMemberOnline(L1PcInstance pc) {
-		for(ClanMember clan : clanMemberList) {
-			if(!(pc instanceof L1RobotInstance)){
-			if(clan.memberId != pc.getId())
-				continue;
-			}
-			clan.online = pc.getOnlineStatus()==1;
-			clan.player = pc;
-		}
-	}
-	public String[] getAllMembersName() {							
-		ArrayList<String> members = new ArrayList<String>();					
-		ClanMember member;					
-		for(int i = 0 ; i < clanMemberList.size() ; i++) {					
-			member = clanMemberList.get(i);				
-			if (!members.contains(member.name)) {				
-				members.add(member.name);			
-			}				
-		}					
-		return members.toArray(new String[members.size()]);					
-	}
+    public void setEmblemId(int emblemId) {
+        this._emblemId = emblemId;
+    }
 
-	public Timestamp getClanBirthDay() { 
-		return _clanBirthday; 
-	}
-	public void setClanBirthDay(Timestamp t){	
-		_clanBirthday = t; 
-	}
-	public int getClanId() {
-		return _clanId;
-	}
+    public int getEmblemStatus() {
+        return _emblemStatus;
+    }
 
-	public void setClanId(int clan_id) {
-		_clanId = clan_id;
-	}
+    public void setEmblemStatus(int emblemStatus) {
+        this._emblemStatus = emblemStatus;
+    }
 
-	public String getClanName() {
-		return _clanName;
-	}
+    /**
+     * 血盟自動登録
+     */
+    private boolean _bot;
+    private int _bot_style;
+    private int _bot_level;
+    /**
+     * 血盟自動登録
+     */
+    private ArrayList<ClanMember> clanMemberList = new ArrayList<ClanMember>();
 
-	public void setClanName(String clan_name) {
-		_clanName = clan_name;
-	}
+    public ArrayList<ClanMember> getClanMemberList() {
+        return clanMemberList;
+    }
 
-	public int getLeaderId() {
-		return _leaderId;
-	}
+    public void addClanMember(String name, int rank, int level, String notes, int memberid, int type, int online, L1PcInstance pc) {
+        clanMemberList.add(new ClanMember(name, rank, level, notes, memberid, type, online == 1, online == 1 ? pc : null));
+    }
 
-	public void setLeaderId(int leader_id) {
-		_leaderId = leader_id;
-	}
+    public void removeClanMember(String name) {
+        for (int i = 0; i < clanMemberList.size(); i++) {
+            if (clanMemberList.get(i).name.equals(name)) {
+                clanMemberList.remove(i);
+                break;
+            }
+        }
+    }
 
-	public String getLeaderName() {
-		return _leaderName;
-	}
+    ///////////血盟リニューアル//////////////
+    public void setClanRank(String name, int data) {
+        for (int i = 0; i < clanMemberList.size(); i++) {
+            if (clanMemberList.get(i).name.equals(name)) {
+                clanMemberList.get(i).rank = data;
+                break;
+            }
+        }
+    }
 
-	public void setLeaderName(String leader_name) {
-		_leaderName = leader_name;
-	}
+    ///////////血盟リニューアル//////////////
+    public int getOnlineMaxUser() {
+        return _maxuser;
+    }
 
-	public int getCastleId() {
-		return _castleId;
-	}
+    public void setOnlineMaxUser(int i) {
+        _maxuser = i;
+    }
 
-	public void setCastleId(int hasCastle) {
-		_castleId = hasCastle;
-	}
+    //リアルタイム変更
+    public void UpdataClanMember(String name, int rank) {
+        for (int i = 0; i < clanMemberList.size(); i++) {
+            if (clanMemberList.get(i).name.equals(name)) {
+                clanMemberList.get(i).rank = rank;
+                break;
+            }
+        }
+    }
 
-	public int getHouseId() {
-		return _houseId;
-	}
+    public void updateClanMemberOnline(L1PcInstance pc) {
+        for (ClanMember clan : clanMemberList) {
+            if (!(pc instanceof L1RobotInstance)) {
+                if (clan.memberId != pc.getId())
+                    continue;
+            }
+            clan.online = pc.getOnlineStatus() == 1;
+            clan.player = pc;
+        }
+    }
 
-	public void setHouseId(int hasHideout) {
-		_houseId = hasHideout;
-	}
+    public String[] getAllMembersName() {
+        ArrayList<String> members = new ArrayList<String>();
+        ClanMember member;
+        for (int i = 0; i < clanMemberList.size(); i++) {
+            member = clanMemberList.get(i);
+            if (!members.contains(member.name)) {
+                members.add(member.name);
+            }
+        }
+        return members.toArray(new String[members.size()]);
+    }
 
-	public int getAlliance() {
-		return _alliance;
-	}
+    public Timestamp getClanBirthDay() {
+        return _clanBirthday;
+    }
 
-	public void setAlliance(int alliance) {
-		_alliance = alliance;
-	}
+    public void setClanBirthDay(Timestamp t) {
+        _clanBirthday = t;
+    }
 
-	// オンライン中の血盟員数
-	public int getOnlineMemberCount() {
-		int count = 0;
-		for (int i = 0; i < clanMemberList.size(); i++) {
-			if (L1World.getInstance().getPlayer(clanMemberList.get(i).name) != null) {
-				count++;
-			}
-		}
-		return count;
-	}
+    public int getClanId() {
+        return _clanId;
+    }
 
-	public L1PcInstance[] getOnlineClanMember() {
-		ArrayList<L1PcInstance> onlineMembers = new ArrayList<L1PcInstance>();
-		L1PcInstance pc = null;
-		for (int i = 0; i < clanMemberList.size(); i++) {
-			pc = L1World.getInstance().getPlayer(clanMemberList.get(i).name);
-			if (pc != null && !onlineMembers.contains(pc)) {
-				onlineMembers.add(pc);
-			}
-		}
-		return onlineMembers.toArray(new L1PcInstance[onlineMembers.size()]);
-	}
-	
-	
+    public void setClanId(int clan_id) {
+        _clanId = clan_id;
+    }
 
-	// 全血盟員ネームリスト
-	public String getAllMembersFP() {
-		String result = "";
-		String rank = "";
-		for (int i = 0; i < clanMemberList.size(); i++) {
-			result = result + clanMemberList.get(i).name + rank + " ";
-		}
-		return result;
-	}
+    public String getClanName() {
+        return _clanName;
+    }
 
-	// オンライン中の血盟員ネームリスト
-	public String getOnlineMembersFP() {
-		String result = "";
-		String rank = "";
-		L1PcInstance pc = null;
-		for (int i = 0; i < clanMemberList.size(); i++) {
-			pc = L1World.getInstance().getPlayer(clanMemberList.get(i).name);
-			if (pc != null) {
-				result = result + clanMemberList.get(i).name + rank + " ";
-			}
-		}
-		return result;
-	}
+    public void setClanName(String clan_name) {
+        _clanName = clan_name;
+    }
 
-	private int _underDungeon = 0;
-	private int _rankTime;
-	private Timestamp _rankDate;
-	private int _underMapid = 0;
-	
-	public int getUnderDungeon() {
-		return _underDungeon;
-	}
-	public void setUnderDungeon(int i) {
-		_underDungeon = i;
-	}	
-	public int getRankTime() {
-		return _rankTime;
-	}
-	public void setRankTime(int i) {
-		_rankTime = i;
-	}
-	public Timestamp getRankDate() {
-		return _rankDate;
-	}
-	public void setRankDate(Timestamp t) {
-		_rankDate = t;
-	}
-	public int getUnderMapid() {
-		return _underMapid;
-	}
-	public void setUnderMapid(int i) {
-		_underMapid = i;
-	}
-	
-	
-	/**血盟自動登録*/
-	public boolean isBot() {
-		return _bot;
-	}
-	public void setBot(boolean _bot) {
-		this._bot = _bot;
-	}
+    public int getLeaderId() {
+        return _leaderId;
+    }
 
-	public int getBotStyle() {
-		return _bot_style;
-	}
-	public void setBotStyle(int _bot_style) {
-		this._bot_style = _bot_style;
-	}
+    public void setLeaderId(int leader_id) {
+        _leaderId = leader_id;
+    }
 
-	public int getBotLevel() {
-		return _bot_level;
-	}
-	public void setBotLevel(int _bot_level) {
-		this._bot_level = _bot_level;
-	}
-	
-	/**血盟自動登録*/
-	//文章ウォッチリスト
-	private ArrayList<String> GazeList = new ArrayList<String>();
-	//文章注視追加
-	public void addGazelist(String name){
-		if(GazeList.contains(name)){
-			return;
-		}
-		GazeList.add(name);
-	}
-	//文章注視削除
-	public void removeGazelist(String name){
-		if(!GazeList.contains(name)){
-			return;
-		}
-		GazeList.remove(name);
-	}
+    public String getLeaderName() {
+        return _leaderName;
+    }
 
-	//文章注視サイズ
-	public int getGazeSize(){
-		return GazeList.size();
-	}
+    public void setLeaderName(String leader_name) {
+        _leaderName = leader_name;
+    }
 
-	//注視リスト戻り
-	public ArrayList<String> getGazeList(){
-		return GazeList;
-	}
+    public int getCastleId() {
+        return _castleId;
+    }
 
-	public L1PcInstance getOnlineLeaders() {
-		L1PcInstance pc = null;
-		L1PcInstance no1pc = null;
-		int oldrank = 0;
-		for (int i = 0; i < clanMemberList.size(); i++) {
-			if (clanMemberList.get(i) == null)
-				continue;
-			if (!clanMemberList.get(i).online || clanMemberList.get(i).player == null)
-				continue;
-			pc = clanMemberList.get(i).player;
-			if (pc.getClanRank() >= L1Clan.GUARDIAN) {
-				if (oldrank < pc.getClanRank()) {
-					oldrank = pc.getClanRank();
-					no1pc = pc;
-				}
-			}
-		}
-		return no1pc;
-	}
+    public void setCastleId(int hasCastle) {
+        _castleId = hasCastle;
+    }
 
-	public int getJoinSetting() {
-		return _join_setting;
-	}
+    public int getHouseId() {
+        return _houseId;
+    }
 
-	public void setJoinSetting(int i) {
-		_join_setting = i;
-	}
+    public void setHouseId(int hasHideout) {
+        _houseId = hasHideout;
+    }
 
-	public int getJoinType() {
-		return _join_type;
-	}
+    public int getAlliance() {
+        return _alliance;
+    }
 
-	public void setJoinType(int i) {
-		_join_type = i;
-	}
-	
-	/**血盟バフポイント **/	
-	private int _bless = 0;
-	private int _blesscount = 0;
-	private int _attack = 0;
-	private int _defence = 0;
-	private int _pvpattack = 0;
-	private int _pvpdefence = 0;
-	public int[] getBuffTime = new int[] { _attack, _defence, _pvpattack, _pvpdefence };
+    public void setAlliance(int alliance) {
+        _alliance = alliance;
+    }
 
-	public int[] getBuffTime() {
-		return getBuffTime;
-	}
+    // オンライン中の血盟員数
+    public int getOnlineMemberCount() {
+        int count = 0;
+        for (int i = 0; i < clanMemberList.size(); i++) {
+            if (L1World.getInstance().getPlayer(clanMemberList.get(i).name) != null) {
+                count++;
+            }
+        }
+        return count;
+    }
 
-	public void setBuffTime(int i, int j) {
-		getBuffTime[i] = IntRange.ensure(j, 0, 172800);
-	}
+    public L1PcInstance[] getOnlineClanMember() {
+        ArrayList<L1PcInstance> onlineMembers = new ArrayList<L1PcInstance>();
+        L1PcInstance pc = null;
+        for (int i = 0; i < clanMemberList.size(); i++) {
+            pc = L1World.getInstance().getPlayer(clanMemberList.get(i).name);
+            if (pc != null && !onlineMembers.contains(pc)) {
+                onlineMembers.add(pc);
+            }
+        }
+        return onlineMembers.toArray(new L1PcInstance[onlineMembers.size()]);
+    }
 
-	public void setBuffTime(int a, int b, int c, int d) {
-		getBuffTime = new int[] { a, b, c, d };
-	}
 
-	public int getBlessCount() {
-		return _blesscount;
-	}
+    // 全血盟員ネームリスト
+    public String getAllMembersFP() {
+        String result = "";
+        String rank = "";
+        for (int i = 0; i < clanMemberList.size(); i++) {
+            result = result + clanMemberList.get(i).name + rank + " ";
+        }
+        return result;
+    }
 
-	public void setBlessCount(int i) {
-		_blesscount = IntRange.ensure(i, 0, 400000000);
-	}
+    // オンライン中の血盟員ネームリスト
+    public String getOnlineMembersFP() {
+        String result = "";
+        String rank = "";
+        L1PcInstance pc = null;
+        for (int i = 0; i < clanMemberList.size(); i++) {
+            pc = L1World.getInstance().getPlayer(clanMemberList.get(i).name);
+            if (pc != null) {
+                result = result + clanMemberList.get(i).name + rank + " ";
+            }
+        }
+        return result;
+    }
 
-	public void addBlessCount(int i) {
-		_blesscount += i;
-		if (_blesscount > 400000000)
-			_blesscount = 400000000;
-		else if (_blesscount < 0)
-			_blesscount = 0;
-	}
+    private int _underDungeon = 0;
+    private int _rankTime;
+    private Timestamp _rankDate;
+    private int _underMapid = 0;
 
-	public int getBless() {
-		return _bless;
-	}
+    public int getUnderDungeon() {
+        return _underDungeon;
+    }
 
-	public void setBless(int i) {
-		_bless = i;
-	}
-	
+    public void setUnderDungeon(int i) {
+        _underDungeon = i;
+    }
+
+    public int getRankTime() {
+        return _rankTime;
+    }
+
+    public void setRankTime(int i) {
+        _rankTime = i;
+    }
+
+    public Timestamp getRankDate() {
+        return _rankDate;
+    }
+
+    public void setRankDate(Timestamp t) {
+        _rankDate = t;
+    }
+
+    public int getUnderMapid() {
+        return _underMapid;
+    }
+
+    public void setUnderMapid(int i) {
+        _underMapid = i;
+    }
+
+
+    /**
+     * 血盟自動登録
+     */
+    public boolean isBot() {
+        return _bot;
+    }
+
+    public void setBot(boolean _bot) {
+        this._bot = _bot;
+    }
+
+    public int getBotStyle() {
+        return _bot_style;
+    }
+
+    public void setBotStyle(int _bot_style) {
+        this._bot_style = _bot_style;
+    }
+
+    public int getBotLevel() {
+        return _bot_level;
+    }
+
+    public void setBotLevel(int _bot_level) {
+        this._bot_level = _bot_level;
+    }
+
+    /**
+     * 血盟自動登録
+     */
+    //文章ウォッチリスト
+    private ArrayList<String> GazeList = new ArrayList<String>();
+
+    //文章注視追加
+    public void addGazelist(String name) {
+        if (GazeList.contains(name)) {
+            return;
+        }
+        GazeList.add(name);
+    }
+
+    //文章注視削除
+    public void removeGazelist(String name) {
+        if (!GazeList.contains(name)) {
+            return;
+        }
+        GazeList.remove(name);
+    }
+
+    //文章注視サイズ
+    public int getGazeSize() {
+        return GazeList.size();
+    }
+
+    //注視リスト戻り
+    public ArrayList<String> getGazeList() {
+        return GazeList;
+    }
+
+    public L1PcInstance getOnlineLeaders() {
+        L1PcInstance pc = null;
+        L1PcInstance no1pc = null;
+        int oldrank = 0;
+        for (int i = 0; i < clanMemberList.size(); i++) {
+            if (clanMemberList.get(i) == null)
+                continue;
+            if (!clanMemberList.get(i).online || clanMemberList.get(i).player == null)
+                continue;
+            pc = clanMemberList.get(i).player;
+            if (pc.getClanRank() >= L1Clan.GUARDIAN) {
+                if (oldrank < pc.getClanRank()) {
+                    oldrank = pc.getClanRank();
+                    no1pc = pc;
+                }
+            }
+        }
+        return no1pc;
+    }
+
+    public int getJoinSetting() {
+        return _join_setting;
+    }
+
+    public void setJoinSetting(int i) {
+        _join_setting = i;
+    }
+
+    public int getJoinType() {
+        return _join_type;
+    }
+
+    public void setJoinType(int i) {
+        _join_type = i;
+    }
+
+    /**
+     * 血盟バフポイント
+     **/
+    private int _bless = 0;
+    private int _blesscount = 0;
+    private int _attack = 0;
+    private int _defence = 0;
+    private int _pvpattack = 0;
+    private int _pvpdefence = 0;
+    public int[] getBuffTime = new int[]{_attack, _defence, _pvpattack, _pvpdefence};
+
+    public int[] getBuffTime() {
+        return getBuffTime;
+    }
+
+    public void setBuffTime(int i, int j) {
+        getBuffTime[i] = IntRange.ensure(j, 0, 172800);
+    }
+
+    public void setBuffTime(int a, int b, int c, int d) {
+        getBuffTime = new int[]{a, b, c, d};
+    }
+
+    public int getBlessCount() {
+        return _blesscount;
+    }
+
+    public void setBlessCount(int i) {
+        _blesscount = IntRange.ensure(i, 0, 400000000);
+    }
+
+    public void addBlessCount(int i) {
+        _blesscount += i;
+        if (_blesscount > 400000000)
+            _blesscount = 400000000;
+        else if (_blesscount < 0)
+            _blesscount = 0;
+    }
+
+    public int getBless() {
+        return _bless;
+    }
+
+    public void setBless(int i) {
+        _bless = i;
+    }
+
 }

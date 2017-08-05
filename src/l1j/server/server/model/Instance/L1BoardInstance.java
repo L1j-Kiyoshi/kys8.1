@@ -29,55 +29,55 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.templates.L1Npc;
 
 public class L1BoardInstance extends L1NpcInstance {
-	/**
-	 * 
-	 */
-	// private GameServerSetting _GameServerSetting =
-	// GameServerSetting.getInstance();
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    // private GameServerSetting _GameServerSetting =
+    // GameServerSetting.getInstance();
+    private static final long serialVersionUID = 1L;
 
-	public L1BoardInstance(L1Npc template) {
-		super(template);
-	}
+    public L1BoardInstance(L1Npc template) {
+        super(template);
+    }
 
-	@Override
-	public void onAction(L1PcInstance player) {
-		if (this.getNpcTemplate().get_npcId() == 999999) {// バグベア勝率掲示板
-			if (BugRaceController.getInstance().getBugState() == 0) { // 表販売中
-				player.sendPackets(new S_Board(this));
-			} else if (BugRaceController.getInstance().getBugState() == 1) { // 試合中
-				player.sendPackets(new S_ChatPacket(player, "試合中に見ることができません。"));
-			} else if (BugRaceController.getInstance().getBugState() == 2) { // 次の試合準備中
-				player.sendPackets(new S_ChatPacket(player, "次の試合の準備をしています。"));
-			}
-		} else {
-			player.sendPackets(new S_Board(this));
-		}
-	}
+    @Override
+    public void onAction(L1PcInstance player) {
+        if (this.getNpcTemplate().get_npcId() == 999999) {// バグベア勝率掲示板
+            if (BugRaceController.getInstance().getBugState() == 0) { // 表販売中
+                player.sendPackets(new S_Board(this));
+            } else if (BugRaceController.getInstance().getBugState() == 1) { // 試合中
+                player.sendPackets(new S_ChatPacket(player, "試合中に見ることができません。"));
+            } else if (BugRaceController.getInstance().getBugState() == 2) { // 次の試合準備中
+                player.sendPackets(new S_ChatPacket(player, "次の試合の準備をしています。"));
+            }
+        } else {
+            player.sendPackets(new S_Board(this));
+        }
+    }
 
-	public void onAction(L1PcInstance player, int number) {
-		player.sendPackets(new S_Board(this, number));
-	}
+    public void onAction(L1PcInstance player, int number) {
+        player.sendPackets(new S_Board(this, number));
+    }
 
-	public void onActionRead(L1PcInstance player, int number) {
-		if (this.getNpcTemplate().get_npcId() == 500001) {// ランキング掲示板
-			player.sendPackets(new S_Ranking(player, number));
-		} else if (this.getNpcTemplate().get_npcId() == 4200013) {//エンチャント掲示板
-			player.sendPackets(new S_EnchantRanking(player, number));
+    public void onActionRead(L1PcInstance player, int number) {
+        if (this.getNpcTemplate().get_npcId() == 500001) {// ランキング掲示板
+            player.sendPackets(new S_Ranking(player, number));
+        } else if (this.getNpcTemplate().get_npcId() == 4200013) {//エンチャント掲示板
+            player.sendPackets(new S_EnchantRanking(player, number));
 
-		} else {
-			if (this.getNpcTemplate().get_npcId() == 500002) {//提案
-				if (!player.isGm()) {
-					player.sendPackets(new S_SystemMessage("オペレータのみ閲覧することができます。"));
-					return;
-				}
-			} else if (this.getNpcTemplate().get_npcId() == 9200036) {
-				if (!player.isGm()) {
-					player.sendPackets(new S_SystemMessage("オペレータのみ閲覧することができます。"));
-					return;
-				}
-			}
-			player.sendPackets(new S_BoardRead(this, number));
-		}
-	}
+        } else {
+            if (this.getNpcTemplate().get_npcId() == 500002) {//提案
+                if (!player.isGm()) {
+                    player.sendPackets(new S_SystemMessage("オペレータのみ閲覧することができます。"));
+                    return;
+                }
+            } else if (this.getNpcTemplate().get_npcId() == 9200036) {
+                if (!player.isGm()) {
+                    player.sendPackets(new S_SystemMessage("オペレータのみ閲覧することができます。"));
+                    return;
+                }
+            }
+            player.sendPackets(new S_BoardRead(this, number));
+        }
+    }
 }

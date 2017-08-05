@@ -26,13 +26,11 @@ import l1j.server.server.Opcodes;
 import l1j.server.server.model.Instance.L1PcInstance;
 
 
-
-
 public class S_BookMarkLoad extends ServerBasePacket {
     private static final String S_BookMarkLoad = "[S] S_BookmarkLoad";
     private byte[] _byte = null;
 
-   private static Logger _log = Logger.getLogger(S_BookMarkLoad.class.getName());
+    private static Logger _log = Logger.getLogger(S_BookMarkLoad.class.getName());
 
     public S_BookMarkLoad(L1PcInstance pc) {
         try {
@@ -68,7 +66,7 @@ public class S_BookMarkLoad extends ServerBasePacket {
             writeH(size);
             for (int i = 0; i < size; i++) {
                 writeD(pc._bookmarks.get(i).getNumId());
-                writeS(pc._bookmarks.get(i).getName()); 
+                writeS(pc._bookmarks.get(i).getName());
                 writeH(pc._bookmarks.get(i).getMapId());
                 writeH(pc._bookmarks.get(i).getLocX());
                 writeH(pc._bookmarks.get(i).getLocY());
@@ -80,8 +78,6 @@ public class S_BookMarkLoad extends ServerBasePacket {
     }
 
 
-
-
     @Override
 
     public byte[] getContent() {
@@ -90,7 +86,6 @@ public class S_BookMarkLoad extends ServerBasePacket {
         }
         return _byte;
     }
-
 
 
     public String getType() {

@@ -26,20 +26,21 @@ import l1j.server.server.Opcodes;
 
 public class S_PinkName extends ServerBasePacket {
 
-	public S_PinkName(int objecId, int time) {
-		writeC(Opcodes.S_CRIMINAL);
-		writeD(objecId);
-		writeC(time);
-	}
+    public S_PinkName(int objecId, int time) {
+        writeC(Opcodes.S_CRIMINAL);
+        writeD(objecId);
+        writeC(time);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return _S__2C_PINKNAME;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	private static final String _S__2C_PINKNAME = "[S] S_PinkName";
+    @Override
+    public String getType() {
+        return _S__2C_PINKNAME;
+    }
+
+    private static final String _S__2C_PINKNAME = "[S] S_PinkName";
 }

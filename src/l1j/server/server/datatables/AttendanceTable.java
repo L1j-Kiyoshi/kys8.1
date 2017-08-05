@@ -34,67 +34,67 @@ import l1j.server.server.utils.SQLUtil;
 
 public class AttendanceTable {
 
-	private static Logger _log = Logger
-			.getLogger(AttendanceTable.class.getName());
+    private static Logger _log = Logger
+            .getLogger(AttendanceTable.class.getName());
 
-	private static AttendanceTable _instance;
+    private static AttendanceTable _instance;
 
-	private final Map<Integer, L1Attendance> list = new HashMap<Integer, L1Attendance>();
+    private final Map<Integer, L1Attendance> list = new HashMap<Integer, L1Attendance>();
 
 
-	public static AttendanceTable getInstance() {
-		if (_instance == null) {
-			_instance = new AttendanceTable();
-		}
-		return _instance;
-	}
+    public static AttendanceTable getInstance() {
+        if (_instance == null) {
+            _instance = new AttendanceTable();
+        }
+        return _instance;
+    }
 
-	public static void reload() {
-		AttendanceTable oldInstance = _instance;
-		_instance = new AttendanceTable();
-		oldInstance.list.clear();
-	}
+    public static void reload() {
+        AttendanceTable oldInstance = _instance;
+        _instance = new AttendanceTable();
+        oldInstance.list.clear();
+    }
 
-	private AttendanceTable() {
-		load();
-	}
+    private AttendanceTable() {
+        load();
+    }
 
-	private void load() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("SELECT * FROM Attendance");
-			rs = pstm.executeQuery();
-			while (rs.next()) {
-				int day = rs.getInt("day");
-				int itemid = rs.getInt("itemid");
-				int count = rs.getInt("count");
-				int itemidpc = rs.getInt("itemid_pcbang");
-				int countpc = rs.getInt("count_pcbang");	
-				L1Attendance cc = new L1Attendance(day,itemid,count,itemidpc,countpc);	
-				list.put(day, cc);
-			}
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} catch (Exception e) {
+    private void load() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("SELECT * FROM Attendance");
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                int day = rs.getInt("day");
+                int itemid = rs.getInt("itemid");
+                int count = rs.getInt("count");
+                int itemidpc = rs.getInt("itemid_pcbang");
+                int countpc = rs.getInt("count_pcbang");
+                L1Attendance cc = new L1Attendance(day, itemid, count, itemidpc, countpc);
+                list.put(day, cc);
+            }
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } catch (Exception e) {
 
-		} finally {
-			SQLUtil.close(rs, pstm, con);
-		}
-	}
+        } finally {
+            SQLUtil.close(rs, pstm, con);
+        }
+    }
 
-	public L1Attendance get(int day) {
-		return list.get(day);
-	}
+    public L1Attendance get(int day) {
+        return list.get(day);
+    }
 
-	public int Size() {
-		return list.size();
-	}
+    public int Size() {
+        return list.size();
+    }
 
-	public Collection<L1Attendance> toArray() {
-		return list.values();
-	}
+    public Collection<L1Attendance> toArray() {
+        return list.values();
+    }
 
 }

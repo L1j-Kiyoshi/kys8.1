@@ -32,71 +32,71 @@ import l1j.server.L1DatabaseFactory;
 import l1j.server.server.utils.SQLUtil;
 
 public class CharacterHitRate {
-	public class HitRate {
-		int Hitrate = 0;
-	}
+    public class HitRate {
+        int Hitrate = 0;
+    }
 
-	private static Logger _log = Logger.getLogger(CharacterHitRate.class.getName());
+    private static Logger _log = Logger.getLogger(CharacterHitRate.class.getName());
 
-	private static CharacterHitRate _instance;
+    private static CharacterHitRate _instance;
 
-	private final Map<Integer, HitRate> _idlist = new HashMap<Integer, HitRate>();
+    private final Map<Integer, HitRate> _idlist = new HashMap<Integer, HitRate>();
 
-	public static CharacterHitRate getInstance() {
-		if (_instance == null) {
-			_instance = new CharacterHitRate();
-		}
-		return _instance;
-	}
+    public static CharacterHitRate getInstance() {
+        if (_instance == null) {
+            _instance = new CharacterHitRate();
+        }
+        return _instance;
+    }
 
 /*	private CharacterHitRate() {
-		System.out.print("■ クラス攻城データ.......................... "）;		
+        System.out.print("■ クラス攻城データ.......................... "）;
 		characterHitrate();
 		System.out.println("■ ロード正常終了 "）;				
 	}*/
 
-	public void characterHitrate() {
-		Connection con = null;
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
+    public void characterHitrate() {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
 
-		try {
-			con = L1DatabaseFactory.getInstance().getConnection();
-			pstm = con.prepareStatement("select id, addHitRate from character_balance");
-			rs = pstm.executeQuery();
+        try {
+            con = L1DatabaseFactory.getInstance().getConnection();
+            pstm = con.prepareStatement("select id, addHitRate from character_balance");
+            rs = pstm.executeQuery();
 
-			HitRate characterhitrate = null;
-			while (rs.next()) {
-				characterhitrate = new HitRate();
+            HitRate characterhitrate = null;
+            while (rs.next()) {
+                characterhitrate = new HitRate();
 
-				characterhitrate.Hitrate = rs.getInt("addHitRate");
+                characterhitrate.Hitrate = rs.getInt("addHitRate");
 
-				_idlist.put(rs.getInt("id"), characterhitrate);
-			}
+                _idlist.put(rs.getInt("id"), characterhitrate);
+            }
 
-		} catch (SQLException e) {
-			_log.log(Level.SEVERE, e.getLocalizedMessage(), e);
-		} finally {
-			SQLUtil.close(rs);
-			SQLUtil.close(pstm);
-			SQLUtil.close(con);
-		}
-	}
+        } catch (SQLException e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        } finally {
+            SQLUtil.close(rs);
+            SQLUtil.close(pstm);
+            SQLUtil.close(con);
+        }
+    }
 
-	public static void reload() {
-		CharacterHitRate oldInstance = _instance;
-		_instance = new CharacterHitRate();
-		if (oldInstance != null)
-			oldInstance._idlist.clear();
-	}
+    public static void reload() {
+        CharacterHitRate oldInstance = _instance;
+        _instance = new CharacterHitRate();
+        if (oldInstance != null)
+            oldInstance._idlist.clear();
+    }
 
-	public double getCharacterHitRate(int Id) {
-		HitRate characterhitrate = _idlist.get(Id);
+    public double getCharacterHitRate(int Id) {
+        HitRate characterhitrate = _idlist.get(Id);
 
-		if (characterhitrate == null) {
-			return 0;
-		}
+        if (characterhitrate == null) {
+            return 0;
+        }
 
-		return characterhitrate.Hitrate;
-	}
+        return characterhitrate.Hitrate;
+    }
 }

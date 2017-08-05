@@ -25,27 +25,27 @@ import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_SystemMessage;
 
 public class L1Kill implements L1CommandExecutor {
-	@SuppressWarnings("unused")
-	private static Logger _log = Logger.getLogger(L1Kill.class.getName());
+    @SuppressWarnings("unused")
+    private static Logger _log = Logger.getLogger(L1Kill.class.getName());
 
-	private L1Kill() {
-	}
+    private L1Kill() {
+    }
 
-	public static L1CommandExecutor getInstance() {
-		return new L1Kill();
-	}
+    public static L1CommandExecutor getInstance() {
+        return new L1Kill();
+    }
 
-	@Override
-	public void execute(L1PcInstance pc, String cmdName, String arg) {
-		try {
-			L1PcInstance target = L1World.getInstance(). getPlayer(arg);
+    @Override
+    public void execute(L1PcInstance pc, String cmdName, String arg) {
+        try {
+            L1PcInstance target = L1World.getInstance().getPlayer(arg);
 
-			if (target != null) {
-				target.setCurrentHp(0);
-				target.death(null, true);
-			}
-		} catch (Exception e) {
-			pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
-		}
-	}
+            if (target != null) {
+                target.setCurrentHp(0);
+                target.death(null, true);
+            }
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "[キャラクター名]で入力してください。"));
+        }
+    }
 }

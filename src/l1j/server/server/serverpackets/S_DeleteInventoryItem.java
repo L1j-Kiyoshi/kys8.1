@@ -24,25 +24,27 @@ import l1j.server.server.model.Instance.L1ItemInstance;
 
 public class S_DeleteInventoryItem extends ServerBasePacket {
 
-	private static final String S_DELETE_INVENTORY_ITEM = "[S] S_DeleteInventoryItem";
+    private static final String S_DELETE_INVENTORY_ITEM = "[S] S_DeleteInventoryItem";
 
-	/**
-	 *リストからアイテムを削除する。
-	 * @param item - 削除するアイテム
-	 */
-	public S_DeleteInventoryItem(L1ItemInstance item) {
-		if (item != null) {
-			writeC(Opcodes.S_REMOVE_INVENTORY);
-			writeD(item.getId());
-		}
-	}
+    /**
+     * リストからアイテムを削除する。
+     *
+     * @param item - 削除するアイテム
+     */
+    public S_DeleteInventoryItem(L1ItemInstance item) {
+        if (item != null) {
+            writeC(Opcodes.S_REMOVE_INVENTORY);
+            writeD(item.getId());
+        }
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return S_DELETE_INVENTORY_ITEM;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
+
+    @Override
+    public String getType() {
+        return S_DELETE_INVENTORY_ITEM;
+    }
 }

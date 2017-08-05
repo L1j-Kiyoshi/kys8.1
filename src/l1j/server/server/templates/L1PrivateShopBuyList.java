@@ -22,67 +22,66 @@ package l1j.server.server.templates;
 // L1PrivateShopBuyList
 
 public class L1PrivateShopBuyList {
-	public L1PrivateShopBuyList() {
-	}
+    public L1PrivateShopBuyList() {
+    }
 
-	 private int _itemId;
-	 public void setItemId(int i)
-	  {
-	    _itemId = i;
-	  }
+    private int _itemId;
 
-	  public int getItemId() {
-	    return _itemId;
-	  }
-	  
-		private String _UserName;
-		public void setUserName(String name)
-		  {
-		    _UserName = name;
-		  }
+    public void setItemId(int i) {
+        _itemId = i;
+    }
 
-		  public String getUserName()
-		  {
-		    return _UserName;
-		  }
-		  
-	private int _itemObjectId;
+    public int getItemId() {
+        return _itemId;
+    }
 
-	public void setItemObjectId(int i) {
-		_itemObjectId = i;
-	}
+    private String _UserName;
 
-	public int getItemObjectId() {
-		return _itemObjectId;
-	}
+    public void setUserName(String name) {
+        _UserName = name;
+    }
 
-	private int _buyTotalCount;
+    public String getUserName() {
+        return _UserName;
+    }
 
-	public void setBuyTotalCount(int i) {
-		_buyTotalCount = i;
-	}
+    private int _itemObjectId;
 
-	public int getBuyTotalCount() {
-		return _buyTotalCount;
-	}
+    public void setItemObjectId(int i) {
+        _itemObjectId = i;
+    }
 
-	private int _buyPrice;
+    public int getItemObjectId() {
+        return _itemObjectId;
+    }
 
-	public void setBuyPrice(int i) {
-		_buyPrice = i;
-	}
+    private int _buyTotalCount;
 
-	public int getBuyPrice() {
-		return _buyPrice;
-	}
+    public void setBuyTotalCount(int i) {
+        _buyTotalCount = i;
+    }
 
-	private int _buyCount;
+    public int getBuyTotalCount() {
+        return _buyTotalCount;
+    }
 
-	public void setBuyCount(int i) {
-		_buyCount = i;
-	}
+    private int _buyPrice;
 
-	public int getBuyCount() {
-		return _buyCount;
-	}
+    public void setBuyPrice(int i) {
+        _buyPrice = i;
+    }
+
+    public int getBuyPrice() {
+        return _buyPrice;
+    }
+
+    private int _buyCount;
+
+    public void setBuyCount(int i) {
+        _buyCount = i;
+    }
+
+    public int getBuyCount() {
+        return _buyCount;
+    }
 }

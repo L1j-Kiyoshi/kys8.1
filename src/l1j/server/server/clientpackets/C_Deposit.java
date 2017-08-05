@@ -34,58 +34,57 @@ import l1j.server.server.templates.L1Castle;
 
 public class C_Deposit extends ClientBasePacket {
 
-	private static final String C_DEPOSIT = "[C] C_Deposit";
+    private static final String C_DEPOSIT = "[C] C_Deposit";
 
-	public C_Deposit(byte abyte0[], GameClient clientthread)
-			throws Exception {
-		super(abyte0);
-		int i = readD();
-		int j = readD();
+    public C_Deposit(byte abyte0[], GameClient clientthread)
+            throws Exception {
+        super(abyte0);
+        int i = readD();
+        int j = readD();
 
-		L1PcInstance player = clientthread.getActiveChar();
-		if ( player == null)return;
-		if (i == player.getId()) {
-			L1Clan clan = L1World.getInstance().getClan(player.getClanname());
-			if (clan != null) {
-				int castle_id = clan.getCastleId();
+        L1PcInstance player = clientthread.getActiveChar();
+        if (player == null) return;
+        if (i == player.getId()) {
+            L1Clan clan = L1World.getInstance().getClan(player.getClanname());
+            if (clan != null) {
+                int castle_id = clan.getCastleId();
 
-				if (castle_id == 0) {
-					return;
-				}
+                if (castle_id == 0) {
+                    return;
+                }
 
-				if(!player.isCrown() || clan.getLeaderId() != player.getId()){
-					return;
-		        }
-				
-				if( WarTimeController.getInstance().isNowWar(castle_id) )
-				{
-					player.sendPackets(new S_ChatPacket(player,"攻城中は不可能です。"));
-					return;
-				}
+                if (!player.isCrown() || clan.getLeaderId() != player.getId()) {
+                    return;
+                }
 
-				if (castle_id != 0) { // 城主クラン
-					L1Castle l1castle = CastleTable.getInstance()
-							.getCastleTable(castle_id);
-					synchronized (l1castle) {
-						int money = l1castle.getPublicMoney();
-						if( j < 0 || money < 0 ){  //ボール級のバグ
-							return;
-						}
-						if (player.getInventory()
-								.consumeItem(L1ItemId.ADENA, j)) {
-							money += j;
-							l1castle.setPublicMoney(money);
-							CastleTable.getInstance().updateCastle(l1castle);
-						}
-					}
-				}
-			}
-		}
-	}
+                if (WarTimeController.getInstance().isNowWar(castle_id)) {
+                    player.sendPackets(new S_ChatPacket(player, "攻城中は不可能です。"));
+                    return;
+                }
 
-	@Override
-	public String getType() {
-		return C_DEPOSIT;
-	}
+                if (castle_id != 0) { // 城主クラン
+                    L1Castle l1castle = CastleTable.getInstance()
+                            .getCastleTable(castle_id);
+                    synchronized (l1castle) {
+                        int money = l1castle.getPublicMoney();
+                        if (j < 0 || money < 0) {  //ボール級のバグ
+                            return;
+                        }
+                        if (player.getInventory()
+                                .consumeItem(L1ItemId.ADENA, j)) {
+                            money += j;
+                            l1castle.setPublicMoney(money);
+                            CastleTable.getInstance().updateCastle(l1castle);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public String getType() {
+        return C_DEPOSIT;
+    }
 
 }

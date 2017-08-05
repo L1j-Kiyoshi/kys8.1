@@ -21,24 +21,24 @@ import l1j.server.server.Opcodes;
 
 public class S_GreenMessage extends ServerBasePacket {
 
-	private static Logger _log = Logger.getLogger(S_GreenMessage.class.getName());
+    private static Logger _log = Logger.getLogger(S_GreenMessage.class.getName());
 
-	private static final String S_GREENMESSAGE = "[S] S_GreenMessage";
+    private static final String S_GREENMESSAGE = "[S] S_GreenMessage";
 
-	public S_GreenMessage(String s) {
-		writeC(Opcodes.S_PUT_OBJECT);
-		writeC(0x54);
-		writeC(0x02);
-		writeS(s);
-	}
+    public S_GreenMessage(String s) {
+        writeC(Opcodes.S_PUT_OBJECT);
+        writeC(0x54);
+        writeC(0x02);
+        writeS(s);
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	@Override
-	public String getType() {
-		return S_GREENMESSAGE;
-	}
+    @Override
+    public String getType() {
+        return S_GREENMESSAGE;
+    }
 }

@@ -26,40 +26,39 @@ import l1j.server.server.Opcodes;
 
 public class S_Poison extends ServerBasePacket {
 
-	/**
-	 *キャラクターの外観を毒状態に変更する際に送信するパケットを構築する
-	 * 
-	 * @param objId
-	 *           外観を変えるキャラクターのID
-	 * @param type
-	 *            外観のタイプ0 =通常の色、1 =緑、2 =グレー
-	 */
-	public S_Poison(int objId, int type) {
-		writeC(Opcodes.S_POISON);
-		writeD(objId);
+    /**
+     * キャラクターの外観を毒状態に変更する際に送信するパケットを構築する
+     *
+     * @param objId 外観を変えるキャラクターのID
+     * @param type  外観のタイプ0 =通常の色、1 =緑、2 =グレー
+     */
+    public S_Poison(int objId, int type) {
+        writeC(Opcodes.S_POISON);
+        writeD(objId);
 
-		if (type == 0) { // 通常
-			writeC(0);
-			writeC(0);
-		} else if (type == 1) { // 緑
-			writeC(1);
-			writeC(0);
-		} else if (type == 2) { // グレー
-			writeC(0);
-			writeC(1);
-		} else {
-			throw new IllegalArgumentException("不正な引数です。 type =" + type);
-		}
-	}
+        if (type == 0) { // 通常
+            writeC(0);
+            writeC(0);
+        } else if (type == 1) { // 緑
+            writeC(1);
+            writeC(0);
+        } else if (type == 2) { // グレー
+            writeC(0);
+            writeC(1);
+        } else {
+            throw new IllegalArgumentException("不正な引数です。 type =" + type);
+        }
+    }
 
-	@Override
-	public byte[] getContent() {
-		return getBytes();
-	}
-	@Override
-	public String getType() {
-		return S_POISON;
-	}
+    @Override
+    public byte[] getContent() {
+        return getBytes();
+    }
 
-	private static final String S_POISON = "[S] S_Poison";
+    @Override
+    public String getType() {
+        return S_POISON;
+    }
+
+    private static final String S_POISON = "[S] S_Poison";
 }

@@ -26,68 +26,68 @@ import java.util.*;
 import l1j.server.server.model.Instance.L1PcInstance;
 
 public class SkillCheck {
-	private HashMap<Integer, List<Integer>> _SkillCheck = new HashMap<Integer, List<Integer>>();
+    private HashMap<Integer, List<Integer>> _SkillCheck = new HashMap<Integer, List<Integer>>();
 
-	private static SkillCheck _instance;
+    private static SkillCheck _instance;
 
-	private SkillCheck() {
-	}
+    private SkillCheck() {
+    }
 
-	public static SkillCheck getInstance() {
-		if (_instance == null) {
-			_instance = new SkillCheck();
-		}
-		return _instance;
-	}
+    public static SkillCheck getInstance() {
+        if (_instance == null) {
+            _instance = new SkillCheck();
+        }
+        return _instance;
+    }
 
-	public void AddSkill(int objid, List<Integer> skillList) {
-		_SkillCheck.put(objid, skillList);
-	}
+    public void AddSkill(int objid, List<Integer> skillList) {
+        _SkillCheck.put(objid, skillList);
+    }
 
-	public boolean AddSkill(int objid, int skillId) {
-		List<Integer> skillList = _SkillCheck.get(objid);
-		if (skillList == null) {
-			_SkillCheck.put(objid, new ArrayList<Integer>());
-			skillList = _SkillCheck.get(objid);
-		}
+    public boolean AddSkill(int objid, int skillId) {
+        List<Integer> skillList = _SkillCheck.get(objid);
+        if (skillList == null) {
+            _SkillCheck.put(objid, new ArrayList<Integer>());
+            skillList = _SkillCheck.get(objid);
+        }
 
-		for (int Id : skillList) {
-			if (Id == skillId) {
-				return false;
-			}
-		}
+        for (int Id : skillList) {
+            if (Id == skillId) {
+                return false;
+            }
+        }
 
-		skillList.add(skillId);
+        skillList.add(skillId);
 
-		return true;
-	}
+        return true;
+    }
 
-	public boolean CheckSkill(L1PcInstance pc, int skillId) {
-		List<Integer> skillList = _SkillCheck.get(pc.getId());
+    public boolean CheckSkill(L1PcInstance pc, int skillId) {
+        List<Integer> skillList = _SkillCheck.get(pc.getId());
 
-		if (skillList == null) {
-			return false;
-		}
+        if (skillList == null) {
+            return false;
+        }
 
-		for (int Id : skillList) {
-			if (Id == skillId) {
-				return true;
-			}
-		}
+        for (int Id : skillList) {
+            if (Id == skillId) {
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	public void DelSkill(int objid, int skillId) {
+    public void DelSkill(int objid, int skillId) {
 
-		List<Integer> skillList = _SkillCheck.get(objid);
+        List<Integer> skillList = _SkillCheck.get(objid);
 
-		if (skillList != null) {
-			skillList.remove((Integer) skillId);
-		}
-	}
+        if (skillList != null) {
+            skillList.remove((Integer) skillId);
+        }
+    }
 
-	public void QuitDelSkill(L1PcInstance pc) {
-		_SkillCheck.remove(pc.getId());
-	}
+    public void QuitDelSkill(L1PcInstance pc) {
+        _SkillCheck.remove(pc.getId());
+    }
 }
