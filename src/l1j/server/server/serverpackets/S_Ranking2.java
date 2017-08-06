@@ -63,7 +63,7 @@ public class S_Ranking2 extends ServerBasePacket {
         try {
             writeC(Opcodes.S_EXTENDED_PROTOBUF);
             writeH(SEND_LOGIN_RANK);
-            byte[] name = rank.getName().getBytes("EUC-KR");
+            byte[] name = rank.getName().getBytes("MS932");
             long time = RankTable.getInstance().getLastUpdateTime();
 
             int totalRnk = rank.getTotalRank();

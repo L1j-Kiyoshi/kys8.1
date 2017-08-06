@@ -109,7 +109,7 @@ public class S_SurvivalCry extends ServerBasePacket {
                     String html = item.getHtml();
                     int ii = 2;
                     if (!html.equalsIgnoreCase("")) {
-                        byte[] test = html.getBytes("EUC-KR");
+                        byte[] test = html.getBytes("MS932");
                         for (int i = 0; i < test.length; ) {
                             if ((test[i] & 0xff) >= 0x7F)
                                 i += 2;

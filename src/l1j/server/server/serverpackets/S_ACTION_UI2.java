@@ -94,7 +94,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
                 write1(0x12);
 
                 try {
-                    byte[] name = "$12125".getBytes("EUC-KR");
+                    byte[] name = "$12125".getBytes("MS932");
                     write1(name.length);
                     writetext(name);
                 } catch (UnsupportedEncodingException e) {
@@ -116,7 +116,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
                 write1(0x02);
                 write1(0x12);
                 try {
-                    byte[] name = "象牙の塔：バルログ陣営".getBytes("EUC-KR");
+                    byte[] name = "象牙の塔：バルログ陣営".getBytes("MS932");
                     write1(name.length);
                     writetext(name);
                 } catch (UnsupportedEncodingException e) {
@@ -139,7 +139,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
                 write1(0x0f);
                 write1(0x12);
                 try {
-                    byte[] name = "象牙の塔：ヤヒ陣営（PC）".getBytes("EUC-KR");
+                    byte[] name = "象牙の塔：ヤヒ陣営（PC）".getBytes("MS932");
                     write1(name.length);
                     writetext(name);
                 } catch (UnsupportedEncodingException e) {
@@ -163,7 +163,7 @@ public class S_ACTION_UI2 extends ServerBasePacket {
                 write1(0x03);
                 write1(0x12);
                 try {
-                    byte[] name = "古代精霊の墓（PC）".getBytes("EUC-KR");
+                    byte[] name = "古代精霊の墓（PC）".getBytes("MS932");
                     write1(name.length);
                     writetext(name);
                 } catch (UnsupportedEncodingException e) {
