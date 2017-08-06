@@ -536,7 +536,7 @@ public class L1World {
                     E -= 2 * dx;
                 }
             }
-			/* 傾きが1よりも大きい場合 */
+            /* 傾きが1よりも大きい場合 */
         } else {
             E = -dy;
             for (i = 0; i <= dy; i++) {
@@ -582,7 +582,7 @@ public class L1World {
         int map = object.getMapId();
         L1Location location = object.getLocation();
         ArrayList<L1Object> result = new ArrayList<L1Object>();
-        int headingRotate[] = {6, 7, 0, 1, 2, 3, 4, 5};
+        int headingRotate[] = { 6, 7, 0, 1, 2, 3, 4, 5 };
         double cosSita = Math.cos(headingRotate[heading] * Math.PI / 4);
         double sinSita = Math.sin(headingRotate[heading] * Math.PI / 4);
 

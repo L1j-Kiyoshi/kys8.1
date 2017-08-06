@@ -12,7 +12,7 @@ public class LineageEncryption {
     public byte[] client_HashKey = new byte[256];
 
     public void initKeys(long seed) {
-        long[] key = {seed, 2467289058L};
+        long[] key = { seed, 2467289058L };
 
         this._LineageBlowfish.getSeeds(key);
         long tmp69_68 = key[0];

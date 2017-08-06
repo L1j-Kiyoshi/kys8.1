@@ -161,16 +161,16 @@ public class L1SkillUse {
 
     private static Logger _log = Logger.getLogger(L1SkillUse.class.getName());
 
-    private static final int[] CAST_WITH_INVIS = {1, 2, 3, 5, 8, 9, 12, 13, 14, 19, 21, 26, 31, 32, 35, 37, 42, 43, 44, 48, 49, 52, 54, 55, 57, 60,
+    private static final int[] CAST_WITH_INVIS = { 1, 2, 3, 5, 8, 9, 12, 13, 14, 19, 21, 26, 31, 32, 35, 37, 42, 43, 44, 48, 49, 52, 54, 55, 57, 60,
             61, 63, 67, 68, 69, 72, 73, 75, 78, 79, REDUCTION_ARMOR, BOUNCE_ATTACK, SOLID_CARRIAGE, COUNTER_BARRIER, 97, 98, 99, 100, 101, 102, 104,
             105, 106, 107, 109, 110, 111, 113, 114, 115, 116, 117, 118, 129, 130, 131, 133, 134, 137, 138, 146, 147, 148, 149, 150, 151, 155, 156,
-            158, 159, 163, 164, 165, 166, 168, 169, 170, 171, 181, SOUL_OF_FLAME, ADDITIONAL_FIRE, ANTA_BUFF, FAFU_BUFF, RIND_BUFF, VALA_BUFF};
+            158, 159, 163, 164, 165, 166, 168, 169, 170, 171, 181, SOUL_OF_FLAME, ADDITIONAL_FIRE, ANTA_BUFF, FAFU_BUFF, RIND_BUFF, VALA_BUFF };
 
     /**
      * カウンターマジックで防御できないスキル
      **/
     // カウンターマジック
-    private static final int[] EXCEPT_COUNTER_MAGIC = {1, 2, 3, 5, 8, 9, 12, 13, 14, 19, 21, 26, 31, 32, 35, 37, 42, 43, 44, 48, 49, 52, 54, 55, 57,
+    private static final int[] EXCEPT_COUNTER_MAGIC = { 1, 2, 3, 5, 8, 9, 12, 13, 14, 19, 21, 26, 31, 32, 35, 37, 42, 43, 44, 48, 49, 52, 54, 55, 57,
             60, 61, 63, 67, 68, 69, 72, 73, 75, 78, 79, SHOCK_STUN, BONE_BREAK, REDUCTION_ARMOR, BOUNCE_ATTACK, SOLID_CARRIAGE, COUNTER_BARRIER, 97,
             98, 99, 100, 101, 102, 104, 105, 106, 107, 109, 110, 111, 113, 114, 115, 116, 117, 118, 129, 130, 131, 132, 134, 137, 138, 146, 147, 148,
             149, 150, 151, 155, 156, 158, 159, 161, 163, 164, 165, 166, 168, 169, 170, 171, 181, SOUL_OF_FLAME, ADDITIONAL_FIRE, FOU_SLAYER,
@@ -178,7 +178,7 @@ public class L1SkillUse {
             IllUSION_LICH, IllUSION_AVATAR, INSIGHT, SHAPE_CHANGE, 10026, 10027, 10028, 10029, 30060, 30000, 30078, 30079, 30011, 30081, 30082, 30083,
             30080, 30084, 30010, 30002, 30086, OMAN_CANCELLATION, ANTA_MESSAGE_2, ANTA_MESSAGE_3, ANTA_MESSAGE_4, ANTA_MESSAGE_5, ANTA_MESSAGE_6,
             ANTA_MESSAGE_7, ANTA_MESSAGE_8, ANTA_MESSAGE_10, 22034, OMAN_STUN, PAP_PREDICATE1, PAP_PREDICATE3, PAP_PREDICATE5, PAP_PREDICATE6,
-            PAP_PREDICATE7, PAP_PREDICATE8, PAP_PREDICATE9, PAP_PREDICATE11, PAP_PREDICATE12, DESPERADO, POWEGRRIP};
+            PAP_PREDICATE7, PAP_PREDICATE8, PAP_PREDICATE9, PAP_PREDICATE11, PAP_PREDICATE12, DESPERADO, POWEGRRIP };
 
     public L1SkillUse() {
     }
@@ -246,13 +246,13 @@ public class L1SkillUse {
             // ** ノディル防止追加
 
             // ** 2次スキルのバグ防止ソースの追加
-            int[] CheckSkillID = {45, 46, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74,
+            int[] CheckSkillID = { 45, 46, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74,
                     75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105,
                     106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131,
                     132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158,
                     159, 160, 161, 162, 163, 164, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175, 176, 181, 182, 183, 184, 185, 186, 187, 188, 189,
                     190, 191, 192, 193, 194, 195, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219,
-                    220};
+                    220 };
             // 3、12、13、21、26、42、168、43、54、1、8チツシンツヒムツヘイストは落ち
 
             // スキルチェックで落ちることのスキルは、上記番号でペサム！
@@ -1155,7 +1155,7 @@ public class L1SkillUse {
                         continue;
                     }
                     /*
-					 * if (tgobj instanceof L1PcInstance) { L1PcInstance targetpc = (L1PcInstance) tgobj; if (_player.getClanid() ==
+                     * if (tgobj instanceof L1PcInstance) { L1PcInstance targetpc = (L1PcInstance) tgobj; if (_player.getClanid() ==
 					 * targetpc.getClanid()) { continue; } }
 					 */
 
@@ -1878,12 +1878,12 @@ public class L1SkillUse {
     private void deleteRepeatedSkills(L1Character cha) {
         final int[][] repeatedSkills = {
                 // { HOLY_WEAPON, ENCHANT_WEAPON, BLESS_WEAPON, SHADOW_FANG },
-                {FIRE_WEAPON, WIND_SHOT, STORM_EYE, BURNING_WEAPON, STORM_SHOT}, {SHIELD, EARTH_SKIN, IRON_SKIN},
-                {HOLY_WALK, BLOOD_LUST, MOVING_ACCELERATION, WIND_WALK, STATUS_BRAVE, STATUS_ELFBRAVE}, {HASTE, GREATER_HASTE, STATUS_HASTE},
-                {PHYSICAL_ENCHANT_DEX, NARUTO_THANKS_CANDY, DRESS_DEXTERITY}, {PHYSICAL_ENCHANT_STR, DRESS_MIGHTY},
+                { FIRE_WEAPON, WIND_SHOT, STORM_EYE, BURNING_WEAPON, STORM_SHOT }, { SHIELD, EARTH_SKIN, IRON_SKIN },
+                { HOLY_WALK, BLOOD_LUST, MOVING_ACCELERATION, WIND_WALK, STATUS_BRAVE, STATUS_ELFBRAVE }, { HASTE, GREATER_HASTE, STATUS_HASTE },
+                { PHYSICAL_ENCHANT_DEX, NARUTO_THANKS_CANDY, DRESS_DEXTERITY }, { PHYSICAL_ENCHANT_STR, DRESS_MIGHTY },
                 // { GLOWING_AURA, SHINING_AURA },
-                {FAFU_MAAN, ANTA_MAAN, LIND_MAAN, VALA_MAAN, LIFE_MAAN, BIRTH_MAAN, SHAPE_MAAN},
-                {SCALES_EARTH_DRAGON, SCALES_WATER_DRAGON, SCALES_FIRE_DRAGON}, {PAP_FIVEPEARLBUFF, PAP_MAGICALPEARLBUFF}};
+                { FAFU_MAAN, ANTA_MAAN, LIND_MAAN, VALA_MAAN, LIFE_MAAN, BIRTH_MAAN, SHAPE_MAAN },
+                { SCALES_EARTH_DRAGON, SCALES_WATER_DRAGON, SCALES_FIRE_DRAGON }, { PAP_FIVEPEARLBUFF, PAP_MAGICALPEARLBUFF } };
         for (int[] skills : repeatedSkills) {
             for (int id : skills) {
                 if (id == _skillId) {
@@ -3073,7 +3073,7 @@ public class L1SkillUse {
                     /**語パンツの中の時間本サーバー化 **/
                     case EARTH_BIND: {// 語パンツの中の時間
 
-                        int[] ebTimeArray = {3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000};
+                        int[] ebTimeArray = { 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000 };
                         _shockStunDuration = ebTimeArray[random.nextInt(ebTimeArray.length)];
 
                         if (cha instanceof L1PcInstance) {
@@ -3123,22 +3123,22 @@ public class L1SkillUse {
                         diffLevel = _user.getLevel() - targetLevel;
 
                         if (diffLevel < -5) {
-                            int[] stunTimeArray = {600, 1000, 1400, 1800, 2200, 2600, 3000, 3400};
+                            int[] stunTimeArray = { 600, 1000, 1400, 1800, 2200, 2600, 3000, 3400 };
                             _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
                         } else if (diffLevel >= -5 && diffLevel <= -3) {
-                            int[] stunTimeArray = {800, 1200, 1600, 2000, 2400, 2800, 3200, 3600};
+                            int[] stunTimeArray = { 800, 1200, 1600, 2000, 2400, 2800, 3200, 3600 };
                             _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
                         } else if (diffLevel >= -2 && diffLevel <= 2) {
-                            int[] stunTimeArray = {1000, 1400, 1800, 2200, 2600, 3000, 3400, 3800};
+                            int[] stunTimeArray = { 1000, 1400, 1800, 2200, 2600, 3000, 3400, 3800 };
                             _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
                         } else if (diffLevel >= 3 && diffLevel <= 5) {
-                            int[] stunTimeArray = {1200, 1600, 2000, 2400, 2800, 3200, 3600, 4000};
+                            int[] stunTimeArray = { 1200, 1600, 2000, 2400, 2800, 3200, 3600, 4000 };
                             _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
                         } else if (diffLevel >= 5 && diffLevel <= 10) {
-                            int[] stunTimeArray = {1400, 1800, 2200, 2600, 3000, 3400, 3800, 4200};
+                            int[] stunTimeArray = { 1400, 1800, 2200, 2600, 3000, 3400, 3800, 4200 };
                             _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
                         } else if (diffLevel > 10) {
-                            int[] stunTimeArray = {1600, 2000, 2400, 2800, 3200, 3600, 4000, 4400};
+                            int[] stunTimeArray = { 1600, 2000, 2400, 2800, 3200, 3600, 4000, 4400 };
                             _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
                         }
                         L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(), cha.getMapId());
@@ -3184,7 +3184,7 @@ public class L1SkillUse {
                         _isFreeze = _magic.calcProbabilityMagic(_skillId);
                         if (_isFreeze) {
                             // int time = _skill.getBuffDuration() * 1000;
-                            int[] grabTime = {1000, 2000, 3000, 4000};
+                            int[] grabTime = { 1000, 2000, 3000, 4000 };
                             int rnd = random.nextInt(grabTime.length);
                             int time = grabTime[rnd]; // 時間ランダムに
                             L1EffectSpawn.getInstance().spawnEffect(81182, time, cha.getX(), cha.getY(), cha.getMapId());
@@ -3408,7 +3408,7 @@ public class L1SkillUse {
                     }
                     break;
                     case OMAN_STUN: {
-                        int[] stunTimeArray = {2500, 3000, 3500};
+                        int[] stunTimeArray = { 2500, 3000, 3500 };
                         int rnd = random.nextInt(stunTimeArray.length);
                         _shockStunDuration = stunTimeArray[rnd];
                         L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(), cha.getMapId());
@@ -3574,7 +3574,7 @@ public class L1SkillUse {
                                 }
                             }
                             if (_skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7 || _skillId == ANTA_MESSAGE_8 || _skillId == ANTA_SHOCKSTUN) {//スターン
-                                int[] stunTimeArray = {4500, 5000, 5500};
+                                int[] stunTimeArray = { 4500, 5000, 5500 };
                                 int rnd = random.nextInt(stunTimeArray.length);
                                 _shockStunDuration = stunTimeArray[rnd];
                                 L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(), cha.getMapId());
@@ -3791,7 +3791,7 @@ public class L1SkillUse {
                                 }
                             } else {
                                 if (pc.getMapId() >= 101 && pc.getMapId() <= 110) {
-                                    int find_item_ids[] = {830022, // 1階
+                                    int find_item_ids[] = { 830022, // 1階
                                             830023, // 2階
                                             830024, // 3階
                                             830025, // 4階
@@ -3979,9 +3979,9 @@ public class L1SkillUse {
                                         int summonid = 0;
                                         int summons[];
                                         if (_skillId == LESSER_ELEMENTAL) {
-                                            summons = new int[]{45306, 45303, 45304, 45305};
+                                            summons = new int[] { 45306, 45303, 45304, 45305 };
                                         } else {
-                                            summons = new int[]{81053, 81050, 81051, 81052};
+                                            summons = new int[] { 81053, 81050, 81051, 81052 };
                                         }
                                         int npcattr = 1;
                                         for (int i = 0; i < summons.length; i++) {
@@ -4430,9 +4430,9 @@ public class L1SkillUse {
                                 }
 
                             }
-                            int[] polyArray = {29, 945, 947, 979, 1037, 1039, 3860, 3861, 3862, 3863, 3864, 3865, 3904, 3906, 95, 146, 2374, 2376, 2377,
+                            int[] polyArray = { 29, 945, 947, 979, 1037, 1039, 3860, 3861, 3862, 3863, 3864, 3865, 3904, 3906, 95, 146, 2374, 2376, 2377,
                                     2378, 3866, 3867, 3868, 3869, 3870, 3871, 3872, 3873, 3874, 3875, 3876, 3882, 3883, 3884, 3885, 11358, 11396, 11397,
-                                    12225, 12226, 11399, 11398, 12227};
+                                    12225, 12226, 11399, 11398, 12227 };
                             int pid = random.nextInt(polyArray.length);
                             int polyId = polyArray[pid];
                             if (cha instanceof L1PcInstance) {
@@ -4483,7 +4483,7 @@ public class L1SkillUse {
                         /** パワーグリップ詠唱時間本サーバー化 **/
                         case POWEGRRIP: {
 
-                            int[] PowerRipTimeArray = {1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000};
+                            int[] PowerRipTimeArray = { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000 };
                             int rnd = random.nextInt(PowerRipTimeArray.length);
                             _shockStunDuration = PowerRipTimeArray[rnd];
                             L1EffectSpawn.getInstance().spawnEffect(9415, _shockStunDuration, _target.getX(), _target.getY(), _target.getMapId());
@@ -4500,7 +4500,7 @@ public class L1SkillUse {
                         }
                         break;
                         case DESPERADO: {
-                            int[] stunTimeArray = {1500, 2200, 2500, 3500, 4000,};
+                            int[] stunTimeArray = { 1500, 2200, 2500, 3500, 4000, };
                             int rnd = random.nextInt(stunTimeArray.length);
                             _shockStunDuration = stunTimeArray[rnd];
                             L1EffectSpawn.getInstance().spawnEffect(9416, _shockStunDuration, _target.getX(), _target.getY(), _target.getMapId());
@@ -4791,7 +4791,7 @@ public class L1SkillUse {
                         break;
                         case RINDVIOR_SUMMON_MONSTER: {
                             Random _random = new Random();
-                            int[] MobId = new int[]{5106, 5107, 5108, 5109}; // 鉱物
+                            int[] MobId = new int[] { 5106, 5107, 5108, 5109 }; // 鉱物
                             // ゴーレム
                             int rnd = _random.nextInt(100);
                             for (int i = 0; i < _random.nextInt(2) + 1; i++) {
@@ -5519,7 +5519,7 @@ public class L1SkillUse {
         level *= 4;
         switch (level) {
             case 28:
-                summonid_list = new int[]{81083, 81084};
+                summonid_list = new int[] { 81083, 81084 };
                 summonid = summonid_list[order];
                 break;
             case 40:

@@ -48,7 +48,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_ALL() {
-        int[] allBuffSkill = {PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, FEATHER_BUFF_A, LIFE_MAAN, God_buff, COMA_B};
+        int[] allBuffSkill = { PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, FEATHER_BUFF_A, LIFE_MAAN, God_buff, COMA_B };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
             if (pc == null || pc.isPrivateShop() || pc.getMapId() == 5166 || pc.isAutoClanjoin()) {
@@ -67,7 +67,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_ALL(L1PcInstance pc) {
-        int[] allBuffSkill = {PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, FEATHER_BUFF_A, LIFE_MAAN, God_buff, COMA_B};
+        int[] allBuffSkill = { PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, FEATHER_BUFF_A, LIFE_MAAN, God_buff, COMA_B };
         L1SkillUse l1skilluse = null;
         if (pc == null || pc.isPrivateShop() || pc.getMapId() == 5166 || pc.isAutoClanjoin()) {
             return;
@@ -84,7 +84,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_ScreenFull(L1PcInstance gm) { //画面の中のユーザーズにフルバフ
-        int[] allBuffSkill = {PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, NATURES_TOUCH, ADDITIONAL_FIRE, INSIGHT, DRAGON_SKIN};
+        int[] allBuffSkill = { PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, NATURES_TOUCH, ADDITIONAL_FIRE, INSIGHT, DRAGON_SKIN };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
             if (pc.isPrivateShop() || pc.isAutoClanjoin()) {
@@ -99,7 +99,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_ScreenMetis(L1PcInstance gm) {
-        int[] allBuffSkill = {FEATHER_BUFF_A};
+        int[] allBuffSkill = { FEATHER_BUFF_A };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
             if (pc.isPrivateShop() || pc.isAutoClanjoin()) {
@@ -127,7 +127,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_EvilEye(L1PcInstance gm) {
-        int[] allBuffSkill = {7678};
+        int[] allBuffSkill = { 7678 };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
             if (pc.isPrivateShop() || pc.isAutoClanjoin()) {
@@ -164,7 +164,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_God(L1PcInstance gm) {
-        int[] allBuffSkill = {God_buff};
+        int[] allBuffSkill = { God_buff };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
             if (pc.isPrivateShop() || pc.isAutoClanjoin()) {
@@ -183,7 +183,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_ScreenCOMA(L1PcInstance gm) {
-        int[] allBuffSkill = {COMA_B};
+        int[] allBuffSkill = { COMA_B };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
             if (pc.isPrivateShop() || pc.isAutoClanjoin()) {
@@ -206,13 +206,13 @@ public class SpecialEventHandler {
     }
 
     public void buff_ALLFull() {
-        int[] allBuffSkill = {DECREASE_WEIGHT, PHYSICAL_ENCHANT_DEX,
+        int[] allBuffSkill = { DECREASE_WEIGHT, PHYSICAL_ENCHANT_DEX,
                 PHYSICAL_ENCHANT_STR, BLESS_WEAPON, BERSERKERS,
                 IMMUNE_TO_HARM, REDUCTION_ARMOR, BOUNCE_ATTACK,
                 SOLID_CARRIAGE, BURNING_SPIRIT, DOUBLE_BRAKE, UNCANNY_DODGE, DRESS_EVASION,
                 GLOWING_AURA, BRAVE_AURA, RESIST_MAGIC, CLEAR_MIND, ELEMENTAL_PROTECTION,
                 AQUA_PROTECTER, BURNING_WEAPON, IRON_SKIN, EXOTIC_VITALIZE,
-                WATER_LIFE, ELEMENTAL_FIRE, SOUL_OF_FLAME, ADDITIONAL_FIRE};
+                WATER_LIFE, ELEMENTAL_FIRE, SOUL_OF_FLAME, ADDITIONAL_FIRE };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
             if (pc == null || pc.isPrivateShop() || pc.getMapId() == 5166 || pc.isAutoClanjoin()) {
@@ -233,7 +233,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_ALLMetis() {
-        int[] allBuffSkill = {FEATHER_BUFF_A};
+        int[] allBuffSkill = { FEATHER_BUFF_A };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
             if (pc == null || pc.isPrivateShop() || pc.getMapId() == 5166 || pc.isAutoClanjoin()) {
@@ -264,7 +264,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_ALLEvilEye() {
-        int[] allBuffSkill = {7678};
+        int[] allBuffSkill = { 7678 };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
             if (pc == null || pc.isPrivateShop() || pc.getMapId() == 5166 || pc.isAutoClanjoin()) {
@@ -304,7 +304,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_ALLGod() {
-        int[] allBuffSkill = {God_buff};
+        int[] allBuffSkill = { God_buff };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
             if (pc == null || pc.isPrivateShop() || pc.getMapId() == 5166 || pc.isAutoClanjoin()) {
@@ -326,7 +326,7 @@ public class SpecialEventHandler {
     }
 
     public void buff_ALLCOMA() {
-        int[] allBuffSkill = {COMA_B};
+        int[] allBuffSkill = { COMA_B };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getAllPlayers()) {
             if (pc == null || pc.isPrivateShop() || pc.getMapId() == 5166 || pc.isAutoClanjoin()) {

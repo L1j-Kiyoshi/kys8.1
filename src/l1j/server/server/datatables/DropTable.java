@@ -192,10 +192,10 @@ public class DropTable {
         }
 
 
-        int[] lastabard = {80453, 80454, 80455, 80456, 80457, 80458, 80459, 80460, 80461, 80462, 80463, 80452};
-        int[] tower = {80450, 80451, 80466, 80467};
-        int[] glu = {80464, 80465};
-        int[] oman = {80468, 80469, 80470, 80471, 80472, 80473, 80474, 80475, 80476, 80477};
+        int[] lastabard = { 80453, 80454, 80455, 80456, 80457, 80458, 80459, 80460, 80461, 80462, 80463, 80452 };
+        int[] tower = { 80450, 80451, 80466, 80467 };
+        int[] glu = { 80464, 80465 };
+        int[] oman = { 80468, 80469, 80470, 80471, 80472, 80473, 80474, 80475, 80476, 80477 };
         int dropChance = random.nextInt(2000) + 1;
         int lastavard = random.nextInt(lastabard.length);
         int ivory = random.nextInt(tower.length);

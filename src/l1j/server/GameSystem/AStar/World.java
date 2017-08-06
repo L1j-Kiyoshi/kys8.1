@@ -204,7 +204,7 @@ public final class World {
     static public void resetMap(int targetId, int resetId) {
 
 		/*
-		 * l1j.server.GameSystem.Astar.bean.Map ori_map = list.get(targetId);
+         * l1j.server.GameSystem.Astar.bean.Map ori_map = list.get(targetId);
 		 * l1j.server.GameSystem.Astar.bean.Map re_map = list.get(resetId);
 		 * if(ori_map == null || re_map == null) return; if(ori_map.data_size !=
 		 * re_map.data_size) return;
@@ -272,8 +272,8 @@ public final class World {
 		 */
     }
 
-    private static final byte HEADING_TABLE_X[] = {0, 1, 1, 1, 0, -1, -1, -1};
-    private static final byte HEADING_TABLE_Y[] = {-1, -1, 0, 1, 1, 1, 0, -1};
+    private static final byte HEADING_TABLE_X[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
+    private static final byte HEADING_TABLE_Y[] = { -1, -1, 0, 1, 1, 1, 0, -1 };
 
     static public boolean moveDoor(int x, int y, int map, int h) {
         if (h < 0 || h > 7) {

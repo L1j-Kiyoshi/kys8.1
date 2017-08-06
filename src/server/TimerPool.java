@@ -21,22 +21,22 @@ package server;
 import java.util.Timer;
 
 public class TimerPool {
-	private Timer _timers[];
-	private int _numOfTimers;
-	private int _pointer = 0;
+    private Timer _timers[];
+    private int _numOfTimers;
+    private int _pointer = 0;
 
-	public TimerPool(int numOfTimers) {
-		_timers = new Timer[numOfTimers];
-		for (int i = 0; i < numOfTimers; i++) {
-			_timers[i] = new Timer();
-		}
-		_numOfTimers = numOfTimers;
-	}
+    public TimerPool(int numOfTimers) {
+        _timers = new Timer[numOfTimers];
+        for (int i = 0; i < numOfTimers; i++) {
+            _timers[i] = new Timer();
+        }
+        _numOfTimers = numOfTimers;
+    }
 
-	public synchronized Timer getTimer() {
-		if (_numOfTimers <= _pointer) {
-			_pointer = 0;
-		}
-		return _timers[_pointer++];
-	}
+    public synchronized Timer getTimer() {
+        if (_numOfTimers <= _pointer) {
+            _pointer = 0;
+        }
+        return _timers[_pointer++];
+    }
 }

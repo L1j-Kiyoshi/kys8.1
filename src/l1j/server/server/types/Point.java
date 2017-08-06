@@ -44,8 +44,8 @@ public class Point {
         _y = y;
     }
 
-    private static final int HEADING_TABLE_X[] = {0, 1, 1, 1, 0, -1, -1, -1};
-    private static final int HEADING_TABLE_Y[] = {-1, -1, 0, 1, 1, 1, 0, -1};
+    private static final int HEADING_TABLE_X[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
+    private static final int HEADING_TABLE_Y[] = { -1, -1, 0, 1, 1, 1, 0, -1 };
 
     public void forward(int heading) {
         _x += HEADING_TABLE_X[heading];

@@ -28,7 +28,7 @@ public class S_SkillBuy extends ServerBasePacket {
                 break;
 
             case 1: // ナイト
-			/*
+            /*
 			 * if (player.get_level() >= 50) { RC = 8; }
 			 */
 

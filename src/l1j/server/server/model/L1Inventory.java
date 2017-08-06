@@ -886,7 +886,7 @@ public class L1Inventory extends L1Object {
                 itemList.add(item);
             }
         }
-        return itemList.toArray(new L1ItemInstance[]{});
+        return itemList.toArray(new L1ItemInstance[] {});
     }
 
     public L1ItemInstance[] findItemsIdNotEquipped(int id) {
@@ -900,7 +900,7 @@ public class L1Inventory extends L1Object {
                 }
             }
         }
-        return itemList.toArray(new L1ItemInstance[]{});
+        return itemList.toArray(new L1ItemInstance[] {});
     }
 
     public L1ItemInstance getItem(int objectId) {

@@ -353,7 +353,7 @@ public class C_Attr extends ClientBasePacket {
                     pc.sendPackets(new S_ServerMessage(513)); // 家の名前が長すぎます。
                 }
                 break;
-			/*if (c == 0) {
+            /*if (c == 0) {
 			pc.sendPackets(new S_SystemMessage（ "回想のキャンドルを使用しキャンセルしました"））;
 		} else if (c == 1) {
 			if (!pc.getMap().isSafetyZone(pc.getLocation())) {

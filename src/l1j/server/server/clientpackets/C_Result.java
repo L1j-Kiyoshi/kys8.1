@@ -978,7 +978,7 @@ public class C_Result extends ClientBasePacket {
                         return;
                     }
                 }
-				/* バグ防止 */
+                /* バグ防止 */
                 if (item.getItem().getItemId() == 41159 || item.getItem().getItemId() == 41246) { //魂の装飾
                     S_ChatPacket s_chatpacket = new S_ChatPacket(pc, "このアイテムは倉庫の利用をすることはできません。");
                     pc.sendPackets(s_chatpacket);

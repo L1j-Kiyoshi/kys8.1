@@ -344,7 +344,7 @@ public class L1PolyMorph {
         if (cha instanceof L1PcInstance) {
             L1PcInstance pc = (L1PcInstance) cha;
 
-            int PolyList[] = {11479, 11427, 10047, 9688, 11322, 10069, 10034, 10032};
+            int PolyList[] = { 11479, 11427, 10047, 9688, 11322, 10069, 10034, 10032 };
             if (pc.getTempCharGfx() != PolyList[polyIndex - 1]) {
                 pc.setTempCharGfx(PolyList[polyIndex - 1]);
                 L1ItemInstance weapon = pc.getWeapon();

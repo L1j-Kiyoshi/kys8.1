@@ -129,17 +129,17 @@ public class L1RobotInstance extends L1PcInstance {
     }
 
     private int _shockStunDuration;
-    private static final int[] stunTimeArray = {2000, 3000, 4000, 5000};
+    private static final int[] stunTimeArray = { 2000, 3000, 4000, 5000 };
 
     private String _himent;
-    private static final String[] himentArray = {"Hi", "どうぞ！", "攻撃しないで", "ハイ？", "じょうじ...", "どっかいって", "戦う？"};
+    private static final String[] himentArray = { "Hi", "どうぞ！", "攻撃しないで", "ハイ？", "じょうじ...", "どっかいって", "戦う？" };
 
     private String _townment;
 
     private String _glment;
 
-    private static final int[] LisBotBuffSkill4 = {L1SkillId.PHYSICAL_ENCHANT_STR, L1SkillId.PHYSICAL_ENCHANT_DEX,
-            L1SkillId.BLESS_WEAPON, L1SkillId.REMOVE_CURSE};
+    private static final int[] LisBotBuffSkill4 = { L1SkillId.PHYSICAL_ENCHANT_STR, L1SkillId.PHYSICAL_ENCHANT_DEX,
+            L1SkillId.BLESS_WEAPON, L1SkillId.REMOVE_CURSE };
 
     public L1RobotInstance() {
 
@@ -781,7 +781,7 @@ public class L1RobotInstance extends L1PcInstance {
     }
 
     private void resetPotion() {
-		/*
+        /*
 		 * ディレイ（2000 + _random.nextInt（14000））;帰還（）;
 		 */
 
@@ -1648,8 +1648,8 @@ public class L1RobotInstance extends L1PcInstance {
         }
     }
 
-    private static final byte HEADING_TABLE_X[] = {0, 1, 1, 1, 0, -1, -1, -1};
-    private static final byte HEADING_TABLE_Y[] = {-1, -1, 0, 1, 1, 1, 0, -1};
+    private static final byte HEADING_TABLE_X[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
+    private static final byte HEADING_TABLE_Y[] = { -1, -1, 0, 1, 1, 1, 0, -1 };
 
     private void setDirectionMove(int dir) {
         if (dir >= 0) {
@@ -1769,11 +1769,11 @@ public class L1RobotInstance extends L1PcInstance {
             }
 
             if (type == ATTACK_SPEED) {
-                int[] list = {100, 110, 120};
+                int[] list = { 100, 110, 120 };
                 interval += list[_random.nextInt(3)];
                 list = null;
             } else {
-                int[] list = {30, 40, 50};
+                int[] list = { 30, 40, 50 };
                 interval += list[_random.nextInt(3)];
                 list = null;
             }
@@ -2046,7 +2046,7 @@ public class L1RobotInstance extends L1PcInstance {
         int mapId = getMapId();
         int diff_x = x - locCenter;
         int diff_y = y - locCenter;
-        int[] locBace = {getX() - diff_x, getY() - diff_y, 0, 0};
+        int[] locBace = { getX() - diff_x, getY() - diff_y, 0, 0 };
         int[] locNext = new int[4];
         int[] locCopy;
         int[] dirFront = new int[5];
@@ -2059,7 +2059,7 @@ public class L1RobotInstance extends L1PcInstance {
                 serchMap[j][locCenter - i] = true;
             }
         }
-        int[] firstCource = {2, 4, 6, 0, 1, 3, 5, 7};
+        int[] firstCource = { 2, 4, 6, 0, 1, 3, 5, 7 };
         for (i = 0; i < 8; i++) {
             System.arraycopy(locBace, 0, locNext, 0, 4);
             _moveLocation(locNext, firstCource[i]);

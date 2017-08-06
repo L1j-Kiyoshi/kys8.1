@@ -182,7 +182,7 @@ public class NpcTable {
         Constructor<?> con = Class.forName(
                 "l1j.server.server.model.Instance." + s + "Instance")
                 .getConstructors()[0];
-        return (L1NpcInstance) con.newInstance(new Object[]{npcTemp});
+        return (L1NpcInstance) con.newInstance(new Object[] { npcTemp });
     }
 
     public static Map<String, Integer> buildFamily() {

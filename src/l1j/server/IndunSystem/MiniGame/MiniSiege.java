@@ -25,13 +25,13 @@ public class MiniSiege extends Thread {
     private int stage = 0; //0 : 準備段階では、1：遮っているObjectの除去、2：ミニ包囲進行、3：包囲完了ボー商品の支払い
     public boolean running = false;
 
-    private boolean destroyed[] = {false, false, false, false, false, false, false, false, false};
+    private boolean destroyed[] = { false, false, false, false, false, false, false, false, false };
 
     L1Party party = new L1Party();
     L1Party party2 = new L1Party();
     L1Party party3 = new L1Party();
 
-    private String msg[] = {"参加者を集めていますしばらくお待ちください！", "守護塔、中塔、司令塔の順に撃破してください！", "それぞれの塔を破壊すると、追加の補償があります！"};
+    private String msg[] = { "参加者を集めていますしばらくお待ちください！", "守護塔、中塔、司令塔の順に撃破してください！", "それぞれの塔を破壊すると、追加の補償があります！" };
 
     public boolean isDestory(int i) {
         return destroyed[i];

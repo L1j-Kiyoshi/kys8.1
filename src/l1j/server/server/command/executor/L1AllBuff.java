@@ -24,13 +24,13 @@ public class L1AllBuff implements L1CommandExecutor {
 
     @Override
     public void execute(L1PcInstance pc, String cmdName, String arg) {
-        int[] allBuffSkill = {DECREASE_WEIGHT, PHYSICAL_ENCHANT_DEX,
+        int[] allBuffSkill = { DECREASE_WEIGHT, PHYSICAL_ENCHANT_DEX,
                 PHYSICAL_ENCHANT_STR, BLESS_WEAPON, BERSERKERS,
                 IMMUNE_TO_HARM, REDUCTION_ARMOR, BOUNCE_ATTACK,
                 SOLID_CARRIAGE, BURNING_SPIRIT, DOUBLE_BRAKE, UNCANNY_DODGE, DRESS_EVASION,
                 GLOWING_AURA, BRAVE_AURA, RESIST_MAGIC, CLEAR_MIND, ELEMENTAL_PROTECTION,
                 AQUA_PROTECTER, BURNING_WEAPON, IRON_SKIN, EXOTIC_VITALIZE,
-                WATER_LIFE, ELEMENTAL_FIRE, SOUL_OF_FLAME, ADDITIONAL_FIRE};
+                WATER_LIFE, ELEMENTAL_FIRE, SOUL_OF_FLAME, ADDITIONAL_FIRE };
         try {
             StringTokenizer st = new StringTokenizer(arg);
             String name = st.nextToken();

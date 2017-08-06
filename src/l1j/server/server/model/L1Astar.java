@@ -93,7 +93,7 @@ public class L1Astar {
     public char MakeChild(L1Node node, int tx, int ty, short m) {
         int x, y;
         char flag = 0;
-        char cc[] = {0, 0, 0, 0, 0, 0, 0, 0};
+        char cc[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
         x = node.x;
         y = node.y;

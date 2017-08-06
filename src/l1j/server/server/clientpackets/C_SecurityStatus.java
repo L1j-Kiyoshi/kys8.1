@@ -49,7 +49,7 @@ public class C_SecurityStatus extends ClientBasePacket {
         else status = "$1117";
 
 //		System.out.println("動作： "+ npcName）;
-        String[] htmldata = new String[]{npcName, status};
+        String[] htmldata = new String[] { npcName, status };
 
         pc.sendPackets(new S_NPCTalkReturn(objid, "CastleS", htmldata));
     }

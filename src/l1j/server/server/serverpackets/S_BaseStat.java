@@ -6,9 +6,9 @@ public class S_BaseStat extends ServerBasePacket {
     private static final String _TYPE = "[S] S_BaseStat";
 
     private byte[] _byte = null;
-    private static final int[][] baseStat = {{13, 10, 10, 11, 10, 13}, {16, 12, 14, 9, 8, 12},
-            {11, 12, 12, 12, 12, 9}, {8, 7, 12, 12, 12, 8}, {12, 15, 8, 10, 11, 9}, {13, 11, 14, 12, 11, 8},
-            {11, 10, 12, 12, 12, 8}};
+    private static final int[][] baseStat = { { 13, 10, 10, 11, 10, 13 }, { 16, 12, 14, 9, 8, 12 },
+            { 11, 12, 12, 12, 12, 9 }, { 8, 7, 12, 12, 12, 8 }, { 12, 15, 8, 10, 11, 9 }, { 13, 11, 14, 12, 11, 8 },
+            { 11, 10, 12, 12, 12, 8 } };
 
     public S_BaseStat(L1PcInstance cha) {
 //		writeC(Opcodes.S_BASESTAT);

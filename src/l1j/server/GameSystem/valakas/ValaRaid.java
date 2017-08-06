@@ -79,7 +79,7 @@ public class ValaRaid implements Runnable {
 
     public void AllShockStun() {
         System.out.println("ショックスタンを使用");
-        int[] stunTimeArray = {4500, 5000, 5500};
+        int[] stunTimeArray = { 4500, 5000, 5500 };
         int rnd = _random.nextInt(stunTimeArray.length);
         int _shockStunDuration = stunTimeArray[rnd];
         for (L1PcInstance pc : PcStageCK()) {

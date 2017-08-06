@@ -158,7 +158,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                         L1CastleLocation.KENT_CASTLE_ID);
                 if (hascastle) {
                     htmlid = "gateokeeper";
-                    htmldata = new String[]{player.getName()};
+                    htmldata = new String[] { player.getName() };
                 } else {
                     htmlid = "gatekeeperop";
                 }
@@ -176,7 +176,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                         L1CastleLocation.WW_CASTLE_ID);
                 if (hascastle) {
                     htmlid = "gateokeeper";
-                    htmldata = new String[]{player.getName()};
+                    htmldata = new String[] { player.getName() };
                 } else {
                     htmlid = "gatekeeperop";
                 }
@@ -188,7 +188,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                         L1CastleLocation.GIRAN_CASTLE_ID);
                 if (hascastle) {
                     htmlid = "gateokeeper";
-                    htmldata = new String[]{player.getName()};
+                    htmldata = new String[] { player.getName() };
                 } else {
                     htmlid = "gatekeeperop";
                 }
@@ -198,7 +198,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                         L1CastleLocation.HEINE_CASTLE_ID);
                 if (hascastle) {
                     htmlid = "gateokeeper";
-                    htmldata = new String[]{player.getName()};
+                    htmldata = new String[] { player.getName() };
                 } else {
                     htmlid = "gatekeeperop";
                 }
@@ -208,7 +208,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                         L1CastleLocation.DOWA_CASTLE_ID);
                 if (hascastle) {
                     htmlid = "gateokeeper";
-                    htmldata = new String[]{player.getName()};
+                    htmldata = new String[] { player.getName() };
                 } else {
                     htmlid = "gatekeeperop";
                 }
@@ -217,7 +217,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                         L1CastleLocation.ADEN_CASTLE_ID);
                 if (hascastle) {
                     htmlid = "gatekeeper";
-                    htmldata = new String[]{player.getName()};
+                    htmldata = new String[] { player.getName() };
                 } else {
                     htmlid = "gatekeeperop";
                 }
@@ -231,7 +231,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                     }
                 }
                 htmlid = "ktguard6";
-                htmldata = new String[]{getName(), clan_name, pri_name};
+                htmldata = new String[] { getName(), clan_name, pri_name };
             } else if (npcid == 60560) {
                 for (L1Clan clan : L1World.getInstance().getAllClans()) {
                     if (clan.getCastleId()
@@ -242,7 +242,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                     }
                 }
                 htmlid = "orcguard6";
-                htmldata = new String[]{getName(), clan_name, pri_name};
+                htmldata = new String[] { getName(), clan_name, pri_name };
             } else if (npcid == 60552 || npcid == 5155) {
                 for (L1Clan clan : L1World.getInstance().getAllClans()) {
                     if (clan.getCastleId()
@@ -253,7 +253,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                     }
                 }
                 htmlid = "wdguard6";
-                htmldata = new String[]{getName(), clan_name, pri_name};
+                htmldata = new String[] { getName(), clan_name, pri_name };
             } else if (npcid == 60524 ||
                     npcid == 60525 ||
                     npcid == 60529) {
@@ -266,7 +266,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                     }
                 }
                 htmlid = "grguard6";
-                htmldata = new String[]{getName(), clan_name, pri_name};
+                htmldata = new String[] { getName(), clan_name, pri_name };
             } else if (npcid == 70857) {
                 for (L1Clan clan : L1World.getInstance().getAllClans()) {
                     if (clan.getCastleId()
@@ -277,7 +277,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                     }
                 }
                 htmlid = "heguard6";
-                htmldata = new String[]{getName(), clan_name, pri_name};
+                htmldata = new String[] { getName(), clan_name, pri_name };
             } else if (npcid == 60530 ||
                     npcid == 60531) {
                 for (L1Clan clan : L1World.getInstance().getAllClans()) {
@@ -289,7 +289,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                     }
                 }
                 htmlid = "dcguard6";
-                htmldata = new String[]{getName(), clan_name, pri_name};
+                htmldata = new String[] { getName(), clan_name, pri_name };
             } else if (npcid == 60533 ||
                     npcid == 60534) {
                 for (L1Clan clan : L1World.getInstance().getAllClans()) {
@@ -301,7 +301,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                     }
                 }
                 htmlid = "adguard6";
-                htmldata = new String[]{getName(), clan_name, pri_name};
+                htmldata = new String[] { getName(), clan_name, pri_name };
             } else if (npcid == 81156) {
                 for (L1Clan clan : L1World.getInstance().getAllClans()) {
                     if (clan.getCastleId()
@@ -312,7 +312,7 @@ public class L1CastleGuardInstance extends L1NpcInstance {
                     }
                 }
                 htmlid = "ktguard6";
-                htmldata = new String[]{getName(), clan_name, pri_name};
+                htmldata = new String[] { getName(), clan_name, pri_name };
             }
 
 

@@ -47,9 +47,9 @@ public class Azmodan implements Runnable {
         _map = id;
     }
 
-    int[] _MonsterList1 = {14901, 14902};
-    int[] _MonsterList2 = {14900, 14901, 14902, 14903};
-    int[] _MonsterList3 = {14901, 14902, 14904};
+    int[] _MonsterList1 = { 14901, 14902 };
+    int[] _MonsterList2 = { 14900, 14901, 14902, 14903 };
+    int[] _MonsterList3 = { 14901, 14902, 14904 };
 
     @Override
     public void run() {

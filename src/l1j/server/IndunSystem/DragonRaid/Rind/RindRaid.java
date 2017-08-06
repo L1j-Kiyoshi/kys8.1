@@ -150,7 +150,7 @@ public class RindRaid implements Runnable {
                                     }
                                 }
                             }
-						/*for (L1PcInstance pc : PcStageCK()){
+                        /*for (L1PcInstance pc : PcStageCK()){
 							createNewItem(pc, 30061, 1); //逃げたドラゴンの痕跡
 						}*/
                             for (L1PcInstance pc : PcStageCK()) {

@@ -300,7 +300,7 @@ public class Robot_ConnectAndRestart {
                             case 5:
                             case 4:
                             case 2:// ギラン
-							/*
+                            /*
 							 * byte sub_type = (byte) _random.nextInt(100);
 							 * if(sub_type >= 95){//掲示板、倉庫の下に追加
 							 * bot.setX(33412+_random.nextInt(8));

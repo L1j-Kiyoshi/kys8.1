@@ -148,7 +148,7 @@ public class RankTable {
         for (int i = 0; i < ll_All.size(); i++) {
             L1Rank rank = ll_All.get(i);
             if (rank == null) break;
-            old_ranks.put(rank.getId(), new int[]{rank.getTotalRank(), rank.getClassRank()});
+            old_ranks.put(rank.getId(), new int[] { rank.getTotalRank(), rank.getClassRank() });
         }
     }
 

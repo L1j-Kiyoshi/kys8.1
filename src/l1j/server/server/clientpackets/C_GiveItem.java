@@ -221,11 +221,11 @@ public class C_GiveItem extends ClientBasePacket {
 
     }
 
-    private final static String receivableImpls[] = new String[]{"L1Npc", // NPC
+    private final static String receivableImpls[] = new String[] { "L1Npc", // NPC
             "L1Monster", // monster
             "L1Guardian", // エルフの森の守護者
             "L1Teleporter", // テレポーター
-            "L1Guard"}; // ガイド
+            "L1Guard" }; // ガイド
 
     private boolean isNpcItemReceivable(L1Npc npc) {
         for (String impl : receivableImpls) {

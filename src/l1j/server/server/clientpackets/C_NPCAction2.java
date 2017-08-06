@@ -818,7 +818,7 @@ public class C_NPCAction2 {
                         return htmlid;
                     }
 /*					if (pc.getInventory().checkItem(41159, 30)) {
-						pc.getInventory().consumeItem(41159, 30);*/
+                        pc.getInventory().consumeItem(41159, 30);*/
 
                     if (pc.getMap().isEscapable() || pc.isGm()) {
                         int rx = _random.nextInt(7);
@@ -1188,8 +1188,8 @@ public class C_NPCAction2 {
             } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71090) {
                 if (s.equalsIgnoreCase("a")) {
                     htmlid = "";
-                    final int[] item_ids = {246, 247, 248, 249, 40660};
-                    final int[] item_amounts = {1, 1, 1, 1, 5};
+                    final int[] item_ids = { 246, 247, 248, 249, 40660 };
+                    final int[] item_amounts = { 1, 1, 1, 1, 5 };
                     L1ItemInstance item = null;
                     for (int i = 0; i < item_ids.length; i++) {
                         item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);

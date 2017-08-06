@@ -774,7 +774,7 @@ class L1SkillStop {
                         }
                         pc.sendPackets(new S_OwnCharStatus(pc));
                     }
-				/*
+                /*
 				 * if(pc.Tam_wait_count()!=0){ Timestamp deleteTime = null;
 				 * deleteTime = new Timestamp(System.currentTimeMillis() +
 				 * (86400000 * (long)pc.Nexttam(pc.getId()))+10000);//7日

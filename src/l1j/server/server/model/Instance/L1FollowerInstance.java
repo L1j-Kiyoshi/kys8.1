@@ -232,7 +232,7 @@ public class L1FollowerInstance extends L1NpcInstance {
                 Constructor _constructor = Class.forName(
                         (new StringBuilder()).append("l1j.server.server.model.Instance. ").append(implementationName)
                                 .append("Instance").toString()).getConstructors()[0];
-                mob = (L1NpcInstance) _constructor.newInstance(new Object[]{l1npc});
+                mob = (L1NpcInstance) _constructor.newInstance(new Object[] { l1npc });
                 mob.setId(IdFactory.getInstance().nextId());
                 mob.setX(X);
                 mob.setY(Y);

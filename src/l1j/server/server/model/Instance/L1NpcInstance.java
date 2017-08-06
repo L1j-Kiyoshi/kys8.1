@@ -1004,10 +1004,10 @@ public class L1NpcInstance extends L1Character {
 
         if (_npcTemplate.get_npcId() == 45032) {
             if (getExp() != 0 && !_inventory.checkItem(20)) {
-                materials = new int[]{40508, 40521, 40045};
-                counts = new int[]{150, 3, 3};
-                createitem = new int[]{20};
-                createcount = new int[]{1};
+                materials = new int[] { 40508, 40521, 40045 };
+                counts = new int[] { 150, 3, 3 };
+                createitem = new int[] { 20 };
+                createcount = new int[] { 1 };
                 if (_inventory.checkItem(materials, counts)) {
                     for (int i = 0; i < materials.length; i++) {
                         _inventory.consumeItem(materials[i], counts[i]);
@@ -1018,10 +1018,10 @@ public class L1NpcInstance extends L1Character {
                 }
             }
             if (getExp() != 0 && !_inventory.checkItem(19)) {
-                materials = new int[]{40494, 40521};
-                counts = new int[]{150, 3};
-                createitem = new int[]{19};
-                createcount = new int[]{1};
+                materials = new int[] { 40494, 40521 };
+                counts = new int[] { 150, 3 };
+                createitem = new int[] { 19 };
+                createcount = new int[] { 1 };
                 if (_inventory.checkItem(materials, counts)) {
                     for (int i = 0; i < materials.length; i++) {
                         _inventory.consumeItem(materials[i], counts[i]);
@@ -1032,10 +1032,10 @@ public class L1NpcInstance extends L1Character {
                 }
             }
             if (getExp() != 0 && !_inventory.checkItem(3)) {
-                materials = new int[]{40494, 40521};
-                counts = new int[]{50, 1};
-                createitem = new int[]{3};
-                createcount = new int[]{1};
+                materials = new int[] { 40494, 40521 };
+                counts = new int[] { 50, 1 };
+                createitem = new int[] { 3 };
+                createcount = new int[] { 1 };
                 if (_inventory.checkItem(materials, counts)) {
                     for (int i = 0; i < materials.length; i++) {
                         _inventory.consumeItem(materials[i], counts[i]);
@@ -1046,10 +1046,10 @@ public class L1NpcInstance extends L1Character {
                 }
             }
             if (getExp() != 0 && !_inventory.checkItem(100)) {
-                materials = new int[]{88, 40508, 40045};
-                counts = new int[]{4, 80, 3};
-                createitem = new int[]{100};
-                createcount = new int[]{1};
+                materials = new int[] { 88, 40508, 40045 };
+                counts = new int[] { 4, 80, 3 };
+                createitem = new int[] { 100 };
+                createcount = new int[] { 1 };
                 if (_inventory.checkItem(materials, counts)) {
                     for (int i = 0; i < materials.length; i++) {
                         _inventory.consumeItem(materials[i], counts[i]);
@@ -1060,10 +1060,10 @@ public class L1NpcInstance extends L1Character {
                 }
             }
             if (getExp() != 0 && !_inventory.checkItem(89)) {
-                materials = new int[]{88, 40494};
-                counts = new int[]{2, 80};
-                createitem = new int[]{89};
-                createcount = new int[]{1};
+                materials = new int[] { 88, 40494 };
+                counts = new int[] { 2, 80 };
+                createitem = new int[] { 89 };
+                createcount = new int[] { 1 };
                 if (_inventory.checkItem(materials, counts)) {
                     for (int i = 0; i < materials.length; i++) {
                         _inventory.consumeItem(materials[i], counts[i]);
@@ -1080,10 +1080,10 @@ public class L1NpcInstance extends L1Character {
             }
         } else if (_npcTemplate.get_npcId() == 81069) {
             if (getExp() != 0 && !_inventory.checkItem(40542)) {
-                materials = new int[]{40032};
-                counts = new int[]{1};
-                createitem = new int[]{40542};
-                createcount = new int[]{1};
+                materials = new int[] { 40032 };
+                counts = new int[] { 1 };
+                createitem = new int[] { 40542 };
+                createcount = new int[] { 1 };
                 if (_inventory.checkItem(materials, counts)) {
                     for (int i = 0; i < materials.length; i++) {
                         _inventory.consumeItem(materials[i], counts[i]);
@@ -1096,10 +1096,10 @@ public class L1NpcInstance extends L1Character {
         } else if (_npcTemplate.get_npcId() == 45166
                 || _npcTemplate.get_npcId() == 45167) {
             if (getExp() != 0 && !_inventory.checkItem(40726)) {
-                materials = new int[]{40725};
-                counts = new int[]{1};
-                createitem = new int[]{40726};
-                createcount = new int[]{1};
+                materials = new int[] { 40725 };
+                counts = new int[] { 1 };
+                createitem = new int[] { 40726 };
+                createcount = new int[] { 1 };
                 if (_inventory.checkItem(materials, counts)) {
                     for (int i = 0; i < materials.length; i++) {
                         _inventory.consumeItem(materials[i], counts[i]);
@@ -1806,7 +1806,7 @@ public class L1NpcInstance extends L1Character {
         int locCenter = courceRange + 1;
         int diff_x = x - locCenter;
         int diff_y = y - locCenter;
-        int[] locBace = {getX() - diff_x, getY() - diff_y, 0, 0};
+        int[] locBace = { getX() - diff_x, getY() - diff_y, 0, 0 };
         int[] locNext = new int[4];
         int[] locCopy;
         int[] dirFront = new int[5];
@@ -1820,7 +1820,7 @@ public class L1NpcInstance extends L1Character {
             }
         }
 
-        int[] firstCource = {2, 4, 6, 0, 1, 3, 5, 7};
+        int[] firstCource = { 2, 4, 6, 0, 1, 3, 5, 7 };
         for (i = 0; i < 8; i++) {
             System.arraycopy(locBace, 0, locNext, 0, 4);
             _moveLocation(locNext, firstCource[i]);
@@ -2034,9 +2034,9 @@ public class L1NpcInstance extends L1Character {
 
     public static final int USEITEM_HEAL = 0;
     public static final int USEITEM_HASTE = 1;
-    public static int[] healPotions = {POTION_OF_GREATER_HEALING, POTION_OF_EXTRA_HEALING, POTION_OF_HEALING};
-    public static int[] haestPotions = {B_POTION_OF_GREATER_HASTE_SELF, POTION_OF_GREATER_HASTE_SELF,
-            B_POTION_OF_HASTE_SELF, POTION_OF_HASTE_SELF};
+    public static int[] healPotions = { POTION_OF_GREATER_HEALING, POTION_OF_EXTRA_HEALING, POTION_OF_HEALING };
+    public static int[] haestPotions = { B_POTION_OF_GREATER_HASTE_SELF, POTION_OF_GREATER_HASTE_SELF,
+            B_POTION_OF_HASTE_SELF, POTION_OF_HASTE_SELF };
 
     public void useItem(int type, int chance) {
         if (hasSkillEffect(71)) {
@@ -2561,7 +2561,7 @@ public class L1NpcInstance extends L1Character {
     //}
 
 	/*public boolean onAStar(int tx, int ty, int mapId, boolean check) {
-		// check: true - パスを確認しますがするが、false  - 検出されたパスを移動させる
+        // check: true - パスを確認しますがするが、false  - 検出されたパスを移動させる
 		pfAStar = new L1Astar();
 		iPath = new int[300][2];
 		// 最短経路を検索する

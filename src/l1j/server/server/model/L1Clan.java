@@ -449,7 +449,7 @@ public class L1Clan {
     private int _defence = 0;
     private int _pvpattack = 0;
     private int _pvpdefence = 0;
-    public int[] getBuffTime = new int[]{_attack, _defence, _pvpattack, _pvpdefence};
+    public int[] getBuffTime = new int[] { _attack, _defence, _pvpattack, _pvpdefence };
 
     public int[] getBuffTime() {
         return getBuffTime;
@@ -460,7 +460,7 @@ public class L1Clan {
     }
 
     public void setBuffTime(int a, int b, int c, int d) {
-        getBuffTime = new int[]{a, b, c, d};
+        getBuffTime = new int[] { a, b, c, d };
     }
 
     public int getBlessCount() {

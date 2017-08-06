@@ -223,7 +223,7 @@ public class AStar {
         x = node.x;
         y = node.y;
         boolean ckckck = false;
-		/*
+        /*
 		 * if(o instanceof L1NpcInstance){ L1NpcInstance npp = (L1NpcInstance)o;
 		 * if(npp.getNpcId() >=100750 && npp.getNpcId() <= 100757){ ckckck =
 		 * true; } }

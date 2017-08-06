@@ -48,7 +48,7 @@ public class Demon implements Runnable {
         _map = id;
     }
 
-    int[] _MonsterList = {5080, 5081, 5082, 5083, 5084, 5085};
+    int[] _MonsterList = { 5080, 5081, 5082, 5083, 5084, 5085 };
 
     @Override
     public void run() {

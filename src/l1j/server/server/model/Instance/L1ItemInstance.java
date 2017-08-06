@@ -855,7 +855,7 @@ public class L1ItemInstance extends L1Object {
         int itemType2 = getItem().getType2();
         int itemId = getItemId();
         BinaryOutputStream os = new BinaryOutputStream();
-		/*if(getAttrEnchantLevel()==3){
+        /*if(getAttrEnchantLevel()==3){
 		//	20 28 24 39 29
 			os.writeC(0x20);
 			os.writeC(0x28);

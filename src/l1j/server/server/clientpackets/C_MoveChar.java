@@ -34,8 +34,8 @@ import l1j.server.server.serverpackets.S_SystemMessage;
 public class C_MoveChar extends ClientBasePacket {
 
 
-    private static final byte HEADING_TABLE_X[] = {0, 1, 1, 1, 0, -1, -1, -1};
-    private static final byte HEADING_TABLE_Y[] = {-1, -1, 0, 1, 1, 1, 0, -1};
+    private static final byte HEADING_TABLE_X[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
+    private static final byte HEADING_TABLE_Y[] = { -1, -1, 0, 1, 1, 1, 0, -1 };
 
     // 移動
     public C_MoveChar(byte decrypt[], GameClient client) throws Exception {
@@ -212,7 +212,7 @@ public class C_MoveChar extends ClientBasePacket {
         /** 時間の割れ目 */
         if (CrockController.getInstance().isMove()) {
             int[] loc = CrockController.getInstance().loc();
-			/* pc座標と時間の割れ目の座標が一致であれば*/
+            /* pc座標と時間の割れ目の座標が一致であれば*/
             if (loc[0] == pc.getX() && loc[1] == pc.getY() && loc[2] == pc.getMapId()) {
                 if (CrockController.getInstance().crocktype() == 0) {
                     new L1Teleport().teleport(pc, 32639, 32876, (short) 780, 4, false);//テーベ

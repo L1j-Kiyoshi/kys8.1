@@ -319,7 +319,7 @@ public class L1HauntedHouse implements Runnable {
                 try {
                     String s = l1npc.getImpl();
                     Constructor constructor = Class.forName("l1j.server.server.model.Instance." + s + "Instance").getConstructors()[0];
-                    Object aobj[] = {l1npc};
+                    Object aobj[] = { l1npc };
                     L1NpcInstance npc = (L1NpcInstance) constructor.newInstance(aobj);
                     npc.setId(IdFactory.getInstance().nextId());
                     npc.setMap((short) 5140);

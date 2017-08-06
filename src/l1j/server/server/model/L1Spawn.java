@@ -275,7 +275,7 @@ public class L1Spawn {
     protected void doSpawn(int spawnNumber, int objectId) {
         L1NpcInstance mob = null;
         try {
-            Object parameters[] = {_template};
+            Object parameters[] = { _template };
 
             int newlocx = getLocX();
             int newlocy = getLocY();

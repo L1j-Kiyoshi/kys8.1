@@ -9,7 +9,7 @@ import l1j.server.server.model.skill.L1SkillId;
 
 public class S_Ranking2 extends ServerBasePacket {
 
-    private static final byte[] minus = {(byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0x01};
+    private static final byte[] minus = { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0x01 };
 
     public static final int SHOW_RANK_BUFFICON = 110;
     public static final int SHOW_RANK_BUTTON = 126;

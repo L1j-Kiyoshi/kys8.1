@@ -27,8 +27,8 @@ public class L1Teleport {
 
 
     // 順番にteleport（白）、change position e（青）、ad mass teleport e（赤）、call clan（緑）
-    public static final int[] EFFECT_SPR = {169, 149, 169, 2281}; //149
-    public static final int[] EFFECT_TIME = {280, 440, 440, 1120};
+    public static final int[] EFFECT_SPR = { 169, 149, 169, 2281 }; //149
+    public static final int[] EFFECT_TIME = { 280, 440, 440, 1120 };
 
     public L1Teleport() {
     }
@@ -59,7 +59,7 @@ public class L1Teleport {
 		 * rob.setY(y); rob.setMap(m); rob.setTeleport(false); rob.loc = null;
 		 */
     }
-	/*@SuppressWarnings("unused")
+    /*@SuppressWarnings("unused")
 	public static void teleport(L1PcInstance pc, int x, int y, short mapid, int head) {
 		pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));	
 

@@ -46,23 +46,21 @@ public class Base64 {
 
     private final static byte[] ALPHABET;
 
-    private final static byte[] _NATIVE_ALPHABET = /*
-                                                     * May be something funny
-													 * like EBCDIC
-													 */
-            {(byte) 'A', (byte) 'B', (byte) 'C', (byte) 'D', (byte) 'E', (byte) 'F',
-                    (byte) 'G', (byte) 'H', (byte) 'I', (byte) 'J', (byte) 'K',
-                    (byte) 'L', (byte) 'M', (byte) 'N', (byte) 'O', (byte) 'P',
-                    (byte) 'Q', (byte) 'R', (byte) 'S', (byte) 'T', (byte) 'U',
-                    (byte) 'V', (byte) 'W', (byte) 'X', (byte) 'Y', (byte) 'Z',
-                    (byte) 'a', (byte) 'b', (byte) 'c', (byte) 'd', (byte) 'e',
-                    (byte) 'f', (byte) 'g', (byte) 'h', (byte) 'i', (byte) 'j',
-                    (byte) 'k', (byte) 'l', (byte) 'm', (byte) 'n', (byte) 'o',
-                    (byte) 'p', (byte) 'q', (byte) 'r', (byte) 's', (byte) 't',
-                    (byte) 'u', (byte) 'v', (byte) 'w', (byte) 'x', (byte) 'y',
-                    (byte) 'z', (byte) '0', (byte) '1', (byte) '2', (byte) '3',
-                    (byte) '4', (byte) '5', (byte) '6', (byte) '7', (byte) '8',
-                    (byte) '9', (byte) '+', (byte) '/'};
+    /*
+     * May be something funny
+     * like EBCDIC
+     */
+    private final static byte[] _NATIVE_ALPHABET = {
+            (byte) 'A', (byte) 'B', (byte) 'C', (byte) 'D', (byte) 'E', (byte) 'F', (byte) 'G',
+            (byte) 'H', (byte) 'I', (byte) 'J', (byte) 'K', (byte) 'L', (byte) 'M', (byte) 'N',
+            (byte) 'O', (byte) 'P', (byte) 'Q', (byte) 'R', (byte) 'S', (byte) 'T', (byte) 'U',
+            (byte) 'V', (byte) 'W', (byte) 'X', (byte) 'Y', (byte) 'Z',
+            (byte) 'a', (byte) 'b', (byte) 'c', (byte) 'd', (byte) 'e', (byte) 'f', (byte) 'g',
+            (byte) 'h', (byte) 'i', (byte) 'j', (byte) 'k', (byte) 'l', (byte) 'm', (byte) 'n',
+            (byte) 'o', (byte) 'p', (byte) 'q', (byte) 'r', (byte) 's', (byte) 't', (byte) 'u',
+            (byte) 'v', (byte) 'w', (byte) 'x', (byte) 'y', (byte) 'z',
+            (byte) '0', (byte) '1', (byte) '2', (byte) '3', (byte) '4', (byte) '5', (byte) '6',
+            (byte) '7', (byte) '8', (byte) '9', (byte) '+', (byte) '/' };
 
     static {
         byte[] __bytes;
@@ -77,7 +75,8 @@ public class Base64 {
         ALPHABET = __bytes;
     } // end static
 
-    private final static byte[] DECODABET = {-9, -9, -9, -9, -9, -9, -9, -9,
+    private final static byte[] DECODABET = {
+            -9, -9, -9, -9, -9, -9, -9, -9,
             -9, // Decimal 0 - 8
             -5, -5, // Whitespace: Tab and Linefeed
             -9, -9, // Decimal 11 - 12
@@ -104,27 +103,26 @@ public class Base64 {
             39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, // Letters 'n'
             // through 'z'
             -9, -9, -9, -9 // Decimal 123 - 126
-    /*
-	 * ,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 127 - 139
-	 * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 140 - 152
-	 * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 153 - 165
-	 * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 166 - 178
-	 * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 179 - 191
-	 * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 192 - 204
-	 * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 205 - 217
-	 * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 218 - 230
-	 * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 231 - 243
-	 * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9 // Decimal 244 - 255
-	 */
-    };
+            /*
+             * ,
+             * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 127 - 139
+             * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 140 - 152
+             * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 153 - 165
+             * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 166 - 178
+             * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 179 - 191
+             * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 192 - 204
+             * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 205 - 217
+             * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 218 - 230
+             * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9, // Decimal 231 - 243
+             * -9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9,-9 // Decimal 244 - 255
+             */
+        };
 
-    private final static byte WHITE_SPACE_ENC = -5; // Indicates white space in
+    // Indicates white space in encoding
+    private final static byte WHITE_SPACE_ENC = -5;
 
-    // encoding
-
-    private final static byte EQUALS_SIGN_ENC = -1; // Indicates equals sign in
-
-    // encoding
+    // Indicates equals sign in encoding
+    private final static byte EQUALS_SIGN_ENC = -1;
 
     private Base64() {
     }

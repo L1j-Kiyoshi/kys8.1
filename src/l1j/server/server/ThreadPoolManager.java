@@ -199,7 +199,7 @@ public class ThreadPoolManager {
     }
 
     public String[] getStats() {
-        return new String[]{
+        return new String[] {
                 "STP:",
                 " + Effects:",
                 " |- ActiveThreads:   "
@@ -286,7 +286,7 @@ public class ThreadPoolManager {
                 " |- CompletedTasks:  "
                         + _generalThreadPool.getCompletedTaskCount(),
                 " |- QueuedTasks:     " + _generalThreadPool.getQueue().size(),
-                " | -------", " + AI:", " |- Not Done"};
+                " | -------", " + AI:", " |- Not Done" };
     }
 
     private class PriorityThreadFactory implements ThreadFactory {

@@ -18,7 +18,7 @@ public class CharBuffTable {
 
     private static Logger _log = Logger.getLogger(CharBuffTable.class.getName());
 
-    private static final int[] buffSkill = {2, 67, // ライト、シェイプチェンジ
+    private static final int[] buffSkill = { 2, 67, // ライト、シェイプチェンジ
             3, 151, 168, // シールドアーススキンアイアンスキン
             43, 54, 1000, 1001, STATUS_ELFBRAVE, // ヘイストライキ、グレーターちょっとストライキ、ブレイブ一部、緑の一部、エルヴンワッフル
             52, 101, 150, // 号 - リワーク、ムービング悪セレーション、ウィンドウォーク

@@ -150,7 +150,7 @@ public class L1MobGroupSpawn {
             Constructor<?> constructor = Class.forName(
                     "l1j.server.server.model.Instance." + s + "Instance")
                     .getConstructors()[0];
-            Object parameters[] = {l1npc};
+            Object parameters[] = { l1npc };
             mob = (L1NpcInstance) constructor.newInstance(parameters);
             mob.setId(IdFactory.getInstance().nextId());
 

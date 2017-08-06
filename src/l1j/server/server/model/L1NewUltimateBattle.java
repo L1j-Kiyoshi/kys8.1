@@ -350,7 +350,7 @@ public class L1NewUltimateBattle {
         }
 
         private void waitForNextRound(int curRound) throws InterruptedException {
-            final int WAIT_TIME_TABLE[] = {7, 12, 36, 18};
+            final int WAIT_TIME_TABLE[] = { 7, 12, 36, 18 };
 
             int wait = WAIT_TIME_TABLE[curRound - 1];
             if (_ubId == 4) {
@@ -753,8 +753,8 @@ public class L1NewUltimateBattle {
         String mpr = String.valueOf(_mpr);
         String summon = _location.getMap().isTakePets() ? "可能" : "不可能";
         String summon2 = _location.getMap().isRecallPets() ? "可能" : "不可能";
-        _ubInfo = new String[]{nextUbTime, classes, sex, loLevel, hiLevel,
-                teleport, res, pot, hpr, mpr, summon, summon2};
+        _ubInfo = new String[] { nextUbTime, classes, sex, loLevel, hiLevel,
+                teleport, res, pot, hpr, mpr, summon, summon2 };
         return _ubInfo;
     }
 }

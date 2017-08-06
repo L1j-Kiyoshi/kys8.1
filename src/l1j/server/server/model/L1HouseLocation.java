@@ -29,19 +29,19 @@ import l1j.server.server.types.Point;
 
 public class L1HouseLocation {
 
-    private static final int[] TELEPORT_LOC_MAPID = {4, 4, 4, 350,};
+    private static final int[] TELEPORT_LOC_MAPID = { 4, 4, 4, 350, };
 
-    private static final Point[] TELEPORT_LOC_GIRAN = {new Point(33419, 32810), new Point(33343, 32723),
-            new Point(33553, 32712), new Point(32702, 32842),};
+    private static final Point[] TELEPORT_LOC_GIRAN = { new Point(33419, 32810), new Point(33343, 32723),
+            new Point(33553, 32712), new Point(32702, 32842), };
 
-    private static final Point[] TELEPORT_LOC_HEINE = {new Point(33604, 33236), new Point(33649, 33413),
-            new Point(33553, 32712), new Point(32702, 32842),};
+    private static final Point[] TELEPORT_LOC_HEINE = { new Point(33604, 33236), new Point(33649, 33413),
+            new Point(33553, 32712), new Point(32702, 32842), };
 
-    private static final Point[] TELEPORT_LOC_ADEN = {new Point(33966, 33253), new Point(33921, 33177),
-            new Point(33553, 32712), new Point(32702, 32842),};
+    private static final Point[] TELEPORT_LOC_ADEN = { new Point(33966, 33253), new Point(33921, 33177),
+            new Point(33553, 32712), new Point(32702, 32842), };
 
-    private static final Point[] TELEPORT_LOC_GLUDIN = {new Point(32628, 32807), new Point(32623, 32729),
-            new Point(33553, 32712), new Point(32702, 32842),};
+    private static final Point[] TELEPORT_LOC_GLUDIN = { new Point(32628, 32807), new Point(32623, 32729),
+            new Point(33553, 32712), new Point(32702, 32842), };
 
     private static final List<Integer> _houseIds = HouseTable.getHouseIdList();
 

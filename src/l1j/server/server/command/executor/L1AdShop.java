@@ -21,8 +21,8 @@ public class L1AdShop implements L1CommandExecutor {
     private static Random _random = new Random(System.nanoTime());
 
 
-    private static final int[] MALE_LIST = new int[]{0, 61, 138, 734, 2786, 6658, 6671};
-    private static final int[] FEMALE_LIST = new int[]{1, 48, 37, 1186, 2796, 6661, 6650};
+    private static final int[] MALE_LIST = new int[] { 0, 61, 138, 734, 2786, 6658, 6671 };
+    private static final int[] FEMALE_LIST = new int[] { 1, 48, 37, 1186, 2796, 6661, 6650 };
 
     private L1AdShop() {
     }

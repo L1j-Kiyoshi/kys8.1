@@ -73,7 +73,7 @@ public class L1MobTrapInstance extends L1NpcInstance {
         for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(this, 0)) {
             if (pc != null) {
                 int count = IntRange.random(1) + 3;// 出動数値
-                int[] moblist = {7000056, 7000057, 7000058, 7000059, 7000060};// 出てくるモンスターの種類
+                int[] moblist = { 7000056, 7000057, 7000058, 7000059, 7000060 };// 出てくるモンスターの種類
                 for (int i = 0; i < count; i++) {
                     L1SpawnUtil.spawn5(getX(), getY(), getMapId(), 5, moblist[IntRange.random(moblist.length)], 4, false);
                 }

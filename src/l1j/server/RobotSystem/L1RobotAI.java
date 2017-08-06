@@ -47,8 +47,8 @@ import l1j.server.server.utils.CommonUtil;
 
 public class L1RobotAI {
 
-    private final byte HEADING_TABLE_X[] = {0, 1, 1, 1, 0, -1, -1, -1};
-    private final byte HEADING_TABLE_Y[] = {-1, -1, 0, 1, 1, 1, 0, -1};
+    private final byte HEADING_TABLE_X[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
+    private final byte HEADING_TABLE_Y[] = { -1, -1, 0, 1, 1, 1, 0, -1 };
 
     private int searchCount = 0;
     private int pickupCount = 0;
@@ -1946,25 +1946,25 @@ public class L1RobotAI {
                 case 4:
                 case 13:
                     if (pc.getLevel() < 55) {
-                        int[] polyList = {11382};
+                        int[] polyList = { 11382 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 55 && pc.getLevel() < 60) {
-                        int[] polyList = {11382, 11382};
+                        int[] polyList = { 11382, 11382 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 60 && pc.getLevel() < 65) {
-                        int[] polyList = {2284, 3892, 3895};
+                        int[] polyList = { 2284, 3892, 3895 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 65 && pc.getLevel() < 70) {
-                        int[] polyList = {2284, 3892, 3895, 6275};
+                        int[] polyList = { 2284, 3892, 3895, 6275 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 70 && pc.getLevel() < 75) {
-                        int[] polyList = {2284, 3892, 3895, 6275, 6278};
+                        int[] polyList = { 2284, 3892, 3895, 6275, 6278 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 75 && pc.getLevel() < 80) {
-                        int[] polyList = {2284, 3892, 3895, 6275, 6278, 8900};
+                        int[] polyList = { 2284, 3892, 3895, 6275, 6278, 8900 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 80) {
-                        int[] polyList = {2284, 3892, 3895, 6275, 6278, 8900, 8913};
+                        int[] polyList = { 2284, 3892, 3895, 6275, 6278, 8900, 8913 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     }
                     L1PolyMorph.doPoly(pc, polyid, time, 1);
@@ -1973,25 +1973,25 @@ public class L1RobotAI {
                 case 11:
                 case 12:
                     if (pc.getLevel() < 55) {
-                        int[] polyList = {6142};
+                        int[] polyList = { 6142 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 55 && pc.getLevel() < 60) {
-                        int[] polyList = {6142, 5727};
+                        int[] polyList = { 6142, 5727 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 60 && pc.getLevel() < 65) {
-                        int[] polyList = {6142, 5727, 5730};
+                        int[] polyList = { 6142, 5727, 5730 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 65 && pc.getLevel() < 70) {
-                        int[] polyList = {6142, 5727, 5730, 6281};
+                        int[] polyList = { 6142, 5727, 5730, 6281 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 70 && pc.getLevel() < 75) {
-                        int[] polyList = {6142, 5727, 5730, 6281, 6282};
+                        int[] polyList = { 6142, 5727, 5730, 6281, 6282 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 75 && pc.getLevel() < 80) {
-                        int[] polyList = {6142, 5727, 5730, 6281, 6282, 8851};
+                        int[] polyList = { 6142, 5727, 5730, 6281, 6282, 8851 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 80) {
-                        int[] polyList = {6142, 5727, 5730, 6281, 6282, 8851, 8978};
+                        int[] polyList = { 6142, 5727, 5730, 6281, 6282, 8851, 8978 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     }
                     L1PolyMorph.doPoly(pc, polyid, time, 1);
@@ -2000,25 +2000,25 @@ public class L1RobotAI {
                 case 7:
                 case 16:
                     if (pc.getLevel() < 55) {
-                        int[] polyList = {6142};
+                        int[] polyList = { 6142 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 55 && pc.getLevel() < 60) {
-                        int[] polyList = {6142, 3890};
+                        int[] polyList = { 6142, 3890 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 60 && pc.getLevel() < 65) {
-                        int[] polyList = {6142, 3890, 3893};
+                        int[] polyList = { 6142, 3890, 3893 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 65 && pc.getLevel() < 70) {
-                        int[] polyList = {6142, 3890, 3893, 6274};
+                        int[] polyList = { 6142, 3890, 3893, 6274 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 70 && pc.getLevel() < 75) {
-                        int[] polyList = {6142, 3890, 3893, 6274, 6277};
+                        int[] polyList = { 6142, 3890, 3893, 6274, 6277 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 75 && pc.getLevel() < 80) {
-                        int[] polyList = {6142, 3890, 3893, 6274, 6277, 8817};
+                        int[] polyList = { 6142, 3890, 3893, 6274, 6277, 8817 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 80) {
-                        int[] polyList = {6142, 3890, 3893, 6274, 6277, 8817, 8812};
+                        int[] polyList = { 6142, 3890, 3893, 6274, 6277, 8817, 8812 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     }
                     L1PolyMorph.doPoly(pc, polyid, time, 1);
@@ -2026,25 +2026,25 @@ public class L1RobotAI {
                 // その他。
                 default:
                     if (pc.getLevel() < 55) {
-                        int[] polyList = {6142};
+                        int[] polyList = { 6142 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 55 && pc.getLevel() < 60) {
-                        int[] polyList = {6142, 3890};
+                        int[] polyList = { 6142, 3890 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 60 && pc.getLevel() < 65) {
-                        int[] polyList = {6142, 3890, 3893};
+                        int[] polyList = { 6142, 3890, 3893 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 65 && pc.getLevel() < 70) {
-                        int[] polyList = {6142, 3890, 3893, 6273};
+                        int[] polyList = { 6142, 3890, 3893, 6273 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 70 && pc.getLevel() < 75) {
-                        int[] polyList = {6142, 3890, 3893, 6273, 6276};
+                        int[] polyList = { 6142, 3890, 3893, 6273, 6276 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 75 && pc.getLevel() < 80) {
-                        int[] polyList = {6142, 3890, 3893, 6273, 6276, 8817};
+                        int[] polyList = { 6142, 3890, 3893, 6273, 6276, 8817 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     } else if (pc.getLevel() >= 80) {
-                        int[] polyList = {6142, 3890, 3893, 6273, 6276, 8817, 8812};
+                        int[] polyList = { 6142, 3890, 3893, 6273, 6276, 8817, 8812 };
                         polyid = polyList[CommonUtil.random(polyList.length)];
                     }
                     L1PolyMorph.doPoly(pc, polyid, time, 1);
@@ -2052,25 +2052,25 @@ public class L1RobotAI {
             }
         } else {
             if (pc.getLevel() < 55) {
-                int[] polyList = {6142};
+                int[] polyList = { 6142 };
                 polyid = polyList[CommonUtil.random(polyList.length)];
             } else if (pc.getLevel() >= 55 && pc.getLevel() < 60) {
-                int[] polyList = {6142, 3890};
+                int[] polyList = { 6142, 3890 };
                 polyid = polyList[CommonUtil.random(polyList.length)];
             } else if (pc.getLevel() >= 60 && pc.getLevel() < 65) {
-                int[] polyList = {6142, 3890, 3893};
+                int[] polyList = { 6142, 3890, 3893 };
                 polyid = polyList[CommonUtil.random(polyList.length)];
             } else if (pc.getLevel() >= 65 && pc.getLevel() < 70) {
-                int[] polyList = {6142, 3890, 3893, 6273};
+                int[] polyList = { 6142, 3890, 3893, 6273 };
                 polyid = polyList[CommonUtil.random(polyList.length)];
             } else if (pc.getLevel() >= 70 && pc.getLevel() < 75) {
-                int[] polyList = {6142, 3890, 3893, 6273, 6276};
+                int[] polyList = { 6142, 3890, 3893, 6273, 6276 };
                 polyid = polyList[CommonUtil.random(polyList.length)];
             } else if (pc.getLevel() >= 75 && pc.getLevel() < 80) {
-                int[] polyList = {6142, 3890, 3893, 6273, 6276, 8817};
+                int[] polyList = { 6142, 3890, 3893, 6273, 6276, 8817 };
                 polyid = polyList[CommonUtil.random(polyList.length)];
             } else if (pc.getLevel() >= 80) {
-                int[] polyList = {6142, 3890, 3893, 6273, 6276, 8817, 8812};
+                int[] polyList = { 6142, 3890, 3893, 6273, 6276, 8817, 8812 };
                 polyid = polyList[CommonUtil.random(polyList.length)];
             }
             L1PolyMorph.doPoly(pc, polyid, time, 1);

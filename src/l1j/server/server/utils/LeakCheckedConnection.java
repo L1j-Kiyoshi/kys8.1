@@ -43,7 +43,7 @@ public class LeakCheckedConnection {
     private LeakCheckedConnection(Connection con) {
         _con = con;
         _proxy = Proxy.newProxyInstance(Connection.class.getClassLoader(),
-                new Class[]{Connection.class}, new ConnectionHandler());
+                new Class[] { Connection.class }, new ConnectionHandler());
         set_stackTrace(new Throwable());
     }
 
@@ -123,7 +123,7 @@ public class LeakCheckedConnection {
         Delegate(Object o, Class<?> c) {
             _original = o;
             _delegateProxy = Proxy.newProxyInstance(c.getClassLoader(),
-                    new Class[]{c}, this);
+                    new Class[] { c }, this);
         }
 
         public Object invoke(Object proxy, Method method, Object[] args)

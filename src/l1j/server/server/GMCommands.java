@@ -638,8 +638,8 @@ public class GMCommands {
                     break;
                 case "test":
                     try {
-                        int icon[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+                        int icon[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
                         StringTokenizer tokenizer = new StringTokenizer(param);
                         int num = Integer.parseInt((tokenizer.nextToken()));
@@ -2915,8 +2915,8 @@ public class GMCommands {
     }
 
     public void allBuff1(L1PcInstance gm) { // 画面の中のユーザーズにフルバフ
-        int[] allBuffSkill = {DECREASE_WEIGHT, PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN,
-                NATURES_TOUCH, ADDITIONAL_FIRE, INSIGHT, DRAGON_SKIN};
+        int[] allBuffSkill = { DECREASE_WEIGHT, PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN,
+                NATURES_TOUCH, ADDITIONAL_FIRE, INSIGHT, DRAGON_SKIN };
         L1SkillUse l1skilluse = null;
         for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
             if (pc.isPrivateShop() || pc.isAutoClanjoin()) {
@@ -2932,7 +2932,7 @@ public class GMCommands {
     }
 
     private void allBuff2(L1PcInstance gm) {
-        int[] allBuffSkill = {FEATHER_BUFF_A};
+        int[] allBuffSkill = { FEATHER_BUFF_A };
         try {
             for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
                 if (!pc.isPrivateShop() && !pc.isAutoClanjoin() && !pc.isDead()) {
@@ -2952,7 +2952,7 @@ public class GMCommands {
     }
 
     private void allBuff3(L1PcInstance gm) {
-        int[] allBuffSkill = {LIFE_MAAN};
+        int[] allBuffSkill = { LIFE_MAAN };
         try {
             for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
                 if (!pc.isPrivateShop() && !pc.isAutoClanjoin() && !pc.isDead()) {
@@ -2972,7 +2972,7 @@ public class GMCommands {
     }
 
     private void allBuff4(L1PcInstance gm) {
-        int[] allBuffSkill = {God_buff};
+        int[] allBuffSkill = { God_buff };
         try {
             for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
                 if (!pc.isPrivateShop() && !pc.isAutoClanjoin() && !pc.isDead()) {
@@ -2995,7 +2995,7 @@ public class GMCommands {
     }
 
     private void allBuff5(L1PcInstance gm) {
-        int[] allBuffSkill = {COMA_B};
+        int[] allBuffSkill = { COMA_B };
         try {
             for (L1PcInstance pc : L1World.getInstance().getVisiblePlayer(gm, 30)) {
                 if (!pc.isPrivateShop() && !pc.isAutoClanjoin() && !pc.isDead()) {
@@ -3079,7 +3079,7 @@ public class GMCommands {
         return false;
     }
 
-    private static int delItemlist[] = {307, 308, 309, 310, 311, 312, 313, 314, 21095, 30146, 30147, 30150};
+    private static int delItemlist[] = { 307, 308, 309, 310, 311, 312, 313, 314, 21095, 30146, 30147, 30150 };
 
     public synchronized static void deleteArnoldEvent() {
         try {
@@ -3165,7 +3165,7 @@ public class GMCommands {
             Delete(sb.toString());
 
 	    /*
-	     * for(int i = 0; i < delItemlist.length; i++){
+         * for(int i = 0; i < delItemlist.length; i++){
 	     * Delete(delItemlist[i]); wareDelete(delItemlist[i]);
 	     * ClanwareDelete(delItemlist[i]); }
 	     */

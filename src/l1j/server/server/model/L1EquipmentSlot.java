@@ -2403,7 +2403,7 @@ public class L1EquipmentSlot {
         if (itemId == 20036) {
             _owner.sendPackets(new S_Ability(3, false));
         }
-		/*if (itemId == 20284) {
+        /*if (itemId == 20284) {
 			_owner.sendPackets(new S_Ability(5, false));
 		}*/
         if (itemId == 20207) {

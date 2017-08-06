@@ -176,7 +176,7 @@ public class FileLogger implements Logger {
             case Pickup:
                 msg = String.format("%s\t拾い\t%s:%s\t%s\r\n", getLocalTime(), pc.getAccountName(), "[" + pc.getName() + "]", getFormatItemName(item, count));
                 break;
-			/* オートルーティングログ記録残さないように変更
+            /* オートルーティングログ記録残さないように変更
 		case AutoLoot:
 			msg = String.format("%s\tオートルーティング\t%s:%s\t%s\r\n", getLocalTime(), pc.getAccountName(), "["+pc.getName()+"]", getFormatItemName(item, count));
 			break;

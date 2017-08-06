@@ -67,7 +67,7 @@ public class L1EffectSpawn {
 
         try {
             _constructor = Class.forName(className).getConstructors()[0];
-            Object obj[] = {template};
+            Object obj[] = { template };
             effect = (L1EffectInstance) _constructor.newInstance(obj);
             effect.setId(IdFactory.getInstance().nextId());
             effect.setGfxId(template.get_gfxid());

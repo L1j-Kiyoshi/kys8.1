@@ -22,8 +22,8 @@ public class L1Robot3 implements L1CommandExecutor {
 
     private static Random _random = new Random(System.nanoTime());
 
-    private static final int[] MALE_LIST = new int[]{61, 138, 2786, 48, 37, 2796};
-    private static final int[] FEMALE_LIST = new int[]{61, 138, 2786, 48, 37, 2796};
+    private static final int[] MALE_LIST = new int[] { 61, 138, 2786, 48, 37, 2796 };
+    private static final int[] FEMALE_LIST = new int[] { 61, 138, 2786, 48, 37, 2796 };
 
     private L1Robot3() {
     }
@@ -52,7 +52,7 @@ public class L1Robot3 implements L1CommandExecutor {
             int x = 0;
             int y = 0;
 
-            int[] loc = {-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8};
+            int[] loc = { -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
             pc.sendPackets(new S_ChatPacket(pc, "----------------------------------------------------"));
             while (count-- > 0) {

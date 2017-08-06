@@ -313,7 +313,7 @@ public class Teleportation {
 			 * 60));// 60分あたり1時間で定義する。 break;
 			 */
                 // 用のダンジョン
-			/*
+            /*
 			 * case 30:case 31:case 32:case 33:case 35:case 36:case 814:
 			 * pc.sendPackets(new S_PacketBox(S_PacketBox.MAP_TIMER, setTimer8 *
 			 * 60));// 60分あたり1時間で定義する。 break;

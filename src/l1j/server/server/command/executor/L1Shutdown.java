@@ -32,26 +32,26 @@ public class L1Shutdown implements L1CommandExecutor {
     }
 
     public static L1CommandExecutor getInstance() {
-	return new L1Shutdown();
+        return new L1Shutdown();
     }
 
     @Override
     public void execute(L1PcInstance pc, String cmdName, String arg) {
-	try {
-	    if (arg.equalsIgnoreCase("now")) {
-		GameServer.getInstance().shutdownWithCountdown(0);
-		return;
-	    }
+        try {
+            if (arg.equalsIgnoreCase("now")) {
+                GameServer.getInstance().shutdownWithCountdown(0);
+                return;
+            }
 
-	    if (arg.equalsIgnoreCase("abort")) {
-		GameServer.getInstance().abortShutdown();
-		return;
-	    }
+            if (arg.equalsIgnoreCase("abort")) {
+                GameServer.getInstance().abortShutdown();
+                return;
+            }
 
-	    int sec = Math.max(5, Integer.parseInt(arg));
-	    GameServer.getInstance().shutdownWithCountdown(sec);
-	} catch (Exception e) {
-	    pc.sendPackets(new S_SystemMessage(cmdName + "[now,abort,秒数]と入力してください。"));
-	}
+            int sec = Math.max(5, Integer.parseInt(arg));
+            GameServer.getInstance().shutdownWithCountdown(sec);
+        } catch (Exception e) {
+            pc.sendPackets(new S_SystemMessage(cmdName + "[now,abort,秒数]と入力してください。"));
+        }
     }
 }

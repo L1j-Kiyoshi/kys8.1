@@ -130,7 +130,7 @@ public abstract class Warehouse extends L1Object {
                 itemList.add(item);
             }
         }
-        return itemList.toArray(new L1ItemInstance[]{});
+        return itemList.toArray(new L1ItemInstance[] {});
     }
 
     public boolean checkItem(int id, int count) {

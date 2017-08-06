@@ -232,14 +232,14 @@ public class L1TreasureBox {
 
                         /** 魔族武器さ **/
                         if ((getBoxId() >= 410127 && item.getItemId() <= 410132) || item.getItemId() == 410170) {
-                            int[] at = {1, 6, 11, 16};
+                            int[] at = { 1, 6, 11, 16 };
                             random = new Random(System.nanoTime());
                             item.setAttrEnchantLevel(at[random.nextInt(4)]);
                         }
                         if ((getBoxId() >= 3000036 && item.getItemId() <= 3000037) ||
                                 (getBoxId() == 410174) ||
                                 (getBoxId() >= 2000021 && item.getItemId() <= 2000028)) {
-                            int[] at = {0};
+                            int[] at = { 0 };
                             random = new Random(System.nanoTime());
                             item.setAttrEnchantLevel(at[random.nextInt(1)]);
                         }
@@ -402,12 +402,12 @@ public class L1TreasureBox {
                 //pc.death(null, true);
             }
             if (itemId == 3000045) { // 古代物品：武器
-                int[] enchantrnd = {0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 1, 2, 3, 4, 4, 0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 6, 3, 3, 3, 1, 2, 3, 4, 4, 5, 1, 2, 3, 7};
+                int[] enchantrnd = { 0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 1, 2, 3, 4, 4, 0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 6, 3, 3, 3, 1, 2, 3, 4, 4, 5, 1, 2, 3, 7 };
                 int RandomEchant = random.nextInt(enchantrnd.length);
                 item.setEnchantLevel(enchantrnd[RandomEchant]);
             }
             if (itemId >= 3000038 && itemId <= 3000044) { // 古代物品：防具
-                int[] enchantrnd = {0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 1, 2, 3, 4, 4, 0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 1, 2, 3, 4, 4, 5};
+                int[] enchantrnd = { 0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 1, 2, 3, 4, 4, 0, 0, 0, 1, 1, 1, 2, 2, 0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 3, 1, 2, 3, 4, 4, 5 };
                 int RandomEchant = random.nextInt(enchantrnd.length);
                 item.setEnchantLevel(enchantrnd[RandomEchant]);
             }

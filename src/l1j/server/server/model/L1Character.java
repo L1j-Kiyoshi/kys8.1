@@ -1276,7 +1276,7 @@ public class L1Character extends L1Object {
     public void setDeaths(int Deaths) {
         _Deaths = Deaths;
     }
-	/* Kill & Death システム？- */
+    /* Kill & Death システム？- */
 
 
     // ** ドオノディレイタイマ修正 **//

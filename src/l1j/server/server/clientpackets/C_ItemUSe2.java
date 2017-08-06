@@ -128,7 +128,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 
 
             case 410057: {// 占いメッセージa
-                int[] allBuffSkill = {L1SkillId.FEATHER_BUFF_A};
+                int[] allBuffSkill = { L1SkillId.FEATHER_BUFF_A };
                 L1SkillUse l1skilluse = new L1SkillUse();
                 if (pc.hasSkillEffect(L1SkillId.FEATHER_BUFF_B))
                     pc.removeSkillEffect(L1SkillId.FEATHER_BUFF_B);
@@ -145,7 +145,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
             break;
 
             case 410058: {// 占いメッセージb
-                int[] allBuffSkill = {L1SkillId.FEATHER_BUFF_B};
+                int[] allBuffSkill = { L1SkillId.FEATHER_BUFF_B };
                 L1SkillUse l1skilluse = new L1SkillUse();
                 if (pc.hasSkillEffect(L1SkillId.FEATHER_BUFF_A))
                     pc.removeSkillEffect(L1SkillId.FEATHER_BUFF_A);
@@ -161,7 +161,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
             }
             break;
             case 410059: {// 占いメッセージc
-                int[] allBuffSkill = {L1SkillId.FEATHER_BUFF_C};
+                int[] allBuffSkill = { L1SkillId.FEATHER_BUFF_C };
                 L1SkillUse l1skilluse = new L1SkillUse();
                 if (pc.hasSkillEffect(L1SkillId.FEATHER_BUFF_B))
                     pc.removeSkillEffect(L1SkillId.FEATHER_BUFF_B);
@@ -177,7 +177,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
             }
             break;
             case 410060: {// 占いメッセージd
-                int[] allBuffSkill = {L1SkillId.FEATHER_BUFF_D};
+                int[] allBuffSkill = { L1SkillId.FEATHER_BUFF_D };
                 L1SkillUse l1skilluse = new L1SkillUse();
                 if (pc.hasSkillEffect(L1SkillId.FEATHER_BUFF_B))
                     pc.removeSkillEffect(L1SkillId.FEATHER_BUFF_B);
@@ -232,8 +232,8 @@ public class C_ItemUSe2 extends ClientBasePacket {
             }
             break;
             case 410009: { // 性転換ポーション
-                int[] MALE_LIST = new int[]{0, 61, 138, 734, 2786, 6658, 6671, 12490};
-                int[] FEMALE_LIST = new int[]{1, 48, 37, 1186, 2796, 6661, 6650, 12494};
+                int[] MALE_LIST = new int[] { 0, 61, 138, 734, 2786, 6658, 6671, 12490 };
+                int[] FEMALE_LIST = new int[] { 1, 48, 37, 1186, 2796, 6661, 6650, 12494 };
                 if (pc.get_sex() == 0) {
                     pc.set_sex(1);
                     pc.setClassId(FEMALE_LIST[pc.getType()]);
@@ -263,7 +263,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
                 }
                 break;
             case 30104: {// コマの祝福コイン
-                int[] allBuffSkill = {50007};
+                int[] allBuffSkill = { 50007 };
                 L1SkillUse l1skilluse = new L1SkillUse();
                 for (int i = 0; i < allBuffSkill.length; i++) {
                     l1skilluse.handleCommands(pc, allBuffSkill[i], pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_SPELLSC);
@@ -313,9 +313,9 @@ public class C_ItemUSe2 extends ClientBasePacket {
             case 1000010:// ランダム武器箱
                 int randomchance1 = _random.nextInt(17);
                 int randomchance2 = _random.nextInt(14);
-                int[] item1 = {1121, 47, 203006, 203018, 76, 1137, 203017, 1119, 1123, 202001,
-                        1120, 1136, 202003, 58, 54, 203025, 203023};
-                int[] item2 = {212, 614, 604, 600, 57, 9, 11, 602, 74, 157, 205, 127, 1134, 603};
+                int[] item1 = { 1121, 47, 203006, 203018, 76, 1137, 203017, 1119, 1123, 202001,
+                        1120, 1136, 202003, 58, 54, 203025, 203023 };
+                int[] item2 = { 212, 614, 604, 600, 57, 9, 11, 602, 74, 157, 205, 127, 1134, 603 };
                 if (_random.nextInt(100) + 1 <= 10) {
                     createNewItem2(pc, item1[randomchance1], 1, 5); // ランダム武器2万評価
                 } else {
@@ -437,7 +437,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
                 }
                 break;
             case 40867: {// キュアポイズンブランクスクロール
-                int[] allBuffSkill = {9};
+                int[] allBuffSkill = { 9 };
                 L1SkillUse l1skilluse = null;
                 l1skilluse = new L1SkillUse();
                 pc.setBuffnoch(1);
@@ -450,7 +450,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
             }
             break;
             case 40877: {// エクストラ・ヒル
-                int[] allBuffSkill = {19};
+                int[] allBuffSkill = { 19 };
                 L1SkillUse l1skilluse = null;
                 l1skilluse = new L1SkillUse();
                 pc.setBuffnoch(1);
@@ -463,7 +463,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
             }
             break;
             case 40893: {// グレートヒル
-                int[] allBuffSkill = {35};
+                int[] allBuffSkill = { 35 };
                 L1SkillUse l1skilluse = null;
                 l1skilluse = new L1SkillUse();
                 pc.setBuffnoch(1);
@@ -680,7 +680,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
                 break;
 
             case 500076: {//近距離バフポーション
-                int[] allBuffSkill = {14, 26, 42, 48, 168, 160, 206, 211, 216, 148, 158};
+                int[] allBuffSkill = { 14, 26, 42, 48, 168, 160, 206, 211, 216, 148, 158 };
                 //ディクリーズ、デッキ、力、ブレスウェポン、オベン、アース、アクア、コンセント、ペイシェンスは、Insight、ファイアーウェポン、アバター、ネイチャーズ
                 pc.setBuffnoch(1);
                 L1SkillUse l1skilluse = null;
@@ -695,7 +695,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
             }
             break;
             case 500077: {//遠距離バフポーション
-                int[] allBuffSkill = {14, 26, 42, 43, 48, 151, 160, 206, 211, 216, 149};
+                int[] allBuffSkill = { 14, 26, 42, 43, 48, 151, 160, 206, 211, 216, 149 };
                 //ディクリーズ、デッキ、力、ブレスウェポン、オベン、アース、アクア、コンセント、ペイシェンスは、Insight、ストームショット、アバター、ネイチャーズ
                 pc.setBuffnoch(1);
                 L1SkillUse l1skilluse = null;
@@ -903,8 +903,8 @@ public class C_ItemUSe2 extends ClientBasePacket {
                     pc.sendPackets(new S_ChatPacket(pc, "あなたは既に戦士クラスです。"));
                     return;
                 }
-                int[] Mclass = new int[]{0, 61, 138, 734, 2786, 6658, 6671, 12490};
-                int[] Wclass = new int[]{1, 48, 37, 1186, 2796, 6661, 6650, 12494};
+                int[] Mclass = new int[] { 0, 61, 138, 734, 2786, 6658, 6671, 12490 };
+                int[] Wclass = new int[] { 1, 48, 37, 1186, 2796, 6661, 6650, 12494 };
                 if (itemId == 51093 && pc.getType() != 0 && pc.get_sex() == 0) {
                     pc.setType(0);
                     pc.setClassId(Mclass[pc.getType()]);
@@ -1116,7 +1116,7 @@ public class C_ItemUSe2 extends ClientBasePacket {
 
             for (L1Object obj : L1World.getInstance().getVisibleObjects(pc, 10)) {
                 Random random = new Random();
-                int[] stunTimeArray = {2000, 2500, 3000, 3500, 4000};
+                int[] stunTimeArray = { 2000, 2500, 3000, 3500, 4000 };
                 int rnd = random.nextInt(stunTimeArray.length);
                 int probability = random.nextInt(100) + 1;
                 if (probability < 50) {

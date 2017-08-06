@@ -312,7 +312,7 @@ public class C_NPCAction extends ClientBasePacket {
                 htmlid = "camus5";
             } else if (s.equalsIgnoreCase("2")) {
                 if (pc.getInventory().consumeItem(L1ItemId.ADENA, 10000)) {
-                    int[] prismIds = {210106, 210107, 210108, 210109};
+                    int[] prismIds = { 210106, 210107, 210108, 210109 };
                     int idx = _random.nextInt(prismIds.length);
                     pc.getInventory().storeItem(prismIds[idx], 1);
                     L1ItemInstance item = ItemTable.getInstance().createItem(prismIds[idx]);
@@ -464,10 +464,10 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkItem(40312))
                     htmlid = "inn5";
                 else if (pc.getInventory().findItemId(40308).getCount() >= 300) {
-                    materials = (new int[]{40308});
-                    counts = (new int[]{300});
-                    createitem = (new int[]{40312});
-                    createcount = (new int[]{1});
+                    materials = (new int[] { 40308 });
+                    counts = (new int[] { 300 });
+                    createitem = (new int[] { 40312 });
+                    createcount = (new int[] { 1 });
                     htmlid = "inn4";
                 } else {
                     htmlid = "inn3";
@@ -476,10 +476,10 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkItem(40312))
                     htmlid = "inn5";
                 else if (pc.getInventory().findItemId(40308).getCount() >= 600) {
-                    materials = (new int[]{40308});
-                    counts = (new int[]{600});
-                    createitem = (new int[]{49016});
-                    createcount = (new int[]{1});
+                    materials = (new int[] { 40308 });
+                    counts = (new int[] { 600 });
+                    createitem = (new int[] { 49016 });
+                    createcount = (new int[] { 1 });
                     htmlid = "inn4";
                 } else {
                     htmlid = "inn3";
@@ -492,7 +492,7 @@ public class C_NPCAction extends ClientBasePacket {
                 }
                 if (k1 >= 0) {
                     htmlid = "inn2";
-                    htmldata = (new String[]{"宿主", "300"});
+                    htmldata = (new String[] { "宿主", "300" });
                 } else {
                     htmlid = "inn1";
                 }
@@ -507,7 +507,7 @@ public class C_NPCAction extends ClientBasePacket {
                 if (k1 >= 0) {
                     if (c1 == 0 || c1 == 1) {
                         htmlid = "inn4";
-                        htmldata = (new String[]{"宿主", "600"});
+                        htmldata = (new String[] { "宿主", "600" });
                     } else {
                         htmlid = "inn10";
                     }
@@ -518,23 +518,23 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkItem(40312)) {
                     int ct = pc.getInventory().findItemId(40312).getCount();
                     int cash = ct * 60;
-                    materials = (new int[]{40312});
-                    counts = (new int[]{ct});
-                    createitem = (new int[]{40308});
-                    createcount = (new int[]{cash});
+                    materials = (new int[] { 40312 });
+                    counts = (new int[] { ct });
+                    createitem = (new int[] { 40308 });
+                    createcount = (new int[] { cash });
                     htmlid = "inn20";
                     String count = Integer.toString(cash);
-                    htmldata = (new String[]{"宿主", count});
+                    htmldata = (new String[] { "宿主", count });
                 } else if (pc.getInventory().checkItem(40312)) {
                     int ct = pc.getInventory().findItemId(40312).getCount();
                     int cash = ct * 120;
-                    materials = (new int[]{49016});
-                    counts = (new int[]{ct});
-                    createitem = (new int[]{40308});
-                    createcount = (new int[]{cash});
+                    materials = (new int[] { 49016 });
+                    counts = (new int[] { ct });
+                    createitem = (new int[] { 40308 });
+                    createcount = (new int[] { cash });
                     htmlid = "inn20";
                     String count = Integer.toString(cash);
-                    htmldata = (new String[]{"宿主", count});
+                    htmldata = (new String[] { "宿主", count });
                 } else {
                     // htmlid = "inn7";
                     pc.sendPackets(new S_SystemMessage("レンタルした部屋やホールがありません。"));
@@ -1292,7 +1292,7 @@ public class C_NPCAction extends ClientBasePacket {
             htmlid = s;
             int npcid = ((L1NpcInstance) obj).getNpcTemplate().get_npcId();
             int taxRatesCastle = L1CastleLocation.getCastleTaxRateByNpcId(npcid);
-            htmldata = new String[]{String.valueOf(taxRatesCastle)};
+            htmldata = new String[] { String.valueOf(taxRatesCastle) };
         } else if (s.equalsIgnoreCase("set")) {
             if (obj instanceof L1NpcInstance) {
                 int npcid = ((L1NpcInstance) obj).getNpcTemplate().get_npcId();
@@ -1357,7 +1357,7 @@ public class C_NPCAction extends ClientBasePacket {
                     String leader = town.get_leader_name();
                     if (leader != null && leader.length() != 0) {
                         htmlid = "owner";
-                        htmldata = new String[]{leader};
+                        htmldata = new String[] { leader };
                     } else {
                         htmlid = "noowner";
                     }
@@ -1541,7 +1541,7 @@ public class C_NPCAction extends ClientBasePacket {
             int karmaLevel = pc.getKarmaLevel();
             if (s.equalsIgnoreCase("a")) {
                 int aliceMaterialId = 0;
-                int[] aliceMaterialIdList = {40991, 196, 197, 198, 199, 200, 201, 202, 203};
+                int[] aliceMaterialIdList = { 40991, 196, 197, 198, 199, 200, 201, 202, 203 };
                 for (int id : aliceMaterialIdList) {
                     if (pc.getInventory().checkItem(id)) {
                         aliceMaterialId = id;
@@ -1552,10 +1552,10 @@ public class C_NPCAction extends ClientBasePacket {
                     htmlid = "alice_no";
                 } else if (aliceMaterialId == 40991) {
                     if (karmaLevel <= -1) {
-                        materials = new int[]{40995, 40718, 40991};
-                        counts = new int[]{100, 100, 1};
-                        createitem = new int[]{196};
-                        createcount = new int[]{1};
+                        materials = new int[] { 40995, 40718, 40991 };
+                        counts = new int[] { 100, 100, 1 };
+                        createitem = new int[] { 196 };
+                        createcount = new int[] { 1 };
                         success_htmlid = "alice_1";
                         failure_htmlid = "alice_no";
                     } else {
@@ -1563,10 +1563,10 @@ public class C_NPCAction extends ClientBasePacket {
                     }
                 } else if (aliceMaterialId == 196) {
                     if (karmaLevel <= -2) {
-                        materials = new int[]{40997, 40718, 196};
-                        counts = new int[]{100, 100, 1};
-                        createitem = new int[]{197};
-                        createcount = new int[]{1};
+                        materials = new int[] { 40997, 40718, 196 };
+                        counts = new int[] { 100, 100, 1 };
+                        createitem = new int[] { 197 };
+                        createcount = new int[] { 1 };
                         success_htmlid = "alice_2";
                         failure_htmlid = "alice_no";
                     } else {
@@ -1574,10 +1574,10 @@ public class C_NPCAction extends ClientBasePacket {
                     }
                 } else if (aliceMaterialId == 197) {
                     if (karmaLevel <= -3) {
-                        materials = new int[]{40990, 40718, 197};
-                        counts = new int[]{100, 100, 1};
-                        createitem = new int[]{198};
-                        createcount = new int[]{1};
+                        materials = new int[] { 40990, 40718, 197 };
+                        counts = new int[] { 100, 100, 1 };
+                        createitem = new int[] { 198 };
+                        createcount = new int[] { 1 };
                         success_htmlid = "alice_3";
                         failure_htmlid = "alice_no";
                     } else {
@@ -1585,10 +1585,10 @@ public class C_NPCAction extends ClientBasePacket {
                     }
                 } else if (aliceMaterialId == 198) {
                     if (karmaLevel <= -4) {
-                        materials = new int[]{40994, 40718, 198};
-                        counts = new int[]{50, 100, 1};
-                        createitem = new int[]{199};
-                        createcount = new int[]{1};
+                        materials = new int[] { 40994, 40718, 198 };
+                        counts = new int[] { 50, 100, 1 };
+                        createitem = new int[] { 199 };
+                        createcount = new int[] { 1 };
                         success_htmlid = "alice_4";
                         failure_htmlid = "alice_no";
                     } else {
@@ -1596,10 +1596,10 @@ public class C_NPCAction extends ClientBasePacket {
                     }
                 } else if (aliceMaterialId == 199) {
                     if (karmaLevel <= -5) {
-                        materials = new int[]{40993, 40718, 199};
-                        counts = new int[]{50, 100, 1};
-                        createitem = new int[]{200};
-                        createcount = new int[]{1};
+                        materials = new int[] { 40993, 40718, 199 };
+                        counts = new int[] { 50, 100, 1 };
+                        createitem = new int[] { 200 };
+                        createcount = new int[] { 1 };
                         success_htmlid = "alice_5";
                         failure_htmlid = "alice_no";
                     } else {
@@ -1607,10 +1607,10 @@ public class C_NPCAction extends ClientBasePacket {
                     }
                 } else if (aliceMaterialId == 200) {
                     if (karmaLevel <= -6) {
-                        materials = new int[]{40998, 40718, 200};
-                        counts = new int[]{50, 100, 1};
-                        createitem = new int[]{201};
-                        createcount = new int[]{1};
+                        materials = new int[] { 40998, 40718, 200 };
+                        counts = new int[] { 50, 100, 1 };
+                        createitem = new int[] { 201 };
+                        createcount = new int[] { 1 };
                         success_htmlid = "alice_6";
                         failure_htmlid = "alice_no";
                     } else {
@@ -1618,10 +1618,10 @@ public class C_NPCAction extends ClientBasePacket {
                     }
                 } else if (aliceMaterialId == 201) {
                     if (karmaLevel <= -7) {
-                        materials = new int[]{40996, 40718, 201};
-                        counts = new int[]{10, 100, 1};
-                        createitem = new int[]{202};
-                        createcount = new int[]{1};
+                        materials = new int[] { 40996, 40718, 201 };
+                        counts = new int[] { 10, 100, 1 };
+                        createitem = new int[] { 202 };
+                        createcount = new int[] { 1 };
                         success_htmlid = "alice_7";
                         failure_htmlid = "alice_no";
                     } else {
@@ -1629,10 +1629,10 @@ public class C_NPCAction extends ClientBasePacket {
                     }
                 } else if (aliceMaterialId == 202) {
                     if (karmaLevel <= -8) {
-                        materials = new int[]{40992, 40718, 202};
-                        counts = new int[]{10, 100, 1};
-                        createitem = new int[]{203};
-                        createcount = new int[]{1};
+                        materials = new int[] { 40992, 40718, 202 };
+                        counts = new int[] { 10, 100, 1 };
+                        createitem = new int[] { 203 };
+                        createcount = new int[] { 1 };
                         success_htmlid = "alice_8";
                         failure_htmlid = "alice_no";
                     } else {
@@ -1707,7 +1707,7 @@ public class C_NPCAction extends ClientBasePacket {
                 }
             } else if (s.equalsIgnoreCase("d")) {
                 if (pc.getInventory().checkItem(40066) // しばらくソンピョンに置き換えてみましょう！ソンピョンがある場合なら運ば持つ〜
-				/*
+                /*
 				 * || pc.getInventory().checkItem(40910) || pc.getInventory().checkItem(40911) || pc.getInventory().checkItem(40912) || pc.getInventory().checkItem(40913) ||
 				 * pc.getInventory().checkItem(40914) || pc.getInventory().checkItem(40915) || pc.getInventory().checkItem(40916) || pc.getInventory().checkItem(40917) ||
 				 * pc.getInventory().checkItem(40918) || pc.getInventory().checkItem(40919) || pc.getInventory().checkItem(40920) || pc.getInventory().checkItem(40921)
@@ -1765,59 +1765,59 @@ public class C_NPCAction extends ClientBasePacket {
             } else if (s.equalsIgnoreCase("8")) {
                 htmlid = "lsmithh";
             } else if (s.equalsIgnoreCase("a") && karmaLevel >= 1) {
-                materials = new int[]{20158, 40669, 40678};
-                counts = new int[]{1, 50, 100};
-                createitem = new int[]{20083};
-                createcount = new int[]{1};
+                materials = new int[] { 20158, 40669, 40678 };
+                counts = new int[] { 1, 50, 100 };
+                createitem = new int[] { 20083 };
+                createcount = new int[] { 1 };
                 success_htmlid = "";
                 failure_htmlid = "lsmithaa";
             } else if (s.equalsIgnoreCase("b") && karmaLevel >= 2) {
-                materials = new int[]{20144, 40672, 40678};
-                counts = new int[]{1, 50, 100};
-                createitem = new int[]{20131};
-                createcount = new int[]{1};
+                materials = new int[] { 20144, 40672, 40678 };
+                counts = new int[] { 1, 50, 100 };
+                createitem = new int[] { 20131 };
+                createcount = new int[] { 1 };
                 success_htmlid = "";
                 failure_htmlid = "lsmithbb";
             } else if (s.equalsIgnoreCase("c") && karmaLevel >= 3) {
-                materials = new int[]{20075, 40671, 40678};
-                counts = new int[]{1, 50, 100};
-                createitem = new int[]{20069};
-                createcount = new int[]{1};
+                materials = new int[] { 20075, 40671, 40678 };
+                counts = new int[] { 1, 50, 100 };
+                createitem = new int[] { 20069 };
+                createcount = new int[] { 1 };
                 success_htmlid = "";
                 failure_htmlid = "lsmithcc";
             } else if (s.equalsIgnoreCase("d") && karmaLevel >= 4) {
-                materials = new int[]{20183, 40674, 40678};
-                counts = new int[]{1, 20, 100};
-                createitem = new int[]{20179};
-                createcount = new int[]{1};
+                materials = new int[] { 20183, 40674, 40678 };
+                counts = new int[] { 1, 20, 100 };
+                createitem = new int[] { 20179 };
+                createcount = new int[] { 1 };
                 success_htmlid = "";
                 failure_htmlid = "lsmithdd";
             } else if (s.equalsIgnoreCase("e") && karmaLevel >= 5) {
-                materials = new int[]{20190, 40674, 40678};
-                counts = new int[]{1, 40, 100};
-                createitem = new int[]{20209};
-                createcount = new int[]{1};
+                materials = new int[] { 20190, 40674, 40678 };
+                counts = new int[] { 1, 40, 100 };
+                createitem = new int[] { 20209 };
+                createcount = new int[] { 1 };
                 success_htmlid = "";
                 failure_htmlid = "lsmithee";
             } else if (s.equalsIgnoreCase("f") && karmaLevel >= 6) {
-                materials = new int[]{20078, 40674, 40678};
-                counts = new int[]{1, 5, 100};
-                createitem = new int[]{20290};
-                createcount = new int[]{1};
+                materials = new int[] { 20078, 40674, 40678 };
+                counts = new int[] { 1, 5, 100 };
+                createitem = new int[] { 20290 };
+                createcount = new int[] { 1 };
                 success_htmlid = "";
                 failure_htmlid = "lsmithff";
             } else if (s.equalsIgnoreCase("g") && karmaLevel >= 7) {
-                materials = new int[]{20078, 40670, 40678};
-                counts = new int[]{1, 1, 100};
-                createitem = new int[]{20261};
-                createcount = new int[]{1};
+                materials = new int[] { 20078, 40670, 40678 };
+                counts = new int[] { 1, 1, 100 };
+                createitem = new int[] { 20261 };
+                createcount = new int[] { 1 };
                 success_htmlid = "";
                 failure_htmlid = "lsmithgg";
             } else if (s.equalsIgnoreCase("h") && karmaLevel >= 8) {
-                materials = new int[]{40719, 40673, 40678};
-                counts = new int[]{1, 1, 100};
-                createitem = new int[]{20031};
-                createcount = new int[]{1};
+                materials = new int[] { 40719, 40673, 40678 };
+                counts = new int[] { 1, 1, 100 };
+                createitem = new int[] { 20031 };
+                createcount = new int[] { 1 };
                 success_htmlid = "";
                 failure_htmlid = "lsmithhh";
             }
@@ -1960,9 +1960,9 @@ public class C_NPCAction extends ClientBasePacket {
             }
             htmlid = "";
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 50007) { //エスメラルダ
-            int[][] ghostloc = {{32642, 34249, 32878, 33114, 32734, 32736, 32737, 32769, 33931, 33051, 32870, 33972, 33427, 33594, 33446, 32741},
-                    {32956, 33453, 32653, 32939, 32831, 32814, 32684, 32800, 33347, 32340, 33254, 33363, 32814, 33244, 32757, 32284,},
-                    {0, 4, 4, 4, 278, 62, 63, 77, 4, 4, 4, 4, 4, 4, 4, 4,}};
+            int[][] ghostloc = { { 32642, 34249, 32878, 33114, 32734, 32736, 32737, 32769, 33931, 33051, 32870, 33972, 33427, 33594, 33446, 32741 },
+                    { 32956, 33453, 32653, 32939, 32831, 32814, 32684, 32800, 33347, 32340, 33254, 33363, 32814, 33244, 32757, 32284, },
+                    { 0, 4, 4, 4, 278, 62, 63, 77, 4, 4, 4, 4, 4, 4, 4, 4, } };
             if (s.equalsIgnoreCase("journey")) {
                 pc.ghosttime = System.currentTimeMillis() + 8000;
                 pc.beginGhost();
@@ -1970,7 +1970,7 @@ public class C_NPCAction extends ClientBasePacket {
             }
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 80057) {
             htmlid = karmaLevelToHtmlId(pc.getKarmaLevel());
-            htmldata = new String[]{String.valueOf(pc.getKarmaPercent())};
+            htmldata = new String[] { String.valueOf(pc.getKarmaPercent()) };
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 80059 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 80060
                 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 80061 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 80062) {
             htmlid = talkToDimensionDoor(pc, (L1NpcInstance) obj, s);
@@ -2069,7 +2069,7 @@ public class C_NPCAction extends ClientBasePacket {
             htmlid = s;
             int npcid = ((L1NpcInstance) obj).getNpcTemplate().get_npcId();
             int taxRatesCastle = L1CastleLocation.getCastleTaxRateByNpcId(npcid);
-            htmldata = new String[]{String.valueOf(taxRatesCastle)};
+            htmldata = new String[] { String.valueOf(taxRatesCastle) };
         } else if (s.equalsIgnoreCase("set")) {
             if (obj instanceof L1NpcInstance) {
                 int npcid = ((L1NpcInstance) obj).getNpcTemplate().get_npcId();
@@ -2134,7 +2134,7 @@ public class C_NPCAction extends ClientBasePacket {
                     String leader = town.get_leader_name();
                     if (leader != null && leader.length() != 0) {
                         htmlid = "owner";
-                        htmldata = new String[]{leader};
+                        htmldata = new String[] { leader };
                     } else {
                         htmlid = "noowner";
                     }
@@ -2159,8 +2159,8 @@ public class C_NPCAction extends ClientBasePacket {
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71005) {
             if (s.equalsIgnoreCase("0")) {
                 if (!pc.getInventory().checkItem(41209)) {
-                    final int[] item_ids = {41209,};
-                    final int[] item_amounts = {1,};
+                    final int[] item_ids = { 41209, };
+                    final int[] item_amounts = { 1, };
                     for (int i = 0; i < item_ids.length; i++) {
                         L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
                         pc.sendPackets(new S_ServerMessage(143, ((L1NpcInstance) obj).getNpcTemplate().get_name(), item.getItem().getName()));
@@ -2169,8 +2169,8 @@ public class C_NPCAction extends ClientBasePacket {
                 htmlid = "";
             } else if (s.equalsIgnoreCase("1")) {
                 if (pc.getInventory().consumeItem(41213, 1)) {
-                    final int[] item_ids = {40029,};
-                    final int[] item_amounts = {20,};
+                    final int[] item_ids = { 40029, };
+                    final int[] item_amounts = { 20, };
                     L1ItemInstance item = null;
                     for (int i = 0; i < item_ids.length; i++) {
                         item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
@@ -2191,10 +2191,10 @@ public class C_NPCAction extends ClientBasePacket {
                     htmlid = "jpe0054";
                 } else if (pc.getInventory().checkItem(41212)) {
                     htmlid = "jpe0056";
-                    materials = new int[]{41212};
-                    counts = new int[]{1};
-                    createitem = new int[]{41213};
-                    createcount = new int[]{1};
+                    materials = new int[] { 41212 };
+                    counts = new int[] { 1 };
+                    createitem = new int[] { 41213 };
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "jpe0057";
                 }
@@ -2213,8 +2213,8 @@ public class C_NPCAction extends ClientBasePacket {
             }
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71025) {
             if (s.equalsIgnoreCase("0")) {
-                final int[] item_ids = {41225,};
-                final int[] item_amounts = {1,};
+                final int[] item_ids = { 41225, };
+                final int[] item_amounts = { 1, };
                 for (int i = 0; i < item_ids.length; i++) {
                     L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
                     pc.sendPackets(new S_ServerMessage(143, ((L1NpcInstance) obj).getNpcTemplate().get_name(), item.getItem().getName()));
@@ -2223,8 +2223,8 @@ public class C_NPCAction extends ClientBasePacket {
             }
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71055) {
             if (s.equalsIgnoreCase("0")) {
-                final int[] item_ids = {40701,};
-                final int[] item_amounts = {1,};
+                final int[] item_ids = { 40701, };
+                final int[] item_amounts = { 1, };
                 L1ItemInstance item = null;
                 for (int i = 0; i < item_ids.length; i++) {
                     item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
@@ -2235,10 +2235,10 @@ public class C_NPCAction extends ClientBasePacket {
             }
             if (s.equalsIgnoreCase("1")) {
                 pc.getQuest().set_end(L1Quest.QUEST_TBOX3);
-                materials = new int[]{40716}; // 祖父の宝
-                counts = new int[]{1};
-                createitem = new int[]{20269}; //スケルトンネックレス
-                createcount = new int[]{1};
+                materials = new int[] { 40716 }; // 祖父の宝
+                counts = new int[] { 1 };
+                createitem = new int[] { 20269 }; //スケルトンネックレス
+                createcount = new int[] { 1 };
                 htmlid = "lukein0";
             } else if (s.equalsIgnoreCase("2")) {
                 htmlid = "lukein12";
@@ -2246,13 +2246,13 @@ public class C_NPCAction extends ClientBasePacket {
             }
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71063) {
             if (s.equalsIgnoreCase("0")) {
-                materials = new int[]{40701};
-                counts = new int[]{1};
-                createitem = new int[]{40702};
-                createcount = new int[]{1};
+                materials = new int[] { 40701 };
+                counts = new int[] { 1 };
+                createitem = new int[] { 40702 };
+                createcount = new int[] { 1 };
                 htmlid = "maptbox1";
                 pc.getQuest().set_end(L1Quest.QUEST_TBOX1);
-                int[] nextbox = {1, 2, 3};
+                int[] nextbox = { 1, 2, 3 };
                 int pid = _random.nextInt(nextbox.length);
                 int nb = nextbox[pid];
                 if (nb == 1) {
@@ -2266,13 +2266,13 @@ public class C_NPCAction extends ClientBasePacket {
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71064 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71065
                 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71066) {
             if (s.equalsIgnoreCase("0")) {
-                materials = new int[]{40701};
-                counts = new int[]{1};
-                createitem = new int[]{40702};
-                createcount = new int[]{1};
+                materials = new int[] { 40701 };
+                counts = new int[] { 1 };
+                createitem = new int[] { 40702 };
+                createcount = new int[] { 1 };
                 htmlid = "maptbox1";
                 pc.getQuest().set_end(L1Quest.QUEST_TBOX2);
-                int[] nextbox2 = {1, 2, 3, 4, 5, 6};
+                int[] nextbox2 = { 1, 2, 3, 4, 5, 6 };
                 int pid = _random.nextInt(nextbox2.length);
                 int nb2 = nextbox2[pid];
                 if (nb2 == 1) {
@@ -2296,10 +2296,10 @@ public class C_NPCAction extends ClientBasePacket {
                 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71071 || ((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71072) {
             if (s.equalsIgnoreCase("0")) {
                 htmlid = "maptboxi";
-                materials = new int[]{40701}; // 小さな宝の地図
-                counts = new int[]{1};
-                createitem = new int[]{40716}; // 祖父の宝
-                createcount = new int[]{1};
+                materials = new int[] { 40701 }; // 小さな宝の地図
+                counts = new int[] { 1 };
+                createitem = new int[] { 40716 }; // 祖父の宝
+                createcount = new int[] { 1 };
                 pc.getQuest().set_end(L1Quest.QUEST_TBOX3);
                 pc.getQuest().set_step(L1Quest.QUEST_LUKEIN1, 11);
             }
@@ -2314,10 +2314,10 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkItem(40661) && pc.getInventory().checkItem(40662) && pc.getInventory().checkItem(40663)) {
                     htmlid = "SIMIZZ8";
                     pc.getQuest().set_step(L1Quest.QUEST_SIMIZZ, 2);
-                    materials = new int[]{40661, 40662, 40663};
-                    counts = new int[]{1, 1, 1};
-                    createitem = new int[]{20044};
-                    createcount = new int[]{1};
+                    materials = new int[] { 40661, 40662, 40663 };
+                    counts = new int[] { 1, 1, 1 };
+                    createitem = new int[] { 20044 };
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "SIMIZZ9";
                 }
@@ -2336,10 +2336,10 @@ public class C_NPCAction extends ClientBasePacket {
             } else if (s.equalsIgnoreCase("1")) {
                 if (pc.getInventory().checkItem(40714)) {
                     htmlid = "doil8";
-                    materials = new int[]{40714};
-                    counts = new int[]{1};
-                    createitem = new int[]{40647};
-                    createcount = new int[]{1};
+                    materials = new int[] { 40714 };
+                    counts = new int[] { 1 };
+                    createitem = new int[] { 40647 };
+                    createcount = new int[] { 1 };
                     pc.getQuest().set_step(L1Quest.QUEST_DOIL, L1Quest.QUEST_END);
                 } else {
                     htmlid = "doil7";
@@ -2351,8 +2351,8 @@ public class C_NPCAction extends ClientBasePacket {
             // ルディの中にお願いを受け入れる
             if (s.equalsIgnoreCase("A")) {
                 htmlid = "rudian6";
-                final int[] item_ids = {40700};
-                final int[] item_amounts = {1};
+                final int[] item_ids = { 40700 };
+                final int[] item_amounts = { 1 };
                 L1ItemInstance item = null;
                 for (int i = 0; i < item_ids.length; i++) {
                     item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
@@ -2362,10 +2362,10 @@ public class C_NPCAction extends ClientBasePacket {
             } else if (s.equalsIgnoreCase("B")) {
                 if (pc.getInventory().checkItem(40710)) {
                     htmlid = "rudian8";
-                    materials = new int[]{40700, 40710};
-                    counts = new int[]{1, 1};
-                    createitem = new int[]{40647};
-                    createcount = new int[]{1};
+                    materials = new int[] { 40700, 40710 };
+                    counts = new int[] { 1, 1 };
+                    createitem = new int[] { 40647 };
+                    createcount = new int[] { 1 };
                     pc.getQuest().set_step(L1Quest.QUEST_RUDIAN, L1Quest.QUEST_END);
                 } else {
                     htmlid = "rudian9";
@@ -2429,8 +2429,8 @@ public class C_NPCAction extends ClientBasePacket {
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71089) {
             if (s.equalsIgnoreCase("a")) {
                 htmlid = "francu10";
-                final int[] item_ids = {40644};
-                final int[] item_amounts = {1};
+                final int[] item_ids = { 40644 };
+                final int[] item_amounts = { 1 };
                 L1ItemInstance item = null;
                 for (int i = 0; i < item_ids.length; i++) {
                     item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
@@ -2449,10 +2449,10 @@ public class C_NPCAction extends ClientBasePacket {
                 pc.getQuest().set_step(L1Quest.QUEST_LIZARD, 3);
             } else if (s.equalsIgnoreCase("C")) {
                 htmlid = "lelder13";
-                materials = new int[]{40634};
-                counts = new int[]{1};
-                createitem = new int[]{20167}; //リザード網ローブ
-                createcount = new int[]{1};
+                materials = new int[] { 40634 };
+                counts = new int[] { 1 };
+                createitem = new int[] { 20167 }; //リザード網ローブ
+                createcount = new int[] { 1 };
                 pc.getQuest().set_step(L1Quest.QUEST_LIZARD, L1Quest.QUEST_END);
             }
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71198) {
@@ -2599,10 +2599,10 @@ public class C_NPCAction extends ClientBasePacket {
             } else if (s.equalsIgnoreCase("1")) {
                 if (!pc.getInventory().checkItem(41314)) {
                     if (pc.getInventory().checkItem(L1ItemId.ADENA, 1000)) {
-                        materials = new int[]{L1ItemId.ADENA, 41313};
-                        counts = new int[]{1000, 1};
-                        createitem = new int[]{41314};
-                        createcount = new int[]{1};
+                        materials = new int[] { L1ItemId.ADENA, 41313 };
+                        counts = new int[] { 1000, 1 };
+                        createitem = new int[] { 41314 };
+                        createcount = new int[] { 1 };
                         int htmlA = _random.nextInt(3) + 1;
                         int htmlB = _random.nextInt(100) + 1;
                         switch (htmlA) {
@@ -3027,10 +3027,10 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkItem(41007, 1)) {
                     if (pc.getInventory().checkItem(40969, 20)) {
                         htmlid = "eris18";
-                        materials = new int[]{40969, 41007};
-                        counts = new int[]{20, 1};
-                        createitem = new int[]{41008};
-                        createcount = new int[]{1};
+                        materials = new int[] { 40969, 41007 };
+                        counts = new int[] { 20, 1 };
+                        createitem = new int[] { 41008 };
+                        createcount = new int[] { 1 };
                     } else {
                         htmlid = "eris5";
                     }
@@ -3050,52 +3050,52 @@ public class C_NPCAction extends ClientBasePacket {
                     if (pc.getInventory().checkItem(41009, 1)) {
                         if (pc.getInventory().checkItem(40959, 1)) {
                             htmlid = "eris17";
-                            materials = new int[]{40959, 41009};
-                            counts = new int[]{1, 1};
-                            createitem = new int[]{41010};
-                            createcount = new int[]{1};
+                            materials = new int[] { 40959, 41009 };
+                            counts = new int[] { 1, 1 };
+                            createitem = new int[] { 41010 };
+                            createcount = new int[] { 1 };
                         } else if (pc.getInventory().checkItem(40960, 1)) {
                             htmlid = "eris16";
-                            materials = new int[]{40960, 41009};
-                            counts = new int[]{1, 1};
-                            createitem = new int[]{41010};
-                            createcount = new int[]{1};
+                            materials = new int[] { 40960, 41009 };
+                            counts = new int[] { 1, 1 };
+                            createitem = new int[] { 41010 };
+                            createcount = new int[] { 1 };
                         } else if (pc.getInventory().checkItem(40961, 1)) {
                             htmlid = "eris15";
-                            materials = new int[]{40961, 41009};
-                            counts = new int[]{1, 1};
-                            createitem = new int[]{41010};
-                            createcount = new int[]{1};
+                            materials = new int[] { 40961, 41009 };
+                            counts = new int[] { 1, 1 };
+                            createitem = new int[] { 41010 };
+                            createcount = new int[] { 1 };
                         } else if (pc.getInventory().checkItem(40962, 1)) {
                             htmlid = "eris14";
-                            materials = new int[]{40962, 41009};
-                            counts = new int[]{1, 1};
-                            createitem = new int[]{41010};
-                            createcount = new int[]{1};
+                            materials = new int[] { 40962, 41009 };
+                            counts = new int[] { 1, 1 };
+                            createitem = new int[] { 41010 };
+                            createcount = new int[] { 1 };
                         } else if (pc.getInventory().checkItem(40635, 10)) {
                             htmlid = "eris12";
-                            materials = new int[]{40635, 41009};
-                            counts = new int[]{10, 1};
-                            createitem = new int[]{41010};
-                            createcount = new int[]{1};
+                            materials = new int[] { 40635, 41009 };
+                            counts = new int[] { 10, 1 };
+                            createitem = new int[] { 41010 };
+                            createcount = new int[] { 1 };
                         } else if (pc.getInventory().checkItem(40638, 10)) {
                             htmlid = "eris11";
-                            materials = new int[]{40638, 41009};
-                            counts = new int[]{10, 1};
-                            createitem = new int[]{41010};
-                            createcount = new int[]{1};
+                            materials = new int[] { 40638, 41009 };
+                            counts = new int[] { 10, 1 };
+                            createitem = new int[] { 41010 };
+                            createcount = new int[] { 1 };
                         } else if (pc.getInventory().checkItem(40642, 10)) {
                             htmlid = "eris13";
-                            materials = new int[]{40642, 41009};
-                            counts = new int[]{10, 1};
-                            createitem = new int[]{41010};
-                            createcount = new int[]{1};
+                            materials = new int[] { 40642, 41009 };
+                            counts = new int[] { 10, 1 };
+                            createitem = new int[] { 41010 };
+                            createcount = new int[] { 1 };
                         } else if (pc.getInventory().checkItem(40667, 10)) {
                             htmlid = "eris13";
-                            materials = new int[]{40667, 41009};
-                            counts = new int[]{10, 1};
-                            createitem = new int[]{41010};
-                            createcount = new int[]{1};
+                            materials = new int[] { 40667, 41009 };
+                            counts = new int[] { 10, 1 };
+                            createitem = new int[] { 41010 };
+                            createcount = new int[] { 1 };
                         } else {
                             htmlid = "eris8";
                         }
@@ -3116,7 +3116,7 @@ public class C_NPCAction extends ClientBasePacket {
             // 倒れた航海士
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 80076) {
             if (s.equalsIgnoreCase("A")) {
-                int[] diaryno = {49082, 49083};
+                int[] diaryno = { 49082, 49083 };
                 int pid = _random.nextInt(diaryno.length);
                 int di = diaryno[pid];
                 if (di == 49082) { //奇数ページ抜け
@@ -3225,10 +3225,10 @@ public class C_NPCAction extends ClientBasePacket {
                         && pc.getInventory().checkItem(40442, 5) // プロップブの胃液
                         && pc.getInventory().checkItem(40051, 1)) { // 高級エメラルド
                     htmlid = "perita7";
-                    materials = new int[]{40651, 40643, 40618, 40645, 40676, 40442, 40051};
-                    counts = new int[]{10, 10, 10, 10, 20, 5, 1};
-                    createitem = new int[]{40925}; // 浄化の一部
-                    createcount = new int[]{1};
+                    materials = new int[] { 40651, 40643, 40618, 40645, 40676, 40442, 40051 };
+                    counts = new int[] { 10, 10, 10, 10, 20, 5, 1 };
+                    createitem = new int[] { 40925 }; // 浄化の一部
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita8";
                 }
@@ -3243,10 +3243,10 @@ public class C_NPCAction extends ClientBasePacket {
                         && pc.getInventory().checkItem(40049, 3) // 高級ルビー
                         && pc.getInventory().checkItem(40051, 1)) { // 高級エメラルド
                     htmlid = "perita27";
-                    materials = new int[]{40651, 40643, 40618, 40645, 40676, 40675, 40049, 40051};
-                    counts = new int[]{5, 5, 5, 5, 10, 10, 3, 1};
-                    createitem = new int[]{40926}; //神秘的ないくつかのステップ1
-                    createcount = new int[]{1};
+                    materials = new int[] { 40651, 40643, 40618, 40645, 40676, 40675, 40049, 40051 };
+                    counts = new int[] { 5, 5, 5, 5, 10, 10, 3, 1 };
+                    createitem = new int[] { 40926 }; //神秘的ないくつかのステップ1
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita28";
                 }
@@ -3261,10 +3261,10 @@ public class C_NPCAction extends ClientBasePacket {
                         && pc.getInventory().checkItem(40048, 3) // 高級ダイヤモンド
                         && pc.getInventory().checkItem(40051, 1)) { // 高級エメラルド
                     htmlid = "perita29";
-                    materials = new int[]{40651, 40643, 40618, 40645, 40676, 40675, 40048, 40051};
-                    counts = new int[]{10, 10, 10, 10, 20, 10, 3, 1};
-                    createitem = new int[]{40927}; // 神秘的ないくつかの2段階
-                    createcount = new int[]{1};
+                    materials = new int[] { 40651, 40643, 40618, 40645, 40676, 40675, 40048, 40051 };
+                    counts = new int[] { 10, 10, 10, 10, 20, 10, 3, 1 };
+                    createitem = new int[] { 40927 }; // 神秘的ないくつかの2段階
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita30";
                 }
@@ -3279,10 +3279,10 @@ public class C_NPCAction extends ClientBasePacket {
                         && pc.getInventory().checkItem(40050, 3) // 高級サファイア
                         && pc.getInventory().checkItem(40051, 1)) { // 高級エメラルド
                     htmlid = "perita31";
-                    materials = new int[]{40651, 40643, 40618, 40645, 40676, 40675, 40050, 40051};
-                    counts = new int[]{20, 20, 20, 20, 30, 10, 3, 1};
-                    createitem = new int[]{40928}; // 神秘的ないくつかの手順3
-                    createcount = new int[]{1};
+                    materials = new int[] { 40651, 40643, 40618, 40645, 40676, 40675, 40050, 40051 };
+                    counts = new int[] { 20, 20, 20, 20, 30, 10, 3, 1 };
+                    createitem = new int[] { 40928 }; // 神秘的ないくつかの手順3
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita32";
                 }
@@ -3297,10 +3297,10 @@ public class C_NPCAction extends ClientBasePacket {
                         && pc.getInventory().checkItem(40052, 1) // 最高級ダイヤモンド
                         && pc.getInventory().checkItem(40051, 1)) { // 高級エメラルド
                     htmlid = "perita33";
-                    materials = new int[]{40651, 40643, 40618, 40645, 40676, 40675, 40052, 40051};
-                    counts = new int[]{30, 30, 30, 30, 30, 20, 1, 1};
-                    createitem = new int[]{40928}; // 神秘的ないくつかのステップ4
-                    createcount = new int[]{1};
+                    materials = new int[] { 40651, 40643, 40618, 40645, 40676, 40675, 40052, 40051 };
+                    counts = new int[] { 30, 30, 30, 30, 30, 20, 1, 1 };
+                    createitem = new int[] { 40928 }; // 神秘的ないくつかのステップ4
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita34";
                 }
@@ -3322,19 +3322,19 @@ public class C_NPCAction extends ClientBasePacket {
                     htmlid = "perita36";
                 }
                 if (earinga > 0) {
-                    materials = new int[]{earinga};
-                    counts = new int[]{1};
-                    createitem = new int[]{earingb};
-                    createcount = new int[]{1};
+                    materials = new int[] { earinga };
+                    counts = new int[] { 1 };
+                    createitem = new int[] { earingb };
+                    createcount = new int[] { 1 };
                 }
             } else if (s.equals("L")) { // 2段階の耳リング（知恵の耳リング）
                 if (pc.getInventory().checkEquipped(21015)) {
                     htmlid = "perita22";
                 } else if (pc.getInventory().checkItem(21015, 1)) {
-                    materials = new int[]{21015};
-                    counts = new int[]{1};
-                    createitem = new int[]{41179};
-                    createcount = new int[]{1};
+                    materials = new int[] { 21015 };
+                    counts = new int[] { 1 };
+                    createitem = new int[] { 41179 };
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita22";
                 }
@@ -3342,10 +3342,10 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkEquipped(21016)) {
                     htmlid = "perita26";
                 } else if (pc.getInventory().checkItem(21016, 1)) {
-                    materials = new int[]{21016};
-                    counts = new int[]{1};
-                    createitem = new int[]{41182};
-                    createcount = new int[]{1};
+                    materials = new int[] { 21016 };
+                    counts = new int[] { 1 };
+                    createitem = new int[] { 41182 };
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita26";
                 }
@@ -3353,10 +3353,10 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkEquipped(21009)) {
                     htmlid = "perita39";
                 } else if (pc.getInventory().checkItem(21009, 1)) {
-                    materials = new int[]{21009};
-                    counts = new int[]{1};
-                    createitem = new int[]{41180};
-                    createcount = new int[]{1};
+                    materials = new int[] { 21009 };
+                    counts = new int[] { 1 };
+                    createitem = new int[] { 41180 };
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita39";
                 }
@@ -3364,10 +3364,10 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkEquipped(21012)) {
                     htmlid = "perita41";
                 } else if (pc.getInventory().checkItem(21012, 1)) {
-                    materials = new int[]{21012};
-                    counts = new int[]{1};
-                    createitem = new int[]{41183};
-                    createcount = new int[]{1};
+                    materials = new int[] { 21012 };
+                    counts = new int[] { 1 };
+                    createitem = new int[] { 41183 };
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita41";
                 }
@@ -3375,10 +3375,10 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkEquipped(21008)) {
                     htmlid = "perita38";
                 } else if (pc.getInventory().checkItem(21008, 1)) {
-                    materials = new int[]{21008};
-                    counts = new int[]{1};
-                    createitem = new int[]{41181};
-                    createcount = new int[]{1};
+                    materials = new int[] { 21008 };
+                    counts = new int[] { 1 };
+                    createitem = new int[] { 41181 };
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita38";
                 }
@@ -3386,10 +3386,10 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkEquipped(21010)) {
                     htmlid = "perita40";
                 } else if (pc.getInventory().checkItem(21010, 1)) {
-                    materials = new int[]{21010};
-                    counts = new int[]{1};
-                    createitem = new int[]{41184};
-                    createcount = new int[]{1};
+                    materials = new int[] { 21010 };
+                    counts = new int[] { 1 };
+                    createitem = new int[] { 41184 };
+                    createcount = new int[] { 1 };
                 } else {
                     htmlid = "perita40";
                 }
@@ -3537,10 +3537,10 @@ public class C_NPCAction extends ClientBasePacket {
                         && pc.getInventory().checkItem(40676, 5)) { // 闇の息づかい
                     if (insn == 1 || bacn == 1) {
                         htmlid = "rumtis60";
-                        materials = new int[]{me, mr, mj, an, 40046, 40618, 40643, 40651, 40676};
-                        counts = new int[]{men, mrn, mjn, ann, 1, 5, 5, 5, 5, 5};
-                        createitem = new int[]{40926}; // 加工されたサファイア：1段階
-                        createcount = new int[]{1};
+                        materials = new int[] { me, mr, mj, an, 40046, 40618, 40643, 40651, 40676 };
+                        counts = new int[] { men, mrn, mjn, ann, 1, 5, 5, 5, 5, 5 };
+                        createitem = new int[] { 40926 }; // 加工されたサファイア：1段階
+                        createcount = new int[] { 1 };
                     } else {
                         htmlid = "rumtis18";
                     }
@@ -3550,18 +3550,18 @@ public class C_NPCAction extends ClientBasePacket {
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71119) {
 
             if (s.equalsIgnoreCase("request las history book")) {
-                materials = new int[]{41019, 41020, 41021, 41022, 41023, 41024, 41025, 41026};
-                counts = new int[]{1, 1, 1, 1, 1, 1, 1, 1};
-                createitem = new int[]{41027};
-                createcount = new int[]{1};
+                materials = new int[] { 41019, 41020, 41021, 41022, 41023, 41024, 41025, 41026 };
+                counts = new int[] { 1, 1, 1, 1, 1, 1, 1, 1 };
+                createitem = new int[] { 41027 };
+                createcount = new int[] { 1 };
                 htmlid = "";
             }
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 71170) {
             if (s.equalsIgnoreCase("request las weapon manual")) {
-                materials = new int[]{41027};
-                counts = new int[]{1};
-                createitem = new int[]{40965};
-                createcount = new int[]{1};
+                materials = new int[] { 41027 };
+                counts = new int[] { 1 };
+                createitem = new int[] { 40965 };
+                createcount = new int[] { 1 };
                 htmlid = "";
             }
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 6000015) {
@@ -3604,8 +3604,8 @@ public class C_NPCAction extends ClientBasePacket {
             if (s.equalsIgnoreCase("n")) {
                 htmlid = "";
                 poly(client, 6034);
-                final int[] item_ids = {41132, 41133, 41134};
-                final int[] item_amounts = {1, 1, 1};
+                final int[] item_ids = { 41132, 41133, 41134 };
+                final int[] item_amounts = { 1, 1, 1 };
                 L1ItemInstance item = null;
                 for (int i = 0; i < item_ids.length; i++) {
                     item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
@@ -3648,8 +3648,8 @@ public class C_NPCAction extends ClientBasePacket {
                 // ギフトを受け取る
             } else if (s.equalsIgnoreCase("g")) {
                 htmlid = "";
-                final int[] item_ids = {41130}; //血痕の契約書
-                final int[] item_amounts = {1};
+                final int[] item_ids = { 41130 }; //血痕の契約書
+                final int[] item_amounts = { 1 };
                 L1ItemInstance item = null;
                 for (int i = 0; i < item_ids.length; i++) {
                     item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
@@ -3883,9 +3883,9 @@ public class C_NPCAction extends ClientBasePacket {
             htmlid = "";
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 3310018) {// ヴァラカスレイドデスナイトバフ社
             if (s.equalsIgnoreCase("a")) {
-                int[] allBuffSkill = {PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR,
+                int[] allBuffSkill = { PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR,
                         L1SkillId.HASTE, ADVANCE_SPIRIT, BRAVE_AURA, NATURES_TOUCH,
-                        IRON_SKIN, GLOWING_AURA, L1SkillId.FEATHER_BUFF_C};
+                        IRON_SKIN, GLOWING_AURA, L1SkillId.FEATHER_BUFF_C };
                 pc.sendPackets(new S_SkillSound(pc.getId(), 7783));
                 Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7783));
                 pc.sendPackets(new S_ServerMessage(1646));
@@ -4313,8 +4313,8 @@ public class C_NPCAction extends ClientBasePacket {
                     htmlid = "robinhood19";
                 }
             } else if (s.equals("B")) { /* robinhood8 */
-                final int[] item_ids = {41346, 41348};
-                final int[] item_amounts = {1, 1,};
+                final int[] item_ids = { 41346, 41348 };
+                final int[] item_amounts = { 1, 1, };
                 for (int i = 0; i < item_ids.length; i++) {
                     L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
                     // L1ItemInstance memo = pc.getInventory().storeItem(41346, 1);
@@ -4335,8 +4335,8 @@ public class C_NPCAction extends ClientBasePacket {
                     pc.getInventory().consumeItem(40645, 30);
                     pc.getInventory().consumeItem(40618, 30);
                     pc.getInventory().consumeItem(40676, 30);
-                    final int[] item_ids = {41350, 41347};
-                    final int[] item_amounts = {1, 1,};
+                    final int[] item_ids = { 41350, 41347 };
+                    final int[] item_amounts = { 1, 1, };
                     for (int i = 0; i < item_ids.length; i++) {
                         L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
                         pc.sendPackets(new S_SystemMessage("ロビンフッドのリングとメモ用紙を獲得しました。"));
@@ -4361,8 +4361,8 @@ public class C_NPCAction extends ClientBasePacket {
                     pc.getInventory().consumeItem(40053, 1);
                     pc.getInventory().consumeItem(40054, 1);
                     pc.getInventory().consumeItem(40055, 1);
-                    final int[] item_ids = {205};
-                    final int[] item_amounts = {1};
+                    final int[] item_ids = { 205 };
+                    final int[] item_amounts = { 1 };
                     for (int i = 0; i < item_ids.length; i++) {
                         L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
                         pc.sendPackets(new S_SystemMessage("月のロングボウを獲得しました。"));
@@ -4389,8 +4389,8 @@ public class C_NPCAction extends ClientBasePacket {
                     pc.getInventory().consumeItem(40049, 10);
                     pc.getInventory().consumeItem(40050, 10);
                     pc.getInventory().consumeItem(40051, 10);
-                    final int[] item_ids = {41353};
-                    final int[] item_amounts = {1};
+                    final int[] item_ids = { 41353 };
+                    final int[] item_amounts = { 1 };
                     for (int i = 0; i < item_ids.length; i++) {
                         L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
                         pc.sendPackets(new S_SystemMessage("エバの短剣を獲得しました。"));
@@ -4404,8 +4404,8 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkItem(40514, 10) && pc.getInventory().checkItem(41353, 1)) {
                     pc.getInventory().consumeItem(40514, 10);
                     pc.getInventory().consumeItem(41353, 1);
-                    final int[] item_ids = {41354};
-                    final int[] item_amounts = {1};
+                    final int[] item_ids = { 41354 };
+                    final int[] item_amounts = { 1 };
                     for (int i = 0; i < item_ids.length; i++) {
                         L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
                         pc.sendPackets(new S_SystemMessage("神聖なエヴァの水を獲得しました。"));
@@ -4418,8 +4418,8 @@ public class C_NPCAction extends ClientBasePacket {
             } else if (s.equals("D")) {
                 if (pc.getInventory().checkItem(41349)) {
                     pc.getInventory().consumeItem(41349, 1);
-                    final int[] item_ids = {41351};
-                    final int[] item_amounts = {1};
+                    final int[] item_ids = { 41351 };
+                    final int[] item_amounts = { 1 };
                     for (int i = 0; i < item_ids.length; i++) {
                         L1ItemInstance item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
                         pc.sendPackets(new S_SystemMessage("月明りの定期を獲得しました。"));
@@ -4438,16 +4438,16 @@ public class C_NPCAction extends ClientBasePacket {
                         && pc.getInventory().checkItem(41139, 1)) { // 宝石と粘着性
                     // ネックレス確認
                     if (random.nextInt(10) > 6) {
-                        materials = new int[]{49028, 49029, 49030, 41139};
-                        counts = new int[]{1, 1, 1, 1};
-                        createitem = new int[]{41140}; // 復元された古代のネックレス
-                        createcount = new int[]{1};
+                        materials = new int[] { 49028, 49029, 49030, 41139 };
+                        counts = new int[] { 1, 1, 1, 1 };
+                        createitem = new int[] { 41140 }; // 復元された古代のネックレス
+                        createcount = new int[] { 1 };
                         htmlid = "dh8";
                     } else { // 失敗の場合アイテムのみ消える
-                        materials = new int[]{49028, 49029, 49030, 41139};
-                        counts = new int[]{1, 1, 1, 1};
-                        createitem = new int[]{410027}; //宝石パウダー
-                        createcount = new int[]{5};
+                        materials = new int[] { 49028, 49029, 49030, 41139 };
+                        counts = new int[] { 1, 1, 1, 1 };
+                        createitem = new int[] { 410027 }; //宝石パウダー
+                        createcount = new int[] { 5 };
                         htmlid = "dh7";
                     }
                 } else { //材料が不足している場合、
@@ -4458,16 +4458,16 @@ public class C_NPCAction extends ClientBasePacket {
                 if (pc.getInventory().checkItem(49027, 1) && pc.getInventory().checkItem(41140, 1)) { // ダイヤモンドと
                     // 復元されたネックレス
                     if (random.nextInt(10) > 7) {
-                        materials = new int[]{49027, 41140};
-                        counts = new int[]{1, 1};
-                        createitem = new int[]{20422}; // 輝く古代のネックレス
-                        createcount = new int[]{1};
+                        materials = new int[] { 49027, 41140 };
+                        counts = new int[] { 1, 1 };
+                        createitem = new int[] { 20422 }; // 輝く古代のネックレス
+                        createcount = new int[] { 1 };
                         htmlid = "dh9";
                     } else {
-                        materials = new int[]{49027, 41140};
-                        counts = new int[]{1, 1};
-                        createitem = new int[]{410027}; // 宝石の粉
-                        createcount = new int[]{5};
+                        materials = new int[] { 49027, 41140 };
+                        counts = new int[] { 1, 1 };
+                        createitem = new int[] { 410027 }; // 宝石の粉
+                        createcount = new int[] { 5 };
                         htmlid = "dh7";
                     }
                 } else { // 材料が不足している場合、
@@ -4481,8 +4481,8 @@ public class C_NPCAction extends ClientBasePacket {
             if (s.equalsIgnoreCase("n")) {
                 htmlid = "";
                 poly(client, 6035);
-                final int[] item_ids = {41123, 41124, 41125};
-                final int[] item_amounts = {1, 1, 1};
+                final int[] item_ids = { 41123, 41124, 41125 };
+                final int[] item_amounts = { 1, 1, 1 };
                 L1ItemInstance item = null;
                 for (int i = 0; i < item_ids.length; i++) {
                     item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
@@ -4525,8 +4525,8 @@ public class C_NPCAction extends ClientBasePacket {
                 //素早く受ける
             } else if (s.equalsIgnoreCase("g")) {
                 htmlid = "";
-                final int[] item_ids = {41121}; // カヘルの契約書
-                final int[] item_amounts = {1};
+                final int[] item_ids = { 41121 }; // カヘルの契約書
+                final int[] item_amounts = { 1 };
                 L1ItemInstance item = null;
                 for (int i = 0; i < item_ids.length; i++) {
                     item = pc.getInventory().storeItem(item_ids[i], item_amounts[i]);
@@ -4542,7 +4542,7 @@ public class C_NPCAction extends ClientBasePacket {
             if (s.equals("A")) { // 象牙の塔防具が必要です。
                 if (pc.isKnight() || pc.isCrown() || pc.isDarkelf() || pc.isDragonknight()) {
                     int check = 0;
-                    int[] item = new int[]{22300, 22301, 22302, 22303, 22304};
+                    int[] item = new int[] { 22300, 22301, 22302, 22303, 22304 };
                     for (int i = 0; i < item.length; i++) {
                         if (!pc.getInventory().checkItem(item[i], 1)) {
                             createNewItem(pc, npcName, item[i], 1, 0);
@@ -4556,7 +4556,7 @@ public class C_NPCAction extends ClientBasePacket {
                     }
                 } else {
                     int check = 0;
-                    int[] item = new int[]{22306, 22307, 22308, 22309, 22310};
+                    int[] item = new int[] { 22306, 22307, 22308, 22309, 22310 };
                     for (int i = 0; i < item.length; i++) {
                         if (!pc.getInventory().checkItem(item[i], 1)) {
                             createNewItem(pc, npcName, item[i], 1, 0);
@@ -4585,9 +4585,9 @@ public class C_NPCAction extends ClientBasePacket {
                 } else {
                     int check = 0;
                     //ヘルム、マント、鎧、手袋、サンダル、シールド
-                    int[] ivory = new int[]{20028, 20283, 20126, 20173, 20206, 20232};
-                    int[] sacred = new int[]{30096, 30098, 30097, 30099, 30100, 30101};
-                    int[] strong = new int[]{30090, 30092, 30091, 30093, 30094, 30095};
+                    int[] ivory = new int[] { 20028, 20283, 20126, 20173, 20206, 20232 };
+                    int[] sacred = new int[] { 30096, 30098, 30097, 30099, 30100, 30101 };
+                    int[] strong = new int[] { 30090, 30092, 30091, 30093, 30094, 30095 };
                     for (L1ItemInstance item : pc.getInventory().getItems()) {
                         switch (item.getItemId()) {
                             case 20028: // 投球
@@ -4978,8 +4978,8 @@ public class C_NPCAction extends ClientBasePacket {
         } else if (((L1NpcInstance) obj).getNpcTemplate().get_npcId() == 5111) {
             L1NpcInstance npc = (L1NpcInstance) obj;
             String npcName = npc.getNpcTemplate().get_name();
-            int[] weapon = new int[]{1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133};
-            int[] armor = new int[]{22328, 22329, 22330, 22331, 22332, 22333, 22334, 22335};
+            int[] weapon = new int[] { 1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133 };
+            int[] armor = new int[] { 22328, 22329, 22330, 22331, 22332, 22333, 22334, 22335 };
             int result = 0;
             if (s.equals("a")) { // 1.ベビーテルラン短剣
                 if (pc.getInventory().checkItem(30065, 1)) {
@@ -5449,7 +5449,7 @@ public class C_NPCAction extends ClientBasePacket {
             String npcName = npc.getNpcTemplate().get_name();
 
             int itemId = 0, enchant = 0, adena = 0;
-            int[] sealitemId = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 30119, 30120};
+            int[] sealitemId = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 30119, 30120 };
             if (s.equals("A")) { // +7共鳴のキーリンク[+ 8サファイアキーリンク]
                 itemId = 503;
                 enchant = 8;
@@ -5642,7 +5642,7 @@ public class C_NPCAction extends ClientBasePacket {
         L1ItemInstance item = pc.getInventory().findItemId(checkItem_1);
         switch (total) {
             case 0:
-                int[] highdailybuff = new int[]{HASTE, /* ADVANCE_SPIRIT, */IRON_SKIN, AQUA_PROTECTER, CONCENTRATION, PATIENCE, INSIGHT};
+                int[] highdailybuff = new int[] { HASTE, /* ADVANCE_SPIRIT, */IRON_SKIN, AQUA_PROTECTER, CONCENTRATION, PATIENCE, INSIGHT };
                 pc.setExp(pc.getExp() + 30000);
                 pc.getQuest().set_step(Quest, pc.getQuest().get_step(Quest) + 1);
                 pc.getInventory().consumeItem(checkItem_1, item.getCount());
@@ -5867,9 +5867,9 @@ public class C_NPCAction extends ClientBasePacket {
         int summonid = 0;
         int levelrange = 0;
         int summoncost = 0;
-        summonstr_list = new String[]{"7", "263", "519", "8", "264", "520", "9", "265", "521", "10", "266", "522", "11", "267", "523", "12", "268", "524", "13", "269", "525",
-                "14", "270", "526", "15", "271", "527", "16", "17", "18", "274"};
-        summonid_list = new int[]{810820, 810821, 810822, // 28
+        summonstr_list = new String[] { "7", "263", "519", "8", "264", "520", "9", "265", "521", "10", "266", "522", "11", "267", "523", "12", "268", "524", "13", "269", "525",
+                "14", "270", "526", "15", "271", "527", "16", "17", "18", "274" };
+        summonid_list = new int[] { 810820, 810821, 810822, // 28
                 810823, 810824, 810825,// 32
                 810826, 810827, 810828,// 36
                 810829, 810830, 810831, // 40
@@ -5883,8 +5883,8 @@ public class C_NPCAction extends ClientBasePacket {
                 810850, 810849 // 72 // - この部分である。
 
         }; // ソファンモプ定める構文....
-        summonlvl_list = new int[]{28, 28, 28, 32, 32, 32, 36, 36, 36, 40, 40, 40, 44, 44, 44, 48, 48, 48, 52, 52, 52, 56, 56, 56, 60, 60, 60, 64, 68, 72, 72};// 術者レベル制限
-        summoncha_list = new int[]{8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 14, 36, 36, 50};//カリー
+        summonlvl_list = new int[] { 28, 28, 28, 32, 32, 32, 36, 36, 36, 40, 40, 40, 44, 44, 44, 48, 48, 48, 52, 52, 52, 56, 56, 56, 60, 60, 60, 64, 68, 72, 72 };// 術者レベル制限
+        summoncha_list = new int[] { 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 14, 36, 36, 50 };//カリー
         // 消費構文
         for (int loop = 0; loop < summonstr_list.length; loop++) {
             if (s.equalsIgnoreCase(summonstr_list[loop])) {
@@ -6244,7 +6244,7 @@ public class C_NPCAction extends ClientBasePacket {
     private String[] makeHouseTaxStrings(L1PcInstance pc, L1NpcInstance npc) {
         String name = npc.getNpcTemplate().get_name();
         String[] result;
-        result = new String[]{name, "2000", "1", "1", "00"};
+        result = new String[] { name, "2000", "1", "1", "00" };
         L1Clan clan = L1World.getInstance().getClan(pc.getClanname());
         if (clan != null) {
             int houseId = clan.getHouseId();
@@ -6256,7 +6256,7 @@ public class C_NPCAction extends ClientBasePacket {
                     int month = cal.get(Calendar.MONTH) + 1;
                     int day = cal.get(Calendar.DATE);
                     int hour = cal.get(Calendar.HOUR_OF_DAY);
-                    result = new String[]{name, "2000", String.valueOf(month), String.valueOf(day), String.valueOf(hour)};
+                    result = new String[] { name, "2000", String.valueOf(month), String.valueOf(day), String.valueOf(hour) };
                 }
             }
         }
@@ -6276,15 +6276,15 @@ public class C_NPCAction extends ClientBasePacket {
         int minute = warTime.get(Calendar.MINUTE);
         String[] result;
         if (castleId == L1CastleLocation.OT_CASTLE_ID) {
-            result = new String[]{String.valueOf(year), String.valueOf(month), String.valueOf(day), String.valueOf(hour), String.valueOf(minute)};
+            result = new String[] { String.valueOf(year), String.valueOf(month), String.valueOf(day), String.valueOf(hour), String.valueOf(minute) };
         } else {
-            result = new String[]{"", String.valueOf(year), String.valueOf(month), String.valueOf(day), String.valueOf(hour), String.valueOf(minute)};
+            result = new String[] { "", String.valueOf(year), String.valueOf(month), String.valueOf(day), String.valueOf(hour), String.valueOf(minute) };
         }
         return result;
     }
 
     private String getYaheeAmulet(L1PcInstance pc, L1NpcInstance npc, String s) {
-        int[] amuletIdList = {20358, 20359, 20360, 20361, 20362, 20363, 20364, 20365};
+        int[] amuletIdList = { 20358, 20359, 20360, 20361, 20362, 20363, 20364, 20365 };
         int amuletId = 0;
         L1ItemInstance item = null;
         String htmlid = null;
@@ -6340,7 +6340,7 @@ public class C_NPCAction extends ClientBasePacket {
     }
 
     private String getBarlogEarring(L1PcInstance pc, L1NpcInstance npc, String s) {
-        int[] earringIdList = {21020, 21021, 21022, 21023, 21024, 21025, 21026, 21027};
+        int[] earringIdList = { 21020, 21021, 21022, 21023, 21024, 21025, 21026, 21027 };
         int earringId = 0;
         L1ItemInstance item = null;
         String htmlid = null;
@@ -6742,8 +6742,8 @@ public class C_NPCAction extends ClientBasePacket {
     }
 
     private void selectComa(L1PcInstance pc, int objid) {
-        String[] htmldata = new String[]{String.valueOf(pc.getDeathMatchPiece()), String.valueOf(pc.getGhostHousePiece()), String.valueOf(pc.getPetRacePiece()),
-                String.valueOf(pc.getPetMatchPiece()), String.valueOf(pc.getUltimateBattlePiece())};
+        String[] htmldata = new String[] { String.valueOf(pc.getDeathMatchPiece()), String.valueOf(pc.getGhostHousePiece()), String.valueOf(pc.getPetRacePiece()),
+                String.valueOf(pc.getPetMatchPiece()), String.valueOf(pc.getUltimateBattlePiece()) };
         pc.sendPackets(new S_NPCTalkReturn(objid, "coma5", htmldata));
     }
 
@@ -6844,8 +6844,8 @@ public class C_NPCAction extends ClientBasePacket {
                 i = 100;
             else if (s.equalsIgnoreCase("5"))
                 i = 500;
-            String[] htmldata = new String[]{String.valueOf(50 * i), String.valueOf(100 * i), String.valueOf(100 * i), String.valueOf(200 * i), String.valueOf(200 * i),
-                    String.valueOf(i)};
+            String[] htmldata = new String[] { String.valueOf(50 * i), String.valueOf(100 * i), String.valueOf(100 * i), String.valueOf(200 * i), String.valueOf(200 * i),
+                    String.valueOf(i) };
             pc.sendPackets(new S_NPCTalkReturn(objid, "bs_m4", htmldata));
             return htmlid;
         }
@@ -6853,7 +6853,7 @@ public class C_NPCAction extends ClientBasePacket {
             if (s.equals("a")) { // 魔法を受ける。
                 if (pc.getInventory().checkItem(40308, 1000)) {
                     pc.getInventory().consumeItem(40308, 1000);
-                    int[] allBuffSkill = {26, 37, 42, 48};
+                    int[] allBuffSkill = { 26, 37, 42, 48 };
                     pc.setBuffnoch(1);
                     L1SkillUse l1skilluse = new L1SkillUse();
                     for (int i = 0; i < allBuffSkill.length; i++) {

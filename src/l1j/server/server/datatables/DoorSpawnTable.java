@@ -74,7 +74,7 @@ public class DoorSpawnTable {
                     Constructor<?> constructor = Class.forName(
                             "l1j.server.server.model.Instance." + s
                                     + "Instance").getConstructors()[0];
-                    Object parameters[] = {l1npc};
+                    Object parameters[] = { l1npc };
                     L1DoorInstance door = (L1DoorInstance) constructor
                             .newInstance(parameters);
                     door = (L1DoorInstance) constructor.newInstance(parameters);

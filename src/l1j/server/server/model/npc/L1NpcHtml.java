@@ -25,7 +25,7 @@ public class L1NpcHtml {
     public static final L1NpcHtml HTML_CLOSE = new L1NpcHtml("");
 
     public L1NpcHtml(String name) {
-        this(name, new String[]{});
+        this(name, new String[] {});
     }
 
     public L1NpcHtml(String name, String... args) {

@@ -78,8 +78,8 @@ public class BugRaceController implements Runnable {
         return _allTemplates;
     }
 
-    private int Start_X[] = {33522, 33520, 33518, 33516, 33514};
-    private int Start_Y[] = {32861, 32863, 32865, 32867, 32869};
+    private int Start_X[] = { 33522, 33520, 33518, 33516, 33514 };
+    private int Start_Y[] = { 32861, 32863, 32865, 32867, 32869 };
 
     // private int[][] GFX = {
     // { 11095 ,11098 ,11094 ,11081 ,11082 },
@@ -87,28 +87,28 @@ public class BugRaceController implements Runnable {
     // { 11088 ,11089 ,11090 ,11091 ,11092 },
     // { 11093 ,11096 ,11097 ,11099 ,11100 }};
 
-    private int[][] GFX = {{3478, 3497, 3498, 3499, 3500}, {3479, 3501, 3502, 3503, 3504},
-            {3480, 3505, 3506, 3507, 3508}, {3481, 3509, 3510, 3511, 3512}};
+    private int[][] GFX = { { 3478, 3497, 3498, 3499, 3500 }, { 3479, 3501, 3502, 3503, 3504 },
+            { 3480, 3505, 3506, 3507, 3508 }, { 3481, 3509, 3510, 3511, 3512 } };
 
-    public int[][] Number = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14, 15}, {16, 17, 18, 19, 20},
-            {21, 22, 23, 24, 25}, {26, 27, 28, 29, 30}};
-    public String[][] BugbearName = {{"デュープインパクト", "オルフェーブル", "エムコンドルパサー", "テイエヌオペラオー", "キタサンフラッグ"},
-            {"キングカヌハヌハ", "グラスフンダー", "スペシャルフィーク", "サクラコーレル", "サドノダイアモンド"},
-            {"シンボリクリスエヌ", "ドゥラヌンテ", "マンハッタンカフュ", "サイレンススズキ", "ヘイセイコー"},
-            {"バリバリルドルフ", "オグリキァップ", "メジロナックイーン", "トーカイテイオー", "ハネダブライアン"},
-            {"クオッカ", "ジェントルドンナ", "タイキシァトル", "ワンポイント", "コールドシップ"},
-            {"アグネスタキヨシ", "シインターボ", "ジャスタウェーイ", "ロードカナエリア", "カポデテュティカピ"}};
+    public int[][] Number = { { 1, 2, 3, 4, 5 }, { 6, 7, 8, 9, 10 }, { 11, 12, 13, 14, 15 }, { 16, 17, 18, 19, 20 },
+            { 21, 22, 23, 24, 25 }, { 26, 27, 28, 29, 30 } };
+    public String[][] BugbearName = { { "デュープインパクト", "オルフェーブル", "エムコンドルパサー", "テイエヌオペラオー", "キタサンフラッグ" },
+            { "キングカヌハヌハ", "グラスフンダー", "スペシャルフィーク", "サクラコーレル", "サドノダイアモンド" },
+            { "シンボリクリスエヌ", "ドゥラヌンテ", "マンハッタンカフュ", "サイレンススズキ", "ヘイセイコー" },
+            { "バリバリルドルフ", "オグリキァップ", "メジロナックイーン", "トーカイテイオー", "ハネダブライアン" },
+            { "クオッカ", "ジェントルドンナ", "タイキシァトル", "ワンポイント", "コールドシップ" },
+            { "アグネスタキヨシ", "シインターボ", "ジャスタウェーイ", "ロードカナエリア", "カポデテュティカピ" } };
 
     public static int[] _time = new int[5];
     public static String _first = null;
     // チケットの初期化
-    public int[] ticket = {0, 0, 0, 0, 0};
+    public int[] ticket = { 0, 0, 0, 0, 0 };
     // 勝率の初期化
-    public double[] _winRate = {0, 0, 0, 0, 0};
+    public double[] _winRate = { 0, 0, 0, 0, 0 };
     // 状態の初期化
-    public String[] _bugCondition = {"良い", "良い", "良い", "良い", "良い"};
+    public String[] _bugCondition = { "良い", "良い", "良い", "良い", "良い" };
     // 倍率の初期化
-    public double _ration[] = {0, 0, 0, 0, 0};
+    public double _ration[] = { 0, 0, 0, 0, 0 };
 
     public static BugRaceController getInstance() {
         if (_instance == null) {
@@ -302,7 +302,7 @@ public class BugRaceController implements Runnable {
                 dogs.set_agrofamily(0);
                 dogs.set_picupitem(false);
 
-                Object[] parameters = {dogs};
+                Object[] parameters = { dogs };
 
                 _littleBugBear[m] = (L1NpcInstance) Class.forName("l1j.server.server.model.Instance.L1NpcInstance")
                         .getConstructors()[0].newInstance(parameters);
@@ -630,8 +630,8 @@ public class BugRaceController implements Runnable {
     public class RunBug implements Runnable {
         private int _status = 0;
 
-        private int[][] _BUG_INFO = {{45, 4, 5, 6, 50}, {42, 6, 5, 7, 50}, {39, 8, 5, 8, 50},
-                {36, 10, 5, 9, 50}, {33, 12, 5, 10, 50}
+        private int[][] _BUG_INFO = { { 45, 4, 5, 6, 50 }, { 42, 6, 5, 7, 50 }, { 39, 8, 5, 8, 50 },
+                { 36, 10, 5, 9, 50 }, { 33, 12, 5, 10, 50 }
                 // {46, 3, 6, 5},
                 // {43, 5, 6, 7},
                 // {40, 7, 6, 9},

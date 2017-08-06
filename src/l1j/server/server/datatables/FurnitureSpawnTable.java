@@ -71,7 +71,7 @@ public class FurnitureSpawnTable {
                     Constructor<?> constructor = Class.forName(
                             "l1j.server.server.model.Instance." + s
                                     + "Instance").getConstructors()[0];
-                    Object parameters[] = {l1npc};
+                    Object parameters[] = { l1npc };
                     L1FurnitureInstance furniture = (L1FurnitureInstance) constructor
                             .newInstance(parameters);
                     furniture = (L1FurnitureInstance) constructor

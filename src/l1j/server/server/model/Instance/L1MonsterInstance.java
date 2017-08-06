@@ -119,7 +119,7 @@ public class L1MonsterInstance extends L1NpcInstance {
         }
     }
 
-    public static int[][] _classGfxId = {{0, 1}, {48, 61}, {37, 138}, {734, 1186}, {2786, 2796}};
+    public static int[][] _classGfxId = { { 0, 1 }, { 48, 61 }, { 37, 138 }, { 734, 1186 }, { 2786, 2796 } };
 
     @Override
     public void searchTarget() {
@@ -1018,10 +1018,10 @@ public class L1MonsterInstance extends L1NpcInstance {
                  ***************************************** ボスの魂石****************************************************
                  *********************************************************************************************************/
                 Random random = new Random();
-                int[] lastabard = {80453, 80454, 80455, 80456, 80457, 80458, 80459, 80460, 80461, 80462, 80463, 80452};
-                int[] tower = {80450, 80451, 80466, 80467};
-                int[] glu = {80464, 80465};
-                int[] oman = {80468, 80469, 80470, 80471, 80472, 80473, 80474, 80475, 80476, 80477};
+                int[] lastabard = { 80453, 80454, 80455, 80456, 80457, 80458, 80459, 80460, 80461, 80462, 80463, 80452 };
+                int[] tower = { 80450, 80451, 80466, 80467 };
+                int[] glu = { 80464, 80465 };
+                int[] oman = { 80468, 80469, 80470, 80471, 80472, 80473, 80474, 80475, 80476, 80477 };
                 int dropChance = random.nextInt(2500) + 1;
                 int lastavard = random.nextInt(lastabard.length);
                 int ivory = random.nextInt(tower.length);
@@ -1276,7 +1276,7 @@ public class L1MonsterInstance extends L1NpcInstance {
             RaidFafu.begin();
         }
         /*for (L1PcInstance pc : L1World.getInstance().getAllPlayers()){
-			if (lastAttacker.getMapId() == pc.getMapId()){
+            if (lastAttacker.getMapId() == pc.getMapId()){
 				createNewItem(pc, 410162, 2, 0); // 地竜の標識
       pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "地竜の標識（2）個が支給されました。 "））;
 			}

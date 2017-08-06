@@ -539,7 +539,7 @@ public class C_ActionUi extends ClientBasePacket {
                 }
                 break;
         /*case 血盟加入申請受信設定：
-			if (pc.getClanid() == 0 || (!pc.isCrown() && pc.getClanRank() != L1Clan.守護））
+            if (pc.getClanid() == 0 || (!pc.isCrown() && pc.getClanRank() != L1Clan.守護））
 				return;
 			readC();
 			readH();

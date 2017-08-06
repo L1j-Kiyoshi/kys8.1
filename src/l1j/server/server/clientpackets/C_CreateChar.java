@@ -120,14 +120,14 @@ public class C_CreateChar extends ClientBasePacket {
     }
 
     // by.lins
-    public static final int[] MALE_LIST = new int[]{0, 61, 138, 734, 2786, 6658, 6671, 12490};
-    public static final int[] FEMALE_LIST = new int[]{1, 48, 37, 1186, 2796, 6661, 6650, 12494};
+    public static final int[] MALE_LIST = new int[] { 0, 61, 138, 734, 2786, 6658, 6671, 12490 };
+    public static final int[] FEMALE_LIST = new int[] { 1, 48, 37, 1186, 2796, 6661, 6650, 12494 };
     // by.lins
 
-    public static final int[][] START_LOC_X = new int[][]{{33434, 33435, 33440, 33424, 33415}};// リニューアルスムギェ統合X
-    public static final int[][] START_LOC_Y = new int[][]{{32815, 32823, 32797, 32813, 32824}};//リニューアルスムギェ統合Y
+    public static final int[][] START_LOC_X = new int[][] { { 33434, 33435, 33440, 33424, 33415 } };// リニューアルスムギェ統合X
+    public static final int[][] START_LOC_Y = new int[][] { { 32815, 32823, 32797, 32813, 32824 } };//リニューアルスムギェ統合Y
 
-    public static final short[] MAPID_LIST = new short[]{4, 4, 4, 4, 4, 4, 4, 4};//リニューアルスムギェ
+    public static final short[] MAPID_LIST = new short[] { 4, 4, 4, 4, 4, 4, 4, 4 };//リニューアルスムギェ
 
     private static void initNewChar(GameClient client, L1PcInstance pc) throws IOException, Exception {
         short init_hp = 0, init_mp = 0;
@@ -343,7 +343,7 @@ public class C_CreateChar extends ClientBasePacket {
         pc.setEinhasad(2000000);
 
         /** 修正新規血盟タイトルの自動 **/
-		/*
+        /*
 		 * pc.addBaseMaxHp(init_hp); pc.setCurrentHp(init_hp); pc.addBaseMaxMp(init_mp); pc.setCurrentMp(init_mp); pc.resetBaseAc();
 		 * pc.setTitle("\\f:新規保護血盟 "）; pc.setClanid（1）; pc.setClanRank（L1Clan修煉）; pc.set_food（39）; // 17％pc.setAccessLevel（（short）0）;
 		 * pc.setGm(false); pc.setMonitor（false）; pc.setGmInvis（false）; pc.setExp（0）; //経験値0 pc.setHighLevel（1）; pc.setStatus（0）;

@@ -159,7 +159,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                 player.sendPackets(new S_SkillSound(player.getId(), 2243));
                 player.sendPackets(new S_HPUpdate(player.getCurrentHp(), player.getMaxHp()));
                 player.sendPackets(new S_MPUpdate(player.getCurrentMp(), player.getMaxMp()));
-                int[] allBuffSkill = {PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, GLOWING_AURA, BRAVE_AURA, HASTE, INSIGHT};
+                int[] allBuffSkill = { PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, GLOWING_AURA, BRAVE_AURA, HASTE, INSIGHT };
                 player.setBuffnoch(1);
                 L1SkillUse l1skilluse1 = new L1SkillUse();
                 for (int i = 0; i < allBuffSkill.length; i++) {
@@ -394,8 +394,8 @@ public class L1MerchantInstance extends L1NpcInstance {
                         int lv45_step = quest.get_step(L1Quest.QUEST_LEVEL45);
                         if (lv45_step == 2 && player.getInventory().checkItem(41422)) {
                             player.getInventory().consumeItem(41422, 1);
-                            final int[] item_ids = {40568};
-                            final int[] item_amounts = {1};
+                            final int[] item_ids = { 40568 };
+                            final int[] item_amounts = { 1 };
                             for (int i = 0; i < item_ids.length; i++) {
                                 player.getInventory().storeItem(item_ids[i], item_amounts[i]);
                             }
@@ -835,7 +835,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                             htmlid = "ishmael1";
                         } else {
                             htmlid = "ishmael6";
-                            htmldata = new String[]{player.getName()};
+                            htmldata = new String[] { player.getName() };
                         }
                     } else {
                         htmlid = "ishmael7";
@@ -848,7 +848,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                             htmlid = "seghem1";
                         } else {
                             htmlid = "seghem6";
-                            htmldata = new String[]{player.getName()};
+                            htmldata = new String[] { player.getName() };
                         }
                     } else {
                         htmlid = "seghem7";
@@ -861,7 +861,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                             htmlid = "othmond1";
                         } else {
                             htmlid = "othmond6";
-                            htmldata = new String[]{player.getName()};
+                            htmldata = new String[] { player.getName() };
                         }
                     } else {
                         htmlid = "othmond7";
@@ -874,7 +874,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                             htmlid = "orville1";
                         } else {
                             htmlid = "orville6";
-                            htmldata = new String[]{player.getName()};
+                            htmldata = new String[] { player.getName() };
                         }
                     } else {
                         htmlid = "orville7";
@@ -887,7 +887,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                             htmlid = "fisher1";
                         } else {
                             htmlid = "fisher6";
-                            htmldata = new String[]{player.getName()};
+                            htmldata = new String[] { player.getName() };
                         }
                     } else {
                         htmlid = "fisher7";
@@ -900,7 +900,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                             htmlid = "potempin1";
                         } else {
                             htmlid = "potempin6";
-                            htmldata = new String[]{player.getName()};
+                            htmldata = new String[] { player.getName() };
                         }
                     } else {
                         htmlid = "potempin7";
@@ -913,7 +913,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                             htmlid = "timon1";
                         } else {
                             htmlid = "timon6";
-                            htmldata = new String[]{player.getName()};
+                            htmldata = new String[] { player.getName() };
                         }
                     } else {
                         htmlid = "timon7";
@@ -926,7 +926,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                             htmlid = "olle1";
                         } else {
                             htmlid = "olle6";
-                            htmldata = new String[]{player.getName()};
+                            htmldata = new String[] { player.getName() };
                         }
                     } else {
                         htmlid = "olle7";
@@ -1554,7 +1554,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                         }
                     }
                     break;
-			/*
+            /*
 			 * } else if (npcid == 70512) { if (player.getLevel() >= 25) { htmlid = "jpe0102"; } } else if (npcid == 70514) { if (player.getLevel() >= 25) { htmlid = "jpe0092"; }
 			 * 
 			 * case 70035: case 70041: // バグベアーレース商人case 70042：if（BugRaceController.getInstance（）getBugState（）== 1）{htmlid = "maeno3"; } else
@@ -2221,7 +2221,7 @@ public class L1MerchantInstance extends L1NpcInstance {
                         createNewItem(player, npcName, L1ItemId.IVORYTOWER_ARMOR_SCROLL, 4, 0); // 象牙の塔の防具強化スクロール
                         htmlid = "tutorrw9";
                     }
-                    int[] Buff = new int[]{HASTE, FULL_HEAL};
+                    int[] Buff = new int[] { HASTE, FULL_HEAL };
                     player.setBuffnoch(1);
                     for (int i = 0; i < Buff.length; i++) {
                         l1skilluse.handleCommands(player, Buff[i], player.getId(), player.getX(), player.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);

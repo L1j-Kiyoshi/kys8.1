@@ -242,7 +242,7 @@ public class L1PcInstance extends L1Character {
      * ロボットダイメント
      */
     private String diement = null;
-    private static String[] _diementArray = {"すでにジュクニャ", "ーー", "ダイ笑", "ふふふふふふ", "", "本ジョクバプ笑", ""};
+    private static String[] _diementArray = { "すでにジュクニャ", "ーー", "ダイ笑", "ふふふふふふ", "", "本ジョクバプ笑", "" };
 
     public void Delay(int delayTime) throws Exception {
 
@@ -269,8 +269,8 @@ public class L1PcInstance extends L1Character {
     /**                                **/
     // ジュクウェ
     private int WeekType = 1;
-    private boolean LineClear[] = {false, false, false};
-    private boolean Reward[] = {false, false, false};
+    private boolean LineClear[] = { false, false, false };
+    private boolean Reward[] = { false, false, false };
     private ArrayList<Integer> wcount = new ArrayList<Integer>();
     private int QuestWeek = 0;
 
@@ -3526,7 +3526,7 @@ public class L1PcInstance extends L1Character {
                             }
                             if (isSiege) {
                                 if (getMapId() == 10502) {
-				    /*
+                    /*
 				     * L1ItemInstance aden =
 				     * ItemTable.getInstance().createItem(40308)
 				     * ; aden.setCount(1000);
@@ -5493,7 +5493,7 @@ public class L1PcInstance extends L1Character {
     }
 
     public void updateLevel() {
-        final int lvlTable[] = new int[]{30, 25, 20, 16, 14, 12, 11, 10, 9, 3, 2};
+        final int lvlTable[] = new int[] { 30, 25, 20, 16, 14, 12, 11, 10, 9, 3, 2 };
 
         int regenLvl = Math.min(10, getLevel());
         if (30 <= getLevel() && isKnight()) {

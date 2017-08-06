@@ -616,7 +616,7 @@ public class GameClient {
     public class ServerPavketThread implements Runnable {
         private final BlockingQueue<byte[]> _queue;
 
-        private byte[] c = {1, 2, 3, 4};
+        private byte[] c = { 1, 2, 3, 4 };
 
         public ServerPavketThread() {
             _queue = new LinkedBlockingQueue<byte[]>();
@@ -674,7 +674,7 @@ public class GameClient {
 
     public class HcPacket implements Runnable {
         private final BlockingQueue<byte[]> _queue;
-        private byte[] c = {1, 2, 3, 4};
+        private byte[] c = { 1, 2, 3, 4 };
 
         public HcPacket() {
             _queue = new LinkedBlockingQueue<byte[]>();

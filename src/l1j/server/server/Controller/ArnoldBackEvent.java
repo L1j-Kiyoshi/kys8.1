@@ -141,8 +141,8 @@ public class ArnoldBackEvent extends Thread {
     }
 
 
-    private static int delItemlist[] = {307, 308, 309, 310, 311, 312, 313, 314, 21095,
-            30146, 30147, 30150};
+    private static int delItemlist[] = { 307, 308, 309, 310, 311, 312, 313, 314, 21095,
+            30146, 30147, 30150 };
 
     public synchronized static void deleteArnoldEvent() {
         try {

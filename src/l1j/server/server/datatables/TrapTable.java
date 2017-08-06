@@ -49,7 +49,7 @@ public class TrapTable {
         final String packageName = "l1j.server.server.model.trap.";
 
         Constructor<?> con = Class.forName(packageName + name).getConstructor(
-                new Class[]{TrapStorage.class});
+                new Class[] { TrapStorage.class });
         return (L1Trap) con.newInstance(storage);
     }
 

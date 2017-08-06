@@ -25,7 +25,7 @@ public class LineageEncryption {
     public static LineageKeys initKeys(long seed) {
         LineageKeys keys = new LineageKeys();
 
-        long key[] = {seed, 0x930FD7E2L};
+        long key[] = { seed, 0x930FD7E2L };
 
         LineageBlowfish.getSeeds(key);
 

@@ -927,7 +927,7 @@ public class C_LoginToServer extends ClientBasePacket {
             AccountAttendanceTable.getInstance().load_account(pc);
         }
         AttendanceController.accsetPc(pc, pc.getAccountName(), 0);
-		/*if(AttendanceController.findacc(pc.getAccountName()).checktype()==1)
+        /*if(AttendanceController.findacc(pc.getAccountName()).checktype()==1)
 			acc.getPc().sendPackets(new S_Attendance(acc, 0 , acc.getPc（）.PC部屋_バフ））;
 		if(AttendanceController.findacc(pc.getAccountName()).checktypepc()==1)
 			acc.getPc().sendPackets(new S_Attendance(acc, 1 , acc.getPc().PC部屋_バフ））;*/
@@ -1370,7 +1370,7 @@ public class C_LoginToServer extends ClientBasePacket {
     }
 
     private void processBuff(L1PcInstance pc, List<BuffInfo> buffList) {
-        int icon[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int icon[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         for (BuffInfo buffInfo : buffList) {
             int skillid = buffInfo.skillId;

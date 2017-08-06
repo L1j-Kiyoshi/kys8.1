@@ -171,7 +171,7 @@ public class L1SkillId {
     public static final int ABSOLUTE_BLADE = 92;
 
     // none = 92-96
-	/*
+    /*
 	 * Dark Spirit Magic
 	 */
     public static final int BLIND_HIDING = 97;

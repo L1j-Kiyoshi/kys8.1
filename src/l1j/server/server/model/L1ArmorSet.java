@@ -322,7 +322,7 @@ class PolymorphEffect implements L1ArmorSetEffect {
 
     @Override
     public void giveEffect(L1PcInstance pc) {
-		/*
+        /*
 		 * if
 		 * (pc.getSkillEffectTimerSet().hasSkillEffect(L1SkillId.SCALES_EARTH_DRAGON
 		 * ) ||

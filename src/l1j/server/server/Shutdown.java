@@ -40,8 +40,8 @@ public class Shutdown extends Thread {
     public static final int GM_SHUTDOWN = 1;
     public static final int GM_RESTART = 2;
     public static final int ABORT = 3;
-    private static String[] _modeText = {"SIGTERM", "shuting down",
-            "restarting", "aborting"};
+    private static String[] _modeText = { "SIGTERM", "shuting down",
+            "restarting", "aborting" };
 
     /**
      * Default constucter is only used internal to create the shutdown-hook

@@ -88,7 +88,7 @@ public class L1MonsterTrap extends L1Trap {
         }
 
         return (L1NpcInstance) _constructor
-                .newInstance(new Object[]{_npcTemp});
+                .newInstance(new Object[] { _npcTemp });
     }
 
     private void spawn(L1Location loc) throws Exception {

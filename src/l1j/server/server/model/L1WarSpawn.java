@@ -92,7 +92,7 @@ public class L1WarSpawn {
                 _constructor = Class.forName(
                         (new StringBuilder()).append("l1j.server.server.model.Instance.").append(s).append("Instance")
                                 .toString()).getConstructors()[0];
-                Object aobj[] = {l1npc};
+                Object aobj[] = { l1npc };
                 L1NpcInstance npc = (L1NpcInstance) _constructor.newInstance(aobj);
                 npc.setId(IdFactory.getInstance().nextId());
                 npc.setX(locx);

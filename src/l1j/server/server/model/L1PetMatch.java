@@ -46,8 +46,8 @@ public class L1PetMatch {
 
     public static final int MAX_PET_MATCH = 1;
 
-    private static final short[] PET_MATCH_MAPID = {5125, 5131, 5132, 5133,
-            5134};
+    private static final short[] PET_MATCH_MAPID = { 5125, 5131, 5132, 5133,
+            5134 };
 
     private String[] _pc1Name = new String[MAX_PET_MATCH];
     private String[] _pc2Name = new String[MAX_PET_MATCH];

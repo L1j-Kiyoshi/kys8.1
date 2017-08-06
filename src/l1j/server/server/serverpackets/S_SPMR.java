@@ -29,30 +29,30 @@ public class S_SPMR extends ServerBasePacket {
     private byte[] _byte = null;
 
     public S_SPMR(L1PcInstance pc) {
-	buildPacket(pc);
+        buildPacket(pc);
     }
 
     private void buildPacket(L1PcInstance pc) {
-	writeC(Opcodes.S_MAGIC_STATUS);
-	// ウィズダム一部のSPはS_SkillBrave送信時に更新されるため控除しておく
-	if (pc.hasSkillEffect(L1SkillId.STATUS_WISDOM_POTION)) {
-	    writeH(pc.getAbility().getSp() - pc.getAbility().getTrueSp() - 2); // 機器増加SP
-	} else {
-	    writeH(pc.getAbility().getSp() - pc.getAbility().getTrueSp()); // 機器増加SP
-	}
-	writeH(pc.getResistance().getMr() - pc.getResistance().getBaseMr()); // 装備や魔法で増加したMR
+        writeC(Opcodes.S_MAGIC_STATUS);
+        // ウィズダム一部のSPはS_SkillBrave送信時に更新されるため控除しておく
+        if (pc.hasSkillEffect(L1SkillId.STATUS_WISDOM_POTION)) {
+            writeH(pc.getAbility().getSp() - pc.getAbility().getTrueSp() - 2); // 機器増加SP
+        } else {
+            writeH(pc.getAbility().getSp() - pc.getAbility().getTrueSp()); // 機器増加SP
+        }
+        writeH(pc.getResistance().getMr() - pc.getResistance().getBaseMr()); // 装備や魔法で増加したMR
     }
 
     @Override
     public byte[] getContent() {
-	if (_byte == null) {
-	    _byte = getBytes();
-	}
-	return _byte;
+        if (_byte == null) {
+            _byte = getBytes();
+        }
+        return _byte;
     }
 
     @Override
     public String getType() {
-	return S_SPMR;
+        return S_SPMR;
     }
 }

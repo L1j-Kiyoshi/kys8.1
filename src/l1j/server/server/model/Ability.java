@@ -509,7 +509,7 @@ public class Ability {
 
         }
         minabllity = getBaseStatDiff(minabllity);
-		/*
+        /*
 		 * for(int i =0 ; i<minabllity.length; i++){ System.out.println(minabllity[i]); }
 		 */
         return minabllity;

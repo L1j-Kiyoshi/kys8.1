@@ -219,7 +219,7 @@ public class C_Craft extends ClientBasePacket {
                 if (CommonUtil.random(100) + 1 <= chance) {
                     switch (step) {
                         case 1:
-                            dollids = new int[]{
+                            dollids = new int[] {
                                     210071, // 長老
                                     41249, //サキュバス
                                     210105, //コカトリス
@@ -229,7 +229,7 @@ public class C_Craft extends ClientBasePacket {
                             };
                             break;
                         case 2:
-                            dollids = new int[]{
+                            dollids = new int[] {
                                     510222, // サーキュクイーン
                                     510221, // ブラックエルダー
                                     510219, //ジャイアント
@@ -239,7 +239,7 @@ public class C_Craft extends ClientBasePacket {
                             };
                             break;
                         case 3:
-                            dollids = new int[]{
+                            dollids = new int[] {
                                     510220, // サイクロプス
                                     447016, // リッチ
                                     743, //ナイトバルド
@@ -250,7 +250,7 @@ public class C_Craft extends ClientBasePacket {
                             };
                             break;
                         case 4://最後出てくる段階
-                            dollids = new int[]{
+                            dollids = new int[] {
                                     745, // デーモン
                                     410171, // デスナイト746
                                     3000088, // バランカ

@@ -242,7 +242,7 @@ public class UserCommands {
              * } else if (cmd.equalsIgnoreCase("友好度")) { describe(pc);
 			 */
             /*
-			 * } else if (cmd.equalsIgnoreCase("アビスポイント")) {
+             * } else if (cmd.equalsIgnoreCase("アビスポイント")) {
 			 */
             }
         } catch (Exception e) {

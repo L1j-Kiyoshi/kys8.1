@@ -99,10 +99,10 @@ public class L1HousekeeperInstance extends L1NpcInstance {
                 }
                 if (isOccupy) {
                     htmlid = "agname";
-                    htmldata = new String[]{clanName, leaderName, targetHouse.getHouseName()};
+                    htmldata = new String[] { clanName, leaderName, targetHouse.getHouseName() };
                 } else {
                     htmlid = "agnoname";
-                    htmldata = new String[]{targetHouse.getHouseName()};
+                    htmldata = new String[] { targetHouse.getHouseName() };
                 }
             }
 

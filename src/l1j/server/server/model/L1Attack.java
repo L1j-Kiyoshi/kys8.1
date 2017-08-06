@@ -1193,7 +1193,7 @@ public class L1Attack {
                         Dmgcritical += 5;
                     }
                 }/*if (_pc.getInventory().checkEquipped(22208)){ // 塗って腕力
-                	L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
+                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
                 	if(item.getEnchantLevel() == 7){
                 		Dmgcritical += 1;
                 	}else if(item.getEnchantLevel() == 8){

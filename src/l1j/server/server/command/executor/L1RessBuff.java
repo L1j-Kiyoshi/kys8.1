@@ -24,7 +24,7 @@ public class L1RessBuff implements L1CommandExecutor {
     public void execute(L1PcInstance pc, String cmdName, String arg) {
         try {
             //int[] allBuffSkill = { PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN };
-            int[] allBuffSkill = {PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, FEATHER_BUFF_A, LIFE_MAAN, God_buff, COMA_B};
+            int[] allBuffSkill = { PHYSICAL_ENCHANT_DEX, PHYSICAL_ENCHANT_STR, BLESS_WEAPON, IRON_SKIN, FEATHER_BUFF_A, LIFE_MAAN, God_buff, COMA_B };
             for (L1PcInstance tg : L1World.getInstance().getVisiblePlayer(pc)) {
                 tg.setBuffnoch(1);
                 L1SkillUse l1skilluse = new L1SkillUse();

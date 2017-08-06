@@ -576,7 +576,7 @@ public class L1MobSkillUse {
                                     "Instance").toString())
                             .getConstructors()[0];
                     mob = (L1NpcInstance) _constructor
-                            .newInstance(new Object[]{spawnmonster});
+                            .newInstance(new Object[] { spawnmonster });
                     mob.setId(IdFactory.getInstance().nextId());
                     L1Location loc = _attacker.getLocation().randomLocation(8,
                             false);

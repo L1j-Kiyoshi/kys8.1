@@ -201,7 +201,7 @@ public class WarTimeController implements Runnable {
 
                     // 日、数攻城進行
                     /*
-					 * if(CurrentDay == 0){//日曜日if（cal.getTime（）。getHours（）>
+                     * if(CurrentDay == 0){//日曜日if（cal.getTime（）。getHours（）>
 					 * 21) cal.setTimeInMillis((3 * 24 * 3600000) +
 					 * cal.getTimeInMillis()); }else if(CurrentDay == 3){//水曜日
 					 * if(cal.getTime().getHours() > 21) cal.setTimeInMillis((4
