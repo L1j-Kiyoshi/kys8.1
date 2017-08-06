@@ -646,7 +646,7 @@ public final class Config {
             AD_REPORT_SERVER_PORT = Integer.parseInt(serverSettings.getProperty("AdReportServerPort", "18182"));
             DB_DRIVER = serverSettings.getProperty("Driver", "com.mysql.jdbc.Driver");
             DB_URL = serverSettings.getProperty("URL",
-                    "jdbc:mysql://localhost/l1jdb?useUnicode=true&characterEncoding=euckr");
+                    "jdbc:mysql://localhost/l1jdb?useUnicode=true&characterEncoding=utf8");
             DB_LOGIN = serverSettings.getProperty("Login", "root");
             DB_PASSWORD = serverSettings.getProperty("Password", "");
             THREAD_P_TYPE_GENERAL = Integer.parseInt(serverSettings.getProperty("GeneralThreadPoolType", "0"), 10);
