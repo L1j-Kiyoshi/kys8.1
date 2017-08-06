@@ -54,7 +54,7 @@ public class S_FairlyConfig extends ServerBasePacket {
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
             pstm = con
-                    .prepareStatement("SELECT * FROM character_Fairly_Config WHERE object_id=?");
+                    .prepareStatement("SELECT * FROM character_fairly_config WHERE object_id=?");
             pstm.setInt(1, pc.getId());
             rs = pstm.executeQuery();
             while (rs.next()) {

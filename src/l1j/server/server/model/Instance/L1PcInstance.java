@@ -1016,7 +1016,7 @@ public class L1PcInstance extends L1Character {
         ResultSet rs = null;
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
-            pstm = con.prepareStatement("SELECT count(*) as cnt FROM character_Fairly_Config WHERE object_id=?");
+            pstm = con.prepareStatement("SELECT count(*) as cnt FROM character_fairly_config WHERE object_id=?");
             pstm.setInt(1, objectId);
             rs = pstm.executeQuery();
             if (rs.next()) {
@@ -1037,7 +1037,7 @@ public class L1PcInstance extends L1Character {
         PreparedStatement pstm = null;
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
-            pstm = con.prepareStatement("INSERT INTO character_Fairly_Config SET object_id=?, data=?");
+            pstm = con.prepareStatement("INSERT INTO character_fairly_config SET object_id=?, data=?");
             pstm.setInt(1, objectId);
             pstm.setBytes(2, data);
             pstm.executeUpdate();
@@ -1054,7 +1054,7 @@ public class L1PcInstance extends L1Character {
         PreparedStatement pstm = null;
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
-            pstm = con.prepareStatement("UPDATE character_Fairly_Config SET data=? WHERE object_id=?");
+            pstm = con.prepareStatement("UPDATE character_fairly_config SET data=? WHERE object_id=?");
             pstm.setBytes(1, data);
             pstm.setInt(2, objectId);
             pstm.executeUpdate();

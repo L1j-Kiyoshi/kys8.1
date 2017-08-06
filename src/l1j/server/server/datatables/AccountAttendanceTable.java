@@ -58,7 +58,7 @@ public class AccountAttendanceTable {
         L1AccountAttendance acc = new L1AccountAttendance(pc.getAccountName());
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
-            pstm = con.prepareStatement("SELECT * FROM AttendanceAccount WHERE account_name=? ");
+            pstm = con.prepareStatement("SELECT * FROM attendanceaccount WHERE account_name=? ");
             pstm.setString(1, pc.getAccountName());
             rs = pstm.executeQuery();
 
@@ -120,12 +120,12 @@ public class AccountAttendanceTable {
         Calendar cal = Calendar.getInstance();
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
-            st = con.prepareStatement("DELETE FROM AttendanceAccount WHERE account_name=?");
+            st = con.prepareStatement("DELETE FROM attendanceaccount WHERE account_name=?");
             st.setString(1, pc.getAccountName());
             st.executeUpdate();
 
             L1AccountAttendance acc = AttendanceController.findacc(pc.getAccountName());
-            st = con.prepareStatement("INSERT INTO AttendanceAccount SET account_name=?, day=?, time=?, clear=?, day_pc=?, time_pc=?, clear_pc=?, laste_check_day=?, laste_check_year=?");
+            st = con.prepareStatement("INSERT INTO attendanceaccount SET account_name=?, day=?, time=?, clear=?, day_pc=?, time_pc=?, clear_pc=?, laste_check_day=?, laste_check_year=?");
             st.setString(1, acc.getAccounts());
             st.setInt(2, acc.getDay());
             st.setInt(3, acc.getTime());

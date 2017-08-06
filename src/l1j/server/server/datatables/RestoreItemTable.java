@@ -73,7 +73,7 @@ public class RestoreItemTable {
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
             pstm = con
-                    .prepareStatement("SELECT * FROM character_restoreItem");
+                    .prepareStatement("SELECT * FROM character_restoreitem");
             rs = pstm.executeQuery();
             L1RestoreItemInstance item = null;
             while (rs.next()) {
@@ -98,7 +98,7 @@ public class RestoreItemTable {
         PreparedStatement pstm = null;
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
-            pstm = con.prepareStatement("DELETE FROM character_restoreItem where objid=?");
+            pstm = con.prepareStatement("DELETE FROM character_restoreitem where objid=?");
             pstm.setInt(1, id);
             pstm.execute();
 
@@ -118,11 +118,11 @@ public class RestoreItemTable {
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
 
-            pstm = con.prepareStatement("DELETE FROM character_restoreItem");
+            pstm = con.prepareStatement("DELETE FROM character_restoreitem");
             pstm.execute();
             for (int i = 0; i < objlist.size(); i++) {
                 id = objlist.get(i);
-                pstm2 = con.prepareStatement("INSERT INTO character_restoreItem SET objid=?, itemid=?, enchantLevel=?,attrenchantLevel=?,bless=?");
+                pstm2 = con.prepareStatement("INSERT INTO character_restoreitem SET objid=?, itemid=?, enchantLevel=?,attrenchantLevel=?,bless=?");
                 pstm2.setInt(1, id);
                 pstm2.setInt(2, restoreItemList.get(id).getItemId());
                 pstm2.setInt(3, restoreItemList.get(id).getEnchantLevel());
