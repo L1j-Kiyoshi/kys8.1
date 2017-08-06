@@ -112,10 +112,14 @@ public class C_ActionUi extends ClientBasePacket {
                     pc.sendPackets(new S_MatizCloudia(1, 0));
                     pc.getInventory().storeItem(3000162, 1);
                     pc.getInventory().storeItem(3000163, 1);
-                    pc.setExp(ExpTable.getExpByLevel(8));
+                    if (pc.getLevel() < 8) {
+                        pc.setExp(ExpTable.getExpByLevel(8));
+                    }
                 } else {
                     pc.sendPackets(new S_MatizCloudia(4));
-                    pc.setExp(ExpTable.getExpByLevel(10));
+                    if (pc.getLevel() < 10) {
+                        pc.setExp(ExpTable.getExpByLevel(10));
+                    }
                 }
                 break;
             case ALARM:
