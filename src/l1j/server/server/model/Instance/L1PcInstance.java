@@ -3860,7 +3860,8 @@ public class L1PcInstance extends L1Character {
 
 	    if (_deathPenalty && player != null) {// PKコメント
 		int price = getHuntPrice();
-		if (Config.BROADCAST_KILL_LOG && getLevel() >= Config.BROADCAST_KILL_LOG_LEVEL) {
+		if (Config.BROADCAST_KILL_LOG && getLevel() >= Config.BROADCAST_KILL_LOG_LEVEL
+			&& !(isRobot() && player.isRobot())) {
 		    L1World.getInstance()
 			    .broadcastPacketToAll(new S_ChatPacket(
 				    "\\aH[" + player.getName() + "]\\aA 様が \\aG[" + getName() + "]\\aA 様を殺した。",
