@@ -67,21 +67,20 @@ public class S_ServerVersion extends ServerBasePacket {
 	// writeD(160922701);
 	writeC(Opcodes.S_VERSION_CHECK);
 	writeC(0x00);
-	writeC(0x0b);
-	writeD(0x0734fd33); // server verion
-	writeD(0x0734fd30); // cache version
-	writeD(0x77cf6eba); // auth version
-	writeD(0x0734fd31); // npc version
-	writeD(UPTIME); // game server time
+	writeC(0x00);
+	writeD(161006201);
+	writeD(161006201);
+	writeD(2015090301);
+	writeD(161006201);
+	writeD(UPTIME);
 	writeC(0x00);
 	writeC(0x00);
 	writeC(Config.CLIENT_LANGUAGE);
-	writeH(32130);
-	writeH(16511);// 16511
+	writeD(0x34ff7d0a);//
 	writeD(UPTIME);
-	writeD(0);
-	writeD(0);
-	writeD(0);
+	writeD(150316700);
+	writeD(150204901);
+	writeD(150306700);
     }
 
     @Override
