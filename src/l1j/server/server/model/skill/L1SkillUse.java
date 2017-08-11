@@ -100,6 +100,7 @@ import l1j.server.server.serverpackets.S_TrueTargetNew;
 import l1j.server.server.serverpackets.S_UseAttackSkill;
 import l1j.server.server.templates.L1Npc;
 import l1j.server.server.templates.L1Skills;
+import l1j.server.server.utils.CalcStat;
 import l1j.server.server.utils.L1SpawnUtil;
 
 public class L1SkillUse {
@@ -161,24 +162,29 @@ public class L1SkillUse {
 
     private static Logger _log = Logger.getLogger(L1SkillUse.class.getName());
 
-    private static final int[] CAST_WITH_INVIS = { 1, 2, 3, 5, 8, 9, 12, 13, 14, 19, 21, 26, 31, 32, 35, 37, 42, 43, 44, 48, 49, 52, 54, 55, 57, 60,
-            61, 63, 67, 68, 69, 72, 73, 75, 78, 79, REDUCTION_ARMOR, BOUNCE_ATTACK, SOLID_CARRIAGE, COUNTER_BARRIER, 97, 98, 99, 100, 101, 102, 104,
-            105, 106, 107, 109, 110, 111, 113, 114, 115, 116, 117, 118, 129, 130, 131, 133, 134, 137, 138, 146, 147, 148, 149, 150, 151, 155, 156,
-            158, 159, 163, 164, 165, 166, 168, 169, 170, 171, 181, SOUL_OF_FLAME, ADDITIONAL_FIRE, ANTA_BUFF, FAFU_BUFF, RIND_BUFF, VALA_BUFF };
+    private static final int[] CAST_WITH_INVIS = { 1, 2, 3, 5, 8, 9, 12, 13, 14, 19, 21, 26, 31, 32, 35, 37, 42, 43, 44,
+            48, 49, 52, 54, 55, 57, 60, 61, 63, 67, 68, 69, 72, 73, 75, 78, 79, REDUCTION_ARMOR, BOUNCE_ATTACK,
+            SOLID_CARRIAGE, COUNTER_BARRIER, 97, 98, 99, 100, 101, 102, 104, 105, 106, 107, 109, 110, 111, 113, 114,
+            115, 116, 117, 118, 129, 130, 131, 133, 134, 137, 138, 146, 147, 148, 149, 150, 151, 155, 156, 158, 159,
+            163, 164, 165, 166, 168, 169, 170, 171, 181, SOUL_OF_FLAME, ADDITIONAL_FIRE, ANTA_BUFF, FAFU_BUFF,
+            RIND_BUFF, VALA_BUFF };
 
     /**
      * カウンターマジックで防御できないスキル
      **/
     // カウンターマジック
-    private static final int[] EXCEPT_COUNTER_MAGIC = { 1, 2, 3, 5, 8, 9, 12, 13, 14, 19, 21, 26, 31, 32, 35, 37, 42, 43, 44, 48, 49, 52, 54, 55, 57,
-            60, 61, 63, 67, 68, 69, 72, 73, 75, 78, 79, SHOCK_STUN, BONE_BREAK, REDUCTION_ARMOR, BOUNCE_ATTACK, SOLID_CARRIAGE, COUNTER_BARRIER, 97,
-            98, 99, 100, 101, 102, 104, 105, 106, 107, 109, 110, 111, 113, 114, 115, 116, 117, 118, 129, 130, 131, 132, 134, 137, 138, 146, 147, 148,
-            149, 150, 151, 155, 156, 158, 159, 161, 163, 164, 165, 166, 168, 169, 170, 171, 181, SOUL_OF_FLAME, ADDITIONAL_FIRE, FOU_SLAYER,
-            SCALES_EARTH_DRAGON, SCALES_FIRE_DRAGON, DRAGON_SKIN, SCALES_WATER_DRAGON, MIRROR_IMAGE, IllUSION_OGRE, PATIENCE, IllUSION_DIAMONDGOLEM,
-            IllUSION_LICH, IllUSION_AVATAR, INSIGHT, SHAPE_CHANGE, 10026, 10027, 10028, 10029, 30060, 30000, 30078, 30079, 30011, 30081, 30082, 30083,
-            30080, 30084, 30010, 30002, 30086, OMAN_CANCELLATION, ANTA_MESSAGE_2, ANTA_MESSAGE_3, ANTA_MESSAGE_4, ANTA_MESSAGE_5, ANTA_MESSAGE_6,
-            ANTA_MESSAGE_7, ANTA_MESSAGE_8, ANTA_MESSAGE_10, 22034, OMAN_STUN, PAP_PREDICATE1, PAP_PREDICATE3, PAP_PREDICATE5, PAP_PREDICATE6,
-            PAP_PREDICATE7, PAP_PREDICATE8, PAP_PREDICATE9, PAP_PREDICATE11, PAP_PREDICATE12, DESPERADO, POWEGRRIP };
+    private static final int[] EXCEPT_COUNTER_MAGIC = { 1, 2, 3, 5, 8, 9, 12, 13, 14, 19, 21, 26, 31, 32, 35, 37, 42,
+            43, 44, 48, 49, 52, 54, 55, 57, 60, 61, 63, 67, 68, 69, 72, 73, 75, 78, 79, SHOCK_STUN, BONE_BREAK,
+            REDUCTION_ARMOR, BOUNCE_ATTACK, SOLID_CARRIAGE, COUNTER_BARRIER, 97, 98, 99, 100, 101, 102, 104, 105, 106,
+            107, 109, 110, 111, 113, 114, 115, 116, 117, 118, 129, 130, 131, 132, 134, 137, 138, 146, 147, 148, 149,
+            150, 151, 155, 156, 158, 159, 161, 163, 164, 165, 166, 168, 169, 170, 171, 181, SOUL_OF_FLAME,
+            ADDITIONAL_FIRE, FOU_SLAYER, SCALES_EARTH_DRAGON, SCALES_FIRE_DRAGON, DRAGON_SKIN, SCALES_WATER_DRAGON,
+            MIRROR_IMAGE, IllUSION_OGRE, PATIENCE, IllUSION_DIAMONDGOLEM, IllUSION_LICH, IllUSION_AVATAR, INSIGHT,
+            SHAPE_CHANGE, 10026, 10027, 10028, 10029, 30060, 30000, 30078, 30079, 30011, 30081, 30082, 30083, 30080,
+            30084, 30010, 30002, 30086, OMAN_CANCELLATION, ANTA_MESSAGE_2, ANTA_MESSAGE_3, ANTA_MESSAGE_4,
+            ANTA_MESSAGE_5, ANTA_MESSAGE_6, ANTA_MESSAGE_7, ANTA_MESSAGE_8, ANTA_MESSAGE_10, 22034, OMAN_STUN,
+            PAP_PREDICATE1, PAP_PREDICATE3, PAP_PREDICATE5, PAP_PREDICATE6, PAP_PREDICATE7, PAP_PREDICATE8,
+            PAP_PREDICATE9, PAP_PREDICATE11, PAP_PREDICATE12, DESPERADO, POWEGRRIP };
 
     public L1SkillUse() {
     }
@@ -222,8 +228,8 @@ public class L1SkillUse {
         _checkedUseSkill = flg;
     }
 
-    public boolean checkUseSkill(L1PcInstance player, int skillid, int target_id, int x, int y, String message, int time, int type,
-                                 L1Character attacker) {
+    public boolean checkUseSkill(L1PcInstance player, int skillid, int target_id, int x, int y, String message,
+            int time, int type, L1Character attacker) {
         // ** 下のバグチェックステートメントを実行してエラーアンナゲ
         if (player instanceof L1PcInstance) {
             L1Object l1object = L1World.getInstance().findObject(target_id);
@@ -238,7 +244,8 @@ public class L1SkillUse {
 
             // ** ノディル防止追加
             long nowtime = System.currentTimeMillis();
-            if (skillid == 17 && player.getSkilldelay2() >= nowtime || skillid == 25 && player.getSkilldelay2() >= nowtime) {
+            if (skillid == 17 && player.getSkilldelay2() >= nowtime
+                    || skillid == 25 && player.getSkilldelay2() >= nowtime) {
                 return false;
             } else if (player.getSkilldelay2() >= nowtime) {
                 return false;
@@ -246,13 +253,14 @@ public class L1SkillUse {
             // ** ノディル防止追加
 
             // ** 2次スキルのバグ防止ソースの追加
-            int[] CheckSkillID = { 45, 46, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74,
-                    75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105,
-                    106, 107, 108, 109, 110, 111, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131,
-                    132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158,
-                    159, 160, 161, 162, 163, 164, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175, 176, 181, 182, 183, 184, 185, 186, 187, 188, 189,
-                    190, 191, 192, 193, 194, 195, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219,
-                    220 };
+            int[] CheckSkillID = { 45, 46, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66,
+                    67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91,
+                    92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 113,
+                    114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133,
+                    134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154,
+                    155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 169, 170, 171, 172, 173, 174, 175,
+                    176, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 201, 202, 203, 204,
+                    205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220 };
             // 3、12、13、21、26、42、168、43、54、1、8チツシンツヒムツヘイストは落ち
 
             // スキルチェックで落ちることのスキルは、上記番号でペサム！
@@ -325,13 +333,12 @@ public class L1SkillUse {
             return false;
         }
 
-        if (_skillId == FIRE_WALL || _skillId == LIFE_STREAM || _skillId == CUBE_IGNITION || _skillId == CUBE_QUAKE || _skillId == CUBE_SHOCK
-                || _skillId == CUBE_BALANCE) {
+        if (_skillId == FIRE_WALL || _skillId == LIFE_STREAM || _skillId == CUBE_IGNITION || _skillId == CUBE_QUAKE
+                || _skillId == CUBE_SHOCK || _skillId == CUBE_BALANCE) {
             return true;
         }
 
         L1Object l1object = L1World.getInstance().findObject(_targetID);
-
 
         if (l1object instanceof L1ItemInstance) {
             _log.fine("skill target item name: " + ((L1ItemInstance) l1object).getViewName());
@@ -365,12 +372,14 @@ public class L1SkillUse {
             _bookmark_y = y;
         }
 
-        if (_skillId == BRING_STONE || _skillId == BLESSED_ARMOR || _skillId == ENCHANT_WEAPON || _skillId == SHADOW_FANG) {
+        if (_skillId == BRING_STONE || _skillId == BLESSED_ARMOR || _skillId == ENCHANT_WEAPON
+                || _skillId == SHADOW_FANG) {
             _itemobjid = target_id;
         }
         _target = (L1Character) l1object;
 
-        if (!(_target instanceof L1MonsterInstance) && _skill.getTarget().equals("attack") && _user.getId() != target_id) {
+        if (!(_target instanceof L1MonsterInstance) && _skill.getTarget().equals("attack")
+                && _user.getId() != target_id) {
             _isPK = true;
         }
         if (!(l1object instanceof L1Character)) {
@@ -398,7 +407,7 @@ public class L1SkillUse {
             if ((pc.isInvisble() || pc.isInvisDelay()) && !isInvisUsableSkill() && _skillId != 233) {
                 return false;
             }
-            if (pc.getRankLevel() < 4 && pc.getInventory().getWeight100() > 82) { //重量オーバーであればスキルを使用することができない
+            if (pc.getRankLevel() < 4 && pc.getInventory().getWeight100() > 82) { // 重量オーバーであればスキルを使用することができない
                 pc.sendPackets(new S_ServerMessage(316));
                 return false;
             }
@@ -412,15 +421,16 @@ public class L1SkillUse {
 
             int castle_id = L1CastleLocation.getCastleIdByArea(pc);
             if (castle_id != 0) {
-                if (_skillId == 50 || _skillId == 69 || _skillId == 157 || _skillId == 66 || _skillId == 78 || _skillId == 116) {
+                if (_skillId == 50 || _skillId == 69 || _skillId == 157 || _skillId == 66 || _skillId == 78
+                        || _skillId == 116) {
                     pc.sendPackets(new S_SystemMessage("ボール成長で使用することはできません。"));
                     return false;
                 }
             }
 
             if (pc.getMap().isSafetyZone(pc.getLocation())) {
-                if (_skillId == 69 || _skillId == 220 || _skillId == 215 || _skillId == 205 || _skillId == 11 || _skillId == 208 || _skillId == 219
-                        || _skillId == 67) { // 67回SHAPE_CHANGE
+                if (_skillId == 69 || _skillId == 220 || _skillId == 215 || _skillId == 205 || _skillId == 11
+                        || _skillId == 208 || _skillId == 219 || _skillId == 67) { // 67回SHAPE_CHANGE
                     pc.sendPackets(new S_SystemMessage("村では使用できません。"));
                     return false;
                 }
@@ -440,7 +450,8 @@ public class L1SkillUse {
             }
 
             if (_skillId == TRUE_TARGET) {
-            } else if ((pc.hasSkillEffect(SILENCE) || pc.hasSkillEffect(AREA_OF_SILENCE) || pc.hasSkillEffect(STATUS_POISON_SILENCE))
+            } else if ((pc.hasSkillEffect(SILENCE) || pc.hasSkillEffect(AREA_OF_SILENCE)
+                    || pc.hasSkillEffect(STATUS_POISON_SILENCE))
                     && (_skillId < SHOCK_STUN || _skillId > COUNTER_BARRIER)) { // サイレンス状態でもトゥルーターゲット詠唱可能
                 pc.sendPackets(new S_ServerMessage(285));
                 return false;
@@ -470,10 +481,12 @@ public class L1SkillUse {
                 }
             }
 
-/*			if (_skillId == ARMOR_BRAKE && _skillId == COUNTER_BARRIER) { // アーマー状態カベ不可
-                pc.sendPackets(new S_SystemMessage("アーマーブレイクが詰まっている場合詠唱することはできません。"));
-				return false;
-			}*/
+            /*
+             * if (_skillId == ARMOR_BRAKE && _skillId == COUNTER_BARRIER) { //
+             * アーマー状態カベ不可 pc.sendPackets(new
+             * S_SystemMessage("アーマーブレイクが詰まっている場合詠唱することはできません。")); return false;
+             * }
+             */
 
             if (pc.hasSkillEffect(CONFUSION)) {
                 pc.sendPackets(new S_ServerMessage(285));
@@ -524,15 +537,16 @@ public class L1SkillUse {
         return false;
     }
 
-    public void handleCommands(L1PcInstance player, int skillId, int targetId, int x, int y, String message, int timeSecs, int type) {
+    public void handleCommands(L1PcInstance player, int skillId, int targetId, int x, int y, String message,
+            int timeSecs, int type) {
         L1Character attacker = null;
         handleCommands(player, skillId, targetId, x, y, message, timeSecs, type, attacker);
     }
 
-    //private boolean useok = true;
+    // private boolean useok = true;
 
-    public void handleCommands(L1PcInstance player, int skillId, int targetId, int x, int y, String message, int timeSecs, int type,
-                               L1Character attacker) {
+    public void handleCommands(L1PcInstance player, int skillId, int targetId, int x, int y, String message,
+            int timeSecs, int type, L1Character attacker) {
 
         try {
             if (!isCheckedUseSkill()) {
@@ -544,47 +558,48 @@ public class L1SkillUse {
                 }
             }
             switch (type) {
-                case TYPE_NORMAL:
-                    if (!_isGlanceCheckFail || _skill.getArea() > 0 || _skill.getTarget().equals("none")) {
-                        if (skillId == DANCING_BLADES || skillId == SOLID_CARRIAGE) {
-                            //特定のスキルのタイムアウト
-                            sendGrfx(true);
-                            runSkill();
-                            useConsume();
-                            sendFailMessageHandle();
-                            setDelay();
-                        } else {
-                            runSkill();
-                            useConsume();
-                            sendGrfx(true);
-                            sendFailMessageHandle();
-                            setDelay();
-                        }
+            case TYPE_NORMAL:
+                if (!_isGlanceCheckFail || _skill.getArea() > 0 || _skill.getTarget().equals("none")) {
+                    if (skillId == DANCING_BLADES || skillId == SOLID_CARRIAGE) {
+                        // 特定のスキルのタイムアウト
+                        sendGrfx(true);
+                        runSkill();
+                        useConsume();
+                        sendFailMessageHandle();
+                        setDelay();
+                    } else {
+                        runSkill();
+                        useConsume();
+                        sendGrfx(true);
+                        sendFailMessageHandle();
+                        setDelay();
                     }
-                    break;
-                case TYPE_LOGIN:
-                    runSkill();
-                    break;
-                case TYPE_SPELLSC:
-                    runSkill();
-                    sendGrfx(true);
-                    setDelay();
-                    break;
-                case TYPE_GMBUFF:
-                    runSkill();
-                    sendGrfx(false);
-                    break;
-                case TYPE_NPCBUFF:
-                    runSkill();
-                    sendGrfx(true);
-                    break;
-                default:
-                    break;
+                }
+                break;
+            case TYPE_LOGIN:
+                runSkill();
+                break;
+            case TYPE_SPELLSC:
+                runSkill();
+                sendGrfx(true);
+                setDelay();
+                break;
+            case TYPE_GMBUFF:
+                runSkill();
+                sendGrfx(false);
+                break;
+            case TYPE_NPCBUFF:
+                runSkill();
+                sendGrfx(true);
+                break;
+            default:
+                break;
             }
             setCheckedUseSkill(false);
         } catch (Exception e) {
             // この部分がNPC見えなかった原因
-            // System.out.println("skillId : " + skillId + " / attacker : " + (attacker==null ? "" : attacker.getName()));
+            // System.out.println("skillId : " + skillId + " / attacker : " +
+            // (attacker==null ? "" : attacker.getName()));
             // _log.log(Level.SEVERE, "", e);
         }
     }
@@ -605,7 +620,8 @@ public class L1SkillUse {
                 return false;
             }
         }
-        if (_calcType == NPC_PC && (cha instanceof L1PcInstance || cha instanceof L1PetInstance || cha instanceof L1SummonInstance)) {
+        if (_calcType == NPC_PC
+                && (cha instanceof L1PcInstance || cha instanceof L1PetInstance || cha instanceof L1SummonInstance)) {
             _flg = true;
         }
 
@@ -615,8 +631,8 @@ public class L1SkillUse {
             }
         }
 
-        if ((_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK) && _calcType == NPC_PC && cha instanceof L1PcInstance
-                && _user instanceof L1SummonInstance) {
+        if ((_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK) && _calcType == NPC_PC
+                && cha instanceof L1PcInstance && _user instanceof L1SummonInstance) {
             L1SummonInstance summon = (L1SummonInstance) _user;
             if (cha.getId() == summon.getMaster().getId()) {
                 return false;
@@ -626,8 +642,8 @@ public class L1SkillUse {
             }
         }
 
-        if ((_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK) && _calcType == NPC_PC && cha instanceof L1PcInstance
-                && _user instanceof L1PetInstance) {
+        if ((_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK) && _calcType == NPC_PC
+                && cha instanceof L1PcInstance && _user instanceof L1PetInstance) {
             L1PetInstance pet = (L1PetInstance) _user;
             if (cha.getId() == pet.getMaster().getId()) {
                 return false;
@@ -641,15 +657,16 @@ public class L1SkillUse {
             return false;
         }
 
-        if (_calcType == PC_NPC && _target instanceof L1NpcInstance && !(_target instanceof L1PetInstance) && !(_target instanceof L1SummonInstance)
-                && !(_target instanceof L1SupportInstance) && (cha instanceof L1PetInstance || cha instanceof L1SummonInstance
-                || cha instanceof L1SupportInstance || cha instanceof L1PcInstance)) {
+        if (_calcType == PC_NPC && _target instanceof L1NpcInstance && !(_target instanceof L1PetInstance)
+                && !(_target instanceof L1SummonInstance) && !(_target instanceof L1SupportInstance)
+                && (cha instanceof L1PetInstance || cha instanceof L1SummonInstance || cha instanceof L1SupportInstance
+                        || cha instanceof L1PcInstance)) {
             return false;
         }
 
         if ((_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK) && _calcType == NPC_PC
-                && !(cha instanceof L1PetInstance) && !(cha instanceof L1SummonInstance) && !(cha instanceof L1SupportInstance)
-                && !(cha instanceof L1PcInstance)) {
+                && !(cha instanceof L1PetInstance) && !(cha instanceof L1SummonInstance)
+                && !(cha instanceof L1SupportInstance) && !(cha instanceof L1PcInstance)) {
             return false;
         }
 
@@ -659,10 +676,11 @@ public class L1SkillUse {
         }
 
         if (_skill.getTarget().equals("none") && _skill.getType() == L1Skills.TYPE_ATTACK
-                && (cha instanceof L1AuctionBoardInstance || cha instanceof L1BoardInstance || cha instanceof L1CrownInstance
-                || cha instanceof L1DwarfInstance || cha instanceof L1EffectInstance || cha instanceof L1FieldObjectInstance
-                || cha instanceof L1FurnitureInstance || cha instanceof L1HousekeeperInstance || cha instanceof L1MerchantInstance
-                || cha instanceof L1TeleporterInstance)) {
+                && (cha instanceof L1AuctionBoardInstance || cha instanceof L1BoardInstance
+                        || cha instanceof L1CrownInstance || cha instanceof L1DwarfInstance
+                        || cha instanceof L1EffectInstance || cha instanceof L1FieldObjectInstance
+                        || cha instanceof L1FurnitureInstance || cha instanceof L1HousekeeperInstance
+                        || cha instanceof L1MerchantInstance || cha instanceof L1TeleporterInstance)) {
             return false;
         }
 
@@ -676,12 +694,14 @@ public class L1SkillUse {
 
         if (((_skill.getTargetTo() & L1Skills.TARGET_TO_PC) == L1Skills.TARGET_TO_PC
                 || (_skill.getTargetTo() & L1Skills.TARGET_TO_CLAN) == L1Skills.TARGET_TO_CLAN
-                || (_skill.getTargetTo() & L1Skills.TARGET_TO_PARTY) == L1Skills.TARGET_TO_PARTY) && cha.getId() == _user.getId()
-                && _skillId != HEAL_ALL) {
+                || (_skill.getTargetTo() & L1Skills.TARGET_TO_PARTY) == L1Skills.TARGET_TO_PARTY)
+                && cha.getId() == _user.getId() && _skillId != HEAL_ALL) {
             return true;
         }
 
-        if (_user instanceof L1PcInstance && (_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK) && _isPK == false) {
+        if (_user instanceof L1PcInstance
+                && (_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK)
+                && _isPK == false) {
             if (cha instanceof L1SummonInstance) {
                 L1SummonInstance summon = (L1SummonInstance) cha;
                 if (_player.getId() == summon.getMaster().getId()) {
@@ -700,10 +720,11 @@ public class L1SkillUse {
             }
         }
 
-        if ((_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK) && !(cha instanceof L1MonsterInstance) && _isPK == false
-                && _target instanceof L1PcInstance) {
+        if ((_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK)
+                && !(cha instanceof L1MonsterInstance) && _isPK == false && _target instanceof L1PcInstance) {
             L1PcInstance enemy = (L1PcInstance) cha;
-            if (_skillId == COUNTER_DETECTION && enemy.getZoneType() != 1 && (cha.hasSkillEffect(INVISIBILITY) || cha.hasSkillEffect(BLIND_HIDING))) {
+            if (_skillId == COUNTER_DETECTION && enemy.getZoneType() != 1
+                    && (cha.hasSkillEffect(INVISIBILITY) || cha.hasSkillEffect(BLIND_HIDING))) {
                 return true;
             }
             if (_player.getClanid() != 0 && enemy.getClanid() != 0) {
@@ -728,32 +749,34 @@ public class L1SkillUse {
         }
 
         /** アイスランスしている場合デバフないかかる **/
-        if ((cha.hasSkillEffect(ICE_LANCE)) && (_skillId == ICE_LANCE || _skillId == SHOCK_STUN || _skillId == DECAY_POTION
-                || _skillId == WEAPON_BREAK || _skillId == SLOW || _skillId == CURSE_PARALYZE || _skillId == MANA_DRAIN || _skillId == DARKNESS
-                || _skillId == FOG_OF_SLEEPING || _skillId == ARMOR_BRAKE || _skillId == EARTH_BIND || _skillId == WIND_SHACKLE
-                || _skillId == POLLUTE_WATER || _skillId == STRIKER_GALE || _skillId == GUARD_BREAK || _skillId == FEAR || _skillId == HORROR_OF_DEATH
-                || _skillId == PANIC || _skillId == IllUSION_AVATAR || _skillId == DESPERADO || _skillId == POWEGRRIP)) {
+        if ((cha.hasSkillEffect(ICE_LANCE)) && (_skillId == ICE_LANCE || _skillId == SHOCK_STUN
+                || _skillId == DECAY_POTION || _skillId == WEAPON_BREAK || _skillId == SLOW
+                || _skillId == CURSE_PARALYZE || _skillId == MANA_DRAIN || _skillId == DARKNESS
+                || _skillId == FOG_OF_SLEEPING || _skillId == ARMOR_BRAKE || _skillId == EARTH_BIND
+                || _skillId == WIND_SHACKLE || _skillId == POLLUTE_WATER || _skillId == STRIKER_GALE
+                || _skillId == GUARD_BREAK || _skillId == FEAR || _skillId == HORROR_OF_DEATH || _skillId == PANIC
+                || _skillId == IllUSION_AVATAR || _skillId == DESPERADO || _skillId == POWEGRRIP)) {
             return false;
         }
 
         if (cha.hasSkillEffect(EARTH_BIND) && _skillId != CANCELLATION) {
             return false;
         }
-//		if (cha.hasSkillEffect(POWERRIP) && _skillId != POWERRIP) {
-//
-//			return false;
-//		}
-//
-//		if (cha.hasSkillEffect(SHOCK_STUN) && _skillId != SHOCK_STUN) {
-//			return false;
-//		}
-//
-//    	if (cha.hasSkillEffect(DESPERADO) && _skillId == DESPERADO) {
-//			return false; //デスペラード中デスペラードリターン
-//		}
+        // if (cha.hasSkillEffect(POWERRIP) && _skillId != POWERRIP) {
+        //
+        // return false;
+        // }
+        //
+        // if (cha.hasSkillEffect(SHOCK_STUN) && _skillId != SHOCK_STUN) {
+        // return false;
+        // }
+        //
+        // if (cha.hasSkillEffect(DESPERADO) && _skillId == DESPERADO) {
+        // return false; //デスペラード中デスペラードリターン
+        // }
 
         if (cha.hasSkillEffect(MOB_BASILL) && _skillId == MOB_BASILL) {
-            return false; //バジルのかたさの中バジルのかたさ
+            return false; // バジルのかたさの中バジルのかたさ
         }
         if (cha.hasSkillEffect(MOB_COCA) && _skillId == MOB_COCA) {
             return false; // コカかた中コカかた
@@ -762,37 +785,43 @@ public class L1SkillUse {
         if (!(cha instanceof L1MonsterInstance) && (_skillId == TAMING_MONSTER || _skillId == CREATE_ZOMBIE)) {
             return false;
         }
-        if (cha.isDead()
-                && (_skillId != CREATE_ZOMBIE && _skillId != RESURRECTION && _skillId != GREATER_RESURRECTION && _skillId != CALL_OF_NATURE)) {
+        if (cha.isDead() && (_skillId != CREATE_ZOMBIE && _skillId != RESURRECTION && _skillId != GREATER_RESURRECTION
+                && _skillId != CALL_OF_NATURE)) {
             return false;
         }
 
-        if (cha.isDead() == false
-                && (_skillId == CREATE_ZOMBIE || _skillId == RESURRECTION || _skillId == GREATER_RESURRECTION || _skillId == CALL_OF_NATURE)) {
+        if (cha.isDead() == false && (_skillId == CREATE_ZOMBIE || _skillId == RESURRECTION
+                || _skillId == GREATER_RESURRECTION || _skillId == CALL_OF_NATURE)) {
             return false;
         }
 
-        if ((cha instanceof L1TowerInstance || cha instanceof L1DoorInstance)
-                && (_skillId == CREATE_ZOMBIE || _skillId == RESURRECTION || _skillId == GREATER_RESURRECTION || _skillId == CALL_OF_NATURE)) {
+        if ((cha instanceof L1TowerInstance || cha instanceof L1DoorInstance) && (_skillId == CREATE_ZOMBIE
+                || _skillId == RESURRECTION || _skillId == GREATER_RESURRECTION || _skillId == CALL_OF_NATURE)) {
             return false;
         }
 
         if (cha instanceof L1PcInstance) {
             L1PcInstance pc = (L1PcInstance) cha;
             if (pc.hasSkillEffect(ABSOLUTE_BARRIER)) {// アブソル中
-                if (_skillId == CURSE_BLIND || _skillId == WEAPON_BREAK || _skillId == DARKNESS || _skillId == WEAKNESS || _skillId == DISEASE
-                        || _skillId == FOG_OF_SLEEPING || _skillId == GREATER_SLOW || _skillId == SLOW || _skillId == CANCELLATION
-                        || _skillId == SILENCE || _skillId == ENTANGLE || _skillId == DECAY_POTION || _skillId == MASS_TELEPORT
-                        || _skillId == DETECTION || _skillId == IZE_BREAK || _skillId == HORROR_OF_DEATH || _skillId == COUNTER_DETECTION
-                        || _skillId == GUARD_BREAK || _skillId == ERASE_MAGIC || _skillId == FEAR || _skillId == PHYSICAL_ENCHANT_DEX
-                        || _skillId == PHYSICAL_ENCHANT_STR || _skillId == BLESS_WEAPON || _skillId == IMMUNE_TO_HARM || _skillId == REMOVE_CURSE
-                        || _skillId == CONFUSION || _skillId == Sand_worms || _skillId == Sand_worms1 || _skillId == Sand_worms2 || _skillId == Sand_worms3 || _skillId == MOB_SLOW_1 || _skillId == MOB_SLOW_18 || _skillId == MOB_WEAKNESS_1
-                        || _skillId == MOB_DISEASE_1 || _skillId == MOB_BASILL || _skillId == MOB_SHOCKSTUN_30 || _skillId == MOB_RANGESTUN_19
-                        || _skillId == MOB_RANGESTUN_18 || _skillId == MOB_DISEASE_30 || _skillId == MOB_WINDSHACKLE_1 || _skillId == MOB_COCA
-                        || _skillId == MOB_CURSEPARALYZ_19 || _skillId == MOB_CURSEPARALYZ_18 || _skillId == Mob_RANGESTUN_30
-                        || _skillId == ANTA_MESSAGE_1 || _skillId == ANTA_MESSAGE_2 || _skillId == ANTA_MESSAGE_3 || _skillId == ANTA_MESSAGE_4
-                        || _skillId == ANTA_MESSAGE_5 || _skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7 || _skillId == ANTA_MESSAGE_8
-                        || _skillId == ANTA_MESSAGE_9 || _skillId == ANTA_MESSAGE_10 || _skillId == OMAN_STUN || _skillId == OMAN_CANCELLATION) {
+                if (_skillId == CURSE_BLIND || _skillId == WEAPON_BREAK || _skillId == DARKNESS || _skillId == WEAKNESS
+                        || _skillId == DISEASE || _skillId == FOG_OF_SLEEPING || _skillId == GREATER_SLOW
+                        || _skillId == SLOW || _skillId == CANCELLATION || _skillId == SILENCE || _skillId == ENTANGLE
+                        || _skillId == DECAY_POTION || _skillId == MASS_TELEPORT || _skillId == DETECTION
+                        || _skillId == IZE_BREAK || _skillId == HORROR_OF_DEATH || _skillId == COUNTER_DETECTION
+                        || _skillId == GUARD_BREAK || _skillId == ERASE_MAGIC || _skillId == FEAR
+                        || _skillId == PHYSICAL_ENCHANT_DEX || _skillId == PHYSICAL_ENCHANT_STR
+                        || _skillId == BLESS_WEAPON || _skillId == IMMUNE_TO_HARM || _skillId == REMOVE_CURSE
+                        || _skillId == CONFUSION || _skillId == Sand_worms || _skillId == Sand_worms1
+                        || _skillId == Sand_worms2 || _skillId == Sand_worms3 || _skillId == MOB_SLOW_1
+                        || _skillId == MOB_SLOW_18 || _skillId == MOB_WEAKNESS_1 || _skillId == MOB_DISEASE_1
+                        || _skillId == MOB_BASILL || _skillId == MOB_SHOCKSTUN_30 || _skillId == MOB_RANGESTUN_19
+                        || _skillId == MOB_RANGESTUN_18 || _skillId == MOB_DISEASE_30 || _skillId == MOB_WINDSHACKLE_1
+                        || _skillId == MOB_COCA || _skillId == MOB_CURSEPARALYZ_19 || _skillId == MOB_CURSEPARALYZ_18
+                        || _skillId == Mob_RANGESTUN_30 || _skillId == ANTA_MESSAGE_1 || _skillId == ANTA_MESSAGE_2
+                        || _skillId == ANTA_MESSAGE_3 || _skillId == ANTA_MESSAGE_4 || _skillId == ANTA_MESSAGE_5
+                        || _skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7 || _skillId == ANTA_MESSAGE_8
+                        || _skillId == ANTA_MESSAGE_9 || _skillId == ANTA_MESSAGE_10 || _skillId == OMAN_STUN
+                        || _skillId == OMAN_CANCELLATION) {
                     return true;
                 } else {
                     return false;
@@ -803,7 +832,8 @@ public class L1SkillUse {
         if (cha instanceof L1NpcInstance) {
             int hiddenStatus = ((L1NpcInstance) cha).getHiddenStatus();
             if (hiddenStatus == L1NpcInstance.HIDDEN_STATUS_SINK) {
-                if (_skillId == DETECTION || _skillId == IZE_BREAK || _skillId == EYE_OF_DRAGON || _skillId == COUNTER_DETECTION) {
+                if (_skillId == DETECTION || _skillId == IZE_BREAK || _skillId == EYE_OF_DRAGON
+                        || _skillId == COUNTER_DETECTION) {
                     return true;
                 } else {
                     return false;
@@ -815,10 +845,12 @@ public class L1SkillUse {
 
         if ((_skill.getTargetTo() & L1Skills.TARGET_TO_PC) == L1Skills.TARGET_TO_PC && cha instanceof L1PcInstance) {
             _flg = true;
-        } else if ((_skill.getTargetTo() & L1Skills.TARGET_TO_NPC) == L1Skills.TARGET_TO_NPC && (cha instanceof L1MonsterInstance
-                || cha instanceof L1NpcInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance)) {
+        } else if ((_skill.getTargetTo() & L1Skills.TARGET_TO_NPC) == L1Skills.TARGET_TO_NPC
+                && (cha instanceof L1MonsterInstance || cha instanceof L1NpcInstance || cha instanceof L1SummonInstance
+                        || cha instanceof L1PetInstance)) {
             _flg = true;
-        } else if ((_skill.getTargetTo() & L1Skills.TARGET_TO_PET) == L1Skills.TARGET_TO_PET && _user instanceof L1PcInstance) {
+        } else if ((_skill.getTargetTo() & L1Skills.TARGET_TO_PET) == L1Skills.TARGET_TO_PET
+                && _user instanceof L1PcInstance) {
             if (cha instanceof L1SummonInstance) {
                 L1SummonInstance summon = (L1SummonInstance) cha;
                 if (summon.getMaster() != null) {
@@ -852,7 +884,8 @@ public class L1SkillUse {
 
         if (_calcType == PC_PC && cha instanceof L1PcInstance) {
             if ((_skill.getTargetTo() & L1Skills.TARGET_TO_CLAN) == L1Skills.TARGET_TO_CLAN
-                    && ((_player.getClanid() != 0 && _player.getClanid() == ((L1PcInstance) cha).getClanid()) || _player.isGm())) {
+                    && ((_player.getClanid() != 0 && _player.getClanid() == ((L1PcInstance) cha).getClanid())
+                            || _player.isGm())) {
                 return true;
             }
             if ((_skill.getTargetTo() & L1Skills.TARGET_TO_PARTY) == L1Skills.TARGET_TO_PARTY
@@ -887,92 +920,92 @@ public class L1SkillUse {
         int b2 = -2 - randomxy;
         int heading = _npc.getHeading(); // モンスター方向
         switch (heading) {
-            case 1:
-                xx = a1 - r;
-                yy = a2 + r;
-                yy1 = a2;
-                xx2 = a1;
-                xx3 = a2;
-                yy3 = b2;
-                xx4 = b1;
-                yy4 = a1;
-                break;
-            case 2:
-                xx = a1 + 1;
-                xx1 = b1;
-                yy1 = a2;
-                xx2 = b1;
-                yy2 = a1;
-                xx3 = b1 - 3;
-                yy3 = a2 - 2;
-                xx4 = b1 - 2;
-                yy4 = a1 + 3;
-                break;
-            case 3:
-                xx = a1 - r;
-                yy = a1 - r;
-                xx1 = a1;
-                yy2 = a1;
-                xx3 = a1;
-                yy3 = a2;
-                xx4 = a2;
-                yy4 = b1;
-                break;
-            case 4:
-                yy = a1 + 1;
-                xx1 = a1;
-                yy1 = b1;
-                xx2 = a2;
-                yy2 = b1;
-                xx3 = a1 + 3;
-                yy3 = b1 - 3;
-                xx4 = a2 - 3;
-                yy4 = b1 - 3;
-                break;
-            case 5:
-                xx = a2 + r;
-                yy = a1 - r;
-                yy1 = a1;
-                xx2 = a2;
-                xx3 = a1;
-                yy3 = b1;
-                xx4 = b2;
-                yy4 = a2;
-                break;
-            case 6:
-                xx = a2 - 1;
-                xx1 = b2;
-                yy1 = a1;
-                xx2 = b2;
-                yy2 = a2;
-                xx3 = b2 + 3;
-                yy3 = a1 + 2;
-                xx4 = b2 + 2;
-                yy4 = a2 - 3;
-                break;
-            case 7:
-                xx = a2 + r;
-                yy = a2 + r;
-                xx1 = a2;
-                yy2 = a2;
-                xx3 = a2;
-                yy3 = a1;
-                xx4 = a1;
-                yy4 = b2;
-                break;
-            case 0:
-                yy = a2 - 1;
-                xx1 = a2;
-                yy1 = b2;
-                xx2 = a1;
-                yy2 = b2;
-                xx3 = a2 - 3;
-                yy3 = b2 + 3;
-                xx4 = a1 + 3;
-                yy4 = b2 + 3;
-                break;
-            default:
-                break;
+        case 1:
+            xx = a1 - r;
+            yy = a2 + r;
+            yy1 = a2;
+            xx2 = a1;
+            xx3 = a2;
+            yy3 = b2;
+            xx4 = b1;
+            yy4 = a1;
+            break;
+        case 2:
+            xx = a1 + 1;
+            xx1 = b1;
+            yy1 = a2;
+            xx2 = b1;
+            yy2 = a1;
+            xx3 = b1 - 3;
+            yy3 = a2 - 2;
+            xx4 = b1 - 2;
+            yy4 = a1 + 3;
+            break;
+        case 3:
+            xx = a1 - r;
+            yy = a1 - r;
+            xx1 = a1;
+            yy2 = a1;
+            xx3 = a1;
+            yy3 = a2;
+            xx4 = a2;
+            yy4 = b1;
+            break;
+        case 4:
+            yy = a1 + 1;
+            xx1 = a1;
+            yy1 = b1;
+            xx2 = a2;
+            yy2 = b1;
+            xx3 = a1 + 3;
+            yy3 = b1 - 3;
+            xx4 = a2 - 3;
+            yy4 = b1 - 3;
+            break;
+        case 5:
+            xx = a2 + r;
+            yy = a1 - r;
+            yy1 = a1;
+            xx2 = a2;
+            xx3 = a1;
+            yy3 = b1;
+            xx4 = b2;
+            yy4 = a2;
+            break;
+        case 6:
+            xx = a2 - 1;
+            xx1 = b2;
+            yy1 = a1;
+            xx2 = b2;
+            yy2 = a2;
+            xx3 = b2 + 3;
+            yy3 = a1 + 2;
+            xx4 = b2 + 2;
+            yy4 = a2 - 3;
+            break;
+        case 7:
+            xx = a2 + r;
+            yy = a2 + r;
+            xx1 = a2;
+            yy2 = a2;
+            xx3 = a2;
+            yy3 = a1;
+            xx4 = a1;
+            yy4 = b2;
+            break;
+        case 0:
+            yy = a2 - 1;
+            xx1 = a2;
+            yy1 = b2;
+            xx2 = a1;
+            yy2 = b2;
+            xx3 = a2 - 3;
+            yy3 = b2 + 3;
+            xx4 = a1 + 3;
+            yy4 = b2 + 3;
+            break;
+        default:
+            break;
         }
         int x = _npc.getX() + xx;
         int y = _npc.getY() + yy;
@@ -982,17 +1015,26 @@ public class L1SkillUse {
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x, y - 1, _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x, y - 2, _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x - 1, y, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x - 1, y + 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x - 1, y - 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x - 1, y - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 1, y + 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 1, y - 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x - 1, y + 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x - 1, y - 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x - 1, y - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 1, y + 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 1, y - 1,
+                _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 1, y, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 1, y - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 2, y - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 2, y - 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 1, y - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 2, y - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 2, y - 1,
+                _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 2, y, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 2, y + 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x + 2, y + 1,
+                _user.getMapId());
         int x1 = _npc.getX() + xx1;
         int y1 = _npc.getY() + yy1;
         // 菱形4 * 4ピクセルの形状（モンスターの基準で左側に出現）
@@ -1001,17 +1043,26 @@ public class L1SkillUse {
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1, y1 - 1, _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1, y1 - 2, _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 - 1, y1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 - 1, y1 + 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 - 1, y1 - 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 - 1, y1 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 1, y1 + 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 1, y1 - 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 - 1, y1 + 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 - 1, y1 - 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 - 1, y1 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 1, y1 + 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 1, y1 - 1,
+                _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 1, y1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 1, y1 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 2, y1 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 2, y1 - 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 1, y1 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 2, y1 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 2, y1 - 1,
+                _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 2, y1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 2, y1 + 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x1 + 2, y1 + 1,
+                _user.getMapId());
         int x2 = _npc.getX() + xx2;
         int y2 = _npc.getY() + yy2;
         // 菱形4 * 4ピクセルの形状（モンスターの基準から右に出現）
@@ -1020,17 +1071,26 @@ public class L1SkillUse {
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2, y2 - 1, _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2, y2 - 2, _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 - 1, y2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 - 1, y2 + 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 - 1, y2 - 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 - 1, y2 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 1, y2 + 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 1, y2 - 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 - 1, y2 + 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 - 1, y2 - 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 - 1, y2 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 1, y2 + 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 1, y2 - 1,
+                _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 1, y2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 1, y2 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 2, y2 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 2, y2 - 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 1, y2 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 2, y2 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 2, y2 - 1,
+                _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 2, y2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 2, y2 + 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x2 + 2, y2 + 1,
+                _user.getMapId());
         int x3 = _npc.getX() + xx3;
         int y3 = _npc.getY() + yy3;
         // 菱形4 * 4ピクセルの形状（モンスターの基準で左側2に出現）
@@ -1039,17 +1099,26 @@ public class L1SkillUse {
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3, y3 - 1, _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3, y3 - 2, _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 - 1, y3, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 - 1, y3 + 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 - 1, y3 - 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 - 1, y3 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 1, y3 + 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 1, y3 - 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 - 1, y3 + 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 - 1, y3 - 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 - 1, y3 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 1, y3 + 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 1, y3 - 1,
+                _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 1, y3, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 1, y3 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 2, y3 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 2, y3 - 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 1, y3 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 2, y3 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 2, y3 - 1,
+                _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 2, y3, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 2, y3 + 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x3 + 2, y3 + 1,
+                _user.getMapId());
         int x4 = _npc.getX() + xx4;
         int y4 = _npc.getY() + yy4;
         // 菱形4 * 4ピクセルの形状（モンスターの基準から右2に出現）
@@ -1058,17 +1127,26 @@ public class L1SkillUse {
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4, y4 - 1, _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4, y4 - 2, _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 - 1, y4, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 - 1, y4 + 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 - 1, y4 - 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 - 1, y4 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 1, y4 + 1, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 1, y4 - 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 - 1, y4 + 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 - 1, y4 - 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 - 1, y4 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 1, y4 + 1,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 1, y4 - 1,
+                _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 1, y4, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 1, y4 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 2, y4 - 2, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 2, y4 - 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 1, y4 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 2, y4 - 2,
+                _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 2, y4 - 1,
+                _user.getMapId());
         L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 2, y4, _user.getMapId());
-        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 2, y4 + 1, _user.getMapId());
+        L1EffectSpawn.getInstance().spawnEffect(Effect, _skill.getBuffDuration() * 1000, x4 + 2, y4 + 1,
+                _user.getMapId());
         return;
     }
 
@@ -1078,7 +1156,8 @@ public class L1SkillUse {
                 _targetList.add(new TargetStatus(_user));
                 return;
             }
-            if (_skill.getTargetTo() == L1Skills.TARGET_TO_ME && (_skill.getType() & L1Skills.TYPE_ATTACK) != L1Skills.TYPE_ATTACK) {
+            if (_skill.getTargetTo() == L1Skills.TARGET_TO_ME
+                    && (_skill.getType() & L1Skills.TYPE_ATTACK) != L1Skills.TYPE_ATTACK) {
                 _targetList.add(new TargetStatus(_user));
                 return;
             }
@@ -1133,7 +1212,8 @@ public class L1SkillUse {
                     _targetList.add(new TargetStatus(_target));
                 }
 
-                if (_skillId != 49 && !(_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK)) {
+                if (_skillId != 49
+                        && !(_skill.getTarget().equals("attack") || _skill.getType() == L1Skills.TYPE_ATTACK)) {
                     _targetList.add(new TargetStatus(_user));
                 }
 
@@ -1155,9 +1235,10 @@ public class L1SkillUse {
                         continue;
                     }
                     /*
-                     * if (tgobj instanceof L1PcInstance) { L1PcInstance targetpc = (L1PcInstance) tgobj; if (_player.getClanid() ==
-					 * targetpc.getClanid()) { continue; } }
-					 */
+                     * if (tgobj instanceof L1PcInstance) { L1PcInstance
+                     * targetpc = (L1PcInstance) tgobj; if (_player.getClanid()
+                     * == targetpc.getClanid()) { continue; } }
+                     */
 
                     if (_skillId == METEOR_STRIKE) {
                         if (cha instanceof L1PcInstance && _user instanceof L1PcInstance) {
@@ -1227,67 +1308,9 @@ public class L1SkillUse {
             currentMp = _player.getCurrentMp();
             currentHp = _player.getCurrentHp();
 
-            if (_player.getAbility().getTotalInt() > 12 && _skillId > HOLY_WEAPON && _skillId <= FREEZING_BLIZZARD) {
-                _mpConsume--;
-            }
-            if (_player.getAbility().getTotalInt() > 13 && _skillId > STALAC && _skillId <= FREEZING_BLIZZARD) {
-                _mpConsume--;
-            }
-            if (_player.getAbility().getTotalInt() > 14 && _skillId > WEAK_ELEMENTAL && _skillId <= FREEZING_BLIZZARD) {
-                _mpConsume--;
-            }
-            if (_player.getAbility().getTotalInt() > 15 && _skillId > MEDITATION && _skillId <= FREEZING_BLIZZARD) {
-                _mpConsume--;
-            }
-            if (_player.getAbility().getTotalInt() > 16 && _skillId > DARKNESS && _skillId <= FREEZING_BLIZZARD) {
-                _mpConsume--;
-            }
-            if (_player.getAbility().getTotalInt() > 17 && _skillId > BLESS_WEAPON && _skillId <= FREEZING_BLIZZARD) {
-                _mpConsume--;
-            }
-            if (_player.getAbility().getTotalInt() > 18 && _skillId > DISEASE && _skillId <= FREEZING_BLIZZARD) {
-                _mpConsume--;
-            }
-
-            if (_player.getAbility().getTotalInt() > 12 && _skillId >= SHOCK_STUN && _skillId <= COUNTER_BARRIER) {
-                _mpConsume -= (_player.getAbility().getTotalInt() - 12);
-            }
-            if (_player.isCrown()) {
-                if (_player.getAbility().getBaseInt() >= 11) {
-                    _mpConsume--;
-                }
-                if (_player.getAbility().getBaseInt() >= 13) {
-                    _mpConsume--;
-                }
-            } else if (_player.isKnight()) {
-                if (_player.getAbility().getBaseInt() >= 9) {
-                    _mpConsume--;
-                }
-                if (_player.getAbility().getBaseInt() >= 11) {
-                    _mpConsume--;
-                }
-            } else if (_player.isDarkelf()) {
-                if (_player.getAbility().getBaseInt() >= 13) {
-                    _mpConsume--;
-                }
-                if (_player.getAbility().getBaseInt() >= 15) {
-                    _mpConsume--;
-                }
-            } else if (_player.isBlackwizard()) {
-                if (_player.getAbility().getBaseInt() >= 14) {
-                    _mpConsume--;
-                }
-                if (_player.getAbility().getBaseInt() >= 15) {
-                    _mpConsume--;
-                }
-            } else if (_player.isWarrior()) {
-                if (_player.getAbility().getBaseInt() >= 11) {
-                    _mpConsume--;
-                }
-                if (_player.getAbility().getBaseInt() >= 13) {
-                    _mpConsume--;
-                }
-            }
+            // intステータスボーナス(消費MP減少)
+            int mpDecrease = CalcStat.calcDecreaseMp(_player.getAbility().getTotalInt());
+            _mpConsume -= (int) (_mpConsume * (mpDecrease / 100d));
 
             if (_skillId == PHYSICAL_ENCHANT_DEX && _player.getInventory().checkEquipped(20013)) {
                 _mpConsume /= 2;
@@ -1450,12 +1473,9 @@ public class L1SkillUse {
             _getBuffDuration = _skillTime * 1000;
         }
 
-        if (_skillId == SHOCK_STUN || _skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7 || _skillId == ANTA_MESSAGE_8
-                || _skillId == OMAN_STUN
-                || _skillId == POWEGRRIP
-                || _skillId == EARTH_BIND
-                || _skillId == DESPERADO
-                ) {
+        if (_skillId == SHOCK_STUN || _skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7
+                || _skillId == ANTA_MESSAGE_8 || _skillId == OMAN_STUN || _skillId == POWEGRRIP
+                || _skillId == EARTH_BIND || _skillId == DESPERADO) {
             _getBuffDuration = _shockStunDuration;
         }
 
@@ -1469,8 +1489,8 @@ public class L1SkillUse {
         // if (_skillId == SHAPE_CHANGE) {
         // return;
         // }
-        if (_skillId == BLESSED_ARMOR || _skillId == HOLY_WEAPON || _skillId == ENCHANT_WEAPON || _skillId == BLESS_WEAPON
-                || _skillId == SHADOW_FANG) {
+        if (_skillId == BLESSED_ARMOR || _skillId == HOLY_WEAPON || _skillId == ENCHANT_WEAPON
+                || _skillId == BLESS_WEAPON || _skillId == SHADOW_FANG) {
             return;
         }
         if ((_skillId == ICE_LANCE) && !_isFreeze) {
@@ -1491,100 +1511,100 @@ public class L1SkillUse {
             _getBuffIconDuration = _skillTime;
         }
         switch (_skillId) {
-            case VALA_BUFF:
-                pc.sendPackets(new S_SkillIconGFX(88, _getBuffIconDuration));
-                break;
-            case SHIELD:
-                pc.sendPackets(new S_SkillIconShield(1, _getBuffIconDuration));
-                break;
-            // case SHADOW_ARMOR:
-            // pc.sendPackets(new S_SkillIconShield(3, _getBuffIconDuration));
-            // break;
-            case DRESS_DEXTERITY:
-                pc.sendPackets(new S_Dexup(pc, 2, _getBuffIconDuration));
-                break;
-            case DRESS_MIGHTY:
-                pc.sendPackets(new S_Strup(pc, 2, _getBuffIconDuration));
-                break;
-            case GLOWING_AURA:
-                pc.sendPackets(new S_SkillIconAura(113, _getBuffIconDuration));
-                break;
-            case SHINING_AURA:
-                pc.sendPackets(new S_SkillIconAura(114, _getBuffIconDuration));
-                break;
-            case BRAVE_AURA:
-                pc.sendPackets(new S_SkillIconAura(116, _getBuffIconDuration));
-                break;
-            case FIRE_WEAPON:
-                pc.sendPackets(new S_SkillIconAura(147, _getBuffIconDuration));
-                break;
-            case WIND_SHOT:
-                pc.sendPackets(new S_SkillIconAura(148, _getBuffIconDuration));
-                break;
-            case DANCING_BLADES:
-                pc.sendPackets(new S_SkillIconAura(154, _getBuffIconDuration));
-                break;
-            case STORM_EYE:
-                pc.sendPackets(new S_SkillIconAura(155, _getBuffIconDuration));
-                break;
-            case EARTH_GUARDIAN:
-                pc.sendPackets(new S_SkillIconShield(7, _getBuffIconDuration));
-                break;
-            case BURNING_WEAPON:
-                pc.sendPackets(new S_SkillIconAura(162, _getBuffIconDuration));
-                break;
-            case STORM_SHOT:
-                pc.sendPackets(new S_SkillIconAura(165, _getBuffIconDuration));
-                break;
-            case IRON_SKIN:
-                pc.sendPackets(new S_SkillIconShield(10, _getBuffIconDuration));
-                break;
-            case EARTH_SKIN:
-                pc.sendPackets(new S_SkillIconShield(6, _getBuffIconDuration));
-                break;
-            case PHYSICAL_ENCHANT_STR:
-                pc.sendPackets(new S_Strup(pc, 5, _getBuffIconDuration));
-                break;
-            case PHYSICAL_ENCHANT_DEX:
-                pc.sendPackets(new S_Dexup(pc, 5, _getBuffIconDuration));
-                break;
-            case NARUTO_THANKS_CANDY:
-                if (pc.getLevel() >= 1 && pc.getLevel() <= 60) {
-                    pc.sendPackets(new S_Dexup(pc, 7, _getBuffIconDuration));
-                    pc.sendPackets(new S_Strup(pc, 7, _getBuffIconDuration));
-                } else {
-                    pc.sendPackets(new S_Dexup(pc, 6, _getBuffIconDuration));
-                    pc.sendPackets(new S_Strup(pc, 6, _getBuffIconDuration));
-                }
-                break;
-            case IMMUNE_TO_HARM:
-                pc.sendPackets(new S_SkillIconGFX(40, _getBuffIconDuration));
-                break;
-            case HASTE:
-            case GREATER_HASTE:
-                pc.sendPackets(new S_SkillHaste(pc.getId(), 1, _getBuffIconDuration));
-                pc.broadcastPacket(new S_SkillHaste(pc.getId(), 1, 0));
-                break;
-            case HOLY_WALK:
-            case MOVING_ACCELERATION:
-            case WIND_WALK:
-                pc.sendPackets(new S_SkillBrave(pc.getId(), 4, _getBuffIconDuration));
-                pc.broadcastPacket(new S_SkillBrave(pc.getId(), 4, 0));
-                break;
-            case BLOOD_LUST:
-                pc.sendPackets(new S_SkillBrave(pc.getId(), 1, _getBuffIconDuration));
-                pc.broadcastPacket(new S_SkillBrave(pc.getId(), 1, 0));
-                break;
-            case SLOW:
-            case MOB_SLOW_1:
-            case MOB_SLOW_18:
-            case GREATER_SLOW:
-            case ENTANGLE:
-                pc.sendPackets(new S_SkillHaste(pc.getId(), 2, _getBuffIconDuration));
-                pc.broadcastPacket(new S_SkillHaste(pc.getId(), 2, 0));
-                break;
-            default:
-                break;
+        case VALA_BUFF:
+            pc.sendPackets(new S_SkillIconGFX(88, _getBuffIconDuration));
+            break;
+        case SHIELD:
+            pc.sendPackets(new S_SkillIconShield(1, _getBuffIconDuration));
+            break;
+        // case SHADOW_ARMOR:
+        // pc.sendPackets(new S_SkillIconShield(3, _getBuffIconDuration));
+        // break;
+        case DRESS_DEXTERITY:
+            pc.sendPackets(new S_Dexup(pc, 2, _getBuffIconDuration));
+            break;
+        case DRESS_MIGHTY:
+            pc.sendPackets(new S_Strup(pc, 2, _getBuffIconDuration));
+            break;
+        case GLOWING_AURA:
+            pc.sendPackets(new S_SkillIconAura(113, _getBuffIconDuration));
+            break;
+        case SHINING_AURA:
+            pc.sendPackets(new S_SkillIconAura(114, _getBuffIconDuration));
+            break;
+        case BRAVE_AURA:
+            pc.sendPackets(new S_SkillIconAura(116, _getBuffIconDuration));
+            break;
+        case FIRE_WEAPON:
+            pc.sendPackets(new S_SkillIconAura(147, _getBuffIconDuration));
+            break;
+        case WIND_SHOT:
+            pc.sendPackets(new S_SkillIconAura(148, _getBuffIconDuration));
+            break;
+        case DANCING_BLADES:
+            pc.sendPackets(new S_SkillIconAura(154, _getBuffIconDuration));
+            break;
+        case STORM_EYE:
+            pc.sendPackets(new S_SkillIconAura(155, _getBuffIconDuration));
+            break;
+        case EARTH_GUARDIAN:
+            pc.sendPackets(new S_SkillIconShield(7, _getBuffIconDuration));
+            break;
+        case BURNING_WEAPON:
+            pc.sendPackets(new S_SkillIconAura(162, _getBuffIconDuration));
+            break;
+        case STORM_SHOT:
+            pc.sendPackets(new S_SkillIconAura(165, _getBuffIconDuration));
+            break;
+        case IRON_SKIN:
+            pc.sendPackets(new S_SkillIconShield(10, _getBuffIconDuration));
+            break;
+        case EARTH_SKIN:
+            pc.sendPackets(new S_SkillIconShield(6, _getBuffIconDuration));
+            break;
+        case PHYSICAL_ENCHANT_STR:
+            pc.sendPackets(new S_Strup(pc, 5, _getBuffIconDuration));
+            break;
+        case PHYSICAL_ENCHANT_DEX:
+            pc.sendPackets(new S_Dexup(pc, 5, _getBuffIconDuration));
+            break;
+        case NARUTO_THANKS_CANDY:
+            if (pc.getLevel() >= 1 && pc.getLevel() <= 60) {
+                pc.sendPackets(new S_Dexup(pc, 7, _getBuffIconDuration));
+                pc.sendPackets(new S_Strup(pc, 7, _getBuffIconDuration));
+            } else {
+                pc.sendPackets(new S_Dexup(pc, 6, _getBuffIconDuration));
+                pc.sendPackets(new S_Strup(pc, 6, _getBuffIconDuration));
+            }
+            break;
+        case IMMUNE_TO_HARM:
+            pc.sendPackets(new S_SkillIconGFX(40, _getBuffIconDuration));
+            break;
+        case HASTE:
+        case GREATER_HASTE:
+            pc.sendPackets(new S_SkillHaste(pc.getId(), 1, _getBuffIconDuration));
+            pc.broadcastPacket(new S_SkillHaste(pc.getId(), 1, 0));
+            break;
+        case HOLY_WALK:
+        case MOVING_ACCELERATION:
+        case WIND_WALK:
+            pc.sendPackets(new S_SkillBrave(pc.getId(), 4, _getBuffIconDuration));
+            pc.broadcastPacket(new S_SkillBrave(pc.getId(), 4, 0));
+            break;
+        case BLOOD_LUST:
+            pc.sendPackets(new S_SkillBrave(pc.getId(), 1, _getBuffIconDuration));
+            pc.broadcastPacket(new S_SkillBrave(pc.getId(), 1, 0));
+            break;
+        case SLOW:
+        case MOB_SLOW_1:
+        case MOB_SLOW_18:
+        case GREATER_SLOW:
+        case ENTANGLE:
+            pc.sendPackets(new S_SkillHaste(pc.getId(), 2, _getBuffIconDuration));
+            pc.broadcastPacket(new S_SkillHaste(pc.getId(), 2, 0));
+            break;
+        default:
+            break;
         }
         pc.sendPackets(new S_OwnCharStatus(pc));
     }
@@ -1602,21 +1622,21 @@ public class L1SkillUse {
         }
         if (_isCriticalDamage) {
             switch (_skillId) {
-                case CALL_LIGHTNING: // コールライトニング
-                    castgfx = 11737;
-                    break;
-                case SUNBURST: // サンバースト
-                    castgfx = 11760;
-                    break;
-                case CONE_OF_COLD: // コーンオブコールド
-                    castgfx = 11742;
-                    break;
-                case DISINTEGRATE: // ディスインテグレート
-                    castgfx = 11748;
-                    break;
-                case ERUPTION:
-                    castgfx = 11754;
-                    break;
+            case CALL_LIGHTNING: // コールライトニング
+                castgfx = 11737;
+                break;
+            case SUNBURST: // サンバースト
+                castgfx = 11760;
+                break;
+            case CONE_OF_COLD: // コーンオブコールド
+                castgfx = 11742;
+                break;
+            case DISINTEGRATE: // ディスインテグレート
+                castgfx = 11748;
+                break;
+            case ERUPTION:
+                castgfx = 11754;
+                break;
             }
         } else {
             if (_skillId == UNCANNY_DODGE) {
@@ -1638,8 +1658,8 @@ public class L1SkillUse {
         }
 
         if (_user instanceof L1PcInstance) {
-            if (_skillId == FIRE_WALL || _skillId == LIFE_STREAM || _skillId == CUBE_IGNITION || _skillId == CUBE_QUAKE || _skillId == CUBE_SHOCK
-                    || _skillId == CUBE_BALANCE) {
+            if (_skillId == FIRE_WALL || _skillId == LIFE_STREAM || _skillId == CUBE_IGNITION || _skillId == CUBE_QUAKE
+                    || _skillId == CUBE_SHOCK || _skillId == CUBE_BALANCE) {
                 L1PcInstance pc = (L1PcInstance) _user;
                 if (_skillId == FIRE_WALL) {
                     pc.setHeading(pc.targetDirection(_targetX, _targetY));
@@ -1654,9 +1674,10 @@ public class L1SkillUse {
 
             int targetid = _target.getId();
 
-            if (_skillId == SHOCK_STUN || _skillId == MOB_SHOCKSTUN_30 || _skillId == MOB_RANGESTUN_20 || _skillId == MOB_RANGESTUN_19
-                    || _skillId == MOB_RANGESTUN_18 || _skillId == Mob_RANGESTUN_30 || _skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7
-                    || _skillId == ANTA_MESSAGE_8 || _skillId == OMAN_STUN) {
+            if (_skillId == SHOCK_STUN || _skillId == MOB_SHOCKSTUN_30 || _skillId == MOB_RANGESTUN_20
+                    || _skillId == MOB_RANGESTUN_19 || _skillId == MOB_RANGESTUN_18 || _skillId == Mob_RANGESTUN_30
+                    || _skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7 || _skillId == ANTA_MESSAGE_8
+                    || _skillId == OMAN_STUN) {
                 if (_targetList.size() == 0) {// 失敗スターンモーション
                     if (_target instanceof L1PcInstance) { // Gn.89
                         L1PcInstance pc = (L1PcInstance) _target;
@@ -1740,17 +1761,21 @@ public class L1SkillUse {
 
             if (_skill.getTarget().equals("attack") && _skillId != 18) {
                 if (isPcSummonPet(_target)) {
-                    if (_player.getZoneType() == 1 || _target.getZoneType() == 1 || _player.checkNonPvP(_player, _target)) {
+                    if (_player.getZoneType() == 1 || _target.getZoneType() == 1
+                            || _player.checkNonPvP(_player, _target)) {
                         _player.sendPackets(new S_UseAttackSkill(_player, 0, castgfx, _targetX, _targetY, actionId));
-                        _player.broadcastPacket(new S_UseAttackSkill(_player, 0, castgfx, _targetX, _targetY, actionId));
+                        _player.broadcastPacket(
+                                new S_UseAttackSkill(_player, 0, castgfx, _targetX, _targetY, actionId));
                         return;
                     }
                 }
 
                 if (_skill.getArea() == 0) {
                     _player.sendPackets(new S_UseAttackSkill(_player, targetid, castgfx, _targetX, _targetY, actionId));
-                    _player.broadcastPacket(new S_UseAttackSkill(_player, targetid, castgfx, _targetX, _targetY, actionId), _target);
-                    _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage), _player);
+                    _player.broadcastPacket(
+                            new S_UseAttackSkill(_player, targetid, castgfx, _targetX, _targetY, actionId), _target);
+                    _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage),
+                            _player);
                 } else {
                     L1Character[] cha = new L1Character[_targetList.size()];
                     int i = 0;
@@ -1759,18 +1784,21 @@ public class L1SkillUse {
                         i++;
                     }
                     _player.sendPackets(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR));
-                    _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR), cha);
+                    _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR),
+                            cha);
                 }
             } else if (_skill.getTarget().equals("none") && _skill.getType() == L1Skills.TYPE_ATTACK) {
                 L1Character[] cha = new L1Character[_targetList.size()];
                 int i = 0;
                 for (TargetStatus ts : _targetList) {
                     cha[i] = ts.getTarget();
-                    cha[i].broadcastPacketExceptTargetSight(new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage), _player);
+                    cha[i].broadcastPacketExceptTargetSight(
+                            new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage), _player);
                     i++;
                 }
                 _player.sendPackets(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR));
-                _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR), cha);
+                _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR),
+                        cha);
             } else {
                 if (_skillId != 5 && _skillId != 69 && _skillId != 131) {
                     if (isSkillAction) {
@@ -1819,32 +1847,43 @@ public class L1SkillUse {
 
             if (_skill.getTarget().equals("attack") && _skillId != 18) {
                 if (_skill.getArea() == 0) {
-                    _user.broadcastPacket(new S_UseAttackSkill(_user, targetid, castgfx, _targetX, _targetY, actionId), _target);
+                    _user.broadcastPacket(new S_UseAttackSkill(_user, targetid, castgfx, _targetX, _targetY, actionId),
+                            _target);
                     if (actionId2 > 0 && castgfx2 > 0) {
-                        _user.broadcastPacket(new S_UseAttackSkill(_user, targetid, castgfx2, _targetX, _targetY, actionId2), _target);
-                        _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage), _user);
+                        _user.broadcastPacket(
+                                new S_UseAttackSkill(_user, targetid, castgfx2, _targetX, _targetY, actionId2),
+                                _target);
+                        _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage),
+                                _user);
                     }
                     if (actionId3 > 0 && castgfx3 > 0) {
-                        _user.broadcastPacket(new S_UseAttackSkill(_user, targetid, castgfx3, _targetX, _targetY, actionId3), _target);
-                        _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage), _user);
+                        _user.broadcastPacket(
+                                new S_UseAttackSkill(_user, targetid, castgfx3, _targetX, _targetY, actionId3),
+                                _target);
+                        _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage),
+                                _user);
                     }
-                    _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage), _user);
+                    _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage),
+                            _user);
                 } else {
                     L1Character[] cha = new L1Character[_targetList.size()];
                     int i = 0;
                     for (TargetStatus ts : _targetList) {
                         cha[i] = ts.getTarget();
-                        cha[i].broadcastPacketExceptTargetSight(new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage), _user);
+                        cha[i].broadcastPacketExceptTargetSight(
+                                new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage), _user);
                         i++;
                     }
                     _user.broadcastPacket(new S_RangeSkill(_user, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR), cha);
                     if (actionId2 > 0 && castgfx2 > 0) {
                         _user.broadcastPacket(new S_RangeSkill(_user, cha, castgfx2, actionId2, S_RangeSkill.TYPE_DIR));
-                        _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage), _user);
+                        _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage),
+                                _user);
                     }
                     if (actionId3 > 0 && castgfx3 > 0) {
                         _user.broadcastPacket(new S_RangeSkill(_user, cha, castgfx3, actionId3, S_RangeSkill.TYPE_DIR));
-                        _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage), _user);
+                        _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage),
+                                _user);
                     }
                 }
             } else if (_skill.getTarget().equals("none") && _skill.getType() == L1Skills.TYPE_ATTACK) {
@@ -1879,11 +1918,13 @@ public class L1SkillUse {
         final int[][] repeatedSkills = {
                 // { HOLY_WEAPON, ENCHANT_WEAPON, BLESS_WEAPON, SHADOW_FANG },
                 { FIRE_WEAPON, WIND_SHOT, STORM_EYE, BURNING_WEAPON, STORM_SHOT }, { SHIELD, EARTH_SKIN, IRON_SKIN },
-                { HOLY_WALK, BLOOD_LUST, MOVING_ACCELERATION, WIND_WALK, STATUS_BRAVE, STATUS_ELFBRAVE }, { HASTE, GREATER_HASTE, STATUS_HASTE },
-                { PHYSICAL_ENCHANT_DEX, NARUTO_THANKS_CANDY, DRESS_DEXTERITY }, { PHYSICAL_ENCHANT_STR, DRESS_MIGHTY },
+                { HOLY_WALK, BLOOD_LUST, MOVING_ACCELERATION, WIND_WALK, STATUS_BRAVE, STATUS_ELFBRAVE },
+                { HASTE, GREATER_HASTE, STATUS_HASTE }, { PHYSICAL_ENCHANT_DEX, NARUTO_THANKS_CANDY, DRESS_DEXTERITY },
+                { PHYSICAL_ENCHANT_STR, DRESS_MIGHTY },
                 // { GLOWING_AURA, SHINING_AURA },
                 { FAFU_MAAN, ANTA_MAAN, LIND_MAAN, VALA_MAAN, LIFE_MAAN, BIRTH_MAAN, SHAPE_MAAN },
-                { SCALES_EARTH_DRAGON, SCALES_WATER_DRAGON, SCALES_FIRE_DRAGON }, { PAP_FIVEPEARLBUFF, PAP_MAGICALPEARLBUFF } };
+                { SCALES_EARTH_DRAGON, SCALES_WATER_DRAGON, SCALES_FIRE_DRAGON },
+                { PAP_FIVEPEARLBUFF, PAP_MAGICALPEARLBUFF } };
         for (int[] skills : repeatedSkills) {
             for (int id : skills) {
                 if (id == _skillId) {
@@ -1927,70 +1968,70 @@ public class L1SkillUse {
         String MonMessage = " ";
         if (type == 1) { // アンタラス
             switch (_skillId) {
-                case ANTA_MESSAGE_1:
-                    MonMessage = "$7861";
-                    break;
-                case ANTA_MESSAGE_2:
-                    MonMessage = "$7911";
-                    break;
-                case ANTA_MESSAGE_3:
-                    MonMessage = "$7905";
-                    break;
-                case ANTA_MESSAGE_4:
-                    MonMessage = "$7907";
-                    break;
-                case ANTA_MESSAGE_5:
-                    MonMessage = "$7863";
-                    break;
-                case ANTA_MESSAGE_6:
-                    MonMessage = "$7903";
-                    break;
-                case ANTA_MESSAGE_7:
-                    MonMessage = "$7909";
-                    break;
-                case ANTA_MESSAGE_8:
-                    MonMessage = "$7915";
-                    break;
-                case ANTA_MESSAGE_9:
-                    MonMessage = "$7862";
-                    break;
-                case ANTA_MESSAGE_10:
-                    MonMessage = "$7913";
-                    break;
-                default:
-                    break;
+            case ANTA_MESSAGE_1:
+                MonMessage = "$7861";
+                break;
+            case ANTA_MESSAGE_2:
+                MonMessage = "$7911";
+                break;
+            case ANTA_MESSAGE_3:
+                MonMessage = "$7905";
+                break;
+            case ANTA_MESSAGE_4:
+                MonMessage = "$7907";
+                break;
+            case ANTA_MESSAGE_5:
+                MonMessage = "$7863";
+                break;
+            case ANTA_MESSAGE_6:
+                MonMessage = "$7903";
+                break;
+            case ANTA_MESSAGE_7:
+                MonMessage = "$7909";
+                break;
+            case ANTA_MESSAGE_8:
+                MonMessage = "$7915";
+                break;
+            case ANTA_MESSAGE_9:
+                MonMessage = "$7862";
+                break;
+            case ANTA_MESSAGE_10:
+                MonMessage = "$7913";
+                break;
+            default:
+                break;
             }
         } else if (type == 2) { // パプリオン
             switch (_skillId) {
-                case PAP_PREDICATE1:
-                    MonMessage = "$8467";
-                    break;
-                case PAP_PREDICATE3:
-                    MonMessage = "$8458";
-                    break;
-                case PAP_PREDICATE5:
-                    MonMessage = "$8456";
-                    break;
-                case PAP_PREDICATE6:
-                    MonMessage = "$8457";
-                    break;
-                case PAP_PREDICATE7:
-                    MonMessage = "$8454";
-                    break;
-                case PAP_PREDICATE8:
-                    MonMessage = "$8455";
-                    break;
-                case PAP_PREDICATE9:
-                    MonMessage = "$8460";
-                    break;
-                case PAP_PREDICATE11:
-                    MonMessage = "$8463";
-                    break;
-                case PAP_PREDICATE12:
-                    MonMessage = "$8465";
-                    break;
-                default:
-                    break;
+            case PAP_PREDICATE1:
+                MonMessage = "$8467";
+                break;
+            case PAP_PREDICATE3:
+                MonMessage = "$8458";
+                break;
+            case PAP_PREDICATE5:
+                MonMessage = "$8456";
+                break;
+            case PAP_PREDICATE6:
+                MonMessage = "$8457";
+                break;
+            case PAP_PREDICATE7:
+                MonMessage = "$8454";
+                break;
+            case PAP_PREDICATE8:
+                MonMessage = "$8455";
+                break;
+            case PAP_PREDICATE9:
+                MonMessage = "$8460";
+                break;
+            case PAP_PREDICATE11:
+                MonMessage = "$8463";
+                break;
+            case PAP_PREDICATE12:
+                MonMessage = "$8465";
+                break;
+            default:
+                break;
             }
         }
         _user.broadcastPacket(new S_NpcChatPacket(_npc, MonMessage, 0));
@@ -2006,8 +2047,8 @@ public class L1SkillUse {
         }
 
         if (_skillId == CUBE_IGNITION) {
-            L1EffectInstance effect = L1EffectSpawn.getInstance().spawnEffect(200056, _skill.getBuffDuration() * 1000, _user.getX(), _user.getY(),
-                    _user.getMapId());
+            L1EffectInstance effect = L1EffectSpawn.getInstance().spawnEffect(200056, _skill.getBuffDuration() * 1000,
+                    _user.getX(), _user.getY(), _user.getMapId());
             _player.setSkillEffect(CUBE_IGNITION, _skill.getBuffDuration() * 1000);
             effect.setCubeTime(4);
             effect.setCubePc(_player);
@@ -2017,8 +2058,8 @@ public class L1SkillUse {
         }
 
         if (_skillId == CUBE_QUAKE) {
-            L1EffectInstance effect = L1EffectSpawn.getInstance().spawnEffect(200057, _skill.getBuffDuration() * 1000, _user.getX(), _user.getY(),
-                    _user.getMapId());
+            L1EffectInstance effect = L1EffectSpawn.getInstance().spawnEffect(200057, _skill.getBuffDuration() * 1000,
+                    _user.getX(), _user.getY(), _user.getMapId());
             _player.setSkillEffect(CUBE_QUAKE, _skill.getBuffDuration() * 1000);
             effect.setCubeTime(4);
             effect.setCubePc(_player);
@@ -2029,8 +2070,8 @@ public class L1SkillUse {
         }
 
         if (_skillId == CUBE_SHOCK) {
-            L1EffectInstance effect = L1EffectSpawn.getInstance().spawnEffect(200058, _skill.getBuffDuration() * 1000, _user.getX(), _user.getY(),
-                    _user.getMapId());
+            L1EffectInstance effect = L1EffectSpawn.getInstance().spawnEffect(200058, _skill.getBuffDuration() * 1000,
+                    _user.getX(), _user.getY(), _user.getMapId());
             _player.setSkillEffect(CUBE_SHOCK, _skill.getBuffDuration() * 1000);
             effect.setCubeTime(4);
             effect.setCubePc(_player);
@@ -2041,8 +2082,8 @@ public class L1SkillUse {
         }
 
         if (_skillId == CUBE_BALANCE) {
-            L1EffectInstance effect = L1EffectSpawn.getInstance().spawnEffect(200059, _skill.getBuffDuration() * 1000, _user.getX(), _user.getY(),
-                    _user.getMapId());
+            L1EffectInstance effect = L1EffectSpawn.getInstance().spawnEffect(200059, _skill.getBuffDuration() * 1000,
+                    _user.getX(), _user.getY(), _user.getMapId());
             _player.setSkillEffect(CUBE_BALANCE, _skill.getBuffDuration() * 1000);
             effect.setCubeTime(5);
             effect.setCubePc(_player);
@@ -2077,7 +2118,8 @@ public class L1SkillUse {
         }
 
         if (_skillId == LIFE_STREAM) {
-            L1EffectSpawn.getInstance().spawnEffect(81169, _skill.getBuffDuration() * 1000, _targetX, _targetY, _user.getMapId());
+            L1EffectSpawn.getInstance().spawnEffect(81169, _skill.getBuffDuration() * 1000, _targetX, _targetY,
+                    _user.getMapId());
 
             return;
         }
@@ -2125,7 +2167,7 @@ public class L1SkillUse {
             boolean isSuccess = false;
             int undeadType = 0;
 
-            for (Iterator<TargetStatus> iter = _targetList.iterator(); iter.hasNext(); ) {
+            for (Iterator<TargetStatus> iter = _targetList.iterator(); iter.hasNext();) {
                 ts = null;
                 cha = null;
                 dmg = 0;
@@ -2146,7 +2188,8 @@ public class L1SkillUse {
                     undeadType = ((L1MonsterInstance) cha).getNpcTemplate().get_undead();
                 }
 
-                if ((_skill.getType() == L1Skills.TYPE_CURSE || _skill.getType() == L1Skills.TYPE_PROBABILITY) && isTargetFailure(cha)) {
+                if ((_skill.getType() == L1Skills.TYPE_CURSE || _skill.getType() == L1Skills.TYPE_PROBABILITY)
+                        && isTargetFailure(cha)) {
                     iter.remove();
                     continue;
                 }
@@ -2258,8 +2301,9 @@ public class L1SkillUse {
                     }
                 }
 
-                if (cha.hasSkillEffect(_skillId) && _skillId != 228 && _skillId != SHOCK_STUN && _skillId != THUNDER_GRAB && _skillId != OMAN_STUN
-                        && _skillId != ANTA_MESSAGE_6 && _skillId != ANTA_MESSAGE_7 && _skillId != ANTA_MESSAGE_8) {
+                if (cha.hasSkillEffect(_skillId) && _skillId != 228 && _skillId != SHOCK_STUN
+                        && _skillId != THUNDER_GRAB && _skillId != OMAN_STUN && _skillId != ANTA_MESSAGE_6
+                        && _skillId != ANTA_MESSAGE_7 && _skillId != ANTA_MESSAGE_8) {
                     addMagicList(cha, true);
                     if (_skillId != SHAPE_CHANGE) {
                         continue;
@@ -2269,2511 +2313,2666 @@ public class L1SkillUse {
                 // ●●●● PC、NPC両方の効果があるスキル ●●●●
                 // GFX Check (Made by HuntBoy)
                 switch (_skillId) {
-                    case ASSASSIN: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.hasSkillEffect(L1SkillId.ASSASSIN)) {
-                                pc.removeSkillEffect(L1SkillId.ASSASSIN);
-                            }
-                            pc.setSkillEffect(L1SkillId.ASSASSIN, 15 * 1000);
-                            pc.sendPackets(new S_NewSkillIcon(L1SkillId.ASSASSIN, true, 15));
+                case ASSASSIN: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.hasSkillEffect(L1SkillId.ASSASSIN)) {
+                            pc.removeSkillEffect(L1SkillId.ASSASSIN);
                         }
+                        pc.setSkillEffect(L1SkillId.ASSASSIN, 15 * 1000);
+                        pc.sendPackets(new S_NewSkillIcon(L1SkillId.ASSASSIN, true, 15));
                     }
+                }
                     break;
-                    case DESTROY: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.hasSkillEffect(L1SkillId.DESTROY)) {
-                                pc.removeSkillEffect(L1SkillId.DESTROY);
-                            }
-                            pc.setSkillEffect(L1SkillId.DESTROY, 30 * 1000);
-                            pc.sendPackets(new S_NewSkillIcon(L1SkillId.DESTROY, true, 30));
+                case DESTROY: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.hasSkillEffect(L1SkillId.DESTROY)) {
+                            pc.removeSkillEffect(L1SkillId.DESTROY);
                         }
+                        pc.setSkillEffect(L1SkillId.DESTROY, 30 * 1000);
+                        pc.sendPackets(new S_NewSkillIcon(L1SkillId.DESTROY, true, 30));
                     }
+                }
                     break;
-                    case SOUL_BARRIER: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.hasSkillEffect(L1SkillId.SOUL_BARRIER)) {
-                                pc.removeSkillEffect(L1SkillId.SOUL_BARRIER);
-                            }
-                            pc.setSkillEffect(L1SkillId.SOUL_BARRIER, 600 * 1000);
-                            pc.sendPackets(new S_NewSkillIcon(L1SkillId.SOUL_BARRIER, true, 600));
+                case SOUL_BARRIER: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.hasSkillEffect(L1SkillId.SOUL_BARRIER)) {
+                            pc.removeSkillEffect(L1SkillId.SOUL_BARRIER);
                         }
+                        pc.setSkillEffect(L1SkillId.SOUL_BARRIER, 600 * 1000);
+                        pc.sendPackets(new S_NewSkillIcon(L1SkillId.SOUL_BARRIER, true, 600));
                     }
+                }
                     break;
-                    case IMPACT: {
-                        if (_user instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) _user;
-                            if (_target instanceof L1PcInstance) {
-                                L1PcInstance target = (L1PcInstance) _target;
-                                if (target.hasSkillEffect(L1SkillId.IMPACT)) {
-                                    target.removeSkillEffect(L1SkillId.IMPACT);
-                                }
-                                target.setSkillEffect(L1SkillId.IMPACT, 15 * 1000);
-                                target.sendPackets(new S_NewSkillIcon(L1SkillId.IMPACT, true, 15));
-                                target.sendPackets(new S_SkillSound(target.getId(), 14513));
-                                Broadcaster.broadcastPacket(target, new S_SkillSound(target.getId(), 14513));
-                                int upskill = pc.getLevel() - 80;
-                                if (upskill >= 5)
-                                    upskill = 5;
-                                target.setImpactUp(5 + upskill);
-                            }
-                        }
-                    }
-                    break;
-                    case TITANL_RISING: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.hasSkillEffect(L1SkillId.TITANL_RISING)) {
-                                pc.removeSkillEffect(L1SkillId.TITANL_RISING);
-                            }
-                            pc.setSkillEffect(L1SkillId.TITANL_RISING, 2400 * 1000);
-                            pc.sendPackets(new S_NewSkillIcon(L1SkillId.TITANL_RISING, true, 2400));
-                            int upHP = pc.getLevel() - 80;
-                            if (upHP >= 5)
-                                upHP = 5;
-                            pc.setRisingUp(5 + upHP);
-                        }
-                    }
-                    break;
-                    case ABSOLUTE_BLADE: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.hasSkillEffect(L1SkillId.ABSOLUTE_BLADE)) {
-                                pc.removeSkillEffect(L1SkillId.ABSOLUTE_BLADE);
-                            }
-                            pc.setSkillEffect(L1SkillId.ABSOLUTE_BLADE, 8 * 1000);
-                            pc.sendPackets(new S_NewSkillIcon(L1SkillId.ABSOLUTE_BLADE, true, 8));
-                        }
-                    }
-                    break;
-                    case DEATH_HEAL: {
+                case IMPACT: {
+                    if (_user instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) _user;
                         if (_target instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) _target;
-                            if (pc.hasSkillEffect(DEATH_HEAL)) {
-                                pc.sendPackets(new S_NewSkillIcon(DEATH_HEAL, false, -1));
-                                pc.removeSkillEffect(DEATH_HEAL);
+                            L1PcInstance target = (L1PcInstance) _target;
+                            if (target.hasSkillEffect(L1SkillId.IMPACT)) {
+                                target.removeSkillEffect(L1SkillId.IMPACT);
                             }
-                            int chance = random.nextInt(10) + 1;
-                            pc.sendPackets(new S_NewSkillIcon(DEATH_HEAL, true, chance));
-                            pc.setSkillEffect(DEATH_HEAL, chance * 1000);
-                            pc.sendPackets(new S_SkillSound(pc.getId(), 14501));
-                            Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 14501));
+                            target.setSkillEffect(L1SkillId.IMPACT, 15 * 1000);
+                            target.sendPackets(new S_NewSkillIcon(L1SkillId.IMPACT, true, 15));
+                            target.sendPackets(new S_SkillSound(target.getId(), 14513));
+                            Broadcaster.broadcastPacket(target, new S_SkillSound(target.getId(), 14513));
+                            int upskill = pc.getLevel() - 80;
+                            if (upskill >= 5)
+                                upskill = 5;
+                            target.setImpactUp(5 + upskill);
                         }
                     }
+                }
                     break;
-                    case GRACE_AVATAR: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.hasSkillEffect(L1SkillId.GRACE_AVATAR)) {
-                                pc.sendPackets(new S_NewSkillIcon(L1SkillId.GRACE_AVATAR, false, -1));
-                                pc.removeSkillEffect(L1SkillId.GRACE_AVATAR);
-                            }
-                            pc.setGraceLv(pc.getLevel());
-                            pc.getResistance().addHold(10 + pc.getGraceLv()); // ホールド耐性（自分）
-                            pc.getResistance().addStun(10 + pc.getGraceLv()); // スタン耐性（自分）
-                            pc.getResistance().addDESPERADO(10 + pc.getGraceLv()); // 恐怖耐性（自分）
-                            pc.setSkillEffect(L1SkillId.GRACE_AVATAR, 15 * 1000);
-                            pc.sendPackets(new S_NewSkillIcon(L1SkillId.GRACE_AVATAR, true, 15));
-                            pc.sendPackets(new S_SkillSound(pc.getId(), 14495));
-                            Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 14495));
-                            for (L1PcInstance player : L1World.getInstance().getVisiblePlayer(pc, 18)) {// 18セル
-                                if (pc.getParty() != null) {
-                                    if (pc.getParty().isMember(player) && player != null) {
-                                        if (player.hasSkillEffect(L1SkillId.GRACE_AVATAR)) {
-                                            player.sendPackets(new S_NewSkillIcon(L1SkillId.GRACE_AVATAR, false, -1));
-                                            player.removeSkillEffect(L1SkillId.GRACE_AVATAR);
-                                        }
-                                        player.setGraceLv(pc.getLevel());
-                                        player.getResistance().addHold(10 + player.getGraceLv()); // ホールド耐性（パーティーメンバー）
-                                        player.getResistance().addStun(10 + player.getGraceLv()); // スタン耐性（パーティーメンバー）
-                                        player.getResistance().addDESPERADO(10 + player.getGraceLv()); // 恐怖耐性（パーティーメンバー）
-                                        player.sendPackets(new S_NewSkillIcon(GRACE_AVATAR, true, 15));
-                                        player.setSkillEffect(L1SkillId.GRACE_AVATAR, 15 * 1000);
-                                        player.sendPackets(new S_ServerMessage(4734));// パーティーメンバーグレースアバター効果メッセージ
+                case TITANL_RISING: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.hasSkillEffect(L1SkillId.TITANL_RISING)) {
+                            pc.removeSkillEffect(L1SkillId.TITANL_RISING);
+                        }
+                        pc.setSkillEffect(L1SkillId.TITANL_RISING, 2400 * 1000);
+                        pc.sendPackets(new S_NewSkillIcon(L1SkillId.TITANL_RISING, true, 2400));
+                        int upHP = pc.getLevel() - 80;
+                        if (upHP >= 5)
+                            upHP = 5;
+                        pc.setRisingUp(5 + upHP);
+                    }
+                }
+                    break;
+                case ABSOLUTE_BLADE: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.hasSkillEffect(L1SkillId.ABSOLUTE_BLADE)) {
+                            pc.removeSkillEffect(L1SkillId.ABSOLUTE_BLADE);
+                        }
+                        pc.setSkillEffect(L1SkillId.ABSOLUTE_BLADE, 8 * 1000);
+                        pc.sendPackets(new S_NewSkillIcon(L1SkillId.ABSOLUTE_BLADE, true, 8));
+                    }
+                }
+                    break;
+                case DEATH_HEAL: {
+                    if (_target instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) _target;
+                        if (pc.hasSkillEffect(DEATH_HEAL)) {
+                            pc.sendPackets(new S_NewSkillIcon(DEATH_HEAL, false, -1));
+                            pc.removeSkillEffect(DEATH_HEAL);
+                        }
+                        int chance = random.nextInt(10) + 1;
+                        pc.sendPackets(new S_NewSkillIcon(DEATH_HEAL, true, chance));
+                        pc.setSkillEffect(DEATH_HEAL, chance * 1000);
+                        pc.sendPackets(new S_SkillSound(pc.getId(), 14501));
+                        Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 14501));
+                    }
+                }
+                    break;
+                case GRACE_AVATAR: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.hasSkillEffect(L1SkillId.GRACE_AVATAR)) {
+                            pc.sendPackets(new S_NewSkillIcon(L1SkillId.GRACE_AVATAR, false, -1));
+                            pc.removeSkillEffect(L1SkillId.GRACE_AVATAR);
+                        }
+                        pc.setGraceLv(pc.getLevel());
+                        pc.getResistance().addHold(10 + pc.getGraceLv()); // ホールド耐性（自分）
+                        pc.getResistance().addStun(10 + pc.getGraceLv()); // スタン耐性（自分）
+                        pc.getResistance().addDESPERADO(10 + pc.getGraceLv()); // 恐怖耐性（自分）
+                        pc.setSkillEffect(L1SkillId.GRACE_AVATAR, 15 * 1000);
+                        pc.sendPackets(new S_NewSkillIcon(L1SkillId.GRACE_AVATAR, true, 15));
+                        pc.sendPackets(new S_SkillSound(pc.getId(), 14495));
+                        Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 14495));
+                        for (L1PcInstance player : L1World.getInstance().getVisiblePlayer(pc, 18)) {// 18セル
+                            if (pc.getParty() != null) {
+                                if (pc.getParty().isMember(player) && player != null) {
+                                    if (player.hasSkillEffect(L1SkillId.GRACE_AVATAR)) {
+                                        player.sendPackets(new S_NewSkillIcon(L1SkillId.GRACE_AVATAR, false, -1));
+                                        player.removeSkillEffect(L1SkillId.GRACE_AVATAR);
                                     }
+                                    player.setGraceLv(pc.getLevel());
+                                    player.getResistance().addHold(10 + player.getGraceLv()); // ホールド耐性（パーティーメンバー）
+                                    player.getResistance().addStun(10 + player.getGraceLv()); // スタン耐性（パーティーメンバー）
+                                    player.getResistance().addDESPERADO(10 + player.getGraceLv()); // 恐怖耐性（パーティーメンバー）
+                                    player.sendPackets(new S_NewSkillIcon(GRACE_AVATAR, true, 15));
+                                    player.setSkillEffect(L1SkillId.GRACE_AVATAR, 15 * 1000);
+                                    player.sendPackets(new S_ServerMessage(4734));// パーティーメンバーグレースアバター効果メッセージ
                                 }
                             }
                         }
                     }
+                }
                     break;
-                    case IMMUNE_TO_HARM:
-                    case IllUSION_OGRE:
-                    case IllUSION_LICH:
-                    case IllUSION_DIAMONDGOLEM:
-                    case CONCENTRATION:
-                    case PATIENCE: {
-                        if (_user instanceof L1PcInstance) {
-                            L1PinkName.onHelp(cha, _user);
-                        }
+                case IMMUNE_TO_HARM:
+                case IllUSION_OGRE:
+                case IllUSION_LICH:
+                case IllUSION_DIAMONDGOLEM:
+                case CONCENTRATION:
+                case PATIENCE: {
+                    if (_user instanceof L1PcInstance) {
+                        L1PinkName.onHelp(cha, _user);
                     }
+                }
                     break;
 
-                    case HASTE: {
-                        if (cha.getMoveSpeed() != 2) {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.getHasteItemEquipped() > 0) {
-                                    continue;
-                                }
-                                pc.setDrink(false);
-                                pc.sendPackets(new S_SkillHaste(pc.getId(), 1, _getBuffIconDuration));
-                            }
-                            cha.broadcastPacket(new S_SkillHaste(cha.getId(), 1, 0));
-                            cha.setMoveSpeed(1);
-                        } else {
-                            int skillNum = 0;
-                            if (cha.hasSkillEffect(SLOW)) {
-                                skillNum = SLOW;
-                            } else if (cha.hasSkillEffect(GREATER_SLOW)) {
-                                skillNum = GREATER_SLOW;
-                            } else if (cha.hasSkillEffect(ENTANGLE)) {
-                                skillNum = ENTANGLE;
-                            } else if (cha.hasSkillEffect(MOB_SLOW_1)) {
-                                skillNum = MOB_SLOW_1;
-                            } else if (cha.hasSkillEffect(MOB_SLOW_18)) {
-                                skillNum = MOB_SLOW_18;
-                            }
-                            if (skillNum != 0) {
-                                cha.removeSkillEffect(skillNum);
-                                cha.removeSkillEffect(HASTE);
-                                cha.setMoveSpeed(0);
+                case HASTE: {
+                    if (cha.getMoveSpeed() != 2) {
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.getHasteItemEquipped() > 0) {
                                 continue;
                             }
+                            pc.setDrink(false);
+                            pc.sendPackets(new S_SkillHaste(pc.getId(), 1, _getBuffIconDuration));
+                        }
+                        cha.broadcastPacket(new S_SkillHaste(cha.getId(), 1, 0));
+                        cha.setMoveSpeed(1);
+                    } else {
+                        int skillNum = 0;
+                        if (cha.hasSkillEffect(SLOW)) {
+                            skillNum = SLOW;
+                        } else if (cha.hasSkillEffect(GREATER_SLOW)) {
+                            skillNum = GREATER_SLOW;
+                        } else if (cha.hasSkillEffect(ENTANGLE)) {
+                            skillNum = ENTANGLE;
+                        } else if (cha.hasSkillEffect(MOB_SLOW_1)) {
+                            skillNum = MOB_SLOW_1;
+                        } else if (cha.hasSkillEffect(MOB_SLOW_18)) {
+                            skillNum = MOB_SLOW_18;
+                        }
+                        if (skillNum != 0) {
+                            cha.removeSkillEffect(skillNum);
+                            cha.removeSkillEffect(HASTE);
+                            cha.setMoveSpeed(0);
+                            continue;
                         }
                     }
+                }
                     break;
-                    case CURE_POISON: {
-                        cha.curePoison();
+                case CURE_POISON: {
+                    cha.curePoison();
+                }
+                    break;
+                case DRESS_EVASION:// 12
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.Add_Er(18);
+                        pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, pc.get_PlusEr()));
                     }
                     break;
-                    case DRESS_EVASION:// 12
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.Add_Er(18);
-                            pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, pc.get_PlusEr()));
-                        }
-                        break;
-                    case AQUA_PROTECTER:// 5
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.Add_Er(5);
-                            pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, pc.get_PlusEr()));
-                        }
-                        break;
-                    case SOLID_CARRIAGE:// 15
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.Add_Er(15);
-                            pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, pc.get_PlusEr()));
-                        }
-                        break;
-				/*
-				 * case STRIKER_GALE:// ソース if (cha instanceof L1PcInstance) { L1PcInstance pc = (L1PcInstance) cha; // pc.Add_Er(-99);
-				 * pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, pc.get_PlusEr())); pc.sendPackets(new S_OwnCharStatus(pc)); } break;
-				 */
-                    case STRIKER_GALE:// ゲイルリアルタイム
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            int er = 0;
-                            er += pc.get_Er();
-                            er += pc.getAdd_Er();
-                            if (er <= 0) {
-                                er = 0;
-                            } else {
-                                er = (int) er / 3;
-                            }
-                            pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, er), true);
-                        }
-                        break; // 修正
-                    case REMOVE_CURSE: {
-                        cha.curePoison();
-                        if (cha.hasSkillEffect(STATUS_CURSE_PARALYZING) || cha.hasSkillEffect(STATUS_CURSE_PARALYZED)
-                                || cha.hasSkillEffect(ANTA_MESSAGE_1) || cha.hasSkillEffect(ANTA_MESSAGE_6) || cha.hasSkillEffect(ANTA_MESSAGE_7)
-                                || cha.hasSkillEffect(ANTA_MESSAGE_8) || cha.hasSkillEffect(OMAN_STUN)) {
-                            cha.cureParalaysis();
-                        }
-                        if (cha.hasSkillEffect(CURSE_BLIND) || cha.hasSkillEffect(DARKNESS)) {
-                            if (cha.hasSkillEffect(CURSE_BLIND)) {
-                                cha.removeSkillEffect(CURSE_BLIND);
-                            } else if (cha.hasSkillEffect(DARKNESS)) {
-                                cha.removeSkillEffect(DARKNESS);
-                            }
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                pc.sendPackets(new S_CurseBlind(0));
-                            }
-                        }
+                case AQUA_PROTECTER:// 5
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.Add_Er(5);
+                        pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, pc.get_PlusEr()));
                     }
                     break;
-                    case RESURRECTION:
-                    case GREATER_RESURRECTION: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (_player.getId() != pc.getId()) {
-                                if (L1World.getInstance().getVisiblePlayer(pc, 0).size() > 0) {
-                                    for (L1PcInstance visiblePc : L1World.getInstance().getVisiblePlayer(pc, 0)) {
-                                        if (!visiblePc.isDead()) {
-                                            _player.sendPackets(new S_ServerMessage(592));
-                                            return;
-                                        }
-                                    }
-                                }
-                                /** ボール成長は復活できないように **/
-                                int castle_id = L1CastleLocation.getCastleIdByArea(pc);
-                                if (castle_id != 0) {
-                                    pc.sendPackets(new S_SystemMessage("利用できない地域です。"));
-                                    return;
-                                }
-                                /** ボール成長は復活できないように **/
-                                if (pc.getCurrentHp() == 0 && pc.isDead()) {
-                                    if (pc.getMap().isUseResurrection()) {
-                                        if (_skillId == RESURRECTION) {
-                                            pc.setGres(false);
-                                        } else if (_skillId == GREATER_RESURRECTION) {
-                                            pc.setGres(true);
-                                        }
-                                        pc.setTempID(_player.getId());
-                                        pc.sendPackets(new S_Message_YN(322, ""));
-                                    }
-                                }
-                            }
-                        }
-                        if (cha instanceof L1NpcInstance) {
-                            if (!(cha instanceof L1TowerInstance)) {
-                                L1NpcInstance npc = (L1NpcInstance) cha;
-                                if (npc.getNpcTemplate().isCantResurrect() && !(npc instanceof L1PetInstance)) {
-                                    return;
-                                }
-                                if (npc instanceof L1PetInstance && L1World.getInstance().getVisiblePlayer(npc, 0).size() > 0) {
-                                    for (L1PcInstance visiblePc : L1World.getInstance().getVisiblePlayer(npc, 0)) {
-                                        if (!visiblePc.isDead()) {
-                                            _player.sendPackets(new S_ServerMessage(592));
-                                            return;
-                                        }
-                                    }
-                                }
-                                if (npc.getCurrentHp() == 0 && npc.isDead()) {
-                                    npc.resurrect(npc.getMaxHp() / 4);
-                                    npc.setResurrect(true);
-                                }
-                            }
-                        }
+                case SOLID_CARRIAGE:// 15
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.Add_Er(15);
+                        pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, pc.get_PlusEr()));
                     }
                     break;
-                    case CALL_OF_NATURE: {
+                /*
+                 * case STRIKER_GALE:// ソース if (cha instanceof L1PcInstance) {
+                 * L1PcInstance pc = (L1PcInstance) cha; // pc.Add_Er(-99);
+                 * pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate,
+                 * pc.get_PlusEr())); pc.sendPackets(new S_OwnCharStatus(pc)); }
+                 * break;
+                 */
+                case STRIKER_GALE:// ゲイルリアルタイム
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        int er = 0;
+                        er += pc.get_Er();
+                        er += pc.getAdd_Er();
+                        if (er <= 0) {
+                            er = 0;
+                        } else {
+                            er = (int) er / 3;
+                        }
+                        pc.sendPackets(new S_PacketBox(S_PacketBox.ER_UpDate, er), true);
+                    }
+                    break; // 修正
+                case REMOVE_CURSE: {
+                    cha.curePoison();
+                    if (cha.hasSkillEffect(STATUS_CURSE_PARALYZING) || cha.hasSkillEffect(STATUS_CURSE_PARALYZED)
+                            || cha.hasSkillEffect(ANTA_MESSAGE_1) || cha.hasSkillEffect(ANTA_MESSAGE_6)
+                            || cha.hasSkillEffect(ANTA_MESSAGE_7) || cha.hasSkillEffect(ANTA_MESSAGE_8)
+                            || cha.hasSkillEffect(OMAN_STUN)) {
+                        cha.cureParalaysis();
+                    }
+                    if (cha.hasSkillEffect(CURSE_BLIND) || cha.hasSkillEffect(DARKNESS)) {
+                        if (cha.hasSkillEffect(CURSE_BLIND)) {
+                            cha.removeSkillEffect(CURSE_BLIND);
+                        } else if (cha.hasSkillEffect(DARKNESS)) {
+                            cha.removeSkillEffect(DARKNESS);
+                        }
                         if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
-                            if (_player.getId() != pc.getId()) {
-                                if (L1World.getInstance().getVisiblePlayer(pc, 0).size() > 0) {
-                                    for (L1PcInstance visiblePc : L1World.getInstance().getVisiblePlayer(pc, 0)) {
-                                        if (!visiblePc.isDead()) {
-                                            _player.sendPackets(new S_ServerMessage(592));
-                                            return;
-                                        }
+                            pc.sendPackets(new S_CurseBlind(0));
+                        }
+                    }
+                }
+                    break;
+                case RESURRECTION:
+                case GREATER_RESURRECTION: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (_player.getId() != pc.getId()) {
+                            if (L1World.getInstance().getVisiblePlayer(pc, 0).size() > 0) {
+                                for (L1PcInstance visiblePc : L1World.getInstance().getVisiblePlayer(pc, 0)) {
+                                    if (!visiblePc.isDead()) {
+                                        _player.sendPackets(new S_ServerMessage(592));
+                                        return;
                                     }
                                 }
-                                if (pc.getCurrentHp() == 0 && pc.isDead()) {
+                            }
+                            /** ボール成長は復活できないように **/
+                            int castle_id = L1CastleLocation.getCastleIdByArea(pc);
+                            if (castle_id != 0) {
+                                pc.sendPackets(new S_SystemMessage("利用できない地域です。"));
+                                return;
+                            }
+                            /** ボール成長は復活できないように **/
+                            if (pc.getCurrentHp() == 0 && pc.isDead()) {
+                                if (pc.getMap().isUseResurrection()) {
+                                    if (_skillId == RESURRECTION) {
+                                        pc.setGres(false);
+                                    } else if (_skillId == GREATER_RESURRECTION) {
+                                        pc.setGres(true);
+                                    }
                                     pc.setTempID(_player.getId());
                                     pc.sendPackets(new S_Message_YN(322, ""));
                                 }
                             }
                         }
-                        if (cha instanceof L1NpcInstance) {
-                            if (!(cha instanceof L1TowerInstance)) {
-                                L1NpcInstance npc = (L1NpcInstance) cha;
-                                if (npc instanceof L1PetInstance && L1World.getInstance().getVisiblePlayer(npc, 0).size() > 0) {
-                                    for (L1PcInstance visiblePc : L1World.getInstance().getVisiblePlayer(npc, 0)) {
-                                        if (!visiblePc.isDead()) {
-                                            _player.sendPackets(new S_ServerMessage(592));
-                                            return;
-                                        }
+                    }
+                    if (cha instanceof L1NpcInstance) {
+                        if (!(cha instanceof L1TowerInstance)) {
+                            L1NpcInstance npc = (L1NpcInstance) cha;
+                            if (npc.getNpcTemplate().isCantResurrect() && !(npc instanceof L1PetInstance)) {
+                                return;
+                            }
+                            if (npc instanceof L1PetInstance
+                                    && L1World.getInstance().getVisiblePlayer(npc, 0).size() > 0) {
+                                for (L1PcInstance visiblePc : L1World.getInstance().getVisiblePlayer(npc, 0)) {
+                                    if (!visiblePc.isDead()) {
+                                        _player.sendPackets(new S_ServerMessage(592));
+                                        return;
                                     }
                                 }
-                                if (npc.getCurrentHp() == 0 && npc.isDead()) {
-                                    npc.resurrect(cha.getMaxHp());
-                                    npc.resurrect(cha.getMaxMp() / 100);
-                                    npc.setResurrect(true);
+                            }
+                            if (npc.getCurrentHp() == 0 && npc.isDead()) {
+                                npc.resurrect(npc.getMaxHp() / 4);
+                                npc.setResurrect(true);
+                            }
+                        }
+                    }
+                }
+                    break;
+                case CALL_OF_NATURE: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (_player.getId() != pc.getId()) {
+                            if (L1World.getInstance().getVisiblePlayer(pc, 0).size() > 0) {
+                                for (L1PcInstance visiblePc : L1World.getInstance().getVisiblePlayer(pc, 0)) {
+                                    if (!visiblePc.isDead()) {
+                                        _player.sendPackets(new S_ServerMessage(592));
+                                        return;
+                                    }
                                 }
                             }
-                        }
-                    }
-                    break;
-                    // UI DG表示
-                    case UNCANNY_DODGE: // アンキャニードッジ
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDg(-8);
-                        }
-                        break;
-                    // UI DG表示
-                    case DETECTION:
-                    case IZE_BREAK:
-                    case EYE_OF_DRAGON: {
-                        if (cha instanceof L1NpcInstance) {
-                            L1NpcInstance npc = (L1NpcInstance) cha;
-                            int hiddenStatus = npc.getHiddenStatus();
-                            if (hiddenStatus == L1NpcInstance.HIDDEN_STATUS_SINK) {
-                                npc.appearOnGround(_player);
+                            if (pc.getCurrentHp() == 0 && pc.isDead()) {
+                                pc.setTempID(_player.getId());
+                                pc.sendPackets(new S_Message_YN(322, ""));
                             }
                         }
                     }
+                    if (cha instanceof L1NpcInstance) {
+                        if (!(cha instanceof L1TowerInstance)) {
+                            L1NpcInstance npc = (L1NpcInstance) cha;
+                            if (npc instanceof L1PetInstance
+                                    && L1World.getInstance().getVisiblePlayer(npc, 0).size() > 0) {
+                                for (L1PcInstance visiblePc : L1World.getInstance().getVisiblePlayer(npc, 0)) {
+                                    if (!visiblePc.isDead()) {
+                                        _player.sendPackets(new S_ServerMessage(592));
+                                        return;
+                                    }
+                                }
+                            }
+                            if (npc.getCurrentHp() == 0 && npc.isDead()) {
+                                npc.resurrect(cha.getMaxHp());
+                                npc.resurrect(cha.getMaxMp() / 100);
+                                npc.setResurrect(true);
+                            }
+                        }
+                    }
+                }
+                    break;
+                // UI DG表示
+                case UNCANNY_DODGE: // アンキャニードッジ
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDg(-8);
+                    }
+                    break;
+                // UI DG表示
+                case DETECTION:
+                case IZE_BREAK:
+                case EYE_OF_DRAGON: {
+                    if (cha instanceof L1NpcInstance) {
+                        L1NpcInstance npc = (L1NpcInstance) cha;
+                        int hiddenStatus = npc.getHiddenStatus();
+                        if (hiddenStatus == L1NpcInstance.HIDDEN_STATUS_SINK) {
+                            npc.appearOnGround(_player);
+                        }
+                    }
+                }
                     break;
 
-                    case COUNTER_DETECTION: {
-                        if (cha instanceof L1PcInstance) {
-                            dmg = _magic.calcMagicDamage(_skillId);
-                        } else if (cha instanceof L1NpcInstance) {
-                            L1NpcInstance npc = (L1NpcInstance) cha;
-                            int hiddenStatus = npc.getHiddenStatus();
-                            if (hiddenStatus == L1NpcInstance.HIDDEN_STATUS_SINK) {
-                                npc.appearOnGround(_player);
-                            } else {
-                                dmg = 0;
-                            }
+                case COUNTER_DETECTION: {
+                    if (cha instanceof L1PcInstance) {
+                        dmg = _magic.calcMagicDamage(_skillId);
+                    } else if (cha instanceof L1NpcInstance) {
+                        L1NpcInstance npc = (L1NpcInstance) cha;
+                        int hiddenStatus = npc.getHiddenStatus();
+                        if (hiddenStatus == L1NpcInstance.HIDDEN_STATUS_SINK) {
+                            npc.appearOnGround(_player);
                         } else {
                             dmg = 0;
                         }
+                    } else {
+                        dmg = 0;
                     }
+                }
                     break;
-                    case MIND_BREAK: {
-                        if (_target.getCurrentMp() >= 5) {
-                            _target.setCurrentMp(_target.getCurrentMp() - 5);
-                            dmg = 15;
-                        } else {
-                            return;
+                case MIND_BREAK: {
+                    if (_target.getCurrentMp() >= 5) {
+                        _target.setCurrentMp(_target.getCurrentMp() - 5);
+                        dmg = 15;
+                    } else {
+                        return;
+                    }
+                }
+                    break;
+                case TRUE_TARGET: {
+                    if (_user instanceof L1PcInstance) {
+                        L1PcInstance pri = (L1PcInstance) _user;
+                        pri.sendPackets(new S_TrueTargetNew(_targetID, true));
+                        if (_target instanceof L1PcInstance) {
+                            int step = pri.getLevel() / 15;
+                            L1PcInstance target = (L1PcInstance) _target;
+                            if (step > 0) {
+                                target.setTrueTarget(step);
+                            }
+                        }
+                        for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(_target)) {
+                            if (pri.getClanid() == pc.getClanid()) {
+                                pc.sendPackets(new S_TrueTargetNew(_targetID, true));
+                            }
+                        }
+                        // 以前に詠唱したトゥルーターゲット探し強制終了させる。
+                        synchronized (_truetarget_list) {
+                            L1Object temp = _truetarget_list.remove(_user.getId());
+                            if (temp != null && temp instanceof L1Character) {
+                                L1Character temp2 = (L1Character) temp;
+                                temp2.removeSkillEffect(L1SkillId.TRUE_TARGET);
+                            }
+                        }
+                        // トゥルーターゲット活性化。
+                        _target.setSkillEffect(L1SkillId.TRUE_TARGET, 16 * 1000);
+                        synchronized (_truetarget_list) {
+                            _truetarget_list.put(_user.getId(), _target);
                         }
                     }
+                }
                     break;
-                    case TRUE_TARGET: {
-                        if (_user instanceof L1PcInstance) {
-                            L1PcInstance pri = (L1PcInstance) _user;
-                            pri.sendPackets(new S_TrueTargetNew(_targetID, true));
+                case ELEMENTAL_FALL_DOWN: {
+                    if (_user instanceof L1PcInstance) {
+                        int playerAttr = _player.getElfAttr();
+                        int i = -50;
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            switch (playerAttr) {
+                            case 0:
+                                _player.sendPackets(new S_ServerMessage(79));
+                                break;
+                            case 1:
+                                pc.getResistance().addEarth(i);
+                                pc.setAddAttrKind(1);
+                                break;
+                            case 2:
+                                pc.getResistance().addFire(i);
+                                pc.setAddAttrKind(2);
+                                break;
+                            case 4:
+                                pc.getResistance().addWater(i);
+                                pc.setAddAttrKind(4);
+                                break;
+                            case 8:
+                                pc.getResistance().addWind(i);
+                                pc.setAddAttrKind(8);
+                                break;
+                            default:
+                                break;
+                            }
+                        } else if (cha instanceof L1MonsterInstance) {
+                            L1MonsterInstance mob = (L1MonsterInstance) cha;
+                            switch (playerAttr) {
+                            case 0:
+                                _player.sendPackets(new S_ServerMessage(79));
+                                break;
+                            case 1:
+                                mob.getResistance().addEarth(i);
+                                mob.setAddAttrKind(1);
+                                break;
+                            case 2:
+                                mob.getResistance().addFire(i);
+                                mob.setAddAttrKind(2);
+                                break;
+                            case 4:
+                                mob.getResistance().addWater(i);
+                                mob.setAddAttrKind(4);
+                                break;
+                            case 8:
+                                mob.getResistance().addWind(i);
+                                mob.setAddAttrKind(8);
+                                break;
+                            default:
+                                break;
+                            }
+                        }
+                    }
+                }
+                    break;
+                case HEAL:
+                case EXTRA_HEAL:
+                case GREATER_HEAL:
+                case FULL_HEAL:
+                case HEAL_ALL:
+                case NATURES_TOUCH:
+                case NATURES_BLESSING: {
+                    if (cha instanceof L1PcInstance) {
+                        cha.killSkillEffectTimer(WATER_LIFE);
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_PacketBox(S_PacketBox.DEL_ICON));
+                    }
+                }
+                    break;
+                case CHILL_TOUCH:
+                case VAMPIRIC_TOUCH: {
+                    heal = dmg / 2;
+                }
+                    break;
+                case TRIPLE_ARROW: {// トリプル
+                    int playerGFX = _player.getTempCharGfx();
+                    int weaponType = _player.getWeapon().getItem().getType1();
+                    if (weaponType != 20 || playerGFX == 3784)
+                        return;
+                    for (int i = 3; i > 0; i--) {
+                        if (_target instanceof L1PcInstance) {
+                            L1PcInstance s = (L1PcInstance) _target;
+                            s.TRIPLE = true;
+                        }
+                        _target.onAction(_player);
+                    }
+                    _player.sendPackets(new S_SkillSound(_player.getId(), 11764));
+                    Broadcaster.broadcastPacket(_player, new S_SkillSound(_player.getId(), 11764));
+                }
+                    break;
+                case 50011: { // モンスタートリプル
+                    if (_user instanceof L1NpcInstance) {
+                        for (int i = 3; i > 0; i--) {
                             if (_target instanceof L1PcInstance) {
-                                int step = pri.getLevel() / 15;
                                 L1PcInstance target = (L1PcInstance) _target;
-                                if (step > 0) {
-                                    target.setTrueTarget(step);
-                                }
-                            }
-                            for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(_target)) {
-                                if (pri.getClanid() == pc.getClanid()) {
-                                    pc.sendPackets(new S_TrueTargetNew(_targetID, true));
-                                }
-                            }
-                            // 以前に詠唱したトゥルーターゲット探し強制終了させる。
-                            synchronized (_truetarget_list) {
-                                L1Object temp = _truetarget_list.remove(_user.getId());
-                                if (temp != null && temp instanceof L1Character) {
-                                    L1Character temp2 = (L1Character) temp;
-                                    temp2.removeSkillEffect(L1SkillId.TRUE_TARGET);
-                                }
-                            }
-                            // トゥルーターゲット活性化。
-                            _target.setSkillEffect(L1SkillId.TRUE_TARGET, 16 * 1000);
-                            synchronized (_truetarget_list) {
-                                _truetarget_list.put(_user.getId(), _target);
+                                target.onAction(_npc);
+                                Broadcaster.broadcastPacket(_user, new S_SkillSound(_user.getId(), 7020));
+                                Broadcaster.broadcastPacket(_user, new S_SkillSound(_user.getId(), 11764));
                             }
                         }
                     }
+
+                }
                     break;
-                    case ELEMENTAL_FALL_DOWN: {
-                        if (_user instanceof L1PcInstance) {
-                            int playerAttr = _player.getElfAttr();
-                            int i = -50;
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                switch (playerAttr) {
-                                    case 0:
-                                        _player.sendPackets(new S_ServerMessage(79));
-                                        break;
-                                    case 1:
-                                        pc.getResistance().addEarth(i);
-                                        pc.setAddAttrKind(1);
-                                        break;
-                                    case 2:
-                                        pc.getResistance().addFire(i);
-                                        pc.setAddAttrKind(2);
-                                        break;
-                                    case 4:
-                                        pc.getResistance().addWater(i);
-                                        pc.setAddAttrKind(4);
-                                        break;
-                                    case 8:
-                                        pc.getResistance().addWind(i);
-                                        pc.setAddAttrKind(8);
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            } else if (cha instanceof L1MonsterInstance) {
-                                L1MonsterInstance mob = (L1MonsterInstance) cha;
-                                switch (playerAttr) {
-                                    case 0:
-                                        _player.sendPackets(new S_ServerMessage(79));
-                                        break;
-                                    case 1:
-                                        mob.getResistance().addEarth(i);
-                                        mob.setAddAttrKind(1);
-                                        break;
-                                    case 2:
-                                        mob.getResistance().addFire(i);
-                                        mob.setAddAttrKind(2);
-                                        break;
-                                    case 4:
-                                        mob.getResistance().addWater(i);
-                                        mob.setAddAttrKind(4);
-                                        break;
-                                    case 8:
-                                        mob.getResistance().addWind(i);
-                                        mob.setAddAttrKind(8);
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                        }
+                case FOU_SLAYER: { // ポースレイヤー
+                    if (_player.getWeapon() == null) {
+                        return;
                     }
+                    int weapontype = _player.getWeapon().getItem().getType1();
+                    if (weapontype != 4 && weapontype != 11 && weapontype != 24 && weapontype != 50) {
+                        return;
+                    }
+                    for (int i = 3; i > 0; i--) {
+                        if (_target instanceof L1PcInstance) {
+                            L1PcInstance s = (L1PcInstance) _target;
+                            s.FouSlayer = true;
+                        }
+                        _target.onAction(_player);
+                    }
+                    _player.sendPackets(new S_SkillSound(_player.getId(), 7020));
+                    _player.sendPackets(new S_SkillSound(_targetID, 6509));
+                    Broadcaster.broadcastPacket(_player, new S_SkillSound(_player.getId(), 7020));
+                    Broadcaster.broadcastPacket(_player, new S_SkillSound(_targetID, 6509));
+                    if (_player.hasSkillEffect(CHAINSWORD1)) {
+                        dmg += 15;
+                        _player.killSkillEffectTimer(CHAINSWORD1);
+                        _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
+                    }
+                    if (_player.hasSkillEffect(CHAINSWORD2)) {
+                        dmg += 30;
+                        _player.killSkillEffectTimer(CHAINSWORD2);
+                        _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
+                    }
+                    if (_player.hasSkillEffect(CHAINSWORD3)) {
+                        _player.killSkillEffectTimer(CHAINSWORD3);
+                        _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
+                        dmg += 45;
+                    }
+                    for (L1DollInstance doll : _player.getDollList()) {
+                        dmg += doll.fou_DamageUp();
+                    }
+                }
                     break;
-                    case HEAL:
-                    case EXTRA_HEAL:
-                    case GREATER_HEAL:
-                    case FULL_HEAL:
-                    case HEAL_ALL:
-                    case NATURES_TOUCH:
-                    case NATURES_BLESSING: {
+                case Sand_worms: { // サンドワームイラプション
+                    L1PcInstance pc = (L1PcInstance) _player;
+                    S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(), 10145, _player.getX(),
+                            _player.getY(), ActionCodes.ACTION_Attack, false);
+                    Broadcaster.broadcastPacket(_user, packet);
+                    Broadcaster.broadcastPacket(pc, packet);
+                    pc.sendPackets(new S_SkillSound(pc.getId(), 10145));
+                }
+                    break;
+                case Sand_worms1: { // サンドワーム範囲攻撃1
+                    L1PcInstance pc = (L1PcInstance) _player;
+                    S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(), 10195, _player.getX(),
+                            _player.getY(), ActionCodes.ACTION_Attack, false);
+                    Broadcaster.broadcastPacket(_user, packet);
+                    Broadcaster.broadcastPacket(pc, packet);
+                    pc.sendPackets(new S_SkillSound(pc.getId(), 10195));
+                }
+                    break;
+                case Sand_worms2: { // サンドワーム範囲攻撃1
+                    L1PcInstance pc = (L1PcInstance) _player;
+                    S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(), 10194, _player.getX(),
+                            _player.getY(), ActionCodes.ACTION_Attack, false);
+                    Broadcaster.broadcastPacket(_user, packet);
+                    Broadcaster.broadcastPacket(pc, packet);
+                    pc.sendPackets(new S_SkillSound(pc.getId(), 10194));
+                }
+                    break;
+                case Sand_worms3: { // サンドワーム範囲攻撃1
+                    L1PcInstance pc = (L1PcInstance) _player;
+                    S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(), 10191, _player.getX(),
+                            _player.getY(), ActionCodes.ACTION_Attack, false);
+                    Broadcaster.broadcastPacket(_user, packet);
+                    Broadcaster.broadcastPacket(pc, packet);
+                    pc.sendPackets(new S_SkillSound(pc.getId(), 10191));
+                }
+                    break;
+
+                /** 血盟バフ **/
+                case CLAN_BUFF1: {// 通常攻撃態勢
+                    L1PcInstance pc = (L1PcInstance) cha;
+                    pc.addDmgupByArmor(2);
+                    pc.addBowDmgupByArmor(2);
+                    pc.sendPackets(new S_ACTION_UI2(2724, pc.getClan().getBuffTime()[pc.getClan().getBless() - 1], 7,
+                            7233, 4650));
+                    pc.sendPackets(new S_ServerMessage(4618, "$22503"));
+                    pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
+                }
+                    break;
+                case CLAN_BUFF2: {// 一般防御態勢
+                    L1PcInstance pc = (L1PcInstance) cha;
+                    pc.getAC().addAc(-3);
+                    pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    pc.sendPackets(new S_ACTION_UI2(2725, pc.getClan().getBuffTime()[pc.getClan().getBless() - 1], 7,
+                            7235, 4651));
+                    pc.sendPackets(new S_ServerMessage(4618, "$22504"));
+                    pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
+                }
+                    break;
+                case CLAN_BUFF3: {// 戦闘攻撃態勢
+                    L1PcInstance pc = (L1PcInstance) cha;// 別にないとはこのようにしても良い。
+                    // pc.addPvPDmgup(1); //pvp追加ダメージ
+                    pc.sendPackets(new S_ACTION_UI2(2726, pc.getClan().getBuffTime()[pc.getClan().getBless() - 1], 7,
+                            7237, 4652));
+                    pc.sendPackets(new S_ServerMessage(4618, "$22505"));
+                    pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
+                }
+                    break;
+                case CLAN_BUFF4: {// 戦闘防御態勢
+                    L1PcInstance pc = (L1PcInstance) cha;
+                    // pc.addDmgReducPvp(1); //pvpリドク
+                    pc.sendPackets(new S_ACTION_UI2(2727, pc.getClan().getBuffTime()[pc.getClan().getBless() - 1], 7,
+                            7239, 4653));
+                    pc.sendPackets(new S_ServerMessage(4618, "$22506"));
+                    pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
+                }
+                    break;
+                case 10026:
+                case 10027:
+                case 10028:
+                case 10029: {
+                    if (_user instanceof L1NpcInstance) {
+                        _user.broadcastPacket(new S_NpcChatPacket(_npc, "$3717", 0));
+                    } else {
+                        _player.broadcastPacket(new S_ChatPacket(_player, "$3717", 0, 0));
+                    }
+                    dmg = cha.getCurrentHp();
+                }
+                    break;
+                case 10057: {
+                    new L1Teleport().teleportToTargetFront(cha, _user, 1);
+                }
+                    break;
+                case SLOW:
+                case GREATER_SLOW:
+                case ENTANGLE:
+                case MOB_SLOW_1:
+                case MOB_SLOW_18: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.getHasteItemEquipped() > 0) {
+                            continue;
+                        }
+
+                    }
+                    if (cha.getMoveSpeed() == 0) {
                         if (cha instanceof L1PcInstance) {
-                            cha.killSkillEffectTimer(WATER_LIFE);
                             L1PcInstance pc = (L1PcInstance) cha;
-                            pc.sendPackets(new S_PacketBox(S_PacketBox.DEL_ICON));
+                            pc.sendPackets(new S_SkillHaste(pc.getId(), 2, _getBuffIconDuration));
+                        }
+                        cha.broadcastPacket(new S_SkillHaste(cha.getId(), 2, _getBuffIconDuration));
+                        cha.setMoveSpeed(2);
+                    } else if (cha.getMoveSpeed() == 1) {
+                        int skillNum = 0;
+                        if (cha.hasSkillEffect(HASTE)) {
+                            skillNum = HASTE;
+                        } else if (cha.hasSkillEffect(GREATER_HASTE)) {
+                            skillNum = GREATER_HASTE;
+                        } else if (cha.hasSkillEffect(STATUS_HASTE)) {
+                            skillNum = STATUS_HASTE;
+                        }
+                        if (skillNum != 0) {
+                            cha.removeSkillEffect(skillNum);
+                            cha.killSkillEffectTimer(skillNum);
+                            cha.removeSkillEffect(_skillId);
+                            ((L1PcInstance) cha).sendPackets(new S_SkillHaste(cha.getId(), 1, 0));
+                            cha.setMoveSpeed(0);
+                            continue;
                         }
                     }
+                }
                     break;
-                    case CHILL_TOUCH:
-                    case VAMPIRIC_TOUCH: {
-                        heal = dmg / 2;
-                    }
-                    break;
-                    case TRIPLE_ARROW: {// トリプル
-                        int playerGFX = _player.getTempCharGfx();
-                        int weaponType = _player.getWeapon().getItem().getType1();
-                        if (weaponType != 20 || playerGFX == 3784)
-                            return;
-                        for (int i = 3; i > 0; i--) {
-                            if (_target instanceof L1PcInstance) {
-                                L1PcInstance s = (L1PcInstance) _target;
-                                s.TRIPLE = true;
-                            }
-                            _target.onAction(_player);
-                        }
-                        _player.sendPackets(new S_SkillSound(_player.getId(), 11764));
-                        Broadcaster.broadcastPacket(_player, new S_SkillSound(_player.getId(), 11764));
-                    }
-                    break;
-                    case 50011: { //モンスタートリプル
-                        if (_user instanceof L1NpcInstance) {
-                            for (int i = 3; i > 0; i--) {
-                                if (_target instanceof L1PcInstance) {
-                                    L1PcInstance target = (L1PcInstance) _target;
-                                    target.onAction(_npc);
-                                    Broadcaster.broadcastPacket(_user, new S_SkillSound(_user.getId(), 7020));
-                                    Broadcaster.broadcastPacket(_user, new S_SkillSound(_user.getId(), 11764));
-                                }
-                            }
-                        }
-
-                    }
-                    break;
-                    case FOU_SLAYER: { // ポースレイヤー
-                        if (_player.getWeapon() == null) {
-                            return;
-                        }
-                        int weapontype = _player.getWeapon().getItem().getType1();
-                        if (weapontype != 4 && weapontype != 11 && weapontype != 24 && weapontype != 50) {
-                            return;
-                        }
-                        for (int i = 3; i > 0; i--) {
-                            if (_target instanceof L1PcInstance) {
-                                L1PcInstance s = (L1PcInstance) _target;
-                                s.FouSlayer = true;
-                            }
-                            _target.onAction(_player);
-                        }
-                        _player.sendPackets(new S_SkillSound(_player.getId(), 7020));
-                        _player.sendPackets(new S_SkillSound(_targetID, 6509));
-                        Broadcaster.broadcastPacket(_player, new S_SkillSound(_player.getId(), 7020));
-                        Broadcaster.broadcastPacket(_player, new S_SkillSound(_targetID, 6509));
-                        if (_player.hasSkillEffect(CHAINSWORD1)) {
-                            dmg += 15;
-                            _player.killSkillEffectTimer(CHAINSWORD1);
-                            _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
-                        }
-                        if (_player.hasSkillEffect(CHAINSWORD2)) {
-                            dmg += 30;
-                            _player.killSkillEffectTimer(CHAINSWORD2);
-                            _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
-                        }
-                        if (_player.hasSkillEffect(CHAINSWORD3)) {
-                            _player.killSkillEffectTimer(CHAINSWORD3);
-                            _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
-                            dmg += 45;
-                        }
-                        for (L1DollInstance doll : _player.getDollList()) {
-                            dmg += doll.fou_DamageUp();
-                        }
-                    }
-                    break;
-                    case Sand_worms: { //サンドワームイラプション
-                        L1PcInstance pc = (L1PcInstance) _player;
-                        S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(),
-                                10145, _player.getX(), _player.getY(), ActionCodes.ACTION_Attack, false);
-                        Broadcaster.broadcastPacket(_user, packet);
-                        Broadcaster.broadcastPacket(pc, packet);
-                        pc.sendPackets(new S_SkillSound(pc.getId(), 10145));
-                    }
-                    break;
-                    case Sand_worms1: { //サンドワーム範囲攻撃1
-                        L1PcInstance pc = (L1PcInstance) _player;
-                        S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(),
-                                10195, _player.getX(), _player.getY(), ActionCodes.ACTION_Attack, false);
-                        Broadcaster.broadcastPacket(_user, packet);
-                        Broadcaster.broadcastPacket(pc, packet);
-                        pc.sendPackets(new S_SkillSound(pc.getId(), 10195));
-                    }
-                    break;
-                    case Sand_worms2: { //サンドワーム範囲攻撃1
-                        L1PcInstance pc = (L1PcInstance) _player;
-                        S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(),
-                                10194, _player.getX(), _player.getY(), ActionCodes.ACTION_Attack, false);
-                        Broadcaster.broadcastPacket(_user, packet);
-                        Broadcaster.broadcastPacket(pc, packet);
-                        pc.sendPackets(new S_SkillSound(pc.getId(), 10194));
-                    }
-                    break;
-                    case Sand_worms3: { //サンドワーム範囲攻撃1
-                        L1PcInstance pc = (L1PcInstance) _player;
-                        S_UseAttackSkill packet = new S_UseAttackSkill(_user, _player.getId(),
-                                10191, _player.getX(), _player.getY(), ActionCodes.ACTION_Attack, false);
-                        Broadcaster.broadcastPacket(_user, packet);
-                        Broadcaster.broadcastPacket(pc, packet);
-                        pc.sendPackets(new S_SkillSound(pc.getId(), 10191));
-                    }
-                    break;
-
-                    /** 血盟バフ **/
-                    case CLAN_BUFF1: {// 通常攻撃態勢
+                case CURSE_BLIND:
+                case DARKNESS: {
+                    if (cha instanceof L1PcInstance) {
                         L1PcInstance pc = (L1PcInstance) cha;
-                        pc.addDmgupByArmor(2);
-                        pc.addBowDmgupByArmor(2);
-                        pc.sendPackets(new S_ACTION_UI2(2724, pc.getClan().getBuffTime()[pc.getClan().getBless() - 1], 7, 7233, 4650));
-                        pc.sendPackets(new S_ServerMessage(4618, "$22503"));
-                        pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
-                    }
-                    break;
-                    case CLAN_BUFF2: {// 一般防御態勢
-                        L1PcInstance pc = (L1PcInstance) cha;
-                        pc.getAC().addAc(-3);
-                        pc.sendPackets(new S_OwnCharAttrDef(pc));
-                        pc.sendPackets(new S_ACTION_UI2(2725, pc.getClan().getBuffTime()[pc.getClan().getBless() - 1], 7, 7235, 4651));
-                        pc.sendPackets(new S_ServerMessage(4618, "$22504"));
-                        pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
-                    }
-                    break;
-                    case CLAN_BUFF3: {// 戦闘攻撃態勢
-                        L1PcInstance pc = (L1PcInstance) cha;// 別にないとはこのようにしても良い。
-                        // pc.addPvPDmgup(1); //pvp追加ダメージ
-                        pc.sendPackets(new S_ACTION_UI2(2726, pc.getClan().getBuffTime()[pc.getClan().getBless() - 1], 7, 7237, 4652));
-                        pc.sendPackets(new S_ServerMessage(4618, "$22505"));
-                        pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
-                    }
-                    break;
-                    case CLAN_BUFF4: {// 戦闘防御態勢
-                        L1PcInstance pc = (L1PcInstance) cha;
-                        // pc.addDmgReducPvp(1); //pvpリドク
-                        pc.sendPackets(new S_ACTION_UI2(2727, pc.getClan().getBuffTime()[pc.getClan().getBless() - 1], 7, 7239, 4653));
-                        pc.sendPackets(new S_ServerMessage(4618, "$22506"));
-                        pc.sendPackets(new S_SkillSound(pc.getId(), 14482));
-                    }
-                    break;
-                    case 10026:
-                    case 10027:
-                    case 10028:
-                    case 10029: {
-                        if (_user instanceof L1NpcInstance) {
-                            _user.broadcastPacket(new S_NpcChatPacket(_npc, "$3717", 0));
+                        if (pc.hasSkillEffect(STATUS_FLOATING_EYE)) {
+                            pc.sendPackets(new S_CurseBlind(2));
                         } else {
-                            _player.broadcastPacket(new S_ChatPacket(_player, "$3717", 0, 0));
+                            pc.sendPackets(new S_CurseBlind(1));
                         }
-                        dmg = cha.getCurrentHp();
+                    }
+                }
+                    break;
+                case CURSE_POISON:
+                    L1DamagePoison.doInfection(_user, cha, 3000, 5, false);
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_PacketBox(S_PacketBox.POSION_ICON, pc, 1, 30));
                     }
                     break;
-                    case 10057: {
-                        new L1Teleport().teleportToTargetFront(cha, _user, 1);
+                case TOMAHAWK: { // トマホーク持続時間、出血状態になってダメージを受ける。レベル* 2/6
+                    if (cha.hasSkillEffect(TOMAHAWK)) {
+                        _player.sendPackets(new S_ServerMessage(280));
+                        return;
                     }
-                    break;
-                    case SLOW:
-                    case GREATER_SLOW:
-                    case ENTANGLE:
-                    case MOB_SLOW_1:
-                    case MOB_SLOW_18: {
+                    dmg = ((_user.getLevel() + 2) / 7);
+                    boolean f = _magic.calcProbabilityMagic(_skillId);
+                    if (f) {
+                        new L1TomaHaekDmg(_user, cha, ((_user.getLevel() + 2) / 7));
                         if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.getHasteItemEquipped() > 0) {
-                                continue;
-                            }
+                            // pc.sendPackets(new S_ServerMessage(3992));
+                            pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 570, true));
+                        }
 
-                        }
-                        if (cha.getMoveSpeed() == 0) {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                pc.sendPackets(new S_SkillHaste(pc.getId(), 2, _getBuffIconDuration));
-                            }
-                            cha.broadcastPacket(new S_SkillHaste(cha.getId(), 2, _getBuffIconDuration));
-                            cha.setMoveSpeed(2);
-                        } else if (cha.getMoveSpeed() == 1) {
-                            int skillNum = 0;
-                            if (cha.hasSkillEffect(HASTE)) {
-                                skillNum = HASTE;
-                            } else if (cha.hasSkillEffect(GREATER_HASTE)) {
-                                skillNum = GREATER_HASTE;
-                            } else if (cha.hasSkillEffect(STATUS_HASTE)) {
-                                skillNum = STATUS_HASTE;
-                            }
-                            if (skillNum != 0) {
-                                cha.removeSkillEffect(skillNum);
-                                cha.killSkillEffectTimer(skillNum);
-                                cha.removeSkillEffect(_skillId);
-                                ((L1PcInstance) cha).sendPackets(new S_SkillHaste(cha.getId(), 1, 0));
-                                cha.setMoveSpeed(0);
-                                continue;
+                    } else {
+                        _player.sendPackets(new S_ServerMessage(280));
+                    }
+                }
+                    break;
+                case CURSE_PARALYZE:
+                case CURSE_PARALYZE2:
+                case MOB_CURSEPARALYZ_18:
+                case MOB_CURSEPARALYZ_19: {
+                    if (!cha.hasSkillEffect(EARTH_BIND) && !cha.hasSkillEffect(ICE_LANCE)) {
+                        if (cha instanceof L1PcInstance) {
+                            L1CurseParalysis.curse(cha, 7000, 3000);
+                        } else if (cha instanceof L1MonsterInstance) {
+                            if (cha.getMaxHp() < 4300) {
+                                L1CurseParalysis.curse(cha, 0, 3000);
                             }
                         }
                     }
+                }
                     break;
-                    case CURSE_BLIND:
-                    case DARKNESS: {
+                case WEAKNESS:
+                case MOB_WEAKNESS_1: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDmgup(-5);
+                        pc.addHitup(-1);
+                    }
+                }
+                    break;
+                case DISEASE:
+                case MOB_DISEASE_1:
+                case MOB_DISEASE_30: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDmgup(-6);
+                        pc.getAC().addAc(12);
+                    }
+                }
+                    break;
+                case GUARD_BREAK: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(10);
+                    }
+                }
+                    break;
+                case HORROR_OF_DEATH: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAbility().addAddedStr((byte) -3);
+                        pc.getAbility().addAddedInt((byte) -3);
+                    }
+                }
+                    break;
+                case PANIC: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAbility().addAddedStr((byte) -1);
+                        pc.getAbility().addAddedDex((byte) -1);
+                        pc.getAbility().addAddedCon((byte) -1);
+                        pc.getAbility().addAddedInt((byte) -1);
+                        pc.getAbility().addAddedWis((byte) -1);
+                        pc.getAbility().addAddedCha((byte) -1);
+                        pc.resetBaseMr();
+                    }
+                }
+                    break;
+                case ICE_LANCE: {
+                    _isFreeze = _magic.calcProbabilityMagic(_skillId);
+                    if (_isFreeze) {
+                        int time = _skill.getBuffDuration() * 1000;
+                        L1EffectSpawn.getInstance().spawnEffect(81168, time, cha.getX(), cha.getY(), cha.getMapId());
                         if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.hasSkillEffect(STATUS_FLOATING_EYE)) {
-                                pc.sendPackets(new S_CurseBlind(2));
-                            } else {
-                                pc.sendPackets(new S_CurseBlind(1));
-                            }
-                        }
-                    }
-                    break;
-                    case CURSE_POISON:
-                        L1DamagePoison.doInfection(_user, cha, 3000, 5, false);
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.sendPackets(new S_PacketBox(S_PacketBox.POSION_ICON, pc, 1, 30));
-                        }
-                        break;
-                    case TOMAHAWK: {  // トマホーク持続時間、出血状態になってダメージを受ける。レベル* 2/6
-                        if (cha.hasSkillEffect(TOMAHAWK)) {
-                            _player.sendPackets(new S_ServerMessage(280));
-                            return;
-                        }
-                        dmg = ((_user.getLevel() + 2) / 7);
-                        boolean f = _magic.calcProbabilityMagic(_skillId);
-                        if (f) {
-                            new L1TomaHaekDmg(_user, cha, ((_user.getLevel() + 2) / 7));
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                //pc.sendPackets(new S_ServerMessage(3992));
-                                pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 570, true));
-                            }
-
-                        } else {
-                            _player.sendPackets(new S_ServerMessage(280));
-                        }
-                    }
-                    break;
-                    case CURSE_PARALYZE:
-                    case CURSE_PARALYZE2:
-                    case MOB_CURSEPARALYZ_18:
-                    case MOB_CURSEPARALYZ_19: {
-                        if (!cha.hasSkillEffect(EARTH_BIND) && !cha.hasSkillEffect(ICE_LANCE)) {
-                            if (cha instanceof L1PcInstance) {
-                                L1CurseParalysis.curse(cha, 7000, 3000);
-                            } else if (cha instanceof L1MonsterInstance) {
-                                if (cha.getMaxHp() < 4300) {
-                                    L1CurseParalysis.curse(cha, 0, 3000);
-                                }
-                            }
-                        }
-                    }
-                    break;
-                    case WEAKNESS:
-                    case MOB_WEAKNESS_1: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDmgup(-5);
-                            pc.addHitup(-1);
-                        }
-                    }
-                    break;
-                    case DISEASE:
-                    case MOB_DISEASE_1:
-                    case MOB_DISEASE_30: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDmgup(-6);
-                            pc.getAC().addAc(12);
-                        }
-                    }
-                    break;
-                    case GUARD_BREAK: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(10);
-                        }
-                    }
-                    break;
-                    case HORROR_OF_DEATH: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAbility().addAddedStr((byte) -3);
-                            pc.getAbility().addAddedInt((byte) -3);
-                        }
-                    }
-                    break;
-                    case PANIC: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAbility().addAddedStr((byte) -1);
-                            pc.getAbility().addAddedDex((byte) -1);
-                            pc.getAbility().addAddedCon((byte) -1);
-                            pc.getAbility().addAddedInt((byte) -1);
-                            pc.getAbility().addAddedWis((byte) -1);
-                            pc.getAbility().addAddedCha((byte) -1);
-                            pc.resetBaseMr();
-                        }
-                    }
-                    break;
-                    case ICE_LANCE: {
-                        _isFreeze = _magic.calcProbabilityMagic(_skillId);
-                        if (_isFreeze) {
-                            int time = _skill.getBuffDuration() * 1000;
-                            L1EffectSpawn.getInstance().spawnEffect(81168, time, cha.getX(), cha.getY(), cha.getMapId());
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                pc.sendPackets(new S_Poison(pc.getId(), 2));
-                                pc.broadcastPacket(new S_Poison(pc.getId(), 2));
-                                pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_FREEZE, true));
-                            } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
-                                L1NpcInstance npc = (L1NpcInstance) cha;
-                                npc.broadcastPacket(new S_Poison(npc.getId(), 2));
-                                npc.setParalyzed(true);
-                            }
-                        }
-                    }
-                    break;
-                    /**語パンツの中の時間本サーバー化 **/
-                    case EARTH_BIND: {// 語パンツの中の時間
-
-                        int[] ebTimeArray = { 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000 };
-                        _shockStunDuration = ebTimeArray[random.nextInt(ebTimeArray.length)];
-
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            //pc.setSkillEffect(L1SkillId.EARTH_BIND, _earthBindDuration);
                             pc.sendPackets(new S_Poison(pc.getId(), 2));
                             pc.broadcastPacket(new S_Poison(pc.getId(), 2));
                             pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_FREEZE, true));
-                        } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
-                            L1NpcInstance npc = (L1NpcInstance) cha;
-                            npc.broadcastPacket(new S_Poison(npc.getId(), 2));
-                            npc.setParalyzed(true);
-                            npc.setParalysisTime(_shockStunDuration);
-                        }
-                    }
-                    break;
-                    case MOB_BASILL:
-                    case MOB_COCA: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (cha.hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZING) || cha.hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZED)) {
-                                pc.cureParalaysis();
-                            }
-                            pc.sendPackets(new S_Poison(pc.getId(), 2));
-                            pc.broadcastPacket(new S_Poison(pc.getId(), 2));
-                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_FREEZE, true));
-                        } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
+                        } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                                || cha instanceof L1PetInstance) {
                             L1NpcInstance npc = (L1NpcInstance) cha;
                             npc.broadcastPacket(new S_Poison(npc.getId(), 2));
                             npc.setParalyzed(true);
                         }
                     }
+                }
+                    break;
+                /** 語パンツの中の時間本サーバー化 **/
+                case EARTH_BIND: {// 語パンツの中の時間
+
+                    int[] ebTimeArray = { 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000 };
+                    _shockStunDuration = ebTimeArray[random.nextInt(ebTimeArray.length)];
+
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        // pc.setSkillEffect(L1SkillId.EARTH_BIND,
+                        // _earthBindDuration);
+                        pc.sendPackets(new S_Poison(pc.getId(), 2));
+                        pc.broadcastPacket(new S_Poison(pc.getId(), 2));
+                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_FREEZE, true));
+                    } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                            || cha instanceof L1PetInstance) {
+                        L1NpcInstance npc = (L1NpcInstance) cha;
+                        npc.broadcastPacket(new S_Poison(npc.getId(), 2));
+                        npc.setParalyzed(true);
+                        npc.setParalysisTime(_shockStunDuration);
+                    }
+                }
+                    break;
+                case MOB_BASILL:
+                case MOB_COCA: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (cha.hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZING)
+                                || cha.hasSkillEffect(L1SkillId.STATUS_CURSE_PARALYZED)) {
+                            pc.cureParalaysis();
+                        }
+                        pc.sendPackets(new S_Poison(pc.getId(), 2));
+                        pc.broadcastPacket(new S_Poison(pc.getId(), 2));
+                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_FREEZE, true));
+                    } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                            || cha instanceof L1PetInstance) {
+                        L1NpcInstance npc = (L1NpcInstance) cha;
+                        npc.broadcastPacket(new S_Poison(npc.getId(), 2));
+                        npc.setParalyzed(true);
+                    }
+                }
                     break;
 
-                    case SHOCK_STUN: {// スタン確率
-                        int targetLevel = 0;
-                        int diffLevel = 0;
+                case SHOCK_STUN: {// スタン確率
+                    int targetLevel = 0;
+                    int diffLevel = 0;
 
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        targetLevel = pc.getLevel();
+                    } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                            || cha instanceof L1PetInstance) {
+                        L1NpcInstance npc = (L1NpcInstance) cha;
+                        targetLevel = npc.getLevel();
+                    }
+
+                    diffLevel = _user.getLevel() - targetLevel;
+
+                    if (diffLevel < -5) {
+                        int[] stunTimeArray = { 600, 1000, 1400, 1800, 2200, 2600, 3000, 3400 };
+                        _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
+                    } else if (diffLevel >= -5 && diffLevel <= -3) {
+                        int[] stunTimeArray = { 800, 1200, 1600, 2000, 2400, 2800, 3200, 3600 };
+                        _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
+                    } else if (diffLevel >= -2 && diffLevel <= 2) {
+                        int[] stunTimeArray = { 1000, 1400, 1800, 2200, 2600, 3000, 3400, 3800 };
+                        _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
+                    } else if (diffLevel >= 3 && diffLevel <= 5) {
+                        int[] stunTimeArray = { 1200, 1600, 2000, 2400, 2800, 3200, 3600, 4000 };
+                        _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
+                    } else if (diffLevel >= 5 && diffLevel <= 10) {
+                        int[] stunTimeArray = { 1400, 1800, 2200, 2600, 3000, 3400, 3800, 4200 };
+                        _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
+                    } else if (diffLevel > 10) {
+                        int[] stunTimeArray = { 1600, 2000, 2400, 2800, 3200, 3600, 4000, 4400 };
+                        _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
+                    }
+                    L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(),
+                            cha.getMapId());
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
+                    } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                            || cha instanceof L1PetInstance) {
+                        L1NpcInstance npc = (L1NpcInstance) cha;
+                        npc.setParalyzed(true);
+                        npc.setParalysisTime(_shockStunDuration);
+                    }
+                }
+                    break;
+                case MOB_RANGESTUN_18:
+                case MOB_RANGESTUN_19:
+                case MOB_SHOCKSTUN_30: {
+
+                    int levelDiff = _user.getLevel() - cha.getLevel();
+                    int duration = 2250 + levelDiff * 80;
+
+                    duration += random.nextInt(1600) - 800;
+
+                    if (duration < 1000) {
+                        duration = 1000;
+                    } else if (duration > 5000) {
+                        duration = 5000;
+                    }
+
+                    _shockStunDuration = duration;
+
+                    L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(),
+                            cha.getMapId());
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
+                    } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                            || cha instanceof L1PetInstance) {
+                        L1NpcInstance npc = (L1NpcInstance) cha;
+                        npc.setParalyzed(true);
+                    }
+                }
+                    break;
+
+                case THUNDER_GRAB: {
+                    _isFreeze = _magic.calcProbabilityMagic(_skillId);
+                    if (_isFreeze) {
+                        // int time = _skill.getBuffDuration() * 1000;
+                        int[] grabTime = { 1000, 2000, 3000, 4000 };
+                        int rnd = random.nextInt(grabTime.length);
+                        int time = grabTime[rnd]; // 時間ランダムに
+                        L1EffectSpawn.getInstance().spawnEffect(81182, time, cha.getX(), cha.getY(), cha.getMapId());
                         if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
-                            targetLevel = pc.getLevel();
-                        } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
-                            L1NpcInstance npc = (L1NpcInstance) cha;
-                            targetLevel = npc.getLevel();
-                        }
-
-                        diffLevel = _user.getLevel() - targetLevel;
-
-                        if (diffLevel < -5) {
-                            int[] stunTimeArray = { 600, 1000, 1400, 1800, 2200, 2600, 3000, 3400 };
-                            _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
-                        } else if (diffLevel >= -5 && diffLevel <= -3) {
-                            int[] stunTimeArray = { 800, 1200, 1600, 2000, 2400, 2800, 3200, 3600 };
-                            _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
-                        } else if (diffLevel >= -2 && diffLevel <= 2) {
-                            int[] stunTimeArray = { 1000, 1400, 1800, 2200, 2600, 3000, 3400, 3800 };
-                            _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
-                        } else if (diffLevel >= 3 && diffLevel <= 5) {
-                            int[] stunTimeArray = { 1200, 1600, 2000, 2400, 2800, 3200, 3600, 4000 };
-                            _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
-                        } else if (diffLevel >= 5 && diffLevel <= 10) {
-                            int[] stunTimeArray = { 1400, 1800, 2200, 2600, 3000, 3400, 3800, 4200 };
-                            _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
-                        } else if (diffLevel > 10) {
-                            int[] stunTimeArray = { 1600, 2000, 2400, 2800, 3200, 3600, 4000, 4400 };
-                            _shockStunDuration = stunTimeArray[random.nextInt(stunTimeArray.length)];
-                        }
-                        L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(), cha.getMapId());
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
-                        } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
-                            L1NpcInstance npc = (L1NpcInstance) cha;
-                            npc.setParalyzed(true);
-                            npc.setParalysisTime(_shockStunDuration);
-                        }
-                    }
-                    break;
-                    case MOB_RANGESTUN_18:
-                    case MOB_RANGESTUN_19:
-                    case MOB_SHOCKSTUN_30: {
-
-                        int levelDiff = _user.getLevel() - cha.getLevel();
-                        int duration = 2250 + levelDiff * 80;
-
-                        duration += random.nextInt(1600) - 800;
-
-                        if (duration < 1000) {
-                            duration = 1000;
-                        } else if (duration > 5000) {
-                            duration = 5000;
-                        }
-
-                        _shockStunDuration = duration;
-
-                        L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(), cha.getMapId());
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
-                        } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
-                            L1NpcInstance npc = (L1NpcInstance) cha;
-                            npc.setParalyzed(true);
-                        }
-                    }
-                    break;
-
-                    case THUNDER_GRAB: {
-                        _isFreeze = _magic.calcProbabilityMagic(_skillId);
-                        if (_isFreeze) {
-                            // int time = _skill.getBuffDuration() * 1000;
-                            int[] grabTime = { 1000, 2000, 3000, 4000 };
-                            int rnd = random.nextInt(grabTime.length);
-                            int time = grabTime[rnd]; // 時間ランダムに
-                            L1EffectSpawn.getInstance().spawnEffect(81182, time, cha.getX(), cha.getY(), cha.getMapId());
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                pc.setSkillEffect(L1SkillId.STATUS_FREEZE, time);
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 4184));
-                                pc.broadcastPacket(new S_SkillSound(pc.getId(), 4184));
-                                pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_BIND, true));
-                            } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
-                                L1NpcInstance npc = (L1NpcInstance) cha;
-                                npc.setSkillEffect(L1SkillId.STATUS_FREEZE, time);
-                                npc.broadcastPacket(new S_SkillSound(npc.getId(), 4184));
-                                npc.setParalyzed(true);
-                            }
-                        }
-                    }
-                    break;
-                    case BONE_BREAK: {
-                        int bonetime = 2000;
-                        L1EffectSpawn.getInstance().spawnEffect(200020, bonetime, cha.getX(), cha.getY(), cha.getMapId());
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
-                        } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
-                            L1NpcInstance npc = (L1NpcInstance) cha;
-                            npc.setParalyzed(true);
-                        }
-                    }
-                    break;
-
-                    case PHANTASM: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_SLEEP, true));
-                        }
-                        cha.setSleeped(true);
-                    }
-                    break;
-
-                    case WIND_SHACKLE:
-                    case MOB_WINDSHACKLE_1: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            // pc.sendPackets(new S_SkillIconWindShackle(pc.getId(),
-                            // _getBuffIconDuration));
-                            pc.setSkillEffect(pc.getId(), _getBuffIconDuration);
-                        }
-                    }
-                    break;
-
-                    case CANCELLATION: {
-                        try { // for test
-                            if (cha instanceof L1NpcInstance) {
-                                L1NpcInstance npc = (L1NpcInstance) cha;
-                                int npcId = npc.getNpcTemplate().get_npcId();
-                                if (npcId == 71092) {
-                                    if (npc.getGfxId() == npc.getTempCharGfx()) {
-                                        npc.setTempCharGfx(1314);
-                                        npc.broadcastPacket(new S_ChangeShape(npc.getId(), 1314));
-                                        return;
-                                    } else {
-                                        return;
-                                    }
-                                }
-                                if (npcId == 45640) {
-                                    if (npc.getGfxId() == npc.getTempCharGfx()) {
-                                        npc.setCurrentHp(npc.getMaxHp());
-                                        npc.setTempCharGfx(2332);
-                                        npc.broadcastPacket(new S_ChangeShape(npc.getId(), 2332));
-                                        npc.setName("$2103");
-                                        npc.setNameId("$2103");
-                                        npc.broadcastPacket(new S_ChangeName(npc.getId(), "$2103"));
-                                    } else if (npc.getTempCharGfx() == 2332) {
-                                        npc.setCurrentHp(npc.getMaxHp());
-                                        npc.setTempCharGfx(2755);
-                                        npc.broadcastPacket(new S_ChangeShape(npc.getId(), 2755));
-                                        npc.setName("$2488");
-                                        npc.setNameId("$2488");
-                                        npc.broadcastPacket(new S_ChangeName(npc.getId(), "$2488"));
-                                    }
-                                }
-                                if (npcId == 81209) {
-                                    if (npc.getGfxId() == npc.getTempCharGfx()) {
-                                        npc.setTempCharGfx(4310);
-                                        npc.broadcastPacket(new S_ChangeShape(npc.getId(), 4310));
-                                        return;
-                                    } else {
-                                        return;
-                                    }
-                                }
-                            }
-                            if (!(cha instanceof L1PcInstance)) {
-                                L1NpcInstance npc = (L1NpcInstance) cha;
-                                npc.setMoveSpeed(0);
-                                npc.setBraveSpeed(0);
-                                npc.broadcastPacket(new S_SkillHaste(cha.getId(), 0, 0));
-                                npc.broadcastPacket(new S_SkillBrave(cha.getId(), 0, 0));
-                                npc.setWeaponBreaked(false);
-                                npc.setParalyzed(false);
-                            }
-
-                            if (cha instanceof L1PcInstance) {
-                                detection((L1PcInstance) cha, false);
-                            }
-
-                            for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
-                                if (isNotCancelable(skillNum) && !cha.isDead()) {
-                                    continue;
-                                }
-                                if (skillNum == SHAPE_CHANGE) {
-                                    if (cha instanceof L1PcInstance) {
-                                        L1PcInstance pc = (L1PcInstance) cha;
-                                        if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                                && pc.getTempCharGfx() <= 13745)
-                                            continue;
-                                    }
-                                }
-                                cha.removeSkillEffect(skillNum);
-                            }
-
-                            for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_END; skillNum++) {
-                                if (skillNum == STATUS_CHAT_PROHIBITED || skillNum == STATUS_CURSE_BARLOG || skillNum == STATUS_CURSE_YAHEE) {
-                                    continue;
-                                }
-                                cha.removeSkillEffect(skillNum);
-                            }
-
-                            cha.curePoison();
-                            cha.cureParalaysis();
-
-                            for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
-                                if (isNotCancelable(skillNum) && !cha.isDead()) {
-                                    continue;
-                                }
-                                cha.removeSkillEffect(skillNum);
-                            }
-
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.getHasteItemEquipped() > 0) {
-                                    continue;
-                                    // pc.setMoveSpeed(0);
-                                    // pc.sendPackets(new S_SkillHaste(pc.getId(),
-                                    // 0, 0));
-                                    // pc.broadcastPacket(new
-                                    // S_SkillHaste(pc.getId(), 0, 0));
-
-                                }
-                            }
-                            cha.removeSkillEffect(STATUS_FREEZE);
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                pc.sendPackets(new S_CharVisualUpdate(pc));
-                                pc.broadcastPacket(new S_CharVisualUpdate(pc));
-                                if (pc.isPrivateShop()) {
-                                    pc.sendPackets(new S_DoActionShop(pc.getId(), ActionCodes.ACTION_Shop, pc.getShopChat()));
-                                    pc.broadcastPacket(new S_DoActionShop(pc.getId(), ActionCodes.ACTION_Shop, pc.getShopChat()));
-                                }
-                                if (_user instanceof L1PcInstance) {
-                                    L1PinkName.onAction(pc, _user);
-                                }
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    break;
-                    case TURN_UNDEAD: {
-                        if (undeadType == 1 || undeadType == 3) {
-                            dmg = cha.getCurrentHp();
-                        }
-                    }
-                    break;
-                    case MANA_DRAIN: {
-                        int chance = random.nextInt(5) + 5;
-                        drainMana = chance + (_user.getAbility().getTotalInt() / 2);
-                        if (cha.getCurrentMp() < drainMana) {
-                            drainMana = cha.getCurrentMp();
-                        }
-                        if (_user instanceof L1PcInstance) {
-                            _player.sendPackets(new S_SkillSound(_player.getId(),
-                                    2171), true);
-                            Broadcaster.broadcastPacket(_player, new S_SkillSound(
-                                    _player.getId(), 2171), true);
-                        } else {
-                            Broadcaster.broadcastPacket(_user, new S_SkillSound(
-                                    _user.getId(), 2171), true);
-                        }
-                    }
-                    break;
-                    case WEAPON_BREAK: {
-                        if (_calcType == PC_PC || _calcType == NPC_PC) {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                L1ItemInstance weapon = pc.getWeapon();
-                                if (weapon != null) {
-                                    int weaponDamage = random.nextInt(_user.getAbility().getTotalInt() / 3) + 1;
-                                    pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
-                                    pc.getInventory().receiveDamage(weapon, weaponDamage);
-                                }
-                            }
-                        } else {
-                            ((L1NpcInstance) cha).setWeaponBreaked(true);
-                        }
-                    }
-                    break;
-                    case FOG_OF_SLEEPING: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_SLEEP, true));
-                        }
-                        cha.setSleeped(true);
-                    }
-                    break;
-                    case STATUS_FREEZE: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
+                            pc.setSkillEffect(L1SkillId.STATUS_FREEZE, time);
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 4184));
+                            pc.broadcastPacket(new S_SkillSound(pc.getId(), 4184));
                             pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_BIND, true));
-                        }
-                    }
-                    break;
-                    case OMAN_STUN: {
-                        int[] stunTimeArray = { 2500, 3000, 3500 };
-                        int rnd = random.nextInt(stunTimeArray.length);
-                        _shockStunDuration = stunTimeArray[rnd];
-                        L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(), cha.getMapId());
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
-                        } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
+                        } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                                || cha instanceof L1PetInstance) {
                             L1NpcInstance npc = (L1NpcInstance) cha;
+                            npc.setSkillEffect(L1SkillId.STATUS_FREEZE, time);
+                            npc.broadcastPacket(new S_SkillSound(npc.getId(), 4184));
                             npc.setParalyzed(true);
-                            npc.setParalysisTime(_shockStunDuration);
                         }
                     }
+                }
                     break;
-                    case OMAN_CANCELLATION: {
-                        if (cha instanceof L1PcInstance) {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
-                                if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                    continue;
+                case BONE_BREAK: {
+                    int bonetime = 2000;
+                    L1EffectSpawn.getInstance().spawnEffect(200020, bonetime, cha.getX(), cha.getY(), cha.getMapId());
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
+                    } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                            || cha instanceof L1PetInstance) {
+                        L1NpcInstance npc = (L1NpcInstance) cha;
+                        npc.setParalyzed(true);
+                    }
+                }
+                    break;
+
+                case PHANTASM: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_SLEEP, true));
+                    }
+                    cha.setSleeped(true);
+                }
+                    break;
+
+                case WIND_SHACKLE:
+                case MOB_WINDSHACKLE_1: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        // pc.sendPackets(new S_SkillIconWindShackle(pc.getId(),
+                        // _getBuffIconDuration));
+                        pc.setSkillEffect(pc.getId(), _getBuffIconDuration);
+                    }
+                }
+                    break;
+
+                case CANCELLATION: {
+                    try { // for test
+                        if (cha instanceof L1NpcInstance) {
+                            L1NpcInstance npc = (L1NpcInstance) cha;
+                            int npcId = npc.getNpcTemplate().get_npcId();
+                            if (npcId == 71092) {
+                                if (npc.getGfxId() == npc.getTempCharGfx()) {
+                                    npc.setTempCharGfx(1314);
+                                    npc.broadcastPacket(new S_ChangeShape(npc.getId(), 1314));
+                                    return;
+                                } else {
+                                    return;
                                 }
-                                if (skillNum == SHAPE_CHANGE) {
+                            }
+                            if (npcId == 45640) {
+                                if (npc.getGfxId() == npc.getTempCharGfx()) {
+                                    npc.setCurrentHp(npc.getMaxHp());
+                                    npc.setTempCharGfx(2332);
+                                    npc.broadcastPacket(new S_ChangeShape(npc.getId(), 2332));
+                                    npc.setName("$2103");
+                                    npc.setNameId("$2103");
+                                    npc.broadcastPacket(new S_ChangeName(npc.getId(), "$2103"));
+                                } else if (npc.getTempCharGfx() == 2332) {
+                                    npc.setCurrentHp(npc.getMaxHp());
+                                    npc.setTempCharGfx(2755);
+                                    npc.broadcastPacket(new S_ChangeShape(npc.getId(), 2755));
+                                    npc.setName("$2488");
+                                    npc.setNameId("$2488");
+                                    npc.broadcastPacket(new S_ChangeName(npc.getId(), "$2488"));
+                                }
+                            }
+                            if (npcId == 81209) {
+                                if (npc.getGfxId() == npc.getTempCharGfx()) {
+                                    npc.setTempCharGfx(4310);
+                                    npc.broadcastPacket(new S_ChangeShape(npc.getId(), 4310));
+                                    return;
+                                } else {
+                                    return;
+                                }
+                            }
+                        }
+                        if (!(cha instanceof L1PcInstance)) {
+                            L1NpcInstance npc = (L1NpcInstance) cha;
+                            npc.setMoveSpeed(0);
+                            npc.setBraveSpeed(0);
+                            npc.broadcastPacket(new S_SkillHaste(cha.getId(), 0, 0));
+                            npc.broadcastPacket(new S_SkillBrave(cha.getId(), 0, 0));
+                            npc.setWeaponBreaked(false);
+                            npc.setParalyzed(false);
+                        }
+
+                        if (cha instanceof L1PcInstance) {
+                            detection((L1PcInstance) cha, false);
+                        }
+
+                        for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
+                            if (isNotCancelable(skillNum) && !cha.isDead()) {
+                                continue;
+                            }
+                            if (skillNum == SHAPE_CHANGE) {
+                                if (cha instanceof L1PcInstance) {
+                                    L1PcInstance pc = (L1PcInstance) cha;
                                     if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
                                             && pc.getTempCharGfx() <= 13745)
                                         continue;
                                 }
-                                pc.removeSkillEffect(skillNum);
                             }
-                            for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
-                                if (skillNum == STATUS_CHAT_PROHIBITED) {
-                                    continue;
-                                }
-                                pc.removeSkillEffect(skillNum);
+                            cha.removeSkillEffect(skillNum);
+                        }
+
+                        for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_END; skillNum++) {
+                            if (skillNum == STATUS_CHAT_PROHIBITED || skillNum == STATUS_CURSE_BARLOG
+                                    || skillNum == STATUS_CURSE_YAHEE) {
+                                continue;
                             }
-                            for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
-                                if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                    continue;
-                                }
-                                pc.removeSkillEffect(skillNum);
+                            cha.removeSkillEffect(skillNum);
+                        }
+
+                        cha.curePoison();
+                        cha.cureParalaysis();
+
+                        for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
+                            if (isNotCancelable(skillNum) && !cha.isDead()) {
+                                continue;
                             }
-                            pc.curePoison();
-                            pc.cureParalaysis();
-                            if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715 && pc.getTempCharGfx() <= 13745)) {
-                                L1PolyMorph.undoPoly(pc);
-                                pc.sendPackets(new S_CharVisualUpdate(pc));
-                                pc.broadcastPacket(new S_CharVisualUpdate(pc));
-                            }
+                            cha.removeSkillEffect(skillNum);
+                        }
+
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
                             if (pc.getHasteItemEquipped() > 0) {
-                                pc.setMoveSpeed(0);
-                                pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
-                                pc.broadcastPacket(new S_SkillHaste(pc.getId(), 0, 0));
+                                continue;
+                                // pc.setMoveSpeed(0);
+                                // pc.sendPackets(new S_SkillHaste(pc.getId(),
+                                // 0, 0));
+                                // pc.broadcastPacket(new
+                                // S_SkillHaste(pc.getId(), 0, 0));
+
                             }
-                            if (pc != null && pc.isInvisble()) {
-                                if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
-                                    pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
-                                    pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                    pc.broadcastPacket(new S_Invis(pc.getId(), 0));
-                                    pc.sendPackets(new S_Sound(147));
+                        }
+                        cha.removeSkillEffect(STATUS_FREEZE);
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            pc.sendPackets(new S_CharVisualUpdate(pc));
+                            pc.broadcastPacket(new S_CharVisualUpdate(pc));
+                            if (pc.isPrivateShop()) {
+                                pc.sendPackets(
+                                        new S_DoActionShop(pc.getId(), ActionCodes.ACTION_Shop, pc.getShopChat()));
+                                pc.broadcastPacket(
+                                        new S_DoActionShop(pc.getId(), ActionCodes.ACTION_Shop, pc.getShopChat()));
+                            }
+                            if (_user instanceof L1PcInstance) {
+                                L1PinkName.onAction(pc, _user);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                    break;
+                case TURN_UNDEAD: {
+                    if (undeadType == 1 || undeadType == 3) {
+                        dmg = cha.getCurrentHp();
+                    }
+                }
+                    break;
+                case MANA_DRAIN: {
+                    int chance = random.nextInt(5) + 5;
+                    drainMana = chance + (_user.getAbility().getTotalInt() / 2);
+                    if (cha.getCurrentMp() < drainMana) {
+                        drainMana = cha.getCurrentMp();
+                    }
+                    if (_user instanceof L1PcInstance) {
+                        _player.sendPackets(new S_SkillSound(_player.getId(), 2171), true);
+                        Broadcaster.broadcastPacket(_player, new S_SkillSound(_player.getId(), 2171), true);
+                    } else {
+                        Broadcaster.broadcastPacket(_user, new S_SkillSound(_user.getId(), 2171), true);
+                    }
+                }
+                    break;
+                case WEAPON_BREAK: {
+                    if (_calcType == PC_PC || _calcType == NPC_PC) {
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            L1ItemInstance weapon = pc.getWeapon();
+                            if (weapon != null) {
+                                int weaponDamage = random.nextInt(_user.getAbility().getTotalInt() / 3) + 1;
+                                pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
+                                pc.getInventory().receiveDamage(weapon, weaponDamage);
+                            }
+                        }
+                    } else {
+                        ((L1NpcInstance) cha).setWeaponBreaked(true);
+                    }
+                }
+                    break;
+                case FOG_OF_SLEEPING: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_SLEEP, true));
+                    }
+                    cha.setSleeped(true);
+                }
+                    break;
+                case STATUS_FREEZE: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_BIND, true));
+                    }
+                }
+                    break;
+                case OMAN_STUN: {
+                    int[] stunTimeArray = { 2500, 3000, 3500 };
+                    int rnd = random.nextInt(stunTimeArray.length);
+                    _shockStunDuration = stunTimeArray[rnd];
+                    L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(),
+                            cha.getMapId());
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
+                    } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                            || cha instanceof L1PetInstance) {
+                        L1NpcInstance npc = (L1NpcInstance) cha;
+                        npc.setParalyzed(true);
+                        npc.setParalysisTime(_shockStunDuration);
+                    }
+                }
+                    break;
+                case OMAN_CANCELLATION: {
+                    if (cha instanceof L1PcInstance) {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
+                            if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                continue;
+                            }
+                            if (skillNum == SHAPE_CHANGE) {
+                                if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                        && pc.getTempCharGfx() <= 13745)
+                                    continue;
+                            }
+                            pc.removeSkillEffect(skillNum);
+                        }
+                        for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
+                            if (skillNum == STATUS_CHAT_PROHIBITED) {
+                                continue;
+                            }
+                            pc.removeSkillEffect(skillNum);
+                        }
+                        for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
+                            if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                continue;
+                            }
+                            pc.removeSkillEffect(skillNum);
+                        }
+                        pc.curePoison();
+                        pc.cureParalaysis();
+                        if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715 && pc.getTempCharGfx() <= 13745)) {
+                            L1PolyMorph.undoPoly(pc);
+                            pc.sendPackets(new S_CharVisualUpdate(pc));
+                            pc.broadcastPacket(new S_CharVisualUpdate(pc));
+                        }
+                        if (pc.getHasteItemEquipped() > 0) {
+                            pc.setMoveSpeed(0);
+                            pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
+                            pc.broadcastPacket(new S_SkillHaste(pc.getId(), 0, 0));
+                        }
+                        if (pc != null && pc.isInvisble()) {
+                            if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
+                                pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
+                                pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                pc.broadcastPacket(new S_Invis(pc.getId(), 0));
+                                pc.sendPackets(new S_Sound(147));
+                            }
+                            if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
+                                pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
+                                pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                pc.broadcastPacket(new S_Invis(pc.getId(), 0));
+                            }
+                        }
+                        pc.removeSkillEffect(STATUS_FREEZE);
+                        pc.sendPackets(new S_SkillSound(pc.getId(), 870));
+                        pc.broadcastPacket(new S_SkillSound(pc.getId(), 870));
+                    }
+                }
+                    break;
+                case ANTA_MESSAGE_1: // ヒット[用言1 /キャンセル - >オブモク！ケインドネシア]
+                case ANTA_MESSAGE_2: // ヒット[用言2 /ブレス+毒/オブモク！ケンロー]
+                case ANTA_MESSAGE_3: // ヒット[用言3 /左手+右パンチ+叫ん/オブモク！ティー育て]
+                case ANTA_MESSAGE_4: // ヒット[用言4 /パンチ+ブレス/オブモク！ケンティ育て]
+                case ANTA_MESSAGE_5: // ヒット[用言5 /叫び声+ブレス/オブモク！ルーミス]
+                case ANTA_MESSAGE_6: // ヒット[用言6 /スタン+ジャンプ/オブモク！ミューズ三]
+                case ANTA_MESSAGE_7: // ヒット[用言7 /スタン+発作/オブモク！ナッツ三]
+                case ANTA_MESSAGE_8: // ヒット[用言8 /スタン+足+点/オブモク！ティープサム]
+                case ANTA_MESSAGE_9: // ヒット[用言9 /ウェポンブレス/オブモク！リラのプ]
+                case ANTA_MESSAGE_10: // ヒット[用言10 /ウェポン+麻痺/オブモク！セイララフ]
+                case ANTA_CANCELLATION:
+                case ANTA_WEAPON_BREAK:
+                case ANTA_SHOCKSTUN: {
+                    int npcId = _npc.getNpcTemplate().get_npcId();
+                    if (npcId == 900011 || npcId == 900012 || npcId == 900013) {
+                        if (_skillId == ANTA_MESSAGE_1 || _skillId == ANTA_CANCELLATION) { // キャンセル
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    if (skillNum == SHAPE_CHANGE) {
+                                        if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                                && pc.getTempCharGfx() <= 13745)
+                                            continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
                                 }
-                                if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
-                                    pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
-                                    pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                    pc.broadcastPacket(new S_Invis(pc.getId(), 0));
+                                for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
+                                    if (skillNum == STATUS_CHAT_PROHIBITED) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                pc.curePoison();
+                                pc.cureParalaysis();
+                                if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                        && pc.getTempCharGfx() <= 13745)) {
+                                    L1PolyMorph.undoPoly(pc);
+                                    pc.sendPackets(new S_CharVisualUpdate(pc));
+                                    pc.broadcastPacket(new S_CharVisualUpdate(pc));
+                                }
+                                if (pc.getHasteItemEquipped() > 0) {
+                                    pc.setMoveSpeed(0);
+                                    pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
+                                    pc.broadcastPacket(new S_SkillHaste(pc.getId(), 0, 0));
+                                }
+                                if (pc != null && pc.isInvisble()) {
+                                    if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
+                                        pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        pc.broadcastPacket(new S_Invis(pc.getId(), 0));
+                                        pc.sendPackets(new S_Sound(147));
+                                    }
+                                    if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
+                                        pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        pc.broadcastPacket(new S_Invis(pc.getId(), 0));
+                                    }
+                                }
+                                pc.removeSkillEffect(STATUS_FREEZE);
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 870));
+                                pc.broadcastPacket(new S_SkillSound(pc.getId(), 870));
+                            }
+                        }
+
+                        if (_skillId == ANTA_MESSAGE_1 || _skillId == ANTA_MESSAGE_10) {// 麻痺毒
+                            Random random = new Random();
+                            int time = random.nextInt(5) + 1;
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                if (time > 10)
+                                    L1ParalysisPoison.doInfection(pc, 5, time * 1000);
+                            }
+                        }
+
+                        if (_skillId == ANTA_MESSAGE_2 || _skillId == ANTA_MESSAGE_5 || _skillId == ANTA_MESSAGE_9) { // 対米ひどく
+                            Random random = new Random();
+                            int PoisonDmg = random.nextInt(50) + 1;
+                            int PoisonTime = random.nextInt(15) + 1;
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                if (PoisonTime > 2)
+                                    L1DamagePoison.doInfection(pc, _target, PoisonTime * 1000, PoisonDmg,
+                                            _skillId == TOMAHAWK);
+                            }
+                        }
+                        if (_skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7 || _skillId == ANTA_MESSAGE_8
+                                || _skillId == ANTA_SHOCKSTUN) {// スターン
+                            int[] stunTimeArray = { 4500, 5000, 5500 };
+                            int rnd = random.nextInt(stunTimeArray.length);
+                            _shockStunDuration = stunTimeArray[rnd];
+                            L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(),
+                                    cha.getMapId());
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
+                            } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                                    || cha instanceof L1PetInstance) {
+                                L1NpcInstance npc = (L1NpcInstance) cha;
+                                npc.setParalyzed(true);
+                                npc.setParalysisTime(_shockStunDuration);
+                            }
+                        }
+                        if (_skillId == ANTA_MESSAGE_9 || _skillId == ANTA_MESSAGE_10
+                                || _skillId == ANTA_WEAPON_BREAK) { // ウェポン
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                L1ItemInstance weapon = pc.getWeapon();
+                                if (weapon != null) {
+                                    int weaponDamage = random.nextInt(3) + 1;
+                                    pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
+                                    pc.getInventory().receiveDamage(weapon, weaponDamage);
+                                    pc.sendPackets(new S_SkillSound(pc.getId(), 172));
+                                    pc.broadcastPacket(new S_SkillSound(pc.getId(), 172));
                                 }
                             }
-                            pc.removeSkillEffect(STATUS_FREEZE);
-                            pc.sendPackets(new S_SkillSound(pc.getId(), 870));
-                            pc.broadcastPacket(new S_SkillSound(pc.getId(), 870));
                         }
                     }
+                }
                     break;
-                    case ANTA_MESSAGE_1: // ヒット[用言1 /キャンセル - >オブモク！ケインドネシア]
-                    case ANTA_MESSAGE_2: // ヒット[用言2 /ブレス+毒/オブモク！ケンロー]
-                    case ANTA_MESSAGE_3: // ヒット[用言3 /左手+右パンチ+叫ん/オブモク！ティー育て]
-                    case ANTA_MESSAGE_4: // ヒット[用言4 /パンチ+ブレス/オブモク！ケンティ育て]
-                    case ANTA_MESSAGE_5: // ヒット[用言5 /叫び声+ブレス/オブモク！ルーミス]
-                    case ANTA_MESSAGE_6: // ヒット[用言6 /スタン+ジャンプ/オブモク！ミューズ三]
-                    case ANTA_MESSAGE_7: // ヒット[用言7 /スタン+発作/オブモク！ナッツ三]
-                    case ANTA_MESSAGE_8: // ヒット[用言8 /スタン+足+点/オブモク！ティープサム]
-                    case ANTA_MESSAGE_9: // ヒット[用言9 /ウェポンブレス/オブモク！リラのプ]
-                    case ANTA_MESSAGE_10: // ヒット[用言10 /ウェポン+麻痺/オブモク！セイララフ]
-                    case ANTA_CANCELLATION:
-                    case ANTA_WEAPON_BREAK:
-                    case ANTA_SHOCKSTUN: {
-                        int npcId = _npc.getNpcTemplate().get_npcId();
-                        if (npcId == 900011 || npcId == 900012 || npcId == 900013) {
-                            if (_skillId == ANTA_MESSAGE_1 || _skillId == ANTA_CANCELLATION) { // キャンセル
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        if (skillNum == SHAPE_CHANGE) {
-                                            if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                                    && pc.getTempCharGfx() <= 13745)
-                                                continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
-                                        if (skillNum == STATUS_CHAT_PROHIBITED) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    pc.curePoison();
-                                    pc.cureParalaysis();
-                                    if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                            && pc.getTempCharGfx() <= 13745)) {
-                                        L1PolyMorph.undoPoly(pc);
-                                        pc.sendPackets(new S_CharVisualUpdate(pc));
-                                        pc.broadcastPacket(new S_CharVisualUpdate(pc));
-                                    }
-                                    if (pc.getHasteItemEquipped() > 0) {
-                                        pc.setMoveSpeed(0);
-                                        pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
-                                        pc.broadcastPacket(new S_SkillHaste(pc.getId(), 0, 0));
-                                    }
-                                    if (pc != null && pc.isInvisble()) {
-                                        if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
-                                            pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            pc.broadcastPacket(new S_Invis(pc.getId(), 0));
-                                            pc.sendPackets(new S_Sound(147));
-                                        }
-                                        if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
-                                            pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            pc.broadcastPacket(new S_Invis(pc.getId(), 0));
-                                        }
-                                    }
-                                    pc.removeSkillEffect(STATUS_FREEZE);
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 870));
-                                    pc.broadcastPacket(new S_SkillSound(pc.getId(), 870));
-                                }
+                case PAP_PREDICATE1: // パプ[用言1：リオタ！ピロイや！ 【五色パール3 /神秘的な五色真珠1
+                    // / トールや召喚5]
+                case PAP_PREDICATE3: // パプ[用言3：リオタ！ラナキュウリので！ 【デスポーション - >右 - >
+                    // アイスイイラプション]
+                case PAP_PREDICATE5: // パプ[用言5：リオタ！ネーナウーアヌス！ 【リデュースヒル+頭の攻撃+アイス
+                    // ブレス]
+                case PAP_PREDICATE6: // パプ[用言6：リオタ！アンテナウェインラク！ [デスヒル+尾の攻撃+アイス
+                    // ブレス]
+                case PAP_PREDICATE7: // パプ[用言7：リオタ！ラナポンポン！ [キャンセレーション+上がった中2回]
+                                     // [範囲
+                    // X]
+                case PAP_PREDICATE8: // パプ[用言8：リオタ！レポポンポン！ [ウェポンブレイク+左手2回] [範囲
+                    // X]
+                case PAP_PREDICATE9: // パプ[用言9：リオタ！アンテナ論連邦！ [尾2連打+アイス
+                    // ブレス] [範囲X]
+                case PAP_PREDICATE11: // パプ[用言11：リオタ！オニーズウェインラク！
+                                      // [マスキャンセレーション+デスヒル
+                    // + アイスメテオ+アイスイラプション] [範囲O]
+                case PAP_PREDICATE12: { // パプ[用言12：リオタ！オニーズアックスオンウェインラク！
+                                        // [マスキャンセレーション
+                    // + デス・ヒル+アイスメテオ+発作] [範囲0]
+                    int npcId = _npc.getNpcTemplate().get_npcId();
+                    if (npcId == 900038 || npcId == 900039 || npcId == 900040) {
+                        if (_skillId == PAP_PREDICATE1) { // リコール召喚（サエル - パール -
+                                                          // トールや）
+                            int i;
+                            for (i = 0; i < 2; i++) { // タイマーテイク部分のfor文で
+                                // 回すとスレッドエラー動作が
+                                // 発生する。
+                                L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900049,
+                                        8, 60 * 1000, 0);
+                                L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900050,
+                                        8, 60 * 1000, 0);
+                                L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900051,
+                                        8, 60 * 1000, 0);
+                                L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900052,
+                                        8, 120 * 1000, 0);
                             }
+                        }
 
+                        if (_skillId == PAP_PREDICATE7 || _skillId == PAP_PREDICATE11 || _skillId == PAP_PREDICATE12) { // キャンセル
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    if (skillNum == SHAPE_CHANGE) {
+                                        if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                                && pc.getTempCharGfx() <= 13745)
+                                            continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
+                                    if (skillNum == STATUS_CHAT_PROHIBITED) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                pc.curePoison();
+                                pc.cureParalaysis();
+                                if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                        && pc.getTempCharGfx() <= 13745)) {
+                                    L1PolyMorph.undoPoly(pc);
+                                    pc.sendPackets(new S_CharVisualUpdate(pc));
+                                    pc.broadcastPacket(new S_CharVisualUpdate(pc));
+                                }
+                                if (pc.getHasteItemEquipped() > 0) {
+                                    pc.setMoveSpeed(0);
+                                    pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
+                                    pc.broadcastPacket(new S_SkillHaste(pc.getId(), 0, 0));
+                                }
+                                if (pc != null && pc.isInvisble()) {
+                                    if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
+                                        pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        pc.broadcastPacket(new S_Invis(pc.getId(), 0));
+                                        pc.sendPackets(new S_Sound(147));
+                                    }
+                                    if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
+                                        pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        pc.broadcastPacket(new S_Invis(pc.getId(), 0));
+                                    }
+                                }
+                                pc.removeSkillEffect(STATUS_FREEZE);
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 870));
+                                pc.broadcastPacket(new S_SkillSound(pc.getId(), 870));
+                            }
+                        }
 
-                            if (_skillId == ANTA_MESSAGE_1 || _skillId == ANTA_MESSAGE_10) {// 麻痺毒
+                        if (_skillId == PAP_PREDICATE8) { // ウェポン
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                L1ItemInstance weapon = pc.getWeapon();
                                 Random random = new Random();
-                                int time = random.nextInt(5) + 1;
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    if (time > 10)
-                                        L1ParalysisPoison.doInfection(pc, 5, time * 1000);
-                                }
-                            }
-
-                            if (_skillId == ANTA_MESSAGE_2 || _skillId == ANTA_MESSAGE_5 || _skillId == ANTA_MESSAGE_9) { //対米ひどく
-                                Random random = new Random();
-                                int PoisonDmg = random.nextInt(50) + 1;
-                                int PoisonTime = random.nextInt(15) + 1;
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    if (PoisonTime > 2)
-                                        L1DamagePoison.doInfection(pc, _target, PoisonTime * 1000, PoisonDmg, _skillId == TOMAHAWK);
-                                }
-                            }
-                            if (_skillId == ANTA_MESSAGE_6 || _skillId == ANTA_MESSAGE_7 || _skillId == ANTA_MESSAGE_8 || _skillId == ANTA_SHOCKSTUN) {//スターン
-                                int[] stunTimeArray = { 4500, 5000, 5500 };
-                                int rnd = random.nextInt(stunTimeArray.length);
-                                _shockStunDuration = stunTimeArray[rnd];
-                                L1EffectSpawn.getInstance().spawnEffect(81162, _shockStunDuration, cha.getX(), cha.getY(), cha.getMapId());
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_STUN, true));
-                                } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
-                                    L1NpcInstance npc = (L1NpcInstance) cha;
-                                    npc.setParalyzed(true);
-                                    npc.setParalysisTime(_shockStunDuration);
-                                }
-                            }
-                            if (_skillId == ANTA_MESSAGE_9 || _skillId == ANTA_MESSAGE_10 || _skillId == ANTA_WEAPON_BREAK) { //ウェポン
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    L1ItemInstance weapon = pc.getWeapon();
-                                    if (weapon != null) {
-                                        int weaponDamage = random.nextInt(3) + 1;
-                                        pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
-                                        pc.getInventory().receiveDamage(weapon, weaponDamage);
-                                        pc.sendPackets(new S_SkillSound(pc.getId(), 172));
-                                        pc.broadcastPacket(new S_SkillSound(pc.getId(), 172));
-                                    }
+                                int rnd = random.nextInt(100) + 1;
+                                if (weapon != null && rnd > 33) {
+                                    int weaponDamage = random.nextInt(2) + 1;
+                                    pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
+                                    pc.getInventory().receiveDamage(weapon, weaponDamage);
+                                    pc.sendPackets(new S_SkillSound(pc.getId(), 172));
+                                    pc.broadcastPacket(new S_SkillSound(pc.getId(), 172));
                                 }
                             }
                         }
-                    }
-                    break;
-                    case PAP_PREDICATE1: // パプ[用言1：リオタ！ピロイや！ 【五色パール3 /神秘的な五色真珠1
-                        // / トールや召喚5]
-                    case PAP_PREDICATE3: // パプ[用言3：リオタ！ラナキュウリので！ 【デスポーション - >右 - >
-                        // アイスイイラプション]
-                    case PAP_PREDICATE5: // パプ[用言5：リオタ！ネーナウーアヌス！ 【リデュースヒル+頭の攻撃+アイス
-                        // ブレス]
-                    case PAP_PREDICATE6: // パプ[用言6：リオタ！アンテナウェインラク！ [デスヒル+尾の攻撃+アイス
-                        // ブレス]
-                    case PAP_PREDICATE7: // パプ[用言7：リオタ！ラナポンポン！ [キャンセレーション+上がった中2回] [範囲
-                        // X]
-                    case PAP_PREDICATE8: // パプ[用言8：リオタ！レポポンポン！ [ウェポンブレイク+左手2回] [範囲
-                        // X]
-                    case PAP_PREDICATE9: // パプ[用言9：リオタ！アンテナ論連邦！ [尾2連打+アイス
-                        // ブレス] [範囲X]
-                    case PAP_PREDICATE11: // パプ[用言11：リオタ！オニーズウェインラク！ [マスキャンセレーション+デスヒル
-                        // + アイスメテオ+アイスイラプション] [範囲O]
-                    case PAP_PREDICATE12: { // パプ[用言12：リオタ！オニーズアックスオンウェインラク！ [マスキャンセレーション
-                        // + デス・ヒル+アイスメテオ+発作] [範囲0]
-                        int npcId = _npc.getNpcTemplate().get_npcId();
-                        if (npcId == 900038 || npcId == 900039 || npcId == 900040) {
-                            if (_skillId == PAP_PREDICATE1) { // リコール召喚（サエル - パール - トールや）
-                                int i;
-                                for (i = 0; i < 2; i++) { // タイマーテイク部分のfor文で
-                                    // 回すとスレッドエラー動作が
-                                    // 発生する。
-                                    L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900049, 8, 60 * 1000, 0);
-                                    L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900050, 8, 60 * 1000, 0);
-                                    L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900051, 8, 60 * 1000, 0);
-                                    L1SpawnUtil.spawn2(_user.getX(), _user.getY(), (short) _user.getMap().getId(), 900052, 8, 120 * 1000, 0);
-                                }
+                        if (_skillId == PAP_PREDICATE3) {
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 7781));
+                                pc.broadcastPacket(new S_SkillSound(pc.getId(), 7781));
+                                pc.setSkillEffect(L1SkillId.PAP_DEATH_PORTION, 12 * 1000);
                             }
+                        }
+                        if (_skillId == PAP_PREDICATE5) {
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 7782));
+                                pc.broadcastPacket(new S_SkillSound(pc.getId(), 7782));
+                                pc.setSkillEffect(L1SkillId.PAP_REDUCE_HELL, 12 * 1000);
+                            }
+                        }
 
-                            if (_skillId == PAP_PREDICATE7 || _skillId == PAP_PREDICATE11 || _skillId == PAP_PREDICATE12) { // キャンセル
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        if (skillNum == SHAPE_CHANGE) {
-                                            if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                                    && pc.getTempCharGfx() <= 13745)
-                                                continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
-                                        if (skillNum == STATUS_CHAT_PROHIBITED) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    pc.curePoison();
-                                    pc.cureParalaysis();
-                                    if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                            && pc.getTempCharGfx() <= 13745)) {
-                                        L1PolyMorph.undoPoly(pc);
-                                        pc.sendPackets(new S_CharVisualUpdate(pc));
-                                        pc.broadcastPacket(new S_CharVisualUpdate(pc));
-                                    }
-                                    if (pc.getHasteItemEquipped() > 0) {
-                                        pc.setMoveSpeed(0);
-                                        pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
-                                        pc.broadcastPacket(new S_SkillHaste(pc.getId(), 0, 0));
-                                    }
-                                    if (pc != null && pc.isInvisble()) {
-                                        if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
-                                            pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            pc.broadcastPacket(new S_Invis(pc.getId(), 0));
-                                            pc.sendPackets(new S_Sound(147));
-                                        }
-                                        if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
-                                            pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            pc.broadcastPacket(new S_Invis(pc.getId(), 0));
-                                        }
-                                    }
-                                    pc.removeSkillEffect(STATUS_FREEZE);
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 870));
-                                    pc.broadcastPacket(new S_SkillSound(pc.getId(), 870));
-                                }
+                        if (_skillId == PAP_PREDICATE6) {
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 7780));
+                                pc.setSkillEffect(L1SkillId.PAP_DEATH_HELL, 12 * 1000);
+                                pc.broadcastPacket(new S_SkillSound(pc.getId(), 7780));
                             }
+                        }
 
-                            if (_skillId == PAP_PREDICATE8) { // ウェポン
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    L1ItemInstance weapon = pc.getWeapon();
-                                    Random random = new Random();
-                                    int rnd = random.nextInt(100) + 1;
-                                    if (weapon != null && rnd > 33) {
-                                        int weaponDamage = random.nextInt(2) + 1;
-                                        pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
-                                        pc.getInventory().receiveDamage(weapon, weaponDamage);
-                                        pc.sendPackets(new S_SkillSound(pc.getId(), 172));
-                                        pc.broadcastPacket(new S_SkillSound(pc.getId(), 172));
-                                    }
-                                }
-                            }
-                            if (_skillId == PAP_PREDICATE3) {
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 7781));
-                                    pc.broadcastPacket(new S_SkillSound(pc.getId(), 7781));
-                                    pc.setSkillEffect(L1SkillId.PAP_DEATH_PORTION, 12 * 1000);
-                                }
-                            }
-                            if (_skillId == PAP_PREDICATE5) {
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 7782));
-                                    pc.broadcastPacket(new S_SkillSound(pc.getId(), 7782));
-                                    pc.setSkillEffect(L1SkillId.PAP_REDUCE_HELL, 12 * 1000);
-                                }
-                            }
-
-                            if (_skillId == PAP_PREDICATE6) {
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 7780));
-                                    pc.setSkillEffect(L1SkillId.PAP_DEATH_HELL, 12 * 1000);
-                                    pc.broadcastPacket(new S_SkillSound(pc.getId(), 7780));
-                                }
-                            }
-
-                            if (_skillId == PAP_PREDICATE11 || _skillId == PAP_PREDICATE12) {// デス・ヒル
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 7780));
-                                    pc.setSkillEffect(L1SkillId.PAP_DEATH_HELL, 12 * 1000);
-                                    pc.broadcastPacket(new S_SkillSound(pc.getId(), 7780));
-                                }
+                        if (_skillId == PAP_PREDICATE11 || _skillId == PAP_PREDICATE12) {// デス・ヒル
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 7780));
+                                pc.setSkillEffect(L1SkillId.PAP_DEATH_HELL, 12 * 1000);
+                                pc.broadcastPacket(new S_SkillSound(pc.getId(), 7780));
                             }
                         }
                     }
+                }
                     break;
-                    default:
-                        break;
+                default:
+                    break;
                 }
 
                 if (_calcType == PC_PC || _calcType == NPC_PC) {
                     switch (_skillId) {
-                        case TELEPORT:
-                        case MASS_TELEPORT: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            Random random = new Random();
-                            if (_bookmark_x != 0) {
-                                if (pc.getMap().isEscapable() || pc.isGm()) {
-                                    L1Map map = L1WorldMap.getInstance().getMap(_bookmark_mapid);
-                                    if (_skillId == MASS_TELEPORT) {
-                                        for (L1PcInstance member : L1World.getInstance().getVisiblePlayer(pc, 3)) {
-                                            if (pc.getClanid() != 0 && member.getClanid() == pc.getClanid() && member.getId() != pc.getId()
-                                                    && !member.isPrivateShop() && !member.isAutoClanjoin()) {
-                                                int newX2 = _bookmark_x + random.nextInt(3) + 1;
-                                                int newY2 = _bookmark_y + random.nextInt(3) + 1;
-                                                if (map.isInMap(newX2, newY2) && map.isPassable(newX2, newY2)) {
-                                                    new L1Teleport().teleport(member, newX2, newY2, _bookmark_mapid, member.getHeading(), true);
+                    case TELEPORT:
+                    case MASS_TELEPORT: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        Random random = new Random();
+                        if (_bookmark_x != 0) {
+                            if (pc.getMap().isEscapable() || pc.isGm()) {
+                                L1Map map = L1WorldMap.getInstance().getMap(_bookmark_mapid);
+                                if (_skillId == MASS_TELEPORT) {
+                                    for (L1PcInstance member : L1World.getInstance().getVisiblePlayer(pc, 3)) {
+                                        if (pc.getClanid() != 0 && member.getClanid() == pc.getClanid()
+                                                && member.getId() != pc.getId() && !member.isPrivateShop()
+                                                && !member.isAutoClanjoin()) {
+                                            int newX2 = _bookmark_x + random.nextInt(3) + 1;
+                                            int newY2 = _bookmark_y + random.nextInt(3) + 1;
+                                            if (map.isInMap(newX2, newY2) && map.isPassable(newX2, newY2)) {
+                                                new L1Teleport().teleport(member, newX2, newY2, _bookmark_mapid,
+                                                        member.getHeading(), true);
 
-                                                } else {
-                                                    new L1Teleport().teleport(member, _bookmark_x, _bookmark_y, _bookmark_mapid, member.getHeading(), true);
+                                            } else {
+                                                new L1Teleport().teleport(member, _bookmark_x, _bookmark_y,
+                                                        _bookmark_mapid, member.getHeading(), true);
 
-                                                }
                                             }
                                         }
                                     }
-                                    if (pc.getInventory().checkItem(20288)) {
-                                        new L1Teleport().teleport(pc, _bookmark_x, _bookmark_y, _bookmark_mapid, pc.getHeading(), true);
-                                    } else {
-                                        int newX2 = _bookmark_x + random.nextInt(15);
-                                        int newY2 = _bookmark_y + random.nextInt(15);
-                                        if (map.isInMap(newX2, newY2) && map.isPassable(newX2, newY2)) {
-                                            new L1Teleport().teleport(pc, newX2, newY2, _bookmark_mapid, pc.getHeading(), true);
-                                        } else {
-                                            new L1Teleport().teleport(pc, _bookmark_x, _bookmark_y, _bookmark_mapid, pc.getHeading(), true);
-                                        }
-                                    }
+                                }
+                                if (pc.getInventory().checkItem(20288)) {
+                                    new L1Teleport().teleport(pc, _bookmark_x, _bookmark_y, _bookmark_mapid,
+                                            pc.getHeading(), true);
                                 } else {
-                                    pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
-                                    pc.sendPackets(new S_ServerMessage(79));
+                                    int newX2 = _bookmark_x + random.nextInt(15);
+                                    int newY2 = _bookmark_y + random.nextInt(15);
+                                    if (map.isInMap(newX2, newY2) && map.isPassable(newX2, newY2)) {
+                                        new L1Teleport().teleport(pc, newX2, newY2, _bookmark_mapid, pc.getHeading(),
+                                                true);
+                                    } else {
+                                        new L1Teleport().teleport(pc, _bookmark_x, _bookmark_y, _bookmark_mapid,
+                                                pc.getHeading(), true);
+                                    }
                                 }
                             } else {
-                                if (pc.getMapId() >= 101 && pc.getMapId() <= 110) {
-                                    int find_item_ids[] = { 830022, // 1階
-                                            830023, // 2階
-                                            830024, // 3階
-                                            830025, // 4階
-                                            830026, // 5階
-                                            830027, // 6階
-                                            830028, // 7階
-                                            830029, //8階
-                                            830030, // 9階
-                                            830031 // 10階
-                                    };
-                                    L1ItemInstance findItem = pc.getInventory().findItemId(find_item_ids[pc.getMapId() - 101]);
-                                    if (findItem != null)
-                                        Telbookitem.toActive(pc, 0, null, _skillId);
-                                    else
-                                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
-                                    pc.sendPackets(new S_ServerMessage(276));
+                                pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
+                                pc.sendPackets(new S_ServerMessage(79));
+                            }
+                        } else {
+                            if (pc.getMapId() >= 101 && pc.getMapId() <= 110) {
+                                int find_item_ids[] = { 830022, // 1階
+                                        830023, // 2階
+                                        830024, // 3階
+                                        830025, // 4階
+                                        830026, // 5階
+                                        830027, // 6階
+                                        830028, // 7階
+                                        830029, // 8階
+                                        830030, // 9階
+                                        830031 // 10階
+                                };
+                                L1ItemInstance findItem = pc.getInventory()
+                                        .findItemId(find_item_ids[pc.getMapId() - 101]);
+                                if (findItem != null)
+                                    Telbookitem.toActive(pc, 0, null, _skillId);
+                                else
+                                    pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
+                                pc.sendPackets(new S_ServerMessage(276));
 
+                            } else {
+                                if (pc.getMap().isTeleportable() || pc.isGm()) {
+                                    Telbookitem.toActive(pc, 0, null, _skillId);
                                 } else {
-                                    if (pc.getMap().isTeleportable() || pc.isGm()) {
-                                        Telbookitem.toActive(pc, 0, null, _skillId);
-                                    } else {
-                                        pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
-                                        pc.sendPackets(new S_ServerMessage(276));
-                                    }
+                                    pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
+                                    pc.sendPackets(new S_ServerMessage(276));
                                 }
                             }
                         }
+                    }
                         break;
-                        case TELEPORT_TO_MATHER: {
-                            L1PcInstance pc = (L1PcInstance) cha;
+                    case TELEPORT_TO_MATHER: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.getMap().isEscapable() || pc.isGm()) {
+                            new L1Teleport().teleport(pc, 33051, 32337, (short) 4, 5, true);
+                        } else {
+                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
+                            pc.sendPackets(new S_ServerMessage(647));
+                        }
+                    }
+                        break;
+                    case CALL_CLAN: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        L1PcInstance clanPc = (L1PcInstance) L1World.getInstance().findObject(_targetID);
+                        if (clanPc != null) {
+                            clanPc.setTempID(pc.getId());
+                            clanPc.sendPackets(new S_Message_YN(729, ""));
+                        }
+                    }
+                        break;
+                    case RUN_CLAN: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        L1PcInstance clanPc = (L1PcInstance) L1World.getInstance().findObject(_targetID);
+                        if (clanPc != null) {
                             if (pc.getMap().isEscapable() || pc.isGm()) {
-                                new L1Teleport().teleport(pc, 33051, 32337, (short) 4, 5, true);
+                                // バトルゾーン
+                                if (pc.get_DuelLine() != 0) {
+                                    return;
+                                }
+                                boolean castle_area = L1CastleLocation.checkInAllWarArea(clanPc.getX(), clanPc.getY(),
+                                        clanPc.getMapId());
+                                if ((clanPc.getMapId() == 0 || clanPc.getMapId() == 4 || clanPc.getMapId() == 5153
+                                        || clanPc.getMapId() == 5001 || clanPc.getMapId() == 304)
+                                        && castle_area == false) {
+                                    new L1Teleport().teleport(pc, clanPc.getX(), clanPc.getY(), clanPc.getMapId(), 5,
+                                            true);
+                                } else {
+                                    pc.sendPackets(new S_ServerMessage(547));
+                                }
                             } else {
                                 pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
                                 pc.sendPackets(new S_ServerMessage(647));
                             }
                         }
+                    }
                         break;
-                        case CALL_CLAN: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            L1PcInstance clanPc = (L1PcInstance) L1World.getInstance().findObject(_targetID);
-                            if (clanPc != null) {
-                                clanPc.setTempID(pc.getId());
-                                clanPc.sendPackets(new S_Message_YN(729, ""));
+                    case BRING_STONE: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        Random random = new Random();
+                        L1ItemInstance item = pc.getInventory().getItem(_itemobjid);
+                        if (item != null) {
+                            int dark = (int) (10 + (pc.getLevel() * 0.8) + (pc.getAbility().getTotalWis() - 6) * 1.2);
+                            int brave = (int) (dark / 2.1);
+                            int wise = (int) (brave / 2.0);
+                            int kayser = (int) (wise / 1.9);
+                            int chance = random.nextInt(100) + 1;
+                            if (Config.CHECK_AUTO_ENCHANT) {
+                                if (pc.checkAuto()) {
+                                    chance = 10000;
+                                }
                             }
-                        }
-                        break;
-                        case RUN_CLAN: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            L1PcInstance clanPc = (L1PcInstance) L1World.getInstance().findObject(_targetID);
-                            if (clanPc != null) {
-                                if (pc.getMap().isEscapable() || pc.isGm()) {
-                                    // バトルゾーン
-                                    if (pc.get_DuelLine() != 0) {
-                                        return;
-                                    }
-                                    boolean castle_area = L1CastleLocation.checkInAllWarArea(clanPc.getX(), clanPc.getY(), clanPc.getMapId());
-                                    if ((clanPc.getMapId() == 0 || clanPc.getMapId() == 4 || clanPc.getMapId() == 5153 || clanPc.getMapId() == 5001
-                                            || clanPc.getMapId() == 304) && castle_area == false) {
-                                        new L1Teleport().teleport(pc, clanPc.getX(), clanPc.getY(), clanPc.getMapId(), 5, true);
-                                    } else {
-                                        pc.sendPackets(new S_ServerMessage(547));
-                                    }
+                            if (item.getItem().getItemId() == 40320) {
+                                pc.getInventory().removeItem(item, 1);
+                                if (dark >= chance) {
+                                    pc.getInventory().storeItem(40321, 1);
+                                    pc.sendPackets(new S_ServerMessage(403, "$2475"));
                                 } else {
-                                    pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_TELEPORT_UNLOCK, false));
-                                    pc.sendPackets(new S_ServerMessage(647));
+                                    pc.sendPackets(new S_ServerMessage(280));
                                 }
-                            }
-                        }
-                        break;
-                        case BRING_STONE: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            Random random = new Random();
-                            L1ItemInstance item = pc.getInventory().getItem(_itemobjid);
-                            if (item != null) {
-                                int dark = (int) (10 + (pc.getLevel() * 0.8) + (pc.getAbility().getTotalWis() - 6) * 1.2);
-                                int brave = (int) (dark / 2.1);
-                                int wise = (int) (brave / 2.0);
-                                int kayser = (int) (wise / 1.9);
-                                int chance = random.nextInt(100) + 1;
-                                if (Config.CHECK_AUTO_ENCHANT) {
-                                    if (pc.checkAuto()) {
-                                        chance = 10000;
-                                    }
-                                }
-                                if (item.getItem().getItemId() == 40320) {
-                                    pc.getInventory().removeItem(item, 1);
-                                    if (dark >= chance) {
-                                        pc.getInventory().storeItem(40321, 1);
-                                        pc.sendPackets(new S_ServerMessage(403, "$2475"));
-                                    } else {
-                                        pc.sendPackets(new S_ServerMessage(280));
-                                    }
-                                } else if (item.getItem().getItemId() == 40321) {
-                                    pc.getInventory().removeItem(item, 1);
-                                    if (brave >= chance) {
-                                        pc.getInventory().storeItem(40322, 1);
-                                        pc.sendPackets(new S_ServerMessage(403, "$2476"));
-                                    } else {
-                                        pc.sendPackets(new S_ServerMessage(280));
-                                    }
-                                } else if (item.getItem().getItemId() == 40322) {
-                                    pc.getInventory().removeItem(item, 1);
-                                    if (wise >= chance) {
-                                        pc.getInventory().storeItem(40323, 1);
-                                        pc.sendPackets(new S_ServerMessage(403, "$2477"));
-                                    } else {
-                                        pc.sendPackets(new S_ServerMessage(280));
-                                    }
-                                } else if (item.getItem().getItemId() == 40323) {
-                                    pc.getInventory().removeItem(item, 1);
-                                    if (kayser >= chance) {
-                                        pc.getInventory().storeItem(40324, 1);
-                                        pc.sendPackets(new S_ServerMessage(403, "$2478"));
-                                    } else {
-                                        pc.sendPackets(new S_ServerMessage(280));
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                        case SUMMON_MONSTER: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            int level = pc.getLevel();
-                            int chari = pc.getAbility().getTotalCha();
-                            if ((pc.getMap().isRecallPets() && !pc.isInWarArea() && pc.getMapId() != 781 && pc.getMapId() != 782) || pc.isGm()) {
-                                int summonid = 0;
-                                if (pc.getInventory().checkEquipped(20284) && chari >= 25) {
-                                    if (level < 40) {
-                                        summonid = 81083;
-                                    } else if (level >= 40 && level < 52) {
-                                        summonid = 81085;
-                                    } else if (level >= 52 && level < 64) {
-                                        summonid = 81086;
-                                    } else if (level >= 64 && level < 76) {
-                                        summonid = 81087;
-                                    } else if (level >= 76) {
-                                        summonid = 81088;
-                                        if ((level >= 80 && level < 82) && chari >= 35) {
-                                            summonid = 81089;
-                                        } else if ((level >= 82 && level < 84) && chari >= 35) {
-                                            summonid = 81090;
-                                        } else if ((level >= 84 && level < 86) && chari >= 35) {
-                                            summonid = 81091;
-                                        } else if ((level >= 86 && level < 88) && chari >= 35) {
-                                            summonid = 81092;
-                                        } else if (level >= 88 && chari >= 35) {
-                                            summonid = 81093;
-                                        }
-                                    }
+                            } else if (item.getItem().getItemId() == 40321) {
+                                pc.getInventory().removeItem(item, 1);
+                                if (brave >= chance) {
+                                    pc.getInventory().storeItem(40322, 1);
+                                    pc.sendPackets(new S_ServerMessage(403, "$2476"));
                                 } else {
+                                    pc.sendPackets(new S_ServerMessage(280));
+                                }
+                            } else if (item.getItem().getItemId() == 40322) {
+                                pc.getInventory().removeItem(item, 1);
+                                if (wise >= chance) {
+                                    pc.getInventory().storeItem(40323, 1);
+                                    pc.sendPackets(new S_ServerMessage(403, "$2477"));
+                                } else {
+                                    pc.sendPackets(new S_ServerMessage(280));
+                                }
+                            } else if (item.getItem().getItemId() == 40323) {
+                                pc.getInventory().removeItem(item, 1);
+                                if (kayser >= chance) {
+                                    pc.getInventory().storeItem(40324, 1);
+                                    pc.sendPackets(new S_ServerMessage(403, "$2478"));
+                                } else {
+                                    pc.sendPackets(new S_ServerMessage(280));
+                                }
+                            }
+                        }
+                    }
+                        break;
+                    case SUMMON_MONSTER: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        int level = pc.getLevel();
+                        int chari = pc.getAbility().getTotalCha();
+                        if ((pc.getMap().isRecallPets() && !pc.isInWarArea() && pc.getMapId() != 781
+                                && pc.getMapId() != 782) || pc.isGm()) {
+                            int summonid = 0;
+                            if (pc.getInventory().checkEquipped(20284) && chari >= 25) {
+                                if (level < 40) {
                                     summonid = 81083;
+                                } else if (level >= 40 && level < 52) {
+                                    summonid = 81085;
+                                } else if (level >= 52 && level < 64) {
+                                    summonid = 81086;
+                                } else if (level >= 64 && level < 76) {
+                                    summonid = 81087;
+                                } else if (level >= 76) {
+                                    summonid = 81088;
+                                    if ((level >= 80 && level < 82) && chari >= 35) {
+                                        summonid = 81089;
+                                    } else if ((level >= 82 && level < 84) && chari >= 35) {
+                                        summonid = 81090;
+                                    } else if ((level >= 84 && level < 86) && chari >= 35) {
+                                        summonid = 81091;
+                                    } else if ((level >= 86 && level < 88) && chari >= 35) {
+                                        summonid = 81092;
+                                    } else if (level >= 88 && chari >= 35) {
+                                        summonid = 81093;
+                                    }
                                 }
+                            } else {
+                                summonid = 81083;
+                            }
+                            int petcost = 0;
+                            int summoncost = pc.getAbility().getTotalCha() + 6 - petcost;
+                            Object[] petlist = pc.getPetList().values().toArray();
+                            for (Object pet : petlist) {
+                                petcost += pc.getAbility().getTotalCha();
+                            }
+                            int charisma = pc.getAbility().getTotalCha() + 6 - petcost;
+                            int summoncount = charisma / summoncost;
+                            L1Npc npcTemp = NpcTable.getInstance().getTemplate(summonid);
+                            for (int i = 0; i < summoncount; i++) {
+                                L1SummonInstance summon = new L1SummonInstance(npcTemp, pc);
+                                summon.setPetcost(summoncost);
+                            }
+                        } else {
+                            pc.sendPackets(new S_ServerMessage(79));
+                        }
+                    }
+                        break;
+                    case LESSER_ELEMENTAL:
+                    case GREATER_ELEMENTAL: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        int attr = pc.getElfAttr();
+                        if (attr != 0) {
+                            if ((pc.getMap().isRecallPets() && !pc.isInWarArea()) || pc.isGm()) {
                                 int petcost = 0;
-                                int summoncost = pc.getAbility().getTotalCha() + 6 - petcost;
                                 Object[] petlist = pc.getPetList().values().toArray();
                                 for (Object pet : petlist) {
-                                    petcost += pc.getAbility().getTotalCha();
+                                    petcost += ((L1NpcInstance) pet).getPetcost();
                                 }
-                                int charisma = pc.getAbility().getTotalCha() + 6 - petcost;
-                                int summoncount = charisma / summoncost;
-                                L1Npc npcTemp = NpcTable.getInstance().getTemplate(summonid);
-                                for (int i = 0; i < summoncount; i++) {
+
+                                if (petcost == 0) {
+                                    int summonid = 0;
+                                    int summons[];
+                                    if (_skillId == LESSER_ELEMENTAL) {
+                                        summons = new int[] { 45306, 45303, 45304, 45305 };
+                                    } else {
+                                        summons = new int[] { 81053, 81050, 81051, 81052 };
+                                    }
+                                    int npcattr = 1;
+                                    for (int i = 0; i < summons.length; i++) {
+                                        if (npcattr == attr) {
+                                            summonid = summons[i];
+                                            i = summons.length;
+                                        }
+                                        npcattr *= 2;
+                                    }
+                                    if (summonid == 0) {
+                                        Random random = new Random();
+                                        int k3 = random.nextInt(4);
+                                        summonid = summons[k3];
+                                    }
+
+                                    L1Npc npcTemp = NpcTable.getInstance().getTemplate(summonid);
                                     L1SummonInstance summon = new L1SummonInstance(npcTemp, pc);
-                                    summon.setPetcost(summoncost);
+                                    summon.setPetcost(pc.getAbility().getTotalCha() + 7);
                                 }
                             } else {
                                 pc.sendPackets(new S_ServerMessage(79));
                             }
                         }
+                    }
                         break;
-                        case LESSER_ELEMENTAL:
-                        case GREATER_ELEMENTAL: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            int attr = pc.getElfAttr();
-                            if (attr != 0) {
-                                if ((pc.getMap().isRecallPets() && !pc.isInWarArea()) || pc.isGm()) {
-                                    int petcost = 0;
-                                    Object[] petlist = pc.getPetList().values().toArray();
-                                    for (Object pet : petlist) {
-                                        petcost += ((L1NpcInstance) pet).getPetcost();
-                                    }
+                    case ABSOLUTE_BARRIER: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        // pc.stopMpRegeneration();
+                        pc.stopMpRegenerationByDoll();
+                    }
+                        break;
+                    case LIGHT:
+                        break;
 
-                                    if (petcost == 0) {
-                                        int summonid = 0;
-                                        int summons[];
-                                        if (_skillId == LESSER_ELEMENTAL) {
-                                            summons = new int[] { 45306, 45303, 45304, 45305 };
-                                        } else {
-                                            summons = new int[] { 81053, 81050, 81051, 81052 };
-                                        }
-                                        int npcattr = 1;
-                                        for (int i = 0; i < summons.length; i++) {
-                                            if (npcattr == attr) {
-                                                summonid = summons[i];
-                                                i = summons.length;
-                                            }
-                                            npcattr *= 2;
-                                        }
-                                        if (summonid == 0) {
-                                            Random random = new Random();
-                                            int k3 = random.nextInt(4);
-                                            summonid = summons[k3];
-                                        }
+                    case GLOWING_AURA: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addHitup(5);
+                        pc.addBowHitup(5);
+                        pc.getResistance().addMr(20);
+                        pc.sendPackets(new S_SPMR(pc));
+                        pc.sendPackets(new S_SkillIconAura(113, _getBuffIconDuration));
+                    }
+                        break;
+                    case SHINING_AURA: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-8);
+                        pc.sendPackets(new S_SkillIconAura(114, _getBuffIconDuration));
+                    }
+                        break;
+                    case BRAVE_AURA: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDmgup(5);
+                        pc.sendPackets(new S_SkillIconAura(116, _getBuffIconDuration));
+                    }
+                        break;
+                    case SHIELD: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-2);
+                        pc.sendPackets(new S_SkillIconShield(2, _getBuffIconDuration));
+                    }
+                        break;
+                    case SHADOW_ARMOR: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getResistance().addMr(5);
+                        pc.sendPackets(new S_SPMR(pc));
+                        // pc.sendPackets(new S_SkillIconShield(3,
+                        // _getBuffIconDuration));
+                    }
+                        break;
+                    case DRESS_DEXTERITY: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAbility().addAddedDex((byte) 3);
+                        pc.sendPackets(new S_Dexup(pc, 3, _getBuffIconDuration));
+                    }
+                        break;
+                    case DRESS_MIGHTY: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAbility().addAddedStr((byte) 3);
+                        pc.sendPackets(new S_Strup(pc, 3, _getBuffIconDuration));
+                    }
+                        break;
+                    case SHADOW_FANG: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        L1ItemInstance item = pc.getInventory().getItem(_itemobjid);
+                        if (item != null && item.getItem().getType2() == 1) {
+                            item.setSkillWeaponEnchant(pc, _skillId, _skill.getBuffDuration() * 1000);
+                            if (item.isEquipped())
+                                pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(),
+                                        _skill.getCastGfx(), 0));
+                        } else {
+                            pc.sendPackets(new S_ServerMessage(79));
+                        }
+                    }
+                        break;
+                    case ENCHANT_WEAPON: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        L1ItemInstance item = pc.getInventory().getItem(_itemobjid);
+                        if (item != null && item.getItem().getType2() == 1) {
+                            pc.sendPackets(new S_ServerMessage(161, item.getLogName(), "$245", "$247"));
+                            item.setSkillWeaponEnchant(pc, _skillId, _skill.getBuffDuration() * 1000);
+                            int count = 0;
+                            for (L1ItemInstance item2 : pc.getEquipSlot().getWeapons()) {
+                                if (item2.getEnchantMagic() == _skill.getCastGfx())
+                                    count++;
+                                pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(),
+                                        _skill.getCastGfx(), count));
+                            }
+                        } else {
+                            pc.sendPackets(new S_ServerMessage(79));
+                        }
+                    }
+                        break;
+                    /** 双バフ関連 **/
+                    case HOLY_WEAPON:
+                    case BLESS_WEAPON: {
+                        if (!(cha instanceof L1PcInstance)) {
+                            return;
+                        }
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.getWeapon() == null) {
+                            pc.sendPackets(new S_ServerMessage(79));
+                            return;
+                        }
 
-                                        L1Npc npcTemp = NpcTable.getInstance().getTemplate(summonid);
-                                        L1SummonInstance summon = new L1SummonInstance(npcTemp, pc);
-                                        summon.setPetcost(pc.getAbility().getTotalCha() + 7);
-                                    }
-                                } else {
-                                    pc.sendPackets(new S_ServerMessage(79));
+                        if (pc.isWarrior() && pc.getEquipSlot().getWeaponCount() == 2) {
+                            int count = 0;
+
+                            for (L1ItemInstance item2 : pc.getInventory().getItems()) {
+                                if (item2 != null && item2.getItem().getType2() == 1 && item2.getItem().getType() == 6
+                                        && item2.isEquipped()) {
+                                    pc.sendPackets(new S_ServerMessage(161, String.valueOf(item2.getLogName()).trim(),
+                                            "$245", "$247"));
+                                    item2.setSkillWeaponEnchant(pc, _skillId, _skill.getBuffDuration() * 1000);
+                                    count++;
+                                    pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(),
+                                            _skill.getCastGfx(), count - 1));
+                                }
+                            }
+                        } else {
+                            for (L1ItemInstance item : pc.getInventory().getItems()) {
+                                if (pc.getWeapon().equals(item)) {
+                                    pc.sendPackets(new S_ServerMessage(161, String.valueOf(item.getLogName()).trim(),
+                                            "$245", "$247"));
+                                    item.setSkillWeaponEnchant(pc, _skillId, _skill.getBuffDuration() * 1000);
+                                    if (item.isEquipped())
+                                        pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(),
+                                                _skill.getCastGfx(), 0));
                                 }
                             }
                         }
+                    }
                         break;
-                        case ABSOLUTE_BARRIER: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            // pc.stopMpRegeneration();
-                            pc.stopMpRegenerationByDoll();
+                    case BLESSED_ARMOR: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        L1ItemInstance item = pc.getInventory().getItem(_itemobjid);
+                        if (item != null && item.getItem().getType2() == 2 && item.getItem().getType() == 2) {
+                            pc.sendPackets(new S_ServerMessage(161, item.getLogName(), "$245", "$247"));
+                            item.setSkillArmorEnchant(pc, _skillId, _skill.getBuffDuration() * 1000);
+                            if (item.isEquipped())
+                                pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(),
+                                        _skill.getCastGfx(), 0));
+                        } else {
+                            pc.sendPackets(new S_ServerMessage(79));
                         }
+                    }
                         break;
-                        case LIGHT:
-                            break;
-
-                        case GLOWING_AURA: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addHitup(5);
-                            pc.addBowHitup(5);
-                            pc.getResistance().addMr(20);
-                            pc.sendPackets(new S_SPMR(pc));
-                            pc.sendPackets(new S_SkillIconAura(113, _getBuffIconDuration));
+                    case EARTH_GUARDIAN: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_SkillIconShield(7, _getBuffIconDuration));
+                    }
+                        break;
+                    case RESIST_MAGIC: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getResistance().addMr(10);
+                        pc.sendPackets(new S_SPMR(pc));
+                    }
+                        break;
+                    case CLEAR_MIND: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAbility().addAddedWis((byte) 3);
+                        pc.resetBaseMr();
+                    }
+                        break;
+                    case RESIST_ELEMENTAL: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getResistance().addAllNaturalResistance(10);
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case BODY_TO_MIND: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.setCurrentMp(pc.getCurrentMp() + 2);
+                    }
+                        break;
+                    case BLOODY_SOUL: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.setCurrentMp(pc.getCurrentMp() + 19);
+                    }
+                        break;
+                    case ELEMENTAL_PROTECTION: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        int attr = pc.getElfAttr();
+                        if (attr == 1) {
+                            pc.getResistance().addEarth(50);
+                        } else if (attr == 2) {
+                            pc.getResistance().addFire(50);
+                        } else if (attr == 4) {
+                            pc.getResistance().addWater(50);
+                        } else if (attr == 8) {
+                            pc.getResistance().addWind(50);
                         }
+                    }
                         break;
-                        case SHINING_AURA: {
+                    case INVISIBILITY:
+                    case BLIND_HIDING: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        for (L1DollInstance doll : pc.getDollList()) {
+                            doll.deleteDoll();
+                        }
+                        pc.sendPackets(new S_Invis(pc.getId(), 1));
+                        pc.broadcastPacket(new S_Invis(pc.getId(), 1));
+                    }
+                        break;
+                    case BUFF_SAEL: {
+                        if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.hasSkillEffect(L1SkillId.BUFF_SAEL)) {
+                                pc.removeSkillEffect(L1SkillId.BUFF_SAEL);
+                            }
                             pc.getAC().addAc(-8);
-                            pc.sendPackets(new S_SkillIconAura(114, _getBuffIconDuration));
-                        }
-                        break;
-                        case BRAVE_AURA: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDmgup(5);
-                            pc.sendPackets(new S_SkillIconAura(116, _getBuffIconDuration));
-                        }
-                        break;
-                        case SHIELD: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(-2);
-                            pc.sendPackets(new S_SkillIconShield(2, _getBuffIconDuration));
-                        }
-                        break;
-                        case SHADOW_ARMOR: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getResistance().addMr(5);
-                            pc.sendPackets(new S_SPMR(pc));
-                            // pc.sendPackets(new S_SkillIconShield(3,
-                            // _getBuffIconDuration));
-                        }
-                        break;
-                        case DRESS_DEXTERITY: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAbility().addAddedDex((byte) 3);
-                            pc.sendPackets(new S_Dexup(pc, 3, _getBuffIconDuration));
-                        }
-                        break;
-                        case DRESS_MIGHTY: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAbility().addAddedStr((byte) 3);
-                            pc.sendPackets(new S_Strup(pc, 3, _getBuffIconDuration));
-                        }
-                        break;
-                        case SHADOW_FANG: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            L1ItemInstance item = pc.getInventory().getItem(_itemobjid);
-                            if (item != null && item.getItem().getType2() == 1) {
-                                item.setSkillWeaponEnchant(pc, _skillId, _skill.getBuffDuration() * 1000);
-                                if (item.isEquipped())
-                                    pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(), _skill.getCastGfx(), 0));
-                            } else {
-                                pc.sendPackets(new S_ServerMessage(79));
-                            }
-                        }
-                        break;
-                        case ENCHANT_WEAPON: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            L1ItemInstance item = pc.getInventory().getItem(_itemobjid);
-                            if (item != null && item.getItem().getType2() == 1) {
-                                pc.sendPackets(new S_ServerMessage(161, item.getLogName(), "$245", "$247"));
-                                item.setSkillWeaponEnchant(pc, _skillId, _skill.getBuffDuration() * 1000);
-                                int count = 0;
-                                for (L1ItemInstance item2 : pc.getEquipSlot().getWeapons()) {
-                                    if (item2.getEnchantMagic() == _skill.getCastGfx())
-                                        count++;
-                                    pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(), _skill.getCastGfx(), count));
-                                }
-                            } else {
-                                pc.sendPackets(new S_ServerMessage(79));
-                            }
-                        }
-                        break;
-                        /** 双バフ関連 **/
-                        case HOLY_WEAPON:
-                        case BLESS_WEAPON: {
-                            if (!(cha instanceof L1PcInstance)) {
-                                return;
-                            }
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.getWeapon() == null) {
-                                pc.sendPackets(new S_ServerMessage(79));
-                                return;
-                            }
-
-                            if (pc.isWarrior() && pc.getEquipSlot().getWeaponCount() == 2) {
-                                int count = 0;
-
-                                for (L1ItemInstance item2 : pc.getInventory().getItems()) {
-                                    if (item2 != null && item2.getItem().getType2() == 1 && item2.getItem().getType() == 6 && item2.isEquipped()) {
-                                        pc.sendPackets(new S_ServerMessage(161, String.valueOf(item2.getLogName()).trim(), "$245", "$247"));
-                                        item2.setSkillWeaponEnchant(pc, _skillId, _skill.getBuffDuration() * 1000);
-                                        count++;
-                                        pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(), _skill.getCastGfx(), count - 1));
-                                    }
-                                }
-                            } else {
-                                for (L1ItemInstance item : pc.getInventory().getItems()) {
-                                    if (pc.getWeapon().equals(item)) {
-                                        pc.sendPackets(new S_ServerMessage(161, String.valueOf(item.getLogName()).trim(), "$245", "$247"));
-                                        item.setSkillWeaponEnchant(pc, _skillId, _skill.getBuffDuration() * 1000);
-                                        if (item.isEquipped())
-                                            pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(), _skill.getCastGfx(), 0));
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                        case BLESSED_ARMOR: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            L1ItemInstance item = pc.getInventory().getItem(_itemobjid);
-                            if (item != null && item.getItem().getType2() == 2 && item.getItem().getType() == 2) {
-                                pc.sendPackets(new S_ServerMessage(161, item.getLogName(), "$245", "$247"));
-                                item.setSkillArmorEnchant(pc, _skillId, _skill.getBuffDuration() * 1000);
-                                if (item.isEquipped())
-                                    pc.sendPackets(new S_PacketBox(S_PacketBox.BUFFICON, _skill.getBuffDuration(), _skill.getCastGfx(), 0));
-                            } else {
-                                pc.sendPackets(new S_ServerMessage(79));
-                            }
-                        }
-                        break;
-                        case EARTH_GUARDIAN: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.sendPackets(new S_SkillIconShield(7, _getBuffIconDuration));
-                        }
-                        break;
-                        case RESIST_MAGIC: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getResistance().addMr(10);
-                            pc.sendPackets(new S_SPMR(pc));
-                        }
-                        break;
-                        case CLEAR_MIND: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAbility().addAddedWis((byte) 3);
-                            pc.resetBaseMr();
-                        }
-                        break;
-                        case RESIST_ELEMENTAL: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getResistance().addAllNaturalResistance(10);
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
-                        }
-                        break;
-                        case BODY_TO_MIND: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.setCurrentMp(pc.getCurrentMp() + 2);
-                        }
-                        break;
-                        case BLOODY_SOUL: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.setCurrentMp(pc.getCurrentMp() + 19);
-                        }
-                        break;
-                        case ELEMENTAL_PROTECTION: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            int attr = pc.getElfAttr();
-                            if (attr == 1) {
-                                pc.getResistance().addEarth(50);
-                            } else if (attr == 2) {
-                                pc.getResistance().addFire(50);
-                            } else if (attr == 4) {
-                                pc.getResistance().addWater(50);
-                            } else if (attr == 8) {
-                                pc.getResistance().addWind(50);
-                            }
-                        }
-                        break;
-                        case INVISIBILITY:
-                        case BLIND_HIDING: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            for (L1DollInstance doll : pc.getDollList()) {
-                                doll.deleteDoll();
-                            }
-                            pc.sendPackets(new S_Invis(pc.getId(), 1));
-                            pc.broadcastPacket(new S_Invis(pc.getId(), 1));
-                        }
-                        break;
-                        case BUFF_SAEL: {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.hasSkillEffect(L1SkillId.BUFF_SAEL)) {
-                                    pc.removeSkillEffect(L1SkillId.BUFF_SAEL);
-                                }
-                                pc.getAC().addAc(-8);
-                                pc.addBowHitup(6);
-                                pc.addBowDmgup(3);
-                                pc.addMaxHp(80);
-                                pc.addMaxMp(10);
-                                pc.addHpr(8);
-                                pc.addMpr(1);
-                                pc.getResistance().addWater(30);
-                                pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
-                                pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
-                                pc.sendPackets(new S_OwnCharAttrDef(pc));
-                                pc.sendPackets(new S_SPMR(pc));
-                            }
-                        }
-                        break;
-                        case BUFF_GUNTER: {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.hasSkillEffect(L1SkillId.BUFF_GUNTER)) {
-                                    pc.removeSkillEffect(L1SkillId.BUFF_GUNTER);
-                                }
-                                pc.getAbility().addAddedDex((byte) 5);
-                                pc.addBowHitup(7);
-                                pc.addBowDmgup(5);
-                                pc.addMaxHp(100);
-                                pc.addMaxMp(40);
-                                pc.addHpr(10);
-                                pc.addMpr(3);
-                                pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
-                                pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
-                                pc.sendPackets(new S_OwnCharAttrDef(pc));
-                                pc.sendPackets(new S_SPMR(pc));
-                            }
-                        }
-                        break;
-                        case God_buff: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(-2);
-                            pc.addHitup(3);
-                            pc.addMaxHp(20);
-                            pc.addMaxMp(13);
-                            pc.getResistance().addHold(10); // ホールド耐性
-                            pc.sendPackets(new S_SkillSound(pc.getId(), 4914));
-                        }
-                        break;
-                        case IRON_SKIN: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(-10);
-                            pc.sendPackets(new S_SkillIconShield(10, _getBuffIconDuration));
-                        }
-                        break;
-                        case EARTH_SKIN: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(-6);
-                            pc.sendPackets(new S_SkillIconShield(6, _getBuffIconDuration));
-                        }
-                        break;
-                        case PHYSICAL_ENCHANT_STR: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAbility().addAddedStr((byte) 5);
-                            pc.sendPackets(new S_Strup(pc, 5, _getBuffIconDuration));
-                        }
-                        break;
-                        case PHYSICAL_ENCHANT_DEX: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAbility().addAddedDex((byte) 5);
-                            pc.sendPackets(new S_Dexup(pc, 5, _getBuffIconDuration));
-                        }
-                        break;
-                        case NARUTO_THANKS_CANDY: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.getLevel() >= 1 && pc.getLevel() <= 60) {
-                                pc.getAbility().addAddedDex((byte) 7);
-                                pc.sendPackets(new S_Dexup(pc, 7, _getBuffIconDuration));
-                                pc.getAbility().addAddedStr((byte) 7);
-                                pc.sendPackets(new S_Strup(pc, 7, _getBuffIconDuration));
-                            } else {
-                                pc.getAbility().addAddedDex((byte) 6);
-                                pc.sendPackets(new S_Dexup(pc, 6, _getBuffIconDuration));
-                                pc.getAbility().addAddedStr((byte) 6);
-                                pc.sendPackets(new S_Strup(pc, 6, _getBuffIconDuration));
-                            }
-                        }
-                        break;
-                        case FIRE_WEAPON: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDmgup(4);
-                            pc.sendPackets(new S_SkillIconAura(147, _getBuffIconDuration));
-                        }
-                        break;
-                        case REDUCE_WEIGHT:// イリュージョニスト、ウィザードのスキルのように使用してください
-                        case DECREASE_WEIGHT: {// ウィザードの魔法
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addWeightReduction(800);
-                        }
-                        break;
-					/*
-					 * case DECREASE_WEIGHT:{//ウィザードの魔法 L1PcInstance pc = (L1PcInstance) cha; pc.addWeightReduction(800); } break;
-					 */
-                        case DANCING_BLADES: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.sendPackets(new S_SkillBrave(pc.getId(), 1, _getBuffIconDuration));
-                            Broadcaster.broadcastPacket(pc, new S_SkillBrave(pc.getId(), 1, 0));
-                            pc.sendPackets(new S_SkillIconAura(154, _getBuffIconDuration));
-                        }
-                        break;
-                        case BURNING_WEAPON: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDmgup(6);
-                            pc.addHitup(3);
-                            pc.sendPackets(new S_SkillIconAura(162, _getBuffIconDuration));
-                        }
-                        break;
-                        case MIRROR_IMAGE: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDg(-8);
-                        }
-                        break;
-                        case WIND_SHOT: {
-                            L1PcInstance pc = (L1PcInstance) cha;
                             pc.addBowHitup(6);
-                            pc.sendPackets(new S_SkillIconAura(148, _getBuffIconDuration));
-                        }
-                        break;
-                        case STORM_EYE: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addBowHitup(2);
                             pc.addBowDmgup(3);
-                            pc.sendPackets(new S_SkillIconAura(155, _getBuffIconDuration));
-                        }
-                        break;
-                        case STORM_SHOT: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addBowDmgup(5);
-                            pc.addBowHitup(-3);
-                            pc.sendPackets(new S_SkillIconAura(165, _getBuffIconDuration));
-                        }
-                        break;
-                        case BERSERKERS: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(10);
-                            pc.addDmgup(5);
-                            pc.addHitup(5);
-                        }
-                        break;
-                        case SCALES_EARTH_DRAGON: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(-3);
-                            pc.getResistance().addHold(10);
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
-                        }
-                        break;
-                        case SCALES_WATER_DRAGON: { // バイタルライズ効果
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getResistance().addFreeze(10);
-                        }
-                        break;
-                        case SCALES_FIRE_DRAGON: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getResistance().addStun(10);
-                            pc.addHitup(5);
-                        }
-                        break;
-                        case IllUSION_OGRE: { // イリュージョンオーガスタ
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDmgup(4);
-                            pc.addHitup(4);
-                        }
-                        break;
-                        case IllUSION_LICH: { // イリュージョンリッチ
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            // pc.addSp(2);
-                            pc.getAbility().addSp(2);
-                            pc.sendPackets(new S_SPMR(pc));
-                        }
-                        break;
-                        case IllUSION_DIAMONDGOLEM: { // イリュージョンダイヤゴーレム
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(-8);
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
-                        }
-                        break;
-                        case IllUSION_AVATAR: { // イリュージョンアバター
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDmgup(10);
-                        }
-                        break;
-                        case INSIGHT: { // インサイト
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAbility().addAddedStr((byte) 1);
-                            pc.getAbility().addAddedDex((byte) 1);
-                            pc.getAbility().addAddedCon((byte) 1);
-                            pc.getAbility().addAddedInt((byte) 1);
-                            pc.getAbility().addAddedWis((byte) 1);
-                            pc.resetBaseMr();
-                        }
-                        break;
-                        case TENKASOUSHI_BUFF: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.hasSkillEffect(TENKASOUSHI_BUFF))
-                                pc.removeSkillEffect(TENKASOUSHI_BUFF);
-                            pc.addDamageReductionByArmor(5);
-                            //pc.sendPackets(new S_SkillIconNEW(2730, 7200, 5, 7244, 1426));
-                            pc.sendPackets(new S_PacketBox(S_PacketBox.ICON_COOKING, pc, 187, 1800));
-                            pc.setDessertId(TENKASOUSHI_BUFF);
-                            pc.sendPackets(new S_ServerMessage(1426));
-                        }
-                        break;
-                        case SHAPE_CHANGE: {
-                            boolean isSameClan = false;
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.getClanid() != 0 && _player.getClanid() == pc.getClanid()) {
-                                    isSameClan = true;
-                                }
-                            }
-                            if (cha instanceof L1MonsterInstance) {
-                                return;
-                            }
-                            if (_player.getId() != cha.getId() && !isSameClan) {
-                                int probability = 80;
-                                int rnd = random.nextInt(100) + 1;
-                                if (rnd > probability) {
-                                    return;
-                                }
-
-                            }
-                            int[] polyArray = { 29, 945, 947, 979, 1037, 1039, 3860, 3861, 3862, 3863, 3864, 3865, 3904, 3906, 95, 146, 2374, 2376, 2377,
-                                    2378, 3866, 3867, 3868, 3869, 3870, 3871, 3872, 3873, 3874, 3875, 3876, 3882, 3883, 3884, 3885, 11358, 11396, 11397,
-                                    12225, 12226, 11399, 11398, 12227 };
-                            int pid = random.nextInt(polyArray.length);
-                            int polyId = polyArray[pid];
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.getInventory().checkEquipped(20281)) {
-                                    pc.sendPackets(new S_Message_YN(180));
-                                } else {
-                                    L1Skills skillTemp = SkillsTable.getInstance().getTemplate(SHAPE_CHANGE);
-                                    L1PolyMorph.doPoly(pc, polyId, skillTemp.getBuffDuration(), L1PolyMorph.MORPH_BY_ITEMMAGIC);
-                                    if (_player.getId() != pc.getId()) {
-                                        pc.sendPackets(new S_ServerMessage(241, _player.getName()));
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                        case ADVANCE_SPIRIT: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.setAdvenHp(pc.getBaseMaxHp() / 5);
-                            pc.setAdvenMp(pc.getBaseMaxMp() / 5);
-                            pc.addMaxHp(pc.getAdvenHp());
-                            pc.addMaxMp(pc.getAdvenMp());
-                            if (pc.isInParty()) {
-                                pc.getParty().updateMiniHP(pc);
-                            }
+                            pc.addMaxHp(80);
+                            pc.addMaxMp(10);
+                            pc.addHpr(8);
+                            pc.addMpr(1);
+                            pc.getResistance().addWater(30);
                             pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
                             pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
+                            pc.sendPackets(new S_OwnCharAttrDef(pc));
+                            pc.sendPackets(new S_SPMR(pc));
                         }
+                    }
                         break;
-
-                        // 戦士スキル：ギガンティック
-                        case GIGANTIC: {
+                    case BUFF_GUNTER: {
+                        if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.hasSkillEffect(L1SkillId.GIGANTIC)) {
-                                pc.removeSkillEffect(L1SkillId.GIGANTIC);
+                            if (pc.hasSkillEffect(L1SkillId.BUFF_GUNTER)) {
+                                pc.removeSkillEffect(L1SkillId.BUFF_GUNTER);
                             }
-                            double percent = pc.getLevel() / 2;
-                            int addHp = (int) Math.round(pc.getBaseMaxHp() * (percent * 0.01));
-                            pc.setGiganticHp(addHp);
-                            pc.addMaxHp(pc.getGiganticHp());
-                            if (pc.isInParty()) {
-                                pc.getParty().updateMiniHP(pc);
-                            }
+                            pc.getAbility().addAddedDex((byte) 5);
+                            pc.addBowHitup(7);
+                            pc.addBowDmgup(5);
+                            pc.addMaxHp(100);
+                            pc.addMaxMp(40);
+                            pc.addHpr(10);
+                            pc.addMpr(3);
                             pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
-                            pc.setSkillEffect(L1SkillId.GIGANTIC, 300 * 1000);
+                            pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
+                            pc.sendPackets(new S_OwnCharAttrDef(pc));
+                            pc.sendPackets(new S_SPMR(pc));
                         }
+                    }
                         break;
-                        /** パワーグリップ詠唱時間本サーバー化 **/
-                        case POWEGRRIP: {
-
-                            int[] PowerRipTimeArray = { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000 };
-                            int rnd = random.nextInt(PowerRipTimeArray.length);
-                            _shockStunDuration = PowerRipTimeArray[rnd];
-                            L1EffectSpawn.getInstance().spawnEffect(9415, _shockStunDuration, _target.getX(), _target.getY(), _target.getMapId());
-                            if (_target instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) _target;
-                                //	_target.setSkillEffect(L1SkillId.POWERRIP, _shockStunDuration);
-                                pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_RIP, true));
-
-                            } else if (_target instanceof L1MonsterInstance || _target instanceof L1SummonInstance || _target instanceof L1PetInstance) {
-                                L1NpcInstance npc = (L1NpcInstance) _target;
-                                //npc.setSkillEffect(L1SkillId.POWERRIP, _shockStunDuration);
-                                npc.setCanNotMove(true);
-                            }
+                    case God_buff: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-2);
+                        pc.addHitup(3);
+                        pc.addMaxHp(20);
+                        pc.addMaxMp(13);
+                        pc.getResistance().addHold(10); // ホールド耐性
+                        pc.sendPackets(new S_SkillSound(pc.getId(), 4914));
+                    }
+                        break;
+                    case IRON_SKIN: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-10);
+                        pc.sendPackets(new S_SkillIconShield(10, _getBuffIconDuration));
+                    }
+                        break;
+                    case EARTH_SKIN: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-6);
+                        pc.sendPackets(new S_SkillIconShield(6, _getBuffIconDuration));
+                    }
+                        break;
+                    case PHYSICAL_ENCHANT_STR: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAbility().addAddedStr((byte) 5);
+                        pc.sendPackets(new S_Strup(pc, 5, _getBuffIconDuration));
+                    }
+                        break;
+                    case PHYSICAL_ENCHANT_DEX: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAbility().addAddedDex((byte) 5);
+                        pc.sendPackets(new S_Dexup(pc, 5, _getBuffIconDuration));
+                    }
+                        break;
+                    case NARUTO_THANKS_CANDY: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.getLevel() >= 1 && pc.getLevel() <= 60) {
+                            pc.getAbility().addAddedDex((byte) 7);
+                            pc.sendPackets(new S_Dexup(pc, 7, _getBuffIconDuration));
+                            pc.getAbility().addAddedStr((byte) 7);
+                            pc.sendPackets(new S_Strup(pc, 7, _getBuffIconDuration));
+                        } else {
+                            pc.getAbility().addAddedDex((byte) 6);
+                            pc.sendPackets(new S_Dexup(pc, 6, _getBuffIconDuration));
+                            pc.getAbility().addAddedStr((byte) 6);
+                            pc.sendPackets(new S_Strup(pc, 6, _getBuffIconDuration));
                         }
+                    }
                         break;
-                        case DESPERADO: {
-                            int[] stunTimeArray = { 1500, 2200, 2500, 3500, 4000, };
-                            int rnd = random.nextInt(stunTimeArray.length);
-                            _shockStunDuration = stunTimeArray[rnd];
-                            L1EffectSpawn.getInstance().spawnEffect(9416, _shockStunDuration, _target.getX(), _target.getY(), _target.getMapId());
-                            if (_target instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) _target;
-                                pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_PERADO, true));
-
-                                _target.setSkillEffect(L1SkillId.DESPERADO, _shockStunDuration);
-                            } else if (_target instanceof L1MonsterInstance || _target instanceof L1SummonInstance || _target instanceof L1PetInstance) {
-                                L1NpcInstance npc = (L1NpcInstance) _target;
-                                //npc.setSkillEffect(L1SkillId.DESPERADO, _shockStunDuration);
-                                npc.setCanNotMove(true);
-                            }
-                        }
+                    case FIRE_WEAPON: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDmgup(4);
+                        pc.sendPackets(new S_SkillIconAura(147, _getBuffIconDuration));
+                    }
                         break;
-
-                        case GREATER_HASTE: {
+                    case REDUCE_WEIGHT:// イリュージョニスト、ウィザードのスキルのように使用してください
+                    case DECREASE_WEIGHT: {// ウィザードの魔法
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addWeightReduction(800);
+                    }
+                        break;
+                    /*
+                     * case DECREASE_WEIGHT:{//ウィザードの魔法 L1PcInstance pc =
+                     * (L1PcInstance) cha; pc.addWeightReduction(800); } break;
+                     */
+                    case DANCING_BLADES: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.sendPackets(new S_SkillBrave(pc.getId(), 1, _getBuffIconDuration));
+                        Broadcaster.broadcastPacket(pc, new S_SkillBrave(pc.getId(), 1, 0));
+                        pc.sendPackets(new S_SkillIconAura(154, _getBuffIconDuration));
+                    }
+                        break;
+                    case BURNING_WEAPON: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDmgup(6);
+                        pc.addHitup(3);
+                        pc.sendPackets(new S_SkillIconAura(162, _getBuffIconDuration));
+                    }
+                        break;
+                    case MIRROR_IMAGE: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDg(-8);
+                    }
+                        break;
+                    case WIND_SHOT: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addBowHitup(6);
+                        pc.sendPackets(new S_SkillIconAura(148, _getBuffIconDuration));
+                    }
+                        break;
+                    case STORM_EYE: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addBowHitup(2);
+                        pc.addBowDmgup(3);
+                        pc.sendPackets(new S_SkillIconAura(155, _getBuffIconDuration));
+                    }
+                        break;
+                    case STORM_SHOT: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addBowDmgup(5);
+                        pc.addBowHitup(-3);
+                        pc.sendPackets(new S_SkillIconAura(165, _getBuffIconDuration));
+                    }
+                        break;
+                    case BERSERKERS: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(10);
+                        pc.addDmgup(5);
+                        pc.addHitup(5);
+                    }
+                        break;
+                    case SCALES_EARTH_DRAGON: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-3);
+                        pc.getResistance().addHold(10);
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case SCALES_WATER_DRAGON: { // バイタルライズ効果
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getResistance().addFreeze(10);
+                    }
+                        break;
+                    case SCALES_FIRE_DRAGON: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getResistance().addStun(10);
+                        pc.addHitup(5);
+                    }
+                        break;
+                    case IllUSION_OGRE: { // イリュージョンオーガスタ
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDmgup(4);
+                        pc.addHitup(4);
+                    }
+                        break;
+                    case IllUSION_LICH: { // イリュージョンリッチ
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        // pc.addSp(2);
+                        pc.getAbility().addSp(2);
+                        pc.sendPackets(new S_SPMR(pc));
+                    }
+                        break;
+                    case IllUSION_DIAMONDGOLEM: { // イリュージョンダイヤゴーレム
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-8);
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case IllUSION_AVATAR: { // イリュージョンアバター
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDmgup(10);
+                    }
+                        break;
+                    case INSIGHT: { // インサイト
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAbility().addAddedStr((byte) 1);
+                        pc.getAbility().addAddedDex((byte) 1);
+                        pc.getAbility().addAddedCon((byte) 1);
+                        pc.getAbility().addAddedInt((byte) 1);
+                        pc.getAbility().addAddedWis((byte) 1);
+                        pc.resetBaseMr();
+                    }
+                        break;
+                    case TENKASOUSHI_BUFF: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.hasSkillEffect(TENKASOUSHI_BUFF))
+                            pc.removeSkillEffect(TENKASOUSHI_BUFF);
+                        pc.addDamageReductionByArmor(5);
+                        // pc.sendPackets(new S_SkillIconNEW(2730, 7200, 5,
+                        // 7244, 1426));
+                        pc.sendPackets(new S_PacketBox(S_PacketBox.ICON_COOKING, pc, 187, 1800));
+                        pc.setDessertId(TENKASOUSHI_BUFF);
+                        pc.sendPackets(new S_ServerMessage(1426));
+                    }
+                        break;
+                    case SHAPE_CHANGE: {
+                        boolean isSameClan = false;
+                        if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
-                            if (pc.getHasteItemEquipped() > 0) {
+                            if (pc.getClanid() != 0 && _player.getClanid() == pc.getClanid()) {
+                                isSameClan = true;
+                            }
+                        }
+                        if (cha instanceof L1MonsterInstance) {
+                            return;
+                        }
+                        if (_player.getId() != cha.getId() && !isSameClan) {
+                            int probability = 80;
+                            int rnd = random.nextInt(100) + 1;
+                            if (rnd > probability) {
+                                return;
+                            }
+
+                        }
+                        int[] polyArray = { 29, 945, 947, 979, 1037, 1039, 3860, 3861, 3862, 3863, 3864, 3865, 3904,
+                                3906, 95, 146, 2374, 2376, 2377, 2378, 3866, 3867, 3868, 3869, 3870, 3871, 3872, 3873,
+                                3874, 3875, 3876, 3882, 3883, 3884, 3885, 11358, 11396, 11397, 12225, 12226, 11399,
+                                11398, 12227 };
+                        int pid = random.nextInt(polyArray.length);
+                        int polyId = polyArray[pid];
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.getInventory().checkEquipped(20281)) {
+                                pc.sendPackets(new S_Message_YN(180));
+                            } else {
+                                L1Skills skillTemp = SkillsTable.getInstance().getTemplate(SHAPE_CHANGE);
+                                L1PolyMorph.doPoly(pc, polyId, skillTemp.getBuffDuration(),
+                                        L1PolyMorph.MORPH_BY_ITEMMAGIC);
+                                if (_player.getId() != pc.getId()) {
+                                    pc.sendPackets(new S_ServerMessage(241, _player.getName()));
+                                }
+                            }
+                        }
+                    }
+                        break;
+                    case ADVANCE_SPIRIT: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.setAdvenHp(pc.getBaseMaxHp() / 5);
+                        pc.setAdvenMp(pc.getBaseMaxMp() / 5);
+                        pc.addMaxHp(pc.getAdvenHp());
+                        pc.addMaxMp(pc.getAdvenMp());
+                        if (pc.isInParty()) {
+                            pc.getParty().updateMiniHP(pc);
+                        }
+                        pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
+                        pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
+                    }
+                        break;
+
+                    // 戦士スキル：ギガンティック
+                    case GIGANTIC: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.hasSkillEffect(L1SkillId.GIGANTIC)) {
+                            pc.removeSkillEffect(L1SkillId.GIGANTIC);
+                        }
+                        double percent = pc.getLevel() / 2;
+                        int addHp = (int) Math.round(pc.getBaseMaxHp() * (percent * 0.01));
+                        pc.setGiganticHp(addHp);
+                        pc.addMaxHp(pc.getGiganticHp());
+                        if (pc.isInParty()) {
+                            pc.getParty().updateMiniHP(pc);
+                        }
+                        pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
+                        pc.setSkillEffect(L1SkillId.GIGANTIC, 300 * 1000);
+                    }
+                        break;
+                    /** パワーグリップ詠唱時間本サーバー化 **/
+                    case POWEGRRIP: {
+
+                        int[] PowerRipTimeArray = { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000 };
+                        int rnd = random.nextInt(PowerRipTimeArray.length);
+                        _shockStunDuration = PowerRipTimeArray[rnd];
+                        L1EffectSpawn.getInstance().spawnEffect(9415, _shockStunDuration, _target.getX(),
+                                _target.getY(), _target.getMapId());
+                        if (_target instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) _target;
+                            // _target.setSkillEffect(L1SkillId.POWERRIP,
+                            // _shockStunDuration);
+                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_RIP, true));
+
+                        } else if (_target instanceof L1MonsterInstance || _target instanceof L1SummonInstance
+                                || _target instanceof L1PetInstance) {
+                            L1NpcInstance npc = (L1NpcInstance) _target;
+                            // npc.setSkillEffect(L1SkillId.POWERRIP,
+                            // _shockStunDuration);
+                            npc.setCanNotMove(true);
+                        }
+                    }
+                        break;
+                    case DESPERADO: {
+                        int[] stunTimeArray = { 1500, 2200, 2500, 3500, 4000, };
+                        int rnd = random.nextInt(stunTimeArray.length);
+                        _shockStunDuration = stunTimeArray[rnd];
+                        L1EffectSpawn.getInstance().spawnEffect(9416, _shockStunDuration, _target.getX(),
+                                _target.getY(), _target.getMapId());
+                        if (_target instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) _target;
+                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_PERADO, true));
+
+                            _target.setSkillEffect(L1SkillId.DESPERADO, _shockStunDuration);
+                        } else if (_target instanceof L1MonsterInstance || _target instanceof L1SummonInstance
+                                || _target instanceof L1PetInstance) {
+                            L1NpcInstance npc = (L1NpcInstance) _target;
+                            // npc.setSkillEffect(L1SkillId.DESPERADO,
+                            // _shockStunDuration);
+                            npc.setCanNotMove(true);
+                        }
+                    }
+                        break;
+
+                    case GREATER_HASTE: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        if (pc.getHasteItemEquipped() > 0) {
+                            continue;
+                        }
+                        if (pc.getMoveSpeed() != 2) {
+                            pc.setDrink(false);
+                            pc.setMoveSpeed(1);
+                            pc.sendPackets(new S_SkillHaste(pc.getId(), 1, _getBuffIconDuration));
+                            pc.broadcastPacket(new S_SkillHaste(pc.getId(), 1, 0));
+                        } else {
+                            int skillNum = 0;
+                            if (pc.hasSkillEffect(SLOW)) {
+                                skillNum = SLOW;
+                            } else if (pc.hasSkillEffect(GREATER_SLOW)) {
+                                skillNum = GREATER_SLOW;
+                            } else if (pc.hasSkillEffect(ENTANGLE)) {
+                                skillNum = ENTANGLE;
+                            } else if (pc.hasSkillEffect(MOB_SLOW_1)) {
+                                skillNum = MOB_SLOW_1;
+                            } else if (pc.hasSkillEffect(MOB_SLOW_18)) {
+                                skillNum = MOB_SLOW_18;
+                            }
+                            if (skillNum != 0) {
+                                pc.removeSkillEffect(skillNum);
+                                pc.removeSkillEffect(GREATER_HASTE);
+                                pc.setMoveSpeed(0);
                                 continue;
                             }
-                            if (pc.getMoveSpeed() != 2) {
-                                pc.setDrink(false);
-                                pc.setMoveSpeed(1);
-                                pc.sendPackets(new S_SkillHaste(pc.getId(), 1, _getBuffIconDuration));
-                                pc.broadcastPacket(new S_SkillHaste(pc.getId(), 1, 0));
-                            } else {
-                                int skillNum = 0;
-                                if (pc.hasSkillEffect(SLOW)) {
-                                    skillNum = SLOW;
-                                } else if (pc.hasSkillEffect(GREATER_SLOW)) {
-                                    skillNum = GREATER_SLOW;
-                                } else if (pc.hasSkillEffect(ENTANGLE)) {
-                                    skillNum = ENTANGLE;
-                                } else if (pc.hasSkillEffect(MOB_SLOW_1)) {
-                                    skillNum = MOB_SLOW_1;
-                                } else if (pc.hasSkillEffect(MOB_SLOW_18)) {
-                                    skillNum = MOB_SLOW_18;
-                                }
-                                if (skillNum != 0) {
-                                    pc.removeSkillEffect(skillNum);
-                                    pc.removeSkillEffect(GREATER_HASTE);
-                                    pc.setMoveSpeed(0);
-                                    continue;
-                                }
-                            }
                         }
+                    }
                         break;
-                        case HOLY_WALK:
-                        case MOVING_ACCELERATION:
-                        case WIND_WALK: {
+                    case HOLY_WALK:
+                    case MOVING_ACCELERATION:
+                    case WIND_WALK: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.setBraveSpeed(4);
+                        pc.sendPackets(new S_SkillBrave(pc.getId(), 4, _getBuffIconDuration));
+                        pc.broadcastPacket(new S_SkillBrave(pc.getId(), 4, 0));
+                    }
+                        break;
+                    case BLOOD_LUST: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.setBraveSpeed(6);
+                        pc.sendPackets(new S_SkillBrave(pc.getId(), 1, _getBuffIconDuration));
+                        pc.broadcastPacket(new S_SkillBrave(pc.getId(), 1, 0));
+                    }
+                        break;
+                    // クレイ血痕
+                    case BUFF_CRAY: {
+                        if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
-                            pc.setBraveSpeed(4);
-                            pc.sendPackets(new S_SkillBrave(pc.getId(), 4, _getBuffIconDuration));
-                            pc.broadcastPacket(new S_SkillBrave(pc.getId(), 4, 0));
-                        }
-                        break;
-                        case BLOOD_LUST: {
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.setBraveSpeed(6);
-                            pc.sendPackets(new S_SkillBrave(pc.getId(), 1, _getBuffIconDuration));
-                            pc.broadcastPacket(new S_SkillBrave(pc.getId(), 1, 0));
-                        }
-                        break;
-                        // クレイ血痕
-                        case BUFF_CRAY: {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                pc.addHitup(5);
-                                pc.addDmgup(1);
-                                pc.addBowHitup(5);
-                                pc.addBowDmgup(1);
-                                pc.addExp(30);
-                                pc.addMaxHp(100);
-                                pc.addMaxMp(50);
-                                pc.addHpr(3);
-                                pc.addMpr(3);
-                                pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
-                                pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
-                                pc.sendPackets(new S_SPMR(pc));
-                            }
-                        }
-                        break;
-                        case COMA_A:
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                pc.getAbility().addAddedCon(1);
-                                pc.getAbility().addAddedDex(5);
-                                pc.getAbility().addAddedStr(5);
-                                pc.addHitRate(3);
-                                pc.getAC().addAc(-3);
-                            }
-                            break;
-                        case COMA_B:
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                // pc.addSp(1);
-                                pc.getAbility().addSp(1);
-                                pc.getAbility().addAddedCon(3);
-                                pc.getAbility().addAddedDex(5);
-                                pc.getAbility().addAddedStr(5);
-                                pc.addHitRate(5);
-                                pc.getAC().addAc(-8);
-                                pc.sendPackets(new S_SPMR(pc));
-                            }
-                            break;
-                        case FEATHER_BUFF_A: { // 占いバフ（非常に良い）
-                            L1PcInstance pc = (L1PcInstance) cha;
+                            pc.addHitup(5);
+                            pc.addDmgup(1);
+                            pc.addBowHitup(5);
+                            pc.addBowDmgup(1);
+                            pc.addExp(30);
+                            pc.addMaxHp(100);
+                            pc.addMaxMp(50);
                             pc.addHpr(3);
                             pc.addMpr(3);
-                            pc.addDmgup(2);
-                            pc.addHitup(2);
-                            pc.addMaxHp(50);
-                            pc.addMaxMp(30);
-                            // pc.addSp(2);
-                            pc.getAbility().addSp(2);
-                            pc.sendPackets(new S_SPMR(pc));
-                            if (pc.isInParty()) {
-                                pc.getParty().updateMiniHP(pc);
-                            }
                             pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
                             pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
-                        }
-                        break;
-                        case FEATHER_BUFF_B: { // 占いバフ（良い）
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addHitup(2);
-                            // pc.addSp(1);
-                            pc.getAbility().addSp(1);
-                            pc.addMaxHp(50);
-                            pc.addMaxMp(30);
                             pc.sendPackets(new S_SPMR(pc));
-                            if (pc.isInParty()) {
-                                pc.getParty().updateMiniHP(pc);
-                            }
-                            pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
-                            pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
                         }
+                    }
                         break;
-                        case FEATHER_BUFF_C: { // 占いバフ（通常）
+                    case COMA_A:
+                        if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addMaxHp(50);
-                            pc.addMaxMp(30);
-                            pc.getAC().addAc(-2);
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
-                            if (pc.isInParty()) {
-                                pc.getParty().updateMiniHP(pc);
-                            }
-                            pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
-                            pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
-                        }
-                        break;
-                        case FEATHER_BUFF_D: { // 占いバフ（悪い）
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(-1);
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
-                        }
-                        break;
-                        case ANTA_MAAN: {// 地竜の魔眼
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(-2);
-                            pc.getResistance().addHold(15);
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
-                        }
-                        break;
-                        case FAFU_MAAN: {// 水竜の魔眼
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getResistance().addFreeze(15);
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
-                        }
-                        break;
-                        case LIND_MAAN: {// 風竜の魔眼
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            // pc.addSp(1);
-                            pc.getAbility().addSp(1);
-                            pc.getResistance().addSleep(15);
-                            pc.sendPackets(new S_SPMR(pc));
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
-                        }
-                        break;
-                        case VALA_MAAN: {// 火竜の魔眼
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDmgup(2);
-                            pc.getResistance().addStun(15);
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
-                        }
-                        break;
-                        case BIRTH_MAAN: {// 誕生の魔眼
-                            L1PcInstance pc = (L1PcInstance) cha;
-                            pc.getAC().addAc(-2);
-                            pc.getResistance().addHold(15);
-                            pc.getResistance().addFreeze(15);
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
-                        }
-                        break;
-                        case SHAPE_MAAN: {// 形状の魔眼
-                            L1PcInstance pc = (L1PcInstance) cha;
+                            pc.getAbility().addAddedCon(1);
+                            pc.getAbility().addAddedDex(5);
+                            pc.getAbility().addAddedStr(5);
+                            pc.addHitRate(3);
                             pc.getAC().addAc(-3);
+                        }
+                        break;
+                    case COMA_B:
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
                             // pc.addSp(1);
                             pc.getAbility().addSp(1);
-                            pc.getResistance().addHold(15);
-                            pc.getResistance().addFreeze(15);
-                            pc.getResistance().addSleep(15);
+                            pc.getAbility().addAddedCon(3);
+                            pc.getAbility().addAddedDex(5);
+                            pc.getAbility().addAddedStr(5);
+                            pc.addHitRate(5);
+                            pc.getAC().addAc(-8);
                             pc.sendPackets(new S_SPMR(pc));
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
                         }
                         break;
-                        case LIFE_MAAN: {// 生命の魔眼
+                    case FEATHER_BUFF_A: { // 占いバフ（非常に良い）
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addHpr(3);
+                        pc.addMpr(3);
+                        pc.addDmgup(2);
+                        pc.addHitup(2);
+                        pc.addMaxHp(50);
+                        pc.addMaxMp(30);
+                        // pc.addSp(2);
+                        pc.getAbility().addSp(2);
+                        pc.sendPackets(new S_SPMR(pc));
+                        if (pc.isInParty()) {
+                            pc.getParty().updateMiniHP(pc);
+                        }
+                        pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
+                        pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
+                    }
+                        break;
+                    case FEATHER_BUFF_B: { // 占いバフ（良い）
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addHitup(2);
+                        // pc.addSp(1);
+                        pc.getAbility().addSp(1);
+                        pc.addMaxHp(50);
+                        pc.addMaxMp(30);
+                        pc.sendPackets(new S_SPMR(pc));
+                        if (pc.isInParty()) {
+                            pc.getParty().updateMiniHP(pc);
+                        }
+                        pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
+                        pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
+                    }
+                        break;
+                    case FEATHER_BUFF_C: { // 占いバフ（通常）
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addMaxHp(50);
+                        pc.addMaxMp(30);
+                        pc.getAC().addAc(-2);
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                        if (pc.isInParty()) {
+                            pc.getParty().updateMiniHP(pc);
+                        }
+                        pc.sendPackets(new S_HPUpdate(pc.getCurrentHp(), pc.getMaxHp()));
+                        pc.sendPackets(new S_MPUpdate(pc.getCurrentMp(), pc.getMaxMp()));
+                    }
+                        break;
+                    case FEATHER_BUFF_D: { // 占いバフ（悪い）
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-1);
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case ANTA_MAAN: {// 地竜の魔眼
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-2);
+                        pc.getResistance().addHold(15);
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case FAFU_MAAN: {// 水竜の魔眼
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getResistance().addFreeze(15);
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case LIND_MAAN: {// 風竜の魔眼
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        // pc.addSp(1);
+                        pc.getAbility().addSp(1);
+                        pc.getResistance().addSleep(15);
+                        pc.sendPackets(new S_SPMR(pc));
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case VALA_MAAN: {// 火竜の魔眼
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDmgup(2);
+                        pc.getResistance().addStun(15);
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case BIRTH_MAAN: {// 誕生の魔眼
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-2);
+                        pc.getResistance().addHold(15);
+                        pc.getResistance().addFreeze(15);
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case SHAPE_MAAN: {// 形状の魔眼
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.getAC().addAc(-3);
+                        // pc.addSp(1);
+                        pc.getAbility().addSp(1);
+                        pc.getResistance().addHold(15);
+                        pc.getResistance().addFreeze(15);
+                        pc.getResistance().addSleep(15);
+                        pc.sendPackets(new S_SPMR(pc));
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case LIFE_MAAN: {// 生命の魔眼
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addDmgup(2);
+                        pc.getAC().addAc(-5);
+                        // pc.addSp(1);
+                        pc.getAbility().addSp(1);
+                        pc.getResistance().addHold(15);
+                        pc.getResistance().addFreeze(15);
+                        pc.getResistance().addSleep(15);
+                        pc.getResistance().addStun(15);
+                        pc.sendPackets(new S_SPMR(pc));
+                        pc.sendPackets(new S_OwnCharAttrDef(pc));
+                    }
+                        break;
+                    case ANTA_BUFF: {
+                        if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addDmgup(2);
-                            pc.getAC().addAc(-5);
-                            // pc.addSp(1);
-                            pc.getAbility().addSp(1);
-                            pc.getResistance().addHold(15);
-                            pc.getResistance().addFreeze(15);
-                            pc.getResistance().addSleep(15);
-                            pc.getResistance().addStun(15);
-                            pc.sendPackets(new S_SPMR(pc));
-                            pc.sendPackets(new S_OwnCharAttrDef(pc));
+                            if (pc.hasSkillEffect(L1SkillId.ANTA_BUFF))
+                                pc.removeSkillEffect(L1SkillId.ANTA_BUFF);
+                            pc.getAC().addAc(-2);
+                            pc.getResistance().addWater(50);
+                            pc.sendPackets(new S_OwnCharStatus(pc));
+                            pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 82, _getBuffIconDuration / 60));
                         }
+                    }
                         break;
-                        case ANTA_BUFF: {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.hasSkillEffect(L1SkillId.ANTA_BUFF))
-                                    pc.removeSkillEffect(L1SkillId.ANTA_BUFF);
-                                pc.getAC().addAc(-2);
-                                pc.getResistance().addWater(50);
-                                pc.sendPackets(new S_OwnCharStatus(pc));
-                                pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 82, _getBuffIconDuration / 60));
-                            }
-                        }
-                        break;
-                        case FAFU_BUFF: {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.hasSkillEffect(L1SkillId.FAFU_BUFF))
-                                    pc.removeSkillEffect(L1SkillId.FAFU_BUFF);
-                                pc.addHpr(3);
-                                pc.addMpr(1);
-                                pc.getResistance().addWind(50);
-                                pc.sendPackets(new S_OwnCharStatus(pc));
-                                pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 85, _getBuffIconDuration / 60));
-                            }
-                        }
-                        break;
-                        case VALA_BUFF:
-                        case RIND_BUFF: {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.hasSkillEffect(L1SkillId.RIND_BUFF))
-                                    pc.removeSkillEffect(L1SkillId.RIND_BUFF);
-                                else if (pc.hasSkillEffect(L1SkillId.VALA_BUFF))
-                                    pc.removeSkillEffect(L1SkillId.VALA_BUFF);
-                                pc.addHitup(3);
-                                pc.addBowHitup(3);
-                                pc.getResistance().addFire(50);
-                                pc.sendPackets(new S_OwnCharStatus(pc));
-                                pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 88, _getBuffIconDuration / 60));
-                            }
-                        }
-                        break;
-                        case BOUNCE_ATTACK: {
+                    case FAFU_BUFF: {
+                        if (cha instanceof L1PcInstance) {
                             L1PcInstance pc = (L1PcInstance) cha;
-                            pc.addHitup(6);
+                            if (pc.hasSkillEffect(L1SkillId.FAFU_BUFF))
+                                pc.removeSkillEffect(L1SkillId.FAFU_BUFF);
+                            pc.addHpr(3);
+                            pc.addMpr(1);
+                            pc.getResistance().addWind(50);
+                            pc.sendPackets(new S_OwnCharStatus(pc));
+                            pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 85, _getBuffIconDuration / 60));
                         }
+                    }
                         break;
-                        // リンドビオル
-                        case RINDVIOR_SUMMON_MONSTER_CLOUD: {
-                            L1SpawnUtil.spawn(_npc, 5110, 10); // グルムデ精霊
+                    case VALA_BUFF:
+                    case RIND_BUFF: {
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.hasSkillEffect(L1SkillId.RIND_BUFF))
+                                pc.removeSkillEffect(L1SkillId.RIND_BUFF);
+                            else if (pc.hasSkillEffect(L1SkillId.VALA_BUFF))
+                                pc.removeSkillEffect(L1SkillId.VALA_BUFF);
+                            pc.addHitup(3);
+                            pc.addBowHitup(3);
+                            pc.getResistance().addFire(50);
+                            pc.sendPackets(new S_OwnCharStatus(pc));
+                            pc.sendPackets(new S_PacketBox(S_PacketBox.DRAGONBLOOD, 88, _getBuffIconDuration / 60));
                         }
+                    }
                         break;
-                        case RINDVIOR_PREDICATE: {
+                    case BOUNCE_ATTACK: {
+                        L1PcInstance pc = (L1PcInstance) cha;
+                        pc.addHitup(6);
+                    }
+                        break;
+                    // リンドビオル
+                    case RINDVIOR_SUMMON_MONSTER_CLOUD: {
+                        L1SpawnUtil.spawn(_npc, 5110, 10); // グルムデ精霊
+                    }
+                        break;
+                    case RINDVIOR_PREDICATE: {
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (_npc.getLocation().getTileLineDistance(pc.getLocation()) > 4) {
+                                L1Location newLoc = null;
+                                for (int count = 0; count < 10; count++) {
+                                    newLoc = _npc.getLocation().randomLocation(3, 4, false);
+                                    if (_npc.glanceCheck(newLoc.getX(), newLoc.getY()) == true) {
+                                        new L1Teleport().teleport(pc, newLoc.getX(), newLoc.getY(), _npc.getMapId(), 5,
+                                                true);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                        break;
+                    case RINDVIOR_SUMMON_MONSTER: {
+                        Random _random = new Random();
+                        int[] MobId = new int[] { 5106, 5107, 5108, 5109 }; // 鉱物
+                        // ゴーレム
+                        int rnd = _random.nextInt(100);
+                        for (int i = 0; i < _random.nextInt(2) + 1; i++) {
+                            L1SpawnUtil.spawn(_npc, MobId[rnd % MobId.length], _random.nextInt(3) + 8);
+                        }
+                    }
+                        break;
+                    case RINDVIOR_SILENCE: {
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.isDead()) {
+                                continue;
+                            }
+                            pc.setSkillEffect(L1SkillId.SILENCE, 12 * 1000);
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 2177));
+                            Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2177));
+                        }
+                    }
+                        break;
+                    case RINDVIOR_BOW: {
+                        if (_target instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) _target;
+                            if (pc.isDead()) {
+                                continue;
+                            }
+                            int SprNum = 0;
+                            int pcX = pc.getX();
+                            int pcY = pc.getY();
+                            int npcId = _npc.getNpcTemplate().get_npcId();
+                            switch (npcId) {
+                            case 5097:
+                                pcY -= 6;
+                                SprNum = 7987;
+                                break;
+                            case 5098:
+                                pcX += 4;
+                                pcY -= 4;
+                                SprNum = 8050;
+                                break;
+                            case 5099:
+                                pcX += 5;
+                                SprNum = 8051;
+                                break;
+                            default:
+                                break;
+                            }
+                            S_EffectLocation packet = new S_EffectLocation(pcX, pcY, SprNum);
+                            pc.sendPackets(packet);
+                            Broadcaster.broadcastPacket(pc, packet);
+                        }
+                    }
+                        break;
+                    case RINDVIOR_WIND_SHACKLE:
+                    case RINDVIOR_WIND_SHACKLE_1: {
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.isDead()) {
+                                continue;
+                            }
+                            pc.setSkillEffect(L1SkillId.WIND_SHACKLE, 12 * 1000);
+                            pc.sendPackets(new S_SkillIconWindShackle(pc.getId(), _getBuffIconDuration));
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 1799));
+                            Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 1799));
+                        }
+                    }
+                        break;
+                    case RINDVIOR_PREDICATE_CANCELLATION: {
+                        Random random = new Random();
+                        int Chance = random.nextInt(100) + 1;
+                        if (Chance > 33) {
                             if (cha instanceof L1PcInstance) {
                                 L1PcInstance pc = (L1PcInstance) cha;
                                 if (_npc.getLocation().getTileLineDistance(pc.getLocation()) > 4) {
@@ -4781,597 +4980,510 @@ public class L1SkillUse {
                                     for (int count = 0; count < 10; count++) {
                                         newLoc = _npc.getLocation().randomLocation(3, 4, false);
                                         if (_npc.glanceCheck(newLoc.getX(), newLoc.getY()) == true) {
-                                            new L1Teleport().teleport(pc, newLoc.getX(), newLoc.getY(), _npc.getMapId(), 5, true);
+                                            new L1Teleport().teleport(pc, newLoc.getX(), newLoc.getY(), _npc.getMapId(),
+                                                    5, true);
                                             break;
                                         }
                                     }
                                 }
-                            }
-                        }
-                        break;
-                        case RINDVIOR_SUMMON_MONSTER: {
-                            Random _random = new Random();
-                            int[] MobId = new int[] { 5106, 5107, 5108, 5109 }; // 鉱物
-                            // ゴーレム
-                            int rnd = _random.nextInt(100);
-                            for (int i = 0; i < _random.nextInt(2) + 1; i++) {
-                                L1SpawnUtil.spawn(_npc, MobId[rnd % MobId.length], _random.nextInt(3) + 8);
-                            }
-                        }
-                        break;
-                        case RINDVIOR_SILENCE: {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.isDead()) {
-                                    continue;
-                                }
-                                pc.setSkillEffect(L1SkillId.SILENCE, 12 * 1000);
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 2177));
-                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2177));
-                            }
-                        }
-                        break;
-                        case RINDVIOR_BOW: {
-                            if (_target instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) _target;
-                                if (pc.isDead()) {
-                                    continue;
-                                }
-                                int SprNum = 0;
-                                int pcX = pc.getX();
-                                int pcY = pc.getY();
-                                int npcId = _npc.getNpcTemplate().get_npcId();
-                                switch (npcId) {
-                                    case 5097:
-                                        pcY -= 6;
-                                        SprNum = 7987;
-                                        break;
-                                    case 5098:
-                                        pcX += 4;
-                                        pcY -= 4;
-                                        SprNum = 8050;
-                                        break;
-                                    case 5099:
-                                        pcX += 5;
-                                        SprNum = 8051;
-                                        break;
-                                    default:
-                                        break;
-                                }
-                                S_EffectLocation packet = new S_EffectLocation(pcX, pcY, SprNum);
-                                pc.sendPackets(packet);
-                                Broadcaster.broadcastPacket(pc, packet);
-                            }
-                        }
-                        break;
-                        case RINDVIOR_WIND_SHACKLE:
-                        case RINDVIOR_WIND_SHACKLE_1: {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.isDead()) {
-                                    continue;
-                                }
-                                pc.setSkillEffect(L1SkillId.WIND_SHACKLE, 12 * 1000);
-                                pc.sendPackets(new S_SkillIconWindShackle(pc.getId(), _getBuffIconDuration));
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 1799));
-                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 1799));
-                            }
-                        }
-                        break;
-                        case RINDVIOR_PREDICATE_CANCELLATION: {
-                            Random random = new Random();
-                            int Chance = random.nextInt(100) + 1;
-                            if (Chance > 33) {
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    if (_npc.getLocation().getTileLineDistance(pc.getLocation()) > 4) {
-                                        L1Location newLoc = null;
-                                        for (int count = 0; count < 10; count++) {
-                                            newLoc = _npc.getLocation().randomLocation(3, 4, false);
-                                            if (_npc.glanceCheck(newLoc.getX(), newLoc.getY()) == true) {
-                                                new L1Teleport().teleport(pc, newLoc.getX(), newLoc.getY(), _npc.getMapId(), 5, true);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        if (skillNum == SHAPE_CHANGE) {
-                                            if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                                    && pc.getTempCharGfx() <= 13745)
-                                                continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
-                                        if (skillNum == STATUS_CHAT_PROHIBITED) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    pc.curePoison();
-                                    pc.cureParalaysis();
-                                    if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                            && pc.getTempCharGfx() <= 13745)) {
-                                        L1PolyMorph.undoPoly(pc);
-                                        pc.sendPackets(new S_CharVisualUpdate(pc));
-                                        Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
-                                    }
-                                    if (pc.getHasteItemEquipped() > 0) {
-                                        pc.setMoveSpeed(0);
-                                        pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
-                                        Broadcaster.broadcastPacket(pc, new S_SkillHaste(pc.getId(), 0, 0));
-                                    }
-                                    if (pc != null && pc.isInvisble()) {
-                                        if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
-                                            pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
-                                            pc.sendPackets(new S_Sound(147));
-                                        }
-                                        if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
-                                            pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
-                                        }
-                                    }
-                                    pc.removeSkillEffect(STATUS_FREEZE);
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 870));
-                                    Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 870));
-                                }
-                            }
-                        }
-                        break;
-                        case RINDVIOR_CANCELLATION: {
-                            Random random = new Random();
-                            int Chance = random.nextInt(100) + 1;
-                            if (Chance > 33) {
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        if (skillNum == SHAPE_CHANGE) {
-                                            if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                                    && pc.getTempCharGfx() <= 13745)
-                                                continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
-                                        if (skillNum == STATUS_CHAT_PROHIBITED) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    pc.curePoison();
-                                    pc.cureParalaysis();
-                                    if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                            && pc.getTempCharGfx() <= 13745)) {
-                                        L1PolyMorph.undoPoly(pc);
-                                        pc.sendPackets(new S_CharVisualUpdate(pc));
-                                        Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
-                                    }
-                                    if (pc.getHasteItemEquipped() > 0) {
-                                        pc.setMoveSpeed(0);
-                                        pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
-                                        Broadcaster.broadcastPacket(pc, new S_SkillHaste(pc.getId(), 0, 0));
-                                    }
-                                    if (pc != null && pc.isInvisble()) {
-                                        if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
-                                            pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
-                                            pc.sendPackets(new S_Sound(147));
-                                        }
-                                        if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
-                                            pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
-                                        }
-                                    }
-                                    pc.removeSkillEffect(STATUS_FREEZE);
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 870));
-                                    Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 870));
-                                }
-                            }
-                        }
-                        break;
-                        case RINDVIOR_WEAPON:
-                        case RINDVIOR_WEAPON_2: {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                L1ItemInstance weapon = pc.getWeapon();
-                                Random random = new Random();
-                                int rnd = random.nextInt(100) + 1;
-                                if (weapon != null && rnd > 33) {
-                                    int weaponDamage = random.nextInt(3) + 1;
-                                    if (pc.isDead()) {
+                                for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
                                         continue;
                                     }
-                                    pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
-                                    pc.getInventory().receiveDamage(weapon, weaponDamage);
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 172));
-                                    Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 172));
+                                    if (skillNum == SHAPE_CHANGE) {
+                                        if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                                && pc.getTempCharGfx() <= 13745)
+                                            continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
                                 }
+                                for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
+                                    if (skillNum == STATUS_CHAT_PROHIBITED) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                pc.curePoison();
+                                pc.cureParalaysis();
+                                if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                        && pc.getTempCharGfx() <= 13745)) {
+                                    L1PolyMorph.undoPoly(pc);
+                                    pc.sendPackets(new S_CharVisualUpdate(pc));
+                                    Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
+                                }
+                                if (pc.getHasteItemEquipped() > 0) {
+                                    pc.setMoveSpeed(0);
+                                    pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
+                                    Broadcaster.broadcastPacket(pc, new S_SkillHaste(pc.getId(), 0, 0));
+                                }
+                                if (pc != null && pc.isInvisble()) {
+                                    if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
+                                        pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
+                                        pc.sendPackets(new S_Sound(147));
+                                    }
+                                    if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
+                                        pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
+                                    }
+                                }
+                                pc.removeSkillEffect(STATUS_FREEZE);
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 870));
+                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 870));
                             }
                         }
+                    }
                         break;
-                        // ブラックエルダーデスヒル/キャンセレーション
-                        case BLACKELDER_DEATH_HELL: {
+                    case RINDVIOR_CANCELLATION: {
+                        Random random = new Random();
+                        int Chance = random.nextInt(100) + 1;
+                        if (Chance > 33) {
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    if (skillNum == SHAPE_CHANGE) {
+                                        if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                                && pc.getTempCharGfx() <= 13745)
+                                            continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
+                                    if (skillNum == STATUS_CHAT_PROHIBITED) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                pc.curePoison();
+                                pc.cureParalaysis();
+                                if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                        && pc.getTempCharGfx() <= 13745)) {
+                                    L1PolyMorph.undoPoly(pc);
+                                    pc.sendPackets(new S_CharVisualUpdate(pc));
+                                    Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
+                                }
+                                if (pc.getHasteItemEquipped() > 0) {
+                                    pc.setMoveSpeed(0);
+                                    pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
+                                    Broadcaster.broadcastPacket(pc, new S_SkillHaste(pc.getId(), 0, 0));
+                                }
+                                if (pc != null && pc.isInvisble()) {
+                                    if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
+                                        pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
+                                        pc.sendPackets(new S_Sound(147));
+                                    }
+                                    if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
+                                        pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
+                                    }
+                                }
+                                pc.removeSkillEffect(STATUS_FREEZE);
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 870));
+                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 870));
+                            }
+                        }
+                    }
+                        break;
+                    case RINDVIOR_WEAPON:
+                    case RINDVIOR_WEAPON_2: {
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            L1ItemInstance weapon = pc.getWeapon();
                             Random random = new Random();
-                            int Chance = random.nextInt(100) + 1;
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 7780));
-                                pc.setSkillEffect(L1SkillId.PAP_DEATH_HELL, 12 * 1000);
-                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7780));
-                            }
-                            if (Chance > 33) {
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        if (skillNum == SHAPE_CHANGE) {
-                                            if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                                    && pc.getTempCharGfx() <= 13745)
-                                                continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    pc.curePoison();
-                                    pc.cureParalaysis();
-                                    if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                            && pc.getTempCharGfx() <= 13745)) {
-                                        L1PolyMorph.undoPoly(pc);
-                                        pc.sendPackets(new S_CharVisualUpdate(pc));
-                                        Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
-                                    }
-                                    if (pc.getHasteItemEquipped() > 0) {
-                                        pc.setMoveSpeed(0);
-                                        pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
-                                        Broadcaster.broadcastPacket(pc, new S_SkillHaste(pc.getId(), 0, 0));
-                                    }
-                                    if (pc != null && pc.isInvisble()) {
-                                        if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
-                                            pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
-                                            pc.sendPackets(new S_Sound(147));
-                                        }
-                                        if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
-                                            pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
-                                        }
-                                    }
-                                    pc.removeSkillEffect(STATUS_FREEZE);
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 870));
-                                    Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 870));
+                            int rnd = random.nextInt(100) + 1;
+                            if (weapon != null && rnd > 33) {
+                                int weaponDamage = random.nextInt(3) + 1;
+                                if (pc.isDead()) {
+                                    continue;
                                 }
+                                pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
+                                pc.getInventory().receiveDamage(weapon, weaponDamage);
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 172));
+                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 172));
                             }
                         }
+                    }
                         break;
-                        // ドレイクマステレポート
-                        case DRAKE_MASSTELEPORT: {
+                    // ブラックエルダーデスヒル/キャンセレーション
+                    case BLACKELDER_DEATH_HELL: {
+                        Random random = new Random();
+                        int Chance = random.nextInt(100) + 1;
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 7780));
+                            pc.setSkillEffect(L1SkillId.PAP_DEATH_HELL, 12 * 1000);
+                            Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7780));
+                        }
+                        if (Chance > 33) {
                             if (cha instanceof L1PcInstance) {
                                 L1PcInstance pc = (L1PcInstance) cha;
-                                L1Location newLocation = pc.getLocation().randomLocation(5, true);
-                                int newX = newLocation.getX();
-                                int newY = newLocation.getY();
+                                for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    if (skillNum == SHAPE_CHANGE) {
+                                        if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                                && pc.getTempCharGfx() <= 13745)
+                                            continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                pc.curePoison();
+                                pc.cureParalaysis();
+                                if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                        && pc.getTempCharGfx() <= 13745)) {
+                                    L1PolyMorph.undoPoly(pc);
+                                    pc.sendPackets(new S_CharVisualUpdate(pc));
+                                    Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
+                                }
+                                if (pc.getHasteItemEquipped() > 0) {
+                                    pc.setMoveSpeed(0);
+                                    pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
+                                    Broadcaster.broadcastPacket(pc, new S_SkillHaste(pc.getId(), 0, 0));
+                                }
+                                if (pc != null && pc.isInvisble()) {
+                                    if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
+                                        pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
+                                        pc.sendPackets(new S_Sound(147));
+                                    }
+                                    if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
+                                        pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
+                                    }
+                                }
+                                pc.removeSkillEffect(STATUS_FREEZE);
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 870));
+                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 870));
+                            }
+                        }
+                    }
+                        break;
+                    // ドレイクマステレポート
+                    case DRAKE_MASSTELEPORT: {
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            L1Location newLocation = pc.getLocation().randomLocation(5, true);
+                            int newX = newLocation.getX();
+                            int newY = newLocation.getY();
+                            if (pc.isDead())
+                                continue;
+                            new L1Teleport().teleport(pc, newX, newY, pc.getMapId(), pc.getHeading(), true);
+                        }
+                    }
+                        break;
+                    // ドレイクウィンドセクル
+                    case DRAKE_WIND_SHACKLE: {
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.isDead()) {
+                                continue;
+                            }
+                            pc.setSkillEffect(L1SkillId.WIND_SHACKLE, 12 * 1000);
+                            pc.sendPackets(new S_SkillIconWindShackle(pc.getId(), _getBuffIconDuration));
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 1799));
+                            Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 1799));
+                        }
+                    }
+                        break;
+                    // ブラックエルダーデスポーション
+                    case BLACKELDER_DEATH_POTION: {
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 7781));
+                            pc.setSkillEffect(L1SkillId.PAP_DEATH_PORTION, 12 * 1000);
+                            Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7781));
+                        }
+                    }
+                        break;
+                    // イフリートサモンモンスター
+                    case EFRETE_SUMMON_MONSTER: {
+                        Random _random = new Random();
+                        for (int i = 0; i < 2; i++) {
+                            L1SpawnUtil.spawn(_npc, 5121, _random.nextInt(3) + 8);
+                        }
+                    }
+                        break;
+                    // フェニックスサモンモンスター
+                    case PHOENIX_SUMMON_MONSTER: {
+                        Random _random = new Random();
+                        for (int i = 0; i < 2; i++) {
+                            L1SpawnUtil.spawn(_npc, 900177, _random.nextInt(3) + 8);
+                        }
+                    }
+                        break;
+                    // フェニックスキャンセレーション
+                    case PHOENIX_CANCELLATION: {
+                        Random random = new Random();
+                        int Chance = random.nextInt(100) + 1;
+                        if (Chance > 33) {
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
+                                for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    if (skillNum == SHAPE_CHANGE) {
+                                        if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                                && pc.getTempCharGfx() <= 13745)
+                                            continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
+                                    if (skillNum == STATUS_CHAT_PROHIBITED) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
+                                    if (isNotCancelable(skillNum) && !pc.isDead()) {
+                                        continue;
+                                    }
+                                    pc.removeSkillEffect(skillNum);
+                                }
+                                pc.curePoison();
+                                pc.cureParalaysis();
+                                if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
+                                        && pc.getTempCharGfx() <= 13745)) {
+                                    L1PolyMorph.undoPoly(pc);
+                                    pc.sendPackets(new S_CharVisualUpdate(pc));
+                                    Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
+                                }
+                                if (pc.getHasteItemEquipped() > 0) {
+                                    pc.setMoveSpeed(0);
+                                    pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
+                                    Broadcaster.broadcastPacket(pc, new S_SkillHaste(pc.getId(), 0, 0));
+                                }
+                                if (pc != null && pc.isInvisble()) {
+                                    if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
+                                        pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
+                                        pc.sendPackets(new S_Sound(147));
+                                    }
+                                    if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
+                                        pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
+                                        pc.sendPackets(new S_Invis(pc.getId(), 0));
+                                        Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
+                                    }
+                                }
+                                pc.removeSkillEffect(STATUS_FREEZE);
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 870));
+                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 870));
+                            }
+                        }
+                    }
+                        break;
+                    case AREA_OF_SILENCE: {
+                        L1PcInstance pc = (L1PcInstance) _target;
+                        pc.sendPackets(new S_PacketBox(S_PacketBox.POSION_ICON, pc, 6, 15));
+                        Broadcaster.broadcastPacket(_target, new S_PacketBox(S_PacketBox.POSION_ICON, pc, 6, 15));
+                        Broadcaster.broadcastPacket(_target, new S_SkillSound(pc.getId(), 10708));
+                    }
+                        break;
+                    case DESERT_SKILL1: { // 広域カーズパラライズ
+                        if (!cha.hasSkillEffect(EARTH_BIND) && !cha.hasSkillEffect(ICE_LANCE)
+                                && !cha.hasSkillEffect(DESERT_SKILL1) && !cha.hasSkillEffect(DESERT_SKILL2)) {
+                            if (cha instanceof L1PcInstance) {
+                                L1PcInstance pc = (L1PcInstance) cha;
                                 if (pc.isDead())
                                     continue;
-                                new L1Teleport().teleport(pc, newX, newY, pc.getMapId(), pc.getHeading(), true);
+                                L1CurseParalysis.curse(pc, 0, 4000);
                             }
                         }
+                    }
                         break;
-                        // ドレイクウィンドセクル
-                        case DRAKE_WIND_SHACKLE: {
+                    case DESERT_SKILL2: { // 広域アースバインド
+                        if (!cha.hasSkillEffect(EARTH_BIND) && !cha.hasSkillEffect(ICE_LANCE)
+                                && !cha.hasSkillEffect(DESERT_SKILL1) && !cha.hasSkillEffect(DESERT_SKILL2)) {
                             if (cha instanceof L1PcInstance) {
                                 L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.isDead()) {
+                                if (pc.isDead())
                                     continue;
-                                }
-                                pc.setSkillEffect(L1SkillId.WIND_SHACKLE, 12 * 1000);
-                                pc.sendPackets(new S_SkillIconWindShackle(pc.getId(), _getBuffIconDuration));
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 1799));
-                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 1799));
-                            }
-                        }
-                        break;
-                        // ブラックエルダーデスポーション
-                        case BLACKELDER_DEATH_POTION: {
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 7781));
-                                pc.setSkillEffect(L1SkillId.PAP_DEATH_PORTION, 12 * 1000);
-                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 7781));
-                            }
-                        }
-                        break;
-                        // イフリートサモンモンスター
-                        case EFRETE_SUMMON_MONSTER: {
-                            Random _random = new Random();
-                            for (int i = 0; i < 2; i++) {
-                                L1SpawnUtil.spawn(_npc, 5121, _random.nextInt(3) + 8);
-                            }
-                        }
-                        break;
-                        // フェニックスサモンモンスター
-                        case PHOENIX_SUMMON_MONSTER: {
-                            Random _random = new Random();
-                            for (int i = 0; i < 2; i++) {
-                                L1SpawnUtil.spawn(_npc, 900177, _random.nextInt(3) + 8);
-                            }
-                        }
-                        break;
-                        // フェニックスキャンセレーション
-                        case PHOENIX_CANCELLATION: {
-                            Random random = new Random();
-                            int Chance = random.nextInt(100) + 1;
-                            if (Chance > 33) {
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    for (int skillNum = SKILLS_BEGIN; skillNum <= SKILLS_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        if (skillNum == SHAPE_CHANGE) {
-                                            if (pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                                    && pc.getTempCharGfx() <= 13745)
-                                                continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = STATUS_BEGIN; skillNum <= STATUS_CANCLEEND; skillNum++) {
-                                        if (skillNum == STATUS_CHAT_PROHIBITED) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    for (int skillNum = COOKING_BEGIN; skillNum <= COOKING_END; skillNum++) {
-                                        if (isNotCancelable(skillNum) && !pc.isDead()) {
-                                            continue;
-                                        }
-                                        pc.removeSkillEffect(skillNum);
-                                    }
-                                    pc.curePoison();
-                                    pc.cureParalaysis();
-                                    if (!(pc.getRankLevel() > 2 && pc.getTempCharGfx() >= 13715
-                                            && pc.getTempCharGfx() <= 13745)) {
-                                        L1PolyMorph.undoPoly(pc);
-                                        pc.sendPackets(new S_CharVisualUpdate(pc));
-                                        Broadcaster.broadcastPacket(pc, new S_CharVisualUpdate(pc));
-                                    }
-                                    if (pc.getHasteItemEquipped() > 0) {
-                                        pc.setMoveSpeed(0);
-                                        pc.sendPackets(new S_SkillHaste(pc.getId(), 0, 0));
-                                        Broadcaster.broadcastPacket(pc, new S_SkillHaste(pc.getId(), 0, 0));
-                                    }
-                                    if (pc != null && pc.isInvisble()) {
-                                        if (pc.hasSkillEffect(L1SkillId.INVISIBILITY)) {
-                                            pc.killSkillEffectTimer(L1SkillId.INVISIBILITY);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
-                                            pc.sendPackets(new S_Sound(147));
-                                        }
-                                        if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
-                                            pc.killSkillEffectTimer(L1SkillId.BLIND_HIDING);
-                                            pc.sendPackets(new S_Invis(pc.getId(), 0));
-                                            Broadcaster.broadcastPacket(pc, new S_Invis(pc.getId(), 0));
-                                        }
-                                    }
-                                    pc.removeSkillEffect(STATUS_FREEZE);
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 870));
-                                    Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 870));
-                                }
-                            }
-                        }
-                        break;
-                        case AREA_OF_SILENCE: {
-                            L1PcInstance pc = (L1PcInstance) _target;
-                            pc.sendPackets(new S_PacketBox(S_PacketBox.POSION_ICON, pc, 6, 15));
-                            Broadcaster.broadcastPacket(_target, new S_PacketBox(S_PacketBox.POSION_ICON, pc, 6, 15));
-                            Broadcaster.broadcastPacket(_target, new S_SkillSound(pc.getId(), 10708));
-                        }
-                        break;
-                        case DESERT_SKILL1: { // 広域カーズパラライズ
-                            if (!cha.hasSkillEffect(EARTH_BIND) && !cha.hasSkillEffect(ICE_LANCE) && !cha.hasSkillEffect(DESERT_SKILL1)
-                                    && !cha.hasSkillEffect(DESERT_SKILL2)) {
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    if (pc.isDead())
-                                        continue;
-                                    L1CurseParalysis.curse(pc, 0, 4000);
-                                }
-                            }
-                        }
-                        break;
-                        case DESERT_SKILL2: { // 広域アースバインド
-                            if (!cha.hasSkillEffect(EARTH_BIND) && !cha.hasSkillEffect(ICE_LANCE) && !cha.hasSkillEffect(DESERT_SKILL1)
-                                    && !cha.hasSkillEffect(DESERT_SKILL2)) {
-                                if (cha instanceof L1PcInstance) {
-                                    L1PcInstance pc = (L1PcInstance) cha;
-                                    if (pc.isDead())
-                                        continue;
 
-                                    pc.setSkillEffect(EARTH_BIND, 12 * 1000); // ディケイポーション
-                                    pc.sendPackets(new S_Poison(pc.getId(), 2));
-                                    pc.broadcastPacket(new S_Poison(pc.getId(), 2));
-                                    pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_FREEZE, true));
+                                pc.setSkillEffect(EARTH_BIND, 12 * 1000); // ディケイポーション
+                                pc.sendPackets(new S_Poison(pc.getId(), 2));
+                                pc.broadcastPacket(new S_Poison(pc.getId(), 2));
+                                pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_FREEZE, true));
 
-                                    pc.sendPackets(new S_SkillSound(pc.getId(), 2251));
-                                    Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2251));
-                                }
+                                pc.sendPackets(new S_SkillSound(pc.getId(), 2251));
+                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2251));
                             }
                         }
+                    }
                         break;
-                        case DESERT_SKILL3: { // 広域マナドレイン
-                            int ranMp = random.nextInt(20);
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.getCurrentMp() <= ranMp || pc.isDead())
-                                    continue;
-                                pc.setCurrentMp(pc.getCurrentMp() - ranMp);
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 2172));
-                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2172));
-                            }
+                    case DESERT_SKILL3: { // 広域マナドレイン
+                        int ranMp = random.nextInt(20);
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.getCurrentMp() <= ranMp || pc.isDead())
+                                continue;
+                            pc.setCurrentMp(pc.getCurrentMp() - ranMp);
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 2172));
+                            Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 2172));
                         }
+                    }
                         break;
-                        case DESERT_SKILL4: { // 広域ポイズン
-                            Random random = new Random();
-                            int PoisonTime = random.nextInt(5) + 1;
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (PoisonTime > 2)
-                                    L1DamagePoison.doInfection(_user, pc, PoisonTime * 1000, 500, _skillId == TOMAHAWK);
-                            }
+                    case DESERT_SKILL4: { // 広域ポイズン
+                        Random random = new Random();
+                        int PoisonTime = random.nextInt(5) + 1;
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (PoisonTime > 2)
+                                L1DamagePoison.doInfection(_user, pc, PoisonTime * 1000, 500, _skillId == TOMAHAWK);
                         }
+                    }
                         break;
-                        case DESERT_SKILL5: { // カース/ディケイ/ダークネス/ディジーズ/ウィークネス
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.isDead() || pc.hasSkillEffect(CURSE_PARALYZE)) {
-                                    continue;
-                                }
-                                L1CurseParalysis.curse(cha, 0, 4000); // カーズパラライズ
-                                pc.setSkillEffect(CURSE_PARALYZE, 4 * 1000); // カーズパラライズ
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 10704));
-                                Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 10704));
+                    case DESERT_SKILL5: { // カース/ディケイ/ダークネス/ディジーズ/ウィークネス
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.isDead() || pc.hasSkillEffect(CURSE_PARALYZE)) {
+                                continue;
                             }
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.isDead() || pc.hasSkillEffect(DECAY_POTION)) {
-                                    continue;
-                                }
-                                pc.setSkillEffect(DECAY_POTION, 16 * 1000); // ディケイポーション
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 2232));
-                                Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2232));
-                            }
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.isDead() || pc.hasSkillEffect(DARKNESS)) {
-                                    continue;
-                                }
-                                if (pc.hasSkillEffect(STATUS_FLOATING_EYE)) {
-                                    pc.sendPackets(new S_CurseBlind(2));
-                                } else {
-                                    pc.sendPackets(new S_CurseBlind(1));
-                                }
-                                pc.setSkillEffect(DARKNESS, 32 * 1000); // ダークネス
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 2175));
-                                Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2175));
-                            }
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.isDead() || pc.hasSkillEffect(DISEASE)) {
-                                    continue;
-                                }
-                                pc.addDmgup(-6);
-                                pc.getAC().addAc(12);
-                                pc.setSkillEffect(DISEASE, 64 * 1000); // ディジーズ
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 2230));
-                                Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2230));
-                            }
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.isDead() || pc.hasSkillEffect(WEAKNESS)) {
-                                    continue;
-                                }
-                                pc.addDmgup(-5);
-                                pc.addHitup(-1);
-                                pc.setSkillEffect(WEAKNESS, 64 * 1000); // ウィークネス
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 2228));
-                                Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2228));
-                            }
+                            L1CurseParalysis.curse(cha, 0, 4000); // カーズパラライズ
+                            pc.setSkillEffect(CURSE_PARALYZE, 4 * 1000); // カーズパラライズ
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 10704));
+                            Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 10704));
                         }
-                        break;
-                        case DESERT_SKILL6: { // 広域ダークネス
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.isDead() || pc.hasSkillEffect(DARKNESS)) {
-                                    continue;
-                                }
-                                if (pc.hasSkillEffect(STATUS_FLOATING_EYE)) {
-                                    pc.sendPackets(new S_CurseBlind(2));
-                                } else {
-                                    pc.sendPackets(new S_CurseBlind(1));
-                                }
-                                pc.setSkillEffect(DARKNESS, 32 * 1000); // ダークネス
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 2175));
-                                Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2175));
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.isDead() || pc.hasSkillEffect(DECAY_POTION)) {
+                                continue;
                             }
+                            pc.setSkillEffect(DECAY_POTION, 16 * 1000); // ディケイポーション
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 2232));
+                            Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2232));
                         }
-                        break;
-                        case DESERT_SKILL7: { // 広域フォグ
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                if (pc.isDead() || pc.hasSkillEffect(FOG_OF_SLEEPING)) {
-                                    continue;
-                                }
-                                pc.setSkillEffect(FOG_OF_SLEEPING, 32 * 1000); // フォグオブスリーピング
-                                pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_SLEEP, true));
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 760));
-                                Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 760));
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.isDead() || pc.hasSkillEffect(DARKNESS)) {
+                                continue;
                             }
-                            cha.setSleeped(true);
-                        }
-                        break;
-                        case DESERT_SKILL8: { // エルジャベトルネードダメージ
-                            if (cha instanceof L1PcInstance) {
-                                L1PcInstance pc = (L1PcInstance) cha;
-                                pc.sendPackets(new S_SkillSound(pc.getId(), 10082));
-                                Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 10082));
+                            if (pc.hasSkillEffect(STATUS_FLOATING_EYE)) {
+                                pc.sendPackets(new S_CurseBlind(2));
+                            } else {
+                                pc.sendPackets(new S_CurseBlind(1));
                             }
+                            pc.setSkillEffect(DARKNESS, 32 * 1000); // ダークネス
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 2175));
+                            Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2175));
                         }
-                        break;
-                        case DESERT_SKILL9: { // エルジャベサモンモンスター
-                            for (int i = 0; i < 4; i++) {
-                                L1SpawnUtil.spawn(_npc, 5138, 6, 120 * 1000); // グラカス
-                                L1SpawnUtil.spawn(_npc, 5139, 6, 120 * 1000); // ベイカス
-                                L1SpawnUtil.spawn(_npc, 5140, 6, 120 * 1000); // 号ルーカス
-                                L1SpawnUtil.spawn(_npc, 5141, 6, 120 * 1000); // アルカス
-                                L1SpawnUtil.spawn(_npc, 5142, 6, 120 * 1000); // 女王守護蟻
-                                L1SpawnUtil.spawn(_npc, 5143, 6, 120 * 1000); // 女王守護蟻
-                                L1SpawnUtil.spawn(_npc, 5144, 6, 120 * 1000); // 女王守護蟻
-                                L1SpawnUtil.spawn(_npc, 5145, 6, 120 * 1000); // 女王守護蟻
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.isDead() || pc.hasSkillEffect(DISEASE)) {
+                                continue;
                             }
+                            pc.addDmgup(-6);
+                            pc.getAC().addAc(12);
+                            pc.setSkillEffect(DISEASE, 64 * 1000); // ディジーズ
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 2230));
+                            Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2230));
                         }
-                        break;
-                        case DESERT_SKILL10: { // エルジャベ砂嵐
-                            for (int i = 0; i < random.nextInt(3) + 1; i++) {
-                                L1SpawnUtil.spawn(_npc, 5095, 6, 3 * 1000); // 砂嵐
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.isDead() || pc.hasSkillEffect(WEAKNESS)) {
+                                continue;
                             }
+                            pc.addDmgup(-5);
+                            pc.addHitup(-1);
+                            pc.setSkillEffect(WEAKNESS, 64 * 1000); // ウィークネス
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 2228));
+                            Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2228));
                         }
+                    }
                         break;
-                        default:
-                            break;
+                    case DESERT_SKILL6: { // 広域ダークネス
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.isDead() || pc.hasSkillEffect(DARKNESS)) {
+                                continue;
+                            }
+                            if (pc.hasSkillEffect(STATUS_FLOATING_EYE)) {
+                                pc.sendPackets(new S_CurseBlind(2));
+                            } else {
+                                pc.sendPackets(new S_CurseBlind(1));
+                            }
+                            pc.setSkillEffect(DARKNESS, 32 * 1000); // ダークネス
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 2175));
+                            Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 2175));
+                        }
+                    }
+                        break;
+                    case DESERT_SKILL7: { // 広域フォグ
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            if (pc.isDead() || pc.hasSkillEffect(FOG_OF_SLEEPING)) {
+                                continue;
+                            }
+                            pc.setSkillEffect(FOG_OF_SLEEPING, 32 * 1000); // フォグオブスリーピング
+                            pc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_SLEEP, true));
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 760));
+                            Broadcaster.broadcastPacket(cha, new S_SkillSound(pc.getId(), 760));
+                        }
+                        cha.setSleeped(true);
+                    }
+                        break;
+                    case DESERT_SKILL8: { // エルジャベトルネードダメージ
+                        if (cha instanceof L1PcInstance) {
+                            L1PcInstance pc = (L1PcInstance) cha;
+                            pc.sendPackets(new S_SkillSound(pc.getId(), 10082));
+                            Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 10082));
+                        }
+                    }
+                        break;
+                    case DESERT_SKILL9: { // エルジャベサモンモンスター
+                        for (int i = 0; i < 4; i++) {
+                            L1SpawnUtil.spawn(_npc, 5138, 6, 120 * 1000); // グラカス
+                            L1SpawnUtil.spawn(_npc, 5139, 6, 120 * 1000); // ベイカス
+                            L1SpawnUtil.spawn(_npc, 5140, 6, 120 * 1000); // 号ルーカス
+                            L1SpawnUtil.spawn(_npc, 5141, 6, 120 * 1000); // アルカス
+                            L1SpawnUtil.spawn(_npc, 5142, 6, 120 * 1000); // 女王守護蟻
+                            L1SpawnUtil.spawn(_npc, 5143, 6, 120 * 1000); // 女王守護蟻
+                            L1SpawnUtil.spawn(_npc, 5144, 6, 120 * 1000); // 女王守護蟻
+                            L1SpawnUtil.spawn(_npc, 5145, 6, 120 * 1000); // 女王守護蟻
+                        }
+                    }
+                        break;
+                    case DESERT_SKILL10: { // エルジャベ砂嵐
+                        for (int i = 0; i < random.nextInt(3) + 1; i++) {
+                            L1SpawnUtil.spawn(_npc, 5095, 6, 3 * 1000); // 砂嵐
+                        }
+                    }
+                        break;
+                    default:
+                        break;
                     }
                 }
 
@@ -5495,15 +5607,16 @@ public class L1SkillUse {
                 }
             }
 
-            if (_skillId == DETECTION || _skillId == IZE_BREAK || _skillId == EYE_OF_DRAGON || _skillId == COUNTER_DETECTION) {//キャンセル
+            if (_skillId == DETECTION || _skillId == IZE_BREAK || _skillId == EYE_OF_DRAGON
+                    || _skillId == COUNTER_DETECTION) {// キャンセル
                 detection(_player, true);
             }
 
         } catch (Exception e) {
             // スキルエラー部分にキャラクター名、モプミョン、ターゲット名順に出力
 
-            System.out.println("エラー：" + (_player != null ? _player.getAccountName() : "") + " | " + (_npc != null ? _npc.getName() : "") + " | "
-                    + (_target != null ? _target.getName() : ""));
+            System.out.println("エラー：" + (_player != null ? _player.getAccountName() : "") + " | "
+                    + (_npc != null ? _npc.getName() : "") + " | " + (_target != null ? _target.getName() : ""));
             // system message output
             e.printStackTrace();
 
@@ -5518,37 +5631,37 @@ public class L1SkillUse {
 
         level *= 4;
         switch (level) {
-            case 28:
-                summonid_list = new int[] { 81083, 81084 };
-                summonid = summonid_list[order];
-                break;
-            case 40:
-                summonid = 81085;
-                break;
-            case 52:
-                summonid = 81086;
-                break;
-            case 64:
-                summonid = 81087;
-                break;
-            case 76:
-                summonid = 81088;
-                break;
-            case 80:
-                summonid = 81089;
-                break;
-            case 82:
-                summonid = 81090;
-                break;
-            case 84:
-                summonid = 81091;
-                break;
-            case 86:
-                summonid = 81092;
-                break;
-            case 88:
-                summonid = 81093;
-                break;
+        case 28:
+            summonid_list = new int[] { 81083, 81084 };
+            summonid = summonid_list[order];
+            break;
+        case 40:
+            summonid = 81085;
+            break;
+        case 52:
+            summonid = 81086;
+            break;
+        case 64:
+            summonid = 81087;
+            break;
+        case 76:
+            summonid = 81088;
+            break;
+        case 80:
+            summonid = 81089;
+            break;
+        case 82:
+            summonid = 81090;
+            break;
+        case 84:
+            summonid = 81091;
+            break;
+        case 86:
+            summonid = 81092;
+            break;
+        case 88:
+            summonid = 81093;
+            break;
         }
         int petcost = 0;
         Object[] petlist = pc.getPetList().values().toArray();
@@ -5608,18 +5721,22 @@ public class L1SkillUse {
      * キャンセルに解除することができないスキルなのかを返す。
      */
     private boolean isNotCancelable(int skillNum) {
-        return skillNum == ABSOLUTE_BARRIER || skillNum == ADVANCE_SPIRIT || skillNum == SHOCK_STUN || skillNum == REDUCTION_ARMOR
-                || skillNum == SOLID_CARRIAGE || skillNum == COUNTER_BARRIER || skillNum == COMA_A || skillNum == COMA_B || skillNum == ANTA_MAAN
-                || skillNum == FAFU_MAAN || skillNum == LIND_MAAN || skillNum == VALA_MAAN || skillNum == BIRTH_MAAN || skillNum == SHAPE_MAAN
-                || skillNum == LIFE_MAAN || skillNum == ANTA_BUFF || skillNum == FAFU_BUFF || skillNum == ANTA_MESSAGE_6 || skillNum == ANTA_MESSAGE_7
-                || skillNum == ANTA_MESSAGE_8 || skillNum == PREDICATEDELAY || skillNum == FEATHER_BUFF_A || skillNum == FEATHER_BUFF_B
-                || skillNum == FEATHER_BUFF_C || skillNum == FEATHER_BUFF_D || skillNum == PAP_DEATH_PORTION || skillNum == PAP_DEATH_HELL
-                || skillNum == PAP_REDUCE_HELL || skillNum == STATUS_DRAGON_PEARL || skillNum == UNCANNY_DODGE || skillNum == DRESS_EVASION
-                || skillNum == SHADOW_ARMOR || skillNum == OMAN_STUN || skillNum == SCALES_EARTH_DRAGON || skillNum == SCALES_WATER_DRAGON
-                || skillNum == SCALES_FIRE_DRAGON || skillNum == COOK_STR || skillNum == COOK_DEX || skillNum == COOK_INT || skillNum == ARMOR_BRAKE
-                || skillNum == SHADOW_FANG || skillNum == CLANBUFF_YES || skillNum == God_buff || skillNum == COOK_GROW || skillNum == DESPERADO
-                || skillNum == MIRROR_IMAGE || skillNum == RANK_BUFF_1 || skillNum == RANK_BUFF_2 || skillNum == RANK_BUFF_3
-                || skillNum == RANK_BUFF_4 || skillNum == RANK_BUFF_5;
+        return skillNum == ABSOLUTE_BARRIER || skillNum == ADVANCE_SPIRIT || skillNum == SHOCK_STUN
+                || skillNum == REDUCTION_ARMOR || skillNum == SOLID_CARRIAGE || skillNum == COUNTER_BARRIER
+                || skillNum == COMA_A || skillNum == COMA_B || skillNum == ANTA_MAAN || skillNum == FAFU_MAAN
+                || skillNum == LIND_MAAN || skillNum == VALA_MAAN || skillNum == BIRTH_MAAN || skillNum == SHAPE_MAAN
+                || skillNum == LIFE_MAAN || skillNum == ANTA_BUFF || skillNum == FAFU_BUFF || skillNum == ANTA_MESSAGE_6
+                || skillNum == ANTA_MESSAGE_7 || skillNum == ANTA_MESSAGE_8 || skillNum == PREDICATEDELAY
+                || skillNum == FEATHER_BUFF_A || skillNum == FEATHER_BUFF_B || skillNum == FEATHER_BUFF_C
+                || skillNum == FEATHER_BUFF_D || skillNum == PAP_DEATH_PORTION || skillNum == PAP_DEATH_HELL
+                || skillNum == PAP_REDUCE_HELL || skillNum == STATUS_DRAGON_PEARL || skillNum == UNCANNY_DODGE
+                || skillNum == DRESS_EVASION || skillNum == SHADOW_ARMOR || skillNum == OMAN_STUN
+                || skillNum == SCALES_EARTH_DRAGON || skillNum == SCALES_WATER_DRAGON || skillNum == SCALES_FIRE_DRAGON
+                || skillNum == COOK_STR || skillNum == COOK_DEX || skillNum == COOK_INT || skillNum == ARMOR_BRAKE
+                || skillNum == SHADOW_FANG || skillNum == CLANBUFF_YES || skillNum == God_buff || skillNum == COOK_GROW
+                || skillNum == DESPERADO || skillNum == MIRROR_IMAGE || skillNum == RANK_BUFF_1
+                || skillNum == RANK_BUFF_2 || skillNum == RANK_BUFF_3 || skillNum == RANK_BUFF_4
+                || skillNum == RANK_BUFF_5;
     }
 
     private void detection(L1PcInstance pc, boolean detectAll) {
@@ -5667,14 +5784,16 @@ public class L1SkillUse {
         }
     }
 
-	/*
-	 * private void detection(L1PcInstance pc) { if (pc == null ) { return; }
-	 *
-	 * if (!pc.isGmInvis() && pc.isInvisble() && !pc.isGhost()) { pc.delInvis(); pc.beginInvisTimer(); }
-	 *
-	 * for (L1PcInstance tgt : L1World.getInstance().getVisiblePlayer(pc)) { if (!tgt.isGmInvis() && tgt.isInvisble() && !pc.isGhost()) {
-	 * tgt.delInvis(); } } L1WorldTraps.getInstance().onDetection(pc); }
-	 */
+    /*
+     * private void detection(L1PcInstance pc) { if (pc == null ) { return; }
+     *
+     * if (!pc.isGmInvis() && pc.isInvisble() && !pc.isGhost()) { pc.delInvis();
+     * pc.beginInvisTimer(); }
+     *
+     * for (L1PcInstance tgt : L1World.getInstance().getVisiblePlayer(pc)) { if
+     * (!tgt.isGmInvis() && tgt.isInvisble() && !pc.isGhost()) { tgt.delInvis();
+     * } } L1WorldTraps.getInstance().onDetection(pc); }
+     */
 
     private boolean isTargetCalc(L1Character cha) {
         if (_skill.getTarget().equals("attack") && _skillId != 18) {
@@ -5788,9 +5907,11 @@ public class L1SkillUse {
         if (cha instanceof L1MonsterInstance) {
             isManaDrain = true;
         }
-        if ((_skillId == TURN_UNDEAD && (undeadType == 0 || undeadType == 2)) || (_skillId == TURN_UNDEAD && isTU == false)
-                || ((_skillId == ERASE_MAGIC || _skillId == SLOW || _skillId == MOB_SLOW_1 || _skillId == MOB_SLOW_18 || _skillId == MANA_DRAIN
-                || _skillId == GREATER_SLOW || _skillId == ENTANGLE || _skillId == WIND_SHACKLE) && isErase == false)
+        if ((_skillId == TURN_UNDEAD && (undeadType == 0 || undeadType == 2))
+                || (_skillId == TURN_UNDEAD && isTU == false)
+                || ((_skillId == ERASE_MAGIC || _skillId == SLOW || _skillId == MOB_SLOW_1 || _skillId == MOB_SLOW_18
+                        || _skillId == MANA_DRAIN || _skillId == GREATER_SLOW || _skillId == ENTANGLE
+                        || _skillId == WIND_SHACKLE) && isErase == false)
                 || (_skillId == MANA_DRAIN && isManaDrain == false)) {
             return true;
         }
@@ -5799,20 +5920,20 @@ public class L1SkillUse {
 
     public void removeNewIcon(L1PcInstance pc, int skillid) {
         switch (skillid) {
-            case ABSOLUTE_BLADE:
-            case DEATH_HEAL:
-            case ASSASSIN:
-            case SOUL_BARRIER:
-            case DESTROY:
-            case IMPACT:
-            case TITANL_RISING:
-            case BLAZING_SPIRITS:
-            case GRACE_AVATAR:
-                pc.sendPackets(new S_NewSkillIcon(skillid, false, -1));
-                pc.removeSkillEffect(skillid);
-                break;
-            default:
-                break;
+        case ABSOLUTE_BLADE:
+        case DEATH_HEAL:
+        case ASSASSIN:
+        case SOUL_BARRIER:
+        case DESTROY:
+        case IMPACT:
+        case TITANL_RISING:
+        case BLAZING_SPIRITS:
+        case GRACE_AVATAR:
+            pc.sendPackets(new S_NewSkillIcon(skillid, false, -1));
+            pc.removeSkillEffect(skillid);
+            break;
+        default:
+            break;
         }
     }
 }

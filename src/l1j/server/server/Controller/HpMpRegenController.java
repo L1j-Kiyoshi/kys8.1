@@ -44,7 +44,8 @@ public class HpMpRegenController implements Runnable {
             try {
                 _list = L1World.getInstance().getAllPlayers();
                 for (L1PcInstance pc : _list) {
-                    if (pc == null || (pc.getNetConnection() == null && !(pc instanceof L1RobotInstance)) || pc.noPlayerCK || pc.noPlayerck2) {
+                    if (pc == null || (pc.getNetConnection() == null && !(pc instanceof L1RobotInstance))
+                            || pc.noPlayerCK || pc.noPlayerck2) {
                         continue;
                     } else {
                         if (pc.isDead() || pc.isPrivateShop() || pc.isAutoClanjoin()) {
@@ -93,11 +94,11 @@ public class HpMpRegenController implements Runnable {
             Collection<L1PcInstance> _list;
             _list = L1World.getInstance().getAllPlayers();
             for (L1PcInstance pc : _list) {
-                //再び週間クエストでハラ面Wに変更
+                // 再び週間クエストでハラ面Wに変更
                 SimpleDateFormat day = new SimpleDateFormat("D");
                 String nowday = day.format(new Date());
                 if (pc.getQuestWeek() != Integer.parseInt(nowday)) {
-                    //リセット
+                    // リセット
                     if (pc.getLevel() <= 65) {
                         pc.setWeekType(1);
                     } else if (pc.getLevel() > 65 && pc.getLevel() <= 85) {
@@ -106,15 +107,16 @@ public class HpMpRegenController implements Runnable {
                         pc.setWeekType(3);
                     }
                     for (int i = 0; i < 3; i++)
-                        pc.setLineClear(i, false); //ラインクリアfalse
+                        pc.setLineClear(i, false); // ラインクリアfalse
 
                     for (int i = 0; i < 3; i++)
-                        pc.setReward(i, false);//補償受けるかどうかfalse
+                        pc.setReward(i, false);// 補償受けるかどうかfalse
 
                     for (int i = 0; i < 9; i++)
-                        pc.setWcount(i, 0); //キャッチ匹数の初期化
+                        pc.setWcount(i, 0); // キャッチ匹数の初期化
 
-                    //		pc.sendPackets(new S_SystemMessage("\\aG モンスタークエストが初期化されました。 "）、true）;
+                    // pc.sendPackets(new S_SystemMessage("\\aG
+                    // モンスタークエストが初期化されました。 "）、true）;
                     pc.setQuestWeek(Integer.parseInt(nowday));
                     //
                     pc.sendPackets(new S_WeekQuest(pc));
@@ -172,12 +174,14 @@ public class HpMpRegenController implements Runnable {
                         wis = 11;
                     }
                     baseMpr += wis - 10;
+                    baseMpr += CalcStat.calcMprPotion(_pc.getAbility().getTotalWis());
                 }
                 if (_pc.hasSkillEffect(L1SkillId.STATUS_BLUE_POTION2) == true) {
                     if (wis < 11) {
                         wis = 11;
                     }
                     baseMpr += wis - 8;
+                    baseMpr += CalcStat.calcMprPotion(_pc.getAbility().getTotalWis());
                 }
                 if (_pc.hasSkillEffect(L1SkillId.MEDITATION) == true) {
                     baseMpr += 5;
@@ -341,8 +345,7 @@ public class HpMpRegenController implements Runnable {
         if (pc.getInventory().checkEquipped(20207)) {
             return false;
         }
-        if (pc.getInventory().checkEquipped(21048)
-                && pc.getInventory().checkEquipped(21049)
+        if (pc.getInventory().checkEquipped(21048) && pc.getInventory().checkEquipped(21049)
                 && pc.getInventory().checkEquipped(21050)) {
             return false;
         }
@@ -351,8 +354,7 @@ public class HpMpRegenController implements Runnable {
     }
 
     private boolean isOverWeight(L1PcInstance pc) {
-        if (pc.hasSkillEffect(L1SkillId.EXOTIC_VITALIZE)
-                || pc.hasSkillEffect(L1SkillId.ADDITIONAL_FIRE)
+        if (pc.hasSkillEffect(L1SkillId.EXOTIC_VITALIZE) || pc.hasSkillEffect(L1SkillId.ADDITIONAL_FIRE)
                 || pc.hasSkillEffect(L1SkillId.SCALES_WATER_DRAGON)) {
             return false;
         }
@@ -377,7 +379,7 @@ public class HpMpRegenController implements Runnable {
             if (pc.getMapId() == 479) {
                 pc.addDmgup(2);
                 pc.addBowDmgup(2);
-//				pc.addSp(1);
+                // pc.addSp(1);
                 pc.getAbility().addSp(1);
                 pc.addMpr(2);
                 pc.sendPackets(new S_SPMR(pc));
@@ -393,7 +395,7 @@ public class HpMpRegenController implements Runnable {
             if (DanteasOk == false) {
                 pc.addDmgup(-2);
                 pc.addBowDmgup(-2);
-//				pc.addSp(-1);
+                // pc.addSp(-1);
                 pc.getAbility().addSp(-1);
                 pc.addMpr(-2);
                 pc.sendPackets(new S_SPMR(pc));
@@ -409,7 +411,7 @@ public class HpMpRegenController implements Runnable {
         L1Clan clan = L1World.getInstance().getClan(clanName);
         if (pc.getClanid() != 0 && clan.getOnlineClanMember().length >= Config.CLAN_COUNT && !pc.isClanBuff()) {
             pc.setSkillEffect(L1SkillId.CLANBUFF_YES, 0);
-            //pc.sendPackets(new S_PacketBox(S_PacketBox.CLAN_BUFF_ICON, 1));
+            // pc.sendPackets(new S_PacketBox(S_PacketBox.CLAN_BUFF_ICON, 1));
             pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 450, true));
             pc.setClanBuff(true);
         } else if (pc.getClanid() != 0 && clan.getOnlineClanMember().length < Config.CLAN_COUNT && pc.isClanBuff()) {
@@ -423,7 +425,7 @@ public class HpMpRegenController implements Runnable {
      * 指定されたPCがライフストリームの範囲内であることをチェックする
      *
      * @param pc
-     * PC
+     *            PC
      * @return true PCがライフストリームの範囲内にある場合
      */
     private static L1EffectInstance effect = null;
@@ -434,8 +436,7 @@ public class HpMpRegenController implements Runnable {
                 continue;
             }
             effect = (L1EffectInstance) object;
-            if (effect.getNpcId() == 81169
-                    && effect.getLocation().getTileLineDistance(pc.getLocation()) < 4) {
+            if (effect.getNpcId() == 81169 && effect.getLocation().getTileLineDistance(pc.getLocation()) < 4) {
                 return true;
             }
         }
@@ -445,13 +446,10 @@ public class HpMpRegenController implements Runnable {
 
     private boolean isInn(L1PcInstance pc) {
         mapId = pc.getMapId();
-        return (mapId == 16384 || mapId == 16896 || mapId == 17408
-                || mapId == 17492 || mapId == 17820 || mapId == 17920
-                || mapId == 18432 || mapId == 18944 || mapId == 19456
-                || mapId == 19968 || mapId == 20480 || mapId == 20992
-                || mapId == 21504 || mapId == 22016 || mapId == 22528
-                || mapId == 23040 || mapId == 23552 || mapId == 24064
-                || mapId == 24576 || mapId == 25088) ? true : false;
+        return (mapId == 16384 || mapId == 16896 || mapId == 17408 || mapId == 17492 || mapId == 17820 || mapId == 17920
+                || mapId == 18432 || mapId == 18944 || mapId == 19456 || mapId == 19968 || mapId == 20480
+                || mapId == 20992 || mapId == 21504 || mapId == 22016 || mapId == 22528 || mapId == 23040
+                || mapId == 23552 || mapId == 24064 || mapId == 24576 || mapId == 25088) ? true : false;
     }
 
 }

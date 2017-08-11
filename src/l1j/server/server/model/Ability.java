@@ -15,7 +15,7 @@ public class Ability {
     private static final int LIMIT_MIN = 0;
     private static final int LIMIT_MAX = 127;
 
-    private byte str = 0; //ベース力+レベルアップまたはエリキシルのために上昇した力
+    private byte str = 0; // ベース力+レベルアップまたはエリキシルのために上昇した力
     private byte baseStr = 0; // ベース力
     private byte addedStr = 0; // 魔法のアイテムに上昇した力
 
@@ -91,23 +91,19 @@ public class Ability {
     }
 
     public int getMagicLevel() {
-        if (character instanceof L1PcInstance
-                && ((L1PcInstance) character).getClassFeature() != null)
-            return ((L1PcInstance) character).getClassFeature().getMagicLevel(
-                    character.getLevel());
+        if (character instanceof L1PcInstance && ((L1PcInstance) character).getClassFeature() != null)
+            return ((L1PcInstance) character).getClassFeature().getMagicLevel(character.getLevel());
         return character.getLevel() / 4;
     }
 
     public int getMagicBonus() {
         int i = getTotalInt();
-        return CalcStat.getMagicBonus(i);
-        /*
-         * if (i <= 5) return -2; else if (i <= 8) return -1; else if (i <= 11)
-		 * return 0; else if (i <= 14) return 1; else if (i <= 17) return 2;
-		 * else if (i <= 24) return i - 15; else if (i <= 35) return 10; else if
-		 * (i <= 42) return 11; else if (i <= 49) return 12; else if (i <= 50)
-		 * return 13; else return i - 25;
-		 */
+        if (character instanceof L1PcInstance) {
+            L1PcInstance pc = (L1PcInstance) character;
+            return CalcStat.calcMagicBonus(pc.getType(), i);
+        } else {
+            return CalcStat.getMagicBonus(i);
+        }
     }
 
     public void setStr(int i) {
@@ -433,85 +429,86 @@ public class Ability {
         int[] minabllity = new int[6];
         // int minStr, minDex, minCon, minWis, minCha, minInt, remainStats;
         switch (classId) {
-            case L1PcInstance.CLASSID_PRINCE:
-            case L1PcInstance.CLASSID_PRINCESS:
-                minabllity[0] = 13;
-                minabllity[1] = 9;
-                minabllity[2] = 11;
-                minabllity[3] = 11;
-                minabllity[4] = 13;
-                minabllity[5] = 9;
-                break;
-            case L1PcInstance.CLASSID_KNIGHT_MALE:
-            case L1PcInstance.CLASSID_KNIGHT_FEMALE:
-                minabllity[0] = 16;
-                minabllity[1] = 12;
-                minabllity[2] = 16;
-                minabllity[3] = 9;
-                minabllity[4] = 10;
-                minabllity[5] = 8;
-                break;
-            case L1PcInstance.CLASSID_WIZARD_MALE:
-            case L1PcInstance.CLASSID_WIZARD_FEMALE:
-                minabllity[0] = 8;
-                minabllity[1] = 7;
-                minabllity[2] = 12;
-                minabllity[3] = 14;
-                minabllity[4] = 8;
-                minabllity[5] = 14;
-                break;
-            case L1PcInstance.CLASSID_ELF_MALE:
-            case L1PcInstance.CLASSID_ELF_FEMALE:
-                minabllity[0] = 10;
-                minabllity[1] = 12;
-                minabllity[2] = 12;
-                minabllity[3] = 12;
-                minabllity[4] = 9;
-                minabllity[5] = 12;
-                break;
-            case L1PcInstance.CLASSID_DARK_ELF_MALE:
-            case L1PcInstance.CLASSID_DARK_ELF_FEMALE:
-                minabllity[0] = 15;
-                minabllity[1] = 12;
-                minabllity[2] = 12;
-                minabllity[3] = 10;
-                minabllity[4] = 8;
-                minabllity[5] = 11;
-                break;
-            case L1PcInstance.CLASSID_DRAGONKNIGHT_MALE:
-            case L1PcInstance.CLASSID_DRAGONKNIGHT_FEMALE:
-                minabllity[0] = 13;
-                minabllity[1] = 11;
-                minabllity[2] = 14;
-                minabllity[3] = 10;
-                minabllity[4] = 8;
-                minabllity[5] = 10;
-                break;
-            case L1PcInstance.CLASSID_BLACKWIZARD_MALE:
-            case L1PcInstance.CLASSID_BLACKWIZARD_FEMALE:
-                minabllity[0] = 9;
-                minabllity[1] = 10;
-                minabllity[2] = 12;
-                minabllity[3] = 14;
-                minabllity[4] = 8;
-                minabllity[5] = 12;
-                break;
-            case L1PcInstance.CLASSID_WARRIOR_MALE:
-            case L1PcInstance.CLASSID_WARRIOR_FEMALE:
-                minabllity[0] = 16;
-                minabllity[1] = 13;
-                minabllity[2] = 16;
-                minabllity[3] = 7;
-                minabllity[4] = 9;
-                minabllity[5] = 10;
-                break;
-            default:
+        case L1PcInstance.CLASSID_PRINCE:
+        case L1PcInstance.CLASSID_PRINCESS:
+            minabllity[0] = 13;
+            minabllity[1] = 9;
+            minabllity[2] = 11;
+            minabllity[3] = 11;
+            minabllity[4] = 13;
+            minabllity[5] = 9;
+            break;
+        case L1PcInstance.CLASSID_KNIGHT_MALE:
+        case L1PcInstance.CLASSID_KNIGHT_FEMALE:
+            minabllity[0] = 16;
+            minabllity[1] = 12;
+            minabllity[2] = 16;
+            minabllity[3] = 9;
+            minabllity[4] = 10;
+            minabllity[5] = 8;
+            break;
+        case L1PcInstance.CLASSID_WIZARD_MALE:
+        case L1PcInstance.CLASSID_WIZARD_FEMALE:
+            minabllity[0] = 8;
+            minabllity[1] = 7;
+            minabllity[2] = 12;
+            minabllity[3] = 14;
+            minabllity[4] = 8;
+            minabllity[5] = 14;
+            break;
+        case L1PcInstance.CLASSID_ELF_MALE:
+        case L1PcInstance.CLASSID_ELF_FEMALE:
+            minabllity[0] = 10;
+            minabllity[1] = 12;
+            minabllity[2] = 12;
+            minabllity[3] = 12;
+            minabllity[4] = 9;
+            minabllity[5] = 12;
+            break;
+        case L1PcInstance.CLASSID_DARK_ELF_MALE:
+        case L1PcInstance.CLASSID_DARK_ELF_FEMALE:
+            minabllity[0] = 15;
+            minabllity[1] = 12;
+            minabllity[2] = 12;
+            minabllity[3] = 10;
+            minabllity[4] = 8;
+            minabllity[5] = 11;
+            break;
+        case L1PcInstance.CLASSID_DRAGONKNIGHT_MALE:
+        case L1PcInstance.CLASSID_DRAGONKNIGHT_FEMALE:
+            minabllity[0] = 13;
+            minabllity[1] = 11;
+            minabllity[2] = 14;
+            minabllity[3] = 10;
+            minabllity[4] = 8;
+            minabllity[5] = 10;
+            break;
+        case L1PcInstance.CLASSID_BLACKWIZARD_MALE:
+        case L1PcInstance.CLASSID_BLACKWIZARD_FEMALE:
+            minabllity[0] = 9;
+            minabllity[1] = 10;
+            minabllity[2] = 12;
+            minabllity[3] = 14;
+            minabllity[4] = 8;
+            minabllity[5] = 12;
+            break;
+        case L1PcInstance.CLASSID_WARRIOR_MALE:
+        case L1PcInstance.CLASSID_WARRIOR_FEMALE:
+            minabllity[0] = 16;
+            minabllity[1] = 13;
+            minabllity[2] = 16;
+            minabllity[3] = 7;
+            minabllity[4] = 9;
+            minabllity[5] = 10;
+            break;
+        default:
 
         }
         minabllity = getBaseStatDiff(minabllity);
         /*
-		 * for(int i =0 ; i<minabllity.length; i++){ System.out.println(minabllity[i]); }
-		 */
+         * for(int i =0 ; i<minabllity.length; i++){
+         * System.out.println(minabllity[i]); }
+         */
         return minabllity;
     }
 

@@ -45,6 +45,7 @@ import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_ServerMessage;
 import l1j.server.server.serverpackets.S_SkillSound;
+import l1j.server.server.utils.CalcStat;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class L1HealingPotion {
@@ -125,8 +126,8 @@ public class L1HealingPotion {
     }
 
     private static void loadXml(HashMap<Integer, L1HealingPotion> dataMap) {
-//		PerformanceTimer timer = new PerformanceTimer();
-//		System.out.print("■ ポーション回復量データ .......................... ");
+        // PerformanceTimer timer = new PerformanceTimer();
+        // System.out.print("■ ポーション回復量データ .......................... ");
         try {
             JAXBContext context = JAXBContext.newInstance(L1HealingPotion.ItemEffectList.class);
 
@@ -146,7 +147,7 @@ public class L1HealingPotion {
             _log.log(Level.SEVERE, _path + "のロードに失敗しまし", e);
             System.exit(0);
         }
-//		System.out.println("■ ロード正常終了」+ timer.get（）+ "ms"）;
+        // System.out.println("■ ロード正常終了」+ timer.get（）+ "ms"）;
     }
 
     public static void load() {
@@ -160,7 +161,7 @@ public class L1HealingPotion {
     }
 
     public boolean use(L1PcInstance pc, L1ItemInstance item) {
-        if (pc.hasSkillEffect(71) == true) {  // ディケイポーションの状態
+        if (pc.hasSkillEffect(71) == true) { // ディケイポーションの状態
             pc.sendPackets(new S_ServerMessage(698)); // 魔力によって何も飲むことができません。
             return false;
         }
@@ -190,7 +191,7 @@ public class L1HealingPotion {
 
         pc.sendPackets(new S_SkillSound(pc.getId(), effect.getGfxId()));
         pc.broadcastPacket(new S_SkillSound(pc.getId(), effect.getGfxId()));
-        //pc.sendPackets(new S_ServerMessage(77)); // \f1気分が良くなりました。
+        // pc.sendPackets(new S_ServerMessage(77)); // \f1気分が良くなりました。
 
         int chance = effect.getMax() - effect.getMin();
         double healHp = effect.getMin();
@@ -198,18 +199,18 @@ public class L1HealingPotion {
             healHp += _random.nextInt(chance) + 1;
         }
         healHp *= (double) pc.getPotionRecoveryRatePct() / 100 + 1;
-        if (pc.hasSkillEffect(POLLUTE_WATER) || pc.hasSkillEffect(L1SkillId.DESPERADO)) { //デスペラード、ポールルートウォーターポーション回復量半減
+        healHp *= (double) CalcStat.calcHprPotion(pc.getAbility().getTotalCon()) / 100 + 1;
+        if (pc.hasSkillEffect(POLLUTE_WATER) || pc.hasSkillEffect(L1SkillId.DESPERADO)) { // デスペラード、ポールルートウォーターポーション回復量半減
             healHp *= 0.3;
         }
-        if (pc.hasSkillEffect(PAP_DEATH_PORTION)) {  // デスポーション
+        if (pc.hasSkillEffect(PAP_DEATH_PORTION)) { // デスポーション
             L1Character cha = null;
             pc.sendPackets(new S_ServerMessage(167));
             pc.setCurrentHp(pc.getCurrentHp() - (int) healHp);
             if (pc != null && pc.isInvisble()) {
                 pc.delInvis();
             }
-            if (cha instanceof L1SummonInstance
-                    || cha instanceof L1PetInstance) {
+            if (cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
                 L1NpcInstance npc = (L1NpcInstance) cha;
                 npc.broadcastPacket(new S_SkillSound(cha.getId(), 7781));
             }
@@ -257,7 +258,7 @@ public class L1HealingPotion {
         }
 
         pc.setCurrentHp(pc.getCurrentHp() + (int) healHp);
-        //System.out.println("ポーション回復量： "+ healHp）;
+        // System.out.println("ポーション回復量： "+ healHp）;
         if (getRemove() > 0) {
             if (chargeCount > 0) {
                 item.setChargeCount(chargeCount - getRemove());
@@ -274,7 +275,7 @@ public class L1HealingPotion {
         if (pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) {
             pc.killSkillEffectTimer(L1SkillId.ABSOLUTE_BARRIER);
             pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 43, false));
-            //pc.startMpRegeneration();
+            // pc.startMpRegeneration();
             pc.startMpRegenerationByDoll();
         }
     }

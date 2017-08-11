@@ -149,331 +149,6 @@ public class L1Attack {
         return _leverage;
     }
 
-    private static final int[] strHit = new int[128];
-
-    static {
-        for (int str = 0; str <= 7; str++) {
-            strHit[str] = -2;
-        }
-        strHit[8] = -1;
-        strHit[9] = -1;
-        strHit[10] = 0;
-        strHit[11] = 0;
-        strHit[12] = 1;
-        strHit[13] = 1;
-        strHit[14] = 2;
-        strHit[15] = 2;
-        strHit[16] = 3;
-        strHit[17] = 3;
-        strHit[18] = 4;
-        strHit[19] = 4;
-        strHit[20] = 4;
-        strHit[21] = 5;
-        strHit[22] = 5;
-        strHit[23] = 5;
-        strHit[24] = 6;
-        strHit[25] = 6;
-        strHit[26] = 6;
-        strHit[27] = 7;
-        strHit[28] = 7;
-        strHit[29] = 7;
-        strHit[30] = 8;
-        strHit[31] = 8;
-        strHit[32] = 8;
-        strHit[33] = 9;
-        strHit[34] = 9;
-        strHit[35] = 9;
-        strHit[36] = 10;
-        strHit[37] = 10;
-        strHit[38] = 10;
-        strHit[39] = 11;
-        strHit[40] = 11;
-        strHit[41] = 11;
-        strHit[42] = 12;
-        strHit[43] = 12;
-        strHit[44] = 12;
-        strHit[45] = 13;
-        strHit[46] = 13;
-        strHit[47] = 13;
-        strHit[48] = 14;
-        strHit[49] = 14;
-        strHit[50] = 14;
-        strHit[51] = 15;
-        strHit[52] = 15;
-        strHit[53] = 15;
-        strHit[54] = 16;
-        strHit[55] = 16;
-        strHit[56] = 16;
-        strHit[57] = 17;
-        strHit[57] = 17;
-        strHit[58] = 17;
-        int Hit = 18;
-        for (int str = 59; str <= 127; str++) { // 59~127は3ごとに+1
-            if (str % 3 == 1) {
-                Hit++;
-            }
-            strHit[str] = Hit;
-        }
-    }
-
-    private static final int[] dexHit = new int[128];
-
-    static {
-        // DEXダメージ補正
-        for (int dex = 0; dex <= 6; dex++) {
-            // 0~11は0
-            dexHit[dex] = -2;
-        }
-        dexHit[7] = -1;
-        dexHit[8] = -1;
-        dexHit[9] = 0;
-        dexHit[10] = 0;
-        dexHit[11] = 1;
-        dexHit[12] = 1;
-        dexHit[13] = 2;
-        dexHit[14] = 2;
-        dexHit[15] = 3;
-        dexHit[16] = 3;
-        dexHit[17] = 4;
-        dexHit[18] = 4;
-        dexHit[19] = 5;
-        dexHit[20] = 6;
-        dexHit[21] = 7;
-        dexHit[22] = 8;
-        dexHit[23] = 9;
-        dexHit[24] = 10;
-        dexHit[25] = 11;
-        dexHit[26] = 12;
-        dexHit[27] = 13;
-        dexHit[28] = 14;
-        dexHit[29] = 15;
-        dexHit[30] = 16;
-        dexHit[31] = 17;
-        dexHit[32] = 18;
-        dexHit[33] = 19;
-        dexHit[34] = 19;
-        dexHit[35] = 19;
-        dexHit[36] = 20;
-        dexHit[37] = 20;
-        dexHit[38] = 20;
-        dexHit[39] = 21;
-        dexHit[40] = 21;
-        dexHit[41] = 21;
-        dexHit[42] = 22;
-        dexHit[43] = 22;
-        dexHit[44] = 22;
-        dexHit[45] = 23;
-        dexHit[46] = 23;
-        dexHit[47] = 23;
-        dexHit[48] = 24;
-        dexHit[49] = 24;
-        dexHit[50] = 24;
-        dexHit[51] = 25;
-        dexHit[52] = 25;
-        dexHit[53] = 25;
-        dexHit[54] = 26;
-        dexHit[55] = 26;
-        dexHit[56] = 26;
-        dexHit[57] = 27;
-        dexHit[58] = 27;
-        dexHit[59] = 27;
-        dexHit[60] = 28;
-        dexHit[61] = 28;
-        dexHit[62] = 28;
-        dexHit[63] = 29;
-        dexHit[64] = 29;
-        dexHit[65] = 29;
-        dexHit[66] = 30;
-        dexHit[67] = 30;
-        dexHit[68] = 30;
-
-        int hit = 31;
-        for (int dex = 69; dex <= 127; dex++) { // 48~127は3ごとに+1
-            if (dex % 3 == 1) {
-                hit++;
-            }
-            dexHit[dex] = hit;
-        }
-    }
-
-    private static final int[] strDmg = new int[128];
-
-    static {
-        strDmg[7] = 2;
-        strDmg[8] = 2;
-        strDmg[9] = 2;
-        strDmg[10] = 3;
-        strDmg[11] = 3;
-        strDmg[12] = 4;
-        strDmg[13] = 4;
-        strDmg[14] = 5;
-        strDmg[15] = 5;
-        strDmg[16] = 6;
-        strDmg[17] = 6;
-        strDmg[18] = 7;
-        strDmg[19] = 7;
-        strDmg[20] = 8;
-        strDmg[21] = 8;
-        strDmg[22] = 9;
-        strDmg[23] = 9;
-        strDmg[24] = 10;
-        strDmg[25] = 10;
-        strDmg[26] = 11;
-        strDmg[27] = 11;
-        strDmg[28] = 12;
-        strDmg[29] = 12;
-        strDmg[30] = 13;
-        strDmg[31] = 13;
-        strDmg[32] = 14;
-        strDmg[33] = 14;
-        strDmg[34] = 15;
-        strDmg[35] = 15;
-        strDmg[36] = 16;
-        strDmg[37] = 16;
-        strDmg[38] = 17;
-        strDmg[39] = 17;
-        strDmg[40] = 18;
-        strDmg[41] = 18;
-        strDmg[42] = 19;
-        strDmg[43] = 19;
-        strDmg[44] = 20;
-        strDmg[45] = 20;
-        strDmg[46] = 21;
-        strDmg[47] = 21;
-        strDmg[48] = 22;
-        strDmg[49] = 22;
-        strDmg[50] = 23;
-        strDmg[51] = 23;
-        strDmg[52] = 24;
-        strDmg[53] = 24;
-        strDmg[54] = 25;
-        strDmg[55] = 25;
-        strDmg[56] = 26;
-        strDmg[57] = 26;
-        strDmg[58] = 27;
-        strDmg[59] = 27;
-        strDmg[60] = 28;
-        strDmg[61] = 28;
-        strDmg[62] = 29;
-        strDmg[63] = 29;
-        strDmg[64] = 30;
-        strDmg[65] = 30;
-        strDmg[66] = 31;
-        strDmg[67] = 31;
-        strDmg[68] = 32;
-        strDmg[69] = 32;
-        strDmg[70] = 33;
-        strDmg[71] = 33;
-        strDmg[72] = 34;
-
-    }
-
-    private static final int[] dexDmg = new int[128];
-
-    static {
-        // DEXダメージ補正
-        dexDmg[7] = 2;
-        dexDmg[8] = 2;
-        dexDmg[9] = 3;
-        dexDmg[10] = 3;
-        dexDmg[11] = 3;
-        dexDmg[12] = 4;
-        dexDmg[13] = 4;
-        dexDmg[14] = 4;
-        dexDmg[15] = 5;
-        dexDmg[16] = 5;
-        dexDmg[17] = 5;
-        dexDmg[18] = 6;
-        dexDmg[19] = 6;
-        dexDmg[20] = 6;
-        dexDmg[21] = 7;
-        dexDmg[22] = 7;
-        dexDmg[23] = 7;
-        dexDmg[24] = 8;
-        dexDmg[25] = 8;
-        dexDmg[26] = 8;
-        dexDmg[27] = 9;
-        dexDmg[28] = 9;
-        dexDmg[29] = 9;
-        dexDmg[30] = 10;
-        dexDmg[31] = 10;
-        dexDmg[32] = 10;
-        dexDmg[33] = 11;
-        dexDmg[34] = 11;
-        dexDmg[35] = 11;
-        dexDmg[36] = 12;
-        dexDmg[37] = 12;
-        dexDmg[38] = 12;
-        dexDmg[39] = 13;
-        dexDmg[40] = 13;
-        dexDmg[41] = 13;
-        dexDmg[42] = 14;
-        dexDmg[43] = 14;
-        dexDmg[44] = 14;
-        dexDmg[45] = 15;
-        dexDmg[46] = 15;
-        dexDmg[47] = 15;
-        dexDmg[48] = 16;
-        dexDmg[49] = 16;
-        dexDmg[50] = 16;
-        dexDmg[51] = 17;
-        dexDmg[52] = 17;
-        dexDmg[53] = 17;
-        dexDmg[54] = 18;
-        dexDmg[55] = 18;
-        dexDmg[56] = 18;
-        dexDmg[57] = 19;
-        dexDmg[58] = 19;
-        dexDmg[59] = 19;
-        dexDmg[60] = 20;
-        dexDmg[61] = 20;
-        dexDmg[62] = 20;
-        dexDmg[63] = 21;
-        dexDmg[64] = 21;
-        dexDmg[65] = 21;
-        dexDmg[66] = 22;
-        dexDmg[67] = 22;
-        dexDmg[68] = 22;
-        dexDmg[69] = 23;
-        dexDmg[70] = 23;
-        dexDmg[71] = 23;
-        dexDmg[72] = 24;
-    }
-
-    private static final int[] intDmg = new int[128];
-
-    static {
-        // intダメージ補正
-        for (int int1 = 0; int1 <= 14; int1++) {
-            intDmg[int1] = 0;
-        }
-        intDmg[15] = 3;
-        intDmg[16] = 4;
-        intDmg[17] = 5;
-        intDmg[18] = 6;
-        intDmg[19] = 6;
-        intDmg[20] = 7;
-        intDmg[21] = 7;
-        intDmg[22] = 8;
-        intDmg[23] = 8;
-        intDmg[24] = 9;
-        intDmg[25] = 9;
-        intDmg[26] = 9;
-        intDmg[27] = 10;
-        intDmg[28] = 10;
-        intDmg[29] = 11;
-        intDmg[30] = 11;
-        intDmg[31] = 12;
-        intDmg[32] = 12;
-        intDmg[33] = 13;
-        intDmg[34] = 13;
-        int dmg = 25;
-        for (int int1 = 35; int1 <= 127; int1++) { // 35~127は1に+1
-            dmg += 1;
-            intDmg[int1] = dmg;
-        }
-    }
-
     public void setActId(int actId) {
         _attckActId = actId;
     }
@@ -545,12 +220,12 @@ public class L1Attack {
                 _weaponAttrLevel = weapon.getAttrEnchantLevel();
             }
             // ステータスによる追加ダメージ補正
-            if (_weaponType == 20) { // 弓の場合はDEX値を参照
-                _statusDamage = dexDmg[_pc.getAbility().getTotalDex()];
+            if (_weaponType == 20 || _weaponType == 62) { // 弓の場合はDEX値を参照
+                _statusDamage = CalcStat.calcBowDmgup(_pc.getAbility().getTotalDex());
             } else if (_weaponType2 == 17) {// キーリンクはポイントの影響
-                _statusDamage = intDmg[_pc.getAbility().getTotalInt()];
+                _statusDamage = CalcStat.calcMagicDmg(_pc.getAbility().getTotalInt());
             } else {
-                _statusDamage = strDmg[_pc.getAbility().getTotalStr()];
+                _statusDamage = CalcStat.calcDmgup(_pc.getAbility().getTotalStr());
             }
         } else if (attacker instanceof L1NpcInstance) {
             _npc = (L1NpcInstance) attacker;
@@ -4049,23 +3724,18 @@ public class L1Attack {
     }
 
     /**
-     * ステータス+武器による攻城
+     * ステータス+武器による命中率補正
      **/
     private int PchitAdd() {
         int value = 0;
         if (_pc instanceof L1RobotInstance) {
             return 10;
         }
-        if (_pc.getAbility().getTotalStr() > 59) {
-            value += (strHit[58]);
-        } else {
-            value += (strHit[_pc.getAbility().getTotalStr() - 1]);
-        }
 
-        if (_pc.getAbility().getTotalDex() > 60) {
-            value += (dexHit[59]);
+        if (_weaponType == 20 || _weaponType == 62) { // 弓の場合はDEX値を参照
+            value += CalcStat.calcBowHitup(_pc.getAbility().getTotalDex());
         } else {
-            value += (dexHit[_pc.getAbility().getTotalDex() - 1]);
+            value += CalcStat.calcHitup(_pc.getAbility().getTotalStr());
         }
 
         if (_weaponType != 20 && _weaponType != 62) {
