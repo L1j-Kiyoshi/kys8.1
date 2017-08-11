@@ -1,0 +1,14 @@
+INSERT INTO `ub_times` VALUES (1, 300);
+INSERT INTO `ub_times` VALUES (1, 600);
+INSERT INTO `ub_times` VALUES (1, 900);
+INSERT INTO `ub_times` VALUES (1, 1200);
+INSERT INTO `ub_times` VALUES (1, 1500);
+INSERT INTO `ub_times` VALUES (1, 1800);
+INSERT INTO `ub_times` VALUES (1, 2100);
+INSERT INTO `ub_times` VALUES (1, 2359);
+INSERT INTO `ub_times` VALUES (2, 400);
+INSERT INTO `ub_times` VALUES (2, 800);
+INSERT INTO `ub_times` VALUES (2, 1200);
+INSERT INTO `ub_times` VALUES (2, 1600);
+INSERT INTO `ub_times` VALUES (2, 2000);
+INSERT INTO `ub_times` VALUES (2, 2359);

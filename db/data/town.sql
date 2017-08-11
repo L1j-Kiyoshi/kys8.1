@@ -1,0 +1,11 @@
+INSERT INTO `town` VALUES (1, '話せる島', 0, NULL, 0, 0, 0, 0, 0, 0);
+INSERT INTO `town` VALUES (2, 'シルバーナイトタウン', 0, NULL, 0, 0, 0, 0, 0, 0);
+INSERT INTO `town` VALUES (3, 'グルーディオ', 0, NULL, 0, 0, 0, 0, 0, 0);
+INSERT INTO `town` VALUES (4, '火田村', 0, NULL, 0, 0, 0, 0, 0, 0);
+INSERT INTO `town` VALUES (5, 'オジュベク', 0, NULL, 0, 0, 0, 0, 0, 0);
+INSERT INTO `town` VALUES (6, 'ケント', 0, NULL, 0, 0, 0, 0, 0, 0);
+INSERT INTO `town` VALUES (7, 'ギラン', 0, NULL, 0, 0, 0, 0, 0, 0);
+INSERT INTO `town` VALUES (8, 'ハイネ', 0, NULL, 0, 0, 0, 0, 0, 0);
+INSERT INTO `town` VALUES (9, 'ウェルダン', 0, NULL, 0, 0, 0, 0, 0, 0);
+INSERT INTO `town` VALUES (10, 'オーレン', 0, NULL, 0, 0, 0, 0, 0, 0);
+INSERT INTO `town` VALUES (19, 'クラウディア', 0, NULL, 0, 0, 0, 0, 0, 0);
