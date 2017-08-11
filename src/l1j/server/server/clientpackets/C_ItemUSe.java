@@ -89,48 +89,7 @@ import l1j.server.server.model.poison.L1DamagePoison;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.model.skill.L1SkillUse;
 import l1j.server.server.monitor.LoggerInstance;
-import l1j.server.server.serverpackets.S_ACTION_UI;
-import l1j.server.server.serverpackets.S_ACTION_UI2;
-import l1j.server.server.serverpackets.S_AddSkill;
-import l1j.server.server.serverpackets.S_AttackPacket;
-import l1j.server.server.serverpackets.S_AttackStatus;
-import l1j.server.server.serverpackets.S_Board;
-import l1j.server.server.serverpackets.S_ChatPacket;
-import l1j.server.server.serverpackets.S_ClanName;
-import l1j.server.server.serverpackets.S_CurseBlind;
-import l1j.server.server.serverpackets.S_DoActionGFX;
-import l1j.server.server.serverpackets.S_HPUpdate;
-import l1j.server.server.serverpackets.S_IdentifyDesc;
-import l1j.server.server.serverpackets.S_ItemName;
-import l1j.server.server.serverpackets.S_ItemStatus;
-import l1j.server.server.serverpackets.S_Liquor;
-import l1j.server.server.serverpackets.S_MPUpdate;
-import l1j.server.server.serverpackets.S_MatizCloudia;
-import l1j.server.server.serverpackets.S_Message_YN;
-import l1j.server.server.serverpackets.S_NPCTalkReturn;
-import l1j.server.server.serverpackets.S_NewCreateItem;
-import l1j.server.server.serverpackets.S_NewSkillIcon;
-import l1j.server.server.serverpackets.S_OwnCharAttrDef;
-import l1j.server.server.serverpackets.S_OwnCharStatus;
-import l1j.server.server.serverpackets.S_OwnCharStatus2;
-import l1j.server.server.serverpackets.S_PacketBox;
-import l1j.server.server.serverpackets.S_Paralysis;
-import l1j.server.server.serverpackets.S_ReturnedStat;
-import l1j.server.server.serverpackets.S_SPMR;
-import l1j.server.server.serverpackets.S_Serchdrop2;
-import l1j.server.server.serverpackets.S_ServerMessage;
-import l1j.server.server.serverpackets.S_ShowPolyList;
-import l1j.server.server.serverpackets.S_SkillBrave;
-import l1j.server.server.serverpackets.S_SkillHaste;
-import l1j.server.server.serverpackets.S_SkillIconBlessOfEva;
-import l1j.server.server.serverpackets.S_SkillIconGFX;
-import l1j.server.server.serverpackets.S_SkillIconWisdomPotion;
-import l1j.server.server.serverpackets.S_SkillSound;
-import l1j.server.server.serverpackets.S_Sound;
-import l1j.server.server.serverpackets.S_SummonPack;
-import l1j.server.server.serverpackets.S_SystemMessage;
-import l1j.server.server.serverpackets.S_TamWindow;
-import l1j.server.server.serverpackets.S_UseAttackSkill;
+import l1j.server.server.serverpackets.*;
 import l1j.server.server.templates.L1Armor;
 import l1j.server.server.templates.L1BookMark;
 import l1j.server.server.templates.L1EtcItem;
@@ -4208,10 +4167,21 @@ public class C_ItemUSe extends ClientBasePacket {
                     }
                     break;
 
-                    case 200000: // 回想のキャンドル
-                        // pc.sendPackets(new S_Message_YN(622, "回想のロウソクを使用しますか？
-                        // "））;
-                        pc.sendPackets(new S_SystemMessage("\\aA警告:\\aG[.ステータス初期化]\\aA コマンドを使用します。"));
+                    case 200000: // 希望のロウソク
+                        if (pc.getLevel() != pc.getHighLevel()) {
+                            pc.sendPackets(new S_SystemMessage("レベルがダウンしたキャラクターです。レベルアップした後ご利用下さい。"));
+                            return;
+                        }
+                        if (pc.getLevel() > 54) {
+                            if (pc.getInventory().checkItem(200000)) {
+                                pc.getInventory().consumeItem(200000, 1);
+                                new L1Teleport().teleport(pc, 32723 + _random.nextInt(10), 32851 + _random.nextInt(10), (short) 5166, 5, true);
+                                StatInitialize(pc);
+                            } else {
+                                pc.sendPackets(new S_ServerMessage(1290));
+                            }
+                        } else
+                            pc.sendPackets(new S_SystemMessage("ステータス初期化は、レベル55以上のみ可能です。"));
                         break;
 
                     case 3000049: // 救済の証書
@@ -12650,6 +12620,36 @@ public class C_ItemUSe extends ClientBasePacket {
         pc.addExp(exp);
         Broadcaster.broadcastPacket(pc, new S_SkillSound(pc.getId(), 3944));
         pc.sendPackets(new S_SkillSound(pc.getId(), 3944));
+    }
+
+    private void StatInitialize(L1PcInstance pc) {
+        L1SkillUse l1skilluse = new L1SkillUse();
+        l1skilluse.handleCommands(pc, L1SkillId.CANCELLATION, pc.getId(), pc.getX(), pc.getY(), null, 0, L1SkillUse.TYPE_LOGIN);
+
+        if (pc.getWeapon() != null) {
+            pc.getInventory().setEquipped(pc.getWeapon(), false, false, false, false);
+        }
+
+        pc.sendPackets(new S_CharVisualUpdate(pc));
+        pc.sendPackets(new S_OwnCharStatus2(pc));
+
+        for (L1ItemInstance armor : pc.getInventory().getItems()) {
+            for (int type = 0; type <= 12; type++) {
+                if (armor != null) {
+                    pc.getInventory().setEquipped(armor, false, false, false, false);
+                }
+            }
+        }
+        pc.setReturnStat(pc.getExp());
+        pc.sendPackets(new S_SPMR(pc));
+        pc.sendPackets(new S_OwnCharAttrDef(pc));
+        pc.sendPackets(new S_OwnCharStatus2(pc));
+        pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.START));
+        try {
+            pc.save();
+        } catch (Exception e) {
+            _log.log(Level.SEVERE, e.getLocalizedMessage(), e);
+        }
     }
 
     /**
