@@ -22,9 +22,9 @@ echo Install the database...
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: MySQL Config
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-set database=l1jdb2
+set database=l1jdb
 set username=root
-set password=1111
+set password=
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: Enter the DATA directory

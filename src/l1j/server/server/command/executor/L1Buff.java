@@ -57,7 +57,7 @@ public class L1Buff implements L1CommandExecutor {
                 pc.sendPackets(new S_SystemMessage("バフ系のスキルがありません。"));
             }
         } catch (Exception e) {
-            pc.sendPackets(new S_SystemMessage(cmdName + "[全体、私] [スキル名] [時間]と入力してください。"));
+            pc.sendPackets(new S_SystemMessage(cmdName + "[all|me] [スキルID] [時間]と入力してください。"));
         }
     }
 }

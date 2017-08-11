@@ -49,7 +49,7 @@ public class L1AllBuff implements L1CommandExecutor {
                 new L1SkillUse().handleCommands(target, allBuffSkill[i], target.getId(), target.getX(), target.getY(), null, skill.getBuffDuration() * 1000, L1SkillUse.TYPE_GMBUFF);
             }
         } catch (Exception e) {
-            pc.sendPackets(new S_SystemMessage("個人バフ[キャラクター名]"));
+            pc.sendPackets(new S_SystemMessage(cmdName+ "[キャラクター名]"));
         }
     }
 }

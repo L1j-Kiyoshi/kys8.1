@@ -670,6 +670,8 @@ public class L1RobotAI {
 	    return;
 	}
 
+	toBuff();
+
 	location = RobotAIThread.getLocation();
 	if (location != null) {
 	    int count = 0;

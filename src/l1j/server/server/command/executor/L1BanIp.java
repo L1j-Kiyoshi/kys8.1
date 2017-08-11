@@ -58,7 +58,7 @@ public class L1BanIp implements L1CommandExecutor {
                 }
             }
         } catch (Exception e) {
-            pc.sendPackets(new S_SystemMessage(cmdName + "アイピー[追加、削除、]と入力してください。"));
+            pc.sendPackets(new S_SystemMessage(cmdName + "[ip][add|delete]と入力してください。"));
         }
     }
 }

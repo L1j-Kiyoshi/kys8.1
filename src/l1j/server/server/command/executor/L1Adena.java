@@ -29,7 +29,7 @@ public class L1Adena implements L1CommandExecutor {
                 pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(count).append("アデナを生成しました。").toString()));
             }
         } catch (Exception e) {
-            pc.sendPackets(new S_SystemMessage((new StringBuilder()).append("。アデナ[金額]に入力してください。").toString()));
+            pc.sendPackets(new S_SystemMessage((new StringBuilder()).append(cmdName + "[金額]と入力してください。").toString()));
         }
     }
 }
