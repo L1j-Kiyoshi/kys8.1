@@ -15,7 +15,7 @@ import l1j.server.server.utils.IntRange;
 
 /**
  * クラフトリスト調査用のクラス
- * 
+ *
  * @author ROOT
  *
  */
@@ -38,8 +38,8 @@ public class L1CraftNum implements L1CommandExecutor {
             StringTokenizer tok = new StringTokenizer(arg);
             int val1 = Integer.parseInt(tok.nextToken());
             int val2 = Integer.parseInt(tok.nextToken());
-            if (!IntRange.includes(val2, 1, 10)) {
-                pc.sendPackets(new S_SystemMessage("1-10の範囲で指定してください"));
+            if (!IntRange.includes(val2, 1, 1000)) {
+                pc.sendPackets(new S_SystemMessage("1-1000の範囲で指定してください"));
                 return;
             }
             _craftNum.put(pc.getId(), new L1CraftNumCommandStructure(val1, val2));

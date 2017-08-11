@@ -3061,6 +3061,16 @@ public class L1Attack {
                 } else {
                     actionPc();
                 }
+                // キーリンクエフェクト
+                if (_pc.getWeapon() != null && _pc.getWeapon().getItem().getType() == 17) {
+                    if (_pc.getWeapon().getItem().getItemId() == 503) {
+                        _pc.sendPackets(new S_SkillSound(_pc.getId(), 6983));
+                        Broadcaster.broadcastPacket(_pc, new S_SkillSound(_pc.getId(), 6983));
+                    } else {
+                        _pc.sendPackets(new S_SkillSound(_pc.getId(), 7049));
+                        Broadcaster.broadcastPacket(_pc, new S_SkillSound(_pc.getId(), 7049));
+                    }
+                }
             } else if (_calcType == NPC_PC || _calcType == NPC_NPC) {
                 actionNpc();
             }
