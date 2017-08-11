@@ -92,13 +92,13 @@ public class L1RobotInstance extends L1PcInstance {
     private int iCurrentPath; // ルート変数
     // private L1RobotInstance _instance = null;
 
-	/*
+    /*
      * private boolean _Rsaid = false;
-	 *
-	 * private boolean Rsaid() { return _Rsaid; }
-	 *
-	 * protected void setRsaid(boolean flag) { _Rsaid = flag; }
-	 */
+     *
+     * private boolean Rsaid() { return _Rsaid; }
+     *
+     * protected void setRsaid(boolean flag) { _Rsaid = flag; }
+     */
 
     private boolean _Townsaid = false;
 
@@ -110,13 +110,13 @@ public class L1RobotInstance extends L1PcInstance {
         _Townsaid = flag;
     }
 
-	/*
+    /*
      * private boolean _Dissaid = false;
-	 *
-	 * private boolean Dissaid() { return _Dissaid; }
-	 *
-	 * protected void setDissaid(boolean flag) { _Dissaid = flag; }
-	 */
+     *
+     * private boolean Dissaid() { return _Dissaid; }
+     *
+     * protected void setDissaid(boolean flag) { _Dissaid = flag; }
+     */
 
     private boolean _GLsaid = false;
 
@@ -428,110 +428,110 @@ public class L1RobotInstance extends L1PcInstance {
             }
 
             switch (huntingBot_Type) {
-                case SETTING:// 店舗、倉庫、バフ
-                case TEL_NPC_MOVE:// テレポーター移動
-                    /** 村でのチャット **/
-                    int townrandom = _random.nextInt(1000) + 1;
-                    if (townrandom > 980) {
-                        try {
-                            Delay(350);
-                            _townment = Robot_Hunt.getInstance().getMessage2();
-                            Broadcaster.broadcastPacket(this, new S_ChatPacket(this, _townment, Opcodes.S_SAY, 0));
-                            setTownsaid(true);
-                            _townment = null;
-                        } catch (Exception e) {
-                            return;
-                        }
-                    }
-                    /** 村でのチャット **/
-                    if (loc == null) {
-                        huntingBot_Type++;
+            case SETTING:// 店舗、倉庫、バフ
+            case TEL_NPC_MOVE:// テレポーター移動
+                /** 村でのチャット **/
+                int townrandom = _random.nextInt(1000) + 1;
+                if (townrandom > 980) {
+                    try {
+                        Delay(350);
+                        _townment = Robot_Hunt.getInstance().getMessage2();
+                        Broadcaster.broadcastPacket(this, new S_ChatPacket(this, _townment, Opcodes.S_SAY, 0));
+                        setTownsaid(true);
+                        _townment = null;
+                    } catch (Exception e) {
                         return;
                     }
-                    if (isDistance(getX(), getY(), getMapId(), loc.getX(), loc.getY(), loc.getMapId(),
-                            1 + _random.nextInt(10))) {
-                        loc = location_queue.poll();
-                        delayBot(5000 + _random.nextInt(15000));
-                        if (loc != null && etc_Village_Move) {
-                            setHeading(5);
-                            telBot(loc.getX(), loc.getY(), loc.getMapId(), 3000 + _random.nextInt(3000));
-                            loc = location_queue.poll();
-                            etc_Village_Move = false;
-                        }
-                        if (loc == null) {
-                            if (huntingBot_Type == SETTING)
-                                zendleBuff();
-                            huntingBot_Type++;
-                        }
-                        return;
-                    }
-                    break;
-                case HUNT_MOVE: // 狩り場に移動
-                    delayBot(500 + _random.nextInt(1000));
-                    telBot(loc.getX(), loc.getY(), loc.getMapId());
-                    location_queue.offer(loc);
-                    loc = location_queue.poll();
+                }
+                /** 村でのチャット **/
+                if (loc == null) {
                     huntingBot_Type++;
                     return;
-                case HUNT: // 狩猟
-                    if (checkTarget() || checkTarget2()) {
-                        return;
-                    }
-
-                    if (tel_Hunting) {
-                        delayBot(1000 + _random.nextInt(500));
-                        randomTel(500 + _random.nextInt(1000));
-                        setTownsaid(false);
-                        setGlsaid(false);
-                        return;
-
-                    }
-
-                    if (loc == null) {
-                        delayBot(3000 + _random.nextInt(6000));
-                        returnBot(1000 + _random.nextInt(2000));
-                        return;
-                    }
-
-                    int range = _random.nextInt(5) + 1;
-
-                    if (isDistance(getX(), getY(), getMapId(), loc.getX(), loc.getY(), getMapId(), range)) {
-                        location_queue.offer(loc);
+                }
+                if (isDistance(getX(), getY(), getMapId(), loc.getX(), loc.getY(), loc.getMapId(),
+                        1 + _random.nextInt(10))) {
+                    loc = location_queue.poll();
+                    delayBot(5000 + _random.nextInt(15000));
+                    if (loc != null && etc_Village_Move) {
+                        setHeading(5);
+                        telBot(loc.getX(), loc.getY(), loc.getMapId(), 3000 + _random.nextInt(3000));
                         loc = location_queue.poll();
-                        cnt2++;
-                        if (cnt2 >= 3) {
-                            passTargetList.clear();
-                            passTargetList2.clear();
-                            cnt2 = 0;
-                            return;
-                        }
+                        etc_Village_Move = false;
                     }
-                    break;
-                case DEATH: // 死
-                    int[] loc = Getback.GetBack_Restart(this);
-                    Broadcaster.broadcastPacket(this, new S_RemoveObject(this), true);
-                    setCurrentHp(getLevel());
-                    set_food(225); // 死んだときに100％
-                    setDead(false);
-                    L1World.getInstance().moveVisibleObject(this, loc[0], loc[1], loc[2]);
-                    setX(loc[0]);
-                    setY(loc[1]);
-                    setMap((short) loc[2]);
-                    for (L1PcInstance pc2 : L1World.getInstance().getVisiblePlayer(this)) {
-                        pc2.sendPackets(new S_OtherCharPacks(this, pc2));
+                    if (loc == null) {
+                        if (huntingBot_Type == SETTING)
+                            zendleBuff();
+                        huntingBot_Type++;
                     }
-                    _target = null; // リーク防止
-                    _targetItem = null; // リーク防止
-                    _target2 = null; // リーク防止
-                    delayBot(3000 + _random.nextInt(6000));
-                    returnBot(1000 + _random.nextInt(2000));
+                    return;
+                }
+                break;
+            case HUNT_MOVE: // 狩り場に移動
+                delayBot(500 + _random.nextInt(1000));
+                telBot(loc.getX(), loc.getY(), loc.getMapId());
+                location_queue.offer(loc);
+                loc = location_queue.poll();
+                huntingBot_Type++;
+                return;
+            case HUNT: // 狩猟
+                if (checkTarget() || checkTarget2()) {
+                    return;
+                }
+
+                if (tel_Hunting) {
+                    delayBot(1000 + _random.nextInt(500));
+                    randomTel(500 + _random.nextInt(1000));
                     setTownsaid(false);
                     setGlsaid(false);
                     return;
-                case EXIT: // 終了
+
+                }
+
+                if (loc == null) {
+                    delayBot(3000 + _random.nextInt(6000));
+                    returnBot(1000 + _random.nextInt(2000));
                     return;
-                default:
-                    break;
+                }
+
+                int range = _random.nextInt(5) + 1;
+
+                if (isDistance(getX(), getY(), getMapId(), loc.getX(), loc.getY(), getMapId(), range)) {
+                    location_queue.offer(loc);
+                    loc = location_queue.poll();
+                    cnt2++;
+                    if (cnt2 >= 3) {
+                        passTargetList.clear();
+                        passTargetList2.clear();
+                        cnt2 = 0;
+                        return;
+                    }
+                }
+                break;
+            case DEATH: // 死
+                int[] loc = Getback.GetBack_Restart(this);
+                Broadcaster.broadcastPacket(this, new S_RemoveObject(this), true);
+                setCurrentHp(getLevel());
+                set_food(225); // 死んだときに100％
+                setDead(false);
+                L1World.getInstance().moveVisibleObject(this, loc[0], loc[1], loc[2]);
+                setX(loc[0]);
+                setY(loc[1]);
+                setMap((short) loc[2]);
+                for (L1PcInstance pc2 : L1World.getInstance().getVisiblePlayer(this)) {
+                    pc2.sendPackets(new S_OtherCharPacks(this, pc2));
+                }
+                _target = null; // リーク防止
+                _targetItem = null; // リーク防止
+                _target2 = null; // リーク防止
+                delayBot(3000 + _random.nextInt(6000));
+                returnBot(1000 + _random.nextInt(2000));
+                setTownsaid(false);
+                setGlsaid(false);
+                return;
+            case EXIT: // 終了
+                return;
+            default:
+                break;
             }
 
             if (!isDead() && loc != null) {
@@ -693,45 +693,45 @@ public class L1RobotInstance extends L1PcInstance {
         int[] loc = new int[3];
         _random.setSeed(System.currentTimeMillis());
         switch (_random.nextInt(10)) {
-            case 0:
-                loc[0] = 33433;
-                loc[1] = 32800;
-                loc[2] = 4;
-                break;
-            case 1:
-                loc[0] = 33418;
-                loc[1] = 32815;
-                loc[2] = 4;
-                break;
-            case 2:
-                loc[0] = 33425;
-                loc[1] = 32827;
-                loc[2] = 4;
-                break;
-            case 3:
-                loc[0] = 33442;
-                loc[1] = 32797;
-                loc[2] = 4;
-                break;
-            case 6:
-            case 5:
-            case 4:
-                loc[0] = 34056;
-                loc[1] = 32279;
-                loc[2] = 4;
-                break;
-            case 7:
-            case 8:
-            case 9:
-                loc[0] = 33080;
-                loc[1] = 33392;
-                loc[2] = 4;
-                break;
-            default:
-                loc[0] = 33442;
-                loc[1] = 32797;
-                loc[2] = 4;
-                break;
+        case 0:
+            loc[0] = 33433;
+            loc[1] = 32800;
+            loc[2] = 4;
+            break;
+        case 1:
+            loc[0] = 33418;
+            loc[1] = 32815;
+            loc[2] = 4;
+            break;
+        case 2:
+            loc[0] = 33425;
+            loc[1] = 32827;
+            loc[2] = 4;
+            break;
+        case 3:
+            loc[0] = 33442;
+            loc[1] = 32797;
+            loc[2] = 4;
+            break;
+        case 6:
+        case 5:
+        case 4:
+            loc[0] = 34056;
+            loc[1] = 32279;
+            loc[2] = 4;
+            break;
+        case 7:
+        case 8:
+        case 9:
+            loc[0] = 33080;
+            loc[1] = 33392;
+            loc[2] = 4;
+            break;
+        default:
+            loc[0] = 33442;
+            loc[1] = 32797;
+            loc[2] = 4;
+            break;
         }
         telBot(loc[0], loc[1], loc[2], time);
         if (huntingBot) {
@@ -779,8 +779,8 @@ public class L1RobotInstance extends L1PcInstance {
 
     private void resetPotion() {
         /*
-		 * ディレイ（2000 + _random.nextInt（14000））;帰還（）;
-		 */
+         * ディレイ（2000 + _random.nextInt（14000））;帰還（）;
+         */
 
         potCount = (short) (800 + _random.nextInt(1000));
         cyanPotion = (short) (1000);
@@ -986,10 +986,10 @@ public class L1RobotInstance extends L1PcInstance {
             setSleepTime(800 + _random.nextInt(400));
 
         } else {
-			/*
-			 * int dir = moveDirection(_targetItem.getX(), _targetItem.getY(),
-			 * _targetItem.getMapId());
-			 */
+            /*
+             * int dir = moveDirection(_targetItem.getX(), _targetItem.getY(),
+             * _targetItem.getMapId());
+             */
             int dir = moveDirectionMatiz(_targetItem.getX(), _targetItem.getY(), _targetItem.getMapId());
             if (dir == -1) {
                 _targetItem = null;
@@ -1094,7 +1094,7 @@ public class L1RobotInstance extends L1PcInstance {
         if (isAttackPosition(this, target.getX(), target.getY(), target.getMapId(), range) == true
                 && isAttackPosition(target, getX(), getY(), getMapId(), range) == true
 
-                ) {// 基本攻撃範囲
+        ) {// 基本攻撃範囲
             if (door || !tail) {
                 cnt++;
                 if (cnt > 5) {
@@ -1109,10 +1109,10 @@ public class L1RobotInstance extends L1PcInstance {
             return true;
 
         } else {
-			/*
-			 * int dir = moveDirection(target.getX(), target.getY(),
-			 * target.getMapId());
-			 */
+            /*
+             * int dir = moveDirection(target.getX(), target.getY(),
+             * target.getMapId());
+             */
             int dir = moveDirectionMatiz(target.getX(), target.getY(), target.getMapId());
             if (dir == -1) {
                 passTargetList.add(_target);
@@ -1176,17 +1176,17 @@ public class L1RobotInstance extends L1PcInstance {
         }
 
         /** 逃げる時のチャット **/
-		/*
-		 * int disrandom= _random.nextInt(100)+1; if(disrandom > 50 && !isElf()
-		 * && Rsaid() && !target2.isRobot() && Math.abs(calcx) > 6 && !Dissaid()
-		 * || disrandom > 50 && !isElf() && Rsaid() && !target2.isRobot() &&
-		 * Math.abs(calcy) > 6 && !Dissaid() ){ _disment =
-		 * dismentArray[_random.nextInt(dismentArray.length)]; String NAME =
-		 * target2.getName(); try{ Delay(1500); Broadcaster.broadcastPacket(this
-		 * ,new S_ChatPacket(this, NAME+_disment, Opcodes.S_OPCODE_NORMALCHAT,
-		 * 0)); cnt++; if (cnt > 2) { setDissaid(true); _disment = null; }
-		 * }catch(Exception e){} }
-		 */
+        /*
+         * int disrandom= _random.nextInt(100)+1; if(disrandom > 50 && !isElf()
+         * && Rsaid() && !target2.isRobot() && Math.abs(calcx) > 6 && !Dissaid()
+         * || disrandom > 50 && !isElf() && Rsaid() && !target2.isRobot() &&
+         * Math.abs(calcy) > 6 && !Dissaid() ){ _disment =
+         * dismentArray[_random.nextInt(dismentArray.length)]; String NAME =
+         * target2.getName(); try{ Delay(1500); Broadcaster.broadcastPacket(this
+         * ,new S_ChatPacket(this, NAME+_disment, Opcodes.S_OPCODE_NORMALCHAT,
+         * 0)); cnt++; if (cnt > 2) { setDissaid(true); _disment = null; }
+         * }catch(Exception e){} }
+         */
         /** 逃げる時のチャット **/
 
         boolean tail = World.isThroughAttack(getX(), getY(), getMapId(),
@@ -1506,51 +1506,51 @@ public class L1RobotInstance extends L1PcInstance {
         int count = 0;
         while (true) {
             switch (dCase) {
-                case 1:
-                    direction[0] = 2;
-                    direction[1] = 4;
-                    direction[2] = 3;
-                    break;
-                case 2:
-                    direction[0] = 4;
-                    direction[1] = 4;
-                    direction[2] = 4;
-                    break;
-                case 3:
-                    direction[0] = 6;
-                    direction[1] = 4;
-                    direction[2] = 5;
-                    break;
-                case 4:
-                    direction[0] = 6;
-                    direction[1] = 6;
-                    direction[2] = 6;
-                    break;
-                case 5:
-                    direction[0] = 6;
-                    direction[1] = 0;
-                    direction[2] = 7;
-                    break;
-                case 6:
-                    direction[0] = 0;
-                    direction[1] = 0;
-                    direction[2] = 0;
-                    break;
-                case 7:
-                    direction[0] = 2;
-                    direction[1] = 0;
-                    direction[2] = 1;
-                    break;
-                case 8:
-                    direction[0] = 2;
-                    direction[1] = 2;
-                    direction[2] = 2;
-                    break;
-                case 9:
-                    direction[0] = -1;
-                    direction[1] = -1;
-                    direction[2] = -1;
-                    break;
+            case 1:
+                direction[0] = 2;
+                direction[1] = 4;
+                direction[2] = 3;
+                break;
+            case 2:
+                direction[0] = 4;
+                direction[1] = 4;
+                direction[2] = 4;
+                break;
+            case 3:
+                direction[0] = 6;
+                direction[1] = 4;
+                direction[2] = 5;
+                break;
+            case 4:
+                direction[0] = 6;
+                direction[1] = 6;
+                direction[2] = 6;
+                break;
+            case 5:
+                direction[0] = 6;
+                direction[1] = 0;
+                direction[2] = 7;
+                break;
+            case 6:
+                direction[0] = 0;
+                direction[1] = 0;
+                direction[2] = 0;
+                break;
+            case 7:
+                direction[0] = 2;
+                direction[1] = 0;
+                direction[2] = 1;
+                break;
+            case 8:
+                direction[0] = 2;
+                direction[1] = 2;
+                direction[2] = 2;
+                break;
+            case 9:
+                direction[0] = -1;
+                direction[1] = -1;
+                direction[2] = -1;
+                break;
             }
             int rnd = new Random().nextInt(3);
             if (getMap().isPassable(getX() + HEADING_TABLE_X[direction[rnd]],
@@ -1695,36 +1695,36 @@ public class L1RobotInstance extends L1PcInstance {
                     weapon = 83;
             }
             switch (type) {
-                case ATTACK_SPEED:
-                    // interval = SprTable.getInstance().getAttackSpeed(gfxid,
-                    // weapon +1);
-                    // if(interval < 406)
-                    interval = 426; // 680-304 396
-                    if (weapon == 50)
-                        interval = 446;
-                    if (weapon == 20)
-                        interval = 436;
-                    break;
-                case MOVE_SPEED:
-                    // interval = SprTable.getInstance().getMoveSpeed(gfxid,
-                    // weapon);
-                    interval = 515; // 515
-                    break;
-                case MAGIC_SPEED:
-                    interval = SprTable.getInstance().getNodirSpellSpeed(gfxid);
-                    if (interval <= 0) {
-                        interval = 120;
-                    }
-                    break;
-                case DMG_MOTION_SPEED:
-                    interval = SprTable.getInstance().getDmgMotionSpeed(gfxid);
-                    if (interval <= 0) {
-                        interval = 120;
-                    }
-                    break;
-                default:
-                    interval = SprTable.getInstance().getMoveSpeed(gfxid, weapon);
-                    break;
+            case ATTACK_SPEED:
+                // interval = SprTable.getInstance().getAttackSpeed(gfxid,
+                // weapon +1);
+                // if(interval < 406)
+                interval = 426; // 680-304 396
+                if (weapon == 50)
+                    interval = 446;
+                if (weapon == 20)
+                    interval = 436;
+                break;
+            case MOVE_SPEED:
+                // interval = SprTable.getInstance().getMoveSpeed(gfxid,
+                // weapon);
+                interval = 515; // 515
+                break;
+            case MAGIC_SPEED:
+                interval = SprTable.getInstance().getNodirSpellSpeed(gfxid);
+                if (interval <= 0) {
+                    interval = 120;
+                }
+                break;
+            case DMG_MOTION_SPEED:
+                interval = SprTable.getInstance().getDmgMotionSpeed(gfxid);
+                if (interval <= 0) {
+                    interval = 120;
+                }
+                break;
+            default:
+                interval = SprTable.getInstance().getMoveSpeed(gfxid, weapon);
+                break;
             }
 
             if (gfxid == 13719 || gfxid == 13725 || gfxid == 13735) {// ロボット攻撃速度修正
@@ -1900,7 +1900,15 @@ public class L1RobotInstance extends L1PcInstance {
                         buffSkillId.add(L1SkillId.SOLID_CARRIAGE);
                         buffSkillId.add(L1SkillId.COUNTER_BARRIER);
                     } else if (L1RobotInstance.this.isElf()) {
-                        buffSkillId.add(L1SkillId.STORM_SHOT);
+                        if (L1RobotInstance.this.getCurrentWeapon() == 20) { // 遠距離
+                            buffSkillId.add(L1SkillId.STORM_SHOT);
+                        } else {
+                            buffSkillId.add(L1SkillId.DANCING_BLADES);
+                            buffSkillId.add(L1SkillId.BURNING_WEAPON);
+                            buffSkillId.add(L1SkillId.ELEMENTAL_FIRE);
+                            buffSkillId.add(L1SkillId.SOUL_OF_FLAME);
+                            buffSkillId.add(L1SkillId.ADDITIONAL_FIRE);
+                        }
                         buffSkillId.add(L1SkillId.RESIST_MAGIC);
                         buffSkillId.add(L1SkillId.CLEAR_MIND);
                         buffSkillId.add(L1SkillId.RESIST_ELEMENTAL);
@@ -2129,64 +2137,64 @@ public class L1RobotInstance extends L1PcInstance {
 
     private void _getFront(int[] ary, int d) {
         switch (d) {
-            case 1:
-                ary[4] = 2;
-                ary[3] = 0;
-                ary[2] = 1;
-                ary[1] = 3;
-                ary[0] = 7;
-                break;
-            case 2:
-                ary[4] = 2;
-                ary[3] = 4;
-                ary[2] = 0;
-                ary[1] = 1;
-                ary[0] = 3;
-                break;
-            case 3:
-                ary[4] = 2;
-                ary[3] = 4;
-                ary[2] = 1;
-                ary[1] = 3;
-                ary[0] = 5;
-                break;
-            case 4:
-                ary[4] = 2;
-                ary[3] = 4;
-                ary[2] = 6;
-                ary[1] = 3;
-                ary[0] = 5;
-                break;
-            case 5:
-                ary[4] = 4;
-                ary[3] = 6;
-                ary[2] = 3;
-                ary[1] = 5;
-                ary[0] = 7;
-                break;
-            case 6:
-                ary[4] = 4;
-                ary[3] = 6;
-                ary[2] = 0;
-                ary[1] = 5;
-                ary[0] = 7;
-                break;
-            case 7:
-                ary[4] = 6;
-                ary[3] = 0;
-                ary[2] = 1;
-                ary[1] = 5;
-                ary[0] = 7;
-                break;
-            case 0:
-                ary[4] = 2;
-                ary[3] = 6;
-                ary[2] = 0;
-                ary[1] = 1;
-                ary[0] = 7;
-                break;
-            default:
-                break;
+        case 1:
+            ary[4] = 2;
+            ary[3] = 0;
+            ary[2] = 1;
+            ary[1] = 3;
+            ary[0] = 7;
+            break;
+        case 2:
+            ary[4] = 2;
+            ary[3] = 4;
+            ary[2] = 0;
+            ary[1] = 1;
+            ary[0] = 3;
+            break;
+        case 3:
+            ary[4] = 2;
+            ary[3] = 4;
+            ary[2] = 1;
+            ary[1] = 3;
+            ary[0] = 5;
+            break;
+        case 4:
+            ary[4] = 2;
+            ary[3] = 4;
+            ary[2] = 6;
+            ary[1] = 3;
+            ary[0] = 5;
+            break;
+        case 5:
+            ary[4] = 4;
+            ary[3] = 6;
+            ary[2] = 3;
+            ary[1] = 5;
+            ary[0] = 7;
+            break;
+        case 6:
+            ary[4] = 4;
+            ary[3] = 6;
+            ary[2] = 0;
+            ary[1] = 5;
+            ary[0] = 7;
+            break;
+        case 7:
+            ary[4] = 6;
+            ary[3] = 0;
+            ary[2] = 1;
+            ary[1] = 5;
+            ary[0] = 7;
+            break;
+        case 0:
+            ary[4] = 2;
+            ary[3] = 6;
+            ary[2] = 0;
+            ary[1] = 1;
+            ary[0] = 7;
+            break;
+        default:
+            break;
         }
     }
 }

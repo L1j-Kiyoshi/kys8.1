@@ -874,9 +874,11 @@ public class L1Magic {
         int damage = 0;
         if (_calcType == PC_PC || _calcType == NPC_PC) {
             damage = calcPcMagicDamage(skillId);
-            damage += CalcStat.calcMagicDmg(_pc.getAbility().getTotalInt()); // ステータス補正
         } else if (_calcType == PC_NPC || _calcType == NPC_NPC) {
             damage = calcNpcMagicDamage(skillId);
+        }
+        if (_calcType == PC_PC || _calcType == PC_NPC) {
+            damage += CalcStat.calcMagicDmg(_pc.getAbility().getTotalInt()); // ステータス補正
         }
 
         if (skillId != CONFUSION && skillId != MIND_BREAK && skillId != MAGMA_BREATH) {
