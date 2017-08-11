@@ -20,6 +20,7 @@ import l1j.server.server.serverpackets.S_CharVisualUpdate;
 import l1j.server.server.serverpackets.S_Message_YN;
 import l1j.server.server.serverpackets.S_PacketBox;
 import l1j.server.server.serverpackets.S_ServerMessage;
+import l1j.server.server.serverpackets.S_SkillSound;
 import l1j.server.server.serverpackets.S_SystemMessage;
 import l1j.server.server.types.Point;
 import l1j.server.server.utils.FaceToFace;
@@ -33,7 +34,8 @@ public class C_Attack extends ClientBasePacket {
         int y = readH();
         L1PcInstance pc = client.getActiveChar();
 
-        if (pc == null || pc.isGhost() || pc.isstop() || pc.isDead() || pc.isTeleport() || (pc.isInvisble() && !pc.hasSkillEffect(L1SkillId.ASSASSIN) || pc.isInvisDelay())) {
+        if (pc == null || pc.isGhost() || pc.isstop() || pc.isDead() || pc.isTeleport()
+                || (pc.isInvisble() && !pc.hasSkillEffect(L1SkillId.ASSASSIN) || pc.isInvisDelay())) {
             return;
         }
         if (pc.hasSkillEffect(1009)) {
@@ -58,22 +60,21 @@ public class C_Attack extends ClientBasePacket {
             }
             if (target instanceof L1DoorInstance) {
                 L1DoorInstance fi = (L1DoorInstance) target;
-                pc.sendPackets(new S_SystemMessage("doorid :"
-                        + fi.getDoorId()));
+                pc.sendPackets(new S_SystemMessage("doorid :" + fi.getDoorId()));
             }
         }
-        if (pc.getZoneType() != 1 && pc.getInventory().checkEquipped(10000)) { //会社員経験値支給
+        if (pc.getZoneType() != 1 && pc.getInventory().checkEquipped(10000)) { // 会社員経験値支給
             pc.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "かかしの武器を解除してください。"));
             ;
             return;
         }
-        if (!(pc.getMapId() >= 2600 && pc.getMapId() <= 2699) && pc.getInventory().checkEquipped(203003)) { //デスナイトのフレイムブレード：ジン
+        if (!(pc.getMapId() >= 2600 && pc.getMapId() <= 2699) && pc.getInventory().checkEquipped(203003)) { // デスナイトのフレイムブレード：ジン
             pc.sendPackets(new S_SystemMessage("火竜の聖域でのみ使用が可能です。"));
             return;
         }
 
         if (target instanceof L1NpcInstance) {
-            if (((L1NpcInstance) target).getHiddenStatus() != 0) { //地中にギア持っているのか、飛んでいる
+            if (((L1NpcInstance) target).getHiddenStatus() != 0) { // 地中にギア持っているのか、飛んでいる
                 return;
             }
         }
@@ -81,19 +82,21 @@ public class C_Attack extends ClientBasePacket {
         /**
          * アイテムの種類を返す。<br>
          *
-         * @return <p>
+         * @return
+         *         <p>
          *         [weapon]<br>
-         *         sword:4, dagger:46, tohandsword:50, bow:20, blunt:11, spear:24, staff:40, throwingknife:2922, arrow:66, gauntlet:62, claw:58, edoryu:54, singlebow:20,
+         *         sword:4, dagger:46, tohandsword:50, bow:20, blunt:11,
+         *         spear:24, staff:40, throwingknife:2922, arrow:66,
+         *         gauntlet:62, claw:58, edoryu:54, singlebow:20,
          *         singlespear:24, tohandblunt:11, tohandstaff:40
          *         </p>
          */
 
         if (target instanceof L1Character) { // npcも一応charactersを継承するからただこれだけ書けばドゥェムダ
-            if (target.getMapId() != pc.getMapId()) { //ターゲットが奇妙な場所にいると終了
+            if (target.getMapId() != pc.getMapId()) { // ターゲットが奇妙な場所にいると終了
                 return;
             }
             int attackRange = 1;
-            int a = pc.getTempCharGfx();
             int poly = pc.getTempCharGfx();
             L1ItemInstance weapon = pc.getWeapon();
 
@@ -102,14 +105,17 @@ public class C_Attack extends ClientBasePacket {
                     attackRange = 17;
                 } else if ((weapon.getItem().getType() == 10) || (weapon.getItem().getType() == 13)) {
                     attackRange = 14;
-                } else if (weapon.getItem().getType() == 5 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
-                    if (poly == 11330 || poly == 11344 || poly == 11351 || poly == 11368 || poly == 11376 || poly == 11447 || poly == 12237 || poly == 0 || poly == 61
-                            || poly == 138 || poly == 734 || poly == 2786 || poly == 6658 || poly == 6671 || poly == 12490 || poly == 1 || poly == 48 || poly == 37 || poly == 1186
-                            || poly == 2796 || poly == 6661 || poly == 6650 || poly == 12494 || poly == 13389 ||
-                            poly == 11408 || poly == 11409 || poly == 11410 || poly == 11411 || poly == 11412 || poly == 11413 ||
-                            poly == 11414 || poly == 11415 || poly == 11416 || poly == 11417 || poly == 11418 || poly == 11419 ||
-                            poly == 11420 || poly == 11421 || poly == 12542 || poly == 12541 || poly == 13735 || poly == 13737
-                            || poly == 14928 //82経費ウィンドウ
+                } else if (weapon.getItem().getType() == 5 || weapon.getItem().getType() == 14
+                        || weapon.getItem().getType() == 18) {
+                    if (poly == 11330 || poly == 11344 || poly == 11351 || poly == 11368 || poly == 11376
+                            || poly == 11447 || poly == 12237 || poly == 0 || poly == 61 || poly == 138 || poly == 734
+                            || poly == 2786 || poly == 6658 || poly == 6671 || poly == 12490 || poly == 1 || poly == 48
+                            || poly == 37 || poly == 1186 || poly == 2796 || poly == 6661 || poly == 6650
+                            || poly == 12494 || poly == 13389 || poly == 11408 || poly == 11409 || poly == 11410
+                            || poly == 11411 || poly == 11412 || poly == 11413 || poly == 11414 || poly == 11415
+                            || poly == 11416 || poly == 11417 || poly == 11418 || poly == 11419 || poly == 11420
+                            || poly == 11421 || poly == 12542 || poly == 12541 || poly == 13735 || poly == 13737
+                            || poly == 14928 // 82経費ウィンドウ
                             || poly == 13389) {
                         attackRange = 2;
                     }
@@ -118,15 +124,13 @@ public class C_Attack extends ClientBasePacket {
                 }
             }
 
-
             if (pc.getLocation().getTileLineDistance(new Point(x, y)) > attackRange + 1) {
                 return;
             }
 
-            if (target.getLocation().getTileLineDistance(new Point(x, y)) > 1) { //これはクライアントの測定バグ...
+            if (target.getLocation().getTileLineDistance(new Point(x, y)) > 1) { // これはクライアントの測定バグ...
                 return;
             }
-
 
         }
         if (pc.isFishing()) {
@@ -151,7 +155,7 @@ public class C_Attack extends ClientBasePacket {
                 }
             }
         }
-        /**買取店**/
+        /** 買取店 **/
         if (target instanceof L1NpcInstance) {
             L1NpcInstance npc = (L1NpcInstance) target;
             if (npc.getNpcTemplate().get_npcId() >= 400067 && npc.getNpcTemplate().get_npcId() <= 400080) {
@@ -165,8 +169,8 @@ public class C_Attack extends ClientBasePacket {
 
         // 攻撃アクションを取ることができる場合の処理
         if (pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) { // アブ小ガルトバリアの解除
-            pc.removeSkillEffect(L1SkillId.ABSOLUTE_BARRIER);//追加アブソル修正
-//			pc.killSkillEffectTimer(L1SkillId.ABSOLUTE_BARRIER);//オリジナルアブソル修正
+            pc.removeSkillEffect(L1SkillId.ABSOLUTE_BARRIER);// 追加アブソル修正
+            // pc.killSkillEffectTimer(L1SkillId.ABSOLUTE_BARRIER);//オリジナルアブソル修正
             pc.startMpRegenerationByDoll();
         }
         pc.killSkillEffectTimer(L1SkillId.MEDITATION);
@@ -179,13 +183,23 @@ public class C_Attack extends ClientBasePacket {
             return;
         }
 
-        // if (target != null && !((L1Character) target).isDead()) {
+        // キーリンクエフェクト
+        if (pc.getWeapon() != null && pc.getWeapon().getItem().getType() == 17) {
+            if (pc.getWeapon().getItem().getItemId() == 503) {
+                pc.sendPackets(new S_SkillSound(pc.getId(), 6983));
+                pc.broadcastPacket(new S_SkillSound(pc.getId(), 6983));
+            } else {
+                pc.sendPackets(new S_SkillSound(pc.getId(), 7049));
+                pc.broadcastPacket(new S_SkillSound(pc.getId(), 7049));
+            }
+        }
+
         // 事前に型チェック
         if (target != null && target instanceof L1Character && !((L1Character) target).isDead()) {
             target.onAction(pc);
 
         } else { // 空の攻撃
-            pc.setHeading(pc.targetDirection(x, y)); //方向セット
+            pc.setHeading(pc.targetDirection(x, y)); // 方向セット
             pc.sendPackets(new S_AttackStatus(pc, 0, ActionCodes.ACTION_Attack));
             pc.broadcastPacket(new S_AttackStatus(pc, 0, ActionCodes.ACTION_Attack));
             // TODO 弓床の空攻撃した場合は、矢が飛ばなければならない

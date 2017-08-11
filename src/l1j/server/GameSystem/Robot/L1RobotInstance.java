@@ -138,9 +138,6 @@ public class L1RobotInstance extends L1PcInstance {
 
     private String _glment;
 
-    private static final int[] LisBotBuffSkill4 = { L1SkillId.PHYSICAL_ENCHANT_STR, L1SkillId.PHYSICAL_ENCHANT_DEX,
-            L1SkillId.BLESS_WEAPON, L1SkillId.REMOVE_CURSE };
-
     public L1RobotInstance() {
 
         iPath = new int[300][2];
@@ -1896,46 +1893,70 @@ public class L1RobotInstance extends L1PcInstance {
         GeneralThreadPool.getInstance().schedule(new Runnable() {
             @Override
             public void run() {
-                // TODO 自動生成されたメソッド・スタブ
                 try {
-                    int[] skillt = LisBotBuffSkill4;
-                    if (_random.nextInt(2) == 0) {
-                        for (Integer i : skillt) {
-                            L1Skills skill = SkillsTable.getInstance().getTemplate(i);
-                            if (i == L1SkillId.HASTE)
-                                new L1SkillUse().handleCommands(L1RobotInstance.this, i, L1RobotInstance.this.getId(),
-                                        L1RobotInstance.this.getX(), L1RobotInstance.this.getY(), null, 0,
-                                        L1SkillUse.TYPE_GMBUFF);
-                            else
-                                Broadcaster.broadcastPacket(L1RobotInstance.this,
-                                        new S_SkillSound(L1RobotInstance.this.getId(), skill.getCastGfx()), true);
-                        }
-                        Thread.sleep(1000 + _random.nextInt(1000));
-                        // 黒砂のコイン
-                        // Broadcaster.broadcastPacket(L1RobotInstance.this, new
-                        // S_SkillSound(L1RobotInstance.this.getId(), 4914),
-                        // true);
-                    } else {
-                        // 黒砂のコイン
-                        // Broadcaster.broadcastPacket(L1RobotInstance.this, new
-                        // S_SkillSound(L1RobotInstance.this.getId(), 4914),
-                        // true);
-                        Thread.sleep(1000 + _random.nextInt(1000));
-                        for (Integer i : skillt) {
-                            L1Skills skill = SkillsTable.getInstance().getTemplate(i);
-                            if (i == L1SkillId.HASTE)
-                                new L1SkillUse().handleCommands(L1RobotInstance.this, i, L1RobotInstance.this.getId(),
-                                        L1RobotInstance.this.getX(), L1RobotInstance.this.getY(), null, 0,
-                                        L1SkillUse.TYPE_GMBUFF);
-                            else
-                                Broadcaster.broadcastPacket(L1RobotInstance.this,
-                                        new S_SkillSound(L1RobotInstance.this.getId(), skill.getCastGfx()), true);
-                        }
+                    ArrayList<Integer> buffSkillId = new ArrayList<Integer>();
+                    if (L1RobotInstance.this.isKnight()) {
+                        buffSkillId.add(L1SkillId.REDUCTION_ARMOR);
+                        buffSkillId.add(L1SkillId.SOLID_CARRIAGE);
+                        buffSkillId.add(L1SkillId.COUNTER_BARRIER);
+                    } else if (L1RobotInstance.this.isElf()) {
+                        buffSkillId.add(L1SkillId.STORM_SHOT);
+                        buffSkillId.add(L1SkillId.RESIST_MAGIC);
+                        buffSkillId.add(L1SkillId.CLEAR_MIND);
+                        buffSkillId.add(L1SkillId.RESIST_ELEMENTAL);
+                        buffSkillId.add(L1SkillId.ELEMENTAL_PROTECTION);
+                        buffSkillId.add(L1SkillId.RESIST_ELEMENTAL);
+                        buffSkillId.add(L1SkillId.PHYSICAL_ENCHANT_DEX);
+                        buffSkillId.add(L1SkillId.PHYSICAL_ENCHANT_STR);
+                        buffSkillId.add(L1SkillId.BLESS_WEAPON);
+                        buffSkillId.add(L1SkillId.COUNTER_MAGIC);
+                    } else if (L1RobotInstance.this.isWizard()) {
+                        buffSkillId.add(L1SkillId.ADVANCE_SPIRIT);
+                        buffSkillId.add(L1SkillId.PHYSICAL_ENCHANT_DEX);
+                        buffSkillId.add(L1SkillId.PHYSICAL_ENCHANT_STR);
+                        buffSkillId.add(L1SkillId.BERSERKERS);
+                        buffSkillId.add(L1SkillId.HOLY_WALK);
+                        buffSkillId.add(L1SkillId.BLESS_WEAPON);
+                        buffSkillId.add(L1SkillId.COUNTER_MAGIC);
+                        buffSkillId.add(L1SkillId.IMMUNE_TO_HARM);
+                    } else if (L1RobotInstance.this.isDarkelf()) {
+                        buffSkillId.add(L1SkillId.ENCHANT_VENOM);
+                        buffSkillId.add(L1SkillId.SHADOW_ARMOR);
+                        buffSkillId.add(L1SkillId.DOUBLE_BRAKE);
+                        buffSkillId.add(L1SkillId.UNCANNY_DODGE);
+                        buffSkillId.add(L1SkillId.DRESS_DEXTERITY);
+                        buffSkillId.add(L1SkillId.DRESS_MIGHTY);
+                        buffSkillId.add(L1SkillId.MOVING_ACCELERATION);
+                        buffSkillId.add(L1SkillId.VENOM_RESIST);
+                        buffSkillId.add(L1SkillId.BURNING_SPIRIT);
+                        buffSkillId.add(L1SkillId.DRESS_EVASION);
+                        buffSkillId.add(L1SkillId.BLAZING_SPIRITS);
+                    } else if (L1RobotInstance.this.isDragonknight()) {
+                        buffSkillId.add(L1SkillId.DRAGON_SKIN);
+                        buffSkillId.add(L1SkillId.BLOOD_LUST);
+                        buffSkillId.add(L1SkillId.MORTAL_BODY);
+                        buffSkillId.add(L1SkillId.SCALES_FIRE_DRAGON);
+                    } else if (L1RobotInstance.this.isBlackwizard()) {
+                        buffSkillId.add(L1SkillId.MIRROR_IMAGE);
+                        buffSkillId.add(L1SkillId.IllUSION_OGRE);
+                        buffSkillId.add(L1SkillId.CONCENTRATION);
+                        buffSkillId.add(L1SkillId.IllUSION_LICH);
+                        buffSkillId.add(L1SkillId.PATIENCE);
+                        buffSkillId.add(L1SkillId.IllUSION_DIAMONDGOLEM);
+                        buffSkillId.add(L1SkillId.INSIGHT);
+                        buffSkillId.add(L1SkillId.IMPACT);
                     }
+                    buffSkillId.stream().forEach(id -> {
+                        L1Skills skill = SkillsTable.getInstance().getTemplate(id);
+                        new L1SkillUse().handleCommands(L1RobotInstance.this, id, L1RobotInstance.this.getId(),
+                                L1RobotInstance.this.getX(), L1RobotInstance.this.getY(), null, 0,
+                                L1SkillUse.TYPE_GMBUFF);
+                        Broadcaster.broadcastPacket(L1RobotInstance.this,
+                                new S_SkillSound(L1RobotInstance.this.getId(), skill.getCastGfx()), true);
+                    });
                 } catch (Exception e) {
                 }
             }
-
         }, 1000 + _random.nextInt(1000));
     }
 

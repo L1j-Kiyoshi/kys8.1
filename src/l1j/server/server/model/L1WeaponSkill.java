@@ -52,9 +52,8 @@ public class L1WeaponSkill {
 
     private int _attr;
 
-    public L1WeaponSkill(int weaponId, int probability, int fixDamage,
-                         int randomDamage, int area, int skillId, int skillTime,
-                         int effectId, int effectTarget, boolean isArrowType, int attr) {
+    public L1WeaponSkill(int weaponId, int probability, int fixDamage, int randomDamage, int area, int skillId,
+            int skillTime, int effectId, int effectTarget, boolean isArrowType, int attr) {
         _weaponId = weaponId;
         _probability = probability;
         _fixDamage = fixDamage;
@@ -128,10 +127,11 @@ public class L1WeaponSkill {
         if (skillId == L1SkillId.SILENCE && cha instanceof L1NpcInstance) {
             L1NpcInstance npc = (L1NpcInstance) cha;
 
-            if (npc.getNpcId() == 45684 || npc.getNpcId() == 45683 || npc.getNpcId() == 45681
-                    || npc.getNpcId() == 45682 || npc.getNpcId() == 900011 || npc.getNpcId() == 900012
-                    || npc.getNpcId() == 900013 || npc.getNpcId() == 900038 || npc.getNpcId() == 900039 || npc.getNpcId() == 900040
-                    || npc.getNpcId() == 5096 || npc.getNpcId() == 5097 || npc.getNpcId() == 5098 || npc.getNpcId() == 5099 || npc.getNpcId() == 5100) {
+            if (npc.getNpcId() == 45684 || npc.getNpcId() == 45683 || npc.getNpcId() == 45681 || npc.getNpcId() == 45682
+                    || npc.getNpcId() == 900011 || npc.getNpcId() == 900012 || npc.getNpcId() == 900013
+                    || npc.getNpcId() == 900038 || npc.getNpcId() == 900039 || npc.getNpcId() == 900040
+                    || npc.getNpcId() == 5096 || npc.getNpcId() == 5097 || npc.getNpcId() == 5098
+                    || npc.getNpcId() == 5099 || npc.getNpcId() == 5100) {
                 return 0;
             }
         }
@@ -168,9 +168,8 @@ public class L1WeaponSkill {
                 pc.sendPackets(new S_SkillSound(chaId, effectId));
                 pc.broadcastPacket(new S_SkillSound(chaId, effectId));
             } else {
-                S_UseAttackSkill packet = new S_UseAttackSkill(pc, cha.getId(),
-                        effectId, cha.getX(), cha.getY(), ActionCodes
-                        .ACTION_Attack, false);
+                S_UseAttackSkill packet = new S_UseAttackSkill(pc, cha.getId(), effectId, cha.getX(), cha.getY(),
+                        ActionCodes.ACTION_Attack, false);
                 pc.sendPackets(packet);
                 pc.broadcastPacket(packet, cha);
             }
@@ -193,8 +192,7 @@ public class L1WeaponSkill {
         if (area > 0 || area == -1) {
             L1PcInstance targetPc = null;
             L1NpcInstance targetNpc = null;
-            for (L1Object object : L1World.getInstance()
-                    .getVisibleObjects(cha, area)) {
+            for (L1Object object : L1World.getInstance().getVisibleObjects(cha, area)) {
                 if (object == null) {
                     continue;
                 }
@@ -219,34 +217,25 @@ public class L1WeaponSkill {
                         continue;
                     }
                 }
-                if (cha instanceof L1PcInstance
-                        || cha instanceof L1SummonInstance
-                        || cha instanceof L1PetInstance) {
-                    if (!(object instanceof L1PcInstance
-                            || object instanceof L1SummonInstance
-                            || object instanceof L1PetInstance
-                            || object instanceof L1MonsterInstance)) {
+                if (cha instanceof L1PcInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
+                    if (!(object instanceof L1PcInstance || object instanceof L1SummonInstance
+                            || object instanceof L1PetInstance || object instanceof L1MonsterInstance)) {
                         continue;
                     }
                 }
-                damage = calcDamageReduction((L1Character) object, damage,
-                        weaponSkill.getAttr());
+                damage = calcDamageReduction((L1Character) object, damage, weaponSkill.getAttr());
                 if (damage <= 0) {
                     continue;
                 }
                 if (object instanceof L1PcInstance) {
                     targetPc = (L1PcInstance) object;
-                    targetPc.sendPackets(new S_DoActionGFX(targetPc.getId(),
-                            ActionCodes.ACTION_Damage));
-                    targetPc.broadcastPacket(new S_DoActionGFX(targetPc.getId(),
-                            ActionCodes.ACTION_Damage));
+                    targetPc.sendPackets(new S_DoActionGFX(targetPc.getId(), ActionCodes.ACTION_Damage));
+                    targetPc.broadcastPacket(new S_DoActionGFX(targetPc.getId(), ActionCodes.ACTION_Damage));
                     targetPc.receiveDamage(pc, (int) damage);
-                } else if (object instanceof L1SummonInstance
-                        || object instanceof L1PetInstance
+                } else if (object instanceof L1SummonInstance || object instanceof L1PetInstance
                         || object instanceof L1MonsterInstance) {
                     targetNpc = (L1NpcInstance) object;
-                    targetNpc.broadcastPacket(new S_DoActionGFX(targetNpc
-                            .getId(), ActionCodes.ACTION_Damage));
+                    targetNpc.broadcastPacket(new S_DoActionGFX(targetNpc.getId(), ActionCodes.ACTION_Damage));
                     targetNpc.receiveDamage(pc, (int) damage);
                 }
             }
@@ -307,18 +296,10 @@ public class L1WeaponSkill {
 
         dmg *= KiringkuCoefficientB;
 
-        if (pc.getWeapon().getItem().getItemId() == 503) {
-            pc.sendPackets(new S_SkillSound(pc.getId(), 6983));
-            pc.broadcastPacket(new S_SkillSound(pc.getId(), 6983));
-        } else {
-            pc.sendPackets(new S_SkillSound(pc.getId(), 7049));
-            pc.broadcastPacket(new S_SkillSound(pc.getId(), 7049));
-        }
         return dmg;
     }
 
-    public static double DiceDagger(L1PcInstance pc,
-                                    L1PcInstance targetPc, L1ItemInstance weapon) {
+    public static double DiceDagger(L1PcInstance pc, L1PcInstance targetPc, L1ItemInstance weapon) {
         double dmg = 0;
         int chance = _random.nextInt(100) + 1;
         if (3 >= chance) {
@@ -347,7 +328,8 @@ public class L1WeaponSkill {
                 targetPc.sendPackets(new S_SkillSound(targetPc.getId(), 4184));
                 targetPc.broadcastPacket(new S_SkillSound(targetPc.getId(), 4184));
                 targetPc.sendPackets(new S_Paralysis(S_Paralysis.TYPE_BIND, true));
-            } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance || cha instanceof L1PetInstance) {
+            } else if (cha instanceof L1MonsterInstance || cha instanceof L1SummonInstance
+                    || cha instanceof L1PetInstance) {
                 L1NpcInstance npc = (L1NpcInstance) cha;
                 npc.setSkillEffect(STATUS_FREEZE, fettersTime);
                 npc.broadcastPacket(new S_SkillSound(npc.getId(), 4184));
@@ -356,7 +338,7 @@ public class L1WeaponSkill {
         }
     }
 
-    public static void ChainSword(L1PcInstance pc) { //チェーンソードダメージ。
+    public static void ChainSword(L1PcInstance pc) { // チェーンソードダメージ。
         if (_random.nextInt(100) < 15) {
             if (pc.hasSkillEffect(L1SkillId.CHAINSWORD1)) {
                 pc.killSkillEffectTimer(L1SkillId.CHAINSWORD1);
@@ -374,7 +356,7 @@ public class L1WeaponSkill {
         }
     }
 
-    public static void ChainSword_Destroyer(L1PcInstance pc) { //チェーンソードダメージ。
+    public static void ChainSword_Destroyer(L1PcInstance pc) { // チェーンソードダメージ。
         if (_random.nextInt(100) < 18) {
             if (pc.hasSkillEffect(L1SkillId.CHAINSWORD1)) {
                 pc.killSkillEffectTimer(L1SkillId.CHAINSWORD1);
@@ -392,8 +374,7 @@ public class L1WeaponSkill {
         }
     }
 
-    public static void getDiseaseWeapon(L1PcInstance pc, L1Character cha,
-                                        int weaponid) {
+    public static void getDiseaseWeapon(L1PcInstance pc, L1Character cha, int weaponid) {
         int chance = _random.nextInt(100) + 1;
         int skilltime = weaponid == 412003 ? 64 : 20;
         if (7 >= chance) {
@@ -407,8 +388,7 @@ public class L1WeaponSkill {
             }
             cha.setSkillEffect(56, skilltime * 1000);
             pc.sendPackets(new S_SkillSound(cha.getId(), 2230));
-            Broadcaster
-                    .broadcastPacket(pc, new S_SkillSound(cha.getId(), 2230));
+            Broadcaster.broadcastPacket(pc, new S_SkillSound(cha.getId(), 2230));
             if (cha.hasSkillEffect(ERASE_MAGIC))
                 cha.removeSkillEffect(ERASE_MAGIC);
         }
@@ -472,7 +452,6 @@ public class L1WeaponSkill {
         }
         return calcDamageReduction(cha, dmg, L1Skills.ATTR_FIRE);
     }
-
 
     public static double ChainSword_Welcome(L1PcInstance pc, L1Character cha, int enchant) {
         double dmg = 0;
@@ -850,7 +829,8 @@ public class L1WeaponSkill {
         int undeadType = ((L1MonsterInstance) cha).getNpcTemplate().get_undead();
         if (undeadType == 1 || undeadType == 3) {
             if (enchant >= chance) {
-                new L1SkillUse().handleCommands(pc, TURN_UNDEAD, cha.getId(), cha.getX(), cha.getY(), null, 0, L1SkillUse.TYPE_GMBUFF);
+                new L1SkillUse().handleCommands(pc, TURN_UNDEAD, cha.getId(), cha.getX(), cha.getY(), null, 0,
+                        L1SkillUse.TYPE_GMBUFF);
             }
         }
     }
@@ -860,8 +840,8 @@ public class L1WeaponSkill {
             return 0;
         }
 
-        int ran1 = 0; //ランダム数値を適用
-        int mrset = 0; //エムアルでランダム数値をペンガプ
+        int ran1 = 0; // ランダム数値を適用
+        int mrset = 0; // エムアルでランダム数値をペンガプ
         int mrs = cha.getResistance().getEffectedMrBySkill();
         ran1 = _random.nextInt(5) + 1;
         mrset = mrs - ran1;

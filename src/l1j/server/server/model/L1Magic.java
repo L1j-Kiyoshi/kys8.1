@@ -401,13 +401,15 @@ public class L1Magic {
 	    isSuccess = true;
 	} else {
 	    if (_calcType == NPC_PC || _calcType == PC_PC) {
-		_targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 13418));
-		Broadcaster.broadcastPacket(_targetPc, new S_SkillSound(_targetPc.getId(), 13418));
-		isSuccess = false;
+                _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 13418));
+                // Broadcaster.broadcastPacket(_targetPc, new
+                // S_SkillSound(_targetPc.getId(), 13418));
+                isSuccess = false;
 	    } else if (_calcType == PC_NPC) {
-		_pc.sendPackets(new S_SkillSound(_targetNpc.getId(), 13418));
-		Broadcaster.broadcastPacket(_pc, new S_SkillSound(_targetNpc.getId(), 13418));// これは、他の人も見る...
-		isSuccess = false;
+                // _pc.sendPackets(new S_SkillSound(_targetNpc.getId(), 13418));
+                // Broadcaster.broadcastPacket(_pc, new
+                // S_SkillSound(_targetNpc.getId(), 13418));// これは、他の人も見る...
+                isSuccess = false;
 	    }
 	}
 	if (!isSuccess & skillId == TURN_UNDEAD) {
