@@ -55,6 +55,7 @@ public class L1EquipmentSlot {
             }
         }
 
+
         weapon.startEquipmentTimer(_owner);
         _weapons.add(weapon);
         for (int i = 0; i < 2; ++i) {
@@ -81,7 +82,7 @@ public class L1EquipmentSlot {
         } else {
             _owner.setCurrentWeapon(weapon.getItem().getType1());
         }
-
+        weaponRange(_owner);
         if (itemId == 10000) { // 会社員
             L1PolyMorph.doPoly(_owner, 11498, 0, L1PolyMorph.MORPH_BY_ITEMMAGIC);
         } else if (itemId == 203003) { // デスナイトのフレイムブレード：ジン
@@ -2256,8 +2257,8 @@ public class L1EquipmentSlot {
 
     private void removeWeapon(L1ItemInstance weapon) {
         _owner.setWeapon(null);
+        weaponRange(_owner);
         _owner.setCurrentWeapon(0);
-
         int itemId = weapon.getItem().getItemId();
         int enchant = weapon.getEnchantLevel();
         if (itemId == 1134 || itemId == 101134) { // 瞑想の杖
@@ -2283,6 +2284,7 @@ public class L1EquipmentSlot {
 
         weapon.stopEquipmentTimer(_owner);
         _weapons.remove(weapon);
+
         if (_owner.hasSkillEffect(L1SkillId.COUNTER_BARRIER)) {
             _owner.removeSkillEffect(L1SkillId.COUNTER_BARRIER);
         }
@@ -4538,6 +4540,69 @@ public class L1EquipmentSlot {
         }
     }
 
+    private static void weaponRange(L1PcInstance pc) {
+		// TODO Auto-generated method stub
+		 int range = 1;
+		 int type = 1;
+		 boolean ck = false;
+		 L1ItemInstance weapon = pc.getWeapon();
+		 if(weapon != null){
+			 if(weapon.getItem().getType() == 4) { //양손활
+				 range = 17;
+			 }else if (weapon.getItem().getType() == 13) { //한손활
+				 range = 14;
+			 }else if ((weapon.getItem().getType() == 24) || (weapon.getItem().getType() == 14) || (weapon.getItem().getType() == 18)) { //창과 체인소드
+				 range = 1;
+				 int polyId = pc.getTempCharGfx();
+				 //변신에 따라 거리 2로 조절
+				 if ((polyId == 11330) || (polyId == 11344) || (polyId == 11351) || (polyId == 11368)
+						 || (polyId == 12240)|| (polyId == 12237) //랜스마스터
+						 || (polyId == 11408) || (polyId == 11409) || (polyId == 11410) || (polyId == 11411) || (polyId == 11418)
+						 || (polyId == 11419) || (polyId == 12613) || (polyId == 12614) //변반 샤르나
+						 || (polyId == 13153) // blue death kinight i was add it
+	                      || polyId == 11392 //arcknight
+						 || (polyId == 13743)
+						 || (polyId == 13389)
+						 || (polyId == 13735)){
+					 range = 2;
+				 }else if (!pc.hasSkillEffect(L1SkillId.SHAPE_CHANGE)) {
+					 //노변신시에도 거리를 2로 해줘야한다.
+					 range = 2;
+				 }
+				 System.out.println("equipspot : " + weapon.getItem().getType1() + " AR: "+ range);
+			 }
+			 if(pc.isKnight()){
+				 if(weapon.getItem().getType() == 3) { //양손검
+					 ck = true;
+				 }
+			 }else if(pc.isElf()){
+				 if(pc.isDancingBlades()){
+					 ck = true;
+				 }
+				 if((weapon.getItem().getType() == 4 ||  weapon.getItem().getType() == 13 ) && weapon.getItem().getType1() == 20){
+					 type = 3;
+					 ck = true;
+				 }
+			 }else if(pc.isDragonknight()){
+				 ck = true;
+				 if((weapon.getItem().getType() == 14) || (weapon.getItem().getType() == 18)){
+					 type = 10;
+				 }
+			 }
+			 if (weapon.getItem().getType1() != 20 && weapon.getItem().getType1() != 62) {
+				 pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, type, ck));
+				 System.out.println("1");
+			 }else{
+				 pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, ck));
+				 System.out.println("2");
+			 }
+		 }else{
+			 pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, 1, 0, ck));
+			 System.out.println("3");
+		 }
+		 pc.setRange(range);
+		// System.out.println("WT : " + weapon.getItem().getType1() + " AR: "+ pc.getRange());
+	}
     /**
      * セットアイテムを解除
      *

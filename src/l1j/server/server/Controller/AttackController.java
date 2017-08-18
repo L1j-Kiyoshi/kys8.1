@@ -107,7 +107,8 @@ public class AttackController implements Runnable {
                 attackRange = 17;
             } else if ((weapon.getItem().getType() == 10) || (weapon.getItem().getType() == 13)) {
                 attackRange = 14;
-            } else if (weapon.getItem().getType() == 5 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
+            } else if (weapon.getItem().getType() == 24 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
+            	attackRange = 1;
                 if (poly == 11330 || poly == 11344 || poly == 11351 || poly == 11368 || poly == 11376 || poly == 11447 ||
                         poly == 12237 || poly == 0 || poly == 61 || poly == 138 || poly == 734 || poly == 2786 || poly == 6658 ||
                         poly == 6671 || poly == 12490 || poly == 1 || poly == 48 || poly == 37 || poly == 1186 || poly == 2796 || poly == 6661 ||
@@ -116,7 +117,10 @@ public class AttackController implements Runnable {
                         poly == 11414 || poly == 11415 || poly == 11416 || poly == 11417 || poly == 11418 || poly == 11419 ||
                         poly == 11420 || poly == 11421 || poly == 12542 || poly == 12541 || poly == 13735 || poly == 13737
                         || poly == 14928 //82経費ウィンドウ
-                        || poly == 13389) {
+                        || poly == 13389
+                        || poly == 11392 //arcknight
+                        || poly == 13153 // blue death
+                        || (poly == 13743)) { // rangking warrior
                     attackRange = 2;
                 }
             } else {
@@ -144,7 +148,7 @@ public class AttackController implements Runnable {
             }
         }
 
-		
+
 		/*if (!L1PolyMorph.isEquipableWeapon(a, weapon_type)) {
             return false;
 		}*/

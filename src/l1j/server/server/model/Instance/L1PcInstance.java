@@ -195,6 +195,21 @@ public class L1PcInstance extends L1Character {
         }
     }
 
+
+	/**
+  	 * @author xavie
+  	 * 6.2c weapon range
+  	 */
+  	private int _range = 0;
+
+  	public void setRange(int i) {
+  		_range = i;
+  	}
+
+	public int getRange() {
+  		return _range;
+  	}
+
     // 付加アイテムのショートカット
     private boolean _PackegeWarehoue = false;
 

@@ -348,60 +348,65 @@ public class C_LoginToServer extends ClientBasePacket {
         pc.sendPackets(new S_SPMR(pc));
         pc.sendPackets(new S_PacketBox(32, 1));
         pc.sendPackets(new S_ReturnedStat(pc, S_ReturnedStat.LOGIN));
+        weaponRange(pc);
         // pc.sendPackets(new S_PacketBox(S_PacketBox。知らない2））;
 
-        L1ItemInstance weapon = pc.getWeapon();
-        if (weapon != null) {
-            int range = 1;
-            int poly = pc.getTempCharGfx();
-            if (weapon.getItem().getType() == 4) { // 両手弓
-                range = 17;
-            } else if ((weapon.getItem().getType() == 10) || (weapon.getItem().getType() == 13)) {// の動産レット、片手弓
-                range = 14;
-            } else if (weapon.getItem().getType() == 5 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
-                if (poly == 11330 || poly == 11344 || poly == 11351 || poly == 11368 || poly == 11376 || poly == 11447 ||
-                        poly == 12237 || poly == 0 || poly == 61 || poly == 138 || poly == 734 || poly == 2786 || poly == 6658 ||
-                        poly == 6671 || poly == 12490 || poly == 1 || poly == 48 || poly == 37 || poly == 1186 || poly == 2796 || poly == 6661 ||
-                        poly == 6650 || poly == 12494 || poly == 13389 ||
-                        poly == 11408 || poly == 11409 || poly == 11410 || poly == 11411 || poly == 11412 || poly == 11413 ||
-                        poly == 11414 || poly == 11415 || poly == 11416 || poly == 11417 || poly == 11418 || poly == 11419 ||
-                        poly == 11420 || poly == 11421 || poly == 12542 || poly == 12541 || poly == 13735 || poly == 13737
-                        || poly == 14928 //82経費ウィンドウ
-                        || poly == 13389 //85経費ウィンドウ
-                        ) {
-                    range = 2;
-                }
-            } else {
-                range = 1;
-            }
-            if (weapon.getItem().getType1() == 20) {
-                if (weapon.getItem().getType() == 4)
-                    pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
-                else
-                    pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
-            } else {
-                //
-                int type = 7;
-                boolean bow_or_tohand = false;
-                if (weapon.getItem().getType() == 3) {
-                    type = 1;
-                    bow_or_tohand = true;
-                } else if (weapon.getItem().getType() == 11) {
-                    type = 2;
-                    bow_or_tohand = true;
-                } else if (weapon.getItem().getType() == 12) {
-                    type = 4;
-                    bow_or_tohand = true;
-                } else if (pc.isDragonknight()) {
-                    type = 10;
-                    bow_or_tohand = true;
-                }
-                //
-                pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, type, bow_or_tohand));
-            }
-        } else {
-            pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, 1, 0, false));
-        }
+//        L1ItemInstance weapon = pc.getWeapon();
+//        if (weapon != null) {
+//            int range = 1;
+//            int poly = pc.getTempCharGfx();
+//            if (weapon.getItem().getType() == 4) { // 両手弓
+//                range = 17;
+//            } else if ((weapon.getItem().getType() == 10) || (weapon.getItem().getType() == 13)) {// の動産レット、片手弓
+//                range = 14;
+//            } else if (weapon.getItem().getType() == 5 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
+//            	range = 1;
+//                if (poly == 11330 || poly == 11344 || poly == 11351 || poly == 11368 || poly == 11376 || poly == 11447 ||
+//                        poly == 12237 || poly == 0 || poly == 61 || poly == 138 || poly == 734 || poly == 2786 || poly == 6658 ||
+//                        poly == 6671 || poly == 12490 || poly == 1 || poly == 48 || poly == 37 || poly == 1186 || poly == 2796 || poly == 6661 ||
+//                        poly == 6650 || poly == 12494 || poly == 13389 ||
+//                        poly == 11408 || poly == 11409 || poly == 11410 || poly == 11411 || poly == 11412 || poly == 11413 ||
+//                        poly == 11414 || poly == 11415 || poly == 11416 || poly == 11417 || poly == 11418 || poly == 11419 ||
+//                        poly == 11420 || poly == 11421 || poly == 12542 || poly == 12541 || poly == 13735 || poly == 13737
+//                        || poly == 14928 //82経費ウィンドウ
+//                        || poly == 13389 //85経費ウィンドウ
+//                        || poly == 13743
+//                        ) {
+//                    range = 2;
+//                    System.out.println(range);
+//                }
+//            } else {
+//                range = 2;
+//            }
+//
+//            if (weapon.getItem().getType1() == 20) {
+//                if (weapon.getItem().getType() == 4)
+//                    pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
+//                else
+//                    pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, true));
+//            } else {
+//                //
+//                int type = 7;
+//                boolean bow_or_tohand = false;
+//                if (weapon.getItem().getType() == 3) {
+//                    type = 1;
+//                    bow_or_tohand = true;
+//                } else if (weapon.getItem().getType() == 11) {
+//                    type = 2;
+//                    bow_or_tohand = true;
+//                } else if (weapon.getItem().getType() == 12) {
+//                    type = 4;
+//                    bow_or_tohand = true;
+//                } else if (pc.isDragonknight()) {
+//                    type = 10;
+//                    bow_or_tohand = true;
+//                }
+//                //
+//                pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, type, bow_or_tohand));
+//            }
+//        } else {
+//            pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, 1, 0, false));
+//        }
 
         pc.sendClanMarks();// 腥血君主冠表示
         pc.sendPackets(new S_SPMR(pc));
@@ -950,7 +955,7 @@ public class C_LoginToServer extends ClientBasePacket {
         } else {
             pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.PCBANG_SET, false));
         }
-		
+
 /*		if(pc.getWcount(0)==WeekQuestTable.getInstance().maxcount.get(0) && pc.getWcount(1)==WeekQuestTable.getInstance().maxcount.get(1) && pc.getWcount(2)==WeekQuestTable.getInstance().maxcount.get(2)){
 			pc.setLineClear(0,true);
 		}
@@ -2237,14 +2242,73 @@ public class C_LoginToServer extends ClientBasePacket {
         }
     }
 
+    private static void weaponRange(L1PcInstance pc) {
+		// TODO Auto-generated method stub
+		 int range = 1;
+		 int type = 1;
+		 boolean ck = false;
+		 L1ItemInstance weapon = pc.getWeapon();
+		 if(weapon != null){
+			 if(weapon.getItem().getType() == 4) { //양손활
+				 range = 17;
+			 }else if (weapon.getItem().getType() == 13) { //한손활
+				 range = 14;
+			 }else if ((weapon.getItem().getType() == 24) || (weapon.getItem().getType() == 14) || (weapon.getItem().getType() == 18)) { //창과 체인소드
+				 range = 1;
+				 int polyId = pc.getTempCharGfx();
+				 //변신에 따라 거리 2로 조절
+				 if ((polyId == 11330) || (polyId == 11344) || (polyId == 11351) || (polyId == 11368)
+						 || (polyId == 12240)|| (polyId == 12237) //랜스마스터
+						 || (polyId == 11408) || (polyId == 11409) || (polyId == 11410) || (polyId == 11411) || (polyId == 11418)
+						 || (polyId == 11419) || (polyId == 12613) || (polyId == 12614) //변반 샤르나
+						 || (polyId == 13153)
+						 || (polyId == 11392)
+						 || (polyId == 13743)){
+					 System.out.println("gere");
+					 range = 2;
+				 }else if (!pc.hasSkillEffect(L1SkillId.SHAPE_CHANGE)) {
+					 //노변신시에도 거리를 2로 해줘야한다.
+					 range = 2;
+				 }
+				 System.out.println("WT : " + weapon.getItem().getType1() + " AR: "+ pc.getRange());
+			 }
+			 if(pc.isKnight()){
+				 if(weapon.getItem().getType() == 3) { //양손검
+					 ck = true;
+				 }
+			 }else if(pc.isElf()){
+				 if(pc.isDancingBlades()){
+					 ck = true;
+				 }
+				 if((weapon.getItem().getType() == 4 ||  weapon.getItem().getType() == 13 ) && weapon.getItem().getType1() == 20){
+					 type = 3;
+					 ck = true;
+				 }
+			 }else if(pc.isDragonknight()){
+				 ck = true;
+				 if((weapon.getItem().getType() == 14) || (weapon.getItem().getType() == 18)){
+					 type = 10;
+				 }
+			 }
+			 if (weapon.getItem().getType1() != 20 && weapon.getItem().getType1() != 62) {
+				 pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, type, ck));
+			 }else{
+				 pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, range, 3, ck));
+			 }
+		 }else{
+			 pc.sendPackets(new S_PacketBox(S_PacketBox.ATTACKABLE_DISTANCE, 1, 0, ck));
+		 }
+		 pc.setRange(range);
+		 //
+	}
 	/*
 	 * private void welcome(L1PcInstance pc) { //このマップエフェクト示す
-	 * 
+	 *
 	 * pc.sendPackets(new S_EffectLocation(pc.getX() + 3, pc.getY() + 3, 6415)); // e pc.sendPackets(new S_EffectLocation(pc.getX() + 2, pc.getY() +
 	 * 2, 6423)); // m pc.sendPackets(new S_EffectLocation(pc.getX() + 1, pc.getY() + 1, 6425)); // o pc.sendPackets(new S_EffectLocation(pc.getX() ,
 	 * pc.getY(), 6413)); // c pc.sendPackets(new S_EffectLocation(pc.getX() - 1, pc.getY() - 1, 6422)); // l pc.sendPackets(new
 	 * S_EffectLocation(pc.getX() - 2, pc.getY() - 2, 6415)); // e pc.sendPackets(new S_EffectLocation(pc.getX() - 3, pc.getY() - 3, 6433)); // w
-	 * 
+	 *
 	 * pc.sendPackets(new S_EffectLocation(pc.getX() +1, pc.getY() +5, 6417)); // G pc.sendPackets(new S_EffectLocation(pc.getX() , pc.getY() +4,
 	 * 6424)); // N pc.sendPackets(new S_EffectLocation(pc.getX() -1, pc.getY() +3, 6425)); // O pc.sendPackets(new S_EffectLocation(pc.getX() -2,
 	 * pc.getY() +2, 6422)); // L pc.sendPackets(new S_EffectLocation(pc.getX() -3, pc.getY() +1, 6425)); // O pc.sendPackets(new

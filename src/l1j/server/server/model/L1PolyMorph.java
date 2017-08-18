@@ -242,7 +242,7 @@ public class L1PolyMorph {
 //							}
 //						}
 //					}else{
-//						for (L1ItemInstance items : pc.getInventory().getItems()) {  
+//						for (L1ItemInstance items : pc.getInventory().getItems()) {
 //							if(items.getItem().getType() == 18){
 //								if(items.getItem().getType1() == 50){
 //									items.getItem().setType1(24);
@@ -278,7 +278,7 @@ public class L1PolyMorph {
                     range = 17;
                 } else if ((weapon.getItem().getType() == 10) || (weapon.getItem().getType() == 13)) {
                     range = 14;
-                } else if (weapon.getItem().getType() == 5 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
+                } else if (weapon.getItem().getType() == 24 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
                     if (poly == 11330 || poly == 11344 || poly == 11351 || poly == 11368 || poly == 11376 || poly == 11447 ||
                             poly == 12237 || poly == 0 || poly == 61 || poly == 138 || poly == 734 || poly == 2786 || poly == 6658 ||
                             poly == 6671 || poly == 12490 || poly == 1 || poly == 48 || poly == 37 || poly == 1186 || poly == 2796 || poly == 6661 ||
@@ -437,7 +437,7 @@ public class L1PolyMorph {
                     range = 17;
                 else if ((weapon.getItem().getType() == 10) || (weapon.getItem().getType() == 13))
                     range = 14;
-                else if (weapon.getItem().getType() == 5 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
+                else if (weapon.getItem().getType() == 24 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
                     if (poly == 11330 || poly == 11344 || poly == 11351 || poly == 11368 || poly == 11376 || poly == 11447 ||
                             poly == 12237 || poly == 0 || poly == 61 || poly == 138 || poly == 734 || poly == 2786 || poly == 6658 ||
                             poly == 6671 || poly == 12490 || poly == 1 || poly == 48 || poly == 37 || poly == 1186 || poly == 2796 || poly == 6661 ||
