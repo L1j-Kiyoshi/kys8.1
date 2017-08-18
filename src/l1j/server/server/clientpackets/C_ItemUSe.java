@@ -89,7 +89,49 @@ import l1j.server.server.model.poison.L1DamagePoison;
 import l1j.server.server.model.skill.L1SkillId;
 import l1j.server.server.model.skill.L1SkillUse;
 import l1j.server.server.monitor.LoggerInstance;
-import l1j.server.server.serverpackets.*;
+import l1j.server.server.serverpackets.S_ACTION_UI;
+import l1j.server.server.serverpackets.S_ACTION_UI2;
+import l1j.server.server.serverpackets.S_AddSkill;
+import l1j.server.server.serverpackets.S_AttackPacket;
+import l1j.server.server.serverpackets.S_AttackStatus;
+import l1j.server.server.serverpackets.S_Board;
+import l1j.server.server.serverpackets.S_CharVisualUpdate;
+import l1j.server.server.serverpackets.S_ChatPacket;
+import l1j.server.server.serverpackets.S_ClanName;
+import l1j.server.server.serverpackets.S_CurseBlind;
+import l1j.server.server.serverpackets.S_DoActionGFX;
+import l1j.server.server.serverpackets.S_HPUpdate;
+import l1j.server.server.serverpackets.S_IdentifyDesc;
+import l1j.server.server.serverpackets.S_ItemName;
+import l1j.server.server.serverpackets.S_ItemStatus;
+import l1j.server.server.serverpackets.S_Liquor;
+import l1j.server.server.serverpackets.S_MPUpdate;
+import l1j.server.server.serverpackets.S_MatizCloudia;
+import l1j.server.server.serverpackets.S_Message_YN;
+import l1j.server.server.serverpackets.S_NPCTalkReturn;
+import l1j.server.server.serverpackets.S_NewCreateItem;
+import l1j.server.server.serverpackets.S_NewSkillIcon;
+import l1j.server.server.serverpackets.S_OwnCharAttrDef;
+import l1j.server.server.serverpackets.S_OwnCharStatus;
+import l1j.server.server.serverpackets.S_OwnCharStatus2;
+import l1j.server.server.serverpackets.S_PacketBox;
+import l1j.server.server.serverpackets.S_Paralysis;
+import l1j.server.server.serverpackets.S_ReturnedStat;
+import l1j.server.server.serverpackets.S_SPMR;
+import l1j.server.server.serverpackets.S_Serchdrop2;
+import l1j.server.server.serverpackets.S_ServerMessage;
+import l1j.server.server.serverpackets.S_ShowPolyList;
+import l1j.server.server.serverpackets.S_SkillBrave;
+import l1j.server.server.serverpackets.S_SkillHaste;
+import l1j.server.server.serverpackets.S_SkillIconBlessOfEva;
+import l1j.server.server.serverpackets.S_SkillIconGFX;
+import l1j.server.server.serverpackets.S_SkillIconWisdomPotion;
+import l1j.server.server.serverpackets.S_SkillSound;
+import l1j.server.server.serverpackets.S_Sound;
+import l1j.server.server.serverpackets.S_SummonPack;
+import l1j.server.server.serverpackets.S_SystemMessage;
+import l1j.server.server.serverpackets.S_TamWindow;
+import l1j.server.server.serverpackets.S_UseAttackSkill;
 import l1j.server.server.templates.L1Armor;
 import l1j.server.server.templates.L1BookMark;
 import l1j.server.server.templates.L1EtcItem;
@@ -681,7 +723,7 @@ public class C_ItemUSe extends ClientBasePacket {
                                 || l1iteminstance1.getBless() == 2 || l1iteminstance1.getBless() == 3) {
                             if (l1iteminstance1 != null && l1iteminstance1.getItem().getType2() != 1
                                     && l1iteminstance1.getItem().getType2() != 2) {
-                                pc.sendPackets(new S_SystemMessage("武器、防具のみシールが可能です。"));
+                                pc.sendPackets(new S_SystemMessage("武器、防具のみ使用可能です。"));
                                 return;
                             }
                             int Bless = 0;
@@ -1007,7 +1049,7 @@ public class C_ItemUSe extends ClientBasePacket {
                     case 700000:// 経験値ポーション
                         if (Config.EXP_POT_LIMIT == true) {
                             if (pc.getLevel() >= Config.LIMITLEVEL) {// 経験値
-                                pc.sendPackets(new S_SystemMessage("レベル制限にもう経験値獲得が不可能です"));
+                                pc.sendPackets(new S_SystemMessage("レベル上限に達したため、使用することができません。"));
                                 return;
                             }
 
@@ -1078,7 +1120,7 @@ public class C_ItemUSe extends ClientBasePacket {
 
                     case 700001:
                         if (pc.getLevel() >= Config.LIMITLEVEL) {// 経験値
-                            pc.sendPackets(new S_SystemMessage("レベル制限にもう経験値獲得が不可能です"));
+                            pc.sendPackets(new S_SystemMessage("レベル上限に達したため、使用することができません。"));
                             return;
                         }
                         supplyEXP(pc);
@@ -1111,7 +1153,7 @@ public class C_ItemUSe extends ClientBasePacket {
                                 // \f1 一つの能力値の最大値は25です。他の能力値を選択してください。
                             }
                         } else {
-                            pc.sendPackets(new S_SystemMessage("エリクサー（5）本使用をすべてられました。"));
+                            pc.sendPackets(new S_SystemMessage("エリクサー使用上限に達したため、使用できません。"));
                             // \f1 一つの能力値の最大値は25です。他の能力値を選択してください。
                         }
                         break;
@@ -1131,7 +1173,7 @@ public class C_ItemUSe extends ClientBasePacket {
                                 // \f1一つの能力値の最大値は25です。他の能力値を選択してください。
                             }
                         } else {
-                            pc.sendPackets(new S_SystemMessage("エリクサー（5）本使用をすべてられました。"));
+                            pc.sendPackets(new S_SystemMessage("エリクサー使用上限に達したため、使用できません。"));
                             // \f1一つの能力値の最大値は25です。他の能力値を選択してください。
                         }
 
@@ -1155,7 +1197,7 @@ public class C_ItemUSe extends ClientBasePacket {
                                 // \f1 一つの能力値の最大値は25です。他の能力値を選択してください。
                             }
                         } else {
-                            pc.sendPackets(new S_SystemMessage("エリクサー（5）本使用をすべてられました。"));
+                            pc.sendPackets(new S_SystemMessage("エリクサー使用上限に達したため、使用できません。"));
                             // \f1 一つの能力値の最大値は25です。他の能力値を選択してください。
                         }
 
@@ -1177,7 +1219,7 @@ public class C_ItemUSe extends ClientBasePacket {
                                 // \f1 一つの能力値の最大値は25です。他の能力値を選択してください。
                             }
                         } else {
-                            pc.sendPackets(new S_SystemMessage("エリクサー（5）本使用をすべてられました。"));
+                            pc.sendPackets(new S_SystemMessage("エリクサー使用上限に達したため、使用できません。"));
                             // \f1 一つの能力値の最大値は25です。他の能力値を選択してください。
                         }
 
@@ -1200,7 +1242,7 @@ public class C_ItemUSe extends ClientBasePacket {
                                 // \f1一つの能力値の最大値は25です。他の能力値を選択してください。
                             }
                         } else {
-                            pc.sendPackets(new S_SystemMessage("エリクサー（5）本使用をすべてられました。"));
+                            pc.sendPackets(new S_SystemMessage("エリクサー使用上限に達したため、使用できません。"));
                             // \f1一つの能力値の最大値は25です。他の能力値を選択してください。
                         }
 
@@ -1222,7 +1264,7 @@ public class C_ItemUSe extends ClientBasePacket {
                                 // \f1一つの能力値の最大値は25です。他の能力値を選択してください。
                             }
                         } else {
-                            pc.sendPackets(new S_SystemMessage("エリクサー（5）本使用をすべてられました。"));
+                            pc.sendPackets(new S_SystemMessage("エリクサー使用上限に達したため、使用できません。"));
                         }
 
                         break;
@@ -1279,7 +1321,7 @@ public class C_ItemUSe extends ClientBasePacket {
                         if (itemId == 30056) {
                             if (!(pc.getMapId() >= 2101 && pc.getMapId() <= 2151
                                     || pc.getMapId() >= 2151 && pc.getMapId() <= 2201)) {
-                                pc.sendPackets(new S_SystemMessage("オルドンでのみ使用可能です。"));
+                                pc.sendPackets(new S_SystemMessage("特定の場所のみ使用可能です。"));
                                 return;
                             }
                         }
@@ -1646,7 +1688,7 @@ public class C_ItemUSe extends ClientBasePacket {
                         if (client.getAccount().getCharSlot() < 8) {
                             client.getAccount().setCharSlot(client, client.getAccount().getCharSlot() + 1);
                             pc.getInventory().removeItem(l1iteminstance, 1);
-                            pc.sendPackets(new S_SystemMessage("キャラクタースロット拡張完了（完全接続終了後適用）"));
+                            pc.sendPackets(new S_SystemMessage("キャラクタースロットを拡張しました。（再起動後適用）"));
                         } else {
                             pc.sendPackets(new S_SystemMessage("キャラクタースロットが既にいっぱいです。"));
                         }
@@ -2697,7 +2739,7 @@ public class C_ItemUSe extends ClientBasePacket {
                                     || partner.getMapId() == 5153 || partner.getMapId() == 5001 || partner.getMapId() == 24
                                     || (partner.getMapId() > 239 && partner.getMapId() < 244)
                                     || (partner.getMapId() > 247 && partner.getMapId() < 252)) {
-                                pc.sendPackets(new S_SystemMessage("あなたのパートナーは、死んでいるか、行くことができないところがあります。"));
+                                pc.sendPackets(new S_SystemMessage("あなたのパートナーは、死んでいるか、行くことができないところでプレイしています。"));
                             }
                         } else if (l1iteminstance.getChargeCount() > 0) {
                             pc.sendPackets(new S_ServerMessage(546));
