@@ -2135,7 +2135,7 @@ public class L1Attack {
                 dmg = dmg + _random.nextInt(15) + 4;
             }
 
-        } else if (_weaponType == 62) { // がんトートレッド
+        } else if (_weaponType == 62) { // ガントレッド
             int add_dmg = 0;
             if (_targetNpc.getNpcTemplate().get_size().equalsIgnoreCase("large")) {
                 add_dmg = _sting.getItem().getDmgLarge();
