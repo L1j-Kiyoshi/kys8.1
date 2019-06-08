@@ -103,7 +103,7 @@ public class C_DropItem extends ClientBasePacket {
                     return;
                 }
                 if (item.getEnchantLevel() >= 1 && !pc.isGm()) {
-                    pc.sendPackets(new S_SystemMessage("エンチャンされたアイテムは捨てることができません。"));
+                    pc.sendPackets(new S_SystemMessage("エンチャントされたアイテムは捨てることができません。"));
                     return;
                 }
 //			if (pc.getInventory().getWeight30() > 240) {
@@ -115,7 +115,7 @@ public class C_DropItem extends ClientBasePacket {
 //				return;
 //			}
                 if (item.getId() >= 0 && (pc.getMapId() == 350 || pc.getMapId() == 340 || pc.getMapId() == 370 || pc.getMapId() == 800)) {
-                    pc.sendPackets(new S_SystemMessage("市場では、アイテムを捨てるません。"));
+                    pc.sendPackets(new S_SystemMessage("市場では、アイテムを捨てることができません。"));
                     return;
                 }
 

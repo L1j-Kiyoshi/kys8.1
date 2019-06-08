@@ -6667,10 +6667,10 @@ public class C_ItemUSe extends ClientBasePacket {
                                         /** エンチャント全体の通知リニューアル **/
                                         if (enchant_level >= 9) { // 武器+10成功したときに通知
                                             L1World.getInstance().broadcastPacketToAll(new S_SystemMessage(
-                                                    "どのアデン勇士様が[" + l1iteminstance1.getLogName() + "]エンチャントに成功しました。"));
+                                                    "とあるアデン勇士が[" + l1iteminstance1.getLogName() + "]エンチャントに成功しました。"));
                                             L1World.getInstance().broadcastPacketToAll(new S_PacketBox(
                                                     S_PacketBox.GREEN_MESSAGE,
-                                                    "どのアデン勇士様が[" + l1iteminstance1.getLogName() + "]エンチャントに成功しました"));
+                                                    "とあるアデン勇士が[" + l1iteminstance1.getLogName() + "]エンチャントに成功しました"));
                                         }
                                         /** エンチャント全体の通知リニューアル **/
                                     } else {

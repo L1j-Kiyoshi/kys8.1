@@ -664,6 +664,28 @@ public class L1Attack {
                         if (_target.getLockSectionUp() != 0) {
                             lockSection += _target.getLockSectionUp();
                         }
+                        if (_targetPc.isWarrior() && _targetPc.getEquipSlot().getWeaponCount() == 2) {
+
+                            for (L1ItemInstance item2 : _targetPc.getInventory().getItems()) {
+                                if (item2 != null && item2.getItem().getType2() == 1 && item2.getItem().getType() == 6
+                                        && item2.isEquipped()) {
+                                    if (item2.getItemId() == 202014) {
+                                        lockSection += 5;
+                                    }
+                                }
+                            }
+                        } else {
+                            for (L1ItemInstance item : _targetPc.getInventory().getItems()) {
+                                if (_targetPc.getWeapon().equals(item)) {
+                                    if (item.isEquipped()) {
+                                        if (item.getItemId() == 202014) {
+                                            lockSection +=5;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         // System.out.println("ロック区間いくら上がるか」+ロック区間);
                         if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp())
                                 && chance <= 35) {
@@ -690,6 +712,28 @@ public class L1Attack {
                             if (_target.getLockSectionUp() != 0) {
                                 lockSection += _target.getLockSectionUp();
                             }
+                            if (_targetPc.isWarrior() && _targetPc.getEquipSlot().getWeaponCount() == 2) {
+
+                                for (L1ItemInstance item2 : _targetPc.getInventory().getItems()) {
+                                    if (item2 != null && item2.getItem().getType2() == 1 && item2.getItem().getType() == 6
+                                            && item2.isEquipped()) {
+                                        if (item2.getItemId() == 202014) {
+                                            lockSection += 5;
+                                        }
+                                    }
+                                }
+                            } else {
+                                for (L1ItemInstance item : _targetPc.getInventory().getItems()) {
+                                    if (_targetPc.getWeapon().equals(item)) {
+                                        if (item.isEquipped()) {
+                                            if (item.getItemId() == 202014) {
+                                                lockSection +=5;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                             if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp())
                                     && chance <= 35) {
                                 if (_targetPc.getInventory().checkItem(41246, 10)) {
@@ -713,6 +757,29 @@ public class L1Attack {
                             if (_target.getLockSectionUp() != 0) {
                                 lockSection += _target.getLockSectionUp();
                             }
+
+                            if (_targetPc.isWarrior() && _targetPc.getEquipSlot().getWeaponCount() == 2) {
+
+                                for (L1ItemInstance item2 : _targetPc.getInventory().getItems()) {
+                                    if (item2 != null && item2.getItem().getType2() == 1 && item2.getItem().getType() == 6
+                                            && item2.isEquipped()) {
+                                        if (item2.getItemId() == 202014) {
+                                            lockSection += 5;
+                                        }
+                                    }
+                                }
+                            } else {
+                                for (L1ItemInstance item : _targetPc.getInventory().getItems()) {
+                                    if (_targetPc.getWeapon().equals(item)) {
+                                        if (item.isEquipped()) {
+                                            if (item.getItemId() == 202014) {
+                                                lockSection +=5;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                             if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp())
                                     && chance <= 35) {
                                 if (this._targetPc.getInventory().checkItem(41246, 10)) {
@@ -733,6 +800,7 @@ public class L1Attack {
                         }
                     }
                 }
+
                 break;
             case PC_NPC:
                 _damage = calcPcNpcDamage();
@@ -749,6 +817,28 @@ public class L1Attack {
                         int lockSection = 0;
                         if (_target.getLockSectionUp() != 0) {
                             lockSection += _target.getLockSectionUp();
+                        }
+
+                        if (_targetPc.isWarrior() && _targetPc.getEquipSlot().getWeaponCount() == 2) {
+
+                            for (L1ItemInstance item2 : _targetPc.getInventory().getItems()) {
+                                if (item2 != null && item2.getItem().getType2() == 1 && item2.getItem().getType() == 6
+                                        && item2.isEquipped()) {
+                                    if (item2.getItemId() == 202014) {
+                                        lockSection += 5;
+                                    }
+                                }
+                            }
+                        } else {
+                            for (L1ItemInstance item : _targetPc.getInventory().getItems()) {
+                                if (_targetPc.getWeapon().equals(item)) {
+                                    if (item.isEquipped()) {
+                                        if (item.getItemId() == 202014) {
+                                            lockSection +=5;
+                                        }
+                                    }
+                                }
+                            }
                         }
                         if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp())
                                 && chance <= 35) {
@@ -774,6 +864,28 @@ public class L1Attack {
                         if (_target.getLockSectionUp() != 0) {
                             lockSection += _target.getLockSectionUp();
                         }
+                        if (_targetPc.isWarrior() && _targetPc.getEquipSlot().getWeaponCount() == 2) {
+
+                            for (L1ItemInstance item2 : _targetPc.getInventory().getItems()) {
+                                if (item2 != null && item2.getItem().getType2() == 1 && item2.getItem().getType() == 6
+                                        && item2.isEquipped()) {
+                                    if (item2.getItemId() == 202014) {
+                                        lockSection += 5;
+                                    }
+                                }
+                            }
+                        } else {
+                            for (L1ItemInstance item : _targetPc.getInventory().getItems()) {
+                                if (_targetPc.getWeapon().equals(item)) {
+                                    if (item.isEquipped()) {
+                                        if (item.getItemId() == 202014) {
+                                            lockSection +=5;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
                         if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp())
                                 && chance <= 35) {
                             if (_targetPc.getInventory().checkItem(41246, 10)) {

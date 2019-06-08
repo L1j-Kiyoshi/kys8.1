@@ -67,7 +67,7 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
             }
 
             if (!pc.isGm() && item.getItem().isCantDelete()) {
-                pc.sendPackets(new S_ServerMessage(125));
+               pc.sendPackets(new S_ServerMessage(125));
                 return;
             }
 
@@ -75,7 +75,7 @@ public class C_DeleteInventoryItem extends ClientBasePacket {
 //			pc.sendPackets(new S_ServerMessage(210, item.getItem().getName())); // \f1%0はしまったり、または他人に両日をすることができません。
 //			return;
 //		}
-//		
+//
             Object[] petlist = pc.getPetList().values().toArray();
             L1PetInstance pet = null;
             for (Object petObject : petlist) {

@@ -54,8 +54,8 @@ public class L1Recall implements L1CommandExecutor {
                 target.dh = target.getHeading();
                 target.setTelType(7);
                 new L1Teleport().teleport(target, target.dx, target.dy, target.dm, target.dh, true);
-                pc.sendPackets(new S_SystemMessage("通知：\\\\ aG" + target.getName() + "様を召喚しました。"));
-                target.sendPackets(new S_SystemMessage("\\aGゲームマスター様が \\aAあなた\\aGを召喚しました。"));
+                pc.sendPackets(new S_SystemMessage("通知：\\\\ aG" + target.getName() + "を召喚しました。"));
+                target.sendPackets(new S_SystemMessage("\\aGゲームマスターが \\aAあなた\\aGを召喚しました。"));
             }
 
 

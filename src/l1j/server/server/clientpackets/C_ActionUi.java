@@ -540,7 +540,7 @@ public class C_ActionUi extends ClientBasePacket {
          * = readC(); readC(); int setting2 = readC(); if (setting2 == 2) {
          * pc.sendPackets(new S_SystemMessage（「現在のパスワード登録のタイプに設定することができません。 "））;
          * setting2 = 1; }
-         * 
+         *
          * pc.getClan().setJoinSetting(setting);
          * pc.getClan().setJoinType(setting2); pc.sendPackets(new
          * S_ACTION_UI2(S_ACTION_UI2.CLAN_JOIN_SETTING, setting, setting2));
@@ -550,29 +550,29 @@ public class C_ActionUi extends ClientBasePacket {
         /*
          * case 血盟加入： try { readC(); readH(); int length = readC(); byte[] BYTE2
          * = readByte();
-         * 
+         *
          * if (pc.isCrown()) { pc.sendPackets(new
          * S_ACTION_UI(S_ACTION_UI.CLAN_JOIN_MESSAGE, 13)); return; }
-         * 
+         *
          * if (pc.getClanid() != 0) { pc.sendPackets(new
          * S_ACTION_UI(S_ACTION_UI.CLAN_JOIN_MESSAGE, 9)); return; }
-         * 
+         *
          * String clanname = new String(BYTE2, 0, length, "MS932");
-         * 
+         *
          * L1Clan clan = L1World.getInstance().getClan(clanname); if (clan ==
          * null) { pc.sendPackets(new S_SystemMessage（「存在しない血盟です。 "））;
          * pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.CLAN_JOIN_MESSAGE, 4));
          * return; }
-         * 
+         *
          * if (clan.getJoinSetting() == 0) { pc.sendPackets(new
          * S_ACTION_UI(S_ACTION_UI.CLAN_JOIN_MESSAGE, 8)); return; }
-         * 
-         * 
+         *
+         *
          * for(L1PcInstance cra : clan.getOnlineClanMember()){
          * if(cra.getClanRank() >= 9){ if (clan.getJoinSetting() == 0) {
          * pc.sendPackets(new S_ACTION_UI(S_ACTION_UI.CLAN_JOIN_MESSAGE, 8));
          * return;
-         * 
+         *
          * } else if (clan.getJoinType() == 0) { pc.sendPackets(new
          * S_ACTION_UI(S_ACTION_UI.CLAN_JOIN_MESSAGE, 0)); return; } else {
          * cra.setTempID(pc.getId()); //相手のオブジェクトIDを保存しておく S_Message_YN myn =
@@ -1707,7 +1707,7 @@ public class C_ActionUi extends ClientBasePacket {
                         pc.getInventory().consumeItem(40308, 100000);
                     }
 
-                    /** 生まれ変わりの宝石 **/
+                    /** 転生の宝石 **/
                 } else if (itemtype == 2739) {
                     if (pc.getInventory().checkItem(40052, 1) && pc.getInventory().checkItem(40055, 1)
                             && pc.getInventory().checkItem(40053, 1) && pc.getInventory().checkItem(40054, 1)

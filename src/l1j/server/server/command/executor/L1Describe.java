@@ -108,7 +108,7 @@ public class L1Describe implements L1CommandExecutor {
                     + "コーン: " + target.getAbility().getTotalCon() + "   " + "ある：" + target.getAbility().getTotalInt() + "   "
                     + "上記: " + target.getAbility().getTotalWis() + "   " + "カー：" + target.getAbility().getTotalCha()));
             pc.sendPackets(new S_ChatPacket(pc, "* 火: " + target.getResistance().getFire() + "水：" + target.getResistance().getWater() + "  風: " + target.getResistance().getWind() + "土地：" + target.getResistance().getEarth()));
-            pc.sendPackets(new S_ChatPacket(pc, "* ホールド: " + target.getResistance().getHold() + "  氷結: " + target.getResistance().getFreeze() + "  睡眠: " + target.getResistance().getSleep() + "スターン：" + target.getResistance().getStun() + "  恐怖: " + target.getResistance().getDESPERADO() + "  リドク: " + target.getDamageReductionByArmor()));
+            pc.sendPackets(new S_ChatPacket(pc, "* ホールド: " + target.getResistance().getHold() + "  氷結: " + target.getResistance().getFreeze() + "  睡眠: " + target.getResistance().getSleep() + "スタン：" + target.getResistance().getStun() + "  恐怖: " + target.getResistance().getDESPERADO() + "  リドク: " + target.getDamageReductionByArmor()));
             pc.sendPackets(new S_ChatPacket(pc, "* ツタ: " + target.getDmgup() + "  攻城: " + target.getHitup() + "  ファルタ: " + target.getBowDmgup() + "  ファルミョン: " + target.getBowHitup() + "  呪術: " + target.getAbility().getSp()));
             pc.sendPackets(new S_SystemMessage("\\aD--------------------------------------------------"));
         } catch (Exception e) {

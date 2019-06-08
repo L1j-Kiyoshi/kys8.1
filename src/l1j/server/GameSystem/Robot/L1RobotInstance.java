@@ -132,7 +132,7 @@ public class L1RobotInstance extends L1PcInstance {
     private static final int[] stunTimeArray = { 2000, 3000, 4000, 5000 };
 
     private String _himent;
-    private static final String[] himentArray = { "Hi", "どうぞ！", "攻撃しないで", "ハイ？", "じょうじ...", "どっかいって", "戦う？" };
+    private static final String[] himentArray = { "マジ卍ィ！", "雑魚ダウン！", "バベチリィ！！", "カフェラティ！！", "お助け～", "触らないで・・・", "俺に触るとヤケドするぜ・・・" };
 
     private String _townment;
 

@@ -154,8 +154,8 @@ public class S_ACTION_UI extends ServerBasePacket {
                 craftlist = new int[] { 157, 158 };
                 break;
             /** ウェルダン村 - シュエルメ **/
-            // case 900000: craftlist = new int[] {
-            // 103,104,105,106,107,108,109,496,497 }; break;
+             //case 900000: craftlist = new int[] {
+             //103,104,105,106,107,108,109,496,497 }; break;
             /** ウェルダン村 - 細心シュヌ **/
             case 900001:
                 craftlist = new int[] { 83, 84, 85, 86 };

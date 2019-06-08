@@ -24,19 +24,27 @@ echo Install the database...
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 set database=l1jdb
 set username=root
-set password=
+set password=M20180613m
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: Enter the DATA directory
+:: CSV Config
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+set delimiter=,
+set enclosed=
+set newline=\r\n
+set skipline=1
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:: Enter the CSV directory
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :RETRY
-echo Enter the DATA directory (Cancel: Press the Enter key without entering)
+echo Enter the CSV directory (Cancel: Press the Enter key without entering)
 set D=
 set /p D=^>
 if not defined D goto :CANCEL
 if not exist %D% goto RETRY
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 :: Create the database
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 echo Drop the database and Create the database.
@@ -51,12 +59,16 @@ mysql -u %username% -p%password% %database% < .\create_tables.sql
 if errorlevel 1 goto ERR
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-:: Store the data
+:: Store the CSV data
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-echo Store the data...
-for %%F in (%D%\*.sql) do (
+echo Store the CSV data...
+for %%F in (%D%\*.csv) do (
   echo %%~fF
-  mysql -u %username% -p%password% %database% < %%F
+  mysqlimport -u %username% -p%password% -L %database% %%F ^
+  --fields-enclosed_by=%enclosed% ^
+  --fields-terminated_by=%delimiter% ^
+  --lines-terminated_by=%newline% ^
+  --ignore-lines=%skipline%
   if errorlevel 1 goto ERR
 )
 

@@ -1547,11 +1547,11 @@ public class L1ItemInstance extends L1Object {
             if (getSpecialEnchant() != 0) {
                 if (itemType2 == 1 && getSpecialEnchant() == 1) {
                     os.writeC(39);
-                    os.writeS("\\f2特化：追加ダメージ+ 5");
+                    os.writeS("\\f2特化：追加ダメージ+5");
                 }
                 if (itemType2 == 2 && getSpecialEnchant() == 1 && (!(getItem().getType() >= 8 && getItem().getType() <= 12))) {
                     os.writeC(39);
-                    os.writeS("\\f2特化：ダメージリダクション+ 1");
+                    os.writeS("\\f2特化：ダメージリダクション+2");
                 }
             }
 
@@ -3241,7 +3241,7 @@ public class L1ItemInstance extends L1Object {
                     case 14:
                     case 15:
                         os.writeC(39);
-                        os.writeS("スターン的中+" + (getItem().get_regist_stun() + 5));
+                        os.writeS("スタン命中+" + (getItem().get_regist_stun() + 5));
                         break;
                     default:
                         break;
@@ -3783,7 +3783,7 @@ public class L1ItemInstance extends L1Object {
                     case 14:
                     case 15:
                         os.writeC(39);
-                        os.writeS("スターン的中+" + (getItem().get_regist_stun() + 10));
+                        os.writeS("スタン命中+" + (getItem().get_regist_stun() + 10));
                         break;
                     default:
                         break;
@@ -3973,6 +3973,11 @@ public class L1ItemInstance extends L1Object {
                     && getEnchantLevel() >= 10) {
                 os.writeC(39);
                 os.writeS("発動：殲滅");
+            }
+            if (itemId == 202014) // タイタンの憤怒　
+                     {
+                os.writeC(39);
+                os.writeS("タイタン系列発動区間 +5%");
             }
             if ((itemId >= 22208 && itemId <= 22211)
                     && getEnchantLevel() >= 7) {

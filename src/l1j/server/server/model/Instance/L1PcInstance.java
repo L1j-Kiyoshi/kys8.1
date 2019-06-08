@@ -3378,7 +3378,7 @@ public class L1PcInstance extends L1Character {
                         /** カウンターバリアー、タイタンダメージ処理 **/
                         if (Config.BROADCAST_KILL_LOG && getLevel() >= Config.BROADCAST_KILL_LOG_LEVEL) {
                             L1World.getInstance().broadcastPacketToAll(new S_ChatPacket(
-                                    "\\aH[" + attacker.getName() + "]\\aA 様が \\aG[" + getName() + "]\\aA 様を殺した。",
+                                    "\\aH[" + attacker.getName() + "]\\aA の攻撃により \\aG[" + getName() + "]\\aA が死亡しました。",
                                     Opcodes.S_MESSAGE));
                             attacker.setKills(attacker.getKills() + 1); // 勝った超えキルス+1
                             setDeaths(getDeaths() + 1); // ジンノムデス数+1
@@ -3709,7 +3709,7 @@ public class L1PcInstance extends L1Character {
                         if (Config.BROADCAST_KILL_LOG && getLevel() >= Config.BROADCAST_KILL_LOG_LEVEL) {
                             L1World.getInstance()
                                     .broadcastPacketToAll(new S_ChatPacket(
-                                            "\\aH[" + player.getName() + "]\\aA 様が \\aG[" + getName() + "]\\aA 様を殺した。",
+                                            "\\aH[" + player.getName() + "]\\aA の攻撃により \\aG[" + getName() + "]\\aA が死亡しました。",
                                             Opcodes.S_MESSAGE));
                             player.setKills(player.getKills() + 1); // 勝った超えキルス+1
                             setDeaths(getDeaths() + 1); // ジンノムデス数+1
@@ -3879,7 +3879,7 @@ public class L1PcInstance extends L1Character {
                         && !(isRobot() && player.isRobot())) {
                     L1World.getInstance()
                             .broadcastPacketToAll(new S_ChatPacket(
-                                    "\\aH[" + player.getName() + "]\\aA 様が \\aG[" + getName() + "]\\aA 様を殺した。",
+                                    "\\aH[" + player.getName() + "]\\aA の攻撃により \\aG[" + getName() + "]\\aA が死亡しました。",
                                     Opcodes.S_MESSAGE));
                     player.setKills(player.getKills() + 1); // 勝った超えキルス+1
                     setDeaths(getDeaths() + 1); // ジンノムデス数+1

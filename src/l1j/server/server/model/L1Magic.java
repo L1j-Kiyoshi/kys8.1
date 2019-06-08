@@ -924,7 +924,7 @@ public class L1Magic {
                 int percent = (int) Math
                         .round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
                 int chance = _random.nextInt(100) + 1;
-                if (!_targetPc.isstop() && (percent + _targetPc.getRisingUp()) <= 40 && chance <= 35) {
+                if (!_targetPc.isstop() && (percent + _targetPc.getRisingUp()) <= 40 && chance <= 35) { // どこかで－10されてる
                     if (_targetPc.getInventory().checkItem(41246, 10)) {
                         if (_calcType == PC_PC)
                             _pc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
