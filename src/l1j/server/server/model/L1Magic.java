@@ -924,17 +924,47 @@ public class L1Magic {
                 int percent = (int) Math
                         .round(((double) _targetPc.getCurrentHp() / (double) _targetPc.getMaxHp()) * 100);
                 int chance = _random.nextInt(100) + 1;
-                if (!_targetPc.isstop() && (percent + _targetPc.getRisingUp()) <= 40 && chance <= 35) { // どこかで－10されてる
-                    if (_targetPc.getInventory().checkItem(41246, 10)) {
-                        if (_calcType == PC_PC)
-                            _pc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
-                        else if (_calcType == PC_NPC)
-                            _npc.receiveCounterBarrierDamage(_targetPc, calcTitanDamage());
-                        damage = 0;
-                        _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12559));
-                        _targetPc.getInventory().consumeItem(41246, 10);
+                int lockSection = 0;
+                if (_targetPc.getLockSectionUp() != 0) {
+                    lockSection += _targetPc.getLockSectionUp();
+                }
+
+                if (_targetPc.isWarrior() && _targetPc.getEquipSlot().getWeaponCount() == 2) {
+
+                    for (L1ItemInstance item2 : _targetPc.getInventory().getItems()) {
+                        if (item2 != null && item2.getItem().getType2() == 1 && item2.getItem().getType() == 6
+                                && item2.isEquipped()) {
+                            if (item2.getItemId() == 202014) {
+                                lockSection += 5;
+                            }
+                        }
+                    }
+                } else {
+                    for (L1ItemInstance item : _targetPc.getInventory().getItems()) {
+                        if (_targetPc.getWeapon().equals(item)) {
+                            if (item.isEquipped()) {
+                                if (item.getItemId() == 202014) {
+                                    lockSection +=5;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (!_targetPc.isstop() && percent <= (40 + lockSection + _targetPc.getRisingUp())
+                        && chance <= 35) {
+                    if (this._targetPc.getInventory().checkItem(41246, 10)) {
+                        if (this._calcType == 1)
+                            this._pc.receiveCounterBarrierDamage(this._targetPc, calcTitanDamage());
+                        else if (this._calcType == 2)
+                            this._npc.receiveCounterBarrierDamage(this._targetPc, calcTitanDamage());
+                            this._targetPc.sendPackets(new S_SkillSound(this._targetPc.getId(), 12559));
+                        // this._targetPc.broadcastPacket(new
+                        // S_SkillSound(this._targetPc.getId(),
+                        // 12559));
+                        this._targetPc.getInventory().consumeItem(41246, 10);
                     } else {
-                        _targetPc.sendPackets(new S_SystemMessage("タイタンマジック：触媒が不足します。"));
+                        this._targetPc.sendPackets(new S_SystemMessage("タイタンマジック：触媒が不足します。"));
                     }
                 }
                 return (int) damage;

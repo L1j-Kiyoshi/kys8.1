@@ -481,8 +481,8 @@ public class UserCommands {
 	    int mpr = pc.getMpr() + pc.getInventory().mpRegenPerTick();
 
 	    pc.sendPackets(new S_SystemMessage("===================( 私の情報 )===================="));
-	    pc.sendPackets(new S_SystemMessage("\\aD(ピチク: " + hpr + ')' + "(エムチク: " + mpr + ')' + "(PK回数: "
-		    + pc.get_PKcount() + ')' + "(エルリック: " + pc.getElixirStats() + "本)"));
+	    pc.sendPackets(new S_SystemMessage("\\aD(HPR: " + hpr + ')' + "(MPR: " + mpr + ')' + "(PK回数: "
+		    + pc.get_PKcount() + ')' + "(エリクサー: " + pc.getElixirStats() + "本)"));
 	    pc.sendPackets(new S_SystemMessage("===================================================="));
 	    pc.setQuizTime(curtime);
 	} catch (Exception e) {

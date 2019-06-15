@@ -2573,13 +2573,13 @@ public class L1ItemInstance extends L1Object {
                 os.writeH(addmp());// mp部分パケット変更
             }
 
-            // ピチク表示
+            // HPR表示
             if (getItem().get_addhpr() != 0) {
                 os.writeC(37);
                 os.writeC(getItem().get_addhpr());
             }
 
-            // エムチク表示
+            // MPR表示
             if (itemId == 1134 || itemId == 101134) {
                 os.writeC(38);
                 os.writeC(getItem().get_addmpr() + getEnchantLevel()); // 瞑想の杖

@@ -1904,16 +1904,16 @@ public class C_ItemUSe extends ClientBasePacket {
                         StringBuffer sb = new StringBuffer();
                         if (l1iteminstance1.getItem().getType2() == 1 || l1iteminstance1.getItem().getType2() == 2) {
                             if (safe_enchant == -1) {
-                                sb.append("\\aD ピチク: " + add_hpr + " /");
-                                sb.append("\\aD エムチク: " + add_mpr + " /");
+                                sb.append("\\aD HPR: " + add_hpr + " /");
+                                sb.append("\\aD MPR: " + add_mpr + " /");
                                 sb.append("\\aD 基本エンチャント：不可能");
                             } else if (safe_enchant == 0) {
-                                sb.append("\\aD ピチク: " + add_hpr + " /");
-                                sb.append("\\aD エムチク: " + add_mpr + " /");
+                                sb.append("\\aD HPR: " + add_hpr + " /");
+                                sb.append("\\aD MPR: " + add_mpr + " /");
                                 sb.append("\\aD 基本エンチャント: 0");
                             } else {
-                                sb.append("\\aD ピチク: " + add_hpr + " /");
-                                sb.append("\\aD エムチク: " + add_mpr + " /");
+                                sb.append("\\aD HPR: " + add_hpr + " /");
+                                sb.append("\\aD MPR: " + add_mpr + " /");
                                 sb.append("\\aD 基本エンチャント: " + safe_enchant + "");
                             }
                         }
