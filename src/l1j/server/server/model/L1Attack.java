@@ -178,10 +178,8 @@ public class L1Attack {
             // 武器情報の取得
             if (_pc.hasSkillEffect(L1SkillId.SLAYER) && _pc.getSecondWeapon() != null && _pc.getSlayerSwich() == 1) {
                 weapon = _pc.getSecondWeapon();
-                _pc.setSlayerSwich(0);
             } else {
-                weapon = _pc.getWeapon();
-                _pc.setSlayerSwich(1);
+            	weapon = _pc.getWeaponSwap();
             }
 
             if (weapon != null) {
