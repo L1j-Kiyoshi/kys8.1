@@ -2259,9 +2259,13 @@ public class C_LoginToServer extends ClientBasePacket {
 				 //변신에 따라 거리 2로 조절
 				 if ((polyId == 15539) || (polyId == 15537) || (polyId == 15534) || (polyId == 15834)
 						 || (polyId == 15599) || (polyId == 11447) || (polyId == 11351) || (polyId == 11368) || (polyId == 11344) || (polyId == 11330)//変身リスト スピアー
-						 || (polyId == 15531) || (polyId == 15833) || (polyId == 15832) || (polyId == 13743) || (polyId == 13745)
-						 || (polyId == 13735) || (polyId == 13737) || (polyId == 13715) || (polyId == 13717) || (polyId == 15115) || (polyId == 13721)
-						 || (polyId == 13723) || (polyId == 13725)) {//変身リスト その他（ランカー変身含む）
+						 || (polyId == 15531) || (polyId == 15833) || (polyId == 15832) //変身リスト その他
+						 || (polyId == 0) || (polyId == 1) || (polyId == 61) || (polyId == 48) || (polyId == 138) || (polyId == 37) || (polyId == 734)
+						 || (polyId == 1186) || (polyId == 2786) || (polyId == 2796) || (polyId == 6658) || (polyId == 6661) || (polyId == 6671) || (polyId == 6650)
+						 || (polyId == 12490) || (polyId == 12494) //各クラス男女未変身
+					 	 || (polyId == 13715) || (polyId == 13717) || (polyId == 15115) || (polyId == 13721) || (polyId == 13723) || (polyId == 13725) || (polyId == 13727)
+					 	 || (polyId == 13729) || (polyId == 13731) || (polyId == 13733) || (polyId == 13735) || (polyId == 13737) || (polyId == 13739) || (polyId == 13741)
+					 	 || (polyId == 13743) || (polyId == 13745)) { // 各クラス男女ランカー変身
 					 System.out.println("gere");
 					 range = 2;
 				 }else if (!pc.hasSkillEffect(L1SkillId.SHAPE_CHANGE)) {
