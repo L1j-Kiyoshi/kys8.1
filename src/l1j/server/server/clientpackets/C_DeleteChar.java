@@ -86,16 +86,16 @@ public class C_DeleteChar extends ClientBasePacket {
                 return;
             }
 
-            if (pc != null) {
-                CharacterTable.getInstance().restoreInventory(pc);
+      //      if (pc != null) {
+        //        CharacterTable.getInstance().restoreInventory(pc);
 
-                for (L1ItemInstance item : pc.getInventory().getItems()) {
-                    if (item.getBless() >= 128) {
-                        client.sendPacket(new S_CommonNews("封印されたアイテムを持ったキャラクターを削除することができません。"));
-                        return;
-                    }
-                }
-            }
+         //       for (L1ItemInstance item : pc.getInventory().getItems()) {
+          //          if (item.getBless() >= 128) {
+           //             client.sendPacket(new S_CommonNews("封印されたアイテムを持ったキャラクターを削除することができません。"));
+            //            return;
+          //          }
+           //     }
+          //  }
 
             if (pc != null) {
                 L1Clan clan = L1World.getInstance().getClan(pc.getClanname());

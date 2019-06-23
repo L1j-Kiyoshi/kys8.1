@@ -291,9 +291,12 @@ public class C_CreateChar extends ClientBasePacket {
         pc.setY(START_LOC_Y[startPosType][startPos]);
 		pc.setMap(MAPID_LIST[pc.getType()]);*/
         //クラウディアに位置移動
-        pc.setX(32772);
-        pc.setY(32819);
-        pc.setMap((short) 7783);
+      //  pc.setX(32772);
+      //  pc.setY(32819);
+      //  pc.setMap((short) 7783);
+        pc.setX(33081);
+        pc.setY(33391);
+        pc.setMap((short) 4);
 
         pc.setHeading(0);
         pc.setLawful(0);
@@ -306,13 +309,13 @@ public class C_CreateChar extends ClientBasePacket {
         pc.setTitle("");
         pc.setClanid(0);
         pc.setClanRank(0);
-        pc.set_food(39); // 17%
+        pc.set_food(225); // 100%
         pc.setAccessLevel((short) 0);
         pc.setGm(false);
         pc.setMonitor(false);
         pc.setGmInvis(false);
-        pc.setExp(0);// 経験値0
-        pc.setHighLevel(1);
+        pc.setExp(91876054);// 経験値 51level
+        pc.setHighLevel(51);
         pc.setStatus(0);
         pc.setAccessLevel((short) 0);
         pc.setClanname("");

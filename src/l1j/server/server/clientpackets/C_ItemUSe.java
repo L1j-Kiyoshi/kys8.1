@@ -1585,8 +1585,9 @@ public class C_ItemUSe extends ClientBasePacket {
                     case 41155:// 劣化の鱗
                     case 41156:// 背徳の鱗
                     case 41157:// 憎悪の鱗
+                    case 8004: // ブラックデスナイト変身スクロール
                         usePolyScale(pc, itemId);
-                        pc.getInventory().removeItem(l1iteminstance, 1);
+                      //  pc.getInventory().removeItem(l1iteminstance, 1); //アイテムを消費しない
                         break;
 
                     case 41143:// ラバーボーンヘッド変身ポーション
@@ -4569,10 +4570,10 @@ public class C_ItemUSe extends ClientBasePacket {
                             pc.getInventory().saveItem(l1iteminstance1, L1PcInventory.COL_SPECIAL_ENCHANT);
                             pc.getInventory().removeItem(l1iteminstance, 1);
                             pc.sendPackets(new S_SkillSound(pc.getId(), 9268));
-                            pc.sendPackets(new S_SystemMessage(l1iteminstance1.getLogName() + "祝福の機運が染みます。"));
+                            pc.sendPackets(new S_SystemMessage(l1iteminstance1.getLogName() + "祝福の機運が染み込みます。"));
                             pc.save();
                         } else {
-                            pc.sendPackets(new S_SystemMessage("祝福の機運が不浸透んでした。"));
+                            pc.sendPackets(new S_SystemMessage("祝福の機運が染み込むことができませんでした。"));
                             pc.getInventory().removeItem(l1iteminstance, 1);
                         }
                         break;
@@ -4604,7 +4605,7 @@ public class C_ItemUSe extends ClientBasePacket {
                         pc.getInventory().saveItem(l1iteminstance1, L1PcInventory.COL_SPECIAL_ENCHANT);
                         pc.getInventory().removeItem(l1iteminstance, 1);
                         pc.sendPackets(new S_SkillSound(pc.getId(), 9268));
-                        pc.sendPackets(new S_SystemMessage(l1iteminstance1.getLogName() + "祝福の機運が染みます。"));
+                        pc.sendPackets(new S_SystemMessage(l1iteminstance1.getLogName() + "祝福の機運が染み込みます。"));
                         pc.save();
 
                         break;
@@ -8943,8 +8944,10 @@ public class C_ItemUSe extends ClientBasePacket {
             polyId = 3888;
         } else if (itemId == 41157) { // 憎悪の鱗
             polyId = 3784;
+        } else if (itemId == 8004) { // ブラックデスナイト変身スクロール
+            polyId = 15154;
         }
-        L1PolyMorph.doPoly(pc, polyId, 600, L1PolyMorph.MORPH_BY_ITEMMAGIC);
+        L1PolyMorph.doPoly(pc, polyId, 7200, L1PolyMorph.MORPH_BY_ITEMMAGIC);
     }
 
     private void usePolyScale2(L1PcInstance pc, int itemId) {
@@ -9554,7 +9557,7 @@ public class C_ItemUSe extends ClientBasePacket {
             } else if (pcInventory.getTypeAndGradeEquipped(2, 9, armor.getItem().getGrade()) == 2) {
                 if (type == 9) {
                     // アーマー、リング、着用しようとするアイテム固有のプロパティ番号3を満足するアイテムが2個着用しているとき
-                    activeChar.sendPackets(new S_SystemMessage("イベント、あるいは有料アイテムは、2個まで着用することができますだ。"));
+                    activeChar.sendPackets(new S_SystemMessage("イベント、あるいは有料アイテムは、2個まで着用することができます。"));
                     return;
                 }
             }

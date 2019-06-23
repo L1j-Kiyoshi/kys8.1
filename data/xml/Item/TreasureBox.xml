@@ -232,32 +232,32 @@
   </TreasureBox>
 
 
-<!-- 回復の文章ポケット -->
+<!-- 回復の紋章ポケット -->
   <TreasureBox Type="SPECIFIC" ItemId="3000098">
     <Item ItemId="900021" Count="1" Enchant="0" Attr="0" Identi = "true"/>
     <Item ItemId="3000100" Count="10" Enchant="0" Attr="0" Identi = "true"/>
   </TreasureBox> 
 
-<!-- 成長の文章ポケット
+<!-- 成長の紋章ポケット
  -->
   <TreasureBox Type="SPECIFIC" ItemId="3000099">
-    <Item ItemId="90002" Count="1" Enchant="0" Attr="0" Identi = "true"/>
+    <Item ItemId="900020" Count="1" Enchant="0" Attr="0" Identi = "true"/>
     <Item ItemId="3000100" Count="10" Enchant="0" Attr="0" Identi = "true"/>
   </TreasureBox> 
 
-<!-- 腕力の文章ポケット(1) -->
+<!-- 腕力の紋章ポケット(1) -->
 <TreasureBox Type="SPECIFIC" ItemId="61523">
     <Item ItemId="222352" Count="1" Enchant="0" Attr="0" Identi = "true"/>
     <Item ItemId="3000100" Count="10" Enchant="0" Attr="0" Identi = "true"/>
 </TreasureBox>
 
-<!-- アジャイルの文章ポケット(1) -->
+<!-- アジャイルの紋章ポケット(1) -->
 <TreasureBox Type="SPECIFIC" ItemId="61524">
     <Item ItemId="222353" Count="1" Enchant="0" Attr="0" Identi = "true"/>
     <Item ItemId="3000100" Count="10" Enchant="0" Attr="0" Identi = "true"/>
 </TreasureBox>
 
-<!-- 知識の文章ポケット(1) -->
+<!-- 知識の紋章ポケット(1) -->
 <TreasureBox Type="SPECIFIC" ItemId="61525">
     <Item ItemId="222354" Count="1" Enchant="0" Attr="0" Identi = "true"/>
     <Item ItemId="3000100" Count="10" Enchant="0" Attr="0" Identi = "true"/>
@@ -3576,306 +3576,167 @@
 
 	<!-- 君主パッケージボックス -->
 	<TreasureBox Type="SPECIFIC" ItemId="2000021">
+		<Item ItemId="1100" Count="1" Enchant="6"  Bless="1"  /> 蒼天のダガー	
+		<Item ItemId="1101" Count="1" Enchant="6"  Bless="1"  /> 蒼天のソード
 
-		무기
-		<Item ItemId="1113" Count="1" Enchant="9"  Bless="1"  />
-		<Item ItemId="169" Count="1" Enchant="9"  Bless="1"  />
-
-		방어구
-		<Item ItemId="20011" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21028" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21060" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20056" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20187" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20194" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20234" Count="1" Enchant="9"  Bless="1" />
-
-		악세사리
-		<Item ItemId="22230" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20422" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="20288" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20317" Count="1" Enchant="5"  Bless="1" />
-		
-		<Item ItemId="40226" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40227" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40228" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40229" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40230" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40231" Count="1" Enchant="0"  Bless="1" />스킬
-
-		<Item ItemId="500214" Count="1" Enchant="0"  Bless="1" />	인형
-
+		<Item ItemId="22034" Count="1" Enchant="4"  Bless="1" />蒼天のグローブ
+		<Item ItemId="22035" Count="1" Enchant="4"  Bless="1" />蒼天のマント
+		<Item ItemId="22036" Count="1" Enchant="4"  Bless="1" />蒼天のブーツ
+		<Item ItemId="22038" Count="1" Enchant="4"  Bless="1" />蒼天のPM
+		<Item ItemId="22039" Count="1" Enchant="4"  Bless="1" />蒼天のLA
+		<Item ItemId="22040" Count="1" Enchant="4"  Bless="1" />蒼天のフード
+		<Item ItemId="22062" Count="2" Enchant="0"  Bless="1" />蒼天のリング２つ
+		<Item ItemId="22063" Count="1" Enchant="0"  Bless="1" />蒼天のイアリング
+		<Item ItemId="22064" Count="1" Enchant="0"  Bless="1" />蒼天のネックレス
+		<Item ItemId="22312" Count="1" Enchant="4"  Bless="1" />修練者のTS
+		<Item ItemId="22337" Count="1" Enchant="0"  Bless="1" />修練者のベルト
+		<Item ItemId="20232" Count="1" Enchant="4"  Bless="1" />修練者のシールド
+		<Item ItemId="321515" Count="1" Enchant="4"  Bless="1" />修練者のゲートル
 	</TreasureBox>
 
-	<!-- 記事パッケージボックス -->
+	<!-- ナイトパッケージボックス -->
 	<TreasureBox Type="SPECIFIC" ItemId="2000022">
+		<Item ItemId="1100" Count="1" Enchant="6"  Bless="1"  /> 蒼天のダガー	
+		<Item ItemId="1101" Count="1" Enchant="6"  Bless="1"  /> 蒼天のソード
+		<Item ItemId="1102" Count="1" Enchant="6"  Bless="1"  /> 蒼天のグレートソード
 
-		무기
-		<Item ItemId="1113" Count="1" Enchant="9"  Bless="1"  />
-		<Item ItemId="169" Count="1" Enchant="9"  Bless="1"  />
-
-		방어구
-		<Item ItemId="20011" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21028" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21060" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20056" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20187" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20194" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20234" Count="1" Enchant="9"  Bless="1" />
-
-		악세사리
-		<Item ItemId="22230" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20422" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="20288" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20317" Count="1" Enchant="5"  Bless="1" />
-		
-		<Item ItemId="40226" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40227" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40228" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40229" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40230" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40231" Count="1" Enchant="0"  Bless="1" />스킬
-
-		<Item ItemId="500214" Count="1" Enchant="0"  Bless="1" />	인형
-
+		<Item ItemId="22034" Count="1" Enchant="4"  Bless="1" />蒼天のグローブ
+		<Item ItemId="22035" Count="1" Enchant="4"  Bless="1" />蒼天のマント
+		<Item ItemId="22036" Count="1" Enchant="4"  Bless="1" />蒼天のブーツ
+		<Item ItemId="22038" Count="1" Enchant="4"  Bless="1" />蒼天のPM
+		<Item ItemId="22040" Count="1" Enchant="4"  Bless="1" />蒼天のフード
+		<Item ItemId="22062" Count="2" Enchant="0"  Bless="1" />蒼天のリング２つ
+		<Item ItemId="22063" Count="1" Enchant="0"  Bless="1" />蒼天のイアリング
+		<Item ItemId="22064" Count="1" Enchant="0"  Bless="1" />蒼天のネックレス
+		<Item ItemId="22312" Count="1" Enchant="4"  Bless="1" />修練者のTS
+		<Item ItemId="22337" Count="1" Enchant="0"  Bless="1" />修練者のベルト
+		<Item ItemId="20232" Count="1" Enchant="4"  Bless="1" />修練者のシールド
+		<Item ItemId="321515" Count="1" Enchant="4"  Bless="1" />修練者のゲートル
 	</TreasureBox>
 
 
 	<!-- エルフパッケージボックス -->
 	<TreasureBox Type="SPECIFIC" ItemId="2000023">
+		<Item ItemId="1107" Count="1" Enchant="6"  Bless="1"  /> エルモアボウガン	
+		<Item ItemId="1100" Count="1" Enchant="6"  Bless="1"  /> エルモアダガー
+		<Item ItemId="1101" Count="1" Enchant="6"  Bless="1"  /> エルモアソード
+		<Item ItemId="30088" Count="2000"  /> 修練者のアロー
+		<Item ItemId="30078" Count="500"  /> 修練者の精霊の玉
 
-		무기
-		<Item ItemId="1113" Count="1" Enchant="9"  Bless="1"  />
-		<Item ItemId="169" Count="1" Enchant="9"  Bless="1"  />
-
-		방어구
-		<Item ItemId="20011" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21028" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21060" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20056" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20187" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20194" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20234" Count="1" Enchant="9"  Bless="1" />
-
-		악세사리
-		<Item ItemId="22230" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20422" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="20288" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20317" Count="1" Enchant="5"  Bless="1" />
-		
-		<Item ItemId="40226" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40227" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40228" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40229" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40230" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40231" Count="1" Enchant="0"  Bless="1" />스킬
-
-		<Item ItemId="500214" Count="1" Enchant="0"  Bless="1" />	인형
-
+		<Item ItemId="22034" Count="1" Enchant="4"  Bless="1" />蒼天のグローブ
+		<Item ItemId="22035" Count="1" Enchant="4"  Bless="1" />蒼天のマント
+		<Item ItemId="22036" Count="1" Enchant="4"  Bless="1" />蒼天のブーツ
+		<Item ItemId="22039" Count="1" Enchant="4"  Bless="1" />蒼天のLA
+		<Item ItemId="22040" Count="1" Enchant="4"  Bless="1" />蒼天のフード
+		<Item ItemId="22062" Count="2" Enchant="0"  Bless="1" />蒼天のリング２つ
+		<Item ItemId="22063" Count="1" Enchant="0"  Bless="1" />蒼天のイアリング
+		<Item ItemId="22064" Count="1" Enchant="0"  Bless="1" />蒼天のネックレス
+		<Item ItemId="22312" Count="1" Enchant="4"  Bless="1" />修練者のTS
+		<Item ItemId="22337" Count="1" Enchant="0"  Bless="1" />修練者のベルト
+		<Item ItemId="20232" Count="1" Enchant="4"  Bless="1" />修練者のシールド
+		<Item ItemId="321515" Count="1" Enchant="4"  Bless="1" />修練者のゲートル
 	</TreasureBox>
 
 
 	<!-- ウィザードパッケージボックス -->
 	<TreasureBox Type="SPECIFIC" ItemId="2000024">
+		<Item ItemId="1100" Count="1" Enchant="6"  Bless="1"  /> 蒼天のダガー	
+		<Item ItemId="1103" Count="1" Enchant="6"  Bless="1"  /> 蒼天のスタッフ
+		<Item ItemId="30079" Count="500"  /> 修練者の魔力の石
 
-		무기
-		<Item ItemId="1113" Count="1" Enchant="9"  Bless="1"  />
-		<Item ItemId="169" Count="1" Enchant="9"  Bless="1"  />
-
-		방어구
-		<Item ItemId="20011" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21028" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21060" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20056" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20187" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20194" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20234" Count="1" Enchant="9"  Bless="1" />
-
-		악세사리
-		<Item ItemId="22230" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20422" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="20288" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20317" Count="1" Enchant="5"  Bless="1" />
-		
-		<Item ItemId="40226" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40227" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40228" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40229" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40230" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40231" Count="1" Enchant="0"  Bless="1" />스킬
-
-		<Item ItemId="500214" Count="1" Enchant="0"  Bless="1" />	인형
-
+		<Item ItemId="22034" Count="1" Enchant="4"  Bless="1" />蒼天のグローブ
+		<Item ItemId="22035" Count="1" Enchant="4"  Bless="1" />蒼天のマント
+		<Item ItemId="22036" Count="1" Enchant="4"  Bless="1" />蒼天のブーツ
+		<Item ItemId="22052" Count="1" Enchant="4"  Bless="1" />蒼天のローブ
+		<Item ItemId="22040" Count="1" Enchant="4"  Bless="1" />蒼天のフード
+		<Item ItemId="22062" Count="2" Enchant="0"  Bless="1" />蒼天のリング２つ
+		<Item ItemId="22063" Count="1" Enchant="0"  Bless="1" />蒼天のイアリング
+		<Item ItemId="22064" Count="1" Enchant="0"  Bless="1" />蒼天のネックレス
+		<Item ItemId="22312" Count="1" Enchant="4"  Bless="1" />修練者のTS
+		<Item ItemId="22337" Count="1" Enchant="0"  Bless="1" />修練者のベルト
+		<Item ItemId="20232" Count="1" Enchant="4"  Bless="1" />修練者のシールド
+		<Item ItemId="321515" Count="1" Enchant="4"  Bless="1" />修練者のゲートル
 	</TreasureBox>
 
 
-	<!-- すべてへのパッケージボックス -->
+	<!-- ダークエルフパッケージボックス -->
 	<TreasureBox Type="SPECIFIC" ItemId="2000025">
+		<Item ItemId="1105" Count="1" Enchant="6"  Bless="1"  /> 蒼天のクロウ	
+		<Item ItemId="30080" Count="500"  /> 修練者のダークストーン
 
-		무기
-		<Item ItemId="1113" Count="1" Enchant="9"  Bless="1"  />
-		<Item ItemId="169" Count="1" Enchant="9"  Bless="1"  />
-
-		방어구
-		<Item ItemId="20011" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21028" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21060" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20056" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20187" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20194" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20234" Count="1" Enchant="9"  Bless="1" />
-
-		악세사리
-		<Item ItemId="22230" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20422" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="20288" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20317" Count="1" Enchant="5"  Bless="1" />
-		
-		<Item ItemId="40226" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40227" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40228" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40229" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40230" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40231" Count="1" Enchant="0"  Bless="1" />스킬
-
-		<Item ItemId="500214" Count="1" Enchant="0"  Bless="1" />	인형
-
+		<Item ItemId="22034" Count="1" Enchant="4"  Bless="1" />蒼天のグローブ
+		<Item ItemId="22035" Count="1" Enchant="4"  Bless="1" />蒼天のマント
+		<Item ItemId="22036" Count="1" Enchant="4"  Bless="1" />蒼天のブーツ
+		<Item ItemId="22039" Count="1" Enchant="4"  Bless="1" />蒼天のLA
+		<Item ItemId="22040" Count="1" Enchant="4"  Bless="1" />蒼天のフード
+		<Item ItemId="22062" Count="2" Enchant="0"  Bless="1" />蒼天のリング２つ
+		<Item ItemId="22063" Count="1" Enchant="0"  Bless="1" />蒼天のイアリング
+		<Item ItemId="22064" Count="1" Enchant="0"  Bless="1" />蒼天のネックレス
+		<Item ItemId="22312" Count="1" Enchant="4"  Bless="1" />修練者のTS
+		<Item ItemId="22337" Count="1" Enchant="0"  Bless="1" />修練者のベルト
+		<Item ItemId="20232" Count="1" Enchant="4"  Bless="1" />修練者のシールド
+		<Item ItemId="321515" Count="1" Enchant="4"  Bless="1" />修練者のゲートル
 	</TreasureBox>
 
-
-	<!-- 竜騎士パッケージボックス -->
+	<!-- ドラゴンナイトパッケージボックス -->
 	<TreasureBox Type="SPECIFIC" ItemId="2000026">
+		<Item ItemId="540" Count="1" Enchant="6"  Bless="1"  /> 蒼天のチェーンソード	
+		<Item ItemId="539" Count="1" Enchant="6"  Bless="1"  /> 蒼天のソード
+		<Item ItemId="515" Count="1" Enchant="6"  Bless="1"  /> 蒼天のグレートソード
 
-		무기
-		<Item ItemId="1113" Count="1" Enchant="9"  Bless="1"  />
-		<Item ItemId="169" Count="1" Enchant="9"  Bless="1"  />
-
-		방어구
-		<Item ItemId="20011" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21028" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21060" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20056" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20187" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20194" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20234" Count="1" Enchant="9"  Bless="1" />
-
-		악세사리
-		<Item ItemId="22230" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20422" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="20288" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20317" Count="1" Enchant="5"  Bless="1" />
-		
-		<Item ItemId="40226" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40227" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40228" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40229" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40230" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40231" Count="1" Enchant="0"  Bless="1" />스킬
-
-		<Item ItemId="500214" Count="1" Enchant="0"  Bless="1" />	인형
-
+		<Item ItemId="22034" Count="1" Enchant="4"  Bless="1" />蒼天のグローブ
+		<Item ItemId="22035" Count="1" Enchant="4"  Bless="1" />蒼天のマント
+		<Item ItemId="22036" Count="1" Enchant="4"  Bless="1" />蒼天のブーツ
+		<Item ItemId="22038" Count="1" Enchant="4"  Bless="1" />蒼天のPM
+		<Item ItemId="22040" Count="1" Enchant="4"  Bless="1" />蒼天のフード
+		<Item ItemId="22062" Count="2" Enchant="0"  Bless="1" />蒼天のリング２つ
+		<Item ItemId="22063" Count="1" Enchant="0"  Bless="1" />蒼天のイアリング
+		<Item ItemId="22064" Count="1" Enchant="0"  Bless="1" />蒼天のネックレス
+		<Item ItemId="22312" Count="1" Enchant="4"  Bless="1" />修練者のTS
+		<Item ItemId="22337" Count="1" Enchant="0"  Bless="1" />修練者のベルト
+		<Item ItemId="20232" Count="1" Enchant="4"  Bless="1" />修練者のシールド
+		<Item ItemId="321515" Count="1" Enchant="4"  Bless="1" />修練者のゲートル
 	</TreasureBox>
 
 
 
 	<!-- イリュージョニストパッケージボックス -->
 	<TreasureBox Type="SPECIFIC" ItemId="2000027">
+		<Item ItemId="1106" Count="1" Enchant="6"  Bless="1"  /> エルモアキーリンク
+		<Item ItemId="30082" Count="500"  /> 修練者の属性石
 
-		무기
-		<Item ItemId="1113" Count="1" Enchant="9"  Bless="1"  />
-		<Item ItemId="169" Count="1" Enchant="9"  Bless="1"  />
-
-		방어구
-		<Item ItemId="20011" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21028" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21060" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20056" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20187" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20194" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20234" Count="1" Enchant="9"  Bless="1" />
-
-		악세사리
-		<Item ItemId="22230" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20422" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="20288" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20317" Count="1" Enchant="5"  Bless="1" />
-		
-		<Item ItemId="40226" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40227" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40228" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40229" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40230" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40231" Count="1" Enchant="0"  Bless="1" />스킬
-
-		<Item ItemId="500214" Count="1" Enchant="0"  Bless="1" />	인형
-
+		<Item ItemId="22034" Count="1" Enchant="4"  Bless="1" />蒼天のグローブ
+		<Item ItemId="22035" Count="1" Enchant="4"  Bless="1" />蒼天のマント
+		<Item ItemId="22036" Count="1" Enchant="4"  Bless="1" />蒼天のブーツ
+		<Item ItemId="22039" Count="1" Enchant="4"  Bless="1" />蒼天のLA
+		<Item ItemId="22040" Count="1" Enchant="4"  Bless="1" />蒼天のフード
+		<Item ItemId="22062" Count="2" Enchant="0"  Bless="1" />蒼天のリング２つ
+		<Item ItemId="22063" Count="1" Enchant="0"  Bless="1" />蒼天のイアリング
+		<Item ItemId="22064" Count="1" Enchant="0"  Bless="1" />蒼天のネックレス
+		<Item ItemId="22312" Count="1" Enchant="4"  Bless="1" />修練者のTS
+		<Item ItemId="22337" Count="1" Enchant="0"  Bless="1" />修練者のベルト
+		<Item ItemId="20232" Count="1" Enchant="4"  Bless="1" />修練者のシールド
+		<Item ItemId="321515" Count="1" Enchant="4"  Bless="1" />修練者のゲートル
 	</TreasureBox>
 
 
 
-	<!-- 君主パッケージボックス -->
+	<!-- 戦士パッケージボックス -->
 	<TreasureBox Type="SPECIFIC" ItemId="2000028">
+		<Item ItemId="203009" Count="2" Enchant="6"  Bless="1"  /> 蒼天のダガー	
 
-		무기
-		<Item ItemId="1113" Count="1" Enchant="9"  Bless="1"  />
-		<Item ItemId="169" Count="1" Enchant="9"  Bless="1"  />
-
-		방어구
-		<Item ItemId="20011" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21028" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="21060" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20056" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20187" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20194" Count="1" Enchant="8"  Bless="1" />
-		<Item ItemId="20234" Count="1" Enchant="9"  Bless="1" />
-
-		악세사리
-		<Item ItemId="22230" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20422" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22228" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="22226" Count="1" Enchant="0"  Bless="1" />
-		<Item ItemId="20288" Count="1" Enchant="5"  Bless="1" />
-		<Item ItemId="20317" Count="1" Enchant="5"  Bless="1" />
-		
-		<Item ItemId="40226" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40227" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40228" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40229" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40230" Count="1" Enchant="0"  Bless="1" />스킬
-		<Item ItemId="40231" Count="1" Enchant="0"  Bless="1" />스킬
-
-		<Item ItemId="500214" Count="1" Enchant="0"  Bless="1" />	인형
-
+		<Item ItemId="22034" Count="1" Enchant="4"  Bless="1" />蒼天のグローブ
+		<Item ItemId="22035" Count="1" Enchant="4"  Bless="1" />蒼天のマント
+		<Item ItemId="22036" Count="1" Enchant="4"  Bless="1" />蒼天のブーツ
+		<Item ItemId="22038" Count="1" Enchant="4"  Bless="1" />蒼天のPM
+		<Item ItemId="22040" Count="1" Enchant="4"  Bless="1" />蒼天のフード
+		<Item ItemId="22062" Count="2" Enchant="0"  Bless="1" />蒼天のリング２つ
+		<Item ItemId="22063" Count="1" Enchant="0"  Bless="1" />蒼天のイアリング
+		<Item ItemId="22064" Count="1" Enchant="0"  Bless="1" />蒼天のネックレス
+		<Item ItemId="22312" Count="1" Enchant="4"  Bless="1" />修練者のTS
+		<Item ItemId="22337" Count="1" Enchant="0"  Bless="1" />修練者のベルト
+		<Item ItemId="20232" Count="1" Enchant="4"  Bless="1" />修練者のシールド
+		<Item ItemId="321515" Count="1" Enchant="4"  Bless="1" />修練者のゲートル
 	</TreasureBox>
 
 

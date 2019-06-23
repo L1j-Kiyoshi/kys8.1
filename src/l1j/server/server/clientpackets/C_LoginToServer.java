@@ -2257,13 +2257,11 @@ public class C_LoginToServer extends ClientBasePacket {
 				 range = 1;
 				 int polyId = pc.getTempCharGfx();
 				 //변신에 따라 거리 2로 조절
-				 if ((polyId == 11330) || (polyId == 11344) || (polyId == 11351) || (polyId == 11368)
-						 || (polyId == 12240)|| (polyId == 12237) //랜스마스터
-						 || (polyId == 11408) || (polyId == 11409) || (polyId == 11410) || (polyId == 11411) || (polyId == 11418)
-						 || (polyId == 11419) || (polyId == 12613) || (polyId == 12614) //변반 샤르나
-						 || (polyId == 13153)
-						 || (polyId == 11392)
-						 || (polyId == 13743)){
+				 if ((polyId == 15539) || (polyId == 15537) || (polyId == 15534) || (polyId == 15834)
+						 || (polyId == 15599) || (polyId == 11447) || (polyId == 11351) || (polyId == 11368) || (polyId == 11344) || (polyId == 11330)//変身リスト スピアー
+						 || (polyId == 15531) || (polyId == 15833) || (polyId == 15832) || (polyId == 13743) || (polyId == 13745)
+						 || (polyId == 13735) || (polyId == 13737) || (polyId == 13715) || (polyId == 13717) || (polyId == 15115) || (polyId == 13721)
+						 || (polyId == 13723) || (polyId == 13725)) {//変身リスト その他（ランカー変身含む）
 					 System.out.println("gere");
 					 range = 2;
 				 }else if (!pc.hasSkillEffect(L1SkillId.SHAPE_CHANGE)) {

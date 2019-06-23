@@ -2469,7 +2469,7 @@ public class L1Attack {
             dmg = 20;
 
         } // ロボットデムガム
-        if (lvl < 10) // モプレプが10未満
+        if (lvl < 10) // モンスターlevelが10未満
             dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
         else if (lvl >= 10 && lvl < 20) // モプレプが10〜49
             dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 2;
@@ -2488,7 +2488,7 @@ public class L1Attack {
         else if (lvl >= 80 && lvl < 87) // モプレプが50〜69
             dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 20;
         else if (lvl >= 87) // モプレプが87以上
-            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 100;
+            dmg = _random.nextInt(lvl) + _npc.getAbility().getTotalStr() + 40;
 
         if (_npc instanceof L1PetInstance) {
             dmg += (lvl / 16); // ペットはLV16に追加打撃
