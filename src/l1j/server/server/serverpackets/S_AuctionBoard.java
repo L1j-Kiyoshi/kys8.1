@@ -61,7 +61,7 @@ public class S_AuctionBoard extends ServerBasePacket {
                         count++;
                     }
                 } else if (board.getX() == 32611 && board.getY() == 32775) { // オークション掲示板（グルーディオ）
-                    if (houseId >= 524289 && houseId <= 524294) {
+                	 if (houseId >= 524289 && houseId <= 524294) { //ここがばぐってる おそらくアジトのIDに問題あり
                         houseList.add(houseId);
                         count++;
                     }

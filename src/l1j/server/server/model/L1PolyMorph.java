@@ -279,16 +279,15 @@ public class L1PolyMorph {
                 } else if ((weapon.getItem().getType() == 10) || (weapon.getItem().getType() == 13)) {
                     range = 14;
                 } else if (weapon.getItem().getType() == 24 || weapon.getItem().getType() == 14 || weapon.getItem().getType() == 18) {
-                    if (poly == 11330 || poly == 11344 || poly == 11351 || poly == 11368 || poly == 11376 || poly == 11447 ||
-                            poly == 12237 || poly == 0 || poly == 61 || poly == 138 || poly == 734 || poly == 2786 || poly == 6658 ||
-                            poly == 6671 || poly == 12490 || poly == 1 || poly == 48 || poly == 37 || poly == 1186 || poly == 2796 || poly == 6661 ||
-                            poly == 6650 || poly == 12494 || poly == 13389 ||
-                            poly == 11408 || poly == 11409 || poly == 11410 || poly == 11411 || poly == 11412 || poly == 11413 ||
-                            poly == 11414 || poly == 11415 || poly == 11416 || poly == 11417 || poly == 11418 || poly == 11419 ||
-                            poly == 11420 || poly == 11421 || poly == 12542 || poly == 12541 || poly == 13735 || poly == 13737
-                            || poly == 14928 //82経費ウィンドウ
-                            || poly == 13389 //85経費ウィンドウ
-                            ) {
+                	if ((poly == 15539) || (poly == 15537) || (poly == 15534) || (poly == 15834)
+   						 || (poly == 15599) || (poly == 11447) || (poly == 11351) || (poly == 11368) || (poly == 11344) || (poly == 11330)//変身リスト スピアー
+   						 || (poly == 15531) || (poly == 15833) || (poly == 15832) //変身リスト その他
+   						 || (poly == 0) || (poly == 1) || (poly == 61) || (poly == 48) || (poly == 138) || (poly == 37) || (poly == 734)
+   						 || (poly == 1186) || (poly == 2786) || (poly == 2796) || (poly == 6658) || (poly == 6661) || (poly == 6671) || (poly == 6650)
+   						 || (poly == 12490) || (poly == 12494) //各クラス男女未変身
+   					 	 || (poly == 13715) || (poly == 13717) || (poly == 15115) || (poly == 13721) || (poly == 13723) || (poly == 13725) || (poly == 13727)
+   					 	 || (poly == 13729) || (poly == 13731) || (poly == 13733) || (poly == 13735) || (poly == 13737) || (poly == 13739) || (poly == 13741)
+   					 	 || (poly == 13743) || (poly == 13745)) { // 各クラス男女ランカー変身
                         range = 2;
                     }
                 } else {

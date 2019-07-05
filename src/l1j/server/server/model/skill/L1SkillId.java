@@ -350,7 +350,7 @@ public class L1SkillId {
     /**
      * パッシブ
      **/
-    public static final int CRASH = 233;
+    public static final int CRASH = 236;
     public static final int FURY = 234;
     public static final int SLAYER = 235;
     public static final int ARMORGUARD = 237;

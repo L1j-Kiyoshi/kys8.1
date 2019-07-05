@@ -8905,11 +8905,7 @@ public class C_ItemUSe extends ClientBasePacket {
         }
 
         L1PolyMorph poly = PolyTable.getInstance().getTemplate(s);
-        // System.out.println("変身 "+ s）;
-        if (pc.isGm()) {
-            pc.sendPackets(new S_SystemMessage("PolyName  > " + s));
-            pc.sendPackets(new S_SystemMessage("PolyCode  > " + pc.getTempCharGfx()));
-        }
+
         try {
 
         } catch (Exception e) {
@@ -8918,14 +8914,27 @@ public class C_ItemUSe extends ClientBasePacket {
         if (poly != null || s.equals("")) {
             if (s.equals("")) {
                 if (pc.getTempCharGfx() == 6034 || pc.getTempCharGfx() == 6035) {
+                	if (pc.isGm()) {
+                        pc.sendPackets(new S_SystemMessage("PolyName  > " + s));
+                        pc.sendPackets(new S_SystemMessage("PolyCode  > " + pc.getTempCharGfx()));
+                    	}
                     return true;
                 } else {
                     pc.removeSkillEffect(SHAPE_CHANGE);
+                    if (pc.isGm()) {
+                        pc.sendPackets(new S_SystemMessage("PolyName  > " + s));
+                        pc.sendPackets(new S_SystemMessage("PolyCode  > " + pc.getTempCharGfx()));
+                    	}
                     return true;
                 }
-            } else if (poly.getMinLevel() <= pc.getLevel() || pc.isGm()) {
+            } else if (poly.getMinLevel() <= pc.getLevel() ) {
                 L1PolyMorph.doPoly(pc, poly.getPolyId(), time, L1PolyMorph.MORPH_BY_ITEMMAGIC);
+                if (pc.isGm()) {
+                    pc.sendPackets(new S_SystemMessage("PolyName  > " + s));
+                    pc.sendPackets(new S_SystemMessage("PolyCode  > " + pc.getTempCharGfx()));
+                }
                 return true;
+
             } else {
                 return false;
             }

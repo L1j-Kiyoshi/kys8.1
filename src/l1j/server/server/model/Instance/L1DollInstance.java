@@ -258,6 +258,7 @@ public class L1DollInstance extends L1NpcInstance {
             case DOLLTYPE_KURTS:
                 _master.getAC().addAc(-2);
                 _master.getResistance().addStun(10);// スタン耐性
+                _master.addFou_DamageUp(10);
                 break;
             case DOLLTYPE_CYCLOPS:
                 _master.addDmgup(2);
@@ -439,6 +440,7 @@ public class L1DollInstance extends L1NpcInstance {
                 case DOLLTYPE_KURTS:
                     _master.getAC().addAc(2);
                     _master.getResistance().addStun(-10);// スタン耐性
+                    _master.addFou_DamageUp(-10);
                     break;
                 case DOLLTYPE_CYCLOPS:
                     _master.addDmgup(-2);

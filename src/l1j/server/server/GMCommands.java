@@ -942,7 +942,7 @@ public class GMCommands {
                 gm.sendPackets(new S_Ability(3, false));
             }
         } catch (Exception e) {
-            gm.sendPackets(new S_SystemMessage("。メプヘク[入or切]"));
+            gm.sendPackets(new S_SystemMessage(".maphack[on / off]"));
         }
     }
 

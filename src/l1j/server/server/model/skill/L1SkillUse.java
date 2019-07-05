@@ -463,12 +463,12 @@ public class L1SkillUse {
                     return false;
                 }
             }
-            if (_skillId == ASSASSIN) {
-                if (!pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
-                    pc.sendPackets(new S_SystemMessage("ブラインド使用人ディング状態でのみ使用することができます。"));
-                    return false;
-                }
-            }
+           // if (_skillId == ASSASSIN) {
+             //   if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
+             //       pc.sendPackets(new S_SystemMessage("ブラインド使用人ディング状態でのみ使用することができます。"));
+             //       return false;
+            //    }
+          //  }
 
             if (_skillId == DANCING_BLADES) {
                 if (pc.getWeapon() == null) {
@@ -2311,7 +2311,11 @@ public class L1SkillUse {
                 }
 
                 // ●●●● PC、NPC両方の効果があるスキル ●●●●
-                // GFX Check (Made by HuntBoy)
+                // GFX Check (Made by HuntBoy)//アサシンここ
+
+
+
+
                 switch (_skillId) {
                 case ASSASSIN: {
                     if (cha instanceof L1PcInstance) {
@@ -2319,10 +2323,12 @@ public class L1SkillUse {
                         if (pc.hasSkillEffect(L1SkillId.ASSASSIN)) {
                             pc.removeSkillEffect(L1SkillId.ASSASSIN);
                         }
+
                         pc.setSkillEffect(L1SkillId.ASSASSIN, 15 * 1000);
                         pc.sendPackets(new S_NewSkillIcon(L1SkillId.ASSASSIN, true, 15));
                     }
                 }
+
                     break;
                 case DESTROY: {
                     if (cha instanceof L1PcInstance) {
@@ -2654,7 +2660,7 @@ public class L1SkillUse {
                 case UNCANNY_DODGE: // アンキャニードッジ
                     if (cha instanceof L1PcInstance) {
                         L1PcInstance pc = (L1PcInstance) cha;
-                        pc.addDg(-8);
+                        pc.addDg(-3);
                     }
                     break;
                 // UI DG表示
@@ -2836,6 +2842,7 @@ public class L1SkillUse {
                 }
                     break;
                 case FOU_SLAYER: { // ポースレイヤー
+                	int DMGUP = 0;
                     if (_player.getWeapon() == null) {
                         return;
                     }
@@ -2848,30 +2855,44 @@ public class L1SkillUse {
                             L1PcInstance s = (L1PcInstance) _target;
                             s.FouSlayer = true;
                         }
+                        if(_player.hasSkillEffect(CHAINSWORD1)) {
+                        	 DMGUP = 15;
+
+                        }else if (_player.hasSkillEffect(CHAINSWORD2)) {
+                        	 DMGUP = 30;
+
+                        }else if (_player.hasSkillEffect(CHAINSWORD3)) {
+                        	 DMGUP = 45;
+
+                        }
+                        if(_player.getFou_DamageUp() != 0) {
+                        	DMGUP += _player.getFou_DamageUp();
+                        }
+                        _player.addDmgup(DMGUP);
                         _target.onAction(_player);
+                        _player.addDmgup(-DMGUP);
                     }
                     _player.sendPackets(new S_SkillSound(_player.getId(), 7020));
                     _player.sendPackets(new S_SkillSound(_targetID, 6509));
                     Broadcaster.broadcastPacket(_player, new S_SkillSound(_player.getId(), 7020));
                     Broadcaster.broadcastPacket(_player, new S_SkillSound(_targetID, 6509));
+
                     if (_player.hasSkillEffect(CHAINSWORD1)) {
-                        dmg += 15;
+                    	//_player.setNoTargetting();
                         _player.killSkillEffectTimer(CHAINSWORD1);
                         _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
                     }
                     if (_player.hasSkillEffect(CHAINSWORD2)) {
-                        dmg += 30;
+                    	//_player.setNoTargetting();
                         _player.killSkillEffectTimer(CHAINSWORD2);
                         _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
                     }
                     if (_player.hasSkillEffect(CHAINSWORD3)) {
                         _player.killSkillEffectTimer(CHAINSWORD3);
                         _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
-                        dmg += 45;
+                       // _player.setNoTargetting();
                     }
-                    for (L1DollInstance doll : _player.getDollList()) {
-                        dmg += doll.fou_DamageUp();
-                    }
+
                 }
                     break;
                 case Sand_worms: { // サンドワームイラプション
@@ -4418,7 +4439,7 @@ public class L1SkillUse {
                         break;
                     case MIRROR_IMAGE: {
                         L1PcInstance pc = (L1PcInstance) cha;
-                        pc.addDg(-8);
+                        pc.addDg(-3);
                     }
                         break;
                     case WIND_SHOT: {

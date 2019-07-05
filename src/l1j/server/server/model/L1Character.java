@@ -1395,5 +1395,16 @@ public class L1Character extends L1Object {
         attackLevel = i;
     }
 
+	private int Fou_DamageUp;
+
+    public int getFou_DamageUp() {
+		return Fou_DamageUp;
+	}
+    public void addFou_DamageUp(int i) {
+    	Fou_DamageUp += i;
+    }
+    public void setFou_DamageUp(int i) {
+        Fou_DamageUp = i;
+    }
 
 }
