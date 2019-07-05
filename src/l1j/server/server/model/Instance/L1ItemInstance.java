@@ -1411,7 +1411,7 @@ public class L1ItemInstance extends L1Object {
                     default:
                         os.writeC(0 + op_addAc);
                 }
-                /** 祝福されたスナップ広がり勇士のリングACセクションの処理 **/
+                /** 祝福されたスナッパー勇士のリングACセクションの処理 **/
             } else if (itemType2 == 2 && itemId == 222336) {
                 os.writeC(2);
                 switch (getEnchantLevel()) {
