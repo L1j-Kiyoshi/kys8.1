@@ -9537,23 +9537,23 @@ public class C_ItemUSe extends ClientBasePacket {
             // 使用した防具を装備していない場合は、その機器箇所が空の場合（装着を試みる）
             if (type == 18) { // 肩甲
                 if (!activeChar.getQuest().isEnd(L1Quest.QUEST_SLOT83)) {
-                    activeChar.sendPackets(new S_SystemMessage("象牙の塔の村スナップ広がりに83レベルのスロット開放後着用可能"));
+                    activeChar.sendPackets(new S_SystemMessage("象牙の塔の村のスナッパーから83レベルのスロット開放が可能になりました。"));
                     return;
                 }
             }
             if (type == 17) { // 記章
                 if (!activeChar.getQuest().isEnd(L1Quest.QUEST_SLOT70)) { // 1~75の間
-                    activeChar.sendPackets(new S_SystemMessage("象牙の塔の村スナップ広がりに70レベルのスロット開放後着用可能"));
+                    activeChar.sendPackets(new S_SystemMessage("象牙の塔の村のスナッパーから70レベルのスロット解放が可能になりました。"));
                     return;
                 }
             }
             if (type == 9) { // タイプが9であれば、
                 if (!activeChar.getQuest().isEnd(L1Quest.QUEST_SLOT76) && pcInventory.getTypeEquipped(2, 9) >= 2) { // 1~75間
-                    activeChar.sendPackets(new S_SystemMessage("象牙の塔の村スナップ広がりに76レベルのスロット開放後着用可能"));
+                    activeChar.sendPackets(new S_SystemMessage("象牙の塔の村スナッパーから76レベルのスロット開放が可能になりました。"));
                     return;
                 } else if (!activeChar.getQuest().isEnd(L1Quest.QUEST_SLOT81)
                         && pcInventory.getTypeEquipped(2, 9) >= 3) { // 76〜80の間
-                    activeChar.sendPackets(new S_SystemMessage("象牙の塔の村スナップ広がりに81レベルのスロット開放後着用可能"));
+                    activeChar.sendPackets(new S_SystemMessage("象牙の塔の村スナッパーから81レベルのスロット開放が可能になりました。"));
                     return;
                 } else if (pcInventory.getTypeEquipped(2, 9) == 4) { // 4つ装着中であればもう着用不可
                     activeChar.sendPackets(new S_SystemMessage("これ以上着用することはできません。"));
@@ -9572,7 +9572,7 @@ public class C_ItemUSe extends ClientBasePacket {
             }
             if (type == 12) { // タイプが12であれば、
                 if (!activeChar.getQuest().isEnd(L1Quest.QUEST_SLOT59) && pcInventory.getTypeEquipped(2, 12) >= 1) {
-                    activeChar.sendPackets(new S_SystemMessage("象牙の塔の村スナップ広がりに59レベルのスロット開放後着用可能"));
+                    activeChar.sendPackets(new S_SystemMessage("象牙の塔の村スナッパーから59レベルのスロット開放が可能になりました。"));
                     return;
                 } else if (pcInventory.getTypeEquipped(2, 12) == 2) {
                     activeChar.sendPackets(new S_SystemMessage("これ以上着用することはできません。"));

@@ -4960,18 +4960,18 @@ public class L1PcInstance extends L1Character {
         int lv59_step = quest.get_step(L1Quest.QUEST_SLOT76);
         if (getLevel() == 59 && lv59_step != L1Quest.QUEST_END) {
             sendPackets(new S_SystemMessage("\\aA通知:あなたは [59]レベルイヤリング開放が可能となりました。"));
-            this.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "お祝い：あなたは[59]レベル達成にスナップ広がりにピアス開放が可能です。"));
+            this.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[59]レベルになりました。スナッパーでイアリングスロットの開放が可能です。"));
             this.sendPackets(new S_NewCreateItem(S_NewCreateItem.NEW_PACKET_10, 0));
         }
         int lv76_step = quest.get_step(L1Quest.QUEST_SLOT76);
         if (getLevel() == 76 && lv76_step != L1Quest.QUEST_END) {
             sendPackets(new S_SystemMessage("\\aA注意：あなたは、 [76]レベルリング開放が可能となりました。"));
-            this.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "お祝い：あなたは[76]レベル達成にスナップ広がりにリング開放が可能です。"));
+            this.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[76]レベルになりました。スナッパーでリングスロットの開放が可能です。"));
         }
         int lv81_step = quest.get_step(L1Quest.QUEST_SLOT81);
         if (getLevel() == 81 && lv81_step != L1Quest.QUEST_END) {
             sendPackets(new S_SystemMessage("\\aA注意：あなたは、 [81]レベルリング開放が可能となりました。"));
-            this.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "お祝い：あなたは[81]レベル達成にスナップ広がりにリング開放が可能です。"));
+            this.sendPackets(new S_PacketBox(S_PacketBox.GREEN_MESSAGE, "[81]レベルになりました。スナッパーでリングスロットの開放が可能です。"));
 
         }
         // **** スナップファー開放メッセージ ****//
