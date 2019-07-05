@@ -84,6 +84,7 @@ public class SkillsTable {
             l1skills.setDamageDiceCount(rs.getInt("damage_dice_count"));
             l1skills.setProbabilityValue(rs.getInt("probability_value"));
             l1skills.setProbabilityDice(rs.getInt("probability_dice"));
+            l1skills.setLimit(rs.getInt("limit"));
             l1skills.setAttr(rs.getInt("attr"));
             l1skills.setType(rs.getInt("type"));
             l1skills.setLawful(rs.getInt("lawful"));

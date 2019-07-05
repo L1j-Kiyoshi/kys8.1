@@ -36,6 +36,7 @@ public class L1Skills {
     private int _damageDiceCount;
     private int _probabilityValue;
     private int _probabilityDice;
+    private int _limit;
     private int _attr;
     private int _type;
     private int _ranged;
@@ -195,6 +196,14 @@ public class L1Skills {
 
     public void setProbabilityDice(int i) {
         _probabilityDice = i;
+    }
+
+    public int getLimit() {
+    	return _limit;
+    }
+
+    public void setLimit(int i) {
+    	_limit = i;
     }
 
     public int getAttr() {

@@ -477,6 +477,7 @@ public class L1Magic {
         int probability = 0;
         int attackInt = 0;
         int defenseMr = 0;
+        int limit =l1skills.getLimit();
 
         if (_calcType == PC_PC || _calcType == PC_NPC) {
             attackLevel = _pc.getLevel();
@@ -865,6 +866,11 @@ public class L1Magic {
         // int命中ボーナス
         if (wizardMagic && _calcType == PC_PC || _calcType == PC_NPC) {
             probability += CalcStat.calcMagicHitUp(_pc.getAbility().getTotalInt());
+        }
+
+
+        if (limit != 0 || getTargetMr() > limit) {
+        	probability = 0;
         }
 
         return probability;
