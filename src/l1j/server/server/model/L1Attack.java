@@ -3297,7 +3297,7 @@ public class L1Attack {
             }
         } else {
             if (_isHit) {
-                _pc.sendPackets(new S_AttackPacket(_pc, _targetId, ActionCodes.ACTION_Attack, _attackType));
+                //_pc.sendPackets(new S_AttackPacket(_pc, _targetId, ActionCodes.ACTION_Attack, _attackType));
                 Broadcaster.broadcastPacket(_pc,
                         new S_AttackPacket(_pc, _targetId, ActionCodes.ACTION_Attack, _attackType));
                 Broadcaster.broadcastPacketExceptTargetSight(_target,
@@ -3802,25 +3802,17 @@ public class L1Attack {
                 || weapon.getItem().get_canbedmg() == 0 || _pc.hasSkillEffect(SOUL_OF_FLAME)) {
             return;
         }
-        // 通常の武器・呪われた武器40317.30087
+        // 通常の武器・呪われた武器
         if ((_weaponBless == 1 || _weaponBless == 2) && ((_random.nextInt(100) + 1) < chance)) {
             // \f1あなたの%0が破損しました。
             _pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
             _pc.getInventory().receiveDamage(weapon);
-            if (_pc.getInventory().checkItem(40317, 1)) {
-                _pc.getInventory().consumeItem(40317, 1);
-                _pc.getInventory().recoveryDamage(weapon);
-            }
         }
         // 祝福された武器
         if (_weaponBless == 0 && ((_random.nextInt(100) + 1) < bchance)) {
             // \f1あなたの%0が破損しました。
             _pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
             _pc.getInventory().receiveDamage(weapon);
-            if (_pc.getInventory().checkItem(40317, 1)) {
-                _pc.getInventory().consumeItem(40317, 1);
-                _pc.getInventory().recoveryDamage(weapon);
-            }
         }
     }
 

@@ -477,7 +477,6 @@ public class L1Magic {
         int probability = 0;
         int attackInt = 0;
         int defenseMr = 0;
-        int limit =l1skills.getLimit();
 
         if (_calcType == PC_PC || _calcType == PC_NPC) {
             attackLevel = _pc.getLevel();
@@ -868,11 +867,6 @@ public class L1Magic {
             probability += CalcStat.calcMagicHitUp(_pc.getAbility().getTotalInt());
         }
 
-
-        if (limit != 0 || getTargetMr() > limit) {
-        	probability = 0;
-        }
-
         return probability;
     }
 
@@ -1000,7 +994,16 @@ public class L1Magic {
             }
         }
         /** ロボットシステム **/
+        if(_targetNpc.getNpcTemplate().getIgnoreAoe() != 0) {
+        	if(skillId ==FROZEN_CLOUD || skillId == FIREBALL || skillId ==EARTH_JAIL ||
+        			skillId == TORNADO || skillId == FIRE_WALL || skillId == BLIZZARD ||
+        			skillId == EARTHQUAKE || skillId == LIGHTNING_STORM || skillId == FIRE_STORM ||
+        			skillId == METEOR_STRIKE || skillId == ICE_ERUPTION) {
+        		damage = 0;
+        		_targetNpc.setSkillEffect(IGNORE_AOE, 0);
 
+        	}
+        }
         return damage;
     }
 

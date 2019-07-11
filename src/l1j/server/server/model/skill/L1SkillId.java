@@ -350,7 +350,7 @@ public class L1SkillId {
     /**
      * パッシブ
      **/
-    public static final int CRASH = 236;
+    public static final int CRASH = 233;
     public static final int FURY = 234;
     public static final int SLAYER = 235;
     public static final int ARMORGUARD = 237;
@@ -646,4 +646,7 @@ public class L1SkillId {
     public static final int Matiz_Buff2 = 7601; //防御（mr10 +ダメージ減少+ 2、HP + 100、HP出現2）
     public static final int Matiz_Buff3 = 7602; //攻撃（根、遠距離ダメージ+ 3、SP + 3、MP + 50、エムピ回復+2）;
     public static final int COMBO_BUFF = 80006; // コンボ
+
+
+    public static final int IGNORE_AOE = 999999;
 }

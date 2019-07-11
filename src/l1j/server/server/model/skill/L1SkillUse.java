@@ -463,12 +463,12 @@ public class L1SkillUse {
                     return false;
                 }
             }
-           // if (_skillId == ASSASSIN) {
-             //   if (pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
-             //       pc.sendPackets(new S_SystemMessage("ブラインド使用人ディング状態でのみ使用することができます。"));
-             //       return false;
-            //    }
-          //  }
+            if (_skillId == ASSASSIN) {
+                if (!pc.hasSkillEffect(L1SkillId.BLIND_HIDING)) {
+                    pc.sendPackets(new S_SystemMessage("ブラインド使用人ディング状態でのみ使用することができます。"));
+                    return false;
+                }
+            }
 
             if (_skillId == DANCING_BLADES) {
                 if (pc.getWeapon() == null) {
@@ -1776,29 +1776,116 @@ public class L1SkillUse {
                             new S_UseAttackSkill(_player, targetid, castgfx, _targetX, _targetY, actionId), _target);
                     _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage),
                             _player);
-                } else {
+
+
+
+                } else {//対象指定範囲
                     L1Character[] cha = new L1Character[_targetList.size()];
                     int i = 0;
+                    int cnt =0;
                     for (TargetStatus ts : _targetList) {
                         cha[i] = ts.getTarget();
+                        if(cha[i].hasSkillEffect(IGNORE_AOE)) {
+                        	cha[i].setIgnoreAoe(1);
+                        }
+                        if(cha[i].getIgnoreAoe() ==0) {
+
+                        	cha[i].broadcastPacket(new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage),_player); //218 = FIREBALL
+                        	if(castgfx ==171) {
+                        		cnt +=1;
+                        		 S_UseAttackSkill packet = new S_UseAttackSkill(_player, _target.getId(), 171, _target.getX(), _target.getY(),
+                                         ActionCodes.ACTION_Attack, false);
+                                 _player.sendPackets(packet);
+                                 _player.broadcastPacket(packet, _target);
+
+                                 if (cha[i]!=_target) {
+                                	 _player.sendPackets(new S_SkillSound(cha[i].getId(), 218));
+                                	 _target.broadcastPacket(new S_SkillSound(cha[i].getId(), 218));
+
+                                 }
+
+                        	}
+                        }
+                        if(cha[i].getIgnoreAoe() ==1) {
+                        	if(castgfx ==171) {
+                        		cnt+=1;
+                        		S_UseAttackSkill packet = new S_UseAttackSkill(_player, _target.getId(), 171, _target.getX(), _target.getY(),
+                                        ActionCodes.ACTION_Attack, false);
+                                _player.sendPackets(packet);
+                                _player.broadcastPacket(packet, _target);
+                        	}
+                        }
                         i++;
                     }
-                    _player.sendPackets(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR));
-                    _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR),
-                            cha);
+                    _player.sendPackets(new S_DoActionGFX(_player.getId(), actionId));
+                    _player.broadcastPacket(new S_DoActionGFX(_player.getId(), actionId));
+                    if(cnt ==0) {
+                    	 _player.sendPackets(new S_SkillSound(_target.getId(), castgfx));
+                    	 _player.broadcastPacket(new S_SkillSound(_target.getId(), castgfx));
+                    }
+
+
+                    //_player.sendPackets(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR));
+                    //_player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR),
+                		//   cha);
                 }
-            } else if (_skill.getTarget().equals("none") && _skill.getType() == L1Skills.TYPE_ATTACK) {
+
+
+
+            } else if (_skill.getTarget().equals("none") && _skill.getType() == L1Skills.TYPE_ATTACK) {//術者中心範囲
                 L1Character[] cha = new L1Character[_targetList.size()];
+
                 int i = 0;
+                int cnt = 0;
                 for (TargetStatus ts : _targetList) {
+
                     cha[i] = ts.getTarget();
-                    cha[i].broadcastPacketExceptTargetSight(
-                            new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage), _player);
+                    if(cha[i].hasSkillEffect(IGNORE_AOE)) {
+                    	cha[i].setIgnoreAoe(1);
+
+                    }
+                    if(cha[i].getIgnoreAoe() == 0) {
+                    	cha[i].broadcastPacket(new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage),_player);
+                    }
+                    if(cha[i].getIgnoreAoe() == 1) {
+                    	cnt +=1;
+                    	//cha[i].broadcastPacketExceptTargetSight(
+                    		//	new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage),_player);
+                    }
+
+
+                 //   String msg = String.valueOf(cha[i].getIgnoreAoe());
+                 //  L1World.getInstance().broadcastServerMessage(msg);		//テスト用
+
                     i++;
+
+
                 }
-                _player.sendPackets(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR));
-                _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR),
-                        cha);
+
+                	_player.sendPackets(new S_DoActionGFX(_player.getId(), actionId));
+                    _player.broadcastPacket(new S_DoActionGFX(_player.getId(), actionId));
+                    _player.sendPackets(new S_SkillSound(_player.getId(), castgfx));
+                    _player.broadcastPacket(new S_SkillSound(_player.getId(), castgfx));
+                    //_player.sendPackets(new S_RangeSkill(_player,cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR));
+                   // _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR),
+                            //cha);
+
+
+
+//                _player.sendPackets(new S_DoActionGFX(_player.getId(), actionId));
+//                _player.broadcastPacket(new S_DoActionGFX(_player.getId(), actionId));
+//                _player.sendPackets(new S_SkillSound(_player.getId(), castgfx));
+//                _player.broadcastPacket(new S_SkillSound(_player.getId(), castgfx));
+
+//                _player.sendPackets(new S_RangeSkill(_player,cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR));
+//                _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR),
+//                        cha);
+
+
+
+
+
+
             } else {
                 if (_skillId != 5 && _skillId != 69 && _skillId != 131) {
                     if (isSkillAction) {
@@ -1866,6 +1953,7 @@ public class L1SkillUse {
                     _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage),
                             _user);
                 } else {
+
                     L1Character[] cha = new L1Character[_targetList.size()];
                     int i = 0;
                     for (TargetStatus ts : _targetList) {
@@ -2311,11 +2399,7 @@ public class L1SkillUse {
                 }
 
                 // ●●●● PC、NPC両方の効果があるスキル ●●●●
-                // GFX Check (Made by HuntBoy)//アサシンここ
-
-
-
-
+                // GFX Check (Made by HuntBoy)
                 switch (_skillId) {
                 case ASSASSIN: {
                     if (cha instanceof L1PcInstance) {
@@ -2323,12 +2407,10 @@ public class L1SkillUse {
                         if (pc.hasSkillEffect(L1SkillId.ASSASSIN)) {
                             pc.removeSkillEffect(L1SkillId.ASSASSIN);
                         }
-
                         pc.setSkillEffect(L1SkillId.ASSASSIN, 15 * 1000);
                         pc.sendPackets(new S_NewSkillIcon(L1SkillId.ASSASSIN, true, 15));
                     }
                 }
-
                     break;
                 case DESTROY: {
                     if (cha instanceof L1PcInstance) {
@@ -2660,7 +2742,7 @@ public class L1SkillUse {
                 case UNCANNY_DODGE: // アンキャニードッジ
                     if (cha instanceof L1PcInstance) {
                         L1PcInstance pc = (L1PcInstance) cha;
-                        pc.addDg(-3);
+                        pc.addDg(-8);
                     }
                     break;
                 // UI DG表示
@@ -2842,7 +2924,6 @@ public class L1SkillUse {
                 }
                     break;
                 case FOU_SLAYER: { // ポースレイヤー
-                	int DMGUP = 0;
                     if (_player.getWeapon() == null) {
                         return;
                     }
@@ -2855,44 +2936,30 @@ public class L1SkillUse {
                             L1PcInstance s = (L1PcInstance) _target;
                             s.FouSlayer = true;
                         }
-                        if(_player.hasSkillEffect(CHAINSWORD1)) {
-                        	 DMGUP = 15;
-
-                        }else if (_player.hasSkillEffect(CHAINSWORD2)) {
-                        	 DMGUP = 30;
-
-                        }else if (_player.hasSkillEffect(CHAINSWORD3)) {
-                        	 DMGUP = 45;
-
-                        }
-                        if(_player.getFou_DamageUp() != 0) {
-                        	DMGUP += _player.getFou_DamageUp();
-                        }
-                        _player.addDmgup(DMGUP);
                         _target.onAction(_player);
-                        _player.addDmgup(-DMGUP);
                     }
                     _player.sendPackets(new S_SkillSound(_player.getId(), 7020));
                     _player.sendPackets(new S_SkillSound(_targetID, 6509));
                     Broadcaster.broadcastPacket(_player, new S_SkillSound(_player.getId(), 7020));
                     Broadcaster.broadcastPacket(_player, new S_SkillSound(_targetID, 6509));
-
                     if (_player.hasSkillEffect(CHAINSWORD1)) {
-                    	//_player.setNoTargetting();
+                        dmg += 15;
                         _player.killSkillEffectTimer(CHAINSWORD1);
                         _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
                     }
                     if (_player.hasSkillEffect(CHAINSWORD2)) {
-                    	//_player.setNoTargetting();
+                        dmg += 30;
                         _player.killSkillEffectTimer(CHAINSWORD2);
                         _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
                     }
                     if (_player.hasSkillEffect(CHAINSWORD3)) {
                         _player.killSkillEffectTimer(CHAINSWORD3);
                         _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
-                       // _player.setNoTargetting();
+                        dmg += 45;
                     }
-
+                    for (L1DollInstance doll : _player.getDollList()) {
+                        dmg += doll.fou_DamageUp();
+                    }
                 }
                     break;
                 case Sand_worms: { // サンドワームイラプション
@@ -4439,7 +4506,7 @@ public class L1SkillUse {
                         break;
                     case MIRROR_IMAGE: {
                         L1PcInstance pc = (L1PcInstance) cha;
-                        pc.addDg(-3);
+                        pc.addDg(-8);
                     }
                         break;
                     case WIND_SHOT: {
