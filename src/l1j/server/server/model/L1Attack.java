@@ -3196,7 +3196,7 @@ public class L1Attack {
                 _isHit = false;
             }
         }
-        if (_weaponType == 20) {
+        if (_weaponType == 20) {//アロー
             if (_pc instanceof L1RobotInstance || _arrow != null) {
                 if (!_pc.noPlayerCK)
                     _pc.getInventory().removeItem(_arrow, 1);
@@ -3260,7 +3260,7 @@ public class L1Attack {
                             new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
                 }
             }
-        } else if (_weaponType == 62 && _sting != null) {
+        } else if (_weaponType == 62 && _sting != null) {//スティング
             _pc.getInventory().removeItem(_sting, 1);
             if (_pc.getTempCharGfx() == 7967) {
                 _pc.sendPackets(new S_UseArrowSkill(_pc, _targetId, 7972, _targetX, _targetY, _isHit));
@@ -3297,14 +3297,15 @@ public class L1Attack {
             }
         } else {
             if (_isHit) {
-                //_pc.sendPackets(new S_AttackPacket(_pc, _targetId, ActionCodes.ACTION_Attack, _attackType));
+                _pc.sendPackets(new S_AttackPacket(_pc, _targetId, ActionCodes.ACTION_Attack, _attackType));
+
                 Broadcaster.broadcastPacket(_pc,
                         new S_AttackPacket(_pc, _targetId, ActionCodes.ACTION_Attack, _attackType));
                 Broadcaster.broadcastPacketExceptTargetSight(_target,
                         new S_DoActionGFX(_targetId, ActionCodes.ACTION_Damage), _pc);
             } else {
                 if (_targetId > 0) {
-                    _pc.sendPackets(new S_AttackMissPacket(_pc, _targetId));
+                	_pc.sendPackets(new S_AttackMissPacket(_pc, _targetId));
                     Broadcaster.broadcastPacket(_pc, new S_AttackMissPacket(_pc, _targetId));
                 } else {
                     _pc.sendPackets(new S_AttackPacket(_pc, 0, ActionCodes.ACTION_Attack));
