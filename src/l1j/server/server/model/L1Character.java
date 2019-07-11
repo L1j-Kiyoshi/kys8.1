@@ -1317,16 +1317,6 @@ public class L1Character extends L1Object {
         return resistance;
     }
 
-    public int Fou_DamageUp = 0;
-
-    public int getFou_DamageUp() {
-    	return Fou_DamageUp;
-    }
-
-    public void addFou_DamageUp(int i) {
-    	Fou_DamageUp += i;
-    }
-
     public AC getAC() {
         return ac;
     }
@@ -1405,13 +1395,16 @@ public class L1Character extends L1Object {
         attackLevel = i;
     }
 
-    public int IgnoreAoe ;
+	private int Fou_DamageUp;
 
-	public void setIgnoreAoe(int i) {
-		IgnoreAoe = i;
+    public int getFou_DamageUp() {
+		return Fou_DamageUp;
 	}
+    public void addFou_DamageUp(int i) {
+    	Fou_DamageUp += i;
+    }
+    public void setFou_DamageUp(int i) {
+        Fou_DamageUp = i;
+    }
 
-	public int getIgnoreAoe() {
-		return IgnoreAoe;
-	}
 }

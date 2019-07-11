@@ -155,7 +155,6 @@ public class NpcTable {
                 npc.setDoor(rs.getInt("spawnlist_door"));
                 npc.setCountId(rs.getInt("count_map"));
                 npc.setCantResurrect(rs.getBoolean("cant_resurrect"));
-                npc.setIgnoreAoe(rs.getInt("ignore_aoe"));
 
                 _npcs.put(npcId, npc);
             }
