@@ -195,7 +195,7 @@ public class C_Attack extends ClientBasePacket {
 
         // 事前に型チェック
         if (target != null && target instanceof L1Character && !((L1Character) target).isDead()) {
-            target.onAction(pc);
+            //target.onAction(pc);
 
         } else { // 空の攻撃
             pc.setHeading(pc.targetDirection(x, y)); // 方向セット
