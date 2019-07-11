@@ -699,4 +699,15 @@ public class L1Npc extends L1Object implements Cloneable {
         _isCantResurrect = isCantResurrect;
     }
 
+	public int IgnoreAoe ;
+
+	public void setIgnoreAoe(int i) {
+		IgnoreAoe = i;
+	}
+
+	public int getIgnoreAoe() {
+		return IgnoreAoe;
+	}
+
+
 }
