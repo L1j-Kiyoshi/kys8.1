@@ -3807,12 +3807,20 @@ public class L1Attack {
             // \f1あなたの%0が破損しました。
             _pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
             _pc.getInventory().receiveDamage(weapon);
+            if (_pc.getInventory().checkItem(40317, 1)) {
+                _pc.getInventory().consumeItem(40317, 1);
+                _pc.getInventory().recoveryDamage(weapon);
+            }
         }
         // 祝福された武器
         if (_weaponBless == 0 && ((_random.nextInt(100) + 1) < bchance)) {
             // \f1あなたの%0が破損しました。
             _pc.sendPackets(new S_ServerMessage(268, weapon.getLogName()));
             _pc.getInventory().receiveDamage(weapon);
+            if (_pc.getInventory().checkItem(40317, 1)) {
+                _pc.getInventory().consumeItem(40317, 1);
+                _pc.getInventory().recoveryDamage(weapon);
+            }
         }
     }
 
