@@ -7105,6 +7105,15 @@ public class L1PcInstance extends L1Character {
 
     public void setSlayerSwich(int _slayerSwich) {
         this._slayerSwich = _slayerSwich;
+
+    }
+    private int _Targetting = 0;
+
+    public int getTargetting() {
+    	return _Targetting;
+    }
+    public void setTargetting(int i) {
+    	_Targetting = i;
     }
 
 }

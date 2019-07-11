@@ -2959,13 +2959,13 @@ public class L1SkillUse {
                     Broadcaster.broadcastPacket(_player, new S_SkillSound(_player.getId(), 7020));
                     Broadcaster.broadcastPacket(_player, new S_SkillSound(_targetID, 6509));
                     if (_player.hasSkillEffect(CHAINSWORD1)) {
-                    	//_player.setNoTargetting();
+                    	_player.setTargetting(0);
                         dmg += 15;
                         _player.killSkillEffectTimer(CHAINSWORD1);
                         _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
                     }
                     if (_player.hasSkillEffect(CHAINSWORD2)) {
-                    	//_player.setNoTargetting();
+                    	_player.setTargetting(0);
                         dmg += 30;
                         _player.killSkillEffectTimer(CHAINSWORD2);
                         _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
@@ -2973,7 +2973,7 @@ public class L1SkillUse {
                     if (_player.hasSkillEffect(CHAINSWORD3)) {
                         _player.killSkillEffectTimer(CHAINSWORD3);
                         _player.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0)); // 追加
-                       // _player.setNoTargetting();
+                        _player.setTargetting(0);
                         dmg += 45;
                     }
                     for (L1DollInstance doll : _player.getDollList()) {

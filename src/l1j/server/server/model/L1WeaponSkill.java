@@ -338,7 +338,7 @@ public class L1WeaponSkill {
         }
     }
 
-    public static void ChainSword(L1PcInstance pc) { // チェーンソードダメージ。
+    public static void ChainSword(L1PcInstance pc, L1Character cha) { // チェーンソードダメージ。
         if (_random.nextInt(100) < 15) {
             if (pc.hasSkillEffect(L1SkillId.CHAINSWORD1)) {
                 pc.killSkillEffectTimer(L1SkillId.CHAINSWORD1);
@@ -352,7 +352,21 @@ public class L1WeaponSkill {
             } else {
                 pc.setSkillEffect(L1SkillId.CHAINSWORD1, 15 * 1000);
                 pc.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 1));
+                pc.setTargetting(cha.getId());
             }
+        }else {
+        	if(pc.getTargetting() != 0 && cha.getId() != pc.getTargetting()) {
+        		if (pc.hasSkillEffect(L1SkillId.CHAINSWORD1)) {
+        			pc.killSkillEffectTimer(L1SkillId.CHAINSWORD1);
+        			pc.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0));
+        		}else if(pc.hasSkillEffect(L1SkillId.CHAINSWORD2)){
+        			pc.killSkillEffectTimer(L1SkillId.CHAINSWORD2);
+        			pc.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0));
+        		}else if(pc.hasSkillEffect(L1SkillId.CHAINSWORD3)) {
+        			pc.killSkillEffectTimer(L1SkillId.CHAINSWORD3);
+        			pc.sendPackets(new S_PacketBox(S_PacketBox.SPOT, 0));
+        		}
+        	}
         }
     }
 

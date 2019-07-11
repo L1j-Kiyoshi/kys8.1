@@ -1293,22 +1293,22 @@ public class L1Attack {
             break;
         case 1108: // 魔族チェーン
             dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
+            L1WeaponSkill.ChainSword(_pc,_target);
             break;
         case 1119: // 極限のチェーンソード
             dmg += extremeChainSword(_pc, _target, 3685, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
+            L1WeaponSkill.ChainSword(_pc,_target);
             break;
         case 1123: // ブラッドサッカー
         case 202013:
-            L1WeaponSkill.ChainSword(_pc);
+            L1WeaponSkill.ChainSword(_pc,_target);
             bloodSucker(dmg, _weaponEnchant);
             break;
         case 500:// デストラクタのチェーンソード
         case 501:// 破滅者のチェーンソード
         case 1104:// エルモアチェーンソード
         case 1132:// ベビーテルランチェーンソード
-            L1WeaponSkill.ChainSword(_pc);
+            L1WeaponSkill.ChainSword(_pc,_target);
             break;
         case 203017:
             L1WeaponSkill.ChainSword_Destroyer(_pc);
@@ -1334,7 +1334,7 @@ public class L1Attack {
             break;
         case 202001: // 歓迎のチェーンソード
             dmg += L1WeaponSkill.ChainSword_Welcome(_pc, _target, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
+            L1WeaponSkill.ChainSword(_pc,_target);
             break;
         case 1124: // 破壊の二刀流
         case 1125: // 破壊のクロウ
@@ -2234,22 +2234,22 @@ public class L1Attack {
             break;
         case 1108: // 魔族チェーン
             dmg += getEbHP(_pc, _target, 8150, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
+            L1WeaponSkill.ChainSword(_pc,_target);
             break;
         case 1119: // 極限のチェーンソード
             dmg += extremeChainSword(_pc, _target, 3685, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
+            L1WeaponSkill.ChainSword(_pc,_target);
             break;
         case 1123: // ブラッドサッカー
         case 202013:
-            L1WeaponSkill.ChainSword(_pc);
+            L1WeaponSkill.ChainSword(_pc,_target);
             bloodSucker(dmg, _weaponEnchant);
             break;
         case 500:// デストラクタのチェーンソード
         case 501:// 破滅者のチェーンソード
         case 1104:// エルモアチェーンソード
         case 1132:// ベビーテルランチェーンソード
-            L1WeaponSkill.ChainSword(_pc);
+            L1WeaponSkill.ChainSword(_pc,_target);
             break;
         case 312:
             dmg = L1WeaponSkill.ChainSword_BlazeShock(_pc, _targetNpc, _weaponEnchant);
@@ -2274,7 +2274,7 @@ public class L1Attack {
             break;
         case 202001: // 歓迎のチェーンソード
             dmg += L1WeaponSkill.ChainSword_Welcome(_pc, _target, _weaponEnchant);
-            L1WeaponSkill.ChainSword(_pc);
+            L1WeaponSkill.ChainSword(_pc,_target);
             break;
         case 1124: // 破壊の二刀流
         case 1125: // 破壊のクロウ
