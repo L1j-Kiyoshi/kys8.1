@@ -85,8 +85,10 @@ public class L1MonsterInstance extends L1NpcInstance {
                 setNameId(_target.getName());
                 setTitle(_target.getTitle());
                 setTempLawful(_target.getLawful());
-                setTempCharGfx(targetPc.getClassId());
-                setGfxId(targetPc.getClassId());
+//              setTempCharGfx(targetPc.getClassId());
+//              setGfxId(targetPc.getClassId());
+                setTempCharGfx(targetPc.getTempCharGfx());
+                setGfxId(targetPc.getTempCharGfx());
                 setPassispeed(640);
                 setAtkspeed(900);
                 for (L1PcInstance pc : L1World.getInstance().getRecognizePlayer(this)) {
