@@ -3462,7 +3462,7 @@ public class L1ItemInstance extends L1Object {
                         break;
                 }
             }
-            /** アジャイルの文章 **/
+            /** 機敏の文章 **/
             if (itemId == 222353) {
                 switch (getEnchantLevel()) {
                     case 1:

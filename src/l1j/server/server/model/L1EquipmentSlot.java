@@ -2020,7 +2020,7 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        /** アジャイルの文章**/
+        /** 機敏の文章**/
         if (itemId == 222353) {
             switch (itemlvl) {
                 case 5:
@@ -4139,7 +4139,7 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        /** アジャイルの文章 **/
+        /** 機敏の文章 **/
         if (itemId == 222353) {
             switch (itemlvl) {
                 case 5:
