@@ -165,7 +165,7 @@ public class L1EquipmentSlot {
                 _owner.setMaxMp(_owner.getMaxMp() + (itemlvl * 10));
             }
         }
-        /** リッチローブのチェンダンsp増加 **/
+        /** リッチローブのエンチャントSP増加 **/
         if (itemId == 20107) {
             if (itemlvl >= 3) {
                 _owner.getAbility().addSp(itemlvl - 2);
@@ -860,6 +860,22 @@ public class L1EquipmentSlot {
                     _owner.addDamageReductionByArmor(1);
                     break;
                 case 7:
+                case 8:
+                    _owner.addDamageReductionByArmor(2);
+                    break;
+                case 9:
+                    _owner.addDamageReductionByArmor(3);
+                    break;
+                default:
+                    break;
+            }
+        }
+        /** アンタラス グランド シリーズ **/
+        if (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199) {
+            switch (itemlvl) {
+                case 7:
+                    _owner.addDamageReductionByArmor(1);
+                    break;
                 case 8:
                     _owner.addDamageReductionByArmor(2);
                     break;
@@ -2328,7 +2344,7 @@ public class L1EquipmentSlot {
                 _owner.setMaxMp(_owner.getMaxMp() - (itemlvl * 10));
             }
         }
-        /**リッチローブのチェンダンsp増加 **/
+        /** リッチローブのエンチャントSP増加 **/
         if (itemId == 20107) {
             if (itemlvl >= 3) {
                 _owner.getAbility().addSp(-(itemlvl - 2));
@@ -2978,19 +2994,17 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-
-        /** ヒットシリーズリドク適用 **/
-        /** ヒットリニューアル **/
+        /** アンタラス グランド シリーズ **/
         if (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199) {
             switch (itemlvl) {
                 case 7:
-                    _owner.addDamageReductionByArmor(1);
+                    _owner.addDamageReductionByArmor(-1);
                     break;
                 case 8:
-                    _owner.addDamageReductionByArmor(2);
+                    _owner.addDamageReductionByArmor(-2);
                     break;
                 case 9:
-                    _owner.addDamageReductionByArmor(3);
+                    _owner.addDamageReductionByArmor(-3);
                     break;
                 default:
                     break;
