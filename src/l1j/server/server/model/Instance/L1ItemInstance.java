@@ -451,7 +451,6 @@ public class L1ItemInstance extends L1Object {
         int mr = _item.get_mdef();
         int itemid = getItemId();
         if (itemid == 20011 || itemid == 20110 || itemid == 120011 || itemid == 22223 || itemid == 20117 // バポカッパ
-                || getItemId() == 22204 || itemid == 22205 || itemid == 22206 || itemid == 22207 // リンドビオルマジックアーマー
                 || getItemId() == 22213 || itemid == 120110 || itemid == 93001 || itemid == 490008 || itemid == 22365
                 || itemid == 222328 || getItemId() >= 222300 && getItemId() <= 222303 || itemid == 222328) {
             mr += getEnchantLevel();
@@ -3833,7 +3832,7 @@ public class L1ItemInstance extends L1Object {
                         break;
                 }
             }
-            /** モモロードクラウン遠距離ダメージ **/
+            /** マミーロードクラウン遠距離ダメージ **/
             if (itemId == 20017 && getEnchantLevel() > 6) {
                 switch (getEnchantLevel()) {
                     case 7:
@@ -3846,7 +3845,7 @@ public class L1ItemInstance extends L1Object {
                         break;
                     case 9:
                         os.writeC(39);
-                        os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 2));
+                        os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 3));
                         break;
                     default:
                         break;
