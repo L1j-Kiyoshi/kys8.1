@@ -422,10 +422,10 @@ public class GameServer {
         // ガベージコレクタの実行（Null）オブジェクトの解除
         System.gc();
         System.out.println("┌────────────────────────────────┐");
-        System.out.println("│\t\tサーバーが正常に稼動しました。 - ON\t\t  │");
-        System.out.println("│\t\t\tサーバーのポート : " + Config.GAME_SERVER_PORT + "\t\t\t  │");
-        System.out.println("│\t\t\t  メモリ : " + SystemUtil.getUsedMemoryMB() + "M\t\t\t\t  │");
-        System.out.println("│\t\t\t  プラットフォーム : Netty Base\t\t\t  │");
+        System.out.println("│\t\tサーバーが正常に稼動しました。\t\t\t  │");
+        System.out.println("│\t\tサーバーのポート : " + Config.GAME_SERVER_PORT + "\t\t\t\t  │");
+        System.out.println("│\t\tメモリ : " + SystemUtil.getUsedMemoryMB() + "M\t\t\t\t\t  │");
+        System.out.println("│\t\tプラットフォーム : Netty Base\t\t\t  │");
         System.out.println("└────────────────────────────────┘\n");
         Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
 
