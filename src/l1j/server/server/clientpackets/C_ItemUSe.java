@@ -8275,8 +8275,8 @@ public class C_ItemUSe extends ClientBasePacket {
                     pc.getAC().addAc(-i);
                 }
                 int i2 = item.getItem().getItemId();
-                if (i2 == 20011 || i2 == 20110 || i2 == 120011 || i2 == 22204 || i2 == 22223 || i2 == 22205
-                        || i2 == 22206 || i2 == 22207 || i2 == 22213 || i2 == 22365 || i2 == 120110 || i2 == 93001
+                if (i2 == 20011 || i2 == 20110 || i2 == 120011 || i2 == 22223
+                        || i2 == 22213 || i2 == 22365 || i2 == 120110 || i2 == 93001
                         || i2 >= 222300 && i2 <= 222303 || i2 == 222328) {// タラスのブーツ
                     pc.getResistance().addMr(i);
                     pc.sendPackets(new S_SPMR(pc));
