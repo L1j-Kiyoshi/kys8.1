@@ -3097,6 +3097,17 @@ public class L1ItemInstance extends L1Object {
                 }
             }
 
+            /** マンボコートのエンチャント+7でのCHA増加 **/
+            if (itemType2 == 2 && (itemId == 20112 || itemId == 120112)) {
+            	if (getEnchantLevel() <= 6) {
+                    os.writeC(13);
+                    os.writeC(getItem().get_addcha() + 2);
+            	} else if (getEnchantLevel() >= 7) {
+                    os.writeC(13);
+                    os.writeC(getItem().get_addcha() + 3);
+            	}
+            }
+
             if (getItem().isHasteItem()) {
                 os.writeC(18);
             }

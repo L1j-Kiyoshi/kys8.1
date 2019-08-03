@@ -171,6 +171,14 @@ public class L1EquipmentSlot {
                 _owner.getAbility().addSp(itemlvl - 2);
             }
         }
+        /** マンボコートのエンチャント+7でのCHA増加 **/
+        if (itemId == 20112 || itemId == 120112) {
+        	if (itemlvl <= 6) {
+        		_owner.getAbility().addCha(2);
+        	} else if (itemlvl >= 7) {
+                _owner.getAbility().addCha(3);
+            }
+        }
 
         _owner.addDamageReductionByArmor(item.getDamageReduction());
         _owner.addWeightReduction(item.getWeightReduction());
@@ -2348,6 +2356,14 @@ public class L1EquipmentSlot {
         if (itemId == 20107) {
             if (itemlvl >= 3) {
                 _owner.getAbility().addSp(-(itemlvl - 2));
+            }
+        }
+        /** マンボコートのエンチャント+7でのCHA増加 **/
+        if (itemId == 20112 || itemId == 120112) {
+        	if (itemlvl <= 6) {
+        		_owner.getAbility().addCha(-2);
+        	} else if (itemlvl >= 7) {
+                _owner.getAbility().addCha(-3);
             }
         }
 
