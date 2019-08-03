@@ -368,7 +368,7 @@ public class L1PcInstance extends L1Character {
     private int MagicCritical = 0;
 
     public void addMagicCritical(int i) {
-        MagicCritical = i;
+        MagicCritical += i;
     }
 
     public int getMagicCritical() {
@@ -378,7 +378,7 @@ public class L1PcInstance extends L1Character {
     private int dmgCritical = 0;
 
     public void addDmgCritical(int i) {
-        dmgCritical = i;
+        dmgCritical += i;
     }
 
     public int getDmgCritical() {
@@ -388,7 +388,7 @@ public class L1PcInstance extends L1Character {
     private int bowCritical = 0;
 
     public void addBowDmgCritical(int i) {
-        bowCritical = i;
+        bowCritical += i;
     }
 
     public int getBowDmgCritical() {

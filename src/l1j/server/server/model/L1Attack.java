@@ -970,24 +970,25 @@ public class L1Attack {
             if (_weaponType != 20 && _weaponType != 62) { // 近距離
                 int Dmgcritical = CalcStat.calcDmgCritical(_pc.getAbility().getTotalStr()) + _pc.getDmgCritical();
                 int chance = _random.nextInt(100) + 1;
-                // 記章クリティカル
-                if (_pc.getInventory().checkEquipped(900032)) {
-                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900032);
-                    if (item.getEnchantLevel() == 6) {
-                        Dmgcritical += 1;
-                    } else if (item.getEnchantLevel() == 7) {
-                        Dmgcritical += 3;
-                    } else if (item.getEnchantLevel() >= 8) {
-                        Dmgcritical += 5;
-                    }
-                } /*
-                   * if (_pc.getInventory().checkEquipped(22208)){ // 塗って腕力
+                // 闘士のインシグニア
+//                if (_pc.getInventory().checkEquipped(900032)) {
+//                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900032);
+//                    if (item.getEnchantLevel() == 6) {
+//                        Dmgcritical += 1;
+//                    } else if (item.getEnchantLevel() == 7) {
+//                        Dmgcritical += 3;
+//                    } else if (item.getEnchantLevel() >= 8) {
+//                        Dmgcritical += 5;
+//                    }
+//                }
+                /*
+                   * if (_pc.getInventory().checkEquipped(22208)){ // ヴァラカス フレイム プレート メイル
                    * L1ItemInstance item =
                    * _pc.getInventory().findEquippedItemId(22208);
                    * if(item.getEnchantLevel() == 7){ Dmgcritical += 1; }else
                    * if(item.getEnchantLevel() == 8){ Dmgcritical += 2; }else
                    * if(item.getEnchantLevel() >= 9){ Dmgcritical += 3; } }if
-                   * (_pc.getInventory().checkEquipped(22209)){ //塗って忍耐
+                   * (_pc.getInventory().checkEquipped(22209)){ // ヴァラカス フレイム スケイル メイル
                    * L1ItemInstance item =
                    * _pc.getInventory().findEquippedItemId(22209);
                    * if(item.getEnchantLevel() == 7){ Dmgcritical += 1; }else
@@ -1013,18 +1014,19 @@ public class L1Attack {
             } else {
                 int Bowcritical = CalcStat.calcBowCritical(_pc.getAbility().getTotalDex()) + _pc.getBowDmgCritical();
                 int chance = _random.nextInt(100) + 1;
-                // 記章クリティカル
-                if (_pc.getInventory().checkEquipped(900033)) {
-                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900033);
-                    if (item.getEnchantLevel() == 6) {
-                        Bowcritical += 1;
-                    } else if (item.getEnchantLevel() == 7) {
-                        Bowcritical += 3;
-                    } else if (item.getEnchantLevel() >= 8) {
-                        Bowcritical += 5;
-                    }
-                } /*
-                   * if (_pc.getInventory().checkEquipped(22210)){
+                // 射手のインシグニア
+//                if (_pc.getInventory().checkEquipped(900033)) {
+//                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900033);
+//                    if (item.getEnchantLevel() == 6) {
+//                        Bowcritical += 1;
+//                    } else if (item.getEnchantLevel() == 7) {
+//                        Bowcritical += 3;
+//                    } else if (item.getEnchantLevel() >= 8) {
+//                        Bowcritical += 5;
+//                    }
+//                }
+                /*
+                   * if (_pc.getInventory().checkEquipped(22210)){ // ヴァラカス フレイム レザー アーマー
                    * L1ItemInstance item =
                    * _pc.getInventory().findEquippedItemId(22210);
                    * if(item.getEnchantLevel() == 7){ Bowcritical += 1; }else
@@ -1590,7 +1592,7 @@ public class L1Attack {
                     dmg += 1;
                 } else if (item.getEnchantLevel() == 8) {
                     dmg += 2;
-                } else if (item.getEnchantLevel() == 9) {
+                } else if (item.getEnchantLevel() >= 9) {
                     dmg += 3;
                 }
             }
@@ -1600,7 +1602,7 @@ public class L1Attack {
                     dmg += 1;
                 } else if (item.getEnchantLevel() == 8) {
                     dmg += 2;
-                } else if (item.getEnchantLevel() == 9) {
+                } else if (item.getEnchantLevel() >= 9) {
                     dmg += 3;
                 }
             }
@@ -1610,7 +1612,7 @@ public class L1Attack {
                     dmg += 1;
                 } else if (item.getEnchantLevel() == 8) {
                     dmg += 2;
-                } else if (item.getEnchantLevel() == 9) {
+                } else if (item.getEnchantLevel() >= 9) {
                     dmg += 3;
                 }
             }
@@ -1620,7 +1622,7 @@ public class L1Attack {
                     dmg += 1;
                 } else if (item.getEnchantLevel() == 8) {
                     dmg += 2;
-                } else if (item.getEnchantLevel() == 9) {
+                } else if (item.getEnchantLevel() >= 9) {
                     dmg += 3;
                 }
             }
@@ -2003,37 +2005,41 @@ public class L1Attack {
             if (_weaponType != 20 && _weaponType != 62) { // 近距離
                 int Dmgcritical = CalcStat.calcDmgCritical(_pc.getAbility().getTotalStr()) + _pc.getDmgCritical();
                 int chance = _random.nextInt(100) + 1;
-                // 記章クリティカル
-                if (_pc.getInventory().checkEquipped(900032)) {
-                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900032);
-                    if (item.getEnchantLevel() == 6) {
-                        Dmgcritical += 1;
-                    } else if (item.getEnchantLevel() == 7) {
-                        Dmgcritical += 3;
-                    } else if (item.getEnchantLevel() >= 8) {
-                        Dmgcritical += 5;
-                    }
-                }
-                if (_pc.getInventory().checkEquipped(22208)) { // 塗って腕力
-                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
-                    if (item.getEnchantLevel() == 7) {
-                        Dmgcritical += 1;
-                    } else if (item.getEnchantLevel() == 8) {
-                        Dmgcritical += 2;
-                    } else if (item.getEnchantLevel() >= 9) {
-                        Dmgcritical += 3;
-                    }
-                }
-                if (_pc.getInventory().checkEquipped(22209)) { // 塗って忍耐
-                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(22209);
-                    if (item.getEnchantLevel() == 7) {
-                        Dmgcritical += 1;
-                    } else if (item.getEnchantLevel() == 8) {
-                        Dmgcritical += 2;
-                    } else if (item.getEnchantLevel() >= 9) {
-                        Dmgcritical += 3;
-                    }
-                }
+                // 闘士のインシグニア
+//                if (_pc.getInventory().checkEquipped(900032)) {
+//                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900032);
+//                    if (item.getEnchantLevel() == 6) {
+//                        Dmgcritical += 1;
+//                    } else if (item.getEnchantLevel() == 7) {
+//                        Dmgcritical += 3;
+//                    } else if (item.getEnchantLevel() >= 8) {
+//                        Dmgcritical += 5;
+//                    }
+//                }
+//                if (_pc.getInventory().checkEquipped(22208)) { // ヴァラカス フレイム プレート メイル
+//                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(22208);
+//                    if (item.getEnchantLevel() <= 6) {
+//                    	Dmgcritical += 3;
+//                    } else if (item.getEnchantLevel() == 7) {
+//                        Dmgcritical += 4;
+//                    } else if (item.getEnchantLevel() == 8) {
+//                        Dmgcritical += 5;
+//                    } else if (item.getEnchantLevel() >= 9) {
+//                        Dmgcritical += 6;
+//                    }
+//                }
+//                if (_pc.getInventory().checkEquipped(22209)) { // ヴァラカス フレイム スケイル メイル
+//                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(22209);
+//                    if (item.getEnchantLevel() <= 6) {
+//                    	Dmgcritical += 3;
+//                    } else if (item.getEnchantLevel() == 7) {
+//                        Dmgcritical += 4;
+//                    } else if (item.getEnchantLevel() == 8) {
+//                        Dmgcritical += 5;
+//                    } else if (item.getEnchantLevel() >= 9) {
+//                        Dmgcritical += 6;
+//                    }
+//                }
                 if (chance <= Dmgcritical) {
                     weaponDamage = weaponMaxDamage + _weaponAddDmg;
                     _isCritical = true;
@@ -2041,27 +2047,29 @@ public class L1Attack {
             } else {
                 int Bowcritical = CalcStat.calcBowCritical(_pc.getAbility().getTotalDex()) + _pc.getBowDmgCritical();
                 int chance = _random.nextInt(100) + 1;
-                // 記章クリティカル
-                if (_pc.getInventory().checkEquipped(900033)) {
-                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900033);
-                    if (item.getEnchantLevel() == 6) {
-                        Bowcritical += 1;
-                    } else if (item.getEnchantLevel() == 7) {
-                        Bowcritical += 3;
-                    } else if (item.getEnchantLevel() >= 8) {
-                        Bowcritical += 5;
-                    }
-                }
-                if (_pc.getInventory().checkEquipped(22210)) {
-                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(22210);
-                    if (item.getEnchantLevel() == 7) {
-                        Bowcritical += 1;
-                    } else if (item.getEnchantLevel() == 8) {
-                        Bowcritical += 2;
-                    } else if (item.getEnchantLevel() >= 9) {
-                        Bowcritical += 3;
-                    }
-                }
+                // 射手のインシグニア
+//                if (_pc.getInventory().checkEquipped(900033)) {
+//                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(900033);
+//                    if (item.getEnchantLevel() == 6) {
+//                        Bowcritical += 1;
+//                    } else if (item.getEnchantLevel() == 7) {
+//                        Bowcritical += 3;
+//                    } else if (item.getEnchantLevel() >= 8) {
+//                        Bowcritical += 5;
+//                    }
+//                }
+//                if (_pc.getInventory().checkEquipped(22210)) { // ヴァラカス フレイム レザー アーマー
+//                    L1ItemInstance item = _pc.getInventory().findEquippedItemId(22210);
+//                    if (item.getEnchantLevel() <= 6) {
+//                    	Bowcritical += 3;
+//                    } else if (item.getEnchantLevel() == 7) {
+//                    	Bowcritical += 4;
+//                    } else if (item.getEnchantLevel() == 8) {
+//                    	Bowcritical += 5;
+//                    } else if (item.getEnchantLevel() >= 9) {
+//                    	Bowcritical += 6;
+//                    }
+//                }
                 if (chance <= Bowcritical) {
                     weaponDamage = weaponMaxDamage + _weaponAddDmg;
                     _isCritical = true;

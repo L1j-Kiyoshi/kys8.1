@@ -110,6 +110,7 @@ public class L1Describe implements L1CommandExecutor {
             pc.sendPackets(new S_ChatPacket(pc, "* Fire:" + target.getResistance().getFire() + " Water:" + target.getResistance().getWater() + " Wind:" + target.getResistance().getWind() + " Earth:" + target.getResistance().getEarth()));
             pc.sendPackets(new S_ChatPacket(pc, "* Hold:" + target.getResistance().getHold() + " Freeze:" + target.getResistance().getFreeze() + " Sleep:" + target.getResistance().getSleep() + " Stun:" + target.getResistance().getStun() + " Desperado:" + target.getResistance().getDESPERADO() + " Reduction:" + target.getDamageReductionByArmor()));
             pc.sendPackets(new S_ChatPacket(pc, "* DmgUP:" + target.getDmgup() + " HitUP:" + target.getHitup() + " BowDmgUP:" + target.getBowDmgup() + " BowHitUP:" + target.getBowHitup() + " SP:" + target.getAbility().getSp()));
+            pc.sendPackets(new S_ChatPacket(pc, "* Critical:" + target.getDmgCritical() + " BowCritical:" + target.getBowDmgCritical() + " MagicCritical:" + target.getMagicCritical()));
             pc.sendPackets(new S_SystemMessage("\\aD--------------------------------------------------"));
         } catch (Exception e) {
             pc.sendPackets(new S_ChatPacket(pc, ".desc [キャラクター名]"));

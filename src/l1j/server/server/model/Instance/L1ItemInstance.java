@@ -1473,7 +1473,7 @@ public class L1ItemInstance extends L1Object {
                         os.writeC(0 + op_addAc);
                 }
 
-            } else if (itemType2 == 2 && (itemId == 900032 || itemId == 900033 || itemId == 900034)) { //記章
+            } else if (itemType2 == 2 && (itemId == 900032 || itemId == 900033 || itemId == 900034)) { //闘士、射手、賢者のインシグニア
                 os.writeC(2);
                 switch (getEnchantLevel()) {
                     case 4:
@@ -1491,7 +1491,7 @@ public class L1ItemInstance extends L1Object {
                         os.writeC(0);
                         break;
                 }
-            } else if (itemType2 == 2 && itemId == 900035) { //記章
+            } else if (itemType2 == 2 && itemId == 900035) { //守護のインシグニア
                 os.writeC(2);
                 switch (getEnchantLevel()) {
                     case 3:
@@ -3948,7 +3948,7 @@ public class L1ItemInstance extends L1Object {
                     os.writeS("ダメージリダクション無視+12");
                 }
             }
-            if ((itemId >= 22208 && itemId <= 22211)) { // 塗っ鎧
+            if ((itemId >= 22208 && itemId <= 22211)) { // ヴァラカス フレイム
                 if (getEnchantLevel() < 7) {
                     os.writeC(39);
                     os.writeS("ダメージリダクション無視+3");
@@ -3957,7 +3957,7 @@ public class L1ItemInstance extends L1Object {
                     os.writeS("ダメージリダクション無視+4");
                 } else if (getEnchantLevel() == 8) {
                     os.writeC(39);
-                    os.writeS("ダメージリダクション無視+ 5");
+                    os.writeS("ダメージリダクション無視+5");
                 } else if (getEnchantLevel() >= 9) {
                     os.writeC(39);
                     os.writeS("ダメージリダクション無視+6");
@@ -4295,7 +4295,7 @@ public class L1ItemInstance extends L1Object {
                 os.writeC(39);
                 os.writeS("$18956 : $18962"); // 意志
             }
-            if (itemId == 900032) { //カーツの投影幕
+            if (itemId == 900032) { //闘士のインシグニア
                 int chp = getEnchantLevel() * 5 + 5;
                 if (getEnchantLevel() == 8) chp = 50;
                 os.writeC(39);
@@ -4303,30 +4303,30 @@ public class L1ItemInstance extends L1Object {
                 switch (getEnchantLevel()) {
                     case 5:
                         os.writeC(39);
-                        os.writeS("近距離ダメージ+1");
+                        os.writeS("近距離ダメージ +1");
                         break;
                     case 6:
                         os.writeC(39);
-                        os.writeS("近距離ダメージ+2");
+                        os.writeS("近距離ダメージ +2");
                         os.writeC(39);
-                        os.writeS("近距離クリティカル+ 1％");
+                        os.writeS("近距離クリティカル +1％");
                         break;
                     case 7:
                         os.writeC(39);
-                        os.writeS("近距離ダメージ+3");
+                        os.writeS("近距離ダメージ +3");
                         os.writeC(39);
-                        os.writeS("近距離クリティカル+ 3％");
+                        os.writeS("近距離クリティカル +3％");
                         break;
                     case 8:
                         os.writeC(39);
-                        os.writeS("近距離ダメージ+4");
+                        os.writeS("近距離ダメージ +4");
                         os.writeC(39);
-                        os.writeS("近距離クリティカル+ 5％");
+                        os.writeS("近距離クリティカル +5％");
                         break;
                 }
 
             }
-            if (itemId == 900033) { //カーツの名弓記章
+            if (itemId == 900033) { //射手のインシグニア
                 int chp = getEnchantLevel() * 5 + 5;
                 if (getEnchantLevel() == 8) chp = 50;
                 os.writeC(39);
@@ -4334,30 +4334,30 @@ public class L1ItemInstance extends L1Object {
                 switch (getEnchantLevel()) {
                     case 5:
                         os.writeC(39);
-                        os.writeS("遠距離ダメージ+1");
+                        os.writeS("遠距離ダメージ +1");
                         break;
                     case 6:
                         os.writeC(39);
-                        os.writeS("遠距離ダメージ+2");
+                        os.writeS("遠距離ダメージ +2");
                         os.writeC(39);
-                        os.writeS("遠距離クリティカル+ 1％");
+                        os.writeS("遠距離クリティカル +1％");
                         break;
                     case 7:
                         os.writeC(39);
-                        os.writeS("遠距離ダメージ+3");
+                        os.writeS("遠距離ダメージ +3");
                         os.writeC(39);
-                        os.writeS("遠距離クリティカル+ 3％");
+                        os.writeS("遠距離クリティカル +3％");
                         break;
                     case 8:
                         os.writeC(39);
-                        os.writeS("遠距離ダメージ+4");
+                        os.writeS("遠距離ダメージ +4");
                         os.writeC(39);
-                        os.writeS("遠距離クリティカル+ 5％");
+                        os.writeS("遠距離クリティカル +5％");
                         break;
                 }
             }
 
-            if (itemId == 900034) { //カーツの賢者記章
+            if (itemId == 900034) { //賢者のインシグニア
                 int chp = getEnchantLevel() * 5 + 5;
                 if (getEnchantLevel() == 8) chp = 50;
                 os.writeC(39);
@@ -4365,30 +4365,30 @@ public class L1ItemInstance extends L1Object {
                 switch (getEnchantLevel()) {
                     case 5:
                         os.writeC(39);
-                        os.writeS("近距離命中+1");
+                        os.writeS("近距離命中 +1");
                         break;
                     case 6:
                         os.writeC(39);
-                        os.writeS("近距離命中+2");
+                        os.writeS("近距離命中 +2");
                         os.writeC(39);
-                        os.writeS("魔法クリティカル+ 1％");
+                        os.writeS("魔法クリティカル +1％");
                         break;
                     case 7:
                         os.writeC(39);
-                        os.writeS("近距離命中+3");
+                        os.writeS("近距離命中 +3");
                         os.writeC(39);
-                        os.writeS("魔法クリティカル+ 2％");
+                        os.writeS("魔法クリティカル +2％");
                         break;
                     case 8:
                         os.writeC(39);
-                        os.writeS("近距離命中+4");
+                        os.writeS("近距離命中 +4");
                         os.writeC(39);
-                        os.writeS("魔法クリティカル+ 4％");
+                        os.writeS("魔法クリティカル +4％");
                         break;
                 }
             }
 
-            if (itemId == 900035) { //カーツの賢者記章
+            if (itemId == 900035) { //守護のインシグニア
                 int chp = getEnchantLevel() * 5 + 5;
                 if (getEnchantLevel() == 8) chp = 50;
                 os.writeC(39);
@@ -4396,23 +4396,23 @@ public class L1ItemInstance extends L1Object {
                 switch (getEnchantLevel()) {
                     case 5:
                         os.writeC(39);
-                        os.writeS("ダメージ減少+ 1");
+                        os.writeS("ダメージ減少 +1");
                         break;
                     case 6:
                         os.writeC(39);
-                        os.writeS("ダメージ減少+2");
+                        os.writeS("ダメージ減少 +2");
                         os.writeC(39);
                         os.writeS("MR +3%");
                         break;
                     case 7:
                         os.writeC(39);
-                        os.writeS("ダメージ減少+3");
+                        os.writeS("ダメージ減少 +3");
                         os.writeC(39);
                         os.writeS("MR +5%");
                         break;
                     case 8:
                         os.writeC(39);
-                        os.writeS("ダメージ減少+4");
+                        os.writeS("ダメージ減少 +4");
                         os.writeC(39);
                         os.writeS("MR +7%");
                         break;

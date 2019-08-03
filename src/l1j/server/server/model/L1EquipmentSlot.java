@@ -173,10 +173,22 @@ public class L1EquipmentSlot {
         }
         /** マンボコートのエンチャント+7でのCHA増加 **/
         if (itemId == 20112 || itemId == 120112) {
-        	if (itemlvl <= 6) {
-        		_owner.getAbility().addCha(2);
-        	} else if (itemlvl >= 7) {
+            if (itemlvl <= 6) {
+                _owner.getAbility().addCha(2);
+            } else if (itemlvl >= 7) {
                 _owner.getAbility().addCha(3);
+            }
+        }
+        /** ヴァラカスフレイムシリーズ **/
+        if (itemId == 22208 || itemId == 22209 || itemId == 22210 || itemId == 22211) {
+            if (itemlvl <= 6) {
+                _owner.addDmgCritical(3);
+            } else if (itemlvl == 7) {
+                _owner.addDmgCritical(4);
+            } else if (itemlvl == 8) {
+                _owner.addDmgCritical(5);
+            } else if (itemlvl >= 9) {
+                _owner.addDmgCritical(6);
             }
         }
 
@@ -2096,7 +2108,7 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        if (itemId == 900032 && itemgrade == 5) { //カーツの投影幕
+        if (itemId == 900032 && itemgrade == 5) { //闘士のインシグニア
             switch (itemlvl) {
                 case 0:
                     _owner.addMaxHp(5);
@@ -2139,7 +2151,7 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        if (itemId == 900033 && itemgrade == 5) { //カーツの名弓記章
+        if (itemId == 900033 && itemgrade == 5) { //射手のインシグニア
             switch (itemlvl) {
                 case 0:
                     _owner.addMaxHp(5);
@@ -2182,7 +2194,7 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        if (itemId == 900034 && itemgrade == 5) { //カーツの賢者記章
+        if (itemId == 900034 && itemgrade == 5) { //賢者のインシグニア
             switch (itemlvl) {
                 case 0:
                     _owner.addMaxHp(5);
@@ -2225,7 +2237,7 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        if (itemId == 900035 && itemgrade == 5) { //カーツの守護記章
+        if (itemId == 900035 && itemgrade == 5) { //守護のインシグニア
             switch (itemlvl) {
                 case 0:
                     _owner.addMaxHp(5);
@@ -2360,10 +2372,22 @@ public class L1EquipmentSlot {
         }
         /** マンボコートのエンチャント+7でのCHA増加 **/
         if (itemId == 20112 || itemId == 120112) {
-        	if (itemlvl <= 6) {
-        		_owner.getAbility().addCha(-2);
-        	} else if (itemlvl >= 7) {
+            if (itemlvl <= 6) {
+                _owner.getAbility().addCha(-2);
+            } else if (itemlvl >= 7) {
                 _owner.getAbility().addCha(-3);
+            }
+        }
+        /** ヴァラカスフレイムシリーズ **/
+        if (itemId == 22208 || itemId == 22209 || itemId == 22210 || itemId == 22211) {
+            if (itemlvl <= 6) {
+                _owner.addDmgCritical(-3);
+            } else if (itemlvl == 7) {
+                _owner.addDmgCritical(-4);
+            } else if (itemlvl == 8) {
+                _owner.addDmgCritical(-5);
+            } else if (itemlvl >= 9) {
+                _owner.addDmgCritical(-6);
             }
         }
 
@@ -4221,7 +4245,7 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        if (itemId == 900032 && itemgrade == 5) { //カーツの投影幕
+        if (itemId == 900032 && itemgrade == 5) { //闘士のインシグニア
             switch (itemlvl) {
                 case 0:
                     _owner.addMaxHp(-5);
@@ -4248,24 +4272,24 @@ public class L1EquipmentSlot {
                     _owner.addMaxHp(-35);
                     _owner.getAC().addAc(3);
                     _owner.addDmgup(-2);
-                    //_owner.addDmgCritical(-1);
+                    _owner.addDmgCritical(-1);
                     break;
                 case 7:
                     _owner.addMaxHp(-40);
                     _owner.getAC().addAc(3);
                     _owner.addDmgup(-3);
-                    //_owner.addDmgCritical(-3);
+                    _owner.addDmgCritical(-3);
                     break;
                 case 8:
                     _owner.addMaxHp(-50);
                     _owner.getAC().addAc(3);
                     _owner.addDmgup(-4);
-                    //_owner.addDmgCritical(-5);
+                    _owner.addDmgCritical(-5);
                     break;
             }
         }
 
-        if (itemId == 900033 && itemgrade == 5) { //カーツの名弓記章
+        if (itemId == 900033 && itemgrade == 5) { //射手のインシグニア
             switch (itemlvl) {
                 case 0:
                     _owner.addMaxHp(-5);
@@ -4292,23 +4316,23 @@ public class L1EquipmentSlot {
                     _owner.addMaxHp(-35);
                     _owner.getAC().addAc(3);
                     _owner.addBowDmgup(-2);
-                    //_owner.addBowDmgCritical(-1);
+                    _owner.addBowDmgCritical(-1);
                     break;
                 case 7:
                     _owner.addMaxHp(-40);
                     _owner.getAC().addAc(3);
                     _owner.addBowDmgup(-3);
-                    //_owner.addBowDmgCritical(-3);
+                    _owner.addBowDmgCritical(-3);
                     break;
                 case 8:
                     _owner.addMaxHp(-50);
                     _owner.getAC().addAc(3);
                     _owner.addBowDmgup(-4);
-                    //_owner.addBowDmgCritical(-5);
+                    _owner.addBowDmgCritical(-5);
                     break;
             }
         }
-        if (itemId == 900034 && itemgrade == 5) { //カーツの賢者記章
+        if (itemId == 900034 && itemgrade == 5) { //賢者のインシグニア
             switch (itemlvl) {
                 case 0:
                     _owner.addMaxHp(-5);
@@ -4335,23 +4359,23 @@ public class L1EquipmentSlot {
                     _owner.addMaxHp(-35);
                     _owner.getAC().addAc(3);
                     _owner.addHitup(-2);
-                    //_owner.addMagicCritical(-1);
+                    _owner.addMagicCritical(-1);
                     break;
                 case 7:
                     _owner.addMaxHp(-40);
                     _owner.getAC().addAc(3);
                     _owner.addHitup(-3);
-                    //_owner.addMagicCritical(-2);
+                    _owner.addMagicCritical(-2);
                     break;
                 case 8:
                     _owner.addMaxHp(-50);
                     _owner.getAC().addAc(3);
                     _owner.addHitup(-4);
-                    //_owner.addMagicCritical(-4);
+                    _owner.addMagicCritical(-4);
                     break;
             }
         }
-        if (itemId == 900035 && itemgrade == 5) { //カーツの守護記章
+        if (itemId == 900035 && itemgrade == 5) { //守護のインシグニア
             switch (itemlvl) {
                 case 0:
                     _owner.addMaxHp(-5);
