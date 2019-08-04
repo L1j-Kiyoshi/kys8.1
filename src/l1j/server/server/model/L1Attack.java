@@ -1732,23 +1732,33 @@ public class L1Attack {
         int chance6 = _random.nextInt(100) + 1;
         if (dmg > 25) {
             if (_target != _targetNpc) {
-                if (_targetPc.getInventory().checkEquipped(22204)) {// リンド腕力
-                    if (chance6 <= 5) {
+                if (_targetPc.getInventory().checkEquipped(22204)) {// リンドビオル ストーム プレート メイル
+                    L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22204);
+                    if (chance6 <= 1 + item.getEnchantLevel()) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 10);
                         _targetPc.setCurrentMp(getMp);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2188));
                     }
-                } else if (_targetPc.getInventory().checkEquipped(22205)) {// リンド先見の明
-                    if (chance6 <= 5) {
+                } else if (_targetPc.getInventory().checkEquipped(22205)) {// リンドビオル ストーム スケイル メイル
+                    L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22205);
+                    if (chance6 <= 1 + item.getEnchantLevel()) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 15);
                         _targetPc.setCurrentMp(getMp);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2188));
                     }
-                } else if (_targetPc.getInventory().checkEquipped(22206)// リンド耐久
-                        || _targetPc.getInventory().checkEquipped(22207)) {// リンド馬力
-                    if (chance6 <= 5) {
+                } else if (_targetPc.getInventory().checkEquipped(22206)) {// リンドビオル ストーム レザー アーマー
+                    L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22206);
+                    if (chance6 <= 1 + item.getEnchantLevel()) {
+                        short getMp = (short) (_targetPc.getCurrentMp() + 20);
+                        _targetPc.setCurrentMp(getMp);
+                        _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
+                        _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2188));
+                    }
+                } else if (_targetPc.getInventory().checkEquipped(22207)) {// リンドビオル ストーム ローブ
+                    L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22207);
+                    if (chance6 <= 1 + item.getEnchantLevel()) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 20);
                         _targetPc.setCurrentMp(getMp);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
@@ -2612,23 +2622,33 @@ public class L1Attack {
         int chance6 = _random.nextInt(100) + 1;
         if (dmg > 25) {
             if (_target != _targetNpc) {
-                if (_targetPc.getInventory().checkEquipped(22204)) {// リンド腕力
-                    if (chance6 <= 5) {
+                if (_targetPc.getInventory().checkEquipped(22204)) {// リンドビオル ストーム プレート メイル
+                    L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22204);
+                    if (chance6 <= 1 + item.getEnchantLevel()) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 10);
                         _targetPc.setCurrentMp(getMp);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2188));
                     }
-                } else if (_targetPc.getInventory().checkEquipped(22205)) {// リンド先見の明
-                    if (chance6 <= 5) {
+                } else if (_targetPc.getInventory().checkEquipped(22205)) {// リンドビオル ストーム スケイル メイル
+                    L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22205);
+                    if (chance6 <= 1 + item.getEnchantLevel()) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 15);
                         _targetPc.setCurrentMp(getMp);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
                         _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2188));
                     }
-                } else if (_targetPc.getInventory().checkEquipped(22206)// リンド耐久
-                        || _targetPc.getInventory().checkEquipped(22207)) {// リンド馬力
-                    if (chance6 <= 5) {
+                } else if (_targetPc.getInventory().checkEquipped(22206)) {// リンドビオル ストーム レザー アーマー
+                    L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22206);
+                    if (chance6 <= 1 + item.getEnchantLevel()) {
+                        short getMp = (short) (_targetPc.getCurrentMp() + 20);
+                        _targetPc.setCurrentMp(getMp);
+                        _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));
+                        _targetPc.broadcastPacket(new S_SkillSound(_targetPc.getId(), 2188));
+                    }
+                } else if (_targetPc.getInventory().checkEquipped(22207)) {// リンドビオル ストーム ローブ
+                    L1ItemInstance item = _targetPc.getInventory().findEquippedItemId(22207);
+                    if (chance6 <= 1 + item.getEnchantLevel()) {
                         short getMp = (short) (_targetPc.getCurrentMp() + 20);
                         _targetPc.setCurrentMp(getMp);
                         _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 2188));

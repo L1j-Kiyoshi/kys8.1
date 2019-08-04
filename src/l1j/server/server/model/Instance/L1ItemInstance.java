@@ -844,9 +844,9 @@ public class L1ItemInstance extends L1Object {
     }
 
     /**
-     * アイテムの状態からサーバーのパケットに利用する形式のバイト列を生成し、返す。 1：打撃、2：エンチャントレベル、3：損傷度、4：両手剣、5：攻撃成功、6：追加打撃7：王子/王女、8：Str、9：Dex、10：Con、11：Wiz、
-     * 12：Int、13：Cha、14：Hp、Mp 15：Mr、16：マナの吸収、17：呪術力、18：ヘイスト効果、19：Ac、20：幸運、21：栄養、22：明るさ、23：材質、24：弓命中、25：タイプ[writeH]、26：
-     * レベル[writeH]、27：火属性28：水属性、29：風属性、30：地属性、31：最大Hp、32：最大Mp、33：耐性、34：生命吸収、35：弓打撃、36：branch用dummy、37：体力回復率、38：マナ回復率、39： `、
+     * アイテムの状態からサーバーのパケットに利用する形式のバイト列を生成し、返す。 1：打撃、2：エンチャントレベル、3：損傷度、4：両手剣、5：攻撃成功、6：追加打撃、7：王子/王女、8：STR、9：DEX、10：CON、11：WIS、
+     * 12：INT、13：CHA、14：HP/MP 15：MR、16：マナの吸収、17：呪術力、18：ヘイスト効果、19：AC、20：幸運、21：栄養、22：明るさ、23：材質、24：弓命中、25：タイプ[writeH]、26：レベル[writeH]、
+     * 27：火属性、28：水属性、29：風属性、30：地属性、31：最大HP、32：最大MP、33：耐性、34：生命吸収、35：弓打撃、36：branch用dummy、37：体力回復率、38：マナ回復率、39： `、
      *
      * @param armor
      */
@@ -3106,6 +3106,32 @@ public class L1ItemInstance extends L1Object {
                     os.writeC(13);
                     os.writeC(getItem().get_addcha() + 3);
             	}
+            }
+
+            /** ドラゴンアーマーシリーズの竜語耐性 **/
+            if (itemType2 == 2 && (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199
+                || itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203
+                || itemId == 22204 || itemId == 22205 || itemId == 22206 || itemId == 22207
+                || itemId == 22208 || itemId == 22209 || itemId == 22210 || itemId == 22211)) {
+                if (getEnchantLevel() <= 4) {
+                    os.writeC(39);
+                    os.writeS("竜語耐性 +2");
+                } else if (getEnchantLevel() == 5) {
+                    os.writeC(39);
+                    os.writeS("竜語耐性 +3");
+                } else if (getEnchantLevel() == 6) {
+                    os.writeC(39);
+                    os.writeS("竜語耐性 +4");
+                } else if (getEnchantLevel() == 7) {
+                    os.writeC(39);
+                    os.writeS("竜語耐性 +5");
+                } else if (getEnchantLevel() == 8) {
+                    os.writeC(39);
+                    os.writeS("竜語耐性 +6");
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(39);
+                    os.writeS("竜語耐性 +7");
+                }
             }
 
             if (getItem().isHasteItem()) {
