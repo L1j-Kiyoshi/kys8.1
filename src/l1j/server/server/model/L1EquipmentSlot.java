@@ -191,25 +191,19 @@ public class L1EquipmentSlot {
                 _owner.addDmgCritical(6);
             }
         }
-        /** ドラゴンアーマーシリーズの竜語耐性 **/
-        if (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199
-            || itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203
-            || itemId == 22204 || itemId == 22205 || itemId == 22206 || itemId == 22207
-            || itemId == 22208 || itemId == 22209 || itemId == 22210 || itemId == 22211) {
-            if (itemlvl <= 4) {
-                _owner.getResistance().addDESPERADO(2);
-            } else if (itemlvl == 5) {
-                _owner.getResistance().addDESPERADO(3);
-            } else if (itemlvl == 6) {
-                _owner.getResistance().addDESPERADO(4);
-            } else if (itemlvl == 7) {
-                _owner.getResistance().addDESPERADO(5);
-            } else if (itemlvl == 8) {
-                _owner.getResistance().addDESPERADO(6);
-            } else if (itemlvl >= 9) {
-                _owner.getResistance().addDESPERADO(7);
-            }
-        }
+//        /** ドラゴンアーマーシリーズの竜語耐性 **/
+//        if (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199
+//            || itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203
+//            || itemId == 22204 || itemId == 22205 || itemId == 22206 || itemId == 22207
+//            || itemId == 22208 || itemId == 22209 || itemId == 22210 || itemId == 22211) {
+//            if (itemlvl <= 4) {
+//            } else if (itemlvl == 5) {
+//            } else if (itemlvl == 6) {
+//            } else if (itemlvl == 7) {
+//            } else if (itemlvl == 8) {
+//            } else if (itemlvl >= 9) {
+//            }
+//        }
 
         _owner.addDamageReductionByArmor(item.getDamageReduction());
         _owner.addWeightReduction(item.getWeightReduction());
@@ -2409,25 +2403,19 @@ public class L1EquipmentSlot {
                 _owner.addDmgCritical(-6);
             }
         }
-        /** ドラゴンアーマーシリーズの竜語耐性 **/
-        if (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199
-            || itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203
-            || itemId == 22204 || itemId == 22205 || itemId == 22206 || itemId == 22207
-            || itemId == 22208 || itemId == 22209 || itemId == 22210 || itemId == 22211) {
-            if (itemlvl <= 4) {
-                _owner.getResistance().addDESPERADO(-2);
-            } else if (itemlvl == 5) {
-                _owner.getResistance().addDESPERADO(-3);
-            } else if (itemlvl == 6) {
-                _owner.getResistance().addDESPERADO(-4);
-            } else if (itemlvl == 7) {
-                _owner.getResistance().addDESPERADO(-5);
-            } else if (itemlvl == 8) {
-                _owner.getResistance().addDESPERADO(-6);
-            } else if (itemlvl >= 9) {
-                _owner.getResistance().addDESPERADO(-7);
-            }
-        }
+//        /** ドラゴンアーマーシリーズの竜語耐性 **/
+//        if (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199
+//            || itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203
+//            || itemId == 22204 || itemId == 22205 || itemId == 22206 || itemId == 22207
+//            || itemId == 22208 || itemId == 22209 || itemId == 22210 || itemId == 22211) {
+//            if (itemlvl <= 4) {
+//            } else if (itemlvl == 5) {
+//            } else if (itemlvl == 6) {
+//            } else if (itemlvl == 7) {
+//            } else if (itemlvl == 8) {
+//            } else if (itemlvl >= 9) {
+//            }
+//        }
 
         _owner.addDamageReductionByArmor(-item.getDamageReduction());
         _owner.addWeightReduction(-item.getWeightReduction());

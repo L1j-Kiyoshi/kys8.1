@@ -3108,31 +3108,31 @@ public class L1ItemInstance extends L1Object {
             	}
             }
 
-            /** ドラゴンアーマーシリーズの竜語耐性 **/
-            if (itemType2 == 2 && (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199
-                || itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203
-                || itemId == 22204 || itemId == 22205 || itemId == 22206 || itemId == 22207
-                || itemId == 22208 || itemId == 22209 || itemId == 22210 || itemId == 22211)) {
-                if (getEnchantLevel() <= 4) {
-                    os.writeC(39);
-                    os.writeS("竜語耐性 +2");
-                } else if (getEnchantLevel() == 5) {
-                    os.writeC(39);
-                    os.writeS("竜語耐性 +3");
-                } else if (getEnchantLevel() == 6) {
-                    os.writeC(39);
-                    os.writeS("竜語耐性 +4");
-                } else if (getEnchantLevel() == 7) {
-                    os.writeC(39);
-                    os.writeS("竜語耐性 +5");
-                } else if (getEnchantLevel() == 8) {
-                    os.writeC(39);
-                    os.writeS("竜語耐性 +6");
-                } else if (getEnchantLevel() >= 9) {
-                    os.writeC(39);
-                    os.writeS("竜語耐性 +7");
-                }
-            }
+//            /** ドラゴンアーマーシリーズの竜語耐性 **/
+//            if (itemType2 == 2 && (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199
+//                || itemId == 22200 || itemId == 22201 || itemId == 22202 || itemId == 22203
+//                || itemId == 22204 || itemId == 22205 || itemId == 22206 || itemId == 22207
+//                || itemId == 22208 || itemId == 22209 || itemId == 22210 || itemId == 22211)) {
+//                if (getEnchantLevel() <= 4) {
+//                    os.writeC(39);
+//                    os.writeS("竜語耐性 +2");
+//                } else if (getEnchantLevel() == 5) {
+//                    os.writeC(39);
+//                    os.writeS("竜語耐性 +3");
+//                } else if (getEnchantLevel() == 6) {
+//                    os.writeC(39);
+//                    os.writeS("竜語耐性 +4");
+//                } else if (getEnchantLevel() == 7) {
+//                    os.writeC(39);
+//                    os.writeS("竜語耐性 +5");
+//                } else if (getEnchantLevel() == 8) {
+//                    os.writeC(39);
+//                    os.writeS("竜語耐性 +6");
+//                } else if (getEnchantLevel() >= 9) {
+//                    os.writeC(39);
+//                    os.writeS("竜語耐性 +7");
+//                }
+//            }
 
             if (getItem().isHasteItem()) {
                 os.writeC(18);
