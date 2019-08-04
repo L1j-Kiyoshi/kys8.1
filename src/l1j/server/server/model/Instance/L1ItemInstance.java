@@ -2417,7 +2417,7 @@ public class L1ItemInstance extends L1Object {
                         break;
                     case 9:
                         os.writeC(14);
-                        os.writeH(getItem().get_addhp() + 60);
+                        os.writeH(getItem().get_addhp() + 50);
                         break;
                     default:
                         break;
