@@ -173,10 +173,8 @@ public class L1EquipmentSlot {
         }
         /** マンボコートのエンチャント+7でのCHA増加 **/
         if (itemId == 20112 || itemId == 120112) {
-            if (itemlvl <= 6) {
-                _owner.getAbility().addCha(2);
-            } else if (itemlvl >= 7) {
-                _owner.getAbility().addCha(3);
+            if (itemlvl >= 7) {
+                _owner.getAbility().addCha(1);
             }
         }
         /** ヴァラカスフレイムシリーズ **/
@@ -2402,10 +2400,8 @@ public class L1EquipmentSlot {
         }
         /** マンボコートのエンチャント+7でのCHA増加 **/
         if (itemId == 20112 || itemId == 120112) {
-            if (itemlvl <= 6) {
-                _owner.getAbility().addCha(-2);
-            } else if (itemlvl >= 7) {
-                _owner.getAbility().addCha(-3);
+            if (itemlvl >= 7) {
+                _owner.getAbility().addCha(-1);
             }
         }
         /** ヴァラカスフレイムシリーズ **/

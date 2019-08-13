@@ -2151,32 +2151,43 @@ public class L1ItemInstance extends L1Object {
             }
 
 
-            // STR~CHA
+            // STR
             if (getItem().get_addstr() != 0) {
                 os.writeC(8);
                 os.writeC(getItem().get_addstr());
             }
+            // DEX
             if (getItem().get_adddex() != 0) {
                 os.writeC(9);
                 os.writeC(getItem().get_adddex());
             }
+            // CON
             if (getItem().get_addcon() != 0) {
                 os.writeC(10);
                 os.writeC(getItem().get_addcon());
             }
+            // WIS
             if (getItem().get_addwis() != 0) {
                 os.writeC(11);
                 os.writeC(getItem().get_addwis());
             }
+            // INT
             if (getItem().get_addint() != 0) {
                 os.writeC(12);
                 os.writeC(getItem().get_addint());
             }
-            if (getItem().get_addcha() != 0) {
+            // CHA
+
+            /** マンボコートのエンチャント+7でのCHA増加 **/
+            if (itemType2 == 2 && (itemId == 20112 || itemId == 120112) && getEnchantLevel() >= 7) {
+                os.writeC(13);
+                os.writeC(getItem().get_addcha() + 1);
+            } else if (getItem().get_addcha() != 0) {
                 os.writeC(13);
                 os.writeC(getItem().get_addcha());
             }
 
+            // HP
             /** スナップファーリング類HP増加表示 **/
             if (itemType2 == 2 && itemId >= 22224 && itemId <= 22228 && getEnchantLevel() > 0) {
                 int snapperHpUp = getEnchantLevel() * 5 + 10;
@@ -3131,17 +3142,6 @@ public class L1ItemInstance extends L1Object {
                     os.writeC(17);
                     os.writeC(addsp());
                 }
-            }
-
-            /** マンボコートのエンチャント+7でのCHA増加 **/
-            if (itemType2 == 2 && (itemId == 20112 || itemId == 120112)) {
-            	if (getEnchantLevel() <= 6) {
-                    os.writeC(13);
-                    os.writeC(getItem().get_addcha() + 2);
-            	} else if (getEnchantLevel() >= 7) {
-                    os.writeC(13);
-                    os.writeC(getItem().get_addcha() + 3);
-            	}
             }
 
 //            /** ドラゴンアーマーシリーズの竜語耐性 **/
