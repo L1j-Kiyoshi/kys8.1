@@ -1238,13 +1238,13 @@ public class L1ItemInstance extends L1Object {
 
         } else if (itemType2 == 1 || itemType2 == 2) { // weapon | armor
             int op_addAc = 0;
-            /** アイテム安全なチャン表示を追加 **/
+            /** アイテムの安全強化値の表示を追加 **/
 			/*int SafeEnchant = getItem().get_safeenchant();
 			os.writeC(39);
 			if (SafeEnchant < 0) {
 				SafeEnchant = 0;
 			}
-			os.writeS("\\fY[安全なチャン : +" + SafeEnchant + "]");*/
+			os.writeS("\\fY[安全強化 : +" + SafeEnchant + "]");*/
 
             if (itemType2 == 1) { // weapon武器打撃値
                 os.writeC(1);
@@ -1316,6 +1316,42 @@ public class L1ItemInstance extends L1Object {
                         break;
                     case 8:
                         if (itemId == 222341) {
+                            os.writeC(10 + op_addAc);
+                        } else {
+                            os.writeC(9 + op_addAc);
+                        }
+                        break;
+                    default:
+                        os.writeC(0 + op_addAc);
+                }
+
+            /** ルームティス レッド イヤリングのAC表示処理 **/
+            } else if (itemType2 == 2 && itemId == 22229 || itemId == 222337) {
+                os.writeC(2);
+                switch (getEnchantLevel()) {
+                    case 5:
+                        if (itemId == 222337) {
+                            os.writeC(7 + op_addAc);
+                        } else {
+                            os.writeC(0 + op_addAc);
+                        }
+                        break;
+                    case 6:
+                        if (itemId == 222337) {
+                            os.writeC(8 + op_addAc);
+                        } else {
+                            os.writeC(7 + op_addAc);
+                        }
+                        break;
+                    case 7:
+                        if (itemId == 222337) {
+                            os.writeC(9 + op_addAc);
+                        } else {
+                            os.writeC(8 + op_addAc);
+                        }
+                        break;
+                    case 8:
+                        if (itemId == 222337) {
                             os.writeC(10 + op_addAc);
                         } else {
                             os.writeC(9 + op_addAc);
@@ -2295,12 +2331,12 @@ public class L1ItemInstance extends L1Object {
                     default:
                         break;
                 }
-                /** ルームティス赤い光のイヤリングHP増加表示 **/
+                /** ルームティス レッド イヤリングHP増加表示 **/
             } else if (itemType2 == 2 && itemId == 22229 && getEnchantLevel() > 0) {
                 int b_roomtisRingHPUp = (getEnchantLevel() * 10) + 10;
                 os.writeC(14);
                 os.writeH(getItem().get_addhp() + b_roomtisRingHPUp);
-                /** 祝福されたルームティス赤い光のイヤリングHP増加表示**/
+                /** 祝福されたルームティス レッド イヤリングHP増加表示**/
             } else if (itemType2 == 2 && itemId == 222337 && getEnchantLevel() > 0) {
                 switch (getEnchantLevel()) {
                     case 1:
@@ -3153,60 +3189,98 @@ public class L1ItemInstance extends L1Object {
                 os.writeC(39);
                 os.writeS("ダメージリダクション" + (getEnchantLevel() - 4));
             }
-            /** ルームティスの赤い光のイヤリングダメージリダクション **/
-            if (getItemId() == 22229 && getEnchantLevel() > 2) {
+            /** ルームティス レッド イヤリング **/
+            if (itemId == 22229) {
                 switch (getEnchantLevel()) {
                     case 3:
                     case 4:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 1));
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 1));
                         break;
                     case 5:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 2));
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 2));
+                        os.writeC(39);
+                        os.writeS("ダメージ低下率 +20(2%)");
                         break;
                     case 6:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 3));
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 3));
+                        os.writeC(39);
+                        os.writeS("ダメージ低下率 +20(3%)");
                         break;
                     case 7:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 4));
+                        os.writeS("近距離命中 +1");
+                        os.writeC(39);
+                        os.writeS("遠距離命中 +1");
+                        os.writeC(39);
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 4));
+                        os.writeC(39);
+                        os.writeS("ダメージ低下率 +20(4%)");
                         break;
                     case 8:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 5));
+                        os.writeS("近距離命中 +3");
+                        os.writeC(39);
+                        os.writeS("遠距離命中 +3");
+                        os.writeC(39);
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 5));
+                        os.writeC(39);
+                        os.writeS("ダメージ低下率 +20(5%)");
                         break;
                     default:
                         break;
                 }
             }
-            /** 祝福されたルームティスの赤い光のイヤリングダメージリダクション **/
-            if (itemId == 222337 && getEnchantLevel() > 2) {
+            /** 祝福されたルームティス レッド イヤリング **/
+            if (itemId == 222337) {
                 switch (getEnchantLevel()) {
                     case 3:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 1));
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 1));
                         break;
                     case 4:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 2));
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 2));
+                        os.writeC(39);
+                        os.writeS("ダメージ低下率 +20(2%)");
                         break;
                     case 5:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 3));
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 3));
+                        os.writeC(39);
+                        os.writeS("ダメージ低下率 +20(3%)");
                         break;
                     case 6:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 4));
+                        os.writeS("近距離命中 +1");
+                        os.writeC(39);
+                        os.writeS("遠距離命中 +1");
+                        os.writeC(39);
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 4));
+                        os.writeC(39);
+                        os.writeS("ダメージ低下率 +20(4%)");
                         break;
                     case 7:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 5));
+                        os.writeS("近距離命中 +3");
+                        os.writeC(39);
+                        os.writeS("遠距離命中 +3");
+                        os.writeC(39);
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 5));
+                        os.writeC(39);
+                        os.writeS("ダメージ低下率 +20(5%)");
                         break;
                     case 8:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション" + (getItem().getDamageReduction() + 6));
+                        os.writeS("近距離命中 +5");
+                        os.writeC(39);
+                        os.writeS("遠距離命中 +5");
+                        os.writeC(39);
+                        os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 6));
+                        os.writeC(39);
+                        os.writeS("ダメージ低下率 +20(6%)");
                         break;
                     default:
                         break;
@@ -4157,54 +4231,54 @@ public class L1ItemInstance extends L1Object {
                         break;
                 }
             }
-            /** ルームティスの赤い光のイヤリング確率 **/
-            if (itemId == 22229) {
-                switch (getEnchantLevel()) {
-                    case 5:
-                        os.writeC(39);
-                        os.writeS("確率ダメージリダクション2％");
-                        break;
-                    case 6:
-                        os.writeC(39);
-                        os.writeS("確率ダメージリダクション3％");
-                        break;
-                    case 7:
-                        os.writeC(39);
-                        os.writeS("確率ダメージリダクション4％");
-                        break;
-                    case 8:
-                        os.writeC(39);
-                        os.writeS("確率ダメージリダクション5％");
-                        break;
-                }
-                os.writeC(39);
-            }
-            /** 祝福されたルームティスの赤い光のイヤリング確率 **/
-            if (itemId == 222337) {
-                switch (getEnchantLevel()) {
-                    case 4:
-                        os.writeC(39);
-                        os.writeS("確率ダメージリダクション2％");
-                        break;
-                    case 5:
-                        os.writeC(39);
-                        os.writeS("確率ダメージリダクション3％");
-                        break;
-                    case 6:
-                        os.writeC(39);
-                        os.writeS("確率ダメージリダクション4％");
-                        break;
-                    case 7:
-                        os.writeC(39);
-                        os.writeS("確率ダメージリダクション5％");
-                        break;
-                    case 8:
-                        os.writeC(39);
-                        os.writeS("確率ダメージリダクション6％");
-                        break;
-                }
-                os.writeC(39);
-            }
+//            /** ルームティス レッド イヤリング **/
+//            if (itemId == 22229) {
+//                switch (getEnchantLevel()) {
+//                    case 5:
+//                        os.writeC(39);
+//                        os.writeS("ダメージ低下率 +20(2%)");
+//                        break;
+//                    case 6:
+//                        os.writeC(39);
+//                        os.writeS("ダメージ低下率 +20(3%)");
+//                        break;
+//                    case 7:
+//                        os.writeC(39);
+//                        os.writeS("ダメージ低下率 +20(4%)");
+//                        break;
+//                    case 8:
+//                        os.writeC(39);
+//                        os.writeS("ダメージ低下率 +20(5%)");
+//                        break;
+//                }
+//                os.writeC(39);
+//            }
+//            /** 祝福されたルームティス レッド イヤリング **/
+//            if (itemId == 222337) {
+//                switch (getEnchantLevel()) {
+//                    case 4:
+//                        os.writeC(39);
+//                        os.writeS("ダメージ低下率 +20(2%)");
+//                        break;
+//                    case 5:
+//                        os.writeC(39);
+//                        os.writeS("ダメージ低下率 +20(3%)");
+//                        break;
+//                    case 6:
+//                        os.writeC(39);
+//                        os.writeS("ダメージ低下率 +20(4%)");
+//                        break;
+//                    case 7:
+//                        os.writeC(39);
+//                        os.writeS("ダメージ低下率 +20(5%)");
+//                        break;
+//                    case 8:
+//                        os.writeC(39);
+//                        os.writeS("ダメージ低下率 +20(6%)");
+//                        break;
+//                }
+//                os.writeC(39);
+//            }
 
 
             if (getItem().get_penetration() == 1) {        //貫通

@@ -3979,6 +3979,7 @@ public class L1Attack {
         return dmg;
     }
 
+    // ルームティス レッド イヤリングの確率ダメージリダクション
     private int roomtisDecreaseDamage() {
         int damage = 0;
         if (_calcType == NPC_PC || _calcType == PC_PC) {
@@ -3991,8 +3992,8 @@ public class L1Attack {
             }
 
             L1ItemInstance item2 = _targetPc.getInventory().checkEquippedItem(222337);
-            if (item2 != null && item2.getEnchantLevel() >= 5) {
-                if (_random.nextInt(100) < Config.ROOMTIECE_CHANCE) {
+            if (item2 != null && item2.getEnchantLevel() >= 4) {
+                if (_random.nextInt(100) < 2 + item2.getEnchantLevel() - 4) {
                     damage = 20;
                     _targetPc.sendPackets(new S_SkillSound(_targetPc.getId(), 12118), true);
                 }
