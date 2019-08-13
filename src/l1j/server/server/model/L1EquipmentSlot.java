@@ -1696,12 +1696,6 @@ public class L1EquipmentSlot {
                 }
             } else if (itemgrade == 4 && itemId == 222337) { // 祝福されたルームティス レッド イアリング
                 switch (itemlvl) {
-                    case 1:
-                        _owner.addMaxHp(20);
-                        break;
-                    case 2:
-                        _owner.addMaxHp(30);
-                        break;
                     case 3:
                         _owner.addMaxHp(50);
                         _owner.addDamageReductionByArmor(1);
@@ -3862,12 +3856,6 @@ public class L1EquipmentSlot {
                 }
             } else if (itemgrade == 4 && itemId == 222337) { // 祝福されたルームティス レッド イアリング
                 switch (itemlvl) {
-                    case 1:
-                        _owner.addMaxHp(-20);
-                        break;
-                    case 2:
-                        _owner.addMaxHp(-30);
-                        break;
                     case 3:
                         _owner.addMaxHp(-50);
                         _owner.addDamageReductionByArmor(-1);

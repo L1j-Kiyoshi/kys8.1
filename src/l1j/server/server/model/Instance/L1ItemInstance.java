@@ -287,166 +287,6 @@ public class L1ItemInstance extends L1Object {
         _itemdelay3 = itemdelay3;
     }
 
-    /**
-     * ルームティス青い光のイヤリングポーション効率表示
-     **/
-    private String RoomtisHealingPotion() {
-        int lvl = getEnchantLevel();
-        String in = "";
-        switch (lvl) {
-            case 0:
-                in = "ポーション回復量2％+ 2";
-                break;
-            case 1:
-                in = "ポーション回復量6％+6";
-                break;
-            case 2:
-                in = "ポーション回復量8％+8";
-                break;
-            case 3:
-                in = "ポーション回復量10％+ 10";
-                break;
-            case 4:
-                in = "ポーション回復量12％+ 12";
-                break;
-            case 5:
-                in = "ポーション回復量14％+14";
-                break;
-            case 6:
-                in = "ポーション回復量16％+16";
-                break;
-            case 7:
-                in = "ポーション回復量18％+18";
-                break;
-            case 8:
-                in = "ポーション回復量20％+20";
-                break;
-            default:
-                break;
-        }
-        return in;
-    }
-
-    /**
-     * ルームティス青い光のイヤリングポーション効率表示
-     **/
-    private String RoomtisHealingPotion11() {
-        int lvl = getEnchantLevel();
-        String in = "";
-        switch (lvl) {
-            case 0:
-                in = "恐怖回復減少効果を相殺+ 2％";
-                break;
-            case 1:
-                in = "恐怖回復減少効果を相殺+ 6％";
-                break;
-            case 2:
-                in = "恐怖回復減少効果を相殺+ 8％";
-                break;
-            case 3:
-                in = "恐怖回復減少効果を相殺+ 10％";
-                break;
-            case 4:
-                in = "恐怖回復減少効果を相殺+ 12％";
-                break;
-            case 5:
-                in = "恐怖回復減少効果を相殺+ 14％";
-                break;
-            case 6:
-                in = "恐怖回復減少効果を相殺+ 16％";
-                break;
-            case 7:
-                in = "恐怖回復減少効果を相殺+ 18％";
-                break;
-            case 8:
-                in = "恐怖回復減少効果を相殺+ 20％";
-                break;
-            default:
-                break;
-        }
-        return in;
-    }
-
-    /**
-     * 祝福されたルームティス青い光のイヤリングポーション効率表示
-     **/
-    private String RoomtisHealingPotion1() {
-        int lvl = getEnchantLevel();
-        String in = "";
-        switch (lvl) {
-            case 0:
-                in = "ポーション回復量2％+ 2";
-                break;
-            case 1:
-                in = "ポーション回復量6％+6";
-                break;
-            case 2:
-                in = "ポーション回復量8％+8";
-                break;
-            case 3:
-                in = "ポーション回復量12％+ 12";
-                break;
-            case 4:
-                in = "ポーション回復量14％+14";
-                break;
-            case 5:
-                in = "ポーション回復量16％+16";
-                break;
-            case 6:
-                in = "ポーション回復量18％+18";
-                break;
-            case 7:
-                in = "ポーション回復量20％+20";
-                break;
-            case 8:
-                in = "ポーション回復量22％+22";
-                break;
-            default:
-                break;
-        }
-        return in;
-    }
-
-    /**
-     * ルームティス青い光のイヤリングポーション効率表示
-     **/
-    private String RoomtisHealingPotion12() {
-        int lvl = getEnchantLevel();
-        String in = "";
-        switch (lvl) {
-            case 0:
-                in = "恐怖回復減少効果を相殺+ 2％";
-                break;
-            case 1:
-                in = "恐怖回復減少効果を相殺+ 6％";
-                break;
-            case 2:
-                in = "恐怖回復減少効果を相殺+ 8％";
-                break;
-            case 3:
-                in = "恐怖回復減少効果を相殺+ 12％";
-                break;
-            case 4:
-                in = "恐怖回復減少効果を相殺+ 14％";
-                break;
-            case 5:
-                in = "恐怖回復減少効果を相殺+ 16％";
-                break;
-            case 6:
-                in = "恐怖回復減少効果を相殺+ 18％";
-                break;
-            case 7:
-                in = "恐怖回復減少効果を相殺+ 20％";
-                break;
-            case 8:
-                in = "恐怖回復減少効果を相殺+ 22％";
-                break;
-            default:
-                break;
-        }
-        return in;
-    }
-
     public int getMr() {
         int mr = _item.get_mdef();
         int itemid = getItemId();
@@ -2348,16 +2188,8 @@ public class L1ItemInstance extends L1Object {
                 os.writeC(14);
                 os.writeH(getItem().get_addhp() + b_roomtisRingHPUp);
                 /** 祝福されたルームティス レッド イヤリングHP増加表示**/
-            } else if (itemType2 == 2 && itemId == 222337 && getEnchantLevel() > 0) {
+            } else if (itemType2 == 2 && itemId == 222337 && getEnchantLevel() > 2) {
                 switch (getEnchantLevel()) {
-                    case 1:
-                        os.writeC(14);
-                        os.writeH(getItem().get_addhp() + 20);
-                        break;
-                    case 2:
-                        os.writeC(14);
-                        os.writeH(getItem().get_addhp() + 30);
-                        break;
                     case 3:
                         os.writeC(14);
                         os.writeH(getItem().get_addhp() + 50);
@@ -2634,20 +2466,110 @@ public class L1ItemInstance extends L1Object {
                 os.writeC(getItem().get_addmpr());
             }
 
-            /**ルームティスの青い光のイヤリングポーション効率表示**/
+            /** ルームティス ブルー イヤリングポーション効率表示**/
             if (itemType2 == 2 && itemId == 22230 && getEnchantLevel() >= 0) {
-                os.writeC(39);
-                os.writeS(RoomtisHealingPotion());
-                os.writeC(39);
-                os.writeS(RoomtisHealingPotion11());
+                switch (getEnchantLevel()) {
+                case 0:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 2% +2");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 2%");
+                    break;
+                case 1:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 6% +6");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 6%");
+                    break;
+                case 2:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 8% +8");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 8%");
+                    break;
+                case 3:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 10% +10");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 10%");
+                    break;
+                case 4:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 12% +12");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 12%");
+                    break;
+                case 5:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 14% +14");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 14%");
+                    break;
+                case 6:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 16% +16");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 16%");
+                    break;
+                case 7:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 18% +18");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 18%");
+                    break;
+                case 8:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 20% +20");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 20%");
+                    break;
+                default:
+                    break;
+                }
             }
 
-            /**祝福されたルームティスの青い光のイヤリングポーション効率表示 **/
+            /** 祝福されたルームティス ブルー イヤリングポーション効率表示 **/
             if (itemType2 == 2 && itemId == 222338 && getEnchantLevel() >= 0) {
-                os.writeC(39);
-                os.writeS(RoomtisHealingPotion1());
-                os.writeC(39);
-                os.writeS(RoomtisHealingPotion12());
+                switch (getEnchantLevel()) {
+                case 3:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 12% +12");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 12%");
+                    break;
+                case 4:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 14% +14");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 14%");
+                    break;
+                case 5:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 16% +16");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 16%");
+                    break;
+                case 6:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 18% +18");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 18%");
+                    break;
+                case 7:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 20% +20");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 20%");
+                    break;
+                case 8:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 22% +22");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 22%");
+                    break;
+                default:
+                    break;
+                }
             }
             /**ネックレス5以上ポーション回復量**/
             if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12) {
