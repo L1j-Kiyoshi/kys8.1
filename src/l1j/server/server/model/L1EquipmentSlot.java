@@ -1598,19 +1598,84 @@ public class L1EquipmentSlot {
                     default:
                         break;
                 }
-                /** ゴムグィac処理部分再修正 **/
-            } else if (itemId == 222340 || itemId == 222341) {
-                int ac = itemlvl;
 
-                if (item.getBless() == 0 && itemlvl >= 3) {
-                    ac += 1;
+            } else if (itemgrade == 4 && itemId == 222340) { // ルームティス ブラック イヤリング
+                switch (itemlvl) {
+                case 1:
+                    _owner.getAC().addAc(-1);
+                    break;
+                case 2:
+                    _owner.getAC().addAc(-2);
+                    break;
+                case 3:
+                    _owner.getAC().addAc(-3);
+                    _owner.addDmgup(1);
+                    _owner.addBowDmgup(1);
+                    break;
+                case 4:
+                    _owner.getAC().addAc(-4);
+                    _owner.addDmgup(1);
+                    _owner.addBowDmgup(1);
+                    break;
+                case 5:
+                    _owner.getAC().addAc(-5);
+                    _owner.addDmgup(2);
+                    _owner.addBowDmgup(2);
+                    break;
+                case 6:
+                    _owner.getAC().addAc(-6);
+                    _owner.addDmgup(3);
+                    _owner.addBowDmgup(3);
+                    break;
+                case 7:
+                    _owner.getAC().addAc(-7);
+                    _owner.addDmgup(4);
+                    _owner.addBowDmgup(4);
+                    break;
+                case 8:
+                    _owner.getAC().addAc(-8);
+                    _owner.addDmgup(5);
+                    _owner.addBowDmgup(5);
+                    break;
+                default:
+                    break;
                 }
-                _owner.getAC().addAc(-ac);
-                int dm = itemlvl - 2;
-                if (item.getBless() != 0 && itemlvl >= 4)
-                    dm -= 1;
-                _owner.addDmgup(dm);
-                _owner.addBowDmgup(dm);
+
+            } else if (itemgrade == 4 && itemId == 222341) { // 祝福されたルームティス ブラック イヤリング
+                switch (itemlvl) {
+                case 3:
+                    _owner.getAC().addAc(-4);
+                    _owner.addDmgup(1);
+                    _owner.addBowDmgup(1);
+                    break;
+                case 4:
+                    _owner.getAC().addAc(-5);
+                    _owner.addDmgup(2);
+                    _owner.addBowDmgup(2);
+                    break;
+                case 5:
+                    _owner.getAC().addAc(-6);
+                    _owner.addDmgup(3);
+                    _owner.addBowDmgup(3);
+                    break;
+                case 6:
+                    _owner.getAC().addAc(-7);
+                    _owner.addDmgup(4);
+                    _owner.addBowDmgup(4);
+                    break;
+                case 7:
+                    _owner.getAC().addAc(-8);
+                    _owner.addDmgup(5);
+                    _owner.addBowDmgup(5);
+                    break;
+                case 8:
+                    _owner.getAC().addAc(-9);
+                    _owner.addDmgup(6);
+                    _owner.addBowDmgup(6);
+                    break;
+                default:
+                    break;
+                }
 
                 /**成長/回復の文章 **/
             } else if (itemgrade == 3 && itemId == 900020 || itemId == 900021) {
@@ -1818,14 +1883,6 @@ public class L1EquipmentSlot {
                 }
             } else if (itemgrade == 4 && itemId == 222339) { // 祝福されたルームティス パープル イヤリング
                 switch (itemlvl) {
-                    case 1:
-                        _owner.addMaxMp(10);
-                        _owner.getResistance().addMr(3);
-                        break;
-                    case 2:
-                        _owner.addMaxMp(15);
-                        _owner.getResistance().addMr(4);
-                        break;
                     case 3:
                         _owner.addMaxMp(35);
                         _owner.getResistance().addMr(6);
@@ -3764,20 +3821,83 @@ public class L1EquipmentSlot {
                     default:
                         break;
                 }
-                /** ゴムグィac処理部分の効果再修正 **/
-            } else if (itemId == 222340 || itemId == 222341) {
-                int ac = itemlvl;
-                if (item.getBless() == 0 && itemlvl >= 3) {
-                    ac += 1;
+            } else if (itemgrade == 4 && itemId == 222340) { // ルームティス ブラック イヤリング
+                switch (itemlvl) {
+                case 1:
+                    _owner.getAC().addAc(1);
+                    break;
+                case 2:
+                    _owner.getAC().addAc(2);
+                    break;
+                case 3:
+                    _owner.getAC().addAc(3);
+                    _owner.addDmgup(-1);
+                    _owner.addBowDmgup(-1);
+                    break;
+                case 4:
+                    _owner.getAC().addAc(4);
+                    _owner.addDmgup(-1);
+                    _owner.addBowDmgup(-1);
+                    break;
+                case 5:
+                    _owner.getAC().addAc(5);
+                    _owner.addDmgup(-2);
+                    _owner.addBowDmgup(-2);
+                    break;
+                case 6:
+                    _owner.getAC().addAc(6);
+                    _owner.addDmgup(-3);
+                    _owner.addBowDmgup(-3);
+                    break;
+                case 7:
+                    _owner.getAC().addAc(7);
+                    _owner.addDmgup(-4);
+                    _owner.addBowDmgup(-4);
+                    break;
+                case 8:
+                    _owner.getAC().addAc(8);
+                    _owner.addDmgup(-5);
+                    _owner.addBowDmgup(-5);
+                    break;
+                default:
+                    break;
                 }
-                _owner.getAC().addAc(ac);
-                int dm = itemlvl - 2;
 
-                if (item.getBless() != 0 && itemlvl >= 4)
-                    dm -= 1;
-
-                _owner.addDmgup(-dm);
-                _owner.addBowDmgup(-dm);
+            } else if (itemgrade == 4 && itemId == 222341) { // 祝福されたルームティス ブラック イヤリング
+                switch (itemlvl) {
+                case 3:
+                    _owner.getAC().addAc(4);
+                    _owner.addDmgup(-1);
+                    _owner.addBowDmgup(-1);
+                    break;
+                case 4:
+                    _owner.getAC().addAc(5);
+                    _owner.addDmgup(-2);
+                    _owner.addBowDmgup(-2);
+                    break;
+                case 5:
+                    _owner.getAC().addAc(6);
+                    _owner.addDmgup(-3);
+                    _owner.addBowDmgup(-3);
+                    break;
+                case 6:
+                    _owner.getAC().addAc(7);
+                    _owner.addDmgup(-4);
+                    _owner.addBowDmgup(-4);
+                    break;
+                case 7:
+                    _owner.getAC().addAc(8);
+                    _owner.addDmgup(-5);
+                    _owner.addBowDmgup(-5);
+                    break;
+                case 8:
+                    _owner.getAC().addAc(9);
+                    _owner.addDmgup(-6);
+                    _owner.addBowDmgup(-6);
+                    break;
+                default:
+                    break;
+                }
 
                 /** 成長/回復の文章 **/
             } else if (itemgrade == 3 && itemId == 900020 || itemId == 900021) {
@@ -3985,14 +4105,6 @@ public class L1EquipmentSlot {
                 }
             } else if (itemgrade == 4 && itemId == 222339) { // 祝福されたルームティス パープル イヤリング
                 switch (itemlvl) {
-                    case 1:
-                        _owner.addMaxMp(-10);
-                        _owner.getResistance().addMr(-3);
-                        break;
-                    case 2:
-                        _owner.addMaxMp(-15);
-                        _owner.getResistance().addMr(-4);
-                        break;
                     case 3:
                         _owner.addMaxMp(-35);
                         _owner.getResistance().addMr(-6);

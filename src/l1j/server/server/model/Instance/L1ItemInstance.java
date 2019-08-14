@@ -1109,15 +1109,23 @@ public class L1ItemInstance extends L1Object {
                 os.writeC(2);
                 os.writeC(getEnchantLevel());
 
-                /** ルームティス黒い光ピアスAC表現処理部 **/
+                /** ルームティス ブラック イヤリングAC表示処理 **/
             } else if (itemType2 == 2 && itemId == 222340 || itemId == 222341) {
                 os.writeC(2);
                 switch (getEnchantLevel()) {
                     case 1:
-                        os.writeC(1 + op_addAc);
+                        if (itemId == 222341) {
+                            os.writeC(0 + op_addAc);
+                        } else {
+                            os.writeC(1 + op_addAc);
+                        }
                         break;
                     case 2:
-                        os.writeC(2 + op_addAc);
+                        if (itemId == 222341) {
+                            os.writeC(0 + op_addAc);
+                        } else {
+                            os.writeC(2 + op_addAc);
+                        }
                         break;
                     case 3:
                         if (itemId == 222341) {
@@ -1128,37 +1136,37 @@ public class L1ItemInstance extends L1Object {
                         break;
                     case 4:
                         if (itemId == 222341) {
+                            os.writeC(5 + op_addAc);
+                        } else {
+                            os.writeC(4 + op_addAc);
+                        }
+                        break;
+                    case 5:
+                        if (itemId == 222341) {
                             os.writeC(6 + op_addAc);
                         } else {
                             os.writeC(5 + op_addAc);
                         }
                         break;
-                    case 5:
+                    case 6:
                         if (itemId == 222341) {
                             os.writeC(7 + op_addAc);
                         } else {
                             os.writeC(6 + op_addAc);
                         }
                         break;
-                    case 6:
+                    case 7:
                         if (itemId == 222341) {
                             os.writeC(8 + op_addAc);
                         } else {
                             os.writeC(7 + op_addAc);
                         }
                         break;
-                    case 7:
+                    case 8:
                         if (itemId == 222341) {
                             os.writeC(9 + op_addAc);
                         } else {
                             os.writeC(8 + op_addAc);
-                        }
-                        break;
-                    case 8:
-                        if (itemId == 222341) {
-                            os.writeC(10 + op_addAc);
-                        } else {
-                            os.writeC(9 + op_addAc);
                         }
                         break;
                     default:
@@ -2440,16 +2448,8 @@ public class L1ItemInstance extends L1Object {
                         break;
                 }
                 /** 祝福されたルームティス パープル イヤリングMP増加表示 **/
-            } else if (itemType2 == 2 && itemId == 222339 && getEnchantLevel() > 0) {
+            } else if (itemType2 == 2 && itemId == 222339 && getEnchantLevel() > 2) {
                 switch (getEnchantLevel()) {
-                    case 1:
-                        os.writeC(32);
-                        os.writeH(getItem().get_addmp() + 10);
-                        break;
-                    case 2:
-                        os.writeC(32);
-                        os.writeH(getItem().get_addmp() + 15);
-                        break;
                     case 3:
                         os.writeC(32);
                         os.writeH(getItem().get_addmp() + 35);
@@ -2472,7 +2472,7 @@ public class L1ItemInstance extends L1Object {
                         break;
                     case 8:
                         os.writeC(39);
-                        os.writeS("最大MP + 130");
+                        os.writeS("最大MP +130");
                         break;
                     default:
                         break;
@@ -2614,99 +2614,113 @@ public class L1ItemInstance extends L1Object {
                     os.writeS("ポーション回復量" + ((getEnchantLevel() - 4) * 2) + "% +0");
                 }
             }
-            if (itemType2 == 2 && itemId == 222340 || itemId == 222341) {
-                if (getEnchantLevel() == 3) {
-                    if (getItemId() == 222341) {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 2);
-                    } else {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 2);
-                    }
-                } else if (getEnchantLevel() == 4) {
-                    if (getItemId() == 222341) {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(39);
-                        os.writeS("追加ダメージ確率+20（2％）");
-                    } else {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 3);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 3);
-                    }
-                } else if (getEnchantLevel() == 5) {
-                    if (getItemId() == 222341) {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(39);
-                        os.writeS("追加ダメージ確率+20（3％）");
-                    } else {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 3);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 3);
-                        os.writeC(39);
-                        os.writeS("追加ダメージ確率+20（2％）");
-                    }
-                } else if (getEnchantLevel() == 6) {
-                    if (getItemId() == 222341) {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(39);
-                        os.writeS("追加ダメージ確率+ 20（4％）");
-                    } else {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 3);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 3);
-                        os.writeC(39);
-                        os.writeS("追加ダメージ確率+20（3％）");
-                    }
-                } else if (getEnchantLevel() == 7) {
-                    if (getItemId() == 222341) {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(39);
-                        os.writeS("追加ダメージ確率+ 20（5％）");
-                    } else {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 3);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 3);
-                        os.writeC(39);
-                        os.writeS("追加ダメージ確率+ 20（4％）");
-                    }
-                } else if (getEnchantLevel() == 8) {
-                    if (getItemId() == 222341) {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 2);
-                        os.writeC(39);
-                        os.writeS("追加ダメージ確率+ 20（6％）");
-                    } else {
-                        os.writeC(6);
-                        os.writeC(getEnchantLevel() - 3);
-                        os.writeC(35);
-                        os.writeC(getEnchantLevel() - 3);
-                        os.writeC(39);
-                        os.writeS("追加ダメージ確率+ 20（5％）");
-                    }
+
+            /** ルームティス ブラック イヤリング **/
+            if (itemType2 == 2 && itemId == 222340) {
+                switch (getEnchantLevel()) {
+                case 3:
+                    os.writeC(6);
+                    os.writeC(1);
+                    os.writeC(35);
+                    os.writeC(1);
+                    break;
+                case 4:
+                    os.writeC(6);
+                    os.writeC(1);
+                    os.writeC(35);
+                    os.writeC(1);
+                    break;
+                case 5:
+                    os.writeC(6);
+                    os.writeC(2);
+                    os.writeC(35);
+                    os.writeC(2);
+                    os.writeC(39);
+                    os.writeS("追加ダメージ率 +20(2%)");
+                    break;
+                case 6:
+                    os.writeC(6);
+                    os.writeC(3);
+                    os.writeC(35);
+                    os.writeC(3);
+                    os.writeC(39);
+                    os.writeS("追加ダメージ率 +20(3%)");
+                    break;
+                case 7:
+                    os.writeC(6);
+                    os.writeC(4);
+                    os.writeC(35);
+                    os.writeC(4);
+                    os.writeC(39);
+                    os.writeS("追加ダメージ率 +20(4%)");
+                    break;
+                case 8:
+                    os.writeC(6);
+                    os.writeC(5);
+                    os.writeC(35);
+                    os.writeC(5);
+                    os.writeC(39);
+                    os.writeS("追加ダメージ率 +20(5%)");
+                    break;
+                default:
+                    break;
                 }
             }
+
+            /** 祝福されたルームティス ブラック イヤリング **/
+            if (itemType2 == 2 && itemId == 222341) {
+                switch (getEnchantLevel()) {
+                case 3:
+                    os.writeC(6);
+                    os.writeC(1);
+                    os.writeC(35);
+                    os.writeC(1);
+                    break;
+                case 4:
+                    os.writeC(6);
+                    os.writeC(2);
+                    os.writeC(35);
+                    os.writeC(2);
+                    os.writeC(39);
+                    os.writeS("追加ダメージ率 +20(2%)");
+                    break;
+                case 5:
+                    os.writeC(6);
+                    os.writeC(3);
+                    os.writeC(35);
+                    os.writeC(3);
+                    os.writeC(39);
+                    os.writeS("追加ダメージ率 +20(3%)");
+                    break;
+                case 6:
+                    os.writeC(6);
+                    os.writeC(4);
+                    os.writeC(35);
+                    os.writeC(4);
+                    os.writeC(39);
+                    os.writeS("追加ダメージ率 +20(4%)");
+                    break;
+                case 7:
+                    os.writeC(6);
+                    os.writeC(5);
+                    os.writeC(35);
+                    os.writeC(5);
+                    os.writeC(39);
+                    os.writeS("追加ダメージ率 +20(5%)");
+                    break;
+                case 8:
+                    os.writeC(6);
+                    os.writeC(6);
+                    os.writeC(35);
+                    os.writeC(6);
+                    os.writeC(39);
+                    os.writeS("追加ダメージ率 +20(6%)");
+                    break;
+                default:
+                    break;
+                }
+            }
+
             /** 祝福されたスナップ広がりの魔法抵抗リングMR表示 **/
             if (itemType2 == 2 && itemId == 222334 && getEnchantLevel() > 5) {
                 os.writeC(15);
@@ -2752,16 +2766,8 @@ public class L1ItemInstance extends L1Object {
                         break;
                 }
                 /** 祝福されたルームティス パープル イヤリングMR表示 **/
-            } else if (itemType2 == 2 && itemId == 222339 && getEnchantLevel() > 0) {
+            } else if (itemType2 == 2 && itemId == 222339 && getEnchantLevel() > 2) {
                 switch (getEnchantLevel()) {
-                    case 1:
-                        os.writeC(15);
-                        os.writeH(getMr() + 3);
-                        break;
-                    case 2:
-                        os.writeC(15);
-                        os.writeH(getMr() + 4);
-                        break;
                     case 3:
                         os.writeC(15);
                         os.writeH(getMr() + 6);

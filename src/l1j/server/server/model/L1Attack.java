@@ -3954,25 +3954,25 @@ public class L1Attack {
         }
     }
 
+    // ルームティス ブラック イヤリングの確率追加ダメージ
     private double roomtisAddDamage() {
         int dmg = 0;
         if (_calcType == PC_PC || _calcType == PC_NPC) {
-            L1ItemInstance blackRumti = _pc.getInventory().checkEquippedItem(222340);
-            if (blackRumti == null)
-                blackRumti = _pc.getInventory().checkEquippedItem(222341);
-            if (blackRumti != null) {
-                int chance = 0;
-                if (blackRumti.getBless() == 0 && blackRumti.getEnchantLevel() >= 4) {
-                    chance = 2 + blackRumti.getEnchantLevel() - 4;
-                } else if (blackRumti.getEnchantLevel() >= 5) {
-                    chance = 2 + blackRumti.getEnchantLevel() - 5;
+            L1ItemInstance item = _pc.getInventory().checkEquippedItem(222340);
+            if (item != null && item.getEnchantLevel() >= 5) {
+                if (_random.nextInt(100) < 2 + item.getEnchantLevel() - 5) {
+                    dmg = 20;
+                    _pc.sendPackets(new S_SkillSound(_pc.getId(), 13931));
+                    _pc.broadcastPacket(new S_SkillSound(_pc.getId(), 13931));
                 }
-                if (chance != 0) {
-                    if (_random.nextInt(100) < Config.ROOMTIECE_CHANCE) {
-                        dmg += 20;
-                        _pc.sendPackets(new S_SkillSound(_pc.getId(), 13931));
-                        _pc.broadcastPacket(new S_SkillSound(_pc.getId(), 13931));
-                    }
+            }
+
+            L1ItemInstance item2 = _pc.getInventory().checkEquippedItem(222341);
+            if (item2 != null && item2.getEnchantLevel() >= 4) {
+                if (_random.nextInt(100) < 2 + item2.getEnchantLevel() - 4) {
+                    dmg = 20;
+                    _pc.sendPackets(new S_SkillSound(_pc.getId(), 13931));
+                    _pc.broadcastPacket(new S_SkillSound(_pc.getId(), 13931));
                 }
             }
         }
