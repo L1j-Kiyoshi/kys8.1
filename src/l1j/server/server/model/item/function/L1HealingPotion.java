@@ -287,7 +287,37 @@ public class L1HealingPotion {
                     }
                 }
             }
-
+            switch (cnt_enchant) {
+            case 0:
+                upHp = 2;
+                break;
+            case 1:
+                upHp = 6;
+                break;
+            case 2:
+                upHp = 8;
+                break;
+            case 3:
+                upHp = 10;
+                break;
+            case 4:
+                upHp = 12;
+                break;
+            case 5:
+                upHp = 14;
+                break;
+            case 6:
+                upHp = 16;
+                break;
+            case 7:
+                upHp = 18;
+                break;
+            case 8:
+                upHp = 20;
+                break;
+            default:
+                break;
+            }
             upHp = 2 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
         }
@@ -301,6 +331,28 @@ public class L1HealingPotion {
                         cnt_enchant = itemx.getEnchantLevel();
                     }
                 }
+            }
+            switch (cnt_enchant) {
+            case 3:
+                upHp = 12;
+                break;
+            case 4:
+                upHp = 14;
+                break;
+            case 5:
+                upHp = 16;
+                break;
+            case 6:
+                upHp = 18;
+                break;
+            case 7:
+                upHp = 20;
+                break;
+            case 8:
+                upHp = 22;
+                break;
+            default:
+                break;
             }
             upHp = 2 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
