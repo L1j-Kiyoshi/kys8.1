@@ -1733,7 +1733,7 @@ public class L1EquipmentSlot {
                     default:
                         break;
                 }
-            } else if (itemgrade == 4 && itemId == 22230) { // ルームティスの青い光のイヤリング
+            } else if (itemgrade == 4 && itemId == 22230) { // ルームティス ブルー イヤリング
                 switch (itemlvl) {
                     case 5:
                         _owner.getAC().addAc(-1);
@@ -1750,7 +1750,7 @@ public class L1EquipmentSlot {
                     default:
                         break;
                 }
-            } else if (itemgrade == 4 && itemId == 222338) { // 祝福されたルームティスの青い光のイヤリング
+            } else if (itemgrade == 4 && itemId == 222338) { // 祝福されたルームティス ブルー イヤリング
                 switch (itemlvl) {
                     case 4:
                         _owner.getAC().addAc(-1);
@@ -1770,7 +1770,7 @@ public class L1EquipmentSlot {
                     default:
                         break;
                 }
-            } else if (itemgrade == 4 && itemId == 22231) { // ルームティスの紫イヤリング
+            } else if (itemgrade == 4 && itemId == 22231) { // ルームティス パープル イヤリング
                 switch (itemlvl) {
                     case 1:
                         _owner.addMaxMp(10);
@@ -1796,16 +1796,19 @@ public class L1EquipmentSlot {
                         _owner.getAbility().addSp(2);
                         break;
                     case 6:
+                        _owner.getAC().addAc(-1);
                         _owner.addMaxMp(55);
                         _owner.getResistance().addMr(8);
                         _owner.getAbility().addSp(2);
                         break;
                     case 7:
+                        _owner.getAC().addAc(-2);
                         _owner.addMaxMp(70);
                         _owner.getResistance().addMr(10);
                         _owner.getAbility().addSp(3);
                         break;
                     case 8:
+                        _owner.getAC().addAc(-3);
                         _owner.addMaxMp(95);
                         _owner.getResistance().addMr(13);
                         _owner.getAbility().addSp(3);
@@ -1813,7 +1816,7 @@ public class L1EquipmentSlot {
                     default:
                         break;
                 }
-            } else if (itemgrade == 4 && itemId == 222339) { // 祝福されたルームティスの紫イヤリング
+            } else if (itemgrade == 4 && itemId == 222339) { // 祝福されたルームティス パープル イヤリング
                 switch (itemlvl) {
                     case 1:
                         _owner.addMaxMp(10);
@@ -1834,21 +1837,25 @@ public class L1EquipmentSlot {
                         _owner.getAbility().addSp(2);
                         break;
                     case 5:
+                        _owner.getAC().addAc(-1);
                         _owner.addMaxMp(55);
                         _owner.getResistance().addMr(8);
                         _owner.getAbility().addSp(2);
                         break;
                     case 6:
+                        _owner.getAC().addAc(-2);
                         _owner.addMaxMp(70);
                         _owner.getResistance().addMr(10);
                         _owner.getAbility().addSp(3);
                         break;
                     case 7:
+                        _owner.getAC().addAc(-3);
                         _owner.addMaxMp(95);
                         _owner.getResistance().addMr(13);
                         _owner.getAbility().addSp(3);
                         break;
                     case 8:
+                        _owner.getAC().addAc(-4);
                         _owner.addMaxMp(125);
                         _owner.getResistance().addMr(18);
                         _owner.getAbility().addSp(4);
@@ -3893,7 +3900,7 @@ public class L1EquipmentSlot {
                     default:
                         break;
                 }
-            } else if (itemgrade == 4 && itemId == 22230) { // ルームティスの青い光のイヤリング
+            } else if (itemgrade == 4 && itemId == 22230) { // ルームティス ブルー イヤリング
                 switch (itemlvl) {
                     case 5:
                         _owner.getAC().addAc(1);
@@ -3910,7 +3917,7 @@ public class L1EquipmentSlot {
                     default:
                         break;
                 }
-            } else if (itemgrade == 4 && itemId == 222338) { // 祝福されたルームティスの青い光のイヤリング
+            } else if (itemgrade == 4 && itemId == 222338) { // 祝福されたルームティス ブルー イヤリング
                 switch (itemlvl) {
                     case 4:
                         _owner.getAC().addAc(1);
@@ -3930,7 +3937,7 @@ public class L1EquipmentSlot {
                     default:
                         break;
                 }
-            } else if (itemgrade == 4 && itemId == 22231) { // ルームティスの紫イヤリング
+            } else if (itemgrade == 4 && itemId == 22231) { // ルームティス パープル イヤリング
                 switch (itemlvl) {
                     case 1:
                         _owner.addMaxMp(-10);
@@ -3956,16 +3963,19 @@ public class L1EquipmentSlot {
                         _owner.getAbility().addSp(-2);
                         break;
                     case 6:
+                        _owner.getAC().addAc(1);
                         _owner.addMaxMp(-55);
                         _owner.getResistance().addMr(-8);
                         _owner.getAbility().addSp(-2);
                         break;
                     case 7:
+                        _owner.getAC().addAc(2);
                         _owner.addMaxMp(-70);
                         _owner.getResistance().addMr(-10);
                         _owner.getAbility().addSp(-3);
                         break;
                     case 8:
+                        _owner.getAC().addAc(3);
                         _owner.addMaxMp(-95);
                         _owner.getResistance().addMr(-13);
                         _owner.getAbility().addSp(-3);
@@ -3973,7 +3983,7 @@ public class L1EquipmentSlot {
                     default:
                         break;
                 }
-            } else if (itemgrade == 4 && itemId == 222339) { // 祝福されたルームティスの紫イヤリング
+            } else if (itemgrade == 4 && itemId == 222339) { // 祝福されたルームティス パープル イヤリング
                 switch (itemlvl) {
                     case 1:
                         _owner.addMaxMp(-10);
@@ -3994,21 +4004,25 @@ public class L1EquipmentSlot {
                         _owner.getAbility().addSp(-2);
                         break;
                     case 5:
+                        _owner.getAC().addAc(1);
                         _owner.addMaxMp(-55);
                         _owner.getResistance().addMr(-8);
                         _owner.getAbility().addSp(-2);
                         break;
                     case 6:
+                        _owner.getAC().addAc(2);
                         _owner.addMaxMp(-70);
                         _owner.getResistance().addMr(-10);
                         _owner.getAbility().addSp(-3);
                         break;
                     case 7:
+                        _owner.getAC().addAc(3);
                         _owner.addMaxMp(-95);
                         _owner.getResistance().addMr(-13);
                         _owner.getAbility().addSp(-3);
                         break;
                     case 8:
+                        _owner.getAC().addAc(4);
                         _owner.addMaxMp(-125);
                         _owner.getResistance().addMr(-18);
                         _owner.getAbility().addSp(-4);

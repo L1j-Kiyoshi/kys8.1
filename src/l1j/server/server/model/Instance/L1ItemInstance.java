@@ -1201,6 +1201,42 @@ public class L1ItemInstance extends L1Object {
                         os.writeC(0 + op_addAc);
                 }
 
+            /** ルームティス パープル イヤリングのAC表示処理 **/
+            } else if (itemType2 == 2 && itemId == 22231 || itemId == 222339) {
+                os.writeC(2);
+                switch (getEnchantLevel()) {
+                    case 5:
+                        if (itemId == 222339) {
+                            os.writeC(1 + op_addAc);
+                        } else {
+                            os.writeC(0 + op_addAc);
+                        }
+                        break;
+                    case 6:
+                        if (itemId == 222339) {
+                            os.writeC(2 + op_addAc);
+                        } else {
+                            os.writeC(1 + op_addAc);
+                        }
+                        break;
+                    case 7:
+                        if (itemId == 222339) {
+                            os.writeC(3 + op_addAc);
+                        } else {
+                            os.writeC(2 + op_addAc);
+                        }
+                        break;
+                    case 8:
+                        if (itemId == 222339) {
+                            os.writeC(4 + op_addAc);
+                        } else {
+                            os.writeC(3 + op_addAc);
+                        }
+                        break;
+                    default:
+                        os.writeC(0 + op_addAc);
+                }
+
                 /** スナップファーリングACセクションの処理 **/
             } else if (itemType2 == 2 && itemId >= 22224 && itemId <= 22228 || itemId == 222290) {
                 os.writeC(2);
@@ -2365,7 +2401,7 @@ public class L1ItemInstance extends L1Object {
                     default:
                         break;
                 }
-                /** ルームティスの紫色のイヤリングMP増加表示 **/
+                /** ルームティス パープル イヤリングMP増加表示 **/
             } else if (itemType2 == 2 && itemId == 22231 && getEnchantLevel() > 0) {
                 switch (getEnchantLevel()) {
                     case 1:
@@ -2403,7 +2439,7 @@ public class L1ItemInstance extends L1Object {
                     default:
                         break;
                 }
-                /** 祝福されたルームティスの紫色のイヤリングMP増加表示 **/
+                /** 祝福されたルームティス パープル イヤリングMP増加表示 **/
             } else if (itemType2 == 2 && itemId == 222339 && getEnchantLevel() > 0) {
                 switch (getEnchantLevel()) {
                     case 1:
@@ -2677,7 +2713,7 @@ public class L1ItemInstance extends L1Object {
                 os.writeH(getMr() + (getEnchantLevel() - 5));
 
 
-                /** ルームティスの紫色のイヤリング魔表示 **/
+                /** ルームティス パープル イヤリングMR表示 **/
             } else if (itemType2 == 2 && itemId == 22231 && getEnchantLevel() > 0) {
                 switch (getEnchantLevel()) {
                     case 1:
@@ -2715,7 +2751,7 @@ public class L1ItemInstance extends L1Object {
                     default:
                         break;
                 }
-                /** 祝福されたルームティスの紫色のイヤリング魔表示 **/
+                /** 祝福されたルームティス パープル イヤリングMR表示 **/
             } else if (itemType2 == 2 && itemId == 222339 && getEnchantLevel() > 0) {
                 switch (getEnchantLevel()) {
                     case 1:
@@ -2972,7 +3008,7 @@ public class L1ItemInstance extends L1Object {
                     default:
                         break;
                 }
-                /** ルームティスの紫色のイヤリングSP表示 **/
+                /** ルームティス パープル イヤリングSP表示 **/
             } else if (itemType2 == 2 && itemId == 22231 && getEnchantLevel() > 2) {
                 switch (getEnchantLevel()) {
                     case 3:
@@ -3002,7 +3038,7 @@ public class L1ItemInstance extends L1Object {
                     default:
                         break;
                 }
-                /**祝福されたルームティスの紫色のイヤリングSP表示 **/
+                /**祝福されたルームティス パープル イヤリングSP表示 **/
             } else if (itemType2 == 2 && itemId == 222339 && getEnchantLevel() > 2) {
                 switch (getEnchantLevel()) {
                     case 3:
