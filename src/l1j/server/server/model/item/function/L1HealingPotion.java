@@ -218,94 +218,91 @@ public class L1HealingPotion {
         /** 回復の文章 **/
         if (pc.getInventory().checkEquipped(900021)) {
             int upHp = 0;
-            int cnt_enchant = pc.getInventory().getEnchantCount(900021);
+            int cnt_enchant = 0;
+
+            for (L1ItemInstance itemx : pc.getInventory().getItems()) {
+                if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
+                    if (itemx.getItemId() == 900021) {
+                        cnt_enchant = itemx.getEnchantLevel();
+                    }
+                }
+            }
             upHp = 1 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
         }
         /** 腕力の文章 **/
         if (pc.getInventory().checkEquipped(222352)) {
             int upHp = 0;
-            int cnt_enchant = pc.getInventory().getEnchantCount(222352);
+            int cnt_enchant = 0;
+
+            for (L1ItemInstance itemx : pc.getInventory().getItems()) {
+                if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
+                    if (itemx.getItemId() == 222352) {
+                        cnt_enchant = itemx.getEnchantLevel();
+                    }
+                }
+            }
             upHp = 1 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
         }
-        /** 機敏の文章 **/
+        /** アジャイルの文章 **/
         if (pc.getInventory().checkEquipped(222353)) {
             int upHp = 0;
-            int cnt_enchant = pc.getInventory().getEnchantCount(222353);
+            int cnt_enchant = 0;
+
+            for (L1ItemInstance itemx : pc.getInventory().getItems()) {
+                if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
+                    if (itemx.getItemId() == 222353) {
+                        cnt_enchant = itemx.getEnchantLevel();
+                    }
+                }
+            }
             upHp = 1 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
         }
         /** 知識の文章 **/
         if (pc.getInventory().checkEquipped(222354)) {
             int upHp = 0;
-            int cnt_enchant = pc.getInventory().getEnchantCount(222354);
+            int cnt_enchant = 0;
+
+            for (L1ItemInstance itemx : pc.getInventory().getItems()) {
+                if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
+                    if (itemx.getItemId() == 222354) {
+                        cnt_enchant = itemx.getEnchantLevel();
+                    }
+                }
+            }
             upHp = 1 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
         }
-        /** ルームティス ブルー イヤリング **/
-        if (pc.getInventory().checkEquipped(22230)) {
+
+        if (pc.getInventory().checkEquipped(22230)) { //ルームティスブルー
             int upHp = 0;
-            int cnt_enchant = pc.getInventory().getEnchantCount(22230);
-            switch (cnt_enchant) {
-            case 0:
-                upHp = 2;
-                break;
-            case 1:
-                upHp = 6;
-                break;
-            case 2:
-                upHp = 8;
-                break;
-            case 3:
-                upHp = 10;
-                break;
-            case 4:
-                upHp = 12;
-                break;
-            case 5:
-                upHp = 14;
-                break;
-            case 6:
-                upHp = 16;
-                break;
-            case 7:
-                upHp = 18;
-                break;
-            case 8:
-                upHp = 20;
-                break;
-            default:
-                break;
+            int cnt_enchant = 0;
+
+            for (L1ItemInstance itemx : pc.getInventory().getItems()) {
+                if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
+                    if (itemx.getItemId() == 22230) {
+                        cnt_enchant = itemx.getEnchantLevel();
+                    }
+                }
             }
+
+            upHp = 2 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
         }
-        /** 祝福されたルームティス ブルー イヤリング **/
         if (pc.getInventory().checkEquipped(222338)) {
             int upHp = 0;
-            int cnt_enchant = pc.getInventory().getEnchantCount(222338);
-            switch (cnt_enchant) {
-            case 3:
-                upHp = 12;
-                break;
-            case 4:
-                upHp = 14;
-                break;
-            case 5:
-                upHp = 16;
-                break;
-            case 6:
-                upHp = 18;
-                break;
-            case 7:
-                upHp = 20;
-                break;
-            case 8:
-                upHp = 22;
-                break;
-            default:
-                break;
+            int cnt_enchant = 0;
+
+            for (L1ItemInstance itemx : pc.getInventory().getItems()) {
+                if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
+                    if (itemx.getItemId() == 222338) {
+                        cnt_enchant = itemx.getEnchantLevel();
+                    }
+                }
             }
+            upHp = 2 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
         }
 
