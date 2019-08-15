@@ -200,7 +200,7 @@ public class L1HealingPotion {
         }
         healHp *= (double) pc.getPotionRecoveryRatePct() / 100 + 1;
         healHp *= (double) CalcStat.calcHprPotion(pc.getAbility().getTotalCon()) / 100 + 1;
-        if (pc.hasSkillEffect(POLLUTE_WATER) || pc.hasSkillEffect(L1SkillId.DESPERADO)) { // デスペラード、ポールルートウォーターポーション回復量半減
+        if (pc.hasSkillEffect(POLLUTE_WATER) || pc.hasSkillEffect(L1SkillId.DESPERADO)) { // デスペラード、ポルートウォーターポーション回復量半減
             healHp *= 0.3;
         }
         if (pc.hasSkillEffect(PAP_DEATH_PORTION)) { // デスポーション
@@ -215,11 +215,13 @@ public class L1HealingPotion {
                 npc.broadcastPacket(new S_SkillSound(cha.getId(), 7781));
             }
         }
+
+        int upHp = 0;  //ポーション追加回復%
+        int upHp2 = 0; //ポーション追加回復絶対値
+        int cnt_enchant = 0;
+
         /** 回復の文章 **/
         if (pc.getInventory().checkEquipped(900021)) {
-            int upHp = 0;
-            int cnt_enchant = 0;
-
             for (L1ItemInstance itemx : pc.getInventory().getItems()) {
                 if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
                     if (itemx.getItemId() == 900021) {
@@ -227,14 +229,58 @@ public class L1HealingPotion {
                     }
                 }
             }
-            upHp = 1 * (cnt_enchant + 1);
-            healHp = healHp * (upHp + 100) / 100 + upHp;
+            switch (cnt_enchant) {
+            case 0:
+                upHp += 2;
+                upHp2 += 2;
+                break;
+            case 1:
+                upHp += 4;
+                upHp2 += 4;
+                break;
+            case 2:
+                upHp += 6;
+                upHp2 += 6;
+                break;
+            case 3:
+                upHp += 8;
+                upHp2 += 8;
+                break;
+            case 4:
+                upHp += 10;
+                upHp2 += 10;
+                break;
+            case 5:
+                upHp += 12;
+                upHp2 += 12;
+                break;
+            case 6:
+                upHp += 14;
+                upHp2 += 14;
+                break;
+            case 7:
+                upHp += 16;
+                upHp2 += 16;
+                break;
+            case 8:
+                upHp += 18;
+                upHp2 += 18;
+                break;
+            case 9:
+                upHp += 20;
+                upHp2 += 20;
+                break;
+            case 10:
+                upHp += 22;
+                upHp2 += 22;
+                break;
+            default:
+                break;
+            }
         }
+
         /** 腕力の文章 **/
         if (pc.getInventory().checkEquipped(222352)) {
-            int upHp = 0;
-            int cnt_enchant = 0;
-
             for (L1ItemInstance itemx : pc.getInventory().getItems()) {
                 if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
                     if (itemx.getItemId() == 222352) {
@@ -242,14 +288,54 @@ public class L1HealingPotion {
                     }
                 }
             }
-            upHp = 1 * (cnt_enchant + 1);
-            healHp = healHp * (upHp + 100) / 100 + upHp;
+            switch (cnt_enchant) {
+            case 1:
+                upHp += 2;
+                upHp2 += 2;
+                break;
+            case 2:
+                upHp += 4;
+                upHp2 += 4;
+                break;
+            case 3:
+                upHp += 6;
+                upHp2 += 6;
+                break;
+            case 4:
+                upHp += 8;
+                upHp2 += 8;
+                break;
+            case 5:
+                upHp += 9;
+                upHp2 += 9;
+                break;
+            case 6:
+                upHp += 10;
+                upHp2 += 10;
+                break;
+            case 7:
+                upHp += 11;
+                upHp2 += 11;
+                break;
+            case 8:
+                upHp += 12;
+                upHp2 += 12;
+                break;
+            case 9:
+                upHp += 13;
+                upHp2 += 13;
+                break;
+            case 10:
+                upHp += 14;
+                upHp2 += 14;
+                break;
+            default:
+                break;
+            }
         }
+
         /** 機敏の文章 **/
         if (pc.getInventory().checkEquipped(222353)) {
-            int upHp = 0;
-            int cnt_enchant = 0;
-
             for (L1ItemInstance itemx : pc.getInventory().getItems()) {
                 if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
                     if (itemx.getItemId() == 222353) {
@@ -257,14 +343,54 @@ public class L1HealingPotion {
                     }
                 }
             }
-            upHp = 1 * (cnt_enchant + 1);
-            healHp = healHp * (upHp + 100) / 100 + upHp;
+            switch (cnt_enchant) {
+            case 1:
+                upHp += 2;
+                upHp2 += 2;
+                break;
+            case 2:
+                upHp += 4;
+                upHp2 += 4;
+                break;
+            case 3:
+                upHp += 6;
+                upHp2 += 6;
+                break;
+            case 4:
+                upHp += 8;
+                upHp2 += 8;
+                break;
+            case 5:
+                upHp += 9;
+                upHp2 += 9;
+                break;
+            case 6:
+                upHp += 10;
+                upHp2 += 10;
+                break;
+            case 7:
+                upHp += 11;
+                upHp2 += 11;
+                break;
+            case 8:
+                upHp += 12;
+                upHp2 += 12;
+                break;
+            case 9:
+                upHp += 13;
+                upHp2 += 13;
+                break;
+            case 10:
+                upHp += 14;
+                upHp2 += 14;
+                break;
+            default:
+                break;
+            }
         }
+
         /** 知識の文章 **/
         if (pc.getInventory().checkEquipped(222354)) {
-            int upHp = 0;
-            int cnt_enchant = 0;
-
             for (L1ItemInstance itemx : pc.getInventory().getItems()) {
                 if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
                     if (itemx.getItemId() == 222354) {
@@ -272,14 +398,54 @@ public class L1HealingPotion {
                     }
                 }
             }
-            upHp = 1 * (cnt_enchant + 1);
-            healHp = healHp * (upHp + 100) / 100 + upHp;
+            switch (cnt_enchant) {
+            case 1:
+                upHp += 2;
+                upHp2 += 2;
+                break;
+            case 2:
+                upHp += 4;
+                upHp2 += 4;
+                break;
+            case 3:
+                upHp += 6;
+                upHp2 += 6;
+                break;
+            case 4:
+                upHp += 8;
+                upHp2 += 8;
+                break;
+            case 5:
+                upHp += 9;
+                upHp2 += 9;
+                break;
+            case 6:
+                upHp += 10;
+                upHp2 += 10;
+                break;
+            case 7:
+                upHp += 11;
+                upHp2 += 11;
+                break;
+            case 8:
+                upHp += 12;
+                upHp2 += 12;
+                break;
+            case 9:
+                upHp += 13;
+                upHp2 += 13;
+                break;
+            case 10:
+                upHp += 14;
+                upHp2 += 14;
+                break;
+            default:
+                break;
+            }
         }
 
-        if (pc.getInventory().checkEquipped(22230)) { //ルームティスブルー
-            int upHp = 0;
-            int cnt_enchant = 0;
-
+        /** ルームティス ブルー イヤリング **/
+        if (pc.getInventory().checkEquipped(22230)) {
             for (L1ItemInstance itemx : pc.getInventory().getItems()) {
                 if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
                     if (itemx.getItemId() == 22230) {
@@ -289,41 +455,48 @@ public class L1HealingPotion {
             }
             switch (cnt_enchant) {
             case 0:
-                upHp = 2;
+                upHp += 2;
+                upHp2 += 2;
                 break;
             case 1:
-                upHp = 6;
+                upHp += 6;
+                upHp2 += 6;
                 break;
             case 2:
-                upHp = 8;
+                upHp += 8;
+                upHp2 += 8;
                 break;
             case 3:
-                upHp = 10;
+                upHp += 10;
+                upHp2 += 10;
                 break;
             case 4:
-                upHp = 12;
+                upHp += 12;
+                upHp2 += 12;
                 break;
             case 5:
-                upHp = 14;
+                upHp += 14;
+                upHp2 += 14;
                 break;
             case 6:
-                upHp = 16;
+                upHp += 16;
+                upHp2 += 16;
                 break;
             case 7:
-                upHp = 18;
+                upHp += 18;
+                upHp2 += 18;
                 break;
             case 8:
-                upHp = 20;
+                upHp += 20;
+                upHp2 += 20;
                 break;
             default:
                 break;
             }
-            healHp = healHp * (upHp + 100) / 100 + upHp;
         }
-        if (pc.getInventory().checkEquipped(222338)) {
-            int upHp = 0;
-            int cnt_enchant = 0;
 
+        /** 祝福されたルームティス ブルー イヤリング **/
+        if (pc.getInventory().checkEquipped(222338)) {
             for (L1ItemInstance itemx : pc.getInventory().getItems()) {
                 if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
                     if (itemx.getItemId() == 222338) {
@@ -333,31 +506,71 @@ public class L1HealingPotion {
             }
             switch (cnt_enchant) {
             case 3:
-                upHp = 12;
+                upHp += 12;
+                upHp2 += 12;
                 break;
             case 4:
-                upHp = 14;
+                upHp += 14;
+                upHp2 += 14;
                 break;
             case 5:
-                upHp = 16;
+                upHp += 16;
+                upHp2 += 16;
                 break;
             case 6:
-                upHp = 18;
+                upHp += 18;
+                upHp2 += 18;
                 break;
             case 7:
-                upHp = 20;
+                upHp += 20;
+                upHp2 += 20;
                 break;
             case 8:
-                upHp = 22;
+                upHp += 22;
+                upHp2 += 22;
                 break;
             default:
                 break;
             }
-            healHp = healHp * (upHp + 100) / 100 + upHp;
         }
 
+//        // アクセサリーエンチャント イアリング / アミュレット
+//        cnt_enchant = 0;
+//        for (L1ItemInstance itemx : pc.getInventory().getItems()) {
+//            if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
+//                if (itemx.getItem().getAccessoryProcess() == 8 || itemx.getItem().getAccessoryProcess() == 12) {
+//                    cnt_enchant = itemx.getEnchantLevel();
+//                }
+//            }
+//        }
+//        switch (cnt_enchant) {
+//        case 5:
+//            upHp += 2;
+//            break;
+//        case 6:
+//            upHp += 4;
+//            upHp2 += 2;
+//            break;
+//        case 7:
+//            upHp += 6;
+//            upHp2 += 4;
+//            break;
+//        case 8:
+//            upHp += 8;
+//            upHp2 += 6;
+//            break;
+//        case 9:
+//            upHp += 9;
+//            upHp2 += 7;
+//            break;
+//        default:
+//            break;
+//        }
+
+        healHp = healHp * (upHp + 100) / 100 + upHp2;
+
         pc.setCurrentHp(pc.getCurrentHp() + (int) healHp);
-        // System.out.println("ポーション回復量： "+ healHp）;
+        // System.out.println("ポーション回復量：" + healHp);
         if (getRemove() > 0) {
             if (chargeCount > 0) {
                 item.setChargeCount(chargeCount - getRemove());
@@ -370,7 +583,7 @@ public class L1HealingPotion {
         return true;
     }
 
-    private void cancelAbsoluteBarrier(L1PcInstance pc) { // アブ小ガルトバリアの解除
+    private void cancelAbsoluteBarrier(L1PcInstance pc) { // アブソルートバリアの解除
         if (pc.hasSkillEffect(L1SkillId.ABSOLUTE_BARRIER)) {
             pc.killSkillEffectTimer(L1SkillId.ABSOLUTE_BARRIER);
             pc.sendPackets(new S_PacketBox(S_PacketBox.UNLIMITED_ICON1, 43, false));
