@@ -245,7 +245,7 @@ public class L1HealingPotion {
             upHp = 1 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
         }
-        /** アジャイルの文章 **/
+        /** 機敏の文章 **/
         if (pc.getInventory().checkEquipped(222353)) {
             int upHp = 0;
             int cnt_enchant = 0;
@@ -318,7 +318,6 @@ public class L1HealingPotion {
             default:
                 break;
             }
-            upHp = 2 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
         }
         if (pc.getInventory().checkEquipped(222338)) {
@@ -354,7 +353,6 @@ public class L1HealingPotion {
             default:
                 break;
             }
-            upHp = 2 * (cnt_enchant + 1);
             healHp = healHp * (upHp + 100) / 100 + upHp;
         }
 
