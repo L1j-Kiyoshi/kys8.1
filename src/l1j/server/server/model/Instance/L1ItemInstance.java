@@ -1982,7 +1982,20 @@ public class L1ItemInstance extends L1Object {
                 os.writeC(24);
                 os.writeC(getItem().getBowHitRate());
             }
-            if (getItem().getBowDmgRate() != 0) {
+
+            /** 古代弓射手のガーダー 遠距離ダメージ **/
+            if (itemId == 22000 && getEnchantLevel() > 4) {
+                if (getEnchantLevel() == 5 || getEnchantLevel() == 6) {
+                    os.writeC(35);
+                    os.writeC((getItem().getBowDmgRate() + 1));
+                } else if (getEnchantLevel() == 7 || getEnchantLevel() == 8) {
+                    os.writeC(35);
+                    os.writeC((getItem().getBowDmgRate() + 2));
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(35);
+                    os.writeC((getItem().getBowDmgRate() + 3));
+                }
+            } else if (getItem().getBowDmgRate() != 0) {
                 os.writeC(35);
                 os.writeC(getItem().getBowDmgRate());
             }
@@ -3917,27 +3930,6 @@ public class L1ItemInstance extends L1Object {
                 }
             }
 
-            /** 古代名弓のがより遠距離ダメージ **/
-            if (itemId == 22000 && getEnchantLevel() > 4) {
-                switch (getEnchantLevel()) {
-                    case 5:
-                    case 6:
-                        os.writeC(39);
-                        os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 0));
-                        break;
-                    case 7:
-                    case 8:
-                        os.writeC(39);
-                        os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 1));
-                        break;
-                    case 9:
-                        os.writeC(39);
-                        os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 2));
-                        break;
-                    default:
-                        break;
-                }
-            }
             /** マミーロードクラウン遠距離ダメージ **/
             if (itemId == 20017 && getEnchantLevel() > 6) {
                 switch (getEnchantLevel()) {

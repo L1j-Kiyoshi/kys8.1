@@ -849,19 +849,19 @@ public class L1EquipmentSlot {
             }
         }
 
-        /** 古代名弓のガーダー **/
+        /** 古代弓射手のガーダー **/
         if (itemId == 22000) {
             switch (itemlvl) {
                 case 5:
                 case 6:
-                    _owner.addBowHitup(1);
+                    _owner.addBowDmgup(1);
                     break;
                 case 7:
                 case 8:
-                    _owner.addBowHitup(2);
+                    _owner.addBowDmgup(2);
                     break;
                 case 9:
-                    _owner.addBowHitup(3);
+                    _owner.addBowDmgup(3);
                     break;
                 default:
                     break;
@@ -3075,19 +3075,19 @@ public class L1EquipmentSlot {
             }
         }
 
-        /** 古代名弓のガーダー **/
+        /** 古代弓射手のガーダー **/
         if (itemId == 22000) {
             switch (itemlvl) {
                 case 5:
                 case 6:
-                    _owner.addBowHitup(-1);
+                    _owner.addBowDmgup(-1);
                     break;
                 case 7:
                 case 8:
-                    _owner.addBowHitup(-1);
+                    _owner.addBowDmgup(-2);
                     break;
                 case 9:
-                    _owner.addBowHitup(-1);
+                    _owner.addBowDmgup(-3);
                     break;
                 default:
                     break;
