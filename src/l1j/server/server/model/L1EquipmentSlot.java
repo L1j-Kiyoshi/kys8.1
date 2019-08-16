@@ -149,6 +149,9 @@ public class L1EquipmentSlot {
         if (armor.getItem().getDmgRate() != 0) {
             _owner.addDmgup(armor.getItem().getDmgRate());
         }
+        if (armor.getItem().getBowDmgRate() != 0) {
+            _owner.addBowDmgup(armor.getItem().getBowDmgRate());
+        }
         if (itemtype >= 8 && itemtype <= 12) {
             _owner.getAC().addAc(item.get_ac() - armor.getAcByMagic() + armor.get_durability());
             _owner.sendPackets(new S_OwnCharAttrDef(_owner));
@@ -2429,6 +2432,9 @@ public class L1EquipmentSlot {
         int itemgrade = armor.getItem().getGrade();
         if (armor.getItem().getDmgRate() != 0) {
             _owner.addDmgup(-armor.getItem().getDmgRate());
+        }
+        if (armor.getItem().getBowDmgRate() != 0) {
+            _owner.addBowDmgup(-armor.getItem().getBowDmgRate());
         }
         if (itemtype >= 8 && itemtype <= 12) {
             _owner.getAC().addAc(-(item.get_ac() - armor.getAcByMagic() + armor.get_durability()));
