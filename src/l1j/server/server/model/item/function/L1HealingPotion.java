@@ -534,41 +534,41 @@ public class L1HealingPotion {
             }
         }
 
-//        // アクセサリーエンチャント イアリング / アミュレット
-//        cnt_enchant = 0;
-//        for (L1ItemInstance itemx : pc.getInventory().getItems()) {
-//            if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
-//                if (itemx.getItem().getAccessoryProcess() == 8 || itemx.getItem().getAccessoryProcess() == 12) {
-//                    cnt_enchant = itemx.getEnchantLevel();
-//                }
-//            }
-//        }
-//        switch (cnt_enchant) {
-//        case 5:
-//            upHp += 2;
-//            break;
-//        case 6:
-//            upHp += 4;
-//            upHp2 += 2;
-//            break;
-//        case 7:
-//            upHp += 6;
-//            upHp2 += 4;
-//            break;
-//        case 8:
-//            upHp += 8;
-//            upHp2 += 6;
-//            break;
-//        case 9:
-//            upHp += 9;
-//            upHp2 += 7;
-//            break;
-//        default:
-//            break;
-//        }
-
+        // アクセサリーエンチャント イアリング / アミュレット
+        cnt_enchant = 0;
+        if (pc.getInventory().checkEquipped(20260) || pc.getInventory().checkEquipped(20459)) {
+        	for (L1ItemInstance itemx : pc.getInventory().getItems()) {
+        		if (itemx != null && itemx.getItem().getType2() == 2 && itemx.isEquipped()) {
+        			if (itemx.getItemId() == 20260 || itemx.getItemId() == 20459) {
+        				cnt_enchant = itemx.getEnchantLevel();
+        				switch (cnt_enchant) {
+        		        case 5:
+        		            upHp += 2;
+        		            break;
+        		        case 6:
+        		            upHp += 4;
+        		            upHp2 += 2;
+        		            break;
+        		        case 7:
+        		            upHp += 6;
+        		            upHp2 += 4;
+        		            break;
+        		        case 8:
+        		            upHp += 8;
+        		            upHp2 += 6;
+        		            break;
+        		        case 9:
+        		            upHp += 9;
+        		            upHp2 += 7;
+        		            break;
+        		        default:
+        		            break;
+        		        }
+        			}
+        		}
+        	}
+        }
         healHp = healHp * (upHp + 100) / 100 + upHp2;
-
         pc.setCurrentHp(pc.getCurrentHp() + (int) healHp);
         // System.out.println("ポーション回復量：" + healHp);
         if (getRemove() > 0) {
