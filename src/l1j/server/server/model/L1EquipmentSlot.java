@@ -1077,30 +1077,26 @@ public class L1EquipmentSlot {
                         _owner.addMaxHp(30);
                         break;
                     case 5:
-                        _owner.setAccessoryHeal(1);
-                        _owner.addMaxHp(40);
-                        break;
-                    case 6:
-                        _owner.setAccessoryHeal(2);
                         _owner.addMaxHp(40);
                         _owner.getAC().addAc(-1);
                         break;
-                    case 7:
-                        _owner.setAccessoryHeal(3);
-                        _owner.addMaxHp(50);
+                    case 6:
+                        _owner.addMaxHp(40);
                         _owner.getAC().addAc(-2);
+                        break;
+                    case 7:
+                        _owner.addMaxHp(50);
+                        _owner.getAC().addAc(-3);
                         _owner.getResistance().addStun(2);
                         break;
                     case 8:
-                        _owner.setAccessoryHeal(4);
                         _owner.addMaxHp(50);
-                        _owner.getAC().addAc(-3);
+                        _owner.getAC().addAc(-4);
                         _owner.getResistance().addStun(3);
                         break;
                     case 9:
-                        _owner.setAccessoryHeal(5);
                         _owner.addMaxHp(60);
-                        _owner.getAC().addAc(-4);
+                        _owner.getAC().addAc(-5);
                         _owner.getResistance().addStun(4);
                         break;
                 }
@@ -3300,30 +3296,26 @@ public class L1EquipmentSlot {
                         _owner.addMaxHp(-30);
                         break;
                     case 5:
-                        _owner.setAccessoryHeal(-1);
-                        _owner.addMaxHp(-40);
-                        break;
-                    case 6:
-                        _owner.setAccessoryHeal(-2);
                         _owner.addMaxHp(-40);
                         _owner.getAC().addAc(1);
                         break;
-                    case 7:
-                        _owner.setAccessoryHeal(-3);
-                        _owner.addMaxHp(-50);
+                    case 6:
+                        _owner.addMaxHp(-40);
                         _owner.getAC().addAc(2);
+                        break;
+                    case 7:
+                        _owner.addMaxHp(-50);
+                        _owner.getAC().addAc(3);
                         _owner.getResistance().addStun(-2);
                         break;
                     case 8:
-                        _owner.setAccessoryHeal(-4);
                         _owner.addMaxHp(-50);
-                        _owner.getAC().addAc(3);
+                        _owner.getAC().addAc(4);
                         _owner.getResistance().addStun(-3);
                         break;
                     case 9:
-                        _owner.setAccessoryHeal(-5);
                         _owner.addMaxHp(-60);
-                        _owner.getAC().addAc(4);
+                        _owner.getAC().addAc(5);
                         _owner.getResistance().addStun(-4);
                         break;
                 }

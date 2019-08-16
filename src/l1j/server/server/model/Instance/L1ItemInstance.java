@@ -1436,6 +1436,29 @@ public class L1ItemInstance extends L1Object {
                         os.writeC(0);
                         break;
                 }
+                /** イヤリング / ネックレス ACセクションの処理 **/
+            } else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12 && getEnchantLevel() > 5) {
+                os.writeC(2);
+                switch (getEnchantLevel()) {
+                    case 5:
+                        os.writeC(1);
+                        break;
+                    case 6:
+                        os.writeC(2);
+                        break;
+                    case 7:
+                        os.writeC(3);
+                        break;
+                    case 8:
+                        os.writeC(4);
+                        break;
+                    case 9:
+                        os.writeC(5);
+                        break;
+                    default:
+                        os.writeC(0);
+                        break;
+                }
             }
 
 
@@ -2231,7 +2254,7 @@ public class L1ItemInstance extends L1Object {
                 int b_roomtisRingHPUp = (getEnchantLevel() * 10) + 10;
                 os.writeC(14);
                 os.writeH(getItem().get_addhp() + b_roomtisRingHPUp);
-                /** 祝福されたルームティス レッド イヤリングHP増加表示**/
+                /** 祝福されたルームティス レッド イヤリングHP増加表示 **/
             } else if (itemType2 == 2 && itemId == 222337 && getEnchantLevel() > 2) {
                 switch (getEnchantLevel()) {
                     case 3:
@@ -2281,7 +2304,7 @@ public class L1ItemInstance extends L1Object {
                     default:
                         break;
                 }
-                /** リングピアスネックレスエンチャントHP増加表示**/
+                /** イヤリング / アミュレット / リング HP増加表示 **/
             } else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() != 10 && getEnchantLevel() > 0) {
                 switch (getEnchantLevel()) {
                     case 1:
@@ -2607,11 +2630,42 @@ public class L1ItemInstance extends L1Object {
                     break;
                 }
             }
-            /**ネックレス5以上ポーション回復量**/
+
+            /** イヤリング / ネックレス ポーション回復量 **/
             if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12) {
-                if (getEnchantLevel() > 4) {
+                switch (getEnchantLevel()) {
+                case 5:
                     os.writeC(39);
-                    os.writeS("ポーション回復量" + ((getEnchantLevel() - 4) * 2) + "% +0");
+                    os.writeS("ポーション回復量 2%");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 2%");
+                    break;
+                case 6:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 4% +2");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 4%");
+                    break;
+                case 7:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 6% +4");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 6%");
+                    break;
+                case 8:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 8% +6");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 8%");
+                    break;
+                case 9:
+                    os.writeC(39);
+                    os.writeS("ポーション回復量 9% +7");
+                    os.writeC(39);
+                    os.writeS("回復悪化防御 9%");
+                    break;
+                default:
+                    break;
                 }
             }
 
@@ -3266,29 +3320,6 @@ public class L1ItemInstance extends L1Object {
                     case 9:
                         os.writeC(39);
                         os.writeS("ダメージリダクション+" + (getItem().getDamageReduction() + 2));
-                        break;
-                    default:
-                        break;
-                }
-            }
-            /** イヤリング、ネックレス+ 6からACセクションの処理**/
-            if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12 && getEnchantLevel() > 5) {
-                switch (getEnchantLevel()) {
-                    case 6:
-                        os.writeC(39);
-                        os.writeS("AC +" + 1);
-                        break;
-                    case 7:
-                        os.writeC(39);
-                        os.writeS("AC +" + 2);
-                        break;
-                    case 8:
-                        os.writeC(39);
-                        os.writeS("AC +" + 3);
-                        break;
-                    case 9:
-                        os.writeC(39);
-                        os.writeS("AC +" + 4);
                         break;
                     default:
                         break;
@@ -4297,7 +4328,7 @@ public class L1ItemInstance extends L1Object {
                 os.writeC(5);
                 os.writeH(getItem().get_regist_stun() + 9);
 
-                /** イヤリング、ネックレス+7からスタン耐性 **/
+                /** イヤリング / ネックレス スタン耐性 **/
             } else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() == 8 || getItem().getAccessoryProcess() == 12 && getEnchantLevel() > 6) {
                 switch (getEnchantLevel()) {
                     case 7:
