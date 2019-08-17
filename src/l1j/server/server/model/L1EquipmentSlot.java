@@ -738,41 +738,25 @@ public class L1EquipmentSlot {
             }
         }
 
-        /** ウィザードのがより **/
+        /** ウィザードのガーダー **/
         if (itemId == 22255) {
-            switch (itemlvl) {
-                case 5:
-                case 6:
-                    _owner.getAbility().addSp(1);
-                    break;
-                case 7:
-                case 8:
-                    _owner.getAbility().addSp(2);
-                    break;
-                case 9:
-                    _owner.getAbility().addSp(3);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5 || itemlvl == 6) {
+                _owner.getAbility().addSp(1);
+            } else if (itemlvl == 7 || itemlvl == 8) {
+                _owner.getAbility().addSp(2);
+            } else if (itemlvl >= 9) {
+                _owner.getAbility().addSp(3);
             }
         }
 
         /** 体力のガーダー **/
         if (itemId == 22256) {
-            switch (itemlvl) {
-                case 5:
-                case 6:
-                    _owner.addMaxHp(25);
-                    break;
-                case 7:
-                case 8:
-                    _owner.addMaxHp(50);
-                    break;
-                case 9:
-                    _owner.addMaxHp(75);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5 || itemlvl == 6) {
+                _owner.addMaxHp(25);
+            } else if (itemlvl == 7 || itemlvl == 8) {
+                _owner.addMaxHp(50);
+            } else if (itemlvl >= 9) {
+                _owner.addMaxHp(75);
             }
         }
 
@@ -835,41 +819,26 @@ public class L1EquipmentSlot {
 
         /** 古代闘士のガーダー **/
         if (itemId == 22003) {
-            switch (itemlvl) {
-                case 5:
-                case 6:
-                    _owner.addDmgup(1);
-                    break;
-                case 7:
-                case 8:
-                    _owner.addDmgup(2);
-                    break;
-                case 9:
-                    _owner.addDmgup(3);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5 || itemlvl == 6) {
+                _owner.addDmgup(1);
+            } else if (itemlvl == 7 || itemlvl == 8) {
+                _owner.addDmgup(2);
+            } else if (itemlvl >= 9) {
+                _owner.addDmgup(3);
             }
         }
 
         /** 古代弓射手のガーダー **/
         if (itemId == 22000) {
-            switch (itemlvl) {
-                case 5:
-                case 6:
-                    _owner.addBowDmgup(1);
-                    break;
-                case 7:
-                case 8:
-                    _owner.addBowDmgup(2);
-                    break;
-                case 9:
-                    _owner.addBowDmgup(3);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5 || itemlvl == 6) {
+                _owner.addBowDmgup(1);
+            } else if (itemlvl == 7 || itemlvl == 8) {
+                _owner.addBowDmgup(2);
+            } else if (itemlvl >= 9) {
+                _owner.addBowDmgup(3);
             }
         }
+
         /** マミーロードクラウン **/
         if (itemId == 20017) {
             switch (itemlvl) {
@@ -886,24 +855,18 @@ public class L1EquipmentSlot {
                     break;
             }
         }
+
         /**守護のガーダー **/
         if (itemId == 22254) {
-            switch (itemlvl) {
-                case 5:
-                case 6:
-                    _owner.addDamageReductionByArmor(1);
-                    break;
-                case 7:
-                case 8:
-                    _owner.addDamageReductionByArmor(2);
-                    break;
-                case 9:
-                    _owner.addDamageReductionByArmor(3);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5 || itemlvl == 6) {
+                _owner.addDamageReductionByArmor(1);
+            } else if (itemlvl == 7 || itemlvl == 8) {
+                _owner.addDamageReductionByArmor(2);
+            } else if (itemlvl >= 9) {
+                _owner.addDamageReductionByArmor(3);
             }
         }
+
         /** アンタラス グランド シリーズ **/
         if (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199) {
             switch (itemlvl) {
@@ -2968,22 +2931,14 @@ public class L1EquipmentSlot {
             }
         }
 
-        /** ウィザードのがより **/
+        /** ウィザードのガーダー **/
         if (itemId == 22255) {
-            switch (itemlvl) {
-                case 5:
-                case 6:
-                    _owner.getAbility().addSp(-1);
-                    break;
-                case 7:
-                case 8:
-                    _owner.getAbility().addSp(-2);
-                    break;
-                case 9:
-                    _owner.getAbility().addSp(-3);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5 || itemlvl == 6) {
+                _owner.getAbility().addSp(-1);
+            } else if (itemlvl == 7 || itemlvl == 8) {
+                _owner.getAbility().addSp(-2);
+            } else if (itemlvl >= 9) {
+                _owner.getAbility().addSp(-3);
             }
         }
 
@@ -3064,41 +3019,26 @@ public class L1EquipmentSlot {
 
         /** 古代闘士のガーダー **/
         if (itemId == 22003) {
-            switch (itemlvl) {
-                case 5:
-                case 6:
-                    _owner.addDmgup(-1);
-                    break;
-                case 7:
-                case 8:
-                    _owner.addDmgup(-2);
-                    break;
-                case 9:
-                    _owner.addDmgup(-3);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5 || itemlvl == 6) {
+                _owner.addDmgup(-1);
+            } else if (itemlvl == 7 || itemlvl == 8) {
+                _owner.addDmgup(-2);
+            } else if (itemlvl >= 9) {
+                _owner.addDmgup(-3);
             }
         }
 
         /** 古代弓射手のガーダー **/
         if (itemId == 22000) {
-            switch (itemlvl) {
-                case 5:
-                case 6:
-                    _owner.addBowDmgup(-1);
-                    break;
-                case 7:
-                case 8:
-                    _owner.addBowDmgup(-2);
-                    break;
-                case 9:
-                    _owner.addBowDmgup(-3);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5 || itemlvl == 6) {
+                _owner.addBowDmgup(-1);
+            } else if (itemlvl == 7 || itemlvl == 8) {
+                _owner.addBowDmgup(-2);
+            } else if (itemlvl >= 9) {
+                _owner.addBowDmgup(-3);
             }
         }
+
         /** マミーロードクラウン **/
         if (itemId == 20017) {
             switch (itemlvl) {
@@ -3115,24 +3055,18 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        /** 守護のガーダー **/
+
+        /**守護のガーダー **/
         if (itemId == 22254) {
-            switch (itemlvl) {
-                case 5:
-                case 6:
-                    _owner.addDamageReductionByArmor(-1);
-                    break;
-                case 7:
-                case 8:
-                    _owner.addDamageReductionByArmor(-2);
-                    break;
-                case 9:
-                    _owner.addDamageReductionByArmor(-3);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5 || itemlvl == 6) {
+                _owner.addDamageReductionByArmor(-1);
+            } else if (itemlvl == 7 || itemlvl == 8) {
+                _owner.addDamageReductionByArmor(-2);
+            } else if (itemlvl >= 9) {
+                _owner.addDamageReductionByArmor(-3);
             }
         }
+
         /** アンタラス グランド シリーズ **/
         if (itemId == 22196 || itemId == 22197 || itemId == 22198 || itemId == 22199) {
             switch (itemlvl) {

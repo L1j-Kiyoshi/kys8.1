@@ -494,10 +494,10 @@ public class L1ItemInstance extends L1Object {
         }
         /*
          * if(getItem().getType2() ==1 &&getAttrEnchantLevel()>0){
-		 * switch(getAttrEnchantLevel()){ case 1: name.append("$6115"); break;
-		 * case 2: name.append("$6116"); break; case 3: name.append("$6117");
-		 * break; } }
-		 */
+         * switch(getAttrEnchantLevel()){ case 1: name.append("$6115"); break;
+         * case 2: name.append("$6116"); break; case 3: name.append("$6117");
+         * break; } }
+         */
         if (getItem().getType2() == 0 && getItem().getType() == 2) { // light
             if (isNowLighting()) {
                 name.append(" ($10)");
@@ -695,13 +695,13 @@ public class L1ItemInstance extends L1Object {
         int itemId = getItemId();
         BinaryOutputStream os = new BinaryOutputStream();
         /*if(getAttrEnchantLevel()==3){
-		//	20 28 24 39 29
-			os.writeC(0x20);
-			os.writeC(0x28);
-			os.writeC(0x24);
-			os.writeC(0x39);
-			os.writeC(0x29);
-		}*/
+        //  20 28 24 39 29
+            os.writeC(0x20);
+            os.writeC(0x28);
+            os.writeC(0x24);
+            os.writeC(0x39);
+            os.writeC(0x29);
+        }*/
         if (itemId == 66 && itemType2 == 1) {
             /** クラス着用部分 **/
             int bit = 0;
@@ -760,7 +760,7 @@ public class L1ItemInstance extends L1Object {
             }
             if (damageReduction() != 0) {
                 os.writeC(39);
-                os.writeS("ダメージリダクション+" + damageReduction());
+                os.writeS("ダメージ低下 +" + damageReduction());
             }
             if (stunLevel() != 0) {
                 os.writeC(39);
@@ -1079,12 +1079,12 @@ public class L1ItemInstance extends L1Object {
         } else if (itemType2 == 1 || itemType2 == 2) { // weapon | armor
             int op_addAc = 0;
             /** アイテムの安全強化値の表示を追加 **/
-			/*int SafeEnchant = getItem().get_safeenchant();
-			os.writeC(39);
-			if (SafeEnchant < 0) {
-				SafeEnchant = 0;
-			}
-			os.writeS("\\fY[安全強化 : +" + SafeEnchant + "]");*/
+            /*int SafeEnchant = getItem().get_safeenchant();
+            os.writeC(39);
+            if (SafeEnchant < 0) {
+                SafeEnchant = 0;
+            }
+            os.writeS("\\fY[安全強化 : +" + SafeEnchant + "]");*/
 
             if (itemType2 == 1) { // weapon武器打撃値
                 os.writeC(1);
@@ -1493,7 +1493,7 @@ public class L1ItemInstance extends L1Object {
                 }
                 if (itemType2 == 2 && getSpecialEnchant() == 1 && (!(getItem().getType() >= 8 && getItem().getType() <= 12))) {
                     os.writeC(39);
-                    os.writeS("\\f2特化：ダメージリダクション+2");
+                    os.writeS("\\f2特化：ダメージ低下 +2");
                 }
             }
 
@@ -1502,7 +1502,7 @@ public class L1ItemInstance extends L1Object {
                 switch (_cha.getType()) {
                     case 0:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+3");
+                        os.writeS("ダメージ低下 +3");
                         break;
                     case 1:
                     case 7:
@@ -1535,7 +1535,7 @@ public class L1ItemInstance extends L1Object {
                 switch (_cha.getType()) {
                     case 0:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+3");
+                        os.writeS("ダメージ低下 +3");
                         break;
                     case 1:
                     case 7:
@@ -1568,7 +1568,7 @@ public class L1ItemInstance extends L1Object {
                 switch (_cha.getType()) {
                     case 0:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+3");
+                        os.writeS("ダメージ低下 +3");
                         break;
                     case 1:
                     case 7:
@@ -1601,7 +1601,7 @@ public class L1ItemInstance extends L1Object {
                 switch (_cha.getType()) {
                     case 0:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+3");
+                        os.writeS("ダメージ低下 +3");
                         break;
                     case 1:
                     case 7:
@@ -1634,7 +1634,7 @@ public class L1ItemInstance extends L1Object {
                 switch (_cha.getType()) {
                     case 0:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+3");
+                        os.writeS("ダメージ低下 +3");
                         break;
                     case 1:
                     case 7:
@@ -1669,7 +1669,7 @@ public class L1ItemInstance extends L1Object {
                 switch (_cha.getType()) {
                     case 0:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+3");
+                        os.writeS("ダメージ低下 +3");
                         os.writeC(39);
                         os.writeS("近距離命中+2");
                         break;
@@ -1701,7 +1701,7 @@ public class L1ItemInstance extends L1Object {
                         os.writeC(39);
                         os.writeS("近距離命中+3");
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+1");
+                        os.writeS("ダメージ低下 +1");
                         break;
                     case 6:
                         os.writeC(39);
@@ -1721,7 +1721,7 @@ public class L1ItemInstance extends L1Object {
                 switch (_cha.getType()) {
                     case 0:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+3");
+                        os.writeS("ダメージ低下 +3");
                         os.writeC(39);
                         os.writeS("近距離命中+2");
                         break;
@@ -1753,7 +1753,7 @@ public class L1ItemInstance extends L1Object {
                         os.writeC(39);
                         os.writeS("近距離命中+3");
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+1");
+                        os.writeS("ダメージ低下 +1");
                         break;
                     case 6:
                         os.writeC(39);
@@ -1773,7 +1773,7 @@ public class L1ItemInstance extends L1Object {
                 switch (_cha.getType()) {
                     case 0:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+3");
+                        os.writeS("ダメージ低下 +3");
                         os.writeC(39);
                         os.writeS("近距離命中+2");
                         break;
@@ -1805,7 +1805,7 @@ public class L1ItemInstance extends L1Object {
                         os.writeC(39);
                         os.writeS("近距離命中+3");
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+1");
+                        os.writeS("ダメージ低下 +1");
                         break;
                     case 6:
                         os.writeC(39);
@@ -1825,7 +1825,7 @@ public class L1ItemInstance extends L1Object {
                 switch (_cha.getType()) {
                     case 0:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+3");
+                        os.writeS("ダメージ低下 +3");
                         os.writeC(39);
                         os.writeS("近距離命中+2");
                         break;
@@ -1857,7 +1857,7 @@ public class L1ItemInstance extends L1Object {
                         os.writeC(39);
                         os.writeS("近距離命中+3");
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+1");
+                        os.writeS("ダメージ低下 +1");
                         break;
                     case 6:
                         os.writeC(39);
@@ -1877,7 +1877,7 @@ public class L1ItemInstance extends L1Object {
                 switch (_cha.getType()) {
                     case 0:
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+3");
+                        os.writeS("ダメージ低下 +3");
                         os.writeC(39);
                         os.writeS("近距離命中+2");
                         break;
@@ -1909,7 +1909,7 @@ public class L1ItemInstance extends L1Object {
                         os.writeC(39);
                         os.writeS("近距離命中+3");
                         os.writeC(39);
-                        os.writeS("ダメージリダクション+1");
+                        os.writeS("ダメージ低下 +1");
                         break;
                     case 6:
                         os.writeC(39);
@@ -1970,10 +1970,23 @@ public class L1ItemInstance extends L1Object {
                 }
             }
 
-            if (getItem().getDmgRate() != 0) {
+            /** 古代闘士のガーダー 近距離ダメージ **/
+            if (itemId == 22003 && getEnchantLevel() > 4) {
+                if (getEnchantLevel() == 5 || getEnchantLevel() == 6) {
+                    os.writeC(6);
+                    os.writeC((getItem().getDmgRate() + 1));
+                } else if (getEnchantLevel() == 7 || getEnchantLevel() == 8) {
+                    os.writeC(6);
+                    os.writeC((getItem().getDmgRate() + 2));
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(6);
+                    os.writeC((getItem().getDmgRate() + 3));
+                }
+            } else if (getItem().getDmgRate() != 0) {
                 os.writeC(6);// 追加ダメージ
                 os.writeC(getItem().getDmgRate());
             }
+
             /** シールドウィングのブレイサー遠距離命中 **/
             if (itemType2 == 2 && itemId == 222343 && getEnchantLevel() > 4) {
                 os.writeC(24);
@@ -2298,24 +2311,16 @@ public class L1ItemInstance extends L1Object {
                         break;
                 }
                 /** 体力のガーダーHP増加表示 **/
-            } else if (itemType2 == 2 && itemId == 22256 && getEnchantLevel() >= 5) {
-                switch (getEnchantLevel()) {
-                    case 5:
-                    case 6:
-                        os.writeC(14);
-                        os.writeH(getItem().get_addhp() + 25);
-                        break;
-                    case 7:
-                    case 8:
-                        os.writeC(14);
-                        os.writeH(getItem().get_addhp() + 50);
-                        break;
-                    case 9:
-                        os.writeC(14);
-                        os.writeH(getItem().get_addhp() + 75);
-                        break;
-                    default:
-                        break;
+            } else if (itemType2 == 2 && itemId == 22256 && getEnchantLevel() > 4) {
+                if (getEnchantLevel() == 5 || getEnchantLevel() == 6) {
+                    os.writeC(14);
+                    os.writeH(getItem().get_addhp() + 25);
+                } else if (getEnchantLevel() == 7 || getEnchantLevel() == 8) {
+                    os.writeC(14);
+                    os.writeH(getItem().get_addhp() + 50);
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(14);
+                    os.writeH(getItem().get_addhp() + 75);
                 }
                 /** イヤリング / アミュレット / リング HP増加表示 **/
             } else if (itemType2 == 2 && getItem().getGrade() >= 0 && getItem().getGrade() <= 2 && getItem().getAccessoryProcess() != 10 && getEnchantLevel() > 0) {
@@ -3137,29 +3142,15 @@ public class L1ItemInstance extends L1Object {
                 }
                 /** ウィザードのガーダーSP表示 **/
             } else if (itemType2 == 2 && itemId == 22255 && getEnchantLevel() > 4) {
-                switch (getEnchantLevel()) {
-                    case 5:
-                        os.writeC(17);
-                        os.writeC(getItem().get_addsp() + 1);
-                        break;
-                    case 6:
-                        os.writeC(17);
-                        os.writeC(getItem().get_addsp() + 1);
-                        break;
-                    case 7:
-                        os.writeC(17);
-                        os.writeC(getItem().get_addsp() + 2);
-                        break;
-                    case 8:
-                        os.writeC(17);
-                        os.writeC(getItem().get_addsp() + 2);
-                        break;
-                    case 9:
-                        os.writeC(17);
-                        os.writeC(getItem().get_addsp() + 3);
-                        break;
-                    default:
-                        break;
+                if (getEnchantLevel() == 5 || getEnchantLevel() == 6) {
+                    os.writeC(17);
+                    os.writeC(getItem().get_addsp() + 1);
+                } else if (getEnchantLevel() == 7 || getEnchantLevel() == 8) {
+                    os.writeC(17);
+                    os.writeC(getItem().get_addsp() + 2);
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(17);
+                    os.writeC(getItem().get_addsp() + 3);
                 }
                 /** リッチローブSP表示 **/
             } else if (itemType2 == 2 && itemId == 20107 && getEnchantLevel() >= 3) {
@@ -3218,7 +3209,7 @@ public class L1ItemInstance extends L1Object {
             /** ベルト5以上ダメージリダクション**/
             if (itemType2 == 2 && (getItem().getType() == 10 && getEnchantLevel() >= 5)) {//ベルト
                 os.writeC(39);
-                os.writeS("ダメージリダクション" + (getEnchantLevel() - 4));
+                os.writeS("ダメージ低下 +" + (getEnchantLevel() - 4));
             }
             /** ルームティス レッド イヤリング **/
             if (itemId == 22229) {
@@ -3312,27 +3303,6 @@ public class L1ItemInstance extends L1Object {
                         os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 6));
                         os.writeC(39);
                         os.writeS("ダメージ低下率 +20(6%)");
-                        break;
-                    default:
-                        break;
-                }
-            }
-            /** 守護のガーダーダメージリダクション **/
-            if (itemId == 22254 && getEnchantLevel() > 4) {
-                switch (getEnchantLevel()) {
-                    case 5:
-                    case 6:
-                        os.writeC(39);
-                        os.writeS("ダメージリダクション+" + (getItem().getDamageReduction() + 0));
-                        break;
-                    case 7:
-                    case 8:
-                        os.writeC(39);
-                        os.writeS("ダメージリダクション+" + (getItem().getDamageReduction() + 1));
-                        break;
-                    case 9:
-                        os.writeC(39);
-                        os.writeS("ダメージリダクション+" + (getItem().getDamageReduction() + 2));
                         break;
                     default:
                         break;
@@ -3875,7 +3845,7 @@ public class L1ItemInstance extends L1Object {
                     os.writeC(39);
                     os.writeS("\\f3PVPダメージ減少 +1");
                     os.writeC(39);
-                    os.writeS("\\f3ダメージリダクション +1");
+                    os.writeS("\\f3ダメージ低下 +1");
                 }
             }
             /***************************/
@@ -3908,28 +3878,6 @@ public class L1ItemInstance extends L1Object {
                 }
             }
 
-            /** 古代闘士のがより近距離ダメージ **/
-            if (itemId == 22003 && getEnchantLevel() > 4) {
-                switch (getEnchantLevel()) {
-                    case 5:
-                    case 6:
-                        os.writeC(39);
-                        os.writeS("近距離ダメージ+" + (getItem().getDmgRate() + 0));
-                        break;
-                    case 7:
-                    case 8:
-                        os.writeC(39);
-                        os.writeS("近距離ダメージ+" + (getItem().getDmgRate() + 1));
-                        break;
-                    case 9:
-                        os.writeC(39);
-                        os.writeS("近距離ダメージ+" + (getItem().getDmgRate() + 2));
-                        break;
-                    default:
-                        break;
-                }
-            }
-
             /** マミーロードクラウン遠距離ダメージ **/
             if (itemId == 20017 && getEnchantLevel() > 6) {
                 switch (getEnchantLevel()) {
@@ -3950,8 +3898,8 @@ public class L1ItemInstance extends L1Object {
                 }
             }
             /** （知恵/機敏/知識/腕力）のブーツ *
-             * :	+7から最大HP + 20 / + 40 / + 60増加
-             * :	+9にダメージ減少+ 1を追加
+             * :    +7から最大HP + 20 / + 40 / + 60増加
+             * :    +9にダメージ減少+ 1を追加
              * */
             if (itemId == 22359 || itemId == 222308 || itemId == 222309 || itemId == 222307 && getEnchantLevel() > 6) {
                 switch (getEnchantLevel()) {
@@ -3980,25 +3928,38 @@ public class L1ItemInstance extends L1Object {
                 int total2 = getItem().getDamageReduction() + 3;
                 if (getEnchantLevel() >= 7 && getEnchantLevel() <= 9) {
                     os.writeC(39);
-                    os.writeS("ダメージリダクション" + total);
+                    os.writeS("ダメージ低下 +" + total);
                 } else if (getEnchantLevel() > 9) {
                     os.writeC(39);
-                    os.writeS("ダメージリダクション" + total2);
+                    os.writeS("ダメージ低下 +" + total2);
                 } else {
                     os.writeC(39);
-                    os.writeS("ダメージリダクション" + getItem().getDamageReduction());
+                    os.writeS("ダメージ低下 +" + getItem().getDamageReduction());
                 }
             } else if (itemId == 491005) { // ダメージリダクション
                 os.writeC(39);
                 if (getEnchantLevel() >= 9)
-                    os.writeS("ダメージリダクション+" + (getItem().getDamageReduction() + 1));
+                    os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 1));
                 else
-                    os.writeS("ダメージリダクション+" + getItem().getDamageReduction());
+                    os.writeS("ダメージ低下 +" + getItem().getDamageReduction());
 
+                /** 守護のガーダーダメージリダクション **/
+            } else if (itemId == 22254 &&  getEnchantLevel() > 4) {
+                if (getEnchantLevel() == 5 || getEnchantLevel() == 6) {
+                    os.writeC(39);
+                    os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 1));
+                } else if (getEnchantLevel() == 7 || getEnchantLevel() == 8) {
+                    os.writeC(39);
+                    os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 2));
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(39);
+                    os.writeS("ダメージ低下 +" + (getItem().getDamageReduction() + 3));
+                }
             } else if (getItem().getDamageReduction() != 0) { // ダメージリダクション
                 os.writeC(39);
-                os.writeS("ダメージリダクション" + getItem().getDamageReduction());
+                os.writeS("ダメージ低下 +" + getItem().getDamageReduction());
             }
+
             /** ベルト7からpvpダメージ減少 **/
             if (itemType2 == 2 && (getItem().getType() == 10 && getEnchantLevel() > 6)) {// ベルト
                 switch (getEnchantLevel()) {
@@ -4032,22 +3993,22 @@ public class L1ItemInstance extends L1Object {
             if (itemId == 202011) {
                 if (getEnchantLevel() >= 0) {
                     os.writeC(39);
-                    os.writeS("ダメージリダクション無視+12");
+                    os.writeS("ダメージ低下無視+12");
                 }
             }
             if ((itemId >= 22208 && itemId <= 22211)) { // ヴァラカス フレイム
                 if (getEnchantLevel() < 7) {
                     os.writeC(39);
-                    os.writeS("ダメージリダクション無視+3");
+                    os.writeS("ダメージ低下無視 +3");
                 } else if (getEnchantLevel() == 7) {
                     os.writeC(39);
-                    os.writeS("ダメージリダクション無視+4");
+                    os.writeS("ダメージ低下無視 +4");
                 } else if (getEnchantLevel() == 8) {
                     os.writeC(39);
-                    os.writeS("ダメージリダクション無視+5");
+                    os.writeS("ダメージ低下無視 +5");
                 } else if (getEnchantLevel() >= 9) {
                     os.writeC(39);
-                    os.writeS("ダメージリダクション無視+6");
+                    os.writeS("ダメージ低下無視 +6");
                 }
             }
             if ((itemId == 203025 || itemId == 203026) // ジンサウルアビ銃剣
