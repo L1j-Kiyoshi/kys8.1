@@ -1946,17 +1946,36 @@ public class L1ItemInstance extends L1Object {
             } else if (itemType2 == 2 && itemId == 222336 && getEnchantLevel() > 3) {
                 os.writeC(5);
                 os.writeC(getItem().getHitModifier() + getEnchantLevel() - 3);
-                /*** 激怒の手袋武器命中***/
-            } else if (itemType2 == 2 && itemId == 222317 && getEnchantLevel() >= 4 && getEnchantLevel() <= 6) {
-                os.writeC(5);
-                os.writeC(getItem().getHitModifier() + getEnchantLevel() - 4);
+                /*** 激昂のグローブ 近距離命中 ***/
             } else if (itemType2 == 2 && itemId == 222317 && getEnchantLevel() > 6) {
-                os.writeC(5);
-                os.writeC(getItem().getHitModifier() + getEnchantLevel() - 3);
-                /** シールドウィングのパワーグローブ近距離命中**/
+                if (getEnchantLevel() == 7) {
+                    os.writeC(5);
+                    os.writeC(getItem().getHitRate() + 4);
+                } else if (getEnchantLevel() == 8) {
+                    os.writeC(5);
+                    os.writeC(getItem().getHitRate() + 5);
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(5);
+                    os.writeC(getItem().getHitRate() + 6);
+                }
+                /** 守護騎士のパワーグローブ 近距離命中 **/
             } else if (itemType2 == 2 && itemId == 222345 && getEnchantLevel() > 4) {
-                os.writeC(5);
-                os.writeC(getItem().getHitModifier() + getEnchantLevel() - 4);
+                if (getEnchantLevel() == 5) {
+                    os.writeC(5);
+                    os.writeC(getItem().getHitRate() + 1);
+                } else if (getEnchantLevel() == 6) {
+                    os.writeC(5);
+                    os.writeC(getItem().getHitRate() + 2);
+                } else if (getEnchantLevel() == 7) {
+                    os.writeC(5);
+                    os.writeC(getItem().getHitRate() + 3);
+                } else if (getEnchantLevel() == 8) {
+                    os.writeC(5);
+                    os.writeC(getItem().getHitRate() + 4);
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(5);
+                    os.writeC(getItem().getHitRate() + 5);
+                }
             } else if (getItem().getHitRate() != 0) { // 防具に付く衝突
                 os.writeC(5);
                 os.writeC(getItem().getHitRate());
@@ -1987,10 +2006,24 @@ public class L1ItemInstance extends L1Object {
                 os.writeC(getItem().getDmgRate());
             }
 
-            /** シールドウィングのブレイサー遠距離命中 **/
+            /** 守護騎士のブレイサー 遠距離命中 **/
             if (itemType2 == 2 && itemId == 222343 && getEnchantLevel() > 4) {
-                os.writeC(24);
-                os.writeC(getItem().getBowHitRate() + getEnchantLevel() - 4);
+                if (getEnchantLevel() == 5) {
+                    os.writeC(24);
+                    os.writeC(getItem().getBowHitRate() + 1);
+                } else if (getEnchantLevel() == 6) {
+                    os.writeC(24);
+                    os.writeC(getItem().getBowHitRate() + 2);
+                } else if (getEnchantLevel() == 7) {
+                    os.writeC(24);
+                    os.writeC(getItem().getBowHitRate() + 3);
+                } else if (getEnchantLevel() == 8) {
+                    os.writeC(24);
+                    os.writeC(getItem().getBowHitRate() + 4);
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(24);
+                    os.writeC(getItem().getBowHitRate() + 5);
+                }
             } else if (getItem().getBowHitRate() != 0) {
                 os.writeC(24);
                 os.writeC(getItem().getBowHitRate());
@@ -3829,27 +3862,6 @@ public class L1ItemInstance extends L1Object {
                         break;
                 }
             }
-            /**魔物8エンチャン以上 **/
-            if (itemId >= 900015 && itemId <= 900018) {
-                if (getEnchantLevel() >= 8) {
-                    os.writeC(39);
-                    os.writeS("\\f3近距離ダメージ +1");
-                    os.writeC(39);
-                    os.writeS("\\f3遠距離ダメージ +1");
-                }
-            }
-            /***************************/
-            /**岩石8エンチャン以上 **/
-            if (itemId >= 900011 && itemId <= 900014) {
-                if (getEnchantLevel() >= 8) {
-                    os.writeC(39);
-                    os.writeS("\\f3PVPダメージ減少 +1");
-                    os.writeC(39);
-                    os.writeS("\\f3ダメージ低下 +1");
-                }
-            }
-            /***************************/
-
 
             /** 真冥王の執行剣スターン的中+10 **/
             if (itemId == 61 || itemId == 7000061 || itemId == 202012) {
@@ -4125,14 +4137,13 @@ public class L1ItemInstance extends L1Object {
                 }
             }
 
-            /** 輝く魔力の手袋 **/
+            /** 光る魔力のグローブ **/
             if (itemId == 20274 && getEnchantLevel() > 4) {
-                int weightBonus = getEnchantLevel() - 4;
                 os.writeC(39);
-                os.writeS("重量ゲージ" + (getItem().getWeightReduction() + weightBonus));
+                os.writeS("所持重量増加 +" + (getItem().getWeightReduction() + 60 * (getEnchantLevel() - 4)));
             } else if (getItem().getWeightReduction() != 0) { // 重量ゲージ
                 os.writeC(39);
-                os.writeS("重量ゲージ" + getItem().getWeightReduction());
+                os.writeS("所持重量増加 +" + getItem().getWeightReduction());
             }
 
             if (itemId == 22263) {

@@ -883,73 +883,23 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        /**輝く魔力の手袋 **/
-        if (itemId == 20274) {
-            switch (itemlvl) {
-                case 5:
-                    _owner.addWeightReduction(1);
-                    break;
-                case 6:
-                    _owner.addWeightReduction(2);
-                    break;
-                case 7:
-                    _owner.addWeightReduction(3);
-                    break;
-                case 8:
-                    _owner.addWeightReduction(4);
-                    break;
-                case 9:
-                    _owner.addWeightReduction(5);
-                    break;
-                default:
-                    break;
-            }
+
+        /** 光る魔力のグローブ **/
+        if (itemId == 20274 && itemlvl > 4) {
+            _owner.addWeightReduction(60 * (itemlvl - 4));
         }
-        /** 激怒の手袋**/
+
+        /** 激昂のグローブ **/
         if (itemId == 222317) {
-            switch (itemlvl) {
-                case 5:
-                    _owner.addHitup(1);
-                    _owner.addBowHitup(1);
-                    break;
-                case 6:
-                    _owner.addHitup(2);
-                    _owner.addBowHitup(2);
-                    break;
-                case 7:
-                    _owner.addHitup(4);
-                    _owner.addBowHitup(4);
-                    break;
-                case 8:
-                    _owner.addHitup(5);
-                    _owner.addBowHitup(5);
-                    break;
-                case 9:
-                    _owner.addHitup(6);
-                    _owner.addBowHitup(6);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 7) {
+                _owner.addHitup(4);
+            } else if (itemlvl == 8) {
+                _owner.addHitup(5);
+            } else if (itemlvl >= 9) {
+                _owner.addHitup(6);
             }
         }
 
-
-        // 古代の岩シリーズ
-        if (itemId >= 900011 && itemId <= 900014) {
-            _owner.addDamageReductionByArmor(2);
-            if (itemlvl >= 8) {
-                _owner.addDamageReductionByArmor(1);
-                _owner.getResistance().addcalcPcDefense(1);
-            }
-        }
-        // 古代魔物シリーズ
-        if (itemId >= 900015 && itemId <= 900018) {
-            _owner.addregist_PVPweaponTotalDamage(2);
-            if (itemlvl >= 8) {
-                _owner.addDmgup(1);
-                _owner.addBowDmgup(1);
-            }
-        }
         if (itemId == 900019) { // シルフのTシャツ
             switch (itemlvl) {
                 case 0:
@@ -2006,50 +1956,37 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        /** シールドウィングのブレイサー遠距離命中 **/
+
+        /** 守護騎士のブレイサー 遠距離命中 **/
         if (itemId == 222343) {
-            switch (itemlvl) {
-                case 5:
-                    _owner.addBowHitRate(1);
-                    break;
-                case 6:
-                    _owner.addBowHitRate(2);
-                    break;
-                case 7:
-                    _owner.addBowHitRate(3);
-                    break;
-                case 8:
-                    _owner.addBowHitRate(4);
-                    break;
-                case 9:
-                    _owner.addBowHitRate(5);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5) {
+                _owner.addBowHitup(1);
+            } else if (itemlvl == 6) {
+                _owner.addBowHitup(2);
+            } else if (itemlvl == 7) {
+                _owner.addBowHitup(3);
+            } else if (itemlvl == 8) {
+                _owner.addBowHitup(4);
+            } else if (itemlvl >= 9) {
+                _owner.addBowHitup(5);
             }
         }
-        /** シールドウィングのパワーグローブ近距離命中 **/
+
+        /** 守護騎士のパワーグローブ 近距離命中 **/
         if (itemId == 222345) {
-            switch (itemlvl) {
-                case 5:
-                    _owner.addHitup(1);
-                    break;
-                case 6:
-                    _owner.addHitup(2);
-                    break;
-                case 7:
-                    _owner.addHitup(3);
-                    break;
-                case 8:
-                    _owner.addHitup(4);
-                    break;
-                case 9:
-                    _owner.addHitup(5);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5) {
+                _owner.addHitup(1);
+            } else if (itemlvl == 6) {
+                _owner.addHitup(2);
+            } else if (itemlvl == 7) {
+                _owner.addHitup(3);
+            } else if (itemlvl == 8) {
+                _owner.addHitup(4);
+            } else if (itemlvl >= 9) {
+                _owner.addHitup(5);
             }
         }
+
         /** 神聖な永遠のネックレススタン耐性**/
         if (itemId == 222349) {
             _owner.getResistance().addStun(7);
@@ -3083,72 +3020,23 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        /** 輝く魔力の手袋 **/
-        if (itemId == 20274) {
-            switch (itemlvl) {
-                case 5:
-                    _owner.addWeightReduction(-1);
-                    break;
-                case 6:
-                    _owner.addWeightReduction(-2);
-                    break;
-                case 7:
-                    _owner.addWeightReduction(-3);
-                    break;
-                case 8:
-                    _owner.addWeightReduction(-4);
-                    break;
-                case 9:
-                    _owner.addWeightReduction(-5);
-                    break;
-                default:
-                    break;
-            }
+
+        /** 光る魔力のグローブ **/
+        if (itemId == 20274 && itemlvl > 4) {
+            _owner.addWeightReduction(-60 * (itemlvl - 4));
         }
-        /** 激怒の手袋 **/
+
+        /** 激昂のグローブ **/
         if (itemId == 222317) {
-            switch (itemlvl) {
-                case 5:
-                    _owner.addHitup(-1);
-                    _owner.addBowHitup(-1);
-                    break;
-                case 6:
-                    _owner.addHitup(-2);
-                    _owner.addBowHitup(-2);
-                    break;
-                case 7:
-                    _owner.addHitup(-4);
-                    _owner.addBowHitup(-4);
-                    break;
-                case 8:
-                    _owner.addHitup(-5);
-                    _owner.addBowHitup(-5);
-                    break;
-                case 9:
-                    _owner.addHitup(-6);
-                    _owner.addBowHitup(-6);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 7) {
+                _owner.addHitup(-4);
+            } else if (itemlvl == 8) {
+                _owner.addHitup(-5);
+            } else if (itemlvl >= 9) {
+                _owner.addHitup(-6);
             }
         }
 
-        // 古代の岩シリーズ
-        if (itemId >= 900011 && itemId <= 900014) {
-            _owner.addDamageReductionByArmor(-2);
-            if (itemlvl >= 8) {
-                _owner.addDamageReductionByArmor(-1);
-                _owner.getResistance().addcalcPcDefense(-1);
-            }
-        }
-        //古代魔物シリーズ
-        if (itemId >= 900015 && itemId <= 900018) {
-            _owner.addregist_PVPweaponTotalDamage(-2);
-            if (itemlvl >= 8) {
-                _owner.addDmgup(-1);
-                _owner.addBowDmgup(-1);
-            }
-        }
         if (itemId == 900019) { // シルフのTシャツ
             switch (itemlvl) {
                 case 0:
@@ -4197,50 +4085,37 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        /**シールドウィングのブレイサー遠距離命中 **/
+
+        /** 守護騎士のブレイサー 遠距離命中 **/
         if (itemId == 222343) {
-            switch (itemlvl) {
-                case 5:
-                    _owner.addBowHitRate(-1);
-                    break;
-                case 6:
-                    _owner.addBowHitRate(-2);
-                    break;
-                case 7:
-                    _owner.addBowHitRate(-3);
-                    break;
-                case 8:
-                    _owner.addBowHitRate(-4);
-                    break;
-                case 9:
-                    _owner.addBowHitRate(-5);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5) {
+                _owner.addBowHitup(-1);
+            } else if (itemlvl == 6) {
+                _owner.addBowHitup(-2);
+            } else if (itemlvl == 7) {
+                _owner.addBowHitup(-3);
+            } else if (itemlvl == 8) {
+                _owner.addBowHitup(-4);
+            } else if (itemlvl >= 9) {
+                _owner.addBowHitup(-5);
             }
         }
-        /** シールドウィングのパワーグローブ近距離命中 **/
+
+        /** 守護騎士のパワーグローブ 近距離命中 **/
         if (itemId == 222345) {
-            switch (itemlvl) {
-                case 5:
-                    _owner.addHitup(-1);
-                    break;
-                case 6:
-                    _owner.addHitup(-2);
-                    break;
-                case 7:
-                    _owner.addHitup(-3);
-                    break;
-                case 8:
-                    _owner.addHitup(-4);
-                    break;
-                case 9:
-                    _owner.addHitup(-5);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 5) {
+                _owner.addHitup(-1);
+            } else if (itemlvl == 6) {
+                _owner.addHitup(-2);
+            } else if (itemlvl == 7) {
+                _owner.addHitup(-3);
+            } else if (itemlvl == 8) {
+                _owner.addHitup(-4);
+            } else if (itemlvl >= 9) {
+                _owner.addHitup(-5);
             }
         }
+
         /** 神聖な永遠のネックレススタン耐性 **/
         if (itemId == 222349) {
             _owner.getResistance().addStun(-7);
