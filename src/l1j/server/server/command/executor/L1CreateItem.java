@@ -26,7 +26,7 @@ public class L1CreateItem implements L1CommandExecutor {
             StringTokenizer st = new StringTokenizer(arg);
 //			if (st.hasMoreTokens()) {  //追加
             String nameid = st.nextToken();
-            int count = 1;
+            int count = 11;
             if (st.hasMoreTokens()) {
                 count = Integer.parseInt(st.nextToken());
             }
@@ -80,6 +80,7 @@ public class L1CreateItem implements L1CommandExecutor {
                         }
                         //if (pc.getInventory(). checkAddItem(item, 1) == L1Inventory.OK) {
                         pc.getInventory().storeItem(item);
+                        enchant += 1;
                         //} else {
                         //	break;
                         //}

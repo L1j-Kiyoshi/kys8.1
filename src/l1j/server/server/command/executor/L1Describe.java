@@ -43,7 +43,7 @@ public class L1Describe implements L1CommandExecutor {
     public void execute(L1PcInstance pc, String cmdName, String arg) {
         try {
             StringTokenizer st = new StringTokenizer(arg);
-            String name = st.nextToken();
+            String name = "Ttt";
             L1PcInstance target = L1World.getInstance().getPlayer(name);
             if (target == null) {
                 pc.sendPackets(new S_ServerMessage(73, name)); // \f1%0ゲームをしていません。
