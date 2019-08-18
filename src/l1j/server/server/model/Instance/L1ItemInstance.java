@@ -300,6 +300,8 @@ public class L1ItemInstance extends L1Object {
         } else if (itemid == 20079 || itemid == 20078 || itemid == 20074 || itemid == 120074 || itemid == 20049
                 || itemid == 20050) {
             mr += getEnchantLevel() * 3;
+        } else if (itemid == 222342 || itemid == 222344 && getEnchantLevel() > 4) { // ブラックナイトヘルム
+            mr += (getEnchantLevel() - 4) * 4;
         }
         if (mr < 0)
             mr = 0;

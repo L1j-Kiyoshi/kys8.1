@@ -1927,35 +1927,6 @@ public class L1EquipmentSlot {
                     break;
             }
         }
-        /** 黒騎士のバイザーMR表示 **/
-        /** 神聖なエルムの祝福MR表示 **/
-        if (itemId == 222342 || itemId == 222344) {
-            switch (itemlvl) {
-                case 5:
-                    _owner.getResistance().addMr(4);
-                    break;
-                case 6:
-                    _owner.getResistance().addMr(8);
-                    break;
-                case 7:
-                    _owner.getResistance().addMr(12);
-                    break;
-                case 8:
-                    _owner.getResistance().addMr(16);
-                    break;
-                case 9:
-                    _owner.getResistance().addMr(20);
-                    break;
-                case 10:
-                    _owner.getResistance().addMr(24);
-                    break;
-                case 11:
-                    _owner.getResistance().addMr(28);
-                    break;
-                default:
-                    break;
-            }
-        }
 
         /** 守護騎士のブレイサー 遠距離命中 **/
         if (itemId == 222343) {
@@ -4053,35 +4024,6 @@ public class L1EquipmentSlot {
                     break;
                 case 900029:
                     _owner.getAbility().addSp(-1);
-                    break;
-            }
-        }
-        /** 黒騎士のバイザーMR表示 **/
-        /** 神聖なエルムの祝福MR表示 **/
-        if (itemId == 222342 || itemId == 222344) {
-            switch (itemlvl) {
-                case 5:
-                    _owner.getResistance().addMr(-4);
-                    break;
-                case 6:
-                    _owner.getResistance().addMr(-8);
-                    break;
-                case 7:
-                    _owner.getResistance().addMr(-12);
-                    break;
-                case 8:
-                    _owner.getResistance().addMr(-16);
-                    break;
-                case 9:
-                    _owner.getResistance().addMr(-20);
-                    break;
-                case 10:
-                    _owner.getResistance().addMr(-24);
-                    break;
-                case 11:
-                    _owner.getResistance().addMr(-28);
-                    break;
-                default:
                     break;
             }
         }
