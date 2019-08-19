@@ -66,7 +66,7 @@ public class Resistance {
     }
 
     public int getMr() {
-        return checkMrRange(baseMr + addedMr, LIMIT_MIN_MR);
+        return checkMrRange(baseMr + addedMr + character.getLevel() / 2, LIMIT_MIN_MR);
     }
 
     public int getBaseMr() {

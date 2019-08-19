@@ -40,7 +40,8 @@ public class S_SPMR extends ServerBasePacket {
         } else {
             writeH(pc.getAbility().getSp() - pc.getAbility().getTrueSp()); // 機器増加SP
         }
-        writeH(pc.getResistance().getMr() - pc.getResistance().getBaseMr()); // 装備や魔法で増加したMR
+//      writeH(pc.getResistance().getMr() - pc.getResistance().getBaseMr()); // 装備や魔法で増加したMR
+      writeH(pc.getResistance().getMr() - pc.getResistance().getBaseMr() - pc.getLevel() / 2); // MR表示が多く見える不具合の暫定対応
     }
 
     @Override
