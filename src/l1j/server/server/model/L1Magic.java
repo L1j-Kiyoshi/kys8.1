@@ -1000,16 +1000,16 @@ public class L1Magic {
             }
         }
         /** ロボットシステム **/
-        if(_targetNpc.getNpcTemplate().getIgnoreAoe() != 0) {
-        	if(skillId ==FROZEN_CLOUD || skillId == FIREBALL || skillId ==EARTH_JAIL ||
-        			skillId == TORNADO || skillId == FIRE_WALL || skillId == BLIZZARD ||
-        			skillId == EARTHQUAKE || skillId == LIGHTNING_STORM || skillId == FIRE_STORM ||
-        			skillId == METEOR_STRIKE || skillId == ICE_ERUPTION) {
-        		damage = 0;
-        		_targetNpc.setSkillEffect(IGNORE_AOE, 0);
-
-        	}
-        }
+//        if(_targetNpc.getNpcTemplate().getIgnoreAoe() != 0) {
+//        	if(skillId ==FROZEN_CLOUD || skillId == FIREBALL || skillId ==EARTH_JAIL ||
+//        			skillId == TORNADO || skillId == FIRE_WALL || skillId == BLIZZARD ||
+//        			skillId == EARTHQUAKE || skillId == LIGHTNING_STORM || skillId == FIRE_STORM ||
+//        			skillId == METEOR_STRIKE || skillId == ICE_ERUPTION) {
+//        		damage = 0;
+//        		_targetNpc.setSkillEffect(IGNORE_AOE, 0);
+//
+//        	}
+//        }
         return damage;
     }
 

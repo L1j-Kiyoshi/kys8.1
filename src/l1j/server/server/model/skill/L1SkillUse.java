@@ -1776,116 +1776,29 @@ public class L1SkillUse {
                             new S_UseAttackSkill(_player, targetid, castgfx, _targetX, _targetY, actionId), _target);
                     _target.broadcastPacketExceptTargetSight(new S_DoActionGFX(targetid, ActionCodes.ACTION_Damage),
                             _player);
-
-
-
-                } else {//対象指定範囲
+                } else {
                     L1Character[] cha = new L1Character[_targetList.size()];
                     int i = 0;
-                    int cnt =0;
                     for (TargetStatus ts : _targetList) {
                         cha[i] = ts.getTarget();
-                        if(cha[i].hasSkillEffect(IGNORE_AOE)) {
-                        	cha[i].setIgnoreAoe(1);
-                        }
-                        if(cha[i].getIgnoreAoe() ==0) {
-
-                        	cha[i].broadcastPacket(new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage),_player); //218 = FIREBALL
-                        	if(castgfx ==171) {
-                        		cnt +=1;
-                        		 S_UseAttackSkill packet = new S_UseAttackSkill(_player, _target.getId(), 171, _target.getX(), _target.getY(),
-                                         ActionCodes.ACTION_Attack, false);
-                                 _player.sendPackets(packet);
-                                 _player.broadcastPacket(packet, _target);
-
-                                 if (cha[i]!=_target) {
-                                	 _player.sendPackets(new S_SkillSound(cha[i].getId(), 218));
-                                	 _target.broadcastPacket(new S_SkillSound(cha[i].getId(), 218));
-
-                                 }
-
-                        	}
-                        }
-                        if(cha[i].getIgnoreAoe() ==1) {
-                        	if(castgfx ==171) {
-                        		cnt+=1;
-                        		S_UseAttackSkill packet = new S_UseAttackSkill(_player, _target.getId(), 171, _target.getX(), _target.getY(),
-                                        ActionCodes.ACTION_Attack, false);
-                                _player.sendPackets(packet);
-                                _player.broadcastPacket(packet, _target);
-                        	}
-                        }
                         i++;
                     }
-                    _player.sendPackets(new S_DoActionGFX(_player.getId(), actionId));
-                    _player.broadcastPacket(new S_DoActionGFX(_player.getId(), actionId));
-                    if(cnt ==0) {
-                    	 _player.sendPackets(new S_SkillSound(_target.getId(), castgfx));
-                    	 _player.broadcastPacket(new S_SkillSound(_target.getId(), castgfx));
-                    }
-
-
-                    //_player.sendPackets(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR));
-                    //_player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR),
-                		//   cha);
+                    _player.sendPackets(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR));
+                    _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_DIR),
+                            cha);
                 }
-
-
-
-            } else if (_skill.getTarget().equals("none") && _skill.getType() == L1Skills.TYPE_ATTACK) {//術者中心範囲
+            } else if (_skill.getTarget().equals("none") && _skill.getType() == L1Skills.TYPE_ATTACK) {
                 L1Character[] cha = new L1Character[_targetList.size()];
-
                 int i = 0;
-                int cnt = 0;
                 for (TargetStatus ts : _targetList) {
-
                     cha[i] = ts.getTarget();
-                    if(cha[i].hasSkillEffect(IGNORE_AOE)) {
-                    	cha[i].setIgnoreAoe(1);
-
-                    }
-                    if(cha[i].getIgnoreAoe() == 0) {
-                    	cha[i].broadcastPacket(new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage),_player);
-                    }
-                    if(cha[i].getIgnoreAoe() == 1) {
-                    	cnt +=1;
-                    	//cha[i].broadcastPacketExceptTargetSight(
-                    		//	new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage),_player);
-                    }
-
-
-                 //   String msg = String.valueOf(cha[i].getIgnoreAoe());
-                 //  L1World.getInstance().broadcastServerMessage(msg);		//テスト用
-
+                    cha[i].broadcastPacketExceptTargetSight(
+                            new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage), _player);
                     i++;
-
-
                 }
-
-                	_player.sendPackets(new S_DoActionGFX(_player.getId(), actionId));
-                    _player.broadcastPacket(new S_DoActionGFX(_player.getId(), actionId));
-                    _player.sendPackets(new S_SkillSound(_player.getId(), castgfx));
-                    _player.broadcastPacket(new S_SkillSound(_player.getId(), castgfx));
-                    //_player.sendPackets(new S_RangeSkill(_player,cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR));
-                   // _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR),
-                            //cha);
-
-
-
-//                _player.sendPackets(new S_DoActionGFX(_player.getId(), actionId));
-//                _player.broadcastPacket(new S_DoActionGFX(_player.getId(), actionId));
-//                _player.sendPackets(new S_SkillSound(_player.getId(), castgfx));
-//                _player.broadcastPacket(new S_SkillSound(_player.getId(), castgfx));
-
-//                _player.sendPackets(new S_RangeSkill(_player,cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR));
-//                _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR),
-//                        cha);
-
-
-
-
-
-
+                _player.sendPackets(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR));
+                _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR),
+                        cha);
             } else {
                 if (_skillId != 5 && _skillId != 69 && _skillId != 131) {
                     if (isSkillAction) {
