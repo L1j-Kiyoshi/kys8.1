@@ -1007,10 +1007,10 @@ public class L1Attack {
                         Broadcaster.broadcastPacket(_pc, packet);
                     }
                 }
-//                if (chance <= Dmgcritical) {
+                if (chance <= Dmgcritical) {
                     weaponDamage = weaponMaxDamage + _weaponAddDmg;
                     _isCritical = true;
-//                }
+                }
             } else {
                 int Bowcritical = CalcStat.calcBowCritical(_pc.getAbility().getTotalDex()) + _pc.getBowDmgCritical();
                 int chance = _random.nextInt(100) + 1;
@@ -1045,10 +1045,10 @@ public class L1Attack {
                         Broadcaster.broadcastPacket(_pc, packet);
                     }
                 }
-//                if (chance <= Bowcritical) {
+                if (chance <= Bowcritical) {
                     weaponDamage = weaponMaxDamage + _weaponAddDmg;
                     _isCritical = true;
-//                }
+                }
             }
         }
         int weaponTotalDamage = weaponDamage + _weaponEnchant;
@@ -2050,10 +2050,10 @@ public class L1Attack {
 //                        Dmgcritical += 6;
 //                    }
 //                }
-//                if (chance <= Dmgcritical) {
+                if (chance <= Dmgcritical) {
                     weaponDamage = weaponMaxDamage + _weaponAddDmg;
                     _isCritical = true;
-//                }
+                }
             } else {
                 int Bowcritical = CalcStat.calcBowCritical(_pc.getAbility().getTotalDex()) + _pc.getBowDmgCritical();
                 int chance = _random.nextInt(100) + 1;
@@ -2080,10 +2080,10 @@ public class L1Attack {
 //                    	Bowcritical += 6;
 //                    }
 //                }
-//                if (chance <= Bowcritical) {
+                if (chance <= Bowcritical) {
                     weaponDamage = weaponMaxDamage + _weaponAddDmg;
                     _isCritical = true;
-//                }
+                }
             }
         }
         int weaponTotalDamage = weaponDamage + _weaponEnchant;
