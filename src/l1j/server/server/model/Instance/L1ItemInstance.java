@@ -2043,6 +2043,18 @@ public class L1ItemInstance extends L1Object {
                     os.writeC(35);
                     os.writeC((getItem().getBowDmgRate() + 3));
                 }
+            /** マミーロードクラウン 遠距離ダメージ **/
+            } else if (itemId == 20017 && getEnchantLevel() > 6) {
+                if (getEnchantLevel() == 7) {
+                    os.writeC(35);
+                    os.writeC((getItem().getBowDmgRate() + 1));
+                } else if (getEnchantLevel() == 8) {
+                    os.writeC(35);
+                    os.writeC((getItem().getBowDmgRate() + 2));
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(35);
+                    os.writeC((getItem().getBowDmgRate() + 3));
+                }
             } else if (getItem().getBowDmgRate() != 0) {
                 os.writeC(35);
                 os.writeC(getItem().getBowDmgRate());
@@ -2553,7 +2565,7 @@ public class L1ItemInstance extends L1Object {
                     default:
                         break;
                 }
-                /** 大魔法使いの帽子エンチャントMP増加表示 **/
+                /** 大魔術師の帽子 MP増加表示 **/
             } else if (itemId == 202022) {
                 os.writeC(32);
                 os.writeH(getItem().get_addmp() + (getEnchantLevel() * 10));
@@ -3892,25 +3904,6 @@ public class L1ItemInstance extends L1Object {
                 }
             }
 
-            /** マミーロードクラウン遠距離ダメージ **/
-            if (itemId == 20017 && getEnchantLevel() > 6) {
-                switch (getEnchantLevel()) {
-                    case 7:
-                        os.writeC(39);
-                        os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 1));
-                        break;
-                    case 8:
-                        os.writeC(39);
-                        os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 2));
-                        break;
-                    case 9:
-                        os.writeC(39);
-                        os.writeS("遠距離ダメージ+" + (getItem().getBowDmgRate() + 3));
-                        break;
-                    default:
-                        break;
-                }
-            }
             /** （知恵/機敏/知識/腕力）のブーツ *
              * :    +7から最大HP + 20 / + 40 / + 60増加
              * :    +9にダメージ減少+ 1を追加
@@ -4271,7 +4264,7 @@ public class L1ItemInstance extends L1Object {
             /** 恐怖耐性 **/
             if (getItem().get_regist_DESPERADO() != 0 && (getMr() == 0)) {
                 os.writeC(39);
-                os.writeS("恐怖耐性+" + getItem().get_regist_DESPERADO());
+                os.writeS("恐怖耐性 +" + getItem().get_regist_DESPERADO());
             }
 
             /** スナップファーリングスタン耐性表示**/ //県全体と一般ユーザーの格差を減らすためにスタン耐性579配置する必要が456に入っている。（ユーザーはわからない）
@@ -4320,11 +4313,36 @@ public class L1ItemInstance extends L1Object {
                 os.writeC(5);
                 os.writeH(getItem().get_regist_stun());
             }
-            if (getItem().get_regist_sustain() != 0 && (getMr() == 0)) {
+
+            /** 大魔術師の帽子 ホールド耐性 **/
+            if (itemType2 == 2 && itemId == 202022 && getEnchantLevel() > 4) {
+                if (getEnchantLevel() == 5) {
+                    os.writeC(33);
+                    os.writeC(6);
+                    os.writeH(getItem().get_regist_sustain() + 1);
+                } else if (getEnchantLevel() == 6) {
+                    os.writeC(33);
+                    os.writeC(6);
+                    os.writeH(getItem().get_regist_sustain() + 2);
+                } else if (getEnchantLevel() == 7) {
+                    os.writeC(33);
+                    os.writeC(6);
+                    os.writeH(getItem().get_regist_sustain() + 3);
+                } else if (getEnchantLevel() == 8) {
+                    os.writeC(33);
+                    os.writeC(6);
+                    os.writeH(getItem().get_regist_sustain() + 4);
+                } else if (getEnchantLevel() >= 9) {
+                    os.writeC(33);
+                    os.writeC(6);
+                    os.writeH(getItem().get_regist_sustain() + 5);
+                }
+            } else if (getItem().get_regist_sustain() != 0 && (getMr() == 0)) {
                 os.writeC(33);
                 os.writeC(6);
                 os.writeH(getItem().get_regist_sustain());
             }
+
             // 火属性
             if (getItem().get_defense_fire() != 0) {
                 os.writeC(27);

@@ -162,10 +162,21 @@ public class L1EquipmentSlot {
             _owner.getAC().addAc(item.get_ac() - armor.getEnchantLevel() - armor.getAcByMagic() + armor.get_durability());
             _owner.sendPackets(new S_OwnCharAttrDef(_owner));
         }
-        /** 大魔法使いの帽子であるチェンダンmp増加 **/
+        /** 大魔術師の帽子 **/
         if (itemId == 202022) {
             if (itemlvl >= 1) {
                 _owner.setMaxMp(_owner.getMaxMp() + (itemlvl * 10));
+            }
+            if (itemlvl == 5) {
+                _owner.getResistance().addHold(1);
+            } else if (itemlvl == 6) {
+                _owner.getResistance().addHold(2);
+            } else if (itemlvl == 7) {
+                _owner.getResistance().addHold(3);
+            } else if (itemlvl == 8) {
+                _owner.getResistance().addHold(4);
+            } else if (itemlvl >= 9) {
+                _owner.getResistance().addHold(5);
             }
         }
         /** リッチローブのエンチャントSP増加 **/
@@ -841,18 +852,12 @@ public class L1EquipmentSlot {
 
         /** マミーロードクラウン **/
         if (itemId == 20017) {
-            switch (itemlvl) {
-                case 7:
-                    _owner.addBowHitup(1);
-                    break;
-                case 8:
-                    _owner.addBowHitup(2);
-                    break;
-                case 9:
-                    _owner.addBowHitup(3);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 7) {
+                _owner.addBowDmgup(1);
+            } else if (itemlvl == 8) {
+                _owner.addBowDmgup(2);
+            } else if (itemlvl >= 9) {
+                _owner.addBowDmgup(3);
             }
         }
 
@@ -2317,10 +2322,21 @@ public class L1EquipmentSlot {
             _owner.getAC().addAc(-(item.get_ac() - armor.getEnchantLevel() - armor.getAcByMagic() + armor.get_durability()));
             _owner.sendPackets(new S_OwnCharAttrDef(_owner));
         }
-        /** 大魔法使いの帽子であるチェンダンmp増加 **/
+        /** 大魔術師の帽子 **/
         if (itemId == 202022) {
             if (itemlvl >= 1) {
                 _owner.setMaxMp(_owner.getMaxMp() - (itemlvl * 10));
+            }
+            if (itemlvl == 5) {
+                _owner.getResistance().addHold(-1);
+            } else if (itemlvl == 6) {
+                _owner.getResistance().addHold(-2);
+            } else if (itemlvl == 7) {
+                _owner.getResistance().addHold(-3);
+            } else if (itemlvl == 8) {
+                _owner.getResistance().addHold(-4);
+            } else if (itemlvl >= 9) {
+                _owner.getResistance().addHold(-5);
             }
         }
         /** リッチローブのエンチャントSP増加 **/
@@ -2949,18 +2965,12 @@ public class L1EquipmentSlot {
 
         /** マミーロードクラウン **/
         if (itemId == 20017) {
-            switch (itemlvl) {
-                case 7:
-                    _owner.addBowHitup(-1);
-                    break;
-                case 8:
-                    _owner.addBowHitup(-2);
-                    break;
-                case 9:
-                    _owner.addBowHitup(-3);
-                    break;
-                default:
-                    break;
+            if (itemlvl == 7) {
+                _owner.addBowDmgup(-1);
+            } else if (itemlvl == 8) {
+                _owner.addBowDmgup(-2);
+            } else if (itemlvl >= 9) {
+                _owner.addBowDmgup(-3);
             }
         }
 
