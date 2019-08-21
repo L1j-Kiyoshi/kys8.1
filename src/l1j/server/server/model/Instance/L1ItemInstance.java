@@ -2972,41 +2972,6 @@ public class L1ItemInstance extends L1Object {
                     default:
                         break;
                 }
-                /** 黒騎士のバイザーMR表示 **/
-                /**神聖なエルムの祝福MR表示 **/
-            } else if (itemType2 == 2 && itemId == 900027 || itemId == 910025 && getEnchantLevel() > 4) {
-                switch (getEnchantLevel()) {
-                    case 5:
-                        os.writeC(15);
-                        os.writeH(getMr() + 4);
-                        break;
-                    case 6:
-                        os.writeC(15);
-                        os.writeH(getMr() + 8);
-                        break;
-                    case 7:
-                        os.writeC(15);
-                        os.writeH(getMr() + 12);
-                        break;
-                    case 8:
-                        os.writeC(15);
-                        os.writeH(getMr() + 16);
-                        break;
-                    case 9:
-                        os.writeC(15);
-                        os.writeH(getMr() + 20);
-                        break;
-                    case 10:
-                        os.writeC(15);
-                        os.writeH(getMr() + 24);
-                        break;
-                    case 11:
-                        os.writeC(15);
-                        os.writeH(getMr() + 28);
-                        break;
-                    default:
-                        break;
-                }
             } else if (getMr() != 0) { // MR
                 os.writeC(15);
                 os.writeH(getMr());
