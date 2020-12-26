@@ -147,28 +147,29 @@ public class Beginner {
         ResultSet rs = null;
         try {
             con = L1DatabaseFactory.getInstance().getConnection();
-            pstm1 = con.prepareStatement("SELECT * FROM beginner WHERE activate IN(?,?)");
-
-            pstm1.setString(1, "A");
+            pstm1 = con.prepareStatement("SELECT * FROM beginner WHERE activate RLIKE(?)");
+            String pcClass = "";
             if (pc.isCrown()) {
-                pstm1.setString(2, "P");
+                pcClass = "P";
             } else if (pc.isKnight()) {
-                pstm1.setString(2, "K");
+                pcClass = "K";
             } else if (pc.isElf()) {
-                pstm1.setString(2, "E");
+                pcClass = "E";
             } else if (pc.isWizard()) {
-                pstm1.setString(2, "W");
+                pcClass = "W";
             } else if (pc.isDarkelf()) {
-                pstm1.setString(2, "D");
+                pcClass = "D";
             } else if (pc.isDragonknight()) {
-                pstm1.setString(2, "T");
+                pcClass = "T";
             } else if (pc.isBlackwizard()) {
-                pstm1.setString(2, "B");
+                pcClass = "B";
             } else if (pc.isWarrior()) {
-                pstm1.setString(2, "J");
+                pcClass = "J";
             } else {
-                pstm1.setString(2, "A");
+                pcClass = "A";
             }
+            String sql = "A|"+pcClass;
+            pstm1.setString(1,sql);
             rs = pstm1.executeQuery();
             while (rs.next()) {
                 try {
