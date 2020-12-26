@@ -1789,15 +1789,23 @@ public class L1SkillUse {
                 }
             } else if (_skill.getTarget().equals("none") && _skill.getType() == L1Skills.TYPE_ATTACK) {
                 L1Character[] cha = new L1Character[_targetList.size()];
+                L1Character[] dummycha = new L1Character[0];
                 int i = 0;
+                L1Character dummy = new L1Character();
                 for (TargetStatus ts : _targetList) {
                     cha[i] = ts.getTarget();
-                    cha[i].broadcastPacketExceptTargetSight(
-                            new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage), _player);
+                    //ignoreAoe
+                    if(cha[i] instanceof L1MonsterInstance){
+                        if(((L1MonsterInstance)cha[i]).getNpcTemplate().getIgnoreAoe() != 1){
+                            cha[i].broadcastPacketExceptTargetSight(
+                            new S_DoActionGFX(cha[i].getId(), ActionCodes.ACTION_Damage), dummy);
+                        }
+                    }
+                    
                     i++;
                 }
-                _player.sendPackets(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR));
-                _player.broadcastPacket(new S_RangeSkill(_player, cha, castgfx, actionId, S_RangeSkill.TYPE_NODIR),
+                _player.sendPackets(new S_RangeSkill(_player, dummycha, castgfx, actionId, S_RangeSkill.TYPE_NODIR));
+                _player.broadcastPacket(new S_RangeSkill(_player, dummycha, castgfx, actionId, S_RangeSkill.TYPE_NODIR),
                         cha);
             } else {
                 if (_skillId != 5 && _skillId != 69 && _skillId != 131) {
@@ -2187,6 +2195,10 @@ public class L1SkillUse {
 
                 if (cha instanceof L1MonsterInstance) {
                     undeadType = ((L1MonsterInstance) cha).getNpcTemplate().get_undead();
+                    // ignoreAoe
+                    if(_skill.getArea() >= 1 && ((L1MonsterInstance) cha).getNpcTemplate().getIgnoreAoe() == 1){
+                        continue;
+                    }
                 }
 
                 if ((_skill.getType() == L1Skills.TYPE_CURSE || _skill.getType() == L1Skills.TYPE_PROBABILITY)
