@@ -1,5 +1,6 @@
 package l1j.server.server.command.executor;
 
+import l1j.server.server.serverpackets.S_ACTION_UI;
 import l1j.server.server.datatables.SkillsTable;
 import l1j.server.server.model.Instance.L1PcInstance;
 import l1j.server.server.serverpackets.S_AddSkill;
@@ -28,7 +29,7 @@ public class L1AddSkill implements L1CommandExecutor {
             pc.broadcastPacket(new S_SkillSound(object_id, '\343'));
 
             if (pc.isCrown()) {
-                pc.sendPackets(new S_AddSkill(255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+                pc.sendPackets(new S_AddSkill(255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
                 L1Skills l1skills = null;
 
                 for (cnt = 1; cnt <= 16; cnt++) { // LV1〜2魔法
@@ -45,7 +46,7 @@ public class L1AddSkill implements L1CommandExecutor {
                     SkillsTable.getInstance().spellMastery(object_id, skill_id, skill_name, 0, 0); // DBに登録
                 }
             } else if (pc.isKnight()) {
-                pc.sendPackets(new S_AddSkill(255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 192, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+                pc.sendPackets(new S_AddSkill(255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 192, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
                 L1Skills l1skills = null;
 
                 for (cnt = 1; cnt <= 8; cnt++) {// LV1魔法
@@ -90,7 +91,8 @@ public class L1AddSkill implements L1CommandExecutor {
                     SkillsTable.getInstance().spellMastery(object_id, skill_id, skill_name, 0, 0); // DBに登録
                 }
             } else if (pc.isDarkelf()) {
-                pc.sendPackets(new S_AddSkill(255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+                pc.sendPackets(new S_AddSkill(255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0));
+                pc.sendPackets(new S_ACTION_UI(146, 9));//ブレイジングスピリッツ
                 L1Skills l1skills = null;
 
                 for (cnt = 1; cnt <= 16; cnt++) {// LV1〜2魔法
@@ -106,6 +108,8 @@ public class L1AddSkill implements L1CommandExecutor {
                     skill_id = l1skills.getSkillId();
                     SkillsTable.getInstance().spellMastery(object_id, skill_id, skill_name, 0, 0); // DBに登録
                 }
+                SkillsTable.getInstance().spellMastery(object_id, 233, "アサシン", 0, 0); // DBに登録
+                SkillsTable.getInstance().spellMastery(object_id, 241, "ブレイジング スピリッツ", 0, 0); // DBに登録
             } else if (pc.isDragonknight()) {
                 pc.sendPackets(new S_AddSkill(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 0, 0, 0, 0, 0, 0));
                 L1Skills l1skills = null;
@@ -125,7 +129,10 @@ public class L1AddSkill implements L1CommandExecutor {
                     SkillsTable.getInstance().spellMastery(object_id, skill_id, skill_name, 0, 0); // DBに登録
                 }
             } else if (pc.isWarrior()) {
-                pc.sendPackets(new S_AddSkill(255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 192, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)); // 戦士off
+                pc.sendPackets(new S_AddSkill(255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 0, 0)); // 戦士off
+                for(int i = 0; i < 9; i++){
+                    pc.sendPackets(new S_ACTION_UI(146, i));//パッシブ
+                }
                 L1Skills l1skills = null;
 
                 for (cnt = 1; cnt <= 8; cnt++) {// LV1魔法
