@@ -42,6 +42,7 @@ public class L1GameTime {
         if (t1 < 0) {
             throw new IllegalArgumentException();
         }
+        t1 %= 86400000L; //Bug fix
         int t2 = (int) ((t1 * 6) / 1000L);
         int t3 = t2 % 3; // 時間が3の倍数になるように調整
         _time = t2 - t3;
