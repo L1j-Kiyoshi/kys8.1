@@ -255,8 +255,8 @@
 	<!-- ディオ：極限のティアラ原石 -->
 	<Action Name="2788">
 		<MakeItem>
-		 <Item Amount="1" ItemId="22260"/>
-		 <Material Amount="1" ItemId="40050" />		매력적인티아라
+		 <Item Amount="1" ItemId="700002"/>
+		 <Material Amount="1" ItemId="22260" />		매력적인티아라
 		</MakeItem>
 	</Action>
 	<!-- ディオ：極限のサンダル原石 -->
