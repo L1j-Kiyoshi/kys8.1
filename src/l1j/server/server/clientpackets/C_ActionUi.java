@@ -1711,14 +1711,13 @@ public class C_ActionUi extends ClientBasePacket {
                 } else if (itemtype == 2739) {
                     if (pc.getInventory().checkItem(40052, 1) && pc.getInventory().checkItem(40055, 1)
                             && pc.getInventory().checkItem(40053, 1) && pc.getInventory().checkItem(40054, 1)
-                            && pc.getInventory().checkItem(410061, 1) || pc.getInventory().checkItem(500020, 1)) {
+                            && pc.getInventory().checkItem(410061, 1)) {
                         supplyEnchant(pc, 31096, 1, 0);
                         pc.getInventory().consumeItem(40052, 1);
                         pc.getInventory().consumeItem(40055, 1);
                         pc.getInventory().consumeItem(40053, 1);
                         pc.getInventory().consumeItem(40054, 1);
                         pc.getInventory().consumeItem(410061, 1);
-                        pc.getInventory().consumeItem(500020, 1);
                     }
 
                     /** 神聖なエルヴンプレートメイル **/

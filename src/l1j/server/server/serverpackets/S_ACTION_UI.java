@@ -335,8 +335,7 @@ public class S_ACTION_UI extends ServerBasePacket {
 
             // 宝石商の_ディオ
             case 70027:
-                craftlist = new int[] { 2739, 2792, 2731, 2732, 2733, 2734, 2735, 2736, 2737, 2738, 2788, 2789, 2790,
-                        2791 };
+                craftlist = new int[] { 2739, 2792, 2731, 2732, 2733, 2734, 2735, 2736, 2737, 2738, 2788, 2789, };
                 break;
 
             // このベルビン
